@@ -1,12 +1,6 @@
 @font-face {
   font-family: 'JleagueKick';
-  src: url('jleaguekick-boldcondensed.cda6e6e2fbb0.woff2') format('woff2');
+  src: url('./JLEAGUEKICK-BoldCondensed.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
-}
-
-#month-header,
-.match-date,
-.info-label {
-  font-family: 'JleagueKick', sans-serif;
 }
