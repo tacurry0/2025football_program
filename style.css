@@ -1,0 +1,15 @@
+
+@font-face {
+  font-family: 'JLEAGUE KICK';
+  src: url('JLEAGUEKICK-BoldCondensed.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 月の見出し（h2）に適用 */
+h2 {
+  font-family: 'JLEAGUE KICK', sans-serif;
+  font-weight: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
