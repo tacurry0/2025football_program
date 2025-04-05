@@ -1,0 +1,1250 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>サッカー試合日程</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+
+@font-face {
+  font-family: 'JleagueKick';
+  src: url(data:font/woff2;charset=utf-8;base64,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) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+
+#month-header,
+.match-date,
+.info-label {
+  font-family: 'JleagueKick', sans-serif;
+}
+
+
+    body {
+      font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+      background: #f2f2f5;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+    }
+    header {
+      background: linear-gradient(90deg, #ff6600, #cc0000);
+      color: white;
+      padding: 1.2em 1em;
+      text-align: center;
+      font-size: 1.6em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.01);
+    }
+    .niigata {
+      border-left: 5px solid orange;
+    }
+    .kumamoto {
+      border-left: 5px solid crimson;
+    }
+    .match-header {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 0.3em;
+    }
+    .match-date {
+      font-size: 0.95em;
+      font-weight: 500;
+      color: #888;
+      margin-left: 0.5em;
+    }
+    .info-line {
+      margin: 0.3em 0;
+    }
+    .info-label {
+      font-weight: 700;
+      display: inline-block;
+      min-width: 2em;
+      font-size: 1.05em;
+    }
+    .niigata .info-label {
+      color: orange;
+    }
+    .kumamoto .info-label {
+      color: crimson;
+    }
+    .opponent-name {
+      font-size: 1.25em;
+      font-weight: 700;
+      color: #111;
+      display: inline;
+    }
+    .venue {
+      font-size: 0.9em;
+      color: #777;
+      margin-top: 0.2em;
+    }
+  
+.emblem {
+  height: 3em;
+  margin-left: 10px;
+}
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.match-info {
+  flex-grow: 1;
+}
+.match-logo {
+  flex-shrink: 0;
+}
+.month-section {
+  display: none;
+}
+.month-title {
+  display: none;
+}
+#month-header {
+  position: sticky;
+  top: 0;
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 0.6em;
+  font-size: 1.4em;
+  font-weight: bold;
+  z-index: 10;
+  border-bottom: 1px solid #ccc;
+}
+
+
+
+
+#month-header,
+.match-date,
+.info-label {
+  font-family: 'Jlg-Display', sans-serif;
+}
+</style>
+</head>
+<body>
+  <header>Jリーグ 2025｜アルビレックス新潟 & ロアッソ熊本</header>
+  <div class="container">
+
+<div id="month-header">Month</div>
+
+    <div class="month-section" data-month="2">
+      <div class="month-title">February</div>
+      
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW1 - 2/15 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">横浜F・マリノス</span></div>
+          <div class="venue">日産スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_yokohamafm.png" alt="横浜F・マリノス">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW1 - 2/15 Sat 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">V・ファーレン長崎</span></div>
+          <div class="venue">PEACE STADIUM Connected by SoftBank</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_nagasaki.png" alt="V・ファーレン長崎">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW2 - 2/22 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">清水エスパルス</span></div>
+          <div class="venue">IAIスタジアム日本平</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_shimizu.png" alt="清水エスパルス">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW2 - 2/23 Sun 13:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">北海道コンサドーレ札幌</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_sapporo.png" alt="北海道コンサドーレ札幌">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW3 - 2/26 Wed 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">鹿島アントラーズ</span></div>
+          <div class="venue">県立カシマサッカースタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kashima.png" alt="鹿島アントラーズ">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="3">
+      <div class="month-title">March</div>
+      
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW4 - 3/2 Sun 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">セレッソ大阪</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_cosaka.png" alt="セレッソ大阪">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW3 - 3/2 Sun 13:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">RB大宮アルディージャ</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_omiya.png" alt="RB大宮アルディージャ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW5 - 3/8 Sat 14:05</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">東京ヴェルディ</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_tokyov.png" alt="東京ヴェルディ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW4 - 3/9 Sun 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">徳島ヴォルティス</span></div>
+          <div class="venue">鳴門・大塚スポーツパーク ポカリスエットスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_tokushima.png" alt="徳島ヴォルティス">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW6 - 3/15 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">FC町田ゼルビア</span></div>
+          <div class="venue">町田GIONスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_machida.png" alt="FC町田ゼルビア">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW5 - 3/16 Sun 13:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">モンテディオ山形</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_yamagata.png" alt="モンテディオ山形">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW6 - 3/23 Sun 13:15</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">レノファ山口FC</span></div>
+          <div class="venue">維新みらいふスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_yamaguchi.png" alt="レノファ山口FC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW7 - 3/29 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ガンバ大阪</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_gosaka.png" alt="ガンバ大阪">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW7 - 3/30 Sun 13:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">サガン鳥栖</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_tosu.png" alt="サガン鳥栖">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="4">
+      <div class="month-title">April</div>
+      
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW8 - 4/2 Wed 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">アビスパ福岡</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_fukuoka.png" alt="アビスパ福岡">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW9 - 4/6 Sun 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ヴィッセル神戸</span></div>
+          <div class="venue">国立競技場</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kobe.png" alt="ヴィッセル神戸">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW8 - 4/6 Sun 13:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">カターレ富山</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_toyama.png" alt="カターレ富山">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW10 - 4/13 Sun 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">横浜FC</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_yokohamafc.png" alt="横浜FC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW9 - 4/13 Sun 15:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ジュビロ磐田</span></div>
+          <div class="venue">ヤマハスタジアム（磐田）</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_iwata.png" alt="ジュビロ磐田">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW11 - 4/19 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">京都サンガF.C.</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kyoto.png" alt="京都サンガF.C.">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW10 - 4/20 Sun 13:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ベガルタ仙台</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_sendai.png" alt="ベガルタ仙台">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW11 - 4/25 Fri 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">藤枝MYFC</span></div>
+          <div class="venue">藤枝総合運動公園サッカー場</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_fujieda.png" alt="藤枝MYFC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW12 - 4/26 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">柏レイソル</span></div>
+          <div class="venue">三協フロンティア柏スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kashiwa.png" alt="柏レイソル">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW13 - 4/29 Tue 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">サンフレッチェ広島</span></div>
+          <div class="venue">エディオンピースウイング広島</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_hiroshima.png" alt="サンフレッチェ広島">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW12 - 4/29 Tue 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ジェフユナイテッド千葉</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_chiba.png" alt="ジェフユナイテッド千葉">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="5">
+      <div class="month-title">May</div>
+      
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW14 - 5/3 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">FC東京</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_ftokyo.png" alt="FC東京">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW13 - 5/3 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">大分トリニータ</span></div>
+          <div class="venue">クラサスドーム大分</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_oita.png" alt="大分トリニータ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW15 - 5/6 Tue 15:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">川崎フロンターレ</span></div>
+          <div class="venue">Uvanceとどろきスタジアム by Fujitsu</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kawasakif.png" alt="川崎フロンターレ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW14 - 5/6 Tue 15:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">FC今治</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_imabari.png" alt="FC今治">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW16 - 5/11 Sun 14:05</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">浦和レッズ</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_urawa.png" alt="浦和レッズ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW15 - 5/11 Sun 15:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">愛媛FC</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_ehime.png" alt="愛媛FC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW16 - 5/17 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">水戸ホーリーホック</span></div>
+          <div class="venue">ケーズデンキスタジアム水戸</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_mito.png" alt="水戸ホーリーホック">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW17 - 5/18 Sun 15:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ファジアーノ岡山</span></div>
+          <div class="venue">JFE晴れの国スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_okayama.png" alt="ファジアーノ岡山">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW18 - 5/25 Sun 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">湘南ベルマーレ</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_shonan.png" alt="湘南ベルマーレ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW17 - 5/25 Sun 16:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ブラウブリッツ秋田</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_akita.png" alt="ブラウブリッツ秋田">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW19 - 5/31 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">名古屋グランパス</span></div>
+          <div class="venue">豊田スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_nagoya.png" alt="名古屋グランパス">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="6">
+      <div class="month-title">June</div>
+      
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW18 - 6/1 Sun 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">いわきFC</span></div>
+          <div class="venue">ハワイアンズスタジアムいわき</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_iwaki.png" alt="いわきFC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW20 - 6/15 Sun 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">横浜F・マリノス</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_yokohamafm.png" alt="横浜F・マリノス">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW19 - 6/15 Sun 18:30</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ヴァンフォーレ甲府</span></div>
+          <div class="venue">JIT リサイクルインク　スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kofu.png" alt="ヴァンフォーレ甲府">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW21 - 6/21 Sat 16:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">アビスパ福岡</span></div>
+          <div class="venue">ベスト電器スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_fukuoka.png" alt="アビスパ福岡">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW20 - 6/22 Sun 13:35</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">V・ファーレン長崎</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_nagasaki.png" alt="V・ファーレン長崎">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW15※ - 6/25 Wed 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">川崎フロンターレ</span></div>
+          <div class="venue">Uvanceとどろきスタジアム by Fujitsu</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kawasakif.png" alt="川崎フロンターレ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW21 - 6/28 Sat 14:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">北海道コンサドーレ札幌</span></div>
+          <div class="venue">大和ハウス プレミストドーム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_sapporo.png" alt="北海道コンサドーレ札幌">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW22 - 6/29 Sun 18:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">FC町田ゼルビア</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_machida.png" alt="FC町田ゼルビア">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="7">
+      <div class="month-title">July</div>
+      
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW23 - 7/5 Sat 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">京都サンガF.C.</span></div>
+          <div class="venue">サンガスタジアム by KYOCERA</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kyoto.png" alt="京都サンガF.C.">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW22 - 7/6 Sun 18:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ジュビロ磐田</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_iwata.png" alt="ジュビロ磐田">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW23 - 7/12 Sat 18:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ブラウブリッツ秋田</span></div>
+          <div class="venue">ソユースタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_akita.png" alt="ブラウブリッツ秋田">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW24 - 7/20 Sun 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">サンフレッチェ広島</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_hiroshima.png" alt="サンフレッチェ広島">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="8">
+      <div class="month-title">August</div>
+      
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW24 - 8/3 Sun 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">水戸ホーリーホック</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_mito.png" alt="水戸ホーリーホック">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW25 - 8/9 Sat 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">FC今治</span></div>
+          <div class="venue">アシックス里山スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_imabari.png" alt="FC今治">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW25 - 8/11 Mon 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">セレッソ大阪</span></div>
+          <div class="venue">ヨドコウ桜スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_cosaka.png" alt="セレッソ大阪">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW26 - 8/16 Sat 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">川崎フロンターレ</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kawasakif.png" alt="川崎フロンターレ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW26 - 8/16 Sat 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">藤枝MYFC</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_fujieda.png" alt="藤枝MYFC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW27 - 8/23 Sat 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">鹿島アントラーズ</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kashima.png" alt="鹿島アントラーズ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW27 - 8/23 Sat 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">RB大宮アルディージャ</span></div>
+          <div class="venue">NACK5スタジアム大宮</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_omiya.png" alt="RB大宮アルディージャ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW28 - 8/30 Sat 18:30</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">カターレ富山</span></div>
+          <div class="venue">富山県総合運動公園陸上競技場</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_toyama.png" alt="カターレ富山">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW28 - 8/31 Sun 19:00</div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">浦和レッズ</span></div>
+          <div class="venue">埼玉スタジアム２００２</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_urawa.png" alt="浦和レッズ">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="9">
+      <div class="month-title">September</div>
+      
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW29 - 9/13 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">清水エスパルス</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_shimizu.png" alt="清水エスパルス">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW29 - 9/15 Mon </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">徳島ヴォルティス</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_tokushima.png" alt="徳島ヴォルティス">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW30 - 9/20 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">横浜FC</span></div>
+          <div class="venue">ニッパツ三ツ沢球技場</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_yokohamafc.png" alt="横浜FC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW30 - 9/20 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">サガン鳥栖</span></div>
+          <div class="venue">駅前不動産スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_tosu.png" alt="サガン鳥栖">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW31 - 9/23 Tue </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">名古屋グランパス</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_nagoya.png" alt="名古屋グランパス">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW32 - 9/27 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ガンバ大阪</span></div>
+          <div class="venue">パナソニックスタジアム吹田</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_gosaka.png" alt="ガンバ大阪">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW31 - 9/27 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ジェフユナイテッド千葉</span></div>
+          <div class="venue">フクダ電子アリーナ</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_chiba.png" alt="ジェフユナイテッド千葉">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="10">
+      <div class="month-title">October</div>
+      
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW33 - 10/4 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ファジアーノ岡山</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_okayama.png" alt="ファジアーノ岡山">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW32 - 10/5 Sun </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">いわきFC</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_iwaki.png" alt="いわきFC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW34 - 10/18 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">東京ヴェルディ</span></div>
+          <div class="venue">味の素スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_tokyov.png" alt="東京ヴェルディ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW33 - 10/19 Sun </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">モンテディオ山形</span></div>
+          <div class="venue">ＮＤソフトスタジアム山形</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_yamagata.png" alt="モンテディオ山形">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW35 - 10/25 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ヴィッセル神戸</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kobe.png" alt="ヴィッセル神戸">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW34 - 10/26 Sun </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">大分トリニータ</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_oita.png" alt="大分トリニータ">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="11">
+      <div class="month-title">November</div>
+      
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW35 - 11/2 Sun </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">レノファ山口FC</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_yamaguchi.png" alt="レノファ山口FC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW36 - 11/8 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">湘南ベルマーレ</span></div>
+          <div class="venue">レモンガススタジアム平塚</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_shonan.png" alt="湘南ベルマーレ">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW36 - 11/8 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ベガルタ仙台</span></div>
+          <div class="venue">ユアテックスタジアム仙台</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_sendai.png" alt="ベガルタ仙台">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW37 - 11/23 Sun </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">愛媛FC</span></div>
+          <div class="venue">ニンジニアスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_ehime.png" alt="愛媛FC">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card kumamoto">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW38 - 11/29 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">ヴァンフォーレ甲府</span></div>
+          <div class="venue">えがお健康スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kofu.png" alt="ヴァンフォーレ甲府">
+        </div>
+      </div>
+    </div>
+    
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW37 - 11/30 Sun </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">柏レイソル</span></div>
+          <div class="venue">デンカビッグスワンスタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_kashiwa.png" alt="柏レイソル">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+    <div class="month-section" data-month="12">
+      <div class="month-title">December</div>
+      
+    <div class="card niigata">
+      <div class="match-header">
+        <div class="match-info">
+          <div class="match-date">MW38 - 12/6 Sat </div>
+          <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">FC東京</span></div>
+          <div class="venue">味の素スタジアム</div>
+        </div>
+        <div class="match-logo">
+          <img class="emblem" src="https://jleague.r10s.jp/img/common/img_club_ftokyo.png" alt="FC東京">
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+<script>
+let currentMonth = new Date().getMonth() + 1;
+const months = Array.from(document.querySelectorAll('.month-section'));
+const monthHeader = document.getElementById('month-header');
+let currentIndex = months.findIndex(m => parseInt(m.dataset.month) === currentMonth);
+if (currentIndex === -1) currentIndex = 0;
+function showMonth(index) {
+  months.forEach((m, i) => m.style.display = i === index ? 'block' : 'none');
+  const monthName = mName(parseInt(months[index].dataset.month));
+  monthHeader.textContent = monthName;
+}
+function mName(m) {
+  const names = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return names[m - 1] || "Unknown";
+}
+showMonth(currentIndex);
+window.addEventListener('touchstart', handleTouchStart, false);
+window.addEventListener('touchend', handleTouchEnd, false);
+let xDown = null;
+function handleTouchStart(evt) {
+  xDown = evt.touches[0].clientX;
+}
+function handleTouchEnd(evt) {
+  if (!xDown) return;
+  let xUp = evt.changedTouches[0].clientX;
+  let xDiff = xDown - xUp;
+  if (Math.abs(xDiff) > 50) {
+    if (xDiff > 0 && currentIndex < months.length - 1) currentIndex++;
+    else if (xDiff < 0 && currentIndex > 0) currentIndex--;
+    showMonth(currentIndex);
+  }
+  xDown = null;
+}
+</script>
+
+  </div>
+</body>
+</html>
