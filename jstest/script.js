@@ -1,5 +1,4 @@
 
-
 const matchData = {
   "アルビレックス新潟": [
     {
@@ -31,7 +30,6 @@ const matchData = {
   ]
 };
 
-
 document.addEventListener("DOMContentLoaded", function () {
   const scheduleContainer = document.getElementById("schedule-container");
   if (!scheduleContainer) return;
@@ -39,16 +37,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentMonth = new Date().getMonth() + 1;
   for (const club in matchData) {
     matchData[club].forEach(match => {
-      const monthMatch = parseInt(match["日付"].match(/(\d+)/)[1]);
-      if (monthMatch === currentMonth) {
+      const matchMonth = parseInt(match["日付"].match(/(\d+)/)[1]);
+      if (matchMonth === currentMonth) {
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <div class="match-info">
-            <div class="match-date">MW${match["節"]} - ${match["日付"]} ${match["曜日"]} ${match["時間"]}</div>
-            <div class="match-vs">vs <span class="opponent">${match["対戦チーム"]}</span></div>
-            <div class="stadium">${match["会場"]}</div>
-          </div>
+          <div class="match-date">MW${match["節"]} - ${match["日付"]} ${match["曜日"]} ${match["時間"]}</div>
+          <div class="match-vs">vs <span class="opponent">${match["対戦チーム"]}</span></div>
+          <div class="stadium">${match["会場"]}</div>
         `;
         scheduleContainer.appendChild(card);
       }
