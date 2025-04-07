@@ -41,4 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   updateSlider(); // 初期表示
+
+  const toggleAlb = document.getElementById("toggle-niigata");
+  const toggleRoa = document.getElementById("toggle-kumamoto");
+
+  toggleAlb.addEventListener("click", () => {
+    toggleClub("niigata", toggleAlb);
+  });
+
+  toggleRoa.addEventListener("click", () => {
+    toggleClub("kumamoto", toggleRoa);
+  });
+
+  function toggleClub(clubClass, icon) {
+    icon.classList.toggle("active");
+    const cards = document.querySelectorAll(`.card.${clubClass}`);
+    cards.forEach(card => {
+      card.style.display = icon.classList.contains("active") ? "block" : "none";
+    });
+  }
 });
