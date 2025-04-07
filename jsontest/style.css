@@ -1,10 +1,15 @@
-body {
-  font-family: 'Poppins', 'Noto Sans JP', sans-serif;
-  background: #f2f2f5;
+/* ベース設定 */
+html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+  background: #f2f2f5;
   color: #1a1a1a;
 }
+
+/* ヘッダー（オレンジ背景） */
 header {
   background: linear-gradient(90deg, #ff6600, #cc0000);
   color: white;
@@ -12,338 +17,24 @@ header {
   text-align: center;
   font-size: 1.6em;
   font-weight: 700;
-  letter-spacing: 0.5px;
 }
-.card:hover {
-  transform: scale(1.01);
-}
-.niigata {
-  border-left: 5px solid orange;
-}
-.kumamoto {
-  border-left: 5px solid crimson;
-}
-.match-header {
-  font-size: 1.2em;
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 0.3em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1rem; /* ← 横1remの余白でカードとそろう */
-  box-sizing: border-box;
-}
-.match-date {
-  font-size: 0.95em;
-  font-weight: 500;
-  color: #888;
-  margin-left: 0.5em;
-}
-.info-line {
-  margin: 0.3em 0;
-}
-.info-label {
-  font-weight: 700;
-  display: inline-block;
-  min-width: 2em;
-  font-size: 1.05em;
-}
-.niigata .info-label {
-  color: orange;
-}
-.kumamoto .info-label {
-  color: crimson;
-}
-.opponent-name {
-  font-size: 1.25em;
-  font-weight: 700;
-  color: #111;
-  display: inline;
-}
-.venue {
-  font-size: 0.9em;
-  color: #777;
-  margin-top: 0.2em;
-}
-.emblem {
-  height: 3em;
-  margin-left: 10px;
-}
-.month-title {
-  display: none;
-}
-#month-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: #f6f8f7;
-  padding: 0.75rem 1rem;
-  font-weight: bold;
-  font-size: 1.3rem;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-text-align: center;
-}
-@font-face {
-  font-family: 'Jlg-Display';
-  src: url('jlg-display.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
+
+/* 月ヘッダー */
 #month-header {
   position: fixed;
-  top: 60px; /* ← オレンジの高さに合わせて */
+  top: 60px;
   width: 100%;
   z-index: 100;
   background: #f6f8f7;
   padding: 0.75rem 1rem;
   box-sizing: border-box;
   text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
   border-bottom: 1px solid #ccc;
 }
 
-
-.container {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  overflow: hidden; /* スライダーがはみ出ないようにする */
-}
-
-#month-slider {
-  display: flex;
-  transition: transform 0.4s ease-in-out;
-  will-change: transform;
-}
-
-.month-section {
-  display: flex; /* カードを縦方向に並べる */
-  flex-direction: column;
-  gap: 0.8rem;
-  min-width: 100%;
-  flex-shrink: 0;
-  padding: 0 0.5rem; /* 左右の余白をつける */
-  box-sizing: border-box;
-}
-
-/* カードの横幅調整 */
-.card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 0.8rem 1rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  transition: all 0.2s ease;
-  width: 100%; /* 親要素いっぱいに調整 */
-  box-sizing: border-box; /* パディングを含めて幅を計算する */
-  max-width: 800px; /* コンテナよりやや小さく設定 */
-  margin: 0 auto; /* 中央揃え */
-}
-@media (max-width: 768px) {
-  .container {
-    padding: 0.5rem;
-  }
-  
-  .month-section {
-    padding: 0 0.3rem;
-  }
-
-  .card {
-    padding: 0.5rem 0.7rem;
-    max-width: 100%; /* 小さい画面では最大幅を画面いっぱいにする */
-  }
-}
-
-/* 基本設定 */
-html, body {
-  width: 100%;
-  overflow-x: hidden; /* 横スクロールの防止 */
-}
-
-.container {
-  max-width: 100%; /* 幅を最大にする */
-  padding: 0.5rem;
-  overflow: hidden; /* コンテナの外に出ないようにする */
-}
-
-/* スライダー部分の調整 */
-#slider-container {
-  width: 100%;
-  overflow: hidden;
-}
-
-#month-slider {
-  display: flex;
-  transition: transform 0.4s ease-in-out;
-}
-
-.month-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  min-width: 100%;
-  padding: 0 0.4rem;
-  box-sizing: border-box;
-}
-
-/* カードの明示的な設定 */
-.card {
-  width: 100%;
-  box-sizing: border-box;
-  background: #fff;
-  border-radius: 14px;
-  padding: 0.6rem 0.8rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-}
-
-/* スマホ向け微調整 */
-@media (max-width: 768px) {
-  .container {
-    padding: 0.3rem;
-  }
-
-  .month-section {
-    padding: 0 0.2rem;
-  }
-
-  .card {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.9em; /* カード内の文字サイズを小さく調整 */
-  }
-
-  .match-header {
-    font-size: 1em; /* ヘッダーサイズ調整 */
-  }
-
-  .opponent-name {
-    font-size: 1.1em; /* 対戦相手の文字を適度に縮小 */
-  }
-
-  .emblem {
-    height: 2em; /* ロゴの大きさ調整 */
-  }
-}
-
-
-/* スライダーの枠は画面幅にぴったり */
-#slider-container {
-  width: 100vw;
-  overflow: hidden;
-}
-
-/* スライダー全体：横並び */
-#month-slider {
-  display: flex;
-  transition: transform 0.4s ease-in-out;
-  will-change: transform;
-}
-
-/* 各月（1スライド分） */
-.month-section {
-  min-width: 100vw;
-  box-sizing: border-box;
-  padding: 1rem 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* 各試合カード：画面幅いっぱい */
-.card {
-  width: 100%;
-  padding: 1rem;
-  box-sizing: border-box;
-  border-radius: 14px;
-  background: white;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-}
-
-/* スマホでも安心 */
-@media (max-width: 768px) {
-  .month-section {
-    padding: 0.8rem 0.4rem;
-  }
-
-  .card {
-    padding: 0.9rem;
-  }
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden; /* 横スクロール完全防止 */
-}
-
-#slider-container {
-  width: 100vw;
-  overflow: hidden;
-}
-
-#month-slider {
-  display: flex;
-  transition: transform 0.4s ease-in-out;
-  will-change: transform;
-}
-
-.month-section {
-  min-width: 100vw;
-  box-sizing: border-box;
-  padding: 0; /* ←横余白なくす */
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* カードを中央寄せ */
-  gap: 1rem;
-}
-
-/* カードを完全にフィット */
-.card {
-  width: calc(100vw - 2rem); /* 画面幅から左右余白1remずつ */
-  max-width: 640px;
-  padding: 1rem;
-  box-sizing: border-box;
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-}
-
-.match-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem; /* ← 間隔広げすぎない */
-}
-
-.card {
-  width: calc(100vw - 1rem); /* ← 余白を1remに変更して中央感を保つ */
-  padding: 1.2rem 1rem; /* ← 縦の余白を少し増やす */
-  margin-right: 1rem;
-}
-
-/* エンブレム画像を大きく */
-.emblem {
-  height: 3.6em; /* 元が3emくらい→もうちょい大きく */
-}
-
-/* match-info の文字サイズもほんの少しアップ */
-.match-info {
-  font-size: 1.05em;
-}
-
-.match-date {
-  font-size: 1em;
-}
-
-.venue {
-  font-size: 0.95em;
-  margin-top: 0.3em;
-}
-
+/* クラブ切り替えアイコン */
 #club-toggle {
   margin-top: 0.5em;
   display: flex;
@@ -363,19 +54,125 @@ html, body {
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
 }
 
+/* スライダーエリア */
+#slider-container {
+  width: 100vw;
+  overflow: hidden;
+  margin-top: 140px; /* オレンジ＋月ヘッダー分 */
+}
+
+#month-slider {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  will-change: transform;
+}
+
+/* 月ごとのスライド */
+.month-section {
+  min-width: 100vw;
+  box-sizing: border-box;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* カード全体 */
+.card {
+  width: calc(100vw - 2rem);
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+.niigata {
+  border-left: 5px solid orange;
+}
+
+.kumamoto {
+  border-left: 5px solid crimson;
+}
+
+/* カード内情報 */
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.match-info {
+  font-size: 1.05em;
+}
+
+.match-date {
+  font-size: 0.95em;
+  font-weight: 500;
+  color: #888;
+}
+
+.info-line {
+  margin: 0.3em 0;
+}
+
+.info-label {
+  font-weight: 700;
+  min-width: 2em;
+  font-size: 1.05em;
+}
+
+.niigata .info-label {
+  color: orange;
+}
+
+.kumamoto .info-label {
+  color: crimson;
+}
+
+.opponent-name {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #111;
+}
+
+.venue {
+  font-size: 0.95em;
+  color: #777;
+  margin-top: 0.3em;
+}
+
+.emblem {
+  height: 3.6em;
+  margin-left: 10px;
+}
+
+/* 詳細＆メモ欄 */
 .match-details {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease, padding 0.3s ease;
-  padding: 0 0;
+  padding: 0;
   font-size: 0.95em;
   color: #444;
 }
 
 .card.expanded .match-details {
-  max-height: 300px; /* 適宜調整 */
+  max-height: 300px;
   padding: 0.5rem 0;
-} 
+}
 
 .note-section {
   margin-top: 1em;
@@ -386,21 +183,41 @@ html, body {
 
 .note-section label {
   font-weight: bold;
-  color: #444;
   font-size: 0.95em;
+  color: #444;
 }
 
 .note-section textarea {
   width: 100%;
   min-height: 3em;
-  font-size: 0.95em;
   padding: 0.5em;
+  font-size: 0.95em;
   box-sizing: border-box;
   border-radius: 8px;
   border: 1px solid #ccc;
   resize: vertical;
 }
 
-#slider-container {
-  margin-top: 3.5rem; /* ヘッダー高さに合わせて調整 */
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .month-section {
+    padding: 0.6rem;
+  }
+
+  .card {
+    padding: 0.9rem;
+    font-size: 0.95em;
+  }
+
+  .match-header {
+    font-size: 1em;
+  }
+
+  .opponent-name {
+    font-size: 1.1em;
+  }
+
+  .emblem {
+    height: 2.8em;
+  }
 }
