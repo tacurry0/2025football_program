@@ -4,6 +4,7 @@ html, body {
   padding: 0;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: auto; /* ← stickyが効かなくなるのを防ぐ */
   font-family: 'Poppins', 'Noto Sans JP', sans-serif;
   background: #f2f2f5;
   color: #1a1a1a;
