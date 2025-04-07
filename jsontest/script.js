@@ -105,4 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     });
+card.addEventListener("click", () => {
+  card.classList.toggle("expanded");
+});
 });
