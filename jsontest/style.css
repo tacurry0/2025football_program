@@ -356,3 +356,17 @@ html, body {
   opacity: 1;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
 }
+
+.match-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 0;
+  font-size: 0.95em;
+  color: #444;
+}
+
+.card.expanded .match-details {
+  max-height: 300px; /* 適宜調整 */
+  padding: 0.5rem 0;
+}
