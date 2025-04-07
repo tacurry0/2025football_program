@@ -230,6 +230,7 @@ header {
   }
 }
 
+.container,
 #slider-container {
   overflow: visible !important;
 }
