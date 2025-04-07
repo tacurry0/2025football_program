@@ -305,3 +305,33 @@ html, body {
   border-radius: 14px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem; /* ← 間隔広げすぎない */
+}
+
+.card {
+  padding: 1.2rem 1rem; /* ← 縦の余白を少し増やす */
+}
+
+/* エンブレム画像を大きく */
+.emblem {
+  height: 3.6em; /* 元が3emくらい→もうちょい大きく */
+}
+
+/* match-info の文字サイズもほんの少しアップ */
+.match-info {
+  font-size: 1.05em;
+}
+
+.match-date {
+  font-size: 1em;
+}
+
+.venue {
+  font-size: 0.95em;
+  margin-top: 0.3em;
+}
