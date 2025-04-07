@@ -18,12 +18,13 @@ header {
   text-align: center;
   font-size: 1.6em;
   font-weight: 700;
+  min-height: 60px; /* ← これが重要 */
 }
 
 /* 月ヘッダー */
 #month-header {
   position: sticky;
-  top: 0;
+  top: 60px; /* ← headerの高さと揃える */
   z-index: 999;
   background: #f6f8f7;
   padding: 1rem;
