@@ -36,3 +36,34 @@ function handleTouchEnd(evt) {
   }
   xDown = null;
 }
+let currentIndex = 0;
+const slider = document.getElementById("month-slider");
+const totalMonths = document.querySelectorAll(".month-section").length;
+
+function updateSlider() {
+  const offset = -100 * currentIndex;
+  slider.style.transform = `translateX(${offset}%)`;
+
+  const currentSection = document.querySelectorAll(".month-section")[currentIndex];
+  const monthName = currentSection.querySelector(".month-title").textContent;
+  document.getElementById("month-header").textContent = monthName;
+}
+
+let touchStartX = 0;
+
+slider.addEventListener("touchstart", e => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+slider.addEventListener("touchend", e => {
+  const touchEndX = e.changedTouches[0].screenX;
+  const deltaX = touchEndX - touchStartX;
+
+  if (deltaX > 50 && currentIndex > 0) {
+    currentIndex--;
+    updateSlider();
+  } else if (deltaX < -50 && currentIndex < totalMonths - 1) {
+    currentIndex++;
+    updateSlider();
+  }
+});
