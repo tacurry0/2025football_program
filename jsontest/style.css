@@ -31,6 +31,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.75rem 1rem; /* ← 横1remの余白でカードとそろう */
+  box-sizing: border-box;
 }
 .match-date {
   font-size: 0.95em;
