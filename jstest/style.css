@@ -136,3 +136,17 @@ header {
   max-width: 800px; /* コンテナよりやや小さく設定 */
   margin: 0 auto; /* 中央揃え */
 }
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .month-section {
+    padding: 0 0.3rem;
+  }
+
+  .card {
+    padding: 0.5rem 0.7rem;
+    max-width: 100%; /* 小さい画面では最大幅を画面いっぱいにする */
+  }
+}
