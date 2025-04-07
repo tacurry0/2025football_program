@@ -369,4 +369,28 @@ html, body {
 .card.expanded .match-details {
   max-height: 300px; /* 適宜調整 */
   padding: 0.5rem 0;
+} 
+
+.note-section {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.note-section label {
+  font-weight: bold;
+  color: #444;
+  font-size: 0.95em;
+}
+
+.note-section textarea {
+  width: 100%;
+  min-height: 3em;
+  font-size: 0.95em;
+  padding: 0.5em;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
 }
