@@ -25,3 +25,5 @@ self.addEventListener('fetch', e => {
     })
   );
 });
+
+navigator.serviceWorker.register('/2025football_program/jstest/sw.js')
