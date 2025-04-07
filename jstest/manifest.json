@@ -2,7 +2,7 @@
 {
   "name": "2025サッカー日程",
   "short_name": "サッカー日程",
-  "start_url": "./index.html",
+  "start_url": "/2025football_program/jstest/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff6600",
