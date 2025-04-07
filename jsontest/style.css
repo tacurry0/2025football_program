@@ -71,6 +71,7 @@ header {
   display: flex;
   transition: transform 0.4s ease-in-out;
   will-change: transform;
+  overflow: visible !important;
 }
 
 /* 月ごとのスライド */
@@ -227,4 +228,8 @@ header {
   .emblem {
     height: 2.8em;
   }
+}
+
+#slider-container {
+  overflow: visible !important;
 }
