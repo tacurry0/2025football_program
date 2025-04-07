@@ -37,9 +37,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
               </div>
             </div>
-            <div class="match-details">${match.details || ""}</div>
-          `;
+            const matchId = `${match.date}_${match.club}_${match.opponent}`;
+const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
+const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
 
+card.innerHTML += `
+  <div class="match-details">
+    ${match.details ? `<p>${match.details}</p>` : ""}
+    <div class="note-section">
+      <label>【行き】</label>
+      <textarea class="note-go" placeholder="行きのメモ（新幹線・飛行機など）">${savedGo}</textarea>
+      <label>【帰り】</label>
+      <textarea class="note-back" placeholder="帰りのメモ">${savedBack}</textarea>
+    </div>
+  </div>
+`;
+`;
+
+setTimeout(() => {
+  const noteGo = card.querySelector(".note-go");
+  const noteBack = card.querySelector(".note-back");
+
+  if (noteGo) {
+    noteGo.addEventListener("input", e => {
+      localStorage.setItem(`note_go_${matchId}`, e.target.value);
+    });
+  }
+
+  if (noteBack) {
+    noteBack.addEventListener("input", e => {
+      localStorage.setItem(`note_back_${matchId}`, e.target.value);
+    });
+  }
+}, 0);
           // タップで詳細開閉
           card.addEventListener("click", () => {
             card.classList.toggle("expanded");
