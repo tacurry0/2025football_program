@@ -41,7 +41,21 @@ document.addEventListener("DOMContentLoaded", () => {
 const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
 const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
 
-card.innerHTML += `
+const matchId = `${match.date}_${match.club}_${match.opponent}`;
+const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
+const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
+
+card.innerHTML = `
+  <div class="match-header">
+    <div class="match-info">
+      <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
+      <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
+      <div class="venue">${match.venue}</div>
+    </div>
+    <div class="match-logo">
+      <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
+    </div>
+  </div>
   <div class="match-details">
     ${match.details ? `<p>${match.details}</p>` : ""}
     <div class="note-section">
@@ -52,7 +66,23 @@ card.innerHTML += `
     </div>
   </div>
 `;
-`;
+
+setTimeout(() => {
+  const noteGo = card.querySelector(".note-go");
+  const noteBack = card.querySelector(".note-back");
+
+  if (noteGo) {
+    noteGo.addEventListener("input", e => {
+      localStorage.setItem(`note_go_${matchId}`, e.target.value);
+    });
+  }
+
+  if (noteBack) {
+    noteBack.addEventListener("input", e => {
+      localStorage.setItem(`note_back_${matchId}`, e.target.value);
+    });
+  }
+}, 0);
 
 setTimeout(() => {
   const noteGo = card.querySelector(".note-go");
