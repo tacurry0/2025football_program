@@ -220,3 +220,98 @@ html, body {
     height: 2em; /* ロゴの大きさ調整 */
   }
 }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 100%;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+#slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+#month-slider {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  will-change: transform;
+}
+
+/* スライド1枚分 */
+.month-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 100%;
+  flex-shrink: 0;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* カードデザイン調整：元の縦幅に近づける */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* 中身の文字やロゴもバランス調整 */
+.match-header {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+.match-date {
+  font-size: 1em;
+  margin-left: 0.5em;
+}
+
+.opponent-name {
+  font-size: 1.3em;
+}
+
+.venue {
+  font-size: 0.95em;
+  margin-top: 0.4em;
+}
+
+.emblem {
+  height: 3.2em;
+  margin-left: 10px;
+}
+
+/* スマホ画面対応 */
+@media (max-width: 768px) {
+  .month-section {
+    padding: 0 0.5rem;
+  }
+
+  .card {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .match-header {
+    font-size: 1.1em;
+  }
+
+  .opponent-name {
+    font-size: 1.15em;
+  }
+
+  .emblem {
+    height: 2.5em;
+  }
+}
