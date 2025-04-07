@@ -56,6 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
           // 詳細の開閉
           card.addEventListener("click", (e) => {
   if (e.target.tagName.toLowerCase() === "textarea") return;
+
+  // 他のカードを閉じる
+  document.querySelectorAll(".card.expanded").forEach(c => {
+    if (c !== card) c.classList.remove("expanded");
+  });
+
+  // 自分は開閉トグル
   card.classList.toggle("expanded");
 });
 
