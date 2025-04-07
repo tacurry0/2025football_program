@@ -1,7 +1,7 @@
 
 {
-  "name": "2025サッカー日程",
-  "short_name": "サッカー日程",
+  "name": "たかれいアプリ",
+  "short_name": "たかれいアプリ",
   "start_url": "/2025football_program/jstest/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
