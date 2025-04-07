@@ -46,9 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
               ${match.details ? `<p>${match.details}</p>` : ""}
               <div class="note-section">
                 <label>【行き】</label>
-                <textarea class="note-go" placeholder="行きのメモ（新幹線・飛行機など）">${savedGo}</textarea>
+                <textarea class="note-go" placeholder="">${savedGo}</textarea>
                 <label>【帰り】</label>
-                <textarea class="note-back" placeholder="帰りのメモ">${savedBack}</textarea>
+                <textarea class="note-back" placeholder="">${savedBack}</textarea>
               </div>
             </div>
           `;
