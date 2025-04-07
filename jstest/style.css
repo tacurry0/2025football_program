@@ -337,3 +337,22 @@ html, body {
   font-size: 0.95em;
   margin-top: 0.3em;
 }
+
+#club-toggle {
+  margin-top: 0.5em;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.club-icon {
+  height: 2.2em;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s ease;
+}
+
+.club-icon.active {
+  opacity: 1;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+}
