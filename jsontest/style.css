@@ -21,17 +21,16 @@ header {
 
 /* 月ヘッダー */
 #month-header {
-  position: fixed;
-  top: 90px;
-  width: 100%;
+  position: sticky;
+  top: 120px; /* ← オレンジヘッダーの高さ分 */
   z-index: 100;
   background: #f6f8f7;
   padding: 0.75rem 1rem;
-  box-sizing: border-box;
-  text-align: center;
-  font-size: 1.3rem;
   font-weight: bold;
+  font-size: 1.3rem;
+  text-align: center;
   border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 /* クラブ切り替えアイコン */
