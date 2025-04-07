@@ -1,53 +1,38 @@
+let currentMonth = new Date().getMonth() + 1;
+const months = Array.from(document.querySelectorAll('.month-section'));
+const monthHeader = document.getElementById('month-header');
+let currentIndex = months.findIndex(m => parseInt(m.dataset.month) === currentMonth);
+if (currentIndex === -1) currentIndex = 0;
 
-const matchData = {
-  "アルビレックス新潟": [
-    {
-      "節": 1,
-      "日付": "2月15日",
-      "曜日": "土",
-      "時間": "14:00",
-      "対戦チーム": "横浜F・マリノス",
-      "会場": "日産スタジアム"
-    },
-    {
-      "節": 2,
-      "日付": "3月3日",
-      "曜日": "日",
-      "時間": "15:00",
-      "対戦チーム": "FC東京",
-      "会場": "デンカビッグスワンスタジアム"
-    }
-  ],
-  "ロアッソ熊本": [
-    {
-      "節": 1,
-      "日付": "2月16日",
-      "曜日": "日",
-      "時間": "13:00",
-      "対戦チーム": "徳島ヴォルティス",
-      "会場": "えがお健康スタジアム"
-    }
-  ]
-};
+function showMonth(index) {
+  months.forEach((m, i) => m.style.display = i === index ? 'block' : 'none');
+  const monthName = mName(parseInt(months[index].dataset.month));
+  monthHeader.textContent = monthName;
+}
 
-document.addEventListener("DOMContentLoaded", function () {
-  const scheduleContainer = document.getElementById("schedule-container");
-  if (!scheduleContainer) return;
+function mName(m) {
+  const names = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return names[m - 1] || "Unknown";
+}
 
-  const currentMonth = new Date().getMonth() + 1;
-  for (const club in matchData) {
-    matchData[club].forEach(match => {
-      const matchMonth = parseInt(match["日付"].match(/(\d+)/)[1]);
-      if (matchMonth === currentMonth) {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <div class="match-date">MW${match["節"]} - ${match["日付"]} ${match["曜日"]} ${match["時間"]}</div>
-          <div class="match-vs">vs <span class="opponent">${match["対戦チーム"]}</span></div>
-          <div class="stadium">${match["会場"]}</div>
-        `;
-        scheduleContainer.appendChild(card);
-      }
-    });
+showMonth(currentIndex);
+
+window.addEventListener('touchstart', handleTouchStart, false);
+window.addEventListener('touchend', handleTouchEnd, false);
+let xDown = null;
+
+function handleTouchStart(evt) {
+  xDown = evt.touches[0].clientX;
+}
+
+function handleTouchEnd(evt) {
+  if (!xDown) return;
+  let xUp = evt.changedTouches[0].clientX;
+  let xDiff = xDown - xUp;
+  if (Math.abs(xDiff) > 50) {
+    if (xDiff > 0 && currentIndex < months.length - 1) currentIndex++;
+    else if (xDiff < 0 && currentIndex > 0) currentIndex--;
+    showMonth(currentIndex);
   }
-});
+  xDown = null;
+}
