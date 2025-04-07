@@ -23,16 +23,14 @@ header {
 }
 
 /* 月ヘッダー */
+
+
 #month-header {
-  position: sticky;
-  top: 52px; /* headerの高さと合わせる */
-  z-index: 999;
-  background: #f6f8f7;
-  padding: 1rem;
-  font-weight: bold;
-  font-size: 1.3rem;
-  text-align: center;
-  border-bottom: 1px solid #ccc;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 
