@@ -83,6 +83,7 @@ header {
   font-size: 1.3rem;
   text-align: center;
   border-bottom: 1px solid #ddd;
+text-align: center;
 }
 @font-face {
   font-family: 'Jlg-Display';
