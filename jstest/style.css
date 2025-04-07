@@ -150,3 +150,73 @@ header {
     max-width: 100%; /* 小さい画面では最大幅を画面いっぱいにする */
   }
 }
+
+/* 基本設定 */
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* 横スクロールの防止 */
+}
+
+.container {
+  max-width: 100%; /* 幅を最大にする */
+  padding: 0.5rem;
+  overflow: hidden; /* コンテナの外に出ないようにする */
+}
+
+/* スライダー部分の調整 */
+#slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+#month-slider {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+}
+
+.month-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 100%;
+  padding: 0 0.4rem;
+  box-sizing: border-box;
+}
+
+/* カードの明示的な設定 */
+.card {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.6rem 0.8rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* スマホ向け微調整 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0.3rem;
+  }
+
+  .month-section {
+    padding: 0 0.2rem;
+  }
+
+  .card {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9em; /* カード内の文字サイズを小さく調整 */
+  }
+
+  .match-header {
+    font-size: 1em; /* ヘッダーサイズ調整 */
+  }
+
+  .opponent-name {
+    font-size: 1.1em; /* 対戦相手の文字を適度に縮小 */
+  }
+
+  .emblem {
+    height: 2em; /* ロゴの大きさ調整 */
+  }
+}
