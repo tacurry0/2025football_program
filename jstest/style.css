@@ -111,3 +111,18 @@ header {
 .info-label {
   font-family: 'Jlg-Display', sans-serif;
 }
+#slider-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+#month-slider {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  will-change: transform;
+}
+
+.month-section {
+  min-width: 100%;
+  flex-shrink: 0;
+}
