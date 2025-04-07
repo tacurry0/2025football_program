@@ -54,9 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
           `;
 
           // 詳細の開閉
-          card.addEventListener("click", () => {
-            card.classList.toggle("expanded");
-          });
+          card.addEventListener("click", (e) => {
+  if (e.target.tagName.toLowerCase() === "textarea") return;
+  card.classList.toggle("expanded");
+});
 
           // メモ保存
           setTimeout(() => {
