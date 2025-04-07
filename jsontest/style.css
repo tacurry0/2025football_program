@@ -22,8 +22,8 @@ header {
 /* 月ヘッダー */
 #month-header {
   position: sticky;
-  top: 0; /* スクロールしたら画面上部にピタッと */
-  z-index: 100;
+  top: 0;
+  z-index: 99;
   background: #f6f8f7;
   padding: 0.75rem 1rem;
   font-weight: bold;
@@ -43,6 +43,10 @@ header {
   display: flex;
   justify-content: center;
   gap: 1rem;
+}
+
+.container {
+  margin-top: 0;
 }
 
 .club-icon {
