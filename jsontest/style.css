@@ -64,7 +64,7 @@ header {
 /* スライダーエリア */
 #slider-container {
   width: 100vw;
-  margin-top: 140px; /* オレンジ＋月ヘッダー分 */
+  margin-top: 10px; /* オレンジ＋月ヘッダー分 */
 }
 
 #month-slider {
