@@ -123,6 +123,7 @@ header {
 }
 
 .month-section {
+  display: block;  /* 変更箇所：非表示から表示へ */
   min-width: 100%;
   flex-shrink: 0;
 }
