@@ -60,4 +60,52 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.display = icon.classList.contains("active") ? "block" : "none";
     });
   }
+  // 以下を追加
+  const cards = document.querySelectorAll(".card");
+  const results = [];
+
+  cards.forEach(card => {
+    const club = card.classList.contains("niigata") ? "niigata" :
+                 card.classList.contains("kumamoto") ? "kumamoto" : "unknown";
+
+    const matchDateEl = card.querySelector(".match-date");
+    const infoLineEl = card.querySelector(".info-line .opponent-name");
+    const venueEl = card.querySelector(".venue");
+    const emblemEl = card.querySelector(".emblem");
+
+    if (!matchDateEl || !infoLineEl || !venueEl || !emblemEl) return;
+
+    const matchText = matchDateEl.textContent.trim(); // 例: "MW1 - 2/15 Sat 14:00"
+    const matchweek = matchText.split(" - ")[0];
+    const dateInfo = matchText.split(" - ")[1];       // "2/15 Sat 14:00"
+
+    const [monthDay, day, time] = dateInfo.split(" ");
+    const [month, dayNum] = monthDay.split("/");
+
+    results.push({
+      club,
+      matchweek,
+      date: `2025-${month.padStart(2, '0')}-${dayNum.padStart(2, '0')}`,
+      day,
+      time,
+      opponent: infoLineEl.textContent.trim(),
+      venue: venueEl.textContent.trim(),
+      emblem: emblemEl.getAttribute("src"),
+      details: ""
+    });
+  });
+
+  // 画面に出力
+  const output = document.createElement("pre");
+  output.textContent = JSON.stringify(results, null, 2);
+  output.style.whiteSpace = "pre-wrap";
+  output.style.fontSize = "12px";
+  output.style.background = "#fff3cc";
+  output.style.border = "1px solid #aaa";
+  output.style.padding = "1em";
+  output.style.margin = "1em";
+  output.style.maxHeight = "40vh";
+  output.style.overflow = "auto";
+
+  document.body.prepend(output);
 });
