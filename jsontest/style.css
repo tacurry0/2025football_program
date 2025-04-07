@@ -22,7 +22,7 @@ header {
 /* 月ヘッダー */
 #month-header {
   position: sticky;
-  top: 120px; /* ← オレンジヘッダーの高さ分 */
+  top: 64px; /* オレンジヘッダーの高さと合わせる */
   z-index: 100;
   background: #f6f8f7;
   padding: 0.75rem 1rem;
@@ -31,6 +31,10 @@ header {
   text-align: center;
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
+}
+
+.month-title {
+  display: none;
 }
 
 /* クラブ切り替えアイコン */
@@ -56,7 +60,6 @@ header {
 /* スライダーエリア */
 #slider-container {
   width: 100vw;
-  overflow: hidden;
   margin-top: 140px; /* オレンジ＋月ヘッダー分 */
 }
 
@@ -75,6 +78,7 @@ header {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  padding-top: 1rem; /* ← 月ヘッダーと重ならないよう少し空ける */
 }
 
 /* カード全体 */
