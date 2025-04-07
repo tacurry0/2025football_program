@@ -398,3 +398,7 @@ html, body {
   border: 1px solid #ccc;
   resize: vertical;
 }
+
+#slider-container {
+  margin-top: 3.5rem; /* ヘッダー高さに合わせて調整 */
+}
