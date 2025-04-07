@@ -26,6 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
         monthsMap[month].forEach(match => {
           const card = document.createElement("div");
           card.className = `card ${match.club}`;
+
+          const matchId = `${match.date}_${match.club}_${match.opponent}`;
+          const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
+          const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
+
           card.innerHTML = `
             <div class="match-header">
               <div class="match-info">
@@ -37,73 +42,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
               </div>
             </div>
-            const matchId = `${match.date}_${match.club}_${match.opponent}`;
-const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
-const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
+            <div class="match-details">
+              ${match.details ? `<p>${match.details}</p>` : ""}
+              <div class="note-section">
+                <label>【行き】</label>
+                <textarea class="note-go" placeholder="行きのメモ（新幹線・飛行機など）">${savedGo}</textarea>
+                <label>【帰り】</label>
+                <textarea class="note-back" placeholder="帰りのメモ">${savedBack}</textarea>
+              </div>
+            </div>
+          `;
 
-const matchId = `${match.date}_${match.club}_${match.opponent}`;
-const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
-const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
-
-card.innerHTML = `
-  <div class="match-header">
-    <div class="match-info">
-      <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
-      <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
-      <div class="venue">${match.venue}</div>
-    </div>
-    <div class="match-logo">
-      <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
-    </div>
-  </div>
-  <div class="match-details">
-    ${match.details ? `<p>${match.details}</p>` : ""}
-    <div class="note-section">
-      <label>【行き】</label>
-      <textarea class="note-go" placeholder="行きのメモ（新幹線・飛行機など）">${savedGo}</textarea>
-      <label>【帰り】</label>
-      <textarea class="note-back" placeholder="帰りのメモ">${savedBack}</textarea>
-    </div>
-  </div>
-`;
-
-setTimeout(() => {
-  const noteGo = card.querySelector(".note-go");
-  const noteBack = card.querySelector(".note-back");
-
-  if (noteGo) {
-    noteGo.addEventListener("input", e => {
-      localStorage.setItem(`note_go_${matchId}`, e.target.value);
-    });
-  }
-
-  if (noteBack) {
-    noteBack.addEventListener("input", e => {
-      localStorage.setItem(`note_back_${matchId}`, e.target.value);
-    });
-  }
-}, 0);
-
-setTimeout(() => {
-  const noteGo = card.querySelector(".note-go");
-  const noteBack = card.querySelector(".note-back");
-
-  if (noteGo) {
-    noteGo.addEventListener("input", e => {
-      localStorage.setItem(`note_go_${matchId}`, e.target.value);
-    });
-  }
-
-  if (noteBack) {
-    noteBack.addEventListener("input", e => {
-      localStorage.setItem(`note_back_${matchId}`, e.target.value);
-    });
-  }
-}, 0);
-          // タップで詳細開閉
+          // 詳細の開閉
           card.addEventListener("click", () => {
             card.classList.toggle("expanded");
           });
+
+          // メモ保存
+          setTimeout(() => {
+            const noteGo = card.querySelector(".note-go");
+            const noteBack = card.querySelector(".note-back");
+
+            if (noteGo) {
+              noteGo.addEventListener("input", e => {
+                localStorage.setItem(`note_go_${matchId}`, e.target.value);
+              });
+            }
+
+            if (noteBack) {
+              noteBack.addEventListener("input", e => {
+                localStorage.setItem(`note_back_${matchId}`, e.target.value);
+              });
+            }
+          }, 0);
 
           section.appendChild(card);
         });
@@ -111,7 +82,6 @@ setTimeout(() => {
         slider.appendChild(section);
       }
 
-      // スライダー表示処理
       const months = Array.from(document.querySelectorAll(".month-section"));
       let currentMonth = new Date().getMonth() + 1;
       let currentIndex = months.findIndex(m => parseInt(m.dataset.month) === currentMonth);
@@ -145,7 +115,7 @@ setTimeout(() => {
 
       updateSlider();
 
-      // エンブレム切り替え
+      // クラブ表示切り替え
       const toggleAlb = document.getElementById("toggle-niigata");
       const toggleRoa = document.getElementById("toggle-kumamoto");
 
@@ -165,7 +135,4 @@ setTimeout(() => {
         });
       }
     });
-card.addEventListener("click", () => {
-  card.classList.toggle("expanded");
-});
 });
