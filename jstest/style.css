@@ -317,6 +317,7 @@ html, body {
   width: calc(100vw - 1rem); /* ← 余白を1remに変更して中央感を保つ */
   padding: 1.2rem 1rem; /* ← 縦の余白を少し増やす */
   margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 /* エンブレム画像を大きく */
