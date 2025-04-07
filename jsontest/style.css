@@ -22,7 +22,7 @@ header {
 /* 月ヘッダー */
 #month-header {
   position: fixed;
-  top: 60px;
+  top: 90px;
   width: 100%;
   z-index: 100;
   background: #f6f8f7;
