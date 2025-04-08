@@ -144,3 +144,28 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 });
+// 必要な変数
+let currentMonthIndex = 0;
+
+// 月移動関数
+function goToMonth(index) {
+  const monthSlider = document.getElementById("month-slider");
+  const monthWidth = monthSlider.clientWidth;
+  currentMonthIndex = index;
+  monthSlider.style.transform = `translateX(-${index * 100}vw)`;
+}
+
+// ボタンイベント
+document.getElementById("prev-month").addEventListener("click", () => {
+  if (currentMonthIndex > 0) goToMonth(currentMonthIndex - 1);
+});
+
+document.getElementById("next-month").addEventListener("click", () => {
+  const totalMonths = document.querySelectorAll(".month-section").length;
+  if (currentMonthIndex < totalMonths - 1) goToMonth(currentMonthIndex + 1);
+});
+
+document.getElementById("go-today").addEventListener("click", () => {
+  const thisMonth = new Date().getMonth(); // 0-11
+  goToMonth(thisMonth);
+});
