@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+document.getElementById("go-today").addEventListener("click", () => {
+  const thisMonth = new Date().getMonth() + 1; // 1-12
+  const months = Array.from(document.querySelectorAll(".month-section"));
+  const index = months.findIndex(m => parseInt(m.dataset.month) === thisMonth);
+  if (index !== -1) {
+    goToMonth(index);
+  }
+});
   const slider = document.getElementById("month-slider");
   const monthHeader = document.getElementById("month-header");
 
