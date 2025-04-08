@@ -238,3 +238,41 @@ header {
 #month-slider {
   overflow: visible !important;
 }
+
+#month-header {
+  position: sticky;
+  top: -1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  z-index: 999;
+  background: #f6f8f7;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #333;
+}
+
+#go-today {
+  position: fixed;
+  bottom: 6rem;
+  right: 1rem;
+  background: #ff6600;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
