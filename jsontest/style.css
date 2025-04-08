@@ -25,7 +25,7 @@ header {
 /* 月ヘッダー */
 #month-header {
   position: sticky;
-  top: 52px; /* headerの高さと合わせる */
+  top: -0.5px; /* headerの高さと合わせる */
   z-index: 999;
   background: #f6f8f7;
   padding: 1rem;
