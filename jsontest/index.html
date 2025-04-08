@@ -36,8 +36,6 @@
 <div id="slider-container">
   <div id="month-slider"></div>
 
-<script src="script.js"></script>
-
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
@@ -45,5 +43,6 @@
       .catch(err => console.error('Service Worker registration failed:', err));
   }
 </script>
+<script src="script.js"></script>
 </body>
 </html>
