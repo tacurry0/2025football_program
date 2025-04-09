@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 const prevBtn = document.getElementById("prev-month");
 const nextBtn = document.getElementById("next-month");
-const goTodayBtn = document.getElementById("go-today");
+const goTodayBtn
 
 if (prevBtn && nextBtn && goTodayBtn) {
   prevBtn.addEventListener("click", () => {
@@ -30,17 +30,21 @@ if (prevBtn && nextBtn && goTodayBtn) {
   });
 }
 
+
+
 document.getElementById("go-today").addEventListener("click", () => {
-  const thisMonth = new Date().getMonth() + 1; // 1-12
+  const thisMonth = new Date().getMonth() + 1;
   const months = Array.from(document.querySelectorAll(".month-section"));
   const index = months.findIndex(m => parseInt(m.dataset.month) === thisMonth);
   if (index !== -1) {
-    goToMonth(index);
+    goToMonth(index); // ← ここが正しい！updateSliderは使わない！
   }
 });
-  const slider = document.getElementById("month-slider");
-  const monthHeader = document.getElementById("month-header");
 
+const titleElement = document.getElementById("month-title");
+if (titleElement) titleElement.textContent = monthName;
+
+  const slider = document.getElementById("month-slider");
   fetch("schedule.json")
     .then(res => res.json())
     .then(data => {
@@ -188,9 +192,15 @@ let currentMonthIndex = 0;
 
 // 月移動関数
 function goToMonth(index) {
-  const monthSlider = document.getElementById("month-slider");
-  const monthWidth = monthSlider.clientWidth;
-  currentMonthIndex = index;
-  monthSlider.style.transform = `translateX(-${index * 100}vw)`;
-}
+  const months = document.querySelectorAll(".month-section");
+  const slider = document.getElementById("month-slider");
+  const monthHeader = document.getElementById("month-title");
 
+  currentMonthIndex = index;
+  slider.style.transform = `translateX(-${index * 100}vw)`;
+
+  // 月名更新
+  const currentSection = months[currentMonthIndex];
+  const monthName = currentSection.querySelector(".month-title")?.textContent || "";
+  if (monthHeader) monthHeader.textContent = monthName;
+}
