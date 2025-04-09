@@ -1,4 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
+const prevBtn = document.getElementById("prev-month");
+const nextBtn = document.getElementById("next-month");
+const goTodayBtn = document.getElementById("go-today");
+
+if (prevBtn && nextBtn && goTodayBtn) {
+  prevBtn.addEventListener("click", () => {
+    if (currentMonthIndex > 0) {
+      currentMonthIndex--;
+      updateSlider();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    const months = document.querySelectorAll(".month-section");
+    if (currentMonthIndex < months.length - 1) {
+      currentMonthIndex++;
+      updateSlider();
+    }
+  });
+
+  goTodayBtn.addEventListener("click", () => {
+    const thisMonth = new Date().getMonth() + 1;
+    const months = Array.from(document.querySelectorAll(".month-section"));
+    const index = months.findIndex(m => parseInt(m.dataset.month) === thisMonth);
+    if (index !== -1) {
+      currentMonthIndex = index;
+      updateSlider();
+    }
+  });
+}
+
 document.getElementById("go-today").addEventListener("click", () => {
   const thisMonth = new Date().getMonth() + 1; // 1-12
   const months = Array.from(document.querySelectorAll(".month-section"));
@@ -163,17 +194,3 @@ function goToMonth(index) {
   monthSlider.style.transform = `translateX(-${index * 100}vw)`;
 }
 
-// ボタンイベント
-document.getElementById("prev-month").addEventListener("click", () => {
-  if (currentMonthIndex > 0) goToMonth(currentMonthIndex - 1);
-});
-
-document.getElementById("next-month").addEventListener("click", () => {
-  const totalMonths = document.querySelectorAll(".month-section").length;
-  if (currentMonthIndex < totalMonths - 1) goToMonth(currentMonthIndex + 1);
-});
-
-document.getElementById("go-today").addEventListener("click", () => {
-  const thisMonth = new Date().getMonth(); // 0-11
-  goToMonth(thisMonth);
-});
