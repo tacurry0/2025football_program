@@ -2,7 +2,7 @@
 
 // ✅ 月移動関数 function goToMonth(index) { const months = document.querySelectorAll(".month-section"); const slider = document.getElementById("month-slider"); const monthHeader = document.getElementById("month-title");
 
-currentMonthIndex = index; slider.style.transform = `translateX(-${index * 100}vw)`;
+currentMonthIndex = index; slider.style.transform = translateX(-${index * 100}vw);
 
 const currentSection = months[currentMonthIndex]; const monthName = currentSection.querySelector(".month-title")?.textContent || ""; if (monthHeader) monthHeader.textContent = monthName; }
 
@@ -35,26 +35,28 @@ data.forEach(match => {
       const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
 
       card.innerHTML = `
-  <div class="match-header">
-    <div class="match-info">
-      <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
-      <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
-      <div class="venue">${match.venue}</div>
-    </div>
-    <div class="match-logo">
-      <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
-    </div>
-  </div>
-  <div class="match-details">
-    ${match.details ? `<p>${match.details}</p>` : ""}
-    <div class="note-section">
-      <label>【行き】</label>
-      <textarea class="note-go" placeholder="">${savedGo}</textarea>
-      <label>【帰り】</label>
-      <textarea class="note-back" placeholder="">${savedBack}</textarea>
-    </div>
-  </div>
-`;card.addEventListener("click", (e) => {
+        <div class="match-header">
+          <div class="match-info">
+            <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
+            <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
+            <div class="venue">${match.venue}</div>
+          </div>
+          <div class="match-logo">
+            <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
+          </div>
+        </div>
+        <div class="match-details">
+          ${match.details ? `<p>${match.details}</p>` : ""}
+          <div class="note-section">
+            <label>【行き】</label>
+            <textarea class="note-go" placeholder="">${savedGo}</textarea>
+            <label>【帰り】</label>
+            <textarea class="note-back" placeholder="">${savedBack}</textarea>
+          </div>
+        </div>
+      `;
+
+      card.addEventListener("click", (e) => {
         if (e.target.tagName.toLowerCase() === "textarea") return;
         document.querySelectorAll(".card.expanded").forEach(c => {
           if (c !== card) c.classList.remove("expanded");
@@ -77,7 +79,7 @@ data.forEach(match => {
   }
 
   const months = Array.from(document.querySelectorAll(".month-section"));
-let touchStartX = 0;
+  let touchStartX = 0;
   const thisMonth = new Date().getMonth() + 1;
   const index = months.findIndex(m => parseInt(m.dataset.month) === thisMonth);
   currentMonthIndex = index !== -1 ? index : 0;
