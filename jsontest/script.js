@@ -50,7 +50,28 @@ document.addEventListener("DOMContentLoaded", () => {
           const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
           const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
 
-          card.innerHTML = `...`; // 省略：カードHTML組み立て
+      card.innerHTML = `
+  <div class="match-header">
+    <div class="match-info">
+      <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
+      <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
+      <div class="venue">${match.venue}</div>
+    </div>
+    <div class="match-logo">
+      <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
+    </div>
+  </div>
+  <div class="match-details">
+    ${match.details ? `<p>${match.details}</p>` : ""}
+    <div class="note-section">
+      <label>【行き】</label>
+      <textarea class="note-go" placeholder="">${savedGo}</textarea>
+      <label>【帰り】</label>
+      <textarea class="note-back" placeholder="">${savedBack}</textarea>
+    </div>
+  </div>
+`;
+
 
           card.addEventListener("click", (e) => {
             if (e.target.tagName.toLowerCase() === "textarea") return;
