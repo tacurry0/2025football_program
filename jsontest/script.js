@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 const prevBtn = document.getElementById("prev-month");
 const nextBtn = document.getElementById("next-month");
-const goTodayBtn
+const goTodayBtn = document.getElementById("go-today");
+
 
 if (prevBtn && nextBtn && goTodayBtn) {
   prevBtn.addEventListener("click", () => {
@@ -145,7 +146,10 @@ if (titleElement) titleElement.textContent = monthName;
         slider.style.transform = `translateX(${offset}%)`;
         const currentSection = months[currentIndex];
         const monthName = currentSection.querySelector(".month-title").textContent;
-        monthHeader.textContent = monthName;
+        const monthTitle = document.getElementById("month-title");
+if (monthTitle) monthTitle.textContent = monthName;
+
+      
       }
 
       slider.addEventListener("touchstart", e => {
