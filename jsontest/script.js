@@ -2,7 +2,7 @@
 
 // ✅ 月移動関数 function goToMonth(index) { const months = document.querySelectorAll(".month-section"); const slider = document.getElementById("month-slider"); const monthHeader = document.getElementById("month-title");
 
-currentMonthIndex = index; slider.style.transform = translateX(-${index * 100}vw);
+currentMonthIndex = index; slider.style.transform = `translateX(-${index * 100}vw)`;
 
 const currentSection = months[currentMonthIndex]; const monthName = currentSection.querySelector(".month-title")?.textContent || ""; if (monthHeader) monthHeader.textContent = monthName; }
 
