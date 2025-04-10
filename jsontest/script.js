@@ -176,18 +176,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 }
 
-function updateClubVisibility() {
-  const toggleAlb = document.getElementById("toggle-niigata");
-  const toggleRoa = document.getElementById("toggle-kumamoto");
-
-  document.querySelectorAll(".card.niigata").forEach(card => {
-    card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
-  });
-
-  document.querySelectorAll(".card.kumamoto").forEach(card => {
-    card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
-  });
-}
-
     });
 });
