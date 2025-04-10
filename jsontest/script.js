@@ -77,6 +77,7 @@ data.forEach(match => {
   }
 
   const months = Array.from(document.querySelectorAll(".month-section"));
+let touchStartX = 0;
   const thisMonth = new Date().getMonth() + 1;
   const index = months.findIndex(m => parseInt(m.dataset.month) === thisMonth);
   currentMonthIndex = index !== -1 ? index : 0;
