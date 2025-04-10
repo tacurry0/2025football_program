@@ -138,13 +138,15 @@ document.getElementById("go-today").addEventListener("click", () => {
 
       let touchStartX = 0;
 
-      function updateSlider() {
-        const offset = -100 * currentIndex;
-        slider.style.transform = `translateX(${offset}%)`;
-        const currentSection = months[currentIndex];
-        const monthName = currentSection.querySelector(".month-title").textContent;
-        const monthTitle = document.getElementById("month-title");
-if (monthTitle) monthTitle.textContent = monthName;
+function updateSlider() {
+  const offset = -100 * currentMonthIndex;
+  slider.style.transform = `translateX(${offset}%)`;
+  const currentSection = months[currentMonthIndex];
+  const monthName = currentSection.querySelector(".month-title").textContent;
+  const monthTitle = document.getElementById("month-title");
+  if (monthTitle) monthTitle.textContent = monthName;
+}
+
 
       
       }
@@ -153,17 +155,18 @@ if (monthTitle) monthTitle.textContent = monthName;
         touchStartX = e.changedTouches[0].screenX;
       });
 
-      slider.addEventListener("touchend", e => {
-        const touchEndX = e.changedTouches[0].screenX;
-        const deltaX = touchEndX - touchStartX;
-        if (deltaX > 50 && currentIndex > 0) {
-          currentIndex--;
-          updateSlider();
-        } else if (deltaX < -50 && currentIndex < months.length - 1) {
-          currentIndex++;
-          updateSlider();
-        }
-      });
+slider.addEventListener("touchend", e => {
+  const touchEndX = e.changedTouches[0].screenX;
+  const deltaX = touchEndX - touchStartX;
+  if (deltaX > 50 && currentMonthIndex > 0) {
+    currentMonthIndex--;
+    updateSlider();
+  } else if (deltaX < -50 && currentMonthIndex < months.length - 1) {
+    currentMonthIndex++;
+    updateSlider();
+  }
+});
+
 
       updateSlider();
 
