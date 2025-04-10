@@ -147,10 +147,6 @@ function updateSlider() {
   if (monthTitle) monthTitle.textContent = monthName;
 }
 
-
-      
-      }
-
       slider.addEventListener("touchstart", e => {
         touchStartX = e.changedTouches[0].screenX;
       });
