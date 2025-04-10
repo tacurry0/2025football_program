@@ -146,6 +146,25 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       function updateSlider() {
+      // クラブ切り替え処理（再追加）
+const toggleAlb = document.getElementById("toggle-niigata");
+const toggleRoa = document.getElementById("toggle-kumamoto");
+
+toggleAlb.addEventListener("click", () => {
+  toggleClub("niigata", toggleAlb);
+});
+
+toggleRoa.addEventListener("click", () => {
+  toggleClub("kumamoto", toggleRoa);
+});
+
+function toggleClub(clubClass, icon) {
+  icon.classList.toggle("active");
+  const cards = document.querySelectorAll(`.card.${clubClass}`);
+  cards.forEach(card => {
+    card.style.display = icon.classList.contains("active") ? "block" : "none";
+  });
+}  
         const offset = -100 * currentMonthIndex;
         slider.style.transform = `translateX(${offset}vw)`;
         const currentSection = months[currentMonthIndex];
