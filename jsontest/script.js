@@ -13,9 +13,9 @@ if (prevBtn && nextBtn && goTodayBtn) {
   });
 
   nextBtn.addEventListener("click", () => {
-    const months = document.querySelectorAll(".month-section");
-    if (currentMonthIndex < months.length - 1) {
-      currentMonthIndex++;
+const months = document.querySelectorAll(".month-section");
+if (currentMonthIndex < months.length - 1) {
+    currentMonthIndex++;
       updateSlider();
     }
   });
@@ -132,8 +132,10 @@ document.getElementById("go-today").addEventListener("click", () => {
       }
 
       const months = Array.from(document.querySelectorAll(".month-section"));
-      let currentMonth = new Date().getMonth() + 1;
-      let currentIndex = months.findIndex(m => parseInt(m.dataset.month) === currentMonth);
+const todayMonth = new Date().getMonth() + 1;
+ currentMonthIndex = months.findIndex(m => parseInt(m.dataset.month) === todayMonth);
+if (currentMonthIndex === -1) currentMonthIndex = 0;
+
       if (currentIndex === -1) currentIndex = 0;
 
       let touchStartX = 0;
