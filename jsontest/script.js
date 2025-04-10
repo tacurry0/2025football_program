@@ -42,9 +42,6 @@ document.getElementById("go-today").addEventListener("click", () => {
   }
 });
 
-const titleElement = document.getElementById("month-title");
-if (titleElement) titleElement.textContent = monthName;
-
   const slider = document.getElementById("month-slider");
   fetch("schedule.json")
     .then(res => res.json())
