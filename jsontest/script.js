@@ -171,6 +171,19 @@ function toggleClub(clubClass, icon) {
         const monthName = currentSection.querySelector(".month-title").textContent;
         const monthTitle = document.getElementById("month-title");
         if (monthTitle) monthTitle.textContent = monthName;
+        updateClubVisibility();
+        function updateClubVisibility() {
+  const toggleAlb = document.getElementById("toggle-niigata");
+  const toggleRoa = document.getElementById("toggle-kumamoto");
+
+  document.querySelectorAll(".card.niigata").forEach(card => {
+    card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
+  });
+
+  document.querySelectorAll(".card.kumamoto").forEach(card => {
+    card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
+  });
+}
       }
     });
 });
