@@ -35,7 +35,6 @@ data.forEach(match => {
       const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
 
       card.innerHTML = `
-
   <div class="match-header">
     <div class="match-info">
       <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
