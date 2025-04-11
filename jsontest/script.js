@@ -1,176 +1,217 @@
-// ✅ 必要な変数 let currentMonthIndex = 0;
 
-// ✅ 月移動関数 function goToMonth(index) { const months = document.querySelectorAll(".month-section"); const slider = document.getElementById("month-slider"); const monthHeader = document.getElementById("month-title");
+1 file changed
++22
+-18
+lines changed
+Search within code
+ 
+‎jsontest/script.js
++22
+-18
+Original file line number	Diff line number	Diff line change
+@@ -1,189 +1,193 @@
+// ✅ 必要な変数
+let currentMonthIndex = 0;
 
-currentMonthIndex = index; slider.style.transform = translateX(-${index * 100}vw);
+// ✅ 月移動関数
+function goToMonth(index) {
+  const months = document.querySelectorAll(".month-section");
+  const slider = document.getElementById("month-slider");
+  const monthHeader = document.getElementById("month-title");
 
-const currentSection = months[currentMonthIndex]; const monthName = currentSection.querySelector(".month-title")?.textContent || ""; if (monthHeader) monthHeader.textContent = monthName; }
+  currentMonthIndex = index;
+  slider.style.transform = `translateX(-${index * 100}vw)`;
 
-document.addEventListener("DOMContentLoaded", () => { const slider = document.getElementById("month-slider"); const prevBtn = document.getElementById("prev-month"); const nextBtn = document.getElementById("next-month"); const goTodayBtn = document.getElementById("go-today"); const toggleAlb = document.getElementById("toggle-niigata"); const toggleRoa = document.getElementById("toggle-kumamoto");
+  const currentSection = months[currentMonthIndex];
+  const monthName = currentSection.querySelector(".month-title")?.textContent || "";
+  if (monthHeader) monthHeader.textContent = monthName;
+}
 
-fetch("schedule.json") .then(res => res.json()) .then(data => { const monthsMap = {};
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.getElementById("month-slider");
+  const prevBtn = document.getElementById("prev-month");
+  const nextBtn = document.getElementById("next-month");
+  const goTodayBtn = document.getElementById("go-today");
 
-data.forEach(match => {
-    const month = new Date(match.date).getMonth() + 1;
-    if (!monthsMap[month]) monthsMap[month] = [];
-    monthsMap[month].push(match);
-  });
+  fetch("schedule.json")
+    .then(res => res.json())
+    .then(data => {
+      const monthsMap = {};
 
-  for (const month in monthsMap) {
-    const section = document.createElement("div");
-    section.className = "month-section";
-    section.dataset.month = month;
-
-    const title = document.createElement("div");
-    title.className = "month-title";
-    title.textContent = new Date(2025, month - 1).toLocaleString("ja", { month: "long" });
-    section.appendChild(title);
-
-    monthsMap[month].forEach(match => {
-      const card = document.createElement("div");
-      card.className = `card ${match.club}`;
-
-      const matchId = `${match.date}_${match.club}_${match.opponent}`;
-      const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
-      const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
-
-      card.innerHTML = `
-        <div class="match-header">
-          <div class="match-info">
-            <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
-            <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
-            <div class="venue">${match.venue}</div>
-          </div>
-          <div class="match-logo">
-            <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
-          </div>
-        </div>
-        <div class="match-details">
-          ${match.details ? `<p>${match.details}</p>` : ""}
-          <div class="note-section">
-            <label>【行き】</label>
-            <textarea class="note-go" placeholder="">${savedGo}</textarea>
-            <label>【帰り】</label>
-            <textarea class="note-back" placeholder="">${savedBack}</textarea>
-          </div>
-        </div>
-      `;
-
-      card.addEventListener("click", (e) => {
-        if (e.target.tagName.toLowerCase() === "textarea") return;
-        document.querySelectorAll(".card.expanded").forEach(c => {
-          if (c !== card) c.classList.remove("expanded");
-        });
-        card.classList.toggle("expanded");
+      data.forEach(match => {
+        const month = new Date(match.date).getMonth() + 1;
+        if (!monthsMap[month]) monthsMap[month] = [];
+        monthsMap[month].push(match);
       });
 
-      setTimeout(() => {
-        const noteGo = card.querySelector(".note-go");
-        const noteBack = card.querySelector(".note-back");
+      for (const month in monthsMap) {
+        const section = document.createElement("div");
+        section.className = "month-section";
+        section.dataset.month = month;
 
-        if (noteGo) noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
-        if (noteBack) noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
-      }, 0);
+        const title = document.createElement("div");
+        title.className = "month-title";
+        title.textContent = new Date(2025, month - 1).toLocaleString("ja", { month: "long" });
+        section.appendChild(title);
 
-      section.appendChild(card);
-    });
+        monthsMap[month].forEach(match => {
+          const card = document.createElement("div");
+          card.className = `card ${match.club}`;
 
-    slider.appendChild(section);
-  }
+          const matchId = `${match.date}_${match.club}_${match.opponent}`;
+          const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
+          const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
 
-  const months = Array.from(document.querySelectorAll(".month-section"));
-  let touchStartX = 0;
-  const thisMonth = new Date().getMonth() + 1;
-  const index = months.findIndex(m => parseInt(m.dataset.month) === thisMonth);
-  currentMonthIndex = index !== -1 ? index : 0;
+      card.innerHTML = `
+  <div class="match-header">
+    <div class="match-info">
+      <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
+      <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
+      <div class="venue">${match.venue}</div>
+    </div>
+    <div class="match-logo">
+      <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
+    </div>
+  </div>
+  <div class="match-details">
+    ${match.details ? `<p>${match.details}</p>` : ""}
+    <div class="note-section">
+      <label>【行き】</label>
+      <textarea class="note-go" placeholder="">${savedGo}</textarea>
+      <label>【帰り】</label>
+      <textarea class="note-back" placeholder="">${savedBack}</textarea>
+    </div>
+  </div>
+`;
 
-  updateSlider();
 
-  slider.addEventListener("touchstart", e => {
-    touchStartX = e.changedTouches[0].screenX;
+          card.addEventListener("click", (e) => {
+            if (e.target.tagName.toLowerCase() === "textarea") return;
+            document.querySelectorAll(".card.expanded").forEach(c => {
+              if (c !== card) c.classList.remove("expanded");
+            });
+            card.classList.toggle("expanded");
+          });
+
+          setTimeout(() => {
+            const noteGo = card.querySelector(".note-go");
+            const noteBack = card.querySelector(".note-back");
+
+            if (noteGo) noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
+            if (noteBack) noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
+          }, 0);
+
+          section.appendChild(card);
+        });
+
+        slider.appendChild(section);
+      }
+
+      const months = Array.from(document.querySelectorAll(".month-section"));
+      const thisMonth = new Date().getMonth() + 1;
+      const index = months.findIndex(m => parseInt(m.dataset.month) === thisMonth);
+      currentMonthIndex = index !== -1 ? index : 0;
+
+      updateSlider();
+
+      slider.addEventListener("touchstart", e => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      slider.addEventListener("touchend", e => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const deltaX = touchEndX - touchStartX;
+        if (deltaX > 50 && currentMonthIndex > 0) {
+          currentMonthIndex--;
+          updateSlider();
+        } else if (deltaX < -50 && currentMonthIndex < months.length - 1) {
+          currentMonthIndex++;
+          updateSlider();
+        }
+      });
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", () => {
+          if (currentMonthIndex > 0) {
+            currentMonthIndex--;
+            updateSlider();
+          }
+        });
+
+        nextBtn.addEventListener("click", () => {
+          if (currentMonthIndex < months.length - 1) {
+            currentMonthIndex++;
+            updateSlider();
+          }
+        });
+      }
+
+      if (goTodayBtn) {
+        goTodayBtn.addEventListener("click", () => {
+          const today = new Date().getMonth() + 1;
+          const todayIndex = months.findIndex(m => parseInt(m.dataset.month) === today);
+          if (todayIndex !== -1) {
+            currentMonthIndex = todayIndex;
+            updateSlider();
+          }
+        });
+      }
+
+      function updateSlider() {
+      // クラブ切り替え処理（再追加）
+const toggleAlb = document.getElementById("toggle-niigata");
+const toggleRoa = document.getElementById("toggle-kumamoto");
+
+toggleAlb.addEventListener("click", () => {
+  toggleClub("niigata", toggleAlb);
+});
+toggleRoa.addEventListener("click", () => {
+  toggleClub("kumamoto", toggleRoa);
+});
+function toggleClub(clubClass, icon) {
+  icon.classList.toggle("active");
+  const cards = document.querySelectorAll(`.card.${clubClass}`);
+  cards.forEach(card => {
+    card.style.display = icon.classList.contains("active") ? "block" : "none";
+  });
+}  
+        const offset = -100 * currentMonthIndex;
+        slider.style.transform = `translateX(${offset}vw)`;
+        const currentSection = months[currentMonthIndex];
+        const monthName = currentSection.querySelector(".month-title").textContent;
+        const monthTitle = document.getElementById("month-title");
+        if (monthTitle) monthTitle.textContent = monthName;
+        updateClubVisibility();
+    updateClubVisibility(); // ← これを追加
+        function updateClubVisibility() {
+  const toggleAlb = document.getElementById("toggle-niigata");
+  const toggleRoa = document.getElementById("toggle-kumamoto");
+
+  document.querySelectorAll(".card.niigata").forEach(card => {
+    card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
   });
 
-  slider.addEventListener("touchend", e => {
-    const touchEndX = e.changedTouches[0].screenX;
-    const deltaX = touchEndX - touchStartX;
-    if (deltaX > 50 && currentMonthIndex > 0) {
-      currentMonthIndex--;
-      updateSlider();
-    } else if (deltaX < -50 && currentMonthIndex < months.length - 1) {
-      currentMonthIndex++;
-      updateSlider();
-    }
+  document.querySelectorAll(".card.kumamoto").forEach(card => {
+    card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
   });
-
-  if (prevBtn && nextBtn) {
-    prevBtn.addEventListener("click", () => {
-      if (currentMonthIndex > 0) {
-        currentMonthIndex--;
-        updateSlider();
+}
       }
+      function toggleClub(clubClass, icon) {
+  icon.classList.toggle("active");
+  const cards = document.querySelectorAll(`.card.${clubClass}`);
+  cards.forEach(card => {
+    card.style.display = icon.classList.contains("active") ? "block" : "none";
+  });
+}
+function updateClubVisibility() {
+  const toggleAlb = document.getElementById("toggle-niigata");
+  const toggleRoa = document.getElementById("toggle-kumamoto");
+  document.querySelectorAll(".card.niigata").forEach(card => {
+    card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
+  });
+  document.querySelectorAll(".card.kumamoto").forEach(card => {
+    card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
+  });
+}
     });
-
-    nextBtn.addEventListener("click", () => {
-      if (currentMonthIndex < months.length - 1) {
-        currentMonthIndex++;
-        updateSlider();
-      }
-    });
-  }
-
-  if (goTodayBtn) {
-    goTodayBtn.addEventListener("click", () => {
-      const today = new Date().getMonth() + 1;
-      const todayIndex = months.findIndex(m => parseInt(m.dataset.month) === today);
-      if (todayIndex !== -1) {
-        currentMonthIndex = todayIndex;
-        updateSlider();
-      }
-    });
-  }
-
-  if (toggleAlb) {
-    toggleAlb.addEventListener("click", () => {
-      toggleClub("niigata", toggleAlb);
-      updateClubVisibility();
-    });
-  }
-
-  if (toggleRoa) {
-    toggleRoa.addEventListener("click", () => {
-      toggleClub("kumamoto", toggleRoa);
-      updateClubVisibility();
-    });
-  }
-
-  function updateSlider() {
-    const offset = -100 * currentMonthIndex;
-    slider.style.transform = `translateX(${offset}vw)`;
-    const currentSection = months[currentMonthIndex];
-    const monthName = currentSection.querySelector(".month-title").textContent;
-    const monthTitle = document.getElementById("month-title");
-    if (monthTitle) monthTitle.textContent = monthName;
-    updateClubVisibility();
-  }
-
-  function updateClubVisibility() {
-    document.querySelectorAll(".card.niigata").forEach(card => {
-      card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
-    });
-
-    document.querySelectorAll(".card.kumamoto").forEach(card => {
-      card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
-    });
-  }
-
-  function toggleClub(clubClass, icon) {
-    icon.classList.toggle("active");
-    const cards = document.querySelectorAll(`.card.${clubClass}`);
-    cards.forEach(card => {
-      card.style.display = icon.classList.contains("active") ? "block" : "none";
-    });
-  }
 });
-
-});
-
