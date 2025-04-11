@@ -1,15 +1,3 @@
-
-1 file changed
-+22
--18
-lines changed
-Search within code
- 
-‎jsontest/script.js
-+22
--18
-Original file line number	Diff line number	Diff line change
-@@ -1,189 +1,193 @@
 // ✅ 必要な変数
 let currentMonthIndex = 0;
 
@@ -165,9 +153,11 @@ const toggleRoa = document.getElementById("toggle-kumamoto");
 toggleAlb.addEventListener("click", () => {
   toggleClub("niigata", toggleAlb);
 });
+
 toggleRoa.addEventListener("click", () => {
   toggleClub("kumamoto", toggleRoa);
 });
+
 function toggleClub(clubClass, icon) {
   icon.classList.toggle("active");
   const cards = document.querySelectorAll(`.card.${clubClass}`);
@@ -182,7 +172,6 @@ function toggleClub(clubClass, icon) {
         const monthTitle = document.getElementById("month-title");
         if (monthTitle) monthTitle.textContent = monthName;
         updateClubVisibility();
-    updateClubVisibility(); // ← これを追加
         function updateClubVisibility() {
   const toggleAlb = document.getElementById("toggle-niigata");
   const toggleRoa = document.getElementById("toggle-kumamoto");
@@ -196,22 +185,5 @@ function toggleClub(clubClass, icon) {
   });
 }
       }
-      function toggleClub(clubClass, icon) {
-  icon.classList.toggle("active");
-  const cards = document.querySelectorAll(`.card.${clubClass}`);
-  cards.forEach(card => {
-    card.style.display = icon.classList.contains("active") ? "block" : "none";
-  });
-}
-function updateClubVisibility() {
-  const toggleAlb = document.getElementById("toggle-niigata");
-  const toggleRoa = document.getElementById("toggle-kumamoto");
-  document.querySelectorAll(".card.niigata").forEach(card => {
-    card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
-  });
-  document.querySelectorAll(".card.kumamoto").forEach(card => {
-    card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
-  });
-}
     });
 });
