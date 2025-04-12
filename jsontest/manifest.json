@@ -2,7 +2,7 @@
 {
   "name": "たかれいアプリ",
   "short_name": "たかれいアプリ",
-  "start_url": "/2025football_program/jstest/index.html",
+  "start_url": "/2025football_program/jsontest/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff6600",
