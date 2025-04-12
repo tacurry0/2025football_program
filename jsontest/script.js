@@ -1,25 +1,10 @@
-// ✅ 必要な変数
-let currentMonthIndex = 0;
-
-// ✅ 月移動関数
-function goToMonth(index) {
-  const months = document.querySelectorAll(".month-section");
-  const slider = document.getElementById("month-slider");
-  const monthHeader = document.getElementById("month-title");
-
-  currentMonthIndex = index;
-  slider.style.transform = `translateX(-${index * 100}vw)`;
-
-  const currentSection = months[currentMonthIndex];
-  const monthName = currentSection.querySelector(".month-title")?.textContent || "";
-  if (monthHeader) monthHeader.textContent = monthName;
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const slider = document.getElementById("month-slider");
   const prevBtn = document.getElementById("prev-month");
   const nextBtn = document.getElementById("next-month");
   const goTodayBtn = document.getElementById("go-today");
+  const toggleAlb = document.getElementById("toggle-niigata");
+  const toggleRoa = document.getElementById("toggle-kumamoto");
 
   fetch("schedule.json")
     .then(res => res.json())
@@ -45,33 +30,31 @@ document.addEventListener("DOMContentLoaded", () => {
         monthsMap[month].forEach(match => {
           const card = document.createElement("div");
           card.className = `card ${match.club}`;
-
           const matchId = `${match.date}_${match.club}_${match.opponent}`;
           const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
           const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
 
-      card.innerHTML = `
-  <div class="match-header">
-    <div class="match-info">
-      <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
-      <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
-      <div class="venue">${match.venue}</div>
-    </div>
-    <div class="match-logo">
-      <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
-    </div>
-  </div>
-  <div class="match-details">
-    ${match.details ? `<p>${match.details}</p>` : ""}
-    <div class="note-section">
-      <label>【行き】</label>
-      <textarea class="note-go" placeholder="">${savedGo}</textarea>
-      <label>【帰り】</label>
-      <textarea class="note-back" placeholder="">${savedBack}</textarea>
-    </div>
-  </div>
-`;
-
+          card.innerHTML = `
+            <div class="match-header">
+              <div class="match-info">
+                <div class="match-date">${match.matchweek} - ${match.date} ${match.day} ${match.time}</div>
+                <div class="info-line"><span class="info-label">vs</span> <span class="opponent-name">${match.opponent}</span></div>
+                <div class="venue">${match.venue}</div>
+              </div>
+              <div class="match-logo">
+                <img class="emblem" src="${match.emblem}" alt="${match.opponent}">
+              </div>
+            </div>
+            <div class="match-details">
+              ${match.details ? `<p>${match.details}</p>` : ""}
+              <div class="note-section">
+                <label>【行き】</label>
+                <textarea class="note-go" placeholder="">${savedGo}</textarea>
+                <label>【帰り】</label>
+                <textarea class="note-back" placeholder="">${savedBack}</textarea>
+              </div>
+            </div>
+          `;
 
           card.addEventListener("click", (e) => {
             if (e.target.tagName.toLowerCase() === "textarea") return;
@@ -84,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             const noteGo = card.querySelector(".note-go");
             const noteBack = card.querySelector(".note-back");
-
             if (noteGo) noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
             if (noteBack) noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
           }, 0);
@@ -144,27 +126,19 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       }
+      
+      // ここにイベントリスナーを一度だけ登録
+      toggleAlb.addEventListener("click", () => {
+        toggleAlb.classList.toggle("active");
+        updateClubVisibility();
+      });
+
+      toggleRoa.addEventListener("click", () => {
+        toggleRoa.classList.toggle("active");
+        updateClubVisibility();
+      });
 
       function updateSlider() {
-      // クラブ切り替え処理（再追加）
-const toggleAlb = document.getElementById("toggle-niigata");
-const toggleRoa = document.getElementById("toggle-kumamoto");
-
-toggleAlb.addEventListener("click", () => {
-  toggleClub("niigata", toggleAlb);
-});
-
-toggleRoa.addEventListener("click", () => {
-  toggleClub("kumamoto", toggleRoa);
-});
-
-function toggleClub(clubClass, icon) {
-  icon.classList.toggle("active");
-  const cards = document.querySelectorAll(`.card.${clubClass}`);
-  cards.forEach(card => {
-    card.style.display = icon.classList.contains("active") ? "block" : "none";
-  });
-}  
         const offset = -100 * currentMonthIndex;
         slider.style.transform = `translateX(${offset}vw)`;
         const currentSection = months[currentMonthIndex];
@@ -172,18 +146,16 @@ function toggleClub(clubClass, icon) {
         const monthTitle = document.getElementById("month-title");
         if (monthTitle) monthTitle.textContent = monthName;
         updateClubVisibility();
-        function updateClubVisibility() {
-  const toggleAlb = document.getElementById("toggle-niigata");
-  const toggleRoa = document.getElementById("toggle-kumamoto");
+      }
 
-  document.querySelectorAll(".card.niigata").forEach(card => {
-    card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
-  });
+      function updateClubVisibility() {
+        document.querySelectorAll(".card.niigata").forEach(card => {
+          card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
+        });
 
-  document.querySelectorAll(".card.kumamoto").forEach(card => {
-    card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
-  });
-}
+        document.querySelectorAll(".card.kumamoto").forEach(card => {
+          card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
+        });
       }
     });
 });
