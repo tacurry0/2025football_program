@@ -75,38 +75,38 @@ document.addEventListener("DOMContentLoaded", () => {
             if (noteGo) noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
             if (noteBack) noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
           }, 0);
-          const viewGo = card.querySelector(".note-go-view");
-  const viewBack = card.querySelector(".note-back-view");
-  const saveBtn = card.querySelector(".save-notes");
+      const viewGo = card.querySelector(".note-go-view");
+const viewBack = card.querySelector(".note-back-view");
+const saveBtn = card.querySelector(".save-notes");
 
-  if (saveBtn) {
-    saveBtn.addEventListener("click", () => {
-      const valGo = noteGo.value.trim();
-      const valBack = noteBack.value.trim();
-
-      localStorage.setItem(`note_go_${matchId}`, valGo);
-      localStorage.setItem(`note_back_${matchId}`, valBack);
-
-      viewGo.innerHTML = parseToDisplay(valGo);
-      viewBack.innerHTML = parseToDisplay(valBack);
-
-      noteGo.style.display = "none";
-      noteBack.style.display = "none";
-      viewGo.style.display = "block";
-      viewBack.style.display = "block";
-      saveBtn.style.display = "none";
-      editBtn.style.display = 'block';
-    });
-  }
-
-// 編集ボタンの追加（新規追加）
+// 編集ボタンをここで先に定義！（エラーの原因をここで解消）
 const editBtn = document.createElement('button');
 editBtn.textContent = '編集';
 editBtn.className = 'edit-notes';
 editBtn.style.display = 'none';
-
 saveBtn.after(editBtn);
 
+if (saveBtn) {
+  saveBtn.addEventListener("click", () => {
+    const valGo = noteGo.value.trim();
+    const valBack = noteBack.value.trim();
+
+    localStorage.setItem(`note_go_${matchId}`, valGo);
+    localStorage.setItem(`note_back_${matchId}`, valBack);
+
+    viewGo.innerHTML = parseToDisplay(valGo);
+    viewBack.innerHTML = parseToDisplay(valBack);
+
+    noteGo.style.display = "none";
+    noteBack.style.display = "none";
+    viewGo.style.display = "block";
+    viewBack.style.display = "block";
+    saveBtn.style.display = "none";
+    editBtn.style.display = 'block'; // ← ここでeditBtnを表示！
+  });
+}
+
+// 編集ボタンがクリックされたら再編集可能にする
 editBtn.addEventListener('click', () => {
   noteGo.style.display = "block";
   noteBack.style.display = "block";
@@ -116,21 +116,17 @@ editBtn.addEventListener('click', () => {
   editBtn.style.display = 'none';
 });
 
-// 初期表示の修正（ページ再読み込み時）
+// 最初から保存済みデータがあれば、最初は表示モード
 if (savedGo || savedBack) {
+  noteGo.style.display = "none";
+  noteBack.style.display = "none";
+  viewGo.innerHTML = parseToDisplay(savedGo);
+  viewBack.innerHTML = parseToDisplay(savedBack);
+  viewGo.style.display = "block";
+  viewBack.style.display = "block";
+  saveBtn.style.display = "none";
   editBtn.style.display = 'block';
 }
-
-  // 初期状態で保存済みなら表示モード
-  if (savedGo || savedBack) {
-    noteGo.style.display = "none";
-    noteBack.style.display = "none";
-    viewGo.innerHTML = parseToDisplay(savedGo);
-    viewBack.innerHTML = parseToDisplay(savedBack);
-    viewGo.style.display = "block";
-    viewBack.style.display = "block";
-    if (saveBtn) saveBtn.style.display = "none";
-  }
 
           section.appendChild(card);
       });
