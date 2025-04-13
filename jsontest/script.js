@@ -48,11 +48,16 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="match-details">
               ${match.details ? `<p>${match.details}</p>` : ""}
               <div class="note-section">
-                <label>【行き】</label>
-                <textarea class="note-go" placeholder="">${savedGo}</textarea>
-                <label>【帰り】</label>
-                <textarea class="note-back" placeholder="">${savedBack}</textarea>
-              </div>
+  <label>【行き】</label>
+  <textarea class="note-go">${savedGo}</textarea>
+  <div class="note-go-view" style="display:none;"></div>
+
+  <label>【帰り】</label>
+  <textarea class="note-back">${savedBack}</textarea>
+  <div class="note-back-view" style="display:none;"></div>
+
+  <button class="save-notes">保存</button>
+  </div>
             </div>
           `;
 
@@ -70,11 +75,52 @@ document.addEventListener("DOMContentLoaded", () => {
             if (noteGo) noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
             if (noteBack) noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
           }, 0);
+          const viewGo = card.querySelector(".note-go-view");
+  const viewBack = card.querySelector(".note-back-view");
+  const saveBtn = card.querySelector(".save-notes");
+
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      const valGo = noteGo.value.trim();
+      const valBack = noteBack.value.trim();
+
+      localStorage.setItem(`note_go_${matchId}`, valGo);
+      localStorage.setItem(`note_back_${matchId}`, valBack);
+
+      viewGo.innerHTML = parseToDisplay(valGo);
+      viewBack.innerHTML = parseToDisplay(valBack);
+
+      noteGo.style.display = "none";
+      noteBack.style.display = "none";
+      viewGo.style.display = "block";
+      viewBack.style.display = "block";
+      saveBtn.style.display = "none";
+    });
+  }
+
+  // 初期状態で保存済みなら表示モード
+  if (savedGo || savedBack) {
+    noteGo.style.display = "none";
+    noteBack.style.display = "none";
+    viewGo.innerHTML = parseToDisplay(savedGo);
+    viewBack.innerHTML = parseToDisplay(savedBack);
+    viewGo.style.display = "block";
+    viewBack.style.display = "block";
+    if (saveBtn) saveBtn.style.display = "none";
+  }
 
           section.appendChild(card);
-        });
+      });
 
-        slider.appendChild(section);
+      // ←★この直後に関数を追加！
+      function parseToDisplay(text) {
+        const escaped = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        return escaped
+          .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+          .replace(/\n/g, "<br>");
+      }
+
+      slider.appendChild(section);
       }
 
       const months = Array.from(document.querySelectorAll(".month-section"));
