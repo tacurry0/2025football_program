@@ -69,44 +69,44 @@ document.addEventListener("DOMContentLoaded", () => {
             card.classList.toggle("expanded");
           });
 
-          setTimeout(() => {
-            const noteGo = card.querySelector(".note-go");
-            const noteBack = card.querySelector(".note-back");
-            if (noteGo) noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
-            if (noteBack) noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
-          }, 0);
-      const viewGo = card.querySelector(".note-go-view");
+          
+const noteGo = card.querySelector(".note-go");
+const noteBack = card.querySelector(".note-back");
+const viewGo = card.querySelector(".note-go-view");
 const viewBack = card.querySelector(".note-back-view");
 const saveBtn = card.querySelector(".save-notes");
 
-// 編集ボタンをここで先に定義！（エラーの原因をここで解消）
+// 編集ボタンを作成して後ろに追加
 const editBtn = document.createElement('button');
 editBtn.textContent = '編集';
 editBtn.className = 'edit-notes';
 editBtn.style.display = 'none';
 saveBtn.after(editBtn);
 
-if (saveBtn) {
-  saveBtn.addEventListener("click", () => {
-    const valGo = noteGo.value.trim();
-    const valBack = noteBack.value.trim();
+// 入力した内容をリアルタイム保存
+noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
+noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
 
-    localStorage.setItem(`note_go_${matchId}`, valGo);
-    localStorage.setItem(`note_back_${matchId}`, valBack);
+// 保存ボタンの動作
+saveBtn.addEventListener("click", () => {
+  const valGo = noteGo.value.trim();
+  const valBack = noteBack.value.trim();
 
-    viewGo.innerHTML = parseToDisplay(valGo);
-    viewBack.innerHTML = parseToDisplay(valBack);
+  localStorage.setItem(`note_go_${matchId}`, valGo);
+  localStorage.setItem(`note_back_${matchId}`, valBack);
 
-    noteGo.style.display = "none";
-    noteBack.style.display = "none";
-    viewGo.style.display = "block";
-    viewBack.style.display = "block";
-    saveBtn.style.display = "none";
-    editBtn.style.display = 'block'; // ← ここでeditBtnを表示！
-  });
-}
+  viewGo.innerHTML = parseToDisplay(valGo);
+  viewBack.innerHTML = parseToDisplay(valBack);
 
-// 編集ボタンがクリックされたら再編集可能にする
+  noteGo.style.display = "none";
+  noteBack.style.display = "none";
+  viewGo.style.display = "block";
+  viewBack.style.display = "block";
+  saveBtn.style.display = "none";
+  editBtn.style.display = 'block';
+});
+
+// 編集ボタンの動作
 editBtn.addEventListener('click', () => {
   noteGo.style.display = "block";
   noteBack.style.display = "block";
@@ -116,7 +116,7 @@ editBtn.addEventListener('click', () => {
   editBtn.style.display = 'none';
 });
 
-// 最初から保存済みデータがあれば、最初は表示モード
+// 最初から保存済みデータがあれば表示モードに
 if (savedGo || savedBack) {
   noteGo.style.display = "none";
   noteBack.style.display = "none";
@@ -127,7 +127,6 @@ if (savedGo || savedBack) {
   saveBtn.style.display = "none";
   editBtn.style.display = 'block';
 }
-
           section.appendChild(card);
       });
 
