@@ -337,6 +337,7 @@ header {
   transition: right 0.3s ease;
   padding-top: 60px;
   z-index: 1500;
+  font-family: 'JLeagueKick', 'Poppins', sans-serif;
 }
 
 #side-menu.active {
@@ -358,6 +359,7 @@ header {
   text-decoration: none;
   color: #333;
   font-weight: bold;
+  font-family: 'JLeagueKick', 'Poppins', sans-serif;
 }
 
 #side-menu ul li a:hover {
