@@ -304,3 +304,54 @@ header {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
+
+/* ハンバーガーボタン */
+#hamburger-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  color: #ffffff;
+  z-index: 2000;
+}
+
+/* サイドメニュー */
+#side-menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -3px 0 10px rgba(0,0,0,0.3);
+  transition: right 0.3s ease;
+  padding-top: 60px;
+  z-index: 1500;
+}
+
+#side-menu.active {
+  right: 0;
+}
+
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#side-menu ul li {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+#side-menu ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+#side-menu ul li a:hover {
+  color: #ff6600;
+}
