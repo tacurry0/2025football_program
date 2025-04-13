@@ -278,14 +278,22 @@ header {
   position: fixed;
   bottom: 6rem;
   right: 1rem;
-  background: #ff6600;
+  background: linear-gradient(45deg, #ff6600, #cc0000);
   color: white;
   border: none;
-  padding: 0.6rem 1rem;
+  padding: 0.7rem 1.2rem;
   border-radius: 999px;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
   z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+#go-today:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
 .save-notes, .edit-notes {
