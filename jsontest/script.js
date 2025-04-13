@@ -95,8 +95,31 @@ document.addEventListener("DOMContentLoaded", () => {
       viewGo.style.display = "block";
       viewBack.style.display = "block";
       saveBtn.style.display = "none";
+      editBtn.style.display = 'block';
     });
   }
+
+// 編集ボタンの追加（新規追加）
+const editBtn = document.createElement('button');
+editBtn.textContent = '編集';
+editBtn.className = 'edit-notes';
+editBtn.style.display = 'none';
+
+saveBtn.after(editBtn);
+
+editBtn.addEventListener('click', () => {
+  noteGo.style.display = "block";
+  noteBack.style.display = "block";
+  viewGo.style.display = "none";
+  viewBack.style.display = "none";
+  saveBtn.style.display = "block";
+  editBtn.style.display = 'none';
+});
+
+// 初期表示の修正（ページ再読み込み時）
+if (savedGo || savedBack) {
+  editBtn.style.display = 'block';
+}
 
   // 初期状態で保存済みなら表示モード
   if (savedGo || savedBack) {
