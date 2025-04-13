@@ -227,4 +227,18 @@ if (savedGo || savedBack) {
         });
       }
     });
+// ハンバーガーメニューの動作（新規追加）
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const sideMenu = document.getElementById('side-menu');
+
+hamburgerBtn.addEventListener('click', () => {
+  sideMenu.classList.toggle('active');
+});
+
+// メニュー外クリックで閉じる処理
+document.addEventListener('click', (event) => {
+  if (!sideMenu.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+    sideMenu.classList.remove('active');
+  }
+});
 });
