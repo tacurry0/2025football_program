@@ -11,6 +11,17 @@ html, body {
   color: #1a1a1a;
 }
 
+@font-face {
+  font-family: 'JLeagueKick';
+  src: url('./fonts/jleaguekick-bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.match-info, .opponent-name, .venue {
+  font-family: 'JLeagueKick', 'Poppins', sans-serif;
+}
+
 /* オレンジのヘッダー */
 header {
   background: linear-gradient(90deg, #ff6600, #cc0000);
