@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITパスポートで子育て育成</title>
+  <style>
+    @font-face {
+      font-family: 'PixelFont';
+      src: local('Arial Black'), local('Impact');
+    }
+    body {
+      font-family: 'PixelFont', 'Meiryo', sans-serif;
+      background: #111;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 800px;
+      height: 600px;
+      margin: 40px auto;
+      background: linear-gradient(to bottom, #444, #222);
+      border: 8px solid #999;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #fff;
+    }
+    h1 {
+      font-size: 36px;
+      text-align: center;
+      margin: 10px 0;
+      color: gold;
+      text-shadow: 0 0 10px #fff;
+    }
+    #stage {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    #character {
+      text-align: center;
+      font-size: 100px;
+      margin: 5px 0;
+    }
+    .status {
+      text-align: center;
+      font-size: 18px;
+      background: #333;
+      padding: 6px;
+      border-top: 1px solid #777;
+      border-bottom: 1px solid #777;
+    }
+    #questionArea {
+      padding: 0 20px;
+      text-align: center;
+    }
+    .optionBtn {
+      background: linear-gradient(to bottom, #26a69a, #00796b);
+      color: #fff;
+      border: 3px solid #004d40;
+      padding: 12px;
+      font-size: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    #quizBtn {
+      margin: 10px auto;
+      padding: 12px 24px;
+      font-size: 18px;
+      background: linear-gradient(to bottom, #ff9800, #e65100);
+      color: #fff;
+      border: 2px solid #bf360c;
+      border-radius: 12px;
+      cursor: pointer;
+      display: block;
+    }
+    #feedback {
+      text-align: center;
+      font-size: 18px;
+      margin: 10px;
+      color: #ffeb3b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ITパスポート育成RPG</h1>
+    <div id="stage">ステージ1：よちよち期（正解5問でクリア）</div>
+    <div id="character">👶</div>
+    <div class="status" id="status">LV 1 ｜ HP: 100 ｜ 知力: 10 ｜ 愛情: 10 ｜ 社会性: 10</div>
+    <div id="questionArea"></div>
+    <div id="feedback"></div>
+    <button id="quizBtn">次のクイズへ</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async function() {
+      const stageNames = ["よちよち期", "はいはい期", "おすわり期", "たっち期", "かけあし期"];
+      const stageEmojis = ["👶", "🐣", "🪑", "🚶‍♂️", "🏃‍♂️"];
+
+      const response = await fetch("questions.json");
+      const questions = await response.json();
+
+      let stageIndex = 0;
+      let correct = 0;
+      let level = 1, hp = 100, knowledge = 10, love = 10, society = 10;
+      let currentGoal = 5;
+
+      const status = document.getElementById("status");
+      const character = document.getElementById("character");
+      const questionArea = document.getElementById("questionArea");
+      const quizBtn = document.getElementById("quizBtn");
+      const feedback = document.getElementById("feedback");
+      const stage = document.getElementById("stage");
+
+      function updateStatus() {
+        status.textContent = `LV ${level} ｜ HP: ${hp} ｜ 知力: ${knowledge} ｜ 愛情: ${love} ｜ 社会性: ${society}`;
+      }
+
+      function loadQuestion() {
+        feedback.textContent = "";
+        questionArea.innerHTML = '';
+
+        if (correct >= currentGoal) {
+          stageIndex++;
+          correct = 0;
+          level++;
+          hp = 100;
+          knowledge += 5;
+          love += 5;
+          society += 5;
+          currentGoal++;
+
+          if (stageIndex >= stageNames.length) {
+            questionArea.innerHTML = '<h2>🎉 全ステージクリア！立派に育ちました！</h2>';
+            quizBtn.disabled = true;
+            return;
+          }
+
+          stage.textContent = `ステージ${stageIndex+1}：${stageNames[stageIndex]}（正解${currentGoal}問でクリア）`;
+          character.textContent = stageEmojis[stageIndex];
+        }
+
+        const q = questions[Math.floor(Math.random() * questions.length)];
+        const qElem = document.createElement("h3");
+        qElem.textContent = `Q: ${q.question}`;
+        questionArea.appendChild(qElem);
+
+        Object.entries(q.choices).forEach(([key, value]) => {
+          const btn = document.createElement("button");
+          btn.className = "optionBtn";
+          btn.textContent = `${key}: ${value}`;
+          btn.onclick = () => checkAnswer(key, q);
+          questionArea.appendChild(btn);
+        });
+      }
+
+      function checkAnswer(selectedKey, q) {
+        if (selectedKey === q.answer) {
+          feedback.textContent = "✅ 正解！";
+          correct++;
+          knowledge += 4;
+          love += 3;
+          society += 2;
+        } else {
+          feedback.textContent = `❌ 不正解。正解は「${q.answer}: ${q.choices[q.answer]}」です。\n${q.explanation}`;
+          hp -= 10;
+        }
+        updateStatus();
+        quizBtn.disabled = false;
+      }
+
+      quizBtn.onclick = () => {
+        quizBtn.disabled = true;
+        loadQuestion();
+      };
+
+      stage.textContent = `ステージ1：${stageNames[0]}（正解${currentGoal}問でクリア）`;
+      updateStatus();
+    });
+  </script>
+</body>
+</html>
