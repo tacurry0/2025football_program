@@ -77,17 +77,6 @@
     "details": ""
   },
   {
-    "club": "kumamoto",
-    "matchweek": "MW4",
-    "date": "2025-03-09",
-    "day": "Sun",
-    "time": "14:00",
-    "opponent": "徳島ヴォルティス",
-    "venue": "鳴門・大塚スポーツパーク ポカリスエットスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
-    "details": ""
-  },
-  {
     "club": "niigata",
     "matchweek": "MW5",
     "date": "2025-03-08",
@@ -100,13 +89,13 @@
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW5",
-    "date": "2025-03-16",
+    "matchweek": "MW4",
+    "date": "2025-03-09",
     "day": "Sun",
-    "time": "13:00",
-    "opponent": "モンテディオ山形",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
+    "time": "14:00",
+    "opponent": "徳島ヴォルティス",
+    "venue": "鳴門・大塚スポーツパーク ポカリスエットスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
     "details": ""
   },
   {
@@ -118,6 +107,17 @@
     "opponent": "FC町田ゼルビア",
     "venue": "町田GIONスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "MW5",
+    "date": "2025-03-16",
+    "day": "Sun",
+    "time": "13:00",
+    "opponent": "モンテディオ山形",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
     "details": ""
   },
   {
@@ -187,17 +187,6 @@
     "details": ""
   },
   {
-    "club": "kumamoto",
-    "matchweek": "MW9",
-    "date": "2025-04-13",
-    "day": "Sun",
-    "time": "15:00",
-    "opponent": "ジュビロ磐田",
-    "venue": "ヤマハスタジアム(磐田)",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
-    "details": ""
-  },
-  {
     "club": "niigata",
     "matchweek": "MW10",
     "date": "2025-04-13",
@@ -210,13 +199,13 @@
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW10",
-    "date": "2025-04-20",
+    "matchweek": "MW9",
+    "date": "2025-04-13",
     "day": "Sun",
-    "time": "13:00",
-    "opponent": "ベガルタ仙台",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_sendai.png",
+    "time": "15:00",
+    "opponent": "ジュビロ磐田",
+    "venue": "ヤマハスタジアム(磐田)",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
     "details": ""
   },
   {
@@ -228,6 +217,17 @@
     "opponent": "京都サンガF.C.",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "MW10",
+    "date": "2025-04-20",
+    "day": "Sun",
+    "time": "13:00",
+    "opponent": "ベガルタ仙台",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sendai.png",
     "details": ""
   },
   {
@@ -309,13 +309,13 @@
   },
   {
     "club": "niigata",
-    "matchweek": "MW15※",
-    "date": "2025-06-25",
-    "day": "Wed",
-    "time": "19:00",
-    "opponent": "川崎フロンターレ",
-    "venue": "Uvanceとどろきスタジアム by Fujitsu",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
+    "matchweek": "MW16",
+    "date": "2025-05-11",
+    "day": "Sun",
+    "time": "14:05",
+    "opponent": "浦和レッズ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
     "details": ""
   },
   {
@@ -327,17 +327,6 @@
     "opponent": "愛媛FC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
-    "details": ""
-  },
-  {
-    "club": "niigata",
-    "matchweek": "MW16",
-    "date": "2025-05-11",
-    "day": "Sun",
-    "time": "14:05",
-    "opponent": "浦和レッズ",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
     "details": ""
   },
   {
@@ -363,17 +352,6 @@
     "details": ""
   },
   {
-    "club": "kumamoto",
-    "matchweek": "MW17",
-    "date": "2025-05-25",
-    "day": "Sun",
-    "time": "16:00",
-    "opponent": "ブラウブリッツ秋田",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
-    "details": ""
-  },
-  {
     "club": "niigata",
     "matchweek": "MW18",
     "date": "2025-05-25",
@@ -386,13 +364,13 @@
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW18",
-    "date": "2025-06-01",
+    "matchweek": "MW17",
+    "date": "2025-05-25",
     "day": "Sun",
-    "time": "14:00",
-    "opponent": "いわきFC",
-    "venue": "ハワイアンズスタジアムいわき",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
+    "time": "16:00",
+    "opponent": "ブラウブリッツ秋田",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
     "details": ""
   },
   {
@@ -408,13 +386,13 @@
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW19",
-    "date": "2025-06-15",
+    "matchweek": "MW18",
+    "date": "2025-06-01",
     "day": "Sun",
-    "time": "18:30",
-    "opponent": "ヴァンフォーレ甲府",
-    "venue": "JIT リサイクルインク スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
+    "time": "14:00",
+    "opponent": "いわきFC",
+    "venue": "ハワイアンズスタジアムいわき",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
     "details": ""
   },
   {
@@ -430,13 +408,13 @@
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW20",
-    "date": "2025-06-22",
+    "matchweek": "MW19",
+    "date": "2025-06-15",
     "day": "Sun",
-    "time": "13:35",
-    "opponent": "V・ファーレン長崎",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "time": "18:30",
+    "opponent": "ヴァンフォーレ甲府",
+    "venue": "JIT リサイクルインク スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
     "details": ""
   },
   {
@@ -448,6 +426,28 @@
     "opponent": "アビスパ福岡",
     "venue": "ベスト電器スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "MW20",
+    "date": "2025-06-22",
+    "day": "Sun",
+    "time": "13:35",
+    "opponent": "V・ファーレン長崎",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": ""
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW15※",
+    "date": "2025-06-25",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "川崎フロンターレ",
+    "venue": "Uvanceとどろきスタジアム by Fujitsu",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
     "details": ""
   },
   {
@@ -473,17 +473,6 @@
     "details": ""
   },
   {
-    "club": "kumamoto",
-    "matchweek": "MW22",
-    "date": "2025-07-06",
-    "day": "Sun",
-    "time": "18:00",
-    "opponent": "ジュビロ磐田",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
-    "details": ""
-  },
-  {
     "club": "niigata",
     "matchweek": "MW23",
     "date": "2025-07-05",
@@ -492,6 +481,17 @@
     "opponent": "京都サンガF.C.",
     "venue": "サンガスタジアム by KYOCERA",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "MW22",
+    "date": "2025-07-06",
+    "day": "Sun",
+    "time": "18:00",
+    "opponent": "ジュビロ磐田",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
     "details": ""
   },
   {
@@ -528,17 +528,6 @@
     "details": ""
   },
   {
-    "club": "niigata",
-    "matchweek": "MW25",
-    "date": "2025-08-11",
-    "day": "Mon",
-    "time": "19:00",
-    "opponent": "セレッソ大阪",
-    "venue": "ヨドコウ桜スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
-    "details": ""
-  },
-  {
     "club": "kumamoto",
     "matchweek": "MW25",
     "date": "2025-08-09",
@@ -547,6 +536,17 @@
     "opponent": "FC今治",
     "venue": "アシックス里山スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_imabari.png",
+    "details": ""
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW25",
+    "date": "2025-08-11",
+    "day": "Mon",
+    "time": "19:00",
+    "opponent": "セレッソ大阪",
+    "venue": "ヨドコウ桜スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
     "details": ""
   },
   {
@@ -594,17 +594,6 @@
     "details": ""
   },
   {
-    "club": "niigata",
-    "matchweek": "MW28",
-    "date": "2025-08-31",
-    "day": "Sun",
-    "time": "19:00",
-    "opponent": "浦和レッズ",
-    "venue": "埼玉スタジアム2002",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
-    "details": ""
-  },
-  {
     "club": "kumamoto",
     "matchweek": "MW28",
     "date": "2025-08-30",
@@ -613,6 +602,17 @@
     "opponent": "カターレ富山",
     "venue": "富山県総合運動公園陸上競技場",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_toyama.png",
+    "details": ""
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW28",
+    "date": "2025-08-31",
+    "day": "Sun",
+    "time": "19:00",
+    "opponent": "浦和レッズ",
+    "venue": "埼玉スタジアム2002",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
     "details": ""
   },
   {
@@ -671,17 +671,6 @@
     "details": ""
   },
   {
-    "club": "kumamoto",
-    "matchweek": "MW31",
-    "date": "2025-09-27",
-    "day": "Sat",
-    "time": "18:00",
-    "opponent": "ジェフユナイテッド千葉",
-    "venue": "フクダ電子アリーナ",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_chiba.png",
-    "details": ""
-  },
-  {
     "club": "niigata",
     "matchweek": "MW32",
     "date": "2025-09-27",
@@ -694,13 +683,13 @@
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW32",
-    "date": "2025-10-05",
-    "day": "Sun",
-    "time": "15:00",
-    "opponent": "いわきFC",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
+    "matchweek": "MW31",
+    "date": "2025-09-27",
+    "day": "Sat",
+    "time": "18:00",
+    "opponent": "ジェフユナイテッド千葉",
+    "venue": "フクダ電子アリーナ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_chiba.png",
     "details": ""
   },
   {
@@ -716,13 +705,13 @@
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW33",
-    "date": "2025-10-19",
+    "matchweek": "MW32",
+    "date": "2025-10-05",
     "day": "Sun",
-    "time": "14:00",
-    "opponent": "モンテディオ山形",
-    "venue": "NDソフトスタジアム山形",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
+    "time": "15:00",
+    "opponent": "いわきFC",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
     "details": ""
   },
   {
@@ -734,6 +723,17 @@
     "opponent": "東京ヴェルディ",
     "venue": "味の素スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "MW33",
+    "date": "2025-10-19",
+    "day": "Sun",
+    "time": "14:00",
+    "opponent": "モンテディオ山形",
+    "venue": "NDソフトスタジアム山形",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
     "details": ""
   },
   {
@@ -792,17 +792,6 @@
     "details": ""
   },
   {
-    "club": "niigata",
-    "matchweek": "MW37",
-    "date": "2025-11-30",
-    "day": "Sun",
-    "time": "14:00",
-    "opponent": "柏レイソル",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
-    "details": ""
-  },
-  {
     "club": "kumamoto",
     "matchweek": "MW37",
     "date": "2025-11-23",
@@ -814,17 +803,6 @@
     "details": ""
   },
   {
-    "club": "niigata",
-    "matchweek": "MW38",
-    "date": "2025-12-06",
-    "day": "Sat",
-    "time": "14:00",
-    "opponent": "FC東京",
-    "venue": "味の素スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_ftokyo.png",
-    "details": ""
-  },
-  {
     "club": "kumamoto",
     "matchweek": "MW38",
     "date": "2025-11-29",
@@ -833,6 +811,28 @@
     "opponent": "ヴァンフォーレ甲府",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
+    "details": ""
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW37",
+    "date": "2025-11-30",
+    "day": "Sun",
+    "time": "14:00",
+    "opponent": "柏レイソル",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
+    "details": ""
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW38",
+    "date": "2025-12-06",
+    "day": "Sat",
+    "time": "14:00",
+    "opponent": "FC東京",
+    "venue": "味の素スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ftokyo.png",
     "details": ""
   }
 ]
