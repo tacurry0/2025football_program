@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>桃鉄風マップ スマホ対応</title>
+<style>
+:root{
+  --rail: #b7b2a1;
+  --sleeper: #a9955b;
+  --tile-border: #2e2e2e;
+  --tile-size: 12vw; /* スマホ向けサイズ（最大でも80px程度） */
+}
+
+body {
+  background: linear-gradient(#e7fbef,#daf7e6);
+  margin: 0;
+  font-family: "Meiryo", sans-serif;
+}
+
+/* 微ノイズテクスチャ */
+body::after {
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:9999;
+  background-image:url('data:image/svg+xml;utf8,\
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">\
+      <filter id="n"><feTurbulence baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter>\
+      <rect width="120" height="120" filter="url(%23n)" opacity="0.025"/></svg>');
+  mix-blend-mode:multiply;
+}
+
+.area {
+  position: relative;
+  width: 95%;
+  max-width: 1020px;
+  height: calc(var(--tile-size) * 2);
+  margin: 5vh auto;
+  border-radius: 2vw;
+  box-shadow: 0 3px 40px #97d8ad30;
+  background: linear-gradient(180deg,#e9fff2 80%,#97d8ad1c 100%);
+  border: 2px solid #bbdec9;
+  overflow:hidden;
+}
+
+/* 線路 */
+.rails {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 22px;
+  z-index: 1;
+  pointer-events: none;
+}
+.rails svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* マス */
+.tile {
+  position: absolute;
+  width: var(--tile-size);
+  height: var(--tile-size);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--tile-size) / 3);
+  font-weight: 700;
+  border: 2.8px solid var(--tile-border);
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 1px #ffffffcc,
+    inset 0 6px 8px -6px #00000020,
+    0 2.5px 12px #5353ad22;
+  transition: transform 0.1s ease, filter 0.2s ease;
+}
+.tile::after {
+  content:"";
+  position:absolute;
+  left:2px; right:2px; top:2px;
+  height:2px;
+  background:#ffffffa0;
+}
+.tile:active, .tile:hover {
+  filter: drop-shadow(0 0 6px #2b8cff66);
+  transform: translateY(-52%);
+}
+
+.station { background:#eff6ff; border-color:#1957c7; }
+.event-blue { background:#94deff; border-color:#2375b2; }
+.event-red { background:#ffd2d2; border-color:#d53e3e; }
+.event-yellow { background:#fff9c0; border-color:#e3c211; }
+
+/* 駅名板 */
+.station-label {
+  position:absolute;
+  left:50%;
+  top:-33%;
+  transform:translateX(-50%);
+  min-width:72px;
+  max-width:110px;
+  padding:4.5px 14px 3.5px;
+  background:#fff;
+  border:3px solid #19388d;
+  color:#15325b;
+  font: 700 calc(var(--tile-size) / 4) "Meiryo", sans-serif;
+  letter-spacing:1.05px;
+  white-space:nowrap;
+  box-shadow: 0 2px 7px #4c7cc288;
+  -webkit-text-stroke: 0.6px #ffffff80;
+  text-shadow: 0 1px 0 #ffffff80;
+}
+.station-label::before {
+  content:"";
+  position:absolute;
+  left:6px;
+  right:6px;
+  top:5px;
+  height:2px;
+  background:linear-gradient(90deg,#ffffffaa,#ffffff00 50%,#ffffffaa);
+}
+
+/* 家アイコン */
+.icon-house {
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  width: 25%;
+  height: 20%;
+  z-index: 4;
+  background: url('data:image/svg+xml;utf8,\
+    <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">\
+      <rect x="0" y="40" width="100" height="60" fill="%23deb887"/>\
+      <polygon points="50,0 100,40 0,40" fill="%23b96a1f"/>\
+    </svg>') no-repeat center/contain;
+  opacity: 0.92;
+}
+</style>
+</head>
+<body>
+
+<div class="area">
+  <!-- レール -->
+  <div class="rails">
+    <svg viewBox="0 0 1020 40" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="ballast" width="8" height="8" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1" fill="#b8c1b5"/>
+          <circle cx="6" cy="3" r="1" fill="#aab3a8"/>
+          <circle cx="4" cy="6" r="1" fill="#c3ccc0"/>
+        </pattern>
+        <linearGradient id="railGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#d9d4c6"/>
+          <stop offset="0.5" stop-color="#b7b2a1"/>
+          <stop offset="1" stop-color="#989387"/>
+        </linearGradient>
+      </defs>
+      <!-- バラスト -->
+      <rect x="0" y="8" width="1020" height="24" fill="url(#ballast)" opacity="0.45"/>
+      <!-- レール -->
+      <rect x="0" y="10" width="1020" height="4.5" rx="2.5" fill="url(#railGrad)"/>
+      <rect x="0" y="22" width="1020" height="4.5" rx="2.5" fill="url(#railGrad)"/>
+      <!-- 枕木 -->
+      <g fill="#a9955b">
+        <rect x="34" y="8" width="10" height="24" rx="1"/>
+        <rect x="124" y="8" width="10" height="24" rx="1"/>
+        <rect x="214" y="8" width="10" height="24" rx="1"/>
+        <rect x="304" y="8" width="10" height="24" rx="1"/>
+        <rect x="394" y="8" width="10" height="24" rx="1"/>
+        <rect x="484" y="8" width="10" height="24" rx="1"/>
+        <rect x="574" y="8" width="10" height="24" rx="1"/>
+        <rect x="664" y="8" width="10" height="24" rx="1"/>
+        <rect x="754" y="8" width="10" height="24" rx="1"/>
+        <rect x="844" y="8" width="10" height="24" rx="1"/>
+        <rect x="934" y="8" width="10" height="24" rx="1"/>
+        <rect x="1014" y="8" width="10" height="24" rx="1"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- マス配置 -->
+  <div class="tile station" style="left:2%;">
+    <span class="station-label">西武新宿</span>
+    <div class="icon-house"></div>
+  </div>
+  <div class="tile event-blue" style="left:22%;">青</div>
+  <div class="tile event-red" style="left:42%;">赤</div>
+  <div class="tile station" style="left:62%;">
+    <span class="station-label">田無</span>
+    <div class="icon-house"></div>
+  </div>
+  <div class="tile event-yellow" style="left:82%;">黄</div>
+  <div class="tile station" style="left:96%;">
+    <span class="station-label">本川越</span>
+    <div class="icon-house"></div>
+  </div>
+</div>
+
+</body>
+</html>
