@@ -1,208 +1,452 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>桃鉄風マップ スマホ対応</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>ミニゲーム10本セット（スマホ対応・単一HTML）</title>
 <style>
-:root{
-  --rail: #b7b2a1;
-  --sleeper: #a9955b;
-  --tile-border: #2e2e2e;
-  --tile-size: 12vw; /* スマホ向けサイズ（最大でも80px程度） */
-}
+  :root{
+    --bg:#0f1220;--panel:#161a2e;--panel-2:#1e2442;--text:#e8ecff;--muted:#a7b0d6;--accent:#6ee7ff;--accent-2:#a78bfa;--ok:#22c55e;--bad:#ef4444;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:linear-gradient(180deg,#0b0e1a,#0f1220 20%,#101532);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif}
+  a{color:var(--accent)}
+  button{font:inherit}
+  .wrap{min-height:100%;max-width:1000px;margin:0 auto;padding:16px}
+  header{display:flex;align-items:center;gap:12px;padding:12px 0}
+  .title{font-weight:800;letter-spacing:.3px;font-size:22px}
+  .muted{color:var(--muted)}
+  .bar{display:flex;gap:8px;margin-left:auto}
+  .btn{border:none;border-radius:14px;padding:10px 14px;background:var(--panel);color:var(--text);box-shadow:0 4px 18px #00000040;cursor:pointer;transition:transform .05s ease,opacity .2s}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:transparent;outline:1px solid #ffffff18}
 
-body {
-  background: linear-gradient(#e7fbef,#daf7e6);
-  margin: 0;
-  font-family: "Meiryo", sans-serif;
-}
+  /* メニュー */
+  .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(min-width:720px){.menu{grid-template-columns:repeat(5,1fr)}}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel-2));border-radius:18px;padding:14px;box-shadow:0 8px 30px #00000050;position:relative;overflow:hidden}
+  .card h3{margin:0 0 6px;font-size:16px}
+  .chip{position:absolute;right:10px;top:10px;font-size:12px;color:#000;background:var(--accent);padding:4px 8px;border-radius:999px}
+  .start-btn{width:100%;margin-top:8px}
 
-/* 微ノイズテクスチャ */
-body::after {
-  content:"";
-  position:fixed; inset:0;
-  pointer-events:none;
-  z-index:9999;
-  background-image:url('data:image/svg+xml;utf8,\
-    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">\
-      <filter id="n"><feTurbulence baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter>\
-      <rect width="120" height="120" filter="url(%23n)" opacity="0.025"/></svg>');
-  mix-blend-mode:multiply;
-}
+  /* ゲーム画面 */
+  .screen{display:none}
+  .screen.active{display:block}
+  .hud{display:flex;gap:10px;align-items:center;margin:10px 0 12px}
+  .hud .stat{background:#ffffff10;padding:8px 12px;border-radius:12px}
+  .canvas-wrap, .board{background:linear-gradient(180deg,#0c1023,#0f1536);border-radius:16px;box-shadow:inset 0 0 0 2px #ffffff10,0 12px 40px #00000060;padding:8px}
+  canvas{width:100%;height:auto;display:block;border-radius:12px;touch-action:none}
+  .grid{display:grid;gap:6px}
 
-.area {
-  position: relative;
-  width: 95%;
-  max-width: 1020px;
-  height: calc(var(--tile-size) * 2);
-  margin: 5vh auto;
-  border-radius: 2vw;
-  box-shadow: 0 3px 40px #97d8ad30;
-  background: linear-gradient(180deg,#e9fff2 80%,#97d8ad1c 100%);
-  border: 2px solid #bbdec9;
-  overflow:hidden;
-}
+  /* 15パズル・TicTacToe・記憶カード */
+  .tile, .cell{display:flex;align-items:center;justify-content:center;background:#1f2749;color:#fff;border-radius:12px;min-height:64px;font-weight:700;user-select:none;touch-action:manipulation}
+  .tile.empty{background:transparent;outline:2px dashed #ffffff2a}
+  .cell{min-height:72px;font-size:28px}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .cardx{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;background:#1b2244;cursor:pointer}
+  .cardx .front,.cardx .back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px}
+  .cardx .front{background:#111531}
+  .cardx.flipped .front{display:none}
+  .cardx .back{background:#232b5a}
+  .win{color:var(--ok);font-weight:800}
+  .lose{color:var(--bad);font-weight:800}
 
-/* 線路 */
-.rails {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  height: 22px;
-  z-index: 1;
-  pointer-events: none;
-}
-.rails svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+  input[type=number], input[type=text]{width:100%;padding:10px;border-radius:12px;border:none;background:#ffffff12;color:#fff}
 
-/* マス */
-.tile {
-  position: absolute;
-  width: var(--tile-size);
-  height: var(--tile-size);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(var(--tile-size) / 3);
-  font-weight: 700;
-  border: 2.8px solid var(--tile-border);
-  background: #fff;
-  box-shadow:
-    inset 0 0 0 1px #ffffffcc,
-    inset 0 6px 8px -6px #00000020,
-    0 2.5px 12px #5353ad22;
-  transition: transform 0.1s ease, filter 0.2s ease;
-}
-.tile::after {
-  content:"";
-  position:absolute;
-  left:2px; right:2px; top:2px;
-  height:2px;
-  background:#ffffffa0;
-}
-.tile:active, .tile:hover {
-  filter: drop-shadow(0 0 6px #2b8cff66);
-  transform: translateY(-52%);
-}
-
-.station { background:#eff6ff; border-color:#1957c7; }
-.event-blue { background:#94deff; border-color:#2375b2; }
-.event-red { background:#ffd2d2; border-color:#d53e3e; }
-.event-yellow { background:#fff9c0; border-color:#e3c211; }
-
-/* 駅名板 */
-.station-label {
-  position:absolute;
-  left:50%;
-  top:-33%;
-  transform:translateX(-50%);
-  min-width:72px;
-  max-width:110px;
-  padding:4.5px 14px 3.5px;
-  background:#fff;
-  border:3px solid #19388d;
-  color:#15325b;
-  font: 700 calc(var(--tile-size) / 4) "Meiryo", sans-serif;
-  letter-spacing:1.05px;
-  white-space:nowrap;
-  box-shadow: 0 2px 7px #4c7cc288;
-  -webkit-text-stroke: 0.6px #ffffff80;
-  text-shadow: 0 1px 0 #ffffff80;
-}
-.station-label::before {
-  content:"";
-  position:absolute;
-  left:6px;
-  right:6px;
-  top:5px;
-  height:2px;
-  background:linear-gradient(90deg,#ffffffaa,#ffffff00 50%,#ffffffaa);
-}
-
-/* 家アイコン */
-.icon-house {
-  position: absolute;
-  left: 5%;
-  bottom: 5%;
-  width: 25%;
-  height: 20%;
-  z-index: 4;
-  background: url('data:image/svg+xml;utf8,\
-    <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">\
-      <rect x="0" y="40" width="100" height="60" fill="%23deb887"/>\
-      <polygon points="50,0 100,40 0,40" fill="%23b96a1f"/>\
-    </svg>') no-repeat center/contain;
-  opacity: 0.92;
-}
+  .footer-note{margin:24px 0 60px;color:#aab}
 </style>
 </head>
 <body>
+<div class="wrap">
+  <header>
+    <div class="title">🎮 ミニゲーム10本セット</div>
+    <div class="muted">（スマホ対応・オフラインOK）</div>
+    <div class="bar">
+      <button class="btn ghost" id="toMenu">メニュー</button>
+      <button class="btn" id="toggleHelp">遊び方</button>
+      <button class="btn ghost" id="runTests">自己診断</button>
+    </div>
+  </header>
 
-<div class="area">
-  <!-- レール -->
-  <div class="rails">
-    <svg viewBox="0 0 1020 40" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="ballast" width="8" height="8" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1" fill="#b8c1b5"/>
-          <circle cx="6" cy="3" r="1" fill="#aab3a8"/>
-          <circle cx="4" cy="6" r="1" fill="#c3ccc0"/>
-        </pattern>
-        <linearGradient id="railGrad" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stop-color="#d9d4c6"/>
-          <stop offset="0.5" stop-color="#b7b2a1"/>
-          <stop offset="1" stop-color="#989387"/>
-        </linearGradient>
-      </defs>
-      <!-- バラスト -->
-      <rect x="0" y="8" width="1020" height="24" fill="url(#ballast)" opacity="0.45"/>
-      <!-- レール -->
-      <rect x="0" y="10" width="1020" height="4.5" rx="2.5" fill="url(#railGrad)"/>
-      <rect x="0" y="22" width="1020" height="4.5" rx="2.5" fill="url(#railGrad)"/>
-      <!-- 枕木 -->
-      <g fill="#a9955b">
-        <rect x="34" y="8" width="10" height="24" rx="1"/>
-        <rect x="124" y="8" width="10" height="24" rx="1"/>
-        <rect x="214" y="8" width="10" height="24" rx="1"/>
-        <rect x="304" y="8" width="10" height="24" rx="1"/>
-        <rect x="394" y="8" width="10" height="24" rx="1"/>
-        <rect x="484" y="8" width="10" height="24" rx="1"/>
-        <rect x="574" y="8" width="10" height="24" rx="1"/>
-        <rect x="664" y="8" width="10" height="24" rx="1"/>
-        <rect x="754" y="8" width="10" height="24" rx="1"/>
-        <rect x="844" y="8" width="10" height="24" rx="1"/>
-        <rect x="934" y="8" width="10" height="24" rx="1"/>
-        <rect x="1014" y="8" width="10" height="24" rx="1"/>
-      </g>
-    </svg>
-  </div>
+  <!-- メニュー -->
+  <section id="menu" class="screen active">
+    <div class="menu">
+      <div class="card"><span class="chip">No.1</span><h3>タップでジャンプ</h3><div class="muted">障害物を避ける横スクロール</div><button class="btn start-btn" data-game="jump">スタート</button></div>
+      <div class="card"><span class="chip">No.2</span><h3>もぐらたたき</h3><div class="muted">出てきたモグラをタップ！</div><button class="btn start-btn" data-game="mole">スタート</button></div>
+      <div class="card"><span class="chip">No.3</span><h3>記憶カード</h3><div class="muted">ペアをそろえる神経衰弱</div><button class="btn start-btn" data-game="memory">スタート</button></div>
+      <div class="card"><span class="chip">No.4</span><h3>ブロック崩し</h3><div class="muted">パドルで弾いて全消し</div><button class="btn start-btn" data-game="breakout">スタート</button></div>
+      <div class="card"><span class="chip">No.5</span><h3>15パズル</h3><div class="muted">スライドで1〜15に整列</div><button class="btn start-btn" data-game="fifteen">スタート</button></div>
+      <div class="card"><span class="chip">No.6</span><h3>反射神経テスト</h3><div class="muted">合図が出たら即タップ</div><button class="btn start-btn" data-game="reaction">スタート</button></div>
+      <div class="card"><span class="chip">No.7</span><h3>〇×ゲーム</h3><div class="muted">シンプル三目並べ（CPU）</div><button class="btn start-btn" data-game="tictactoe">スタート</button></div>
+      <div class="card"><span class="chip">No.8</span><h3>落ち物パズル</h3><div class="muted">簡易テトリス</div><button class="btn start-btn" data-game="tetris">スタート</button></div>
+      <div class="card"><span class="chip">No.9</span><h3>数当て</h3><div class="muted">1〜100を当てよう</div><button class="btn start-btn" data-game="guess">スタート</button></div>
+      <div class="card"><span class="chip">No.10</span><h3>風船割り</h3><div class="muted">上昇風船をタップで破裂</div><button class="btn start-btn" data-game="balloon">スタート</button></div>
+    </div>
 
-  <!-- マス配置 -->
-  <div class="tile station" style="left:2%;">
-    <span class="station-label">西武新宿</span>
-    <div class="icon-house"></div>
-  </div>
-  <div class="tile event-blue" style="left:22%;">青</div>
-  <div class="tile event-red" style="left:42%;">赤</div>
-  <div class="tile station" style="left:62%;">
-    <span class="station-label">田無</span>
-    <div class="icon-house"></div>
-  </div>
-  <div class="tile event-yellow" style="left:82%;">黄</div>
-  <div class="tile station" style="left:96%;">
-    <span class="station-label">本川越</span>
-    <div class="icon-house"></div>
-  </div>
+    <div class="footer-note muted">ヒント：ホーム画面に追加してオフラインでも遊べます。各ゲームはメニューの「スタート」から起動できます。</div>
+  </section>
+
+  <!-- 1: タップでジャンプ -->
+  <section id="game-jump" class="screen">
+    <div class="hud"><div class="stat">スコア: <span id="jumpScore">0</span></div><div class="stat">ベスト: <span id="jumpBest">0</span></div><button class="btn" id="jumpRestart">リスタート</button></div>
+    <div class="canvas-wrap"><canvas id="jumpCanvas" width="640" height="320"></canvas></div>
+    <div class="muted" style="margin-top:8px">操作：画面タップでジャンプ。床や障害物に触れるとゲームオーバー。</div>
+  </section>
+
+  <!-- 2: もぐらたたき -->
+  <section id="game-mole" class="screen">
+    <div class="hud"><div class="stat">スコア: <span id="moleScore">0</span></div><div class="stat">残り: <span id="moleTime">30</span>s</div><button class="btn" id="moleRestart">リスタート</button></div>
+    <div class="board">
+      <div id="moleGrid" class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px"></div>
+    </div>
+    <div class="muted" style="margin-top:8px">操作：出てきた穴をタップ。30秒で何匹叩ける？</div>
+  </section>
+
+  <!-- 3: 記憶カード -->
+  <section id="game-memory" class="screen">
+    <div class="hud"><div class="stat">ターン: <span id="memTurns">0</span></div><button class="btn" id="memRestart">シャッフル</button></div>
+    <div class="board">
+      <div id="memBoard" class="cards"></div>
+    </div>
+  </section>
+
+  <!-- 4: ブロック崩し -->
+  <section id="game-breakout" class="screen">
+    <div class="hud"><div class="stat">スコア: <span id="brScore">0</span></div><div class="stat">残機: <span id="brLives">3</span></div><button class="btn" id="brRestart">リスタート</button></div>
+    <div class="canvas-wrap"><canvas id="brCanvas" width="640" height="360"></canvas></div>
+  </section>
+
+  <!-- 5: 15パズル -->
+  <section id="game-fifteen" class="screen">
+    <div class="hud"><button class="btn" id="fifRestart">シャッフル</button></div>
+    <div class="board">
+      <div id="fifBoard" class="grid" style="grid-template-columns:repeat(4,1fr);gap:8px"></div>
+    </div>
+  </section>
+
+  <!-- 6: 反射神経テスト -->
+  <section id="game-reaction" class="screen">
+    <div class="hud"><div class="stat">ベスト: <span id="reBest">—</span></div><button class="btn" id="reStart">スタート</button></div>
+    <div id="rePanel" class="board" style="height:220px;display:flex;align-items:center;justify-content:center;font-size:22px;border-radius:16px;">
+      タップで開始
+    </div>
+  </section>
+
+  <!-- 7: 〇×ゲーム -->
+  <section id="game-tictactoe" class="screen">
+    <div class="hud"><div class="stat">あなた：X / CPU：O</div><button class="btn" id="ttRestart">リセット</button></div>
+    <div class="board">
+      <div id="ttBoard" class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px"></div>
+    </div>
+    <div id="ttMsg" class="muted" style="margin-top:8px"></div>
+  </section>
+
+  <!-- 8: 落ち物パズル（簡易テトリス） -->
+  <section id="game-tetris" class="screen">
+    <div class="hud"><div class="stat">スコア: <span id="teScore">0</span></div><button class="btn" id="teRestart">リスタート</button></div>
+    <div class="canvas-wrap"><canvas id="teCanvas" width="240" height="480"></canvas></div>
+    <div class="muted" style="margin-top:8px">操作：左＝画面左半分タップ / 右＝右半分タップ / 回転＝上スワイプ / ソフトドロップ＝下スワイプ</div>
+  </section>
+
+  <!-- 9: 数当て -->
+  <section id="game-guess" class="screen">
+    <div class="hud"><div class="stat">回数: <span id="guTries">0</span></div><button class="btn" id="guRestart">リセット</button></div>
+    <div class="board" style="padding:16px">
+      <div class="muted">1〜100の数字を当ててください。</div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <input id="guInput" type="number" placeholder="数字を入力" />
+        <button class="btn" id="guBtn">判定</button>
+      </div>
+      <div id="guLog" style="margin-top:12px;min-height:28px"></div>
+    </div>
+  </section>
+
+  <!-- 10: 風船割り -->
+  <section id="game-balloon" class="screen">
+    <div class="hud"><div class="stat">スコア: <span id="baScore">0</span></div><button class="btn" id="baRestart">リスタート</button></div>
+    <div class="canvas-wrap"><canvas id="baCanvas" width="640" height="360"></canvas></div>
+  </section>
+
 </div>
 
+<script>
+(() => {
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+  const screens = {
+    menu: $('#menu'), jump: $('#game-jump'), mole: $('#game-mole'), memory: $('#game-memory'),
+    breakout: $('#game-breakout'), fifteen: $('#game-fifteen'), reaction: $('#game-reaction'),
+    tictactoe: $('#game-tictactoe'), tetris: $('#game-tetris'), guess: $('#game-guess'), balloon: $('#game-balloon')
+  };
+  const state = { current: 'menu' };
+  const show = (name) => {
+    Object.values(screens).forEach(s => s.classList.remove('active'));
+    screens[name].classList.add('active');
+    state.current = name;
+  };
+  // Menu buttons
+  $$('#menu .start-btn').forEach(b => b.addEventListener('click', () => {
+    const g = b.dataset.game;
+    show(g);
+    initGame[g]?.();
+  }));
+  $('#toMenu').addEventListener('click', ()=> show('menu'));
+
+  // Help
+  const help = `遊び方\n\n1) メニューからゲームを選びます。\n2) 画面上部の「リスタート」「リセット」でやり直し。\n3) スマホの全画面（ホーム画面追加）にすると快適です。`;
+  $('#toggleHelp').addEventListener('click',()=> alert(help));
+
+  // ========================= 自己診断（簡易テスト） =========================
+  function runSelfTests(){
+    const results = [];
+    const ok = (name, cond) => results.push({name, pass: !!cond});
+    // 1) 画面要素が存在
+    ok('screens 10個が存在', Object.values(screens).every(Boolean) && Object.keys(screens).length===10);
+    // 2) 初期化マップが10関数
+    ok('initGame 10関数', initGame && Object.keys(initGame).length===10 && Object.values(initGame).every(v=>typeof v==='function'));
+    // 3) Canvasが取得できる
+    const c1 = document.getElementById('jumpCanvas');
+    ok('Canvas 2D取得', !!c1 && !!c1.getContext('2d'));
+    // 4) 簡易ロジックテスト（テトリスの回転）
+    const sample = [[1,0],[1,1]]; // 2x2 を rotate -> 2x2
+    const rot = (m)=>{ const H=m.length,W=m[0].length; const r=Array.from({length:W},()=>Array(H).fill(0)); for(let y=0;y<H;y++)for(let x=0;x<W;x++) r[x][H-1-y]=m[y][x]; return r; };
+    ok('rotateの行列サイズ保持', rot(sample).length===2 && rot(sample)[0].length===2);
+
+    const summary = results.map(r=>`${r.pass?'✅':'❌'} ${r.name}`).join('\n');
+    alert('自己診断 結果:\n'+summary);
+  }
+  document.getElementById('runTests').addEventListener('click', runSelfTests);
+
+  // ========================= 1. タップでジャンプ =========================
+  const jump = (()=>{
+    let canvas, ctx, w, h, raf, player, obstacles, score, best, alive, g=0.5;
+    const scrEl = $('#jumpScore'), bestEl = $('#jumpBest');
+    function resize(){ w = canvas.width; h = canvas.height; }
+    function reset(){
+      player = {x:60,y:h-60,vy:0,size:28, onGround:true};
+      obstacles = [];
+      score = 0; alive = true; spawnTimer = 0; speed=3;
+      scrEl.textContent = score;
+    }
+    let spawnTimer=0, speed=3;
+    function spawn(){
+      const height = 30 + Math.random()*40;
+      obstacles.push({x:w+10,y:h-height,width:20+Math.random()*20,height});
+    }
+    function tap(){ if(!alive){reset();} if(player.onGround){ player.vy=-10; player.onGround=false; } }
+    function loop(){
+      ctx.clearRect(0,0,w,h);
+      // ground
+      ctx.fillStyle = '#1c2145'; ctx.fillRect(0,h-20,w,20);
+      // player
+      player.vy += g; player.y += player.vy;
+      if(player.y+player.size>h-20){ player.y=h-20-player.size; player.vy=0; player.onGround=true; }
+      ctx.fillStyle = '#6ee7ff'; ctx.fillRect(player.x, player.y, player.size, player.size);
+      // obstacles
+      spawnTimer--; if(spawnTimer<=0){ spawn(); spawnTimer = 70 + (Math.random()*40)|0; speed += 0.02; }
+      ctx.fillStyle='#a78bfa';
+      for(let i=obstacles.length-1;i>=0;i--){
+        const o = obstacles[i]; o.x -= speed;
+        ctx.fillRect(o.x,o.y,o.width,o.height);
+        if(o.x+o.width<0){ obstacles.splice(i,1); score++; scrEl.textContent=score; }
+        if(alive && rectHit(player.x,player.y,player.size,player.size,o.x,o.y,o.width,o.height)){
+          alive=false; best=Math.max(best||0,score); localStorage.setItem('jgBest',best); bestEl.textContent=best; ctx.fillStyle='#ef4444';
+          ctx.fillRect(player.x,player.y,player.size,player.size);
+        }
+      }
+      if(!alive){ drawGameOver(ctx,w,h,'タップで再開'); }
+      raf = requestAnimationFrame(loop);
+    }
+    function rectHit(x,y,w1,h1, x2,y2,w2,h2){ return x<x2+w2 && x+w1>x2 && y<y2+h2 && y+h1>y2; }
+    function drawGameOver(ctx,w,h,msg){ ctx.fillStyle='#00000080'; ctx.fillRect(0,0,w,h); ctx.fillStyle='#fff'; ctx.font='20px system-ui'; ctx.textAlign='center'; ctx.fillText('GAME OVER', w/2, h/2-10); ctx.fillText(msg, w/2, h/2+20); }
+    function init(){
+      canvas=$('#jumpCanvas'); ctx=canvas.getContext('2d'); resize();
+      best = parseInt(localStorage.getItem('jgBest')||'0',10); bestEl.textContent=best;
+      reset();
+      canvas.addEventListener('pointerdown', tap);
+      $('#jumpRestart').onclick = reset;
+      cancelAnimationFrame(raf); loop();
+    }
+    return { init };
+  })();
+
+  // ========================= 2. もぐらたたき =========================
+  const mole = (()=>{
+    let score, time, timerId, holes=[];
+    const grid = $('#moleGrid'), scoreEl=$('#moleScore'), timeEl=$('#moleTime');
+    function initBoard(){
+      grid.innerHTML=''; holes=[]; for(let i=0;i<9;i++){ const d=document.createElement('div'); d.className='cell'; d.style.minHeight='88px'; d.textContent='🕳️'; grid.appendChild(d); holes.push(d); }
+    }
+    function start(){ score=0; time=30; scoreEl.textContent=0; timeEl.textContent=time; initBoard(); nextMole();
+      clearInterval(timerId); timerId=setInterval(()=>{ time--; timeEl.textContent=time; if(time<=0){ clearInterval(timerId); end(); } },1000);
+    }
+    function nextMole(){ holes.forEach(h=>{ h.dataset.mole='0'; h.textContent='🕳️'; h.style.background=''});
+      const idx = (Math.random()*holes.length)|0; const h=holes[idx]; h.dataset.mole='1'; h.textContent='🐹'; h.style.background='#1d2b4e';
+      holes.forEach(h=>{ h.onclick = ()=>{ if(time<=0) return; if(h.dataset.mole==='1'){ score++; scoreEl.textContent=score; nextMole(); } } });
+    }
+    function end(){ holes.forEach(h=>h.onclick=null); alert(`終了！ スコア: ${score}`); }
+    function init(){ start(); $('#moleRestart').onclick=start; }
+    return { init };
+  })();
+
+  // ========================= 3. 記憶カード（神経衰弱） =========================
+  const memory = (()=>{
+    const icons = ['🍎','🍋','🍇','🍓','🥝','🍒','🍉','🍑'];
+    let board, turns, first=null, lock=false, matched=0; const boardEl=$('#memBoard'), turnsEl=$('#memTurns');
+    function setup(){
+      const deck = shuffle([...icons,...icons]); boardEl.innerHTML=''; board=[]; turns=0; matched=0; first=null; lock=false; turnsEl.textContent='0';
+      deck.forEach((ic,i)=>{
+        const c=document.createElement('div'); c.className='cardx'; c.dataset.icon=ic; c.innerHTML='<div class="front">❓</div><div class="back">'+ic+'</div>';
+        c.addEventListener('click',()=> flip(c)); boardEl.appendChild(c); board.push(c);
+      });
+    }
+    function flip(c){ if(lock||c.classList.contains('flipped')) return; c.classList.add('flipped');
+      if(!first){ first=c; } else { turns++; turnsEl.textContent=turns; lock=true; setTimeout(()=>{
+        if(first.dataset.icon===c.dataset.icon){ first.style.opacity=c.style.opacity='0.3'; matched+=2; }
+        else { first.classList.remove('flipped'); c.classList.remove('flipped'); }
+        first=null; lock=false; if(matched===board.length){ alert(`クリア！ ターン: ${turns}`); }
+      },500); }
+    }
+    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=(Math.random()*(i+1))|0; [a[i],a[j]]=[a[j],a[i]]; } return a; }
+    function init(){ setup(); $('#memRestart').onclick=setup; }
+    return { init };
+  })();
+
+  // ========================= 4. ブロック崩し =========================
+  const breakout = (()=>{
+    let canvas,ctx,w,h, x,y,dx,dy,pw=90,ph=12,px, bricks=[], rows=5, cols=8, bw, bh=18, gap=6, lives, score, raf;
+    const scoreEl=$('#brScore'), livesEl=$('#brLives');
+    function build(){ bw = ((w - (cols+1)*gap) / cols)|0; bricks=[]; for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){ bricks.push({x:gap+c*(bw+gap), y:gap+r*(bh+gap), w:bw, h:bh, alive:true}); }} }
+    function reset(){ x=w/2; y=h-60; dx=3; dy=-3; px=(w-pw)/2; lives=3; score=0; scoreEl.textContent=0; livesEl.textContent=lives; build(); }
+    function draw(){ ctx.clearRect(0,0,w,h); // paddle
+      ctx.fillStyle='#6ee7ff'; ctx.fillRect(px,h-ph-8,pw,ph); // ball
+      ctx.beginPath(); ctx.arc(x,y,6,0,Math.PI*2); ctx.fillStyle='#a78bfa'; ctx.fill();
+      // bricks
+      bricks.forEach(b=>{ if(b.alive){ ctx.fillStyle='#223166'; ctx.fillRect(b.x,b.y,b.w,b.h); }});
+    }
+    function step(){ x+=dx; y+=dy; if(x<6||x>w-6) dx*=-1; if(y<6) dy*=-1; if(y>h-6){ lives--; livesEl.textContent=lives; if(lives<=0){ gameOver(); return; } x=w/2; y=h-60; dy=-3; }
+      // paddle hit
+      if(y>h-ph-20 && x>px && x<px+pw){ dy=-Math.abs(dy); dx += ( (x-(px+pw/2))/50 ); }
+      // brick hit
+      bricks.forEach(b=>{ if(!b.alive) return; if(x>b.x && x<b.x+b.w && y>b.y && y<b.y+b.h){ b.alive=false; dy*=-1; score++; scoreEl.textContent=score; }});
+    }
+    function gameOver(){ ctx.fillStyle='#0008'; ctx.fillRect(0,0,w,h); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.font='20px system-ui'; ctx.fillText('GAME OVER', w/2, h/2); cancelAnimationFrame(raf); }
+    function loop(){ draw(); step(); raf=requestAnimationFrame(loop); }
+    function init(){ canvas=$('#brCanvas'); ctx=canvas.getContext('2d'); w=canvas.width; h=canvas.height; reset(); loop();
+      let dragging=false, lastX=0; canvas.addEventListener('pointerdown',e=>{dragging=true; lastX=e.clientX}); canvas.addEventListener('pointerup',()=>dragging=false); canvas.addEventListener('pointermove',e=>{ if(dragging){ const dx=e.clientX-lastX; lastX=e.clientX; px+=dx; px=Math.max(0,Math.min(w-pw,px)); }});
+      $('#brRestart').onclick=()=>{ reset(); cancelAnimationFrame(raf); loop(); };
+    }
+    return { init };
+  })();
+
+  // ========================= 5. 15パズル =========================
+  const fifteen = (()=>{
+    const boardEl=$('#fifBoard'); let arr=[]; const size=4;
+    function render(){ boardEl.innerHTML=''; arr.forEach((n,i)=>{ const d=document.createElement('div'); d.className='tile'+(n===0?' empty':''); d.textContent=n===0?'':n; d.addEventListener('click',()=>move(i)); boardEl.appendChild(d); }); }
+    function pos(idx){ return [Math.floor(idx/size), idx%size]; }
+    function move(i){ const z=arr.indexOf(0); const [rz,cz]=pos(z), [ri,ci]=pos(i); if(Math.abs(rz-ri)+Math.abs(cz-ci)===1){ [arr[z],arr[i]]=[arr[i],arr[z]]; render(); if(isSolved()) alert('クリア！'); } }
+    function isSolved(){ return arr.slice(0,15).every((n,i)=>n===i+1); }
+    function shuffle(){ arr=[...Array(15).keys()].map(x=>x+1).concat(0); // make solvable by random moves
+      for(let k=0;k<200;k++){ const z=arr.indexOf(0); const [r,c]=pos(z); const cand=[]; if(r>0)cand.push(z-4); if(r<3)cand.push(z+4); if(c>0)cand.push(z-1); if(c<3)cand.push(z+1); const t=cand[(Math.random()*cand.length)|0]; [arr[z],arr[t]]=[arr[t],arr[z]]; }
+      render(); }
+    function init(){ shuffle(); $('#fifRestart').onclick=shuffle; }
+    return { init };
+  })();
+
+  // ========================= 6. 反射神経テスト =========================
+  const reaction = (()=>{
+    const panel=$('#rePanel'), bestEl=$('#reBest'); let stage='idle', to, startTime, best=parseInt(localStorage.getItem('reBest')||'0',10)||null; if(best) bestEl.textContent=best+'ms';
+    function reset(){ clearTimeout(to); stage='wait'; panel.style.background='#0f1536'; panel.textContent='緑になったらタップ！…待って…'; const delay= 800+Math.random()*2200; to=setTimeout(()=>{ stage='go'; startTime=performance.now(); panel.style.background='#1a3a1a'; panel.textContent='今！タップ！'; },delay); }
+    panel.addEventListener('pointerdown',()=>{
+      if(stage==='idle'){ reset(); }
+      else if(stage==='wait'){ panel.style.background='#3a1a1a'; panel.textContent='早すぎ！もう一度'; stage='idle'; }
+      else if(stage==='go'){ const t=Math.round(performance.now()-startTime); panel.textContent=`${t}ms`; panel.style.background='#0f1536'; if(!best||t<best){ best=t; localStorage.setItem('reBest',String(t)); bestEl.textContent=t+'ms'; } stage='idle'; }
+    });
+    function init(){ $('#reStart').onclick=reset; panel.textContent='タップで開始'; stage='idle'; }
+    return { init };
+  })();
+
+  // ========================= 7. 〇×ゲーム（TicTacToe） =========================
+  const ttt = (()=>{
+    const boardEl=$('#ttBoard'), msgEl=$('#ttMsg'); let cells=[]; let board=Array(9).fill('');
+    function render(){ boardEl.innerHTML=''; cells=[]; for(let i=0;i<9;i++){ const d=document.createElement('div'); d.className='cell'; d.textContent=board[i]; d.addEventListener('click',()=>play(i)); boardEl.appendChild(d); cells.push(d);} updateMsg(); }
+    function win(b,p){ const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; return L.some(l=>l.every(i=>b[i]===p)); }
+    function emptyIdx(b){ return b.map((v,i)=>v?null:i).filter(v=>v!==null); }
+    function play(i){ if(board[i]||win(board,'X')||win(board,'O')) return; board[i]='X'; render(); if(win(board,'X')) return; const empt=emptyIdx(board); if(empt.length===0) return; // CPU random
+      const j=empt[(Math.random()*empt.length)|0]; board[j]='O'; render(); }
+    function updateMsg(){ if(win(board,'X')) msgEl.textContent='あなたの勝ち！'; else if(win(board,'O')) msgEl.textContent='CPUの勝ち'; else if(board.every(v=>v)) msgEl.textContent='引き分け'; else msgEl.textContent='あなたの番（X）'; }
+    function reset(){ board=Array(9).fill(''); render(); }
+    function init(){ reset(); $('#ttRestart').onclick=reset; }
+    return { init };
+  })();
+
+  // ========================= 8. 落ち物パズル（簡易テトリス） =========================
+  const tetris = (()=>{
+    let canvas,ctx, w,h, gridW=10, gridH=20, cell=24, board, cur, next, dropMs=600, acc=0, last=0, score=0, raf;
+    const shapes = {
+      I:[[1,1,1,1]], O:[[1,1],[1,1]], T:[[0,1,0],[1,1,1]], L:[[1,0,0],[1,1,1]], J:[[0,0,1],[1,1,1]], S:[[0,1,1],[1,1,0]], Z:[[1,1,0],[0,1,1]]
+    };
+    const scoreEl=$('#teScore');
+    function newPiece(){ const ks=Object.keys(shapes); const s=shapes[ks[(Math.random()*ks.length)|0]]; return {m:s, x:3, y:0}; }
+    function rotate(m){ const H=m.length, W=m[0].length; const r=Array.from({length:W},()=>Array(H).fill(0)); for(let y=0;y<H;y++)for(let x=0;x<W;x++) r[x][H-1-y]=m[y][x]; return r; }
+    function collide(b,p){ const m=p.m; for(let y=0;y<m.length;y++) for(let x=0;x<m[0].length;x++){ if(!m[y][x]) continue; const nx=p.x+x, ny=p.y+y; if(nx<0||nx>=gridW||ny>=gridH|| (ny>=0 && b[ny][nx])) return true; } return false; }
+    function merge(b,p){ p.m.forEach((row,yy)=> row.forEach((v,xx)=>{ if(v && p.y+yy>=0) b[p.y+yy][p.x+xx]=1; })); }
+    function clearLines(){ let lines=0; for(let y=gridH-1;y>=0;y--){ if(board[y].every(v=>v)){ board.splice(y,1); board.unshift(Array(gridW).fill(0)); lines++; y++; } } if(lines){ score+= [0,40,100,300,1200][lines]; scoreEl.textContent=score; dropMs=Math.max(120, dropMs-20); } }
+    function drawCell(x,y,v){ ctx.fillStyle = v?'#6ee7ff':'#0f1536'; ctx.fillRect(x*cell,y*cell,cell-1,cell-1); }
+    function draw(){ ctx.clearRect(0,0,w,h); for(let y=0;y<gridH;y++) for(let x=0;x<gridW;x++) drawCell(x,y,board[y][x]); cur.m.forEach((row,yy)=> row.forEach((v,xx)=>{ if(v){ ctx.fillStyle='#a78bfa'; ctx.fillRect((cur.x+xx)*cell,(cur.y+yy)*cell,cell-1,cell-1); }})); }
+    function drop(){ cur.y++; if(collide(board,cur)){ cur.y--; merge(board,cur); clearLines(); cur=newPiece(); if(collide(board,cur)){ gameOver(); return; } }
+    }
+    function update(t){ const dt=t-last; last=t; acc+=dt; if(acc>dropMs){ acc=0; drop(); } draw(); raf=requestAnimationFrame(update); }
+    let touch={x:0,y:0,active:false};
+    function bindControls(){ canvas.addEventListener('pointerdown',e=>{ touch={x:e.clientX,y:e.clientY,active:true}; if(e.clientX < canvas.getBoundingClientRect().left + canvas.clientWidth/2){ cur.x--; if(collide(board,cur)) cur.x++; } else { cur.x++; if(collide(board,cur)) cur.x--; } });
+      canvas.addEventListener('pointermove',e=>{ if(!touch.active) return; const dy=e.clientY-touch.y; const dx=e.clientX-touch.x; if(Math.abs(dy)>40){ if(dy<0){ const r=rotate(cur.m); const prev=cur.m; cur.m=r; if(collide(board,cur)) cur.m=prev; } else { cur.y++; if(collide(board,cur)) cur.y--; else { acc=0; } } touch={x:e.clientX,y:e.clientY,active:true}; }});
+      canvas.addEventListener('pointerup',()=>{ touch.active=false; });
+    }
+    function reset(){ board=Array.from({length:gridH},()=>Array(gridW).fill(0)); cur=newPiece(); score=0; scoreEl.textContent=0; dropMs=600; last=performance.now(); acc=0; cancelAnimationFrame(raf); raf=requestAnimationFrame(update); }
+    function gameOver(){ cancelAnimationFrame(raf); ctx.fillStyle='#0008'; ctx.fillRect(0,0,w,h); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.font='20px system-ui'; ctx.fillText('GAME OVER', w/2, h/2); }
+    function init(){ canvas=$('#teCanvas'); ctx=canvas.getContext('2d'); w=canvas.width; h=canvas.height; bindControls(); reset(); $('#teRestart').onclick=reset; }
+    return { init };
+  })();
+
+  // ========================= 9. 数当て =========================
+  const guess = (()=>{
+    let ans, tries=0; const input=$('#guInput'), btn=$('#guBtn'), log=$('#guLog'), triesEl=$('#guTries');
+    function reset(){ ans = 1 + (Math.random()*100 |0); tries=0; triesEl.textContent=0; log.textContent=''; input.value=''; }
+    function judge(){ const v=parseInt(input.value,10); if(isNaN(v)) return; tries++; triesEl.textContent=tries; if(v===ans){ log.innerHTML=`<span class='win'>正解！ ${v}</span>`; } else if(v<ans){ log.textContent='もっと大きい'; } else { log.textContent='もっと小さい'; } }
+    function init(){ reset(); btn.onclick=judge; $('#guRestart').onclick=reset; input.addEventListener('keydown',e=>{ if(e.key==='Enter') judge(); }); }
+    return { init };
+  })();
+
+  // ========================= 10. 風船割り =========================
+  const balloon = (()=>{
+    let canvas,ctx,w,h, balloons=[], score=0, raf;
+    const scoreEl=$('#baScore');
+    function spawn(){ const r=12+Math.random()*18; balloons.push({x: r+Math.random()*(w-2*r), y:h+r, r, vy:1+Math.random()*1.6}); }
+    function step(){ if(Math.random()<0.08) spawn(); balloons.forEach(b=>{ b.y -= b.vy; }); balloons = balloons.filter(b=> b.y + b.r> -20); }
+    function draw(){ ctx.clearRect(0,0,w,h); balloons.forEach(b=>{ ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fillStyle='#6ee7ff'; ctx.fill(); ctx.beginPath(); ctx.moveTo(b.x, b.y+b.r); ctx.lineTo(b.x, b.y+b.r+14); ctx.strokeStyle='#6ee7ff'; ctx.stroke(); }); }
+    function loop(){ step(); draw(); raf=requestAnimationFrame(loop); }
+    function tap(e){ const rect=canvas.getBoundingClientRect(); const x=(e.clientX-rect.left)* (canvas.width/rect.width); const y=(e.clientY-rect.top)* (canvas.height/rect.height);
+      for(let i=balloons.length-1;i>=0;i--){ const b=balloons[i]; const dx=b.x-x, dy=b.y-y; if(dx*dx+dy*dy <= b.r*b.r){ balloons.splice(i,1); score++; scoreEl.textContent=score; break; } }
+    }
+    function reset(){ balloons=[]; score=0; scoreEl.textContent=0; cancelAnimationFrame(raf); loop(); }
+    function init(){ canvas=$('#baCanvas'); ctx=canvas.getContext('2d'); w=canvas.width; h=canvas.height; canvas.addEventListener('pointerdown',tap); $('#baRestart').onclick=reset; reset(); }
+    return { init };
+  })();
+
+  // ====== ゲーム初期化マップ ======
+  const initGame = {
+    jump: jump.init,
+    mole: mole.init,
+    memory: memory.init,
+    breakout: breakout.init,
+    fifteen: fifteen.init,
+    reaction: reaction.init,
+    tictactoe: ttt.init,
+    tetris: tetris.init,
+    guess: guess.init,
+    balloon: balloon.init
+  };
+})();
+</script>
 </body>
 </html>
