@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jリーグ試合一覧 → スコアボード（Yahoo!連携）</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+  :root{ --red:#d64a2b; --red2:#b83a22; --gold:#f3c766; --bg:#101012; --panel:#141218; --line:#2a2222; --text:#fff; --muted:#d8d1cc; }
+  html,body{height:100%;}
+  body{margin:0; background:#0c0b0e; color:var(--text); font-family:-apple-system,"SF Pro Display","Noto Sans JP",Roboto,Arial,sans-serif; letter-spacing:.3px;}
+  .wrap{min-height:100dvh; display:grid; grid-template-rows:auto 1fr; gap:10px; padding: max(8px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom)) 10px;}
+  .topbar{display:flex; gap:8px; align-items:center; justify-content:space-between;}
+  .btn{background:#1a1313; border:1px solid #3a2d2d; color:#fff; border-radius:10px; padding:8px 12px; font-weight:800;}
+  select,input{background:#151017; color:#fff; border:1px solid #3a2d2d; border-radius:10px; padding:8px 10px;}
+  .badge{padding:6px 10px; border-radius:999px; background:linear-gradient(180deg,#f8d68a,#eec667); color:#3a2d2d; font-weight:900;}
+  .board{display:grid; grid-template-columns: 1fr 520px 1fr; gap:12px; align-items:stretch;}
+  @media (max-width: 1200px){ .board{grid-template-columns:1fr; } }
+  .teamCol{ background:linear-gradient(180deg,#531e16 0%, #3b1410 100%); border:2px solid #6a311f; border-radius:16px; overflow:hidden; box-shadow:0 6px 40px #0008; }
+  .teamHeader{ background:linear-gradient(180deg,var(--red),var(--red2)); border-bottom:2px solid #842f1d; padding:8px 12px; font-weight:900; font-size: clamp(18px,2.2vw,26px); text-shadow:0 2px 0 #000; }
+  .posGroup{ padding:10px 8px; }
+  .posLabel{ font-weight:900; color:#ffd6c6; opacity:.95; margin:6px 0; display:flex; align-items:center; gap:8px; }
+  .posLabel::before{ content:attr(data-pos); display:inline-block; font-weight:900; background:#a13e2a; border:1px solid #e4a88a; width:44px; text-align:center; padding:6px 0; border-radius:8px; box-shadow: inset 0 0 0 2px #ffffff22; }
+  .player{ display:grid; grid-template-columns:46px 1fr; gap:8px; align-items:center; padding:6px 10px; margin:4px 0; background: linear-gradient(180deg, #2a1411, #200f0d); border:1px solid #6a2f20; border-radius:10px; }
+  .no{ font-weight:900; font-variant-numeric: tabular-nums; text-align:center; padding:6px 0; border-radius:8px; background:#180b0a; border:1px solid #7a3b2a; }
+  .pname{ font-weight:800; letter-spacing:.5px; }
+  .center{ background:linear-gradient(180deg, #702819 0%, #521e13 100%); border:2px solid #8d3f25; border-radius:16px; box-shadow:0 10px 50px #000a; overflow:hidden; display:grid; grid-template-rows:auto 1fr auto; }
+  .leagueHeader{ display:flex; align-items:center; justify-content:center; gap:10px; background:linear-gradient(180deg,#ff7b4e,#e35736); color:#fff; font-weight:900; padding:8px 0; border-bottom:2px solid #b43a22; }
+  .scoreRows{ display:grid; grid-template-rows:1fr 1fr 1fr; gap:8px; padding:12px; }
+  .row{ background:linear-gradient(180deg,#2b0f0b,#1c0a08); border:1px solid #6a2f20; border-radius:12px; display:grid; grid-template-columns: 1fr auto 1fr; align-items:center; text-align:center; padding: 10px; box-shadow: inset 0 0 0 2px #ffffff10; }
+  .label{ font-weight:900; font-size: clamp(16px,2.2vw,24px); color:#ffe6cf; letter-spacing:1px; }
+  .big{ font-weight:900; font-size: clamp(38px,6vw,72px); background:#140706; padding:6px 14px; border-radius:10px; border:1px solid #84402a; min-width:1.5em; }
+  .footerBar{ display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-top:2px solid #8d3f25; background: #2d0f0b; }
+  .phase{ font-weight:900; }
+  .clock{ font-family: ui-monospace, Menlo, Consolas, monospace; font-weight:900; }
+
+  .overlay{ position:fixed; inset:0; background:#000a; backdrop-filter: blur(2px); display:none; z-index:100; }
+  .overlay.open{ display:block; }
+  .dlg{ position:absolute; left:50%; top:50%; transform: translate(-50%,-50%); width:min(960px,96vw); max-height:84vh; overflow:auto; background:#160f12; border:1px solid #3a2d2d; border-radius:16px; box-shadow:0 40px 120px #000; padding:12px; }
+  .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:10px; }
+  .card{ background:#1b1316; border:1px solid #3a2d2d; border-radius:12px; padding:10px; cursor:pointer; }
+  .card:hover{ outline:2px solid #e8c06f55; }
+  .time{ color:#f7d07a; font-weight:900; }
+  .vs{ font-weight:800; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div style="display:flex; gap:8px; align-items:center;">
+      <button id="btnList" class="btn">本日の試合を表示</button>
+      <select id="selCat">
+        <option value="j1">J1</option>
+        <option value="j2" selected>J2</option>
+        <option value="j3">J3</option>
+      </select>
+      <span class="badge" id="badge">未選択</span>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button id="btnRefresh" class="btn">手動更新</button>
+      <button id="btnHomeIcon" class="btn">ホーム画面に追加</button>
+    </div>
+  </div>
+
+  <div class="board">
+    <div class="teamCol">
+      <div class="teamHeader" id="homeName">ホーム</div>
+      <div id="homeList"></div>
+    </div>
+
+    <div class="center">
+      <div class="leagueHeader"><span id="leagueLabel">J2</span><span id="matchLabel">試合未選択</span></div>
+      <div class="scoreRows">
+        <div class="row">
+          <div class="big" id="homeFH">0</div>
+          <div class="label">前半</div>
+          <div class="big" id="awayFH">0</div>
+        </div>
+        <div class="row">
+          <div class="big" id="homeSH">0</div>
+          <div class="label">後半</div>
+          <div class="big" id="awaySH">0</div>
+        </div>
+        <div class="row">
+          <div class="big" id="homeTot">0</div>
+          <div class="label">TOTAL</div>
+          <div class="big" id="awayTot">0</div>
+        </div>
+      </div>
+      <div class="footerBar">
+        <div class="phase" id="phase">-</div>
+        <div class="clock" id="clock">--:--</div>
+      </div>
+    </div>
+
+    <div class="teamCol">
+      <div class="teamHeader" id="awayName" style="text-align:right">アウェイ</div>
+      <div id="awayList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="ov">
+  <div class="dlg">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <div style="font-weight:900;">本日の試合</div>
+      <div style="display:flex; gap:8px;">
+        <button id="btnReload" class="btn">再取得</button>
+        <button id="btnClose" class="btn">閉じる</button>
+      </div>
+    </div>
+    <div id="grid" class="grid"></div>
+    <div id="hint" style="opacity:.8; margin-top:8px; font-size:12px;">※ Yahoo!の構造変更により取得に失敗する場合があります。</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const $=s=>document.querySelector(s);
+  const state = { backend:"https://script.google.com/macros/s/AKfycbzX4fYeymO9EHKbfEj-7o7um5ZyFzp32D9dIS4AKwedBTZNtBaDFdOA_PZLM8mhYHIr9g/exec", category:"j2", gameId:null, interval:20, timer:null };
+  const K='rk-yahoo-board-v5';
+
+  const homeName=$("#homeName"), awayName=$("#awayName");
+  const homeList=$("#homeList"), awayList=$("#awayList");
+  const leagueLabel=$("#leagueLabel"), matchLabel=$("#matchLabel");
+  const phase=$("#phase"), clock=$("#clock");
+  const homeFH=$("#homeFH"), awayFH=$("#awayFH");
+  const homeSH=$("#homeSH"), awaySH=$("#awaySH");
+  const homeTot=$("#homeTot"), awayTot=$("#awayTot");
+  const badge=$("#badge");
+
+  const ov=$("#ov"), grid=$("#grid");
+  $("#btnList").onclick=()=>{ ov.classList.add('open'); loadList(); };
+  $("#btnClose").onclick=()=> ov.classList.remove('open');
+  $("#btnReload").onclick=()=> loadList();
+  $("#btnRefresh").onclick=()=>{ if(state.gameId) pollOnce(); };
+  $("#btnHomeIcon").onclick=()=> alert('Safariの共有メニューから「ホーム画面に追加」で全画面に近い表示になります。');
+
+  $("#selCat").onchange=(e)=>{ state.category=e.target.value; leagueLabel.textContent=state.category.toUpperCase(); save(); };
+
+  try{ Object.assign(state, JSON.parse(localStorage.getItem(K)||'{}')); }catch{}
+  state.backend="https://script.google.com/macros/s/AKfycbzX4fYeymO9EHKbfEj-7o7um5ZyFzp32D9dIS4AKwedBTZNtBaDFdOA_PZLM8mhYHIr9g/exec"; // 強制的に最新URLを採用
+  leagueLabel.textContent = state.category.toUpperCase();
+  badge.textContent = state.gameId? ('gameId:'+state.gameId) : '未選択';
+  if(state.gameId) start();
+
+  async function loadList(){
+    grid.innerHTML='読み込み中…';
+    try{
+      const u = `${state.backend}?mode=listToday&category=${encodeURIComponent(state.category)}`;
+      const j = await get(u);
+      const arr = (j && j.matches) || [];
+      if(!arr.length){ grid.innerHTML = '本日の試合が取得できませんでした。カテゴリを切り替えてみてください。'; return; }
+      grid.innerHTML='';
+      arr.forEach(m=>{
+        const el=document.createElement('div');
+        el.className='card';
+        el.innerHTML = `<div class="time">${m.time||''}</div>
+                        <div class="vs">${m.home||'未判別'} vs ${m.away||'未判別'}</div>
+                        <div style="opacity:.8;font-size:12px;">gameId: ${m.gameId}</div>`;
+        el.onclick=()=>{ state.gameId=m.gameId; badge.textContent='gameId:'+state.gameId; save(); ov.classList.remove('open'); start(); };
+        grid.appendChild(el);
+      });
+    }catch(e){
+      grid.innerHTML='エラー: '+e.message;
+    }
+  }
+
+  function start(){
+    pollOnce();
+    if(state.timer) clearInterval(state.timer);
+    state.timer = setInterval(pollOnce, Math.max(10,state.interval)*1000);
+  }
+
+  async function pollOnce(){
+    try{
+      const u = `${state.backend}?mode=summary&gameId=${state.gameId}&category=${encodeURIComponent(state.category)}`;
+      const j = await get(u);
+      apply(j);
+    }catch(e){
+      console.error(e);
+    }
+  }
+
+  function apply(d){
+    homeName.textContent = d.home && d.home.name || 'ホーム';
+    awayName.textContent = d.away && d.away.name || 'アウェイ';
+    matchLabel.textContent = d.home?.name && d.away?.name ? (d.home.name+' vs '+d.away.name) : '試合未選択';
+    phase.textContent = d.phase || '-';
+    clock.textContent = d.elapsed || '--:--';
+
+    renderByPos(homeList, (d.home?.players||[]).filter(p=>p.on));
+    renderByPos(awayList, (d.away?.players||[]).filter(p=>p.on));
+
+    const h = d.score?.home ?? 0, a = d.score?.away ?? 0;
+    homeTot.textContent = h; awayTot.textContent = a;
+    homeFH.textContent = h; awayFH.textContent = a;
+    homeSH.textContent = h; awaySH.textContent = a;
+  }
+
+  function renderByPos(container, players){
+    container.innerHTML='';
+    const groups = {GK:[], DF:[], MF:[], FW:[]};
+    players.forEach(p=>{ const k=(p.pos||'').toUpperCase(); if(groups[k]) groups[k].push(p); });
+    ["GK","DF","MF","FW"].forEach(pos=>{
+      if(groups[pos].length){
+        const sec=document.createElement('div'); sec.className='posGroup';
+        const label=document.createElement('div'); label.className='posLabel'; label.dataset.pos=pos; label.textContent='';
+        sec.appendChild(label);
+        groups[pos].forEach(p=>{
+          const row=document.createElement('div'); row.className='player';
+          row.innerHTML=`<div class="no">${p.no??''}</div><div class="pname">${p.name||''}</div>`;
+          sec.appendChild(row);
+        });
+        container.appendChild(sec);
+      }
+    });
+  }
+
+  function save(){ localStorage.setItem(K, JSON.stringify(state)); }
+  async function get(url){ const r = await fetch(url, {cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); return await r.json(); }
+})();
+</script>
+</body>
+</html>
