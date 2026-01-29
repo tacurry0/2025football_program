@@ -887,7 +887,7 @@
     "time": "13:00",
     "opponent": "ギラヴァンツ北九州",
     "venue": "えがお健康スタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kitakyushu.png",
     "details": ""
   },
   {
@@ -898,7 +898,7 @@
     "time": "14:00",
     "opponent": "カマタマーレ讃岐",
     "venue": "四国化成MEGLIOスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sanuki.png",
     "details": ""
   },
   {
@@ -931,7 +931,7 @@
     "time": "14:00",
     "opponent": "高知ユナイテッドSC",
     "venue": "デンカビッグスワンスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kochi.png",
     "details": ""
   },
   {
@@ -942,7 +942,7 @@
     "time": "14:00",
     "opponent": "レイラック滋賀FC",
     "venue": "平和堂HATOスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_shiga.png",
     "details": ""
   },
   {
@@ -953,7 +953,7 @@
     "time": "14:00",
     "opponent": "奈良クラブ",
     "venue": "ロートフィールド奈良",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nara.png",
     "details": ""
   },
   {
@@ -964,7 +964,7 @@
     "time": "13:00",
     "opponent": "ガイナーレ鳥取",
     "venue": "えがお健康スタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tottori.png",
     "details": ""
   },
   {
@@ -986,7 +986,7 @@
     "time": "14:00",
     "opponent": "テゲバジャーロ宮崎",
     "venue": "いちご宮崎新富サッカー場",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_miyazaki.png",
     "details": ""
   },
   {
@@ -997,7 +997,7 @@
     "time": "13:00",
     "opponent": "鹿児島ユナイテッドFC",
     "venue": "えがお健康スタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
     "details": ""
   },
   {
@@ -1008,7 +1008,7 @@
     "time": "14:00",
     "opponent": "FC大阪",
     "venue": "東大阪市花園ラグビー場",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fosaka.png",
     "details": ""
   },
   {
@@ -1019,7 +1019,7 @@
     "time": "14:00",
     "opponent": "ツエーゲン金沢",
     "venue": "デンカビッグスワンスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
     "details": ""
   },
   {
@@ -1030,7 +1030,7 @@
     "time": "16:00",
     "opponent": "FC琉球",
     "venue": "沖縄県総合運動公園陸上競技場",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
     "details": ""
   },
   {
@@ -1041,7 +1041,7 @@
     "time": "14:00",
     "opponent": "テゲバジャーロ宮崎",
     "venue": "えがお健康スタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_miyazaki.png",
     "details": ""
   },
   {
@@ -1052,7 +1052,7 @@
     "time": "14:00",
     "opponent": "高知ユナイテッドSC",
     "venue": "GIKENスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kochi.png",
     "details": ""
   },
   {
@@ -1085,7 +1085,7 @@
     "time": "14:00",
     "opponent": "ガイナーレ鳥取",
     "venue": "Axisバードスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tottori.png",
     "details": ""
   },
   {
@@ -1096,7 +1096,7 @@
     "time": "14:00",
     "opponent": "FC大阪",
     "venue": "デンカビッグスワンスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fosaka.png",
     "details": ""
   },
   {
@@ -1129,7 +1129,7 @@
     "time": "14:00",
     "opponent": "レイラック滋賀FC",
     "venue": "えがお健康スタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_shiga.png",
     "details": ""
   },
   {
@@ -1140,7 +1140,7 @@
     "time": "14:00",
     "opponent": "カマタマーレ讃岐",
     "venue": "デンカビッグスワンスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sanuki.png",
     "details": ""
   },
   {
@@ -1151,7 +1151,7 @@
     "time": "14:00",
     "opponent": "ギラヴァンツ北九州",
     "venue": "ミクニワールドスタジアム北九州",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kitakyushu.png",
     "details": ""
   },
   {
@@ -1166,6 +1166,17 @@
     "details": ""
   },
   {
+    "club": "niigata",
+    "matchweek": "MW16",
+    "date": "2026-05-10",
+    "day": "Sun",
+    "time": "00:00",
+    "opponent": "ツエーゲン金沢",
+    "venue": "未定",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
+    "details": ""
+  },
+  {
     "club": "kumamoto",
     "matchweek": "MW16",
     "date": "2026-05-10",
@@ -1173,7 +1184,7 @@
     "time": "14:00",
     "opponent": "FC琉球",
     "venue": "えがお健康スタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
     "details": ""
   },
   {
@@ -1184,7 +1195,7 @@
     "time": "14:00",
     "opponent": "奈良クラブ",
     "venue": "デンカビッグスワンスタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nara.png",
     "details": ""
   },
   {
@@ -1195,7 +1206,7 @@
     "time": "14:00",
     "opponent": "鹿児島ユナイテッドFC",
     "venue": "白波スタジアム",
-    "emblem": "",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
     "details": ""
   },
   {
@@ -1218,6 +1229,50 @@
     "opponent": "愛媛FC",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
+    "details": ""
+  },
+  {
+    "club": "niigata",
+    "matchweek": "PO1",
+    "date": "2026-05-30",
+    "day": "Sat",
+    "time": "14:00",
+    "opponent": "プレーオフ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "PO",
+    "date": "2026-05-30",
+    "day": "Sat",
+    "time": "00:00",
+    "opponent": "プレーオフ",
+    "venue": "未定",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
+    "details": ""
+  },
+  {
+    "club": "niigata",
+    "matchweek": "PO2",
+    "date": "2026-06-06",
+    "day": "Sat",
+    "time": "00:00",
+    "opponent": "プレーオフ",
+    "venue": "未定",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "PO2",
+    "date": "2026-06-06",
+    "day": "Sat",
+    "time": "00:00",
+    "opponent": "プレーオフ",
+    "venue": "未定",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
     "details": ""
   }
 ]
