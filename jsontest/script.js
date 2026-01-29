@@ -6,30 +6,61 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleAlb = document.getElementById("toggle-niigata");
   const toggleRoa = document.getElementById("toggle-kumamoto");
 
+  // スライダー操作用
+  let currentMonthIndex = 0;
+  let touchStartX = 0;
+
+  // メモ表示用（URLリンク化 + 改行反映）
+  function parseToDisplay(text) {
+    const escaped = (text || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return escaped
+      .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\n/g, "<br>");
+  }
+
   fetch("schedule.json")
     .then(res => res.json())
     .then(data => {
-      const monthsMap = {};
-
-      data.forEach(match => {
-        const month = new Date(match.date).getMonth() + 1;
-        if (!monthsMap[month]) monthsMap[month] = [];
-        monthsMap[month].push(match);
+      // まず日付順に整列（年をまたいでも正しく並ぶ）
+      data.sort((a, b) => {
+        const da = new Date(`${a.date}T${a.time || "00:00"}`);
+        const db = new Date(`${b.date}T${b.time || "00:00"}`);
+        return da - db;
       });
 
-      for (const month in monthsMap) {
+      // 年-月でグルーピング（★ここが2025/2026混在対策）
+      const ymMap = {}; // key: "YYYY-MM"
+      data.forEach(match => {
+        const d = new Date(match.date);
+        const y = d.getFullYear();
+        const m = d.getMonth() + 1;
+        const key = `${y}-${String(m).padStart(2, "0")}`;
+        if (!ymMap[key]) ymMap[key] = [];
+        ymMap[key].push(match);
+      });
+
+      // キー（YYYY-MM）を昇順で回す
+      const keys = Object.keys(ymMap).sort((a, b) => a.localeCompare(b, "en"));
+
+      keys.forEach(key => {
+        const [yearStr, monthStr] = key.split("-");
+        const year = parseInt(yearStr, 10);
+        const month = parseInt(monthStr, 10);
+
         const section = document.createElement("div");
         section.className = "month-section";
-        section.dataset.month = month;
+        section.dataset.ym = key; // 例: 2026-02
 
         const title = document.createElement("div");
         title.className = "month-title";
-        title.textContent = new Date(2025, month - 1).toLocaleString("ja", { month: "long" });
+        // 年＋月を表示（例: 2026年2月）
+        title.textContent = new Date(year, month - 1, 1).toLocaleString("ja", { year: "numeric", month: "long" });
         section.appendChild(title);
 
-        monthsMap[month].forEach(match => {
+        ymMap[key].forEach(match => {
           const card = document.createElement("div");
           card.className = `card ${match.club}`;
+
           const matchId = `${match.date}_${match.club}_${match.opponent}`;
           const savedGo = localStorage.getItem(`note_go_${matchId}`) || "";
           const savedBack = localStorage.getItem(`note_back_${matchId}`) || "";
@@ -48,106 +79,103 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="match-details">
               ${match.details ? `<p>${match.details}</p>` : ""}
               <div class="note-section">
-  <label>【行き】</label>
-  <textarea class="note-go">${savedGo}</textarea>
-  <div class="note-go-view" style="display:none;"></div>
+                <label>【行き】</label>
+                <textarea class="note-go">${savedGo}</textarea>
+                <div class="note-go-view" style="display:none;"></div>
 
-  <label>【帰り】</label>
-  <textarea class="note-back">${savedBack}</textarea>
-  <div class="note-back-view" style="display:none;"></div>
+                <label>【帰り】</label>
+                <textarea class="note-back">${savedBack}</textarea>
+                <div class="note-back-view" style="display:none;"></div>
 
-  <button class="save-notes">保存</button>
-  </div>
+                <button class="save-notes">保存</button>
+              </div>
             </div>
           `;
 
+          // カード開閉
           card.addEventListener("click", (e) => {
-            if (e.target.tagName.toLowerCase() === "textarea") return;
+            if (e.target.tagName.toLowerCase() === "textarea" || e.target.tagName.toLowerCase() === "button" || e.target.tagName.toLowerCase() === "a") return;
             document.querySelectorAll(".card.expanded").forEach(c => {
               if (c !== card) c.classList.remove("expanded");
             });
             card.classList.toggle("expanded");
           });
 
-          
-const noteGo = card.querySelector(".note-go");
-const noteBack = card.querySelector(".note-back");
-const viewGo = card.querySelector(".note-go-view");
-const viewBack = card.querySelector(".note-back-view");
-const saveBtn = card.querySelector(".save-notes");
+          const noteGo = card.querySelector(".note-go");
+          const noteBack = card.querySelector(".note-back");
+          const viewGo = card.querySelector(".note-go-view");
+          const viewBack = card.querySelector(".note-back-view");
+          const saveBtn = card.querySelector(".save-notes");
 
-// 編集ボタンを作成して後ろに追加
-const editBtn = document.createElement('button');
-editBtn.textContent = '編集';
-editBtn.className = 'edit-notes';
-editBtn.style.display = 'none';
-saveBtn.after(editBtn);
+          // 編集ボタンを作成して後ろに追加
+          const editBtn = document.createElement("button");
+          editBtn.textContent = "編集";
+          editBtn.className = "edit-notes";
+          editBtn.style.display = "none";
+          saveBtn.after(editBtn);
 
-// 入力した内容をリアルタイム保存
-noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
-noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
+          // 入力した内容をリアルタイム保存
+          noteGo.addEventListener("input", e => localStorage.setItem(`note_go_${matchId}`, e.target.value));
+          noteBack.addEventListener("input", e => localStorage.setItem(`note_back_${matchId}`, e.target.value));
 
-// 保存ボタンの動作
-saveBtn.addEventListener("click", () => {
-  const valGo = noteGo.value.trim();
-  const valBack = noteBack.value.trim();
+          // 保存ボタン
+          saveBtn.addEventListener("click", () => {
+            const valGo = noteGo.value.trim();
+            const valBack = noteBack.value.trim();
 
-  localStorage.setItem(`note_go_${matchId}`, valGo);
-  localStorage.setItem(`note_back_${matchId}`, valBack);
+            localStorage.setItem(`note_go_${matchId}`, valGo);
+            localStorage.setItem(`note_back_${matchId}`, valBack);
 
-  viewGo.innerHTML = parseToDisplay(valGo);
-  viewBack.innerHTML = parseToDisplay(valBack);
+            viewGo.innerHTML = parseToDisplay(valGo);
+            viewBack.innerHTML = parseToDisplay(valBack);
 
-  noteGo.style.display = "none";
-  noteBack.style.display = "none";
-  viewGo.style.display = "block";
-  viewBack.style.display = "block";
-  saveBtn.style.display = "none";
-  editBtn.style.display = 'block';
-});
+            noteGo.style.display = "none";
+            noteBack.style.display = "none";
+            viewGo.style.display = "block";
+            viewBack.style.display = "block";
+            saveBtn.style.display = "none";
+            editBtn.style.display = "block";
+          });
 
-// 編集ボタンの動作
-editBtn.addEventListener('click', () => {
-  noteGo.style.display = "block";
-  noteBack.style.display = "block";
-  viewGo.style.display = "none";
-  viewBack.style.display = "none";
-  saveBtn.style.display = "block";
-  editBtn.style.display = 'none';
-});
+          // 編集ボタン
+          editBtn.addEventListener("click", () => {
+            noteGo.style.display = "block";
+            noteBack.style.display = "block";
+            viewGo.style.display = "none";
+            viewBack.style.display = "none";
+            saveBtn.style.display = "block";
+            editBtn.style.display = "none";
+          });
 
-// 最初から保存済みデータがあれば表示モードに
-if (savedGo || savedBack) {
-  noteGo.style.display = "none";
-  noteBack.style.display = "none";
-  viewGo.innerHTML = parseToDisplay(savedGo);
-  viewBack.innerHTML = parseToDisplay(savedBack);
-  viewGo.style.display = "block";
-  viewBack.style.display = "block";
-  saveBtn.style.display = "none";
-  editBtn.style.display = 'block';
-}
+          // 最初から保存済みデータがあれば表示モード
+          if (savedGo || savedBack) {
+            noteGo.style.display = "none";
+            noteBack.style.display = "none";
+            viewGo.innerHTML = parseToDisplay(savedGo);
+            viewBack.innerHTML = parseToDisplay(savedBack);
+            viewGo.style.display = "block";
+            viewBack.style.display = "block";
+            saveBtn.style.display = "none";
+            editBtn.style.display = "block";
+          }
+
           section.appendChild(card);
+        });
+
+        slider.appendChild(section);
       });
 
-      // ←★この直後に関数を追加！
-      function parseToDisplay(text) {
-        const escaped = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        return escaped
-          .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
-          .replace(/\n/g, "<br>");
-      }
+      const sections = Array.from(document.querySelectorAll(".month-section"));
 
-      slider.appendChild(section);
-      }
-
-      const months = Array.from(document.querySelectorAll(".month-section"));
-      const thisMonth = new Date().getMonth() + 1;
-      const index = months.findIndex(m => parseInt(m.dataset.month) === thisMonth);
+      // 今日の「年-月」に移動できるようにする
+      const today = new Date();
+      const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
+      const index = sections.findIndex(s => s.dataset.ym === todayKey);
       currentMonthIndex = index !== -1 ? index : 0;
 
       updateSlider();
 
+      // スワイプ操作
       slider.addEventListener("touchstart", e => {
         touchStartX = e.changedTouches[0].screenX;
       });
@@ -158,12 +186,13 @@ if (savedGo || savedBack) {
         if (deltaX > 50 && currentMonthIndex > 0) {
           currentMonthIndex--;
           updateSlider();
-        } else if (deltaX < -50 && currentMonthIndex < months.length - 1) {
+        } else if (deltaX < -50 && currentMonthIndex < sections.length - 1) {
           currentMonthIndex++;
           updateSlider();
         }
       });
 
+      // 前月/次月（※実際は「前の年-月」「次の年-月」）
       if (prevBtn && nextBtn) {
         prevBtn.addEventListener("click", () => {
           if (currentMonthIndex > 0) {
@@ -173,39 +202,45 @@ if (savedGo || savedBack) {
         });
 
         nextBtn.addEventListener("click", () => {
-          if (currentMonthIndex < months.length - 1) {
+          if (currentMonthIndex < sections.length - 1) {
             currentMonthIndex++;
             updateSlider();
           }
         });
       }
 
+      // 今日へ
       if (goTodayBtn) {
         goTodayBtn.addEventListener("click", () => {
-          const today = new Date().getMonth() + 1;
-          const todayIndex = months.findIndex(m => parseInt(m.dataset.month) === today);
-          if (todayIndex !== -1) {
-            currentMonthIndex = todayIndex;
+          const t = new Date();
+          const key = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}`;
+          const idx = sections.findIndex(s => s.dataset.ym === key);
+          if (idx !== -1) {
+            currentMonthIndex = idx;
             updateSlider();
           }
         });
       }
-      
-      // ここにイベントリスナーを一度だけ登録
-      toggleAlb.addEventListener("click", () => {
-        toggleAlb.classList.toggle("active");
-        updateClubVisibility();
-      });
 
-      toggleRoa.addEventListener("click", () => {
-        toggleRoa.classList.toggle("active");
-        updateClubVisibility();
-      });
+      // ここにイベントリスナーを一度だけ登録
+      if (toggleAlb) {
+        toggleAlb.addEventListener("click", () => {
+          toggleAlb.classList.toggle("active");
+          updateClubVisibility();
+        });
+      }
+
+      if (toggleRoa) {
+        toggleRoa.addEventListener("click", () => {
+          toggleRoa.classList.toggle("active");
+          updateClubVisibility();
+        });
+      }
 
       function updateSlider() {
         const offset = -100 * currentMonthIndex;
         slider.style.transform = `translateX(${offset}vw)`;
-        const currentSection = months[currentMonthIndex];
+        const currentSection = sections[currentMonthIndex];
         const monthName = currentSection.querySelector(".month-title").textContent;
         const monthTitle = document.getElementById("month-title");
         if (monthTitle) monthTitle.textContent = monthName;
@@ -213,27 +248,33 @@ if (savedGo || savedBack) {
       }
 
       function updateClubVisibility() {
-        document.querySelectorAll(".card.niigata").forEach(card => {
-          card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
-        });
-
-        document.querySelectorAll(".card.kumamoto").forEach(card => {
-          card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
-        });
+        if (toggleAlb) {
+          document.querySelectorAll(".card.niigata").forEach(card => {
+            card.style.display = toggleAlb.classList.contains("active") ? "block" : "none";
+          });
+        }
+        if (toggleRoa) {
+          document.querySelectorAll(".card.kumamoto").forEach(card => {
+            card.style.display = toggleRoa.classList.contains("active") ? "block" : "none";
+          });
+        }
       }
     });
-// ハンバーガーメニューの動作（新規追加）
-const hamburgerBtn = document.getElementById('hamburger-btn');
-const sideMenu = document.getElementById('side-menu');
 
-hamburgerBtn.addEventListener('click', () => {
-  sideMenu.classList.toggle('active');
-});
+  // ハンバーガーメニューの動作
+  const hamburgerBtn = document.getElementById("hamburger-btn");
+  const sideMenu = document.getElementById("side-menu");
 
-// メニュー外クリックで閉じる処理
-document.addEventListener('click', (event) => {
-  if (!sideMenu.contains(event.target) && !hamburgerBtn.contains(event.target)) {
-    sideMenu.classList.remove('active');
+  if (hamburgerBtn && sideMenu) {
+    hamburgerBtn.addEventListener("click", () => {
+      sideMenu.classList.toggle("active");
+    });
+
+    // メニュー外クリックで閉じる処理
+    document.addEventListener("click", (event) => {
+      if (!sideMenu.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+        sideMenu.classList.remove("active");
+      }
+    });
   }
-});
 });
