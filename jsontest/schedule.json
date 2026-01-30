@@ -942,7 +942,7 @@
     "time": "14:00",
     "opponent": "レイラック滋賀FC",
     "venue": "平和堂HATOスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_shiga.png",
+    "emblem": "https://d1o3ac4rhk9lvf.cloudfront.net/emblem/2026/shiga.svg",
     "details": ""
   },
   {
@@ -1129,7 +1129,7 @@
     "time": "14:00",
     "opponent": "レイラック滋賀FC",
     "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_shiga.png",
+    "emblem": "https://d1o3ac4rhk9lvf.cloudfront.net/emblem/2026/shiga.svg",
     "details": ""
   },
   {
@@ -1170,9 +1170,9 @@
     "matchweek": "MW16",
     "date": "2026-05-10",
     "day": "Sun",
-    "time": "00:00",
+    "time": "13:30",
     "opponent": "ツエーゲン金沢",
-    "venue": "未定",
+    "venue": "金沢ゴーゴーカレースタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
     "details": ""
   },
@@ -1273,6 +1273,18 @@
     "opponent": "プレーオフ",
     "venue": "未定",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
+    "details": ""
+  }
+  ,
+  {
+    "club": "niigata",
+    "matchweek": "EX",
+    "date": "2026-06-13",
+    "day": "Sat",
+    "time": "00:00",
+    "opponent": "オールスター",
+    "venue": "MUFGスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
     "details": ""
   }
 ]
