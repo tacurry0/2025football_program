@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+  <title>Match Day - Ultra v2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260406-v2">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" href="https://jleague.r10s.jp/img/common/img_club_niigata.png">
+</head>
+<body>
+
+  <div id="bg-canvas"></div>
+
+  <!-- 💎 Fixed App Header -->
+  <header id="ultra-header">
+    <div class="header-content">
+      <div id="active-month-title">...月</div>
+      <div id="club-selection">
+        <img src="https://jleague.r10s.jp/img/common/img_club_niigata.png" id="toggle-niigata" class="club-pip active" alt="新潟">
+        <img src="https://jleague.r10s.jp/img/common/img_club_kumamoto.png" id="toggle-kumamoto" class="club-pip active" alt="熊本">
+      </div>
+      <div id="hamburger-btn">●●●</div>
+    </div>
+    
+    <div id="search-section">
+      <div id="search-wrap">
+        <input type="text" id="search-input" placeholder="検索..." autocomplete="off">
+      </div>
+      <div id="search-popup" class="search-popup"></div>
+    </div>
+  </header>
+
+  <!-- 🍔 App Dashboard Menu -->
+  <nav id="side-menu">
+    <div class="menu-inner">
+      <h2 class="menu-title">MENU</h2>
+      <div class="menu-grid">
+        <button class="menu-card" id="menu-feed" data-mode="feed">
+          <span class="m-icon">📋</span>
+          <span class="m-label">日程一覧</span>
+        </button>
+        <button class="menu-card" id="menu-calendar" data-mode="calendar">
+          <span class="m-icon">📅</span>
+          <span class="m-label">カレンダー</span>
+        </button>
+        <button class="menu-card" id="menu-chants">
+          <span class="m-icon">📢</span>
+          <span class="m-label">チャント集</span>
+        </button>
+        <button class="menu-card" id="menu-standings">
+          <span class="m-icon">🏆</span>
+          <span class="m-label">順位表</span>
+        </button>
+        <button class="menu-card" id="menu-links">
+          <span class="m-icon">🔗</span>
+          <span class="m-label">リンク集</span>
+        </button>
+        <button class="menu-card" id="menu-data">
+          <span class="m-icon">💾</span>
+          <span class="m-label">データ管理</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🔗 Links Overlay (Hidden by Default) -->
+  <div id="links-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>リンク集 / LINKS</h3>
+      <button class="close-pane">✕</button>
+    </div>
+    <ul>
+      <li><a href="https://www.albirex.co.jp" target="_blank">ALBIREX HP</a></li>
+      <li><a href="https://roasso-k.com/" target="_blank">ROASSO HP</a></li>
+      <li><a href="https://www.albirex.co.jp/ticket/ngate/form/" target="_blank">Nゲート抽選</a></li>
+      <li><a href="https://z.albirex.co.jp" target="_blank">モバアルZ</a></li>
+      <li><a href="https://x.com/albirex_pr" target="_blank">ALBIREX X</a></li>
+      <li><a href="https://x.com/roassoofficial" target="_blank">ROASSO X</a></li>
+      <li><a href="https://www.jleague-ticket.jp/" target="_blank">J LEAGUE TICKETS</a></li>
+    </ul>
+  </div>
+
+  <!-- 📢 Chants Overlay (Stub) -->
+  <div id="chants-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>チャント集 / CHANTS</h3>
+      <button class="close-pane">✕</button>
+    </div>
+    <div class="pane-content">現在準備中です</div>
+  </div>
+
+  <!-- 🏆 Standings Overlay (Stub) -->
+  <div id="standings-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>順位表 / STANDINGS</h3>
+      <button class="close-pane">✕</button>
+    </div>
+    <div class="pane-content">現在準備中です</div>
+  </div>
+
+  <!-- 💾 Data Backup Overlay -->
+  <div id="data-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>データ管理 / DATA BACKUP</h3>
+      <button class="close-pane">✕</button>
+    </div>
+    <div class="pane-content u-backup-area">
+      <p class="u-backup-desc">観戦予定、メモ、結果のデータをJSONファイルとして保存したり、読み込んだりできます。</p>
+      
+      <div class="u-backup-group">
+        <label>エクスポート</label>
+        <button id="export-btn" class="u-backup-btn export">データをファイルに保存</button>
+      </div>
+
+      <div class="u-backup-group">
+        <label>インポート</label>
+        <button id="import-trigger" class="u-backup-btn import">ファイルから読み込み</button>
+        <input type="file" id="import-file" style="display:none" accept=".json">
+      </div>
+
+      <div class="u-backup-warning">※インポートすると現在のデータは書き換えられます。完了後にアプリが自動的に再読み込みされます。</div>
+    </div>
+  </div>
+
+  <!-- 🏛️ Main View Switcher -->
+  <div id="view-layer">
+    <!-- View 1: Feed (Timeline) -->
+    <main id="ultra-feed" class="active-view">
+      <div id="feed-slider"></div>
+    </main>
+
+    <!-- View 2: Calendar Mode -->
+    <main id="calendar-view" class="hidden-view">
+      <div id="calendar-body">
+        <!-- Injected via JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- 📱 Navigation Pill -->
+  <footer id="ultra-nav">
+    <div class="nav-pill">
+      <button id="prev-month" class="nav-icon">←</button>
+      <div id="nav-year-tabs">
+        <button id="toggle-year-2025" class="year-tab">2025</button>
+        <button id="toggle-year-2026" class="year-tab">2026</button>
+        <button id="toggle-year-all" class="year-tab">ALL</button>
+      </div>
+      <button id="next-month" class="nav-icon">→</button>
+    </div>
+    <button id="go-today" class="today-bubble">LIVE</button>
+  </footer>
+
+  <div id="detail-sheet-backdrop"></div>
+  <div id="detail-sheet">
+    <div class="sheet-handle"></div>
+    <div id="sheet-content"></div>
+  </div>
+
+  <!-- 🎯 Calendar Match Picker Overlay -->
+  <div id="match-picker-backdrop" class="sub-pane-backdrop"></div>
+  <div id="match-picker-overlay" class="sub-pane-pop">
+    <div class="pop-header">
+      <h4>試合を選択</h4>
+      <button class="close-pop">✕</button>
+    </div>
+    <div id="picker-list"></div>
+  </div>
+
+<script src="schedule.js?v=20260406-v2"></script>
+<script src="script.js?v=20260406-v2"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+/* 🏁 MATCH DAY - ULTRA V2: CALENDAR & DASHBOARD 🏁 */
+
+:root {
+  --albirex-orange: #ff6600;
+  --albirex-orange-rgb: 255, 102, 0;
+  --roasso-red: #cc0000;
+  --roasso-red-rgb: 204, 0, 0;
+  --ultra-bg: #f5f5f7;
+  --ultra-glass: rgba(255, 255, 255, 0.9);
+  --ultra-border: rgba(0, 0, 0, 0.06);
+  --text-main: #1d1d1f;
+  --text-grey: #86868b;
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --font-main: 'Outfit', 'Noto Sans JP', sans-serif;
+  --font-kick: 'JLeagueKick', 'Poppins', sans-serif;
+}
+
+@font-face {
+  font-family: 'JLeagueKick';
+  src: url('./fonts/jleaguekick-bold.woff2') format('woff2');
+  font-weight: bold; font-style: normal;
+}
+
+/* 🌀 Global Shell */
+html, body {
+  margin: 0; padding: 0; width: 100%; height: 100%;
+  font-family: var(--font-main); background-color: var(--ultra-bg);
+  color: var(--text-main); overflow: hidden; -webkit-tap-highlight-color: transparent;
+}
+
+#bg-canvas {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+  background: 
+    radial-gradient(at 0% 0%, rgba(var(--albirex-orange-rgb), 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(var(--roasso-red-rgb), 0.05) 0px, transparent 50%);
+}
+
+/* 💎 Header */
+#ultra-header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+  border-bottom: 1px solid var(--ultra-border); padding-top: env(safe-area-inset-top);
+}
+.header-content { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 1rem 1.2rem 0.6rem; }
+#active-month-title { font-family: var(--font-kick); font-size: 1.4rem; letter-spacing: 0.05em; color: var(--text-main); }
+#club-selection { display: flex; gap: 15px; }
+.club-pip { height: 30px; filter: grayscale(1) opacity(0.3); transition: 0.4s var(--ease-expo); cursor: pointer; }
+.club-pip.active { filter: grayscale(0) opacity(1); transform: scale(1.1); }
+#hamburger-btn { font-size: 0.8rem; cursor: pointer; color: var(--text-grey); font-weight: 800; letter-spacing: 1px; }
+
+/* 🔍 Search */
+#search-section { max-width: 600px; margin: 0 auto; padding: 0 1.2rem 0.8rem; }
+#search-input {
+  width: 100%; padding: 10px 16px; border-radius: 12px; border: 1px solid transparent;
+  background: rgba(0,0,0,0.05); font-family: inherit; font-size: 0.9rem; outline: none;
+}
+
+/* 🍔 App Dashboard Menu (Radical Refinement) */
+#side-menu {
+  position: fixed; top: 0; right: -100%; width: 90%; max-width: 400px; height: 100vh;
+  background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+  z-index: 3000; transition: right 0.5s var(--ease-expo);
+  box-shadow: -20px 0 50px rgba(0,0,0,0.1); padding-top: 100px;
+}
+#side-menu.active { right: 0; }
+.menu-inner { padding: 0 30px; }
+.menu-title { font-family: var(--font-kick); font-size: 1rem; color: var(--text-grey); margin-bottom: 30px; letter-spacing: 0.2em; }
+
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.menu-card {
+  aspect-ratio: 1/1; background: white; border: 1px solid var(--ultra-border); border-radius: 24px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  cursor: pointer; transition: all 0.3s var(--ease-expo);
+}
+.menu-card:active { transform: scale(0.95); background: #f2f2f7; }
+.menu-card .m-icon { font-size: 1.8rem; }
+.menu-card .m-label { font-size: 0.85rem; font-weight: 800; color: var(--text-main); }
+
+/* 🔗 Sub-Panes (Links, Chants, Standings) */
+.sub-pane {
+  position: fixed; top: 0; left: 100%; width: 100%; height: 100%;
+  background: white; z-index: 3100; transition: left 0.5s var(--ease-expo);
+  box-sizing: border-box; display: flex; flex-direction: column;
+}
+.sub-pane.active { left: 0; }
+.pane-header { padding: 60px 20px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f2f2f7; }
+.pane-header h3 { font-family: var(--font-kick); font-size: 1.2rem; margin: 0; }
+.close-pane { background: #f2f2f7; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; cursor: pointer; }
+
+.sub-pane ul { list-style: none; padding: 20px; }
+.sub-pane li { border-bottom: 1px solid #f2f2f7; }
+.sub-pane a { display: block; padding: 20px; text-decoration: none; color: var(--text-main); font-weight: 800; font-size: 1.1rem; }
+.pane-content { padding: 40px; text-align: center; color: var(--text-grey); font-family: var(--font-kick); }
+
+/* 💾 Data Backup Pane Styles */
+.u-backup-area { text-align: left; padding: 20px 30px; font-family: var(--font-main); }
+.u-backup-desc { font-size: 0.9rem; line-height: 1.6; color: var(--text-grey); margin-bottom: 30px; }
+.u-backup-group { margin-bottom: 25px; }
+.u-backup-group label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--text-grey); margin-bottom: 10px; letter-spacing: 0.05em; }
+.u-backup-btn {
+  width: 100%; padding: 18px; border-radius: 16px; border: none;
+  font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.3s;
+}
+.u-backup-btn.export { background: var(--text-main); color: white; }
+.u-backup-btn.import { background: #f2f2f7; color: var(--text-main); }
+.u-backup-btn:active { transform: scale(0.98); opacity: 0.8; }
+.u-backup-warning { margin-top: 30px; padding: 15px; background: #fff5f5; color: #cc0000; font-size: 0.8rem; border-radius: 12px; line-height: 1.5; font-weight: 600; }
+
+/* 🏛️ View Switcher (Feed/Calendar) */
+#view-layer { width: 100%; height: 100%; }
+.hidden-view { display: none !important; }
+.active-view { display: flex !important; }
+
+/* 🏟️ Feed Slider Styles (Same as Ultra Pro) */
+#ultra-feed { height: 100%; width: 100%; scroll-snap-type: x mandatory; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+#feed-slider { display: flex; height: 100%; }
+.month-section {
+  min-width: 100vw; height: 100%; padding: 160px 20px 110px; box-sizing: border-box; 
+  overflow-y: auto; display: flex; flex-direction: column; gap: 12px; align-items: center;
+  scroll-snap-align: start; flex-shrink: 0;
+}
+
+/* 🃏 Card Pro Styles (Same as Ultra Pro Refined) */
+.card { width: 100%; max-width: 580px; border-radius: 22px; padding: 18px 22px; box-sizing: border-box; border: 2.5px solid transparent; background: white; transition: 0.3s; position: relative; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+.card.club-niigata.type-home { background: rgba(var(--albirex-orange-rgb), 0.04); border-color: var(--albirex-orange); }
+.card.club-niigata.type-away { background: white; border-color: var(--albirex-orange); }
+.card.club-kumamoto.type-home { background: rgba(var(--roasso-red-rgb), 0.04); border-color: var(--roasso-red); }
+.card.club-kumamoto.type-away { background: white; border-color: var(--roasso-red); }
+
+.opponent-name { font-family: var(--font-kick); font-size: 1.8rem; line-height: 1; margin: 0; }
+.emblem { height: 50px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1)); }
+
+/* Card Components (Restored) */
+.match-meta { display: flex; justify-content: flex-start; align-items: center; gap: 8px; }
+.match-mw-pill, .match-ha-pill {
+  font-family: var(--font-kick); font-size: 0.85rem; padding: 2px 8px; border-radius: 6px;
+}
+.match-mw-pill { background: rgba(0,0,0,0.05); color: var(--text-grey); }
+.match-ha-pill { font-weight: 900; }
+.type-home .match-ha-pill { color: var(--text-main); }
+.type-away .match-ha-pill { color: var(--text-grey); }
+
+.match-date-venue { font-size: 0.7rem; font-weight: 700; color: var(--text-grey); letter-spacing: 0.02em; }
+.match-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
+
+/* Result Badge (Restored) */
+.result-badge {
+  position: absolute; top: 18px; right: 22px; font-family: var(--font-kick); font-size: 0.75rem; 
+  font-weight: 900; padding: 3px 8px; border-radius: 6px; color: white; display: none;
+}
+.result-badge:not(:empty) { display: block; }
+.badge-win { background: #34c759; }
+.badge-lose { background: #ff3b30; }
+.badge-draw { background: #8e8e93; }
+.badge-pk-win { background: #ffcc00; color: #000; }
+.badge-pk-lose { background: #5856d6; }
+
+/* Detail Sheet Utils (Restored) */
+.sheet-handle { width: 36px; height: 4px; background: #e3e3e8; border-radius: 5px; margin: 0 auto 20px; }
+.sheet-header { margin-bottom: 25px; }
+.sheet-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.sheet-club-row { display: flex; align-items: center; gap: 8px; }
+.sheet-club { font-family: var(--font-kick); font-size: 1rem; color: var(--text-grey); font-weight: 900; letter-spacing: 0.05em; }
+.sheet-ha { font-family: var(--font-kick); font-size: 0.75rem; padding: 4px 10px; border-radius: 10px; }
+.sheet-opp-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin: 10px 0; }
+.sheet-opp { font-family: var(--font-kick); font-size: 2.2rem; margin: 0; line-height: 1.1; flex: 1; }
+.sheet-opp-emblem { height: 45px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1)); }
+.sheet-venue-info { color: var(--text-grey); font-weight: 700; font-size: 0.85rem; }
+.sheet-score-area { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 35px; }
+.u-score-input { width: 90px; height: 100px; background: #f2f2f7; border: none; border-radius: 20px; font-family: var(--font-kick); font-size: 4rem; text-align: center; color: var(--text-main); }
+.u-score-sep { font-family: var(--font-kick); font-size: 2rem; color: #d1d1d6; }
+.u-pk-area { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 35px; background: #fffdf5; padding: 12px; border-radius: 16px; }
+.u-note-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 35px; }
+.u-note-box label { font-size: 0.8rem; font-weight: 800; color: var(--text-grey); display: block; margin-bottom: 6px; }
+.u-textarea { width: 100%; height: 160px; background: #f2f2f7; border: none; border-radius: 18px; padding: 15px; box-sizing: border-box; font-family: inherit; font-size: 1rem; resize: none; color: var(--text-main); }
+
+.u-attend-btn {
+  width: 100%; padding: 18px; border-radius: 20px; border: 2px solid #e3e3e8;
+  background: white; font-family: var(--font-kick); font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 25px; transition: 0.3s; cursor: pointer;
+}
+.u-attend-btn.active { border-color: var(--albirex-orange); background: rgba(var(--albirex-orange-rgb), 0.05); color: var(--albirex-orange); }
+.u-attend-btn.active.kumamoto { border-color: var(--roasso-red); background: rgba(var(--roasso-red-rgb), 0.05); color: var(--roasso-red); }
+
+.close-sheet-btn { width: 100%; background: var(--text-main); color: white; border: none; padding: 20px; border-radius: 22px; font-weight: 900; font-family: var(--font-kick); font-size: 1.2rem; margin-bottom: 20px; transition: 0.3s; }
+.close-sheet-btn:active { opacity: 0.8; transform: scale(0.98); }
+
+
+/* 📅 Calendar View (Grid Logic) */
+#calendar-view {
+  width: 100%; height: 100%; padding: 160px 20px 110px; box-sizing: border-box;
+  overflow-y: auto; flex-direction: column; align-items: center;
+}
+
+#calendar-body { width: 100%; max-width: 600px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+
+.cal-day-label {
+  text-align: center; font-family: var(--font-kick); font-size: 0.75rem; color: var(--text-grey); padding-bottom: 10px;
+}
+
+.cal-cell {
+  aspect-ratio: 1/1.2; background: white; border-radius: 14px; padding: 6px; box-sizing: border-box;
+  border: 1px solid var(--ultra-border); position: relative; cursor: pointer; transition: 0.2s;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.cal-cell:active { transform: scale(0.95); background: #f2f2f7; }
+.cal-cell.empty { background: transparent; border: none; pointer-events: none; }
+.cal-cell.today { border: 2px solid var(--albirex-orange); }
+.cal-cell.attending-niigata { background: rgba(var(--albirex-orange-rgb), 0.08); }
+.cal-cell.attending-kumamoto { background: rgba(var(--roasso-red-rgb), 0.08); }
+
+.cal-date-num { font-family: var(--font-kick); font-size: 1rem; color: var(--text-main); line-height: 1; }
+
+.cal-match-container { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; pointer-events: none; }
+.cal-dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid transparent; pointer-events: auto; cursor: pointer; }
+.cal-dot.niigata.home { background: var(--albirex-orange); border-color: var(--albirex-orange); }
+.cal-dot.niigata.away { background: white; border-color: var(--albirex-orange); }
+.cal-dot.kumamoto.home { background: var(--roasso-red); border-color: var(--roasso-red); }
+.cal-dot.kumamoto.away { background: white; border-color: var(--roasso-red); }
+
+/* 🎯 Match Picker Pop-up */
+.sub-pane-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 3600; opacity: 0; pointer-events: none; transition: 0.4s ease; }
+.sub-pane-backdrop.active { opacity: 1; pointer-events: auto; }
+.sub-pane-pop { position: fixed; bottom: -100%; left: 0; width: 100%; background: white; border-radius: 28px 28px 0 0; z-index: 3700; transition: bottom 0.4s var(--ease-expo); padding: 30px 20px; box-sizing: border-box; }
+.sub-pane-pop.active { bottom: 0; }
+.pop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.pop-header h4 { font-family: var(--font-kick); font-size: 1.2rem; margin: 0; }
+.close-pop { background: #f2f2f7; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+
+.picker-item { display: flex; align-items: center; gap: 15px; padding: 20px; background: white; border: 1px solid var(--ultra-border); border-radius: 18px; margin-bottom: 12px; cursor: pointer; transition: 0.2s; }
+.picker-item:active { background: #f2f2f7; transform: scale(0.98); }
+.picker-club { font-family: var(--font-kick); font-size: 0.9rem; font-weight: 900; }
+.picker-club.niigata { color: var(--albirex-orange); }
+.picker-club.kumamoto { color: var(--roasso-red); }
+.picker-opp { font-family: var(--font-kick); font-size: 1.2rem; }
+
+#detail-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 86vh; background: white; border-radius: 28px 28px 0 0; z-index: 3500; transition: bottom 0.5s var(--ease-expo); padding: 0 20px 20px; box-sizing: border-box; overflow-y: auto; }
+#detail-sheet.active { bottom: 0; }
+#detail-sheet-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 3400; opacity: 0; pointer-events: none; transition: 0.4s ease; }
+#detail-sheet-backdrop.active { opacity: 1; pointer-events: auto; }
+#detail-sheet .sheet-handle { width: 36px; height: 4px; background: #e3e3e8; border-radius: 5px; margin: 15px auto 15px; cursor: pointer; }
+
+/* 📱 Nav Bar (Restored) */
+#ultra-nav { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 1020; padding-bottom: env(safe-area-inset-bottom); }
+.nav-pill { background: rgba(29, 29, 31, 0.95); backdrop-filter: blur(20px); padding: 5px; border-radius: 40px; display: flex; align-items: center; gap: 4px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.nav-icon { background: transparent; border: none; color: white; padding: 8px 12px; font-weight: 900; }
+.year-tab { background: transparent; border: none; color: rgba(255,255,255,0.4); padding: 7px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; font-family: var(--font-kick); }
+.year-tab.active { background: white; color: var(--text-main); }
+.today-bubble { width: 48px; height: 48px; border-radius: 50%; border: none; background: var(--albirex-orange); color: white; font-family: var(--font-kick); font-size: 0.65rem; font-weight: 900; box-shadow: 0 8px 20px rgba(var(--albirex-orange-rgb),0.3); }

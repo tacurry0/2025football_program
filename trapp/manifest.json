@@ -1,0 +1,21 @@
+{
+  "name": "Match Day Ultra",
+  "short_name": "Match Day",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#ff6600",
+  "icons": [
+    {
+      "src": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
