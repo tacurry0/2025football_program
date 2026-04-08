@@ -248,3 +248,31 @@ html, body {
 .year-tab { background: transparent; border: none; color: rgba(255,255,255,0.4); padding: 7px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; font-family: var(--font-kick); }
 .year-tab.active { background: white; color: var(--text-main); }
 .today-bubble { width: 48px; height: 48px; border-radius: 50%; border: none; background: var(--albirex-orange); color: white; font-family: var(--font-kick); font-size: 0.65rem; font-weight: 900; box-shadow: 0 8px 20px rgba(var(--albirex-orange-rgb),0.3); }
+
+/* 📱 Responsive Additions */
+@media (max-width: 600px) {
+  #active-month-title { font-size: 1.1rem; }
+  .header-content { padding: 1rem 1rem 0.6rem; }
+  #club-selection { gap: 8px; }
+  .club-pip { height: 24px; }
+  #hamburger-btn { font-size: 0.7rem; }
+  
+  #calendar-view, .month-section { padding: 140px 12px 110px; }
+  #calendar-body { gap: 4px; }
+  .cal-cell { border-radius: 8px; padding: 4px; }
+  .cal-day-label { font-size: 0.6rem; }
+  .cal-date-num { font-size: 0.8rem; }
+  .cal-dot { width: 8px; height: 8px; }
+  
+  .year-tab { padding: 7px 8px; font-size: 0.7rem; }
+}
+
+/* 🍏 Safe Area Support */
+@supports (padding: env(safe-area-inset-top)) {
+  #ultra-header { padding-top: env(safe-area-inset-top); }
+  #ultra-nav { padding-bottom: env(safe-area-inset-bottom); }
+  .month-section, #calendar-view { 
+    padding-top: calc(140px + env(safe-area-inset-top));
+    padding-bottom: calc(100px + env(safe-area-inset-bottom));
+  }
+}

@@ -37,7 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedYear = null;
   let currentMode = "feed"; // feed or calendar
 
-  // --- Theme Helpers ---
+  // --- Date/Theme Helpers ---
+  function parseDate(s) {
+    const [y, m, d] = s.split("-").map(Number);
+    return new Date(y, m - 1, d || 1);
+  }
+
   function isHomeMatch(club, venue) {
     if (!venue) return false;
     if (club === "niigata") return venue.includes("デンカビッグスワン");
@@ -125,14 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const [year, month] = activeSec.dataset.ym.split("-").map(Number);
     
     calendarBody.innerHTML = "";
-    const days = ["S", "M", "T", "W", "T", "F", "S"];
+    const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     days.forEach(d => {
       const el = document.createElement("div");
       el.className = "cal-day-label"; el.textContent = d;
       calendarBody.appendChild(el);
     });
 
-    const firstDay = new Date(year, month - 1, 1).getDay();
+    const firstDay = parseDate(`${year}-${month}-01`).getDay();
     const daysInMonth = new Date(year, month, 0).getDate();
 
     for (let i = 0; i < firstDay; i++) {
@@ -144,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const kOn = toggleKumamoto.classList.contains("active");
 
     const matchesInMonth = scheduleData.filter(m => {
-      const md = new Date(m.date);
+      const md = parseDate(m.date);
       if (md.getFullYear() !== year || (md.getMonth() + 1) !== month) return false;
       if (m.club === "niigata" && !nOn) return false;
       if (m.club === "kumamoto" && !kOn) return false;
@@ -223,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
     
     let pkHtml = "";
-    if (new Date(match.date).getFullYear() === 2026) {
+    if (parseDate(match.date).getFullYear() === 2026) {
       const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
       const sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
       const isD = (sMy !== "" && sOpp !== "" && sMy === sOpp);
@@ -314,16 +319,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderFeed() {
     feedSlider.innerHTML = "";
-    scheduleData.sort((a,b) => new Date(a.date) - new Date(b.date));
+    scheduleData.sort((a,b) => parseDate(a.date) - parseDate(b.date));
     const ymMap = {};
     scheduleData.forEach(m => {
-      const d = new Date(m.date), key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;
+      const d = parseDate(m.date), key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;
       if(!ymMap[key]) ymMap[key] = []; ymMap[key].push(m);
     });
 
     Object.keys(ymMap).sort().forEach(key => {
       const [year, month] = key.split("-").map(Number);
-      const section = document.createElement("div"); section.className = "month-section"; section.dataset.ym = key; section.dataset.year = year; section.dataset.ym_title = `${year}年${month}月`;
+      const section = document.createElement("div"); section.className = "month-section"; section.dataset.ym = key; section.dataset.year = year; section.dataset.ym_title = `${year} / ${String(month).padStart(2,"0")}`;
 
       ymMap[key].forEach(match => {
         const mId = `${match.date}_${match.club}_${match.opponent}`;
@@ -442,7 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const x = scheduleData.find(m => m.date === date && m.club === club && m.opponent === opponent);
       if(x) { 
         searchPopup.style.display="none"; searchInput.value=""; 
-        const d = new Date(date), ty = d.getFullYear(), tk = `${ty}-${String(d.getMonth()+1).padStart(2,"0")}`;
+        const d = parseDate(date), ty = d.getFullYear(), tk = `${ty}-${String(d.getMonth()+1).padStart(2,"0")}`;
         applyYearFilter(ty, true); const i = visibleSections.findIndex(s => s.dataset.ym === tk);
         if(i !== -1) { scrollToIndex(i); setTimeout(() => openDetailSheet(x), 500); }
       }
