@@ -99,19 +99,27 @@ document.addEventListener("DOMContentLoaded", () => {
   function scrollToIndex(idx) {
     if (!visibleSections[idx]) return;
     currentIndex = idx;
+    if (activeMonthTitle) {
+      activeMonthTitle.textContent = visibleSections[idx].dataset.ym_title || "";
+    }
     if (currentMode === "feed") {
       const offset = visibleSections[idx].offsetLeft;
       ultraFeed.scrollTo({ left: offset, behavior: "smooth" });
+    } else {
+      renderCalendar();
     }
-    updateActiveUI();
   }
 
   function updateActiveUI() {
-    const activeSec = visibleSections[currentIndex];
-    if (activeSec && activeMonthTitle) {
-      activeMonthTitle.textContent = activeSec.dataset.ym_title || "";
+    const scrollLeft = ultraFeed.scrollLeft, width = ultraFeed.clientWidth || window.innerWidth;
+    const newIdx = Math.round(scrollLeft / width);
+    if(newIdx !== currentIndex && visibleSections[newIdx]) { 
+      currentIndex = newIdx; 
+      if (activeMonthTitle) {
+        activeMonthTitle.textContent = visibleSections[newIdx].dataset.ym_title || "";
+      }
+      if (currentMode === "calendar") renderCalendar();
     }
-    if (currentMode === "calendar") renderCalendar();
   }
 
   function updateClubVisibility() {
@@ -193,6 +201,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       calendarBody.appendChild(cell);
     }
+
+    // --- Added Swipe Support for Calendar ---
+    let touchStartX = 0;
+    calendarBody.ontouchstart = (e) => { touchStartX = e.changedTouches[0].screenX; };
+    calendarBody.ontouchend = (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentIndex < visibleSections.length - 1) scrollToIndex(currentIndex + 1);
+        else if (diff < 0 && currentIndex > 0) scrollToIndex(currentIndex - 1);
+      }
+    };
   }
 
   function openMatchPicker(matches) {
@@ -384,6 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Menus
   hamBtn.onclick = () => sideMenu.classList.add("active");
+  document.getElementById("menu-close").onclick = () => sideMenu.classList.remove("active");
   sideMenu.onclick = (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); };
   document.getElementById("menu-feed").onclick = () => switchMode("feed");
   document.getElementById("menu-calendar").onclick = () => switchMode("calendar");
@@ -429,12 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.readAsText(file);
   };
 
-  ultraFeed.addEventListener("scroll", () => {
-    if (currentMode !== "feed") return;
-    const scrollLeft = ultraFeed.scrollLeft, width = window.innerWidth;
-    const newIdx = Math.round(scrollLeft / width);
-    if(newIdx !== currentIndex && visibleSections[newIdx]) { currentIndex = newIdx; updateActiveUI(); }
-  });
+  ultraFeed.addEventListener("scroll", updateActiveUI);
 
   // Search Logic
   searchInput.oninput = (e) => {
