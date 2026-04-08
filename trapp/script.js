@@ -356,7 +356,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const today = new Date(), todayY = today.getFullYear(), tKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}`;
   applyYearFilter(allSections.some(s => Number(s.dataset.year) === todayY) ? todayY : 2025, true);
   const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
-  scrollToIndex(tIdx !== -1 ? tIdx : 0);
+  
+  // Use requestAnimationFrame and small timeout to ensure layout is ready for iPhone
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      scrollToIndex(tIdx !== -1 ? tIdx : 0);
+    }, 100);
+  });
 
   // Navigation
   prevBtn.onclick = () => { if(currentIndex > 0) scrollToIndex(currentIndex-1); };

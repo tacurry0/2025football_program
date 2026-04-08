@@ -117,8 +117,10 @@ html, body {
 .month-section {
   min-width: 100vw; height: 100%; padding: 160px 20px 110px; box-sizing: border-box; 
   overflow-y: auto; display: flex; flex-direction: column; gap: 12px; align-items: center;
-  scroll-snap-align: start; flex-shrink: 0;
+  scroll-snap-align: start; scroll-snap-stop: always; flex-shrink: 0;
+  -ms-overflow-style: none; scrollbar-width: none; /* Hide scrollbars */
 }
+.month-section::-webkit-scrollbar { display: none; }
 
 /* 🃏 Card Pro Styles (Same as Ultra Pro Refined) */
 .card { width: 100%; max-width: 580px; border-radius: 22px; padding: 18px 22px; box-sizing: border-box; border: 2.5px solid transparent; background: white; transition: 0.3s; position: relative; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
@@ -196,7 +198,8 @@ html, body {
 #calendar-body { width: 100%; max-width: 600px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
 
 .cal-day-label {
-  text-align: center; font-family: var(--font-kick); font-size: 0.75rem; color: var(--text-grey); padding-bottom: 10px;
+  text-align: center; font-family: var(--font-kick); font-size: 1.5rem; color: var(--text-grey); padding-bottom: 12px;
+  font-weight: 800;
 }
 
 .cal-cell {
@@ -210,10 +213,10 @@ html, body {
 .cal-cell.attending-niigata { background: rgba(var(--albirex-orange-rgb), 0.08); }
 .cal-cell.attending-kumamoto { background: rgba(var(--roasso-red-rgb), 0.08); }
 
-.cal-date-num { font-family: var(--font-kick); font-size: 1rem; color: var(--text-main); line-height: 1; }
+.cal-date-num { font-family: var(--font-kick); font-size: 2rem; color: var(--text-main); line-height: 1; font-weight: 900; }
 
 .cal-match-container { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; pointer-events: none; }
-.cal-dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid transparent; pointer-events: auto; cursor: pointer; }
+.cal-dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid transparent; pointer-events: auto; cursor: pointer; }
 .cal-dot.niigata.home { background: var(--albirex-orange); border-color: var(--albirex-orange); }
 .cal-dot.niigata.away { background: white; border-color: var(--albirex-orange); }
 .cal-dot.kumamoto.home { background: var(--roasso-red); border-color: var(--roasso-red); }
@@ -257,12 +260,12 @@ html, body {
   .club-pip { height: 24px; }
   #hamburger-btn { font-size: 0.7rem; }
   
-  #calendar-view, .month-section { padding: 140px 12px 110px; }
-  #calendar-body { gap: 4px; }
-  .cal-cell { border-radius: 8px; padding: 4px; }
-  .cal-day-label { font-size: 0.6rem; }
-  .cal-date-num { font-size: 0.8rem; }
-  .cal-dot { width: 8px; height: 8px; }
+  #calendar-view, .month-section { padding: 140px 8px 110px; }
+  #calendar-body { gap: 2px; }
+  .cal-cell { border-radius: 8px; padding: 2px; border-width: 0.5px; }
+  .cal-day-label { font-size: 1.1rem; padding-bottom: 6px; }
+  .cal-date-num { font-size: 1.6rem; }
+  .cal-dot { width: 14px; height: 14px; }
   
   .year-tab { padding: 7px 8px; font-size: 0.7rem; }
 }
