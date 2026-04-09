@@ -42,7 +42,7 @@ html, body {
   border-bottom: 1px solid var(--ultra-border); padding-top: env(safe-area-inset-top);
 }
 .header-content { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 1.4rem 1.4rem 1rem; }
-#active-month-title { font-family: var(--font-kick); font-size: 2rem; letter-spacing: 0.05em; color: var(--text-main); cursor: pointer; user-select: none; }
+#active-month-title { font-family: var(--font-kick); font-size: 1.4rem; letter-spacing: 0.05em; color: var(--text-main); cursor: pointer; user-select: none; }
 #active-month-title:active { opacity: 0.6; }
 
 /* 📅 Year/Month Picker Popup */
@@ -170,6 +170,7 @@ html, body {
 }
 .match-mw-pill { background: rgba(0,0,0,0.05); color: var(--text-grey); }
 .match-ha-pill { font-weight: 900; border: 1.5px solid transparent; }
+.match-att-emoji { font-size: 1.1rem; }
 .club-niigata.type-home .match-ha-pill { background: var(--albirex-orange); border-color: var(--albirex-orange); color: white; }
 .club-niigata.type-away .match-ha-pill { background: white; border-color: transparent; color: var(--albirex-orange); }
 .club-kumamoto.type-home .match-ha-pill { background: var(--roasso-red); border-color: var(--roasso-red); color: white; }

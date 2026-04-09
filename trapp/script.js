@@ -374,9 +374,18 @@ document.addEventListener("DOMContentLoaded", () => {
         badge.textContent = res ? res.replace("-"," ").toUpperCase() : "";
         
         // Update Attendance Emoji in Feed
-        const haPill = card.querySelector(".match-ha-pill");
-        const ha = isHomeMatch(match.club, match.venue) ? "HOME" : "AWAY";
-        haPill.textContent = isAtt ? `${ha} 🏟️` : ha;
+        const metaDiv = card.querySelector(".match-meta");
+        let attEl = metaDiv.querySelector(".match-att-emoji");
+        if (isAtt) {
+          if (!attEl) {
+            attEl = document.createElement("span");
+            attEl.className = "match-att-emoji";
+            attEl.textContent = "🏟️";
+            metaDiv.appendChild(attEl);
+          }
+        } else {
+          if (attEl) attEl.remove();
+        }
       }
     };
     sheetContent.querySelectorAll("input, textarea").forEach(inp => inp.oninput = saveAndRefresh);
@@ -410,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isHome = isHomeMatch(match.club, match.venue);
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
-        card.innerHTML = `<div class="result-badge ${res ? 'badge-'+res : ''}">${res ? res.replace("-"," ").toUpperCase() : ""}</div><div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${isAtt ? ha + " 🏟️" : ha}</span></div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
+        card.innerHTML = `<div class="result-badge ${res ? 'badge-'+res : ''}">${res ? res.replace("-"," ").toUpperCase() : ""}</div><div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji">🏟️</span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
         card.onclick = () => openDetailSheet(match);
         section.appendChild(card);
       });
