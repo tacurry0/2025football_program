@@ -31,6 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search-input");
   const searchPopup = document.getElementById("search-popup");
 
+  const ymPickerOverlay = document.getElementById("ym-picker-overlay");
+  const ymPickerBackdrop = document.getElementById("ym-picker-backdrop");
+  const ymPickerList = document.getElementById("ym-picker-list");
+
   let currentIndex = 0;
   let allSections = [];
   let visibleSections = [];
@@ -442,6 +446,48 @@ document.addEventListener("DOMContentLoaded", () => {
   yearTabs["2025"].onclick = () => applyYearFilter(2025);
   yearTabs["2026"].onclick = () => applyYearFilter(2026);
   yearTabs["all"].onclick = () => applyYearFilter(null);
+
+  // YM Picker
+  function openYmPicker() {
+    if(!activeMonthTitle.textContent.includes("/")) return; // Not fully initialized
+    ymPickerList.innerHTML = "";
+    const yearMap = {};
+    allSections.forEach(sec => {
+      const y = sec.dataset.year;
+      if (!yearMap[y]) yearMap[y] = [];
+      yearMap[y].push({ ym: sec.dataset.ym, m: sec.dataset.ym.split("-")[1] });
+    });
+
+    Object.keys(yearMap).sort().forEach(y => {
+      const g = document.createElement("div"); g.className = "ym-picker-group";
+      g.innerHTML = `<div class="ym-picker-year-label">${y}年</div><div class="ym-picker-months"></div>`;
+      const grid = g.querySelector(".ym-picker-months");
+      yearMap[y].forEach(item => {
+        const btn = document.createElement("button"); btn.className = "ym-picker-btn";
+        btn.textContent = Number(item.m) + "月";
+        if (visibleSections[currentIndex] && visibleSections[currentIndex].dataset.ym === item.ym) {
+           btn.classList.add("current");
+        }
+        btn.onclick = () => {
+          closeYmPicker();
+          applyYearFilter(selectedYear === null ? null : Number(y));
+          const idx = visibleSections.findIndex(s => s.dataset.ym === item.ym);
+          if (idx !== -1) scrollToIndex(idx);
+        };
+        grid.appendChild(btn);
+      });
+      ymPickerList.appendChild(g);
+    });
+    ymPickerOverlay.classList.add("active");
+    ymPickerBackdrop.classList.add("active");
+  }
+  function closeYmPicker() {
+    ymPickerOverlay.classList.remove("active");
+    ymPickerBackdrop.classList.remove("active");
+  }
+  activeMonthTitle.onclick = openYmPicker;
+  document.getElementById("ym-picker-close").onclick = closeYmPicker;
+  ymPickerBackdrop.onclick = closeYmPicker;
 
   // Club Filter
   toggleNiigata.onclick = () => { toggleNiigata.classList.toggle("active"); updateClubVisibility(); };

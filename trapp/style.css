@@ -42,7 +42,31 @@ html, body {
   border-bottom: 1px solid var(--ultra-border); padding-top: env(safe-area-inset-top);
 }
 .header-content { display: flex; justify-content: space-between; align-items: center; max-width: 800px; margin: 0 auto; padding: 1.4rem 1.4rem 1rem; }
-#active-month-title { font-family: var(--font-kick); font-size: 1.4rem; letter-spacing: 0.05em; color: var(--text-main); }
+#active-month-title { font-family: var(--font-kick); font-size: 1.4rem; letter-spacing: 0.05em; color: var(--text-main); cursor: pointer; user-select: none; }
+#active-month-title:active { opacity: 0.6; }
+
+/* 📅 Year/Month Picker Popup */
+.ym-picker-pop {
+  position: fixed; bottom: -100%; left: 0; width: 100%; background: white;
+  border-radius: 28px 28px 0 0; z-index: 3700; transition: bottom 0.4s var(--ease-expo);
+  padding: 20px 20px 40px; box-sizing: border-box; max-height: 70vh; overflow-y: auto;
+}
+.ym-picker-pop.active { bottom: 0; }
+.ym-picker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.ym-picker-header h4 { font-family: var(--font-kick); font-size: 1.2rem; margin: 0; }
+#ym-picker-close { background: #f2f2f7; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; cursor: pointer; }
+.ym-picker-group { margin-bottom: 20px; }
+.ym-picker-year-label { font-family: var(--font-kick); font-size: 0.85rem; font-weight: 900; color: var(--text-grey); letter-spacing: 0.1em; margin-bottom: 10px; }
+.ym-picker-months { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.ym-picker-btn {
+  padding: 12px 6px; border-radius: 14px; border: 1.5px solid var(--ultra-border);
+  background: white; font-family: var(--font-kick); font-size: 1rem; font-weight: 800;
+  cursor: pointer; transition: 0.2s; color: var(--text-main); text-align: center;
+}
+.ym-picker-btn:active { transform: scale(0.95); }
+.ym-picker-btn.current { border-color: var(--albirex-orange); background: rgba(var(--albirex-orange-rgb),0.06); color: var(--albirex-orange); }
+.ym-picker-btn.disabled { opacity: 0.25; pointer-events: none; }
+
 #club-selection { display: flex; gap: 15px; }
 .club-pip { height: 30px; filter: grayscale(1) opacity(0.3); transition: 0.4s var(--ease-expo); cursor: pointer; }
 .club-pip.active { filter: grayscale(0) opacity(1); transform: scale(1.1); }
@@ -265,7 +289,7 @@ html, body {
 .picker-club.kumamoto { color: var(--roasso-red); }
 .picker-opp { font-family: var(--font-kick); font-size: 1.2rem; }
 
-#detail-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 86vh; background: white; border-radius: 28px 28px 0 0; z-index: 3500; transition: bottom 0.5s var(--ease-expo); padding: 0 20px 20px; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; touch-action: pan-y; }
+#detail-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; max-width: 100vw; height: 86vh; background: white; border-radius: 28px 28px 0 0; z-index: 3500; transition: bottom 0.5s var(--ease-expo); padding: 0 16px 20px; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; touch-action: pan-y; }
 #detail-sheet.active { bottom: 0; }
 #detail-sheet-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 3400; opacity: 0; pointer-events: none; transition: 0.4s ease; }
 #detail-sheet-backdrop.active { opacity: 1; pointer-events: auto; }
@@ -273,7 +297,7 @@ html, body {
 
 /* 📱 Nav Bar (Restored) */
 #ultra-nav { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 1020; padding-bottom: env(safe-area-inset-bottom); }
-.nav-pill { background: rgba(29, 29, 31, 0.95); backdrop-filter: blur(20px); padding: 5px; border-radius: 40px; display: flex; align-items: center; gap: 4px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.nav-pill { background: rgba(29, 29, 31, 0.95); backdrop-filter: blur(20px); padding: 5px; border-radius: 40px; display: flex; align-items: center; gap: 2px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); flex-wrap: nowrap; }
 .nav-icon { background: transparent; border: none; color: white; padding: 8px 12px; font-weight: 900; }
 .year-tab { background: transparent; border: none; color: rgba(255,255,255,0.4); padding: 7px 12px; border-radius: 20px; font-size: 2rem; font-weight: 800; font-family: var(--font-kick); }
 .year-tab.active { background: white; color: var(--text-main); }
@@ -294,7 +318,12 @@ html, body {
   .cal-date-num { font-size: 1.6rem; }
   .cal-dot { width: 14px; height: 14px; }
   
-  .year-tab { padding: 7px 8px; font-size: 0.7rem; }
+  .sheet-opp { font-size: 1.6rem; }
+  .u-score-input { width: 70px; height: 80px; font-size: 3.2rem; }
+  .u-score-sep { font-size: 1.6rem; }
+  .u-attend-btn { padding: 14px; font-size: 1rem; }
+  
+  .year-tab { padding: 5px 8px; font-size: 1.8rem; }
 }
 
 /* 🍏 Safe Area Support */
