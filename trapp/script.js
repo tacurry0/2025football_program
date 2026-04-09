@@ -279,13 +279,58 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="btn-text">観戦予定</span>
       </div>
       <div class="u-note-single">
-        <div class="u-note-box"><label>メモ</label><textarea class="u-textarea memo-field">${sMemo}</textarea></div>
+        <div class="u-note-box">
+          <div class="u-note-header">
+            <label>メモ</label>
+            <button class="u-note-edit-btn" id="memo-edit-btn">編集</button>
+          </div>
+          <div class="u-memo-display" id="memo-display"></div>
+          <textarea class="u-textarea memo-field hidden">${sMemo}</textarea>
+        </div>
       </div>
       <button class="close-sheet-btn">保存して閉じる</button>
     `;
 
+    // Helper: convert URLs to clickable links
+    function linkifyMemo(text) {
+      if (!text) return '';
+      const escaped = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      return escaped.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+    }
+
+    const memoDisplay = sheetContent.querySelector('#memo-display');
+    const memoField = sheetContent.querySelector('.memo-field');
+    const memoEditBtn = sheetContent.querySelector('#memo-edit-btn');
+
+    // Initial display
+    memoDisplay.innerHTML = linkifyMemo(sMemo);
+
+    memoEditBtn.onclick = () => {
+      const isEditing = memoDisplay.classList.contains('hidden');
+      if (isEditing) {
+        // Switch back to display mode
+        const newText = memoField.value;
+        memoDisplay.innerHTML = linkifyMemo(newText);
+        memoDisplay.classList.remove('hidden');
+        memoField.classList.add('hidden');
+        memoEditBtn.textContent = '編集';
+        memoEditBtn.classList.remove('editing');
+      } else {
+        // Switch to edit mode
+        memoDisplay.classList.add('hidden');
+        memoField.classList.remove('hidden');
+        memoField.focus();
+        memoEditBtn.textContent = '完了';
+        memoEditBtn.classList.add('editing');
+      }
+    };
+
     detailSheet.classList.add("active");
     sheetBackdrop.classList.add("active");
+
+    // Prevent touch events from leaking through to the feed slider behind
+    detailSheet.ontouchstart = (e) => e.stopPropagation();
+    detailSheet.ontouchmove = (e) => e.stopPropagation();
 
     sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
     sheetBackdrop.onclick = () => closeDetailSheet();
@@ -361,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isHome = isHomeMatch(match.club, match.venue);
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
-        card.innerHTML = `<div class="result-badge ${res ? 'badge-'+res : ''}">${res ? res.replace("-"," ").toUpperCase() : ""}</div><div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${isAtt ? ha + " 🏟️" : ha}</span></div><div class="match-date-venue">${match.date} ${match.day} - ${match.time} | ${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
+        card.innerHTML = `<div class="result-badge ${res ? 'badge-'+res : ''}">${res ? res.replace("-"," ").toUpperCase() : ""}</div><div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${isAtt ? ha + " 🏟️" : ha}</span></div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
         card.onclick = () => openDetailSheet(match);
         section.appendChild(card);
       });
