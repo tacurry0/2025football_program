@@ -70,7 +70,7 @@ html, body {
 #club-selection { display: flex; gap: 15px; }
 .club-pip { height: 30px; filter: grayscale(1) opacity(0.3); transition: 0.4s var(--ease-expo); cursor: pointer; }
 .club-pip.active { filter: grayscale(0) opacity(1); transform: scale(1.1); filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)); }
-#hamburger-btn { font-size: 1.1rem; cursor: pointer; color: var(--text-grey); font-weight: 800; letter-spacing: 1px; }
+#hamburger-btn { font-size: 0.85rem; cursor: pointer; color: var(--text-grey); font-weight: 800; letter-spacing: 0.5px; }
 
 /* 🔍 Search */
 #search-section { max-width: 600px; margin: 0 auto; padding: 0 1.2rem 0.8rem; }
@@ -234,12 +234,12 @@ html, body {
   width: 100%; padding: 18px; border-radius: 20px; border: 2px solid #e3e3e8;
   background: white; font-family: var(--font-kick); font-size: 1.1rem;
   display: flex; align-items: center; justify-content: center; gap: 10px;
-  margin-bottom: 25px; transition: 0.3s; cursor: pointer;
+  margin-bottom: 25px; transition: 0.3s; cursor: pointer; box-sizing: border-box;
 }
 .u-attend-btn.active { border-color: var(--albirex-orange); background: rgba(var(--albirex-orange-rgb), 0.05); color: var(--albirex-orange); }
 .u-attend-btn.active.kumamoto { border-color: var(--roasso-red); background: rgba(var(--roasso-red-rgb), 0.05); color: var(--roasso-red); }
 
-.close-sheet-btn { width: 100%; background: var(--text-main); color: white; border: none; padding: 20px; border-radius: 22px; font-weight: 900; font-family: var(--font-kick); font-size: 1.2rem; margin-top: 25px; margin-bottom: 20px; transition: 0.3s; }
+.close-sheet-btn { width: 100%; background: var(--text-main); color: white; border: none; padding: 20px; border-radius: 22px; font-weight: 900; font-family: var(--font-kick); font-size: 1.2rem; margin-top: 25px; margin-bottom: 20px; transition: 0.3s; box-sizing: border-box; }
 .close-sheet-btn:active { opacity: 0.8; transform: scale(0.98); }
 
 

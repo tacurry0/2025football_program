@@ -580,4 +580,112 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".sheet-handle").onclick = () => closeDetailSheet();
   pickerBackdrop.onclick = () => closeMatchPicker();
   document.querySelector(".close-pop").onclick = () => closeMatchPicker();
+
+  // 📋 Export Attendance Schedule
+  const exportListBtn = document.getElementById("export-list-btn");
+  if (exportListBtn) {
+    exportListBtn.onclick = async () => {
+      let txt = "【観戦予定リスト】\n\n";
+      const attMatches = scheduleData.filter(match => {
+        const mId = `${match.date}_${match.club}_${match.opponent}`;
+        return localStorage.getItem(`attend_${mId}`) === "true";
+      }).sort((a,b) => parseDate(a.date) - parseDate(b.date));
+      
+      if (attMatches.length === 0) {
+        alert("観戦予定の試合はまだありません。");
+        return;
+      }
+      attMatches.forEach(m => {
+        const isHome = isHomeMatch(m.club, m.venue);
+        txt += `${m.date} ${m.day} ${m.time} - vs ${m.opponent}\n`;
+        txt += `📍 ${m.venue} (${isHome ? 'HOME' : 'AWAY'})\n\n`;
+      });
+      txt += "Powered by Match Day Ultra";
+      try {
+        await navigator.clipboard.writeText(txt);
+        alert("観戦予定リストをクリップボードにコピーしました！\nLINEやメモ帳に貼り付けて共有できます。");
+      } catch (err) {
+        alert("コピーに失敗しました。このブラウザではサポートされていない可能性があります。");
+      }
+    };
+  }
+
+  // ⚡ Fast Input Modal
+  const fastInputBtn = document.getElementById("fast-input-btn");
+  const fastInputSheet = document.getElementById("fast-input-sheet");
+  const fastInputList = document.getElementById("fast-input-list");
+  const saveFastInputBtn = document.getElementById("save-fast-input");
+  const closeFastInputBtn = document.getElementById("close-fast-input");
+
+  function openFastInput() {
+    fastInputList.innerHTML = "";
+    const today = new Date();
+    today.setHours(23,59,59,999);
+    
+    // Get past matches that DON'T have a score yet
+    const pastMatches = scheduleData.filter(m => {
+      const d = parseDate(m.date);
+      if (d > today) return false;
+      const mId = `${m.date}_${m.club}_${m.opponent}`;
+      return !localStorage.getItem(`score_my_${mId}`);
+    }).sort((a,b) => parseDate(a.date) - parseDate(b.date));
+
+    if(pastMatches.length === 0) {
+       fastInputList.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-grey);">未入力の過去の試合はありません。</div>`;
+    } else {
+       pastMatches.forEach(m => {
+         const mId = `${m.date}_${m.club}_${m.opponent}`;
+         const div = document.createElement("div");
+         div.style.cssText = "padding: 15px; border-bottom: 1px solid #e3e3e8; display: flex; align-items: center; justify-content: space-between;";
+         div.innerHTML = `
+           <div style="flex:1;">
+             <div style="font-size: 0.8rem; color: var(--text-grey); font-weight:700;">${m.date} | ${m.club.toUpperCase()}</div>
+             <div style="font-size: 1.1rem; font-weight:900; font-family: var(--font-kick); margin-top:4px;">vs ${m.opponent}</div>
+           </div>
+           <div style="display: flex; gap: 8px; align-items: center;">
+             <input type="number" data-mid="${mId}" data-type="my" style="width:50px; height:40px; text-align:center; font-size:1.2rem; font-weight:900; background:#f2f2f7; border:none; border-radius:10px; color:var(--text-main);" placeholder="-">
+             <span style="font-weight:900; color:var(--text-grey);">-</span>
+             <input type="number" data-mid="${mId}" data-type="opp" style="width:50px; height:40px; text-align:center; font-size:1.2rem; font-weight:900; background:#f2f2f7; border:none; border-radius:10px; color:var(--text-main);" placeholder="-">
+           </div>
+         `;
+         fastInputList.appendChild(div);
+       });
+    }
+    fastInputSheet.classList.add("active");
+  }
+
+  if (fastInputBtn) fastInputBtn.onclick = openFastInput;
+  if (closeFastInputBtn) closeFastInputBtn.onclick = () => fastInputSheet.classList.remove("active");
+
+  if (saveFastInputBtn) {
+    saveFastInputBtn.onclick = () => {
+      const inputs = fastInputList.querySelectorAll("input[type='number']");
+      let savedCount = 0;
+      const scoreMap = {};
+      inputs.forEach(inp => {
+        const mId = inp.dataset.mid;
+        if (!scoreMap[mId]) scoreMap[mId] = {};
+        scoreMap[mId][inp.dataset.type] = inp.value;
+      });
+
+      Object.keys(scoreMap).forEach(mId => {
+        const myScore = scoreMap[mId].my;
+        const oppScore = scoreMap[mId].opp;
+        if (myScore !== "" && oppScore !== "") {
+          localStorage.setItem(`score_my_${mId}`, myScore);
+          localStorage.setItem(`score_opp_${mId}`, oppScore);
+          savedCount++;
+        }
+      });
+
+      if (savedCount > 0) {
+        renderFeed();
+        if (calendarView && !calendarView.classList.contains("hidden-view")) {
+           switchMode("calendar");
+        }
+        alert(`${savedCount}試合の結果を保存しました。`);
+      }
+      fastInputSheet.classList.remove("active");
+    };
+  }
 });

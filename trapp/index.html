@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>Match Day - Ultra v2</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260409i">
+  <link rel="stylesheet" href="style.css?v=20260409j">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="https://jleague.r10s.jp/img/common/img_club_niigata.png">
@@ -110,7 +110,15 @@
     </div>
     <div class="pane-content u-backup-area">
       <p class="u-backup-desc">観戦予定、メモ、結果のデータをJSONファイルとして保存したり、読み込んだりできます。</p>
+      <div class="u-backup-group">
+        <label>一括入力</label>
+        <button id="fast-input-btn" class="u-backup-btn export" style="background:var(--albirex-orange); color:white; border:none;">過去の結果を一括入力</button>
+      </div>
       
+      <div class="u-backup-group">
+        <label>観戦予定</label>
+        <button id="export-list-btn" class="u-backup-btn export" style="background:#28a745; color:white; border:none;">観戦予定リストをコピー</button>
+      </div>
       <div class="u-backup-group">
         <label>エクスポート</label>
         <button id="export-btn" class="u-backup-btn export">データをファイルに保存</button>
@@ -181,8 +189,21 @@
     <div id="ym-picker-list"></div>
   </div>
 
-<script src="schedule.js?v=20260409i"></script>
-<script src="script.js?v=20260409i"></script>
+  <!-- ⚡ Fast Input Overlay -->
+  <div id="fast-input-sheet" class="sub-pane" style="z-index: 4000;">
+    <div class="pane-header">
+      <h3>過去の結果を一括入力</h3>
+      <button class="close-pane" id="close-fast-input">✕</button>
+    </div>
+    <div class="pane-content" id="fast-input-list" style="padding-bottom: 80px; overflow-y: auto; height: calc(100% - 60px);">
+      <!-- JavaScript will inject match rows here -->
+    </div>
+    <button id="save-fast-input" class="close-sheet-btn" style="position:absolute; bottom:0; left:0; border-radius:0; margin:0; z-index: 4010;">一括保存</button>
+  </div>
+
+
+<script src="schedule.js?v=20260409j"></script>
+<script src="script.js?v=20260409j"></script>
 
 </body>
 </html>
