@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260409j">
+  <link rel="stylesheet" href="style.css?v=20260410t">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="https://jleague.r10s.jp/img/common/img_club_niigata.png">
@@ -29,7 +29,7 @@
     
     <div id="search-section">
       <div id="search-wrap">
-        <input type="text" id="search-input" placeholder="検索..." autocomplete="off">
+        <input type="text" id="search-input" placeholder="Search" autocomplete="off">
       </div>
       <div id="search-popup" class="search-popup"></div>
     </div>
@@ -73,6 +73,19 @@
   </nav>
 
   <!-- 🔗 Links Overlay (Hidden by Default) -->
+  <!-- 📝 Bulk Paste Pane (New View) -->
+  <div id="bulk-paste-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>データ一括入力</h3>
+      <button class="close-pane">✕</button>
+    </div>
+    <div class="pane-content" style="padding: 20px;">
+      <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">公式サイト等の試合日程表をコピーしてここに貼り付けてください。自動的に結果（スコア）が抽出されます。</p>
+      <textarea id="bulk-paste-area-new" style="width:100%; height:300px; border: 1px solid #ddd; border-radius: 12px; padding: 15px; font-size: 0.9rem; margin-bottom: 20px; font-family:var(--font-jp);" placeholder="第1節 2/22 〇〇 1-0 〇〇..."></textarea>
+      <button id="bulk-paste-save-btn" class="u-backup-btn export" style="width:100%; background:#28a745; color:white; border:none; padding:15px; font-weight:700;">解析して保存する</button>
+    </div>
+  </div>
+
   <div id="links-overlay" class="sub-pane">
     <div class="pane-header">
       <h3>リンク集 / LINKS</h3>
@@ -96,33 +109,248 @@
       <button class="close-pane">✕</button>
     </div>
     <div class="pane-content u-chant-area">
-      <div class="u-chant-item">
-        <div class="u-chant-title">アイシテルニイガタ <span class="u-chant-arrow">▼</span></div>
-        <div class="u-chant-body">
-          <button class="u-chant-play">▶ 再生</button>
-          <div class="u-chant-lyrics">アーイシテルニイガタ
-          ラーラララ ラーラーラー
-          アーイシテルニイガタ
-          ラーラララ ラーラーラー</div>
+      <div class="standings-tabs" style="margin-bottom: 20px;">
+        <button class="u-tab-btn active" onclick="switchChantClub('niigata', this)">新潟</button>
+        <button class="u-tab-btn" onclick="switchChantClub('kumamoto', this)">熊本</button>
+      </div>
+
+      <!-- 新潟のチャント -->
+      <div id="chants-niigata" class="chant-club-group">
+        <div class="u-chant-item">
+          <div class="u-chant-title">アイシテルニイガタ <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">俺達が ついてるさ新潟
+ヤケドさせてくれ このゲーム
+俺達が ついてるさ新潟
+伝えたい この想い
+
+アイシテルニイガタ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">俺たちの誇り新潟 <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">新潟 レッツゴー
+オッオー 俺たちの新潟
+新潟 レッツゴー
+オッオー 俺たちの新潟</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Pride of Niigata <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">Oh, Pride of Niigata!
+Pride of Niigata!
+We are ready to go
+
+オー オーオーオーオーオー
+オー オーオーオーオーオーオー
+オー オーオーオーオーオー
+オー オーオーオーオーオー</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">フォルツァ新潟 <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">オオオー オオオー
+フォルツァ新潟
+オオオー オオオー
+フォルツァ新潟</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">漢（おとこ） <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">アレアレオオー アレアレオオー
+さあ行こうぜ 漢見せろ
+アレ新潟</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">ガノワ <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">オーオオオ オーオオオ
+さあ走りだせ プライドオブ新潟</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">真夏の夜の夢 <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">アッレ アレー オオーオ 新潟アーレ
+挑み続けろよ
+アッレ アレー オオーオ 新潟アーレ
+全ては 勝ち獲るため</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">蹴散らせ <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">蹴散らせ 新潟
+蹴散らせ 新潟
+勝利を目指して
+突き進め</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Niigata In My Life <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">オーオオオー Niigata in my life
+オーオオオー Niigata in my life
+俺たちの夢をのせて
+どこまでも突き進め</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">ラ・バモラ <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">ラララ ラ・バモラ
+ニイガタ ラ・バモラ
+ニイガタ ラ・バモラ
+勝利を信じて</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">好きにならずにいられない <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">オーオーオー
+We can't help falling in love with you
+オーオーオー
+We can't help falling in love with you
+新潟！ 新潟！</div>
+          </div>
         </div>
       </div>
-      <div class="u-chant-item">
-        <div class="u-chant-title">Pride of NIIGATA <span class="u-chant-arrow">▼</span></div>
-        <div class="u-chant-body">
-          <button class="u-chant-play">▶ 再生</button>
-          <div class="u-chant-lyrics">おおー オレオレ 新潟
-          誇りを胸に 戦え新潟
-          ラララ ラーラー ラーラァ</div>
+
+      <!-- 熊本のチャント -->
+      <div id="chants-kumamoto" class="chant-club-group" style="display:none;">
+        <div class="u-chant-item">
+          <div class="u-chant-title">HIKARI <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">オオー オオオオー
+オオオオー オオオオオー
+オーオーオオオオオーオー
+オーオーオー</div>
+          </div>
         </div>
-      </div>
-      <div class="u-chant-item">
-        <div class="u-chant-title">俺たちの新潟 <span class="u-chant-arrow">▼</span></div>
-        <div class="u-chant-body">
-          <button class="u-chant-play">▶ 再生</button>
-          <div class="u-chant-lyrics">俺たちの新潟
-          熱い気持ち見せてくれ
-          さあ行こうぜ新潟
-          勝利を掴み取れ</div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">誇りを胸に <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">熊本 誇りを胸に
+LaLaLaLaLa La
+熱く闘おう</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">ロッソと共に <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">ロッソと共に我らは生きる
+叫び飛跳ねる
+今日も勝利の為に</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">カモンロッソ (Come On Rosso) <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">Come On Rosso !
+Come On ! Come On Rosso !
+
+オー オーオーオー
+オーオーオー
+オーオーオー</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">ボラーレ (Volare) <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">ボーラレー オーオー 
+カンターレ オオオオー
+赤くそめられた スタジアム揺らせ！</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">We Are rosso aleo <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">We are rosso
+We are rosso
+We are rosso ale oh～
+突き進め 俺達の誇り熊本 オオオ...</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">俺たちの熊本 <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">(手拍子)オイ (手拍子)オイ
+(手拍子)オーオイ (手拍子)オイ
+(手拍子)オイ (手拍子)オーバモれや
+跳ーび跳ねれやゴール奪えや
+俺たちの熊本</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">アレ熊本 <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">アレ アレ アレ 熊本
+アレ アレ アレ 熊本
+アレ アレ アレ (アレ！)
+アレ アレ アレ (アレ！)
+アレ アレ アレ 熊本</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Kumamoto Rosso! <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">くまもと rosso！ rosso! rosso!
+くまもと rosso！ rosso! rosso!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">駆け上がれ熊本 <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">駆け上がれ熊本！俺たちの夢乗せ
+さぁ 行こうぜ
+オオ オオ オオー</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">レッツゴーロッソ <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">Let's Go Rosso！ Let's Go！
+Let's Go Rosso! ×4
+オー オーオーオー
+オーオーオー
+オーオーオー</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">火の国魂 <span class="u-chant-arrow">▼</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">▶ 再生</button>
+            <div class="u-chant-lyrics">オオオー オオオオー オー
+燃えあがれ 熊本
+火の国魂</div>
+          </div>
         </div>
       </div>
     </div>
@@ -134,17 +362,9 @@
       <h3>順位表 / STANDINGS</h3>
       <button class="close-pane">✕</button>
     </div>
-    <div class="pane-content standings-container">
-      <div class="standings-tabs">
-        <button class="u-tab-btn active" data-league="j1">J1 (EAST/WEST)</button>
-        <button class="u-tab-btn" data-league="j2">J2･J3</button>
-      </div>
-      <div id="standings-loading" class="standings-loading">
-        <div class="spinner"></div>
-        <p>最新データを取得中...</p>
-      </div>
-      <div id="standings-error" class="standings-error" style="display:none;"></div>
-      <div id="standings-content-area" class="standings-content-area"></div>
+    <div class="pane-content standings-container" style="text-align: center; padding: 40px 20px;">
+      <p style="margin-bottom: 20px;">Jリーグ公式サイトの順位表を確認します。</p>
+      <a href="https://www.jleague.jp/standings/j2j3/" target="_blank" class="u-backup-btn export" style="display:inline-block; background:#007bff; color:white; text-decoration:none;">公式サイトを開く</a>
     </div>
   </div>
 
@@ -158,8 +378,7 @@
       <p class="u-backup-desc">観戦予定、メモ、結果のデータをJSONファイルとして保存したり、読み込んだりできます。</p>
       <div class="u-backup-group">
         <label>テキスト一括反映 (自動入力)</label>
-        <textarea id="bulk-paste-area" style="width:100%; height:80px; margin-bottom:5px; border: 1px solid #ccc; border-radius: 8px; padding: 10px;" placeholder="ここに表データ(第○節～)を貼り付けると自動で結果が反映されます"></textarea>
-        <button id="bulk-paste-btn" class="u-backup-btn export" style="background:#007bff; color:white; border:none; margin-top: 5px;">テキストから結果を抽出して保存</button>
+        <button id="open-bulk-paste-btn" class="u-backup-btn export" style="background:#007bff; color:white; border:none; margin-top: 5px;">一括入力画面へ</button>
       </div>
 
       <div class="u-backup-group" style="margin-top: 20px;">
@@ -260,8 +479,8 @@
   </div>
 
 
-<script src="schedule.js?v=20260409j"></script>
-<script src="script.js?v=20260409j"></script>
+<script src="schedule.js?v=20260410t"></script>
+<script src="script.js?v=20260410t"></script>
 
 </body>
 </html>

@@ -136,7 +136,8 @@ html, body {
 .sub-pane ul { list-style: none; padding: 20px; }
 .sub-pane li { border-bottom: 1px solid #f2f2f7; }
 .sub-pane a { display: block; padding: 20px; text-decoration: none; color: var(--text-main); font-weight: 800; font-size: 1.1rem; }
-.pane-content { padding: 40px; text-align: center; color: var(--text-grey); font-family: var(--font-kick); }
+.pane-content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px; text-align: center; color: var(--text-grey); font-family: var(--font-kick); }
+.sheet-mw { display: inline-block; font-family: var(--font-kick); font-size: 1rem; padding: 4px 10px; border-radius: 6px; background: rgba(0,0,0,0.05); color: var(--text-grey); margin-bottom: 5px; }
 
 /* 💾 Data Backup Pane Styles */
 .u-backup-area { text-align: left; padding: 20px 30px; font-family: var(--font-main); }
