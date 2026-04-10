@@ -251,6 +251,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
     const sMy = localStorage.getItem(`score_my_${mId}`) || "";
     const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
+    const sWeather = localStorage.getItem(`weather_${mId}`) || "";
+    const sTemp = localStorage.getItem(`temp_${mId}`) || "";
+
+    const J_CLUB_ENG = {
+      "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC"
+    };
     
     let pkHtml = "";
     if (parseDate(match.date).getFullYear() === 2026) {
@@ -264,6 +270,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const clubName = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
     const clubEmblem = match.club === "niigata" ? "https://github.com/niigatals/program/blob/main/program/niigata.png?raw=true" : "https://github.com/niigatals/program/blob/main/program/kumamoto.png?raw=true";
 
+    const engOpp = J_CLUB_ENG[match.opponent] || match.opponent.toUpperCase();
+
     sheetContent.innerHTML = `
       <div class="sheet-header club-${match.club}">
         <div class="sheet-meta">
@@ -271,12 +279,29 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="sheet-ha badge-${homeAway.toLowerCase()}">${homeAway}</span>
         </div>
         <span class="sheet-mw">${match.matchweek || "EX"}</span>
-        <div class="sheet-opp-row">
-          <h2 class="sheet-opp">${match.opponent}</h2>
+        <div class="sheet-opp-row" style="align-items: flex-start; margin-bottom: 5px;">
+          <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+            <h2 class="sheet-opp" style="margin-bottom:0;">${match.opponent}</h2>
+            <div class="sheet-opp-eng" style="font-size: 0.75rem; color: #666; font-family: var(--font-kick); font-weight: 800; letter-spacing: 0.5px; margin-top: 2px;">${engOpp}</div>
+          </div>
           <img class="sheet-opp-emblem" src="${match.emblem}">
         </div>
-        <p class="sheet-venue-info">${match.date} | ${match.venue}</p>
+        <div class="sheet-venue-row" style="display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:8px;">
+          <p class="sheet-venue-info" style="margin:0;">${match.date} | ${match.venue}</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(match.venue)}" target="_blank" style="background:#f2f2f7; color:var(--text-main); font-size:0.75rem; padding:6px 12px; border-radius:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-weight:700;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> MAPで開く</a>
+        </div>
       </div>
+      <div id="u-auto-weather-area" style="display: none; gap: 15px; justify-content: center; margin: 15px 0;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+           <span style="font-size:0.65rem; color:#888; position:relative;">天気 <span id="auto-weather-badge" style="position:absolute; top:-12px; left:120%; width:max-content; background:#28a745; color:white; font-size:0.5rem; padding:1px 4px; border-radius:4px; font-weight:800; display:none;">取得済</span></span>
+           <div id="u-weather-display" style="font-size: 1.5rem; margin-top: 4px;">-</div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+           <span style="font-size:0.65rem; color:#888;">最高気温 (℃)</span>
+           <div id="u-temp-display" style="font-size: 1.2rem; font-family:var(--font-kick); font-weight:800; margin-top: 8px;">-</div>
+        </div>
+      </div>
+
       <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
       ${pkHtml}
       <div class="u-attend-btn ${match.club} ${isAttend?'active':''}" id="attend-toggle">
@@ -295,6 +320,81 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <button class="close-sheet-btn">保存して閉じる</button>
     `;
+
+    // --- Weather Auto Fetch Logic ---
+    const wArea = sheetContent.querySelector("#u-auto-weather-area");
+    const wDisp = sheetContent.querySelector("#u-weather-display");
+    const tDisp = sheetContent.querySelector("#u-temp-display");
+    const aBadge = sheetContent.querySelector("#auto-weather-badge");
+
+    const mDate = new Date(match.date);
+    const now = new Date();
+    const diffDays = (mDate - now) / (1000 * 60 * 60 * 24);
+    
+    // Only fetch and display for matches within -3 to 14 days
+    if (diffDays >= -4 && diffDays <= 14) {
+        wArea.style.display = "flex";
+
+        const STADIUM_CITY_MAP = {
+            "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
+            "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
+            "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
+            "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
+            "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
+            "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
+            "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
+            "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
+            "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
+            "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
+            "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
+            "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
+            "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
+            "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
+            "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
+            "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
+            "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
+            "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
+            "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
+            "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
+            "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
+            "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
+        };
+        const searchLocation = STADIUM_CITY_MAP[match.venue] || match.venue;
+
+        (async () => {
+            try {
+                let lat, lon;
+                const cCache = localStorage.getItem('coord_' + searchLocation);
+                if (cCache) {
+                    const c = JSON.parse(cCache); lat = c.lat; lon = c.lon;
+                } else {
+                    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchLocation)}&format=json&limit=1`);
+                    const data = await res.json();
+                    if (data && data[0]) {
+                        lat = data[0].lat; lon = data[0].lon;
+                        localStorage.setItem('coord_' + searchLocation, JSON.stringify({lat, lon}));
+                    }
+                }
+                if (lat !== undefined && lon !== undefined) {
+                    const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&past_days=3&forecast_days=16`);
+                    const wData = await wRes.json();
+                    const dIdx = wData.daily?.time?.indexOf(match.date);
+                    if (dIdx !== undefined && dIdx > -1) {
+                        const code = wData.daily.weather_code[dIdx];
+                        const max = wData.daily.temperature_2m_max[dIdx];
+                        let emoji = "☁️";
+                        if (code <= 1) emoji = "☀️";
+                        else if (code <= 3) emoji = "☁️";
+                        else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
+                        else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
+
+                        wDisp.innerText = emoji;
+                        tDisp.innerText = Math.round(max);
+                    }
+                }
+            } catch(e) { console.warn("Auto weather fetch skipped.", e); }
+        })();
+    }
 
     // Helper: convert URLs to clickable links
     function linkifyMemo(text) {
@@ -517,6 +617,19 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("menu-close").onclick = () => toggleMenu(false);
   sideMenuBackdrop.onclick = () => toggleMenu(false);
   
+  function openSubPane(id) {
+    document.getElementById(id).classList.add("active");
+  }
+  function closeSubPane(id) {
+    document.getElementById(id).classList.remove("active");
+  }
+  document.querySelectorAll(".close-pane").forEach(btn => {
+    btn.onclick = () => {
+      const pane = btn.closest(".sub-pane");
+      if (pane) pane.classList.remove("active");
+    };
+  });
+
   // Close menu after clicking item
   const menuItems = document.querySelectorAll(".menu-card");
   menuItems.forEach(btn => btn.addEventListener('click', () => toggleMenu(false)));
@@ -526,8 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("menu-links").onclick = () => openSubPane("links-overlay");
   document.getElementById("menu-chants").onclick = () => openSubPane("chants-overlay");
   document.getElementById("menu-standings").onclick = () => {
-    openSubPane("standings-overlay");
-    openStandingsSheet();
+    window.open("https://www.jleague.jp/standings/j2j3/", "_blank");
   };
   document.getElementById("menu-data").onclick = () => openSubPane("data-overlay");
 
@@ -804,16 +916,26 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // 📋 Text Bulk Input Parsing
-  const bulkPasteBtn = document.getElementById("bulk-paste-btn");
-  if (bulkPasteBtn) {
-    bulkPasteBtn.onclick = () => {
-      const text = document.getElementById("bulk-paste-area").value;
+  // 📋 Text Bulk Input Parsing (New Screen Flow)
+  const openBulkPasteBtn = document.getElementById("open-bulk-paste-btn");
+  const bulkPasteSaveBtn = document.getElementById("bulk-paste-save-btn");
+  const bulkPasteArea = document.getElementById("bulk-paste-area-new");
+
+  if (openBulkPasteBtn) {
+    openBulkPasteBtn.onclick = () => {
+      toggleMenu(false); 
+      closeSubPane("data-overlay");
+      openSubPane("bulk-paste-overlay");
+    };
+  }
+
+  if (bulkPasteSaveBtn) {
+    bulkPasteSaveBtn.onclick = () => {
+      const text = bulkPasteArea.value;
       if (!text) return;
       
       const blocks = text.split(/第(\d+)節/);
       let savedCount = 0;
-      // blocks[0] is string before "第X節", odds are the numbers, evens are the text contents
       for (let i = 1; i < blocks.length; i += 2) {
         const mwNum = blocks[i];
         const content = blocks[i+1];
@@ -833,9 +955,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const candidates = scheduleData.filter(m => m.matchweek === `MW${mwNum}`);
           let target = null;
           
-          // 対戦クラブ名（最低2文字）と日付を紐づけて確実に対象試合を特定する
           for (const c of candidates) {
-            // 英語や記号を取り除き、純粋なクラブの頭文字2文字で判定する（FC今治などがマッチしない問題の修正）
             const oppNameBase = c.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '').substring(0, 2);
             const isNameMatch = oppNameBase.length > 0 && content.includes(oppNameBase);
             const isDateMatch = mPadDate && c.date.endsWith(mPadDate);
@@ -844,7 +964,7 @@ document.addEventListener("DOMContentLoaded", () => {
               target = c;
               break;
             } else if (isNameMatch && !target) {
-              target = c; // 代替としてクラブ名一致のみを保持
+              target = c;
             }
           }
           if (target) {
@@ -859,16 +979,14 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }
       }
-      
+
       if (savedCount > 0) {
         renderFeed();
-        if (calendarView && !calendarView.classList.contains("hidden-view")) {
-           switchMode("calendar");
-        }
-        alert(`${savedCount}試合の結果をテキストから抽出して保存しました。`);
-        document.getElementById("bulk-paste-area").value = "";
+        alert(`${savedCount}件の試合結果を反映しました。`);
+        bulkPasteArea.value = "";
+        closeSubPane("bulk-paste-overlay");
       } else {
-        alert("結果を抽出できませんでした。形式を確認してください。");
+        alert("該当する試合データが見つかりませんでした。入力形式を確認してください。");
       }
     };
   }
@@ -880,195 +998,18 @@ document.addEventListener("DOMContentLoaded", () => {
       parent.classList.toggle('active');
     };
   });
-
-  //=========================================
-  // Standings Logic (Scraping via CORS Proxy)
-  //=========================================
-  let currentStandingsLeague = 'j1';
-  let standingsCache = { 'j1': null, 'j2': null };
-
-  window.openStandingsSheet = function() {
-    renderStandings(currentStandingsLeague);
-  };
-
-  document.querySelectorAll('.standings-tabs .u-tab-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      document.querySelectorAll('.standings-tabs .u-tab-btn').forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      currentStandingsLeague = e.target.dataset.league;
-      renderStandings(currentStandingsLeague);
-    });
-  });
-
-  async function renderStandings(league) {
-    const loading = document.getElementById('standings-loading');
-    const errorEl = document.getElementById('standings-error');
-    const contentEl = document.getElementById('standings-content-area');
-    
-    loading.style.display = 'flex';
-    errorEl.style.display = 'none';
-    contentEl.innerHTML = '';
-
-    if (standingsCache[league]) {
-      loading.style.display = 'none';
-      contentEl.innerHTML = standingsCache[league];
-      return;
-    }
-
-    try {
-      // Yahooはスクレイピング対策やJS描画が多く安定しないため、最も安定しているJリーグ公式データサイトをスクレイピングする
-      const targetUrl = league === 'j1' 
-        ? "https://data.j-league.or.jp/SFRT01/"
-        : "https://data.j-league.or.jp/SFRT01/?competitionSectionId=0&competitionId=563&yearId=2024"; // J2 fallback
-        
-      const proxies = [
-        { url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`, isJson: false },
-        { url: `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`, isJson: true },
-        { url: `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`, isJson: false }
-      ];
-
-      let htmlText = null;
-      let lastErrorName = "";
-
-      for (let p of proxies) {
-        try {
-          const res = await fetch(p.url, {
-             // omit credentials for CORS
-          });
-          if (!res.ok) throw new Error("Status Error");
-          
-          if (p.isJson) {
-            const data = await res.json();
-            htmlText = data.contents;
-          } else {
-            htmlText = await res.text();
-          }
-          
-          if (htmlText) break; // Success
-        } catch(e) {
-          lastErrorName = e.message;
-          // continue to next proxy
-        }
-      }
-
-      if (!htmlText) {
-         throw new Error("プロキシ接続に失敗しました: " + (lastErrorName || "Failed to fetch"));
-      }
-      
-      // Parse HTML
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlText, 'text/html');
-      
-      // Yahoo Sports table class is usually inside a container, finding <table>
-      let tables = Array.from(doc.querySelectorAll('.sn-table table'));
-      if(tables.length === 0) tables = Array.from(doc.querySelectorAll('table'));
-      
-      if(tables.length === 0) {
-          throw new Error("現在オフシーズン、または特別期間中のためデータが見つかりませんでした。");
-      }
-
-      // Process tables to our format
-      let outHTML = "";
-      tables.forEach((tableDOM) => {
-         // try to find prior header (like EAST / WEST)
-         let title = "";
-         let prev = tableDOM.closest('.sn-table')?.previousElementSibling;
-         if (!prev) prev = tableDOM.previousElementSibling;
-         
-         if (prev && prev.tagName && prev.tagName.match(/^H[1-6]$/)) {
-            title = prev.textContent.trim().replace(/順位表.*/, '');
-         } else if (prev && prev.innerText) {
-            // maybe it's inside a header tag
-            let h = prev.querySelector('h1, h2, h3, h4');
-            if (h) title = h.textContent.trim();
-         }
-
-         if (title) {
-            outHTML += `<h4 style="margin: 16px 0 8px; color: var(--text-main); padding-left:6px; border-left:3px solid var(--primary); font-size:1.05rem;">${title}</h4>`;
-         }
-         outHTML += formatParsedTable(tableDOM);
-      });
-      
-      standingsCache[league] = outHTML;
-      
-      loading.style.display = 'none';
-      contentEl.innerHTML = outHTML;
-
-    } catch (err) {
-      loading.style.display = 'none';
-      errorEl.style.display = 'block';
-      errorEl.innerText = err.message || "順位表の取得に失敗しました。";
-    }
-  }
-
-  function formatParsedTable(originalTable) {
-      const rows = Array.from(originalTable.querySelectorAll('tr'));
-      if (rows.length < 2) return "";
-
-      const headers = Array.from(rows[0].querySelectorAll('th, td')).map(th => th.textContent.trim());
-      
-      // Dynamic mapping for special season columns (like PK win/loss might exist, so indexes shift)
-      const idxRank = headers.findIndex(h => h.includes("順位"));
-      const idxTeam = headers.findIndex(h => h.includes("チーム"));
-      const idxPts  = headers.findIndex(h => h.includes("勝点"));
-      const idxPlay = headers.findIndex(h => h.includes("試合"));
-      const idxWin  = headers.findIndex(h => h === "勝");
-      const idxDraw = headers.findIndex(h => h === "引" || h === "分" || h === "引分");
-      const idxLose = headers.findIndex(h => h === "負" || h === "敗");
-      const idxDiff = headers.findIndex(h => h.includes("差"));
-
-      // Fallback if exact match isn't found
-      const pRank = idxRank !== -1 ? idxRank : 0;
-      const pTeam = idxTeam !== -1 ? idxTeam : 1;
-      const pPts  = idxPts !== -1 ? idxPts : 2;
-      const pPlay = idxPlay !== -1 ? idxPlay : 3;
-      const pWin  = idxWin !== -1 ? idxWin : 4;
-      const pDraw = idxDraw !== -1 ? idxDraw : 5;
-      const pLose = idxLose !== -1 ? idxLose : 6;
-      const pDiff = idxDiff !== -1 ? idxDiff : headers.length - 1;
-
-      let resultHTML = `<table class="parsed-standings-table">`;
-      resultHTML += `<thead><tr>
-          <th>順位</th>
-          <th class="col-team">チーム</th>
-          <th>勝点</th>
-          <th>試</th>
-          <th>勝</th>
-          <th>分</th>
-          <th>負</th>
-          <th>差</th>
-      </tr></thead><tbody>`;
-
-      for(let i = 1; i < rows.length; i++) {
-          const cols = rows[i].querySelectorAll('td, th');
-          if(cols.length < 4) continue; // safety check
-          
-          let rank = cols[pRank]?.textContent.trim().replace(/\D/g, '') || "-";
-          let teamName = cols[pTeam]?.textContent.trim() || "-";
-          
-          // J-League data site cleanup
-          teamName = teamName.replace(/[\r\n\t]/g, '').trim();
-          
-          let pts = cols[pPts]?.textContent.trim() || "-";
-          let played = cols[pPlay]?.textContent.trim() || "-";
-          let win = cols[pWin]?.textContent.trim() || "0";
-          let draw = cols[pDraw]?.textContent.trim() || "0";
-          let lose = cols[pLose]?.textContent.trim() || "0";
-          let diff = cols[pDiff]?.textContent.trim() || "0";
-
-          resultHTML += `<tr>
-              <td class="col-rank">${rank}</td>
-              <td class="col-team">${teamName}</td>
-              <td class="col-pts">${pts}</td>
-              <td>${played}</td>
-              <td>${win}</td>
-              <td>${draw}</td>
-              <td>${lose}</td>
-              <td>${diff}</td>
-          </tr>`;
-      }
-      
-      resultHTML += `</tbody></table>`;
-      return resultHTML;
-  }
 });
+
+window.switchChantClub = function(club, btn) {
+  // Update buttons
+  const tabs = btn.closest('.standings-tabs').querySelectorAll('.u-tab-btn');
+  tabs.forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Update content visibility
+  const pane = btn.closest('.u-chant-area');
+  pane.querySelectorAll('.chant-club-group').forEach(group => {
+    group.style.display = 'none';
+  });
+  pane.querySelector('#chants-' + club).style.display = 'block';
+};
