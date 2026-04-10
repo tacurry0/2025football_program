@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pickerList = document.getElementById("picker-list");
 
   const sideMenu = document.getElementById("side-menu");
+  const sideMenuBackdrop = document.getElementById("side-menu-backdrop");
   const hamBtn = document.getElementById("hamburger-btn");
   const searchInput = document.getElementById("search-input");
   const searchPopup = document.getElementById("search-popup");
@@ -279,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
       ${pkHtml}
       <div class="u-attend-btn ${match.club} ${isAttend?'active':''}" id="attend-toggle">
-        <span class="btn-icon">🏟️</span>
+        <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
         <span class="btn-text">観戦予定</span>
       </div>
       <div class="u-note-single">
@@ -380,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (!attEl) {
             attEl = document.createElement("span");
             attEl.className = "match-att-emoji";
-            attEl.textContent = "🏟️";
+            attEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>';
             metaDiv.appendChild(attEl);
           }
         } else {
@@ -419,7 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isHome = isHomeMatch(match.club, match.venue);
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
-        card.innerHTML = `<div class="result-badge ${res ? 'badge-'+res : ''}">${res ? res.replace("-"," ").toUpperCase() : ""}</div><div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji">🏟️</span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
+        card.innerHTML = `<div class="result-badge ${res ? 'badge-'+res : ''}">${res ? res.replace("-"," ").toUpperCase() : ""}</div><div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
         card.onclick = () => openDetailSheet(match);
         section.appendChild(card);
       });
@@ -503,14 +504,31 @@ document.addEventListener("DOMContentLoaded", () => {
   toggleKumamoto.onclick = () => { toggleKumamoto.classList.toggle("active"); updateClubVisibility(); };
 
   // Menus
-  hamBtn.onclick = () => sideMenu.classList.add("active");
-  document.getElementById("menu-close").onclick = () => sideMenu.classList.remove("active");
-  sideMenu.onclick = (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); };
+  const toggleMenu = (isOpen) => {
+    if (isOpen) {
+      sideMenu.classList.add("active");
+      sideMenuBackdrop.classList.add("active");
+    } else {
+      sideMenu.classList.remove("active");
+      sideMenuBackdrop.classList.remove("active");
+    }
+  };
+  hamBtn.onclick = () => toggleMenu(true);
+  document.getElementById("menu-close").onclick = () => toggleMenu(false);
+  sideMenuBackdrop.onclick = () => toggleMenu(false);
+  
+  // Close menu after clicking item
+  const menuItems = document.querySelectorAll(".menu-card");
+  menuItems.forEach(btn => btn.addEventListener('click', () => toggleMenu(false)));
+
   document.getElementById("menu-feed").onclick = () => switchMode("feed");
   document.getElementById("menu-calendar").onclick = () => switchMode("calendar");
   document.getElementById("menu-links").onclick = () => openSubPane("links-overlay");
   document.getElementById("menu-chants").onclick = () => openSubPane("chants-overlay");
-  document.getElementById("menu-standings").onclick = () => openSubPane("standings-overlay");
+  document.getElementById("menu-standings").onclick = () => {
+    openSubPane("standings-overlay");
+    openStandingsSheet();
+  };
   document.getElementById("menu-data").onclick = () => openSubPane("data-overlay");
 
   // Data Backup Logic
@@ -617,36 +635,58 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveFastInputBtn = document.getElementById("save-fast-input");
   const closeFastInputBtn = document.getElementById("close-fast-input");
 
-  function openFastInput() {
+  let fastSelectedYear = 2026;
+
+  function renderFastInput() {
     fastInputList.innerHTML = "";
-    const today = new Date();
-    today.setHours(23,59,59,999);
     
-    // Get past matches that DON'T have a score yet
-    const pastMatches = scheduleData.filter(m => {
-      const d = parseDate(m.date);
-      if (d > today) return false;
-      const mId = `${m.date}_${m.club}_${m.opponent}`;
-      return !localStorage.getItem(`score_my_${mId}`);
+    // 選択された年の試合の全件を取得（未来の試合も含める）
+    const yearMatches = scheduleData.filter(m => {
+      return parseDate(m.date).getFullYear() === fastSelectedYear;
     }).sort((a,b) => parseDate(a.date) - parseDate(b.date));
 
-    if(pastMatches.length === 0) {
-       fastInputList.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-grey);">未入力の過去の試合はありません。</div>`;
+    if(yearMatches.length === 0) {
+       fastInputList.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-grey);">${fastSelectedYear}年の該当する試合はありません。</div>`;
     } else {
-       pastMatches.forEach(m => {
+       yearMatches.forEach(m => {
+         const mYear = parseDate(m.date).getFullYear();
          const mId = `${m.date}_${m.club}_${m.opponent}`;
+         const sMy = localStorage.getItem(`score_my_${mId}`) || "";
+         const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
+
+         const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
+         const sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
+         const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
+         
+         // 2026年でかつ現在の入力値が同点の場合のみPK領域を表示する
+         const isDraw = sMy !== "" && sOpp !== "" && sMy === sOpp;
+         const showPk = mYear === 2026 && isDraw;
+         
          const div = document.createElement("div");
-         div.style.cssText = "padding: 15px; border-bottom: 1px solid #e3e3e8; display: flex; align-items: center; justify-content: space-between;";
+         div.style.cssText = "padding: 15px; border-bottom: 1px solid #e3e3e8; display: flex; align-items: center; justify-content: space-between; gap: 10px;";
          div.innerHTML = `
            <div style="flex:1;">
              <div style="font-size: 0.8rem; color: var(--text-grey); font-weight:700;">${m.date} | ${m.club.toUpperCase()}</div>
              <div style="font-size: 1.1rem; font-weight:900; font-family: var(--font-kick); margin-top:4px;">vs ${m.opponent}</div>
            </div>
-           <div style="display: flex; gap: 8px; align-items: center;">
-             <input type="number" data-mid="${mId}" data-type="my" style="width:50px; height:40px; text-align:center; font-size:1.2rem; font-weight:900; background:#f2f2f7; border:none; border-radius:10px; color:var(--text-main);" placeholder="-">
-             <span style="font-weight:900; color:var(--text-grey);">-</span>
-             <input type="number" data-mid="${mId}" data-type="opp" style="width:50px; height:40px; text-align:center; font-size:1.2rem; font-weight:900; background:#f2f2f7; border:none; border-radius:10px; color:var(--text-main);" placeholder="-">
+           
+           <div style="display: flex; flex-direction: column; gap: 5px; align-items: flex-end;">
+             <div style="display: flex; gap: 4px; align-items: center;">
+               <input type="number" class="fast-my-score" data-year="${mYear}" data-mid="${mId}" data-type="my" value="${sMy}" style="width:45px; height:35px; text-align:center; font-size:1.1rem; font-weight:900; background:#f2f2f7; border:none; border-radius:8px; color:var(--text-main);" placeholder="-">
+               <span style="font-weight:900; color:var(--text-grey);">-</span>
+               <input type="number" class="fast-opp-score" data-year="${mYear}" data-mid="${mId}" data-type="opp" value="${sOpp}" style="width:45px; height:35px; text-align:center; font-size:1.1rem; font-weight:900; background:#f2f2f7; border:none; border-radius:8px; color:var(--text-main);" placeholder="-">
+             </div>
+             
+             <!-- PK入力領域（2026年かつ同点時のみ表示） -->
+             <div class="fast-pk-area" style="display: ${showPk ? 'flex' : 'none'}; gap: 4px; align-items: center;">
+               <span style="font-size:0.7rem; font-weight:700; color:var(--text-grey);">PK</span>
+               <input type="number" data-mid="${mId}" data-type="pkMy" value="${sPkM}" style="width:35px; height:25px; text-align:center; font-size:0.9rem; font-weight:800; background:#fffdf5; border:1px solid #ddd; border-radius:6px; color:var(--text-main);" placeholder="-">
+               <span style="font-weight:900; color:var(--text-grey);">-</span>
+               <input type="number" data-mid="${mId}" data-type="pkOpp" value="${sPkO}" style="width:35px; height:25px; text-align:center; font-size:0.9rem; font-weight:800; background:#fffdf5; border:1px solid #ddd; border-radius:6px; color:var(--text-main);" placeholder="-">
+             </div>
            </div>
+
+           <button class="u-attend-btn ${isAttend ? 'active' : ''} ${m.club}" data-mid="${mId}" data-type="attend" style="width:45px; height:45px; padding:0; margin:0; display:flex; align-items:center; justify-content:center; border-radius:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; pointer-events: none;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></button>
          `;
          fastInputList.appendChild(div);
        });
@@ -654,28 +694,103 @@ document.addEventListener("DOMContentLoaded", () => {
     fastInputSheet.classList.add("active");
   }
 
-  if (fastInputBtn) fastInputBtn.onclick = openFastInput;
+  // Handle manual attend toggle and dynamic PK display in fast input
+  if (fastInputList) {
+    // スコア入力時の動的なPK領域の表示切替
+    fastInputList.oninput = (e) => {
+      const inp = e.target;
+      if (inp.classList.contains("fast-my-score") || inp.classList.contains("fast-opp-score")) {
+        const mYear = parseInt(inp.dataset.year);
+        if (mYear === 2026) {
+          const container = inp.closest("div").parentElement; // .flex-end 領域
+          const pkArea = container.querySelector(".fast-pk-area");
+          if (pkArea) {
+             const mS = container.querySelector(".fast-my-score").value;
+             const oS = container.querySelector(".fast-opp-score").value;
+             pkArea.style.display = (mS !== "" && oS !== "" && mS === oS) ? "flex" : "none";
+          }
+        }
+      }
+    };
+    
+    // 観戦トグルのハンドリング
+    fastInputList.onclick = (e) => {
+      const btn = e.target.closest("button[data-type='attend']");
+      if (btn) {
+        btn.classList.toggle("active");
+      }
+    };
+  }
+
+  if (fastInputBtn) {
+    fastInputBtn.onclick = () => {
+      renderFastInput();
+      fastInputSheet.classList.add("active");
+    };
+  }
+  
   if (closeFastInputBtn) closeFastInputBtn.onclick = () => fastInputSheet.classList.remove("active");
+
+  document.querySelectorAll(".fast-year-tab").forEach(tab => {
+    tab.onclick = () => {
+      document.querySelectorAll(".fast-year-tab").forEach(t => {
+        t.classList.remove("active");
+        t.style.background = "#f2f2f7";
+        t.style.color = "var(--text-grey)";
+      });
+      tab.classList.add("active");
+      tab.style.background = "var(--text-main)";
+      tab.style.color = "white";
+      fastSelectedYear = Number(tab.dataset.y);
+      renderFastInput();
+    };
+  });
 
   if (saveFastInputBtn) {
     saveFastInputBtn.onclick = () => {
       const inputs = fastInputList.querySelectorAll("input[type='number']");
       let savedCount = 0;
       const scoreMap = {};
+      
       inputs.forEach(inp => {
         const mId = inp.dataset.mid;
         if (!scoreMap[mId]) scoreMap[mId] = {};
         scoreMap[mId][inp.dataset.type] = inp.value;
       });
 
+      const attendBtns = fastInputList.querySelectorAll("button[data-type='attend']");
+      attendBtns.forEach(btn => {
+        const mId = btn.dataset.mid;
+        if (!scoreMap[mId]) scoreMap[mId] = {};
+        scoreMap[mId].attend = btn.classList.contains("active");
+      });
+
       Object.keys(scoreMap).forEach(mId => {
-        const myScore = scoreMap[mId].my;
-        const oppScore = scoreMap[mId].opp;
-        if (myScore !== "" && oppScore !== "") {
-          localStorage.setItem(`score_my_${mId}`, myScore);
-          localStorage.setItem(`score_opp_${mId}`, oppScore);
-          savedCount++;
+        const s = scoreMap[mId];
+        let hasEdit = false;
+        if (s.my !== undefined && s.opp !== undefined && (s.my !== "" || s.opp !== "")) {
+          localStorage.setItem(`score_my_${mId}`, s.my);
+          localStorage.setItem(`score_opp_${mId}`, s.opp);
+          hasEdit = true;
+        } else if (s.my === "" && s.opp === "") {
+          localStorage.removeItem(`score_my_${mId}`);
+          localStorage.removeItem(`score_opp_${mId}`);
         }
+        
+        if (s.pkMy !== undefined && s.pkOpp !== undefined && (s.pkMy !== "" || s.pkOpp !== "")) {
+          localStorage.setItem(`score_my_pk_${mId}`, s.pkMy);
+          localStorage.setItem(`score_opp_pk_${mId}`, s.pkOpp);
+        } else if (s.pkMy === "" && s.pkOpp === "") {
+          localStorage.removeItem(`score_my_pk_${mId}`);
+          localStorage.removeItem(`score_opp_pk_${mId}`);
+        }
+
+        if (s.attend !== undefined) {
+          localStorage.setItem(`attend_${mId}`, s.attend);
+          hasEdit = true;
+        }
+        
+        if (hasEdit) savedCount++;
       });
 
       if (savedCount > 0) {
@@ -683,9 +798,277 @@ document.addEventListener("DOMContentLoaded", () => {
         if (calendarView && !calendarView.classList.contains("hidden-view")) {
            switchMode("calendar");
         }
-        alert(`${savedCount}試合の結果を保存しました。`);
+        alert(`一括入力の内容を保存しました。`);
       }
       fastInputSheet.classList.remove("active");
     };
+  }
+
+  // 📋 Text Bulk Input Parsing
+  const bulkPasteBtn = document.getElementById("bulk-paste-btn");
+  if (bulkPasteBtn) {
+    bulkPasteBtn.onclick = () => {
+      const text = document.getElementById("bulk-paste-area").value;
+      if (!text) return;
+      
+      const blocks = text.split(/第(\d+)節/);
+      let savedCount = 0;
+      // blocks[0] is string before "第X節", odds are the numbers, evens are the text contents
+      for (let i = 1; i < blocks.length; i += 2) {
+        const mwNum = blocks[i];
+        const content = blocks[i+1];
+        
+        const scoreMatch = content.match(/(○|●|△|[-])?\s*(\d+)-(\d+)(?:\s*PK(\d+)-(\d+))?/);
+        if (scoreMatch) {
+          const myScore = scoreMatch[2];
+          const oppScore = scoreMatch[3];
+          const pkMy = scoreMatch[4] || "";
+          const pkOpp = scoreMatch[5] || "";
+          const mDateMatch = content.match(/(\d{1,2})\/(\d{1,2})/);
+          let mPadDate = "";
+          if (mDateMatch) {
+            mPadDate = `${String(mDateMatch[1]).padStart(2, '0')}-${String(mDateMatch[2]).padStart(2, '0')}`;
+          }
+
+          const candidates = scheduleData.filter(m => m.matchweek === `MW${mwNum}`);
+          let target = null;
+          
+          // 対戦クラブ名（最低2文字）と日付を紐づけて確実に対象試合を特定する
+          for (const c of candidates) {
+            // 英語や記号を取り除き、純粋なクラブの頭文字2文字で判定する（FC今治などがマッチしない問題の修正）
+            const oppNameBase = c.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '').substring(0, 2);
+            const isNameMatch = oppNameBase.length > 0 && content.includes(oppNameBase);
+            const isDateMatch = mPadDate && c.date.endsWith(mPadDate);
+            
+            if (isNameMatch && isDateMatch) {
+              target = c;
+              break;
+            } else if (isNameMatch && !target) {
+              target = c; // 代替としてクラブ名一致のみを保持
+            }
+          }
+          if (target) {
+            const mId = `${target.date}_${target.club}_${target.opponent}`;
+            localStorage.setItem(`score_my_${mId}`, myScore);
+            localStorage.setItem(`score_opp_${mId}`, oppScore);
+            if (pkMy && pkOpp) {
+              localStorage.setItem(`score_my_pk_${mId}`, pkMy);
+              localStorage.setItem(`score_opp_pk_${mId}`, pkOpp);
+            }
+            savedCount++;
+          }
+        }
+      }
+      
+      if (savedCount > 0) {
+        renderFeed();
+        if (calendarView && !calendarView.classList.contains("hidden-view")) {
+           switchMode("calendar");
+        }
+        alert(`${savedCount}試合の結果をテキストから抽出して保存しました。`);
+        document.getElementById("bulk-paste-area").value = "";
+      } else {
+        alert("結果を抽出できませんでした。形式を確認してください。");
+      }
+    };
+  }
+
+  // 📢 Chants Accordion Logic
+  document.querySelectorAll('.u-chant-title').forEach(title => {
+    title.onclick = () => {
+      const parent = title.parentElement;
+      parent.classList.toggle('active');
+    };
+  });
+
+  //=========================================
+  // Standings Logic (Scraping via CORS Proxy)
+  //=========================================
+  let currentStandingsLeague = 'j1';
+  let standingsCache = { 'j1': null, 'j2': null };
+
+  window.openStandingsSheet = function() {
+    renderStandings(currentStandingsLeague);
+  };
+
+  document.querySelectorAll('.standings-tabs .u-tab-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.standings-tabs .u-tab-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      currentStandingsLeague = e.target.dataset.league;
+      renderStandings(currentStandingsLeague);
+    });
+  });
+
+  async function renderStandings(league) {
+    const loading = document.getElementById('standings-loading');
+    const errorEl = document.getElementById('standings-error');
+    const contentEl = document.getElementById('standings-content-area');
+    
+    loading.style.display = 'flex';
+    errorEl.style.display = 'none';
+    contentEl.innerHTML = '';
+
+    if (standingsCache[league]) {
+      loading.style.display = 'none';
+      contentEl.innerHTML = standingsCache[league];
+      return;
+    }
+
+    try {
+      // Yahooはスクレイピング対策やJS描画が多く安定しないため、最も安定しているJリーグ公式データサイトをスクレイピングする
+      const targetUrl = league === 'j1' 
+        ? "https://data.j-league.or.jp/SFRT01/"
+        : "https://data.j-league.or.jp/SFRT01/?competitionSectionId=0&competitionId=563&yearId=2024"; // J2 fallback
+        
+      const proxies = [
+        { url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`, isJson: false },
+        { url: `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`, isJson: true },
+        { url: `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`, isJson: false }
+      ];
+
+      let htmlText = null;
+      let lastErrorName = "";
+
+      for (let p of proxies) {
+        try {
+          const res = await fetch(p.url, {
+             // omit credentials for CORS
+          });
+          if (!res.ok) throw new Error("Status Error");
+          
+          if (p.isJson) {
+            const data = await res.json();
+            htmlText = data.contents;
+          } else {
+            htmlText = await res.text();
+          }
+          
+          if (htmlText) break; // Success
+        } catch(e) {
+          lastErrorName = e.message;
+          // continue to next proxy
+        }
+      }
+
+      if (!htmlText) {
+         throw new Error("プロキシ接続に失敗しました: " + (lastErrorName || "Failed to fetch"));
+      }
+      
+      // Parse HTML
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlText, 'text/html');
+      
+      // Yahoo Sports table class is usually inside a container, finding <table>
+      let tables = Array.from(doc.querySelectorAll('.sn-table table'));
+      if(tables.length === 0) tables = Array.from(doc.querySelectorAll('table'));
+      
+      if(tables.length === 0) {
+          throw new Error("現在オフシーズン、または特別期間中のためデータが見つかりませんでした。");
+      }
+
+      // Process tables to our format
+      let outHTML = "";
+      tables.forEach((tableDOM) => {
+         // try to find prior header (like EAST / WEST)
+         let title = "";
+         let prev = tableDOM.closest('.sn-table')?.previousElementSibling;
+         if (!prev) prev = tableDOM.previousElementSibling;
+         
+         if (prev && prev.tagName && prev.tagName.match(/^H[1-6]$/)) {
+            title = prev.textContent.trim().replace(/順位表.*/, '');
+         } else if (prev && prev.innerText) {
+            // maybe it's inside a header tag
+            let h = prev.querySelector('h1, h2, h3, h4');
+            if (h) title = h.textContent.trim();
+         }
+
+         if (title) {
+            outHTML += `<h4 style="margin: 16px 0 8px; color: var(--text-main); padding-left:6px; border-left:3px solid var(--primary); font-size:1.05rem;">${title}</h4>`;
+         }
+         outHTML += formatParsedTable(tableDOM);
+      });
+      
+      standingsCache[league] = outHTML;
+      
+      loading.style.display = 'none';
+      contentEl.innerHTML = outHTML;
+
+    } catch (err) {
+      loading.style.display = 'none';
+      errorEl.style.display = 'block';
+      errorEl.innerText = err.message || "順位表の取得に失敗しました。";
+    }
+  }
+
+  function formatParsedTable(originalTable) {
+      const rows = Array.from(originalTable.querySelectorAll('tr'));
+      if (rows.length < 2) return "";
+
+      const headers = Array.from(rows[0].querySelectorAll('th, td')).map(th => th.textContent.trim());
+      
+      // Dynamic mapping for special season columns (like PK win/loss might exist, so indexes shift)
+      const idxRank = headers.findIndex(h => h.includes("順位"));
+      const idxTeam = headers.findIndex(h => h.includes("チーム"));
+      const idxPts  = headers.findIndex(h => h.includes("勝点"));
+      const idxPlay = headers.findIndex(h => h.includes("試合"));
+      const idxWin  = headers.findIndex(h => h === "勝");
+      const idxDraw = headers.findIndex(h => h === "引" || h === "分" || h === "引分");
+      const idxLose = headers.findIndex(h => h === "負" || h === "敗");
+      const idxDiff = headers.findIndex(h => h.includes("差"));
+
+      // Fallback if exact match isn't found
+      const pRank = idxRank !== -1 ? idxRank : 0;
+      const pTeam = idxTeam !== -1 ? idxTeam : 1;
+      const pPts  = idxPts !== -1 ? idxPts : 2;
+      const pPlay = idxPlay !== -1 ? idxPlay : 3;
+      const pWin  = idxWin !== -1 ? idxWin : 4;
+      const pDraw = idxDraw !== -1 ? idxDraw : 5;
+      const pLose = idxLose !== -1 ? idxLose : 6;
+      const pDiff = idxDiff !== -1 ? idxDiff : headers.length - 1;
+
+      let resultHTML = `<table class="parsed-standings-table">`;
+      resultHTML += `<thead><tr>
+          <th>順位</th>
+          <th class="col-team">チーム</th>
+          <th>勝点</th>
+          <th>試</th>
+          <th>勝</th>
+          <th>分</th>
+          <th>負</th>
+          <th>差</th>
+      </tr></thead><tbody>`;
+
+      for(let i = 1; i < rows.length; i++) {
+          const cols = rows[i].querySelectorAll('td, th');
+          if(cols.length < 4) continue; // safety check
+          
+          let rank = cols[pRank]?.textContent.trim().replace(/\D/g, '') || "-";
+          let teamName = cols[pTeam]?.textContent.trim() || "-";
+          
+          // J-League data site cleanup
+          teamName = teamName.replace(/[\r\n\t]/g, '').trim();
+          
+          let pts = cols[pPts]?.textContent.trim() || "-";
+          let played = cols[pPlay]?.textContent.trim() || "-";
+          let win = cols[pWin]?.textContent.trim() || "0";
+          let draw = cols[pDraw]?.textContent.trim() || "0";
+          let lose = cols[pLose]?.textContent.trim() || "0";
+          let diff = cols[pDiff]?.textContent.trim() || "0";
+
+          resultHTML += `<tr>
+              <td class="col-rank">${rank}</td>
+              <td class="col-team">${teamName}</td>
+              <td class="col-pts">${pts}</td>
+              <td>${played}</td>
+              <td>${win}</td>
+              <td>${draw}</td>
+              <td>${lose}</td>
+              <td>${diff}</td>
+          </tr>`;
+      }
+      
+      resultHTML += `</tbody></table>`;
+      return resultHTML;
   }
 });

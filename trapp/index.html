@@ -22,7 +22,9 @@
         <img src="https://jleague.r10s.jp/img/common/img_club_niigata.png" id="toggle-niigata" class="club-pip active" alt="新潟">
         <img src="https://jleague.r10s.jp/img/common/img_club_kumamoto.png" id="toggle-kumamoto" class="club-pip active" alt="熊本">
       </div>
-      <div id="hamburger-btn">●●●</div>
+      <button id="hamburger-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+      </button>
     </div>
     
     <div id="search-section">
@@ -34,33 +36,36 @@
   </header>
 
   <!-- 🍔 App Dashboard Menu -->
+  <div id="side-menu-backdrop"></div>
   <nav id="side-menu">
-    <button id="menu-close">✕</button>
+    <button id="menu-close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
     <div class="menu-inner">
       <h2 class="menu-title">MENU</h2>
       <div class="menu-grid">
         <button class="menu-card" id="menu-feed" data-mode="feed">
-          <span class="m-icon">📋</span>
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
           <span class="m-label">日程一覧</span>
         </button>
         <button class="menu-card" id="menu-calendar" data-mode="calendar">
-          <span class="m-icon">📅</span>
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
           <span class="m-label">カレンダー</span>
         </button>
         <button class="menu-card" id="menu-chants">
-          <span class="m-icon">📢</span>
-          <span class="m-label">チャント集</span>
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+          <span class="m-label">応援・チャント</span>
         </button>
         <button class="menu-card" id="menu-standings">
-          <span class="m-icon">🏆</span>
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
           <span class="m-label">順位表</span>
         </button>
         <button class="menu-card" id="menu-links">
-          <span class="m-icon">🔗</span>
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
           <span class="m-label">リンク集</span>
         </button>
         <button class="menu-card" id="menu-data">
-          <span class="m-icon">💾</span>
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
           <span class="m-label">データ管理</span>
         </button>
       </div>
@@ -84,22 +89,63 @@
     </ul>
   </div>
 
-  <!-- 📢 Chants Overlay (Stub) -->
+  <!-- 📢 Chants Overlay -->
   <div id="chants-overlay" class="sub-pane">
     <div class="pane-header">
       <h3>チャント集 / CHANTS</h3>
       <button class="close-pane">✕</button>
     </div>
-    <div class="pane-content">現在準備中です</div>
+    <div class="pane-content u-chant-area">
+      <div class="u-chant-item">
+        <div class="u-chant-title">アイシテルニイガタ <span class="u-chant-arrow">▼</span></div>
+        <div class="u-chant-body">
+          <button class="u-chant-play">▶ 再生</button>
+          <div class="u-chant-lyrics">アーイシテルニイガタ
+          ラーラララ ラーラーラー
+          アーイシテルニイガタ
+          ラーラララ ラーラーラー</div>
+        </div>
+      </div>
+      <div class="u-chant-item">
+        <div class="u-chant-title">Pride of NIIGATA <span class="u-chant-arrow">▼</span></div>
+        <div class="u-chant-body">
+          <button class="u-chant-play">▶ 再生</button>
+          <div class="u-chant-lyrics">おおー オレオレ 新潟
+          誇りを胸に 戦え新潟
+          ラララ ラーラー ラーラァ</div>
+        </div>
+      </div>
+      <div class="u-chant-item">
+        <div class="u-chant-title">俺たちの新潟 <span class="u-chant-arrow">▼</span></div>
+        <div class="u-chant-body">
+          <button class="u-chant-play">▶ 再生</button>
+          <div class="u-chant-lyrics">俺たちの新潟
+          熱い気持ち見せてくれ
+          さあ行こうぜ新潟
+          勝利を掴み取れ</div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- 🏆 Standings Overlay (Stub) -->
+  <!-- 🏆 Standings Overlay -->
   <div id="standings-overlay" class="sub-pane">
     <div class="pane-header">
       <h3>順位表 / STANDINGS</h3>
       <button class="close-pane">✕</button>
     </div>
-    <div class="pane-content">現在準備中です</div>
+    <div class="pane-content standings-container">
+      <div class="standings-tabs">
+        <button class="u-tab-btn active" data-league="j1">J1 (EAST/WEST)</button>
+        <button class="u-tab-btn" data-league="j2">J2･J3</button>
+      </div>
+      <div id="standings-loading" class="standings-loading">
+        <div class="spinner"></div>
+        <p>最新データを取得中...</p>
+      </div>
+      <div id="standings-error" class="standings-error" style="display:none;"></div>
+      <div id="standings-content-area" class="standings-content-area"></div>
+    </div>
   </div>
 
   <!-- 💾 Data Backup Overlay -->
@@ -111,7 +157,13 @@
     <div class="pane-content u-backup-area">
       <p class="u-backup-desc">観戦予定、メモ、結果のデータをJSONファイルとして保存したり、読み込んだりできます。</p>
       <div class="u-backup-group">
-        <label>一括入力</label>
+        <label>テキスト一括反映 (自動入力)</label>
+        <textarea id="bulk-paste-area" style="width:100%; height:80px; margin-bottom:5px; border: 1px solid #ccc; border-radius: 8px; padding: 10px;" placeholder="ここに表データ(第○節～)を貼り付けると自動で結果が反映されます"></textarea>
+        <button id="bulk-paste-btn" class="u-backup-btn export" style="background:#007bff; color:white; border:none; margin-top: 5px;">テキストから結果を抽出して保存</button>
+      </div>
+
+      <div class="u-backup-group" style="margin-top: 20px;">
+        <label>結果の手動入力</label>
         <button id="fast-input-btn" class="u-backup-btn export" style="background:var(--albirex-orange); color:white; border:none;">過去の結果を一括入力</button>
       </div>
       
@@ -191,9 +243,15 @@
 
   <!-- ⚡ Fast Input Overlay -->
   <div id="fast-input-sheet" class="sub-pane" style="z-index: 4000;">
-    <div class="pane-header">
-      <h3>過去の結果を一括入力</h3>
-      <button class="close-pane" id="close-fast-input">✕</button>
+    <div class="pane-header" style="flex-direction: column; align-items: stretch; gap: 15px; padding-bottom: 15px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="margin: 0;">一括入力・編集</h3>
+        <button class="close-pane" id="close-fast-input">✕</button>
+      </div>
+      <div id="fast-year-tabs" style="display: flex; justify-content: center; gap: 10px;">
+        <button class="fast-year-tab" data-y="2025" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: #f2f2f7; color: var(--text-grey); font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2025</button>
+        <button class="fast-year-tab active" data-y="2026" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: var(--text-main); color: white; font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2026</button>
+      </div>
     </div>
     <div class="pane-content" id="fast-input-list" style="padding-bottom: 80px; overflow-y: auto; height: calc(100% - 60px);">
       <!-- JavaScript will inject match rows here -->
