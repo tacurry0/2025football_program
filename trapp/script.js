@@ -998,7 +998,178 @@ document.addEventListener("DOMContentLoaded", () => {
       parent.classList.toggle('active');
     };
   });
+  // =========================================================
+  // 🔄 GAS API 自動同期（試合結果 + 順位表）
+  // =========================================================
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbzK_DTYbg8Zzibe3uVutxEaRebQHvB1vZwz9A1s74PANFU4osrkFtLbfewwteRFZ_1o/exec";
+
+  // チーム名の略称マップ（GAS結果→scheduleData の opponent に含まれる文字列）
+  const TEAM_ABBR = {
+    "仙台": "仙台", "湘南": "湘南", "秋田": "秋田", "新潟": "新潟", "熊本": "熊本",
+    "栃木": "栃木", "群馬": "群馬", "甲府": "甲府", "金沢": "金沢", "藤枝": "藤枝",
+    "宮崎": "宮崎", "鹿児島": "鹿児島", "琉球": "琉球", "高知": "高知", "滋賀": "滋賀",
+    "富山": "富山", "岐阜": "岐阜", "長野": "長野", "沼津": "沼津", "今治": "今治",
+    "八戸": "八戸", "盛岡": "盛岡", "山形": "山形", "福島": "福島", "水戸": "水戸",
+    "千葉": "千葉", "大宮": "大宮", "相模原": "相模原", "松本": "松本", "清水": "清水",
+    "磐田": "磐田", "岡山": "岡山", "山口": "山口", "讃岐": "讃岐", "徳島": "徳島",
+    "愛媛": "愛媛", "北九州": "北九州", "鳥取": "鳥取", "山形": "山形",
+    "栃木Ｃ": "栃木", "Ｃ大阪": "セレッソ",
+  };
+
+  function findKeyword(shortName) {
+    // GASから得た略称で scheduleData の opponent を検索するキーワードを返す
+    if (TEAM_ABBR[shortName]) return TEAM_ABBR[shortName];
+    // 前方一致でマッチするものを検索
+    return shortName.substring(0, 2);
+  }
+
+  // GAS結果をlocalStorageに同期（バックグラウンド）
+  async function syncResultsFromGAS() {
+    try {
+      const res = await fetch(`${GAS_URL}?type=results&league=j2&nocache=1`);
+      const json = await res.json();
+      if (!json.data || !Array.isArray(json.data)) return;
+
+      // 重複排除（same date+home+away）
+      const seen = new Set();
+      const results = json.data.filter(r => {
+        const key = `${r.date}|${r.home}|${r.away}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+      let synced = 0;
+      results.forEach(r => {
+        if (!r.home_score && !r.away_score) return;
+        const homeKw = findKeyword(r.home);
+        const awayKw = findKeyword(r.away);
+
+        // scheduleData から新潟 or 熊本が関わる試合をマッチング
+        scheduleData.forEach(m => {
+          const mDateStr = m.date; // "2026-04-04"
+          if (mDateStr !== r.date) return;
+
+          const opp = m.opponent || "";
+          // 試合日が一致＋相手チームが略称に一致
+          const isNiigata = m.club === "niigata";
+          const myKw = isNiigata ? "新潟" : "熊本";
+          const oppKw = isNiigata ? awayKw : homeKw;
+
+          // GAS結果のhome=新潟 or niigata側がhome
+          let myScore, oppScore;
+          if (r.home.includes(myKw) || opp.includes(oppKw) || opp.includes(isNiigata ? homeKw : awayKw)) {
+            if (opp.includes(homeKw) || opp.includes(awayKw) || 
+                opp.includes(r.home.substring(0,2)) || opp.includes(r.away.substring(0,2))) {
+              // スコア割り当て: 自クラブがhomeかawayか判断
+              if (r.home.includes(myKw) || r.home.substring(0,2) === myKw.substring(0,2)) {
+                myScore = r.home_score;
+                oppScore = r.away_score;
+              } else {
+                myScore = r.away_score;
+                oppScore = r.home_score;
+              }
+              const mId = `${m.date}_${m.club}_${m.opponent}`;
+              // 既にスコアが入力済みの場合は上書きしない
+              if (!localStorage.getItem(`score_my_${mId}`)) {
+                localStorage.setItem(`score_my_${mId}`, myScore);
+                localStorage.setItem(`score_opp_${mId}`, oppScore);
+                if (r.pk) {
+                  const pkParts = r.pk.split(" PK ");
+                  if (pkParts.length === 2) {
+                    const myPk = r.home.includes(myKw) ? pkParts[0] : pkParts[1];
+                    const oppPk = r.home.includes(myKw) ? pkParts[1] : pkParts[0];
+                    localStorage.setItem(`score_my_pk_${mId}`, myPk);
+                    localStorage.setItem(`score_opp_pk_${mId}`, oppPk);
+                  }
+                }
+                synced++;
+              }
+            }
+          }
+        });
+      });
+
+      if (synced > 0) {
+        console.log(`[GAS Sync] ${synced}件の試合結果を自動同期しました`);
+        // 現在の表示位置を保持したまま再描画
+        const savedIdx = currentIndex;
+        const savedYear = selectedYear;
+        renderFeed();
+        applyYearFilter(savedYear, true);
+        requestAnimationFrame(() => scrollToIndex(Math.min(savedIdx, visibleSections.length - 1)));
+      }
+    } catch (e) {
+      console.warn("[GAS Sync] 結果取得エラー:", e);
+    }
+  }
+
+  // 順位表ビュー
+  const menuStandingsBtn = document.getElementById("menu-standings");
+  if (menuStandingsBtn) {
+    menuStandingsBtn.onclick = () => {
+      toggleMenu(false);
+      openSubPane("standings-overlay");
+      loadStandings();
+    };
+  }
+
+  async function loadStandings() {
+    const container = document.getElementById("standings-content");
+    if (!container) return;
+    container.innerHTML = `<div style="text-align:center;padding:40px;color:#888;">読み込み中...</div>`;
+    try {
+      const res = await fetch(`${GAS_URL}?type=standings&league=j2&nocache=1`);
+      const json = await res.json();
+      if (!json.data || !Array.isArray(json.data)) throw new Error("no data");
+
+      // グループ別に整理
+      const groups = {};
+      json.data.forEach(row => {
+        if (!groups[row.group]) groups[row.group] = [];
+        groups[row.group].push(row);
+      });
+
+      // グループ表示順: WEST-A → WEST-B → EAST-A → EAST-B
+      const GROUP_ORDER = ['WEST-A', 'WEST-B', 'EAST-A', 'EAST-B'];
+      const sortedGroups = Object.keys(groups).sort((a, b) => {
+        const ai = GROUP_ORDER.findIndex(k => a.includes(k));
+        const bi = GROUP_ORDER.findIndex(k => b.includes(k));
+        return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+      });
+      let html = "";
+      sortedGroups.forEach(g => {
+        html += `<div class="standings-group-title">${g}</div>
+        <table class="standings-table">
+          <thead><tr><th>順</th><th>チーム</th><th>勝点</th><th>試合</th><th>勝</th><th>PK勝</th><th>PK負</th><th>負</th><th>得</th><th>失</th><th>差</th></tr></thead>
+          <tbody>`;
+        groups[g].forEach(row => {
+          const isNiigata = row.team.includes("新潟");
+          const isKumamoto = row.team.includes("熊本");
+          const cls = isNiigata ? "standing-niigata" : isKumamoto ? "standing-kumamoto" : "";
+          html += `<tr class="${cls}">
+            <td>${row.rank}</td><td class="standing-team">${row.team}</td>
+            <td><strong>${row.points}</strong></td><td>${row.played}</td>
+            <td>${row.won}</td><td>${row.pk_won||"-"}</td><td>${row.pk_lost||"-"}</td>
+            <td>${row.lost}</td><td>${row.goals_for}</td><td>${row.goals_against}</td>
+            <td>${row.goal_diff}</td></tr>`;
+        });
+        html += `</tbody></table>`;
+      });
+
+      const now = new Date().toLocaleString("ja-JP");
+      html += `<p style="text-align:center;font-size:0.7rem;color:#999;margin-top:12px;">更新: ${now}</p>`;
+      container.innerHTML = html;
+    } catch (e) {
+      container.innerHTML = `<div style="text-align:center;padding:40px;color:#e74c3c;">取得に失敗しました。<br>再度お試しください。</div>`;
+    }
+  }
+
+  // アプリ起動時にバックグラウンドで結果同期（3秒後）
+  setTimeout(syncResultsFromGAS, 3000);
+
 });
+
 
 window.switchChantClub = function(club, btn) {
   // Update buttons

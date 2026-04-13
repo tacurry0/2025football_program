@@ -479,3 +479,55 @@ html, body {
 .parsed-standings-table tr:hover td {
   background: rgba(255,255,255,0.05);
 }
+
+/* ===== STANDINGS TABLE ===== */
+.standings-container { overflow-y: auto; }
+
+.standings-group-title {
+  background: linear-gradient(135deg, var(--primary,#6c63ff), #8b5cf6);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin: 14px 10px 6px;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+  margin-bottom: 6px;
+}
+.standings-table th {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-secondary, #666);
+  font-weight: 700;
+  padding: 5px 3px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.standings-table td {
+  padding: 6px 3px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.standings-table td.standing-team {
+  text-align: left;
+  padding-left: 8px;
+  font-weight: 600;
+  max-width: 100px;
+}
+.standings-table tr.standing-niigata {
+  background: rgba(0, 80, 200, 0.08);
+  font-weight: 700;
+}
+.standings-table tr.standing-kumamoto {
+  background: rgba(220, 30, 30, 0.08);
+  font-weight: 700;
+}
+.standings-table tr.standing-niigata td,
+.standings-table tr.standing-kumamoto td {
+  color: var(--text-main, #111);
+}
