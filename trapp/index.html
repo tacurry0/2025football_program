@@ -60,6 +60,10 @@
           <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
           <span class="m-label">順位表</span>
         </button>
+        <button class="menu-card" id="menu-dashboard">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+          <span class="m-label">ダッシュボード</span>
+        </button>
         <button class="menu-card" id="menu-links">
           <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
           <span class="m-label">リンク集</span>
@@ -468,6 +472,17 @@ Power to the ROSSO right on !</div>
       <div id="standings-content" style="padding:12px 0;">
         <div style="text-align:center;padding:40px;color:#888;">読み込み中...</div>
       </div>
+    </div>
+  </div>
+
+  <!-- 🏠 Dashboard Overlay -->
+  <div id="dashboard-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>🏟 MATCHDAY DASHBOARD</h3>
+      <button class="close-pane">✕</button>
+    </div>
+    <div class="pane-content dash-pane-content" id="dashboard-content">
+      <div style="text-align:center;padding:40px;color:#888;">読み込み中...</div>
     </div>
   </div>
 

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+﻿document.addEventListener("DOMContentLoaded", () => {
   const feedSlider = document.getElementById("feed-slider");
   const calendarBody = document.getElementById("calendar-body");
   const ultraFeed = document.getElementById("ultra-feed");
@@ -1137,29 +1137,92 @@ document.addEventListener("DOMContentLoaded", () => {
         const bi = GROUP_ORDER.findIndex(k => b.includes(k));
         return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
       });
-      let html = "";
-      sortedGroups.forEach(g => {
-        html += `<div class="standings-group-title">${g}</div>
-        <table class="standings-table">
-          <thead><tr><th>順</th><th>チーム</th><th>勝点</th><th>試合</th><th>勝</th><th>PK勝</th><th>PK負</th><th>負</th><th>得</th><th>失</th><th>差</th></tr></thead>
-          <tbody>`;
-        groups[g].forEach(row => {
-          const isNiigata = row.team.includes("新潟");
-          const isKumamoto = row.team.includes("熊本");
-          const cls = isNiigata ? "standing-niigata" : isKumamoto ? "standing-kumamoto" : "";
-          html += `<tr class="${cls}">
-            <td>${row.rank}</td><td class="standing-team">${row.team}</td>
-            <td><strong>${row.points}</strong></td><td>${row.played}</td>
-            <td>${row.won}</td><td>${row.pk_won||"-"}</td><td>${row.pk_lost||"-"}</td>
-            <td>${row.lost}</td><td>${row.goals_for}</td><td>${row.goals_against}</td>
-            <td>${row.goal_diff}</td></tr>`;
-        });
-        html += `</tbody></table>`;
-      });
+      // カラム定義
+      const COLS = [
+        { label: '順',    key: 'rank',           type: 'num' },
+        { label: 'チーム', key: 'team',           type: 'str' },
+        { label: '勝点',  key: 'points',          type: 'num' },
+        { label: '試合',  key: 'played',          type: 'num' },
+        { label: '勝',    key: 'won',             type: 'num' },
+        { label: 'PK勝',  key: 'pk_won',          type: 'num' },
+        { label: 'PK負',  key: 'pk_lost',         type: 'num' },
+        { label: '負',    key: 'lost',            type: 'num' },
+        { label: '得',    key: 'goals_for',       type: 'num' },
+        { label: '失',    key: 'goals_against',   type: 'num' },
+        { label: '差',    key: 'goal_diff',       type: 'num' },
+      ];
 
-      const now = new Date().toLocaleString("ja-JP");
-      html += `<p style="text-align:center;font-size:0.7rem;color:#999;margin-top:12px;">更新: ${now}</p>`;
-      container.innerHTML = html;
+      // ソート状態をグループ毎に管理
+      const sortState = {};
+      sortedGroups.forEach(g => { sortState[g] = { key: 'rank', dir: 'asc' }; });
+
+      function buildGroupTable(groupName, rows) {
+        const { key: sKey, dir: sDir } = sortState[groupName];
+        const sorted = [...rows].sort((a, b) => {
+          const col = COLS.find(c => c.key === sKey);
+          if (!col) return 0;
+          if (col.type === 'str') {
+            const av = (a[sKey] || '').toString();
+            const bv = (b[sKey] || '').toString();
+            return sDir === 'asc' ? av.localeCompare(bv, 'ja') : bv.localeCompare(av, 'ja');
+          }
+          const av = parseFloat(a[sKey]) || 0;
+          const bv = parseFloat(b[sKey]) || 0;
+          return sDir === 'asc' ? av - bv : bv - av;
+        });
+        const thHTML = COLS.map(c => {
+          const isSorted = c.key === sKey;
+          const cls = isSorted ? (sDir === 'asc' ? 'sort-asc' : 'sort-desc') : '';
+          return '<th class="' + cls + '" data-key="' + c.key + '" data-group="' + groupName + '">' + c.label + '</th>';
+        }).join('');
+        const tbodyHTML = sorted.map(row => {
+          const isNiigata = (row.team || '').includes('新潟');
+          const isKumamoto = (row.team || '').includes('熊本');
+          const trcls = isNiigata ? 'standing-niigata' : isKumamoto ? 'standing-kumamoto' : '';
+          return '<tr class="' + trcls + '">'
+            + '<td class="col-rank">' + row.rank + '</td>'
+            + '<td class="standing-team">' + row.team + '</td>'
+            + '<td class="col-pts"><strong>' + row.points + '</strong></td>'
+            + '<td>' + row.played + '</td>'
+            + '<td>' + row.won + '</td>'
+            + '<td>' + (row.pk_won || '-') + '</td>'
+            + '<td>' + (row.pk_lost || '-') + '</td>'
+            + '<td>' + row.lost + '</td>'
+            + '<td>' + row.goals_for + '</td>'
+            + '<td>' + row.goals_against + '</td>'
+            + '<td>' + row.goal_diff + '</td>'
+            + '</tr>';
+        }).join('');
+        return '<div class="standings-group-title">' + groupName + '</div>'
+          + '<table class="standings-table" data-group="' + groupName + '">'
+          + '<thead><tr>' + thHTML + '</tr></thead>'
+          + '<tbody>' + tbodyHTML + '</tbody>'
+          + '</table>';
+      }
+
+      function renderAll() {
+        const now = new Date().toLocaleString("ja-JP");
+        let html = sortedGroups.map(g => buildGroupTable(g, groups[g])).join('');
+        html += '<p style="text-align:center;font-size:0.75rem;color:#999;margin-top:16px;padding-bottom:8px;">更新: ' + now + '</p>';
+        container.innerHTML = html;
+        // ソートクリックイベントを再バインド
+        container.querySelectorAll('.standings-table th[data-key]').forEach(th => {
+          th.onclick = () => {
+            const group = th.dataset.group;
+            const key = th.dataset.key;
+            const cur = sortState[group];
+            if (cur.key === key) {
+              cur.dir = cur.dir === 'asc' ? 'desc' : 'asc';
+            } else {
+              cur.key = key;
+              cur.dir = (key === 'team' || key === 'lost' || key === 'goals_against') ? 'asc' : 'desc';
+            }
+            renderAll();
+          };
+        });
+      }
+
+      renderAll();
     } catch (e) {
       container.innerHTML = `<div style="text-align:center;padding:40px;color:#e74c3c;">取得に失敗しました。<br>再度お試しください。</div>`;
     }

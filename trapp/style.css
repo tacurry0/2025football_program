@@ -484,50 +484,90 @@ html, body {
 .standings-container { overflow-y: auto; }
 
 .standings-group-title {
-  background: linear-gradient(135deg, var(--primary,#6c63ff), #8b5cf6);
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 800;
-  letter-spacing: 1px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  margin: 14px 10px 6px;
+  letter-spacing: 1.5px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  margin: 16px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .standings-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.72rem;
-  margin-bottom: 6px;
+  font-size: 0.92rem;
+  margin-bottom: 8px;
 }
 .standings-table th {
-  background: rgba(0,0,0,0.05);
-  color: var(--text-secondary, #666);
-  font-weight: 700;
-  padding: 5px 3px;
+  background: rgba(0,0,0,0.06);
+  color: #555;
+  font-weight: 800;
+  padding: 10px 5px;
   text-align: center;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background 0.15s;
+}
+.standings-table th:hover {
+  background: rgba(0,0,0,0.1);
+}
+.standings-table th.sort-asc::after {
+  content: ' ▲';
+  font-size: 0.65rem;
+  color: var(--albirex-orange);
+}
+.standings-table th.sort-desc::after {
+  content: ' ▼';
+  font-size: 0.65rem;
+  color: var(--albirex-orange);
 }
 .standings-table td {
-  padding: 6px 3px;
+  padding: 11px 5px;
   text-align: center;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.95rem;
+}
+.standings-table tbody tr:hover td {
+  background: rgba(0,0,0,0.03);
 }
 .standings-table td.standing-team {
   text-align: left;
-  padding-left: 8px;
-  font-weight: 600;
-  max-width: 100px;
+  padding-left: 10px;
+  font-weight: 700;
+  max-width: 110px;
+  font-size: 0.9rem;
+}
+.standings-table td.col-rank {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #444;
+}
+.standings-table td.col-pts strong {
+  font-size: 1.05rem;
 }
 .standings-table tr.standing-niigata {
-  background: rgba(0, 80, 200, 0.08);
+  background: rgba(var(--albirex-orange-rgb), 0.12);
   font-weight: 700;
 }
 .standings-table tr.standing-kumamoto {
-  background: rgba(220, 30, 30, 0.08);
+  background: rgba(var(--roasso-red-rgb), 0.10);
   font-weight: 700;
 }
-.standings-table tr.standing-niigata td,
+.standings-table tr.standing-niigata td {
+  color: #b84a00;
+}
 .standings-table tr.standing-kumamoto td {
+  color: #9a0000;
+}
+.standings-table tr.standing-niigata td.standing-team,
+.standings-table tr.standing-kumamoto td.standing-team {
   color: var(--text-main, #111);
 }
