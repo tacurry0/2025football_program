@@ -530,19 +530,19 @@ html, body {
   color: var(--albirex-orange);
 }
 .standings-table td {
-  padding: 11px 5px;
+  padding: 11px 4px;
   text-align: center;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 .standings-table tbody tr:hover td {
   background: rgba(0,0,0,0.03);
 }
 .standings-table td.standing-team {
   text-align: left;
-  padding-left: 10px;
+  padding-left: 6px;
   font-weight: 700;
-  max-width: 110px;
   font-size: 0.9rem;
 }
 .standings-table td.col-rank {

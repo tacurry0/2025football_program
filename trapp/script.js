@@ -670,6 +670,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     // Bind new quick links
+    const btnFeed = document.getElementById("dash-to-feed");
+    const btnCal = document.getElementById("dash-to-calendar");
+    if (btnFeed) btnFeed.onclick = () => switchMode("feed");
+    if (btnCal) btnCal.onclick = () => switchMode("calendar");
+    
     document.getElementById("dash-to-standings").onclick = () => {
        openSubPane("standings-overlay");
        loadStandings();
@@ -1368,41 +1373,43 @@ document.addEventListener("DOMContentLoaded", () => {
           if (mDateStr !== r.date) return;
 
           const opp = m.opponent || "";
-          // 試合日が一致＋相手チームが略称に一致
           const isNiigata = m.club === "niigata";
           const myKw = isNiigata ? "新潟" : "熊本";
-          const oppKw = isNiigata ? awayKw : homeKw;
 
-          // GAS結果のhome=新潟 or niigata側がhome
-          let myScore, oppScore;
-          if (r.home.includes(myKw) || opp.includes(oppKw) || opp.includes(isNiigata ? homeKw : awayKw)) {
-            if (opp.includes(homeKw) || opp.includes(awayKw) || 
-                opp.includes(r.home.substring(0,2)) || opp.includes(r.away.substring(0,2))) {
-              // スコア割り当て: 自クラブがhomeかawayか判断
-              if (r.home.includes(myKw) || r.home.substring(0,2) === myKw.substring(0,2)) {
-                myScore = r.home_score;
-                oppScore = r.away_score;
-              } else {
-                myScore = r.away_score;
-                oppScore = r.home_score;
+          let isMatch = false;
+          let myScore = null, oppScore = null;
+          let myPk = null, oppPk = null;
+
+          if (r.home.includes(myKw) && (opp.includes(awayKw) || opp.includes(r.away.substring(0,2)))) {
+              isMatch = true;
+              myScore = r.home_score;
+              oppScore = r.away_score;
+              if (r.pk) {
+                 const pks = r.pk.split(" PK ");
+                 if (pks.length === 2) { myPk = pks[0]; oppPk = pks[1]; }
               }
+          } 
+          else if (r.away.includes(myKw) && (opp.includes(homeKw) || opp.includes(r.home.substring(0,2)))) {
+              isMatch = true;
+              myScore = r.away_score;
+              oppScore = r.home_score;
+              if (r.pk) {
+                 const pks = r.pk.split(" PK ");
+                 if (pks.length === 2) { myPk = pks[1]; oppPk = pks[0]; }
+              }
+          }
+
+          if (isMatch) {
               const mId = `${m.date}_${m.club}_${m.opponent}`;
-              // 既にスコアが入力済みの場合は上書きしない
               if (!localStorage.getItem(`score_my_${mId}`)) {
-                localStorage.setItem(`score_my_${mId}`, myScore);
-                localStorage.setItem(`score_opp_${mId}`, oppScore);
-                if (r.pk) {
-                  const pkParts = r.pk.split(" PK ");
-                  if (pkParts.length === 2) {
-                    const myPk = r.home.includes(myKw) ? pkParts[0] : pkParts[1];
-                    const oppPk = r.home.includes(myKw) ? pkParts[1] : pkParts[0];
-                    localStorage.setItem(`score_my_pk_${mId}`, myPk);
-                    localStorage.setItem(`score_opp_pk_${mId}`, oppPk);
+                  localStorage.setItem(`score_my_${mId}`, myScore);
+                  localStorage.setItem(`score_opp_${mId}`, oppScore);
+                  if (myPk && oppPk) {
+                     localStorage.setItem(`score_my_pk_${mId}`, myPk);
+                     localStorage.setItem(`score_opp_pk_${mId}`, oppPk);
                   }
-                }
-                synced++;
+                  synced++;
               }
-            }
           }
         });
       });
@@ -1510,10 +1517,12 @@ document.addEventListener("DOMContentLoaded", () => {
             + '</tr>';
         }).join('');
         return '<div class="standings-group-title">' + groupName + '</div>'
-          + '<table class="standings-table" data-group="' + groupName + '">'
+          + '<div style="border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.03); margin:10px 0 20px;">'
+          + '<div style="width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;">'
+          + '<table class="standings-table" data-group="' + groupName + '" style="margin:0; box-shadow:none; border-radius:0;">'
           + '<thead><tr>' + thHTML + '</tr></thead>'
           + '<tbody>' + tbodyHTML + '</tbody>'
-          + '</table>';
+          + '</table></div></div>';
       }
 
       function renderAll() {
