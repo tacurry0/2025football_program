@@ -1369,8 +1369,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // scheduleData から新潟 or 熊本が関わる試合をマッチング
         scheduleData.forEach(m => {
-          const mDateStr = m.date; // "2026-04-04"
-          if (mDateStr !== r.date) return;
+          // 節番号でのマッチングを試行 (MW7 -> 7)
+          const mSec = parseInt((m.matchweek || "").replace(/\D/g, ""));
+          const rSec = parseInt(r.section);
+          
+          // 節番号が一致するか、日付が完全一致する場合を候補とする
+          const isSameSection = !isNaN(mSec) && mSec === rSec;
+          const isSameDate = (m.date === r.date);
+          
+          if (!isSameSection && !isSameDate) return;
+          
+          // 節番号一致の場合でも、念のため開催日が3日以上離れていないか確認（別年度の誤爆防止）
+          if (isSameSection) {
+            const dM = new Date(m.date);
+            const dR = new Date(r.date);
+            const diffDays = Math.abs(dM - dR) / (1000 * 60 * 60 * 24);
+            if (diffDays > 3) return; 
+          }
 
           const isNiigata = m.club === "niigata";
           const myKw = isNiigata ? "新潟" : "熊本";
