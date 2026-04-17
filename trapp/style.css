@@ -575,11 +575,11 @@ html, body {
    7. 🏟 DASHBOARD VIEW
    ========================================= */
 #ultra-dashboard {
-  width: 100%; height: 100%; padding: 20px 15px 40px; box-sizing: border-box;
-  overflow-y: hidden; flex-direction: column; align-items: center; justify-content: center; gap: 15px;
+  width: 100%; height: 100%; padding: 75px 15px 20px; box-sizing: border-box;
+  overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 15px;
 }
 @supports (padding: env(safe-area-inset-top)) {
-  #ultra-dashboard { padding-top: calc(20px + env(safe-area-inset-top)); }
+  #ultra-dashboard { padding-top: calc(75px + env(safe-area-inset-top)); }
 }
 
 /* Dashboard Shell Tweaks (Hide Header/Footer) */
@@ -626,7 +626,7 @@ body[data-mode="dashboard"] .header-title {
 }
 
 #dashboard-cards-container {
-  width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 5px; flex-shrink: 1; min-height: 0;
+  width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 5px; flex-shrink: 0;
 }
 
 .dash-card {
