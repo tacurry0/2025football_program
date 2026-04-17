@@ -809,12 +809,15 @@ document.addEventListener("DOMContentLoaded", () => {
                       const opp = m.opponent;
                       const existing = pastOptions.find(r => r.date === m.date && (r.home.includes(teamKw) || r.away.includes(teamKw)));
                       if (!existing) {
+                         const pkM = localStorage.getItem(`score_my_pk_${mId}`);
+                         const pkO = localStorage.getItem(`score_opp_pk_${mId}`);
                          pastOptions.push({
                             date: m.date,
                             home: isHome ? teamKw : opp,
                             away: isHome ? opp : teamKw,
                             home_score: isHome ? sM : sO,
-                            away_score: isHome ? sO : sM
+                            away_score: isHome ? sO : sM,
+                            pk: (pkM && pkO) ? (isHome ? `${pkM} PK ${pkO}` : `${pkO} PK ${pkM}`) : ""
                          });
                       }
                    }
@@ -827,13 +830,33 @@ document.addEventListener("DOMContentLoaded", () => {
              
              const lastM = pastOptions[pastOptions.length - 1];
              const isHome = lastM.home.includes(teamKw);
-             const sM = isHome ? lastM.home_score : lastM.away_score;
-             const sO = isHome ? lastM.away_score : lastM.home_score;
+             const sM = Number(isHome ? lastM.home_score : lastM.away_score);
+             const sO = Number(isHome ? lastM.away_score : lastM.home_score);
              const opName = isHome ? lastM.away : lastM.home;
+             
              let wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
-             if (Number(sM) < Number(sO)) wl = "<span style='color:var(--text-main);font-weight:900;'>●</span>";
-             if (Number(sM) === Number(sO)) wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
-             return `<span style="color:var(--text-grey);font-size:0.75rem;margin-right:4px;">vs ${opName}</span> ${sM}-${sO} ${wl}`;
+             let pkDisplay = "";
+
+             if (sM < sO) {
+                wl = "<span style='color:var(--text-main);font-weight:900;'>●</span>";
+             } else if (sM === sO) {
+                if (lastM.pk) {
+                   const pkMatch = lastM.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+                   if (pkMatch) {
+                      const pkM = Number(isHome ? pkMatch[1] : pkMatch[2]);
+                      const pkO = Number(isHome ? pkMatch[2] : pkMatch[1]);
+                      pkDisplay = ` (${pkM}PK${pkO})`;
+                      if (pkM > pkO) wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
+                      else if (pkM < pkO) wl = "<span style='color:var(--text-main);font-weight:900;'>●</span>";
+                      else wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
+                   } else {
+                      wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
+                   }
+                } else {
+                   wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
+                }
+             }
+             return `<span style="color:var(--text-grey);font-size:0.75rem;margin-right:4px;">vs ${opName}</span> ${sM}-${sO}${pkDisplay} ${wl}`;
           };
           
           const recentRow = document.getElementById(`dash-recent-${m.club}`);
