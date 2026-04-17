@@ -1372,7 +1372,6 @@ document.addEventListener("DOMContentLoaded", () => {
           const mDateStr = m.date; // "2026-04-04"
           if (mDateStr !== r.date) return;
 
-          const opp = m.opponent || "";
           const isNiigata = m.club === "niigata";
           const myKw = isNiigata ? "新潟" : "熊本";
 
@@ -1380,7 +1379,7 @@ document.addEventListener("DOMContentLoaded", () => {
           let myScore = null, oppScore = null;
           let myPk = null, oppPk = null;
 
-          if (r.home.includes(myKw) && (opp.includes(awayKw) || opp.includes(r.away.substring(0,2)))) {
+          if (r.home.includes(myKw) && !r.away.includes(myKw)) {
               isMatch = true;
               myScore = r.home_score;
               oppScore = r.away_score;
@@ -1389,7 +1388,7 @@ document.addEventListener("DOMContentLoaded", () => {
                  if (pks.length === 2) { myPk = pks[0]; oppPk = pks[1]; }
               }
           } 
-          else if (r.away.includes(myKw) && (opp.includes(homeKw) || opp.includes(r.home.substring(0,2)))) {
+          else if (r.away.includes(myKw) && !r.home.includes(myKw)) {
               isMatch = true;
               myScore = r.away_score;
               oppScore = r.home_score;
@@ -1401,15 +1400,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (isMatch) {
               const mId = `${m.date}_${m.club}_${m.opponent}`;
-              if (!localStorage.getItem(`score_my_${mId}`)) {
-                  localStorage.setItem(`score_my_${mId}`, myScore);
-                  localStorage.setItem(`score_opp_${mId}`, oppScore);
-                  if (myPk && oppPk) {
-                     localStorage.setItem(`score_my_pk_${mId}`, myPk);
-                     localStorage.setItem(`score_opp_pk_${mId}`, oppPk);
-                  }
-                  synced++;
+              localStorage.setItem(`score_my_${mId}`, myScore);
+              localStorage.setItem(`score_opp_${mId}`, oppScore);
+              if (myPk && oppPk) {
+                 localStorage.setItem(`score_my_pk_${mId}`, myPk);
+                 localStorage.setItem(`score_opp_pk_${mId}`, oppPk);
               }
+              synced++;
           }
         });
       });
