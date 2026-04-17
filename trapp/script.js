@@ -67,6 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (mode === "calendar") renderCalendar();
     if (mode === "dashboard") renderDashboard();
+    if (mode === "feed") {
+       requestAnimationFrame(() => scrollToIndex(currentIndex));
+    }
     sideMenu.classList.remove("active");
   }
 
@@ -602,6 +605,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let html = "";
     const renderCard = (m, clubName, mainColor, myShortName) => {
         if (!m) return `<div class="dash-card"><div style="padding:20px;text-align:center;color:#888;">今後の試合予定はありません</div></div>`;
+        const isAtt = localStorage.getItem('attend_' + m.date + '_' + m.club + '_' + m.opponent) === "true";
         const isHome = isHomeMatch(m.club, m.venue);
         const haBadge = isHome ? '<span class="sheet-ha badge-home">HOME</span>' : '<span class="sheet-ha badge-away">AWAY</span>';
         const J_CLUB_ENG = {"北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC"};
@@ -619,6 +623,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
                        <span class="dash-mw">${m.matchweek || "EX"}</span>
                        <span class="dash-date">${m.date} ${m.day} ${m.time}</span>
+                       ${isAtt ? '<span class="match-att-emoji" style="margin-left:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}
                     </div>
                     <div class="dash-venue-row" style="margin:0;">
                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-grey)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -789,19 +794,46 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           
           const findPrevStr = (teamKw) => {
-             // Search for matches where home or away includes teamKw, and home_score is present
-             const pastOptions = data.filter(r => (r.home.includes(teamKw) || r.away.includes(teamKw)) && r.home_score !== "" && typeof r.home_score !== "undefined");
+             // Search for matches in GAS data
+             let pastOptions = data.filter(r => (r.home.includes(teamKw) || r.away.includes(teamKw)) && r.home_score !== "" && typeof r.home_score !== "undefined");
+             
+             // Inject local manual entries for our clubs
+             const myClub = teamKw === "新潟" ? "niigata" : (teamKw === "熊本" ? "kumamoto" : null);
+             if (myClub) {
+                scheduleData.filter(m => m.club === myClub).forEach(m => {
+                   const mId = `${m.date}_${m.club}_${m.opponent}`;
+                   const sM = localStorage.getItem(`score_my_${mId}`);
+                   const sO = localStorage.getItem(`score_opp_${mId}`);
+                   if (sM && sO) {
+                      const isHome = isHomeMatch(m.club, m.venue);
+                      const opp = m.opponent;
+                      const existing = pastOptions.find(r => r.date === m.date && (r.home.includes(teamKw) || r.away.includes(teamKw)));
+                      if (!existing) {
+                         pastOptions.push({
+                            date: m.date,
+                            home: isHome ? teamKw : opp,
+                            away: isHome ? opp : teamKw,
+                            home_score: isHome ? sM : sO,
+                            away_score: isHome ? sO : sM
+                         });
+                      }
+                   }
+                });
+             }
+
              if (pastOptions.length === 0) return "-";
-             // Get the last one chronologically Assuming GAS list goes chronologically downward
+             // Sort by date upward
+             pastOptions.sort((a,b) => new Date(a.date) - new Date(b.date));
+             
              const lastM = pastOptions[pastOptions.length - 1];
              const isHome = lastM.home.includes(teamKw);
              const sM = isHome ? lastM.home_score : lastM.away_score;
              const sO = isHome ? lastM.away_score : lastM.home_score;
              const opName = isHome ? lastM.away : lastM.home;
-             let wl = "<span style='color:#34c759;font-weight:900;'>〇</span>";
-             if (Number(sM) < Number(sO)) wl = "<span style='color:#ff3b30;font-weight:900;'>●</span>";
-             if (Number(sM) === Number(sO)) wl = "<span style='color:#8e8e93;font-weight:900;'>△</span>";
-             return `<span style="color:var(--text-grey);font-size:0.7rem;margin-right:3px;">vs${opName.substring(0,2)}</span> ${sM}-${sO} ${wl}`;
+             let wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
+             if (Number(sM) < Number(sO)) wl = "<span style='color:var(--text-main);font-weight:900;'>●</span>";
+             if (Number(sM) === Number(sO)) wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
+             return `<span style="color:var(--text-grey);font-size:0.75rem;margin-right:4px;">vs ${opName}</span> ${sM}-${sO} ${wl}`;
           };
           
           const recentRow = document.getElementById(`dash-recent-${m.club}`);
@@ -835,13 +867,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const isAtt = localStorage.getItem(`attend_${mId}`) === "true";
         const sMy = localStorage.getItem(`score_my_${mId}`) || "", sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
         const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "", sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
-        let res = null; if (sMy !== "" && sOpp !== "") {
-          const ms = Number(sMy), os = Number(sOpp); if (ms > os) res = "win"; else if (ms < os) res = "lose"; else if (sPkM !== "" && sPkO !== "") res = Number(sPkM) > Number(sPkO) ? "pk-win" : "pk-lose"; else res = "draw";
+        let res = null; 
+        let scoreDisplay = "";
+        
+        if (sMy !== "" && sOpp !== "") {
+          const ms = Number(sMy), os = Number(sOpp);
+          if (sPkM !== "" && sPkO !== "") {
+             scoreDisplay = `(${sPkM}) ${ms} - ${os} (${sPkO})`;
+             if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = Number(sPkM) > Number(sPkO) ? "pk-win" : "pk-lose";
+          } else {
+             scoreDisplay = `${ms} - ${os}`;
+             if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = "draw";
+          }
         }
         const isHome = isHomeMatch(match.club, match.venue);
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
-        card.innerHTML = `<div class="result-badge ${res ? 'badge-'+res : ''}">${res ? res.replace("-"," ").toUpperCase() : ""}</div><div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
+        
+        let resultHtml = "";
+        if (res) {
+          resultHtml = `
+            <div class="result-box">
+              <div class="result-badge badge-${res}">${res.replace("-"," ").toUpperCase()}</div>
+              <div class="match-score-text">${scoreDisplay}</div>
+            </div>`;
+        }
+        
+        card.innerHTML = `${resultHtml}<div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
         card.onclick = () => openDetailSheet(match);
         section.appendChild(card);
       });
@@ -1324,7 +1376,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   // 🔄 GAS API 自動同期（試合結果 + 順位表）
   // =========================================================
-  const GAS_URL = "https://script.google.com/macros/s/AKfycbzK_DTYbg8Zzibe3uVutxEaRebQHvB1vZwz9A1s74PANFU4osrkFtLbfewwteRFZ_1o/exec";
+  const gasUrl = 'https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec';
 
   // チーム名の略称マップ（GAS結果→scheduleData の opponent に含まれる文字列）
   const TEAM_ABBR = {

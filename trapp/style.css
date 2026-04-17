@@ -199,12 +199,19 @@ html, body {
 .match-date-venue { font-size: 0.7rem; font-weight: 700; color: var(--text-grey); letter-spacing: 0.02em; }
 .match-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2px; }
 
-/* Result Badge (Restored) */
-.result-badge {
-  position: absolute; top: 18px; right: 22px; font-family: var(--font-kick); font-size: 0.9rem; 
-  font-weight: 900; padding: 4px 10px; border-radius: 6px; color: white; display: none;
+/* Result Badge Blocks */
+.result-box {
+  position: absolute; top: 18px; right: 22px; 
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
 }
-.result-badge:not(:empty) { display: block; }
+.result-badge {
+  font-family: var(--font-kick); font-size: 0.9rem; 
+  font-weight: 900; padding: 4px 10px; border-radius: 6px; color: white;
+}
+.match-score-text {
+  font-family: var(--font-kick); font-size: 1.45rem; font-weight: 900; 
+  color: var(--text-main); letter-spacing: -0.02em; line-height: 1;
+}
 .badge-win { background: #34c759; }
 .badge-lose { background: #ff3b30; }
 .badge-draw { background: #8e8e93; }

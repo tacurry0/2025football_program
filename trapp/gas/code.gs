@@ -31,14 +31,40 @@ function doGet(e) {
 
 function test() {
   console.log("--- 順位表のテスト (J2) ---");
-  const standings = fetchStandings('j2');
-  console.log("取得件数: " + standings.length);
-  if (standings.length > 0) console.log(JSON.stringify(standings.slice(0, 3), null, 2));
+  try {
+    const standings = fetchStandings('j2');
+    console.log("取得件数: " + standings.length);
+    if (standings.length > 0) {
+      console.log("先頭3件:");
+      console.log(JSON.stringify(standings.slice(0, 3), null, 2));
+    }
+  } catch (e) {
+    console.error("順位表取得エラー: " + e.message);
+  }
 
-  console.log("--- 試合結果のテスト (J2) ---");
-  const results = fetchResults('j2');
-  console.log("取得件数: " + results.length);
-  if (results.length > 0) console.log(JSON.stringify(results.slice(0, 3), null, 2));
+  console.log("\n--- 試合結果のテスト (J2) ---");
+  try {
+    const results = fetchResults('j2');
+    console.log("取得件数: " + results.length);
+    if (results.length > 0) {
+      console.log("最新3件:");
+      // ソートして最新を表示
+      const sorted = results.sort((a, b) => b.section - a.section || new Date(b.date) - new Date(a.date));
+      console.log(JSON.stringify(sorted.slice(0, 3), null, 2));
+      
+      // 重複チェック（デバッグ用）
+      const keys = {};
+      let dups = 0;
+      results.forEach(r => {
+        const k = r.date + r.home + r.away;
+        if (keys[k]) dups++;
+        keys[k] = true;
+      });
+      console.log("重複検出数: " + dups + " (0であれば正常)");
+    }
+  } catch (e) {
+    console.error("試合結果取得エラー: " + e.message);
+  }
 }
 
 // キャッシュを手動でクリアする（GASエディタで実行）
@@ -221,7 +247,7 @@ function fetchResults(league) {
   };
 
   // J2J3百年構想は週2節ペースの場合があるため week*2 で推定
-  const seasonStart = new Date('2026-03-08');
+  const seasonStart = new Date('2026-02-01');
   const today = new Date();
   const daysElapsed = Math.floor((today - seasonStart) / (24 * 60 * 60 * 1000));
   const estimatedSection = Math.max(1, Math.min(Math.ceil(daysElapsed / 3.5), 40));
@@ -259,69 +285,94 @@ function fetchResults(league) {
 
 // 節ページHTMLからスコアを抽出
 // 実測: 試合リンクは相対URL /match/j2j3/2026/MMDDNN/live/ 形式
+/**
+ * 指定された節のHTMLを解析して試合結果を抽出
+ */
 function parseSectionResults(html, sectionNum) {
   var results = [];
-  var seen = {};
-  var liveUrls = [];
+  var seenMatches = {}; // 最終的な重複チェック用 (date_home_away)
 
-  // 相対URL・絶対URL両方にマッチ（実際のHTMLは相対URLを使用）
+  // 試合詳細リンクを全て探す
   var liveRegex = /href="([^"]+\/live\/)"/g;
-  var hm;
-  while ((hm = liveRegex.exec(html)) !== null) {
-    var url = hm[1];
-    // 日付パターン /YYYY/MMDDNN/ を含むものだけ（ナビゲーション等を除外）
+  var match;
+
+  while ((match = liveRegex.exec(html)) !== null) {
+    var url = match[1];
+    var urlPos = match.index;
+
+    // 不正なURLはスキップ
     if (!/\/\d{4}\/\d{4,}\/live\//.test(url)) continue;
-    if (!seen[url]) {
-      seen[url] = true;
-      liveUrls.push(url);
+
+    // URLの前後2000文字を取得（十分なコンテキストを確保）
+    var win = html.substring(Math.max(0, urlPos - 1000), Math.min(html.length, urlPos + 1000));
+
+    // 「試合終了」が含まれていない場合はスキップ
+    if (!win.includes('試合終了')) continue;
+
+    // 1. チーム名の抽出
+    var homeTeam = '', awayTeam = '';
+    // title属性から抽出を試みる (最も確実)
+    var titleMatch = win.match(/(?:title|alt|TITLE|ALT)="\s*([^"<>]+?)\s*(?:vs|VS|vs\.|v\.s\.)\s*([^"<>]+?)(?:の試合詳細)?"/i);
+    
+    if (titleMatch) {
+      homeTeam = titleMatch[1].trim();
+      awayTeam = titleMatch[2].trim();
+    } else {
+      // タグをクリーニングしてテキストから抽出を試みる (フォールバック)
+      var cleanWin = win.replace(/<[^>]+>/g, ' ');
+      var textMatch = cleanWin.match(/([^\s()「」【】]{1,20})\s*(?:vs|VS|vs\.|v\.s\.)\s*([^\s()「」【】]{1,20})/i);
+      if (textMatch) {
+        homeTeam = textMatch[1].trim();
+        awayTeam = textMatch[2].trim();
+      }
     }
-  }
-  console.log('section' + sectionNum + ' live URL数: ' + liveUrls.length);
 
-  liveUrls.forEach(function(url) {
-    // このURLのHTML内の位置を特定
-    var urlPos = html.indexOf('"' + url + '"');
-    if (urlPos === -1) return;
+    if (!homeTeam || !awayTeam) continue;
 
-    // URL周囲4000文字のウィンドウ
-    var win = html.substring(Math.max(0, urlPos - 2000), Math.min(html.length, urlPos + 2000));
-
-    // 試合終了が含まれなければスキップ
-    if (!win.includes('試合終了')) return;
-
-    // チーム名: HOMEvs AWAYの試合詳細
-    var vsMatch = win.match(/([^\s<>"()「」【】]{1,20})vs([^\s<>"()「」【】]{1,20})の試合詳細/);
-    if (!vsMatch) return;
-
-    // スコア: 試合終了の前後の >数字< (1~2桁)
+    // 2. スコアの抽出 (「試合終了」の周辺)
     var finIdx = win.indexOf('試合終了');
-    var before = win.substring(0, finIdx);
-    var after  = win.substring(finIdx);
+    var before = win.substring(Math.max(0, finIdx - 300), finIdx);
+    var after  = win.substring(finIdx, Math.min(win.length, finIdx + 300));
+    
     var homeNums = before.match(/>(\d{1,2})</g) || [];
     var awayNums = after.match(/>(\d{1,2})</g) || [];
+    
     var homeScore = homeNums.length > 0 ? homeNums[homeNums.length - 1].replace(/\D/g, '') : '';
     var awayScore = awayNums.length > 0 ? awayNums[0].replace(/\D/g, '') : '';
 
-    // PK: (1 PK 4) 形式
-    var pkMatch = win.match(/\(\s*(\d+)\s*PK\s*(\d+)\s*\)/i);
-    var pk = pkMatch ? pkMatch[1] + ' PK ' + pkMatch[2] : '';
+    // 3. PKの抽出
+    var pk = '';
+    var pkMatch = win.match(/\(\s*(\d+)\s*(?:PK|pk)\s*(\d+)\s*\)/i);
+    if (pkMatch) {
+      // スコアから300文字以内にある場合のみ採用
+      var pkIdx = win.indexOf(pkMatch[0]);
+      if (Math.abs(pkIdx - finIdx) < 300) {
+        pk = pkMatch[1] + ' PK ' + pkMatch[2];
+      }
+    }
 
-    // 日付: URLの /2026/041110/ から
+    // 4. 日付の抽出 (URLから)
     var dateMatch = url.match(/\/(\d{4})\/(\d{2})(\d{2})\d*\//);
     var date = dateMatch ? dateMatch[1] + '-' + dateMatch[2] + '-' + dateMatch[3] : '';
 
-    results.push({
-      section:    sectionNum,
-      date:       date,
-      home:       vsMatch[1],
-      away:       vsMatch[2],
-      home_score: homeScore,
-      away_score: awayScore,
-      pk:         pk,
-      status:    'finished'
-    });
-  });
+    // 重複チェック
+    var matchKey = date + '_' + homeTeam + '_' + awayTeam;
+    if (!seenMatches[matchKey]) {
+      seenMatches[matchKey] = true;
+      results.push({
+        section:    sectionNum,
+        date:       date,
+        home:       homeTeam,
+        away:       awayTeam,
+        home_score: homeScore,
+        away_score: awayScore,
+        pk:         pk,
+        status:    'finished'
+      });
+    }
+  }
 
+  console.log('節' + sectionNum + ' 解析完了: ' + results.length + '件');
   return results;
 }
 
