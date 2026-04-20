@@ -546,15 +546,57 @@ document.addEventListener("DOMContentLoaded", () => {
     return cachedStandings;
   }
 
+  function syncResultsToLocal(data) {
+    let changed = false;
+    scheduleData.forEach(m => {
+      const kw = m.club === "niigata" ? "新潟" : "熊本";
+      const gObj = data.find(r => r.date === m.date && (r.home.includes(kw) || r.away.includes(kw)));
+      if (gObj && gObj.home_score !== "" && typeof gObj.home_score !== "undefined") {
+        const isHome = gObj.home.includes(kw);
+        const sM = isHome ? gObj.home_score : gObj.away_score;
+        const sO = isHome ? gObj.away_score : gObj.home_score;
+        
+        const mId = `${m.date}_${m.club}_${m.opponent}`;
+        const lMy = localStorage.getItem(`score_my_${mId}`);
+        const lOpp = localStorage.getItem(`score_opp_${mId}`);
+        
+        if (lMy !== String(sM) || lOpp !== String(sO)) {
+          localStorage.setItem(`score_my_${mId}`, sM);
+          localStorage.setItem(`score_opp_${mId}`, sO);
+          if (gObj.pk) {
+             const pkMatch = gObj.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+             if (pkMatch) {
+                const pkM = isHome ? pkMatch[1] : pkMatch[2];
+                const pkO = isHome ? pkMatch[2] : pkMatch[1];
+                localStorage.setItem(`score_my_pk_${mId}`, pkM);
+                localStorage.setItem(`score_opp_pk_${mId}`, pkO);
+             }
+          }
+          changed = true;
+        }
+      }
+    });
+    if (changed) {
+      if (document.getElementById("ultra-feed").classList.contains("active-view") && typeof renderFeed === "function") renderFeed();
+      if (document.getElementById("calendar-view").classList.contains("active-view") && typeof switchMode === "function") switchMode("calendar");
+    }
+  }
+
   async function fetchGasResultsSilently() {
     if (cachedResults) return cachedResults;
     const lSave = localStorage.getItem("trapp_results_cache");
-    if (lSave) { try { cachedResults = JSON.parse(lSave); } catch (e) { } }
+    if (lSave) { 
+      try { 
+        cachedResults = JSON.parse(lSave); 
+        syncResultsToLocal(cachedResults);
+      } catch (e) { } 
+    }
 
     fetchStaticJsonOrFallback("results").then(json => {
       if (json && json.data && JSON.stringify(json.data) !== JSON.stringify(cachedResults)) {
         cachedResults = json.data;
         localStorage.setItem("trapp_results_cache", JSON.stringify(cachedResults));
+        syncResultsToLocal(cachedResults);
         if (currentMode === "dashboard") renderDashboard();
       }
     }).catch(() => { });
@@ -845,7 +887,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const isHome = lastM.home.includes(teamKw);
           const sM = Number(isHome ? lastM.home_score : lastM.away_score);
           const sO = Number(isHome ? lastM.away_score : lastM.home_score);
-          const opName = isHome ? lastM.away : lastM.home;
+          const rawOpName = isHome ? lastM.away : lastM.home;
+          const opName = rawOpName ? rawOpName.replace(/の試合詳細/g, '') : "";
 
           let wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
           let pkDisplay = "";
