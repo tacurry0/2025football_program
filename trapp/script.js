@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const ultraFeed = document.getElementById("ultra-feed");
   const calendarView = document.getElementById("calendar-view");
   const ultraDashboard = document.getElementById("ultra-dashboard");
-  
+
   const prevBtn = document.getElementById("prev-month");
   const nextBtn = document.getElementById("next-month");
   const goTodayBtn = document.getElementById("go-today");
   const activeMonthTitle = document.getElementById("active-month-title");
-  
+
   const toggleNiigata = document.getElementById("toggle-niigata");
   const toggleKumamoto = document.getElementById("toggle-kumamoto");
 
@@ -60,15 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function switchMode(mode) {
     currentMode = mode;
     document.body.setAttribute("data-mode", mode);
-    
+
     if (ultraDashboard) ultraDashboard.className = mode === "dashboard" ? "active-view" : "hidden-view";
     if (ultraFeed) ultraFeed.className = mode === "feed" ? "active-view" : "hidden-view";
     if (calendarView) calendarView.className = mode === "calendar" ? "active-view" : "hidden-view";
-    
+
     if (mode === "calendar") renderCalendar();
     if (mode === "dashboard") renderDashboard();
     if (mode === "feed") {
-       requestAnimationFrame(() => scrollToIndex(currentIndex));
+      requestAnimationFrame(() => scrollToIndex(currentIndex));
     }
     sideMenu.classList.remove("active");
   }
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isActive = (k === "all" && selectedYear === null) || (Number(k) === selectedYear);
       if (yearTabs[k]) yearTabs[k].classList.toggle("active", isActive);
     });
-    
+
     allSections.forEach(sec => {
       const y = Number(sec.dataset.year || 0);
       sec.style.display = (selectedYear === null || y === selectedYear) ? "flex" : "none";
@@ -122,8 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateActiveUI() {
     const scrollLeft = ultraFeed.scrollLeft, width = ultraFeed.clientWidth || window.innerWidth;
     const newIdx = Math.round(scrollLeft / width);
-    if(newIdx !== currentIndex && visibleSections[newIdx]) { 
-      currentIndex = newIdx; 
+    if (newIdx !== currentIndex && visibleSections[newIdx]) {
+      currentIndex = newIdx;
       if (activeMonthTitle) {
         activeMonthTitle.textContent = visibleSections[newIdx].dataset.ym_title || "";
       }
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const activeSec = visibleSections[currentIndex];
     if (!activeSec) return;
     const [year, month] = activeSec.dataset.ym.split("-").map(Number);
-    
+
     calendarBody.innerHTML = "";
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     days.forEach(d => {
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let d = 1; d <= daysInMonth; d++) {
       const cell = document.createElement("div");
       cell.className = "cal-cell";
-      if (year === today.getFullYear() && month === (today.getMonth()+1) && d === today.getDate()) cell.classList.add("today");
+      if (year === today.getFullYear() && month === (today.getMonth() + 1) && d === today.getDate()) cell.classList.add("today");
 
       const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       const dayMatches = matchesInMonth.filter(m => m.date === dateStr);
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const matchContainer = document.createElement("div");
       matchContainer.className = "cal-match-container";
-      
+
       dayMatches.forEach(m => {
         const dot = document.createElement("div");
         const isHome = isHomeMatch(m.club, m.venue);
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `).join("");
     pickerOverlay.classList.add("active");
     pickerBackdrop.classList.add("active");
-    
+
     pickerList.querySelectorAll(".picker-item").forEach(item => {
       item.onclick = () => {
         const m = matches.find(x => x.date === item.dataset.date && x.club === item.dataset.club && x.opponent === item.dataset.opp);
@@ -261,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const J_CLUB_ENG = {
       "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC"
     };
-    
+
     let pkHtml = "";
     if (parseDate(match.date).getFullYear() === 2026) {
       const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
       ${pkHtml}
-      <div class="u-attend-btn ${match.club} ${isAttend?'active':''}" id="attend-toggle">
+      <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
         <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
         <span class="btn-text">観戦予定</span>
       </div>
@@ -334,76 +334,76 @@ document.addEventListener("DOMContentLoaded", () => {
     const mDate = new Date(match.date);
     const now = new Date();
     const diffDays = (mDate - now) / (1000 * 60 * 60 * 24);
-    
+
     // Only fetch and display for matches within -3 to 14 days
     if (diffDays >= -4 && diffDays <= 14) {
-        wArea.style.display = "flex";
+      wArea.style.display = "flex";
 
-        const STADIUM_CITY_MAP = {
-            "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
-            "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
-            "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
-            "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
-            "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
-            "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
-            "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
-            "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
-            "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
-            "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
-            "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
-            "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
-            "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
-            "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
-            "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
-            "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
-            "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
-            "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
-            "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
-            "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
-            "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
-            "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
-        };
-        const searchLocation = STADIUM_CITY_MAP[match.venue] || match.venue;
+      const STADIUM_CITY_MAP = {
+        "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
+        "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
+        "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
+        "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
+        "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
+        "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
+        "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
+        "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
+        "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
+        "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
+        "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
+        "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
+        "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
+        "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
+        "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
+        "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
+        "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
+        "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
+        "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
+        "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
+        "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
+        "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
+      };
+      const searchLocation = STADIUM_CITY_MAP[match.venue] || match.venue;
 
-        (async () => {
-            try {
-                let lat, lon;
-                const cCache = localStorage.getItem('coord_' + searchLocation);
-                if (cCache) {
-                    const c = JSON.parse(cCache); lat = c.lat; lon = c.lon;
-                } else {
-                    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchLocation)}&format=json&limit=1`);
-                    const data = await res.json();
-                    if (data && data[0]) {
-                        lat = data[0].lat; lon = data[0].lon;
-                        localStorage.setItem('coord_' + searchLocation, JSON.stringify({lat, lon}));
-                    }
-                }
-                if (lat !== undefined && lon !== undefined) {
-                    const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&past_days=3&forecast_days=16`);
-                    const wData = await wRes.json();
-                    const dIdx = wData.daily?.time?.indexOf(match.date);
-                    if (dIdx !== undefined && dIdx > -1) {
-                        const code = wData.daily.weather_code[dIdx];
-                        const max = wData.daily.temperature_2m_max[dIdx];
-                        let emoji = "☁️";
-                        if (code <= 1) emoji = "☀️";
-                        else if (code <= 3) emoji = "☁️";
-                        else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
-                        else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
+      (async () => {
+        try {
+          let lat, lon;
+          const cCache = localStorage.getItem('coord_' + searchLocation);
+          if (cCache) {
+            const c = JSON.parse(cCache); lat = c.lat; lon = c.lon;
+          } else {
+            const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchLocation)}&format=json&limit=1`);
+            const data = await res.json();
+            if (data && data[0]) {
+              lat = data[0].lat; lon = data[0].lon;
+              localStorage.setItem('coord_' + searchLocation, JSON.stringify({ lat, lon }));
+            }
+          }
+          if (lat !== undefined && lon !== undefined) {
+            const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&past_days=3&forecast_days=16`);
+            const wData = await wRes.json();
+            const dIdx = wData.daily?.time?.indexOf(match.date);
+            if (dIdx !== undefined && dIdx > -1) {
+              const code = wData.daily.weather_code[dIdx];
+              const max = wData.daily.temperature_2m_max[dIdx];
+              let emoji = "☁️";
+              if (code <= 1) emoji = "☀️";
+              else if (code <= 3) emoji = "☁️";
+              else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
+              else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
 
-                        wDisp.innerText = emoji;
-                        tDisp.innerText = Math.round(max);
-                    }
-                }
-            } catch(e) { console.warn("Auto weather fetch skipped.", e); }
-        })();
+              wDisp.innerText = emoji;
+              tDisp.innerText = Math.round(max);
+            }
+          }
+        } catch (e) { console.warn("Auto weather fetch skipped.", e); }
+      })();
     }
 
     // Helper: convert URLs to clickable links
     function linkifyMemo(text) {
       if (!text) return '';
-      const escaped = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       return escaped.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
     }
 
@@ -476,8 +476,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const ms = Number(mS), os = Number(oS); if (ms > os) res = "win"; else if (ms < os) res = "lose"; else if (pm !== "" && po !== "") res = Number(pm) > Number(po) ? "pk-win" : "pk-lose"; else res = "draw";
         }
         const badge = card.querySelector(".result-badge"); badge.className = "result-badge " + (res ? "badge-" + res : "");
-        badge.textContent = res ? res.replace("-"," ").toUpperCase() : "";
-        
+        badge.textContent = res ? res.replace("-", " ").toUpperCase() : "";
+
         // Update Attendance Emoji in Feed
         const metaDiv = card.querySelector(".match-meta");
         let attEl = metaDiv.querySelector(".match-att-emoji");
@@ -499,119 +499,132 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeDetailSheet() { detailSheet.classList.remove("active"); sheetBackdrop.classList.remove("active"); }
 
   const GAS_EXEC_URL = "https://script.google.com/macros/s/AKfycbzK_DTYbg8Zzibe3uVutxEaRebQHvB1vZwz9A1s74PANFU4osrkFtLbfewwteRFZ_1o/exec";
-  
+
   async function fetchStaticJsonOrFallback(type) {
-      const localUrl = `./data/${type}.json`;
-      const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
-      try {
-          const res = await fetch(localUrl + "?t=" + Date.now());
-          if (res.ok) {
-              const text = await res.text();
-              try { return JSON.parse(text); } catch(e) {}
+    const localUrl = `./data/${type}.json`;
+    const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
+    try {
+      const res = await fetch(localUrl + "?t=" + Date.now());
+      if (res.ok) {
+        const text = await res.text();
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed && parsed.timestamp) {
+            const ageMs = Date.now() - new Date(parsed.timestamp).getTime();
+            if (ageMs > 3 * 3600 * 1000) {
+              console.warn("Static data is stale, falling back to GAS:", type);
+              throw new Error("Stale JSON");
+            }
           }
-      } catch(e) { }
-      // Fallback
-      try {
-          const res = await fetch(gasUrl);
-          return await res.json();
-      } catch(e) { return null; }
+          return parsed;
+        } catch (e) { }
+      }
+    } catch (e) { }
+    // Fallback
+    try {
+      const res = await fetch(gasUrl);
+      return await res.json();
+    } catch (e) { return null; }
   }
 
   // --- Dashboard Logic ---
   let cachedStandings = null;
   let cachedResults = null;
-  
+
   async function fetchStandingsSilently() {
     if (cachedStandings) return cachedStandings;
     const lSave = localStorage.getItem("trapp_standings_cache");
-    if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch(e) {} }
-    
+    if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
+
     fetchStaticJsonOrFallback("standings").then(json => {
-       if (json && json.data && JSON.stringify(json.data) !== JSON.stringify(cachedStandings)) {
-           cachedStandings = json.data;
-           localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
-           if (currentMode === "dashboard") renderDashboard();
-       }
-    }).catch(()=>{});
+      if (json && json.data && JSON.stringify(json.data) !== JSON.stringify(cachedStandings)) {
+        cachedStandings = json.data;
+        localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
+        if (currentMode === "dashboard") renderDashboard();
+      }
+    }).catch(() => { });
     return cachedStandings;
   }
-  
+
   async function fetchGasResultsSilently() {
     if (cachedResults) return cachedResults;
     const lSave = localStorage.getItem("trapp_results_cache");
-    if (lSave) { try { cachedResults = JSON.parse(lSave); } catch(e) {} }
-    
+    if (lSave) { try { cachedResults = JSON.parse(lSave); } catch (e) { } }
+
     fetchStaticJsonOrFallback("results").then(json => {
-       if (json && json.data && JSON.stringify(json.data) !== JSON.stringify(cachedResults)) {
-           cachedResults = json.data;
-           localStorage.setItem("trapp_results_cache", JSON.stringify(cachedResults));
-           if (currentMode === "dashboard") renderDashboard();
-       }
-    }).catch(()=>{});
+      if (json && json.data && JSON.stringify(json.data) !== JSON.stringify(cachedResults)) {
+        cachedResults = json.data;
+        localStorage.setItem("trapp_results_cache", JSON.stringify(cachedResults));
+        if (currentMode === "dashboard") renderDashboard();
+      }
+    }).catch(() => { });
     return cachedResults;
   }
 
   // extract the city map into reusable object
   const COMMON_STADIUM_CITY_MAP = {
-      "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
-      "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
-      "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
-      "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
-      "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
-      "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
-      "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
-      "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
-      "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
-      "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
-      "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
-      "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
-      "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
-      "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
-      "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
-      "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
-      "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
-      "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
-      "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
-      "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
-      "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
-      "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
+    "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
+    "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
+    "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
+    "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
+    "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
+    "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
+    "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
+    "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
+    "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
+    "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
+    "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
+    "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
+    "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
+    "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
+    "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
+    "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
+    "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
+    "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
+    "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
+    "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
+    "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
+    "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
   };
 
   async function renderDashboard() {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
-    
+
     // Sort logic to find "Next" Match
     const now = new Date();
-    // Use yesterday midnight as cutoff to keep today's matches
-    const cutoffStr = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString().split("T")[0]; 
-    
+    // Use today's local date as cutoff to keep today's matches visible until tomorrow
+    const y = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const cutoffStr = `${y}-${mm}-${dd}`;
+
     // Check if toggle buttons exist, respect club visibility
     const showNiigata = true; // Dashboard shows both actively or check toggles
     const showKumamoto = true;
 
     let nextNiigata = null;
     let nextKumamoto = null;
-    
+
     // sorted ascending array
-    const sorted = [...scheduleData].sort((a,b) => parseDate(a.date) - parseDate(b.date));
-    
+    const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
     for (let m of sorted) {
-       if (m.date >= cutoffStr && !nextNiigata && m.club === "niigata") nextNiigata = m;
-       if (m.date >= cutoffStr && !nextKumamoto && m.club === "kumamoto") nextKumamoto = m;
-       if (nextNiigata && nextKumamoto) break;
+      if (m.date >= cutoffStr && !nextNiigata && m.club === "niigata") nextNiigata = m;
+      if (m.date >= cutoffStr && !nextKumamoto && m.club === "kumamoto") nextKumamoto = m;
+      if (nextNiigata && nextKumamoto) break;
     }
 
     let html = "";
     const renderCard = (m, clubName, mainColor, myShortName) => {
-        if (!m) return `<div class="dash-card"><div style="padding:20px;text-align:center;color:#888;">今後の試合予定はありません</div></div>`;
-        const isAtt = localStorage.getItem('attend_' + m.date + '_' + m.club + '_' + m.opponent) === "true";
-        const isHome = isHomeMatch(m.club, m.venue);
-        const haBadge = isHome ? '<span class="sheet-ha badge-home">HOME</span>' : '<span class="sheet-ha badge-away">AWAY</span>';
-        const J_CLUB_ENG = {"北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC"};
-        const engOpp = J_CLUB_ENG[m.opponent] || m.opponent.toUpperCase();
-        
-        return `
+      if (!m) return `<div class="dash-card"><div style="padding:20px;text-align:center;color:#888;">今後の試合予定はありません</div></div>`;
+      const isAtt = localStorage.getItem('attend_' + m.date + '_' + m.club + '_' + m.opponent) === "true";
+      const isHome = isHomeMatch(m.club, m.venue);
+      const haBadge = isHome ? '<span class="sheet-ha badge-home">HOME</span>' : '<span class="sheet-ha badge-away">AWAY</span>';
+      const J_CLUB_ENG = { "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC" };
+      const engOpp = J_CLUB_ENG[m.opponent] || m.opponent.toUpperCase();
+
+      return `
           <div class="dash-card card-glow-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}">
             <div class="dash-card-header" style="background:${mainColor};">
               <span class="dash-team-name">${clubName}</span>
@@ -659,214 +672,214 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
     };
-    
+
     html += renderCard(nextNiigata, "ALBIREX NIIGATA", "var(--albirex-orange)", "新潟");
     html += renderCard(nextKumamoto, "ROASSO KUMAMOTO", "var(--roasso-red)", "熊本");
     container.innerHTML = html;
-    
+
     // Bind buttons
     container.querySelectorAll('.dash-card').forEach(card => {
       card.onclick = () => {
-         const mId = card.dataset.mid;
-         if (!mId) return;
-         const match = scheduleData.find(x => `${x.date}_${x.club}_${x.opponent}` === mId);
-         if (match) openDetailSheet(match);
+        const mId = card.dataset.mid;
+        if (!mId) return;
+        const match = scheduleData.find(x => `${x.date}_${x.club}_${x.opponent}` === mId);
+        if (match) openDetailSheet(match);
       };
     });
-    
+
     // Bind new quick links
     const btnFeed = document.getElementById("dash-to-feed");
     const btnCal = document.getElementById("dash-to-calendar");
     if (btnFeed) btnFeed.onclick = () => switchMode("feed");
     if (btnCal) btnCal.onclick = () => switchMode("calendar");
-    
+
     document.getElementById("dash-to-standings").onclick = () => {
-       openSubPane("standings-overlay");
-       loadStandings();
+      openSubPane("standings-overlay");
+      loadStandings();
     };
     document.getElementById("dash-to-links").onclick = () => openSubPane("links-overlay");
 
     // Auto Fetch Weather Function inline
     const fetchWeatherForDash = async (idPrefix, clubPrefix) => {
-       const wBox = document.getElementById(idPrefix);
-       if (!wBox) return;
-       const venue = wBox.dataset.venue;
-       const dateStr = wBox.dataset.date;
-       
-       const cacheKey = `weather_html_${venue}_${dateStr}`;
-       const cachedHTML = localStorage.getItem(cacheKey);
-       const cachedTime = localStorage.getItem(`${cacheKey}_time`);
-       
-       // 3時間のキャッシュ有効期限
-       if (cachedHTML && cachedTime && (Date.now() - parseInt(cachedTime) < 10800000)) {
-           wBox.querySelector('.val-weather').innerHTML = cachedHTML;
-           return;
-       }
-       
-       const mDate = new Date(dateStr);
-       const now = new Date();
-       const diffDays = (mDate - now) / (1000 * 60 * 60 * 24);
-       
-       if (diffDays >= -4 && diffDays <= 14) {
-          const searchLocation = COMMON_STADIUM_CITY_MAP[venue] || venue;
-          try {
-             let lat, lon;
-             const cCache = localStorage.getItem('coord_' + searchLocation);
-             if (cCache) { const c = JSON.parse(cCache); lat = c.lat; lon = c.lon; }
-             else {
-                 const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchLocation)}&format=json&limit=1`);
-                 const data = await res.json();
-                 if (data && data[0]) {
-                     lat = data[0].lat; lon = data[0].lon;
-                     localStorage.setItem('coord_' + searchLocation, JSON.stringify({lat, lon}));
-                 }
-             }
-             if (lat !== undefined && lon !== undefined) {
-                 const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&past_days=3&forecast_days=16`);
-                 const wData = await wRes.json();
-                 const dIdx = wData.daily?.time?.indexOf(dateStr);
-                 if (dIdx !== undefined && dIdx > -1) {
-                     const code = wData.daily.weather_code[dIdx];
-                     const max = wData.daily.temperature_2m_max[dIdx];
-                     let emoji = "☁️";
-                     if (code <= 1) emoji = "☀️";
-                     else if (code <= 3) emoji = "☁️";
-                     else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
-                     else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
-                      const finalHTML = `${emoji} <span style="font-size:0.8rem;font-weight:700;">${Math.round(max)}℃</span>`;
-                      wBox.querySelector(".val-weather").innerHTML = finalHTML;
-                      localStorage.setItem(cacheKey, finalHTML);
-                      localStorage.setItem(`${cacheKey}_time`, Date.now().toString());
-                  }
-              }
-           } catch(e) {}
-       } else {
-           wBox.querySelector(".val-weather").innerHTML = `<span style="font-size:0.6rem;color:#999;line-height:2;">取得期間外</span>`;
-       }
+      const wBox = document.getElementById(idPrefix);
+      if (!wBox) return;
+      const venue = wBox.dataset.venue;
+      const dateStr = wBox.dataset.date;
+
+      const cacheKey = `weather_html_${venue}_${dateStr}`;
+      const cachedHTML = localStorage.getItem(cacheKey);
+      const cachedTime = localStorage.getItem(`${cacheKey}_time`);
+
+      // 3時間のキャッシュ有効期限
+      if (cachedHTML && cachedTime && (Date.now() - parseInt(cachedTime) < 10800000)) {
+        wBox.querySelector('.val-weather').innerHTML = cachedHTML;
+        return;
+      }
+
+      const mDate = new Date(dateStr);
+      const now = new Date();
+      const diffDays = (mDate - now) / (1000 * 60 * 60 * 24);
+
+      if (diffDays >= -4 && diffDays <= 14) {
+        const searchLocation = COMMON_STADIUM_CITY_MAP[venue] || venue;
+        try {
+          let lat, lon;
+          const cCache = localStorage.getItem('coord_' + searchLocation);
+          if (cCache) { const c = JSON.parse(cCache); lat = c.lat; lon = c.lon; }
+          else {
+            const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchLocation)}&format=json&limit=1`);
+            const data = await res.json();
+            if (data && data[0]) {
+              lat = data[0].lat; lon = data[0].lon;
+              localStorage.setItem('coord_' + searchLocation, JSON.stringify({ lat, lon }));
+            }
+          }
+          if (lat !== undefined && lon !== undefined) {
+            const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&past_days=3&forecast_days=16`);
+            const wData = await wRes.json();
+            const dIdx = wData.daily?.time?.indexOf(dateStr);
+            if (dIdx !== undefined && dIdx > -1) {
+              const code = wData.daily.weather_code[dIdx];
+              const max = wData.daily.temperature_2m_max[dIdx];
+              let emoji = "☁️";
+              if (code <= 1) emoji = "☀️";
+              else if (code <= 3) emoji = "☁️";
+              else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
+              else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
+              const finalHTML = `${emoji} <span style="font-size:0.8rem;font-weight:700;">${Math.round(max)}℃</span>`;
+              wBox.querySelector(".val-weather").innerHTML = finalHTML;
+              localStorage.setItem(cacheKey, finalHTML);
+              localStorage.setItem(`${cacheKey}_time`, Date.now().toString());
+            }
+          }
+        } catch (e) { }
+      } else {
+        wBox.querySelector(".val-weather").innerHTML = `<span style="font-size:0.6rem;color:#999;line-height:2;">取得期間外</span>`;
+      }
     };
-    
+
     if (nextNiigata) fetchWeatherForDash(`dash-weather-niigata`, 'niigata');
     if (nextKumamoto) fetchWeatherForDash(`dash-weather-kumamoto`, 'kumamoto');
-    
+
     // Auto Fetch Standings
     fetchStandingsSilently().then(data => {
       if (!data) return;
       const updateStandings = (m, myKeyword, oppKeyword) => {
-         if (!m) return;
-         const myData = data.find(r => r.team && r.team.includes(myKeyword));
-         // Using the original TEAM_ABBR logic logic from syncResultsFromGAS to find opponent name in GAS
-         const J_TEAM_KWS = ["札幌","鹿島","浦和","柏","FC東京","東京V","町田","川崎","横浜FM","横浜FC","YS横浜","湘南","新潟","富山","金沢","清水","藤枝","沼津","磐田","名古屋","岐阜","京都","G大阪","C大阪","セレッソ","FC大阪","神戸","奈良","鳥取","岡山","広島","山口","讃岐","徳島","愛媛","今治","福岡","北九州","鳥栖","長崎","熊本","大分","宮崎","鹿児島","琉球","高知","滋賀","八戸","盛岡","秋田","山形","仙台","福島","水戸","群馬","栃木","大宮","千葉","相模原","甲府","松本","長野"]; 
-         // Find matching team in data
-         const oppNameBase = m.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '');
-         const oppData = data.find(r => {
-             if (!r.team) return false;
-             for (let kw of J_TEAM_KWS) {
-                if (oppNameBase.includes(kw) && r.team.includes(kw)) return true;
-             }
-             return r.team.includes(oppNameBase.substring(0,2));
-         });
-         
-         const statsRow = document.getElementById(`dash-stats-${m.club}`);
-         if (statsRow) {
-            if (myData) {
-               statsRow.querySelector('.val-rank-my').innerHTML = `<span style="font-size:1.3rem;font-weight:900;line-height:1;">${myData.rank}</span><span style="font-size:0.7rem;">位</span><span style="font-size:0.65rem;color:#888;margin-left:4px;">PTS ${myData.points}</span>`;
-            }
-            if (oppData) {
-               statsRow.querySelector('.val-rank-opp').innerHTML = `<span style="font-size:1.3rem;font-weight:900;line-height:1;">${oppData.rank}</span><span style="font-size:0.7rem;">位</span><span style="font-size:0.65rem;color:#888;margin-left:4px;">PTS ${oppData.points}</span>`;
-            }
-         }
+        if (!m) return;
+        const myData = data.find(r => r.team && r.team.includes(myKeyword));
+        // Using the original TEAM_ABBR logic logic from syncResultsFromGAS to find opponent name in GAS
+        const J_TEAM_KWS = ["札幌", "鹿島", "浦和", "柏", "FC東京", "東京V", "町田", "川崎", "横浜FM", "横浜FC", "YS横浜", "湘南", "新潟", "富山", "金沢", "清水", "藤枝", "沼津", "磐田", "名古屋", "岐阜", "京都", "G大阪", "C大阪", "セレッソ", "FC大阪", "神戸", "奈良", "鳥取", "岡山", "広島", "山口", "讃岐", "徳島", "愛媛", "今治", "福岡", "北九州", "鳥栖", "長崎", "熊本", "大分", "宮崎", "鹿児島", "琉球", "高知", "滋賀", "八戸", "盛岡", "秋田", "山形", "仙台", "福島", "水戸", "群馬", "栃木", "大宮", "千葉", "相模原", "甲府", "松本", "長野"];
+        // Find matching team in data
+        const oppNameBase = m.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '');
+        const oppData = data.find(r => {
+          if (!r.team) return false;
+          for (let kw of J_TEAM_KWS) {
+            if (oppNameBase.includes(kw) && r.team.includes(kw)) return true;
+          }
+          return r.team.includes(oppNameBase.substring(0, 2));
+        });
+
+        const statsRow = document.getElementById(`dash-stats-${m.club}`);
+        if (statsRow) {
+          if (myData) {
+            statsRow.querySelector('.val-rank-my').innerHTML = `<span style="font-size:1.3rem;font-weight:900;line-height:1;">${myData.rank}</span><span style="font-size:0.7rem;">位</span><span style="font-size:0.65rem;color:#888;margin-left:4px;">PTS ${myData.points}</span>`;
+          }
+          if (oppData) {
+            statsRow.querySelector('.val-rank-opp').innerHTML = `<span style="font-size:1.3rem;font-weight:900;line-height:1;">${oppData.rank}</span><span style="font-size:0.7rem;">位</span><span style="font-size:0.65rem;color:#888;margin-left:4px;">PTS ${oppData.points}</span>`;
+          }
+        }
       };
-      
+
       updateStandings(nextNiigata, "新潟", "opponent");
       updateStandings(nextKumamoto, "熊本", "opponent");
     });
-    
+
     // Auto Fetch Previous Results
     fetchGasResultsSilently().then(data => {
-       if (!data) return;
-       const updateRecent = (m, myKeyword) => {
-          if (!m) return;
-          const J_TEAM_KWS = ["札幌","鹿島","浦和","柏","FC東京","東京V","町田","川崎","横浜FM","横浜FC","YS横浜","湘南","新潟","富山","金沢","清水","藤枝","沼津","磐田","名古屋","岐阜","京都","G大阪","C大阪","セレッソ","FC大阪","神戸","奈良","鳥取","岡山","広島","山口","讃岐","徳島","愛媛","今治","福岡","北九州","鳥栖","長崎","熊本","大分","宮崎","鹿児島","琉球","高知","滋賀","八戸","盛岡","秋田","山形","仙台","福島","水戸","群馬","栃木","大宮","千葉","相模原","甲府","松本","長野"]; 
-          const oppNameBase = m.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '');
-          let oppKw = oppNameBase.substring(0,2);
-          for (let kw of J_TEAM_KWS) {
-             if (oppNameBase.includes(kw)) { oppKw = kw; break; }
-          }
-          
-          const findPrevStr = (teamKw) => {
-             // Search for matches in GAS data
-             let pastOptions = data.filter(r => (r.home.includes(teamKw) || r.away.includes(teamKw)) && r.home_score !== "" && typeof r.home_score !== "undefined");
-             
-             // Inject local manual entries for our clubs
-             const myClub = teamKw === "新潟" ? "niigata" : (teamKw === "熊本" ? "kumamoto" : null);
-             if (myClub) {
-                scheduleData.filter(m => m.club === myClub).forEach(m => {
-                   const mId = `${m.date}_${m.club}_${m.opponent}`;
-                   const sM = localStorage.getItem(`score_my_${mId}`);
-                   const sO = localStorage.getItem(`score_opp_${mId}`);
-                   if (sM && sO) {
-                      const isHome = isHomeMatch(m.club, m.venue);
-                      const opp = m.opponent;
-                      const existing = pastOptions.find(r => r.date === m.date && (r.home.includes(teamKw) || r.away.includes(teamKw)));
-                      if (!existing) {
-                         const pkM = localStorage.getItem(`score_my_pk_${mId}`);
-                         const pkO = localStorage.getItem(`score_opp_pk_${mId}`);
-                         pastOptions.push({
-                            date: m.date,
-                            home: isHome ? teamKw : opp,
-                            away: isHome ? opp : teamKw,
-                            home_score: isHome ? sM : sO,
-                            away_score: isHome ? sO : sM,
-                            pk: (pkM && pkO) ? (isHome ? `${pkM} PK ${pkO}` : `${pkO} PK ${pkM}`) : ""
-                         });
-                      }
-                   }
-                });
-             }
+      if (!data) return;
+      const updateRecent = (m, myKeyword) => {
+        if (!m) return;
+        const J_TEAM_KWS = ["札幌", "鹿島", "浦和", "柏", "FC東京", "東京V", "町田", "川崎", "横浜FM", "横浜FC", "YS横浜", "湘南", "新潟", "富山", "金沢", "清水", "藤枝", "沼津", "磐田", "名古屋", "岐阜", "京都", "G大阪", "C大阪", "セレッソ", "FC大阪", "神戸", "奈良", "鳥取", "岡山", "広島", "山口", "讃岐", "徳島", "愛媛", "今治", "福岡", "北九州", "鳥栖", "長崎", "熊本", "大分", "宮崎", "鹿児島", "琉球", "高知", "滋賀", "八戸", "盛岡", "秋田", "山形", "仙台", "福島", "水戸", "群馬", "栃木", "大宮", "千葉", "相模原", "甲府", "松本", "長野"];
+        const oppNameBase = m.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '');
+        let oppKw = oppNameBase.substring(0, 2);
+        for (let kw of J_TEAM_KWS) {
+          if (oppNameBase.includes(kw)) { oppKw = kw; break; }
+        }
 
-             if (pastOptions.length === 0) return "-";
-             // Sort by date upward
-             pastOptions.sort((a,b) => new Date(a.date) - new Date(b.date));
-             
-             const lastM = pastOptions[pastOptions.length - 1];
-             const isHome = lastM.home.includes(teamKw);
-             const sM = Number(isHome ? lastM.home_score : lastM.away_score);
-             const sO = Number(isHome ? lastM.away_score : lastM.home_score);
-             const opName = isHome ? lastM.away : lastM.home;
-             
-             let wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
-             let pkDisplay = "";
+        const findPrevStr = (teamKw) => {
+          // Search for matches in GAS data
+          let pastOptions = data.filter(r => (r.home.includes(teamKw) || r.away.includes(teamKw)) && r.home_score !== "" && typeof r.home_score !== "undefined");
 
-             if (sM < sO) {
-                wl = "<span style='color:var(--text-main);font-weight:900;'>●</span>";
-             } else if (sM === sO) {
-                if (lastM.pk) {
-                   const pkMatch = lastM.pk.match(/(\d+)\s*PK\s*(\d+)/i);
-                   if (pkMatch) {
-                      const pkM = Number(isHome ? pkMatch[1] : pkMatch[2]);
-                      const pkO = Number(isHome ? pkMatch[2] : pkMatch[1]);
-                      pkDisplay = ` (${pkM}PK${pkO})`;
-                      if (pkM > pkO) wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
-                      else if (pkM < pkO) wl = "<span style='color:var(--text-main);font-weight:900;'>●</span>";
-                      else wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
-                   } else {
-                      wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
-                   }
-                } else {
-                   wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
+          // Inject local manual entries for our clubs
+          const myClub = teamKw === "新潟" ? "niigata" : (teamKw === "熊本" ? "kumamoto" : null);
+          if (myClub) {
+            scheduleData.filter(m => m.club === myClub).forEach(m => {
+              const mId = `${m.date}_${m.club}_${m.opponent}`;
+              const sM = localStorage.getItem(`score_my_${mId}`);
+              const sO = localStorage.getItem(`score_opp_${mId}`);
+              if (sM && sO) {
+                const isHome = isHomeMatch(m.club, m.venue);
+                const opp = m.opponent;
+                const existing = pastOptions.find(r => r.date === m.date && (r.home.includes(teamKw) || r.away.includes(teamKw)));
+                if (!existing) {
+                  const pkM = localStorage.getItem(`score_my_pk_${mId}`);
+                  const pkO = localStorage.getItem(`score_opp_pk_${mId}`);
+                  pastOptions.push({
+                    date: m.date,
+                    home: isHome ? teamKw : opp,
+                    away: isHome ? opp : teamKw,
+                    home_score: isHome ? sM : sO,
+                    away_score: isHome ? sO : sM,
+                    pk: (pkM && pkO) ? (isHome ? `${pkM} PK ${pkO}` : `${pkO} PK ${pkM}`) : ""
+                  });
                 }
-             }
-             return `<span style="color:var(--text-grey);font-size:0.75rem;margin-right:4px;">vs ${opName}</span> ${sM}-${sO}${pkDisplay} ${wl}`;
-          };
-          
-          const recentRow = document.getElementById(`dash-recent-${m.club}`);
-          if (recentRow) {
-             recentRow.querySelector(".val-prev-my").innerHTML = findPrevStr(myKeyword);
-             recentRow.querySelector(".val-prev-opp").innerHTML = findPrevStr(oppKw);
+              }
+            });
           }
-       };
-       updateRecent(nextNiigata, "新潟");
-       updateRecent(nextKumamoto, "熊本");
+
+          if (pastOptions.length === 0) return "-";
+          // Sort by date upward
+          pastOptions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+          const lastM = pastOptions[pastOptions.length - 1];
+          const isHome = lastM.home.includes(teamKw);
+          const sM = Number(isHome ? lastM.home_score : lastM.away_score);
+          const sO = Number(isHome ? lastM.away_score : lastM.home_score);
+          const opName = isHome ? lastM.away : lastM.home;
+
+          let wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
+          let pkDisplay = "";
+
+          if (sM < sO) {
+            wl = "<span style='color:var(--text-main);font-weight:900;'>●</span>";
+          } else if (sM === sO) {
+            if (lastM.pk) {
+              const pkMatch = lastM.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+              if (pkMatch) {
+                const pkM = Number(isHome ? pkMatch[1] : pkMatch[2]);
+                const pkO = Number(isHome ? pkMatch[2] : pkMatch[1]);
+                pkDisplay = ` (${pkM}PK${pkO})`;
+                if (pkM > pkO) wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
+                else if (pkM < pkO) wl = "<span style='color:var(--text-main);font-weight:900;'>●</span>";
+                else wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
+              } else {
+                wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
+              }
+            } else {
+              wl = "<span style='color:var(--text-grey);font-weight:900;'>△</span>";
+            }
+          }
+          return `<span style="color:var(--text-grey);font-size:0.75rem;margin-right:4px;">vs ${opName}</span> ${sM}-${sO}${pkDisplay} ${wl}`;
+        };
+
+        const recentRow = document.getElementById(`dash-recent-${m.club}`);
+        if (recentRow) {
+          recentRow.querySelector(".val-prev-my").innerHTML = findPrevStr(myKeyword);
+          recentRow.querySelector(".val-prev-opp").innerHTML = findPrevStr(oppKw);
+        }
+      };
+      updateRecent(nextNiigata, "新潟");
+      updateRecent(nextKumamoto, "熊本");
     });
   }
 
@@ -874,48 +887,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderFeed() {
     feedSlider.innerHTML = "";
-    scheduleData.sort((a,b) => parseDate(a.date) - parseDate(b.date));
+    scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
     const ymMap = {};
     scheduleData.forEach(m => {
-      const d = parseDate(m.date), key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;
-      if(!ymMap[key]) ymMap[key] = []; ymMap[key].push(m);
+      const d = parseDate(m.date), key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      if (!ymMap[key]) ymMap[key] = []; ymMap[key].push(m);
     });
 
     Object.keys(ymMap).sort().forEach(key => {
       const [year, month] = key.split("-").map(Number);
-      const section = document.createElement("div"); section.className = "month-section"; section.dataset.ym = key; section.dataset.year = year; section.dataset.ym_title = `${year} / ${String(month).padStart(2,"0")}`;
+      const section = document.createElement("div"); section.className = "month-section"; section.dataset.ym = key; section.dataset.year = year; section.dataset.ym_title = `${year} / ${String(month).padStart(2, "0")}`;
 
       ymMap[key].forEach(match => {
         const mId = `${match.date}_${match.club}_${match.opponent}`;
         const isAtt = localStorage.getItem(`attend_${mId}`) === "true";
         const sMy = localStorage.getItem(`score_my_${mId}`) || "", sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
         const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "", sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
-        let res = null; 
+        let res = null;
         let scoreDisplay = "";
-        
+
         if (sMy !== "" && sOpp !== "") {
           const ms = Number(sMy), os = Number(sOpp);
           if (sPkM !== "" && sPkO !== "") {
-             scoreDisplay = `(${sPkM}) ${ms} - ${os} (${sPkO})`;
-             if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = Number(sPkM) > Number(sPkO) ? "pk-win" : "pk-lose";
+            scoreDisplay = `(${sPkM}) ${ms} - ${os} (${sPkO})`;
+            if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = Number(sPkM) > Number(sPkO) ? "pk-win" : "pk-lose";
           } else {
-             scoreDisplay = `${ms} - ${os}`;
-             if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = "draw";
+            scoreDisplay = `${ms} - ${os}`;
+            if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = "draw";
           }
         }
         const isHome = isHomeMatch(match.club, match.venue);
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
-        
+
         let resultHtml = "";
         if (res) {
           resultHtml = `
             <div class="result-box">
-              <div class="result-badge badge-${res}">${res.replace("-"," ").toUpperCase()}</div>
+              <div class="result-badge badge-${res}">${res.replace("-", " ").toUpperCase()}</div>
               <div class="match-score-text">${scoreDisplay}</div>
             </div>`;
         }
-        
+
         card.innerHTML = `${resultHtml}<div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
         card.onclick = () => openDetailSheet(match);
         section.appendChild(card);
@@ -928,10 +941,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Initializing App ---
   renderFeed();
-  const today = new Date(), todayY = today.getFullYear(), tKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}`;
+  const today = new Date(), todayY = today.getFullYear(), tKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
   applyYearFilter(allSections.some(s => Number(s.dataset.year) === todayY) ? todayY : 2025, true);
   const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
-  
+
   // Use requestAnimationFrame and small timeout to ensure layout is ready for iPhone
   requestAnimationFrame(() => {
     setTimeout(() => {
@@ -941,13 +954,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Navigation
-  prevBtn.onclick = () => { if(currentIndex > 0) scrollToIndex(currentIndex-1); };
-  nextBtn.onclick = () => { if(currentIndex < visibleSections.length-1) scrollToIndex(currentIndex+1); };
+  prevBtn.onclick = () => { if (currentIndex > 0) scrollToIndex(currentIndex - 1); };
+  nextBtn.onclick = () => { if (currentIndex < visibleSections.length - 1) scrollToIndex(currentIndex + 1); };
   goTodayBtn.onclick = () => {
-    const n = new Date(), y = n.getFullYear(), k = `${y}-${String(n.getMonth()+1).padStart(2,"0")}`;
-    applyYearFilter(y); 
+    const n = new Date(), y = n.getFullYear(), k = `${y}-${String(n.getMonth() + 1).padStart(2, "0")}`;
+    applyYearFilter(y);
     const i = visibleSections.findIndex(s => s.dataset.ym === k);
-    if(i !== -1) scrollToIndex(i);
+    if (i !== -1) scrollToIndex(i);
   };
 
   yearTabs["2025"].onclick = () => applyYearFilter(2025);
@@ -956,7 +969,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // YM Picker
   function openYmPicker() {
-    if(!activeMonthTitle.textContent.includes("/")) return; // Not fully initialized
+    if (!activeMonthTitle.textContent.includes("/")) return; // Not fully initialized
     ymPickerList.innerHTML = "";
     const yearMap = {};
     allSections.forEach(sec => {
@@ -973,7 +986,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const btn = document.createElement("button"); btn.className = "ym-picker-btn";
         btn.textContent = Number(item.m) + "月";
         if (visibleSections[currentIndex] && visibleSections[currentIndex].dataset.ym === item.ym) {
-           btn.classList.add("current");
+          btn.classList.add("current");
         }
         btn.onclick = () => {
           closeYmPicker();
@@ -1013,7 +1026,7 @@ document.addEventListener("DOMContentLoaded", () => {
   hamBtn.onclick = () => toggleMenu(true);
   document.getElementById("menu-close").onclick = () => toggleMenu(false);
   sideMenuBackdrop.onclick = () => toggleMenu(false);
-  
+
   function openSubPane(id) {
     document.getElementById(id).classList.add("active");
   }
@@ -1084,7 +1097,7 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.oninput = (e) => {
     const q = e.target.value.toLowerCase().trim();
     if (!q) { searchPopup.style.display = "none"; return; }
-    const m = scheduleData.filter(x => (x.opponent||"").toLowerCase().includes(q) || (x.venue||"").toLowerCase().includes(q)).slice(0, 10);
+    const m = scheduleData.filter(x => (x.opponent || "").toLowerCase().includes(q) || (x.venue || "").toLowerCase().includes(q)).slice(0, 10);
     if (m.length > 0) {
       searchPopup.innerHTML = m.map(x => `<div class="search-item" data-date="${x.date}" data-club="${x.club}" data-opponent="${x.opponent}"><strong>${x.opponent}</strong><br><small>${x.date} | ${x.club.toUpperCase()}</small></div>`).join("");
       searchPopup.style.display = "block";
@@ -1092,14 +1105,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   searchPopup.onclick = (e) => {
     const item = e.target.closest(".search-item");
-    if(item) {
+    if (item) {
       const { date, club, opponent } = item.dataset;
       const x = scheduleData.find(m => m.date === date && m.club === club && m.opponent === opponent);
-      if(x) { 
-        searchPopup.style.display="none"; searchInput.value=""; 
-        const d = parseDate(date), ty = d.getFullYear(), tk = `${ty}-${String(d.getMonth()+1).padStart(2,"0")}`;
+      if (x) {
+        searchPopup.style.display = "none"; searchInput.value = "";
+        const d = parseDate(date), ty = d.getFullYear(), tk = `${ty}-${String(d.getMonth() + 1).padStart(2, "0")}`;
         applyYearFilter(ty, true); const i = visibleSections.findIndex(s => s.dataset.ym === tk);
-        if(i !== -1) { scrollToIndex(i); setTimeout(() => openDetailSheet(x), 500); }
+        if (i !== -1) { scrollToIndex(i); setTimeout(() => openDetailSheet(x), 500); }
       }
     }
   };
@@ -1117,8 +1130,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const attMatches = scheduleData.filter(match => {
         const mId = `${match.date}_${match.club}_${match.opponent}`;
         return localStorage.getItem(`attend_${mId}`) === "true";
-      }).sort((a,b) => parseDate(a.date) - parseDate(b.date));
-      
+      }).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
       if (attMatches.length === 0) {
         alert("観戦予定の試合はまだありません。");
         return;
@@ -1149,32 +1162,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderFastInput() {
     fastInputList.innerHTML = "";
-    
+
     // 選択された年の試合の全件を取得（未来の試合も含める）
     const yearMatches = scheduleData.filter(m => {
       return parseDate(m.date).getFullYear() === fastSelectedYear;
-    }).sort((a,b) => parseDate(a.date) - parseDate(b.date));
+    }).sort((a, b) => parseDate(a.date) - parseDate(b.date));
 
-    if(yearMatches.length === 0) {
-       fastInputList.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-grey);">${fastSelectedYear}年の該当する試合はありません。</div>`;
+    if (yearMatches.length === 0) {
+      fastInputList.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-grey);">${fastSelectedYear}年の該当する試合はありません。</div>`;
     } else {
-       yearMatches.forEach(m => {
-         const mYear = parseDate(m.date).getFullYear();
-         const mId = `${m.date}_${m.club}_${m.opponent}`;
-         const sMy = localStorage.getItem(`score_my_${mId}`) || "";
-         const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
+      yearMatches.forEach(m => {
+        const mYear = parseDate(m.date).getFullYear();
+        const mId = `${m.date}_${m.club}_${m.opponent}`;
+        const sMy = localStorage.getItem(`score_my_${mId}`) || "";
+        const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
 
-         const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
-         const sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
-         const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
-         
-         // 2026年でかつ現在の入力値が同点の場合のみPK領域を表示する
-         const isDraw = sMy !== "" && sOpp !== "" && sMy === sOpp;
-         const showPk = mYear === 2026 && isDraw;
-         
-         const div = document.createElement("div");
-         div.style.cssText = "padding: 15px; border-bottom: 1px solid #e3e3e8; display: flex; align-items: center; justify-content: space-between; gap: 10px;";
-         div.innerHTML = `
+        const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
+        const sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
+        const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
+
+        // 2026年でかつ現在の入力値が同点の場合のみPK領域を表示する
+        const isDraw = sMy !== "" && sOpp !== "" && sMy === sOpp;
+        const showPk = mYear === 2026 && isDraw;
+
+        const div = document.createElement("div");
+        div.style.cssText = "padding: 15px; border-bottom: 1px solid #e3e3e8; display: flex; align-items: center; justify-content: space-between; gap: 10px;";
+        div.innerHTML = `
            <div style="flex:1;">
              <div style="font-size: 0.8rem; color: var(--text-grey); font-weight:700;">${m.date} | ${m.club.toUpperCase()}</div>
              <div style="font-size: 1.1rem; font-weight:900; font-family: var(--font-kick); margin-top:4px;">vs ${m.opponent}</div>
@@ -1198,8 +1211,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
            <button class="u-attend-btn ${isAttend ? 'active' : ''} ${m.club}" data-mid="${mId}" data-type="attend" style="width:45px; height:45px; padding:0; margin:0; display:flex; align-items:center; justify-content:center; border-radius:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; pointer-events: none;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></button>
          `;
-         fastInputList.appendChild(div);
-       });
+        fastInputList.appendChild(div);
+      });
     }
     fastInputSheet.classList.add("active");
   }
@@ -1215,14 +1228,14 @@ document.addEventListener("DOMContentLoaded", () => {
           const container = inp.closest("div").parentElement; // .flex-end 領域
           const pkArea = container.querySelector(".fast-pk-area");
           if (pkArea) {
-             const mS = container.querySelector(".fast-my-score").value;
-             const oS = container.querySelector(".fast-opp-score").value;
-             pkArea.style.display = (mS !== "" && oS !== "" && mS === oS) ? "flex" : "none";
+            const mS = container.querySelector(".fast-my-score").value;
+            const oS = container.querySelector(".fast-opp-score").value;
+            pkArea.style.display = (mS !== "" && oS !== "" && mS === oS) ? "flex" : "none";
           }
         }
       }
     };
-    
+
     // 観戦トグルのハンドリング
     fastInputList.onclick = (e) => {
       const btn = e.target.closest("button[data-type='attend']");
@@ -1238,7 +1251,7 @@ document.addEventListener("DOMContentLoaded", () => {
       fastInputSheet.classList.add("active");
     };
   }
-  
+
   if (closeFastInputBtn) closeFastInputBtn.onclick = () => fastInputSheet.classList.remove("active");
 
   document.querySelectorAll(".fast-year-tab").forEach(tab => {
@@ -1261,7 +1274,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const inputs = fastInputList.querySelectorAll("input[type='number']");
       let savedCount = 0;
       const scoreMap = {};
-      
+
       inputs.forEach(inp => {
         const mId = inp.dataset.mid;
         if (!scoreMap[mId]) scoreMap[mId] = {};
@@ -1286,7 +1299,7 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.removeItem(`score_my_${mId}`);
           localStorage.removeItem(`score_opp_${mId}`);
         }
-        
+
         if (s.pkMy !== undefined && s.pkOpp !== undefined && (s.pkMy !== "" || s.pkOpp !== "")) {
           localStorage.setItem(`score_my_pk_${mId}`, s.pkMy);
           localStorage.setItem(`score_opp_pk_${mId}`, s.pkOpp);
@@ -1299,14 +1312,14 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.setItem(`attend_${mId}`, s.attend);
           hasEdit = true;
         }
-        
+
         if (hasEdit) savedCount++;
       });
 
       if (savedCount > 0) {
         renderFeed();
         if (calendarView && !calendarView.classList.contains("hidden-view")) {
-           switchMode("calendar");
+          switchMode("calendar");
         }
         alert(`一括入力の内容を保存しました。`);
       }
@@ -1321,7 +1334,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (openBulkPasteBtn) {
     openBulkPasteBtn.onclick = () => {
-      toggleMenu(false); 
+      toggleMenu(false);
       closeSubPane("data-overlay");
       openSubPane("bulk-paste-overlay");
     };
@@ -1331,13 +1344,13 @@ document.addEventListener("DOMContentLoaded", () => {
     bulkPasteSaveBtn.onclick = () => {
       const text = bulkPasteArea.value;
       if (!text) return;
-      
+
       const blocks = text.split(/第(\d+)節/);
       let savedCount = 0;
       for (let i = 1; i < blocks.length; i += 2) {
         const mwNum = blocks[i];
-        const content = blocks[i+1];
-        
+        const content = blocks[i + 1];
+
         const scoreMatch = content.match(/(○|●|△|[-])?\s*(\d+)-(\d+)(?:\s*PK(\d+)-(\d+))?/);
         if (scoreMatch) {
           const myScore = scoreMatch[2];
@@ -1352,12 +1365,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const candidates = scheduleData.filter(m => m.matchweek === `MW${mwNum}`);
           let target = null;
-          
+
           for (const c of candidates) {
             const oppNameBase = c.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '').substring(0, 2);
             const isNameMatch = oppNameBase.length > 0 && content.includes(oppNameBase);
             const isDateMatch = mPadDate && c.date.endsWith(mPadDate);
-            
+
             if (isNameMatch && isDateMatch) {
               target = c;
               break;
@@ -1447,19 +1460,19 @@ document.addEventListener("DOMContentLoaded", () => {
           // 節番号でのマッチングを試行 (MW7 -> 7)
           const mSec = parseInt((m.matchweek || "").replace(/\D/g, ""));
           const rSec = parseInt(r.section);
-          
+
           // 節番号が一致するか、日付が完全一致する場合を候補とする
           const isSameSection = !isNaN(mSec) && mSec === rSec;
           const isSameDate = (m.date === r.date);
-          
+
           if (!isSameSection && !isSameDate) return;
-          
+
           // 節番号一致の場合でも、念のため開催日が3日以上離れていないか確認（別年度の誤爆防止）
           if (isSameSection) {
             const dM = new Date(m.date);
             const dR = new Date(r.date);
             const diffDays = Math.abs(dM - dR) / (1000 * 60 * 60 * 24);
-            if (diffDays > 3) return; 
+            if (diffDays > 3) return;
           }
 
           const isNiigata = m.club === "niigata";
@@ -1470,33 +1483,33 @@ document.addEventListener("DOMContentLoaded", () => {
           let myPk = null, oppPk = null;
 
           if (r.home.includes(myKw) && !r.away.includes(myKw)) {
-              isMatch = true;
-              myScore = r.home_score;
-              oppScore = r.away_score;
-              if (r.pk) {
-                 const pks = r.pk.split(" PK ");
-                 if (pks.length === 2) { myPk = pks[0]; oppPk = pks[1]; }
-              }
-          } 
+            isMatch = true;
+            myScore = r.home_score;
+            oppScore = r.away_score;
+            if (r.pk) {
+              const pks = r.pk.split(" PK ");
+              if (pks.length === 2) { myPk = pks[0]; oppPk = pks[1]; }
+            }
+          }
           else if (r.away.includes(myKw) && !r.home.includes(myKw)) {
-              isMatch = true;
-              myScore = r.away_score;
-              oppScore = r.home_score;
-              if (r.pk) {
-                 const pks = r.pk.split(" PK ");
-                 if (pks.length === 2) { myPk = pks[1]; oppPk = pks[0]; }
-              }
+            isMatch = true;
+            myScore = r.away_score;
+            oppScore = r.home_score;
+            if (r.pk) {
+              const pks = r.pk.split(" PK ");
+              if (pks.length === 2) { myPk = pks[1]; oppPk = pks[0]; }
+            }
           }
 
           if (isMatch) {
-              const mId = `${m.date}_${m.club}_${m.opponent}`;
-              localStorage.setItem(`score_my_${mId}`, myScore);
-              localStorage.setItem(`score_opp_${mId}`, oppScore);
-              if (myPk && oppPk) {
-                 localStorage.setItem(`score_my_pk_${mId}`, myPk);
-                 localStorage.setItem(`score_opp_pk_${mId}`, oppPk);
-              }
-              synced++;
+            const mId = `${m.date}_${m.club}_${m.opponent}`;
+            localStorage.setItem(`score_my_${mId}`, myScore);
+            localStorage.setItem(`score_opp_${mId}`, oppScore);
+            if (myPk && oppPk) {
+              localStorage.setItem(`score_my_pk_${mId}`, myPk);
+              localStorage.setItem(`score_opp_pk_${mId}`, oppPk);
+            }
+            synced++;
           }
         });
       });
@@ -1549,17 +1562,17 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       // カラム定義
       const COLS = [
-        { label: '順',    key: 'rank',           type: 'num' },
-        { label: 'チーム', key: 'team',           type: 'str' },
-        { label: '勝点',  key: 'points',          type: 'num' },
-        { label: '試合',  key: 'played',          type: 'num' },
-        { label: '勝',    key: 'won',             type: 'num' },
-        { label: 'PK勝',  key: 'pk_won',          type: 'num' },
-        { label: 'PK負',  key: 'pk_lost',         type: 'num' },
-        { label: '負',    key: 'lost',            type: 'num' },
-        { label: '得',    key: 'goals_for',       type: 'num' },
-        { label: '失',    key: 'goals_against',   type: 'num' },
-        { label: '差',    key: 'goal_diff',       type: 'num' },
+        { label: '順', key: 'rank', type: 'num' },
+        { label: 'チーム', key: 'team', type: 'str' },
+        { label: '勝点', key: 'points', type: 'num' },
+        { label: '試合', key: 'played', type: 'num' },
+        { label: '勝', key: 'won', type: 'num' },
+        { label: 'PK勝', key: 'pk_won', type: 'num' },
+        { label: 'PK負', key: 'pk_lost', type: 'num' },
+        { label: '負', key: 'lost', type: 'num' },
+        { label: '得', key: 'goals_for', type: 'num' },
+        { label: '失', key: 'goals_against', type: 'num' },
+        { label: '差', key: 'goal_diff', type: 'num' },
       ];
 
       // ソート状態をグループ毎に管理
@@ -1646,7 +1659,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-window.switchChantClub = function(club, btn) {
+window.switchChantClub = function (club, btn) {
   // Update buttons
   const tabs = btn.closest('.standings-tabs').querySelectorAll('.u-tab-btn');
   tabs.forEach(t => t.classList.remove('active'));
