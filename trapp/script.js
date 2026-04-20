@@ -49,12 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
     return new Date(y, m - 1, d || 1);
   }
 
-  function isHomeMatch(club, venue) {
-    if (!venue) return false;
-    if (club === "niigata") return venue.includes("デンカビッグスワン");
-    if (club === "kumamoto") return venue.includes("えがお健康");
-    return false;
-  }
+    const normalizeName = (s) => (s || "").normalize("NFKC").trim();
+    
+    function isHomeMatch(club, venue) {
+      if (!venue) return false;
+      const v = normalizeName(venue);
+      if (club === "niigata") return v.includes("デンカビッグスワン");
+      if (club === "kumamoto") return v.includes("えがお健康");
+      return false;
+    }
 
   // --- View Management ---
   function switchMode(mode) {
@@ -532,17 +535,29 @@ document.addEventListener("DOMContentLoaded", () => {
   let cachedResults = null;
 
   async function fetchStandingsSilently() {
+    // Return cached if already available
     if (cachedStandings) return cachedStandings;
+
+    // Try localStorage first for instant display
     const lSave = localStorage.getItem("trapp_standings_cache");
     if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
 
-    fetchStaticJsonOrFallback("standings").then(json => {
-      if (json && json.data && JSON.stringify(json.data) !== JSON.stringify(cachedStandings)) {
-        cachedStandings = json.data;
-        localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
-        if (currentMode === "dashboard") renderDashboard();
+    // Always fetch fresh data in background and re-render if changed
+    const refreshPromise = fetchStaticJsonOrFallback("standings").then(json => {
+      if (json && json.data) {
+        const newStr = JSON.stringify(json.data);
+        if (newStr !== JSON.stringify(cachedStandings)) {
+          cachedStandings = json.data;
+          localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
+          if (currentMode === "dashboard") renderDashboard();
+        }
       }
     }).catch(() => { });
+
+    // If no localStorage cache yet, wait for the fetch to complete
+    if (!cachedStandings) {
+      await refreshPromise;
+    }
     return cachedStandings;
   }
 
@@ -550,9 +565,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let changed = false;
     scheduleData.forEach(m => {
       const kw = m.club === "niigata" ? "新潟" : "熊本";
-      const gObj = data.find(r => r.date === m.date && (r.home.includes(kw) || r.away.includes(kw)));
+      const normKw = normalizeName(kw);
+      const gObj = data.find(r => {
+        const h = normalizeName(r.home);
+        const a = normalizeName(r.away);
+        return r.date === m.date && (h.includes(normKw) || a.includes(normKw));
+      });
       if (gObj && gObj.home_score !== "" && typeof gObj.home_score !== "undefined") {
-        const isHome = gObj.home.includes(kw);
+        const isHome = normalizeName(gObj.home).includes(normKw);
         const sM = isHome ? gObj.home_score : gObj.away_score;
         const sO = isHome ? gObj.away_score : gObj.home_score;
         
@@ -803,23 +823,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (nextNiigata) fetchWeatherForDash(`dash-weather-niigata`, 'niigata');
     if (nextKumamoto) fetchWeatherForDash(`dash-weather-kumamoto`, 'kumamoto');
 
-    // Auto Fetch Standings
-    fetchStandingsSilently().then(data => {
+    // Ensure standings are available on dashboard
+    const refreshStandings = async () => {
+      const data = await fetchStandingsSilently();
       if (!data) return;
-      const updateStandings = (m, myKeyword, oppKeyword) => {
+      
+      const updateStatsCard = (m, myKeyword) => {
         if (!m) return;
-        const myData = data.find(r => r.team && r.team.includes(myKeyword));
-        // Using the original TEAM_ABBR logic logic from syncResultsFromGAS to find opponent name in GAS
-        const J_TEAM_KWS = ["札幌", "鹿島", "浦和", "柏", "FC東京", "東京V", "町田", "川崎", "横浜FM", "横浜FC", "YS横浜", "湘南", "新潟", "富山", "金沢", "清水", "藤枝", "沼津", "磐田", "名古屋", "岐阜", "京都", "G大阪", "C大阪", "セレッソ", "FC大阪", "神戸", "奈良", "鳥取", "岡山", "広島", "山口", "讃岐", "徳島", "愛媛", "今治", "福岡", "北九州", "鳥栖", "長崎", "熊本", "大分", "宮崎", "鹿児島", "琉球", "高知", "滋賀", "八戸", "盛岡", "秋田", "山形", "仙台", "福島", "水戸", "群馬", "栃木", "大宮", "千葉", "相模原", "甲府", "松本", "長野"];
-        // Find matching team in data
-        const oppNameBase = m.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '');
-        const oppData = data.find(r => {
-          if (!r.team) return false;
-          for (let kw of J_TEAM_KWS) {
-            if (oppNameBase.includes(kw) && r.team.includes(kw)) return true;
-          }
-          return r.team.includes(oppNameBase.substring(0, 2));
-        });
+        const nMyKey = normalizeName(myKeyword);
+        const myData = data.find(r => r.team && normalizeName(r.team).includes(nMyKey));
+        
+        // Match opponent rank
+        const J_TEAM_KWS = ["FC東京", "東京V", "横浜FM", "横浜FC", "YS横浜", "FC大阪", "G大阪", "C大阪", "セレッソ", "FC岐阜", "FC今治", "FC琉球", "札幌", "鹿島", "浦和", "柏", "町田", "川崎", "湘南", "新潟", "富山", "金沢", "清水", "藤枝", "沼津", "磐田", "名古屋", "岐阜", "京都", "神戸", "奈良", "鳥取", "岡山", "広島", "山口", "讃岐", "徳島", "愛媛", "今治", "福岡", "北九州", "鳥栖", "長崎", "熊本", "大分", "宮崎", "鹿児島", "琉球", "高知", "滋賀", "八戸", "盛岡", "秋田", "山形", "仙台", "福島", "水戸", "群馬", "栃木", "大宮", "千葉", "相模原", "甲府", "松本", "長野"];
+        let oppData = null;
+        let bestLen = 0;
+        const nOpp = normalizeName(m.opponent);
+        for (let kw of J_TEAM_KWS) {
+           const nKw = normalizeName(kw);
+           if (nOpp.includes(nKw)) {
+             const found = data.find(r => r.team && normalizeName(r.team).includes(nKw));
+             if (found && kw.length > bestLen) {
+                oppData = found;
+                bestLen = kw.length;
+             }
+           }
+        }
 
         const statsRow = document.getElementById(`dash-stats-${m.club}`);
         if (statsRow) {
@@ -831,38 +859,64 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }
       };
-
-      updateStandings(nextNiigata, "新潟", "opponent");
-      updateStandings(nextKumamoto, "熊本", "opponent");
-    });
+      updateStatsCard(nextNiigata, "新潟");
+      updateStatsCard(nextKumamoto, "熊本");
+    };
+    refreshStandings();
 
     // Auto Fetch Previous Results
     fetchGasResultsSilently().then(data => {
       if (!data) return;
       const updateRecent = (m, myKeyword) => {
         if (!m) return;
-        const J_TEAM_KWS = ["札幌", "鹿島", "浦和", "柏", "FC東京", "東京V", "町田", "川崎", "横浜FM", "横浜FC", "YS横浜", "湘南", "新潟", "富山", "金沢", "清水", "藤枝", "沼津", "磐田", "名古屋", "岐阜", "京都", "G大阪", "C大阪", "セレッソ", "FC大阪", "神戸", "奈良", "鳥取", "岡山", "広島", "山口", "讃岐", "徳島", "愛媛", "今治", "福岡", "北九州", "鳥栖", "長崎", "熊本", "大分", "宮崎", "鹿児島", "琉球", "高知", "滋賀", "八戸", "盛岡", "秋田", "山形", "仙台", "福島", "水戸", "群馬", "栃木", "大宮", "千葉", "相模原", "甲府", "松本", "長野"];
-        const oppNameBase = m.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '');
-        let oppKw = oppNameBase.substring(0, 2);
+        const J_TEAM_KWS = ["FC東京", "東京V", "横浜FM", "横浜FC", "YS横浜", "FC大阪", "G大阪", "C大阪", "セレッソ", "FC岐阜", "FC今治", "FC琉球", "札幌", "鹿島", "浦和", "柏", "町田", "川崎", "湘南", "新潟", "富山", "金沢", "清水", "藤枝", "沼津", "磐田", "名古屋", "岐阜", "京都", "神戸", "奈良", "鳥取", "岡山", "広島", "山口", "讃岐", "徳島", "愛媛", "今治", "福岡", "北九州", "鳥栖", "長崎", "熊本", "大分", "宮崎", "鹿児島", "琉球", "高知", "滋賀", "八戸", "盛岡", "秋田", "山形", "仙台", "福島", "水戸", "群馬", "栃木", "大宮", "千葉", "相模原", "甲府", "松本", "長野"];
+        // Find the longest keyword that the opponent name contains (most specific match)
+        let oppKw = m.opponent.substring(0, 2);
+        let bestLen = 0;
+        const normOpp = normalizeName(m.opponent);
         for (let kw of J_TEAM_KWS) {
-          if (oppNameBase.includes(kw)) { oppKw = kw; break; }
+          const nKw = normalizeName(kw);
+          if (normOpp.includes(nKw) && kw.length > bestLen) {
+            oppKw = kw;
+            bestLen = kw.length;
+          }
         }
 
         const findPrevStr = (teamKw) => {
-          // Search for matches in GAS data
-          let pastOptions = data.filter(r => (r.home.includes(teamKw) || r.away.includes(teamKw)) && r.home_score !== "" && typeof r.home_score !== "undefined");
+          // Use today's local date string as upper cutoff
+          const todayNow = new Date();
+          const todayStr = `${todayNow.getFullYear()}-${String(todayNow.getMonth()+1).padStart(2,'0')}-${String(todayNow.getDate()).padStart(2,'0')}`;
 
-          // Inject local manual entries for our clubs
+          // Normalize GAS team name: strip garbage suffix
+          const cleanGas = (name) => (name || "").replace(/の試合詳細/g, "").trim();
+
+          // Match: GAS name contains kw, OR kw contains GAS name (handles both full and short names)
+          // Guard against single-char false positives with c.length >= 2
+          const gasMatch = (gasName, kw) => {
+            const c = normalizeName(cleanGas(gasName));
+            const nKw = normalizeName(kw);
+            // Strict check: normalized GAS name contains normalized keyword
+            return c === nKw || c.includes(nKw);
+          };
+
+          // Search for matches in GAS data - only past or today with scores
+          let pastOptions = data.filter(r =>
+            (gasMatch(r.home, teamKw) || gasMatch(r.away, teamKw)) &&
+            r.date <= todayStr &&
+            r.home_score !== "" && typeof r.home_score !== "undefined"
+          );
+
+          // Inject local manual entries for our clubs (for dates <= today)
           const myClub = teamKw === "新潟" ? "niigata" : (teamKw === "熊本" ? "kumamoto" : null);
           if (myClub) {
-            scheduleData.filter(m => m.club === myClub).forEach(m => {
+            scheduleData.filter(m => m.club === myClub && m.date <= todayStr).forEach(m => {
               const mId = `${m.date}_${m.club}_${m.opponent}`;
               const sM = localStorage.getItem(`score_my_${mId}`);
               const sO = localStorage.getItem(`score_opp_${mId}`);
               if (sM && sO) {
                 const isHome = isHomeMatch(m.club, m.venue);
                 const opp = m.opponent;
-                const existing = pastOptions.find(r => r.date === m.date && (r.home.includes(teamKw) || r.away.includes(teamKw)));
+                const existing = pastOptions.find(r => r.date === m.date && (gasMatch(r.home, teamKw) || gasMatch(r.away, teamKw)));
                 if (!existing) {
                   const pkM = localStorage.getItem(`score_my_pk_${mId}`);
                   const pkO = localStorage.getItem(`score_opp_pk_${mId}`);
@@ -880,15 +934,26 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           if (pastOptions.length === 0) return "-";
-          // Sort by date upward
-          pastOptions.sort((a, b) => new Date(a.date) - new Date(b.date));
+          // Sort by date descending, get most recent
+          pastOptions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-          const lastM = pastOptions[pastOptions.length - 1];
-          const isHome = lastM.home.includes(teamKw);
+          const lastM = pastOptions[0];
+          const isHome = gasMatch(lastM.home, teamKw);
           const sM = Number(isHome ? lastM.home_score : lastM.away_score);
           const sO = Number(isHome ? lastM.away_score : lastM.home_score);
           const rawOpName = isHome ? lastM.away : lastM.home;
-          const opName = rawOpName ? rawOpName.replace(/の試合詳細/g, '') : "";
+          // Extract city name: remove team name cruft and get keyword only
+          const J_TEAM_KWS_CITY = ["札幌","鹿島","浦和","柏","東京","町田","川崎","横浜","湘南","新潟","富山","金沢","清水","藤枝","沼津","磐田","名古屋","岐阜","京都","大阪","神戸","奈良","鳥取","岡山","広島","山口","讃岐","徳島","愛媛","今治","福岡","北九州","鳥栖","長崎","熊本","大分","宮崎","鹿児島","琉球","高知","滋賀","八戸","盛岡","秋田","山形","仙台","福島","水戸","群馬","栃木","大宮","千葉","相模原","甲府","松本","長野"];
+          const cleaned = normalizeName(cleanGas(rawOpName));
+          let opName = cleaned;
+          let bestCityLen = 0;
+          for (const kw of J_TEAM_KWS_CITY) {
+            const nKwArr = normalizeName(kw);
+            if (cleaned.includes(nKwArr) && kw.length > bestCityLen) { 
+              opName = kw; 
+              bestCityLen = kw.length;
+            }
+          }
 
           let wl = "<span style='color:var(--text-main);font-weight:900;'>〇</span>";
           let pkDisplay = "";
