@@ -688,3 +688,18 @@ body[data-mode="dashboard"] .header-title {
 .dash-ql-btn:active { transform: scale(0.94); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
 .dash-ql-btn .m-icon { width: 22px; height: 22px; color: var(--text-main); }
 .dash-ql-btn span { font-weight: 900; font-size: 0.95rem; color: var(--text-main); }
+
+/* 📢 Header N Gate Button */
+#header-n-gate-container { display: flex; align-items: center; }
+.btn-ngate-header {
+  padding: 6px 12px; border-radius: 20px; background: var(--albirex-orange); color: white;
+  font-family: var(--font-kick); font-size: 0.75rem; font-weight: 900;
+  text-decoration: none; box-shadow: 0 4px 10px rgba(var(--albirex-orange-rgb), 0.3);
+  white-space: nowrap; margin-right: 10px; border: 1.5px solid rgba(255,255,255,0.3);
+  transition: transform 0.2s;
+}
+.btn-ngate-header:active { transform: scale(0.94); opacity: 0.9; }
+
+@media (max-width: 600px) {
+  .btn-ngate-header { padding: 5px 10px; font-size: 0.7rem; margin-right: 5px; }
+}
