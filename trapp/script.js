@@ -195,9 +195,9 @@ document.addEventListener("DOMContentLoaded", () => {
               <div style="display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.7); padding:4px 10px; border-radius:15px; box-shadow:0 1px 4px rgba(0,0,0,0.05);">
                 ${ICONS[ik]}
                 <div style="display:flex; align-items:baseline; gap:3px; font-family:var(--font-kick); font-weight:800; font-size:0.85rem;">
-                  <span style="color:#ff3b30;">${max}</span>
+                  <span class="w-temp-max" style="color:#ff3b30;">${max}</span>
                   <span style="font-size:0.6rem; color:#888;">/</span>
-                  <span style="color:#007aff;">${min}</span>
+                  <span class="w-temp-min" style="color:#007aff;">${min}</span>
                   <span style="font-size:0.55rem; color:#999;">℃</span>
                 </div>
               </div>
@@ -518,10 +518,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const resInner = wIconPlace.querySelector("div[style*='background:']");
       if (resInner) {
         const svg = resInner.querySelector("svg");
-        const temps = resInner.querySelectorAll("span[style*='color:']");
+        const maxVal = resInner.querySelector(".w-temp-max");
+        const minVal = resInner.querySelector(".w-temp-min");
         if (svg) wIconPlace.innerHTML = svg.outerHTML;
-        if (temps[0]) tMaxPlace.innerText = temps[0].innerText;
-        if (temps[1]) tMinPlace.innerText = temps[1].innerText;
+        if (maxVal) tMaxPlace.innerText = maxVal.innerText;
+        if (minVal) tMinPlace.innerText = minVal.innerText;
         resInner.remove(); // Clean up the wrapper
       }
       wBox.style.display = "flex";
@@ -594,9 +595,17 @@ document.addEventListener("DOMContentLoaded", () => {
       let pm = "", po = "";
       const pkA = sheetContent.querySelector(".u-pk-area");
       if (pkA) {
-        pkA.style.display = (mS !== "" && oS !== "" && mS === oS) ? "flex" : "none";
-        pm = sheetContent.querySelector(".pk-my").value; po = sheetContent.querySelector(".pk-opp").value;
-        localStorage.setItem(`score_my_pk_${mId}`, pm); localStorage.setItem(`score_opp_pk_${mId}`, po);
+        const isDraw = (mS !== "" && oS !== "" && mS === oS);
+        pkA.style.display = isDraw ? "flex" : "none";
+        if (isDraw) {
+          pm = sheetContent.querySelector(".pk-my").value; 
+          po = sheetContent.querySelector(".pk-opp").value;
+          localStorage.setItem(`score_my_pk_${mId}`, pm); 
+          localStorage.setItem(`score_opp_pk_${mId}`, po);
+        } else {
+          localStorage.removeItem(`score_my_pk_${mId}`);
+          localStorage.removeItem(`score_opp_pk_${mId}`);
+        }
       }
 
       const card = document.querySelector(`.card[data-mid="${mId}"]`);
@@ -739,7 +748,7 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.setItem(`score_my_${mId}`, sM);
           localStorage.setItem(`score_opp_${mId}`, sO);
           
-          if (r.pk) {
+          if (r.pk && r.home_score === r.away_score) {
             const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
             if (pkMatch) {
               const pkM = isHome ? pkMatch[1] : pkMatch[2];
@@ -747,6 +756,9 @@ document.addEventListener("DOMContentLoaded", () => {
               localStorage.setItem(`score_my_pk_${mId}`, pkM);
               localStorage.setItem(`score_opp_pk_${mId}`, pkO);
             }
+          } else {
+            localStorage.removeItem(`score_my_pk_${mId}`);
+            localStorage.removeItem(`score_opp_pk_${mId}`);
           }
           changed = true;
         }
@@ -1061,7 +1073,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let res = `<span style="color:var(--text-grey);font-size:0.7rem;margin-right:4px;">vs ${opp}</span>`;
       res += `<span style="color:${symbolColor};font-weight:900;margin-right:8px;font-size:0.75rem;font-family:var(--font-kick);vertical-align:middle;">${symbol}</span>`;
       res += `<span style="font-weight:900;font-size:1.1rem;color:var(--text-main);">${sM} - ${sO}</span>`;
-      if (last.pk) res += `<span style="font-size:0.65rem;color:var(--text-grey);margin-left:2px;">(PK)</span>`;
+      if (last.pk && sM === sO) res += `<span style="font-size:0.65rem;color:var(--text-grey);margin-left:2px;">(PK)</span>`;
       return res;
     };
 
@@ -1128,9 +1140,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (sMy !== "" && sOpp !== "") {
           const ms = Number(sMy), os = Number(sOpp);
-          if (sPkM !== "" && sPkO !== "") {
+          if (ms === os && sPkM !== "" && sPkO !== "") {
             scoreDisplay = `(${sPkM}) ${ms} - ${os} (${sPkO})`;
-            if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = Number(sPkM) > Number(sPkO) ? "pk-win" : "pk-lose";
+            res = Number(sPkM) > Number(sPkO) ? "pk-win" : "pk-lose";
           } else {
             scoreDisplay = `${ms} - ${os}`;
             if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = "draw";
