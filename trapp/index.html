@@ -73,6 +73,10 @@
           <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
           <span class="m-label">データ管理</span>
         </button>
+        <button class="menu-card" id="menu-reload">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          <span class="m-label">再読み込み</span>
+        </button>
       </div>
     </div>
   </nav>
@@ -105,6 +109,17 @@
       <li><a href="https://x.com/roassoofficial" target="_blank">ROASSO X</a></li>
       <li><a href="https://www.jleague-ticket.jp/" target="_blank">J LEAGUE TICKETS</a></li>
     </ul>
+  </div>
+ 
+  <!-- 🏆 Standings Overlay -->
+  <div id="standings-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>順位表 / STANDINGS</h3>
+      <button class="close-pane">✕</button>
+    </div>
+    <div class="pane-content" id="standings-content" style="padding:15px;">
+      <!-- JavaScript will inject standings here -->
+    </div>
   </div>
 
   <!-- 📢 Chants Overlay -->
@@ -819,8 +834,8 @@ We can't help falling in love with you
   </div>
 
 
-<script src="schedule.js?v=20260420a"></script>
-<script src="script.js?v=20260420a"></script>
+<script src="schedule.js?v=20260424c"></script>
+<script src="script.js?v=20260424c"></script>
 
 </body>
 </html>

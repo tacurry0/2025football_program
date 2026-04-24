@@ -125,6 +125,88 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
+    async function updateWeatherUI(container, date, venue) {
+      if (!container) return;
+      const STADIUM_CITY_MAP = {
+        "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
+        "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
+        "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
+        "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
+        "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
+        "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
+        "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
+        "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
+        "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
+        "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
+        "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
+        "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
+        "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
+        "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
+        "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
+        "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
+        "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
+        "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
+        "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
+        "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
+        "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
+        "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
+      };
+      const loc = STADIUM_CITY_MAP[venue] || venue;
+      const now = new Date();
+      const mDateObj = new Date(date);
+      const diffDays = (mDateObj - now) / (1000 * 60 * 60 * 24);
+      if (diffDays < -4 || diffDays > 14) return;
+
+      try {
+        let lat, lon;
+        const cCache = localStorage.getItem('coord_' + loc);
+        if (cCache) {
+          const c = JSON.parse(cCache); lat = c.lat; lon = c.lon;
+        } else {
+          const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(loc)}&format=json&limit=1`);
+          const data = await res.json();
+          if (data && data[0]) {
+            lat = data[0].lat; lon = data[0].lon;
+            localStorage.setItem('coord_' + loc, JSON.stringify({ lat, lon }));
+          }
+        }
+        if (lat !== undefined && lon !== undefined) {
+          const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&past_days=3&forecast_days=16`);
+          const wData = await wRes.json();
+          const dIdx = wData.daily?.time?.indexOf(date);
+          if (dIdx !== undefined && dIdx > -1) {
+            const code = wData.daily.weather_code[dIdx];
+            const max = Math.round(wData.daily.temperature_2m_max[dIdx]);
+            const min = Math.round(wData.daily.temperature_2m_min[dIdx]);
+            
+            const ICONS = {
+              SUNNY: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
+              CLOUDY: `<svg viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>`,
+              RAIN: `<svg viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M16 13a4 4 0 0 0-8 0"></path><path d="M20 16a4 4 0 0 0-8 0"></path><path d="M12 5a4 4 0 0 0-8 0"></path><path d="M8 19v2"></path><path d="M12 19v2"></path><path x1="16" y1="19" x2="16" y2="21"></path></svg>`,
+              SNOW: `<svg viewBox="0 0 24 24" fill="none" stroke="#5ac8fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line></svg>`
+            };
+            let ik = "CLOUDY";
+            if (code <= 1) ik = "SUNNY";
+            else if (code <= 3) ik = "CLOUDY";
+            else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) ik = "RAIN";
+            else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) ik = "SNOW";
+
+            container.innerHTML = `
+              <div style="display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.7); padding:4px 10px; border-radius:15px; box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+                ${ICONS[ik]}
+                <div style="display:flex; align-items:baseline; gap:3px; font-family:var(--font-kick); font-weight:800; font-size:0.85rem;">
+                  <span style="color:#ff3b30;">${max}</span>
+                  <span style="font-size:0.6rem; color:#888;">/</span>
+                  <span style="color:#007aff;">${min}</span>
+                  <span style="font-size:0.55rem; color:#999;">℃</span>
+                </div>
+              </div>
+            `;
+          }
+        }
+      } catch (e) { console.warn("Weather UI update failed", e); }
+    }
+
     function updateHeaderAnnouncements() {
       const container = document.getElementById("header-n-gate-container");
       if (!container) return;
@@ -387,14 +469,23 @@ document.addEventListener("DOMContentLoaded", () => {
           <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(match.venue)}" target="_blank" style="background:#f2f2f7; color:var(--text-main); font-size:0.75rem; padding:6px 12px; border-radius:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-weight:700;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> MAPで開く</a>
         </div>
       </div>
-      <div id="u-auto-weather-area" style="display: none; gap: 15px; justify-content: center; margin: 15px 0;">
-        <div style="display:flex; flex-direction:column; align-items:center;">
-           <span style="font-size:0.65rem; color:#888; position:relative;">天気 <span id="auto-weather-badge" style="position:absolute; top:-12px; left:120%; width:max-content; background:#28a745; color:white; font-size:0.5rem; padding:1px 4px; border-radius:4px; font-weight:800; display:none;">取得済</span></span>
-           <div id="u-weather-display" style="font-size: 1.5rem; margin-top: 4px;">-</div>
+      <div id="u-auto-weather-area" style="display: none; gap: 20px; justify-content: center; margin: 20px 0; background: rgba(242, 242, 247, 0.5); padding: 15px; border-radius: 18px; backdrop-filter: blur(5px);">
+        <div style="display:flex; flex-direction:column; align-items:center; flex: 1;">
+           <span style="font-size:0.65rem; color:#888; font-weight:700; margin-bottom:6px;">FORECAST</span>
+           <div id="u-weather-display" style="display:flex; flex-direction:column; align-items:center;">
+             <span class="w-icon" style="font-size: 1.8rem;">-</span>
+           </div>
         </div>
-        <div style="display:flex; flex-direction:column; align-items:center;">
-           <span style="font-size:0.65rem; color:#888;">最高気温 (℃)</span>
-           <div id="u-temp-display" style="font-size: 1.2rem; font-family:var(--font-kick); font-weight:800; margin-top: 8px;">-</div>
+        <div style="width:1px; background:#ddd; height:40px; align-self:center;"></div>
+        <div style="display:flex; flex-direction:column; align-items:center; flex: 1;">
+           <span style="font-size:0.65rem; color:#888; font-weight:700; margin-bottom:6px;">TEMPERATURE</span>
+           <div style="display:flex; align-items: baseline; gap: 4px;">
+             <span id="u-temp-max" style="font-size: 1.6rem; font-family:var(--font-kick); font-weight:900; color:#ff3b30;">-</span>
+             <span style="font-size:0.7rem; color:#888; font-weight:800; margin-right:4px;">℃</span>
+             <span style="font-size: 0.8rem; color:#ddd;">/</span>
+             <span id="u-temp-min" style="font-size: 1.2rem; font-family:var(--font-kick); font-weight:800; color:#007aff; margin-left:4px;">-</span>
+             <span style="font-size:0.6rem; color:#888; font-weight:800;">℃</span>
+           </div>
         </div>
       </div>
 
@@ -417,80 +508,26 @@ document.addEventListener("DOMContentLoaded", () => {
       <button class="close-sheet-btn">保存して閉じる</button>
     `;
 
-    // --- Weather Auto Fetch Logic ---
-    const wArea = sheetContent.querySelector("#u-auto-weather-area");
-    const wDisp = sheetContent.querySelector("#u-weather-display");
-    const tDisp = sheetContent.querySelector("#u-temp-display");
-    const aBadge = sheetContent.querySelector("#auto-weather-badge");
+    // Use the unified weather helper
+    const wBox = sheetContent.querySelector("#u-auto-weather-area");
+    const wIconPlace = wBox.querySelector(".w-icon");
+    const tMaxPlace = wBox.querySelector("#u-temp-max");
+    const tMinPlace = wBox.querySelector("#u-temp-min");
 
-    const mDate = new Date(match.date);
-    const now = new Date();
-    const diffDays = (mDate - now) / (1000 * 60 * 60 * 24);
+    updateWeatherUI(wIconPlace, match.date, match.venue).then(() => {
+      const resInner = wIconPlace.querySelector("div[style*='background:']");
+      if (resInner) {
+        const svg = resInner.querySelector("svg");
+        const temps = resInner.querySelectorAll("span[style*='color:']");
+        if (svg) wIconPlace.innerHTML = svg.outerHTML;
+        if (temps[0]) tMaxPlace.innerText = temps[0].innerText;
+        if (temps[1]) tMinPlace.innerText = temps[1].innerText;
+        resInner.remove(); // Clean up the wrapper
+      }
+      wBox.style.display = "flex";
+    });
 
-    // Only fetch and display for matches within -3 to 14 days
-    if (diffDays >= -4 && diffDays <= 14) {
-      wArea.style.display = "flex";
 
-      const STADIUM_CITY_MAP = {
-        "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
-        "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
-        "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
-        "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
-        "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
-        "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
-        "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
-        "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
-        "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
-        "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
-        "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
-        "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
-        "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
-        "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
-        "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
-        "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
-        "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
-        "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
-        "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
-        "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
-        "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
-        "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
-      };
-      const searchLocation = STADIUM_CITY_MAP[match.venue] || match.venue;
-
-      (async () => {
-        try {
-          let lat, lon;
-          const cCache = localStorage.getItem('coord_' + searchLocation);
-          if (cCache) {
-            const c = JSON.parse(cCache); lat = c.lat; lon = c.lon;
-          } else {
-            const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchLocation)}&format=json&limit=1`);
-            const data = await res.json();
-            if (data && data[0]) {
-              lat = data[0].lat; lon = data[0].lon;
-              localStorage.setItem('coord_' + searchLocation, JSON.stringify({ lat, lon }));
-            }
-          }
-          if (lat !== undefined && lon !== undefined) {
-            const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&past_days=3&forecast_days=16`);
-            const wData = await wRes.json();
-            const dIdx = wData.daily?.time?.indexOf(match.date);
-            if (dIdx !== undefined && dIdx > -1) {
-              const code = wData.daily.weather_code[dIdx];
-              const max = wData.daily.temperature_2m_max[dIdx];
-              let emoji = "☁️";
-              if (code <= 1) emoji = "☀️";
-              else if (code <= 3) emoji = "☁️";
-              else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
-              else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
-
-              wDisp.innerText = emoji;
-              tDisp.innerText = Math.round(max);
-            }
-          }
-        } catch (e) { console.warn("Auto weather fetch skipped.", e); }
-      })();
-    }
 
     // Helper: convert URLs to clickable links
     function linkifyMemo(text) {
@@ -590,154 +627,137 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function closeDetailSheet() { detailSheet.classList.remove("active"); sheetBackdrop.classList.remove("active"); }
 
-  const GAS_EXEC_URL = "https://script.google.com/macros/s/AKfycbzK_DTYbg8Zzibe3uVutxEaRebQHvB1vZwz9A1s74PANFU4osrkFtLbfewwteRFZ_1o/exec";
+  const GAS_EXEC_URL = "https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec";
 
-  async function fetchStaticJsonOrFallback(type) {
+  // --- Results & Data Management ---
+  let officialResults = [];
+  let cachedStandings = null;
+
+  // Initialize data from localStorage cache
+  const rSave = localStorage.getItem("trapp_results_cache");
+  if (rSave) { try { officialResults = JSON.parse(rSave); } catch (e) { } }
+  
+  const lSave = localStorage.getItem("trapp_standings_cache");
+  if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
+
+  /**
+   * Universal fetch with fallback and stale check
+   */
+  async function fetchData(type, forceGas = false) {
     const localUrl = `./data/${type}.json`;
     const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
+    let staticJson = null;
     try {
       const res = await fetch(localUrl + "?t=" + Date.now());
-      if (res.ok) {
-        const text = await res.text();
-        try {
-          const parsed = JSON.parse(text);
-          if (parsed && parsed.timestamp) {
-            const ageMs = Date.now() - new Date(parsed.timestamp).getTime();
-            // results: スタールチェックしない（GASが誤データを返すため静的ファイル優先）
-            // standings: 24時間以内なら静的ファイルを使用
-            if (type !== "results" && ageMs > 24 * 3600 * 1000) {
-              console.warn("Static data is stale, falling back to GAS:", type);
-              throw new Error("Stale JSON");
-            }
-          }
-          return parsed;
-        } catch (e) { }
-      }
-    } catch (e) { }
-    // Fallback to GAS only for non-results types
-    // results は静的ファイルが優先（GASは履歴を持たない場合があるため）
+      if (res.ok) staticJson = await res.json();
+    } catch (e) { console.warn(`Static load failed: ${type}`); }
+
     try {
-      const res = await fetch(gasUrl);
-      return await res.json();
-    } catch (e) { return null; }
+      const gasUrlWithCacheBuster = `${gasUrl}&nocache=1&t=${Date.now()}`;
+      const res = await fetch(gasUrlWithCacheBuster);
+      const gasJson = await res.json();
+      const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
+      const staticArr = (staticJson && staticJson.data) ? staticJson.data : (Array.isArray(staticJson) ? staticJson : []);
+      if (gasArr.length >= staticArr.length && gasArr.length > 0) return gasJson;
+    } catch (e) { console.error(`GAS fetch failed: ${type}`); }
+    return staticJson;
   }
 
-  // --- Dashboard Logic ---
-  let cachedStandings = null;
-  let cachedResults = null;
-  // Try localStorage first for instant display
-  const rSave = localStorage.getItem("trapp_results_cache");
-  if (rSave) { try { cachedResults = JSON.parse(rSave); } catch (e) { } }
+  /**
+   * Refreshes all data and updates UI
+   */
+  async function refreshAllData(forceGas = false) {
+    const [resJson, stdJson] = await Promise.all([
+      fetchData("results", forceGas),
+      fetchData("standings", forceGas)
+    ]);
 
-  // results.json から直接読み込んだデータ（GASに頼らない）
-  let staticResultsData = null;
-
-  // ページ起動時に results.json を確実に読み込む
-  (async () => {
-    try {
-      const json = await fetchStaticJsonOrFallback("results");
-      if (json) {
-        // オブジェクト形式か配列形式かを判別して正規化
-        const resData = Array.isArray(json) ? json : (json.data || []);
-        staticResultsData = resData;
-        cachedResults = resData;
-        localStorage.setItem("trapp_results_cache", JSON.stringify(resData));
-        
-        // データ取得後に即時反映
-        updateDashboardPrevResults();
-        if (typeof syncResultsFromGAS === "function") {
-          syncResultsFromGAS(resData);
-        }
-      }
-    } catch (e) {
-      console.warn('results.json load failed:', e);
+    if (resJson) {
+      officialResults = Array.isArray(resJson) ? resJson : (resJson.data || []);
+      localStorage.setItem("trapp_results_cache", JSON.stringify(officialResults));
+      syncResultsToLocalStorage(officialResults);
     }
-  })();
 
-  async function fetchStandingsSilently() {
-    // Return cached if already available
-    if (cachedStandings) return cachedStandings;
-
-    // Try localStorage first for instant display
-    const lSave = localStorage.getItem("trapp_standings_cache");
-    if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
-
-    // Always fetch fresh data in background and re-render if changed
-    const refreshPromise = fetchStaticJsonOrFallback("standings").then(json => {
-      if (json && json.data) {
-        const newStr = JSON.stringify(json.data);
-        if (newStr !== JSON.stringify(cachedStandings)) {
-          cachedStandings = json.data;
-          localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
-          if (currentMode === "dashboard") renderDashboard();
-        }
-      }
-    }).catch(() => { });
-
-    // If no localStorage cache yet, wait for the fetch to complete
-    if (!cachedStandings) {
-      await refreshPromise;
+    if (stdJson && stdJson.data) {
+      cachedStandings = stdJson.data;
+      localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
     }
-    return cachedStandings;
+
+    // Update UI components
+    if (currentMode === "dashboard") renderDashboard();
+    else if (currentMode === "feed") renderFeed();
+    else if (currentMode === "calendar") renderCalendar();
+    
+    if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
   }
 
-  function syncResultsToLocal(data) {
+  /**
+   * Finds official result for a specific match
+   */
+  function findOfficialResult(match) {
+    if (!officialResults || !officialResults.length) return null;
+    const myKw = match.club === "niigata" ? "新潟" : "熊本";
+    
+    return officialResults.find(r => {
+      const dateMatch = r.date === match.date;
+      const teamMatch = robustTeamMatch(r.home, myKw) || robustTeamMatch(r.away, myKw);
+      if (!teamMatch) return false;
+      
+      const isHome = robustTeamMatch(r.home, myKw);
+      const opp = isHome ? r.away : r.home;
+      const oppMatch = robustTeamMatch(opp, match.opponent);
+      
+      // Prefer exact date + opponent match
+      if (dateMatch && oppMatch) return true;
+      
+      // Fallback: If section matches (if provided in results)
+      if (r.section && match.matchweek) {
+         const rSec = parseInt(r.section);
+         const mSec = parseInt(match.matchweek.replace(/\D/g, ""));
+         if (rSec === mSec && oppMatch) return true;
+      }
+      
+      return false;
+    });
+  }
+
+  /**
+   * Syncs official results into individual localStorage keys (for Feed/Calendar)
+   */
+  function syncResultsToLocalStorage(results) {
     let changed = false;
     scheduleData.forEach(m => {
-      const kw = m.club === "niigata" ? "新潟" : "熊本";
-      const normKw = normalizeName(kw);
-      const gObj = data.find(r => {
-        const h = normalizeName(r.home);
-        const a = normalizeName(r.away);
-        return r.date === m.date && (h.includes(normKw) || a.includes(normKw));
-      });
-      if (gObj && gObj.home_score !== "" && typeof gObj.home_score !== "undefined") {
-        const isHome = normalizeName(gObj.home).includes(normKw);
-        const sM = isHome ? gObj.home_score : gObj.away_score;
-        const sO = isHome ? gObj.away_score : gObj.home_score;
+      const r = findOfficialResult(m);
+      if (r && r.home_score !== "" && r.home_score !== null) {
+        const isHome = robustTeamMatch(r.home, m.club === "niigata" ? "新潟" : "熊本");
+        const sM = isHome ? r.home_score : r.away_score;
+        const sO = isHome ? r.away_score : r.home_score;
         
         const mId = `${m.date}_${m.club}_${m.opponent}`;
-        const lMy = localStorage.getItem(`score_my_${mId}`);
-        const lOpp = localStorage.getItem(`score_opp_${mId}`);
-        
-        if (lMy !== String(sM) || lOpp !== String(sO)) {
+        if (localStorage.getItem(`score_my_${mId}`) !== String(sM) || 
+            localStorage.getItem(`score_opp_${mId}`) !== String(sO)) {
           localStorage.setItem(`score_my_${mId}`, sM);
           localStorage.setItem(`score_opp_${mId}`, sO);
-          if (gObj.pk) {
-             const pkMatch = gObj.pk.match(/(\d+)\s*PK\s*(\d+)/i);
-             if (pkMatch) {
-                const pkM = isHome ? pkMatch[1] : pkMatch[2];
-                const pkO = isHome ? pkMatch[2] : pkMatch[1];
-                localStorage.setItem(`score_my_pk_${mId}`, pkM);
-                localStorage.setItem(`score_opp_pk_${mId}`, pkO);
-             }
+          
+          if (r.pk) {
+            const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+            if (pkMatch) {
+              const pkM = isHome ? pkMatch[1] : pkMatch[2];
+              const pkO = isHome ? pkMatch[2] : pkMatch[1];
+              localStorage.setItem(`score_my_pk_${mId}`, pkM);
+              localStorage.setItem(`score_opp_pk_${mId}`, pkO);
+            }
           }
           changed = true;
         }
       }
     });
-    if (changed) {
-      if (document.getElementById("ultra-feed").classList.contains("active-view") && typeof renderFeed === "function") renderFeed();
-      if (document.getElementById("calendar-view").classList.contains("active-view") && typeof switchMode === "function") switchMode("calendar");
-    }
+    return changed;
   }
 
-  async function fetchGasResultsSilently() {
-    // staticResultsData があれば必ずそれを使う（GASに頼らない）
-    if (staticResultsData) {
-      cachedResults = staticResultsData;
-      return cachedResults;
-    }
-    if (cachedResults) return cachedResults;
-    // フォールバック: localStorage
-    const lSave = localStorage.getItem("trapp_results_cache");
-    if (lSave) { 
-      try { 
-        cachedResults = JSON.parse(lSave); 
-      } catch (e) { } 
-    }
-    return cachedResults;
-  }
+  // Initial load
+  refreshAllData();
+
 
   // extract the city map into reusable object
   const COMMON_STADIUM_CITY_MAP = {
@@ -944,7 +964,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Ensure standings are available on dashboard
     const refreshStandings = async () => {
-      const data = await fetchStandingsSilently();
+      const data = cachedStandings;
       if (!data) return;
       
       const updateStatsCard = (m, myKeyword) => {
@@ -988,82 +1008,96 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- 前節表示更新（renderDashboard再呼び出しでもリセットされない独立関数） ---
+  // --- Update Previous Match Results on Dashboard ---
   function updateDashboardPrevResults() {
-    // データの正規化
-    let data = staticResultsData || cachedResults;
-    if (!data) {
-      // localStorage からの最終手段
-      const saved = localStorage.getItem("trapp_results_cache");
-      if (saved) {
-        try { data = JSON.parse(saved); } catch(e) {}
-      }
-    }
-    if (!data) return;
-    const resultsArray = Array.isArray(data) ? data : (data.data || []);
-    if (resultsArray.length === 0) return;
+    if (!officialResults.length) return;
 
     const now = new Date();
-    const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
     const cutoffStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
 
-    let nextNiigata2 = null, nextKumamoto2 = null;
-    for (const m of sorted) {
-      if (m.date >= cutoffStr && !nextNiigata2 && m.club === "niigata") nextNiigata2 = m;
-      if (m.date >= cutoffStr && !nextKumamoto2 && m.club === "kumamoto") nextKumamoto2 = m;
-      if (nextNiigata2 && nextKumamoto2) break;
-    }
+    // Find next matches to determine cutoff dates
+    const sorted = [...scheduleData].sort((a, b) => a.date.localeCompare(b.date));
+    let nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
+    let nextKumamoto = sorted.find(m => m.date >= cutoffStr && m.club === "kumamoto");
 
-    const findPrev = (teamKw, emblemUrl, cutoff) => {
-      // エンブレムからのキーワードを優先（文字化け対策）
-      const ekw = getTeamKwFromEmblem(emblemUrl);
-      const kw = ekw || teamKw;
-      
-      const past = resultsArray.filter(r => {
+    const findPrev = (teamKw, cutoff) => {
+      if (!teamKw) return "-";
+      const past = officialResults.filter(r => {
         const dMatch = r.date < cutoff;
-        const tMatch = robustTeamMatch(r.home, kw) || robustTeamMatch(r.away, kw);
-        const hasScore = r.home_score !== "" && r.home_score !== null && r.home_score !== undefined;
-        const s = (r.status || "").toLowerCase();
-        const sMatch = hasScore && (s.includes("finish") || s.includes("ft") || s.includes("終"));
-        return dMatch && tMatch && sMatch;
-      }).sort((a,b) => b.date.localeCompare(a.date) || Number(b.section || 0) - Number(a.section || 0));
+        const tMatch = robustTeamMatch(r.home, teamKw) || robustTeamMatch(r.away, teamKw);
+        const hasScore = r.home_score !== "" && r.home_score !== null;
+        const status = (r.status || "").toLowerCase();
+        const isFinished = status.includes("finish") || status.includes("ft") || status.includes("終");
+        return dMatch && tMatch && (hasScore || isFinished);
+      }).sort((a,b) => b.date.localeCompare(a.date));
 
-      if (past.length === 0) return "-";
-      const lastM = past[0];
-      const isHome = robustTeamMatch(lastM.home, kw);
-      const sM = isHome ? lastM.home_score : lastM.away_score;
-      const sO = isHome ? lastM.away_score : lastM.home_score;
+      if (!past.length) return "-";
+      const last = past[0];
+      const isHome = robustTeamMatch(last.home, teamKw);
+      const sM = parseInt(isHome ? last.home_score : last.away_score);
+      const sO = parseInt(isHome ? last.away_score : last.home_score);
+      const opp = (isHome ? last.away : last.home).replace(/の試合詳細|の結果/g, "").trim();
       
-      // 相手チーム名を特定
-      const opNameFull = isHome ? lastM.away : lastM.home;
-      const opName = (opNameFull || "").replace("の試合詳細", "").replace("の結果", "").trim();
+      let symbol = "DRAW";
+      let symbolColor = "#000000";
       
-      let res = `<span style="color:var(--text-grey);font-size:0.75rem;margin-right:4px;">vs ${opName}</span> ${sM} - ${sO}`;
-      if (lastM.pk) res += " (PK)";
+      if (sM > sO) {
+        symbol = "WIN";
+      } else if (sM < sO) {
+        symbol = "LOSE";
+      } else if (last.pk) {
+        const pkMatch = last.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+        if (pkMatch) {
+          const pkM = parseInt(isHome ? pkMatch[1] : pkMatch[2]);
+          const pkO = parseInt(isHome ? pkMatch[2] : pkMatch[1]);
+          if (pkM > pkO) {
+            symbol = "PK WIN";
+          } else {
+            symbol = "PK LOSE";
+          }
+        }
+      }
+
+      let res = `<span style="color:var(--text-grey);font-size:0.7rem;margin-right:4px;">vs ${opp}</span>`;
+      res += `<span style="color:${symbolColor};font-weight:900;margin-right:8px;font-size:0.75rem;font-family:var(--font-kick);vertical-align:middle;">${symbol}</span>`;
+      res += `<span style="font-weight:900;font-size:1.1rem;color:var(--text-main);">${sM} - ${sO}</span>`;
+      if (last.pk) res += `<span style="font-size:0.65rem;color:var(--text-grey);margin-left:2px;">(PK)</span>`;
       return res;
     };
 
-    const updateOne = (m, myKw) => {
-      if (!m) return;
-      const row = document.getElementById(`dash-recent-${m.club}`);
-      if (!row) {
-        setTimeout(() => {
-          const retryRow = document.getElementById(`dash-recent-${m.club}`);
-          if (retryRow) {
-            retryRow.querySelector(".val-prev-my").innerHTML = findPrev(myKw, null, m.date);
-            retryRow.querySelector(".val-prev-opp").innerHTML = findPrev(m.opponent, m.emblem, m.date);
-          }
-        }, 100);
-        return;
-      }
+    const updateUI = (club, myKw, match) => {
+      const row = document.getElementById(`dash-recent-${club}`);
+      if (!row) return;
+      
+      const cutoff = match ? match.date : "9999-12-31";
       const elMy = row.querySelector(".val-prev-my");
       const elOpp = row.querySelector(".val-prev-opp");
-      if (elMy) elMy.innerHTML = findPrev(myKw, null, m.date);
-      if (elOpp) elOpp.innerHTML = findPrev(m.opponent, m.emblem, m.date);
+      if (elMy) elMy.innerHTML = findPrev(myKw, cutoff);
+      if (elOpp) elOpp.innerHTML = findPrev(match ? match.opponent : "", cutoff);
     };
 
-    updateOne(nextNiigata2, "新潟");
-    updateOne(nextKumamoto2, "熊本");
+    updateUI("niigata", "新潟", nextNiigata);
+    updateUI("kumamoto", "熊本", nextKumamoto);
+
+    // --- Dashboard Weather Sync ---
+    setTimeout(() => {
+      const wN = document.getElementById("dash-weather-niigata");
+      const wK = document.getElementById("dash-weather-kumamoto");
+      if (wN && nextNiigata) updateWeatherUI(wN, nextNiigata.date, nextNiigata.venue);
+      if (wK && nextKumamoto) updateWeatherUI(wK, nextKumamoto.date, nextKumamoto.venue);
+    }, 100);
+
+    // Add update timestamp to dashboard
+    let timeBox = document.getElementById("dash-update-time");
+    if (!timeBox) {
+      timeBox = document.createElement("div");
+      timeBox.id = "dash-update-time";
+      container.appendChild(timeBox);
+    }
+    timeBox.style.cssText = "font-size:0.65rem; color:white; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:10px; margin-top:15px; display:inline-block; font-weight:700;";
+    timeBox.innerText = `最終同期: ${new Date().toLocaleTimeString()} (Data: v20260424)`;
   }
+
 
   // --- Rendering Feed ---
 
@@ -1236,9 +1270,39 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("menu-links").onclick = () => openSubPane("links-overlay");
   document.getElementById("menu-chants").onclick = () => openSubPane("chants-overlay");
   document.getElementById("menu-standings").onclick = () => {
-    window.open("https://www.jleague.jp/standings/j2j3/", "_blank");
+    openSubPane("standings-overlay");
+    loadStandings();
   };
+  const dashStandingsBtn = document.getElementById("dash-to-standings");
+  if (dashStandingsBtn) {
+    dashStandingsBtn.onclick = () => {
+      openSubPane("standings-overlay");
+      loadStandings();
+    };
+  }
   document.getElementById("menu-data").onclick = () => openSubPane("data-overlay");
+  document.getElementById("menu-reload").onclick = async () => {
+    const btn = document.getElementById("menu-reload");
+    const label = btn.querySelector(".m-label");
+    const originalLabel = label.textContent;
+    label.textContent = "更新中...";
+    btn.style.pointerEvents = "none";
+    btn.style.opacity = "0.7";
+
+    try {
+      await refreshAllData(true); // Force GAS
+      alert("最新データを取得して反映しました。");
+    } catch (e) {
+      console.error(e);
+      alert("更新に失敗しました。");
+    } finally {
+      label.textContent = originalLabel;
+      btn.style.pointerEvents = "auto";
+      btn.style.opacity = "1";
+      toggleMenu(false);
+    }
+  };
+
 
   // Data Backup Logic
   document.getElementById("export-btn").onclick = () => {
@@ -1600,134 +1664,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
   const gasUrl = 'https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec';
 
-  // チーム名の略称マップ（GAS結果→scheduleData の opponent に含まれる文字列）
-  const TEAM_ABBR = {
-    "仙台": "仙台", "湘南": "湘南", "秋田": "秋田", "新潟": "新潟", "熊本": "熊本",
-    "栃木": "栃木", "群馬": "群馬", "甲府": "甲府", "金沢": "金沢", "藤枝": "藤枝",
-    "宮崎": "宮崎", "鹿児島": "鹿児島", "琉球": "琉球", "高知": "高知", "滋賀": "滋賀",
-    "富山": "富山", "岐阜": "岐阜", "長野": "長野", "沼津": "沼津", "今治": "今治",
-    "八戸": "八戸", "盛岡": "盛岡", "山形": "山形", "福島": "福島", "水戸": "水戸",
-    "千葉": "千葉", "大宮": "大宮", "相模原": "相模原", "松本": "松本", "清水": "清水",
-    "磐田": "磐田", "岡山": "岡山", "山口": "山口", "讃岐": "讃岐", "徳島": "徳島",
-    "愛媛": "愛媛", "北九州": "北九州", "鳥取": "鳥取", "山形": "山形",
-    "栃木Ｃ": "栃木", "Ｃ大阪": "セレッソ",
-  };
 
-  function findKeyword(shortName) {
-    // GASから得た略称で scheduleData の opponent を検索するキーワードを返す
-    if (TEAM_ABBR[shortName]) return TEAM_ABBR[shortName];
-    // 前方一致でマッチするものを検索
-    return shortName.substring(0, 2);
-  }
-
-  // GAS結果をlocalStorageに同期（バックグラウンド）
-  async function syncResultsFromGAS(providedData) {
-    try {
-      const json = providedData ? { data: providedData } : await fetchStaticJsonOrFallback("results");
-      if (!json || !json.data || !Array.isArray(json.data)) return;
-
-      // 重複排除（same date+home+away）
-      const seen = new Set();
-      const results = json.data.filter(r => {
-        const key = `${r.date}|${r.home}|${r.away}`;
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-      });
-
-      let synced = 0;
-      results.forEach(r => {
-        if (r.home_score === "" || r.home_score === null) return;
-
-        // scheduleData から新潟 or 熊本が関わる試合をマッチング
-        scheduleData.forEach(m => {
-          // 節番号でのマッチングを試行 (MW7 -> 7)
-          const mSec = parseInt((m.matchweek || "").replace(/\D/g, ""));
-          const rSec = parseInt(r.section);
-
-          // 節番号が一致するか、日付が完全一致する場合を候補とする
-          const isSameSection = !isNaN(mSec) && mSec === rSec;
-          const isSameDate = (m.date === r.date);
-
-          if (!isSameSection && !isSameDate) return;
-
-          // 節番号一致の場合でも、念のため開催日が3日以上離れていないか確認（別年度の誤爆防止）
-          if (isSameSection) {
-            const dM = new Date(m.date);
-            const dR = new Date(r.date);
-            const diffDays = Math.abs(dM - dR) / (1000 * 60 * 60 * 24);
-            if (diffDays > 5) return; // 5日程度までの変更を許容
-          }
-
-          const isNiigata = m.club === "niigata";
-          const myKw = isNiigata ? "新潟" : "熊本";
-
-          let isMatch = false;
-          let myScore = null, oppScore = null;
-          let myPk = null, oppPk = null;
-
-          if (robustTeamMatch(r.home, myKw)) {
-            isMatch = true;
-            myScore = r.home_score;
-            oppScore = r.away_score;
-            if (r.pk) {
-              const pks = r.pk.split(" PK ");
-              if (pks.length === 2) { myPk = pks[0]; oppPk = pks[1]; }
-            }
-          }
-          else if (robustTeamMatch(r.away, myKw)) {
-            isMatch = true;
-            myScore = r.away_score;
-            oppScore = r.home_score;
-            if (r.pk) {
-              const pks = r.pk.split(" PK ");
-              if (pks.length === 2) { myPk = pks[1]; oppPk = pks[0]; }
-            }
-          }
-
-          if (isMatch) {
-            const mId = `${m.date}_${m.club}_${m.opponent}`;
-            localStorage.setItem(`score_my_${mId}`, myScore);
-            localStorage.setItem(`score_opp_${mId}`, oppScore);
-            if (myPk && oppPk) {
-              localStorage.setItem(`score_my_pk_${mId}`, myPk);
-              localStorage.setItem(`score_opp_pk_${mId}`, oppPk);
-            }
-            synced++;
-          }
-        });
-      });
-
-      if (synced > 0) {
-        console.log(`[GAS Sync] ${synced}件の試合結果を自動同期しました`);
-        // 現在の表示位置を保持したまま再描画
-        const savedIdx = currentIndex;
-        const savedYear = selectedYear;
-        renderFeed();
-        applyYearFilter(savedYear, true);
-        requestAnimationFrame(() => scrollToIndex(Math.min(savedIdx, visibleSections.length - 1)));
-      }
-    } catch (e) {
-      console.warn("[GAS Sync] 結果取得エラー:", e);
-    }
-  }
-
-  // 順位表ビュー
-  const menuStandingsBtn = document.getElementById("menu-standings");
-  if (menuStandingsBtn) {
-    menuStandingsBtn.onclick = () => {
-      toggleMenu(false);
-      openSubPane("standings-overlay");
-      loadStandings();
-    };
-  }
+  // --- Standings View ---
 
   async function loadStandings() {
     const container = document.getElementById("standings-content");
     if (!container) return;
     container.innerHTML = `<div style="text-align:center;padding:40px;color:#888;">読み込み中...</div>`;
     try {
-      const json = await fetchStaticJsonOrFallback("standings");
+      const json = await fetchData("standings");
       if (!json || !json.data || !Array.isArray(json.data)) throw new Error("no data");
 
       // グループ別に整理
@@ -1841,7 +1786,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateHeaderAnnouncements();
 
   // アプリ起動時にバックグラウンドで結果同期（3秒後）
-  setTimeout(syncResultsFromGAS, 3000);
+  setTimeout(() => refreshAllData(), 3000);
 
 });
 
