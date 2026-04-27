@@ -1,3 +1,35 @@
+window.clubSitesData = null;
+window.openClubSite = async function(clubName, event) {
+  if (event) {
+    event.stopPropagation();
+  }
+  if (!window.clubSitesData) {
+    try {
+      const res = await fetch('jleague_club_official_sites.json');
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      window.clubSitesData = await res.json();
+    } catch(e) {
+      alert("公式サイトのデータが読み込めませんでした。\nローカル環境(file://)の場合、ブラウザのセキュリティ設定でブロックされている可能性があります。");
+      console.error("Failed to load club sites", e);
+      return;
+    }
+  }
+  
+  const target = clubName.trim();
+  let club = window.clubSitesData.find(c => c.club_name === target);
+  
+  if (!club) {
+    club = window.clubSitesData.find(c => c.club_name.includes(target) || target.includes(c.club_name));
+  }
+
+  if (club && club.official_site) {
+    window.open(club.official_site, '_blank');
+  } else {
+    alert(target + " の公式サイト情報が見つかりませんでした。");
+    console.warn("No official site found for:", target);
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const feedSlider = document.getElementById("feed-slider");
   const calendarBody = document.getElementById("calendar-body");
@@ -515,7 +547,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tMinPlace = wBox.querySelector("#u-temp-min");
 
     updateWeatherUI(wIconPlace, match.date, match.venue).then(() => {
-      const resInner = wIconPlace.querySelector("div[style*='background:']");
+      const resInner = wIconPlace.firstElementChild;
       if (resInner) {
         const svg = resInner.querySelector("svg");
         const maxVal = resInner.querySelector(".w-temp-max");
@@ -523,7 +555,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (svg) wIconPlace.innerHTML = svg.outerHTML;
         if (maxVal) tMaxPlace.innerText = maxVal.innerText;
         if (minVal) tMinPlace.innerText = minVal.innerText;
-        resInner.remove(); // Clean up the wrapper
       }
       wBox.style.display = "flex";
     });
@@ -873,7 +904,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <div style="display:flex; gap: 15px;">
                  <!-- Left (My Team) -->
                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <img src="${myEmblem}" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));">
+                    <img src="${myEmblem}" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${myShortName === '新潟' ? 'アルビレックス新潟' : 'ロアッソ熊本'}', event)">
                     <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
                        <span class="val-rank-num-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-my">-</span> pts</span>
@@ -890,7 +921,7 @@ document.addEventListener("DOMContentLoaded", () => {
                  
                  <!-- Right (Opponent) -->
                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <img src="${m.emblem}" class="dash-opp-emblem" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));">
+                    <img src="${m.emblem}" class="dash-opp-emblem" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${m.opponent}', event)">
                     <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
                        <span class="val-rank-num-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-opp">-</span> pts</span>
