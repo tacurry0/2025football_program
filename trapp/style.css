@@ -11,7 +11,7 @@
   --text-main: #1d1d1f;
   --text-grey: #86868b;
   --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --font-main: 'Outfit', 'Noto Sans JP', sans-serif;
+  --font-main: 'JLeagueKick', 'Outfit', 'Noto Sans JP', sans-serif;
   --font-kick: 'JLeagueKick', 'Poppins', sans-serif;
 }
 
@@ -642,6 +642,13 @@ body[data-mode="dashboard"] .header-title {
   overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s var(--ease-expo);
   cursor: pointer;
 }
+.dash-card.white-theme {
+  background: #ffffff;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+  border: 1px solid #f0f0f5;
+}
 .dash-card:active { transform: scale(0.98); }
 
 .card-glow-niigata { box-shadow: 0 15px 40px rgba(var(--albirex-orange-rgb), 0.15); border: 1.5px solid rgba(var(--albirex-orange-rgb), 0.2); }
@@ -691,6 +698,7 @@ body[data-mode="dashboard"] .header-title {
 
 /* 📢 Header N Gate Button */
 #header-n-gate-container { display: flex; align-items: center; }
+body[data-mode="dashboard"] #header-n-gate-container { pointer-events: auto; }
 .btn-ngate-header {
   padding: 6px 12px; border-radius: 20px; background: var(--albirex-orange); color: white;
   font-family: var(--font-kick); font-size: 0.75rem; font-weight: 900;

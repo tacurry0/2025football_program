@@ -180,10 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const min = Math.round(wData.daily.temperature_2m_min[dIdx]);
             
             const ICONS = {
-              SUNNY: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
-              CLOUDY: `<svg viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>`,
-              RAIN: `<svg viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M16 13a4 4 0 0 0-8 0"></path><path d="M20 16a4 4 0 0 0-8 0"></path><path d="M12 5a4 4 0 0 0-8 0"></path><path d="M8 19v2"></path><path d="M12 19v2"></path><path x1="16" y1="19" x2="16" y2="21"></path></svg>`,
-              SNOW: `<svg viewBox="0 0 24 24" fill="none" stroke="#5ac8fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line></svg>`
+              SUNNY: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
+              CLOUDY: `<svg viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>`,
+              RAIN: `<svg viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M16 13a4 4 0 0 0-8 0"></path><path d="M20 16a4 4 0 0 0-8 0"></path><path d="M12 5a4 4 0 0 0-8 0"></path><path d="M8 19v2"></path><path d="M12 19v2"></path><path x1="16" y1="19" x2="16" y2="21"></path></svg>`,
+              SNOW: `<svg viewBox="0 0 24 24" fill="none" stroke="#5ac8fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line></svg>`
             };
             let ik = "CLOUDY";
             if (code <= 1) ik = "SUNNY";
@@ -192,13 +192,13 @@ document.addEventListener("DOMContentLoaded", () => {
             else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) ik = "SNOW";
 
             container.innerHTML = `
-              <div style="display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.7); padding:4px 10px; border-radius:15px; box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+              <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.7); padding:6px 14px; border-radius:20px; box-shadow:0 1px 4px rgba(0,0,0,0.05);">
                 ${ICONS[ik]}
-                <div style="display:flex; align-items:baseline; gap:3px; font-family:var(--font-kick); font-weight:800; font-size:0.85rem;">
+                <div style="display:flex; align-items:baseline; gap:4px; font-family:var(--font-kick); font-weight:900; font-size:1.3rem;">
                   <span class="w-temp-max" style="color:#ff3b30;">${max}</span>
-                  <span style="font-size:0.6rem; color:#888;">/</span>
+                  <span style="font-size:1.1rem; color:#888;">/</span>
                   <span class="w-temp-min" style="color:#007aff;">${min}</span>
-                  <span style="font-size:0.55rem; color:#999;">℃</span>
+                  <span style="font-size:0.9rem; color:#999;">℃</span>
                 </div>
               </div>
             `;
@@ -446,7 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const homeAway = isHomeMatch(match.club, match.venue) ? "HOME" : "AWAY";
     const clubName = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
-    const clubEmblem = match.club === "niigata" ? "https://github.com/niigatals/program/blob/main/program/niigata.png?raw=true" : "https://github.com/niigatals/program/blob/main/program/kumamoto.png?raw=true";
+    const clubEmblem = match.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
 
     const engOpp = J_CLUB_ENG[match.opponent] || match.opponent.toUpperCase();
 
@@ -830,53 +830,74 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!m) return `<div class="dash-card"><div style="padding:20px;text-align:center;color:#888;">今後の試合予定はありません</div></div>`;
       const isAtt = localStorage.getItem('attend_' + m.date + '_' + m.club + '_' + m.opponent) === "true";
       const isHome = isHomeMatch(m.club, m.venue);
-      const haBadge = isHome ? '<span class="sheet-ha badge-home">HOME</span>' : '<span class="sheet-ha badge-away">AWAY</span>';
+      const haBadge = isHome ? '<span class="sheet-ha badge-home" style="color:#fff; font-weight:800; font-size:1rem;">HOME</span>' : '<span class="sheet-ha badge-away" style="color:#fff; font-weight:800; font-size:1rem;">AWAY</span>';
+      const myEmblem = m.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
       const J_CLUB_ENG = { "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC" };
       const engOpp = J_CLUB_ENG[m.opponent] || m.opponent.toUpperCase();
 
       return `
-          <div class="dash-card card-glow-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}">
-            <div class="dash-card-header" style="background:${mainColor};">
-              <span class="dash-team-name">${clubName}</span>
-              ${haBadge}
+          <div class="dash-card white-theme" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white;">
+            <div class="dash-card-header" style="background:${mainColor}; border-bottom:none; padding:8px 15px;">
+              <span class="dash-team-name" style="font-size:1.4rem; font-weight:900;">${clubName}</span>
+              ${haBadge.replace('font-size:1rem;', 'font-size:0.85rem;')}
             </div>
-            <div class="dash-card-body">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
-                 <div>
-                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
-                       <span class="dash-mw">${m.matchweek || "EX"}</span>
-                       <span class="dash-date">${m.date} ${m.day} ${m.time}</span>
-                       ${isAtt ? '<span class="match-att-emoji" style="margin-left:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}
-                    </div>
-                    <div class="dash-venue-row" style="margin:0;">
-                       <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-grey)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                       <span style="color:var(--text-grey); font-weight:700;">${m.venue}</span>
-                    </div>
+            <div class="dash-card-body" style="background: white; color: #111; padding:10px 15px;">
+              
+              <!-- Top row -->
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+                 <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="dash-mw" style="background: #e8e8ed; color: #111; padding: 2px 8px; border-radius:6px; font-size:0.9rem; border:none;">${m.matchweek || "EX"}</span>
+                    <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${m.date} ${m.day} ${m.time}</span>
                  </div>
                  <div id="dash-weather-${m.club}" data-venue="${m.venue}" data-date="${m.date}" style="text-align:right;">
-                    <span class="val-weather" style="font-size:1.1rem; line-height:1; display:flex; flex-direction:column; align-items:flex-end;"></span>
+                    <span class="val-weather" style="font-size:1.8rem; display:flex; align-items:center; gap: 8px;"></span>
                  </div>
               </div>
               
-              <div class="dash-opp-row" style="margin-bottom:8px;">
-                 <div class="dash-opp-text" style="display:flex; flex-direction:column;">
-                    <div style="display:flex; align-items:baseline; gap:6px;">
-                       <span class="dash-vs">vs</span>
-                       <h3 class="dash-opp-name" style="color:var(--text-main); font-weight:900; margin:0; font-family:var(--font-kick); font-size:1.4rem;">${m.opponent}</h3>
+              <!-- Venue -->
+              <div class="dash-venue-row" style="color:#555; margin-bottom: 8px; font-size:0.85rem; align-items:center;">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:4px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                 <span style="font-weight:700;">${m.venue}</span>
+              </div>
+              
+              <!-- Opponent Title -->
+              <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:10px; border-bottom: 1px solid #f0f0f5; padding-bottom:10px;">
+                 <span class="dash-vs" style="color:#888; font-size:1.1rem; font-weight:800;">VS</span>
+                 <h3 class="dash-opp-name" style="color:#111; font-weight:900; margin:0; font-size:1.6rem; font-family:var(--font-main); letter-spacing:1px;">${m.opponent}</h3>
+              </div>
+              
+               <!-- Split Layout -->
+              <div style="display:flex; gap: 15px;">
+                 <!-- Left (My Team) -->
+                 <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <img src="${myEmblem}" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));">
+                    <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
+                       <span class="val-rank-num-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
+                       <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-my">-</span> pts</span>
                     </div>
-                    <div class="dash-opp-eng">${engOpp}</div>
+                    <div style="font-size:0.75rem; color:#555; font-weight:700; margin-bottom:4px;"><span class="val-prev-date-my">-</span> <span style="color:#aaa; font-weight:500;">vs</span> <span class="val-prev-opp-name-my">-</span><span class="val-prev-ha-my" style="margin-left:2px;font-weight:900;color:#888;"></span></div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                       <span class="val-prev-score-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
+                       <span class="val-prev-res-my">-</span>
+                    </div>
                  </div>
-                 <img src="${m.emblem}" class="dash-opp-emblem">
-              </div>
-              
-              <div class="dash-recent-row" id="dash-recent-${m.club}" style="display:flex; justify-content:space-between; gap:8px; border-top:1px solid rgba(0,0,0,0.05); padding-top:8px; margin-bottom:8px;">
-                 <div class="dash-stat-item"><span class="dash-stat-label">${myShortName} 前節</span><span class="dash-stat-val val-prev-my" style="font-size:0.8rem">-</span></div>
-                 <div class="dash-stat-item"><span class="dash-stat-label">${m.opponent} 前節</span><span class="dash-stat-val val-prev-opp" style="font-size:0.8rem">-</span></div>
-              </div>
-              
-              <div class="dash-stats-row" id="dash-stats-${m.club}">
-                 <div class="dash-stat-item"><span class="dash-stat-label">${myShortName} 順位</span><span class="dash-stat-val val-rank-my">-</span></div>
-                 <div class="dash-stat-item"><span class="dash-stat-label">${m.opponent} 順位</span><span class="dash-stat-val val-rank-opp">-</span></div>
+                 
+                 <!-- Divider -->
+                 <div style="width:1px; background:#e8e8ed;"></div>
+                 
+                 <!-- Right (Opponent) -->
+                 <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <img src="${m.emblem}" class="dash-opp-emblem" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));">
+                    <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
+                       <span class="val-rank-num-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
+                       <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-opp">-</span> pts</span>
+                    </div>
+                    <div style="font-size:0.75rem; color:#555; font-weight:700; margin-bottom:4px;"><span class="val-prev-date-opp">-</span> <span style="color:#aaa; font-weight:500;">vs</span> <span class="val-prev-opp-name-opp">-</span><span class="val-prev-ha-opp" style="margin-left:2px;font-weight:900;color:#888;"></span></div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                       <span class="val-prev-score-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
+                       <span class="val-prev-res-opp">-</span>
+                    </div>
+                 </div>
               </div>
             </div>
           </div>
@@ -954,12 +975,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (dIdx !== undefined && dIdx > -1) {
               const code = wData.daily.weather_code[dIdx];
               const max = wData.daily.temperature_2m_max[dIdx];
+              const min = wData.daily.temperature_2m_min[dIdx];
               let emoji = "☁️";
               if (code <= 1) emoji = "☀️";
               else if (code <= 3) emoji = "☁️";
               else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
               else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
-              const finalHTML = `${emoji} <span style="font-size:0.8rem;font-weight:700;">${Math.round(max)}℃</span>`;
+              
+              const finalHTML = `${emoji} <div style="display:flex; align-items:baseline; gap:6px; font-family:var(--font-kick); font-weight:900; font-size:1.4rem;"><span style="color:#ff3b30;">${Math.round(max)}</span> <span style="font-size:1.2rem; color:#aaa;">/</span> <span style="color:#007aff;">${Math.round(min)}</span> <span style="font-size:1rem; color:#111;">℃</span></div>`;
               wBox.querySelector(".val-weather").innerHTML = finalHTML;
               localStorage.setItem(cacheKey, finalHTML);
               localStorage.setItem(`${cacheKey}_time`, Date.now().toString());
@@ -1000,13 +1023,19 @@ document.addEventListener("DOMContentLoaded", () => {
            }
         }
 
-        const statsRow = document.getElementById(`dash-stats-${m.club}`);
-        if (statsRow) {
+        const card = document.getElementById(`dash-card-${m.club}`);
+        if (card) {
           if (myData) {
-            statsRow.querySelector('.val-rank-my').innerHTML = `<span style="font-size:1.3rem;font-weight:900;line-height:1;">${myData.rank}</span><span style="font-size:0.7rem;">位</span><span style="font-size:0.65rem;color:#888;margin-left:4px;">PTS ${myData.points}</span>`;
+            const rankEl = card.querySelector('.val-rank-num-my');
+            const ptsEl = card.querySelector('.val-pts-my');
+            if (rankEl) rankEl.innerText = myData.rank;
+            if (ptsEl) ptsEl.innerText = myData.points;
           }
           if (oppData) {
-            statsRow.querySelector('.val-rank-opp').innerHTML = `<span style="font-size:1.3rem;font-weight:900;line-height:1;">${oppData.rank}</span><span style="font-size:0.7rem;">位</span><span style="font-size:0.65rem;color:#888;margin-left:4px;">PTS ${oppData.points}</span>`;
+            const rankEl = card.querySelector('.val-rank-num-opp');
+            const ptsEl = card.querySelector('.val-pts-opp');
+            if (rankEl) rankEl.innerText = oppData.rank;
+            if (ptsEl) ptsEl.innerText = oppData.points;
           }
         }
       };
@@ -1032,60 +1061,64 @@ document.addEventListener("DOMContentLoaded", () => {
     let nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
     let nextKumamoto = sorted.find(m => m.date >= cutoffStr && m.club === "kumamoto");
 
-    const findPrev = (teamKw, cutoff) => {
-      if (!teamKw) return "-";
-      const past = officialResults.filter(r => {
-        const dMatch = r.date < cutoff;
-        const tMatch = robustTeamMatch(r.home, teamKw) || robustTeamMatch(r.away, teamKw);
-        const hasScore = r.home_score !== "" && r.home_score !== null;
-        const status = (r.status || "").toLowerCase();
-        const isFinished = status.includes("finish") || status.includes("ft") || status.includes("終");
-        return dMatch && tMatch && (hasScore || isFinished);
-      }).sort((a,b) => b.date.localeCompare(a.date));
-
-      if (!past.length) return "-";
-      const last = past[0];
-      const isHome = robustTeamMatch(last.home, teamKw);
-      const sM = parseInt(isHome ? last.home_score : last.away_score);
-      const sO = parseInt(isHome ? last.away_score : last.home_score);
-      const opp = (isHome ? last.away : last.home).replace(/の試合詳細|の結果/g, "").trim();
-      
-      let symbol = "DRAW";
-      let symbolColor = "#000000";
-      
-      if (sM > sO) {
-        symbol = "WIN";
-      } else if (sM < sO) {
-        symbol = "LOSE";
-      } else if (last.pk) {
-        const pkMatch = last.pk.match(/(\d+)\s*PK\s*(\d+)/i);
-        if (pkMatch) {
-          const pkM = parseInt(isHome ? pkMatch[1] : pkMatch[2]);
-          const pkO = parseInt(isHome ? pkMatch[2] : pkMatch[1]);
-          if (pkM > pkO) {
-            symbol = "PK WIN";
-          } else {
-            symbol = "PK LOSE";
-          }
-        }
-      }
-
-      let res = `<span style="color:var(--text-grey);font-size:0.7rem;margin-right:4px;">vs ${opp}</span>`;
-      res += `<span style="color:${symbolColor};font-weight:900;margin-right:8px;font-size:0.75rem;font-family:var(--font-kick);vertical-align:middle;">${symbol}</span>`;
-      res += `<span style="font-weight:900;font-size:1.1rem;color:var(--text-main);">${sM} - ${sO}</span>`;
-      if (last.pk && sM === sO) res += `<span style="font-size:0.65rem;color:var(--text-grey);margin-left:2px;">(PK)</span>`;
-      return res;
-    };
-
-    const updateUI = (club, myKw, match) => {
-      const row = document.getElementById(`dash-recent-${club}`);
-      if (!row) return;
+    const updateUI = (club, teamKw, match) => {
+      const card = document.getElementById(`dash-card-${club}`);
+      if (!card) return;
       
       const cutoff = match ? match.date : "9999-12-31";
-      const elMy = row.querySelector(".val-prev-my");
-      const elOpp = row.querySelector(".val-prev-opp");
-      if (elMy) elMy.innerHTML = findPrev(myKw, cutoff);
-      if (elOpp) elOpp.innerHTML = findPrev(match ? match.opponent : "", cutoff);
+      
+      const updateHalf = (prefix, kw) => {
+        const past = officialResults.filter(r => {
+          const dMatch = r.date < cutoff;
+          const tMatch = robustTeamMatch(r.home, kw) || robustTeamMatch(r.away, kw);
+          const hasScore = r.home_score !== "" && r.home_score !== null;
+          const status = (r.status || "").toLowerCase();
+          const isFinished = status.includes("finish") || status.includes("ft") || status.includes("終");
+          return dMatch && tMatch && (hasScore || isFinished);
+        }).sort((a,b) => b.date.localeCompare(a.date));
+
+        if (!past.length) return;
+        const last = past[0];
+        const isHome = robustTeamMatch(last.home, kw);
+        const sM = parseInt(isHome ? last.home_score : last.away_score);
+        const sO = parseInt(isHome ? last.away_score : last.home_score);
+        const opp = (isHome ? last.away : last.home).replace(/の試合詳細|の結果/g, "").trim();
+        
+        let symbol = "DRAW";
+        let badgeColor = "#f1f3f4";
+        let badgeText = "#5f6368";
+        let scoreStr = `${sM} - ${sO}`;
+        
+        if (sM > sO) { symbol = "WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
+        else if (sM < sO) { symbol = "LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
+        else if (last.pk) {
+          const pkMatch = last.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+          if (pkMatch) {
+            const pkM = parseInt(isHome ? pkMatch[1] : pkMatch[2]);
+            const pkO = parseInt(isHome ? pkMatch[2] : pkMatch[1]);
+            scoreStr = `(${pkM}) ${sM}-${sO} (${pkO})`;
+            if (pkM > pkO) { symbol = "PK WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
+            else { symbol = "PK LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
+          }
+        }
+
+        const resHtml = `<span style="border:1px solid ${badgeColor}; background:${badgeColor}; color:${badgeText}; border-radius:12px; padding:3px 8px; font-size:0.7rem; font-weight:800; display:inline-flex; align-items:center; gap:4px;"><span style="font-size:0.5rem;">●</span> ${symbol}</span>`;
+
+        const elDate = card.querySelector(`.val-prev-date-${prefix}`);
+        const elOpp = card.querySelector(`.val-prev-opp-name-${prefix}`);
+        const elHA = card.querySelector(`.val-prev-ha-${prefix}`);
+        const elScore = card.querySelector(`.val-prev-score-${prefix}`);
+        const elRes = card.querySelector(`.val-prev-res-${prefix}`);
+        
+        if (elDate) elDate.innerText = last.date.substring(5).replace("-", "/");
+        if (elOpp) elOpp.innerText = opp;
+        if (elHA) elHA.innerText = isHome ? "(H)" : "(A)";
+        if (elScore) elScore.innerText = scoreStr;
+        if (elRes) elRes.innerHTML = resHtml;
+      };
+
+      updateHalf('my', teamKw);
+      if (match) updateHalf('opp', match.opponent);
     };
 
     updateUI("niigata", "新潟", nextNiigata);
@@ -1095,8 +1128,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       const wN = document.getElementById("dash-weather-niigata");
       const wK = document.getElementById("dash-weather-kumamoto");
-      if (wN && nextNiigata) updateWeatherUI(wN, nextNiigata.date, nextNiigata.venue);
-      if (wK && nextKumamoto) updateWeatherUI(wK, nextKumamoto.date, nextKumamoto.venue);
+      // Use schedule.js updateWeatherUI function to inject SVG icons
+      if (typeof updateWeatherUI === 'function') {
+        if (wN && nextNiigata) updateWeatherUI(wN, nextNiigata.date, nextNiigata.venue);
+        if (wK && nextKumamoto) updateWeatherUI(wK, nextKumamoto.date, nextKumamoto.venue);
+      }
     }, 100);
 
     // Add update timestamp to dashboard
