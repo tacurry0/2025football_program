@@ -15,18 +15,23 @@ window.openClubSite = async function(clubName, event) {
     }
   }
   
-  const target = clubName.trim();
-  let club = window.clubSitesData.find(c => c.club_name === target);
+  const norm = (s) => (s || "").normalize("NFKC").replace(/[\s・]/g, "").toLowerCase();
+  const targetNorm = norm(clubName);
+  
+  let club = window.clubSitesData.find(c => norm(c.club_name) === targetNorm);
   
   if (!club) {
-    club = window.clubSitesData.find(c => c.club_name.includes(target) || target.includes(c.club_name));
+    club = window.clubSitesData.find(c => {
+      const cNorm = norm(c.club_name);
+      return cNorm.includes(targetNorm) || targetNorm.includes(cNorm);
+    });
   }
 
   if (club && club.official_site) {
     window.open(club.official_site, '_blank');
   } else {
-    alert(target + " の公式サイト情報が見つかりませんでした。");
-    console.warn("No official site found for:", target);
+    alert(clubName.trim() + " の公式サイト情報が見つかりませんでした。");
+    console.warn("No official site found for:", clubName);
   }
 };
 
