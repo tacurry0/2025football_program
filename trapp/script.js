@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleKumamoto = document.getElementById("toggle-kumamoto");
 
   const yearTabs = {
+    "2024": document.getElementById("toggle-year-2024"),
     "2025": document.getElementById("toggle-year-2025"),
     "2026": document.getElementById("toggle-year-2026"),
     "all": document.getElementById("toggle-year-all")
@@ -483,6 +484,18 @@ document.addEventListener("DOMContentLoaded", () => {
       "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC"
     };
 
+    let goalsHtml = "";
+    const offRes = findOfficialResult(match);
+    if (offRes && offRes.goals && offRes.goals.length > 0) {
+      goalsHtml = `<div class="u-goals-area" style="margin-top: 15px; padding: 10px; background: rgba(242, 242, 247, 0.5); border-radius: 12px; font-size: 0.85rem; color: #333;">
+        <h4 style="margin:0 0 8px 0; font-size: 0.8rem; color: #888; border-bottom: 1px solid #ddd; padding-bottom: 4px; font-weight: 800;">GOALS</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px;">`;
+      offRes.goals.forEach(g => {
+         goalsHtml += `<li style="display: flex; gap: 10px; align-items: center;"><span style="font-family: var(--font-kick); font-weight: 900; width: 45px; text-align: right; color: #555;">${g.minute}'</span><span style="font-weight: bold; font-size: 0.95rem;">${g.scorer}</span></li>`;
+      });
+      goalsHtml += `</ul></div>`;
+    }
+
     let pkHtml = "";
     if (parseDate(match.date).getFullYear() === 2026) {
       const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
@@ -538,6 +551,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
       ${pkHtml}
+      ${goalsHtml}
       <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
         <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
         <span class="btn-text">観戦予定</span>
@@ -699,6 +713,18 @@ document.addEventListener("DOMContentLoaded", () => {
    * Universal fetch with fallback and stale check
    */
   async function fetchData(type, forceGas = false) {
+    if (type === "results" && window.STATIC_RESULTS) {
+       const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
+       try {
+         const gasUrlWithCacheBuster = `${gasUrl}&nocache=1&t=${Date.now()}`;
+         const res = await fetch(gasUrlWithCacheBuster);
+         const gasJson = await res.json();
+         const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
+         if (gasArr.length >= window.STATIC_RESULTS.length && gasArr.length > 0) return gasJson;
+       } catch (e) { console.error(`GAS fetch failed: ${type}`); }
+       return window.STATIC_RESULTS;
+    }
+
     const localUrl = `./data/${type}.json`;
     const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
     let staticJson = null;
@@ -730,6 +756,33 @@ document.addEventListener("DOMContentLoaded", () => {
     if (resJson) {
       officialResults = Array.isArray(resJson) ? resJson : (resJson.data || []);
       localStorage.setItem("trapp_results_cache", JSON.stringify(officialResults));
+      
+      // Inject 2024 matches from results into scheduleData
+      officialResults.forEach(r => {
+        if (!r.date || !r.club || !r.opponent) return;
+        const exists = scheduleData.find(m => m.date === r.date && m.club === r.club && m.opponent === r.opponent);
+        if (!exists) {
+          const d = parseDate(r.date);
+          const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+          const dayStr = days[d.getDay()];
+          let emblem = r.emblem || getTeamKwFromEmblem(r.opponent) || "";
+          if (!emblem) {
+            const reversed = Object.entries(EMBLEM_MAP).find(([k,v]) => robustTeamMatch(v, r.opponent));
+            if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
+          }
+          scheduleData.push({
+             club: r.club,
+             matchweek: r.matchweek || "EX",
+             date: r.date,
+             day: dayStr,
+             time: r.time || "",
+             opponent: r.opponent,
+             venue: r.venue || "",
+             emblem: emblem,
+             details: r.details || ""
+          });
+        }
+      });
       syncResultsToLocalStorage(officialResults);
     }
 
@@ -738,9 +791,11 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
     }
 
-    // Update UI components
+    // Unconditionally render feed to populate DOM with newly injected matches (e.g. 2024)
+    renderFeed();
+    applyYearFilter(selectedYear, true);
+
     if (currentMode === "dashboard") renderDashboard();
-    else if (currentMode === "feed") renderFeed();
     else if (currentMode === "calendar") renderCalendar();
     
     if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
@@ -754,6 +809,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const myKw = match.club === "niigata" ? "新潟" : "熊本";
     
     return officialResults.find(r => {
+      // Static JSON Format Support
+      if (r.club && r.opponent) {
+        if (r.date === match.date && r.club === match.club && robustTeamMatch(r.opponent, match.opponent)) return true;
+      }
+
+      // GAS Format Support
+      if (!r.home || !r.away) return false;
       const dateMatch = r.date === match.date;
       const teamMatch = robustTeamMatch(r.home, myKw) || robustTeamMatch(r.away, myKw);
       if (!teamMatch) return false;
@@ -762,16 +824,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const opp = isHome ? r.away : r.home;
       const oppMatch = robustTeamMatch(opp, match.opponent);
       
-      // Prefer exact date + opponent match
       if (dateMatch && oppMatch) return true;
-      
-      // Fallback: If section matches (if provided in results)
       if (r.section && match.matchweek) {
          const rSec = parseInt(r.section);
          const mSec = parseInt(match.matchweek.replace(/\D/g, ""));
          if (rSec === mSec && oppMatch) return true;
       }
-      
       return false;
     });
   }
@@ -783,30 +841,55 @@ document.addEventListener("DOMContentLoaded", () => {
     let changed = false;
     scheduleData.forEach(m => {
       const r = findOfficialResult(m);
-      if (r && r.home_score !== "" && r.home_score !== null) {
-        const isHome = robustTeamMatch(r.home, m.club === "niigata" ? "新潟" : "熊本");
-        const sM = isHome ? r.home_score : r.away_score;
-        const sO = isHome ? r.away_score : r.home_score;
+      if (r) {
+        let sM = null, sO = null, pkM = null, pkO = null;
         
-        const mId = `${m.date}_${m.club}_${m.opponent}`;
-        if (localStorage.getItem(`score_my_${mId}`) !== String(sM) || 
-            localStorage.getItem(`score_opp_${mId}`) !== String(sO)) {
-          localStorage.setItem(`score_my_${mId}`, sM);
-          localStorage.setItem(`score_opp_${mId}`, sO);
-          
+        // Static JSON Format Support
+        if (r.score !== undefined) {
+          const scores = String(r.score).split("-").map(x => x.trim());
+          if (scores.length === 2 && scores[0] !== "") {
+            sM = scores[0];
+            sO = scores[1];
+            if (r.pk) {
+               const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+               if (pkMatch) {
+                 const isHome = r.home_away === "H";
+                 pkM = isHome ? pkMatch[1] : pkMatch[2];
+                 pkO = isHome ? pkMatch[2] : pkMatch[1];
+               }
+            }
+          }
+        }
+        // GAS Format Support
+        else if (r.home_score !== "" && r.home_score !== null) {
+          const isHome = robustTeamMatch(r.home, m.club === "niigata" ? "新潟" : "熊本");
+          sM = isHome ? r.home_score : r.away_score;
+          sO = isHome ? r.away_score : r.home_score;
           if (r.pk && r.home_score === r.away_score) {
             const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
             if (pkMatch) {
-              const pkM = isHome ? pkMatch[1] : pkMatch[2];
-              const pkO = isHome ? pkMatch[2] : pkMatch[1];
+              pkM = isHome ? pkMatch[1] : pkMatch[2];
+              pkO = isHome ? pkMatch[2] : pkMatch[1];
+            }
+          }
+        }
+
+        if (sM !== null && sO !== null) {
+          const mId = `${m.date}_${m.club}_${m.opponent}`;
+          if (localStorage.getItem(`score_my_${mId}`) !== String(sM) || 
+              localStorage.getItem(`score_opp_${mId}`) !== String(sO)) {
+            localStorage.setItem(`score_my_${mId}`, sM);
+            localStorage.setItem(`score_opp_${mId}`, sO);
+            
+            if (pkM !== null && pkO !== null) {
               localStorage.setItem(`score_my_pk_${mId}`, pkM);
               localStorage.setItem(`score_opp_pk_${mId}`, pkO);
+            } else {
+              localStorage.removeItem(`score_my_pk_${mId}`);
+              localStorage.removeItem(`score_opp_pk_${mId}`);
             }
-          } else {
-            localStorage.removeItem(`score_my_pk_${mId}`);
-            localStorage.removeItem(`score_opp_pk_${mId}`);
+            changed = true;
           }
-          changed = true;
         }
       }
     });
@@ -1121,24 +1204,44 @@ document.addEventListener("DOMContentLoaded", () => {
       const updateHalf = (prefix, kw) => {
         const past = officialResults.filter(r => {
           const dMatch = r.date < cutoff;
-          const tMatch = robustTeamMatch(r.home, kw) || robustTeamMatch(r.away, kw);
-          const hasScore = r.home_score !== "" && r.home_score !== null;
           const status = (r.status || "").toLowerCase();
           const isFinished = status.includes("finish") || status.includes("ft") || status.includes("終");
+          
+          // Static JSON Support
+          if (r.club && r.opponent) {
+            const tMatchStatic = (kw === "新潟" ? r.club === "niigata" : r.club === "kumamoto");
+            const hasScoreStatic = r.score !== undefined;
+            return dMatch && tMatchStatic && hasScoreStatic;
+          }
+          
+          // GAS Support
+          const tMatch = robustTeamMatch(r.home, kw) || robustTeamMatch(r.away, kw);
+          const hasScore = r.home_score !== "" && r.home_score !== null;
           return dMatch && tMatch && (hasScore || isFinished);
         }).sort((a,b) => b.date.localeCompare(a.date));
 
         if (!past.length) return;
         const last = past[0];
-        const isHome = robustTeamMatch(last.home, kw);
-        const sM = parseInt(isHome ? last.home_score : last.away_score);
-        const sO = parseInt(isHome ? last.away_score : last.home_score);
-        const opp = (isHome ? last.away : last.home).replace(/の試合詳細|の結果/g, "").trim();
         
-        let symbol = "DRAW";
-        let badgeColor = "#f1f3f4";
-        let badgeText = "#5f6368";
-        let scoreStr = `${sM} - ${sO}`;
+        let isHome, sM, sO, opp, symbol, badgeColor, badgeText, scoreStr;
+
+        if (last.score !== undefined) {
+           isHome = last.home_away === "H";
+           const scores = last.score.split("-");
+           sM = parseInt(scores[0]);
+           sO = parseInt(scores[1]);
+           opp = last.opponent;
+        } else {
+           isHome = robustTeamMatch(last.home, kw);
+           sM = parseInt(isHome ? last.home_score : last.away_score);
+           sO = parseInt(isHome ? last.away_score : last.home_score);
+           opp = (isHome ? last.away : last.home).replace(/の試合詳細|の結果/g, "").trim();
+        }
+        
+        symbol = "DRAW";
+        badgeColor = "#f1f3f4";
+        badgeText = "#5f6368";
+        scoreStr = `${sM} - ${sO}`;
         
         if (sM > sO) { symbol = "WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
         else if (sM < sO) { symbol = "LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
@@ -1158,15 +1261,24 @@ document.addEventListener("DOMContentLoaded", () => {
         let formHtml = `<div style="display:flex; gap:3px; margin-top:6px; justify-content:center;">`;
         const recent5 = past.slice(0, 5).reverse();
         recent5.forEach(r => {
-          const isRHome = robustTeamMatch(r.home, kw);
-          const rM = parseInt(isRHome ? r.home_score : r.away_score);
-          const rO = parseInt(isRHome ? r.away_score : r.home_score);
-          let rSym = "△";
+          let rM, rO, rSym = "△";
+          if (r.score !== undefined) {
+             const isRHome = r.home_away === "H";
+             const rScores = r.score.split("-");
+             rM = parseInt(rScores[0]);
+             rO = parseInt(rScores[1]);
+          } else {
+             const isRHome = robustTeamMatch(r.home, kw);
+             rM = parseInt(isRHome ? r.home_score : r.away_score);
+             rO = parseInt(isRHome ? r.away_score : r.home_score);
+          }
+
           if (rM > rO) { rSym = "〇"; }
           else if (rM < rO) { rSym = "●"; }
           else if (r.pk) {
             const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
             if (pkMatch) {
+              const isRHome = (r.score !== undefined) ? (r.home_away === "H") : robustTeamMatch(r.home, kw);
               const pkM = parseInt(isRHome ? pkMatch[1] : pkMatch[2]);
               const pkO = parseInt(isRHome ? pkMatch[2] : pkMatch[1]);
               if (pkM > pkO) { rSym = "△"; }
@@ -1306,6 +1418,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (i !== -1) scrollToIndex(i);
   };
 
+  yearTabs["2024"].onclick = () => applyYearFilter(2024);
   yearTabs["2025"].onclick = () => applyYearFilter(2025);
   yearTabs["2026"].onclick = () => applyYearFilter(2026);
   yearTabs["all"].onclick = () => applyYearFilter(null);
