@@ -15,7 +15,8 @@ window.openClubSite = async function(clubName, event) {
     }
   }
   
-  const norm = (s) => (s || "").normalize("NFKC").replace(/[\s・]/g, "").toLowerCase();
+  // Remove all spaces, dots, middle dots, hyphens, and convert full-width to half-width
+  const norm = (s) => (s || "").normalize("NFKC").replace(/[\s・\.\-\_]/g, "").toLowerCase();
   const targetNorm = norm(clubName);
   
   let club = window.clubSitesData.find(c => norm(c.club_name) === targetNorm);
@@ -27,10 +28,19 @@ window.openClubSite = async function(clubName, event) {
     });
   }
 
+  // Fallback for tricky JLeague abbreviations like "F東京" vs "FC東京"
+  if (!club && targetNorm.includes("f東京")) club = window.clubSitesData.find(c => c.club_name.includes("FC東京"));
+  if (!club && targetNorm.includes("c大阪")) club = window.clubSitesData.find(c => c.club_name.includes("セレッソ"));
+  if (!club && targetNorm.includes("g大阪")) club = window.clubSitesData.find(c => c.club_name.includes("ガンバ"));
+  if (!club && targetNorm.includes("東京v")) club = window.clubSitesData.find(c => c.club_name.includes("ヴェルディ"));
+  if (!club && targetNorm.includes("横浜fm")) club = window.clubSitesData.find(c => c.club_name.includes("マリノス"));
+
   if (club && club.official_site) {
     window.open(club.official_site, '_blank');
   } else {
-    alert(clubName.trim() + " の公式サイト情報が見つかりませんでした。");
+    alert("公式サイトが見つかりません:\n" + 
+          "元の名前: [" + clubName + "]\n" + 
+          "内部変換: [" + targetNorm + "]");
     console.warn("No official site found for:", clubName);
   }
 };
