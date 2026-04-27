@@ -494,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h2 class="sheet-opp" style="margin-bottom:0;">${match.opponent}</h2>
             <div class="sheet-opp-eng" style="font-size: 0.75rem; color: #666; font-family: var(--font-kick); font-weight: 800; letter-spacing: 0.5px; margin-top: 2px;">${engOpp}</div>
           </div>
-          <img class="sheet-opp-emblem" src="${match.emblem}">
+          <img class="sheet-opp-emblem" src="${match.emblem}" style="cursor:pointer;" onclick="openClubSite('${match.opponent}', event)">
         </div>
         <div class="sheet-venue-row" style="display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:8px;">
           <p class="sheet-venue-info" style="margin:0;">${match.date} | ${match.venue}</p>
@@ -914,6 +914,7 @@ document.addEventListener("DOMContentLoaded", () => {
                        <span class="val-prev-score-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
                        <span class="val-prev-res-my">-</span>
                     </div>
+                    <div class="val-prev-form-my" style="min-height:18px;"></div>
                  </div>
                  
                  <!-- Divider -->
@@ -931,6 +932,7 @@ document.addEventListener("DOMContentLoaded", () => {
                        <span class="val-prev-score-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
                        <span class="val-prev-res-opp">-</span>
                     </div>
+                    <div class="val-prev-form-opp" style="min-height:18px;"></div>
                  </div>
               </div>
             </div>
@@ -1138,17 +1140,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const resHtml = `<span style="border:1px solid ${badgeColor}; background:${badgeColor}; color:${badgeText}; border-radius:12px; padding:3px 8px; font-size:0.7rem; font-weight:800; display:inline-flex; align-items:center; gap:4px;"><span style="font-size:0.5rem;">●</span> ${symbol}</span>`;
 
+        let formHtml = `<div style="display:flex; gap:3px; margin-top:6px; justify-content:center;">`;
+        const recent5 = past.slice(0, 5).reverse();
+        recent5.forEach(r => {
+          const isRHome = robustTeamMatch(r.home, kw);
+          const rM = parseInt(isRHome ? r.home_score : r.away_score);
+          const rO = parseInt(isRHome ? r.away_score : r.home_score);
+          let rSym = "△";
+          if (rM > rO) { rSym = "〇"; }
+          else if (rM < rO) { rSym = "●"; }
+          else if (r.pk) {
+            const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+            if (pkMatch) {
+              const pkM = parseInt(isRHome ? pkMatch[1] : pkMatch[2]);
+              const pkO = parseInt(isRHome ? pkMatch[2] : pkMatch[1]);
+              if (pkM > pkO) { rSym = "△"; }
+              else { rSym = "▲"; }
+            }
+          }
+          formHtml += `<span style="color:#555; font-size:0.9rem; font-weight:900;">${rSym}</span>`;
+        });
+        formHtml += `</div>`;
+
         const elDate = card.querySelector(`.val-prev-date-${prefix}`);
         const elOpp = card.querySelector(`.val-prev-opp-name-${prefix}`);
         const elHA = card.querySelector(`.val-prev-ha-${prefix}`);
         const elScore = card.querySelector(`.val-prev-score-${prefix}`);
         const elRes = card.querySelector(`.val-prev-res-${prefix}`);
+        const elForm = card.querySelector(`.val-prev-form-${prefix}`);
         
         if (elDate) elDate.innerText = last.date.substring(5).replace("-", "/");
         if (elOpp) elOpp.innerText = opp;
         if (elHA) elHA.innerText = isHome ? "(H)" : "(A)";
         if (elScore) elScore.innerText = scoreStr;
         if (elRes) elRes.innerHTML = resHtml;
+        if (elForm) elForm.innerHTML = formHtml;
       };
 
       updateHalf('my', teamKw);
@@ -1815,7 +1841,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const trcls = isNiigata ? 'standing-niigata' : isKumamoto ? 'standing-kumamoto' : '';
           return '<tr class="' + trcls + '">'
             + '<td class="col-rank">' + row.rank + '</td>'
-            + '<td class="standing-team">' + row.team + '</td>'
+            + '<td class="standing-team" style="cursor:pointer;" onclick="openClubSite(\'' + row.team + '\', event)">' + row.team + '</td>'
             + '<td class="col-pts"><strong>' + row.points + '</strong></td>'
             + '<td>' + row.played + '</td>'
             + '<td>' + row.won + '</td>'
