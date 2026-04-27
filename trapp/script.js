@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const ICONS = {
               SUNNY: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
               CLOUDY: `<svg viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>`,
-              RAIN: `<svg viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M16 13a4 4 0 0 0-8 0"></path><path d="M20 16a4 4 0 0 0-8 0"></path><path d="M12 5a4 4 0 0 0-8 0"></path><path d="M8 19v2"></path><path d="M12 19v2"></path><path x1="16" y1="19" x2="16" y2="21"></path></svg>`,
+              RAIN: `<svg viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M20 16.2A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.4"></path><line x1="16" y1="18" x2="14" y2="22"></line><line x1="12" y1="18" x2="10" y2="22"></line><line x1="8" y1="18" x2="6" y2="22"></line></svg>`,
               SNOW: `<svg viewBox="0 0 24 24" fill="none" stroke="#5ac8fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line></svg>`
             };
             let ik = "CLOUDY";
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
             else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) ik = "SNOW";
 
             container.innerHTML = `
-              <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.7); padding:6px 14px; border-radius:20px; box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:2px;">
                 ${ICONS[ik]}
                 <div style="display:flex; align-items:baseline; gap:4px; font-family:var(--font-kick); font-weight:900; font-size:1.3rem;">
                   <span class="w-temp-max" style="color:#ff3b30;">${max}</span>
@@ -843,21 +843,24 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="dash-card-body" style="background: white; color: #111; padding:10px 15px;">
               
-              <!-- Top row -->
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
-                 <div style="display:flex; align-items:center; gap:8px;">
-                    <span class="dash-mw" style="background: #e8e8ed; color: #111; padding: 2px 8px; border-radius:6px; font-size:0.9rem; border:none;">${m.matchweek || "EX"}</span>
-                    <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${m.date} ${m.day} ${m.time}</span>
+              <!-- Top area (Date, Venue + Weather) -->
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                 <!-- Left Side: Date and Venue -->
+                 <div style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                       <span class="dash-mw" style="background: #e8e8ed; color: #111; padding: 2px 8px; border-radius:6px; font-size:0.9rem; border:none;">${m.matchweek || "EX"}</span>
+                       <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${m.date} ${m.day} ${m.time}</span>
+                    </div>
+                    <div class="dash-venue-row" style="color:#555; font-size:0.85rem; align-items:center; display:flex;">
+                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:4px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                       <span style="font-weight:700;">${m.venue}</span>
+                    </div>
                  </div>
+
+                 <!-- Right Side: Weather -->
                  <div id="dash-weather-${m.club}" data-venue="${m.venue}" data-date="${m.date}" style="text-align:right;">
                     <span class="val-weather" style="font-size:1.8rem; display:flex; align-items:center; gap: 8px;"></span>
                  </div>
-              </div>
-              
-              <!-- Venue -->
-              <div class="dash-venue-row" style="color:#555; margin-bottom: 8px; font-size:0.85rem; align-items:center;">
-                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:4px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                 <span style="font-weight:700;">${m.venue}</span>
               </div>
               
               <!-- Opponent Title -->
