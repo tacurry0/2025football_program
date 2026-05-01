@@ -49,12 +49,23 @@ html, body {
 .ym-picker-pop {
   position: fixed; bottom: -100%; left: 0; width: 100%; background: white;
   border-radius: 28px 28px 0 0; z-index: 3700; transition: bottom 0.4s var(--ease-expo);
-  padding: 20px 20px 40px; box-sizing: border-box; max-height: 70vh; overflow-y: auto;
+  padding: 20px 20px 40px; box-sizing: border-box; max-height: 70vh; overflow: hidden;
 }
 .ym-picker-pop.active { bottom: 0; }
 .ym-picker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 .ym-picker-header h4 { font-family: var(--font-kick); font-size: 1.5rem; margin: 0; }
 #ym-picker-close { background: #f2f2f7; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; }
+#ym-picker-list { max-height: calc(70vh - 116px); overflow: hidden; }
+.ym-picker-columns { display: grid; grid-template-columns: minmax(96px, 0.34fr) 1fr; gap: 14px; min-height: 320px; }
+.ym-picker-years { overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px; }
+.ym-picker-month-panel { min-width: 0; overflow-y: auto; }
+.ym-picker-year-btn {
+  width: 100%; min-height: 46px; border-radius: 12px; border: 1.5px solid var(--ultra-border);
+  background: #f7f7fa; color: var(--text-grey); font-family: var(--font-kick); font-size: 1.2rem; font-weight: 900;
+  cursor: pointer; transition: 0.2s;
+}
+.ym-picker-year-btn.active { background: var(--text-main); border-color: var(--text-main); color: white; }
+.ym-picker-year-btn:active { transform: scale(0.96); }
 .ym-picker-group { margin-bottom: 20px; }
 .ym-picker-year-label { font-family: var(--font-kick); font-size: 1.1rem; font-weight: 900; color: var(--text-grey); letter-spacing: 0.1em; margin-bottom: 15px; }
 .ym-picker-months { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }

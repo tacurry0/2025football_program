@@ -1,0 +1,23 @@
+$bytes = [System.IO.File]::ReadAllBytes('script.js')
+$utf8 = [System.Text.Encoding]::UTF8
+$text = $utf8.GetString($bytes)
+
+# Strip out invalid characters and split
+$lines = $text -split "`r`n"
+
+$b64_980 = "ICAgICLPhsOD44OU44OD44Kv55yM57eP44Gy44KD44GU44KT44K544K/44K444Ki44OgIjogIuaWhue4hOW4giIsICJVdmFuY2Xjgajjganjgo3jgY3jgrnjgr/jgrjjgqLjg6AgYnkgRnVqaXRzdSI6ICLlt53ltI7luILkuK3ljp/ljLoiLA=="
+$b64_1192 = "ICAgICAgICBjb25zdCBKX1RFQU1fS1dTID0gWyJGQ+adseS6rSIsICLmnbHkuq1WIiwgIuaoqua1nUZNIiwgIuaoqua1nUZDIiwgIllT5qiq5rWdIiwgIkZDeWSnZemYqiIsICJHeWSnZemYqiIsICJDeWSnZemYqiIsICLgrrvjg6zjg4Pjgr0iLCAiRkPlsqDpmJwiLCAiRkPku4rmirsiLCAiRkPnkInnkIMiLCAi5pyt5bmMIiwgIum5v+WztSIsICLmtablkozIiwgIuaPjyIsICLn町55SwIiwgIuW3neW0jiIsICLmuZjljZciLCAi5paw5r2fIiwgIuWvjOWxsyIsICLph5HmsKIiLCAi5riF5rC0IiwgIuiXpOWenSIsICLmsrzmtKUiLCAi56磐55SwIiwgIuWQjeWPpOWxi1IsICLlsqDpmJwiLCAi5Lqs6YO9IiwgIueWeuaIuCIsICLlpYjohpoiLCAi6bOl5Y+WIiwgIuWyoeWxsyIsICLlupPls7UiLCAi5bGx5Y+jIiwgIuium岐IiwgIuW+s+WztSIsICLmhJvlqqsiLCAi5LuK5Yq7IiwgIuePj+WyoeIsICLljJfkuZ3lt54iLCAi6bOl5qCWIiwgIumVt+W0jiIsICLnhIrmnKwiLCAi5aSn5YiGIiwgIuWuruW0jiIsICLpub/lhZDls7UiLCAi55CJ55CDIiwgIumrmOefpSIsICLmu4vgrboiLCAi5YWr5oi4IiwgIuebmOWyoeIsICLnp4vn田IiwgIuWxseW9oiIsICLku5nlj7AiLCAi56aP5bO1IiwgIuaCteaIuCIsICLnvqTppokiLCAi5qCD5pyoIiwgIuWkp+WuruIsICLljYPokYkiLCAi55u45qih5Y6fIiwgIueUszYnwiLCAi5p2+5pysIiwgIumVt+mHjiJdOw=="
+$b64_1030 = "ICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJkYXNoLXZlbnVlLXJvdyIgc3R5bGU9ImNvbG9yOiM1NTU7IGZvbnQtc2l6ZTowLjg1cmVtOyBhbGlnbi1pdGVtczpjZW50ZXI7IGRpc3BsYXk6ZmxleDsiPgogICAgICAgICAgICAgICAgICAgICAgIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0eWxlPSJ3aWR0aDoxNnB4O2hlaWdodDoxNnB4O21hcmdpbi1yaWdodDo0cHg7Ij48cGF0aCBkPSJNMjEgMTBjMCA3LTkgMTMtOSAxM3MtOS02LTktMTNhOSA5IDAgMCAxIDE4IDB6Ij48L3BhdGg+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMyI+PC9jaXJjbGU+PC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gc3R5bGU9ImZvbnQtd2VpZ2h0OjcwMDsiPiR7bS52ZW51ZX08L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgPC9kaXY+"
+
+$str_980 = $utf8.GetString([System.Convert]::FromBase64String($b64_980))
+$str_1192 = $utf8.GetString([System.Convert]::FromBase64String($b64_1192))
+$str_1030 = $utf8.GetString([System.Convert]::FromBase64String($b64_1030))
+
+# We will just replace by index and write it back.
+$lines[979] = $str_980
+$lines[1029] = $str_1030
+$lines[1191] = $str_1192
+
+$newText = $lines -join "`r`n"
+$newBytes = $utf8.GetBytes($newText)
+[System.IO.File]::WriteAllBytes('script.js', $newBytes)

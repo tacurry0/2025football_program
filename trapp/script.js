@@ -173,6 +173,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
+    function getMatchIsHome(match) {
+      if (match && match.home_away === "H") return true;
+      if (match && match.home_away === "A") return false;
+      return isHomeMatch(match && match.club, match && match.venue);
+    }
+
     async function updateWeatherUI(container, date, venue) {
       if (!container) return;
       const STADIUM_CITY_MAP = {
@@ -264,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
       const nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
 
-      if (nextNiigata && isHomeMatch(nextNiigata.club, nextNiigata.venue)) {
+      if (nextNiigata && getMatchIsHome(nextNiigata)) {
         const mDate = parseDate(nextNiigata.date);
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         const diffDays = Math.round((mDate - today) / (1000 * 60 * 60 * 24));
@@ -419,7 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       dayMatches.forEach(m => {
         const dot = document.createElement("div");
-        const isHome = isHomeMatch(m.club, m.venue);
+        const isHome = getMatchIsHome(m);
         dot.className = `cal-dot ${m.club} ${isHome ? 'home' : 'away'}`;
         matchContainer.appendChild(dot);
       });
@@ -504,7 +510,7 @@ document.addEventListener("DOMContentLoaded", () => {
       pkHtml = `<div class="u-pk-area" style="${isD ? 'display:flex;' : 'display:none;'}"><span class="u-pk-label">PK</span><input type="number" class="u-score-input pk-my" value="${sPkM}"><span class="u-score-sep">-</span><input type="number" class="u-score-input pk-opp" value="${sPkO}"></div>`;
     }
 
-    const homeAway = isHomeMatch(match.club, match.venue) ? "HOME" : "AWAY";
+    const homeAway = getMatchIsHome(match) ? "HOME" : "AWAY";
     const clubName = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
     const clubEmblem = match.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
 
@@ -709,6 +715,71 @@ document.addEventListener("DOMContentLoaded", () => {
   const lSave = localStorage.getItem("trapp_standings_cache");
   if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
 
+  function getResultArray(payload) {
+    if (!payload) return [];
+    return Array.isArray(payload) ? payload : (payload.data || []);
+  }
+
+  function getResultKey(result) {
+    const date = result.date || "";
+    if (result.club && result.opponent) {
+      return ["static", date, result.club, result.matchweek || "", normalizeName(result.opponent)].join("|");
+    }
+    return ["gas", date, result.section || "", normalizeName(result.home), normalizeName(result.away)].join("|");
+  }
+
+  function mergeResultArrays(...sources) {
+    const seen = new Set();
+    const merged = [];
+    sources.forEach(source => {
+      getResultArray(source).forEach(result => {
+        const key = getResultKey(result);
+        if (seen.has(key)) return;
+        seen.add(key);
+        merged.push(result);
+      });
+    });
+    return merged;
+  }
+
+  function withMergedResultsPayload(basePayload, mergedResults) {
+    if (!basePayload || Array.isArray(basePayload)) return mergedResults;
+    return { ...basePayload, data: mergedResults };
+  }
+
+  function injectResultsIntoSchedule(results) {
+    let added = 0;
+    getResultArray(results).forEach(r => {
+      if (!r.date || !r.club || !r.opponent) return;
+      const exists = scheduleData.find(m => m.date === r.date && m.club === r.club && m.opponent === r.opponent);
+      if (exists) return;
+
+      const d = parseDate(r.date);
+      const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+      const dayStr = r.day || days[d.getDay()];
+      let emblem = r.emblem || getTeamKwFromEmblem(r.opponent) || "";
+      if (!emblem) {
+        const reversed = Object.entries(EMBLEM_MAP).find(([k,v]) => robustTeamMatch(v, r.opponent));
+        if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
+      }
+
+      scheduleData.push({
+         club: r.club,
+         matchweek: r.matchweek || "EX",
+         date: r.date,
+         day: dayStr,
+         time: r.time || "",
+         opponent: r.opponent,
+         venue: r.venue || "",
+         home_away: r.home_away || "",
+         emblem: emblem,
+         details: r.details || ""
+      });
+      added++;
+    });
+    return added;
+  }
+
   /**
    * Universal fetch with fallback and stale check
    */
@@ -720,7 +791,10 @@ document.addEventListener("DOMContentLoaded", () => {
          const res = await fetch(gasUrlWithCacheBuster);
          const gasJson = await res.json();
          const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
-         if (gasArr.length >= window.STATIC_RESULTS.length && gasArr.length > 0) return gasJson;
+         if (gasArr.length > 0) {
+           const merged = mergeResultArrays(window.STATIC_RESULTS, gasJson);
+           return withMergedResultsPayload(gasJson, merged);
+         }
        } catch (e) { console.error(`GAS fetch failed: ${type}`); }
        return window.STATIC_RESULTS;
     }
@@ -757,32 +831,7 @@ document.addEventListener("DOMContentLoaded", () => {
       officialResults = Array.isArray(resJson) ? resJson : (resJson.data || []);
       localStorage.setItem("trapp_results_cache", JSON.stringify(officialResults));
       
-      // Inject 2024 matches from results into scheduleData
-      officialResults.forEach(r => {
-        if (!r.date || !r.club || !r.opponent) return;
-        const exists = scheduleData.find(m => m.date === r.date && m.club === r.club && m.opponent === r.opponent);
-        if (!exists) {
-          const d = parseDate(r.date);
-          const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-          const dayStr = days[d.getDay()];
-          let emblem = r.emblem || getTeamKwFromEmblem(r.opponent) || "";
-          if (!emblem) {
-            const reversed = Object.entries(EMBLEM_MAP).find(([k,v]) => robustTeamMatch(v, r.opponent));
-            if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
-          }
-          scheduleData.push({
-             club: r.club,
-             matchweek: r.matchweek || "EX",
-             date: r.date,
-             day: dayStr,
-             time: r.time || "",
-             opponent: r.opponent,
-             venue: r.venue || "",
-             emblem: emblem,
-             details: r.details || ""
-          });
-        }
-      });
+      injectResultsIntoSchedule(officialResults);
       syncResultsToLocalStorage(officialResults);
     }
 
@@ -896,6 +945,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return changed;
   }
 
+  if (window.STATIC_RESULTS && window.STATIC_RESULTS.length) {
+    officialResults = mergeResultArrays(window.STATIC_RESULTS, officialResults);
+    injectResultsIntoSchedule(window.STATIC_RESULTS);
+    syncResultsToLocalStorage(window.STATIC_RESULTS);
+  }
+
   // Initial load
   refreshAllData();
 
@@ -958,7 +1013,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const renderCard = (m, clubName, mainColor, myShortName) => {
       if (!m) return `<div class="dash-card"><div style="padding:20px;text-align:center;color:#888;">今後の試合予定はありません</div></div>`;
       const isAtt = localStorage.getItem('attend_' + m.date + '_' + m.club + '_' + m.opponent) === "true";
-      const isHome = isHomeMatch(m.club, m.venue);
+      const isHome = getMatchIsHome(m);
       const haBadge = isHome ? '<span class="sheet-ha badge-home" style="color:#fff; font-weight:800; font-size:1rem;">HOME</span>' : '<span class="sheet-ha badge-away" style="color:#fff; font-weight:800; font-size:1rem;">AWAY</span>';
       const myEmblem = m.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
       const J_CLUB_ENG = { "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC" };
@@ -1323,14 +1378,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
 
     // Add update timestamp to dashboard
+    const dashboardContainer = document.getElementById("dashboard-cards-container");
     let timeBox = document.getElementById("dash-update-time");
-    if (!timeBox) {
+    if (!timeBox && dashboardContainer) {
       timeBox = document.createElement("div");
       timeBox.id = "dash-update-time";
-      container.appendChild(timeBox);
+      dashboardContainer.appendChild(timeBox);
     }
-    timeBox.style.cssText = "font-size:0.65rem; color:white; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:10px; margin-top:15px; display:inline-block; font-weight:700;";
-    timeBox.innerText = `最終同期: ${new Date().toLocaleTimeString()} (Data: v20260424)`;
+    if (timeBox) timeBox.style.cssText = "font-size:0.65rem; color:white; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:10px; margin-top:15px; display:inline-block; font-weight:700;";
+    if (timeBox) timeBox.innerText = `最終同期: ${new Date().toLocaleTimeString()} (Data: v20260424)`;
   }
 
 
@@ -1371,7 +1427,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = "draw";
           }
         }
-        const isHome = isHomeMatch(match.club, match.venue);
+        const isHome = getMatchIsHome(match);
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
 
@@ -1426,7 +1482,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // YM Picker
   function openYmPicker() {
     if (!activeMonthTitle.textContent.includes("/")) return; // Not fully initialized
-    ymPickerList.innerHTML = "";
     const yearMap = {};
     allSections.forEach(sec => {
       const y = sec.dataset.year;
@@ -1434,11 +1489,49 @@ document.addEventListener("DOMContentLoaded", () => {
       yearMap[y].push({ ym: sec.dataset.ym, m: sec.dataset.ym.split("-")[1] });
     });
 
-    Object.keys(yearMap).sort().forEach(y => {
-      const g = document.createElement("div"); g.className = "ym-picker-group";
-      g.innerHTML = `<div class="ym-picker-year-label">${y}年</div><div class="ym-picker-months"></div>`;
-      const grid = g.querySelector(".ym-picker-months");
-      yearMap[y].forEach(item => {
+    const years = Object.keys(yearMap).sort((a, b) => Number(a) - Number(b));
+    if (!years.length) return;
+
+    const activeSec = visibleSections[currentIndex] || allSections[currentIndex] || allSections[0];
+    let pickerYear = activeSec?.dataset.year || String(selectedYear || years[years.length - 1]);
+    if (!yearMap[pickerYear]) pickerYear = years[years.length - 1];
+
+    ymPickerList.innerHTML = `
+      <div class="ym-picker-columns">
+        <div class="ym-picker-years" aria-label="年"></div>
+        <div class="ym-picker-month-panel">
+          <div class="ym-picker-year-label"></div>
+          <div class="ym-picker-months"></div>
+        </div>
+      </div>
+    `;
+
+    const yearCol = ymPickerList.querySelector(".ym-picker-years");
+    const yearLabel = ymPickerList.querySelector(".ym-picker-year-label");
+    const monthGrid = ymPickerList.querySelector(".ym-picker-months");
+
+    const renderYears = () => {
+      yearCol.innerHTML = "";
+      years.forEach(y => {
+        const btn = document.createElement("button");
+        btn.className = "ym-picker-year-btn";
+        btn.textContent = y;
+        btn.classList.toggle("active", y === pickerYear);
+        btn.onclick = () => {
+          pickerYear = y;
+          renderYears();
+          renderMonths();
+        };
+        yearCol.appendChild(btn);
+      });
+    };
+
+    const renderMonths = () => {
+      yearLabel.textContent = `${pickerYear}年`;
+      monthGrid.innerHTML = "";
+      yearMap[pickerYear]
+        .sort((a, b) => Number(a.m) - Number(b.m))
+        .forEach(item => {
         const btn = document.createElement("button"); btn.className = "ym-picker-btn";
         btn.textContent = Number(item.m) + "月";
         if (visibleSections[currentIndex] && visibleSections[currentIndex].dataset.ym === item.ym) {
@@ -1446,14 +1539,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         btn.onclick = () => {
           closeYmPicker();
-          applyYearFilter(selectedYear === null ? null : Number(y));
+          applyYearFilter(Number(pickerYear), true);
           const idx = visibleSections.findIndex(s => s.dataset.ym === item.ym);
           if (idx !== -1) scrollToIndex(idx);
         };
-        grid.appendChild(btn);
+        monthGrid.appendChild(btn);
       });
-      ymPickerList.appendChild(g);
-    });
+    };
+
+    renderYears();
+    renderMonths();
     ymPickerOverlay.classList.add("active");
     ymPickerBackdrop.classList.add("active");
   }
@@ -1623,7 +1718,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       attMatches.forEach(m => {
-        const isHome = isHomeMatch(m.club, m.venue);
+        const isHome = getMatchIsHome(m);
         txt += `${m.date} ${m.day} ${m.time} - vs ${m.opponent}\n`;
         txt += `📍 ${m.venue} (${isHome ? 'HOME' : 'AWAY'})\n\n`;
       });
