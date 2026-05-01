@@ -144,6 +144,18 @@ document.addEventListener("DOMContentLoaded", () => {
       return null;
     }
 
+    function escapeHtml(value) {
+      return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function getEmblemUrlForTeam(teamName) {
+      if (!teamName) return "";
+      const direct = scheduleData.find(m => robustTeamMatch(m.opponent, teamName) || robustTeamMatch(getTeamKwFromEmblem(m.emblem), teamName));
+      if (direct && direct.emblem) return direct.emblem;
+      const reversed = Object.entries(EMBLEM_MAP).find(([, kw]) => robustTeamMatch(kw, teamName));
+      return reversed ? `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png` : "";
+    }
+
     function robustTeamMatch(name1, name2) {
       if (!name1 || !name2) return false;
       const n1 = normalizeName(name1).replace("の試合詳細", "").replace("の結果", "").replace("SC", "").replace("FC", "").replace("F.C.", "");
@@ -424,10 +436,11 @@ document.addEventListener("DOMContentLoaded", () => {
       matchContainer.className = "cal-match-container";
 
       dayMatches.forEach(m => {
-        const dot = document.createElement("div");
         const isHome = getMatchIsHome(m);
-        dot.className = `cal-dot ${m.club} ${isHome ? 'home' : 'away'}`;
-        matchContainer.appendChild(dot);
+        const item = document.createElement("div");
+        item.className = `cal-match-chip ${m.club} ${isHome ? 'home' : 'away'}`;
+        item.innerHTML = `<span class="cal-ha">${isHome ? 'H' : 'A'}</span><img class="cal-emblem" src="${escapeHtml(m.emblem)}" alt="${escapeHtml(m.opponent)}">`;
+        matchContainer.appendChild(item);
       });
       cell.appendChild(matchContainer);
 
@@ -2086,9 +2099,11 @@ document.addEventListener("DOMContentLoaded", () => {
           const isNiigata = (row.team || '').includes('新潟');
           const isKumamoto = (row.team || '').includes('熊本');
           const trcls = isNiigata ? 'standing-niigata' : isKumamoto ? 'standing-kumamoto' : '';
+          const emblemUrl = getEmblemUrlForTeam(row.team);
+          const emblemHTML = emblemUrl ? '<img class="standing-team-emblem" src="' + escapeHtml(emblemUrl) + '" alt="' + escapeHtml(row.team) + '">' : '<span class="standing-team-emblem-placeholder"></span>';
           return '<tr class="' + trcls + '">'
             + '<td class="col-rank">' + row.rank + '</td>'
-            + '<td class="standing-team" style="cursor:pointer;" onclick="openClubSite(\'' + row.team + '\', event)">' + row.team + '</td>'
+            + '<td class="standing-team" style="cursor:pointer;" onclick="openClubSite(\'' + row.team + '\', event)"><span class="standing-team-name">' + emblemHTML + '<span>' + row.team + '</span></span></td>'
             + '<td class="col-pts"><strong>' + row.points + '</strong></td>'
             + '<td>' + row.played + '</td>'
             + '<td>' + row.won + '</td>'
