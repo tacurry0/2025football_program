@@ -1250,6 +1250,25 @@ document.addEventListener("DOMContentLoaded", () => {
     let nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
     let nextKumamoto = sorted.find(m => m.date >= cutoffStr && m.club === "kumamoto");
 
+    const escapeAttr = (value) => String(value || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+    const getOpponentInfoFromResult = (r, kw) => {
+      if (r.score !== undefined) {
+        return {
+          name: r.opponent || "",
+          emblem: r.emblem || (scheduleData.find(m => m.date === r.date && m.club === r.club && robustTeamMatch(m.opponent, r.opponent))?.emblem || "")
+        };
+      }
+
+      const isRHome = robustTeamMatch(r.home, kw);
+      const name = ((isRHome ? r.away : r.home) || "").replace(/の試合詳細|の結果/g, "").trim();
+      let emblem = scheduleData.find(m => m.date === r.date && robustTeamMatch(m.opponent, name))?.emblem || "";
+      if (!emblem) {
+        const reversed = Object.entries(EMBLEM_MAP).find(([k, v]) => robustTeamMatch(v, name));
+        if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
+      }
+      return { name, emblem };
+    };
+
     const updateUI = (club, teamKw, match) => {
       const card = document.getElementById(`dash-card-${club}`);
       if (!card) return;
@@ -1313,7 +1332,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const resHtml = `<span style="border:1px solid ${badgeColor}; background:${badgeColor}; color:${badgeText}; border-radius:12px; padding:3px 8px; font-size:0.7rem; font-weight:800; display:inline-flex; align-items:center; gap:4px;"><span style="font-size:0.5rem;">●</span> ${symbol}</span>`;
 
-        let formHtml = `<div style="display:flex; gap:3px; margin-top:6px; justify-content:center;">`;
+        let formHtml = `<div class="dash-form-strip">`;
         const recent5 = past.slice(0, 5).reverse();
         recent5.forEach(r => {
           let rM, rO, rSym = "△";
@@ -1340,7 +1359,12 @@ document.addEventListener("DOMContentLoaded", () => {
               else { rSym = "▲"; }
             }
           }
-          formHtml += `<span style="color:#555; font-size:0.9rem; font-weight:900;">${rSym}</span>`;
+          const recentOpp = getOpponentInfoFromResult(r, kw);
+          const recentHA = (r.score !== undefined ? r.home_away : (robustTeamMatch(r.home, kw) ? "H" : "A")) || "";
+          const emblemHtml = recentOpp.emblem
+            ? `<img class="dash-form-emblem" src="${escapeAttr(recentOpp.emblem)}" alt="${escapeAttr(recentOpp.name)}">`
+            : `<span class="dash-form-emblem-placeholder"></span>`;
+          formHtml += `<span class="dash-form-item"><span class="dash-form-symbol">${rSym}</span>${emblemHtml}<span class="dash-form-ha">${recentHA}</span></span>`;
         });
         formHtml += `</div>`;
 
