@@ -1,10 +1,13 @@
 
-const cacheName = 'football-app-v6';
+const cacheName = 'football-app-v7';
 const assetsToCache = [
   './',
   './index.html',
   './style.css',
   './script.js',
+  './club_emblems.json',
+  './data/results.json',
+  './icons/img_club_gunma.png',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'

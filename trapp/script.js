@@ -151,12 +151,50 @@ document.addEventListener("DOMContentLoaded", () => {
       return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
 
+    let clubEmblemMap = {};
+
+    async function loadClubEmblemMap() {
+      const fromSchedule = {};
+      scheduleData.forEach(m => {
+        if (/^202[56]-/.test(m.date) && m.opponent && m.emblem && !fromSchedule[m.opponent]) {
+          fromSchedule[m.opponent] = m.emblem;
+        }
+      });
+
+      try {
+        const res = await fetch("./club_emblems.json?v=20260513a");
+        if (res.ok) {
+          const json = await res.json();
+          clubEmblemMap = { ...fromSchedule, ...json };
+          return;
+        }
+      } catch (e) {
+        console.warn("Club emblem map load failed", e);
+      }
+      clubEmblemMap = fromSchedule;
+    }
+
+    const clubEmblemMapReady = loadClubEmblemMap();
+
+    function getClubEmblemFromMap(teamName) {
+      if (!teamName) return "";
+      if (clubEmblemMap[teamName]) return clubEmblemMap[teamName];
+      const found = Object.entries(clubEmblemMap).find(([name]) => robustTeamMatch(name, teamName));
+      return found ? found[1] : "";
+    }
+
     function getEmblemUrlForTeam(teamName) {
       if (!teamName) return "";
+      const mapped = getClubEmblemFromMap(teamName);
+      if (mapped) return mapped;
       const direct = scheduleData.find(m => robustTeamMatch(m.opponent, teamName) || robustTeamMatch(getTeamKwFromEmblem(m.emblem), teamName));
       if (direct && direct.emblem) return direct.emblem;
       const reversed = Object.entries(EMBLEM_MAP).find(([, kw]) => robustTeamMatch(kw, teamName));
       return reversed ? `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png` : "";
+    }
+
+    function resolveEmblemUrl(teamName, fallback = "") {
+      return getEmblemUrlForTeam(teamName) || fallback || "";
     }
 
     function robustTeamMatch(name1, name2) {
@@ -477,9 +515,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       dayMatches.forEach(m => {
         const isHome = getMatchIsHome(m);
+        const emblemUrl = resolveEmblemUrl(m.opponent, m.emblem);
         const item = document.createElement("div");
         item.className = `cal-match-chip ${m.club} ${isHome ? 'home' : 'away'}`;
-        item.innerHTML = `<span class="cal-ha">${isHome ? 'H' : 'A'}</span><img class="cal-emblem" src="${escapeHtml(m.emblem)}" alt="${escapeHtml(m.opponent)}">`;
+        item.innerHTML = `<span class="cal-ha">${isHome ? 'H' : 'A'}</span><img class="cal-emblem" src="${escapeHtml(emblemUrl)}" alt="${escapeHtml(m.opponent)}">`;
         matchContainer.appendChild(item);
       });
       cell.appendChild(matchContainer);
@@ -568,6 +607,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const clubEmblem = match.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
 
     const engOpp = J_CLUB_ENG[match.opponent] || match.opponent.toUpperCase();
+    const opponentEmblem = resolveEmblemUrl(match.opponent, match.emblem);
 
     sheetContent.innerHTML = `
       <div class="sheet-header club-${match.club}">
@@ -581,7 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h2 class="sheet-opp" style="margin-bottom:0;">${match.opponent}</h2>
             <div class="sheet-opp-eng" style="font-size: 0.75rem; color: #666; font-family: var(--font-kick); font-weight: 800; letter-spacing: 0.5px; margin-top: 2px;">${engOpp}</div>
           </div>
-          <img class="sheet-opp-emblem" src="${match.emblem}" style="cursor:pointer;" onclick="openClubSite('${match.opponent}', event)">
+          <img class="sheet-opp-emblem" src="${escapeHtml(opponentEmblem)}" style="cursor:pointer;" onclick="openClubSite('${match.opponent}', event)">
         </div>
         <div class="sheet-venue-row" style="display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:8px;">
           <p class="sheet-venue-info" style="margin:0;">${match.date} | ${match.venue}</p>
@@ -774,6 +814,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize data from localStorage cache
   const rSave = localStorage.getItem("trapp_results_cache");
   if (rSave) { try { officialResults = JSON.parse(rSave); } catch (e) { } }
+  if (window.STATIC_RESULTS) {
+    officialResults = mergeResultArrays(window.STATIC_RESULTS, officialResults);
+  }
   
   const lSave = localStorage.getItem("trapp_standings_cache");
   if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
@@ -810,6 +853,32 @@ document.addEventListener("DOMContentLoaded", () => {
     return { ...basePayload, data: mergedResults };
   }
 
+  async function fetchLocalJson(type) {
+    try {
+      const res = await fetch(`./data/${type}.json?t=${Date.now()}`);
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.warn(`Static load failed: ${type}`);
+    }
+    return null;
+  }
+
+  function commitResultsPayload(resJson) {
+    const merged = mergeResultArrays(window.STATIC_RESULTS || [], officialResults, resJson);
+    if (!merged.length) return;
+
+    officialResults = merged;
+    localStorage.setItem("trapp_results_cache", JSON.stringify(officialResults));
+    injectResultsIntoSchedule(officialResults);
+    syncResultsToLocalStorage(officialResults);
+
+    renderFeed();
+    applyYearFilter(selectedYear, true);
+    if (currentMode === "dashboard") renderDashboard();
+    else if (currentMode === "calendar") renderCalendar();
+    if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
+  }
+
   function injectResultsIntoSchedule(results) {
     let added = 0;
     getResultArray(results).forEach(r => {
@@ -820,7 +889,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const d = parseDate(r.date);
       const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
       const dayStr = r.day || days[d.getDay()];
-      let emblem = r.emblem || getTeamKwFromEmblem(r.opponent) || "";
+      let emblem = resolveEmblemUrl(r.opponent, r.emblem) || "";
       if (!emblem) {
         const reversed = Object.entries(EMBLEM_MAP).find(([k,v]) => robustTeamMatch(v, r.opponent));
         if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
@@ -848,6 +917,12 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   async function fetchData(type, forceGas = false) {
     if (type === "results" && window.STATIC_RESULTS) {
+       const localJson = await fetchLocalJson(type);
+       const localMerged = mergeResultArrays(window.STATIC_RESULTS, officialResults, localJson);
+       if (!forceGas && localJson) {
+         return withMergedResultsPayload(localJson, localMerged);
+       }
+
        const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
        try {
          const gasUrlWithCacheBuster = `${gasUrl}&nocache=1&t=${Date.now()}`;
@@ -855,20 +930,15 @@ document.addEventListener("DOMContentLoaded", () => {
          const gasJson = await res.json();
          const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
          if (gasArr.length > 0) {
-           const merged = mergeResultArrays(window.STATIC_RESULTS, gasJson);
+           const merged = mergeResultArrays(window.STATIC_RESULTS, officialResults, localJson, gasJson);
            return withMergedResultsPayload(gasJson, merged);
          }
        } catch (e) { console.error(`GAS fetch failed: ${type}`); }
-       return window.STATIC_RESULTS;
+       return withMergedResultsPayload(localJson || window.STATIC_RESULTS, localMerged);
     }
 
-    const localUrl = `./data/${type}.json`;
     const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
-    let staticJson = null;
-    try {
-      const res = await fetch(localUrl + "?t=" + Date.now());
-      if (res.ok) staticJson = await res.json();
-    } catch (e) { console.warn(`Static load failed: ${type}`); }
+    let staticJson = await fetchLocalJson(type);
 
     try {
       const gasUrlWithCacheBuster = `${gasUrl}&nocache=1&t=${Date.now()}`;
@@ -885,27 +955,20 @@ document.addEventListener("DOMContentLoaded", () => {
    * Refreshes all data and updates UI
    */
   async function refreshAllData(forceGas = false) {
-    const [resJson, stdJson] = await Promise.all([
-      fetchData("results", forceGas),
-      fetchData("standings", forceGas)
-    ]);
+    await clubEmblemMapReady;
 
+    const resultsPromise = fetchData("results", forceGas);
+    const standingsPromise = fetchData("standings", forceGas);
+    const resJson = await resultsPromise;
     if (resJson) {
-      officialResults = Array.isArray(resJson) ? resJson : (resJson.data || []);
-      localStorage.setItem("trapp_results_cache", JSON.stringify(officialResults));
-      
-      injectResultsIntoSchedule(officialResults);
-      syncResultsToLocalStorage(officialResults);
+      commitResultsPayload(resJson);
     }
 
+    const stdJson = await standingsPromise;
     if (stdJson && stdJson.data) {
       cachedStandings = stdJson.data;
       localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
     }
-
-    // Unconditionally render feed to populate DOM with newly injected matches (e.g. 2024)
-    renderFeed();
-    applyYearFilter(selectedYear, true);
 
     if (currentMode === "dashboard") renderDashboard();
     else if (currentMode === "calendar") renderCalendar();
@@ -1318,13 +1381,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (r.score !== undefined) {
         return {
           name: r.opponent || "",
-          emblem: r.emblem || (scheduleData.find(m => m.date === r.date && m.club === r.club && robustTeamMatch(m.opponent, r.opponent))?.emblem || "")
+          emblem: resolveEmblemUrl(r.opponent, r.emblem || (scheduleData.find(m => m.date === r.date && m.club === r.club && robustTeamMatch(m.opponent, r.opponent))?.emblem || ""))
         };
       }
 
       const isRHome = robustTeamMatch(r.home, kw);
       const name = ((isRHome ? r.away : r.home) || "").replace(/の試合詳細|の結果/g, "").trim();
-      let emblem = scheduleData.find(m => m.date === r.date && robustTeamMatch(m.opponent, name))?.emblem || "";
+      let emblem = resolveEmblemUrl(name, scheduleData.find(m => m.date === r.date && robustTeamMatch(m.opponent, name))?.emblem || "");
       if (!emblem) {
         const reversed = Object.entries(EMBLEM_MAP).find(([k, v]) => robustTeamMatch(v, name));
         if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
@@ -1517,6 +1580,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isHome = getMatchIsHome(match);
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
+        const emblemUrl = resolveEmblemUrl(match.opponent, match.emblem);
 
         let resultHtml = "";
         if (res) {
@@ -1527,7 +1591,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>`;
         }
 
-        card.innerHTML = `${resultHtml}<div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${match.emblem}"></div>`;
+        card.innerHTML = `${resultHtml}<div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${escapeHtml(emblemUrl)}"></div>`;
         card.onclick = () => openDetailSheet(match);
         section.appendChild(card);
       });
@@ -2202,7 +2266,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateHeaderAnnouncements();
 
   // アプリ起動時にバックグラウンドで結果同期（3秒後）
-  setTimeout(() => refreshAllData(), 3000);
+  setTimeout(() => refreshAllData(true), 800);
 
 });
 
