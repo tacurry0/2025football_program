@@ -60,12 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleNiigata = document.getElementById("toggle-niigata");
   const toggleKumamoto = document.getElementById("toggle-kumamoto");
 
-  const yearTabs = {
-    "2024": document.getElementById("toggle-year-2024"),
-    "2025": document.getElementById("toggle-year-2025"),
-    "2026": document.getElementById("toggle-year-2026"),
-    "all": document.getElementById("toggle-year-all")
-  };
+  const yearTabContainer = document.getElementById("nav-year-tabs");
+  let yearTabs = {};
 
   const detailSheet = document.getElementById("detail-sheet");
   const sheetBackdrop = document.getElementById("detail-sheet-backdrop");
@@ -95,6 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function parseDate(s) {
     const [y, m, d] = s.split("-").map(Number);
     return new Date(y, m - 1, d || 1);
+  }
+
+  function isBeforeToday(dateStr) {
+    const target = parseDate(dateStr);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return target < today;
   }
 
     const normalizeName = (s) => (s || "").normalize("NFKC").trim();
@@ -327,6 +330,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function rebuildVisibleSections() {
     visibleSections = allSections.filter(s => s.style.display !== "none");
+  }
+
+  function rebuildYearTabs() {
+    if (!yearTabContainer) return;
+    yearTabContainer.innerHTML = "";
+    yearTabs = {};
+
+    ["2025", "2026"].forEach(y => {
+      const btn = document.createElement("button");
+      btn.id = `toggle-year-${y}`;
+      btn.className = "year-tab";
+      btn.textContent = y;
+      btn.onclick = () => {
+        applyYearFilter(Number(y));
+      };
+      yearTabContainer.appendChild(btn);
+      yearTabs[y] = btn;
+    });
+
+    const allBtn = document.createElement("button");
+    allBtn.id = "toggle-year-all";
+    allBtn.className = "year-tab";
+    allBtn.textContent = "ALL";
+    allBtn.onclick = () => goToCurrentMonthAll();
+    yearTabContainer.appendChild(allBtn);
+    yearTabs.all = allBtn;
+  }
+
+  function getCurrentMonthKey() {
+    const n = new Date();
+    return `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}`;
+  }
+
+  function goToCurrentMonthAll() {
+    applyYearFilter(null, true);
+    const idx = visibleSections.findIndex(s => s.dataset.ym === getCurrentMonthKey());
+    scrollToIndex(idx !== -1 ? idx : 0);
   }
 
   function applyYearFilter(year, skipScroll = false) {
@@ -594,18 +634,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const tMaxPlace = wBox.querySelector("#u-temp-max");
     const tMinPlace = wBox.querySelector("#u-temp-min");
 
-    updateWeatherUI(wIconPlace, match.date, match.venue).then(() => {
-      const resInner = wIconPlace.firstElementChild;
-      if (resInner) {
+    if (isBeforeToday(match.date)) {
+      wBox.remove();
+    } else {
+      updateWeatherUI(wIconPlace, match.date, match.venue).then(() => {
+        const resInner = wIconPlace.firstElementChild;
+        if (!resInner) {
+          wBox.remove();
+          return;
+        }
         const svg = resInner.querySelector("svg");
         const maxVal = resInner.querySelector(".w-temp-max");
         const minVal = resInner.querySelector(".w-temp-min");
+        if (!svg && !maxVal && !minVal) {
+          wBox.remove();
+          return;
+        }
         if (svg) wIconPlace.innerHTML = svg.outerHTML;
         if (maxVal) tMaxPlace.innerText = maxVal.innerText;
         if (minVal) tMinPlace.innerText = minVal.innerText;
-      }
-      wBox.style.display = "flex";
-    });
+        wBox.style.display = "flex";
+      });
+    }
 
 
 
@@ -1484,6 +1534,7 @@ document.addEventListener("DOMContentLoaded", () => {
       feedSlider.appendChild(section);
     });
     allSections = Array.from(document.querySelectorAll(".month-section"));
+    rebuildYearTabs();
     updateClubVisibility();
   }
 
@@ -1506,15 +1557,10 @@ document.addEventListener("DOMContentLoaded", () => {
   nextBtn.onclick = () => { if (currentIndex < visibleSections.length - 1) scrollToIndex(currentIndex + 1); };
   goTodayBtn.onclick = () => {
     const n = new Date(), y = n.getFullYear(), k = `${y}-${String(n.getMonth() + 1).padStart(2, "0")}`;
-    applyYearFilter(y);
+    applyYearFilter(y, true);
     const i = visibleSections.findIndex(s => s.dataset.ym === k);
     if (i !== -1) scrollToIndex(i);
   };
-
-  yearTabs["2024"].onclick = () => applyYearFilter(2024);
-  yearTabs["2025"].onclick = () => applyYearFilter(2025);
-  yearTabs["2026"].onclick = () => applyYearFilter(2026);
-  yearTabs["all"].onclick = () => applyYearFilter(null);
 
   // YM Picker
   function openYmPicker() {

@@ -1,15 +1,2968 @@
 window.STATIC_RESULTS = [
   {
     "club": "niigata",
-    "matchweek": "MW1",
-    "date": "2024-02-24",
+    "matchweek": "第1節",
+    "date": "2020-02-23",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "ザスパクサツ群馬",
+    "venue": "正田醤油スタジアム群馬",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
+    "details": "J2 A ○ 3-0",
+    "home_away": "A",
+    "score": "3-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第1節",
+    "date": "2020-06-27",
+    "day": "Sat",
+    "time": "",
+    "opponent": "鹿児島ユナイテッドＦＣ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
+    "details": "J3 H ○ 3-2",
+    "home_away": "H",
+    "score": "3-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第2節",
+    "date": "2020-06-27",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "ヴァンフォーレ甲府",
+    "venue": "山梨中銀スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
+    "details": "J2 A △ 3-3",
+    "home_away": "A",
+    "score": "3-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第2節",
+    "date": "2020-07-04",
+    "day": "Sat",
+    "time": "",
+    "opponent": "ＦＣ今治",
+    "venue": "ありがとうサービス.夢スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_imabari.png",
+    "details": "J3 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第3節",
+    "date": "2020-07-04",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "ツエーゲン金沢",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
+    "details": "J2 H ● 3-5",
+    "home_away": "H",
+    "score": "3-5"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第3節",
+    "date": "2020-07-11",
+    "day": "Sat",
+    "time": "",
+    "opponent": "セレッソ大阪U-23",
+    "venue": "えがお健康スタジアム",
+    "emblem": "",
+    "details": "J3 H ○ 5-3",
+    "home_away": "H",
+    "score": "5-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第4節",
+    "date": "2020-07-11",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "松本山雅ＦＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_matsumoto.png",
+    "details": "J2 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第4節",
+    "date": "2020-07-15",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ガンバ大阪U-23",
+    "venue": "えがお健康スタジアム",
+    "emblem": "",
+    "details": "J3 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第5節",
+    "date": "2020-07-15",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "ＦＣ町田ゼルビア",
+    "venue": "町田GIONスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "J2 A △ 3-3",
+    "home_away": "A",
+    "score": "3-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第5節",
+    "date": "2020-07-19",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＦＣ岐阜",
+    "venue": "岐阜メモリアルセンター長良川競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gifu.png",
+    "details": "J3 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第6節",
+    "date": "2020-07-19",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "モンテディオ山形",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第6節",
+    "date": "2020-07-25",
+    "day": "Sat",
+    "time": "",
+    "opponent": "カマタマーレ讃岐",
+    "venue": "Pikaraスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sanuki.png",
+    "details": "J3 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第7節",
+    "date": "2020-07-25",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "水戸ホーリーホック",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_mito.png",
+    "details": "J2 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第7節",
+    "date": "2020-07-29",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ガイナーレ鳥取",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tottori.png",
+    "details": "J3 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第8節",
+    "date": "2020-07-29",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "東京ヴェルディ",
+    "venue": "味の素スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": "J2 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第8節",
+    "date": "2020-08-02",
+    "day": "Sun",
+    "time": "",
+    "opponent": "福島ユナイテッドＦＣ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukushima.png",
+    "details": "J3 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第9節",
+    "date": "2020-08-02",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "栃木ＳＣ",
+    "venue": "栃木県グリーンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
+    "details": "J2 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第10節",
+    "date": "2020-08-08",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "大宮アルディージャ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_omiya.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第９節",
+    "date": "2020-08-09",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ブラウブリッツ秋田",
+    "venue": "ソユースタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
+    "details": "J3 A ● 1-2",
+    "home_away": "A",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第11節",
+    "date": "2020-08-12",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "レノファ山口ＦＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
+    "details": "J2 H ○ 2-1",
+    "home_away": "H",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第10節",
+    "date": "2020-08-15",
+    "day": "Sat",
+    "time": "",
+    "opponent": "ヴァンラーレ八戸",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_hachinohe.png",
+    "details": "J3 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第12節",
+    "date": "2020-08-15",
+    "day": "Sat",
+    "time": "19:02",
+    "opponent": "ファジアーノ岡山",
+    "venue": "シティライトスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_okayama.png",
+    "details": "J2 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第13節",
+    "date": "2020-08-19",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "京都サンガF.C.",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第11節",
+    "date": "2020-08-22",
+    "day": "Sat",
+    "time": "",
+    "opponent": "いわてグルージャ盛岡",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwate.png",
+    "details": "J3 H ○ 3-1",
+    "home_away": "H",
+    "score": "3-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第14節",
+    "date": "2020-08-23",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "ＦＣ琉球",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
+    "details": "J2 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第15節",
+    "date": "2020-08-29",
+    "day": "Sat",
+    "time": "19:03",
+    "opponent": "アビスパ福岡",
+    "venue": "ベスト電器スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": "J2 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第12節",
+    "date": "2020-08-30",
+    "day": "Sun",
+    "time": "",
+    "opponent": "アスルクラロ沼津",
+    "venue": "愛鷹広域公園多目的競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_numazu.png",
+    "details": "J3 A ○ 3-0",
+    "home_away": "A",
+    "score": "3-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第13節",
+    "date": "2020-09-02",
+    "day": "Wed",
+    "time": "",
+    "opponent": "カターレ富山",
+    "venue": "富山県総合運動公園陸上競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_toyama.png",
+    "details": "J3 A ○ 3-2",
+    "home_away": "A",
+    "score": "3-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第16節",
+    "date": "2020-09-02",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "Ｖ・ファーレン長崎",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "J2 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第17節",
+    "date": "2020-09-05",
+    "day": "Sat",
+    "time": "18:05",
+    "opponent": "ジュビロ磐田",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
+    "details": "J2 H ● 1-3",
+    "home_away": "H",
+    "score": "1-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第14節",
+    "date": "2020-09-09",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ＡＣ長野パルセイロ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "",
+    "details": "J3 H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第18節",
+    "date": "2020-09-09",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "ジェフユナイテッド千葉",
+    "venue": "フクダ電子アリーナ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_chiba.png",
+    "details": "J2 A ○ 3-1",
+    "home_away": "A",
+    "score": "3-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第15節",
+    "date": "2020-09-12",
+    "day": "Sat",
+    "time": "",
+    "opponent": "ＳＣ相模原",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sagamihara.png",
+    "details": "J3 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第19節",
+    "date": "2020-09-13",
+    "day": "Sun",
+    "time": "19:03",
+    "opponent": "ギラヴァンツ北九州",
+    "venue": "ミクニワールドスタジアム北九州",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kitakyushu.png",
+    "details": "J2 A ● 1-2",
+    "home_away": "A",
+    "score": "1-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第16節",
+    "date": "2020-09-19",
+    "day": "Sat",
+    "time": "",
+    "opponent": "藤枝ＭＹＦＣ",
+    "venue": "藤枝総合運動公園サッカー場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fujieda.png",
+    "details": "J3 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第20節",
+    "date": "2020-09-19",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "徳島ヴォルティス",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
+    "details": "J2 H ● 0-1",
+    "home_away": "H",
+    "score": "0-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第17節",
+    "date": "2020-09-22",
+    "day": "Tue",
+    "time": "",
+    "opponent": "Ｙ．Ｓ．Ｃ．Ｃ．横浜",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ysyokohama.png",
+    "details": "J3 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第21節",
+    "date": "2020-09-23",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "愛媛ＦＣ",
+    "venue": "ニンジニアスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
+    "details": "J2 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第22節",
+    "date": "2020-09-26",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "ヴァンフォーレ甲府",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第18節",
+    "date": "2020-09-27",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ガンバ大阪U-23",
+    "venue": "パナソニック　スタジアム　吹田",
+    "emblem": "",
+    "details": "J3 A ● 0-2",
+    "home_away": "A",
+    "score": "0-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第23節",
+    "date": "2020-09-30",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "ＦＣ琉球",
+    "venue": "タピック県総ひやごんスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
+    "details": "J2 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第19節",
+    "date": "2020-10-04",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＦＣ岐阜",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gifu.png",
+    "details": "J3 H ● 2-3",
+    "home_away": "H",
+    "score": "2-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第24節",
+    "date": "2020-10-04",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "ＦＣ町田ゼルビア",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "J2 H ○ 4-0",
+    "home_away": "H",
+    "score": "4-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第20節",
+    "date": "2020-10-07",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ＡＣ長野パルセイロ",
+    "venue": "長野Uスタジアム",
+    "emblem": "",
+    "details": "J3 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第25節",
+    "date": "2020-10-10",
+    "day": "Sat",
+    "time": "14:04",
+    "opponent": "京都サンガF.C.",
+    "venue": "サンガスタジアム by ＫＹＯＣＥＲＡ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": "J2 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第21節",
+    "date": "2020-10-11",
+    "day": "Sun",
+    "time": "",
+    "opponent": "福島ユナイテッドＦＣ",
+    "venue": "とうほう・みんなのスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukushima.png",
+    "details": "J3 A ○ 3-2",
+    "home_away": "A",
+    "score": "3-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第26節",
+    "date": "2020-10-14",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "アビスパ福岡",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": "J2 H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第22節",
+    "date": "2020-10-17",
+    "day": "Sat",
+    "time": "",
+    "opponent": "Ｙ．Ｓ．Ｃ．Ｃ．横浜",
+    "venue": "ニッパツ三ツ沢球技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ysyokohama.png",
+    "details": "J3 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第27節",
+    "date": "2020-10-18",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "水戸ホーリーホック",
+    "venue": "ケーズデンキスタジアム水戸",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_mito.png",
+    "details": "J2 A ○ 3-1",
+    "home_away": "A",
+    "score": "3-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第28節",
+    "date": "2020-10-21",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "ファジアーノ岡山",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_okayama.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第23節",
+    "date": "2020-10-25",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＳＣ相模原",
+    "venue": "相模原ギオンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sagamihara.png",
+    "details": "J3 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第29節",
+    "date": "2020-10-25",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "徳島ヴォルティス",
+    "venue": "鳴門大塚",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
+    "details": "J2 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第24節",
+    "date": "2020-10-31",
+    "day": "Sat",
+    "time": "",
+    "opponent": "アスルクラロ沼津",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_numazu.png",
+    "details": "J3 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第30節",
+    "date": "2020-11-01",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "東京ヴェルディ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": "J2 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第25節",
+    "date": "2020-11-03",
+    "day": "Tue",
+    "time": "",
+    "opponent": "ヴァンラーレ八戸",
+    "venue": "プライフーズスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_hachinohe.png",
+    "details": "J3 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第31節",
+    "date": "2020-11-04",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "モンテディオ山形",
+    "venue": "NDソフトスタジアム山形",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
+    "details": "J2 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第26節",
+    "date": "2020-11-07",
+    "day": "Sat",
+    "time": "",
+    "opponent": "鹿児島ユナイテッドＦＣ",
+    "venue": "白波スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
+    "details": "J3 A ● 1-4",
+    "home_away": "A",
+    "score": "1-4"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第32節",
+    "date": "2020-11-08",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "ギラヴァンツ北九州",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kitakyushu.png",
+    "details": "J2 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第33節",
+    "date": "2020-11-11",
+    "day": "Wed",
+    "time": "19:33",
+    "opponent": "ジュビロ磐田",
+    "venue": "ヤマハ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
+    "details": "J2 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第27節",
+    "date": "2020-11-14",
+    "day": "Sat",
+    "time": "",
+    "opponent": "藤枝ＭＹＦＣ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fujieda.png",
+    "details": "J3 H ● 2-3",
+    "home_away": "H",
+    "score": "2-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第34節",
+    "date": "2020-11-15",
+    "day": "Sun",
+    "time": "14:04",
+    "opponent": "ジェフユナイテッド千葉",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_chiba.png",
+    "details": "J2 H ● 0-2",
+    "home_away": "H",
+    "score": "0-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第28節",
+    "date": "2020-11-18",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ＦＣ今治",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_imabari.png",
+    "details": "J3 H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第35節",
+    "date": "2020-11-21",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "ツエーゲン金沢",
+    "venue": "石川県西部緑地公園陸上競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
+    "details": "J2 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第29節",
+    "date": "2020-11-22",
+    "day": "Sun",
+    "time": "",
+    "opponent": "セレッソ大阪U-23",
+    "venue": "ヤンマースタジアム長居",
+    "emblem": "",
+    "details": "J3 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第36節",
+    "date": "2020-11-25",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "愛媛ＦＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
+    "details": "J2 H ● 0-3",
+    "home_away": "H",
+    "score": "0-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第37節",
+    "date": "2020-11-28",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "Ｖ・ファーレン長崎",
+    "venue": "トランスコスモススタジアム長崎",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "J2 A ● 0-2",
+    "home_away": "A",
+    "score": "0-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第30節",
+    "date": "2020-11-29",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ブラウブリッツ秋田",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
+    "details": "J3 H ● 2-4",
+    "home_away": "H",
+    "score": "2-4"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第38節",
+    "date": "2020-12-02",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "栃木ＳＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
+    "details": "J2 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第31節",
+    "date": "2020-12-05",
+    "day": "Sat",
+    "time": "",
+    "opponent": "いわてグルージャ盛岡",
+    "venue": "いわぎんスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwate.png",
+    "details": "J3 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第39節",
+    "date": "2020-12-06",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "松本山雅ＦＣ",
+    "venue": "サンプロ アルウィン",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_matsumoto.png",
+    "details": "J2 A ● 1-3",
+    "home_away": "A",
+    "score": "1-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第32節",
+    "date": "2020-12-09",
+    "day": "Wed",
+    "time": "",
+    "opponent": "カターレ富山",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_toyama.png",
+    "details": "J3 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第33節",
+    "date": "2020-12-13",
+    "day": "Sun",
+    "time": "",
+    "opponent": "カマタマーレ讃岐",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sanuki.png",
+    "details": "J3 H ○ 3-0",
+    "home_away": "H",
+    "score": "3-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第40節",
+    "date": "2020-12-13",
+    "day": "Sun",
+    "time": "15:13",
+    "opponent": "ザスパクサツ群馬",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
+    "details": "J2 H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第41節",
+    "date": "2020-12-16",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "レノファ山口ＦＣ",
+    "venue": "維新みらいふスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
+    "details": "J2 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第34節",
+    "date": "2020-12-20",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ガイナーレ鳥取",
+    "venue": "Axisバードスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tottori.png",
+    "details": "J3 A ● 1-2",
+    "home_away": "A",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第42節",
+    "date": "2020-12-20",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "大宮アルディージャ",
+    "venue": "NACK5スタジアム大宮",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_omiya.png",
+    "details": "J2 A ● 1-3",
+    "home_away": "A",
+    "score": "1-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第1節",
+    "date": "2021-02-27",
     "day": "Sat",
     "time": "14:05",
+    "opponent": "ギラヴァンツ北九州",
+    "venue": "ミクニワールドスタジアム北九州",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kitakyushu.png",
+    "details": "J2 A ○ 4-1",
+    "home_away": "A",
+    "score": "4-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第2節",
+    "date": "2021-03-06",
+    "day": "Sat",
+    "time": "13:33",
+    "opponent": "Ｖ・ファーレン長崎",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "J2 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第3節",
+    "date": "2021-03-13",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "レノファ山口ＦＣ",
+    "venue": "維新みらいふスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
+    "details": "J2 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第1節",
+    "date": "2021-03-14",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＦＣ今治",
+    "venue": "ありがとうサービス.夢スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_imabari.png",
+    "details": "J3 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第2節",
+    "date": "2021-03-20",
+    "day": "Sat",
+    "time": "",
+    "opponent": "鹿児島ユナイテッドＦＣ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
+    "details": "J3 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第4節",
+    "date": "2021-03-20",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "ザスパクサツ群馬",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
+    "details": "J2 H ○ 3-1",
+    "home_away": "H",
+    "score": "3-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第5節",
+    "date": "2021-03-27",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "東京ヴェルディ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": "J2 H ○ 7-0",
+    "home_away": "H",
+    "score": "7-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第3節",
+    "date": "2021-03-28",
+    "day": "Sun",
+    "time": "",
+    "opponent": "Ｙ．Ｓ．Ｃ．Ｃ．横浜",
+    "venue": "ニッパツ三ツ沢球技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ysyokohama.png",
+    "details": "J3 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第4節",
+    "date": "2021-04-04",
+    "day": "Sun",
+    "time": "",
+    "opponent": "テゲバジャーロ宮崎",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_miyazaki.png",
+    "details": "J3 H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第6節",
+    "date": "2021-04-04",
+    "day": "Sun",
+    "time": "13:03",
+    "opponent": "ＳＣ相模原",
+    "venue": "ギオンス",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sagamihara.png",
+    "details": "J2 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第5節",
+    "date": "2021-04-11",
+    "day": "Sun",
+    "time": "",
+    "opponent": "福島ユナイテッドＦＣ",
+    "venue": "とうほう・みんなのスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukushima.png",
+    "details": "J3 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第7節",
+    "date": "2021-04-11",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "モンテディオ山形",
+    "venue": "NDソフトスタジアム山形",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
+    "details": "J2 A ○ 2-0",
+    "home_away": "A",
+    "score": "2-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第6節",
+    "date": "2021-04-25",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ヴァンラーレ八戸",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_hachinohe.png",
+    "details": "J3 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第7節",
+    "date": "2021-05-02",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＦＣ岐阜",
+    "venue": "岐阜メモリアルセンター長良川競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gifu.png",
+    "details": "J3 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第8節",
+    "date": "2021-05-16",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＡＣ長野パルセイロ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "",
+    "details": "J3 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第14節",
+    "date": "2021-05-16",
+    "day": "Sun",
+    "time": "15:03",
+    "opponent": "ＦＣ町田ゼルビア",
+    "venue": "町田GIONスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "EC A ● 1-2",
+    "home_away": "A",
+    "score": "1-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "1回戦",
+    "date": "2021-05-22",
+    "day": "Sat",
+    "time": "",
+    "opponent": "日本文理大学（大分県代表）",
+    "venue": "えがお健康スタジアム",
+    "emblem": "",
+    "details": "EC H ○ 3-0",
+    "home_away": "H",
+    "score": "3-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第9節",
+    "date": "2021-05-29",
+    "day": "Sat",
+    "time": "",
+    "opponent": "藤枝ＭＹＦＣ",
+    "venue": "藤枝総合運動公園サッカー場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fujieda.png",
+    "details": "J3 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第10節",
+    "date": "2021-06-06",
+    "day": "Sun",
+    "time": "",
+    "opponent": "アスルクラロ沼津",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_numazu.png",
+    "details": "J3 H ● 0-1",
+    "home_away": "H",
+    "score": "0-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "2回戦",
+    "date": "2021-06-09",
+    "day": "Wed",
+    "time": "",
     "opponent": "サガン鳥栖",
     "venue": "駅前不動産スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
-    "details": "W 2-1",
+    "details": "EC A ● 0-1",
     "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "2回戦",
+    "date": "2021-06-09",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "ツエーゲン金沢",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
+    "details": "EC ○ 4-1",
+    "score": "4-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第11節",
+    "date": "2021-06-13",
+    "day": "Sun",
+    "time": "",
+    "opponent": "カターレ富山",
+    "venue": "富山県総合運動公園陸上競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_toyama.png",
+    "details": "J3 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第12節",
+    "date": "2021-06-20",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ガイナーレ鳥取",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tottori.png",
+    "details": "J3 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第13節",
+    "date": "2021-06-26",
+    "day": "Sat",
+    "time": "",
+    "opponent": "カマタマーレ讃岐",
+    "venue": "Pikaraスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sanuki.png",
+    "details": "J3 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第15節",
+    "date": "2021-07-11",
+    "day": "Sun",
+    "time": "",
+    "opponent": "いわてグルージャ盛岡",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwate.png",
+    "details": "J3 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第22節",
+    "date": "2021-07-11",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "栃木ＳＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
+    "details": "EC H ○ 3-0",
+    "home_away": "H",
+    "score": "3-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "3回戦",
+    "date": "2021-08-04",
+    "day": "Wed",
+    "time": "18:00",
+    "opponent": "セレッソ大阪",
+    "venue": "ヨドコウ桜スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
+    "details": "EC ● 2-3",
+    "score": "2-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第26節",
+    "date": "2021-08-22",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "ＳＣ相模原",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sagamihara.png",
+    "details": "EC H ○ 2-1",
+    "home_away": "H",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第16節",
+    "date": "2021-08-28",
+    "day": "Sat",
+    "time": "",
+    "opponent": "ガイナーレ鳥取",
+    "venue": "Axisバードスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tottori.png",
+    "details": "J3 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第17節",
+    "date": "2021-09-05",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＦＣ今治",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_imabari.png",
+    "details": "J3 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第19節",
+    "date": "2021-09-19",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＡＣ長野パルセイロ",
+    "venue": "長野Uスタジアム",
+    "emblem": "",
+    "details": "J3 A ○ 2-0",
+    "home_away": "A",
+    "score": "2-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第20節",
+    "date": "2021-09-26",
+    "day": "Sun",
+    "time": "",
+    "opponent": "福島ユナイテッドＦＣ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukushima.png",
+    "details": "J3 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第21節",
+    "date": "2021-10-03",
+    "day": "Sun",
+    "time": "",
+    "opponent": "藤枝ＭＹＦＣ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fujieda.png",
+    "details": "J3 H ○ 3-2",
+    "home_away": "H",
+    "score": "3-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第22節",
+    "date": "2021-10-10",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ヴァンラーレ八戸",
+    "venue": "プライフーズスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_hachinohe.png",
+    "details": "J3 A ○ 5-0",
+    "home_away": "A",
+    "score": "5-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第23節",
+    "date": "2021-10-16",
+    "day": "Sat",
+    "time": "",
+    "opponent": "アスルクラロ沼津",
+    "venue": "愛鷹広域公園多目的競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_numazu.png",
+    "details": "J3 A ○ 3-1",
+    "home_away": "A",
+    "score": "3-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第35節",
+    "date": "2021-10-23",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "ブラウブリッツ秋田",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
+    "details": "EC H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第24節",
+    "date": "2021-10-24",
+    "day": "Sun",
+    "time": "",
+    "opponent": "カマタマーレ讃岐",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sanuki.png",
+    "details": "J3 H △ 0-0",
+    "home_away": "H",
+    "score": "0-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第25節",
+    "date": "2021-10-31",
+    "day": "Sun",
+    "time": "",
+    "opponent": "鹿児島ユナイテッドＦＣ",
+    "venue": "白波スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
+    "details": "J3 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第37節",
+    "date": "2021-11-03",
+    "day": "Wed",
+    "time": "14:03",
+    "opponent": "ジュビロ磐田",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
+    "details": "EC H ● 0-1",
+    "home_away": "H",
+    "score": "0-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第26節",
+    "date": "2021-11-07",
+    "day": "Sun",
+    "time": "",
+    "opponent": "いわてグルージャ盛岡",
+    "venue": "北上総合運動公園北上陸上競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwate.png",
+    "details": "J3 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第27節",
+    "date": "2021-11-14",
+    "day": "Sun",
+    "time": "",
+    "opponent": "カターレ富山",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_toyama.png",
+    "details": "J3 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第28節",
+    "date": "2021-11-21",
+    "day": "Sun",
+    "time": "",
+    "opponent": "Ｙ．Ｓ．Ｃ．Ｃ．横浜",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ysyokohama.png",
+    "details": "J3 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第29節",
+    "date": "2021-11-28",
+    "day": "Sun",
+    "time": "",
+    "opponent": "テゲバジャーロ宮崎",
+    "venue": "ユニリーバスタジアム新富",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_miyazaki.png",
+    "details": "J3 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第41節",
+    "date": "2021-11-28",
+    "day": "Sun",
+    "time": "13:06",
+    "opponent": "ＦＣ琉球",
+    "venue": "タピック県総ひやごんスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
+    "details": "EC A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第30節",
+    "date": "2021-12-05",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＦＣ岐阜",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gifu.png",
+    "details": "J3 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第42節",
+    "date": "2021-12-05",
+    "day": "Sun",
+    "time": "13:03",
+    "opponent": "ＦＣ町田ゼルビア",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "EC H ● 0-2",
+    "home_away": "H",
+    "score": "0-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第1節",
+    "date": "2022-02-20",
+    "day": "Sun",
+    "time": "",
+    "opponent": "レノファ山口ＦＣ",
+    "venue": "維新みらいふスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
+    "details": "J2 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第1節",
+    "date": "2022-02-20",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "ベガルタ仙台",
+    "venue": "ユアスタ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sendai.png",
+    "details": "J2 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第2節",
+    "date": "2022-02-26",
+    "day": "Sat",
+    "time": "13:03",
+    "opponent": "大宮アルディージャ",
+    "venue": "ＮＡＣＫ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_omiya.png",
+    "details": "J2 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第2節",
+    "date": "2022-02-27",
+    "day": "Sun",
+    "time": "",
+    "opponent": "モンテディオ山形",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
+    "details": "J2 H ● 0-3",
+    "home_away": "H",
+    "score": "0-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第3節",
+    "date": "2022-03-05",
+    "day": "Sat",
+    "time": "",
+    "opponent": "大宮アルディージャ",
+    "venue": "NACK5スタジアム大宮",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_omiya.png",
+    "details": "J2 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第3節",
+    "date": "2022-03-05",
+    "day": "Sat",
+    "time": "13:33",
+    "opponent": "レノファ山口ＦＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第4節",
+    "date": "2022-03-12",
+    "day": "Sat",
+    "time": "",
+    "opponent": "徳島ヴォルティス",
+    "venue": "鳴門・大塚スポーツパーク ポカリスエットスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
+    "details": "J2 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第4節",
+    "date": "2022-03-13",
+    "day": "Sun",
+    "time": "13:03",
+    "opponent": "ブラウブリッツ秋田",
+    "venue": "ソユースタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
+    "details": "J2 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第5節",
+    "date": "2022-03-19",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "ヴァンフォーレ甲府",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
+    "details": "J2 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第5節",
+    "date": "2022-03-21",
+    "day": "Mon",
+    "time": "",
+    "opponent": "Ｖ・ファーレン長崎",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "J2 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第6節",
+    "date": "2022-03-26",
+    "day": "Sat",
+    "time": "",
+    "opponent": "水戸ホーリーホック",
+    "venue": "ケーズデンキスタジアム水戸",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_mito.png",
+    "details": "J2 A ● 0-2",
+    "home_away": "A",
+    "score": "0-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第6節",
+    "date": "2022-03-26",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "ザスパクサツ群馬",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
+    "details": "J2 H ○ 3-2",
+    "home_away": "H",
+    "score": "3-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第7節",
+    "date": "2022-03-30",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ツエーゲン金沢",
+    "venue": "石川県西部緑地公園 陸上競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
+    "details": "J2 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第7節",
+    "date": "2022-03-30",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "ジェフユナイテッド千葉",
+    "venue": "フクダ電子アリーナ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_chiba.png",
+    "details": "J2 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第8節",
+    "date": "2022-04-03",
+    "day": "Sun",
+    "time": "",
+    "opponent": "アルビレックス新潟",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+    "details": "J2 H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第8節",
+    "date": "2022-04-03",
+    "day": "Sun",
+    "time": "13:03",
+    "opponent": "ロアッソ熊本",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
+    "details": "J2 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第9節",
+    "date": "2022-04-09",
+    "day": "Sat",
+    "time": "",
+    "opponent": "東京ヴェルディ",
+    "venue": "味の素スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": "J2 A ○ 3-2",
+    "home_away": "A",
+    "score": "3-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第9節",
+    "date": "2022-04-10",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "栃木ＳＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
+    "details": "J2 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第10節",
+    "date": "2022-04-17",
+    "day": "Sun",
+    "time": "",
+    "opponent": "栃木ＳＣ",
+    "venue": "栃木県グリーンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
+    "details": "J2 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第10節",
+    "date": "2022-04-17",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "ファジアーノ岡山",
+    "venue": "シティライトスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_okayama.png",
+    "details": "J2 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第11節",
+    "date": "2022-04-22",
+    "day": "Fri",
+    "time": "",
+    "opponent": "ファジアーノ岡山",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_okayama.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第11節",
+    "date": "2022-04-23",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "Ｖ・ファーレン長崎",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "J2 H ○ 2-1",
+    "home_away": "H",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第12節",
+    "date": "2022-04-27",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ベガルタ仙台",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sendai.png",
+    "details": "J2 H ● 0-2",
+    "home_away": "H",
+    "score": "0-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第12節",
+    "date": "2022-04-27",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "いわてグルージャ盛岡",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwate.png",
+    "details": "J2 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第13節",
+    "date": "2022-04-30",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "ＦＣ琉球",
+    "venue": "タピック県総ひやごんスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
+    "details": "J2 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第13節",
+    "date": "2022-05-01",
+    "day": "Sun",
+    "time": "",
+    "opponent": "いわてグルージャ盛岡",
+    "venue": "いわぎんスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwate.png",
+    "details": "J2 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第14節",
+    "date": "2022-05-04",
+    "day": "Wed",
+    "time": "",
+    "opponent": "横浜FC",
+    "venue": "ニッパツ三ツ沢球技場",
+    "emblem": "",
+    "details": "J2 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第14節",
+    "date": "2022-05-04",
+    "day": "Wed",
+    "time": "14:03",
+    "opponent": "ツエーゲン金沢",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
+    "details": "J2 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第15節",
+    "date": "2022-05-08",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＦＣ琉球",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
+    "details": "J2 H ● 0-2",
+    "home_away": "H",
+    "score": "0-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第15節",
+    "date": "2022-05-08",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "東京ヴェルディ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": "J2 H ○ 4-3",
+    "home_away": "H",
+    "score": "4-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第16節",
+    "date": "2022-05-14",
+    "day": "Sat",
+    "time": "",
+    "opponent": "大分トリニータ",
+    "venue": "昭和電工ドーム大分",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
+    "details": "J2 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第16節",
+    "date": "2022-05-15",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "ＦＣ町田ゼルビア",
+    "venue": "町田GIONスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "J2 A ● 1-2",
+    "home_away": "A",
+    "score": "1-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第17節",
+    "date": "2022-05-21",
+    "day": "Sat",
+    "time": "",
+    "opponent": "ジェフユナイテッド千葉",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_chiba.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第17節",
+    "date": "2022-05-21",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "横浜ＦＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafc.png",
+    "details": "J2 H ○ 3-0",
+    "home_away": "H",
+    "score": "3-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第18節",
+    "date": "2022-05-25",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ザスパクサツ群馬",
+    "venue": "正田醤油スタジアム群馬",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
+    "details": "J2 A ○ 3-2",
+    "home_away": "A",
+    "score": "3-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第18節",
+    "date": "2022-05-25",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "水戸ホーリーホック",
+    "venue": "ケーズデンキスタジアム水戸",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_mito.png",
+    "details": "J2 A ○ 3-0",
+    "home_away": "A",
+    "score": "3-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第19節",
+    "date": "2022-05-28",
+    "day": "Sat",
+    "time": "",
+    "opponent": "ヴァンフォーレ甲府",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "2回戦",
+    "date": "2022-06-01",
+    "day": "Wed",
+    "time": "",
+    "opponent": "アルビレックス新潟",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+    "details": "EC A ○ 4-1",
+    "home_away": "A",
+    "score": "4-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "2回戦",
+    "date": "2022-06-01",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "ロアッソ熊本",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
+    "details": "EC ● 1-4",
+    "score": "1-4"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第20節",
+    "date": "2022-06-05",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ブラウブリッツ秋田",
+    "venue": "ソユースタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
+    "details": "J2 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第21節",
+    "date": "2022-06-12",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ＦＣ町田ゼルビア",
+    "venue": "町田GIONスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "J2 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第22節",
+    "date": "2022-06-18",
+    "day": "Sat",
+    "time": "",
+    "opponent": "水戸ホーリーホック",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_mito.png",
+    "details": "J2 H △ 0-0",
+    "home_away": "H",
+    "score": "0-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "3回戦",
+    "date": "2022-06-22",
+    "day": "Wed",
+    "time": "",
+    "opponent": "サガン鳥栖",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
+    "details": "EC H ● 2-3",
+    "home_away": "H",
+    "score": "2-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第23節",
+    "date": "2022-06-25",
+    "day": "Sat",
+    "time": "",
+    "opponent": "大分トリニータ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
+    "details": "J2 H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第24節",
+    "date": "2022-07-02",
+    "day": "Sat",
+    "time": "",
+    "opponent": "ファジアーノ岡山",
+    "venue": "シティライトスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_okayama.png",
+    "details": "J2 A ○ 2-0",
+    "home_away": "A",
+    "score": "2-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "1回戦",
+    "date": "2022-10-30",
+    "day": "Sun",
+    "time": "",
+    "opponent": "大分トリニータ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
+    "details": "PO H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "2回戦",
+    "date": "2022-11-06",
+    "day": "Sun",
+    "time": "",
+    "opponent": "モンテディオ山形",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
+    "details": "PO H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "決定戦",
+    "date": "2022-11-13",
+    "day": "Sun",
+    "time": "",
+    "opponent": "京都サンガF.C.",
+    "venue": "サンガスタジアム by ＫＹＯＣＥＲＡ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": "PO A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第1節",
+    "date": "2023-02-18",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "セレッソ大阪",
+    "venue": "ヨドコウ桜スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
+    "details": "J1 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第1節",
+    "date": "2023-02-19",
+    "day": "Sun",
+    "time": "",
+    "opponent": "栃木ＳＣ",
+    "venue": "カンセキスタジアムとちぎ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
+    "details": "J2 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第2節",
+    "date": "2023-02-26",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ブラウブリッツ秋田",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
+    "details": "J2 H ● 0-1",
+    "home_away": "H",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第2節",
+    "date": "2023-02-26",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "サンフレッチェ広島",
+    "venue": "エディオンスタジアム広島",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_hiroshima.png",
+    "details": "J1 A ○ 2-1",
+    "home_away": "A",
+    "score": "2-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第3節",
+    "date": "2023-03-04",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "北海道コンサドーレ札幌",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sapporo.png",
+    "details": "J1 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第3節",
+    "date": "2023-03-05",
+    "day": "Sun",
+    "time": "",
+    "opponent": "大宮アルディージャ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_omiya.png",
+    "details": "J2 H ○ 3-0",
+    "home_away": "H",
+    "score": "3-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第1節",
+    "date": "2023-03-08",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "アビスパ福岡",
+    "venue": "ベスト電器スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": "LC A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第4節",
+    "date": "2023-03-11",
+    "day": "Sat",
+    "time": "",
+    "opponent": "レノファ山口ＦＣ",
+    "venue": "維新みらいふスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
+    "details": "J2 A ○ 3-1",
+    "home_away": "A",
+    "score": "3-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第4節",
+    "date": "2023-03-11",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "川崎フロンターレ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
+    "details": "J1 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第5節",
+    "date": "2023-03-18",
+    "day": "Sat",
+    "time": "15:03",
+    "opponent": "浦和レッズ",
+    "venue": "浦和駒場スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
+    "details": "J1 A ● 1-2",
+    "home_away": "A",
+    "score": "1-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第5節",
+    "date": "2023-03-19",
+    "day": "Sun",
+    "time": "",
+    "opponent": "Ｖ・ファーレン長崎",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "J2 H ● 0-2",
+    "home_away": "H",
+    "score": "0-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第6節",
+    "date": "2023-03-25",
+    "day": "Sat",
+    "time": "",
+    "opponent": "東京ヴェルディ",
+    "venue": "味の素スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": "J2 A ● 0-3",
+    "home_away": "A",
+    "score": "0-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第2節",
+    "date": "2023-03-26",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "鹿島アントラーズ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashima.png",
+    "details": "LC H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第6節",
+    "date": "2023-04-01",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "名古屋グランパス",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagoya.png",
+    "details": "J1 H ● 1-3",
+    "home_away": "H",
+    "score": "1-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第7節",
+    "date": "2023-04-02",
+    "day": "Sun",
+    "time": "",
+    "opponent": "徳島ヴォルティス",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
+    "details": "J2 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第3節",
+    "date": "2023-04-05",
+    "day": "Wed",
+    "time": "19:04",
+    "opponent": "柏レイソル",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
+    "details": "LC H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第8節",
+    "date": "2023-04-09",
+    "day": "Sun",
+    "time": "",
+    "opponent": "ツエーゲン金沢",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
+    "details": "J2 H ○ 3-1",
+    "home_away": "H",
+    "score": "3-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第7節",
+    "date": "2023-04-09",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "ヴィッセル神戸",
+    "venue": "ノエビアスタジアム神戸",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kobe.png",
+    "details": "J1 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "第9節",
+    "date": "2023-04-12",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ファジアーノ岡山",
+    "venue": "シティライトスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_okayama.png",
+    "details": "J2 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第8節",
+    "date": "2023-04-15",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "アビスパ福岡",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": "J1 H ○ 3-2",
+    "home_away": "H",
+    "score": "3-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第4節",
+    "date": "2023-04-19",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "柏レイソル",
+    "venue": "三協フロンテア柏スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
+    "details": "LC A ● 2-3",
+    "home_away": "A",
+    "score": "2-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第9節",
+    "date": "2023-04-23",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "鹿島アントラーズ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashima.png",
+    "details": "J1 H ● 0-2",
+    "home_away": "H",
+    "score": "0-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第10節",
+    "date": "2023-04-29",
+    "day": "Sat",
+    "time": "15:03",
+    "opponent": "ＦＣ東京",
+    "venue": "味の素スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ftokyo.png",
+    "details": "J1 A ● 1-2",
+    "home_away": "A",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第11節",
+    "date": "2023-05-03",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "横浜ＦＣ",
+    "venue": "ニッパツ三ツ沢球技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafc.png",
+    "details": "J1 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第12節",
+    "date": "2023-05-07",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "柏レイソル",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
+    "details": "J1 H △ 0-0",
+    "home_away": "H",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第13節",
+    "date": "2023-05-14",
+    "day": "Sun",
+    "time": "13:34",
+    "opponent": "横浜Ｆ・マリノス",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafm.png",
+    "details": "J1 H ○ 2-1",
+    "home_away": "H",
+    "score": "2-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第14節",
+    "date": "2023-05-20",
+    "day": "Sat",
+    "time": "17:05",
+    "opponent": "サガン鳥栖",
+    "venue": "駅前不動産スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
+    "details": "J1 A ● 0-2",
+    "home_away": "A",
+    "score": "0-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第5節",
+    "date": "2023-05-24",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "アビスパ福岡",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": "LC H ● 1-2",
+    "home_away": "H",
+    "score": "1-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第15節",
+    "date": "2023-05-28",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "ガンバ大阪",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gosaka.png",
+    "details": "J1 H ● 1-3",
+    "home_away": "H",
+    "score": "1-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第16節",
+    "date": "2023-06-03",
+    "day": "Sat",
+    "time": "15:03",
+    "opponent": "湘南ベルマーレ",
+    "venue": "レモンガススタジアム平塚",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_shonan.png",
+    "details": "J1 A △ 2-2",
+    "home_away": "A",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "2回戦",
+    "date": "2023-06-07",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "レイラック滋賀",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_shiga.png",
+    "details": "EC ○ 1-0",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第17節",
+    "date": "2023-06-11",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "京都サンガF.C.",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": "J1 H ● 1-3",
+    "home_away": "H",
+    "score": "1-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第6節",
+    "date": "2023-06-18",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "鹿島アントラーズ",
+    "venue": "県立カシマサッカースタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashima.png",
+    "details": "LC A ● 0-2",
+    "home_away": "A",
+    "score": "0-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "2回戦",
+    "date": "2023-06-21",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ＦＣ琉球",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
+    "details": "EC H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第18節",
+    "date": "2023-06-24",
+    "day": "Sat",
+    "time": "19:03",
+    "opponent": "柏レイソル",
+    "venue": "三協フロンテア柏スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
+    "details": "J1 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第19節",
+    "date": "2023-07-01",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "サンフレッチェ広島",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_hiroshima.png",
+    "details": "J1 H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第20節",
+    "date": "2023-07-07",
+    "day": "Fri",
+    "time": "19:03",
+    "opponent": "ヴィッセル神戸",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kobe.png",
+    "details": "J1 H ● 0-1",
+    "home_away": "H",
+    "score": "0-1"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "3回戦",
+    "date": "2023-07-12",
+    "day": "Wed",
+    "time": "",
+    "opponent": "サガン鳥栖",
+    "venue": "駅前不動産スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
+    "details": "EC A ○ 4-3",
+    "home_away": "A",
+    "score": "4-3"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第21節",
+    "date": "2023-07-15",
+    "day": "Sat",
+    "time": "13:03",
+    "opponent": "北海道コンサドーレ札幌",
+    "venue": "札幌厚別公園競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sapporo.png",
+    "details": "J1 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "3回戦",
+    "date": "2023-07-19",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "カターレ富山",
+    "venue": "富山",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_toyama.png",
+    "details": "EC ○ 4-3",
+    "score": "4-3"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "4回戦",
+    "date": "2023-08-02",
+    "day": "Wed",
+    "time": "",
+    "opponent": "FC東京",
+    "venue": "えがお健康スタジアム",
+    "emblem": "",
+    "details": "EC H ○ 2-0",
+    "home_away": "H",
+    "score": "2-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ラウンド16",
+    "date": "2023-08-02",
+    "day": "Wed",
+    "time": "18:30",
+    "opponent": "ＦＣ町田ゼルビア",
+    "venue": "町田GIONスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "EC ○ 1-0",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第22節",
+    "date": "2023-08-05",
+    "day": "Sat",
+    "time": "19:04",
+    "opponent": "名古屋グランパス",
+    "venue": "国立",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagoya.png",
+    "details": "J1 A ● 0-1",
+    "home_away": "A",
+    "score": "0-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第23節",
+    "date": "2023-08-12",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "湘南ベルマーレ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_shonan.png",
+    "details": "J1 H △ 2-2",
+    "home_away": "H",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第24節",
+    "date": "2023-08-18",
+    "day": "Fri",
+    "time": "19:03",
+    "opponent": "アビスパ福岡",
+    "venue": "ベスト電器スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": "J1 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第25節",
+    "date": "2023-08-26",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "鹿島アントラーズ",
+    "venue": "県立カシマサッカースタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashima.png",
+    "details": "J1 A ● 0-2",
+    "home_away": "A",
+    "score": "0-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "準々決勝",
+    "date": "2023-08-30",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ヴィッセル神戸",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kobe.png",
+    "details": "EC H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "準々決勝",
+    "date": "2023-08-30",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "川崎フロンターレ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
+    "details": "EC ● 2-2PK3-4",
+    "score": "2-2"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第26節",
+    "date": "2023-09-02",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "浦和レッズ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
+    "details": "J1 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第27節",
+    "date": "2023-09-17",
+    "day": "Sun",
+    "time": "19:03",
+    "opponent": "ガンバ大阪",
+    "venue": "パナソニック スタジアム 吹田",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gosaka.png",
+    "details": "J1 A △ 1-1",
+    "home_away": "A",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第28節",
+    "date": "2023-09-23",
+    "day": "Sat",
+    "time": "14:05",
+    "opponent": "横浜ＦＣ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafc.png",
+    "details": "J1 H ○ 3-1",
+    "home_away": "H",
+    "score": "3-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第29節",
+    "date": "2023-09-29",
+    "day": "Fri",
+    "time": "19:03",
+    "opponent": "川崎フロンターレ",
+    "venue": "等々力",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
+    "details": "J1 A ○ 3-2",
+    "home_away": "A",
+    "score": "3-2"
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "準決勝",
+    "date": "2023-10-08",
+    "day": "Sun",
+    "time": "",
+    "opponent": "柏レイソル",
+    "venue": "三協フロンテア柏スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
+    "details": "EC A ● 0-4",
+    "home_away": "A",
+    "score": "0-4"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第30節",
+    "date": "2023-10-21",
+    "day": "Sat",
+    "time": "13:03",
+    "opponent": "サガン鳥栖",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
+    "details": "J1 H △ 1-1",
+    "home_away": "H",
+    "score": "1-1"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第31節",
+    "date": "2023-10-28",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "京都サンガF.C.",
+    "venue": "サンガスタジアム by ＫＹＯＣＥＲＡ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": "J1 A ○ 1-0",
+    "home_away": "A",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第32節",
+    "date": "2023-11-11",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "ＦＣ東京",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ftokyo.png",
+    "details": "J1 H △ 0-0",
+    "home_away": "H",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第33節",
+    "date": "2023-11-24",
+    "day": "Fri",
+    "time": "19:03",
+    "opponent": "横浜Ｆ・マリノス",
+    "venue": "日産スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafm.png",
+    "details": "J1 A △ 0-0",
+    "home_away": "A",
+    "score": "0-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "第34節",
+    "date": "2023-12-03",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "セレッソ大阪",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
+    "details": "J1 H ○ 1-0",
+    "home_away": "H",
+    "score": "1-0"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW1",
+    "date": "2024-02-24",
+    "opponent": "サガン鳥栖",
+    "home_away": "A",
+    "details": "W 2-1",
     "result": "W",
     "score": "2-1",
     "goals": [
@@ -21,25 +2974,15 @@ window.STATIC_RESULTS = [
         "scorer": "新井直人",
         "minute": "54"
       }
-    ],
-    "opponent_goals": [
-      {
-        "scorer": "福田 晃斗",
-        "minute": "5"
-      }
     ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW1",
     "date": "2024-02-25",
-    "day": "Sun",
-    "time": "13:03",
     "opponent": "清水エスパルス",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_shimizu.png",
-    "details": "L 1-2",
     "home_away": "H",
+    "details": "L 1-2",
     "result": "L",
     "score": "1-2",
     "goals": [
@@ -47,41 +2990,26 @@ window.STATIC_RESULTS = [
         "scorer": "豊田歩",
         "minute": "39"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW2",
     "date": "2024-03-02",
-    "day": "Sat",
-    "time": "15:03",
     "opponent": "ガンバ大阪",
-    "venue": "パナソニックスタジアム吹田",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_gosaka.png",
-    "details": "L 0-1",
     "home_away": "A",
+    "details": "L 0-1",
     "result": "L",
     "score": "0-1",
-    "goals": [],
-    "opponent_goals": [
-      {
-        "scorer": "宇佐美 貴史",
-        "minute": "75"
-      }
-    ]
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW2",
     "date": "2024-03-03",
-    "day": "Sun",
-    "time": "13:03",
     "opponent": "ザスパ群馬",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
-    "details": "D 1-1",
     "home_away": "H",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -89,20 +3017,15 @@ window.STATIC_RESULTS = [
         "scorer": "石川大地",
         "minute": "36"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW3",
     "date": "2024-03-09",
-    "day": "Sat",
-    "time": "14:05",
     "opponent": "名古屋グランパス",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagoya.png",
-    "details": "W 1-0",
     "home_away": "H",
+    "details": "W 1-0",
     "result": "W",
     "score": "1-0",
     "goals": [
@@ -110,20 +3033,15 @@ window.STATIC_RESULTS = [
         "scorer": "長谷川元希",
         "minute": "88"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW3",
     "date": "2024-03-10",
-    "day": "Sun",
-    "time": "15:03",
     "opponent": "愛媛FC",
-    "venue": "ニンジニアスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
-    "details": "W 3-2",
     "home_away": "A",
+    "details": "W 3-2",
     "result": "W",
     "score": "3-2",
     "goals": [
@@ -139,29 +3057,15 @@ window.STATIC_RESULTS = [
         "scorer": "大西遼太郎",
         "minute": "90+1"
       }
-    ],
-    "opponent_goals": [
-      {
-        "scorer": "谷本駿介",
-        "minute": "38"
-      },
-      {
-        "scorer": "菊地俊介",
-        "minute": "87"
-      }
     ]
   },
   {
     "club": "niigata",
     "matchweek": "MW4",
     "date": "2024-03-16",
-    "day": "Sat",
-    "time": "16:03",
     "opponent": "東京ヴェルディ",
-    "venue": "味の素スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
-    "details": "D 2-2",
     "home_away": "A",
+    "details": "D 2-2",
     "result": "D",
     "score": "2-2",
     "goals": [
@@ -173,36 +3077,26 @@ window.STATIC_RESULTS = [
         "scorer": "長倉幹樹",
         "minute": "69"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW4",
     "date": "2024-03-17",
-    "day": "Sun",
-    "time": "13:03",
     "opponent": "いわきFC",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
-    "details": "L 0-6",
     "home_away": "H",
+    "details": "L 0-6",
     "result": "L",
     "score": "0-6",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW5",
     "date": "2024-03-30",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "柏レイソル",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
-    "details": "D 1-1",
     "home_away": "H",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -210,52 +3104,37 @@ window.STATIC_RESULTS = [
         "scorer": "千葉和彦",
         "minute": "57"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW5",
     "date": "2024-03-20",
-    "day": "Wed",
-    "time": "14:03",
     "opponent": "ベガルタ仙台",
-    "venue": "ユアテックスタジアム仙台",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_sendai.png",
-    "details": "D 0-0",
     "home_away": "A",
+    "details": "D 0-0",
     "result": "D",
     "score": "0-0",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW6",
     "date": "2024-04-03",
-    "day": "Wed",
-    "time": "19:03",
     "opponent": "ジュビロ磐田",
-    "venue": "ヤマハスタジアム(磐田)",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
-    "details": "L 0-2",
     "home_away": "A",
+    "details": "L 0-2",
     "result": "L",
     "score": "0-2",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW6",
     "date": "2024-03-24",
-    "day": "Sun",
-    "time": "14:03",
     "opponent": "藤枝MYFC",
-    "venue": "藤枝総合運動公園サッカー場",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_fujieda.png",
-    "details": "L 1-2",
     "home_away": "A",
+    "details": "L 1-2",
     "result": "L",
     "score": "1-2",
     "goals": [
@@ -263,36 +3142,26 @@ window.STATIC_RESULTS = [
         "scorer": "大西遼太郎",
         "minute": "63"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW7",
     "date": "2024-04-07",
-    "day": "Sun",
-    "time": "14:03",
     "opponent": "セレッソ大阪",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
-    "details": "L 0-1",
     "home_away": "H",
+    "details": "L 0-1",
     "result": "L",
     "score": "0-1",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW7",
     "date": "2024-03-30",
-    "day": "Sat",
-    "time": "15:03",
     "opponent": "ジェフユナイテッド千葉",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_chiba.png",
-    "details": "W 1-0",
     "home_away": "H",
+    "details": "W 1-0",
     "result": "W",
     "score": "1-0",
     "goals": [
@@ -300,20 +3169,15 @@ window.STATIC_RESULTS = [
         "scorer": "神代慶人",
         "minute": "86"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW8",
     "date": "2024-04-13",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "北海道コンサドーレ札幌",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_sapporo.png",
-    "details": "D 1-1",
     "home_away": "H",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -321,20 +3185,15 @@ window.STATIC_RESULTS = [
         "scorer": "秋山裕紀",
         "minute": "80"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW8",
     "date": "2024-04-03",
-    "day": "Wed",
-    "time": "19:03",
     "opponent": "レノファ山口FC",
-    "venue": "維新みらいふスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
-    "details": "W 2-1",
     "home_away": "A",
+    "details": "W 2-1",
     "result": "W",
     "score": "2-1",
     "goals": [
@@ -346,20 +3205,15 @@ window.STATIC_RESULTS = [
         "scorer": "神代慶人",
         "minute": "89"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW9",
     "date": "2024-04-20",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "京都サンガF.C.",
-    "venue": "サンガスタジアム by KYOCERA",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
-    "details": "W 1-0",
     "home_away": "A",
+    "details": "W 1-0",
     "result": "W",
     "score": "1-0",
     "goals": [
@@ -367,20 +3221,15 @@ window.STATIC_RESULTS = [
         "scorer": "谷口海斗",
         "minute": "59"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW9",
     "date": "2024-04-07",
-    "day": "Sun",
-    "time": "13:03",
     "opponent": "V・ファーレン長崎",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
-    "details": "L 3-4",
     "home_away": "H",
+    "details": "L 3-4",
     "result": "L",
     "score": "3-4",
     "goals": [
@@ -396,20 +3245,15 @@ window.STATIC_RESULTS = [
         "scorer": "神代慶人",
         "minute": "90+2"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW10",
     "date": "2024-04-27",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "FC東京",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_ftokyo.png",
-    "details": "L 1-3",
     "home_away": "H",
+    "details": "L 1-3",
     "result": "L",
     "score": "1-3",
     "goals": [
@@ -417,20 +3261,15 @@ window.STATIC_RESULTS = [
         "scorer": "早川史哉",
         "minute": "90"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW10",
     "date": "2024-04-14",
-    "day": "Sun",
-    "time": "14:03",
     "opponent": "ヴァンフォーレ甲府",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
-    "details": "D 3-3",
     "home_away": "H",
+    "details": "D 3-3",
     "result": "D",
     "score": "3-3",
     "goals": [
@@ -446,20 +3285,15 @@ window.STATIC_RESULTS = [
         "scorer": "道脇豊",
         "minute": "79"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW11",
     "date": "2024-05-03",
-    "day": "Fri",
-    "time": "14:03",
     "opponent": "サンフレッチェ広島",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_hiroshima.png",
-    "details": "D 1-1",
     "home_away": "H",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -467,36 +3301,26 @@ window.STATIC_RESULTS = [
         "scorer": "高木善朗",
         "minute": "90+4"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW11",
     "date": "2024-04-20",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "ファジアーノ岡山",
-    "venue": "シティライトスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_okayama.png",
-    "details": "L 0-2",
     "home_away": "A",
+    "details": "L 0-2",
     "result": "L",
     "score": "0-2",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW12",
     "date": "2024-05-06",
-    "day": "Mon",
-    "time": "13:03",
     "opponent": "ヴィッセル神戸",
-    "venue": "ノエビアスタジアム神戸",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kobe.png",
-    "details": "L 2-3",
     "home_away": "A",
+    "details": "L 2-3",
     "result": "L",
     "score": "2-3",
     "goals": [
@@ -508,20 +3332,15 @@ window.STATIC_RESULTS = [
         "scorer": "遠藤凌",
         "minute": "76"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW12",
     "date": "2024-04-28",
-    "day": "Sun",
-    "time": "13:03",
     "opponent": "大分トリニータ",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
-    "details": "L 1-2",
     "home_away": "H",
+    "details": "L 1-2",
     "result": "L",
     "score": "1-2",
     "goals": [
@@ -529,20 +3348,15 @@ window.STATIC_RESULTS = [
         "scorer": "藤井皓也",
         "minute": "31"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW13",
     "date": "2024-05-11",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "浦和レッズ",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
-    "details": "L 2-4",
     "home_away": "H",
+    "details": "L 2-4",
     "result": "L",
     "score": "2-4",
     "goals": [
@@ -554,37 +3368,15 @@ window.STATIC_RESULTS = [
         "scorer": "長倉幹樹",
         "minute": "87"
       }
-    ],
-    "opponent_goals": [
-      {
-        "scorer": "チアゴ・サンタナ",
-        "minute": "4"
-      },
-      {
-        "scorer": "サミュエル・グスタフソン",
-        "minute": "65"
-      },
-      {
-        "scorer": "前田 直輝",
-        "minute": "69"
-      },
-      {
-        "scorer": "チアゴ・サンタナ",
-        "minute": "90+12"
-      }
     ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW13",
     "date": "2024-05-03",
-    "day": "Fri",
-    "time": "14:03",
     "opponent": "鹿児島ユナイテッドFC",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
-    "details": "D 2-2",
     "home_away": "H",
+    "details": "D 2-2",
     "result": "D",
     "score": "2-2",
     "goals": [
@@ -596,20 +3388,15 @@ window.STATIC_RESULTS = [
         "scorer": "藤井皓也",
         "minute": "59"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW14",
     "date": "2024-05-15",
-    "day": "Wed",
-    "time": "19:03",
     "opponent": "横浜F・マリノス",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafm.png",
-    "details": "W 3-1",
     "home_away": "H",
+    "details": "W 3-1",
     "result": "W",
     "score": "3-1",
     "goals": [
@@ -625,36 +3412,26 @@ window.STATIC_RESULTS = [
         "scorer": "奥村仁",
         "minute": "82"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW14",
     "date": "2024-05-06",
-    "day": "Mon",
-    "time": "14:03",
     "opponent": "水戸ホーリーホック",
-    "venue": "ケーズデンキスタジアム水戸",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_mito.png",
-    "details": "L 0-2",
     "home_away": "A",
+    "details": "L 0-2",
     "result": "L",
     "score": "0-2",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW15",
     "date": "2024-05-19",
-    "day": "Sun",
-    "time": "16:03",
     "opponent": "湘南ベルマーレ",
-    "venue": "レモンガススタジアム平塚",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_shonan.png",
-    "details": "W 2-1",
     "home_away": "A",
+    "details": "W 2-1",
     "result": "W",
     "score": "2-1",
     "goals": [
@@ -662,36 +3439,26 @@ window.STATIC_RESULTS = [
         "scorer": "長倉幹樹",
         "minute": "30"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW15",
     "date": "2024-05-12",
-    "day": "Sun",
-    "time": "13:03",
     "opponent": "横浜FC",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafc.png",
-    "details": "D 0-0",
     "home_away": "H",
+    "details": "D 0-0",
     "result": "D",
     "score": "0-0",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW16",
     "date": "2024-05-25",
-    "day": "Sat",
-    "time": "16:03",
     "opponent": "アビスパ福岡",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
-    "details": "L 1-2",
     "home_away": "H",
+    "details": "L 1-2",
     "result": "L",
     "score": "1-2",
     "goals": [
@@ -699,29 +3466,15 @@ window.STATIC_RESULTS = [
         "scorer": "早川史哉",
         "minute": "90+3"
       }
-    ],
-    "opponent_goals": [
-      {
-        "scorer": "前 寛之",
-        "minute": "37"
-      },
-      {
-        "scorer": "紺野 和也",
-        "minute": "85"
-      }
     ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW16",
     "date": "2024-05-18",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "徳島ヴォルティス",
-    "venue": "鳴門・大塚スポーツパーク ポカリスエットスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
-    "details": "W 2-1",
     "home_away": "A",
+    "details": "W 2-1",
     "result": "W",
     "score": "2-1",
     "goals": [
@@ -733,20 +3486,15 @@ window.STATIC_RESULTS = [
         "scorer": "大崎舜",
         "minute": "74"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW17",
     "date": "2024-06-01",
-    "day": "Sat",
-    "time": "15:03",
     "opponent": "FC町田ゼルビア",
-    "venue": "町田GIONスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
-    "details": "W 3-1",
     "home_away": "A",
+    "details": "W 3-1",
     "result": "W",
     "score": "3-1",
     "goals": [
@@ -762,36 +3510,26 @@ window.STATIC_RESULTS = [
         "scorer": "チャン・ミンギュ",
         "minute": "52 OG"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW17",
     "date": "2024-05-26",
-    "day": "Sun",
-    "time": "14:03",
     "opponent": "モンテディオ山形",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
-    "details": "L 0-1",
     "home_away": "H",
+    "details": "L 0-1",
     "result": "L",
     "score": "0-1",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW18",
     "date": "2024-06-16",
-    "day": "Sun",
-    "time": "18:03",
     "opponent": "鹿島アントラーズ",
-    "venue": "県立カシマサッカースタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashima.png",
-    "details": "D 1-1",
     "home_away": "A",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -799,20 +3537,15 @@ window.STATIC_RESULTS = [
         "scorer": "小見洋太",
         "minute": "43"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW18",
     "date": "2024-06-02",
-    "day": "Sun",
-    "time": "17:03",
     "opponent": "栃木SC",
-    "venue": "カンセキスタジアムとちぎ",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
-    "details": "W 3-1",
     "home_away": "A",
+    "details": "W 3-1",
     "result": "W",
     "score": "3-1",
     "goals": [
@@ -828,20 +3561,15 @@ window.STATIC_RESULTS = [
         "scorer": "阿部海斗",
         "minute": "77"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW19",
     "date": "2024-06-22",
-    "day": "Sat",
-    "time": "18:03",
     "opponent": "川崎フロンターレ",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
-    "details": "D 2-2",
     "home_away": "H",
+    "details": "D 2-2",
     "result": "D",
     "score": "2-2",
     "goals": [
@@ -853,29 +3581,15 @@ window.STATIC_RESULTS = [
         "scorer": "鈴木孝司",
         "minute": "90+7"
       }
-    ],
-    "opponent_goals": [
-      {
-        "scorer": "マルシーニョ",
-        "minute": "17"
-      },
-      {
-        "scorer": "山田 新",
-        "minute": "90+11"
-      }
     ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW19",
     "date": "2024-06-08",
-    "day": "Sat",
-    "time": "15:03",
     "opponent": "ブラウブリッツ秋田",
-    "venue": "ソユースタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
-    "details": "D 1-1",
     "home_away": "A",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -883,20 +3597,15 @@ window.STATIC_RESULTS = [
         "scorer": "大崎舜",
         "minute": "14"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW20",
     "date": "2024-06-26",
-    "day": "Wed",
-    "time": "19:03",
     "opponent": "サンフレッチェ広島",
-    "venue": "エディオンピースウイング広島",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_hiroshima.png",
-    "details": "D 1-1",
     "home_away": "A",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -904,36 +3613,26 @@ window.STATIC_RESULTS = [
         "scorer": "谷口海斗",
         "minute": "11"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW20",
     "date": "2024-06-16",
-    "day": "Sun",
-    "time": "18:03",
     "opponent": "ファジアーノ岡山",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_okayama.png",
-    "details": "L 0-1",
     "home_away": "H",
+    "details": "L 0-1",
     "result": "L",
     "score": "0-1",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW21",
     "date": "2024-06-29",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "北海道コンサドーレ札幌",
-    "venue": "札幌ドーム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_sapporo.png",
-    "details": "W 1-0",
     "home_away": "A",
+    "details": "W 1-0",
     "result": "W",
     "score": "1-0",
     "goals": [
@@ -941,36 +3640,26 @@ window.STATIC_RESULTS = [
         "scorer": "谷口海斗",
         "minute": "52"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW21",
     "date": "2024-06-22",
-    "day": "Sat",
-    "time": "18:03",
     "opponent": "横浜FC",
-    "venue": "ニッパツ三ツ沢球技場",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafc.png",
-    "details": "L 0-5",
     "home_away": "A",
+    "details": "L 0-5",
     "result": "L",
     "score": "0-5",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW22",
     "date": "2024-07-06",
-    "day": "Sat",
-    "time": "18:33",
     "opponent": "サガン鳥栖",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
-    "details": "L 3-4",
     "home_away": "H",
+    "details": "L 3-4",
     "result": "L",
     "score": "3-4",
     "goals": [
@@ -986,20 +3675,15 @@ window.STATIC_RESULTS = [
         "scorer": "藤原奏哉",
         "minute": "84"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW22",
     "date": "2024-06-29",
-    "day": "Sat",
-    "time": "18:03",
     "opponent": "愛媛FC",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
-    "details": "W 4-0",
     "home_away": "H",
+    "details": "W 4-0",
     "result": "W",
     "score": "4-0",
     "goals": [
@@ -1019,52 +3703,37 @@ window.STATIC_RESULTS = [
         "scorer": "大崎舜",
         "minute": "84"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW23",
     "date": "2024-07-13",
-    "day": "Sat",
-    "time": "19:03",
     "opponent": "FC東京",
-    "venue": "国立競技場",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_ftokyo.png",
-    "details": "L 0-2",
     "home_away": "A",
+    "details": "L 0-2",
     "result": "L",
     "score": "0-2",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW23",
     "date": "2024-07-06",
-    "day": "Sat",
-    "time": "19:03",
     "opponent": "V・ファーレン長崎",
-    "venue": "トランスコスモススタジアム長崎",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
-    "details": "L 0-2",
     "home_away": "A",
+    "details": "L 0-2",
     "result": "L",
     "score": "0-2",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW24",
     "date": "2024-07-20",
-    "day": "Sat",
-    "time": "19:03",
     "opponent": "セレッソ大阪",
-    "venue": "ヨドコウ桜スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
-    "details": "W 2-1",
     "home_away": "A",
+    "details": "W 2-1",
     "result": "W",
     "score": "2-1",
     "goals": [
@@ -1076,20 +3745,15 @@ window.STATIC_RESULTS = [
         "scorer": "小野裕二",
         "minute": "47"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW24",
     "date": "2024-07-14",
-    "day": "Sun",
-    "time": "19:03",
     "opponent": "ジェフユナイテッド千葉",
-    "venue": "フクダ電子アリーナ",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_chiba.png",
-    "details": "W 2-0",
     "home_away": "A",
+    "details": "W 2-0",
     "result": "W",
     "score": "2-0",
     "goals": [
@@ -1101,20 +3765,15 @@ window.STATIC_RESULTS = [
         "scorer": "神代慶人",
         "minute": "74"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW25",
     "date": "2024-08-07",
-    "day": "Wed",
-    "time": "19:03",
     "opponent": "ジュビロ磐田",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
-    "details": "D 2-2",
     "home_away": "H",
+    "details": "D 2-2",
     "result": "D",
     "score": "2-2",
     "goals": [
@@ -1126,45 +3785,26 @@ window.STATIC_RESULTS = [
         "scorer": "秋山裕紀",
         "minute": "27"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW25",
     "date": "2024-08-03",
-    "day": "Sat",
-    "time": "19:03",
     "opponent": "栃木SC",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
-    "details": "L 0-2",
     "home_away": "H",
+    "details": "L 0-2",
     "result": "L",
     "score": "0-2",
-    "goals": [],
-    "opponent_goals": [
-      {
-        "scorer": "大森 渚生",
-        "minute": "12"
-      },
-      {
-        "scorer": "宮崎 鴻",
-        "minute": "62"
-      }
-    ]
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW26",
     "date": "2024-08-12",
-    "day": "Mon",
-    "time": "19:03",
     "opponent": "京都サンガF.C.",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
-    "details": "W 2-0",
     "home_away": "H",
+    "details": "W 2-0",
     "result": "W",
     "score": "2-0",
     "goals": [
@@ -1176,20 +3816,15 @@ window.STATIC_RESULTS = [
         "scorer": "谷口海斗",
         "minute": "70"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW26",
     "date": "2024-08-11",
-    "day": "Sun",
-    "time": "19:03",
     "opponent": "大分トリニータ",
-    "venue": "レゾナックドーム大分",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
-    "details": "L 1-2",
     "home_away": "A",
+    "details": "L 1-2",
     "result": "L",
     "score": "1-2",
     "goals": [
@@ -1197,20 +3832,15 @@ window.STATIC_RESULTS = [
         "scorer": "オウンゴール",
         "minute": "69"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW27",
     "date": "2024-08-17",
-    "day": "Sat",
-    "time": "19:33",
     "opponent": "アビスパ福岡",
-    "venue": "ベスト電器スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
-    "details": "W 1-0",
     "home_away": "A",
+    "details": "W 1-0",
     "result": "W",
     "score": "1-0",
     "goals": [
@@ -1218,52 +3848,37 @@ window.STATIC_RESULTS = [
         "scorer": "谷口海斗",
         "minute": "49"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW27",
     "date": "2024-08-17",
-    "day": "Sat",
-    "time": "19:03",
     "opponent": "水戸ホーリーホック",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_mito.png",
-    "details": "L 0-1",
     "home_away": "H",
+    "details": "L 0-1",
     "result": "L",
     "score": "0-1",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW28",
     "date": "2024-08-25",
-    "day": "Sun",
-    "time": "19:03",
     "opponent": "FC町田ゼルビア",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
-    "details": "D 0-0",
     "home_away": "H",
+    "details": "D 0-0",
     "result": "D",
     "score": "0-0",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW28",
     "date": "2024-08-25",
-    "day": "Sun",
-    "time": "18:03",
     "opponent": "いわきFC",
-    "venue": "ハワイアンズスタジアムいわき",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
-    "details": "W 4-3",
     "home_away": "A",
+    "details": "W 4-3",
     "result": "W",
     "score": "4-3",
     "goals": [
@@ -1283,49 +3898,26 @@ window.STATIC_RESULTS = [
         "scorer": "岩下航",
         "minute": "68"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW29",
     "date": "2024-09-18",
-    "day": "Wed",
-    "time": "19:03",
     "opponent": "名古屋グランパス",
-    "venue": "豊田スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagoya.png",
-    "details": "L 0-3",
     "home_away": "A",
+    "details": "L 0-3",
     "result": "L",
     "score": "0-3",
-    "goals": [],
-    "opponent_goals": [
-      {
-        "scorer": "野上 結貴",
-        "minute": "15"
-      },
-      {
-        "scorer": "永井 謙佑",
-        "minute": "44"
-      },
-      {
-        "scorer": "菊地 泰智",
-        "minute": "78"
-      }
-    ]
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW29",
     "date": "2024-09-01",
-    "day": "Sun",
-    "time": "19:03",
     "opponent": "藤枝MYFC",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_fujieda.png",
-    "details": "L 1-2",
     "home_away": "H",
+    "details": "L 1-2",
     "result": "L",
     "score": "1-2",
     "goals": [
@@ -1333,20 +3925,15 @@ window.STATIC_RESULTS = [
         "scorer": "大崎舜",
         "minute": "80"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW30",
     "date": "2024-09-14",
-    "day": "Sat",
-    "time": "19:05",
     "opponent": "湘南ベルマーレ",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_shonan.png",
-    "details": "W 3-1",
     "home_away": "H",
+    "details": "W 3-1",
     "result": "W",
     "score": "3-1",
     "goals": [
@@ -1362,20 +3949,15 @@ window.STATIC_RESULTS = [
         "scorer": "谷口海斗",
         "minute": "75"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW31",
+    "matchweek": "MW30",
     "date": "2024-09-15",
-    "day": "Sun",
-    "time": "18:04",
     "opponent": "鹿児島ユナイテッドFC",
-    "venue": "白波スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
-    "details": "W 2-0",
     "home_away": "A",
+    "details": "W 2-0",
     "result": "W",
     "score": "2-0",
     "goals": [
@@ -1387,20 +3969,15 @@ window.STATIC_RESULTS = [
         "scorer": "唐山翔自",
         "minute": "57"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW31",
     "date": "2024-09-22",
-    "day": "Sun",
-    "time": "18:03",
     "opponent": "ヴィッセル神戸",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kobe.png",
-    "details": "L 2-3",
     "home_away": "H",
+    "details": "L 2-3",
     "result": "L",
     "score": "2-3",
     "goals": [
@@ -1412,20 +3989,15 @@ window.STATIC_RESULTS = [
         "scorer": "小野裕二",
         "minute": "36"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW32",
+    "matchweek": "MW31",
     "date": "2024-09-21",
-    "day": "Sat",
-    "time": "18:03",
     "opponent": "ブラウブリッツ秋田",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
-    "details": "W 3-1",
     "home_away": "H",
+    "details": "W 3-1",
     "result": "W",
     "score": "3-1",
     "goals": [
@@ -1441,20 +4013,15 @@ window.STATIC_RESULTS = [
         "scorer": "石川大地",
         "minute": "82"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW32",
     "date": "2024-09-27",
-    "day": "Fri",
-    "time": "19:03",
     "opponent": "川崎フロンターレ",
-    "venue": "Uvanceとどろきスタジアム by Fujitsu",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
-    "details": "L 1-5",
     "home_away": "A",
+    "details": "L 1-5",
     "result": "L",
     "score": "1-5",
     "goals": [
@@ -1462,41 +4029,15 @@ window.STATIC_RESULTS = [
         "scorer": "太田修介",
         "minute": "86"
       }
-    ],
-    "opponent_goals": [
-      {
-        "scorer": "エリソン",
-        "minute": "14"
-      },
-      {
-        "scorer": "脇坂 泰斗",
-        "minute": "18"
-      },
-      {
-        "scorer": "エリソン",
-        "minute": "63"
-      },
-      {
-        "scorer": "山田 新",
-        "minute": "65"
-      },
-      {
-        "scorer": "山田 新",
-        "minute": "73"
-      }
     ]
   },
   {
     "club": "kumamoto",
-    "matchweek": "MW30",
+    "matchweek": "MW32",
     "date": "2024-09-25",
-    "day": "Wed",
-    "time": "19:03",
     "opponent": "ヴァンフォーレ甲府",
-    "venue": "JIT リサイクルインク スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
-    "details": "W 4-2",
     "home_away": "A",
+    "details": "W 4-2",
     "result": "W",
     "score": "4-2",
     "goals": [
@@ -1516,36 +4057,26 @@ window.STATIC_RESULTS = [
         "scorer": "オウンゴール",
         "minute": "45+3"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW33",
     "date": "2024-10-05",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "鹿島アントラーズ",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashima.png",
-    "details": "L 0-4",
     "home_away": "H",
+    "details": "L 0-4",
     "result": "L",
     "score": "0-4",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW33",
     "date": "2024-09-29",
-    "day": "Sun",
-    "time": "18:03",
     "opponent": "ザスパ群馬",
-    "venue": "正田醤油スタジアム群馬",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
-    "details": "W 3-2",
     "home_away": "A",
+    "details": "W 3-2",
     "result": "W",
     "score": "3-2",
     "goals": [
@@ -1561,36 +4092,26 @@ window.STATIC_RESULTS = [
         "scorer": "岩下航",
         "minute": "90+2"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW34",
     "date": "2024-10-18",
-    "day": "Fri",
-    "time": "19:33",
     "opponent": "横浜F・マリノス",
-    "venue": "日産スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafm.png",
-    "details": "D 0-0",
     "home_away": "A",
+    "details": "D 0-0",
     "result": "D",
     "score": "0-0",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW34",
     "date": "2024-10-06",
-    "day": "Sun",
-    "time": "14:04",
     "opponent": "徳島ヴォルティス",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
-    "details": "L 1-2",
     "home_away": "H",
+    "details": "L 1-2",
     "result": "L",
     "score": "1-2",
     "goals": [
@@ -1598,36 +4119,26 @@ window.STATIC_RESULTS = [
         "scorer": "石川大地",
         "minute": "25"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW35",
     "date": "2024-10-23",
-    "day": "Wed",
-    "time": "19:03",
     "opponent": "東京ヴェルディ",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
-    "details": "L 0-2",
     "home_away": "H",
+    "details": "L 0-2",
     "result": "L",
     "score": "0-2",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW35",
     "date": "2024-10-20",
-    "day": "Sun",
-    "time": "15:03",
     "opponent": "レノファ山口FC",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
-    "details": "D 1-1",
     "home_away": "H",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -1635,20 +4146,15 @@ window.STATIC_RESULTS = [
         "scorer": "石川大地",
         "minute": "20"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "niigata",
     "matchweek": "MW36",
     "date": "2024-11-09",
-    "day": "Sat",
-    "time": "15:03",
     "opponent": "柏レイソル",
-    "venue": "三協フロンテア柏スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
-    "details": "D 1-1",
     "home_away": "A",
+    "details": "D 1-1",
     "result": "D",
     "score": "1-1",
     "goals": [
@@ -1656,52 +4162,37 @@ window.STATIC_RESULTS = [
         "scorer": "藤原奏哉",
         "minute": "90+4"
       }
-    ],
-    "opponent_goals": []
+    ]
   },
   {
     "club": "kumamoto",
     "matchweek": "MW36",
     "date": "2024-10-27",
-    "day": "Sun",
-    "time": "14:04",
     "opponent": "モンテディオ山形",
-    "venue": "NDソフトスタジアム山形",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
-    "details": "L 0-1",
     "home_away": "A",
+    "details": "L 0-1",
     "result": "L",
     "score": "0-1",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "niigata",
     "matchweek": "MW37",
     "date": "2024-11-30",
-    "day": "Sat",
-    "time": "14:03",
     "opponent": "ガンバ大阪",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_gosaka.png",
-    "details": "L 0-1",
     "home_away": "H",
+    "details": "L 0-1",
     "result": "L",
     "score": "0-1",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW37",
     "date": "2024-11-04",
-    "day": "Mon",
-    "time": "14:03",
     "opponent": "ベガルタ仙台",
-    "venue": "えがお健康スタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_sendai.png",
-    "details": "W 3-1",
     "home_away": "H",
+    "details": "W 3-1",
     "result": "W",
     "score": "3-1",
     "goals": [
@@ -1717,49 +4208,28 @@ window.STATIC_RESULTS = [
         "scorer": "大崎舜",
         "minute": "78"
       }
-    ],
-    "opponent_goals": [
-      {
-        "scorer": "中島 元彦",
-        "minute": "2"
-      }
     ]
   },
   {
     "club": "niigata",
     "matchweek": "MW38",
     "date": "2024-12-08",
-    "day": "Sun",
-    "time": "14:04",
     "opponent": "浦和レッズ",
-    "venue": "埼玉スタジアム2002",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
-    "details": "D 0-0",
     "home_away": "A",
+    "details": "D 0-0",
     "result": "D",
     "score": "0-0",
-    "goals": [],
-    "opponent_goals": []
+    "goals": []
   },
   {
     "club": "kumamoto",
     "matchweek": "MW38",
     "date": "2024-11-10",
-    "day": "Sun",
-    "time": "14:03",
     "opponent": "清水エスパルス",
-    "venue": "IAIスタジアム日本平",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_shimizu.png",
-    "details": "L 0-1",
     "home_away": "A",
+    "details": "L 0-1",
     "result": "L",
     "score": "0-1",
-    "goals": [],
-    "opponent_goals": [
-      {
-        "scorer": "原 輝綺",
-        "minute": "61"
-      }
-    ]
+    "goals": []
   }
 ];
