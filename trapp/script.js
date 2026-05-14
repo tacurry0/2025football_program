@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadClubEmblemMap() {
       const fromSchedule = {};
       scheduleData.forEach(m => {
-        if (/^202[56]-/.test(m.date) && m.opponent && m.emblem && !fromSchedule[m.opponent]) {
+        if (/^202[456]-/.test(m.date) && m.opponent && m.emblem && !fromSchedule[m.opponent]) {
           fromSchedule[m.opponent] = m.emblem;
         }
       });
@@ -375,7 +375,13 @@ document.addEventListener("DOMContentLoaded", () => {
     yearTabContainer.innerHTML = "";
     yearTabs = {};
 
-    ["2025", "2026"].forEach(y => {
+    const years = Array.from(new Set(scheduleData
+      .map(m => parseDate(m.date).getFullYear())
+      .filter(Boolean)))
+      .sort((a, b) => a - b);
+
+    years.forEach(y => {
+      y = String(y);
       const btn = document.createElement("button");
       btn.id = `toggle-year-${y}`;
       btn.className = "year-tab";
@@ -567,6 +573,339 @@ document.addEventListener("DOMContentLoaded", () => {
     pickerBackdrop.classList.remove("active");
   }
 
+  function compactPlayerName(value) {
+    return String(value || "").normalize("NFKC").replace(/[\s　・･.\-_]/g, "").toLowerCase();
+  }
+
+  function formatRecordValue(value, suffix = "") {
+    if (value === undefined || value === null || value === "") return "";
+    if (typeof value === "number") return value.toLocaleString("ja-JP") + suffix;
+    return escapeHtml(value) + suffix;
+  }
+
+  function getMemberName(member) {
+    return typeof member === "string" ? member : (member && member.name) || "";
+  }
+
+  function renderPlayerButton(name, className = "") {
+    if (!name) return "";
+    return `<button type="button" class="u-player-link ${className}" data-player="${escapeHtml(name)}">${escapeHtml(name)}</button>`;
+  }
+
+  function renderOfficialInfo(match) {
+    const primary = [
+      ["RESULT", match.result_mark],
+      ["SCORE", match.score],
+      ["STAGE", match.stage || match.matchweek],
+      ["COMP", match.tournament]
+    ].filter(([, value]) => value !== undefined && value !== null && value !== "");
+
+    const items = [
+      ["天候", match.weather],
+      ["気温", match.temperature !== undefined && match.temperature !== null ? `${match.temperature}℃` : ""],
+      ["湿度", match.humidity !== undefined && match.humidity !== null ? `${match.humidity}%` : ""],
+      ["入場者", match.attendance !== undefined && match.attendance !== null ? `${Number(match.attendance).toLocaleString("ja-JP")}人` : ""],
+      ["主審", match.referee],
+      ["副審", Array.isArray(match.assistant_referees) ? match.assistant_referees.join(" / ") : ""],
+      ["監督", match.manager]
+    ].filter(([, value]) => value !== undefined && value !== null && value !== "");
+
+    if (!items.length && !match.j_official_url) return "";
+
+    return `
+      <section class="u-match-record">
+        <div class="u-section-head">
+          <h4>公式記録</h4>
+          ${match.j_official_url ? `<a class="u-official-link" href="${escapeHtml(match.j_official_url)}" target="_blank" rel="noopener">DATA SITE</a>` : ""}
+        </div>
+        ${primary.length ? `
+          <div class="u-record-primary">
+            ${primary.map(([label, value]) => `
+              <div class="u-record-primary-item">
+                <span>${escapeHtml(label)}</span>
+                <strong>${formatRecordValue(value)}</strong>
+              </div>
+            `).join("")}
+          </div>
+        ` : ""}
+        <div class="u-record-pills">
+          ${items.map(([label, value]) => `
+            <div class="u-record-item">
+              <span>${escapeHtml(label)}</span>
+              <strong>${formatRecordValue(value)}</strong>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  function renderMemberList(title, members, type) {
+    if (!Array.isArray(members) || !members.length) return "";
+    const rows = members.map(member => {
+      const name = getMemberName(member);
+      const position = typeof member === "object" && member ? member.position : "";
+      const number = typeof member === "object" && member ? member.number : "";
+      const hasMeta = Boolean(number || position);
+      return `
+        <li class="u-member-row ${type} ${hasMeta ? "" : "simple"}">
+          ${hasMeta ? `
+            <span class="u-member-meta">
+              ${number ? `<span class="u-member-number">${escapeHtml(number)}</span>` : `<span class="u-member-number muted">-</span>`}
+              ${position ? `<span class="u-member-position">${escapeHtml(position)}</span>` : ""}
+            </span>
+          ` : ""}
+          <span class="u-member-name">${renderPlayerButton(name)}</span>
+        </li>
+      `;
+    }).join("");
+    return `
+      <div class="u-member-block ${type}">
+        <h5>${escapeHtml(title)}</h5>
+        <ul>${rows}</ul>
+      </div>
+    `;
+  }
+
+  function renderMatchMembers(match) {
+    const starters = renderMemberList("STARTING XI", match.starting_members, "starter");
+    const bench = renderMemberList("BENCH", match.bench_members, "bench");
+    if (!starters && !bench) return "";
+
+    return `
+      <section class="u-match-members">
+        <div class="u-section-head">
+          <h4>メンバー</h4>
+          <span>${(match.starting_members || []).length + (match.bench_members || []).length} PLAYERS</span>
+        </div>
+        <div class="u-member-columns">
+          ${starters}
+          ${bench}
+        </div>
+      </section>
+    `;
+  }
+
+  function renderMatchEvents(match) {
+    const substitutions = Array.isArray(match.substitutions) ? match.substitutions : [];
+    const warnings = Array.isArray(match.warnings) ? match.warnings : [];
+    if (!substitutions.length && !warnings.length) return "";
+
+    const subHtml = substitutions.length ? `
+      <div class="u-event-block">
+        <h5>交代</h5>
+        <ul>
+          ${substitutions.map(sub => `
+            <li>
+              <span class="u-event-minute">${escapeHtml(sub.minute || "")}'</span>
+              <span class="u-sub-out">${renderPlayerButton(sub.out)}</span>
+              <span class="u-sub-arrow">→</span>
+              <span class="u-sub-in">${renderPlayerButton(sub.in)}</span>
+            </li>
+          `).join("")}
+        </ul>
+      </div>
+    ` : "";
+
+    const warnHtml = warnings.length ? `
+      <div class="u-event-block">
+        <h5>警告</h5>
+        <ul>
+          ${warnings.map(warn => `
+            <li>
+              <span class="u-event-minute">${escapeHtml(warn.minute || "")}'</span>
+              ${renderPlayerButton(warn.player)}
+            </li>
+          `).join("")}
+        </ul>
+      </div>
+    ` : "";
+
+    return `
+      <section class="u-match-events">
+        <h4>試合イベント</h4>
+        ${subHtml}
+        ${warnHtml}
+      </section>
+    `;
+  }
+
+  function getPlayerRoleForMatch(match, playerKey) {
+    const starters = Array.isArray(match.starting_members) ? match.starting_members : [];
+    const bench = Array.isArray(match.bench_members) ? match.bench_members : [];
+    const subs = Array.isArray(match.substitutions) ? match.substitutions : [];
+    const starter = starters.find(member => compactPlayerName(getMemberName(member)) === playerKey);
+    const benchMember = bench.find(member => compactPlayerName(getMemberName(member)) === playerKey);
+    const subIn = subs.find(sub => compactPlayerName(sub.in) === playerKey);
+    const subOut = subs.find(sub => compactPlayerName(sub.out) === playerKey);
+
+    if (starter) {
+      return {
+        appeared: true,
+        squad: true,
+        role: "先発" + (subOut ? ` (${subOut.minute}' OUT)` : ""),
+        number: starter.number || "",
+        position: starter.position || "",
+        name: getMemberName(starter)
+      };
+    }
+
+    if (subIn) {
+      return {
+        appeared: true,
+        squad: true,
+        role: `${subIn.minute}' IN`,
+        number: "",
+        position: "",
+        name: subIn.in || ""
+      };
+    }
+
+    if (benchMember) {
+      return { appeared: false, squad: true, role: "ベンチ", number: "", position: "", name: getMemberName(benchMember) };
+    }
+
+    return { appeared: false, squad: false, role: "", number: "", position: "", name: "" };
+  }
+
+  function getPlayerGoals(playerName) {
+    const playerKey = compactPlayerName(playerName);
+    const goals = [];
+
+    getResultArray(officialResults).forEach(result => {
+      if (result.club && result.club !== "niigata") return;
+      (result.goals || []).forEach(goal => {
+        if (compactPlayerName(goal.scorer) !== playerKey) return;
+        const match = scheduleData.find(m => {
+          return m.club === "niigata" &&
+            m.date === result.date &&
+            (!result.opponent || robustTeamMatch(m.opponent, result.opponent));
+        });
+        goals.push({ result, goal, match });
+      });
+    });
+
+    return goals.sort((a, b) => parseDate(a.result.date) - parseDate(b.result.date));
+  }
+
+  function buildPlayerProfile(playerName) {
+    const playerKey = compactPlayerName(playerName);
+    const squadMatches = [];
+    const appearances = [];
+    const numbers = new Set();
+    const positions = new Set();
+    let displayName = playerName;
+
+    scheduleData
+      .filter(match => match.club === "niigata")
+      .sort((a, b) => parseDate(a.date) - parseDate(b.date))
+      .forEach(match => {
+        const role = getPlayerRoleForMatch(match, playerKey);
+        if (!role.squad) return;
+
+        if (role.name) displayName = role.name;
+        if (role.number) numbers.add(String(role.number));
+        if (role.position) positions.add(role.position);
+
+        const row = { match, role };
+        squadMatches.push(row);
+        if (role.appeared) appearances.push(row);
+      });
+
+    const goals = getPlayerGoals(playerName);
+    return { playerName: displayName, numbers, positions, squadMatches, appearances, goals };
+  }
+
+  function renderPlayerMatchRow(item) {
+    const match = item.match;
+    const result = findOfficialResult(match);
+    const score = match.score || (result && result.score) || "";
+    const scoreText = score ? `<span class="u-player-match-score">${escapeHtml(score)}</span>` : "";
+    return `
+      <li class="u-player-match-row">
+        <div>
+          <strong>${escapeHtml(match.date)}</strong>
+          <span>${escapeHtml(match.stage || match.matchweek || "")} ${getMatchIsHome(match) ? "HOME" : "AWAY"}</span>
+          <span>vs ${escapeHtml(match.opponent)}</span>
+        </div>
+        <div>
+          ${scoreText}
+          <span class="u-player-role">${escapeHtml(item.role.role)}</span>
+        </div>
+      </li>
+    `;
+  }
+
+  function openPlayerSheet(playerName, sourceMatch) {
+    const profile = buildPlayerProfile(playerName);
+    const numbers = Array.from(profile.numbers).join(" / ") || "未記録";
+    const positions = Array.from(profile.positions).join(" / ") || "未記録";
+
+    const appearanceHtml = profile.appearances.length
+      ? profile.appearances.map(renderPlayerMatchRow).join("")
+      : `<li class="u-empty-row">出場試合はJSON内では見つかりませんでした。</li>`;
+
+    const goalHtml = profile.goals.length
+      ? profile.goals.map(item => {
+        const match = item.match;
+        const opponent = match ? match.opponent : item.result.opponent || "";
+        const score = match ? (match.score || item.result.score || "") : item.result.score || "";
+        return `
+          <li class="u-player-match-row">
+            <div>
+              <strong>${escapeHtml(item.result.date)}</strong>
+              <span>vs ${escapeHtml(opponent)}</span>
+            </div>
+            <div>
+              ${score ? `<span class="u-player-match-score">${escapeHtml(score)}</span>` : ""}
+              <span class="u-player-role">${escapeHtml(item.goal.minute || "")}' GOAL</span>
+            </div>
+          </li>
+        `;
+      }).join("")
+      : `<li class="u-empty-row">得点した試合は見つかりませんでした。</li>`;
+
+    sheetContent.innerHTML = `
+      <section class="u-player-profile">
+        <button type="button" class="u-player-back">← 試合詳細へ戻る</button>
+        <div class="u-player-header">
+          <span>ALBIREX NIIGATA</span>
+          <h2>${escapeHtml(profile.playerName)}</h2>
+        </div>
+        <div class="u-player-stats">
+          <div><span>背番号</span><strong>${escapeHtml(numbers)}</strong></div>
+          <div><span>ポジション</span><strong>${escapeHtml(positions)}</strong></div>
+          <div><span>出場</span><strong>${profile.appearances.length}</strong></div>
+          <div><span>得点</span><strong>${profile.goals.length}</strong></div>
+          <div><span>メンバー入り</span><strong>${profile.squadMatches.length}</strong></div>
+        </div>
+        <div class="u-player-section">
+          <h4>出場試合</h4>
+          <ul>${appearanceHtml}</ul>
+        </div>
+        <div class="u-player-section">
+          <h4>得点した試合</h4>
+          <ul>${goalHtml}</ul>
+        </div>
+        <button class="close-sheet-btn">閉じる</button>
+      </section>
+    `;
+
+    const backBtn = sheetContent.querySelector(".u-player-back");
+    if (backBtn && sourceMatch) backBtn.onclick = () => openDetailSheet(sourceMatch);
+    sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
+  }
+
+  function bindPlayerLinks(sourceMatch) {
+    sheetContent.querySelectorAll(".u-player-link").forEach(btn => {
+      btn.onclick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        openPlayerSheet(btn.dataset.player, sourceMatch);
+      };
+    });
+  }
+
   // --- Detail Sheet & Persistence ---
 
   function openDetailSheet(match) {
@@ -584,15 +923,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let goalsHtml = "";
     const offRes = findOfficialResult(match);
-    if (offRes && offRes.goals && offRes.goals.length > 0) {
-      goalsHtml = `<div class="u-goals-area" style="margin-top: 15px; padding: 10px; background: rgba(242, 242, 247, 0.5); border-radius: 12px; font-size: 0.85rem; color: #333;">
-        <h4 style="margin:0 0 8px 0; font-size: 0.8rem; color: #888; border-bottom: 1px solid #ddd; padding-bottom: 4px; font-weight: 800;">GOALS</h4>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px;">`;
-      offRes.goals.forEach(g => {
-         goalsHtml += `<li style="display: flex; gap: 10px; align-items: center;"><span style="font-family: var(--font-kick); font-weight: 900; width: 45px; text-align: right; color: #555;">${g.minute}'</span><span style="font-weight: bold; font-size: 0.95rem;">${g.scorer}</span></li>`;
-      });
-      goalsHtml += `</ul></div>`;
+    if (offRes && ((offRes.goals && offRes.goals.length) || (offRes.opponent_goals && offRes.opponent_goals.length))) {
+      const ownGoals = offRes.goals || [];
+      const opponentGoals = offRes.opponent_goals || [];
+      goalsHtml = `
+        <section class="u-goals-area">
+          <h4>GOALS</h4>
+          ${ownGoals.length ? `
+            <div class="u-goal-team">
+              <span>新潟</span>
+              <ul>
+                ${ownGoals.map(g => `
+                  <li>
+                    <span class="u-goal-minute">${escapeHtml(g.minute || "")}'</span>
+                    ${renderPlayerButton(g.scorer, "goal-scorer")}
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+          ` : ""}
+          ${opponentGoals.length ? `
+            <div class="u-goal-team opponent">
+              <span>${escapeHtml(match.opponent)}</span>
+              <ul>
+                ${opponentGoals.map(g => `
+                  <li>
+                    <span class="u-goal-minute">${escapeHtml(g.minute || "")}'</span>
+                    <strong>${escapeHtml(g.scorer || "")}</strong>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+          ` : ""}
+        </section>
+      `;
     }
+
+    const officialInfoHtml = renderOfficialInfo(match);
+    const membersHtml = renderMatchMembers(match);
+    const eventsHtml = renderMatchEvents(match);
 
     let pkHtml = "";
     if (parseDate(match.date).getFullYear() === 2026) {
@@ -651,6 +1020,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
       ${pkHtml}
       ${goalsHtml}
+      ${officialInfoHtml}
+      ${membersHtml}
+      ${eventsHtml}
       <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
         <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
         <span class="btn-text">観戦予定</span>
@@ -667,6 +1039,8 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <button class="close-sheet-btn">保存して閉じる</button>
     `;
+
+    bindPlayerLinks(match);
 
     // Use the unified weather helper
     const wBox = sheetContent.querySelector("#u-auto-weather-area");

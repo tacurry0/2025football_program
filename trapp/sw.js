@@ -1,10 +1,13 @@
 
-const cacheName = 'football-app-v7';
+const cacheName = 'football-app-v8';
 const assetsToCache = [
   './',
   './index.html',
   './style.css',
   './script.js',
+  './schedule/schedule.js',
+  './schedule/schedule.json',
+  './schedule/niigata_2024_schedule.json',
   './club_emblems.json',
   './data/results.json',
   './icons/img_club_gunma.png',
