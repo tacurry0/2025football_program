@@ -1,10 +1,15 @@
 
-const cacheName = 'football-app-v8';
+const cacheName = 'football-app-v14';
 const assetsToCache = [
   './',
   './index.html',
   './style.css',
   './script.js',
+  './scoreboard.html',
+  './scoreboard-display.html',
+  './scoreboard.css',
+  './scoreboard.js',
+  './vendor/html2canvas.min.js',
   './schedule/schedule.js',
   './schedule/schedule.json',
   './schedule/niigata_2024_schedule.json',

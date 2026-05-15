@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ultraFeed = document.getElementById("ultra-feed");
   const calendarView = document.getElementById("calendar-view");
   const ultraDashboard = document.getElementById("ultra-dashboard");
+  const scoreboardView = document.getElementById("scoreboard-view");
 
   const prevBtn = document.getElementById("prev-month");
   const nextBtn = document.getElementById("next-month");
@@ -74,6 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const sideMenu = document.getElementById("side-menu");
   const sideMenuBackdrop = document.getElementById("side-menu-backdrop");
   const hamBtn = document.getElementById("hamburger-btn");
+  const hamburgerIconHtml = hamBtn ? hamBtn.innerHTML : "";
+  const ellipsisIconHtml = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="5.01" y2="12"></line><line x1="12" y1="12" x2="12.01" y2="12"></line><line x1="19" y1="12" x2="19.01" y2="12"></line></svg>';
   const searchInput = document.getElementById("search-input");
   const searchPopup = document.getElementById("search-popup");
 
@@ -85,7 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let allSections = [];
   let visibleSections = [];
   let selectedYear = null;
-  let currentMode = "dashboard"; // dashboard, feed or calendar
+  let currentMode = "dashboard"; // dashboard, feed, calendar or scoreboard
+
+  const CLUB_ENGLISH_NAMES = {
+    "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "岩手": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "福島": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "いわき": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "鹿島": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "水戸": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "栃木": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "ザスパクサツ群馬": "THESPAKUSATSU GUNMA", "群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "浦和": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "大宮": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "柏": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "東京V": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "町田": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "川崎": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FM": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "湘南": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "松本": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "長野": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "清水": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "藤枝": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "名古屋": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "京都": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "G大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "C大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "神戸": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "奈良": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "山口": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "徳島": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "愛媛": "EHIME FC", "FC今治": "FC IMABARI", "今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "大分": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "鹿児島": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "高知": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC", "滋賀": "REILAC SHIGA FC"
+  };
 
   // --- Date/Theme Helpers ---
   function parseDate(s) {
@@ -149,6 +156,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function escapeHtml(value) {
       return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function getOwnClubEnglish(club) {
+      if (club === "niigata") return "ALBIREX NIIGATA";
+      if (club === "kumamoto") return "ROASSO KUMAMOTO";
+      return String(club || "").normalize("NFKC").toUpperCase();
+    }
+
+    function getClubEnglishName(name) {
+      const normalized = String(name || "").normalize("NFKC").trim();
+      return CLUB_ENGLISH_NAMES[normalized] || CLUB_ENGLISH_NAMES[name] || normalized.toUpperCase();
+    }
+
+    function getMatchCopyClubNames(match) {
+      const own = getOwnClubEnglish(match.club);
+      const opponent = getClubEnglishName(match.opponent);
+      return getMatchIsHome(match) ? [own, opponent] : [opponent, own];
+    }
+
+    function showCopyToast(message) {
+      let toast = document.getElementById("copy-toast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "copy-toast";
+        document.body.appendChild(toast);
+      }
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showCopyToast.timer);
+      showCopyToast.timer = setTimeout(() => toast.classList.remove("show"), 1400);
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.focus();
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+    }
+
+    function bindClubNameLongPress(nameEl, card, match) {
+      if (!nameEl) return;
+      let timer = null;
+      let startX = 0;
+      let startY = 0;
+      const clear = () => {
+        if (timer) clearTimeout(timer);
+        timer = null;
+      };
+      const start = (event) => {
+        startX = event.clientX || 0;
+        startY = event.clientY || 0;
+        clear();
+        timer = setTimeout(async () => {
+          timer = null;
+          card.dataset.suppressClick = "true";
+          const text = getMatchCopyClubNames(match).join("\n");
+          try {
+            await copyText(text);
+            showCopyToast("クラブ名をコピーしました");
+          } catch (error) {
+            console.error(error);
+            showCopyToast("コピーに失敗しました");
+          }
+        }, 620);
+      };
+      const move = (event) => {
+        const dx = Math.abs((event.clientX || 0) - startX);
+        const dy = Math.abs((event.clientY || 0) - startY);
+        if (dx > 12 || dy > 12) clear();
+      };
+      nameEl.addEventListener("pointerdown", start);
+      nameEl.addEventListener("pointermove", move);
+      nameEl.addEventListener("pointerup", clear);
+      nameEl.addEventListener("pointercancel", clear);
+      nameEl.addEventListener("contextmenu", (event) => event.preventDefault());
     }
 
     let clubEmblemMap = {};
@@ -338,6 +429,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
   // --- View Management ---
+  function ensureScoreboardFrame() {
+    const frame = document.querySelector("#scoreboard-view .scoreboard-app-frame");
+    if (frame && !frame.getAttribute("src")) {
+      frame.setAttribute("src", frame.dataset.src);
+    }
+  }
+
   function switchMode(mode) {
     currentMode = mode;
     document.body.setAttribute("data-mode", mode);
@@ -345,12 +443,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (ultraDashboard) ultraDashboard.className = mode === "dashboard" ? "active-view" : "hidden-view";
     if (ultraFeed) ultraFeed.className = mode === "feed" ? "active-view" : "hidden-view";
     if (calendarView) calendarView.className = mode === "calendar" ? "active-view" : "hidden-view";
+    if (scoreboardView) scoreboardView.className = mode === "scoreboard" ? "active-view" : "hidden-view";
 
     if (mode === "calendar") renderCalendar();
     if (mode === "dashboard") renderDashboard();
+    if (mode === "scoreboard") ensureScoreboardFrame();
     if (mode === "feed") {
       requestAnimationFrame(() => scrollToIndex(currentIndex));
     }
+    if (hamBtn) hamBtn.innerHTML = mode === "scoreboard" ? ellipsisIconHtml : hamburgerIconHtml;
     sideMenu.classList.remove("active");
   }
 
@@ -1965,8 +2066,15 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>`;
         }
 
-        card.innerHTML = `${resultHtml}<div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name">${match.opponent}</h3><img class="emblem" src="${escapeHtml(emblemUrl)}"></div>`;
-        card.onclick = () => openDetailSheet(match);
+        card.innerHTML = `${resultHtml}<div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name" title="長押しでHOME/AWAYのクラブ名をコピー">${escapeHtml(match.opponent)}</h3><img class="emblem" src="${escapeHtml(emblemUrl)}"></div>`;
+        bindClubNameLongPress(card.querySelector(".opponent-name"), card, match);
+        card.onclick = () => {
+          if (card.dataset.suppressClick === "true") {
+            delete card.dataset.suppressClick;
+            return;
+          }
+          openDetailSheet(match);
+        };
         section.appendChild(card);
       });
       feedSlider.appendChild(section);
@@ -2125,6 +2233,10 @@ document.addEventListener("DOMContentLoaded", () => {
     openSubPane("standings-overlay");
     loadStandings();
   };
+  const menuScoreboard = document.getElementById("menu-scoreboard");
+  if (menuScoreboard) {
+    menuScoreboard.onclick = () => switchMode("scoreboard");
+  }
   const dashStandingsBtn = document.getElementById("dash-to-standings");
   if (dashStandingsBtn) {
     dashStandingsBtn.onclick = () => {
