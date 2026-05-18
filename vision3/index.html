@@ -1,0 +1,281 @@
+﻿<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>大型ビジョン 管理画面</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260518t" />
+  </head>
+  <body class="admin-page">
+    <header class="admin-header">
+      <div>
+        <p class="admin-kicker">STADIUM VISION CONTROLLER</p>
+        <h1>大型ビジョン 管理画面</h1>
+      </div>
+      <div class="admin-actions">
+        <select class="export-target-select" id="exportTargetSelect" aria-label="画像出力する画面">
+          <option value="display.html?v=20260518t">スタメン</option>
+          <option value="result.html?v=20260518t">結果</option>
+          <option value="attendance.html?v=20260518t">来場者</option>
+          <option value="top.html?v=20260518t">対戦トップ</option>
+          <option value="referees.html?v=20260518t">審判</option>
+        </select>
+        <button class="admin-button export-button" id="exportImageButton" type="button">画像出力</button>
+        <a class="admin-link" href="display.html?v=20260518t" target="_blank" rel="noopener">スタメン画面</a>
+        <a class="admin-link" href="result.html?v=20260518t" target="_blank" rel="noopener">結果画面</a>
+        <a class="admin-link" href="attendance.html?v=20260518t" target="_blank" rel="noopener">来場者画面</a>
+        <a class="admin-link" href="top.html?v=20260518t" target="_blank" rel="noopener">対戦トップ</a>
+        <a class="admin-link" href="referees.html?v=20260518t" target="_blank" rel="noopener">審判画面</a>
+        <a class="admin-link" href="preview.html?v=20260518t" target="_blank" rel="noopener">全画面プレビュー</a>
+        <button class="admin-button" id="resetButton" type="button">初期値に戻す</button>
+      </div>
+    </header>
+
+    <main class="admin-shell">
+      <form class="control-panel" id="controlForm" autocomplete="off">
+        <section class="control-section import-section">
+          <h2>公式記録から反映</h2>
+          <div class="official-url-row">
+            <label>
+              <span>J.LEAGUE Data Site URL</span>
+              <input id="officialUrlInput" type="url" placeholder="https://data.j-league.or.jp/SFMS02/?match_card_id=33403" />
+            </label>
+            <button class="admin-button" id="officialImportButton" type="button">反映</button>
+          </div>
+          <p class="official-import-status" id="officialImportStatus" aria-live="polite"></p>
+        </section>
+
+        <div class="admin-tabs" role="tablist" aria-label="作成画面">
+          <button class="admin-tab active" type="button" data-tab-target="lineup" role="tab" aria-selected="true">スタメン</button>
+          <button class="admin-tab" type="button" data-tab-target="result" role="tab" aria-selected="false">試合結果</button>
+          <button class="admin-tab" type="button" data-tab-target="attendance" role="tab" aria-selected="false">来場者数</button>
+          <button class="admin-tab" type="button" data-tab-target="top" role="tab" aria-selected="false">対戦トップ</button>
+          <button class="admin-tab" type="button" data-tab-target="referees" role="tab" aria-selected="false">審判</button>
+        </div>
+
+        <section class="control-section">
+          <h2>クラブ名</h2>
+          <div class="field-grid">
+            <label>
+              <span>左クラブ選択</span>
+              <select id="homeClubSelect" data-club-select="home">
+                <option value="">クラブを読み込み中</option>
+              </select>
+            </label>
+            <label>
+              <span>右クラブ選択</span>
+              <select id="awayClubSelect" data-club-select="away">
+                <option value="">クラブを読み込み中</option>
+              </select>
+            </label>
+            <label>
+              <span>左クラブ名</span>
+              <input name="home.club" type="text" />
+            </label>
+            <label>
+              <span>右クラブ名</span>
+              <input name="away.club" type="text" />
+            </label>
+          </div>
+        </section>
+
+        <section class="control-section">
+          <h2>クラブカラー</h2>
+          <div class="color-grid">
+            <label>
+              <span>左チーム色</span>
+              <input name="colors.home" type="color" />
+            </label>
+            <label>
+              <span>右チーム色</span>
+              <input name="colors.away" type="color" />
+            </label>
+            <label>
+              <span>左クラブ名文字色</span>
+              <input name="textColors.homeClub" type="color" />
+            </label>
+            <label>
+              <span>右クラブ名文字色</span>
+              <input name="textColors.awayClub" type="color" />
+            </label>
+            <label>
+              <span>左背番号文字色</span>
+              <input name="textColors.homeNumber" type="color" />
+            </label>
+            <label>
+              <span>右背番号文字色</span>
+              <input name="textColors.awayNumber" type="color" />
+            </label>
+          </div>
+        </section>
+
+        <section class="control-section">
+          <h2>試合情報</h2>
+          <div class="score-grid">
+            <label>
+              <span>節</span>
+              <input name="match.round" type="text" />
+            </label>
+            <label>
+              <span>前半 HOME</span>
+              <input name="match.firstHome" type="number" min="0" />
+            </label>
+            <label>
+              <span>前半 AWAY</span>
+              <input name="match.firstAway" type="number" min="0" />
+            </label>
+            <label>
+              <span>後半 HOME</span>
+              <input name="match.secondHome" type="number" min="0" />
+            </label>
+            <label>
+              <span>後半 AWAY</span>
+              <input name="match.secondAway" type="number" min="0" />
+            </label>
+            <label>
+              <span>TOTAL HOME</span>
+              <input name="match.totalHome" type="number" min="0" />
+            </label>
+            <label>
+              <span>TOTAL AWAY</span>
+              <input name="match.totalAway" type="number" min="0" />
+            </label>
+          </div>
+        </section>
+
+        <section class="control-section" data-tab-panel="lineup">
+          <h2>画像部分</h2>
+          <div class="image-control-stack">
+            <div class="logo-controls">
+              <label>
+                <span>上部大会表記画像</span>
+                <input id="leagueImageInput" type="file" accept="image/*" />
+              </label>
+              <button class="admin-button" id="clearLeagueImage" type="button">画像を消す</button>
+            </div>
+            <div class="logo-controls">
+              <label>
+                <span>下部ロゴ画像</span>
+                <input id="logoInput" type="file" accept="image/*" />
+              </label>
+              <button class="admin-button" id="clearLogo" type="button">画像を消す</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="control-section" data-tab-panel="lineup">
+          <h2>左チーム メンバー</h2>
+          <div class="player-editor" id="homeEditor"></div>
+        </section>
+
+        <section class="control-section" data-tab-panel="lineup">
+          <h2>右チーム メンバー</h2>
+          <div class="player-editor" id="awayEditor"></div>
+        </section>
+
+        <section class="control-section" data-tab-panel="result" hidden>
+          <h2>左チーム 得点者</h2>
+          <div class="scorer-editor" id="homeScorerEditor"></div>
+        </section>
+
+        <section class="control-section" data-tab-panel="result" hidden>
+          <h2>右チーム 得点者</h2>
+          <div class="scorer-editor" id="awayScorerEditor"></div>
+        </section>
+
+        <section class="control-section" data-tab-panel="attendance" hidden>
+          <h2>来場者数</h2>
+          <div class="field-grid wide">
+            <label>
+              <span>タイトル</span>
+              <input name="attendance.title" type="text" />
+            </label>
+            <label>
+              <span>人数</span>
+              <input name="attendance.count" type="text" placeholder="16,994" />
+            </label>
+            <label>
+              <span>下部メッセージ</span>
+              <input name="attendance.message" type="text" />
+            </label>
+          </div>
+        </section>
+
+        <section class="control-section" data-tab-panel="top" hidden>
+          <h2>対戦トップ</h2>
+          <div class="field-grid wide">
+            <label>
+              <span>年</span>
+              <input name="top.year" type="text" placeholder="2024" />
+            </label>
+            <label>
+              <span>キックオフ</span>
+              <input name="top.kickoff" type="text" placeholder="14:00K.O." />
+            </label>
+            <label>
+              <span>サンクスデー表記</span>
+              <input name="top.eventName" type="text" placeholder="DAMZサンクスデー" />
+            </label>
+            <label>
+              <span>左クラブ英字</span>
+              <input name="top.homeEnglish" type="text" placeholder="ALBIREX NIIGATA" />
+            </label>
+            <label>
+              <span>右クラブ英字</span>
+              <input name="top.awayEnglish" type="text" placeholder="SANFRECCE HIROSHIMA" />
+            </label>
+          </div>
+        </section>
+
+        <section class="control-section" data-tab-panel="referees" hidden>
+          <h2>審判</h2>
+          <div class="referee-editor">
+            <div class="referee-edit-row referee-edit-head">
+              <span>役割</span>
+              <span>氏名</span>
+            </div>
+            <div class="referee-edit-row">
+              <input name="referees.0.role" type="text" placeholder="主　審" />
+              <input name="referees.0.name" type="text" placeholder="荒木　友輔" />
+            </div>
+            <div class="referee-edit-row">
+              <input name="referees.1.role" type="text" placeholder="副　審" />
+              <input name="referees.1.name" type="text" placeholder="熊谷　幸剛" />
+            </div>
+            <div class="referee-edit-row">
+              <input name="referees.2.role" type="text" placeholder="副　審" />
+              <input name="referees.2.name" type="text" placeholder="岩田　浩義" />
+            </div>
+            <div class="referee-edit-row">
+              <input name="referees.3.role" type="text" placeholder="第4の審判員" />
+              <input name="referees.3.name" type="text" placeholder="赤阪　修" />
+            </div>
+          </div>
+        </section>
+      </form>
+
+      <section class="preview-panel" aria-label="プレビュー">
+        <div class="preview-toolbar">
+          <span>表示プレビュー</span>
+          <div class="preview-switcher" aria-label="プレビュー切替">
+            <button class="preview-button active" type="button" data-preview-src="display.html?v=20260518t" data-preview-width="1920" data-preview-height="1080">スタメン</button>
+            <button class="preview-button" type="button" data-preview-src="result.html?v=20260518t" data-preview-width="1920" data-preview-height="1080">結果</button>
+            <button class="preview-button" type="button" data-preview-src="attendance.html?v=20260518t" data-preview-width="1920" data-preview-height="1080">来場者</button>
+            <button class="preview-button" type="button" data-preview-src="top.html?v=20260518t" data-preview-width="1920" data-preview-height="1080">対戦トップ</button>
+            <button class="preview-button" type="button" data-preview-src="referees.html?v=20260518t" data-preview-width="1920" data-preview-height="1080">審判</button>
+            <button class="preview-button" type="button" data-preview-src="preview.html?v=20260518t" data-preview-width="1920" data-preview-height="1080">全画面</button>
+          </div>
+        </div>
+        <div class="preview-stage">
+          <iframe class="vision-preview" src="display.html?v=20260518t" title="大型ビジョンプレビュー" data-preview-width="1920" data-preview-height="1080"></iframe>
+        </div>
+      </section>
+    </main>
+
+    <script src="vendor/html2canvas.min.js?v=20260518t"></script>
+    <script src="app.js?v=20260518t"></script>
+  </body>
+</html>
+
+
