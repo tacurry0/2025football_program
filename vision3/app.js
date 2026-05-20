@@ -97,7 +97,9 @@
       { role: "主　審", name: "荒木　友輔" },
       { role: "副　審", name: "熊谷　幸剛" },
       { role: "副　審", name: "岩田　浩義" },
-      { role: "第4の審判員", name: "赤阪　修" }
+      { role: "第4の審判員", name: "赤阪　修" },
+      { role: "", name: "" },
+      { role: "", name: "" }
     ]
   };
 
@@ -112,6 +114,7 @@
     "ヤ": "ﾔ", "ユ": "ﾕ", "ヨ": "ﾖ",
     "ラ": "ﾗ", "リ": "ﾘ", "ル": "ﾙ", "レ": "ﾚ", "ロ": "ﾛ",
     "ワ": "ﾜ", "ヲ": "ｦ", "ン": "ﾝ",
+    "ヴ": "ｳﾞ",
     "ガ": "ｶﾞ", "ギ": "ｷﾞ", "グ": "ｸﾞ", "ゲ": "ｹﾞ", "ゴ": "ｺﾞ",
     "ザ": "ｻﾞ", "ジ": "ｼﾞ", "ズ": "ｽﾞ", "ゼ": "ｾﾞ", "ゾ": "ｿﾞ",
     "ダ": "ﾀﾞ", "ヂ": "ﾁﾞ", "ヅ": "ﾂﾞ", "デ": "ﾃﾞ", "ド": "ﾄﾞ",
@@ -144,11 +147,18 @@
   }
 
   const DEFAULT_LEAGUE_IMAGE = makeDefaultLeagueImage();
+  const DEFAULT_LEAGUE_ASSET = "icons/100l.png?v=20260520c";
+  const LEAGUE_LOGO_ASSETS = {
+    hundred: "icons/100l.png?v=20260520c",
+    j1: "icons/j1.png?v=20260520c",
+    j2: "icons/j2.png?v=20260520c"
+  };
+  const LEAGUE_LOGO_OPTIONS = Object.values(LEAGUE_LOGO_ASSETS);
 
   const channel = "BroadcastChannel" in window ? new BroadcastChannel(CHANNEL_NAME) : null;
   const MAX_SCORERS = 8;
-  const MAX_REFEREES = 4;
-  const CLUB_EMBLEMS_URL = "club_emblems.json?v=20260518t";
+  const MAX_REFEREES = 6;
+  const CLUB_EMBLEMS_URL = "club_emblems.json?v=20260520c";
   const CLUB_ENGLISH_LIST = [
     ["AC長野パルセイロ", "AC NAGANO PARCEIRO"],
     ["FC今治", "FC IMABARI"],
@@ -218,7 +228,7 @@
     ["ＦＣ大阪", "FC大阪"],
     ["ザスパクサツ群馬", "ザスパ群馬"],
     ["レイラック滋賀FC", "レイラック滋賀"],
-    ["ヴィッセル神戶", "ヴィッセル神戸"],
+    ["ヴィッセル神?", "ヴィッセル神戸"],
     ["京都サンガFC", "京都サンガF.C."],
     ["京都サンガ", "京都サンガF.C."],
     ["高知ユナイテッド", "高知ユナイテッドSC"],
@@ -228,6 +238,8 @@
   let clubEmblems = {};
   let clubEmblemLookup = {};
   let clubEmblemsReady = Promise.resolve(false);
+  let cachedOfficialRecord = null;
+  let cachedOfficialRecordUrl = "";
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
@@ -270,11 +282,14 @@
   function normalizeRefereeList(input, fallback) {
     const source = Array.isArray(input) ? input : fallback;
     const list = makeBlankReferees();
-    (source || []).slice(0, MAX_REFEREES).forEach((referee, index) => {
-      list[index] = {
-        role: referee && referee.role != null ? String(referee.role) : "",
-        name: referee && referee.name != null ? String(referee.name) : ""
-      };
+    const normalized = [];
+    (source || []).forEach((referee) => {
+      const role = referee && referee.role != null ? String(referee.role) : "";
+      const name = referee && referee.name != null ? String(referee.name) : "";
+      pushReferee(normalized, role, name);
+    });
+    normalized.slice(0, MAX_REFEREES).forEach((referee, index) => {
+      list[index] = referee;
     });
     return list;
   }
@@ -285,6 +300,11 @@
       && scorerFullName(scorers[0]) === "若月　大和"
       && scorers[1].minute === "47"
       && scorerFullName(scorers[1]) === "シマブク　カズヨシ";
+  }
+
+  function isAllowedImageSource(value) {
+    const text = String(value || "");
+    return text.startsWith("data:") || /^icons\/[^"'<>]+\.(png|webp|jpg|jpeg|svg)(\?[^"'<>]*)?$/i.test(text);
   }
 
   function loadState() {
@@ -311,8 +331,8 @@
       state.textColors.awayNumber = input.textColors.awayNumber || state.textColors.awayNumber;
     }
     if (input.images) {
-      state.images.league = (input.images.league && input.images.league.startsWith("data:")) ? input.images.league : "";
-      state.images.bottom = (input.images.bottom && input.images.bottom.startsWith("data:")) ? input.images.bottom : "";
+      state.images.league = isAllowedImageSource(input.images.league) ? input.images.league : "";
+      state.images.bottom = isAllowedImageSource(input.images.bottom) ? input.images.bottom : "";
     }
     state.images.bottom = state.images.bottom || ((input.image && input.image.startsWith("data:")) ? input.image : "");
     state.image = state.images.bottom;
@@ -396,8 +416,48 @@
     return Array.from(value || "").map((char) => kanaMap[char] || char).join("");
   }
 
-  function isKanaLike(value) {
-    return /[ァ-ヶーｦ-ﾟ]/.test(value || "");
+  const wideKanaMap = Object.entries(kanaMap).reduce((acc, [wide, half]) => {
+    acc[half] = wide;
+    return acc;
+  }, {});
+
+  function halfKanaUnitToWide(unit) {
+    const chars = Array.from(unit || "");
+    let result = "";
+    for (let index = 0; index < chars.length; index += 1) {
+      const char = chars[index];
+      const pair = chars[index + 1] && wideKanaMap[char + chars[index + 1]];
+      if (pair) {
+        result += pair;
+        index += 1;
+      } else {
+        result += wideKanaMap[char] || char;
+      }
+    }
+    return result;
+  }
+
+  function toWideKana(value) {
+    return kanaUnits(value).map((unit) => wideKanaMap[unit] || halfKanaUnitToWide(unit)).join("");
+  }
+
+  const fullSmallKana = new Set(["ァ", "ィ", "ゥ", "ェ", "ォ", "ャ", "ュ", "ョ", "ッ"]);
+
+  function visualKanaUnits(value) {
+    return Array.from(toWideKana(value));
+  }
+
+  function compactUnitLength(units) {
+    return (units || []).reduce((sum, unit) => sum + (fullSmallKana.has(unit) ? 0.62 : 1), 0);
+  }
+
+  function shouldUseCompactName(player) {
+    if (!player || !player.half) return false;
+    const familyCount = Array.from(String(player.family || "").replace(/\s+/g, "")).length;
+    const givenCount = Array.from(String(player.given || "").replace(/\s+/g, "")).length;
+    const total = familyCount + givenCount;
+    if (givenCount > 0) return total >= 6;
+    return total >= 7;
   }
 
   function kanaUnits(value) {
@@ -416,15 +476,26 @@
   function textUnits(value, compact) {
     if (!value) return [];
     if (compact) {
-      return Array.from((value || "").normalize("NFKC"));
+      return visualKanaUnits(value);
     }
     return Array.from(value);
   }
 
-  function nameBlockWidth(count, total, longName) {
+  function nameBlockWidth(count, total, longName, compact = false, visualLength = count) {
     if (!count) return 0;
-    if (longName && total >= 7) return Math.min(164, Math.max(72, count * 24));
-    if (longName && total >= 6) return Math.min(156, Math.max(76, count * 27));
+    if (compact) {
+      const base = Math.max(72, count * 32, visualLength * 42 + 12);
+      if (total >= 10) return Math.min(220, base);
+      if (total >= 8) return Math.min(210, base);
+      return Math.min(205, base);
+    }
+    if (longName) {
+      if (count === 1) return 54;
+      if (count === 2) return total >= 8 ? 112 : 126;
+      if (count === 3) return 136;
+      if (count === 4) return 184;
+      return Math.min(228, Math.max(184, count * 42));
+    }
     if (count === 1) return longName ? 43 : 49;
     if (count === 2) return total <= 3 ? (longName ? 136 : 150) : (longName ? 118 : 126);
     if (count === 3) return longName ? 132 : 146;
@@ -434,12 +505,20 @@
   function createNameBlock(kind, text, compact) {
     const units = textUnits(text, compact);
     const block = document.createElement("span");
-    block.className = `${kind} name-chars ${units.length ? `n${Math.min(units.length, 4)}` : "empty"}`;
+    block.className = `${kind} name-chars ${units.length ? `n${Math.min(units.length, 8)}` : "empty"}`;
+    block.style.setProperty("--char-count", String(Math.max(units.length, 1)));
+    if (compact) {
+      const scale = units.length >= 9 ? 0.89 : 0.92;
+      block.style.setProperty("--compact-scale", String(scale));
+    }
     units.forEach((unit) => {
       const span = document.createElement("span");
       span.textContent = unit;
       if (compact && /^[ァ-ヶー]+$/.test(unit)) {
         span.classList.add("condensed");
+      }
+      if (compact && fullSmallKana.has(unit)) {
+        span.classList.add("small-kana");
       }
       block.appendChild(span);
     });
@@ -447,19 +526,26 @@
   }
 
   function createPlayerName(player) {
-    const compact = Boolean(player.half);
+    const compact = shouldUseCompactName(player);
     const familyUnits = textUnits(player.family, compact);
     const givenUnits = textUnits(player.given, compact);
     const totalUnits = familyUnits.length + givenUnits.length;
     const name = document.createElement("div");
     name.className = "player-name";
     if (!player.given) name.classList.add("full-name");
-    const longName = compact || familyUnits.length > 3 || givenUnits.length > 3;
+    const longName = !compact && (familyUnits.length > 3 || givenUnits.length > 3);
     if (longName) name.classList.add("long-name");
-    if (!player.yellow && player.given && (compact || totalUnits >= 7)) name.classList.add("tight-name");
-    name.style.setProperty("--family-width", `${nameBlockWidth(familyUnits.length, totalUnits, longName)}px`);
-    name.style.setProperty("--given-width", `${nameBlockWidth(givenUnits.length, totalUnits, longName)}px`);
-    name.style.setProperty("--name-gap", `${compact || totalUnits >= 8 ? 18 : 26}px`);
+    if (compact) name.classList.add("compact-name");
+    if (player.given && !compact && totalUnits >= 7) name.classList.add("tight-name");
+    name.dataset.compact = compact ? "1" : "0";
+    name.dataset.familyUnits = String(familyUnits.length);
+    name.dataset.givenUnits = String(givenUnits.length);
+    name.dataset.familyVisual = String(compact ? compactUnitLength(familyUnits) : familyUnits.length);
+    name.dataset.givenVisual = String(compact ? compactUnitLength(givenUnits) : givenUnits.length);
+    name.dataset.totalUnits = String(totalUnits);
+    name.style.setProperty("--family-width", `${nameBlockWidth(familyUnits.length, totalUnits, longName, compact, compactUnitLength(familyUnits))}px`);
+    name.style.setProperty("--given-width", `${nameBlockWidth(givenUnits.length, totalUnits, longName, compact, compactUnitLength(givenUnits))}px`);
+    name.style.setProperty("--name-gap", `${compact ? (totalUnits >= 6 ? 14 : 24) : (totalUnits >= 8 ? 20 : 28)}px`);
     name.append(createNameBlock("family-name", player.family, compact));
     name.append(createNameBlock("given-name", player.given, compact));
     if (player.yellow) {
@@ -495,11 +581,204 @@
     document.querySelectorAll("[data-field]").forEach((node) => {
       const value = String(getPath(state, node.dataset.field) ?? "");
       node.textContent = "";
+      if (
+        node.classList.contains("club-name")
+        || node.classList.contains("result-club-bar")
+        || node.classList.contains("top-club-ja")
+        || node.matches(".top-club-name strong")
+      ) {
+        const label = document.createElement("span");
+        label.className = "fit-label-text";
+        label.textContent = value;
+        node.appendChild(label);
+        return;
+      }
       value.split("\n").forEach((line, index) => {
         if (index) node.appendChild(document.createElement("br"));
         node.appendChild(document.createTextNode(line));
       });
     });
+  }
+
+  function fitSingleLineLabel(node, options = {}) {
+    if (!node || !node.textContent.trim() || !node.clientWidth) return;
+    const label = node.querySelector(".fit-label-text") || node;
+    const maxFont = Number(options.maxFont) || parseFloat(getComputedStyle(node).fontSize) || 56;
+    const baseSpacingEm = Number(options.baseSpacingEm) || 0;
+    const minScale = Number(options.minScale) || 0.74;
+    const maxWidth = Math.max(40, node.clientWidth - (Number(options.padding) || 42));
+    const measureWidth = () => {
+      const style = getComputedStyle(node);
+      const canvas = fitSingleLineLabel.canvas || (fitSingleLineLabel.canvas = document.createElement("canvas"));
+      const context = canvas.getContext("2d");
+      context.font = `${style.fontStyle || "normal"} ${style.fontWeight || "900"} ${style.fontSize || `${maxFont}px`} ${style.fontFamily || "sans-serif"}`;
+      const text = node.textContent.trim();
+      const charCount = Array.from(text.replace(/\s+/g, "")).length;
+      const spacingPx = parseFloat(node.style.letterSpacing || style.letterSpacing) || 0;
+      return context.measureText(text).width + Math.max(0, charCount - 1) * spacingPx;
+    };
+    const currentWidth = () => Math.max(label.scrollWidth || 0, measureWidth());
+
+    node.style.fontSize = "";
+    node.style.setProperty("--fit-scale", "1");
+
+    const units = Array.from(node.textContent.trim().replace(/\s+/g, ""));
+    node.style.letterSpacing = "0px";
+    node.style.textIndent = "0px";
+    node.style.fontSize = `${maxFont}px`;
+
+    let spacing = units.length > 1 ? maxFont * baseSpacingEm : 0;
+    if (options.fillShort && units.length > 1 && units.length <= 6) {
+      const naturalWidth = currentWidth();
+      const fillSpacing = (maxWidth - naturalWidth) / (units.length - 1);
+      const maxSpacing = maxFont * (Number(options.maxSpacingEm) || 0.72);
+      spacing = Math.max(spacing, Math.min(maxSpacing, fillSpacing));
+    }
+    node.style.letterSpacing = `${spacing}px`;
+    node.style.textIndent = `${spacing}px`;
+
+    while (spacing > 0 && currentWidth() > maxWidth) {
+      spacing = Math.max(0, spacing - 1);
+      node.style.letterSpacing = `${spacing}px`;
+      node.style.textIndent = `${spacing}px`;
+    }
+    let finalWidth = currentWidth();
+    if (finalWidth > maxWidth && options.shrinkFont) {
+      const minFont = Number(options.minFont) || maxFont * minScale;
+      const nextFont = Math.max(minFont, Math.floor(maxFont * (maxWidth / finalWidth)));
+      node.style.fontSize = `${nextFont}px`;
+      node.style.setProperty("--fit-scale", "1");
+      finalWidth = currentWidth();
+    }
+    if (finalWidth > maxWidth) {
+      node.style.setProperty("--fit-scale", String(Math.max(minScale, maxWidth / finalWidth)));
+    }
+  }
+
+  function fitClubLabels() {
+    document.querySelectorAll(".club-name, .result-club-bar").forEach((node) => {
+      const isAway = node.classList.contains("away-club") || node.classList.contains("result-away-club");
+      fitSingleLineLabel(node, {
+        maxFont: 56,
+        padding: 42,
+        baseSpacingEm: isAway ? 0.28 : 0.045,
+        fillShort: isAway,
+        maxSpacingEm: 0.72,
+        minScale: 0.78
+      });
+    });
+    document.querySelectorAll(".top-club-ja").forEach((node) => {
+      fitSingleLineLabel(node, { maxFont: 44, padding: 8, baseSpacingEm: 0.012, minScale: 0.72 });
+    });
+    document.querySelectorAll(".top-club-name strong").forEach((node) => {
+      fitSingleLineLabel(node, { maxFont: 74, padding: 0, baseSpacingEm: 0.014, minScale: 0.48, shrinkFont: true, minFont: 42 });
+    });
+  }
+
+  function scheduleClubLabelFit() {
+    fitClubLabels();
+    const raf = window.requestAnimationFrame || (typeof requestAnimationFrame === "function" ? requestAnimationFrame : null);
+    if (raf) raf(fitClubLabels);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitClubLabels).catch(() => {});
+    }
+  }
+
+  function readNumber(value, fallback = 0) {
+    const number = parseFloat(value);
+    return Number.isFinite(number) ? number : fallback;
+  }
+
+  function fitNameUnits(block) {
+    if (!block || !block.classList.contains("name-chars")) return;
+    const spans = Array.from(block.querySelectorAll("span"));
+    if (!spans.length || !block.clientWidth) return;
+    const slot = block.clientWidth / Math.max(1, spans.length);
+    const compactBlock = Boolean(block.closest(".compact-name"));
+    spans.forEach((span) => {
+      span.style.transform = "";
+      if (!compactBlock) return;
+      const naturalWidth = Math.max(1, span.scrollWidth || span.getBoundingClientRect().width);
+      const blockScale = readNumber(getComputedStyle(block).getPropertyValue("--compact-scale"), 0.9);
+      const fitScale = Math.min(blockScale, Math.max(0.72, (slot * 0.94) / naturalWidth));
+      span.style.transform = `scaleX(${fitScale})`;
+    });
+  }
+
+  function fitPlayerName(name) {
+    if (!name || !name.classList || !name.classList.contains("player-name") || !name.clientWidth) return;
+    const compact = name.dataset.compact === "1";
+    const familyUnits = readNumber(name.dataset.familyUnits, 0);
+    const givenUnits = readNumber(name.dataset.givenUnits, 0);
+    const totalUnits = readNumber(name.dataset.totalUnits, familyUnits + givenUnits);
+    const familyVisual = readNumber(name.dataset.familyVisual, familyUnits);
+    const givenVisual = readNumber(name.dataset.givenVisual, givenUnits);
+    const hasGiven = givenUnits > 0 && !name.classList.contains("full-name");
+    const longName = name.classList.contains("long-name");
+    const tightName = name.classList.contains("tight-name");
+    const style = getComputedStyle(name);
+    const available = Math.max(
+      72,
+      name.clientWidth - readNumber(style.paddingLeft, 0) - readNumber(style.paddingRight, 0)
+    );
+
+    let familyWidth = nameBlockWidth(familyUnits, totalUnits, longName, compact, familyVisual);
+    let givenWidth = nameBlockWidth(givenUnits, totalUnits, longName, compact, givenVisual);
+    let gap = compact
+      ? (totalUnits >= 6 ? 14 : 24)
+      : (tightName ? (totalUnits >= 8 ? 18 : 24) : (totalUnits >= 8 ? 20 : 28));
+
+    if (compact) {
+      familyWidth = familyUnits ? Math.max(68, Math.min(220, familyVisual * 42 + 12)) : 0;
+      givenWidth = givenUnits ? Math.max(68, Math.min(235, givenVisual * 42 + 12)) : 0;
+    }
+
+    if (!hasGiven) {
+      familyWidth = available;
+      givenWidth = 0;
+      gap = 0;
+    } else {
+      const preferred = familyWidth + givenWidth + gap;
+      if (preferred > available) {
+        const minGap = compact ? 8 : 12;
+        gap = Math.max(minGap, Math.min(gap, available * (compact ? 0.04 : 0.07)));
+        const blocksAvailable = Math.max(90, available - gap);
+        const ratio = Math.min(1, blocksAvailable / Math.max(1, familyWidth + givenWidth));
+        familyWidth = Math.max(compact ? 54 : 44, familyWidth * ratio);
+        givenWidth = Math.max(compact ? 54 : 44, givenWidth * ratio);
+        const overflow = familyWidth + givenWidth + gap - available;
+        if (overflow > 0) {
+          const secondRatio = (available - gap) / Math.max(1, familyWidth + givenWidth);
+          familyWidth *= secondRatio;
+          givenWidth *= secondRatio;
+        }
+      }
+    }
+
+    name.style.setProperty("--family-width", `${Math.floor(familyWidth)}px`);
+    name.style.setProperty("--given-width", `${Math.floor(givenWidth)}px`);
+    name.style.setProperty("--name-gap", `${Math.floor(gap)}px`);
+
+    const compactScale = compact
+      ? (totalUnits >= 11 ? 0.86 : (totalUnits >= 9 ? 0.89 : 0.92))
+      : 1;
+    name.querySelectorAll(".name-chars").forEach((block) => {
+      block.style.setProperty("--compact-scale", String(compactScale));
+      fitNameUnits(block);
+    });
+  }
+
+  function fitPlayerNames() {
+    document.querySelectorAll(".player-name").forEach(fitPlayerName);
+  }
+
+  function schedulePlayerNameFit() {
+    fitPlayerNames();
+    const raf = window.requestAnimationFrame || (typeof requestAnimationFrame === "function" ? requestAnimationFrame : null);
+    if (raf) raf(fitPlayerNames);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitPlayerNames).catch(() => {});
+    }
   }
 
   function colorMix(color, percent) {
@@ -529,20 +808,35 @@
     root.style.setProperty("--away-number-text", state.textColors.awayNumber);
   }
 
+  function normalizeLeagueLogoSrc(value) {
+    const text = String(value || "");
+    if (LEAGUE_LOGO_OPTIONS.includes(text)) return text;
+    if (/icons\/j1\.png/i.test(text)) return LEAGUE_LOGO_ASSETS.j1;
+    if (/icons\/j2\.png/i.test(text)) return LEAGUE_LOGO_ASSETS.j2;
+    if (/icons\/100l\.png/i.test(text)) return LEAGUE_LOGO_ASSETS.hundred;
+    return DEFAULT_LEAGUE_ASSET;
+  }
+
+  function syncLeagueLogoSelect(state) {
+    const select = document.getElementById("leagueLogoSelect");
+    if (!select) return;
+    select.value = normalizeLeagueLogoSrc(state.images && state.images.league);
+  }
+
   function renderImages(state) {
     const leagueImage = document.getElementById("leagueImage");
     if (leagueImage) {
-      leagueImage.src = state.images.league || DEFAULT_LEAGUE_IMAGE;
+      leagueImage.src = normalizeLeagueLogoSrc(state.images.league);
     }
 
     const resultLeagueImage = document.getElementById("resultLeagueImage");
     if (resultLeagueImage) {
-      resultLeagueImage.src = state.images.league || DEFAULT_LEAGUE_IMAGE;
+      resultLeagueImage.src = normalizeLeagueLogoSrc(state.images.league);
     }
 
     const topLeagueImage = document.getElementById("topLeagueImage");
     if (topLeagueImage) {
-      topLeagueImage.src = state.images.league || DEFAULT_LEAGUE_IMAGE;
+      topLeagueImage.src = normalizeLeagueLogoSrc(state.images.league);
     }
 
     const image = document.getElementById("customLogo");
@@ -592,10 +886,15 @@
       const normalized = normalizeScorer(scorer);
       const row = document.createElement("div");
       row.className = "result-scorer";
+      const hasLongMinute = String(normalized.minute || "").includes("+");
 
       const minute = document.createElement("span");
       minute.className = "result-scorer-minute";
-      minute.textContent = scorerMinuteLabel(normalized.minute);
+      if (hasLongMinute) minute.classList.add("long-minute");
+      const minuteText = document.createElement("span");
+      minuteText.className = "result-scorer-minute-text";
+      minuteText.textContent = scorerMinuteLabel(normalized.minute);
+      minute.appendChild(minuteText);
 
       const name = createPlayerName(normalized);
       name.classList.add("result-scorer-name");
@@ -610,14 +909,28 @@
     renderScorers(document.getElementById("resultAwayScorers"), state.result.awayScorers);
   }
 
+  function renderRefereeRows(state) {
+    const list = document.querySelector(".referees-list");
+    if (!list) return;
+    const activeCount = Math.max(1, (state.referees || []).filter((referee) => referee && (referee.role || referee.name)).length);
+    list.dataset.refereeCount = String(Math.min(MAX_REFEREES, activeCount));
+    list.querySelectorAll(".referee-row").forEach((row, index) => {
+      const referee = state.referees[index] || {};
+      row.hidden = !(referee.role || referee.name);
+    });
+  }
+
   function renderDisplay(state) {
     applyColors(state);
     renderFields(state);
+    renderRefereeRows(state);
     renderLineup(document.getElementById("homeLineup"), state.home.players, "home");
     renderLineup(document.getElementById("awayLineup"), state.away.players, "away");
     renderImages(state);
     renderResult(state);
     renderClubEmblems(state);
+    scheduleClubLabelFit();
+    schedulePlayerNameFit();
   }
 
   function createPlayerEditor(container, side, state) {
@@ -716,6 +1029,7 @@
       field.value = getPath(state, field.name) ?? "";
     });
     syncClubSelectors(state);
+    syncLeagueLogoSelect(state);
   }
 
   function readForm(form, state) {
@@ -993,13 +1307,13 @@
     const text = normalizeOfficialText(value).replace(/\s+/g, "");
     if (!text) return "";
     if (text.includes("百年構想リーグ") || text.includes("100年構想") || text.includes("J2・J3")) {
-      return LEAGUE_LOGOS.hundred;
+      return LEAGUE_LOGO_ASSETS.hundred;
     }
     if (/(^|[^A-Z0-9])J1([^A-Z0-9]|$)/i.test(text) || text.includes("明治安田J1")) {
-      return LEAGUE_LOGOS.j1;
+      return LEAGUE_LOGO_ASSETS.j1;
     }
     if (/(^|[^A-Z0-9])J2([^A-Z0-9]|$)/i.test(text) || text.includes("明治安田J2")) {
-      return LEAGUE_LOGOS.j2;
+      return LEAGUE_LOGO_ASSETS.j2;
     }
     return "";
   }
@@ -1031,26 +1345,47 @@
     return { family, given, half: kanaOnly && clean.length > 4 };
   }
 
-  function parseStarterLines(block) {
+  function makeBlankPlayer() {
+    return { pos: "", no: "", family: "", given: "", half: false, yellow: false };
+  }
+
+  function makePlayerFromLine(line) {
+    const match = normalizeOfficialText(line).trim().match(/^(GK|DF|MF|FW)\s+(\d+)\s+(.+?)(?:\s+\d+'\s*)?$/);
+    if (!match) return null;
+    const parsedName = splitPlayerName(match[3]);
+    return {
+      pos: match[1],
+      no: match[2],
+      family: parsedName.family,
+      given: parsedName.given,
+      half: parsedName.half,
+      yellow: false
+    };
+  }
+
+  function parseRegisteredPlayerLines(block) {
     const lines = block.split("\n").map((line) => normalizeOfficialText(line).trim()).filter(Boolean);
     const players = [];
-    let previousPos = "";
     lines.forEach((line) => {
-      const match = line.match(/^(GK|DF|MF|FW)\s+(\d+)\s+(.+?)(?:\s+\d+'\s*)?$/);
-      if (!match) return;
-      const parsedName = splitPlayerName(match[3]);
-      const rawPos = match[1];
-      players.push({
-        pos: rawPos === previousPos ? "" : rawPos,
-        no: match[2],
-        family: parsedName.family,
-        given: parsedName.given,
-        half: parsedName.half,
-        yellow: false
-      });
-      previousPos = rawPos;
+      const player = makePlayerFromLine(line);
+      if (player) players.push(player);
     });
-    return players.slice(0, 11);
+    return players;
+  }
+
+  function withDisplayPositions(players) {
+    let previousPos = "";
+    return (players || []).slice(0, 11).map((player) => {
+      if (!player || (!player.no && !player.family && !player.given)) return makeBlankPlayer();
+      const rawPos = player.pos || "";
+      const displayPos = rawPos && rawPos === previousPos ? "" : rawPos;
+      if (rawPos) previousPos = rawPos;
+      return { ...player, pos: displayPos };
+    });
+  }
+
+  function parseStarterLines(block) {
+    return withDisplayPositions(parseRegisteredPlayerLines(block));
   }
 
   function extractTeamBlock(text, teamName) {
@@ -1093,7 +1428,18 @@
     }));
   }
 
-  function extractTeamStarters(text, teamName) {
+  function extractIndexedSection(text, heading, sideIndex) {
+    const regex = new RegExp(`####\\s*${heading}\\s*`, "g");
+    const matches = Array.from(text.matchAll(regex));
+    const match = matches[sideIndex || 0];
+    if (!match) return "";
+    const startIndex = match.index + match[0].length;
+    const section = text.slice(startIndex);
+    const nextIndex = section.search(/\n(?:###|####)\s/);
+    return nextIndex > 0 ? section.slice(0, nextIndex) : section;
+  }
+
+  function extractTeamStarterPool(text, teamName) {
     const teamBlock = extractTeamBlock(text, teamName);
     if (!teamBlock) return [];
     const starterIndex = teamBlock.indexOf("#### 先発");
@@ -1103,8 +1449,96 @@
       .map((token) => starterBlock.indexOf(token))
       .filter((index) => index > 0);
     const endIndex = endCandidates.length ? Math.min(...endCandidates) : starterBlock.length;
-    const players = parseStarterLines(starterBlock.slice(0, endIndex));
-    return applyYellowCards(players, extractSection(teamBlock, "警告"));
+    return parseRegisteredPlayerLines(starterBlock.slice(0, endIndex)).slice(0, 11);
+  }
+
+  function extractTeamStarters(text, teamName, sideIndex = 0, includeWarnings = true) {
+    const players = withDisplayPositions(extractTeamStarterPool(text, teamName));
+    return includeWarnings ? applyYellowCards(players, extractIndexedSection(text, "警告", sideIndex)) : players;
+  }
+
+  function extractTeamBench(text, sideIndex) {
+    return parseRegisteredPlayerLines(extractIndexedSection(text, "控え", sideIndex));
+  }
+
+  function parseSubstitutionLines(section) {
+    const substitutions = [];
+    const lines = section.split("\n").map((line) => stripMarkdown(line)).filter(Boolean);
+    let pendingOut = "";
+    lines.forEach((line) => {
+      const outMatch = line.match(/^[▽▼]\s*(.+?)(?:\s+\d+(?:\+\d+)?['’分]?)?$/);
+      if (outMatch) {
+        pendingOut = outMatch[1].trim();
+        return;
+      }
+      const inMatch = line.match(/^[▲△]\s*(.+?)(?:\s+\d+(?:\+\d+)?['’分]?)?$/);
+      if (inMatch && pendingOut) {
+        substitutions.push({ outName: pendingOut, inName: inMatch[1].trim() });
+        pendingOut = "";
+      }
+    });
+    return substitutions;
+  }
+
+  function playerFullName(player) {
+    return `${player.family || ""}${player.given ? ` ${player.given}` : ""}`.trim();
+  }
+
+  function findPlayerIndexByName(players, name) {
+    const key = compactOfficialText(name);
+    if (!key) return -1;
+    return players.findIndex((player) => {
+      const fullKey = compactOfficialText(playerFullName(player));
+      const familyKey = compactOfficialText(player.family);
+      const givenKey = compactOfficialText(player.given);
+      return fullKey === key
+        || (fullKey.length >= 2 && (fullKey.includes(key) || key.includes(fullKey)))
+        || (familyKey && givenKey && key.includes(familyKey) && key.includes(givenKey));
+    });
+  }
+
+  function findRegisteredPlayerByName(players, name) {
+    const index = findPlayerIndexByName(players, name);
+    return index >= 0 ? players[index] : null;
+  }
+
+  function playerFromName(name) {
+    const parsed = splitPlayerName(name);
+    return {
+      pos: "",
+      no: "",
+      family: parsed.family,
+      given: parsed.given,
+      half: parsed.half,
+      yellow: false
+    };
+  }
+
+  function extractDismissedNames(text, sideIndex) {
+    return extractIndexedSection(text, "退場", sideIndex)
+      .split("\n")
+      .map((line) => stripMarkdown(line).replace(/\s+\d+(?:\+\d+)?['’分]?.*$/, "").trim())
+      .filter(Boolean);
+  }
+
+  function buildFinalPlayers(text, teamName, sideIndex) {
+    const starters = extractTeamStarterPool(text, teamName);
+    const bench = extractTeamBench(text, sideIndex);
+    const substitutions = parseSubstitutionLines(extractIndexedSection(text, "交代", sideIndex));
+    const finalPlayers = starters.map((player) => ({ ...player }));
+    substitutions.forEach((substitution) => {
+      const outIndex = findPlayerIndexByName(finalPlayers, substitution.outName);
+      if (outIndex === -1) return;
+      const incoming = findRegisteredPlayerByName(bench, substitution.inName) || playerFromName(substitution.inName);
+      finalPlayers[outIndex] = { ...incoming, yellow: false };
+    });
+
+    const warned = applyYellowCards(finalPlayers, extractIndexedSection(text, "警告", sideIndex));
+    extractDismissedNames(text, sideIndex).forEach((name) => {
+      const index = findPlayerIndexByName(warned, name);
+      if (index >= 0) warned[index] = makeBlankPlayer();
+    });
+    return withDisplayPositions(warned);
   }
 
   function stripMarkdown(value) {
@@ -1246,34 +1680,61 @@
   function normalizeRefereeRole(value) {
     const text = normalizeOfficialText(value).replace(/\s+/g, "");
     if (/主審/.test(text)) return "主　審";
-    if (/副審/.test(text)) return "副　審";
+    if (/副審[12１２]?/.test(text)) return "副　審";
     if (/第[4４]/.test(text) || /第四/.test(text)) return "第4の審判員";
+    if (/^VAR$/i.test(text)) return "VAR";
+    if (/^AVAR$/i.test(text)) return "AVAR";
     return "";
   }
 
   function isBareRefereeRole(value) {
     const text = normalizeOfficialText(value).replace(/\s+/g, "");
-    return /^(主審|副審|第[4４]の?審判員?|第四の?審判員?)$/.test(text);
+    return /^(主審|副審[12１２]?|第[4４]の?審判員?|第四の?審判員?|VAR|AVAR)$/i.test(text);
   }
 
   function pushReferee(referees, role, name) {
     const normalizedRole = normalizeRefereeRole(role);
     const cleanName = stripMarkdown(name).replace(/\s+/g, "　").trim();
     if (!normalizedRole || !cleanName || /^[-－ー]+$/.test(cleanName)) return;
+    if (normalizedRole === "副　審" && /[,，、]/.test(cleanName)) {
+      cleanName.split(/[,，、]+/).forEach((part) => pushReferee(referees, normalizedRole, part));
+      return;
+    }
     if (normalizedRole === "副　審") {
       const assistantCount = referees.filter((referee) => referee.role === "副　審").length;
       if (assistantCount >= 2) return;
     } else if (referees.some((referee) => referee.role === normalizedRole)) {
       return;
     }
+    if (referees.length >= MAX_REFEREES) return;
     referees.push({ role: normalizedRole, name: cleanName });
+  }
+
+  function pushInlineReferees(referees, cell) {
+    const clean = stripMarkdown(cell).replace(/\s+/g, " ").trim();
+    if (!clean) return;
+    const varPair = clean.match(/VAR\s*[／\/]\s*AVAR\s*[:：]?\s*(.+?)\s*[／\/]\s*(.+)$/i);
+    if (varPair) {
+      pushReferee(referees, "VAR", varPair[1]);
+      pushReferee(referees, "AVAR", varPair[2]);
+      return;
+    }
+    const roleRegex = /(主審|副審\s*[12１２]?|第\s*[4４]\s*の?\s*審判員?|第四の?審判員?|VAR|AVAR)\s*[:：]?/gi;
+    const matches = Array.from(clean.matchAll(roleRegex));
+    matches.forEach((match, index) => {
+      const next = matches[index + 1];
+      const segment = clean.slice(match.index + match[0].length, next ? next.index : clean.length)
+        .replace(/^[\s　:：|]+/, "")
+        .replace(/[\s　|]+$/, "");
+      pushReferee(referees, match[1], segment);
+    });
   }
 
   function extractReferees(text) {
     const referees = [];
     let pendingRoles = [];
     text.split("\n").forEach((line) => {
-      const hasRole = /(主審|副審|第\s*[4４]|第四)/.test(line);
+      const hasRole = /(主審|副審|第\s*[4４]|第四|VAR|AVAR)/i.test(line);
       if (!hasRole && !pendingRoles.length) return;
       const cells = line.includes("|") ? line.split("|").slice(1, -1).map(stripMarkdown) : [stripMarkdown(line)];
       if (pendingRoles.length && !hasRole) {
@@ -1299,11 +1760,7 @@
           pendingRoles[index] = role;
           return;
         }
-        const inlineRegex = /(主審|副審|第\s*[4４]\s*の?\s*審判員?|第四の?審判員?)\s*[:：]?\s*([^\s　|]+(?:[\s　]+[^\s　|]+)?)/g;
-        let inline;
-        while ((inline = inlineRegex.exec(cell))) {
-          pushReferee(referees, inline[1], inline[2]);
-        }
+        pushInlineReferees(referees, cell);
       });
     });
     return normalizeRefereeList(referees, makeBlankReferees());
@@ -1322,8 +1779,10 @@
     const roundMatch = text.match(/第\s*(\d+)\s*節/);
     const homeClub = scoreMatch[1].trim();
     const awayClub = scoreMatch[8].trim();
-    const homePlayers = extractTeamStarters(text, homeClub);
-    const awayPlayers = extractTeamStarters(text, awayClub);
+    const homePlayers = extractTeamStarters(text, homeClub, 0, false);
+    const awayPlayers = extractTeamStarters(text, awayClub, 1, false);
+    const homeFinalPlayers = buildFinalPlayers(text, homeClub, 0);
+    const awayFinalPlayers = buildFinalPlayers(text, awayClub, 1);
     const goalTableScorers = extractGoalTableScorers(text);
     const homeScorers = extractTeamScorers(text, homeClub);
     const awayScorers = extractTeamScorers(text, awayClub);
@@ -1336,6 +1795,8 @@
       awayClub,
       homePlayers,
       awayPlayers,
+      homeFinalPlayers,
+      awayFinalPlayers,
       homeScorers: hasScorers(homeScorers) ? homeScorers : goalTableScorers.homeScorers,
       awayScorers: hasScorers(awayScorers) ? awayScorers : goalTableScorers.awayScorers,
       attendanceCount: extractAttendanceCount(text),
@@ -1354,20 +1815,29 @@
     };
   }
 
-  function applyOfficialRecord(state, record) {
+  function applyOfficialRecord(state, record, mode = "fulltime") {
+    const kickoffMode = mode === "kickoff";
     const next = normalizeState(state);
     next.home.club = record.homeClub;
     next.away.club = record.awayClub;
     next.top.homeEnglish = getClubEnglishName(record.homeClub) || next.top.homeEnglish;
     next.top.awayEnglish = getClubEnglishName(record.awayClub) || next.top.awayEnglish;
-    next.home.players = record.homePlayers;
-    next.away.players = record.awayPlayers;
-    next.result.homeScorers = normalizeScorerList(record.homeScorers, makeBlankScorers());
-    next.result.awayScorers = normalizeScorerList(record.awayScorers, makeBlankScorers());
+    next.home.players = kickoffMode ? record.homePlayers : record.homeFinalPlayers;
+    next.away.players = kickoffMode ? record.awayPlayers : record.awayFinalPlayers;
+    next.result.homeScorers = kickoffMode ? makeBlankScorers() : normalizeScorerList(record.homeScorers, makeBlankScorers());
+    next.result.awayScorers = kickoffMode ? makeBlankScorers() : normalizeScorerList(record.awayScorers, makeBlankScorers());
     if (hasReferees(record.referees)) {
       next.referees = normalizeRefereeList(record.referees, next.referees);
     }
     Object.assign(next.match, record.match);
+    if (kickoffMode) {
+      next.match.firstHome = "";
+      next.match.firstAway = "";
+      next.match.secondHome = "";
+      next.match.secondAway = "";
+      next.match.totalHome = "";
+      next.match.totalAway = "";
+    }
     if (record.attendanceCount) next.attendance.count = record.attendanceCount;
     const homeColor = getOfficialClubColor(record.homeClub);
     const awayColor = getOfficialClubColor(record.awayClub);
@@ -1833,19 +2303,19 @@
   function drawSpreadText(ctx, text, x, y, width, color, maxSize, compact) {
     const value = String(text || "");
     if (!value) return;
-    const units = Array.from(value);
+    const units = compact ? visualKanaUnits(value) : Array.from(value);
     
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     
-    const KANA_Y_BOOST = 1.14;
-    const KANA_X_SCALE = 0.7;
+    const KANA_Y_BOOST = 1;
+    const COMPACT_X_SCALE = units.length >= 9 ? 0.89 : 0.92;
     
     const scales = units.map(unit => {
-      const isKana = /^[ァ-ヶー]+$/.test(unit);
+      const isKana = /^[ァ-ヶーｦ-ﾟ]+$/.test(unit);
       return {
         isKana: compact && isKana,
-        scaleX: (compact && isKana) ? (KANA_X_SCALE / KANA_Y_BOOST) : 1,
+        scaleX: compact ? (COMPACT_X_SCALE / KANA_Y_BOOST) : 1,
         scaleY: (compact && isKana) ? KANA_Y_BOOST : 1
       };
     });
@@ -1860,7 +2330,7 @@
     const totalW = measureFunc(ctx);
     
     let extraScale = 1;
-    if (totalW > width) {
+    if (compact && totalW > width) {
       extraScale = width / totalW;
     }
 
@@ -1917,6 +2387,39 @@
     );
   }
 
+  function drawClubBarText(ctx, text, x, y, width, color, side) {
+    const value = String(text || "");
+    if (!value) return;
+    let size = 56;
+    const minSize = 30;
+    setHeavyFont(ctx, size);
+    while (size > minSize && ctx.measureText(value).width > width) {
+      size -= 1;
+      setHeavyFont(ctx, size);
+    }
+
+    const chars = Array.from(value);
+    const baseWidth = ctx.measureText(value).width;
+    const spare = Math.max(0, width - baseWidth);
+    const maxSpacing = size * (side === "away" ? 0.36 : 0.08);
+    const spacing = chars.length > 1 ? Math.min(maxSpacing, spare / (chars.length - 1)) : 0;
+    if (!spacing) {
+      drawShadowText(ctx, value, x + width / 2, y, { color, maxWidth: width });
+      return;
+    }
+
+    const totalWidth = baseWidth + spacing * (chars.length - 1);
+    let cursor = x + (width - totalWidth) / 2;
+    ctx.save();
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    chars.forEach((char) => {
+      drawShadowText(ctx, char, cursor, y, { color, align: "left", maxWidth: width, shadow: true, stroke: true });
+      cursor += ctx.measureText(char).width + spacing;
+    });
+    ctx.restore();
+  }
+
   function drawPlayerRow(ctx, player, side, x, y, w, h, state) {
     const posW = side === "home" ? 105 : 103;
     const noW = 96;
@@ -1943,22 +2446,35 @@
     drawShadowText(ctx, player.no || "", numX + noW / 2, y + h / 2, { color: textColor, maxWidth: noW - 8 });
 
     const nameX = x + posW + noW + 28;
-    const compact = Boolean(player.half);
-    const family = compact ? (player.family || "").normalize("NFKC") : player.family;
-    const given = compact ? (player.given || "").normalize("NFKC") : player.given;
-    const nameRight = x + w - 56;
-    const longName = compact || Array.from(player.family || "").length > 3 || Array.from(player.given || "").length > 3;
+    const compact = shouldUseCompactName(player);
+    const family = player.family || "";
+    const given = player.given || "";
+    const nameRight = x + w - 66;
+    const longName = !compact && (Array.from(player.family || "").length > 3 || Array.from(player.given || "").length > 3);
     const maxNameSize = 54;
     if (given) {
-      const familyCount = Array.from(family).length;
-      const givenCount = Array.from(given).length;
+      const familyCount = compact ? visualKanaUnits(family).length : Array.from(family).length;
+      const givenCount = compact ? visualKanaUnits(given).length : Array.from(given).length;
       const totalCount = familyCount + givenCount;
-      const familyWidth = nameBlockWidth(familyCount, totalCount, longName);
-      const givenWidth = nameBlockWidth(givenCount, totalCount, longName);
-      const tightName = compact || totalCount >= 7;
-      const gap = compact || totalCount >= 8 ? 18 : 26;
+      const familyVisual = compact ? compactUnitLength(visualKanaUnits(family)) : familyCount;
+      const givenVisual = compact ? compactUnitLength(visualKanaUnits(given)) : givenCount;
+    let familyWidth = nameBlockWidth(familyCount, totalCount, longName, compact, familyVisual);
+    let givenWidth = nameBlockWidth(givenCount, totalCount, longName, compact, givenVisual);
+    const tightName = !compact && totalCount >= 7;
+      let gap = compact ? (totalCount >= 6 ? 14 : 24) : (totalCount >= 8 ? 20 : 28);
+      if (compact) {
+        familyWidth = Math.max(68, Math.min(220, familyVisual * 42 + 12));
+        givenWidth = Math.max(68, Math.min(235, givenVisual * 42 + 12));
+      }
+      const available = Math.max(80, nameRight - nameX);
+      if (familyWidth + givenWidth + gap > available) {
+        gap = Math.max(compact ? 8 : 12, Math.min(gap, available * (compact ? 0.04 : 0.07)));
+        const ratio = (available - gap) / Math.max(1, familyWidth + givenWidth);
+        familyWidth *= ratio;
+        givenWidth *= ratio;
+      }
       drawSpreadText(ctx, family, nameX, y + h / 2 - 2, familyWidth, "#fff", maxNameSize, compact);
-      drawSpreadText(ctx, given, tightName ? nameX + familyWidth + gap : nameRight - givenWidth, y + h / 2 - 2, givenWidth, "#fff", maxNameSize, compact);
+      drawSpreadText(ctx, given, (tightName || compact) ? nameX + familyWidth + gap : nameRight - givenWidth, y + h / 2 - 2, givenWidth, "#fff", maxNameSize, compact);
     } else {
       drawSpreadText(ctx, family, nameX, y + h / 2 - 2, nameRight - nameX, "#fff", maxNameSize, compact);
     }
@@ -1973,8 +2489,7 @@
     const headerGrad = gradient(ctx, x, y, 82, [[0, mixColor(color, 34, "#bd211a")], [0.5, color], [1, mixColor(color, -42, "#bd211a")]]);
     fillRectWithBorder(ctx, x, y, w, 82, headerGrad, "rgba(27,4,5,0.72)", 0);
     drawDots(ctx, x, y, w, 82, side === "home" ? "rgba(255,190,52,0.36)" : "rgba(118,194,255,0.22)", 10, 1.4, 1);
-    fitFont(ctx, state[side].club || "", w - 44, 56, 30, setHeavyFont);
-    drawShadowText(ctx, state[side].club || "", x + w / 2, y + 41, { color: headerTextColor, maxWidth: w - 36 });
+    drawClubBarText(ctx, state[side].club || "", x + 18, y + 41, w - 36, headerTextColor, side);
 
     const lineupY = y + 92;
     const rowH = 894 / 11;
@@ -1992,7 +2507,7 @@
     ctx.shadowColor = "rgba(0,0,0,0.72)";
     ctx.shadowOffsetX = 2;
     ctx.shadowOffsetY = 2;
-    drawImageContained(ctx, leagueImage, x + 99, y + 22, 330, 82);
+    drawImageContained(ctx, leagueImage, x + (w - 360) / 2, y + 22, 360, 82);
     ctx.restore();
 
     setHeavyFont(ctx, 65);
@@ -2036,7 +2551,7 @@
       await withTimeout(document.fonts.ready.catch(() => {}), 900, null);
     }
     const [leagueImage, logoImage, bgImage] = await Promise.all([
-      loadImageSafe(state.images.league || DEFAULT_LEAGUE_IMAGE),
+      loadImageSafe(normalizeLeagueLogoSrc(state.images.league)),
       loadImageSafe(state.images.bottom || DEFAULT_BOTTOM_IMAGE),
       loadImageSafe(ORANGE_BG_IMAGE)
     ]);
@@ -2054,9 +2569,9 @@
     ctx.lineWidth = 2;
     ctx.strokeRect(boardX + 2, boardY + 2, boardW - 4, boardH - 4);
 
-    drawTeam(ctx, "home", boardX, boardY, 672, boardH, state);
-    drawCenter(ctx, boardX + 672, boardY, 528, boardH, state, leagueImage, logoImage, bgImage, !state.images.bottom);
-    drawTeam(ctx, "away", boardX + 1200, boardY, 672, boardH, state);
+    drawTeam(ctx, "home", boardX, boardY, 612, boardH, state);
+    drawCenter(ctx, boardX + 612, boardY, 648, boardH, state, leagueImage, logoImage, bgImage, !state.images.bottom);
+    drawTeam(ctx, "away", boardX + 1260, boardY, 612, boardH, state);
 
     return canvasToPngBlob(canvas);
   }
@@ -2124,19 +2639,23 @@
     await withTimeout(waitForImages(targetDoc), 1500, null);
 
     if (targetWindow.html2canvas) {
-      const canvas = await targetWindow.html2canvas(source, {
-        backgroundColor: null,
-        scale: 1,
-        width: 1920,
-        height: 1080,
-        windowWidth: 1920,
-        windowHeight: 1080,
-        scrollX: 0,
-        scrollY: 0,
-        useCORS: true,
-        logging: false
-      });
-      return canvasToPngBlob(canvas);
+      try {
+        const canvas = await targetWindow.html2canvas(source, {
+          backgroundColor: null,
+          scale: 1,
+          width: 1920,
+          height: 1080,
+          windowWidth: 1920,
+          windowHeight: 1080,
+          scrollX: 0,
+          scrollY: 0,
+          useCORS: true,
+          logging: false
+        });
+        return await canvasToPngBlob(canvas);
+      } catch (error) {
+        console.warn("html2canvas capture failed; trying SVG fallback", error);
+      }
     }
 
     const wrapper = targetDoc.createElement("div");
@@ -2194,46 +2713,67 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
+  async function createExportFrame(src, state) {
+    const frame = document.createElement("iframe");
+    frame.setAttribute("aria-hidden", "true");
+    frame.tabIndex = -1;
+    frame.style.cssText = [
+      "position:fixed",
+      "left:-2400px",
+      "top:0",
+      "width:1920px",
+      "height:1080px",
+      "border:0",
+      "pointer-events:none",
+      "background:transparent"
+    ].join(";");
+    document.body.appendChild(frame);
+    const loadPromise = waitForFrameLoad(frame, 6000);
+    frame.src = src || "display.html?v=20260520c";
+    await loadPromise;
+    const win = frame.contentWindow;
+    if (win && win.scoreboardVision) {
+      if (win.scoreboardVision.whenReady) {
+        await withTimeout(win.scoreboardVision.whenReady(), 4000, null);
+      }
+      win.scoreboardVision.applyState(state);
+      await withTimeout(nextFrame(win), 800, null);
+      if (win.document && win.document.fonts && win.document.fonts.ready) {
+        await withTimeout(win.document.fonts.ready.catch(() => {}), 1000, null);
+      }
+    }
+    return frame;
+  }
+
   async function exportCurrentImage(state, targetSrc) {
     const next = normalizeState(state);
-    if (targetSrc) {
-      await setExportPreviewTarget(targetSrc, next);
-    }
-    const frame = getPreviewFrame();
-    try {
-      if (frame && frame.contentWindow && frame.contentWindow.scoreboardVision) {
-        if (frame.contentWindow.scoreboardVision.whenReady) {
-          await withTimeout(frame.contentWindow.scoreboardVision.whenReady(), 2500, null);
-        }
-        frame.contentWindow.scoreboardVision.applyState(next);
-        await withTimeout(nextFrame(frame.contentWindow), 500, null);
-      }
-    } catch (error) {
-      console.warn("Preview sync skipped", error);
-    }
-    if (!frame) {
-      renderDisplay(next);
-    }
+    const previewFrame = getPreviewFrame();
+    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20260520c";
+    let captureFrame = null;
 
     let blob;
     try {
-      const targetDoc = getExportDocument();
+      captureFrame = await createExportFrame(activeSrc, next);
+      const targetDoc = captureFrame.contentDocument;
       blob = await withTimeout(
         makePngBlobFromDisplay(targetDoc),
-        8000,
+        30000,
         new Error("DOM capture timed out")
       );
     } catch (error) {
       console.warn("DOM capture failed; falling back to canvas renderer", error);
-      const activeSrc = targetSrc || (frame && frame.getAttribute("src")) || "display.html";
       if (!String(activeSrc).includes("display.html")) throw error;
       blob = await withTimeout(
         makePngBlobFromState(next),
-        9000,
+        15000,
         new Error("画像出力がタイムアウトしました。")
       );
+    } finally {
+      if (captureFrame && captureFrame.parentNode) {
+        captureFrame.parentNode.removeChild(captureFrame);
+      }
     }
-    downloadBlob(blob, makeExportFileName(next, targetSrc || (frame && frame.getAttribute("src")) || "display.html"));
+    downloadBlob(blob, makeExportFileName(next, activeSrc));
     return blob;
   }
 
@@ -2305,24 +2845,11 @@
       fillForm(form, state);
     });
 
-    const leagueImageInput = document.getElementById("leagueImageInput");
-    if (leagueImageInput) {
-      leagueImageInput.addEventListener("change", () => {
-        readImageFile(leagueImageInput, (dataUrl) => {
-          state = readForm(form, state);
-          state.images.league = dataUrl;
-          saveState(state, true);
-          renderDisplay(state);
-        });
-      });
-    }
-
-    const clearLeagueImage = document.getElementById("clearLeagueImage");
-    if (clearLeagueImage) {
-      clearLeagueImage.addEventListener("click", () => {
+    const leagueLogoSelect = document.getElementById("leagueLogoSelect");
+    if (leagueLogoSelect) {
+      leagueLogoSelect.addEventListener("change", () => {
         state = readForm(form, state);
-        state.images.league = "";
-        if (leagueImageInput) leagueImageInput.value = "";
+        state.images.league = normalizeLeagueLogoSrc(leagueLogoSelect.value);
         saveState(state, true);
         renderDisplay(state);
       });
@@ -2365,7 +2892,10 @@
     }
 
     const officialUrlInput = document.getElementById("officialUrlInput");
+    const officialImportMode = document.getElementById("officialImportMode");
     const officialImportButton = document.getElementById("officialImportButton");
+    const officialKickoffButton = document.getElementById("officialKickoffButton");
+    const officialFulltimeButton = document.getElementById("officialFulltimeButton");
     const officialImportStatus = document.getElementById("officialImportStatus");
     const setOfficialStatus = (message, type) => {
       if (!officialImportStatus) return;
@@ -2373,35 +2903,82 @@
       officialImportStatus.classList.toggle("error", type === "error");
       officialImportStatus.classList.toggle("success", type === "success");
     };
+    const setOfficialModeButtons = (enabled) => {
+      [officialKickoffButton, officialFulltimeButton].forEach((button) => {
+        if (button) button.disabled = !enabled;
+      });
+    };
+    const ensureOfficialRecord = async (forceFetch = false) => {
+      const url = officialUrlInput ? officialUrlInput.value : "";
+      const normalizedUrl = normalizeOfficialUrl(url);
+      if (!forceFetch && cachedOfficialRecord && cachedOfficialRecordUrl === normalizedUrl) {
+        return cachedOfficialRecord;
+      }
+      const raw = await withTimeout(
+        fetchOfficialRecordText(url),
+        12000,
+        new Error("公式記録の取得がタイムアウトしました。")
+      );
+      cachedOfficialRecord = parseOfficialRecord(raw);
+      cachedOfficialRecordUrl = normalizedUrl;
+      setOfficialModeButtons(true);
+      return cachedOfficialRecord;
+    };
+    const applyOfficialMode = (record, importMode) => {
+      state = applyOfficialRecord(readForm(form, state), record, importMode);
+      saveState(state, true);
+      renderAdminEditors(state);
+      fillForm(form, state);
+      renderDisplay(state);
+      if (officialImportMode) officialImportMode.value = importMode;
+      setOfficialStatus(`${record.homeClub} vs ${record.awayClub} を${importMode === "kickoff" ? "試合開始前" : "試合終了時"}として反映しました。`, "success");
+    };
+    const applyOfficialModeFromCache = async (importMode, forceFetch = false) => {
+      const record = await ensureOfficialRecord(forceFetch);
+      applyOfficialMode(record, importMode);
+    };
+    setOfficialModeButtons(Boolean(cachedOfficialRecord));
 
     if (officialUrlInput && officialImportButton) {
       officialImportButton.addEventListener("click", async () => {
         const originalLabel = officialImportButton.textContent;
         officialImportButton.textContent = "取得中...";
         officialImportButton.disabled = true;
+        setOfficialModeButtons(false);
         setOfficialStatus("公式記録を取得しています。", "");
         try {
-          const raw = await withTimeout(
-            fetchOfficialRecordText(officialUrlInput.value),
-            12000,
-            new Error("公式記録の取得がタイムアウトしました。")
-          );
-          const record = parseOfficialRecord(raw);
-          state = applyOfficialRecord(readForm(form, state), record);
-          saveState(state, true);
-          renderAdminEditors(state);
-          fillForm(form, state);
-          renderDisplay(state);
-          setOfficialStatus(`${record.homeClub} vs ${record.awayClub} を反映しました。`, "success");
+          const importMode = officialImportMode ? officialImportMode.value : "fulltime";
+          await applyOfficialModeFromCache(importMode, true);
         } catch (error) {
           console.error(error);
           setOfficialStatus(error.message || "公式記録の反映に失敗しました。", "error");
         } finally {
           officialImportButton.textContent = originalLabel;
           officialImportButton.disabled = false;
+          setOfficialModeButtons(Boolean(cachedOfficialRecord));
         }
       });
     }
+    [
+      [officialKickoffButton, "kickoff"],
+      [officialFulltimeButton, "fulltime"]
+    ].forEach(([button, importMode]) => {
+      if (!button) return;
+      button.addEventListener("click", async () => {
+        const originalLabel = button.textContent;
+        button.textContent = "反映中...";
+        button.disabled = true;
+        try {
+          await applyOfficialModeFromCache(importMode, false);
+        } catch (error) {
+          console.error(error);
+          setOfficialStatus(error.message || "公式記録の反映に失敗しました。", "error");
+        } finally {
+          button.textContent = originalLabel;
+          setOfficialModeButtons(Boolean(cachedOfficialRecord));
+        }
+      });
+    });
 
     const exportButton = document.getElementById("exportImageButton");
     if (exportButton) {
@@ -2416,12 +2993,12 @@
           const exportTarget = exportTargetSelect ? exportTargetSelect.value : "";
           await withTimeout(
             exportCurrentImage(state, exportTarget),
-            11000,
+            60000,
             new Error("画像出力がタイムアウトしました。")
           );
         } catch (error) {
           console.error(error);
-          alert("画像出力に失敗しました。もう一度お試しください。");
+          alert(`画像出力に失敗しました。${error && error.message ? `\n${error.message}` : ""}`);
         } finally {
           exportButton.textContent = originalLabel;
           exportButton.disabled = false;
@@ -2452,7 +3029,7 @@
       saveState(currentState, false);
       applyIncoming(currentState);
     },
-    exportImage: () => exportCurrentImage(currentState)
+    exportImage: (targetSrc) => exportCurrentImage(currentState, targetSrc)
   };
 
   if (channel) {
@@ -2472,5 +3049,9 @@
     }
   });
 })();
+
+
+
+
 
 
