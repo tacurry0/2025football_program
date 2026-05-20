@@ -139,26 +139,26 @@
         <circle cx="49" cy="41" r="17" fill="none" stroke="#f7e8fb" stroke-width="2.5"/>
         <text x="49" y="36" font-family="Arial, sans-serif" font-size="14" font-weight="900" text-anchor="middle">J2</text>
         <text x="49" y="52" font-family="Arial, sans-serif" font-size="14" font-weight="900" text-anchor="middle">J3</text>
-        <text x="92" y="35" font-family="BIZ UDPGothic, Noto Sans JP, sans-serif" font-size="25" font-weight="900">明治安田</text>
-        <text x="92" y="63" font-family="BIZ UDPGothic, Noto Sans JP, sans-serif" font-size="24" font-weight="900">J2・J3 百年構想リーグ</text>
+        <text x="92" y="35" font-family="BIZUDPGothicLocal, BIZ UDPGothic, Noto Sans JP, sans-serif" font-size="25" font-weight="900">明治安田</text>
+        <text x="92" y="63" font-family="BIZUDPGothicLocal, BIZ UDPGothic, Noto Sans JP, sans-serif" font-size="24" font-weight="900">J2・J3 百年構想リーグ</text>
       </g>
     </svg>`;
     return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
   }
 
   const DEFAULT_LEAGUE_IMAGE = makeDefaultLeagueImage();
-  const DEFAULT_LEAGUE_ASSET = "icons/100l.png?v=20260520c";
+  const DEFAULT_LEAGUE_ASSET = "icons/100l.png?v=20260520d";
   const LEAGUE_LOGO_ASSETS = {
-    hundred: "icons/100l.png?v=20260520c",
-    j1: "icons/j1.png?v=20260520c",
-    j2: "icons/j2.png?v=20260520c"
+    hundred: "icons/100l.png?v=20260520d",
+    j1: "icons/j1.png?v=20260520d",
+    j2: "icons/j2.png?v=20260520d"
   };
   const LEAGUE_LOGO_OPTIONS = Object.values(LEAGUE_LOGO_ASSETS);
 
   const channel = "BroadcastChannel" in window ? new BroadcastChannel(CHANNEL_NAME) : null;
   const MAX_SCORERS = 8;
   const MAX_REFEREES = 6;
-  const CLUB_EMBLEMS_URL = "club_emblems.json?v=20260520c";
+  const CLUB_EMBLEMS_URL = "club_emblems.json?v=20260520d";
   const CLUB_ENGLISH_LIST = [
     ["AC長野パルセイロ", "AC NAGANO PARCEIRO"],
     ["FC今治", "FC IMABARI"],
@@ -2171,7 +2171,7 @@
   }
 
   function setHeavyFont(ctx, size) {
-    ctx.font = `900 ${size}px "BIZ UDPGothic", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif`;
+    ctx.font = `900 ${size}px "BIZUDPGothicLocal", "BIZ UDPGothic", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif`;
   }
 
   function setLatinFont(ctx, size) {
@@ -2545,6 +2545,7 @@
     const ctx = canvas.getContext("2d");
 
     if (document.fonts && document.fonts.load) {
+      await withTimeout(document.fonts.load('900 56px "BIZUDPGothicLocal"').catch(() => {}), 1200, null);
       await withTimeout(document.fonts.load('900 56px "ScoreboardShinGo"').catch(() => {}), 1200, null);
     }
     if (document.fonts && document.fonts.ready) {
@@ -2729,7 +2730,7 @@
     ].join(";");
     document.body.appendChild(frame);
     const loadPromise = waitForFrameLoad(frame, 6000);
-    frame.src = src || "display.html?v=20260520c";
+    frame.src = src || "display.html?v=20260520d";
     await loadPromise;
     const win = frame.contentWindow;
     if (win && win.scoreboardVision) {
@@ -2748,7 +2749,7 @@
   async function exportCurrentImage(state, targetSrc) {
     const next = normalizeState(state);
     const previewFrame = getPreviewFrame();
-    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20260520c";
+    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20260520d";
     let captureFrame = null;
 
     let blob;
