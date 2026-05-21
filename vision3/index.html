@@ -53,18 +53,6 @@
                 <option value="">年を選択</option>
               </select>
             </label>
-            <label>
-              <span>ホームorアウェイ</span>
-              <select id="matchHomeAwaySelect" disabled>
-                <option value="">年を選択</option>
-              </select>
-            </label>
-            <label>
-              <span>対戦クラブ名</span>
-              <select id="matchOpponentSelect" disabled>
-                <option value="">年を選択</option>
-              </select>
-            </label>
             <div class="official-mode-actions">
               <button class="admin-button secondary" id="matchKickoffButton" type="button" disabled>試合前で反映</button>
               <button class="admin-button secondary" id="matchFulltimeButton" type="button" disabled>試合後で反映</button>
@@ -191,6 +179,8 @@
                 <span>下部ロゴ画像</span>
                 <input id="logoInput" type="file" accept="image/*" />
               </label>
+            </div>
+            <div class="logo-controls">
               <button class="admin-button" id="clearLogo" type="button">画像を消す</button>
             </div>
           </div>
@@ -254,19 +244,13 @@
 
         <section class="control-section" data-tab-panel="attendance" hidden>
           <h2>来場者数</h2>
-          <div class="field-grid wide">
-            <label>
-              <span>タイトル</span>
-              <input name="attendance.title" type="text" />
-            </label>
-            <label>
-              <span>人数</span>
-              <input name="attendance.count" type="text" placeholder="16,994" />
-            </label>
-            <label>
-              <span>下部メッセージ</span>
-              <input name="attendance.message" type="text" />
-            </label>
+          <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; margin: 0 auto; max-width: 480px;">
+            <div style="font-size: 15px; font-weight: 800; color: #aebbd0; letter-spacing: 0.1em; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">本日の来場者数</div>
+            <div style="display: flex; align-items: center; gap: 10px; width: 100%; justify-content: center;">
+              <input name="attendance.count" type="text" placeholder="16,994" style="text-align: center; font-size: 24px; font-weight: 900; letter-spacing: 0.05em; padding: 8px 16px; min-height: 48px; width: 220px; border-radius: 6px;" />
+              <span style="font-size: 20px; font-weight: 900; color: #ffffff;">人</span>
+            </div>
+            <div style="font-size: 14px; font-weight: 700; color: #8a9bb3; letter-spacing: 0.05em;">ご来場ありがとうございました</div>
           </div>
         </section>
 

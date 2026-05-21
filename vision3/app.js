@@ -658,13 +658,16 @@
   function renderLineup(container, players, side) {
     if (!container) return;
     container.textContent = "";
+    let lastPos = "";
     players.forEach((player) => {
       const row = document.createElement("div");
       row.className = "player-row";
 
       const pos = document.createElement("div");
       pos.className = "pos";
-      pos.textContent = player.pos;
+      const currentPos = (player.pos || "").trim();
+      pos.textContent = currentPos === lastPos ? "" : currentPos;
+      lastPos = currentPos;
 
       const num = document.createElement("div");
       num.className = `num ${side}-num`;
@@ -1036,13 +1039,16 @@
     if (!container) return;
     container.textContent = "";
     const list = normalizePlayerList(players, [], count);
+    let lastPos = "";
     list.forEach((player) => {
       const row = document.createElement("div");
       row.className = "member-row";
 
       const pos = document.createElement("div");
       pos.className = "pos member-pos";
-      pos.textContent = player.pos || "";
+      const currentPos = (player.pos || "").trim();
+      pos.textContent = currentPos === lastPos ? "" : currentPos;
+      lastPos = currentPos;
 
       const num = document.createElement("div");
       num.className = `num member-num ${side}-num`;
@@ -3157,8 +3163,6 @@
 
     const matchYearSelect = document.getElementById("matchYearSelect");
     const matchSectionSelect = document.getElementById("matchSectionSelect");
-    const matchHomeAwaySelect = document.getElementById("matchHomeAwaySelect");
-    const matchOpponentSelect = document.getElementById("matchOpponentSelect");
     const matchKickoffButton = document.getElementById("matchKickoffButton");
     const matchFulltimeButton = document.getElementById("matchFulltimeButton");
     const officialImportStatus = document.getElementById("officialImportStatus");
@@ -3331,7 +3335,14 @@
         leagueName: matchData.competition || "",
         leagueLogo: getLeagueLogoFromText(matchData.competition || ""),
         match: {
-          round: matchData.section || "",
+          round: (() => {
+            const raw = matchData.section || "";
+            const match = raw.match(/第?\s*(\d+)\s*節/);
+            if (match) {
+              return `第${match[1]}節`;
+            }
+            return raw;
+          })(),
           firstHome: String(homeFirstHalf),
           firstAway: String(awayFirstHalf),
           secondHome: String(homeSecondHalf),
@@ -3356,92 +3367,49 @@
     };
 
     const updateDropdownOptions = () => {
-      if (!matchSectionSelect || !matchHomeAwaySelect || !matchOpponentSelect) return;
+      if (!matchSectionSelect) return;
       
-      const prevSection = matchSectionSelect.value;
-      const prevHomeAway = matchHomeAwaySelect.value;
-      const prevOpponent = matchOpponentSelect.value;
-      
-      const sections = Array.from(new Set(loadedMatchesForYear.map(m => m.section).filter(Boolean)));
       matchSectionSelect.textContent = "";
       const secPlaceholder = document.createElement("option");
       secPlaceholder.value = "";
       secPlaceholder.textContent = "節を選択";
       matchSectionSelect.appendChild(secPlaceholder);
-      sections.forEach(sec => {
+      
+      loadedMatchesForYear.forEach((m, idx) => {
         const option = document.createElement("option");
-        option.value = sec;
-        option.textContent = sec;
+        option.value = String(idx);
+        
+        let cleanSection = (m.section || "").replace(/^第/, "");
+        cleanSection = cleanSection.replace(/節.*$/, "節");
+        
+        const isHomeNiigata = m.home_team.includes("新潟");
+        const ha = isHomeNiigata ? "H" : "A";
+        const opponent = isHomeNiigata ? m.away_team : m.home_team;
+        
+        option.textContent = `${cleanSection} ${ha} ${opponent}`;
         matchSectionSelect.appendChild(option);
       });
-      matchSectionSelect.disabled = !sections.length;
-      
-      matchHomeAwaySelect.textContent = "";
-      const haPlaceholder = document.createElement("option");
-      haPlaceholder.value = "";
-      haPlaceholder.textContent = "ホーム/アウェイ選択";
-      matchHomeAwaySelect.appendChild(haPlaceholder);
-      
-      const homeOpt = document.createElement("option");
-      homeOpt.value = "home";
-      homeOpt.textContent = "ホーム";
-      matchHomeAwaySelect.appendChild(homeOpt);
-      
-      const awayOpt = document.createElement("option");
-      awayOpt.value = "away";
-      awayOpt.textContent = "アウェイ";
-      matchHomeAwaySelect.appendChild(awayOpt);
-      matchHomeAwaySelect.disabled = !loadedMatchesForYear.length;
-      
-      const opponents = Array.from(new Set(loadedMatchesForYear.map(m => {
-        const isHomeNiigata = m.home_team.includes("新潟");
-        return isHomeNiigata ? m.away_team : m.home_team;
-      }).filter(Boolean))).sort((a, b) => a.localeCompare(b, "ja"));
-      
-      matchOpponentSelect.textContent = "";
-      const oppPlaceholder = document.createElement("option");
-      oppPlaceholder.value = "";
-      oppPlaceholder.textContent = "対戦クラブを選択";
-      matchOpponentSelect.appendChild(oppPlaceholder);
-      opponents.forEach(opp => {
-        const option = document.createElement("option");
-        option.value = opp;
-        option.textContent = opp;
-        matchOpponentSelect.appendChild(option);
-      });
-      matchOpponentSelect.disabled = !opponents.length;
-      
-      if (sections.includes(prevSection)) matchSectionSelect.value = prevSection;
-      if (prevHomeAway) matchHomeAwaySelect.value = prevHomeAway;
-      if (opponents.includes(prevOpponent)) matchOpponentSelect.value = prevOpponent;
+      matchSectionSelect.disabled = !loadedMatchesForYear.length;
       
       updateSelectedMatch();
     };
 
     const updateSelectedMatch = () => {
       const year = matchYearSelect.value;
-      const section = matchSectionSelect.value;
-      const homeAway = matchHomeAwaySelect.value;
-      const opponent = matchOpponentSelect.value;
+      const selectIndex = matchSectionSelect.value;
       
-      if (!year || !section || !homeAway || !opponent) {
+      if (!year || selectIndex === "") {
         selectedMatchRecord = null;
         setMatchButtons(false);
         if (!year) {
           setOfficialStatus("年を選択してください。", "");
         } else {
-          setOfficialStatus("節、ホームorアウェイ、対戦クラブ名を選択してください。", "");
+          setOfficialStatus("節を選択してください。", "");
         }
         return;
       }
       
-      const matched = loadedMatchesForYear.find(m => {
-        const isHomeNiigata = m.home_team.includes("新潟");
-        const actualHomeAway = isHomeNiigata ? "home" : "away";
-        const actualOpponent = isHomeNiigata ? m.away_team : m.home_team;
-        
-        return m.section === section && actualHomeAway === homeAway && actualOpponent === opponent;
-      });
+      const matched = loadedMatchesForYear[parseInt(selectIndex, 10)];
       
       if (matched) {
         selectedMatchRecord = matched;
@@ -3518,40 +3486,9 @@
       });
     }
 
-    const onDropdownChange = (event) => {
-      if (!loadedMatchesForYear.length) return;
-      
-      // Dynamic auto-selections
-      if (event.target === matchSectionSelect && matchSectionSelect.value) {
-        const section = matchSectionSelect.value;
-        const matched = loadedMatchesForYear.find(m => m.section === section);
-        if (matched) {
-          const isHomeNiigata = matched.home_team.includes("新潟");
-          matchHomeAwaySelect.value = isHomeNiigata ? "home" : "away";
-          matchOpponentSelect.value = isHomeNiigata ? matched.away_team : matched.home_team;
-        }
-      } else if ((event.target === matchHomeAwaySelect || event.target === matchOpponentSelect) && matchHomeAwaySelect.value && matchOpponentSelect.value) {
-        const homeAway = matchHomeAwaySelect.value;
-        const opponent = matchOpponentSelect.value;
-        const matched = loadedMatchesForYear.find(m => {
-          const isHomeNiigata = m.home_team.includes("新潟");
-          const actualHomeAway = isHomeNiigata ? "home" : "away";
-          const actualOpponent = isHomeNiigata ? m.away_team : m.home_team;
-          return actualHomeAway === homeAway && actualOpponent === opponent;
-        });
-        if (matched) {
-          matchSectionSelect.value = matched.section;
-        }
-      }
-      
-      updateSelectedMatch();
-    };
-
-    [matchSectionSelect, matchHomeAwaySelect, matchOpponentSelect].forEach(select => {
-      if (select) {
-        select.addEventListener("change", onDropdownChange);
-      }
-    });
+    if (matchSectionSelect) {
+      matchSectionSelect.addEventListener("change", updateSelectedMatch);
+    }
 
     [
       [matchKickoffButton, "kickoff"],
