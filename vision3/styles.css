@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --ink: #f4e5fb;
   --soft-ink: #f2ddf8;
   --shadow: rgba(0, 0, 0, 0.84);
@@ -19,13 +19,13 @@
   --away-club-text: #f4e5fb;
   --home-number-text: #ffffff;
   --away-number-text: #ffffff;
-  --orange-bg-image: url("./orange-bg.svg?v=20260520d");
-  --top-bg-image: url("./top_back.png?v=20260520d");
+  --orange-bg-image: url("./orange-bg.svg?v=20260521b");
+  --top-bg-image: url("./top_back.png?v=20260521b");
 }
 
 @font-face {
   font-family: 'BIZUDPGothicLocal';
-  src: url('./fonts/BIZUDPGothic-Regular.ttf?v=20260520d') format('truetype');
+  src: url('./fonts/BIZUDPGothic-Regular.ttf?v=20260521b') format('truetype');
   font-weight: 400 699;
   font-style: normal;
   font-display: block;
@@ -33,7 +33,7 @@
 
 @font-face {
   font-family: 'BIZUDPGothicLocal';
-  src: url('./fonts/BIZUDPGothic-Bold.ttf?v=20260520d') format('truetype');
+  src: url('./fonts/BIZUDPGothic-Bold.ttf?v=20260521b') format('truetype');
   font-weight: 700 900;
   font-style: normal;
   font-display: block;
@@ -41,7 +41,7 @@
 
 @font-face {
   font-family: 'ScoreboardShinGo';
-  src: url('./fonts/AOTFShinGoProDeBold.otf?v=20260520d') format('opentype');
+  src: url('./fonts/AOTFShinGoProDeBold.otf?v=20260521b') format('opentype');
   font-weight: 700 900;
   font-style: normal;
   font-display: block;
@@ -282,6 +282,11 @@ body {
     1px 1px 0 rgba(0, 0, 0, 0.72),
     0 0 2px rgba(255, 255, 255, 0.12);
   -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.22);
+}
+
+.lineup .player-name {
+  font-weight: 700;
+  -webkit-text-stroke: 0.12px rgba(255, 255, 255, 0.14);
 }
 
 .yellow-card {
@@ -607,7 +612,7 @@ body {
 
 .score-box {
   display: grid;
-  grid-template-columns: 132px 1fr 132px;
+  grid-template-columns: 204px minmax(0, 1fr) 204px;
   align-items: center;
   width: 100%;
   height: 140px;
@@ -641,10 +646,19 @@ body {
   font-size: 88px;
 }
 
+.score-box span:first-child {
+  transform: translateX(14px);
+}
+
+.score-box span:last-child {
+  transform: translateX(-14px);
+}
+
 .score-box strong {
   font-size: 72px;
   letter-spacing: 0.1em;
   text-indent: 0.1em;
+  white-space: nowrap;
 }
 
 .score-total {
@@ -667,6 +681,11 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.62),
     0 1px 0 rgba(0, 0, 0, 0.72);
+}
+
+.is-kickoff .gold-line,
+.is-kickoff .score-total {
+  display: none;
 }
 
 .logo-slot {
@@ -908,6 +927,10 @@ body.admin-page {
   gap: 6px;
 }
 
+.player-edit-row.no-yellow {
+  grid-template-columns: 66px 72px 1fr 1fr 76px;
+}
+
 .player-edit-head {
   align-items: center;
 }
@@ -965,6 +988,14 @@ body.admin-page {
   grid-template-columns: minmax(0, 1fr) 160px auto auto;
   gap: 10px;
   align-items: end;
+}
+
+.official-match-picker {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  gap: 10px;
+  align-items: end;
+  margin-top: 10px;
 }
 
 .official-mode-actions {
@@ -1050,33 +1081,46 @@ body.admin-page {
 
 @media (max-width: 720px) {
   .admin-header {
-    position: sticky;
-    top: 0;
+    position: static;
     z-index: 20;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 14px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .admin-kicker {
+    display: none;
   }
 
   .admin-header h1 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .admin-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 2px;
   }
 
   .admin-actions > * {
-    width: 100%;
+    flex: 0 0 auto;
+    width: auto;
+    height: 34px;
+    padding: 0 10px;
+    font-size: 12px;
   }
 
   .export-button {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 
   .admin-shell {
-    padding: 14px;
+    gap: 12px;
+    padding: 10px;
   }
 
   .control-section {
@@ -1090,7 +1134,8 @@ body.admin-page {
   }
 
   .logo-controls,
-  .official-url-row {
+  .official-url-row,
+  .official-match-picker {
     grid-template-columns: 1fr;
   }
 
@@ -1107,6 +1152,10 @@ body.admin-page {
   .player-edit-row {
     grid-template-columns: 42px 48px minmax(0, 1fr) minmax(0, 1fr) 52px 48px;
     gap: 4px;
+  }
+
+  .player-edit-row.no-yellow {
+    grid-template-columns: 42px 48px minmax(0, 1fr) minmax(0, 1fr) 52px;
   }
 
   .scorer-edit-row {
@@ -1301,7 +1350,7 @@ body.admin-page {
 
 .result-score-box {
   display: grid;
-  grid-template-columns: 142px minmax(0, 1fr) 142px;
+  grid-template-columns: 188px minmax(0, 1fr) 188px;
   align-items: center;
   width: 580px;
   height: 150px;
@@ -1537,11 +1586,14 @@ body.admin-page {
 }
 
 .attendance-count span {
+  display: inline-block;
   max-width: 1500px;
   overflow: hidden;
   font-size: 360px;
   font-weight: 900;
   white-space: nowrap;
+  transform: scaleX(0.93);
+  transform-origin: center center;
 }
 
 .attendance-count strong {
@@ -1609,7 +1661,7 @@ body.admin-page {
   position: absolute;
   z-index: 2;
   left: 486px;
-  top: 232px;
+  top: 208px;
   display: flex;
   align-items: center;
   gap: 30px;
@@ -1665,7 +1717,7 @@ body.admin-page {
   z-index: 2;
   left: 0;
   right: 0;
-  top: 338px;
+  top: 306px;
   margin: 0;
   color: #fff;
   font-family: var(--vision-font);
@@ -1682,9 +1734,9 @@ body.admin-page {
 .top-emblem-row {
   position: absolute;
   z-index: 2;
-  left: 562px;
-  right: 562px;
-  top: 420px;
+  left: 500px;
+  right: 500px;
+  top: 374px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1692,8 +1744,8 @@ body.admin-page {
 
 .gloss-emblem {
   position: relative;
-  width: 370px;
-  height: 370px;
+  width: 450px;
+  height: 450px;
   display: grid;
   place-items: center;
   filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.62));
@@ -1712,8 +1764,8 @@ body.admin-page {
 .top-club-row {
   position: absolute;
   z-index: 2;
-  left: 78px;
-  right: 78px;
+  left: 118px;
+  right: 118px;
   bottom: 150px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -1768,8 +1820,179 @@ body.admin-page {
   -webkit-text-stroke: 0.7px rgba(255, 255, 255, 0.18);
 }
 
+.top-club-home strong {
+  padding-left: 58px;
+}
+
 .top-club-away strong {
+  padding-right: 58px;
   transform-origin: right center;
+}
+
+.member-canvas {
+  padding: 18px 20px;
+  background: #101821 var(--orange-bg-image) center / cover no-repeat;
+}
+
+.member-board {
+  position: relative;
+  width: 1880px;
+  height: 1044px;
+  overflow: hidden;
+  color: #f4e5fb;
+  border: 3px solid rgba(112, 58, 61, 0.95);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.14)),
+    var(--orange-bg-image) center / cover no-repeat;
+  box-shadow:
+    inset 0 0 0 2px rgba(0, 0, 0, 0.82),
+    inset 0 0 34px rgba(0, 0, 0, 0.68);
+}
+
+.member-board::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 36%, rgba(0, 0, 0, 0.1)),
+    radial-gradient(circle, rgba(35, 22, 29, 0.14) 0 1.2px, transparent 1.55px) 0 0 / 7px 7px;
+}
+
+.member-header {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 720px minmax(0, 1fr);
+  height: 92px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.82);
+}
+
+.member-club-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--vision-font);
+  font-size: 66px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow:
+    3px 3px 0 rgba(0, 0, 0, 0.86),
+    0 0 6px rgba(245, 231, 251, 0.26);
+  -webkit-text-stroke: 0.65px rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -18px 28px rgba(0, 0, 0, 0.34);
+}
+
+.member-side-home .member-club-name {
+  color: var(--home-club-text);
+  background:
+    radial-gradient(circle, rgba(255, 190, 52, 0.36) 0 1.35px, transparent 1.7px) 0 0 / 10px 10px,
+    linear-gradient(180deg, var(--home-color-light) 0%, var(--home-color) 48%, var(--home-color-dark) 100%);
+}
+
+.member-side-away .member-club-name {
+  color: var(--away-club-text);
+  background:
+    radial-gradient(circle, rgba(118, 194, 255, 0.22) 0 1.35px, transparent 1.75px) 0 0 / 10px 10px,
+    linear-gradient(180deg, var(--away-color-light) 0%, var(--away-color) 50%, var(--away-color-dark) 100%);
+}
+
+.member-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  overflow: hidden;
+  color: #f4e5fb;
+  font-family: var(--name-font);
+  font-size: 66px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  text-shadow:
+    2px 2px 0 rgba(17, 12, 18, 0.92),
+    4px 4px 0 rgba(0, 0, 0, 0.48),
+    0 0 6px rgba(239, 219, 245, 0.26);
+  background:
+    radial-gradient(circle, rgba(255, 174, 196, 0.32) 0 1.5px, transparent 1.9px) 0 0 / 9px 9px,
+    linear-gradient(180deg, #9b2e3a 0%, #752a33 100%);
+}
+
+.member-list {
+  position: absolute;
+  z-index: 2;
+  left: 24px;
+  right: 24px;
+  display: grid;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, rgba(95, 72, 79, 0.13) 0 1.4px, transparent 1.75px) 0 0 / 8px 8px,
+    linear-gradient(180deg, #21171d 0%, #111015 100%);
+  border: 2px solid rgba(0, 0, 0, 0.85);
+}
+
+.member-screen-starting .member-list {
+  top: 108px;
+  bottom: 20px;
+  grid-template-rows: repeat(11, minmax(0, 1fr));
+}
+
+.member-screen-reserve .member-list {
+  top: 126px;
+  height: 790px;
+  grid-template-rows: repeat(9, minmax(0, 1fr));
+}
+
+.member-row {
+  display: grid;
+  grid-template-columns: 172px 112px 520px minmax(0, 1fr);
+  min-height: 0;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.78);
+}
+
+.member-row:last-child {
+  border-bottom: 0;
+}
+
+.member-pos {
+  font-size: 72px;
+  border-right: 2px solid rgba(0, 0, 0, 0.72);
+}
+
+.member-num {
+  font-size: 76px;
+}
+
+.member-player-name {
+  min-width: 0;
+  padding-left: 34px;
+  padding-right: 28px;
+  font-size: 64px;
+  border-right: 2px solid rgba(0, 0, 0, 0.52);
+}
+
+.member-player-name.tight-name,
+.member-player-name.compact-name {
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.member-player-name .yellow-card {
+  display: none;
+}
+
+.member-filler {
+  min-width: 0;
+  background:
+    radial-gradient(circle, rgba(95, 72, 79, 0.12) 0 1.4px, transparent 1.75px) 0 0 / 8px 8px,
+    linear-gradient(180deg, #21171d 0%, #111015 100%);
 }
 
 .referees-canvas {
@@ -1992,6 +2215,8 @@ body.fullscreen-preview-page {
   transform-origin: top left;
   pointer-events: none;
 }
+
+
 
 
 
