@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let allSections = [];
   let visibleSections = [];
   let selectedYear = null;
+  let renderedFeedYear = "__none__";
   let currentMode = "dashboard"; // dashboard, feed, calendar or scoreboard
 const CLUB_ENGLISH_NAMES = {
     "\u5317\u6d77\u9053\u30b3\u30f3\u30b5\u30c9\u30fc\u30ec\u672d\u5e4c": "HOKKAIDO CONSADOLE SAPPORO",
@@ -785,6 +786,10 @@ const EMBLEM_MAP = {
   }
   function applyYearFilter(year, skipScroll = false) {
     selectedYear = year === null || year === undefined ? null : Number(year);
+    const desiredRenderYear = selectedYear === null ? null : selectedYear;
+    if (renderedFeedYear !== desiredRenderYear) {
+      renderFeed(desiredRenderYear);
+    }
     rebuildYearTabs();
     allSections.forEach(sec => {
       const y = Number(sec.dataset.year || 0);
@@ -2541,12 +2546,16 @@ async function renderDashboard() {
   }
   // --- Rendering Feed ---
   // --- Rendering Feed ---
-  function renderFeed() {
+  function renderFeed(yearFilter = selectedYear === null ? getPivotYear() : selectedYear) {
+    const renderYear = yearFilter === null || yearFilter === undefined ? null : Number(yearFilter);
+    renderedFeedYear = renderYear;
     feedSlider.innerHTML = "";
     scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
     const ymMap = {};
     scheduleData.forEach(m => {
-      const d = parseDate(m.date), key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      const d = parseDate(m.date);
+      if (renderYear !== null && d.getFullYear() !== renderYear) return;
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
       if (!ymMap[key]) ymMap[key] = []; ymMap[key].push(m);
     });
     Object.keys(ymMap).sort().forEach(key => {
@@ -3365,24 +3374,26 @@ async function renderDashboard() {
     if (historicalDataPromise) return historicalDataPromise;
     historicalDataLoaded = false;
     historicalDataPromise = (async () => {
-    const years = [];
     const currentYear = new Date().getFullYear();
-    for (let y = currentYear; y >= 1999; y--) {
-      years.push(y);
-    }
-    
-    const promises = years.map(async (year) => {
+    const baseYears = [];
+    for (let y = currentYear; y >= 1999; y--) baseYears.push(y);
+    const priorityYears = [selectedYear, currentYear, currentYear - 1, currentYear - 2]
+      .filter(y => Number.isFinite(Number(y)) && Number(y) >= 1999 && Number(y) <= currentYear)
+      .map(Number);
+    const years = Array.from(new Set([...priorityYears, ...baseYears]));
+    const yieldToUi = () => new Promise(resolve => setTimeout(resolve, 0));
+
+    for (const year of years) {
       try {
-        const res = await fetch(`vision/data/${year}.json?v=${Date.now()}`);
+        const res = await fetch(`vision/data/${year}.json?v=20260522g`);
         if (!res.ok) throw new Error("HTTP " + res.status);
         const matches = await res.json();
         processHistoricalMatches(matches, year);
       } catch (e) {
         console.warn(`Failed to load historical matches for year ${year}:`, e);
       }
-    });
-    
-    await Promise.all(promises);
+      await yieldToUi();
+    }
     
     scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
     
@@ -3390,7 +3401,7 @@ async function renderDashboard() {
     historicalDataLoaded = true;
     
     rebuildYearTabs();
-    renderFeed();
+    renderFeed(selectedYear === null ? currentYear : selectedYear);
     applyYearFilter(selectedYear === null ? currentYear : selectedYear, true);
     if (currentMode === "dashboard") renderDashboard();
     else if (currentMode === "calendar") renderCalendar();
