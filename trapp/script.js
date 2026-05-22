@@ -738,10 +738,13 @@ const EMBLEM_MAP = {
     if (!yearTabContainer) return;
     yearTabContainer.innerHTML = "";
     yearTabs = {};
-    const allYears = Array.from(new Set(scheduleData
+    const scheduleYears = Array.from(new Set(scheduleData
       .map(m => parseDate(m.date).getFullYear())
       .filter(Boolean)))
       .sort((a, b) => a - b);
+    const currentYear = new Date().getFullYear();
+    const historicalYears = Array.from({ length: currentYear - 1999 + 1 }, (_, index) => 1999 + index);
+    const allYears = Array.from(new Set([...historicalYears, ...scheduleYears])).sort((a, b) => a - b);
     if (!allYears.length) return;
     const displayYears = allYears;
     displayYears.forEach(y => {
@@ -798,6 +801,9 @@ const EMBLEM_MAP = {
     rebuildVisibleSections();
     if (!skipScroll) { currentIndex = 0; scrollToIndex(0); }
     if (currentMode === "calendar") renderCalendar();
+    if (selectedYear !== null && !loadedHistoricalYears.has(selectedYear)) {
+      loadHistoricalYear(selectedYear, { rerender: true }).catch((e) => console.warn("historical year load failed", e));
+    }
   }
   if (yearTabContainer) {
     yearTabContainer.addEventListener("wheel", (event) => {
@@ -1810,6 +1816,8 @@ const EMBLEM_MAP = {
   let cachedStandings = null;
   let historicalDataLoaded = false;
   let historicalDataPromise = null;
+  const loadedHistoricalYears = new Set();
+  const loadingHistoricalYears = new Map();
   // Initialize data from localStorage cache
   const rSave = localStorage.getItem("trapp_results_cache");
   if (rSave) { try { officialResults = JSON.parse(rSave); } catch (e) { } }
@@ -2540,7 +2548,7 @@ async function renderDashboard() {
     if (timeBox) {
       timeBox.style.cssText = "font-size:0.65rem; color:white; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:10px; margin-top:15px; display:inline-block; font-weight:700;";
       timeBox.innerText = historicalDataLoaded
-        ? `\u6700\u7d42\u540c\u671f: ${new Date().toLocaleTimeString()} (Vision data 1999-${new Date().getFullYear()})`
+        ? `\u6700\u7d42\u540c\u671f: ${new Date().toLocaleTimeString()} (必要な履歴のみ読み込み)`
         : "\u5c65\u6b74\u30c7\u30fc\u30bf\u8aad\u307f\u8fbc\u307f\u4e2d...";
     }
   }
@@ -3370,31 +3378,55 @@ async function renderDashboard() {
       }
     });
   }
+  async function loadHistoricalYear(year, options = {}) {
+    const y = Number(year);
+    if (!Number.isFinite(y) || y < 1999 || y > new Date().getFullYear()) return false;
+    if (loadedHistoricalYears.has(y)) return true;
+    if (loadingHistoricalYears.has(y)) return loadingHistoricalYears.get(y);
+    const promise = (async () => {
+      try {
+        const res = await fetch(`vision/data/${y}.json?v=20260522h`);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const matches = await res.json();
+        processHistoricalMatches(matches, y);
+        loadedHistoricalYears.add(y);
+        scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+        decorateAllMatches();
+        rebuildYearTabs();
+        if (options.rerender && (selectedYear === y || selectedYear === null)) {
+          renderFeed(selectedYear === null ? y : selectedYear);
+          applyYearFilter(selectedYear === null ? y : selectedYear, true);
+          if (currentMode === "dashboard") renderDashboard();
+          else if (currentMode === "calendar") renderCalendar();
+        }
+        return true;
+      } catch (e) {
+        console.warn(`Failed to load historical matches for year ${y}:`, e);
+        return false;
+      } finally {
+        loadingHistoricalYears.delete(y);
+      }
+    })();
+    loadingHistoricalYears.set(y, promise);
+    return promise;
+  }
+  async function loadHistoricalYears(years) {
+    for (const year of years) {
+      await loadHistoricalYear(year);
+      await new Promise(resolve => setTimeout(resolve, 0));
+    }
+  }
   async function loadHistoricalData() {
     if (historicalDataPromise) return historicalDataPromise;
     historicalDataLoaded = false;
     historicalDataPromise = (async () => {
     const currentYear = new Date().getFullYear();
-    const baseYears = [];
-    for (let y = currentYear; y >= 1999; y--) baseYears.push(y);
-    const priorityYears = [selectedYear, currentYear, currentYear - 1, currentYear - 2]
+    const priorityYears = [selectedYear, currentYear]
       .filter(y => Number.isFinite(Number(y)) && Number(y) >= 1999 && Number(y) <= currentYear)
       .map(Number);
-    const years = Array.from(new Set([...priorityYears, ...baseYears]));
-    const yieldToUi = () => new Promise(resolve => setTimeout(resolve, 0));
+    const years = Array.from(new Set(priorityYears));
+    await loadHistoricalYears(years);
 
-    for (const year of years) {
-      try {
-        const res = await fetch(`vision/data/${year}.json?v=20260522g`);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const matches = await res.json();
-        processHistoricalMatches(matches, year);
-      } catch (e) {
-        console.warn(`Failed to load historical matches for year ${year}:`, e);
-      }
-      await yieldToUi();
-    }
-    
     scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
     
     decorateAllMatches();
