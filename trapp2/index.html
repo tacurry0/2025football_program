@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+  <title>takarei app</title>
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      alert("JavaScriptエラーが発生しました:\n" + message + "\n\n場所: " + source + "\n行: " + lineno + ", 列: " + colno + "\n\nエラーオブジェクト: " + (error ? error.stack : "なし"));
+      return false;
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260515e">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" href="https://jleague.r10s.jp/img/common/img_club_niigata.png">
+</head>
+<body>
+
+  <div id="bg-canvas"></div>
+
+  <!-- 虫 Fixed App Header -->
+  <header id="ultra-header">
+    <div class="header-content">
+      <div id="active-month-title" title="繧ｿ繝・・縺励※譛医ｒ驕ｸ謚・>... / ..</div>
+      <div id="club-selection">
+        <img src="https://jleague.r10s.jp/img/common/img_club_niigata.png" id="toggle-niigata" class="club-pip active" alt="譁ｰ貎・>
+        <img src="https://jleague.r10s.jp/img/common/img_club_kumamoto.png" id="toggle-kumamoto" class="club-pip active" alt="辭頑悽">
+      </div>
+      <div id="header-n-gate-container"></div>
+      <button id="hamburger-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+      </button>
+    </div>
+    
+    <div id="search-section">
+      <div id="search-wrap">
+        <input type="text" id="search-input" placeholder="Search" autocomplete="off">
+      </div>
+      <div id="search-popup" class="search-popup"></div>
+    </div>
+  </header>
+
+  <!-- 鵠 App Dashboard Menu -->
+  <div id="side-menu-backdrop"></div>
+  <nav id="side-menu">
+    <button id="menu-close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="menu-inner">
+      <h2 class="menu-title">MENU</h2>
+      <div class="menu-grid">
+        <button class="menu-card" id="menu-dashboard">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+          <span class="m-label">繝帙・繝</span>
+        </button>
+        <button class="menu-card" id="menu-feed" data-mode="feed">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
+          <span class="m-label">譌･遞倶ｸ隕ｧ</span>
+        </button>
+        <button class="menu-card" id="menu-calendar" data-mode="calendar">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+          <span class="m-label">繧ｫ繝ｬ繝ｳ繝繝ｼ</span>
+        </button>
+        <button class="menu-card" id="menu-chants">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+          <span class="m-label">蠢懈抄繝ｻ繝√Ε繝ｳ繝・/span>
+        </button>
+        <button class="menu-card" id="menu-standings">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+          <span class="m-label">鬆・ｽ崎｡ｨ</span>
+        </button>
+
+        <button class="menu-card" id="menu-vision" data-mode="vision">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M21 15H3"/><path d="M7 21h10"/><path d="M12 15v6"/></svg>
+          <span class="m-label">螟ｧ蝙九ン繧ｸ繝ｧ繝ｳ</span>
+        </button>
+        <button class="menu-card" id="menu-links">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          <span class="m-label">繝ｪ繝ｳ繧ｯ髮・/span>
+        </button>
+        <button class="menu-card" id="menu-data">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <span class="m-label">繝・・繧ｿ邂｡逅・/span>
+        </button>
+        <button class="menu-card" id="menu-reload">
+          <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          <span class="m-label">蜀崎ｪｭ縺ｿ霎ｼ縺ｿ</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 迫 Links Overlay (Hidden by Default) -->
+  <!-- 統 Bulk Paste Pane (New View) -->
+  <div id="bulk-paste-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>繝・・繧ｿ荳諡ｬ蜈･蜉・/h3>
+      <button class="close-pane">笨・/button>
+    </div>
+    <div class="pane-content" style="padding: 20px;">
+      <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">蜈ｬ蠑上し繧､繝育ｭ峨・隧ｦ蜷域律遞玖｡ｨ繧偵さ繝斐・縺励※縺薙％縺ｫ雋ｼ繧贋ｻ倥￠縺ｦ縺上□縺輔＞縲り・蜍慕噪縺ｫ邨先棡・医せ繧ｳ繧｢・峨′謚ｽ蜃ｺ縺輔ｌ縺ｾ縺吶・/p>
+      <textarea id="bulk-paste-area-new" style="width:100%; height:300px; border: 1px solid #ddd; border-radius: 12px; padding: 15px; font-size: 0.9rem; margin-bottom: 20px; font-family:var(--font-jp);" placeholder="隨ｬ1遽 2/22 縲・・1-0 縲・・.."></textarea>
+      <button id="bulk-paste-save-btn" class="u-backup-btn export" style="width:100%; background:#28a745; color:white; border:none; padding:15px; font-weight:700;">隗｣譫舌＠縺ｦ菫晏ｭ倥☆繧・/button>
+    </div>
+  </div>
+
+  <div id="links-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>繝ｪ繝ｳ繧ｯ髮・/ LINKS</h3>
+      <button class="close-pane">笨・/button>
+    </div>
+    <ul style="list-style: none; padding: 0;">
+      <li style="margin-bottom:12px;"><a href="https://www.albirex.co.jp" target="_blank" style="font-size:1.4rem; color:var(--text-main); font-weight:700; text-decoration:none; display:block; background:#f2f2f7; padding:12px 20px; border-radius:12px; text-align:center;">ALBIREX HP</a></li>
+      <li style="margin-bottom:12px;"><a href="https://roasso-k.com/" target="_blank" style="font-size:1.4rem; color:var(--text-main); font-weight:700; text-decoration:none; display:block; background:#f2f2f7; padding:12px 20px; border-radius:12px; text-align:center;">ROASSO HP</a></li>
+      <li style="margin-bottom:12px;"><a href="https://www.albirex.co.jp/ticket/ngate/form/" target="_blank" style="font-size:1.4rem; color:var(--text-main); font-weight:700; text-decoration:none; display:block; background:#f2f2f7; padding:12px 20px; border-radius:12px; text-align:center;">N繧ｲ繝ｼ繝域歓驕ｸ</a></li>
+      <li style="margin-bottom:12px;"><a href="https://z.albirex.co.jp" target="_blank" style="font-size:1.4rem; color:var(--text-main); font-weight:700; text-decoration:none; display:block; background:#f2f2f7; padding:12px 20px; border-radius:12px; text-align:center;">繝｢繝舌い繝ｫZ</a></li>
+      <li style="margin-bottom:12px;"><a href="https://x.com/albirex_pr" target="_blank" style="font-size:1.4rem; color:var(--text-main); font-weight:700; text-decoration:none; display:block; background:#f2f2f7; padding:12px 20px; border-radius:12px; text-align:center;">ALBIREX X</a></li>
+      <li style="margin-bottom:12px;"><a href="https://x.com/roassoofficial" target="_blank" style="font-size:1.4rem; color:var(--text-main); font-weight:700; text-decoration:none; display:block; background:#f2f2f7; padding:12px 20px; border-radius:12px; text-align:center;">ROASSO X</a></li>
+      <li style="margin-bottom:12px;"><a href="https://www.jleague-ticket.jp/" target="_blank" style="font-size:1.4rem; color:var(--text-main); font-weight:700; text-decoration:none; display:block; background:#f2f2f7; padding:12px 20px; border-radius:12px; text-align:center;">J LEAGUE TICKETS</a></li>
+    </ul>
+  </div>
+ 
+  <!-- 醇 Standings Overlay -->
+  <div id="standings-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>鬆・ｽ崎｡ｨ / STANDINGS</h3>
+      <button class="close-pane">笨・/button>
+    </div>
+    <div class="pane-content" id="standings-content" style="padding:15px;">
+      <!-- JavaScript will inject standings here -->
+    </div>
+  </div>
+
+  <!-- 討 Chants Overlay -->
+  <div id="chants-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>繝√Ε繝ｳ繝磯寔 / CHANTS</h3>
+      <button class="close-pane">笨・/button>
+    </div>
+    <div class="pane-content u-chant-area">
+      <div class="standings-tabs" style="margin-bottom: 20px;">
+        <button class="u-tab-btn active" onclick="switchChantClub('niigata', this)">譁ｰ貎・/button>
+        <button class="u-tab-btn" onclick="switchChantClub('kumamoto', this)">辭頑悽</button>
+      </div>
+
+      <!-- 譁ｰ貎溘・繝√Ε繝ｳ繝・-->
+      <div id="chants-niigata" class="chant-club-group">
+        <div class="u-chant-item">
+          <div class="u-chant-title">繧｢繧､繧ｷ繝・Ν繝九う繧ｬ繧ｿ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">菫ｺ驕斐′ 縺､縺・※繧九＆譁ｰ貎・繝､繧ｱ繝峨＆縺帙※縺上ｌ 縺薙・繧ｲ繝ｼ繝
+菫ｺ驕斐′ 縺､縺・※繧九＆譁ｰ貎・莨昴∴縺溘＞ 縺薙・諠ｳ縺・
+繧｢繧､繧ｷ繝・Ν繝九う繧ｬ繧ｿ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">菫ｺ縺溘■縺ｮ隱・ｊ譁ｰ貎・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">譁ｰ貎・繝ｬ繝・ヤ繧ｴ繝ｼ
+繧ｪ繝・が繝ｼ 菫ｺ縺溘■縺ｮ譁ｰ貎・譁ｰ貎・繝ｬ繝・ヤ繧ｴ繝ｼ
+繧ｪ繝・が繝ｼ 菫ｺ縺溘■縺ｮ譁ｰ貎・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Pride of Niigata <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">Oh, Pride of Niigata!
+Pride of Niigata!
+We are ready to go
+
+繧ｪ繝ｼ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ
+繧ｪ繝ｼ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ
+繧ｪ繝ｼ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ
+繧ｪ繝ｼ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">繝輔か繝ｫ繝・ぃ譁ｰ貎・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繧ｪ繧ｪ繝ｼ 繧ｪ繧ｪ繧ｪ繝ｼ
+繝輔か繝ｫ繝・ぃ譁ｰ貎・繧ｪ繧ｪ繧ｪ繝ｼ 繧ｪ繧ｪ繧ｪ繝ｼ
+繝輔か繝ｫ繝・ぃ譁ｰ貎・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">貍｢・医♀縺ｨ縺難ｼ・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧｢繝ｬ繧｢繝ｬ繧ｪ繧ｪ繝ｼ 繧｢繝ｬ繧｢繝ｬ繧ｪ繧ｪ繝ｼ
+縺輔≠陦後％縺・● 貍｢隕九○繧・繧｢繝ｬ譁ｰ貎・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">繧ｬ繝弱Ρ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ繧ｪ繧ｪ繧ｪ 繧ｪ繝ｼ繧ｪ繧ｪ繧ｪ
+縺輔≠襍ｰ繧翫□縺・繝励Λ繧､繝峨が繝匁眠貎・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">逵溷､上・螟懊・螟｢ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧｢繝・Ξ 繧｢繝ｬ繝ｼ 繧ｪ繧ｪ繝ｼ繧ｪ 譁ｰ貎溘い繝ｼ繝ｬ
+謖代∩邯壹￠繧阪ｈ
+繧｢繝・Ξ 繧｢繝ｬ繝ｼ 繧ｪ繧ｪ繝ｼ繧ｪ 譁ｰ貎溘い繝ｼ繝ｬ
+蜈ｨ縺ｦ縺ｯ 蜍昴■迯ｲ繧九◆繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">雹ｴ謨｣繧峨○ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">雹ｴ謨｣繧峨○ 譁ｰ貎・雹ｴ謨｣繧峨○ 譁ｰ貎・蜍晏茜繧堤岼謖・＠縺ｦ
+遯√″騾ｲ繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Niigata In My Life <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ繧ｪ繧ｪ繧ｪ繝ｼ Niigata in my life
+繧ｪ繝ｼ繧ｪ繧ｪ繧ｪ繝ｼ Niigata in my life
+菫ｺ縺溘■縺ｮ螟｢繧偵・縺帙※
+縺ｩ縺薙∪縺ｧ繧らｪ√″騾ｲ繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">繝ｩ繝ｻ繝舌Δ繝ｩ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｩ繝ｩ繝ｩ 繝ｩ繝ｻ繝舌Δ繝ｩ
+繝九う繧ｬ繧ｿ 繝ｩ繝ｻ繝舌Δ繝ｩ
+繝九う繧ｬ繧ｿ 繝ｩ繝ｻ繝舌Δ繝ｩ
+蜍晏茜繧剃ｿ｡縺倥※</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">螂ｽ縺阪↓縺ｪ繧峨★縺ｫ縺・ｉ繧後↑縺・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ
+We can't help falling in love with you
+繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ
+We can't help falling in love with you
+譁ｰ貎滂ｼ・譁ｰ貎滂ｼ・/div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 辭頑悽縺ｮ繝√Ε繝ｳ繝・-->
+      <div id="chants-kumamoto" class="chant-club-group" style="display:none;">
+        <!-- ｧ､ GK -->
+        <div class="u-chant-item">
+          <div class="u-chant-title">GK 1. 菴占陸蜿ｲ鬨・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">莉頑律繧よｭ｢繧√ｍ 菴占陸蜿ｲ鬨・繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ 縺励・縺催・ 繝舌Δ 縺励・縺・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">GK 16. 豁ｦ閠・､ｧ螟｢ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">菫ｺ繧峨・繧ｴ繝ｼ繝ｫ繧貞ｮ医ｊ謚懊￠ 縺ｲ繧阪・ 縺ｲ繧阪・ 繧縺励ｃ縺ｲ繧阪・</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">GK 21. 隘ｿ譚鷹▼蟾ｱ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">縺・▽縺ｾ縺ｧ繧・縺・▽縺ｾ縺ｧ繧・螳医ｌ螳医ｌ 隘ｿ譚鷹▼蟾ｱ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">GK 23. 菴占陸蜆ｪ荵・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">菫ｺ繧峨・螳郁ｭｷ逾槭ｆ縺・ｄ 螳医ｊ謚懊￠繧・≧繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">GK 蜈ｱ騾・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ 繧ｪ繧ｪ繧ｪ 繧ｪ繧ｪ繧ｪ 笳銀雷(GK縺ｮ蜷榊燕)!</div>
+          </div>
+        </div>
+
+        <!-- 孱・・DF -->
+        <div class="u-chant-item">
+          <div class="u-chant-title">DF 2. 鮟呈惠譎・ｹｳ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">Hey!(逕ｷ) Hey!(螂ｳ) Hey! (逕ｷ) Hey!(螂ｳ) 繧ｳ繝ｼ繝倥う繧ｯ繝ｭ繧ｭ(逕ｷ螂ｳ)</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">DF 3. 螟ｧ隘ｿ驕ｼ螟ｪ驛・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">螟ｧ隘ｿ驕ｼ螟ｪ驛・繝ｩ繝ｩ繝ｩ繝ｩ繝ｩﾃ・ 縺ｿ縺帙※縺上ｌ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">DF 4. 阮ｬ蟶ｫ逕ｰ貔ｪ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">螳医ｊ謚懊￠ 繧後＞ 繧・￥縺励□ 繝輔か繝ｼ繧ｨ繝舌・</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">DF 6. 蟯ｩ荳玖穐 <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｩ繝ｩ繝ｩ繝ｩ 繧｢繝ｬ 縺・ｏ縺励◆ 繝ｩ繝ｩ繝ｩ 繧｢繝ｬ 繧上◆繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">DF 24. 譚取ｳｰ豐ｳ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｪ繝・ワ 繝懊Φ繝舌う繧ｨ! 繝ｪ繝・ワ繝懊Φ繝舌う繧ｨ! 繝ｪ繝・ワ 繧ｪ繝ｼ繝ｬ 繧ｪ繝ｼ繝ｬﾃ・</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">DF 26. 謌ｸ逕ｰ蟲ｻ蟷ｳ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">縺ｨ縺縺ｨ縺縺ｨ縺縺ｨ縺縺励ｅ繧薙⊆縺・縺ｨ縺縺ｨ縺縺ｨ縺 縺励ｅ繧薙⊆縺・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">DF 30. 髟ｷ蠍句ｿ玲ｭｩ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">縺ｪ縺後＠縺ｾ 縺ｪ縺後＠縺ｾ 縺励い繝ｬ 繧｢繝ｬ繧ｪ繝ｼ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">DF 35. 莨願陸鬚ｯ逵・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">遶九■蝪槭′繧・縺昴≧縺ｾ 螳医ｊ謚懊￠繧・縺昴≧縺ｾ</div>
+          </div>
+        </div>
+
+        <!-- 笞ｽ MF -->
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 5. 蟆乗棊諷ｶ螟ｪ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｩ繝ｩ繝ｩ縺薙・繧・＠縺代＞縺・繧｢繝ｬ繧｢繝ｬ縺代＞縺・繝ｩ繝ｩ繝ｩ 繝輔か繝ｫ繝・ぃ 縺薙・繧・＠縺代＞縺溘が繝ｬ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 7. 阯､莠慕囀荵・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">襍ｰ繧後％縺・ｄ隕九○繧阪％縺・ｄ 繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｼ繝ｩ 縺ｵ縺倥＞縺薙≧繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 8. 荳頑搗蜻ｨ蟷ｳ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝舌Δ縺励ｅ縺・∈縺・繝舌Δ縺励ｅ縺・∈縺・隱・ｊ繧定・縺ｫ縺溘◆縺九♀縺・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 13. 鬟ｯ譏滓・濶ｯ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">縺・＞縺ｻ縺励≠縺阪ｉﾃ・ 縺九′繧・￠縺ゅ″繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 15. 荳牙ｳｶ鬆悟ｹｳ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">荳牙ｳｶ鬆悟ｹｳ 荳牙ｳｶ鬆悟ｹｳ 繝ｩ繝ｼ繝ｩ繝ｩ繝ｩ繝ｼ繝ｩ繝ｩ繝ｩ 繝舌Δ鬆悟ｹｳ陦後％縺・ｸ牙ｳｶ遯√″騾ｲ繧・悟ｹｳ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 17. 豌ｸ莠暮｢ｯ螟ｪ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">縺ｪ縺後＞縺昴≧縺・繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｼ繝ｩﾃ・ 縺ｪ縺後＞縺昴≧縺・繝ｩ繝ｩ繝ｼ繝ｩ繝ｩ繝ｩ繝ｼ繝ｩ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 19. 貂｡驍画懈ｭｩ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧後≠繧・繧後≠繧・繧後≠繧・繧｢繝ｬ繧後≠繧・蛻・ｊ陬ゅ￠ 菫ｺ繧峨・繧｢繝ｬ繧後≠繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 22. 譚ｾ逕ｰ隧螟ｪ驛・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ 縺ｾ縺､縺縺医＞縺溘ｍ縺・繝ｩ繝ｼ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ 縺医＞縺溘ｍ縺・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 25. 驍｣鬆亥▼荳 <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">驍｣鬆亥▼荳繧｢繝ｬ 驍｣鬆亥▼荳繧｢繝ｬ繧ｪ 襍ｰ繧檎㏍縺医ｍ 辭ｱ縺上↑繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 27. 譬ｹ蟯ｸ諠豎ｰ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">縺ｭ縺弱＠縺代＞縺・繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ 縺ｭ縺弱＠縺代＞縺・繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ 繧ｪ繧ｪ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 28. 蜷牙ｲ｡蜆ｪ蟶・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繧ｪ100%繧・≧縺・繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繧・≧縺・菫ｺ縺溘■縺ｮ螢ｰ繧定レ縺ｫ蜿励￠ 蜷牙ｲ｡蜆ｪ蟶・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 39. 髱呈惠菫願ｼ・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ繧ｪ 髱呈惠菫願ｼ・髱呈惠菫願ｼ・隕九○縺ｦ縺上ｌ 繧ｪ繝ｼ繧ｪ繧ｪ繝ｼ繧ｪ繧ｪ繝ｼ繧ｪ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">MF 41. 螟ｧ譛ｬ逾先ｧｻ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｩ繝ｩ繝ｼ繝ｩ繝ｩ繝ｼ繝ｩ 繝ｩ繝ｩ繝ｩ繝ｩ繝ｼ繧・≧縺・繧ｪ繧ｪ繝ｼ 繝ｩ繝ｩ 繧・≧縺・/div>
+          </div>
+        </div>
+
+        <!-- 噫 FW -->
+        <div class="u-chant-item">
+          <div class="u-chant-title">FW 10. 鮖ｿ蜿門窮譁・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">縺九→繧翫ｆ縺・→ 繝ｩ繝ｩ繝ｩ繝ｼ繝ｩ 繝ｩ繝ｼ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">FW 11. 繝吶ず繝ｧ繝ｳ繝溘Φ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｩ繝ｩ繝ｩ繝吶ず繝ｧ繝ｳ繝溘Φ 菫ｺ繧峨→蜈ｱ縺ｫ 繝ｩ繝ｩ繝ｩ繝吶ず繝ｧ繝ｳ繝溘Φ 繝√ぉ繧ｬ繝ｳ!繝吶ず繝ｧ繝ｳ繝溘Φ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">FW 14. 遏ｳ蜴溷､ｮ鄒・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">遏ｳ蜴溷､ｮ鄒・辯・∴繧肴ｼ｢ 遏ｳ蜴溷､ｮ鄒・螟ｮ鄒・遯√″騾ｲ繧√が繧ｪ 螟ｮ鄒・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">FW 18. 蜊贋ｻ｣蟆・・ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ繝ｬ繧ｪ繝ｬ繧ｪ繝ｬ繧ｪ繝ｬ 縺ｯ繧薙□縺・・繧薙□縺・/div>
+          </div>
+        </div>
+
+        <!-- 藻 逶｣逹｣ -->
+        <div class="u-chant-item">
+          <div class="u-chant-title">逶｣逹｣ 迚・㍽蝮ら衍螳・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">********* 迚・㍽蝮ら・譛ｬ!</div>
+          </div>
+        </div>
+
+        <!-- 圸 繝√・繝繝√Ε繝ｳ繝・-->
+        <div class="u-chant-item">
+          <div class="u-chant-title">繝ｭ繧｢繝・た辭頑悽繧ｳ繝ｼ繝ｫ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">***** 繝ｭ繧｢繝・た辭頑悽! ***** 繝ｭ繧｢繝・た辭頑悽!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">We are Rosso! <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">We are Rosso! We are Rosso! We are Rosso! We are Rosso!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Forza KUMAMOTO <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧｢繝ｬ繧ｪ 繝輔か繝ｫ繝・ぃ 縺上∪繧ゅ→ 繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">繝懊Λ繝ｼ繝ｬ(繝帙・繝 ver.) <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝懊Λ繝ｼ繝ｬ繝ｼ! 繧ｪ繧ｪ 繧ｫ繝ｳ繧ｿ繝ｼ繝ｬ! 繧ｪ繧ｪ繧ｪ 襍､縺乗沒繧√ｉ繧後◆ 繧ｹ繧ｿ繧ｸ繧｢繝謠ｺ繧峨○!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">繝懊Λ繝ｼ繝ｬ (繧｢繧ｦ繧ｧ繧､ ver.) <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝懊Λ繝ｼ繝ｬ繝ｼ! 繧ｪ繧ｪ 繧ｫ繝ｳ繧ｿ繝ｼ繝ｬ!繧ｪ繧ｪ繧ｪ 襍､縺乗沒繧∽ｸ翫￡縺・菫ｺ縺溘■繧呈昭繧峨○!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">鬧・￠荳翫′繧後￥縺ｾ繧ゅ→! <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">鬧・￠荳翫′繧後￥縺ｾ繧ゅ→! 菫ｺ縺溘■縺ｮ螟｢縺ｮ縺・縺輔≠陦後％縺・● 繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繝ｼ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">繝ｭ繝・た縺ｨ蜈ｱ縺ｫ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｭ繝・た縺ｨ蜈ｱ縺ｫ謌代ｉ縺ｯ逕溘″繧・蜿ｫ縺ｳ鬟帙・霍ｳ縺ｭ繧・莉頑律繧ょ享蛻ｩ縺ｮ縺溘ａ縺ｫ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">隱・ｊ繧定・縺ｫ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">辭頑悽 隱・ｊ繧定・縺ｫ 繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ 辭ｱ縺乗姶縺翫≧</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">辭ｱ縺・ワ繝ｼ繝・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝輔か繝ｫ繝・ぃ辭頑悽 辭ｱ縺・％縺ｮ繝上・繝・菫ｺ縺溘■縺ｮ隱・ｊ 繝ｭ繝・た 遯√″騾ｲ繧・/div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Vamos rosso <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝舌Δ繝舌Δ繝ｭ繝・た 繝舌Δ繝舌Δ繝ｭ繝・た 繝舌Δ繧ｹ繝ｭ繝・た 繝舌Δ繧ｹ繝ｭ繝・た</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">縺上∪繧ゅ→縺ｮ縺溘ａ縺ｫ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">辭頑悽縺ｮ縺溘ａ縺ｫ謌代ｉ縺ｯ豁後≧縺・蜍晏茜縺ｫ蜷代°縺｣縺ｦ縺ｿ繧薙↑縺ｧ豁後∴繧ｪ繧､繧ｪ繧､繧ｪ繧､</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Power to the ROSSO <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">Power to the ROSSO ﾃ・ Power to the ROSSO right on!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">繝薙Ν繝峨い繝・・ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">**** ** 繧ｪ繝ｼ繧ｪ繧､! **** ** 繧ｪ繝ｼ繧ｪ繧､!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">GOAL 辭頑悽 GOAL <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｴ繝ｼ繝ｫ! 縺上∪繧ゅ→! 繧ｴ繝ｼ繝ｫ!!! 繧ｴ繝ｼ繝ｫ! 縺上∪繧ゅ→! 繧ｴ繝ｼ繝ｫ!!!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Let's GO KUMAMOTO <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｬ繝・ヤ繧ｴ繝ｼ 縺上∪繧ゅ→! 繝ｬ繝・ヤ繧ｴ繝ｼ 縺上∪繧ゅ→!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">縺吶∋縺ｦ縺ｯ蜍晏茜縺ｮ縺溘ａ縺ｫ <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝舌Δ繝ｭ繝・た 貍｢縺ｪ繧峨・ 縺昴・隱・ｊ縺九￠縺ｦ謌ｦ縺・繧ｪ繝ｼ!繧ｪ! 繧ｪ繝ｼ!繧ｪ! 繧ｪ繝ｼ!繧ｪ! 繧ｪ繝ｼ!繧ｪ!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">We Are rosso aleo <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝舌Δ繝ｭ繝・た縺ｿ縺帙※縺上ｌ 縺吶∋縺ｦ縺ｯ蜍晏茜縺ｮ縺溘ａ縺ｫ 繧ｪ繝ｼ! 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ! 縺ｿ縺帙※縺上ｌ! 
+(繧ｦ繧｣繧｢繝ｭ繝・た 繧ｦ繧｣繧｢繝ｭ繝・た 繧ｦ繧｣繧｢繝ｭ繝・た繧｢繝ｬ繧ｪ繝ｼ) We are rosso We are rosso We are rosso ale oh 
+遯√″騾ｲ繧・菫ｺ縺溘■縺ｮ隱・ｊ辭頑悽 (2蝗樒岼縺ｯ豁瑚ｩ槭′蜈ｨ縺ｦ縲後が繝ｼ縲・</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">繧｢繝ｬ! 繧｢繝ｬ! 繧｢繝ｬ! KUMAMOTO <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧｢繝ｬ繧｢繝ｬ繧｢繝ｬ 縺上∪繧ゅ→ﾃ・ 繧｢繝ｬ繧｢繝ｬ繧｢繝ｬ(繧｢繝ｬ!) 繧｢繝ｬ繧｢繝ｬ繧｢繝ｬ(繧｢繝ｬ!) 繧｢繝ｬ繧｢繝ｬ繧｢繝ｬ 縺上∪繧ゅ→</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">轣ｫ縺ｮ蝗ｽ鬲・<span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">縺輔＝繝ｼ縺・￠! 繝ｭ繧｢繝・た辭頑悽! 縺・▽繧ゆｿｺ縺溘■縺後▽縺・※縺・ｋ縺・ 轣ｫ縺ｮ蝗ｽ鬲・ 縺ｿ縺帙ｈ縺・●!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Forza Rosso <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝輔か繝ｫ繝・ぃ繝ｭ繝・たﾃ・ 荳也阜縺ｫ遉ｺ縺帙％縺ｮ隱・ｊ 繝輔か繝ｫ繝・ぃ繝ｭ繝・たﾃ・ 菫ｺ繧峨・鮠灘虚譏ゅｉ縺・繧ｪ繝ｼ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繝ｼ繧ｪ繧ｪ繧ｪ繧ｪ 繧ｪ繝ｼ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ 繝ｩ繝ｼ繝ｩ繝ｩ繝ｩ繝ｩ 繝ｩ繝ｼ繝ｩ繝ｩ繝ｩ繝ｩ 繝ｩ繝ｼ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ繝ｩ 繝ｩ繝ｩ繝ｩ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">We Are rsso, LOVE Rosso <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｦ繧｣繝ｼ繧｢繝ｼ繝ｭ繝・た 繝ｩ繝悶Ο繝・た蠢・ｒ荳縺､縺ｫﾃ・ 縺上∪繧ゅ→!縺上∪繧ゅ→!縺上∪繧ゅ→! 繧ｪ繧､繧ｪ繧､繧ｪ繧､!</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Officalsong <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ繧ｪ繝ｼ! 繧ｪ繝ｼ繧ｪ繝ｼ! 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繝ｭ繧｢繝・た!ﾃ・ 繧ｪ繧､! *** 繧ｪ繧､! *** 繝ｭ繧｢繝・た縺上∪繧ゅ→!**</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Come On Rosso <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">***ﾃ・ 繧ｫ繝｢繝ｳ繝ｭ繝・た! 繧ｫ繝｢繝ｳ! 繧ｫ繝｢繝ｳ繝ｭ繝・た!ﾃ・ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Let's go Rosso <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝ｬ繝・ヤ繧ｴ繝ｼ繝ｭ繝・た!繝ｬ繝・ヤ繧ｴ繝ｼ!繝ｬ繝・ヤ繧ｴ繝ｼ繝ｭ繝・た!ﾃ・ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Ole Oh KUMAMOTO <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ繝ｬ繧ｪ繝ｼ 繧ｪ繝ｬ縺上∪繧ゅ→ﾃ・ 繧ｪ繧ｪ繧ｪ 繧ｪ繧､! 繧ｪ繧､繧ｪ繧､繧ｪ繧､</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">辭頑悽繧ｪ繝ｼ繝ｬ! <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">辭頑悽繧ｪ繝ｼ繝ｬ! 辭頑悽繧ｪ繝ｼ繝ｬ! 辭頑悽繧ｪ繝ｼ繝ｬ繧ｪ繝ｼ繝ｬ! (蠕礼せ譎ゅ・縲檎・譛ｬ縲阪ｒ驕ｸ謇句錐縺ｫ)</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">Coffee Rumba <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ 繝ｭ繝・た 繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ 繧ｪ繝ｼ 繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ 繝ｭ繝・た 繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ繝繝ｬ 繧ｪ繝ｼ繝ｭ繝・た</div>
+          </div>
+        </div>
+        <div class="u-chant-item">
+          <div class="u-chant-title">HIKARI <span class="u-chant-arrow">笆ｼ</span></div>
+          <div class="u-chant-body">
+            <button class="u-chant-play">笆ｶ 蜀咲函</button>
+            <div class="u-chant-lyrics">繧ｪ繝ｼ 繧ｪ繧ｪ繧ｪ繝ｼ 繧ｪ繧ｪ繧ｪ繧ｪ繝ｼ 繧ｪ繝ｼ繧ｪ繝ｼ 繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繝ｼ繧ｪ繝ｼ 繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繧ｪ繝ｼ 繧ｪ繝ｼ繧ｪ繝ｼ繧ｪ繝ｼ!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 醇 Standings Overlay -->
+  <div id="standings-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>鬆・ｽ崎｡ｨ / STANDINGS</h3>
+      <button class="close-pane">笨・/button>
+    </div>
+    <div class="pane-content standings-container">
+      <div id="standings-content" style="padding:12px 0;">
+        <div style="text-align:center;padding:40px;color:#888;">隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 沈 Data Backup Overlay -->
+  <div id="data-overlay" class="sub-pane">
+    <div class="pane-header">
+      <h3>繝・・繧ｿ邂｡逅・/ DATA BACKUP</h3>
+      <button class="close-pane">笨・/button>
+    </div>
+    <div class="pane-content u-backup-area">
+      <p class="u-backup-desc">隕ｳ謌ｦ莠亥ｮ壹√Γ繝｢縲∫ｵ先棡縺ｮ繝・・繧ｿ繧谷SON繝輔ぃ繧､繝ｫ縺ｨ縺励※菫晏ｭ倥＠縺溘ｊ縲∬ｪｭ縺ｿ霎ｼ繧薙□繧翫〒縺阪∪縺吶・/p>
+      <div class="u-backup-group">
+        <label>繝・く繧ｹ繝井ｸ諡ｬ蜿肴丐 (閾ｪ蜍募・蜉・</label>
+        <button id="open-bulk-paste-btn" class="u-backup-btn export" style="background:#007bff; color:white; border:none; margin-top: 5px;">荳諡ｬ蜈･蜉帷判髱｢縺ｸ</button>
+      </div>
+
+      <div class="u-backup-group" style="margin-top: 20px;">
+        <label>邨先棡縺ｮ謇句虚蜈･蜉・/label>
+        <button id="fast-input-btn" class="u-backup-btn export" style="background:var(--albirex-orange); color:white; border:none;">驕主悉縺ｮ邨先棡繧剃ｸ諡ｬ蜈･蜉・/button>
+      </div>
+      
+      <div class="u-backup-group">
+        <label>隕ｳ謌ｦ莠亥ｮ・/label>
+        <button id="export-list-btn" class="u-backup-btn export" style="background:#28a745; color:white; border:none;">隕ｳ謌ｦ莠亥ｮ壹Μ繧ｹ繝医ｒ繧ｳ繝斐・</button>
+      </div>
+      <div class="u-backup-group">
+        <label>繧ｨ繧ｯ繧ｹ繝昴・繝・/label>
+        <button id="export-btn" class="u-backup-btn export">繝・・繧ｿ繧偵ヵ繧｡繧､繝ｫ縺ｫ菫晏ｭ・/button>
+      </div>
+
+      <div class="u-backup-group">
+        <label>繧､繝ｳ繝昴・繝・/label>
+        <button id="import-trigger" class="u-backup-btn import">繝輔ぃ繧､繝ｫ縺九ｉ隱ｭ縺ｿ霎ｼ縺ｿ</button>
+        <input type="file" id="import-file" style="display:none" accept=".json">
+      </div>
+
+      <div class="u-backup-warning">窶ｻ繧､繝ｳ繝昴・繝医☆繧九→迴ｾ蝨ｨ縺ｮ繝・・繧ｿ縺ｯ譖ｸ縺肴鋤縺医ｉ繧後∪縺吶ょｮ御ｺ・ｾ後↓繧｢繝励Μ縺瑚・蜍慕噪縺ｫ蜀崎ｪｭ縺ｿ霎ｼ縺ｿ縺輔ｌ縺ｾ縺吶・/div>
+    </div>
+  </div>
+
+  <!-- 鋤・・Main View Switcher -->
+  <div id="view-layer">
+    <!-- View 0: Dashboard (Top) -->
+    <main id="ultra-dashboard" class="active-view">
+      <div id="dashboard-cards-container">
+         <div style="text-align:center;padding:40px;color:#888;">隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ...</div>
+      </div>
+      
+      <div class="dash-quick-links">
+         <button class="dash-ql-btn" id="dash-to-feed">
+            <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
+            <span>譌･遞倶ｸ隕ｧ</span>
+         </button>
+         <button class="dash-ql-btn" id="dash-to-calendar">
+            <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            <span>繧ｫ繝ｬ繝ｳ繝繝ｼ</span>
+         </button>
+         <button class="dash-ql-btn" id="dash-to-standings">
+            <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+            <span>鬆・ｽ崎｡ｨ</span>
+         </button>
+         <button class="dash-ql-btn" id="dash-to-links">
+            <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            <span>繝ｪ繝ｳ繧ｯ髮・/span>
+         </button>
+
+         <button class="dash-ql-btn" id="dash-to-vision">
+            <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M21 15H3"/><path d="M7 21h10"/><path d="M12 15v6"/></svg>
+            <span>螟ｧ蝙九ン繧ｸ繝ｧ繝ｳ</span>
+         </button>
+      </div>
+    </main>
+
+    <!-- View 1: Feed (Timeline) -->
+    <main id="ultra-feed" class="hidden-view">
+      <div id="feed-slider"></div>
+    </main>
+
+    <!-- View 2: Calendar Mode -->
+    <main id="calendar-view" class="hidden-view">
+      <div id="calendar-body">
+        <!-- Injected via JS -->
+      </div>
+    </main>
+
+
+
+    <!-- View 4: Stadium Vision Controller -->
+    <main id="vision-view" class="hidden-view">
+      <iframe class="vision-app-frame" data-src="vision/index.html?v=20260521a" title="螟ｧ蝙九ン繧ｸ繝ｧ繝ｳ邂｡逅・></iframe>
+    </main>
+  </div>
+
+  <!-- 導 Navigation Pill -->
+  <footer id="ultra-nav">
+    <div class="nav-pill">
+      <button id="prev-month" class="nav-icon">竊・/button>
+      <div id="nav-year-tabs">
+        <button id="toggle-year-2024" class="year-tab">2024</button>
+        <button id="toggle-year-2025" class="year-tab">2025</button>
+        <button id="toggle-year-2026" class="year-tab">2026</button>
+        <button id="toggle-year-all" class="year-tab">ALL</button>
+      </div>
+      <button id="next-month" class="nav-icon">竊・/button>
+    </div>
+    <button id="go-today" class="today-bubble">LIVE</button>
+  </footer>
+
+  <div id="detail-sheet-backdrop"></div>
+  <div id="detail-sheet">
+    <div class="sheet-handle"></div>
+    <div id="sheet-content"></div>
+  </div>
+
+  <!-- 識 Calendar Match Picker Overlay -->
+  <div id="match-picker-backdrop" class="sub-pane-backdrop"></div>
+  <div id="match-picker-overlay" class="sub-pane-pop">
+    <div class="pop-header">
+      <h4>隧ｦ蜷医ｒ驕ｸ謚・/h4>
+      <button class="close-pop">笨・/button>
+    </div>
+    <div id="picker-list"></div>
+  </div>
+
+  <!-- 套 Year/Month Picker -->
+  <div id="ym-picker-backdrop" class="sub-pane-backdrop"></div>
+  <div id="ym-picker-overlay" class="ym-picker-pop">
+    <div class="ym-picker-header">
+      <h4>蟷ｴ譛医ｒ驕ｸ謚・/h4>
+      <button id="ym-picker-close">笨・/button>
+    </div>
+    <div id="ym-picker-list"></div>
+  </div>
+
+  <!-- 笞｡ Fast Input Overlay -->
+  <div id="fast-input-sheet" class="sub-pane" style="z-index: 4000;">
+    <div class="pane-header" style="flex-direction: column; align-items: stretch; gap: 15px; padding-bottom: 15px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="margin: 0;">荳諡ｬ蜈･蜉帙・邱ｨ髮・/h3>
+        <button class="close-pane" id="close-fast-input">笨・/button>
+      </div>
+      <div id="fast-year-tabs" style="display: flex; justify-content: center; gap: 10px;">
+        <button class="fast-year-tab" data-y="2024" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: #f2f2f7; color: var(--text-grey); font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2024</button>
+        <button class="fast-year-tab" data-y="2025" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: #f2f2f7; color: var(--text-grey); font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2025</button>
+        <button class="fast-year-tab active" data-y="2026" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: var(--text-main); color: white; font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2026</button>
+      </div>
+    </div>
+    <div class="pane-content" id="fast-input-list" style="padding-bottom: 80px; overflow-y: auto; height: calc(100% - 60px);">
+      <!-- JavaScript will inject match rows here -->
+    </div>
+    <button id="save-fast-input" class="close-sheet-btn" style="position:absolute; bottom:0; left:0; border-radius:0; margin:0; z-index: 4010;">荳諡ｬ菫晏ｭ・/button>
+  </div>
+
+
+<script src="results_data.js?v=20260501b"></script>
+<script src="schedule/schedule.js?v=20260513b"></script>
+  <!-- 📽️ Stadium Vision Preview Modal -->
+  <div id="vision-preview-backdrop" class="sub-pane-backdrop" style="background: rgba(0, 0, 0, 0.85); z-index: 5000;"></div>
+  <div id="vision-preview-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: transparent; z-index: 5001; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+    <div class="vision-preview-container" style="position: relative; width: 90%; max-width: 1200px; aspect-ratio: 16 / 9; background: rgba(20, 20, 25, 0.9); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); overflow: hidden; display: flex; flex-direction: column;">
+      <div class="vision-preview-header" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: rgba(30, 30, 40, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <h4 style="margin: 0; font-family: var(--font-kick); color: #fff; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ff6b00;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M21 15H3"/><path d="M7 21h10"/><path d="M12 15v6"/></svg>
+          大型ビジョン プレビュー
+        </h4>
+        <button id="close-vision-preview" style="background: rgba(255, 255, 255, 0.1); border: none; color: #fff; font-size: 1.2rem; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-weight: bold; border: 1px solid rgba(255,255,255,0.05);">✕</button>
+      </div>
+      <iframe id="vision-preview-iframe" style="flex: 1; border: none; width: 100%; height: 100%;" src="about:blank"></iframe>
+    </div>
+  </div>
+
+<script src="script.js?v=20260515e"></script>
+
+</body>
+</html>
