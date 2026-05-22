@@ -742,8 +742,7 @@ const EMBLEM_MAP = {
       .filter(Boolean)))
       .sort((a, b) => a - b);
     if (!allYears.length) return;
-    const pivot = getPivotYear();
-    const displayYears = getDisplayYears(allYears, pivot);
+    const displayYears = allYears;
     displayYears.forEach(y => {
       const yStr = String(y);
       const btn = document.createElement("button");
@@ -768,6 +767,12 @@ const EMBLEM_MAP = {
       const isActive = (k === "all" && selectedYear === null) || (Number(k) === selectedYear);
       if (yearTabs[k]) yearTabs[k].classList.toggle("active", isActive);
     });
+    requestAnimationFrame(() => {
+      const activeTab = yearTabContainer.querySelector(".year-tab.active");
+      if (activeTab && typeof activeTab.scrollIntoView === "function") {
+        activeTab.scrollIntoView({ inline: "center", block: "nearest" });
+      }
+    });
   }
   function getCurrentMonthKey() {
     const n = new Date();
@@ -788,6 +793,13 @@ const EMBLEM_MAP = {
     rebuildVisibleSections();
     if (!skipScroll) { currentIndex = 0; scrollToIndex(0); }
     if (currentMode === "calendar") renderCalendar();
+  }
+  if (yearTabContainer) {
+    yearTabContainer.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      event.preventDefault();
+      yearTabContainer.scrollLeft += event.deltaY;
+    }, { passive: false });
   }
   function scrollToIndex(idx) {
     if (!visibleSections[idx]) return;
@@ -1756,16 +1768,33 @@ const EMBLEM_MAP = {
     // \u30d5\u30eb\u30b9\u30af\u30ea\u30fc\u30f3\u30aa\u30fc\u30d0\ufffdE\u30ec\u30a4\u3092\u8868\u793a
     const backdrop = document.getElementById("vision-preview-backdrop");
     const overlay = document.getElementById("vision-preview-overlay");
+    const container = overlay ? overlay.querySelector(".vision-preview-container") : null;
     const iframe = document.getElementById("vision-preview-iframe");
     if (!overlay || !iframe) return;
+    const updateVisionPreviewScale = () => {
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      const scale = Math.max(0.05, Math.min(rect.width / 1920, rect.height / 1080));
+      overlay.style.setProperty("--vision-preview-scale", String(scale));
+    };
     iframe.src = "vision/display.html?t=" + Date.now();
     overlay.style.display = "flex";
-    if (backdrop) backdrop.style.display = "block";
+    if (backdrop) {
+      backdrop.style.display = "block";
+      backdrop.classList.add("active");
+    }
+    updateVisionPreviewScale();
+    requestAnimationFrame(updateVisionPreviewScale);
+    window.addEventListener("resize", updateVisionPreviewScale);
     const closeBtn = document.getElementById("close-vision-preview");
     const doClose = () => {
       overlay.style.display = "none";
-      if (backdrop) backdrop.style.display = "none";
+      if (backdrop) {
+        backdrop.classList.remove("active");
+        backdrop.style.display = "none";
+      }
       iframe.src = "about:blank";
+      window.removeEventListener("resize", updateVisionPreviewScale);
     };
     if (closeBtn) closeBtn.onclick = doClose;
     if (backdrop) backdrop.onclick = doClose;

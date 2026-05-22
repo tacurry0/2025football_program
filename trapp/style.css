@@ -616,11 +616,11 @@ html, body {
 
 /* 📱 Nav Bar (Restored) */
 #ultra-nav { position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 1020; padding-bottom: env(safe-area-inset-bottom); }
-.nav-pill { background: rgba(29, 29, 31, 0.95); backdrop-filter: blur(20px); padding: 5px; border-radius: 40px; display: flex; align-items: center; gap: 2px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); flex-wrap: nowrap; }
-#nav-year-tabs { display: flex; align-items: center; gap: 2px; max-width: min(72vw, 430px); overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.nav-pill { background: rgba(29, 29, 31, 0.95); backdrop-filter: blur(20px); padding: 5px; border-radius: 40px; display: flex; align-items: center; gap: 2px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); flex-wrap: nowrap; max-width: calc(100vw - 24px); }
+#nav-year-tabs { display: flex; align-items: center; gap: 2px; max-width: min(68vw, 430px); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -ms-overflow-style: none; touch-action: pan-x; overscroll-behavior-x: contain; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
 #nav-year-tabs::-webkit-scrollbar { display: none; }
 .nav-icon { background: transparent; border: none; color: white; padding: 8px 12px; font-weight: 900; }
-.year-tab { background: transparent; border: none; color: rgba(255,255,255,0.4); padding: 7px 16px; border-radius: 20px; font-size: 1.1rem; font-weight: 800; font-family: var(--font-kick); }
+.year-tab { flex: 0 0 auto; scroll-snap-align: center; background: transparent; border: none; color: rgba(255,255,255,0.4); padding: 7px 16px; border-radius: 20px; font-size: 1.1rem; font-weight: 800; font-family: var(--font-kick); }
 .year-tab.active { background: white; color: var(--text-main); }
 .today-bubble { width: 48px; height: 48px; border-radius: 50%; border: none; background: var(--albirex-orange); color: white; font-family: var(--font-kick); font-size: 0.65rem; font-weight: 900; box-shadow: 0 8px 20px rgba(var(--albirex-orange-rgb),0.3); }
 
@@ -1389,6 +1389,74 @@ body[data-mode="dashboard"] #header-n-gate-container { pointer-events: auto; }
 .u-player-scroll-list::-webkit-scrollbar { display: none; }
 
 /* ===== Stadium Vision Preview Button ===== */
+.vision-preview-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  z-index: 5001;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.vision-preview-container {
+  position: relative;
+  width: min(96vw, 1280px);
+  aspect-ratio: 16 / 9;
+  max-height: calc(100vh - 24px);
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vision-preview-fit {
+  width: calc(1920px * var(--vision-preview-scale, 0.5));
+  height: calc(1080px * var(--vision-preview-scale, 0.5));
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+#vision-preview-iframe {
+  display: block;
+  width: 1920px;
+  height: 1080px;
+  border: 0;
+  background: #000;
+  transform: scale(var(--vision-preview-scale, 0.5));
+  transform-origin: top left;
+}
+
+.vision-preview-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .u-vision-preview-btn {
   display: flex;
   align-items: center;

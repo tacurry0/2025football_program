@@ -11,7 +11,7 @@
       return false;
     };
   </script>
-  <link rel="stylesheet" href="style.css?v=20260515e">
+  <link rel="stylesheet" href="style.css?v=20260522g">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="https://jleague.r10s.jp/img/common/img_club_niigata.png">
@@ -858,14 +858,16 @@ We can't help falling in love with you
 <script src="schedule/schedule.js?v=20260513b"></script>
   <!-- 📽️ Stadium Vision Preview Modal -->
   <div id="vision-preview-backdrop" class="sub-pane-backdrop" style="background: rgba(0, 0, 0, 0.85); z-index: 5000;"></div>
-  <div id="vision-preview-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: transparent; z-index: 5001; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
-    <div class="vision-preview-container" style="position: relative; width: 94%; max-width: 1200px; aspect-ratio: 16 / 9; background: #000; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); overflow: hidden; display: flex;">
-      <button id="close-vision-preview" aria-label="閉じる" style="position:absolute; right:10px; top:10px; z-index:2; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 1.1rem; cursor: pointer; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">✕</button>
-      <iframe id="vision-preview-iframe" style="border: none; width: 100%; height: 100%;" src="about:blank"></iframe>
+  <div id="vision-preview-overlay" class="vision-preview-overlay">
+    <div class="vision-preview-container">
+      <button id="close-vision-preview" class="vision-preview-close" aria-label="閉じる">✕</button>
+      <div class="vision-preview-fit">
+        <iframe id="vision-preview-iframe" src="about:blank"></iframe>
+      </div>
     </div>
   </div>
 
-<script src="script.js?v=20260522f"></script>
+<script src="script.js?v=20260522g"></script>
 
 </body>
 </html>
