@@ -1,4 +1,4 @@
-window.clubSitesData = null;
+﻿window.clubSitesData = null;
 window.openClubSite = async function(clubName, event) {
   if (event) {
     event.stopPropagation();
@@ -9,7 +9,7 @@ window.openClubSite = async function(clubName, event) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       window.clubSitesData = await res.json();
     } catch(e) {
-      alert("蜈ｬ蠑上し繧､繝医・繝・・繧ｿ縺瑚ｪｭ縺ｿ霎ｼ繧√∪縺帙ｓ縺ｧ縺励◆縲ゅΟ繝ｼ繧ｫ繝ｫ迺ｰ蠅・file://)縺ｮ蝣ｴ蜷医√ヶ繝ｩ繧ｦ繧ｶ縺ｮ繧ｻ繧ｭ繝･繝ｪ繝・ぅ險ｭ螳壹〒繝悶Ο繝・け縺輔ｌ縺ｦ縺・ｋ蜿ｯ閭ｽ諤ｧ縺後≠繧翫∪縺吶・);
+      alert("\u516c\u5f0f\u30b5\u30a4\u30c8\u306e\u30c7\u30fc\u30bf\u304c\u8aad\u307f\u8fbc\u3081\u307e\u305b\u3093\u3067\u3057\u305f\u3002\u30ed\u30fc\u30ab\u30eb\u74b0\u5883(file://)\u306e\u5834\u5408\u3001\u30d6\u30e9\u30a6\u30b6\u306e\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3\u8a2d\u5b9a\u3067\u30d6\u30ed\u30c3\u30af\u3055\u308c\u3066\u3044\u308b\u53ef\u80fd\u6027\u304c\u3042\u308a\u307e\u3059\u3002");
       console.error("Failed to load club sites", e);
       return;
     }
@@ -27,18 +27,18 @@ window.openClubSite = async function(clubName, event) {
       return cNorm.includes(targetNorm) || targetNorm.includes(cNorm);
     });
   }
-  // Fallback for tricky JLeague abbreviations like "F譚ｱ莠ｬ" vs "FC譚ｱ莠ｬ"
-  if (!club && targetNorm.includes("f譚ｱ莠ｬ")) club = window.clubSitesData.find(c => c.club_name.includes("FC譚ｱ莠ｬ"));
-  if (!club && targetNorm.includes("c螟ｧ髦ｪ")) club = window.clubSitesData.find(c => c.club_name.includes("繧ｻ繝ｬ繝・た"));
-  if (!club && targetNorm.includes("g螟ｧ髦ｪ")) club = window.clubSitesData.find(c => c.club_name.includes("繧ｬ繝ｳ繝・));
-  if (!club && targetNorm.includes("譚ｱ莠ｬv")) club = window.clubSitesData.find(c => c.club_name.includes("繝ｴ繧ｧ繝ｫ繝・ぅ"));
-  if (!club && targetNorm.includes("讓ｪ豬彷m")) club = window.clubSitesData.find(c => c.club_name.includes("繝槭Μ繝弱せ"));
+  // Fallback for tricky JLeague abbreviations like "f東京" vs "FC東京"
+  if (!club && targetNorm.includes("f\u6771\u4eac")) club = window.clubSitesData.find(c => c.club_name.includes("FC\u6771\u4eac"));
+  if (!club && targetNorm.includes("c\u5927\u962a")) club = window.clubSitesData.find(c => c.club_name.includes("\u30bb\u30ec\u30c3\u30bd"));
+  if (!club && targetNorm.includes("g\u5927\u962a")) club = window.clubSitesData.find(c => c.club_name.includes("\u30ac\u30f3\u30d0"));
+  if (!club && targetNorm.includes("\u6771\u4eacv")) club = window.clubSitesData.find(c => c.club_name.includes("\u30f4\u30a7\u30eb\u30c7\u30a3"));
+  if (!club && targetNorm.includes("\u6a2a\u6d5cfm")) club = window.clubSitesData.find(c => c.club_name.includes("\u30de\u30ea\u30ce\u30b9"));
   if (club && club.official_site) {
     window.open(club.official_site, '_blank');
   } else {
-    alert("蜈ｬ蠑上し繧､繝医′隕九▽縺九ｊ縺ｾ縺帙ｓ:\n" + 
-          "繧ｯ繝ｩ繝門錐蜑・ [" + clubName + "]\n" + 
-          "豁｣隕丞喧: [" + targetNorm + "]");
+    alert("\u516c\u5f0f\u30b5\u30a4\u30c8\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093:\n" + 
+          "\u30af\u30e9\u30d6\u540d: [" + clubName + "]\n" + 
+          "\u6b63\u898f\u5316: [" + targetNorm + "]");
     console.warn("No official site found for:", clubName);
   }
 };
@@ -78,8 +78,132 @@ document.addEventListener("DOMContentLoaded", () => {
   let visibleSections = [];
   let selectedYear = null;
   let currentMode = "dashboard"; // dashboard, feed, calendar or scoreboard
-  const CLUB_ENGLISH_NAMES = {
-    "蛹玲ｵｷ驕薙さ繝ｳ繧ｵ繝会ｿｽE繝ｬ譛ｭ蟷・: "HOKKAIDO CONSADOLE SAPPORO", "譛ｭ蟷・: "HOKKAIDO CONSADOLE SAPPORO", "繝ｴ繧｡繝ｳ繝ｩ繝ｼ繝ｬ蜈ｫ謌ｸ": "VANRAURE HACHINOHE", "蜈ｫ謌ｸ": "VANRAURE HACHINOHE", "縺・・ｽ・ｽ縺ｦ繧ｰ繝ｫ繝ｼ繧ｸ繝｣逶帛ｲ｡": "IWATE GRULLA MORIOKA", "蟯ｩ謇・: "IWATE GRULLA MORIOKA", "繝吶ぎ繝ｫ繧ｿ莉吝床": "VEGALTA SENDAI", "莉吝床": "VEGALTA SENDAI", "繝悶Λ繧ｦ繝悶Μ繝・・ｽ・ｽ遘狗伐": "BLAUBLITZ AKITA", "遘狗伐": "BLAUBLITZ AKITA", "繝｢繝ｳ繝・・ｽ・ｽ繧｣繧ｪ螻ｱ蠖｢": "MONTEDIO YAMAGATA", "螻ｱ蠖｢": "MONTEDIO YAMAGATA", "遖丞ｳｶ繝ｦ繝翫う繝・・ｽ・ｽ繝宇C": "FUKUSHIMA UNITED FC", "遖丞ｳｶ": "FUKUSHIMA UNITED FC", "縺・・ｽ・ｽ縺孝C": "IWAKI FC", "縺・・ｽ・ｽ縺・: "IWAKI FC", "鮖ｿ蟲ｶ繧｢繝ｳ繝医Λ繝ｼ繧ｺ": "KASHIMA ANTLERS", "鮖ｿ蟲ｶ": "KASHIMA ANTLERS", "豌ｴ謌ｸ繝幢ｿｽE繝ｪ繝ｼ繝帙ャ繧ｯ": "MITO HOLLYHOCK", "豌ｴ謌ｸ": "MITO HOLLYHOCK", "譬・・ｽ・ｽSC": "TOCHIGI SC", "譬・・ｽ・ｽ": "TOCHIGI SC", "繧ｶ繧ｹ繝醍ｾ､鬥ｬ": "THESPA GUNMA", "繧ｶ繧ｹ繝代け繧ｵ繝・・ｽ・ｽ鬥ｬ": "THESPAKUSATSU GUNMA", "鄒､鬥ｬ": "THESPA GUNMA", "豬ｦ蜥後Ξ繝・・ｽ・ｽ": "URAWA REDS", "豬ｦ蜥・: "URAWA REDS", "螟ｧ螳ｮ繧｢繝ｫ繝・・ｽ・ｽ繝ｼ繧ｸ繝｣": "OMIYA ARDIJA", "RB螟ｧ螳ｮ繧｢繝ｫ繝・・ｽ・ｽ繝ｼ繧ｸ繝｣": "RB OMIYA ARDIJA", "螟ｧ螳ｮ": "RB OMIYA ARDIJA", "繧ｸ繧ｧ繝輔Θ繝翫う繝・・ｽ・ｽ繝牙鴻闡・: "JEF UNITED CHIBA", "蜊・・ｽ・ｽ": "JEF UNITED CHIBA", "譟上Ξ繧､繧ｽ繝ｫ": "KASHIWA REYSOL", "譟・: "KASHIWA REYSOL", "FC譚ｱ莠ｬ": "FC TOKYO", "譚ｱ莠ｬ": "FC TOKYO", "譚ｱ莠ｬ繝ｴ繧ｧ繝ｫ繝・・ｽ・ｽ": "TOKYO VERDY", "譚ｱ莠ｬV": "TOKYO VERDY", "FC逕ｺ逕ｰ繧ｼ繝ｫ繝薙い": "FC MACHIDA ZELVIA", "逕ｺ逕ｰ": "FC MACHIDA ZELVIA", "蟾晏ｴ弱ヵ繝ｭ繝ｳ繧ｿ繝ｼ繝ｬ": "KAWASAKI FRONTALE", "蟾晏ｴ・: "KAWASAKI FRONTALE", "讓ｪ豬廡繝ｻ繝槭Μ繝弱せ": "YOKOHAMA F. MARINOS", "讓ｪ豬廡M": "YOKOHAMA F. MARINOS", "讓ｪ豬廡C": "YOKOHAMA FC", "Y.S.C.C.讓ｪ豬・: "Y.S.C.C. YOKOHAMA", "貉伜漉繝吶Ν繝橸ｿｽE繝ｬ": "SHONAN BELLMARE", "貉伜漉": "SHONAN BELLMARE", "SC逶ｸ讓｡蜴・: "SC SAGAMIHARA", "逶ｸ讓｡蜴・: "SC SAGAMIHARA", "繝ｴ繧｡繝ｳ繝輔か繝ｼ繝ｬ逕ｲ蠎・: "VENTFORET KOFU", "逕ｲ蠎・: "VENTFORET KOFU", "譚ｾ譛ｬ螻ｱ髮・C": "MATSUMOTO YAMAGA FC", "譚ｾ譛ｬ": "MATSUMOTO YAMAGA FC", "AC髟ｷ驥弱ヱ繝ｫ繧ｻ繧､繝ｭ": "AC NAGANO PARCEIRO", "髟ｷ驥・: "AC NAGANO PARCEIRO", "繧｢繝ｫ繝薙Ξ繝・・ｽ・ｽ繧ｹ譁ｰ貎・: "ALBIREX NIIGATA", "譁ｰ貎・: "ALBIREX NIIGATA", "繧ｫ繧ｿ繝ｼ繝ｬ蟇悟ｱｱ": "KATALLER TOYAMA", "蟇悟ｱｱ": "KATALLER TOYAMA", "繝・・ｽ・ｽ繝ｼ繧ｲ繝ｳ驥第ｲ｢": "ZWEIGEN KANAZAWA", "驥第ｲ｢": "ZWEIGEN KANAZAWA", "貂・・ｽ・ｽ繧ｨ繧ｹ繝代Ν繧ｹ": "SHIMIZU S-PULSE", "貂・・ｽ・ｽ": "SHIMIZU S-PULSE", "繧ｸ繝･繝薙Ο逎千伐": "JUBILO IWATA", "逎千伐": "JUBILO IWATA", "阯､譫扨YFC": "FUJIEDA MYFC", "阯､譫・: "FUJIEDA MYFC", "繧｢繧ｹ繝ｫ繧ｯ繝ｩ繝ｭ豐ｼ豢･": "AZUL CLARO NUMAZU", "豐ｼ豢･": "AZUL CLARO NUMAZU", "蜷榊商螻九げ繝ｩ繝ｳ繝代せ": "NAGOYA GRAMPUS", "蜷榊商螻・: "NAGOYA GRAMPUS", "FC蟯撰ｿｽE": "FC GIFU", "蟯撰ｿｽE": "FC GIFU", "莠ｬ驛ｽ繧ｵ繝ｳ繧ｬF.C.": "KYOTO SANGA F.C.", "莠ｬ驛ｽ": "KYOTO SANGA F.C.", "繧ｬ繝ｳ繝仙､ｧ髦ｪ": "GAMBA OSAKA", "G螟ｧ髦ｪ": "GAMBA OSAKA", "繧ｻ繝ｬ繝・・ｽ・ｽ螟ｧ髦ｪ": "CEREZO OSAKA", "C螟ｧ髦ｪ": "CEREZO OSAKA", "FC螟ｧ髦ｪ": "FC OSAKA", "螟ｧ髦ｪ": "FC OSAKA", "繝ｴ繧｣繝・・ｽ・ｽ繝ｫ逾樊虻": "VISSEL KOBE", "繝ｴ繧｣繝・・ｽ・ｽ繝ｫ逾樊宛": "VISSEL KOBE", "逾樊虻": "VISSEL KOBE", "螂郁憶繧ｯ繝ｩ繝・: "NARA CLUB", "螂郁憶": "NARA CLUB", "繧ｬ繧､繝奇ｿｽE繝ｬ魑･蜿・: "GAINARE TOTTORI", "魑･蜿・: "GAINARE TOTTORI", "繝輔ぃ繧ｸ繧｢繝ｼ繝主ｲ｡螻ｱ": "FAGIANO OKAYAMA", "蟯｡螻ｱ": "FAGIANO OKAYAMA", "繧ｵ繝ｳ繝輔Ξ繝・・ｽ・ｽ繧ｧ蠎・・ｽ・ｽ": "SANFRECCE HIROSHIMA", "蠎・・ｽ・ｽ": "SANFRECCE HIROSHIMA", "繝ｬ繝弱ヵ繧｡螻ｱ蜿｣FC": "RENOFA YAMAGUCHI FC", "螻ｱ蜿｣": "RENOFA YAMAGUCHI FC", "繧ｫ繝槭ち繝橸ｿｽE繝ｬ隶・・ｽ・ｽE: "KAMATAMARE SANUKI", "隶・・ｽ・ｽE: "KAMATAMARE SANUKI", "蠕ｳ蟲ｶ繝ｴ繧ｩ繝ｫ繝・・ｽ・ｽ繧ｹ": "TOKUSHIMA VORTIS", "蠕ｳ蟲ｶ": "TOKUSHIMA VORTIS", "諢帛ｪ妲C": "EHIME FC", "諢帛ｪ・: "EHIME FC", "FC莉頑ｲｻ": "FC IMABARI", "莉頑ｲｻ": "FC IMABARI", "繧｢繝薙せ繝醍ｦ丞ｲ｡": "AVISPA FUKUOKA", "遖丞ｲ｡": "AVISPA FUKUOKA", "繧ｮ繝ｩ繝ｴ繧｡繝ｳ繝・・ｽ・ｽ荵晏ｷ・: "GIRAVANZ KITAKYUSHU", "蛹嶺ｹ晏ｷ・: "GIRAVANZ KITAKYUSHU", "繧ｵ繧ｬ繝ｳ魑･譬・: "SAGAN TOSU", "魑･譬・: "SAGAN TOSU", "V繝ｻ繝輔ぃ繝ｼ繝ｬ繝ｳ髟ｷ蟠・: "V-VAREN NAGASAKI", "髟ｷ蟠・: "V-VAREN NAGASAKI", "繝ｭ繧｢繝・・ｽ・ｽ辭頑悽": "ROASSO KUMAMOTO", "辭頑悽": "ROASSO KUMAMOTO", "螟ｧ蛻・・ｽ・ｽ繝ｪ繝具ｿｽE繧ｿ": "OITA TRINITA", "螟ｧ蛻・: "OITA TRINITA", "繝・・ｽ・ｽ繝舌ず繝｣繝ｼ繝ｭ螳ｮ蟠・: "TEGEVAJARO MIYAZAKI", "螳ｮ蟠・: "TEGEVAJARO MIYAZAKI", "鮖ｿ蜈仙ｳｶ繝ｦ繝翫う繝・・ｽ・ｽ繝宇C": "KAGOSHIMA UNITED FC", "鮖ｿ蜈仙ｳｶ": "KAGOSHIMA UNITED FC", "FC逅臥帥": "FC RYUKYU", "逅臥帥": "FC RYUKYU", "鬮倡衍繝ｦ繝翫う繝・・ｽ・ｽ繝唄C": "KOCHI UNITED SC", "鬮倡衍": "KOCHI UNITED SC", "繝ｬ繧､繝ｩ繝・・ｽ・ｽ貊玖ｳFC": "REILAC SHIGA FC", "貊玖ｳ": "REILAC SHIGA FC"
+const CLUB_ENGLISH_NAMES = {
+    "\u5317\u6d77\u9053\u30b3\u30f3\u30b5\u30c9\u30fc\u30ec\u672d\u5e4c": "HOKKAIDO CONSADOLE SAPPORO",
+    "\u672d\u5e4c": "HOKKAIDO CONSADOLE SAPPORO",
+    "\u30f4\u30a1\u30f3\u30e9\u30fc\u30ec\u516b\u6238": "VANRAURE HACHINOHE",
+    "\u516b\u6238": "VANRAURE HACHINOHE",
+    "\u3044\u308f\u3066\u30b0\u30eb\u30fc\u30b8\u30e3\u76db\u5ca1": "IWATE GRULLA MORIOKA",
+    "\u5ca9\u624b": "IWATE GRULLA MORIOKA",
+    "\u30d9\u30ac\u30eb\u30bf\u4ed9\u53f0": "VEGALTA SENDAI",
+    "\u4ed9\u53f0": "VEGALTA SENDAI",
+    "\u30d6\u30e9\u30a6\u30d6\u30ea\u30c3\u30c4\u79cb\u7530": "BLAUBLITZ AKITA",
+    "\u79cb\u7530": "BLAUBLITZ AKITA",
+    "\u30e2\u30f3\u30c6\u30c7\u30a3\u30aa\u5c71\u5f62": "MONTEDIO YAMAGATA",
+    "\u5c71\u5f62": "MONTEDIO YAMAGATA",
+    "\u798f\u5cf6\u30e6\u30ca\u30a4\u30c6\u30c3\u30c9FC": "FUKUSHIMA UNITED FC",
+    "\u798f\u5cf6": "FUKUSHIMA UNITED FC",
+    "\u3044\u308f\u304dFC": "IWAKI FC",
+    "\u3044\u308f\u304d": "IWAKI FC",
+    "\u9e7f\u5cf6\u30a2\u30f3\u30c8\u30e9\u30fc\u30ba": "KASHIMA ANTLERS",
+    "\u9e7f\u5cf6": "KASHIMA ANTLERS",
+    "\u6c34\u6238\u30db\u30fc\u30ea\u30fc\u30db\u30c3\u30af": "MITO HOLLYHOCK",
+    "\u6c34\u6238": "MITO HOLLYHOCK",
+    "\u6803\u6728SC": "TOCHIGI SC",
+    "\u6803\u6728": "TOCHIGI SC",
+    "\u30b6\u30b9\u30d1\u7fa4\u99ac": "THESPA GUNMA",
+    "\u30b6\u30b9\u30d1\u30af\u30b5\u30c4\u7fa4\u99ac": "THESPAKUSATSU GUNMA",
+    "\u7fa4\u99ac": "THESPA GUNMA",
+    "\u6d66\u548c\u30ec\u30c3\u30ba": "URAWA REDS",
+    "\u6d66\u548c": "URAWA REDS",
+    "\u5927\u5bae\u30a2\u30eb\u30c7\u30a3\u30fc\u30b8\u30e3": "OMIYA ARDIJA",
+    "RB\u5927\u5bae\u30a2\u30eb\u30c7\u30a3\u30fc\u30b8\u30e3": "RB OMIYA ARDIJA",
+    "\u5927\u5bae": "RB OMIYA ARDIJA",
+    "\u30b8\u30a7\u30d5\u30e6\u30ca\u30a4\u30c6\u30c3\u30c9\u5343\u8449": "JEF UNITED CHIBA",
+    "\u5343\u8449": "JEF UNITED CHIBA",
+    "\u67cf\u30ec\u30a4\u30bd\u30eb": "KASHIWA REYSOL",
+    "\u67cf": "KASHIWA REYSOL",
+    "FC\u6771\u4eac": "FC TOKYO",
+    "\u6771\u4eac": "FC TOKYO",
+    "\u6771\u4eac\u30f4\u30a7\u30eb\u30c7\u30a3": "TOKYO VERDY",
+    "\u6771\u4eacV": "TOKYO VERDY",
+    "FC\u753a\u7530\u30bc\u30eb\u30d3\u30a2": "FC MACHIDA ZELVIA",
+    "\u753a\u7530": "FC MACHIDA ZELVIA",
+    "\u5ddd\u5d0e\u30d5\u30ed\u30f3\u30bf\u30fc\u30ec": "KAWASAKI FRONTALE",
+    "\u5ddd\u5d0e": "KAWASAKI FRONTALE",
+    "\u6a2a\u6d5cF\u30fb\u30de\u30ea\u30ce\u30b9": "YOKOHAMA F. MARINOS",
+    "\u6a2a\u6d5cFM": "YOKOHAMA F. MARINOS",
+    "\u6a2a\u6d5cFC": "YOKOHAMA FC",
+    "Y.S.C.C.\u6a2a\u6d5c": "Y.S.C.C. YOKOHAMA",
+    "\u6e58\u5357\u30d9\u30eb\u30de\u30fc\u30ec": "SHONAN BELLMARE",
+    "\u6e58\u5357": "SHONAN BELLMARE",
+    "SC\u76f8\u6a21\u539f": "SC SAGAMIHARA",
+    "\u76f8\u6a21\u539f": "SC SAGAMIHARA",
+    "\u30f4\u30a1\u30f3\u30d5\u30a9\u30fc\u30ec\u7532\u5e9c": "VENTFORET KOFU",
+    "\u7532\u5e9c": "VENTFORET KOFU",
+    "\u677e\u672c\u5c71\u96c5FC": "MATSUMOTO YAMAGA FC",
+    "\u677e\u672c": "MATSUMOTO YAMAGA FC",
+    "AC\u9577\u91ce\u30d1\u30eb\u30bb\u30a4\u30ed": "AC NAGANO PARCEIRO",
+    "\u9577\u91ce": "AC NAGANO PARCEIRO",
+    "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f": "ALBIREX NIIGATA",
+    "\u65b0\u6f5f": "ALBIREX NIIGATA",
+    "\u30ab\u30bf\u30fc\u30ec\u5bcc\u5c71": "KATALLER TOYAMA",
+    "\u5bcc\u5c71": "KATALLER TOYAMA",
+    "\u30c4\u30a8\u30fc\u30b2\u30f3\u91d1\u6ca2": "ZWEIGEN KANAZAWA",
+    "\u91d1\u6ca2": "ZWEIGEN KANAZAWA",
+    "\u6e05\u6c34\u30a8\u30b9\u30d1\u30eb\u30b9": "SHIMIZU S-PULSE",
+    "\u6e05\u6c34": "SHIMIZU S-PULSE",
+    "\u30b8\u30e5\u30d3\u30ed\u78d0\u7530": "JUBILO IWATA",
+    "\u78d0\u7530": "JUBILO IWATA",
+    "\u85e4\u679dMYFC": "FUJIEDA MYFC",
+    "\u85e4\u679d": "FUJIEDA MYFC",
+    "\u30a2\u30b9\u30eb\u30af\u30e9\u30ed\u6cbc\u6d25": "AZUL CLARO NUMAZU",
+    "\u6cbc\u6d25": "AZUL CLARO NUMAZU",
+    "\u540d\u53e4\u5c4b\u30b0\u30e9\u30f3\u30d1\u30b9": "NAGOYA GRAMPUS",
+    "\u540d\u53e4\u5c4b": "NAGOYA GRAMPUS",
+    "FC\u5c90\u961c": "FC GIFU",
+    "\u5c90\u961c": "FC GIFU",
+    "\u4eac\u90fd\u30b5\u30f3\u30acF.C.": "KYOTO SANGA F.C.",
+    "\u4eac\u90fd": "KYOTO SANGA F.C.",
+    "\u30ac\u30f3\u30d0\u5927\u962a": "GAMBA OSAKA",
+    "G\u5927\u962a": "GAMBA OSAKA",
+    "\u30bb\u30ec\u30c3\u30bd\u5927\u962a": "CEREZO OSAKA",
+    "C\u5927\u962a": "CEREZO OSAKA",
+    "FC\u5927\u962a": "FC OSAKA",
+    "\u5927\u962a": "FC OSAKA",
+    "\u30f4\u30a3\u30c3\u30bb\u30eb\u795e\u6238": "VISSEL KOBE",
+    "\u30f4\u30a3\u30c3\u30bb\u30eb\u795e\u6236": "VISSEL KOBE",
+    "\u795e\u6238": "VISSEL KOBE",
+    "\u5948\u826f\u30af\u30e9\u30d6": "NARA CLUB",
+    "\u5948\u826f": "NARA CLUB",
+    "\u30ac\u30a4\u30ca\u30fc\u30ec\u9ce5\u53d6": "GAINARE TOTTORI",
+    "\u9ce5\u53d6": "GAINARE TOTTORI",
+    "\u30d5\u30a1\u30b8\u30a2\u30fc\u30ce\u5ca1\u5c71": "FAGIANO OKAYAMA",
+    "\u5ca1\u5c71": "FAGIANO OKAYAMA",
+    "\u30b5\u30f3\u30d5\u30ec\u30c3\u30c1\u30a7\u5e83\u5cf6": "SANFRECCE HIROSHIMA",
+    "\u5e83\u5cf6": "SANFRECCE HIROSHIMA",
+    "\u30ec\u30ce\u30d5\u30a1\u5c71\u53e3FC": "RENOFA YAMAGUCHI FC",
+    "\u5c71\u53e3": "RENOFA YAMAGUCHI FC",
+    "\u30ab\u30de\u30bf\u30de\u30fc\u30ec\u8b83\u5c90": "KAMATAMARE SANUKI",
+    "\u8b83\u5c90": "KAMATAMARE SANUKI",
+    "\u5fb3\u5cf6\u30f4\u30a9\u30eb\u30c6\u30a3\u30b9": "TOKUSHIMA VORTIS",
+    "\u5fb3\u5cf6": "TOKUSHIMA VORTIS",
+    "\u611b\u5a9bFC": "EHIME FC",
+    "\u611b\u5a9b": "EHIME FC",
+    "FC\u4eca\u6cbb": "FC IMABARI",
+    "\u4eca\u6cbb": "FC IMABARI",
+    "\u30a2\u30d3\u30b9\u30d1\u798f\u5ca1": "AVISPA FUKUOKA",
+    "\u798f\u5ca1": "AVISPA FUKUOKA",
+    "\u30ae\u30e9\u30f4\u30a1\u30f3\u30c4\u5317\u4e5d\u5dde": "GIRAVANZ KITAKYUSHU",
+    "\u5317\u4e5d\u5dde": "GIRAVANZ KITAKYUSHU",
+    "\u30b5\u30ac\u30f3\u9ce5\u6816": "SAGAN TOSU",
+    "\u9ce5\u6816": "SAGAN TOSU",
+    "V\u30fb\u30d5\u30a1\u30fc\u30ec\u30f3\u9577\u5d0e": "V-VAREN NAGASAKI",
+    "\u9577\u5d0e": "V-VAREN NAGASAKI",
+    "\u30ed\u30a2\u30c3\u30bd\u718a\u672c": "ROASSO KUMAMOTO",
+    "\u718a\u672c": "ROASSO KUMAMOTO",
+    "\u5927\u5206\u30c8\u30ea\u30cb\u30fc\u30bf": "OITA TRINITA",
+    "\u5927\u5206": "OITA TRINITA",
+    "\u30c6\u30b2\u30d0\u30b8\u30e3\u30fc\u30ed\u5bae\u5d0e": "TEGEVAJARO MIYAZAKI",
+    "\u5bae\u5d0e": "TEGEVAJARO MIYAZAKI",
+    "\u9e7f\u5150\u5cf6\u30e6\u30ca\u30a4\u30c6\u30c3\u30c9FC": "KAGOSHIMA UNITED FC",
+    "\u9e7f\u5150\u5cf6": "KAGOSHIMA UNITED FC",
+    "FC\u7409\u7403": "FC RYUKYU",
+    "\u7409\u7403": "FC RYUKYU",
+    "\u9ad8\u77e5\u30e6\u30ca\u30a4\u30c6\u30c3\u30c9SC": "KOCHI UNITED SC",
+    "\u9ad8\u77e5": "KOCHI UNITED SC",
+    "\u30ec\u30a4\u30e9\u30c3\u30af\u6ecb\u8cc0FC": "REILAC SHIGA FC",
+    "\u6ecb\u8cc0": "REILAC SHIGA FC"
   };
   // --- Date/Theme Helpers ---
   function parseDate(s) {
@@ -94,40 +218,155 @@ document.addEventListener("DOMContentLoaded", () => {
   }
     const normalizeName = (s) => (s || "").normalize("NFKC").trim();
     
-    // 繝・ｿｽE繝蜷搾ｿｽE繧・・ｽ・ｽ縺弱ｒ蜷ｸ蜿弱☆繧九◆繧・ｿｽE繝槭ャ繝斐Φ繧ｰ
-    const GLOBAL_TEAM_MAP = {
-      "譁ｰ貎・: "譁ｰ貎・, "辭頑悽": "辭頑悽", "魑･蜿・: "魑･蜿・, "蟇悟ｱｱ": "蟇悟ｱｱ", "驥第ｲ｢": "驥第ｲ｢",
-      "貂・・ｽ・ｽ": "貂・・ｽ・ｽ", "逎千伐": "逎千伐", "蜷榊商螻・: "蜷榊商螻・, "逾樊宛": "逾樊虻", "逾樊虻": "逾樊虻", "莠ｬ驛ｽ": "莠ｬ驛ｽ",
-      "譛ｭ蟷・: "譛ｭ蟷・, "鮖ｿ蟲ｶ": "鮖ｿ蟲ｶ", "豬ｦ蜥・: "豬ｦ蜥・, "譟・: "譟・, "貉伜漉": "貉伜漉",
-      "逕ｺ逕ｰ": "逕ｺ逕ｰ", "蟾晏ｴ・: "蟾晏ｴ・, "讓ｪ豬廡M": "讓ｪ豬廡M", "讓ｪ豬廡繝ｻ繝槭Μ繝弱せ": "讓ｪ豬廡M", "螟ｧ蛻・: "螟ｧ蛻・, "遖丞ｲ｡": "遖丞ｲ｡",
-      "魑･譬・: "魑･譬・, "髟ｷ蟠・: "髟ｷ蟠・, "蟯｡螻ｱ": "蟯｡螻ｱ", "蠎・・ｽ・ｽ": "蠎・・ｽ・ｽ", "螻ｱ蜿｣": "螻ｱ蜿｣",
-      "蠕ｳ蟲ｶ": "蠕ｳ蟲ｶ", "隶・・ｽ・ｽE: "隶・・ｽ・ｽE, "蛹嶺ｹ晏ｷ・: "蛹嶺ｹ晏ｷ・, "螳ｮ蟠・: "螳ｮ蟠・,
-      "蜈ｫ謌ｸ": "蜈ｫ謌ｸ", "逶帛ｲ｡": "逶帛ｲ｡", "遘狗伐": "遘狗伐", "螻ｱ蠖｢": "螻ｱ蠖｢",
-      "莉吝床": "莉吝床", "豌ｴ謌ｸ": "豌ｴ謌ｸ", "鄒､鬥ｬ": "鄒､鬥ｬ", "螟ｧ螳ｮ": "螟ｧ螳ｮ", "蜊・・ｽ・ｽ": "蜊・・ｽ・ｽ",
-      "逕ｲ蠎・: "逕ｲ蠎・, "髟ｷ驥・: "髟ｷ驥・, "譚ｾ譛ｬ": "譚ｾ譛ｬ", "鮖ｿ蜈仙ｳｶ": "鮖ｿ蜈仙ｳｶ",
-      "譬・・ｽ・ｽSC": "譬・・ｽ・ｽ", "譬・・ｽ・ｽ": "譬・・ｽ・ｽ", "譬・・ｽ・ｽC": "譬・・ｽ・ｽ", "譬・・ｽ・ｽ・ｽE・ｽ": "譬・・ｽ・ｽ",
-      "繧ｻ繝ｬ繝・・ｽ・ｽ": "繧ｻ繝ｬ繝・・ｽ・ｽ", "C螟ｧ髦ｪ": "繧ｻ繝ｬ繝・・ｽ・ｽ", "・ｽE・ｽ螟ｧ髦ｪ": "繧ｻ繝ｬ繝・・ｽ・ｽ",
-      "繧ｬ繝ｳ繝・: "繧ｬ繝ｳ繝・, "G螟ｧ髦ｪ": "繧ｬ繝ｳ繝・, "・ｽE・ｽ螟ｧ髦ｪ": "繧ｬ繝ｳ繝・,
-      "FC譚ｱ莠ｬ": "譚ｱ莠ｬ", "譚ｱ莠ｬV": "譚ｱ莠ｬV", "譚ｱ莠ｬ繝ｴ繧ｧ繝ｫ繝・・ｽ・ｽ": "譚ｱ莠ｬV",
-      "FC螟ｧ髦ｪ": "螟ｧ髦ｪ", "FC莉頑ｲｻ": "莉頑ｲｻ", "莉頑ｲｻ": "莉頑ｲｻ", "FC蟯撰ｿｽE": "蟯撰ｿｽE", "FC逅臥帥": "逅臥帥"
+    // Team name normalization mappings
+const GLOBAL_TEAM_MAP = {
+      "\u65b0\u6f5f": "\u65b0\u6f5f",
+      "\u718a\u672c": "\u718a\u672c",
+      "\u9ce5\u53d6": "\u9ce5\u53d6",
+      "\u5bcc\u5c71": "\u5bcc\u5c71",
+      "\u91d1\u6ca2": "\u91d1\u6ca2",
+      "\u6e05\u6c34": "\u6e05\u6c34",
+      "\u78d0\u7530": "\u78d0\u7530",
+      "\u540d\u53e4\u5c4b": "\u540d\u53e4\u5c4b",
+      "\u795e\u6236": "\u795e\u6238",
+      "\u795e\u6238": "\u795e\u6238",
+      "\u4eac\u90fd": "\u4eac\u90fd",
+      "\u672d\u5e4c": "\u672d\u5e4c",
+      "\u9e7f\u5cf6": "\u9e7f\u5cf6",
+      "\u6d66\u548c": "\u6d66\u548c",
+      "\u67cf": "\u67cf",
+      "\u6e58\u5357": "\u6e58\u5357",
+      "\u753a\u7530": "\u753a\u7530",
+      "\u5ddd\u5d0e": "\u5ddd\u5d0e",
+      "\u6a2a\u6d5cFM": "\u6a2a\u6d5cFM",
+      "\u6a2a\u6d5cF\u30fb\u30de\u30ea\u30ce\u30b9": "\u6a2a\u6d5cFM",
+      "\u5927\u5206": "\u5927\u5206",
+      "\u798f\u5ca1": "\u798f\u5ca1",
+      "\u9ce5\u6816": "\u9ce5\u6816",
+      "\u9577\u5d0e": "\u9577\u5d0e",
+      "\u5ca1\u5c71": "\u5ca1\u5c71",
+      "\u5e83\u5cf6": "\u5e83\u5cf6",
+      "\u5c71\u53e3": "\u5c71\u53e3",
+      "\u5fb3\u5cf6": "\u5fb3\u5cf6",
+      "\u8b83\u5c90": "\u8b83\u5c90",
+      "\u5317\u4e5d\u5dde": "\u5317\u4e5d\u5dde",
+      "\u5bae\u5d0e": "\u5bae\u5d0e",
+      "\u516b\u6238": "\u516b\u6238",
+      "\u76db\u5ca1": "\u76db\u5ca1",
+      "\u79cb\u7530": "\u79cb\u7530",
+      "\u5c71\u5f62": "\u5c71\u5f62",
+      "\u4ed9\u53f0": "\u4ed9\u53f0",
+      "\u6c34\u6238": "\u6c34\u6238",
+      "\u7fa4\u99ac": "\u7fa4\u99ac",
+      "\u5927\u5bae": "\u5927\u5bae",
+      "\u5343\u8449": "\u5343\u8449",
+      "\u7532\u5e9c": "\u7532\u5e9c",
+      "\u9577\u91ce": "\u9577\u91ce",
+      "\u677e\u672c": "\u677e\u672c",
+      "\u9e7f\u5150\u5cf6": "\u9e7f\u5150\u5cf6",
+      "\u6803\u6728SC": "\u6803\u6728",
+      "\u6803\u6728": "\u6803\u6728",
+      "\u6803\u6728C": "\u6803\u6728",
+      "\u6803\u6728\u770c": "\u6803\u6728",
+      "\u30bb\u30ec\u30c3\u30bd": "\u30bb\u30ec\u30c3\u30bd",
+      "C\u5927\u962a": "\u30bb\u30ec\u30c3\u30bd",
+      "\u30bb\u30ec\u30c3\u30bd\u5927\u962a": "\u30bb\u30ec\u30c3\u30bd",
+      "\u30ac\u30f3\u30d0": "\u30ac\u30f3\u30d0",
+      "G\u5927\u962a": "\u30ac\u30f3\u30d0",
+      "\u30ac\u30f3\u30d0\u5927\u962a": "\u30ac\u30f3\u30d0",
+      "FC\u6771\u4eac": "\u6771\u4eac",
+      "\u6771\u4eacV": "\u6771\u4eacV",
+      "\u6771\u4eac\u30f4\u30a7\u30eb\u30c7\u30a3": "\u6771\u4eacV",
+      "FC\u5927\u962a": "\u5927\u962a",
+      "FC\u4eca\u6cbb": "\u4eca\u6cbb",
+      "\u4eca\u6cbb": "\u4eca\u6cbb",
+      "FC\u5c90\u961c": "\u5c90\u961c",
+      "FC\u7409\u7403": "\u7409\u7403"
     };
-    // 繧ｨ繝ｳ繝悶Ξ繝URL縺九ｉ繝・ｿｽE繝蜷阪ｒ迚ｹ螳壹☆繧具ｼ域枚蟄怜喧縺大ｯｾ遲厄ｼ・    const EMBLEM_MAP = {
-      "niigata": "譁ｰ貎・, "kumamoto": "辭頑悽", "imabari": "莉頑ｲｻ", "tosu": "魑･譬・, "kochi": "鬮倡衍", "ehime": "諢帛ｪ・,
-      "kyoto": "莠ｬ驛ｽ", "yamaguchi": "螻ｱ蜿｣", "miyazaki": "螳ｮ蟠・, "tottori": "魑･蜿・, "kagoshima": "鮖ｿ蜈仙ｳｶ",
-      "ryukyu": "逅臥帥", "shiga": "貊玖ｳ", "oita": "螟ｧ蛻・, "kitakyushu": "蛹嶺ｹ晏ｷ・, "kanazawa": "驥第ｲ｢",
-      "sanuki": "隶・・ｽ・ｽE, "tokushima": "蠕ｳ蟲ｶ", "toyama": "蟇悟ｱｱ", "nara": "螂郁憶", "iwaki": "縺・・ｽ・ｽ縺・,
-      "gifu": "蟯撰ｿｽE", "sapporo": "譛ｭ蟷・, "matsumoto": "譚ｾ譛ｬ", "nagano": "髟ｷ驥・, "iwata": "逎千伐",
-      "fukushima": "遖丞ｳｶ", "kofu": "逕ｲ蠎・, "shonan": "貉伜漉", "akita": "遘狗伐", "yamagata": "螻ｱ蠖｢",
-      "yokohamafc": "讓ｪ豬廡C", "yokohamafm": "讓ｪ豬廡M", "sendai": "莉吝床", "hachinohe": "蜈ｫ謌ｸ",
-      "morioka": "逶帛ｲ｡", "gunma": "鄒､鬥ｬ", "mito": "豌ｴ謌ｸ", "tochigi": "譬・・ｽ・ｽ", "omiya": "螟ｧ螳ｮ",
-      "chiba": "蜊・・ｽ・ｽ", "sagamihara": "逶ｸ讓｡蜴・, "shimizu": "貂・・ｽ・ｽ", "okayama": "蟯｡螻ｱ",
-      "hiroshima": "蠎・・ｽ・ｽ", "vissel": "逾樊虻", "g-osaka": "繧ｬ繝ｳ繝・, "c-osaka": "繧ｻ繝ｬ繝・・ｽ・ｽ",
-      "urawa": "豬ｦ蜥・, "kashima": "鮖ｿ蟲ｶ", "kashiwa": "譟・, "tokyo": "譚ｱ莠ｬ", "tokyov": "譚ｱ莠ｬV", "machida": "逕ｺ逕ｰ",
-      "fosaka": "螟ｧ髦ｪ", "f-osaka": "螟ｧ髦ｪ", "iwate": "逶帛ｲ｡", "kusatsu": "鄒､鬥ｬ", "verdy": "譚ｱ莠ｬV", "marinos": "讓ｪ豬廡M",
-      "antlers": "鮖ｿ蟲ｶ", "reds": "豬ｦ蜥・, "reysol": "譟・, "frontale": "蟾晏ｴ・, "bellmare": "貉伜漉", "s-pulse": "貂・・ｽ・ｽ",
-      "jubilo": "逎千伐", "grampus": "蜷榊商螻・, "sanga": "莠ｬ驛ｽ", "gambaosaka": "繧ｬ繝ｳ繝・, "cerezoosaka": "繧ｻ繝ｬ繝・・ｽ・ｽ",
-      "vissel-k": "逾樊虻", "trinita": "螟ｧ蛻・, "avispa": "遖丞ｲ｡", "zelvia": "逕ｺ逕ｰ", "fagiano": "蟯｡螻ｱ", "sanfrecce": "蠎・・ｽ・ｽ",
-      "renofa": "螻ｱ蜿｣", "vortis": "蠕ｳ蟲ｶ", "kamatamare": "隶・・ｽ・ｽE, "giravanz": "蛹嶺ｹ晏ｷ・, "tegevajaro": "螳ｮ蟠・
+    // Emblem URL to team name mappings
+const EMBLEM_MAP = {
+      "niigata": "\u65b0\u6f5f",
+      "kumamoto": "\u718a\u672c",
+      "imabari": "\u4eca\u6cbb",
+      "tosu": "\u9ce5\u6816",
+      "kochi": "\u9ad8\u77e5",
+      "ehime": "\u611b\u5a9b",
+      "kyoto": "\u4eac\u90fd",
+      "yamaguchi": "\u5c71\u53e3",
+      "miyazaki": "\u5bae\u5d0e",
+      "tottori": "\u9ce5\u53d6",
+      "kagoshima": "\u9e7f\u5150\u5cf6",
+      "ryukyu": "\u7409\u7403",
+      "shiga": "\u6ecb\u8cc0",
+      "oita": "\u5927\u5206",
+      "kitakyushu": "\u5317\u4e5d\u5dde",
+      "kanazawa": "\u91d1\u6ca2",
+      "sanuki": "\u8b83\u5c90",
+      "tokushima": "\u5fb3\u5cf6",
+      "toyama": "\u5bcc\u5c71",
+      "nara": "\u5948\u826f",
+      "iwaki": "\u3044\u308f\u304d",
+      "gifu": "\u5c90\u961c",
+      "sapporo": "\u672d\u5e4c",
+      "matsumoto": "\u677e\u672c",
+      "nagano": "\u9577\u91ce",
+      "iwata": "\u78d0\u7530",
+      "fukushima": "\u798f\u5cf6",
+      "kofu": "\u7532\u5e9c",
+      "shonan": "\u6e58\u5357",
+      "akita": "\u79cb\u7530",
+      "yamagata": "\u5c71\u5f62",
+      "yokohamafc": "\u6a2a\u6d5cFC",
+      "yokohamafm": "\u6a2a\u6d5cFM",
+      "sendai": "\u4ed9\u53f0",
+      "hachinohe": "\u516b\u6238",
+      "morioka": "\u76db\u5ca1",
+      "gunma": "\u7fa4\u99ac",
+      "mito": "\u6c34\u6238",
+      "tochigi": "\u6803\u6728",
+      "omiya": "\u5927\u5bae",
+      "chiba": "\u5343\u8449",
+      "sagamihara": "\u76f8\u6a21\u539f",
+      "shimizu": "\u6e05\u6c34",
+      "okayama": "\u5ca1\u5c71",
+      "hiroshima": "\u5e83\u5cf6",
+      "vissel": "\u795e\u6238",
+      "g-osaka": "\u30ac\u30f3\u30d0",
+      "c-osaka": "\u30bb\u30ec\u30c3\u30bd",
+      "urawa": "\u6d66\u548c",
+      "kashima": "\u9e7f\u5cf6",
+      "kashiwa": "\u67cf",
+      "tokyo": "\u6771\u4eac",
+      "tokyov": "\u6771\u4eacV",
+      "machida": "\u753a\u7530",
+      "fosaka": "\u5927\u962a",
+      "f-osaka": "\u5927\u962a",
+      "iwate": "\u76db\u5ca1",
+      "kusatsu": "\u7fa4\u99ac",
+      "verdy": "\u6771\u4eacV",
+      "marinos": "\u6a2a\u6d5cFM",
+      "antlers": "\u9e7f\u5cf6",
+      "reds": "\u6d66\u548c",
+      "reysol": "\u67cf",
+      "frontale": "\u5ddd\u5d0e",
+      "bellmare": "\u6e58\u5357",
+      "s-pulse": "\u6e05\u6c34",
+      "jubilo": "\u78d0\u7530",
+      "grampus": "\u540d\u53e4\u5c4b",
+      "sanga": "\u4eac\u90fd",
+      "gambaosaka": "\u30ac\u30f3\u30d0",
+      "cerezoosaka": "\u30bb\u30ec\u30c3\u30bd",
+      "vissel-k": "\u795e\u6238",
+      "trinita": "\u5927\u5206",
+      "avispa": "\u798f\u5ca1",
+      "zelvia": "\u753a\u7530",
+      "fagiano": "\u5ca1\u5c71",
+      "sanfrecce": "\u5e83\u5cf6",
+      "renofa": "\u5c71\u53e3",
+      "vortis": "\u5fb3\u5cf6",
+      "kamatamare": "\u8b83\u5c90",
+      "giravanz": "\u5317\u4e5d\u5dde",
+      "tegevajaro": "\u5bae\u5d0e"
     };
     function getTeamKwFromEmblem(url) {
       if (!url) return null;
@@ -593,7 +832,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function openMatchPicker(matches) {
     pickerList.innerHTML = matches.map(m => `
       <div class="picker-item" data-date="${m.date}" data-club="${m.club}" data-opp="${m.opponent}">
-        <span class="picker-club ${m.club}">${m.club === 'niigata' ? '譁ｰ貎・ : '辭頑悽'}</span>
+        <span class="picker-club ${m.club}">${m.club === 'niigata' ? '\u65b0\u6f5f' : '\u718a\u672c'}</span>
         <span class="picker-opp">${m.opponent}</span>
       </div>
     `).join("");
@@ -633,19 +872,19 @@ document.addEventListener("DOMContentLoaded", () => {
       ["COMP", match.tournament]
     ].filter(([, value]) => value !== undefined && value !== null && value !== "");
     const items = [
-      ["螟ｩ蛟・, match.weather],
-      ["豌玲ｸｩ", match.temperature !== undefined && match.temperature !== null ? `${match.temperature}邃チ : ""],
-      ["貉ｿ蠎ｦ", match.humidity !== undefined && match.humidity !== null ? `${match.humidity}%` : ""],
-      ["蜈･蝣ｴ閠・, match.attendance !== undefined && match.attendance !== null ? `${Number(match.attendance).toLocaleString("ja-JP")}莠ｺ` : ""],
-      ["荳ｻ蟇ｩ", match.referee],
-      ["蜑ｯ蟇ｩ", Array.isArray(match.assistant_referees) ? match.assistant_referees.join(" / ") : ""],
-      ["逶｣逹｣", match.manager]
+      ["\u5929\u6c17", match.weather],
+      ["\u6c17\u6e29", match.temperature !== undefined && match.temperature !== null ? `${match.temperature}\u2103` : ""],
+      ["\u6e7f\u5ea6", match.humidity !== undefined && match.humidity !== null ? `${match.humidity}%` : ""],
+      ["\u5165\u5834\u8005", match.attendance !== undefined && match.attendance !== null ? `${Number(match.attendance).toLocaleString("ja-JP")}\u4eba` : ""],
+      ["\u4e3b\u5be9", match.referee],
+      ["\u526f\u5be9", Array.isArray(match.assistant_referees) ? match.assistant_referees.join(" / ") : ""],
+      ["\u76e3\u7763", match.manager]
     ].filter(([, value]) => value !== undefined && value !== null && value !== "");
     if (!items.length && !match.j_official_url) return "";
     return `
       <section class="u-match-record">
         <div class="u-section-head">
-          <h4>蜈ｬ蠑剰ｨ倬鹸</h4>
+          <h4>\u51ec\u5f0f\u8a18\u9332</h4>
           ${match.j_official_url ? `<a class="u-official-link" href="${escapeHtml(match.j_official_url)}" target="_blank" rel="noopener">DATA SITE</a>` : ""}
         </div>
         ${primary.length ? `
@@ -1010,7 +1249,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h4>GOALS</h4>
           ${ownGoals.length ? `
             <div class="u-goal-team">
-              <span>${match.club === "niigata" ? "譁ｰ貎・ : "辭頑悽"}</span>
+              <span>${match.club === "niigata" ? "\u65b0\u6f5f" : "\u718a\u672c"}</span>
               <ul>
                 ${ownGoals.map(g => `
                   <li>
@@ -1431,7 +1670,7 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   function findOfficialResult(match) {
     if (!officialResults || !officialResults.length) return null;
-    const myKw = match.club === "niigata" ? "譁ｰ貎・ : "辭頑悽";
+    const myKw = match.club === "niigata" ? "\u65b0\u6f5f" : "\u718a\u672c";
     
     return officialResults.find(r => {
       // Static JSON Format Support
@@ -1485,7 +1724,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         // GAS Format Support
         else if (r.home_score !== "" && r.home_score !== null) {
-          const isHome = robustTeamMatch(r.home, m.club === "niigata" ? "譁ｰ貎・ : "辭頑悽");
+          const isHome = robustTeamMatch(r.home, m.club === "niigata" ? "\u65b0\u6f5f" : "\u718a\u672c");
           sM = isHome ? r.home_score : r.away_score;
           sO = isHome ? r.away_score : r.home_score;
           if (r.pk && r.home_score === r.away_score) {
@@ -2608,8 +2847,8 @@ async function renderDashboard() {
           return '<th class="' + cls + '" data-key="' + c.key + '" data-group="' + groupName + '">' + c.label + '</th>';
         }).join('');
         const tbodyHTML = sorted.map(row => {
-          const isNiigata = (row.team || '').includes('譁ｰ貎・);
-          const isKumamoto = (row.team || '').includes('辭頑悽');
+          const isNiigata = (row.team || '').includes('\u65b0\u6f5f');
+          const isKumamoto = (row.team || '').includes('\u718a\u672c');
           const trcls = isNiigata ? 'standing-niigata' : isKumamoto ? 'standing-kumamoto' : '';
           const emblemUrl = getEmblemUrlForTeam(row.team);
           const emblemHTML = emblemUrl ? '<img class="standing-team-emblem" src="' + escapeHtml(emblemUrl) + '" alt="' + escapeHtml(row.team) + '">' : '<span class="standing-team-emblem-placeholder"></span>';
@@ -2750,13 +2989,13 @@ async function renderDashboard() {
     if (!Array.isArray(matches)) return;
     
     matches.forEach(m => {
-      const isNiigata = m.home_team === "繧｢繝ｫ繝薙Ξ繝・・ｽ・ｽ繧ｹ譁ｰ貎・ || m.away_team === "繧｢繝ｫ繝薙Ξ繝・・ｽ・ｽ繧ｹ譁ｰ貎・;
-      const isKumamoto = m.home_team === "繝ｭ繧｢繝・・ｽ・ｽ辭頑悽" || m.away_team === "繝ｭ繧｢繝・・ｽ・ｽ辭頑悽";
+      const isNiigata = m.home_team === "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f" || m.away_team === "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f";
+      const isKumamoto = m.home_team === "\u30ed\u30a2\u30c3\u30bd\u718a\u672c" || m.away_team === "\u30ed\u30a2\u30c3\u30bd\u718a\u672c";
       
       if (!isNiigata && !isKumamoto) return;
       
       const club = isNiigata ? "niigata" : "kumamoto";
-      const clubKeyword = isNiigata ? "繧｢繝ｫ繝薙Ξ繝・・ｽ・ｽ繧ｹ譁ｰ貎・ : "繝ｭ繧｢繝・・ｽ・ｽ辭頑悽";
+      const clubKeyword = isNiigata ? "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f" : "\u30ed\u30a2\u30c3\u30bd\u718a\u672c";
       const isHome = m.home_team === clubKeyword;
       const opponent = isHome ? m.away_team : m.home_team;
       const dateStr = m.date.replace(/\//g, "-");
