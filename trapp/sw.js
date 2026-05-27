@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v14';
+const cacheName = 'football-app-v15-history';
 const assetsToCache = [
   './',
   './index.html',
@@ -10,12 +10,14 @@ const assetsToCache = [
   './scoreboard.css',
   './scoreboard.js',
   './vendor/html2canvas.min.js',
+  './results_data.js',
   './schedule/schedule.js',
   './schedule/schedule.json',
   './schedule/niigata_2024_schedule.json',
   './club_emblems.json',
   './data/results.json',
-  './icons/img_club_gunma.png',
+  './emblems/アルビレックス新潟.png',
+  './emblems/ロアッソ熊本.png',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
@@ -36,5 +38,3 @@ self.addEventListener('fetch', e => {
     })
   );
 });
-
-navigator.serviceWorker.register('/2025football_program/jstest/sw.js')

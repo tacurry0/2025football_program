@@ -147,6 +147,39 @@ document.addEventListener("DOMContentLoaded", () => {
       "renofa": "山口", "vortis": "徳島", "kamatamare": "讃岐", "giravanz": "北九州", "tegevajaro": "宮崎"
     };
 
+    const LOCAL_EMBLEM_BY_SLUG = {
+      niigata: "アルビレックス新潟.png", kumamoto: "ロアッソ熊本.png", imabari: "FC今治.png", tosu: "サガン鳥栖.png",
+      kochi: "高知ユナイテッドSC.png", ehime: "愛媛FC.png", kyoto: "京都サンガF.C..png", yamaguchi: "レノファ山口FC.png",
+      miyazaki: "テゲバジャーロ宮崎.png", tottori: "ガイナーレ鳥取.png", kagoshima: "鹿児島ユナイテッドFC.png",
+      ryukyu: "FC琉球.png", shiga: "レイラック滋賀.png", oita: "大分トリニータ.png", kitakyushu: "ギラヴァンツ北九州.png",
+      kanazawa: "ツエーゲン金沢.png", sanuki: "カマタマーレ讃岐.png", tokushima: "徳島ヴォルティス.png",
+      toyama: "カターレ富山.png", nara: "奈良クラブ.png", iwaki: "いわきFC.png", gifu: "FC岐阜.png",
+      sapporo: "北海道コンサドーレ札幌.png", matsumoto: "松本山雅FC.png", nagano: "AC長野パルセイロ.png",
+      iwata: "ジュビロ磐田.png", fukushima: "福島ユナイテッド.png", kofu: "ヴァンフォーレ甲府.png",
+      shonan: "湘南ベルマーレ.png", akita: "ブラウブリッツ秋田.png", yamagata: "モンテディオ山形.png",
+      yokohamafc: "横浜FC.png", yokohamafm: "横浜F・マリノス.png", sendai: "ベガルタ仙台.png",
+      hachinohe: "ヴァンラーレ八戸.png", morioka: "いわてグルージャ盛岡.png", iwate: "いわてグルージャ盛岡.png",
+      gunma: "ザスパ群馬.png", kusatsu: "ザスパ群馬.png", mito: "水戸ホーリーホック.png", tochigi: "栃木SC.png",
+      omiya: "大宮アルディージャ.png", chiba: "ジェフユナイテッド千葉.png", sagamihara: "SC相模原.png",
+      shimizu: "清水エスパルス.png", okayama: "ファジアーノ岡山.png", hiroshima: "サンフレッチェ広島.png",
+      kobe: "ヴィッセル神戸.png", vissel: "ヴィッセル神戸.png", gosaka: "ガンバ大阪.png", "g-osaka": "ガンバ大阪.png",
+      cosaka: "セレッソ大阪.png", "c-osaka": "セレッソ大阪.png", urawa: "浦和レッズ.png",
+      kashima: "鹿島アントラーズ.png", kashiwa: "柏レイソル.png", ftokyo: "FC東京.png", tokyo: "FC東京.png",
+      tokyov: "東京ヴェルディ.png", machida: "FC町田ゼルビア.png", fosaka: "FC大阪.png", "f-osaka": "FC大阪.png",
+      fujieda: "藤枝MYFC.png", nagoya: "名古屋グランパス.png", nagasaki: "V・ファーレン長崎.png",
+      fukuoka: "アビスパ福岡.png", ysyokohama: "Y.S.C.C.横浜.png", numazu: "アスルクラロ沼津.png"
+    };
+
+    function localizeEmblemUrl(url) {
+      if (!url) return "";
+      const value = String(url);
+      if (value.startsWith("./emblems/") || value.startsWith("emblems/")) return value;
+      if (value.includes("/emblem/2026/shiga.svg")) return "./emblems/レイラック滋賀.png";
+      const m = value.match(/img_club_([^.\/]+)\.png/);
+      if (m && LOCAL_EMBLEM_BY_SLUG[m[1]]) return `./emblems/${LOCAL_EMBLEM_BY_SLUG[m[1]]}`;
+      return value;
+    }
+
     function getTeamKwFromEmblem(url) {
       if (!url) return null;
       const m = url.match(/img_club_([^.]+)\.png/);
@@ -257,12 +290,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (res.ok) {
           const json = await res.json();
           clubEmblemMap = { ...fromSchedule, ...json };
+          Object.keys(clubEmblemMap).forEach(key => {
+            clubEmblemMap[key] = localizeEmblemUrl(clubEmblemMap[key]);
+          });
           return;
         }
       } catch (e) {
         console.warn("Club emblem map load failed", e);
       }
       clubEmblemMap = fromSchedule;
+      Object.keys(clubEmblemMap).forEach(key => {
+        clubEmblemMap[key] = localizeEmblemUrl(clubEmblemMap[key]);
+      });
     }
 
     const clubEmblemMapReady = loadClubEmblemMap();
@@ -277,15 +316,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function getEmblemUrlForTeam(teamName) {
       if (!teamName) return "";
       const mapped = getClubEmblemFromMap(teamName);
-      if (mapped) return mapped;
+      if (mapped) return localizeEmblemUrl(mapped);
       const direct = scheduleData.find(m => robustTeamMatch(m.opponent, teamName) || robustTeamMatch(getTeamKwFromEmblem(m.emblem), teamName));
-      if (direct && direct.emblem) return direct.emblem;
+      if (direct && direct.emblem) return localizeEmblemUrl(direct.emblem);
       const reversed = Object.entries(EMBLEM_MAP).find(([, kw]) => robustTeamMatch(kw, teamName));
-      return reversed ? `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png` : "";
+      return reversed ? localizeEmblemUrl(`https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`) : "";
     }
 
     function resolveEmblemUrl(teamName, fallback = "") {
-      return getEmblemUrlForTeam(teamName) || fallback || "";
+      return getEmblemUrlForTeam(teamName) || localizeEmblemUrl(fallback) || "";
     }
 
     function robustTeamMatch(name1, name2) {
@@ -1060,9 +1099,10 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    const officialInfoHtml = renderOfficialInfo(match);
-    const membersHtml = renderMatchMembers(match);
-    const eventsHtml = renderMatchEvents(match);
+    const detailData = offRes ? { ...match, ...offRes } : match;
+    const officialInfoHtml = renderOfficialInfo(detailData);
+    const membersHtml = renderMatchMembers(detailData);
+    const eventsHtml = renderMatchEvents(detailData);
 
     let pkHtml = "";
     if (parseDate(match.date).getFullYear() === 2026) {
@@ -1074,7 +1114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const homeAway = getMatchIsHome(match) ? "HOME" : "AWAY";
     const clubName = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
-    const clubEmblem = match.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
+    const clubEmblem = match.club === "niigata" ? "./emblems/アルビレックス新潟.png" : "./emblems/ロアッソ熊本.png";
 
     const engOpp = J_CLUB_ENG[match.opponent] || match.opponent.toUpperCase();
     const opponentEmblem = resolveEmblemUrl(match.opponent, match.emblem);
@@ -1367,7 +1407,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let emblem = resolveEmblemUrl(r.opponent, r.emblem) || "";
       if (!emblem) {
         const reversed = Object.entries(EMBLEM_MAP).find(([k,v]) => robustTeamMatch(v, r.opponent));
-        if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
+        if (reversed) emblem = localizeEmblemUrl(`https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`);
       }
 
       scheduleData.push({
@@ -1616,7 +1656,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isAtt = localStorage.getItem('attend_' + m.date + '_' + m.club + '_' + m.opponent) === "true";
       const isHome = getMatchIsHome(m);
       const haBadge = isHome ? '<span class="sheet-ha badge-home" style="color:#fff; font-weight:800; font-size:1rem;">HOME</span>' : '<span class="sheet-ha badge-away" style="color:#fff; font-weight:800; font-size:1rem;">AWAY</span>';
-      const myEmblem = m.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
+      const myEmblem = m.club === "niigata" ? "./emblems/アルビレックス新潟.png" : "./emblems/ロアッソ熊本.png";
       const J_CLUB_ENG = { "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC" };
       const engOpp = J_CLUB_ENG[m.opponent] || m.opponent.toUpperCase();
 
@@ -1676,7 +1716,7 @@ document.addEventListener("DOMContentLoaded", () => {
                  
                  <!-- Right (Opponent) -->
                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <img src="${m.emblem}" class="dash-opp-emblem" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${m.opponent}', event)">
+                    <img src="${escapeHtml(resolveEmblemUrl(m.opponent, m.emblem))}" class="dash-opp-emblem" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${m.opponent}', event)">
                     <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
                        <span class="val-rank-num-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-opp">-</span> pts</span>
@@ -1865,7 +1905,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let emblem = resolveEmblemUrl(name, scheduleData.find(m => m.date === r.date && robustTeamMatch(m.opponent, name))?.emblem || "");
       if (!emblem) {
         const reversed = Object.entries(EMBLEM_MAP).find(([k, v]) => robustTeamMatch(v, name));
-        if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
+        if (reversed) emblem = localizeEmblemUrl(`https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`);
       }
       return { name, emblem };
     };
