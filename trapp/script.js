@@ -1,4 +1,4 @@
-﻿window.clubSitesData = null;
+window.clubSitesData = null;
 window.openClubSite = async function(clubName, event) {
   if (event) {
     event.stopPropagation();
@@ -9,14 +9,14 @@ window.openClubSite = async function(clubName, event) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       window.clubSitesData = await res.json();
     } catch(e) {
-      alert("\u516c\u5f0f\u30b5\u30a4\u30c8\u306e\u30c7\u30fc\u30bf\u304c\u8aad\u307f\u8fbc\u3081\u307e\u305b\u3093\u3067\u3057\u305f\u3002\u30ed\u30fc\u30ab\u30eb\u74b0\u5883(file://)\u306e\u5834\u5408\u3001\u30d6\u30e9\u30a6\u30b6\u306e\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3\u8a2d\u5b9a\u3067\u30d6\u30ed\u30c3\u30af\u3055\u308c\u3066\u3044\u308b\u53ef\u80fd\u6027\u304c\u3042\u308a\u307e\u3059\u3002");
+      alert("公式サイトのデータが読み込めませんでした。\nローカル環境(file://)の場合、ブラウザのセキュリティ設定でブロックされている可能性があります。");
       console.error("Failed to load club sites", e);
       return;
     }
   }
   
   // Remove all spaces, dots, middle dots, hyphens, and convert full-width to half-width
-  const norm = (s) => (s || "").normalize("NFKC").replace(/[\s\u30fb\.\-\_]/g, "").toLowerCase();
+  const norm = (s) => (s || "").normalize("NFKC").replace(/[\s・\.\-\_]/g, "").toLowerCase();
   const targetNorm = norm(clubName);
   
   let club = window.clubSitesData.find(c => norm(c.club_name) === targetNorm);
@@ -27,42 +27,51 @@ window.openClubSite = async function(clubName, event) {
       return cNorm.includes(targetNorm) || targetNorm.includes(cNorm);
     });
   }
-  // Fallback for tricky JLeague abbreviations like "f\ufffd\ufffd\ufffd\ufffd" vs "FC\ufffd\ufffd\ufffd\ufffd"
-  if (!club && targetNorm.includes("f\u6771\u4eac")) club = window.clubSitesData.find(c => c.club_name.includes("FC\u6771\u4eac"));
-  if (!club && targetNorm.includes("c\u5927\u962a")) club = window.clubSitesData.find(c => c.club_name.includes("\u30bb\u30ec\u30c3\u30bd"));
-  if (!club && targetNorm.includes("g\u5927\u962a")) club = window.clubSitesData.find(c => c.club_name.includes("\u30ac\u30f3\u30d0"));
-  if (!club && targetNorm.includes("\u6771\u4eacv")) club = window.clubSitesData.find(c => c.club_name.includes("\u30f4\u30a7\u30eb\u30c7\u30a3"));
-  if (!club && targetNorm.includes("\u6a2a\u6d5cfm")) club = window.clubSitesData.find(c => c.club_name.includes("\u30de\u30ea\u30ce\u30b9"));
+
+  // Fallback for tricky JLeague abbreviations like "F東京" vs "FC東京"
+  if (!club && targetNorm.includes("f東京")) club = window.clubSitesData.find(c => c.club_name.includes("FC東京"));
+  if (!club && targetNorm.includes("c大阪")) club = window.clubSitesData.find(c => c.club_name.includes("セレッソ"));
+  if (!club && targetNorm.includes("g大阪")) club = window.clubSitesData.find(c => c.club_name.includes("ガンバ"));
+  if (!club && targetNorm.includes("東京v")) club = window.clubSitesData.find(c => c.club_name.includes("ヴェルディ"));
+  if (!club && targetNorm.includes("横浜fm")) club = window.clubSitesData.find(c => c.club_name.includes("マリノス"));
+
   if (club && club.official_site) {
     window.open(club.official_site, '_blank');
   } else {
-    alert("\u516c\u5f0f\u30b5\u30a4\u30c8\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093:\n" + 
-          "\u30af\u30e9\u30d6\u540d: [" + clubName + "]\n" + 
-          "\u6b63\u898f\u5316: [" + targetNorm + "]");
+    alert("公式サイトが見つかりません:\n" + 
+          "元の名前: [" + clubName + "]\n" + 
+          "内部変換: [" + targetNorm + "]");
     console.warn("No official site found for:", clubName);
   }
 };
+
 document.addEventListener("DOMContentLoaded", () => {
   const feedSlider = document.getElementById("feed-slider");
   const calendarBody = document.getElementById("calendar-body");
   const ultraFeed = document.getElementById("ultra-feed");
   const calendarView = document.getElementById("calendar-view");
   const ultraDashboard = document.getElementById("ultra-dashboard");
-  const visionView = document.getElementById("vision-view");
+  const scoreboardView = document.getElementById("scoreboard-view");
+
   const prevBtn = document.getElementById("prev-month");
   const nextBtn = document.getElementById("next-month");
   const goTodayBtn = document.getElementById("go-today");
   const activeMonthTitle = document.getElementById("active-month-title");
+
   const toggleNiigata = document.getElementById("toggle-niigata");
   const toggleKumamoto = document.getElementById("toggle-kumamoto");
+
   const yearTabContainer = document.getElementById("nav-year-tabs");
   let yearTabs = {};
+
   const detailSheet = document.getElementById("detail-sheet");
   const sheetBackdrop = document.getElementById("detail-sheet-backdrop");
   const sheetContent = document.getElementById("sheet-content");
+
   const pickerOverlay = document.getElementById("match-picker-overlay");
   const pickerBackdrop = document.getElementById("match-picker-backdrop");
   const pickerList = document.getElementById("picker-list");
+
   const sideMenu = document.getElementById("side-menu");
   const sideMenuBackdrop = document.getElementById("side-menu-backdrop");
   const hamBtn = document.getElementById("hamburger-btn");
@@ -70,331 +79,102 @@ document.addEventListener("DOMContentLoaded", () => {
   const ellipsisIconHtml = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="5.01" y2="12"></line><line x1="12" y1="12" x2="12.01" y2="12"></line><line x1="19" y1="12" x2="19.01" y2="12"></line></svg>';
   const searchInput = document.getElementById("search-input");
   const searchPopup = document.getElementById("search-popup");
+
   const ymPickerOverlay = document.getElementById("ym-picker-overlay");
   const ymPickerBackdrop = document.getElementById("ym-picker-backdrop");
   const ymPickerList = document.getElementById("ym-picker-list");
+
   let currentIndex = 0;
   let allSections = [];
   let visibleSections = [];
   let selectedYear = null;
-  let renderedFeedYear = "__none__";
   let currentMode = "dashboard"; // dashboard, feed, calendar or scoreboard
-const CLUB_ENGLISH_NAMES = {
-    "\u5317\u6d77\u9053\u30b3\u30f3\u30b5\u30c9\u30fc\u30ec\u672d\u5e4c": "HOKKAIDO CONSADOLE SAPPORO",
-    "\u672d\u5e4c": "HOKKAIDO CONSADOLE SAPPORO",
-    "\u30f4\u30a1\u30f3\u30e9\u30fc\u30ec\u516b\u6238": "VANRAURE HACHINOHE",
-    "\u516b\u6238": "VANRAURE HACHINOHE",
-    "\u3044\u308f\u3066\u30b0\u30eb\u30fc\u30b8\u30e3\u76db\u5ca1": "IWATE GRULLA MORIOKA",
-    "\u5ca9\u624b": "IWATE GRULLA MORIOKA",
-    "\u30d9\u30ac\u30eb\u30bf\u4ed9\u53f0": "VEGALTA SENDAI",
-    "\u4ed9\u53f0": "VEGALTA SENDAI",
-    "\u30d6\u30e9\u30a6\u30d6\u30ea\u30c3\u30c4\u79cb\u7530": "BLAUBLITZ AKITA",
-    "\u79cb\u7530": "BLAUBLITZ AKITA",
-    "\u30e2\u30f3\u30c6\u30c7\u30a3\u30aa\u5c71\u5f62": "MONTEDIO YAMAGATA",
-    "\u5c71\u5f62": "MONTEDIO YAMAGATA",
-    "\u798f\u5cf6\u30e6\u30ca\u30a4\u30c6\u30c3\u30c9FC": "FUKUSHIMA UNITED FC",
-    "\u798f\u5cf6": "FUKUSHIMA UNITED FC",
-    "\u3044\u308f\u304dFC": "IWAKI FC",
-    "\u3044\u308f\u304d": "IWAKI FC",
-    "\u9e7f\u5cf6\u30a2\u30f3\u30c8\u30e9\u30fc\u30ba": "KASHIMA ANTLERS",
-    "\u9e7f\u5cf6": "KASHIMA ANTLERS",
-    "\u6c34\u6238\u30db\u30fc\u30ea\u30fc\u30db\u30c3\u30af": "MITO HOLLYHOCK",
-    "\u6c34\u6238": "MITO HOLLYHOCK",
-    "\u6803\u6728SC": "TOCHIGI SC",
-    "\u6803\u6728": "TOCHIGI SC",
-    "\u30b6\u30b9\u30d1\u7fa4\u99ac": "THESPA GUNMA",
-    "\u30b6\u30b9\u30d1\u30af\u30b5\u30c4\u7fa4\u99ac": "THESPAKUSATSU GUNMA",
-    "\u7fa4\u99ac": "THESPA GUNMA",
-    "\u6d66\u548c\u30ec\u30c3\u30ba": "URAWA REDS",
-    "\u6d66\u548c": "URAWA REDS",
-    "\u5927\u5bae\u30a2\u30eb\u30c7\u30a3\u30fc\u30b8\u30e3": "OMIYA ARDIJA",
-    "RB\u5927\u5bae\u30a2\u30eb\u30c7\u30a3\u30fc\u30b8\u30e3": "RB OMIYA ARDIJA",
-    "\u5927\u5bae": "RB OMIYA ARDIJA",
-    "\u30b8\u30a7\u30d5\u30e6\u30ca\u30a4\u30c6\u30c3\u30c9\u5343\u8449": "JEF UNITED CHIBA",
-    "\u5343\u8449": "JEF UNITED CHIBA",
-    "\u67cf\u30ec\u30a4\u30bd\u30eb": "KASHIWA REYSOL",
-    "\u67cf": "KASHIWA REYSOL",
-    "FC\u6771\u4eac": "FC TOKYO",
-    "\u6771\u4eac": "FC TOKYO",
-    "\u6771\u4eac\u30f4\u30a7\u30eb\u30c7\u30a3": "TOKYO VERDY",
-    "\u6771\u4eacV": "TOKYO VERDY",
-    "FC\u753a\u7530\u30bc\u30eb\u30d3\u30a2": "FC MACHIDA ZELVIA",
-    "\u753a\u7530": "FC MACHIDA ZELVIA",
-    "\u5ddd\u5d0e\u30d5\u30ed\u30f3\u30bf\u30fc\u30ec": "KAWASAKI FRONTALE",
-    "\u5ddd\u5d0e": "KAWASAKI FRONTALE",
-    "\u6a2a\u6d5cF\u30fb\u30de\u30ea\u30ce\u30b9": "YOKOHAMA F. MARINOS",
-    "\u6a2a\u6d5cFM": "YOKOHAMA F. MARINOS",
-    "\u6a2a\u6d5cFC": "YOKOHAMA FC",
-    "Y.S.C.C.\u6a2a\u6d5c": "Y.S.C.C. YOKOHAMA",
-    "\u6e58\u5357\u30d9\u30eb\u30de\u30fc\u30ec": "SHONAN BELLMARE",
-    "\u6e58\u5357": "SHONAN BELLMARE",
-    "SC\u76f8\u6a21\u539f": "SC SAGAMIHARA",
-    "\u76f8\u6a21\u539f": "SC SAGAMIHARA",
-    "\u30f4\u30a1\u30f3\u30d5\u30a9\u30fc\u30ec\u7532\u5e9c": "VENTFORET KOFU",
-    "\u7532\u5e9c": "VENTFORET KOFU",
-    "\u677e\u672c\u5c71\u96c5FC": "MATSUMOTO YAMAGA FC",
-    "\u677e\u672c": "MATSUMOTO YAMAGA FC",
-    "AC\u9577\u91ce\u30d1\u30eb\u30bb\u30a4\u30ed": "AC NAGANO PARCEIRO",
-    "\u9577\u91ce": "AC NAGANO PARCEIRO",
-    "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f": "ALBIREX NIIGATA",
-    "\u65b0\u6f5f": "ALBIREX NIIGATA",
-    "\u30ab\u30bf\u30fc\u30ec\u5bcc\u5c71": "KATALLER TOYAMA",
-    "\u5bcc\u5c71": "KATALLER TOYAMA",
-    "\u30c4\u30a8\u30fc\u30b2\u30f3\u91d1\u6ca2": "ZWEIGEN KANAZAWA",
-    "\u91d1\u6ca2": "ZWEIGEN KANAZAWA",
-    "\u6e05\u6c34\u30a8\u30b9\u30d1\u30eb\u30b9": "SHIMIZU S-PULSE",
-    "\u6e05\u6c34": "SHIMIZU S-PULSE",
-    "\u30b8\u30e5\u30d3\u30ed\u78d0\u7530": "JUBILO IWATA",
-    "\u78d0\u7530": "JUBILO IWATA",
-    "\u85e4\u679dMYFC": "FUJIEDA MYFC",
-    "\u85e4\u679d": "FUJIEDA MYFC",
-    "\u30a2\u30b9\u30eb\u30af\u30e9\u30ed\u6cbc\u6d25": "AZUL CLARO NUMAZU",
-    "\u6cbc\u6d25": "AZUL CLARO NUMAZU",
-    "\u540d\u53e4\u5c4b\u30b0\u30e9\u30f3\u30d1\u30b9": "NAGOYA GRAMPUS",
-    "\u540d\u53e4\u5c4b": "NAGOYA GRAMPUS",
-    "FC\u5c90\u961c": "FC GIFU",
-    "\u5c90\u961c": "FC GIFU",
-    "\u4eac\u90fd\u30b5\u30f3\u30acF.C.": "KYOTO SANGA F.C.",
-    "\u4eac\u90fd": "KYOTO SANGA F.C.",
-    "\u30ac\u30f3\u30d0\u5927\u962a": "GAMBA OSAKA",
-    "G\u5927\u962a": "GAMBA OSAKA",
-    "\u30bb\u30ec\u30c3\u30bd\u5927\u962a": "CEREZO OSAKA",
-    "C\u5927\u962a": "CEREZO OSAKA",
-    "FC\u5927\u962a": "FC OSAKA",
-    "\u5927\u962a": "FC OSAKA",
-    "\u30f4\u30a3\u30c3\u30bb\u30eb\u795e\u6238": "VISSEL KOBE",
-    "\u30f4\u30a3\u30c3\u30bb\u30eb\u795e\u6236": "VISSEL KOBE",
-    "\u795e\u6238": "VISSEL KOBE",
-    "\u5948\u826f\u30af\u30e9\u30d6": "NARA CLUB",
-    "\u5948\u826f": "NARA CLUB",
-    "\u30ac\u30a4\u30ca\u30fc\u30ec\u9ce5\u53d6": "GAINARE TOTTORI",
-    "\u9ce5\u53d6": "GAINARE TOTTORI",
-    "\u30d5\u30a1\u30b8\u30a2\u30fc\u30ce\u5ca1\u5c71": "FAGIANO OKAYAMA",
-    "\u5ca1\u5c71": "FAGIANO OKAYAMA",
-    "\u30b5\u30f3\u30d5\u30ec\u30c3\u30c1\u30a7\u5e83\u5cf6": "SANFRECCE HIROSHIMA",
-    "\u5e83\u5cf6": "SANFRECCE HIROSHIMA",
-    "\u30ec\u30ce\u30d5\u30a1\u5c71\u53e3FC": "RENOFA YAMAGUCHI FC",
-    "\u5c71\u53e3": "RENOFA YAMAGUCHI FC",
-    "\u30ab\u30de\u30bf\u30de\u30fc\u30ec\u8b83\u5c90": "KAMATAMARE SANUKI",
-    "\u8b83\u5c90": "KAMATAMARE SANUKI",
-    "\u5fb3\u5cf6\u30f4\u30a9\u30eb\u30c6\u30a3\u30b9": "TOKUSHIMA VORTIS",
-    "\u5fb3\u5cf6": "TOKUSHIMA VORTIS",
-    "\u611b\u5a9bFC": "EHIME FC",
-    "\u611b\u5a9b": "EHIME FC",
-    "FC\u4eca\u6cbb": "FC IMABARI",
-    "\u4eca\u6cbb": "FC IMABARI",
-    "\u30a2\u30d3\u30b9\u30d1\u798f\u5ca1": "AVISPA FUKUOKA",
-    "\u798f\u5ca1": "AVISPA FUKUOKA",
-    "\u30ae\u30e9\u30f4\u30a1\u30f3\u30c4\u5317\u4e5d\u5dde": "GIRAVANZ KITAKYUSHU",
-    "\u5317\u4e5d\u5dde": "GIRAVANZ KITAKYUSHU",
-    "\u30b5\u30ac\u30f3\u9ce5\u6816": "SAGAN TOSU",
-    "\u9ce5\u6816": "SAGAN TOSU",
-    "V\u30fb\u30d5\u30a1\u30fc\u30ec\u30f3\u9577\u5d0e": "V-VAREN NAGASAKI",
-    "\u9577\u5d0e": "V-VAREN NAGASAKI",
-    "\u30ed\u30a2\u30c3\u30bd\u718a\u672c": "ROASSO KUMAMOTO",
-    "\u718a\u672c": "ROASSO KUMAMOTO",
-    "\u5927\u5206\u30c8\u30ea\u30cb\u30fc\u30bf": "OITA TRINITA",
-    "\u5927\u5206": "OITA TRINITA",
-    "\u30c6\u30b2\u30d0\u30b8\u30e3\u30fc\u30ed\u5bae\u5d0e": "TEGEVAJARO MIYAZAKI",
-    "\u5bae\u5d0e": "TEGEVAJARO MIYAZAKI",
-    "\u9e7f\u5150\u5cf6\u30e6\u30ca\u30a4\u30c6\u30c3\u30c9FC": "KAGOSHIMA UNITED FC",
-    "\u9e7f\u5150\u5cf6": "KAGOSHIMA UNITED FC",
-    "FC\u7409\u7403": "FC RYUKYU",
-    "\u7409\u7403": "FC RYUKYU",
-    "\u9ad8\u77e5\u30e6\u30ca\u30a4\u30c6\u30c3\u30c9SC": "KOCHI UNITED SC",
-    "\u9ad8\u77e5": "KOCHI UNITED SC",
-    "\u30ec\u30a4\u30e9\u30c3\u30af\u6ecb\u8cc0FC": "REILAC SHIGA FC",
-    "\u6ecb\u8cc0": "REILAC SHIGA FC"
+
+  const CLUB_ENGLISH_NAMES = {
+    "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "岩手": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "福島": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "いわき": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "鹿島": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "水戸": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "栃木": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "ザスパクサツ群馬": "THESPAKUSATSU GUNMA", "群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "浦和": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "大宮": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "柏": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "東京V": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "町田": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "川崎": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FM": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "湘南": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "松本": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "長野": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "清水": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "藤枝": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "名古屋": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "京都": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "G大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "C大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "神戸": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "奈良": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "山口": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "徳島": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "愛媛": "EHIME FC", "FC今治": "FC IMABARI", "今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "大分": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "鹿児島": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "高知": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC", "滋賀": "REILAC SHIGA FC"
   };
+
   // --- Date/Theme Helpers ---
-  function normalizeDateString(value) {
-    return String(value || "").trim().replace(/\//g, "-");
-  }
   function parseDate(s) {
-    const [y, m, d] = normalizeDateString(s).split("-").map(Number);
+    const [y, m, d] = s.split("-").map(Number);
     return new Date(y, m - 1, d || 1);
   }
+
   function isBeforeToday(dateStr) {
     const target = parseDate(dateStr);
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     return target < today;
   }
+
     const normalizeName = (s) => (s || "").normalize("NFKC").trim();
     
-    // Team name normalization mappings
-const GLOBAL_TEAM_MAP = {
-      "\u65b0\u6f5f": "\u65b0\u6f5f",
-      "\u718a\u672c": "\u718a\u672c",
-      "\u9ce5\u53d6": "\u9ce5\u53d6",
-      "\u5bcc\u5c71": "\u5bcc\u5c71",
-      "\u91d1\u6ca2": "\u91d1\u6ca2",
-      "\u6e05\u6c34": "\u6e05\u6c34",
-      "\u78d0\u7530": "\u78d0\u7530",
-      "\u540d\u53e4\u5c4b": "\u540d\u53e4\u5c4b",
-      "\u795e\u6236": "\u795e\u6238",
-      "\u795e\u6238": "\u795e\u6238",
-      "\u4eac\u90fd": "\u4eac\u90fd",
-      "\u672d\u5e4c": "\u672d\u5e4c",
-      "\u9e7f\u5cf6": "\u9e7f\u5cf6",
-      "\u6d66\u548c": "\u6d66\u548c",
-      "\u67cf": "\u67cf",
-      "\u6e58\u5357": "\u6e58\u5357",
-      "\u753a\u7530": "\u753a\u7530",
-      "\u5ddd\u5d0e": "\u5ddd\u5d0e",
-      "\u6a2a\u6d5cFM": "\u6a2a\u6d5cFM",
-      "\u6a2a\u6d5cF\u30fb\u30de\u30ea\u30ce\u30b9": "\u6a2a\u6d5cFM",
-      "\u5927\u5206": "\u5927\u5206",
-      "\u798f\u5ca1": "\u798f\u5ca1",
-      "\u9ce5\u6816": "\u9ce5\u6816",
-      "\u9577\u5d0e": "\u9577\u5d0e",
-      "\u5ca1\u5c71": "\u5ca1\u5c71",
-      "\u5e83\u5cf6": "\u5e83\u5cf6",
-      "\u5c71\u53e3": "\u5c71\u53e3",
-      "\u5fb3\u5cf6": "\u5fb3\u5cf6",
-      "\u8b83\u5c90": "\u8b83\u5c90",
-      "\u5317\u4e5d\u5dde": "\u5317\u4e5d\u5dde",
-      "\u5bae\u5d0e": "\u5bae\u5d0e",
-      "\u516b\u6238": "\u516b\u6238",
-      "\u76db\u5ca1": "\u76db\u5ca1",
-      "\u79cb\u7530": "\u79cb\u7530",
-      "\u5c71\u5f62": "\u5c71\u5f62",
-      "\u4ed9\u53f0": "\u4ed9\u53f0",
-      "\u6c34\u6238": "\u6c34\u6238",
-      "\u7fa4\u99ac": "\u7fa4\u99ac",
-      "\u5927\u5bae": "\u5927\u5bae",
-      "\u5343\u8449": "\u5343\u8449",
-      "\u7532\u5e9c": "\u7532\u5e9c",
-      "\u9577\u91ce": "\u9577\u91ce",
-      "\u677e\u672c": "\u677e\u672c",
-      "\u9e7f\u5150\u5cf6": "\u9e7f\u5150\u5cf6",
-      "\u6803\u6728SC": "\u6803\u6728",
-      "\u6803\u6728": "\u6803\u6728",
-      "\u6803\u6728C": "\u6803\u6728",
-      "\u6803\u6728\u770c": "\u6803\u6728",
-      "\u30bb\u30ec\u30c3\u30bd": "\u30bb\u30ec\u30c3\u30bd",
-      "C\u5927\u962a": "\u30bb\u30ec\u30c3\u30bd",
-      "\u30bb\u30ec\u30c3\u30bd\u5927\u962a": "\u30bb\u30ec\u30c3\u30bd",
-      "\u30ac\u30f3\u30d0": "\u30ac\u30f3\u30d0",
-      "G\u5927\u962a": "\u30ac\u30f3\u30d0",
-      "\u30ac\u30f3\u30d0\u5927\u962a": "\u30ac\u30f3\u30d0",
-      "FC\u6771\u4eac": "\u6771\u4eac",
-      "\u6771\u4eacV": "\u6771\u4eacV",
-      "\u6771\u4eac\u30f4\u30a7\u30eb\u30c7\u30a3": "\u6771\u4eacV",
-      "FC\u5927\u962a": "\u5927\u962a",
-      "FC\u4eca\u6cbb": "\u4eca\u6cbb",
-      "\u4eca\u6cbb": "\u4eca\u6cbb",
-      "FC\u5c90\u961c": "\u5c90\u961c",
-      "FC\u7409\u7403": "\u7409\u7403"
+    // チーム名のゆらぎを吸収するためのマッピング
+    const GLOBAL_TEAM_MAP = {
+      "新潟": "新潟", "熊本": "熊本", "鳥取": "鳥取", "富山": "富山", "金沢": "金沢",
+      "清水": "清水", "磐田": "磐田", "名古屋": "名古屋", "神戶": "神戸", "神戸": "神戸", "京都": "京都",
+      "札幌": "札幌", "鹿島": "鹿島", "浦和": "浦和", "柏": "柏", "湘南": "湘南",
+      "町田": "町田", "川崎": "川崎", "横浜FM": "横浜FM", "横浜F・マリノス": "横浜FM", "大分": "大分", "福岡": "福岡",
+      "鳥栖": "鳥栖", "長崎": "長崎", "岡山": "岡山", "広島": "広島", "山口": "山口",
+      "徳島": "徳島", "讃岐": "讃岐", "北九州": "北九州", "宮崎": "宮崎",
+      "八戸": "八戸", "盛岡": "盛岡", "秋田": "秋田", "山形": "山形",
+      "仙台": "仙台", "水戸": "水戸", "群馬": "群馬", "大宮": "大宮", "千葉": "千葉",
+      "甲府": "甲府", "長野": "長野", "松本": "松本", "鹿児島": "鹿児島",
+      "栃木SC": "栃木", "栃木": "栃木", "栃木C": "栃木", "栃木Ｃ": "栃木",
+      "セレッソ": "セレッソ", "C大阪": "セレッソ", "Ｃ大阪": "セレッソ",
+      "ガンバ": "ガンバ", "G大阪": "ガンバ", "Ｇ大阪": "ガンバ",
+      "FC東京": "東京", "東京V": "東京V", "東京ヴェルディ": "東京V",
+      "FC大阪": "大阪", "FC今治": "今治", "今治": "今治", "FC岐阜": "岐阜", "FC琉球": "琉球"
     };
-    // Emblem URL to team name mappings
-const EMBLEM_MAP = {
-      "niigata": "\u65b0\u6f5f",
-      "kumamoto": "\u718a\u672c",
-      "imabari": "\u4eca\u6cbb",
-      "tosu": "\u9ce5\u6816",
-      "kochi": "\u9ad8\u77e5",
-      "ehime": "\u611b\u5a9b",
-      "kyoto": "\u4eac\u90fd",
-      "yamaguchi": "\u5c71\u53e3",
-      "miyazaki": "\u5bae\u5d0e",
-      "tottori": "\u9ce5\u53d6",
-      "kagoshima": "\u9e7f\u5150\u5cf6",
-      "ryukyu": "\u7409\u7403",
-      "shiga": "\u6ecb\u8cc0",
-      "oita": "\u5927\u5206",
-      "kitakyushu": "\u5317\u4e5d\u5dde",
-      "kanazawa": "\u91d1\u6ca2",
-      "sanuki": "\u8b83\u5c90",
-      "tokushima": "\u5fb3\u5cf6",
-      "toyama": "\u5bcc\u5c71",
-      "nara": "\u5948\u826f",
-      "iwaki": "\u3044\u308f\u304d",
-      "gifu": "\u5c90\u961c",
-      "sapporo": "\u672d\u5e4c",
-      "matsumoto": "\u677e\u672c",
-      "nagano": "\u9577\u91ce",
-      "iwata": "\u78d0\u7530",
-      "fukushima": "\u798f\u5cf6",
-      "kofu": "\u7532\u5e9c",
-      "shonan": "\u6e58\u5357",
-      "akita": "\u79cb\u7530",
-      "yamagata": "\u5c71\u5f62",
-      "yokohamafc": "\u6a2a\u6d5cFC",
-      "yokohamafm": "\u6a2a\u6d5cFM",
-      "sendai": "\u4ed9\u53f0",
-      "hachinohe": "\u516b\u6238",
-      "morioka": "\u76db\u5ca1",
-      "gunma": "\u7fa4\u99ac",
-      "mito": "\u6c34\u6238",
-      "tochigi": "\u6803\u6728",
-      "omiya": "\u5927\u5bae",
-      "chiba": "\u5343\u8449",
-      "sagamihara": "\u76f8\u6a21\u539f",
-      "shimizu": "\u6e05\u6c34",
-      "okayama": "\u5ca1\u5c71",
-      "hiroshima": "\u5e83\u5cf6",
-      "vissel": "\u795e\u6238",
-      "g-osaka": "\u30ac\u30f3\u30d0",
-      "c-osaka": "\u30bb\u30ec\u30c3\u30bd",
-      "urawa": "\u6d66\u548c",
-      "kashima": "\u9e7f\u5cf6",
-      "kashiwa": "\u67cf",
-      "tokyo": "\u6771\u4eac",
-      "tokyov": "\u6771\u4eacV",
-      "machida": "\u753a\u7530",
-      "fosaka": "\u5927\u962a",
-      "f-osaka": "\u5927\u962a",
-      "iwate": "\u76db\u5ca1",
-      "kusatsu": "\u7fa4\u99ac",
-      "verdy": "\u6771\u4eacV",
-      "marinos": "\u6a2a\u6d5cFM",
-      "antlers": "\u9e7f\u5cf6",
-      "reds": "\u6d66\u548c",
-      "reysol": "\u67cf",
-      "frontale": "\u5ddd\u5d0e",
-      "bellmare": "\u6e58\u5357",
-      "s-pulse": "\u6e05\u6c34",
-      "jubilo": "\u78d0\u7530",
-      "grampus": "\u540d\u53e4\u5c4b",
-      "sanga": "\u4eac\u90fd",
-      "gambaosaka": "\u30ac\u30f3\u30d0",
-      "cerezoosaka": "\u30bb\u30ec\u30c3\u30bd",
-      "vissel-k": "\u795e\u6238",
-      "trinita": "\u5927\u5206",
-      "avispa": "\u798f\u5ca1",
-      "zelvia": "\u753a\u7530",
-      "fagiano": "\u5ca1\u5c71",
-      "sanfrecce": "\u5e83\u5cf6",
-      "renofa": "\u5c71\u53e3",
-      "vortis": "\u5fb3\u5cf6",
-      "kamatamare": "\u8b83\u5c90",
-      "giravanz": "\u5317\u4e5d\u5dde",
-      "tegevajaro": "\u5bae\u5d0e"
+
+    // エンブレムURLからチーム名を特定する（文字化け対策）
+    const EMBLEM_MAP = {
+      "niigata": "新潟", "kumamoto": "熊本", "imabari": "今治", "tosu": "鳥栖", "kochi": "高知", "ehime": "愛媛",
+      "kyoto": "京都", "yamaguchi": "山口", "miyazaki": "宮崎", "tottori": "鳥取", "kagoshima": "鹿児島",
+      "ryukyu": "琉球", "shiga": "滋賀", "oita": "大分", "kitakyushu": "北九州", "kanazawa": "金沢",
+      "sanuki": "讃岐", "tokushima": "徳島", "toyama": "富山", "nara": "奈良", "iwaki": "いわき",
+      "gifu": "岐阜", "sapporo": "札幌", "matsumoto": "松本", "nagano": "長野", "iwata": "磐田",
+      "fukushima": "福島", "kofu": "甲府", "shonan": "湘南", "akita": "秋田", "yamagata": "山形",
+      "yokohamafc": "横浜FC", "yokohamafm": "横浜FM", "sendai": "仙台", "hachinohe": "八戸",
+      "morioka": "盛岡", "gunma": "群馬", "mito": "水戸", "tochigi": "栃木", "omiya": "大宮",
+      "chiba": "千葉", "sagamihara": "相模原", "shimizu": "清水", "okayama": "岡山",
+      "hiroshima": "広島", "vissel": "神戸", "g-osaka": "ガンバ", "c-osaka": "セレッソ",
+      "urawa": "浦和", "kashima": "鹿島", "kashiwa": "柏", "tokyo": "東京", "tokyov": "東京V", "machida": "町田",
+      "fosaka": "大阪", "f-osaka": "大阪", "iwate": "盛岡", "kusatsu": "群馬", "verdy": "東京V", "marinos": "横浜FM",
+      "antlers": "鹿島", "reds": "浦和", "reysol": "柏", "frontale": "川崎", "bellmare": "湘南", "s-pulse": "清水",
+      "jubilo": "磐田", "grampus": "名古屋", "sanga": "京都", "gambaosaka": "ガンバ", "cerezoosaka": "セレッソ",
+      "vissel-k": "神戸", "trinita": "大分", "avispa": "福岡", "zelvia": "町田", "fagiano": "岡山", "sanfrecce": "広島",
+      "renofa": "山口", "vortis": "徳島", "kamatamare": "讃岐", "giravanz": "北九州", "tegevajaro": "宮崎"
     };
+
     function getTeamKwFromEmblem(url) {
       if (!url) return null;
       const m = url.match(/img_club_([^.]+)\.png/);
       if (m && EMBLEM_MAP[m[1]]) return EMBLEM_MAP[m[1]];
       return null;
     }
+
     function escapeHtml(value) {
       return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
+
     function getOwnClubEnglish(club) {
       if (club === "niigata") return "ALBIREX NIIGATA";
       if (club === "kumamoto") return "ROASSO KUMAMOTO";
       return String(club || "").normalize("NFKC").toUpperCase();
     }
+
     function getClubEnglishName(name) {
       const normalized = String(name || "").normalize("NFKC").trim();
       return CLUB_ENGLISH_NAMES[normalized] || CLUB_ENGLISH_NAMES[name] || normalized.toUpperCase();
     }
+
     function getMatchCopyClubNames(match) {
       const own = getOwnClubEnglish(match.club);
       const opponent = getClubEnglishName(match.opponent);
       return getMatchIsHome(match) ? [own, opponent] : [opponent, own];
     }
+
     function showCopyToast(message) {
       let toast = document.getElementById("copy-toast");
       if (!toast) {
@@ -407,6 +187,7 @@ const EMBLEM_MAP = {
       clearTimeout(showCopyToast.timer);
       showCopyToast.timer = setTimeout(() => toast.classList.remove("show"), 1400);
     }
+
     async function copyText(text) {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
@@ -422,6 +203,7 @@ const EMBLEM_MAP = {
       document.execCommand("copy");
       area.remove();
     }
+
     function bindClubNameLongPress(nameEl, card, match) {
       if (!nameEl) return;
       let timer = null;
@@ -441,10 +223,10 @@ const EMBLEM_MAP = {
           const text = getMatchCopyClubNames(match).join("\n");
           try {
             await copyText(text);
-            showCopyToast("\u30af\u30e9\u30d6\u540d\u3092\u30b3\u30d4\ufffdE\u3057\u307e\u3057\u305f");
+            showCopyToast("クラブ名をコピーしました");
           } catch (error) {
             console.error(error);
-            showCopyToast("\u30b3\u30d4\ufffdE\u306b\u5931\u6557\u3057\u307e\u3057\u305f");
+            showCopyToast("コピーに失敗しました");
           }
         }, 620);
       };
@@ -459,7 +241,9 @@ const EMBLEM_MAP = {
       nameEl.addEventListener("pointercancel", clear);
       nameEl.addEventListener("contextmenu", (event) => event.preventDefault());
     }
+
     let clubEmblemMap = {};
+
     async function loadClubEmblemMap() {
       const fromSchedule = {};
       scheduleData.forEach(m => {
@@ -467,6 +251,7 @@ const EMBLEM_MAP = {
           fromSchedule[m.opponent] = m.emblem;
         }
       });
+
       try {
         const res = await fetch("./club_emblems.json?v=20260513a");
         if (res.ok) {
@@ -479,13 +264,16 @@ const EMBLEM_MAP = {
       }
       clubEmblemMap = fromSchedule;
     }
+
     const clubEmblemMapReady = loadClubEmblemMap();
+
     function getClubEmblemFromMap(teamName) {
       if (!teamName) return "";
       if (clubEmblemMap[teamName]) return clubEmblemMap[teamName];
       const found = Object.entries(clubEmblemMap).find(([name]) => robustTeamMatch(name, teamName));
       return found ? found[1] : "";
     }
+
     function getEmblemUrlForTeam(teamName) {
       if (!teamName) return "";
       const mapped = getClubEmblemFromMap(teamName);
@@ -495,17 +283,20 @@ const EMBLEM_MAP = {
       const reversed = Object.entries(EMBLEM_MAP).find(([, kw]) => robustTeamMatch(kw, teamName));
       return reversed ? `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png` : "";
     }
+
     function resolveEmblemUrl(teamName, fallback = "") {
       return getEmblemUrlForTeam(teamName) || fallback || "";
     }
+
     function robustTeamMatch(name1, name2) {
       if (!name1 || !name2) return false;
-      const n1 = normalizeName(name1).replace("\u306e\u8a66\u5408\u8a73\u7d30", "").replace("\u306e\u7d50\u679c", "").replace("SC", "").replace("FC", "").replace("F.C.", "");
-      const n2 = normalizeName(name2).replace("\u306e\u8a66\u5408\u8a73\u7d30", "").replace("\u306e\u7d50\u679c", "").replace("SC", "").replace("FC", "").replace("F.C.", "");
+      const n1 = normalizeName(name1).replace("の試合詳細", "").replace("の結果", "").replace("SC", "").replace("FC", "").replace("F.C.", "");
+      const n2 = normalizeName(name2).replace("の試合詳細", "").replace("の結果", "").replace("SC", "").replace("FC", "").replace("F.C.", "");
       
       if (n1 === n2) return true;
       if (n1.length >= 2 && n2.length >= 2 && (n1.includes(n2) || n2.includes(n1))) return true;
-      // \u30de\u30c3\u30d4\u30f3\u30b0\u306b\u3088\u308b\u89e3\u6c7a
+
+      // マッピングによる解決
       const getAlias = (n) => {
         for (let key in GLOBAL_TEAM_MAP) {
           const nk = normalizeName(key);
@@ -517,91 +308,53 @@ const EMBLEM_MAP = {
       const a2 = getAlias(n2);
       return a1 === a2 && a1.length >= 2;
     }
+
     function isHomeMatch(club, venue) {
       if (!venue) return false;
       const v = normalizeName(venue);
-      if (club === "niigata") return v.includes("\u30c1E\ufffdE\ufffd\ufffdE\ufffd\u30ab\u30d3\u30c3\u30b0\u30b9\u30ef\u30f3");
-      if (club === "kumamoto") return v.includes("\u3048\u304c\u304a\u5065\u5eb7");
+      if (club === "niigata") return v.includes("デンカビッグスワン");
+      if (club === "kumamoto") return v.includes("えがお健康");
       return false;
     }
+
     function getMatchIsHome(match) {
       if (match && match.home_away === "H") return true;
       if (match && match.home_away === "A") return false;
       return isHomeMatch(match && match.club, match && match.venue);
     }
+
     async function updateWeatherUI(container, date, venue) {
       if (!container) return;
       const STADIUM_CITY_MAP = {
-        "\u3048\u304c\u304a\u5065\u5eb7\u30b9\u30bf\u30b8\u30a2\u30e0": "\u718a\u672c\u5e02",
-        "\u30c7\u30f3\u30ab\u30d3\u30c3\u30b0\u30b9\u30ef\u30f3\u30b9\u30bf\u30b8\u30a2\u30e0": "\u65b0\u6f5f\u5e02",
-        "\u5473\u306e\u7d20\u30b9\u30bf\u30b8\u30a2\u30e0": "\u8abf\u5e03\u5e02",
-        "\u8c4a\u7530\u30b9\u30bf\u30b8\u30a2\u30e0": "\u8c4a\u7530\u5e02",
-        "\u30d1\u30ca\u30bd\u30cb\u30c3\u30af\u30b9\u30bf\u30b8\u30a2\u30e0\u5439\u7530": "\u5439\u7530\u5e02",
-        "\u57fc\u7389\u30b9\u30bf\u30b8\u30a2\u30e02002": "\u3055\u3044\u305f\u307e\u5e02\u7dd1\u533a",
-        "\u30e8\u30c9\u30b3\u30a6\u685c\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5927\u962a\u5e02\u6771\u4f4f\u5409\u533a",
-        "\u65e5\u7523\u30b9\u30bf\u30b8\u30a2\u30e0": "\u6a2a\u6d5c\u5e02\u6e2f\u5317\u533a",
-        "\u30cb\u30c3\u30d1\u30c4\u4e09\u30c4\u6ca2\u7403\u6280\u5834": "\u6a2a\u6d5c\u5e02\u795e\u5948\u5ddd\u533a",
-        "\u30ec\u30e2\u30f3\u30ac\u30b9\u30b9\u30bf\u30b8\u30a2\u30e0\u5e73\u585a": "\u5e73\u585a\u5e02",
-        "\u30b5\u30f3\u30ac\u30b9\u30bf\u30b8\u30a2\u30e0 by KYOCERA": "\u4e80\u5ca1\u5e02",
-        "\u30a8\u30c7\u30a3\u30aa\u30f3\u30d4\u30fc\u30b9\u30a6\u30a4\u30f3\u30b0\u5e83\u5cf6": "\u5e83\u5cf6\u5e02\u4e2d\u533a",
-        "\u30d9\u30b9\u30c8\u96fb\u5668\u30b9\u30bf\u30b8\u30a2\u30e0": "\u798f\u5ca1\u5e02\u535a\u591a\u533a",
-        "\u99c5\u524d\u4e0d\u52d5\u7523\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9ce5\u6816\u5e02",
-        "\u662d\u548c\u96fb\u5de5\u30c9\u30fc\u30e0\u5927\u5206": "\u5927\u5206\u5e02",
-        "\u30c9\u30fc\u30e0\u5927\u5206": "\u5927\u5206\u5e02",
-        "\u30e6\u30a2\u30c6\u30c3\u30af\u30b9\u30bf\u30b8\u30a2\u30e0\u4ed9\u53f0": "\u4ed9\u53f0\u5e02\u6cc9\u533a",
-        "IAI\u30b9\u30bf\u30b8\u30a2\u30e0\u65e5\u672c\u5e73": "\u9759\u5ca1\u5e02\u6e05\u6c34\u533a",
-        "\u30a8\u30b3\u30d1\u30b9\u30bf\u30b8\u30a2\u30e0": "\u888b\u4e95\u5e02",
-        "\u30e4\u30de\u30cf\u30b9\u30bf\u30b8\u30a2\u30e0": "\u78d0\u7530\u5e02",
-        "\u30c8\u30e9\u30f3\u30b9\u30b3\u30b9\u30e2\u30b9\u30b9\u30bf\u30b8\u30a2\u30e0\u9577\u5d0e": "\u8aeb\u65e9\u5e02",
-        "PEACE STADIUM Connected by SoftBank": "\u9577\u5d0e\u5e02",
-        "\u30d5\u30af\u30c0\u96fb\u5b50\u30a2\u30ea\u30fc\u30ca": "\u5343\u8449\u5e02\u4e2d\u592e\u533a",
-        "\u4e09\u5354\u30d5\u30ed\u30f3\u30c6\u30a2\u67cf\u30b9\u30bf\u30b8\u30a2\u30e0": "\u67cf\u5e02",
-        "\u30b7\u30c6\u30a3\u30e9\u30a4\u30c8\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5ca1\u5c71\u5e02\u5317\u533a",
-        "JFE\u6674\u308c\u3084\u304b\u56fd\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5ca1\u5c71\u5e02\u5317\u533a",
-        "\u7dad\u65b0\u307f\u3089\u3044\u3075\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5c71\u53e3\u5e02",
-        "\u30dd\u30ab\u30ea\u30b9\u30a8\u30c3\u30c8\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9cf4\u9580\u5e02",
-        "\u9cf4\u9580\u30fb\u5927\u585a\u30b9\u30dd\u30fc\u30c4\u30d1\u30fc\u30af \u30dd\u30ab\u30ea\u30b9\u30a8\u30c3\u30c8\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9cf4\u9580\u5e02",
-        "\u30cb\u30f3\u30b8\u30cb\u30a2\u30b9\u30bf\u30b8\u30a2\u30e0": "\u677e\u5c71\u5e02",
-        "ND\u30bd\u30d5\u30c8\u30b9\u30bf\u30b8\u30a2\u30e0\u5c71\u5f62": "\u5929\u7ae5\u5e02",
-        "\u30bd\u30e6\u30fc\u30b9\u30bf\u30b8\u30a2\u30e0": "\u79cb\u7530\u5e02",
-        "NACK5\u30b9\u30bf\u30b8\u30a2\u30e0\u5927\u5bae": "\u3055\u3044\u305f\u307e\u5e02\u5927\u5bae\u533a",
-        "\u30b1\u30fc\u30ba\u30c7\u30f3\u30ad\u30b9\u30bf\u30b8\u30a2\u30e0\u6c34\u6238": "\u6c34\u6238\u5e02",
-        "\u30ab\u30f3\u30bb\u30ad\u30b9\u30bf\u30b8\u30a2\u30e0\u3068\u3061\u304e": "\u5b87\u90fd\u5bae\u5e02",
-        "\u6b63\u7530\u91a4\u6cb9\u30b9\u30bf\u30b8\u30a2\u30e0\u7fa4\u99ac": "\u524d\u6a4b\u5e02",
-        "\u30cf\u30ef\u30a4\u30a2\u30f3\u30ba\u30b9\u30bf\u30b8\u30a2\u30e0\u3044\u308f\u304d": "\u3044\u308f\u304d\u5e02",
-        "\u3068\u3046\u307b\u3046\u30fb\u307f\u3093\u306a\u306e\u30b9\u30bf\u30b8\u30a2\u30e0": "\u798f\u5cf6\u5e02",
-        "\u30d7\u30e9\u30a4\u30d5\u30fc\u30ba\u30b9\u30bf\u30b8\u30a2\u30e0": "\u516b\u6238\u5e02",
-        "\u3044\u308f\u304e\u3093\u30b9\u30bf\u30b8\u30a2\u30e0": "\u76db\u5ca1\u5e02",
-        "JIT \u30ea\u30b5\u30a4\u30af\u30eb\u30a4\u30f3\u30af \u30b9\u30bf\u30b8\u30a2\u30e0": "\u7532\u5e9c\u5e02",
-        "\u30b5\u30f3\u30d7\u30ed \u30a2\u30eb\u30a6\u30a3\u30f3": "\u677e\u672c\u5e02",
-        "\u9577\u91ceU\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9577\u91ce\u5e02",
-        "\u5bcc\u5c71\u770c\u7dcf\u5408\u904b\u52d5\u516c\u5712\u9678\u4e0a\u7af6\u6280\u5834": "\u5bcc\u5c71\u5e02",
-        "\u77f3\u5ddd\u770c\u897f\u90e8\u7dd1\u5730\u516c\u5712\u9678\u4e0a\u7af6\u6280\u5834": "\u91d1\u6ca2\u5e02",
-        "\u91d1\u6ca2\u30b4\u30fc\u30b4\u30fc\u30ab\u30ec\u30fc\u30b9\u30bf\u30b8\u30a2\u30e0": "\u91d1\u6ca2\u5e02",
-        "\u85e4\u679d\u7dcf\u5408\u904b\u52d5\u516c\u5712\u30b5\u30c3\u30ab\u30fc\u5834": "\u85e4\u679d\u5e02",
-        "\u611b\u9df9\u5e83\u57df\u516c\u5712\u591a\u76ee\u7684\u7af6\u6280\u5834": "\u6cbc\u6d25\u5e02",
-        "\u9577\u826f\u5ddd\u7af6\u6280\u5834": "\u5c90\u961c\u5e02",
-        "\u6771\u5927\u962a\u5e02\u82b1\u5712\u30e9\u30b0\u30d3\u30fc\u5834": "\u6771\u5927\u962a\u5e02",
-        "\u30ed\u30fc\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u5948\u826f": "\u5948\u826f\u5e02",
-        "Axis\u30d0\u30fc\u30c9\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9ce5\u53d6\u5e02",
-        "\u30c1\u30e5\u30a6\u30d6YAJIN\u30b9\u30bf\u30b8\u30a2\u52a0": "\u7c73\u5b50\u5e02",
-        "\u30c1\u30e5\u30a6\u30d6YAJIN\u30b9\u30bf\u30b8\u30a2\u30e0": "\u7c73\u5b50\u5e02",
-        "Pikara\u30b9\u30bf\u30b8\u30a2\u30e0": "\u4e38\u4e80\u5e02",
-        "\u56db\u56fd\u5316\u6210MEGLIO\u30b9\u30bf\u30b8\u30a2\u30e0": "\u4e38\u4e80\u5e02",
-        "\u30a2\u30b7\u30c3\u30af\u30b9\u91cc\u5c71\u30b9\u30bf\u30b8\u30a2\u30e0": "\u4eca\u6cbb\u5e02",
-        "\u30df\u30af\u30cb\u30ef\u30fc\u30eb\u30c9\u30b9\u30bf\u30b8\u30a2\u30e0\u5317\u4e5d\u5dde": "\u5317\u4e5d\u5dde\u5e02\u5c0f\u5009\u5317\u533a",
-        "\u3044\u3061\u3054\u5bae\u5d0e\u65b0\u5bcc\u30b5\u30c3\u30ab\u30fc\u5834": "\u65b0\u5bcc\u753a",
-        "\u767d\u6ce2\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9e7f\u5150\u5cf6\u5e02",
-        "\u30bf\u30d4\u30c3\u30af\u770c\u7dcf\u3072\u3084\u3054\u3093\u30b9\u30bf\u30b8\u30a2\u30e0": "\u6c96\u7e04\u5e02",
-        "Uvance\u3068\u3069\u308d\u304d\u30b9\u30bf\u30b8\u30a2\u30e0 by Fujitsu": "\u5ddd\u5d0e\u5e02\u4e2d\u539f\u533a",
-        "\u5927\u548c\u30cf\u30a6\u30b9 \u30d7\u30ec\u30df\u30b9\u30c8\u30c9\u30fc\u30e0": "\u672d\u5e4c\u5e02\u8c4a\u5e73\u533a",
-        "\u5e73\u548c\u5802HATO\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5f66\u6839\u5e02"
+        "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
+        "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
+        "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
+        "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
+        "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
+        "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
+        "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
+        "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
+        "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
+        "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
+        "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
+        "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
+        "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
+        "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
+        "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
+        "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
+        "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
+        "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
+        "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
+        "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
+        "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
+        "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
       };
       const loc = STADIUM_CITY_MAP[venue] || venue;
       const now = new Date();
       const mDateObj = new Date(date);
       const diffDays = (mDateObj - now) / (1000 * 60 * 60 * 24);
       if (diffDays < -4 || diffDays > 14) return;
+
       try {
         let lat, lon;
         const cCache = localStorage.getItem('coord_' + loc);
@@ -635,6 +388,7 @@ const EMBLEM_MAP = {
             else if (code <= 3) ik = "CLOUDY";
             else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) ik = "RAIN";
             else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) ik = "SNOW";
+
             container.innerHTML = `
               <div style="display:flex; flex-direction:column; align-items:flex-end; gap:2px;">
                 ${ICONS[ik]}
@@ -642,7 +396,7 @@ const EMBLEM_MAP = {
                   <span class="w-temp-max" style="color:#ff3b30;">${max}</span>
                   <span style="font-size:1.1rem; color:#888;">/</span>
                   <span class="w-temp-min" style="color:#007aff;">${min}</span>
-                  <span style="font-size:0.9rem; color:#999;">\u2103</span>
+                  <span style="font-size:0.9rem; color:#999;">℃</span>
                 </div>
               </div>
             `;
@@ -650,6 +404,7 @@ const EMBLEM_MAP = {
         }
       } catch (e) { console.warn("Weather UI update failed", e); }
     }
+
     function updateHeaderAnnouncements() {
       const container = document.getElementById("header-n-gate-container");
       if (!container) return;
@@ -658,107 +413,87 @@ const EMBLEM_MAP = {
       const cutoffStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
       const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
       const nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
+
       if (nextNiigata && getMatchIsHome(nextNiigata)) {
         const mDate = parseDate(nextNiigata.date);
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         const diffDays = Math.round((mDate - today) / (1000 * 60 * 60 * 24));
         if (diffDays === 0) showNGate = true;
       }
+
       if (showNGate) {
-        container.innerHTML = `<a href="https://www.albirex.co.jp/ticket/ngate/form/" target="_blank" class="btn-ngate-header">N\u30b2\u30fc\u30c8\u62bd\u9078</a>`;
+        container.innerHTML = `<a href="https://www.albirex.co.jp/ticket/ngate/form/" target="_blank" class="btn-ngate-header">Nゲート抽選</a>`;
       } else {
         container.innerHTML = "";
       }
     }
+
   // --- View Management ---
-  function ensureVisionFrame() {
-    const frame = document.querySelector("#vision-view .vision-app-frame");
+  function ensureScoreboardFrame() {
+    const frame = document.querySelector("#scoreboard-view .scoreboard-app-frame");
     if (frame && !frame.getAttribute("src")) {
       frame.setAttribute("src", frame.dataset.src);
     }
   }
+
   function switchMode(mode) {
     currentMode = mode;
     document.body.setAttribute("data-mode", mode);
+
     if (ultraDashboard) ultraDashboard.className = mode === "dashboard" ? "active-view" : "hidden-view";
     if (ultraFeed) ultraFeed.className = mode === "feed" ? "active-view" : "hidden-view";
     if (calendarView) calendarView.className = mode === "calendar" ? "active-view" : "hidden-view";
-    if (visionView) visionView.className = mode === "vision" ? "active-view" : "hidden-view";
+    if (scoreboardView) scoreboardView.className = mode === "scoreboard" ? "active-view" : "hidden-view";
+
     if (mode === "calendar") renderCalendar();
     if (mode === "dashboard") renderDashboard();
-    if (mode === "vision") ensureVisionFrame();
+    if (mode === "scoreboard") ensureScoreboardFrame();
     if (mode === "feed") {
       requestAnimationFrame(() => scrollToIndex(currentIndex));
     }
-    if (hamBtn) hamBtn.innerHTML = (mode === "vision") ? ellipsisIconHtml : hamburgerIconHtml;
+    if (hamBtn) hamBtn.innerHTML = mode === "scoreboard" ? ellipsisIconHtml : hamburgerIconHtml;
     sideMenu.classList.remove("active");
   }
+
   function openSubPane(id) {
     const pane = document.getElementById(id);
     if (pane) pane.classList.add("active");
     sideMenu.classList.remove("active");
   }
+
   document.querySelectorAll(".close-pane").forEach(btn => {
     btn.onclick = () => btn.closest(".sub-pane").classList.remove("active");
   });
+
   // --- Navigation & Sync ---
+
   function rebuildVisibleSections() {
     visibleSections = allSections.filter(s => s.style.display !== "none");
   }
-  function getPivotYear() {
-    if (selectedYear !== null) return Number(selectedYear);
-    if (visibleSections[currentIndex]) {
-      const ym = visibleSections[currentIndex].dataset.ym || "";
-      const y = parseInt(ym.split("-")[0], 10);
-      if (y) return y;
-    }
-    return new Date().getFullYear();
-  }
-  function getDisplayYears(allYears, pivotYear) {
-    if (!allYears.length) return [];
-    const pivot = Number(pivotYear);
-    const set = new Set(allYears.filter(y => Math.abs(y - pivot) <= 1));
-    if (set.size < 3) {
-      const pivotIndex = allYears.includes(pivot)
-        ? allYears.indexOf(pivot)
-        : allYears.findIndex(y => y > pivot);
-      const startIndex = pivotIndex === -1 ? allYears.length - 1 : Math.max(0, pivotIndex);
-      let left = startIndex - 1;
-      let right = startIndex + 1;
-      set.add(allYears[startIndex]);
-      while (set.size < 3 && (left >= 0 || right < allYears.length)) {
-        if (left >= 0) set.add(allYears[left--]);
-        if (set.size >= 3) break;
-        if (right < allYears.length) set.add(allYears[right++]);
-      }
-    }
-    return Array.from(set).sort((a, b) => a - b);
-  }
+
   function rebuildYearTabs() {
     if (!yearTabContainer) return;
     yearTabContainer.innerHTML = "";
     yearTabs = {};
-    const scheduleYears = Array.from(new Set(scheduleData
+
+    const years = Array.from(new Set(scheduleData
       .map(m => parseDate(m.date).getFullYear())
       .filter(Boolean)))
       .sort((a, b) => a - b);
-    const currentYear = new Date().getFullYear();
-    const historicalYears = Array.from({ length: currentYear - 1999 + 1 }, (_, index) => 1999 + index);
-    const allYears = Array.from(new Set([...historicalYears, ...scheduleYears])).sort((a, b) => a - b);
-    if (!allYears.length) return;
-    const displayYears = allYears;
-    displayYears.forEach(y => {
-      const yStr = String(y);
+
+    years.forEach(y => {
+      y = String(y);
       const btn = document.createElement("button");
-      btn.id = `toggle-year-${yStr}`;
+      btn.id = `toggle-year-${y}`;
       btn.className = "year-tab";
-      btn.textContent = yStr;
+      btn.textContent = y;
       btn.onclick = () => {
-        applyYearFilter(y);
+        applyYearFilter(Number(y));
       };
       yearTabContainer.appendChild(btn);
-      yearTabs[yStr] = btn;
+      yearTabs[y] = btn;
     });
+
     const allBtn = document.createElement("button");
     allBtn.id = "toggle-year-all";
     allBtn.className = "year-tab";
@@ -766,34 +501,26 @@ const EMBLEM_MAP = {
     allBtn.onclick = () => goToCurrentMonthAll();
     yearTabContainer.appendChild(allBtn);
     yearTabs.all = allBtn;
-    // \u73fe\u5728\u306e\u9078\u629e\u72b6\u614b\u3092\u53cd\u6620
-    Object.keys(yearTabs).forEach(k => {
-      const isActive = (k === "all" && selectedYear === null) || (Number(k) === selectedYear);
-      if (yearTabs[k]) yearTabs[k].classList.toggle("active", isActive);
-    });
-    requestAnimationFrame(() => {
-      const activeTab = yearTabContainer.querySelector(".year-tab.active");
-      if (activeTab && typeof activeTab.scrollIntoView === "function") {
-        activeTab.scrollIntoView({ inline: "center", block: "nearest" });
-      }
-    });
   }
+
   function getCurrentMonthKey() {
     const n = new Date();
     return `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}`;
   }
+
   function goToCurrentMonthAll() {
     applyYearFilter(null, true);
     const idx = visibleSections.findIndex(s => s.dataset.ym === getCurrentMonthKey());
     scrollToIndex(idx !== -1 ? idx : 0);
   }
+
   function applyYearFilter(year, skipScroll = false) {
-    selectedYear = year === null || year === undefined ? null : Number(year);
-    const desiredRenderYear = selectedYear === null ? null : selectedYear;
-    if (renderedFeedYear !== desiredRenderYear) {
-      renderFeed(desiredRenderYear);
-    }
-    rebuildYearTabs();
+    selectedYear = year;
+    Object.keys(yearTabs).forEach(k => {
+      const isActive = (k === "all" && selectedYear === null) || (Number(k) === selectedYear);
+      if (yearTabs[k]) yearTabs[k].classList.toggle("active", isActive);
+    });
+
     allSections.forEach(sec => {
       const y = Number(sec.dataset.year || 0);
       sec.style.display = (selectedYear === null || y === selectedYear) ? "flex" : "none";
@@ -801,17 +528,8 @@ const EMBLEM_MAP = {
     rebuildVisibleSections();
     if (!skipScroll) { currentIndex = 0; scrollToIndex(0); }
     if (currentMode === "calendar") renderCalendar();
-    if (selectedYear !== null && !loadedHistoricalYears.has(selectedYear)) {
-      loadHistoricalYear(selectedYear, { rerender: true }).catch((e) => console.warn("historical year load failed", e));
-    }
   }
-  if (yearTabContainer) {
-    yearTabContainer.addEventListener("wheel", (event) => {
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-      event.preventDefault();
-      yearTabContainer.scrollLeft += event.deltaY;
-    }, { passive: false });
-  }
+
   function scrollToIndex(idx) {
     if (!visibleSections[idx]) return;
     currentIndex = idx;
@@ -825,6 +543,7 @@ const EMBLEM_MAP = {
       renderCalendar();
     }
   }
+
   function updateActiveUI() {
     const scrollLeft = ultraFeed.scrollLeft, width = ultraFeed.clientWidth || window.innerWidth;
     const newIdx = Math.round(scrollLeft / width);
@@ -836,6 +555,7 @@ const EMBLEM_MAP = {
       if (currentMode === "calendar") renderCalendar();
     }
   }
+
   function updateClubVisibility() {
     const nOn = toggleNiigata.classList.contains("active");
     const kOn = toggleKumamoto.classList.contains("active");
@@ -843,11 +563,14 @@ const EMBLEM_MAP = {
     document.querySelectorAll(".card.club-kumamoto").forEach(c => c.style.display = kOn ? "flex" : "none");
     if (currentMode === "calendar") renderCalendar();
   }
+
   // --- Calendar Engine ---
+
   function renderCalendar() {
     const activeSec = visibleSections[currentIndex];
     if (!activeSec) return;
     const [year, month] = activeSec.dataset.ym.split("-").map(Number);
+
     calendarBody.innerHTML = "";
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     days.forEach(d => {
@@ -855,14 +578,18 @@ const EMBLEM_MAP = {
       el.className = "cal-day-label"; el.textContent = d;
       calendarBody.appendChild(el);
     });
+
     const firstDay = parseDate(`${year}-${month}-01`).getDay();
     const daysInMonth = new Date(year, month, 0).getDate();
+
     for (let i = 0; i < firstDay; i++) {
       const empty = document.createElement("div");
       empty.className = "cal-cell empty"; calendarBody.appendChild(empty);
     }
+
     const nOn = toggleNiigata.classList.contains("active");
     const kOn = toggleKumamoto.classList.contains("active");
+
     const matchesInMonth = scheduleData.filter(m => {
       const md = parseDate(m.date);
       if (md.getFullYear() !== year || (md.getMonth() + 1) !== month) return false;
@@ -870,23 +597,29 @@ const EMBLEM_MAP = {
       if (m.club === "kumamoto" && !kOn) return false;
       return true;
     });
+
     const today = new Date();
     for (let d = 1; d <= daysInMonth; d++) {
       const cell = document.createElement("div");
       cell.className = "cal-cell";
       if (year === today.getFullYear() && month === (today.getMonth() + 1) && d === today.getDate()) cell.classList.add("today");
+
       const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       const dayMatches = matchesInMonth.filter(m => m.date === dateStr);
-      // \u89b3\u6226\u4e88\u5b9a / \u30cf\u30a4\u30e9\u30a4\u30c8\u5224\u5b9a
+
+      // 観戦予定のハイライト判定
       dayMatches.forEach(m => {
         const isAttend = localStorage.getItem(`attend_${m.date}_${m.club}_${m.opponent}`) === "true";
         if (isAttend) cell.classList.add(`attending-${m.club}`);
       });
+
       const num = document.createElement("span");
       num.className = "cal-date-num"; num.textContent = d;
       cell.appendChild(num);
+
       const matchContainer = document.createElement("div");
       matchContainer.className = "cal-match-container";
+
       dayMatches.forEach(m => {
         const isHome = getMatchIsHome(m);
         const emblemUrl = resolveEmblemUrl(m.opponent, m.emblem);
@@ -896,12 +629,15 @@ const EMBLEM_MAP = {
         matchContainer.appendChild(item);
       });
       cell.appendChild(matchContainer);
+
       cell.onclick = () => {
         if (dayMatches.length === 1) openDetailSheet(dayMatches[0]);
         else if (dayMatches.length > 1) openMatchPicker(dayMatches);
       };
+
       calendarBody.appendChild(cell);
     }
+
     // --- Added Swipe Support for Calendar ---
     let touchStartX = 0;
     calendarBody.ontouchstart = (e) => { touchStartX = e.changedTouches[0].screenX; };
@@ -914,15 +650,17 @@ const EMBLEM_MAP = {
       }
     };
   }
+
   function openMatchPicker(matches) {
     pickerList.innerHTML = matches.map(m => `
       <div class="picker-item" data-date="${m.date}" data-club="${m.club}" data-opp="${m.opponent}">
-        <span class="picker-club ${m.club}">${m.club === 'niigata' ? '\u65b0\u6f5f' : '\u718a\u672c'}</span>
+        <span class="picker-club ${m.club}">${m.club === 'niigata' ? '新潟' : '熊本'}</span>
         <span class="picker-opp">${m.opponent}</span>
       </div>
     `).join("");
     pickerOverlay.classList.add("active");
     pickerBackdrop.classList.add("active");
+
     pickerList.querySelectorAll(".picker-item").forEach(item => {
       item.onclick = () => {
         const m = matches.find(x => x.date === item.dataset.date && x.club === item.dataset.club && x.opponent === item.dataset.opp);
@@ -930,104 +668,31 @@ const EMBLEM_MAP = {
       };
     });
   }
+
   function closeMatchPicker() {
     pickerOverlay.classList.remove("active");
     pickerBackdrop.classList.remove("active");
   }
+
   function compactPlayerName(value) {
-    return String(value || "").normalize("NFKC").replace(/[\s\u3000\u30fb.\-_]/g, "").toLowerCase();
+    return String(value || "").normalize("NFKC").replace(/[\s　・･.\-_]/g, "").toLowerCase();
   }
+
   function formatRecordValue(value, suffix = "") {
     if (value === undefined || value === null || value === "") return "";
     if (typeof value === "number") return value.toLocaleString("ja-JP") + suffix;
     return escapeHtml(value) + suffix;
   }
+
   function getMemberName(member) {
     return typeof member === "string" ? member : (member && member.name) || "";
   }
+
   function renderPlayerButton(name, className = "") {
     if (!name) return "";
     return `<button type="button" class="u-player-link ${className}" data-player="${escapeHtml(name)}">${escapeHtml(name)}</button>`;
   }
-  function parseScorePair(score) {
-    const parts = String(score || "").match(/(\d+)\s*[-:]\s*(\d+)/);
-    return parts ? { my: Number(parts[1]), opp: Number(parts[2]) } : null;
-  }
-  function getStoredOrOfficialScore(match) {
-    const mId = `${match.date}_${match.club}_${match.opponent}`;
-    const storedMy = localStorage.getItem(`score_my_${mId}`);
-    const storedOpp = localStorage.getItem(`score_opp_${mId}`);
-    const hasStored = storedMy !== null && storedOpp !== null && storedMy !== "" && storedOpp !== "";
-    if (hasStored) {
-      return {
-        my: storedMy,
-        opp: storedOpp,
-        pkMy: localStorage.getItem(`score_my_pk_${mId}`) || "",
-        pkOpp: localStorage.getItem(`score_opp_pk_${mId}`) || ""
-      };
-    }
-    const official = findOfficialResult(match);
-    const parsed = parseScorePair((official && official.score) || match.score || "");
-    if (!parsed) return { my: "", opp: "", pkMy: "", pkOpp: "" };
-    return { my: String(parsed.my), opp: String(parsed.opp), pkMy: "", pkOpp: "" };
-  }
-  function getScoreMetaFromValues(my, opp, pkMy = "", pkOpp = "") {
-    if (my === "" || opp === "" || my === null || opp === null) return null;
-    const ms = Number(my), os = Number(opp);
-    if (!Number.isFinite(ms) || !Number.isFinite(os)) return null;
-    if (ms === os && pkMy !== "" && pkOpp !== "") {
-      const pm = Number(pkMy), po = Number(pkOpp);
-      return {
-        result: pm > po ? "pk-win" : "pk-lose",
-        score: `(${pkMy}) ${ms} - ${os} (${pkOpp})`
-      };
-    }
-    return {
-      result: ms > os ? "win" : ms < os ? "lose" : "draw",
-      score: `${ms} - ${os}`
-    };
-  }
-  function getRefereeValues(referees) {
-    const entries = referees && typeof referees === "object" ? Object.entries(referees).filter(([, value]) => value) : [];
-    const findBy = (patterns, fallbackIndex) => {
-      const found = entries.find(([key]) => patterns.some(pattern => String(key).includes(pattern)));
-      return found ? found[1] : (entries[fallbackIndex] ? entries[fallbackIndex][1] : "");
-    };
-    return {
-      referee: findBy(["主審", "main", "referee"], 0),
-      assistants: String(findBy(["副審", "assistant"], 1) || "").split(",").map(s => s.trim()).filter(Boolean)
-    };
-  }
-  function mapMemberList(players) {
-    return Array.isArray(players) ? players.map(p => ({
-      position: p.position || "",
-      number: p.number || "",
-      name: p.name || ""
-    })) : [];
-  }
-  function mapSubstitutions(details) {
-    const substitutions = [];
-    const rawSubs = details && Array.isArray(details.substitutions) ? details.substitutions : [];
-    for (let i = 0; i < rawSubs.length; i += 2) {
-      const outPlayer = rawSubs[i];
-      const inPlayer = rawSubs[i + 1];
-      if (outPlayer && inPlayer) {
-        substitutions.push({
-          minute: outPlayer.time ? outPlayer.time.replace("'", "") : "",
-          out: outPlayer.name,
-          in: inPlayer.name
-        });
-      }
-    }
-    return substitutions;
-  }
-  function mapWarnings(details) {
-    const rawCards = details && Array.isArray(details.cards) ? details.cards : [];
-    return rawCards.map(c => ({
-      minute: c.time ? c.time.replace("'", "") : "",
-      player: c.name
-    }));
-  }
+
   function renderOfficialInfo(match) {
     const primary = [
       ["RESULT", match.result_mark],
@@ -1035,20 +700,23 @@ const EMBLEM_MAP = {
       ["STAGE", match.stage || match.matchweek],
       ["COMP", match.tournament]
     ].filter(([, value]) => value !== undefined && value !== null && value !== "");
+
     const items = [
-      ["\u5929\u6c17", match.weather],
-      ["\u6c17\u6e29", match.temperature !== undefined && match.temperature !== null ? `${match.temperature}\u2103` : ""],
-      ["\u6e7f\u5ea6", match.humidity !== undefined && match.humidity !== null ? (String(match.humidity).includes("%") ? String(match.humidity) : `${match.humidity}%`) : ""],
-      ["\u5165\u5834\u8005", match.attendance !== undefined && match.attendance !== null ? `${Number(match.attendance).toLocaleString("ja-JP")}\u4eba` : ""],
-      ["\u4e3b\u5be9", match.referee],
-      ["\u526f\u5be9", Array.isArray(match.assistant_referees) ? match.assistant_referees.join(" / ") : ""],
-      ["\u76e3\u7763", match.manager]
+      ["天候", match.weather],
+      ["気温", match.temperature !== undefined && match.temperature !== null ? `${match.temperature}℃` : ""],
+      ["湿度", match.humidity !== undefined && match.humidity !== null ? `${match.humidity}%` : ""],
+      ["入場者", match.attendance !== undefined && match.attendance !== null ? `${Number(match.attendance).toLocaleString("ja-JP")}人` : ""],
+      ["主審", match.referee],
+      ["副審", Array.isArray(match.assistant_referees) ? match.assistant_referees.join(" / ") : ""],
+      ["監督", match.manager]
     ].filter(([, value]) => value !== undefined && value !== null && value !== "");
-    if (!primary.length && !items.length && !match.j_official_url) return "";
+
+    if (!items.length && !match.j_official_url) return "";
+
     return `
       <section class="u-match-record">
         <div class="u-section-head">
-          <h4>\u516c\u5f0f\u8a18\u9332</h4>
+          <h4>公式記録</h4>
           ${match.j_official_url ? `<a class="u-official-link" href="${escapeHtml(match.j_official_url)}" target="_blank" rel="noopener">DATA SITE</a>` : ""}
         </div>
         ${primary.length ? `
@@ -1072,7 +740,8 @@ const EMBLEM_MAP = {
       </section>
     `;
   }
-  function renderMemberList(title, members, type, teamClass = "") {
+
+  function renderMemberList(title, members, type) {
     if (!Array.isArray(members) || !members.length) return "";
     const rows = members.map(member => {
       const name = getMemberName(member);
@@ -1092,111 +761,56 @@ const EMBLEM_MAP = {
       `;
     }).join("");
     return `
-      <div class="u-member-block ${type} ${teamClass}">
+      <div class="u-member-block ${type}">
         <h5>${escapeHtml(title)}</h5>
         <ul>${rows}</ul>
       </div>
     `;
   }
-  function renderTeamMembers(title, starters, bench, teamClass) {
-    const starterHtml = renderMemberList("STARTING XI", starters, "starter", teamClass);
-    const benchHtml = renderMemberList("BENCH", bench, "bench", teamClass);
-    if (!starterHtml && !benchHtml) return "";
-    return `
-      <div class="u-member-team ${teamClass}">
-        <div class="u-member-team-title">${escapeHtml(title)}</div>
-        <div class="u-member-columns">
-          ${starterHtml}
-          ${benchHtml}
-        </div>
-      </div>
-    `;
-  }
+
   function renderMatchMembers(match) {
-    const ownTitle = match.club === "niigata" ? "\u65b0\u6f5f" : "\u718a\u672c";
-    const opponentTitle = match.opponent || "\u76f8\u624b";
-    const ownHtml = renderTeamMembers(ownTitle, match.starting_members, match.bench_members, "own");
-    const opponentHtml = renderTeamMembers(opponentTitle, match.opponent_starting_members, match.opponent_bench_members, "opponent");
-    if (!ownHtml && !opponentHtml) return "";
-    const totalPlayers = [
-      ...(match.starting_members || []),
-      ...(match.bench_members || []),
-      ...(match.opponent_starting_members || []),
-      ...(match.opponent_bench_members || [])
-    ].length;
+    const starters = renderMemberList("STARTING XI", match.starting_members, "starter");
+    const bench = renderMemberList("BENCH", match.bench_members, "bench");
+    if (!starters && !bench) return "";
+
     return `
       <section class="u-match-members">
         <div class="u-section-head">
-          <h4>\u30e1\u30f3\u30d0\u30fc</h4>
-          <span>${totalPlayers} PLAYERS</span>
+          <h4>メンバー</h4>
+          <span>${(match.starting_members || []).length + (match.bench_members || []).length} PLAYERS</span>
         </div>
-        <div class="u-member-team-tabs">
-          ${ownHtml ? `<button type="button" class="u-member-team-tab active" data-member-team="own">${escapeHtml(ownTitle)}</button>` : ""}
-          ${opponentHtml ? `<button type="button" class="u-member-team-tab ${ownHtml ? "" : "active"}" data-member-team="opponent">${escapeHtml(opponentTitle)}</button>` : ""}
-        </div>
-        <div class="u-member-team-panels">
-          ${ownHtml}
-          ${opponentHtml}
+        <div class="u-member-columns">
+          ${starters}
+          ${bench}
         </div>
       </section>
     `;
   }
+
   function renderMatchEvents(match) {
-    const goals = Array.isArray(match.goals) ? match.goals : [];
-    const opponentGoals = Array.isArray(match.opponent_goals) ? match.opponent_goals : [];
     const substitutions = Array.isArray(match.substitutions) ? match.substitutions : [];
     const warnings = Array.isArray(match.warnings) ? match.warnings : [];
-    const opponentSubstitutions = Array.isArray(match.opponent_substitutions) ? match.opponent_substitutions : [];
-    const opponentWarnings = Array.isArray(match.opponent_warnings) ? match.opponent_warnings : [];
-    if (!goals.length && !opponentGoals.length && !substitutions.length && !warnings.length && !opponentSubstitutions.length && !opponentWarnings.length) return "";
-    const goalHtml = (goals.length || opponentGoals.length) ? `
+    if (!substitutions.length && !warnings.length) return "";
+
+    const subHtml = substitutions.length ? `
       <div class="u-event-block">
-        <h5>\u5f97\u70b9</h5>
-        <ul>
-          ${goals.map(goal => `
-            <li>
-              <span class="u-event-minute">${escapeHtml(goal.minute || "")}'</span>
-              <strong class="u-event-team">\u81ea\u30c1\u30fc\u30e0</strong>
-              ${renderPlayerButton(goal.scorer)}
-            </li>
-          `).join("")}
-          ${opponentGoals.map(goal => `
-            <li>
-              <span class="u-event-minute">${escapeHtml(goal.minute || "")}'</span>
-              <strong class="u-event-team">\u76f8\u624b</strong>
-              ${renderPlayerButton(goal.scorer)}
-            </li>
-          `).join("")}
-        </ul>
-      </div>
-    ` : "";
-    const subHtml = (substitutions.length || opponentSubstitutions.length) ? `
-      <div class="u-event-block">
-        <h5>\u4ea4\u4ee3</h5>
+        <h5>交代</h5>
         <ul>
           ${substitutions.map(sub => `
             <li>
               <span class="u-event-minute">${escapeHtml(sub.minute || "")}'</span>
               <span class="u-sub-out">${renderPlayerButton(sub.out)}</span>
-              <span class="u-sub-arrow">\u2192</span>
-              <span class="u-sub-in">${renderPlayerButton(sub.in)}</span>
-            </li>
-          `).join("")}
-          ${opponentSubstitutions.map(sub => `
-            <li>
-              <span class="u-event-minute">${escapeHtml(sub.minute || "")}'</span>
-              <strong class="u-event-team">\u76f8\u624b</strong>
-              <span class="u-sub-out">${renderPlayerButton(sub.out)}</span>
-              <span class="u-sub-arrow">\u2192</span>
+              <span class="u-sub-arrow">→</span>
               <span class="u-sub-in">${renderPlayerButton(sub.in)}</span>
             </li>
           `).join("")}
         </ul>
       </div>
     ` : "";
-    const warnHtml = (warnings.length || opponentWarnings.length) ? `
+
+    const warnHtml = warnings.length ? `
       <div class="u-event-block">
-        <h5>\u8b66\u544a</h5>
+        <h5>警告</h5>
         <ul>
           ${warnings.map(warn => `
             <li>
@@ -1204,90 +818,77 @@ const EMBLEM_MAP = {
               ${renderPlayerButton(warn.player)}
             </li>
           `).join("")}
-          ${opponentWarnings.map(warn => `
-            <li>
-              <span class="u-event-minute">${escapeHtml(warn.minute || "")}'</span>
-              <strong class="u-event-team">\u76f8\u624b</strong>
-              ${renderPlayerButton(warn.player)}
-            </li>
-          `).join("")}
         </ul>
       </div>
     ` : "";
+
     return `
       <section class="u-match-events">
-        <h4>\u8a66\u5408\u30a4\u30d9\u30f3\u30c8</h4>
-        ${goalHtml}
+        <h4>試合イベント</h4>
         ${subHtml}
         ${warnHtml}
       </section>
     `;
   }
+
   function getPlayerRoleForMatch(match, playerKey) {
-    const teams = [
-      {
-        label: match.club === "niigata" ? "\u65b0\u6f5f" : "\u718a\u672c",
-        starters: Array.isArray(match.starting_members) ? match.starting_members : [],
-        bench: Array.isArray(match.bench_members) ? match.bench_members : [],
-        subs: Array.isArray(match.substitutions) ? match.substitutions : []
-      },
-      {
-        label: match.opponent || "\u76f8\u624b",
-        starters: Array.isArray(match.opponent_starting_members) ? match.opponent_starting_members : [],
-        bench: Array.isArray(match.opponent_bench_members) ? match.opponent_bench_members : [],
-        subs: Array.isArray(match.opponent_substitutions) ? match.opponent_substitutions : []
-      }
-    ];
-    for (const team of teams) {
-    const starters = team.starters;
-    const bench = team.bench;
-    const subs = team.subs;
+    const starters = Array.isArray(match.starting_members) ? match.starting_members : [];
+    const bench = Array.isArray(match.bench_members) ? match.bench_members : [];
+    const subs = Array.isArray(match.substitutions) ? match.substitutions : [];
     const starter = starters.find(member => compactPlayerName(getMemberName(member)) === playerKey);
     const benchMember = bench.find(member => compactPlayerName(getMemberName(member)) === playerKey);
     const subIn = subs.find(sub => compactPlayerName(sub.in) === playerKey);
     const subOut = subs.find(sub => compactPlayerName(sub.out) === playerKey);
+
     if (starter) {
       return {
         appeared: true,
         squad: true,
-        role: `${team.label} \u5148\u767a` + (subOut ? ` (${subOut.minute}' OUT)` : ""),
+        role: "先発" + (subOut ? ` (${subOut.minute}' OUT)` : ""),
         number: starter.number || "",
         position: starter.position || "",
         name: getMemberName(starter)
       };
     }
+
     if (subIn) {
       return {
         appeared: true,
         squad: true,
-        role: `${team.label} ${subIn.minute}' IN`,
+        role: `${subIn.minute}' IN`,
         number: "",
         position: "",
         name: subIn.in || ""
       };
     }
+
     if (benchMember) {
-      return { appeared: false, squad: true, role: `${team.label} \u30d9\u30f3\u30c1`, number: "", position: "", name: getMemberName(benchMember) };
+      return { appeared: false, squad: true, role: "ベンチ", number: "", position: "", name: getMemberName(benchMember) };
     }
-    }
+
     return { appeared: false, squad: false, role: "", number: "", position: "", name: "" };
   }
+
   function getPlayerGoals(playerName) {
     const playerKey = compactPlayerName(playerName);
     const goals = [];
+
     getResultArray(officialResults).forEach(result => {
+      if (result.club && result.club !== "niigata") return;
       (result.goals || []).forEach(goal => {
         if (compactPlayerName(goal.scorer) !== playerKey) return;
         const match = scheduleData.find(m => {
-          return m.club === result.club &&
+          return m.club === "niigata" &&
             m.date === result.date &&
             (!result.opponent || robustTeamMatch(m.opponent, result.opponent));
         });
         goals.push({ result, goal, match });
       });
     });
+
     return goals.sort((a, b) => parseDate(a.result.date) - parseDate(b.result.date));
   }
+
   function buildPlayerProfile(playerName) {
     const playerKey = compactPlayerName(playerName);
     const squadMatches = [];
@@ -1295,23 +896,27 @@ const EMBLEM_MAP = {
     const numbers = new Set();
     const positions = new Set();
     let displayName = playerName;
-    let playerClub = "niigata";
+
     scheduleData
+      .filter(match => match.club === "niigata")
       .sort((a, b) => parseDate(a.date) - parseDate(b.date))
       .forEach(match => {
         const role = getPlayerRoleForMatch(match, playerKey);
         if (!role.squad) return;
-        playerClub = match.club;
+
         if (role.name) displayName = role.name;
         if (role.number) numbers.add(String(role.number));
         if (role.position) positions.add(role.position);
+
         const row = { match, role };
         squadMatches.push(row);
         if (role.appeared) appearances.push(row);
       });
+
     const goals = getPlayerGoals(playerName);
-    return { playerName: displayName, numbers, positions, squadMatches, appearances, goals, club: playerClub };
+    return { playerName: displayName, numbers, positions, squadMatches, appearances, goals };
   }
+
   function renderPlayerMatchRow(item) {
     const match = item.match;
     const result = findOfficialResult(match);
@@ -1331,16 +936,18 @@ const EMBLEM_MAP = {
       </li>
     `;
   }
+
   function openPlayerSheet(playerName, sourceMatch) {
     const profile = buildPlayerProfile(playerName);
-    const numbers = Array.from(profile.numbers).join(" / ") || "\u672a\u8a18\u9332";
-    const positions = Array.from(profile.positions).join(" / ") || "\u672a\u8a18\u9332";
-    const clubLabel = profile.club === "niigata" ? "ALBIREX NIIGATA" : profile.club === "kumamoto" ? "ROASSO KUMAMOTO" : "";
-    const years = Array.from(new Set([
-      ...profile.squadMatches.map(item => parseDate(item.match.date).getFullYear()),
-      ...profile.goals.map(item => parseDate(item.result.date).getFullYear())
-    ].filter(Boolean))).sort((a, b) => b - a);
-    const renderGoalRow = (item) => {
+    const numbers = Array.from(profile.numbers).join(" / ") || "未記録";
+    const positions = Array.from(profile.positions).join(" / ") || "未記録";
+
+    const appearanceHtml = profile.appearances.length
+      ? profile.appearances.map(renderPlayerMatchRow).join("")
+      : `<li class="u-empty-row">出場試合はJSON内では見つかりませんでした。</li>`;
+
+    const goalHtml = profile.goals.length
+      ? profile.goals.map(item => {
         const match = item.match;
         const opponent = match ? match.opponent : item.result.opponent || "";
         const score = match ? (match.score || item.result.score || "") : item.result.score || "";
@@ -1356,77 +963,40 @@ const EMBLEM_MAP = {
             </div>
           </li>
         `;
-    };
-    const yearTabsHtml = years.length
-      ? years.map((year, index) => `<button class="u-player-year-tab ${index === 0 ? "active" : ""}" data-year="${year}">${year}</button>`).join("")
-      : "";
-    const yearPanelsHtml = years.length
-      ? years.map((year, index) => {
-        const appearances = profile.appearances.filter(item => parseDate(item.match.date).getFullYear() === year);
-        const goals = profile.goals.filter(item => parseDate(item.result.date).getFullYear() === year);
-        const squad = profile.squadMatches.filter(item => parseDate(item.match.date).getFullYear() === year);
-        return `
-          <div class="u-player-year-panel ${index === 0 ? "active" : ""}" data-year-panel="${year}">
-            <div class="u-player-year-summary">
-              <span>\u30e1\u30f3\u30d0\u30fc\u5165\u308a <strong>${squad.length}</strong></span>
-              <span>\u51fa\u5834 <strong>${appearances.length}</strong></span>
-              <span>\u5f97\u70b9 <strong>${goals.length}</strong></span>
-            </div>
-            <div class="u-player-list-group">
-              <h4>\u51fa\u5834\u8a66\u5408</h4>
-              <ul class="u-player-scroll-list">${appearances.length ? appearances.map(renderPlayerMatchRow).join("") : `<li class="u-empty-row">\u3053\u306e\u5e74\u306e\u51fa\u5834\u8a18\u9332\u306f\u3042\u308a\u307e\u305b\u3093</li>`}</ul>
-            </div>
-            <div class="u-player-list-group">
-              <h4>\u5f97\u70b9\u3057\u305f\u8a66\u5408</h4>
-              <ul class="u-player-scroll-list compact">${goals.length ? goals.map(renderGoalRow).join("") : `<li class="u-empty-row">\u3053\u306e\u5e74\u306e\u5f97\u70b9\u8a18\u9332\u306f\u3042\u308a\u307e\u305b\u3093</li>`}</ul>
-            </div>
-          </div>
-        `;
       }).join("")
-      : `<div class="u-player-year-panel active"><li class="u-empty-row">\u8a18\u9332\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f</li></div>`;
+      : `<li class="u-empty-row">得点した試合は見つかりませんでした。</li>`;
+
     sheetContent.innerHTML = `
       <section class="u-player-profile">
-        <button type="button" class="u-player-back">\u2190 \u8a66\u5408\u8a73\u7d30\u3078\u623b\u308b</button>
+        <button type="button" class="u-player-back">← 試合詳細へ戻る</button>
         <div class="u-player-header">
-          ${clubLabel ? `<span class="u-player-club-label">${clubLabel}</span>` : ""}
+          <span>ALBIREX NIIGATA</span>
           <h2>${escapeHtml(profile.playerName)}</h2>
         </div>
-        <div class="u-player-card-grid">
-          <div class="u-player-card">
-            <span class="u-card-label">\u80cc\u756a\u53f7</span>
-            <strong class="u-card-value">${escapeHtml(numbers)}</strong>
-          </div>
-          <div class="u-player-card">
-            <span class="u-card-label">\u30dd\u30b8\u30b7\u30e7\u30f3</span>
-            <strong class="u-card-value">${escapeHtml(positions)}</strong>
-          </div>
-          <div class="u-player-card">
-            <span class="u-card-label">\u51fa\u5834\u8a66\u5408</span>
-            <strong class="u-card-value">${profile.appearances.length}</strong>
-          </div>
-          <div class="u-player-card">
-            <span class="u-card-label">\u5f97\u70b9\u3057\u305f\u8a66\u5408</span>
-            <strong class="u-card-value">${profile.goals.length}</strong>
-          </div>
+        <div class="u-player-stats">
+          <div><span>背番号</span><strong>${escapeHtml(numbers)}</strong></div>
+          <div><span>ポジション</span><strong>${escapeHtml(positions)}</strong></div>
+          <div><span>出場</span><strong>${profile.appearances.length}</strong></div>
+          <div><span>得点</span><strong>${profile.goals.length}</strong></div>
+          <div><span>メンバー入り</span><strong>${profile.squadMatches.length}</strong></div>
         </div>
-        <div class="u-player-year-tabs">${yearTabsHtml}</div>
-        <div class="u-player-year-panels">${yearPanelsHtml}</div>
-        <button class="close-sheet-btn">\u9589\u3058\u308b</button>
+        <div class="u-player-section">
+          <h4>出場試合</h4>
+          <ul>${appearanceHtml}</ul>
+        </div>
+        <div class="u-player-section">
+          <h4>得点した試合</h4>
+          <ul>${goalHtml}</ul>
+        </div>
+        <button class="close-sheet-btn">閉じる</button>
       </section>
     `;
-    sheetContent.querySelectorAll(".u-player-year-tab").forEach(tab => {
-      tab.onclick = () => {
-        sheetContent.querySelectorAll(".u-player-year-tab").forEach(t => t.classList.remove("active"));
-        sheetContent.querySelectorAll(".u-player-year-panel").forEach(p => p.classList.remove("active"));
-        tab.classList.add("active");
-        const panel = sheetContent.querySelector(`[data-year-panel="${tab.dataset.year}"]`);
-        if (panel) panel.classList.add("active");
-      };
-    });
+
     const backBtn = sheetContent.querySelector(".u-player-back");
     if (backBtn && sourceMatch) backBtn.onclick = () => openDetailSheet(sourceMatch);
     sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
   }
+
   function bindPlayerLinks(sourceMatch) {
     sheetContent.querySelectorAll(".u-player-link").forEach(btn => {
       btn.onclick = (event) => {
@@ -1436,76 +1006,22 @@ const EMBLEM_MAP = {
       };
     });
   }
+
   // --- Detail Sheet & Persistence ---
+
   function openDetailSheet(match) {
     const mId = `${match.date}_${match.club}_${match.opponent}`;
     const sMemo = localStorage.getItem(`memo_${mId}`) || "";
     const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
-    const scoreData = getStoredOrOfficialScore(match);
-    const sMy = scoreData.my;
-    const sOpp = scoreData.opp;
+    const sMy = localStorage.getItem(`score_my_${mId}`) || "";
+    const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
     const sWeather = localStorage.getItem(`weather_${mId}`) || "";
     const sTemp = localStorage.getItem(`temp_${mId}`) || "";
+
     const J_CLUB_ENG = {
-      "\u5317\u6d7b\u9053\u30b3\u30f3\u30b5\u30c9\u30fc\u30ec\u672d\u5e4c": "HOKKAIDO CONSADOSE SAPPORO",
-      "\u30f4\u30a1\u30f3\u30e9\u30fc\u30ec\u516b\u6238": "VANRAURE HACHINOHE",
-      "\u3044\u308f\u304e\u3093\u30b9\u30bf\u30b8\u30a2\u30e0\u76db\u5ca1": "IWATE GRULLA MORIOKA",
-      "\u30d9\u30ac\u30eb\u30bf\u4ed9\u53f0": "VEGALTA SENDAI",
-      "\u30d6\u30e9\u30a6\u30d6\u30ea\u30c3\u30c4\u79cb\u7530": "BLAUBLITZ AKITA",
-      "\u30e2\u30f3\u30c6\u30c7\u30a3\u30aa\u5c71\u5f62": "MONTEDIO YAMAGATA",
-      "\u798f\u5cf6\u30e5\u30ca\u30a4\u30c6\u30c3\u30c9FC": "FUKUSHIMA UNITED FC",
-      "\u3044\u308f\u304eFC": "IWAKI FC",
-      "\u9e7a\u5cf6\u30a2\u30f3\u30c8\u30e9\u30fc\u30ba": "KASHIMA ANTLERS",
-      "\u6c34\u6238\u30db\u30ea\u30cf\u30c3\u30af": "MITO HOLLYHOCK",
-      "\u6803\u6728SC": "TOCHIGI SC",
-      "\u30b6\u30b9\u30d1\u7fa4\u99ac": "THESPA GUNMA",
-      "\u6d66\u548c\u30ec\u30c3\u30ba": "URAWA REDS",
-      "\u5927\u5bae\u30a2\u30eb\u30c7\u30a3\u30fc\u30b8\u30e3": "OMIYA ARDIJA",
-      "RB\u5927\u5bae\u30a2\u30eb\u30c7\u30a3\u30fc\u30b8\u30e3": "RB OMIYA ARDIJA",
-      "\u30b8\u30a7\u30d5\u30e5\u30ca\u30a4\u30c6\u30c3\u30c9\u5343\u8449": "JEF UNITED CHIBA",
-      "\u67cf\u30ec\u30a4\u30cd\u30eb": "KASHIWA REYSOL",
-      "FC\u6771\u4eac": "FC TOKYO",
-      "\u6771\u4eac\u30f4\u30a1\u30fc\u30c7\u30a3": "TOKYO VERDY",
-      "FC\u753a\u7530\u30bc\u30eb\u30d3\u30a2": "FC MACHIDA ZELVIA",
-      "\u5ddd\u5d0e\u30d5\u30ed\u30f3\u30bf\u30fc\u30ec": "KAWASAKI FRONTALE",
-      "\u6a2a\u6d5cF\u30fb\u30de\u30ea\u30ce\u30b9": "YOKOHAMA F. MARINOS",
-      "\u6a2a\u6d5cFC": "YOKOHAMA FC",
-      "Y.S.C.C.\u6a2a\u6d5c": "Y.S.C.C. YOKOHAMA",
-      "\u6e58\u5357\u30d9\u30eb\u30de\u30fc\u30ec": "SHONAN BELLMARE",
-      "SC\u76f8\u6a21\u539f": "SC SAGAMIHARA",
-      "\u30f4\u30a1\u30f3\u30d5\u30a9\u30fc\u30ec\u7532\u5e9c": "VENTFORET KOFU",
-      "\u677e\u672c\u5c71\u96c5FC": "MATSUMOTO YAMAGA FC",
-      "AC\u9577\u91ce\u30d5\u30a3\u30eb\u30bb\u30fc\u30ed": "AC NAGANO PARCEIRO",
-      "\u30a2\u30b9\u30eb\u30af\u30e9\u30ed\u6cbc\u6d25": "AZUL CLARO NUMAZU",
-      "\u540d\u53e4\u5c4b\u30b0\u30e9\u30f3\u30d1\u30b9": "NAGOYA GRAMPUS",
-      "FC\u5c90\u961c": "FC GIFU",
-      "\u4eac\u90fd\u30b5\u30f3\u30acF.C.": "KYOTO SANGA F.C.",
-      "\u30ac\u30f3\u30d0\u5927\u962a": "GAMBA OSAKA",
-      "\u30bb\u30ec\u30c3\u30bd\u5927\u962a": "CEREZO OSAKA",
-      "FC\u5927\u962a": "FC OSAKA",
-      "\u30f4\u30a3\u30c5\u30eb\u795e\u6238": "VISSEL KOBE",
-      "\u30f4\u30a3\u30c5\u30eb\u795e\u6238": "VISSEL KOBE",
-      "\u5948\u826f\u30af\u30e9\u30d6": "NARA CLUB",
-      "\u30ac\u30a4\u30ca\u30fc\u30ec\u9ce5\u53d6": "GAINARE TOTTORI",
-      "\u30d5\u30a1\u30b8\u30a2\u30fc\u30ce\u5ca1\u5c71": "FAGIANO OKAYAMA",
-      "\u30b5\u30f3\u30d5\u30ec\u30c3\u30cc\u5e83\u5cf6": "SANFRECCE HIROSHIMA",
-      "\u30ec\u30ce\u30d5\u30a1\u5c71\u53e3FC": "RENOFA YAMAGUCHI FC",
-      "\u30ab\u30de\u30bf\u30de\u30fc\u30ec\u8b89\u5c90": "KAMATAMARE SANUKI",
-      "\u5fb3\u5cf6\u30f4\u30a9\u30eb\u30c6\u30a3\u30b9": "TOKUSHIMA VORTIS",
-      "\u611b\u5a9bFC": "EHIME FC",
-      "FC\u4eca\u6cbb": "FC IMABARI",
-      "\u30a2\u30d3\u30b9\u30d1\u798f\u5ca1": "AVISPA FUKUOKA",
-      "\u30ae\u30e9\u30f4\u30a1\u30f3\u30c4\u5317\u4e5d\u5dde": "GIRAVANZ KITAKYUSHU",
-      "\u30b5\u30ac\u30f3\u9ce5\u6816": "SAGAN TOSU",
-      "V\u30fb\u30d5\u30a1\u30fc\u30ec\u30f3\u9577\u5d0e": "V-VAREN NAGASAKI",
-      "\u30ed\u30a2\u30c3\u30bd\u718a\u672c": "ROASSO KUMAMOTO",
-      "\u5927\u5206\u30c8\u30ea\u30cb\u30bf": "OITA TRINITA",
-      "\u30c6\u30b2\u30d0\u30b8\u30e3\u30fc\u30ed\u5bae\u5d0e": "TEGEVAJARO MIYAZAKI",
-      "\u9e7a\u5150\u5cf6\u30e5\u30ca\u30a4\u30c6\u30c3\u30c9FC": "KAGOSHIMA UNITED FC",
-      "FC\u7409\u7403": "FC RYUKYU",
-      "\u9ad8\u77e5\u30e5\u30ca\u30a4\u30c6\u30c3\u30c9SC": "KOCHI UNITED SC",
-      "\u30ec\u30a4\u30e9\u30af\u6ecb\u8cc0FC": "REILAC SHIGA FC"
+      "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC"
     };
+
     let goalsHtml = "";
     const offRes = findOfficialResult(match);
     if (offRes && ((offRes.goals && offRes.goals.length) || (offRes.opponent_goals && offRes.opponent_goals.length))) {
@@ -1516,7 +1032,7 @@ const EMBLEM_MAP = {
           <h4>GOALS</h4>
           ${ownGoals.length ? `
             <div class="u-goal-team">
-              <span>${match.club === "niigata" ? "\u65b0\u6f5f" : "\u718a\u672c"}</span>
+              <span>新潟</span>
               <ul>
                 ${ownGoals.map(g => `
                   <li>
@@ -1543,21 +1059,26 @@ const EMBLEM_MAP = {
         </section>
       `;
     }
+
     const officialInfoHtml = renderOfficialInfo(match);
     const membersHtml = renderMatchMembers(match);
     const eventsHtml = renderMatchEvents(match);
+
     let pkHtml = "";
     if (parseDate(match.date).getFullYear() === 2026) {
-      const sPkM = scoreData.pkMy || "";
-      const sPkO = scoreData.pkOpp || "";
+      const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
+      const sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
       const isD = (sMy !== "" && sOpp !== "" && sMy === sOpp);
       pkHtml = `<div class="u-pk-area" style="${isD ? 'display:flex;' : 'display:none;'}"><span class="u-pk-label">PK</span><input type="number" class="u-score-input pk-my" value="${sPkM}"><span class="u-score-sep">-</span><input type="number" class="u-score-input pk-opp" value="${sPkO}"></div>`;
     }
+
     const homeAway = getMatchIsHome(match) ? "HOME" : "AWAY";
     const clubName = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
     const clubEmblem = match.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
+
     const engOpp = J_CLUB_ENG[match.opponent] || match.opponent.toUpperCase();
     const opponentEmblem = resolveEmblemUrl(match.opponent, match.emblem);
+
     sheetContent.innerHTML = `
       <div class="sheet-header club-${match.club}">
         <div class="sheet-meta">
@@ -1574,7 +1095,7 @@ const EMBLEM_MAP = {
         </div>
         <div class="sheet-venue-row" style="display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:8px;">
           <p class="sheet-venue-info" style="margin:0;">${match.date} | ${match.venue}</p>
-          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(match.venue)}" target="_blank" style="background:#f2f2f7; color:var(--text-main); font-size:0.75rem; padding:6px 12px; border-radius:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-weight:700;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> MAP\u3067\u958b\u304f</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(match.venue)}" target="_blank" style="background:#f2f2f7; color:var(--text-main); font-size:0.75rem; padding:6px 12px; border-radius:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-weight:700;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> MAPで開く</a>
         </div>
       </div>
       <div id="u-auto-weather-area" style="display: none; gap: 20px; justify-content: center; margin: 20px 0; background: rgba(242, 242, 247, 0.5); padding: 15px; border-radius: 18px; backdrop-filter: blur(5px);">
@@ -1589,62 +1110,45 @@ const EMBLEM_MAP = {
            <span style="font-size:0.65rem; color:#888; font-weight:700; margin-bottom:6px;">TEMPERATURE</span>
            <div style="display:flex; align-items: baseline; gap: 4px;">
              <span id="u-temp-max" style="font-size: 1.6rem; font-family:var(--font-kick); font-weight:900; color:#ff3b30;">-</span>
-             <span style="font-size:0.7rem; color:#888; font-weight:800; margin-right:4px;">\u2103</span>
+             <span style="font-size:0.7rem; color:#888; font-weight:800; margin-right:4px;">℃</span>
              <span style="font-size: 0.8rem; color:#ddd;">/</span>
              <span id="u-temp-min" style="font-size: 1.2rem; font-family:var(--font-kick); font-weight:800; color:#007aff; margin-left:4px;">-</span>
-             <span style="font-size:0.6rem; color:#888; font-weight:800;">\u2103</span>
+             <span style="font-size:0.6rem; color:#888; font-weight:800;">℃</span>
            </div>
         </div>
       </div>
+
       <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
       ${pkHtml}
-      ${isBeforeToday(match.date) && match.raw_json ? `
-      <button id="open-vision-preview-btn" class="u-vision-preview-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M21 15H3"/><path d="M7 21h10"/><path d="M12 15v6"/></svg>
-        \u5927\u578b\u30d3\u30b8\u30e7\u30f3\u8868\u793a
-      </button>` : ""}
       ${goalsHtml}
       ${officialInfoHtml}
       ${membersHtml}
       ${eventsHtml}
       <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
         <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
-        <span class="btn-text">\u89b3\u6226\u4e88\u5b9a</span>
+        <span class="btn-text">観戦予定</span>
       </div>
       <div class="u-note-single">
         <div class="u-note-box">
           <div class="u-note-header">
-            <label>\u30e1\u30e2</label>
-            <button class="u-note-edit-btn" id="memo-edit-btn">\u7de8\u96c6</button>
+            <label>メモ</label>
+            <button class="u-note-edit-btn" id="memo-edit-btn">編集</button>
           </div>
           <div class="u-memo-display" id="memo-display"></div>
           <textarea class="u-textarea memo-field hidden">${sMemo}</textarea>
         </div>
       </div>
-      <button class="close-sheet-btn">\u4fdd\u5b58\u3057\u3066\u9589\u3058\u308b</button>
+      <button class="close-sheet-btn">保存して閉じる</button>
     `;
+
     bindPlayerLinks(match);
-    sheetContent.querySelectorAll(".u-member-team-tab").forEach(tab => {
-      tab.onclick = () => {
-        sheetContent.querySelectorAll(".u-member-team-tab").forEach(t => t.classList.remove("active"));
-        sheetContent.querySelectorAll(".u-member-team").forEach(panel => panel.classList.remove("active"));
-        tab.classList.add("active");
-        const panel = sheetContent.querySelector(`.u-member-team.${tab.dataset.memberTeam}`);
-        if (panel) panel.classList.add("active");
-      };
-    });
-    const firstMemberPanel = sheetContent.querySelector(".u-member-team");
-    if (firstMemberPanel) firstMemberPanel.classList.add("active");
-    // \u5927\u578b\u30d3\u30b8\u30e7\u30f3\u8868\u793a\u30dc\u30bf\u30f3\u306e\u30a4\u30d9\u30f3\u30c8\u8a2d\u5b81E
-    const visionBtn = sheetContent.querySelector("#open-vision-preview-btn");
-    if (visionBtn && match.raw_json) {
-      visionBtn.onclick = () => openVisionPreview(match.raw_json);
-    }
+
     // Use the unified weather helper
     const wBox = sheetContent.querySelector("#u-auto-weather-area");
     const wIconPlace = wBox.querySelector(".w-icon");
     const tMaxPlace = wBox.querySelector("#u-temp-max");
     const tMinPlace = wBox.querySelector("#u-temp-min");
+
     if (isBeforeToday(match.date)) {
       wBox.remove();
     } else {
@@ -1667,17 +1171,23 @@ const EMBLEM_MAP = {
         wBox.style.display = "flex";
       });
     }
+
+
+
     // Helper: convert URLs to clickable links
     function linkifyMemo(text) {
       if (!text) return '';
       const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       return escaped.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
     }
+
     const memoDisplay = sheetContent.querySelector('#memo-display');
     const memoField = sheetContent.querySelector('.memo-field');
     const memoEditBtn = sheetContent.querySelector('#memo-edit-btn');
+
     // Initial display
     memoDisplay.innerHTML = linkifyMemo(sMemo);
+
     memoEditBtn.onclick = () => {
       const isEditing = memoDisplay.classList.contains('hidden');
       if (isEditing) {
@@ -1686,39 +1196,46 @@ const EMBLEM_MAP = {
         memoDisplay.innerHTML = linkifyMemo(newText);
         memoDisplay.classList.remove('hidden');
         memoField.classList.add('hidden');
-        memoEditBtn.textContent = '\u7de8\u96c6';
+        memoEditBtn.textContent = '編集';
         memoEditBtn.classList.remove('editing');
       } else {
         // Switch to edit mode
         memoDisplay.classList.add('hidden');
         memoField.classList.remove('hidden');
         memoField.focus();
-        memoEditBtn.textContent = '\u5b8c\u4e86';
+        memoEditBtn.textContent = '完了';
         memoEditBtn.classList.add('editing');
       }
     };
+
     detailSheet.classList.add("active");
     sheetBackdrop.classList.add("active");
+
     // Prevent touch events from leaking through to the feed slider behind
     detailSheet.ontouchstart = (e) => e.stopPropagation();
     detailSheet.ontouchmove = (e) => e.stopPropagation();
+
     sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
     sheetBackdrop.onclick = () => closeDetailSheet();
     document.querySelector(".sheet-handle").onclick = () => closeDetailSheet();
+
     const toggleBtn = document.getElementById("attend-toggle");
     toggleBtn.onclick = () => {
       toggleBtn.classList.toggle("active");
       saveAndRefresh();
       if (currentMode === "calendar") renderCalendar();
     };
+
     const saveAndRefresh = () => {
       const mS = sheetContent.querySelector(".my-score").value;
       const oS = sheetContent.querySelector(".opp-score").value;
       const mVal = sheetContent.querySelector(".memo-field").value;
       const isAtt = toggleBtn.classList.contains("active");
+
       localStorage.setItem(`score_my_${mId}`, mS); localStorage.setItem(`score_opp_${mId}`, oS);
       localStorage.setItem(`memo_${mId}`, mVal);
       localStorage.setItem(`attend_${mId}`, isAtt);
+
       let pm = "", po = "";
       const pkA = sheetContent.querySelector(".u-pk-area");
       if (pkA) {
@@ -1734,6 +1251,7 @@ const EMBLEM_MAP = {
           localStorage.removeItem(`score_opp_pk_${mId}`);
         }
       }
+
       const card = document.querySelector(`.card[data-mid="${mId}"]`);
       if (card) {
         let res = null; if (mS !== "" && oS !== "") {
@@ -1741,6 +1259,7 @@ const EMBLEM_MAP = {
         }
         const badge = card.querySelector(".result-badge"); badge.className = "result-badge " + (res ? "badge-" + res : "");
         badge.textContent = res ? res.replace("-", " ").toUpperCase() : "";
+
         // Update Attendance Emoji in Feed
         const metaDiv = card.querySelector(".match-meta");
         let attEl = metaDiv.querySelector(".match-att-emoji");
@@ -1758,66 +1277,15 @@ const EMBLEM_MAP = {
     };
     sheetContent.querySelectorAll("input, textarea").forEach(inp => inp.oninput = saveAndRefresh);
   }
+
   function closeDetailSheet() { detailSheet.classList.remove("active"); sheetBackdrop.classList.remove("active"); }
-  function openVisionPreview(rawJsonMatchData) {
-    if (!rawJsonMatchData) return;
-    // localStorage\u306b\u8a66\u5408\u30c7\u30fc\u30bf\u3092\u66f8\u304d\u8fbc\u3080
-    try {
-      const STORAGE_KEY = "stadiumVisionApp.v2";
-      const CHANNEL_NAME = "stadiumVisionAppLive";
-      const current = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-      current._pendingJsonMatch = rawJsonMatchData;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
-      try {
-        const bc = new BroadcastChannel(CHANNEL_NAME);
-        bc.postMessage({ type: "JSON_MATCH_PREVIEW", data: rawJsonMatchData });
-        bc.close();
-      } catch(e) {}
-    } catch(e) {
-      console.warn("Vision preview data injection failed:", e);
-    }
-    // \u30d5\u30eb\u30b9\u30af\u30ea\u30fc\u30f3\u30aa\u30fc\u30d0\ufffdE\u30ec\u30a4\u3092\u8868\u793a
-    const backdrop = document.getElementById("vision-preview-backdrop");
-    const overlay = document.getElementById("vision-preview-overlay");
-    const container = overlay ? overlay.querySelector(".vision-preview-container") : null;
-    const iframe = document.getElementById("vision-preview-iframe");
-    if (!overlay || !iframe) return;
-    const updateVisionPreviewScale = () => {
-      if (!container) return;
-      const rect = container.getBoundingClientRect();
-      const scale = Math.max(0.05, Math.min(rect.width / 1920, rect.height / 1080));
-      overlay.style.setProperty("--vision-preview-scale", String(scale));
-    };
-    iframe.src = "vision/display.html?t=" + Date.now();
-    overlay.style.display = "flex";
-    if (backdrop) {
-      backdrop.style.display = "block";
-      backdrop.classList.add("active");
-    }
-    updateVisionPreviewScale();
-    requestAnimationFrame(updateVisionPreviewScale);
-    window.addEventListener("resize", updateVisionPreviewScale);
-    const closeBtn = document.getElementById("close-vision-preview");
-    const doClose = () => {
-      overlay.style.display = "none";
-      if (backdrop) {
-        backdrop.classList.remove("active");
-        backdrop.style.display = "none";
-      }
-      iframe.src = "about:blank";
-      window.removeEventListener("resize", updateVisionPreviewScale);
-    };
-    if (closeBtn) closeBtn.onclick = doClose;
-    if (backdrop) backdrop.onclick = doClose;
-  }
+
   const GAS_EXEC_URL = "https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec";
+
   // --- Results & Data Management ---
   let officialResults = [];
   let cachedStandings = null;
-  let historicalDataLoaded = false;
-  let historicalDataPromise = null;
-  const loadedHistoricalYears = new Set();
-  const loadingHistoricalYears = new Map();
+
   // Initialize data from localStorage cache
   const rSave = localStorage.getItem("trapp_results_cache");
   if (rSave) { try { officialResults = JSON.parse(rSave); } catch (e) { } }
@@ -1827,10 +1295,12 @@ const EMBLEM_MAP = {
   
   const lSave = localStorage.getItem("trapp_standings_cache");
   if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
+
   function getResultArray(payload) {
     if (!payload) return [];
     return Array.isArray(payload) ? payload : (payload.data || []);
   }
+
   function getResultKey(result) {
     const date = result.date || "";
     if (result.club && result.opponent) {
@@ -1838,6 +1308,7 @@ const EMBLEM_MAP = {
     }
     return ["gas", date, result.section || "", normalizeName(result.home), normalizeName(result.away)].join("|");
   }
+
   function mergeResultArrays(...sources) {
     const seen = new Set();
     const merged = [];
@@ -1851,10 +1322,12 @@ const EMBLEM_MAP = {
     });
     return merged;
   }
+
   function withMergedResultsPayload(basePayload, mergedResults) {
     if (!basePayload || Array.isArray(basePayload)) return mergedResults;
     return { ...basePayload, data: mergedResults };
   }
+
   async function fetchLocalJson(type) {
     try {
       const res = await fetch(`./data/${type}.json?t=${Date.now()}`);
@@ -1864,25 +1337,30 @@ const EMBLEM_MAP = {
     }
     return null;
   }
+
   function commitResultsPayload(resJson) {
     const merged = mergeResultArrays(window.STATIC_RESULTS || [], officialResults, resJson);
     if (!merged.length) return;
+
     officialResults = merged;
     localStorage.setItem("trapp_results_cache", JSON.stringify(officialResults));
     injectResultsIntoSchedule(officialResults);
     syncResultsToLocalStorage(officialResults);
+
     renderFeed();
     applyYearFilter(selectedYear, true);
     if (currentMode === "dashboard") renderDashboard();
     else if (currentMode === "calendar") renderCalendar();
     if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
   }
+
   function injectResultsIntoSchedule(results) {
     let added = 0;
     getResultArray(results).forEach(r => {
       if (!r.date || !r.club || !r.opponent) return;
       const exists = scheduleData.find(m => m.date === r.date && m.club === r.club && m.opponent === r.opponent);
       if (exists) return;
+
       const d = parseDate(r.date);
       const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
       const dayStr = r.day || days[d.getDay()];
@@ -1891,6 +1369,7 @@ const EMBLEM_MAP = {
         const reversed = Object.entries(EMBLEM_MAP).find(([k,v]) => robustTeamMatch(v, r.opponent));
         if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
       }
+
       scheduleData.push({
          club: r.club,
          matchweek: r.matchweek || "EX",
@@ -1907,6 +1386,7 @@ const EMBLEM_MAP = {
     });
     return added;
   }
+
   /**
    * Universal fetch with fallback and stale check
    */
@@ -1917,6 +1397,7 @@ const EMBLEM_MAP = {
        if (!forceGas && localJson) {
          return withMergedResultsPayload(localJson, localMerged);
        }
+
        const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
        try {
          const gasUrlWithCacheBuster = `${gasUrl}&nocache=1&t=${Date.now()}`;
@@ -1930,8 +1411,10 @@ const EMBLEM_MAP = {
        } catch (e) { console.error(`GAS fetch failed: ${type}`); }
        return withMergedResultsPayload(localJson || window.STATIC_RESULTS, localMerged);
     }
+
     const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
     let staticJson = await fetchLocalJson(type);
+
     try {
       const gasUrlWithCacheBuster = `${gasUrl}&nocache=1&t=${Date.now()}`;
       const res = await fetch(gasUrlWithCacheBuster);
@@ -1942,39 +1425,45 @@ const EMBLEM_MAP = {
     } catch (e) { console.error(`GAS fetch failed: ${type}`); }
     return staticJson;
   }
+
   /**
    * Refreshes all data and updates UI
    */
   async function refreshAllData(forceGas = false) {
     await clubEmblemMapReady;
+
     const resultsPromise = fetchData("results", forceGas);
     const standingsPromise = fetchData("standings", forceGas);
     const resJson = await resultsPromise;
     if (resJson) {
       commitResultsPayload(resJson);
     }
+
     const stdJson = await standingsPromise;
     if (stdJson && stdJson.data) {
       cachedStandings = stdJson.data;
       localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
     }
+
     if (currentMode === "dashboard") renderDashboard();
     else if (currentMode === "calendar") renderCalendar();
     
     if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
   }
+
   /**
    * Finds official result for a specific match
    */
   function findOfficialResult(match) {
     if (!officialResults || !officialResults.length) return null;
-    const myKw = match.club === "niigata" ? "\u65b0\u6f5f" : "\u718a\u672c";
+    const myKw = match.club === "niigata" ? "新潟" : "熊本";
     
-    const candidates = officialResults.filter(r => {
+    return officialResults.find(r => {
       // Static JSON Format Support
       if (r.club && r.opponent) {
         if (r.date === match.date && r.club === match.club && robustTeamMatch(r.opponent, match.opponent)) return true;
       }
+
       // GAS Format Support
       if (!r.home || !r.away) return false;
       const dateMatch = r.date === match.date;
@@ -1993,19 +1482,8 @@ const EMBLEM_MAP = {
       }
       return false;
     });
-    if (!candidates.length) return null;
-    const resultQuality = (r) => {
-      let score = 0;
-      if (r.raw_json) score += 10;
-      if (r.score) score += 5;
-      if (r.attendance) score += 3;
-      if (r.referee) score += 3;
-      if (Array.isArray(r.starting_members) && r.starting_members.length) score += 3;
-      if (Array.isArray(r.goals) && r.goals.length) score += 2;
-      return score;
-    };
-    return candidates.sort((a, b) => resultQuality(b) - resultQuality(a))[0];
   }
+
   /**
    * Syncs official results into individual localStorage keys (for Feed/Calendar)
    */
@@ -2034,7 +1512,7 @@ const EMBLEM_MAP = {
         }
         // GAS Format Support
         else if (r.home_score !== "" && r.home_score !== null) {
-          const isHome = robustTeamMatch(r.home, m.club === "niigata" ? "\u65b0\u6f5f" : "\u718a\u672c");
+          const isHome = robustTeamMatch(r.home, m.club === "niigata" ? "新潟" : "熊本");
           sM = isHome ? r.home_score : r.away_score;
           sO = isHome ? r.away_score : r.home_score;
           if (r.pk && r.home_score === r.away_score) {
@@ -2045,6 +1523,7 @@ const EMBLEM_MAP = {
             }
           }
         }
+
         if (sM !== null && sO !== null) {
           const mId = `${m.date}_${m.club}_${m.opponent}`;
           if (localStorage.getItem(`score_my_${mId}`) !== String(sM) || 
@@ -2066,172 +1545,81 @@ const EMBLEM_MAP = {
     });
     return changed;
   }
+
   if (window.STATIC_RESULTS && window.STATIC_RESULTS.length) {
     officialResults = mergeResultArrays(window.STATIC_RESULTS, officialResults);
     injectResultsIntoSchedule(window.STATIC_RESULTS);
     syncResultsToLocalStorage(window.STATIC_RESULTS);
   }
+
   // Initial load
-  loadHistoricalData().catch((e) => console.warn("historical data load failed", e));
   refreshAllData();
+
+
   // extract the city map into reusable object
   const COMMON_STADIUM_CITY_MAP = {
-    "\u3048\u304c\u304a\u5065\u5eb7\u30b9\u30bf\u30b8\u30a2\u30e0": "\u718a\u672c\u5e02",
-    "\u30c7\u30f3\u30ab\u30d3\u30c3\u30b0\u30b9\u30ef\u30f3\u30b9\u30bf\u30b8\u30a2\u30e0": "\u65b0\u6f5f\u5e02",
-    "\u5473\u306e\u7d20\u30b9\u30bf\u30b8\u30a2\u30e0": "\u8abf\u5e03\u5e02",
-    "\u8c4a\u7530\u30b9\u30bf\u30b8\u30a2\u30e0": "\u8c4a\u7530\u5e02",
-    "\u30d1\u30ca\u30bd\u30cb\u30c3\u30af\u30b9\u30bf\u30b8\u30a2\u30e0\u5439\u7530": "\u5439\u7530\u5e02",
-    "\u57fc\u7389\u30b9\u30bf\u30b8\u30a2\u30e02002": "\u3055\u3044\u305f\u307e\u5e02\u7dd1\u533a",
-    "\u30e8\u30c9\u30b3\u30a6\u685c\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5927\u962a\u5e02\u6771\u4f4f\u5409\u533a",
-    "\u65e5\u7523\u30b9\u30bf\u30b8\u30a2\u30e0": "\u6a2a\u6d5c\u5e02\u6e2f\u5317\u533a",
-    "\u30cb\u30c3\u30d1\u30c4\u4e09\u30c4\u6ca2\u7403\u6280\u5834": "\u6a2a\u6d5c\u5e02\u795e\u5948\u5ddd\u533a",
-    "\u30ec\u30e2\u30f3\u30ac\u30b9\u30b9\u30bf\u30b8\u30a2\u30e0\u5e73\u585a": "\u5e73\u585a\u5e02",
-    "\u30b5\u30f3\u30ac\u30b9\u30bf\u30b8\u30a2\u30e0 by KYOCERA": "\u4e80\u5ca1\u5e02",
-    "\u30a8\u30c7\u30a3\u30aa\u30f3\u30d4\u30fc\u30b9\u30a6\u30a4\u30f3\u30b0\u5e83\u5cf6": "\u5e83\u5cf6\u5e02\u4e2d\u533a",
-    "\u30d9\u30b9\u30c8\u96fb\u5668\u30b9\u30bf\u30b8\u30a2\u30e0": "\u798f\u5ca1\u5e02\u535a\u591a\u533a",
-    "\u99c5\u524d\u4e0d\u52d5\u7523\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9ce5\u6816\u5e02",
-    "\u662d\u548c\u96fb\u5de5\u30c9\u30fc\u30e0\u5927\u5206": "\u5927\u5206\u5e02",
-    "\u30c9\u30fc\u30e0\u5927\u5206": "\u5927\u5206\u5e02",
-    "\u30e6\u30a2\u30c6\u30c3\u30af\u30b9\u30bf\u30b8\u30a2\u30e0\u4ed9\u53f0": "\u4ed9\u53f0\u5e02\u6cc9\u533a",
-    "IAI\u30b9\u30bf\u30b8\u30a2\u30e0\u65e5\u672c\u5e73": "\u9759\u5ca1\u5e02\u6e05\u6c34\u533a",
-    "\u30a8\u30b3\u30d1\u30b9\u30bf\u30b8\u30a2\u30e0": "\u888b\u4e95\u5e02",
-    "\u30e4\u30de\u30cf\u30b9\u30bf\u30b8\u30a2\u30e0": "\u78d0\u7530\u5e02",
-    "\u30c8\u30e9\u30f3\u30b9\u30b3\u30b9\u30e2\u30b9\u30b9\u30bf\u30b8\u30a2\u30e0\u9577\u5d0e": "\u8aeb\u65e9\u5e02",
-    "PEACE STADIUM Connected by SoftBank": "\u9577\u5d0e\u5e02",
-    "\u30d5\u30af\u30c0\u96fb\u5b50\u30a2\u30ea\u30fc\u30ca": "\u5343\u8449\u5e02\u4e2d\u592e\u533a",
-    "\u4e09\u5354\u30d5\u30ed\u30f3\u30c6\u30a2\u67cf\u30b9\u30bf\u30b8\u30a2\u30e0": "\u67cf\u5e02",
-    "\u30b7\u30c6\u30a3\u30e9\u30a4\u30c8\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5ca1\u5c71\u5e02\u5317\u533a",
-    "JFE\u6674\u308c\u3084\u304b\u56fd\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5ca1\u5c71\u5e02\u5317\u533a",
-    "\u7dad\u65b0\u307f\u3089\u3044\u3075\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5c71\u53e3\u5e02",
-    "\u30dd\u30ab\u30ea\u30b9\u30a8\u30c3\u30c8\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9cf4\u9580\u5e02",
-    "\u9cf4\u9580\u30fb\u5927\u585a\u30b9\u30dd\u30fc\u30c4\u30d1\u30fc\u30af \u30dd\u30ab\u30ea\u30b9\u30a8\u30c3\u30c8\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9cf4\u9580\u5e02",
-    "\u30cb\u30f3\u30b8\u30cb\u30a2\u30b9\u30bf\u30b8\u30a2\u30e0": "\u677e\u5c71\u5e02",
-    "ND\u30bd\u30d5\u30c8\u30b9\u30bf\u30b8\u30a2\u30e0\u5c71\u5f62": "\u5929\u7ae5\u5e02",
-    "\u30bd\u30e6\u30fc\u30b9\u30bf\u30b8\u30a2\u30e0": "\u79cb\u7530\u5e02",
-    "NACK5\u30b9\u30bf\u30b8\u30a2\u30e0\u5927\u5bae": "\u3055\u3044\u305f\u307e\u5e02\u5927\u5bae\u533a",
-    "\u30b1\u30fc\u30ba\u30c7\u30f3\u30ad\u30b9\u30bf\u30b8\u30a2\u30e0\u6c34\u6238": "\u6c34\u6238\u5e02",
-    "\u30ab\u30f3\u30bb\u30ad\u30b9\u30bf\u30b8\u30a2\u30e0\u3068\u3061\u304e": "\u5b87\u90fd\u5bae\u5e02",
-    "\u6b63\u7530\u91a4\u6cb9\u30b9\u30bf\u30b8\u30a2\u30e0\u7fa4\u99ac": "\u524d\u6a4b\u5e02",
-    "\u30cf\u30ef\u30a4\u30a2\u30f3\u30ba\u30b9\u30bf\u30b8\u30a2\u30e0\u3044\u308f\u304d": "\u3044\u308f\u304d\u5e02",
-    "\u3068\u3046\u307b\u3046\u30fb\u307f\u3093\u306a\u306e\u30b9\u30bf\u30b8\u30a2\u30e0": "\u798f\u5cf6\u5e02",
-    "\u30d7\u30e9\u30a4\u30d5\u30fc\u30ba\u30b9\u30bf\u30b8\u30a2\u30e0": "\u516b\u6238\u5e02",
-    "\u3044\u308f\u304e\u3093\u30b9\u30bf\u30b8\u30a2\u30e0": "\u76db\u5ca1\u5e02",
-    "JIT \u30ea\u30b5\u30a4\u30af\u30eb\u30a4\u30f3\u30af \u30b9\u30bf\u30b8\u30a2\u30e0": "\u7532\u5e9c\u5e02",
-    "\u30b5\u30f3\u30d7\u30ed \u30a2\u30eb\u30a6\u30a3\u30f3": "\u677e\u672c\u5e02",
-    "\u9577\u91ceU\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9577\u91ce\u5e02",
-    "\u5bcc\u5c71\u770c\u7dcf\u5408\u904b\u52d5\u516c\u5712\u9678\u4e0a\u7af6\u6280\u5834": "\u5bcc\u5c71\u5e02",
-    "\u77f3\u5ddd\u770c\u897f\u90e8\u7dd1\u5730\u516c\u5712\u9678\u4e0a\u7af6\u6280\u5834": "\u91d1\u6ca2\u5e02",
-    "\u91d1\u6ca2\u30b4\u30fc\u30b4\u30fc\u30ab\u30ec\u30fc\u30b9\u30bf\u30b8\u30a2\u30e0": "\u91d1\u6ca2\u5e02",
-    "\u85e4\u679d\u7dcf\u5408\u904b\u52d5\u516c\u5712\u30b5\u30c3\u30ab\u30fc\u5834": "\u85e4\u679d\u5e02",
-    "\u611b\u9df9\u5e83\u57df\u516c\u5712\u591a\u76ee\u7684\u7af6\u6280\u5834": "\u6cbc\u6d25\u5e02",
-    "\u9577\u826f\u5ddd\u7af6\u6280\u5834": "\u5c90\u961c\u5e02",
-    "\u6771\u5927\u962a\u5e02\u82b1\u5712\u30e9\u30b0\u30d3\u30fc\u5834": "\u6771\u5927\u962a\u5e02",
-    "\u30ed\u30fc\u30c8\u30d5\u30a3\u30fc\u30eb\u30c9\u5948\u826f": "\u5948\u826f\u5e02",
-    "Axis\u30d0\u30fc\u30c9\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9ce5\u53d6\u5e02",
-    "\u30c1\u30e5\u30a6\u30d6YAJIN\u30b9\u30bf\u30b8\u30a2\u52a0": "\u7c73\u5b50\u5e02",
-    "\u30c1\u30e5\u30a6\u30d6YAJIN\u30b9\u30bf\u30b8\u30a2\u30e0": "\u7c73\u5b50\u5e02",
-    "Pikara\u30b9\u30bf\u30b8\u30a2\u30e0": "\u4e38\u4e80\u5e02",
-    "\u56db\u56fd\u5316\u6210MEGLIO\u30b9\u30bf\u30b8\u30a2\u30e0": "\u4e38\u4e80\u5e02",
-    "\u30a2\u30b7\u30c3\u30af\u30b9\u91cc\u5c71\u30b9\u30bf\u30b8\u30a2\u30e0": "\u4eca\u6cbb\u5e02",
-    "\u30df\u30af\u30cb\u30ef\u30fc\u30eb\u30c9\u30b9\u30bf\u30b8\u30a2\u30e0\u5317\u4e5d\u5dde": "\u5317\u4e5d\u5dde\u5e02\u5c0f\u5009\u5317\u533a",
-    "\u3044\u3061\u3054\u5bae\u5d0e\u65b0\u5bcc\u30b5\u30c3\u30ab\u30fc\u5834": "\u65b0\u5bcc\u753a",
-    "\u767d\u6ce2\u30b9\u30bf\u30b8\u30a2\u30e0": "\u9e7f\u5150\u5cf6\u5e02",
-    "\u30bf\u30d4\u30c3\u30af\u770c\u7dcf\u3072\u3084\u3054\u3093\u30b9\u30bf\u30b8\u30a2\u30e0": "\u6c96\u7e04\u5e02",
-    "Uvance\u3068\u3069\u308d\u304d\u30b9\u30bf\u30b8\u30a2\u30e0 by Fujitsu": "\u5ddd\u5d0e\u5e02\u4e2d\u539f\u533a",
-    "\u5927\u548c\u30cf\u30a6\u30b9 \u30d7\u30ec\u30df\u30b9\u30c8\u30c9\u30fc\u30e0": "\u672d\u5e4c\u5e02\u8c4a\u5e73\u533a",
-    "\u5e73\u548c\u5802HATO\u30b9\u30bf\u30b8\u30a2\u30e0": "\u5f66\u6839\u5e02"
+    "えがお健康スタジアム": "熊本市", "デンカビッグスワンスタジアム": "新潟市", "味の素スタジアム": "調布市",
+    "豊田スタジアム": "豊田市", "パナソニックスタジアム吹田": "吹田市", "埼玉スタジアム2002": "さいたま市緑区",
+    "ヨドコウ桜スタジアム": "大阪市東住吉区", "日産スタジアム": "横浜市港北区", "ニッパツ三ツ沢球技場": "横浜市神奈川区",
+    "レモンガススタジアム平塚": "平塚市", "サンガスタジアム by KYOCERA": "亀岡市", "エディオンピースウイング広島": "広島市中区",
+    "ベスト電器スタジアム": "福岡市博多区", "駅前不動産スタジアム": "鳥栖市", "昭和電工ドーム大分": "大分市",
+    "クラサスドーム大分": "大分市", "ユアテックスタジアム仙台": "仙台市泉区", "IAIスタジアム日本平": "静岡市清水区",
+    "エコパスタジアム": "袋井市", "ヤマハスタジアム": "磐田市", "トランスコスモススタジアム長崎": "諫早市",
+    "PEACE STADIUM Connected by SoftBank": "長崎市", "フクダ電子アリーナ": "千葉市中央区", "三協フロンティア柏スタジアム": "柏市",
+    "シティライトスタジアム": "岡山市北区", "JFE晴れの国スタジアム": "岡山市北区", "維新みらいふスタジアム": "山口市",
+    "ポカリスエットスタジアム": "鳴門市", "鳴門・大塚スポーツパーク ポカリスエットスタジアム": "鳴門市",
+    "ニンジニアスタジアム": "松山市", "NDソフトスタジアム山形": "天童市", "ソユースタジアム": "秋田市",
+    "NACK5スタジアム大宮": "さいたま市大宮区", "ケーズデンキスタジアム水戸": "水戸市", "カンセキスタジアムとちぎ": "宇都宮市",
+    "正田醤油スタジアム群馬": "前橋市", "ハワイアンズスタジアムいわき": "いわき市", "とうほう・みんなのスタジアム": "福島市",
+    "プライフーズスタジアム": "八戸市", "いわぎんスタジアム": "盛岡市", "JIT リサイクルインク スタジアム": "甲府市",
+    "サンプロ アルウィン": "松本市", "長野Uスタジアム": "長野市", "富山県総合運動公園陸上競技場": "富山市",
+    "石川県西部緑地公園陸上競技場": "金沢市", "金沢ゴーゴーカレースタジアム": "金沢市", "藤枝総合運動公園サッカー場": "藤枝市",
+    "愛鷹広域公園多目的競技場": "沼津市", "長良川競技場": "岐阜市", "東大阪市花園ラグビー場": "東大阪市",
+    "ロートフィールド奈良": "奈良市", "Axisバードスタジアム": "鳥取市", "チュウブYAJINスタジアム": "米子市",
+    "Pikaraスタジアム": "丸亀市", "四国化成MEGLIOスタジアム": "丸亀市", "アシックス里山スタジアム": "今治市",
+    "ミクニワールドスタジアム北九州": "北九州市小倉北区", "いちご宮崎新富サッカー場": "新富町", "白波スタジアム": "鹿児島市",
+    "タピック県総ひやごんスタジアム": "沖縄市", "Uvanceとどろきスタジアム by Fujitsu": "川崎市中原区",
+    "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
   };
-async function renderDashboard() {
+
+  async function renderDashboard() {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
+
+    // Sort logic to find "Next" Match
     const now = new Date();
+    // Use today's local date as cutoff to keep today's matches visible until tomorrow
     const y = now.getFullYear();
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const dd = String(now.getDate()).padStart(2, '0');
     const cutoffStr = `${y}-${mm}-${dd}`;
-    const showNiigata = true;
+
+    // Check if toggle buttons exist, respect club visibility
+    const showNiigata = true; // Dashboard shows both actively or check toggles
     const showKumamoto = true;
+
     let nextNiigata = null;
     let nextKumamoto = null;
+
+    // sorted ascending array
     const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
     for (let m of sorted) {
       if (m.date >= cutoffStr && !nextNiigata && m.club === "niigata") nextNiigata = m;
       if (m.date >= cutoffStr && !nextKumamoto && m.club === "kumamoto") nextKumamoto = m;
       if (nextNiigata && nextKumamoto) break;
     }
+
     let html = "";
     const renderCard = (m, clubName, mainColor, myShortName) => {
-      if (!m) return `<div class="dash-card"><div style="padding:20px;text-align:center;color:#888;">\u4eca\u5f8c\u306e\u8a66\u5408\u4e88\u5b9a\u306f\u3042\u308a\u307e\u305b\u3093</div></div>`;
+      if (!m) return `<div class="dash-card"><div style="padding:20px;text-align:center;color:#888;">今後の試合予定はありません</div></div>`;
       const isAtt = localStorage.getItem('attend_' + m.date + '_' + m.club + '_' + m.opponent) === "true";
       const isHome = getMatchIsHome(m);
       const haBadge = isHome ? '<span class="sheet-ha badge-home" style="color:#fff; font-weight:800; font-size:1rem;">HOME</span>' : '<span class="sheet-ha badge-away" style="color:#fff; font-weight:800; font-size:1rem;">AWAY</span>';
       const myEmblem = m.club === "niigata" ? "https://jleague.r10s.jp/img/common/img_club_niigata.png" : "https://jleague.r10s.jp/img/common/img_club_kumamoto.png";
-      const J_CLUB_ENG = {
-        "\u5317\u6d77\u9053\u30b3\u30f3\u30b5\u30c9\u30fc\u30ec\u672d\u5e4c": "HOKKAIDO CONSADOLE SAPPORO",
-        "\u30f4\u30a1\u30f3\u30e9\u30fc\u30ec\u516b\u6238": "VANRAURE HACHINOHE",
-        "\u3044\u308f\u304e\u3093\u30b9\u30bf\u30b8\u30a2\u30e0\u76db\u5ca1": "IWATE GRULLA MORIOKA",
-        "\u30d9\u30ac\u30eb\u30bf\u4ed9\u53f0": "VEGALTA SENDAI",
-        "\u30d6\u30e9\u30a6\u30d6\u30ea\u30c3\u30c4\u79cb\u7530": "BLAUBLITZ AKITA",
-        "\u30e2\u30f3\u30c6\u30c7\u30a3\u30aa\u5c71\u5f62": "MONTEDIO YAMAGATA",
-        "\u798f\u5cf6\u30e5\u30ca\u30a4\u30c6\u30c3\u30c9FC": "FUKUSHIMA UNITED FC",
-        "\u3044\u308f\u304dFC": "IWAKI FC",
-        "\u9e7a\u5cf6\u30a2\u30f3\u30c8\u30e9\u30fc\u30ba": "KASHIMA ANTLERS",
-        "\u6c34\u6238\u30db\u30ea\u30cf\u30c3\u30af": "MITO HOLLYHOCK",
-        "\u6803\u6728SC": "TOCHIGI SC",
-        "\u30b6\u30b9\u30d1\u7fa4\u99ac": "THESPA GUNMA",
-        "\u6d66\u548c\u30ec\u30c3\u30ba": "URAWA REDS",
-        "\u5927\u5bae\u30a2\u30eb\u30c7\u30a3\u30fc\u30b8\u30e3": "OMIYA ARDIJA",
-        "RB\u5927\u5bae\u30a2\u30eb\u30c7\u30a3\u30fc\u30b8\u30e3": "RB OMIYA ARDIJA",
-        "\u30b8\u30a7\u30d5\u30e5\u30ca\u30a4\u30c6\u30c3\u30c9\u5343\u8449": "JEF UNITED CHIBA",
-        "\u67cf\u30ec\u30a4\u30bd\u30eb": "KASHIWA REYSOL",
-        "FC\u6771\u4eac": "FC TOKYO",
-        "\u6771\u4eac\u30f4\u30a1\u30fc\u30c7\u30a3": "TOKYO VERDY",
-        "FC\u753a\u7530\u30bc\u30eb\u30d3\u30a2": "FC MACHIDA ZELVIA",
-        "\u5ddd\u5d0e\u30d5\u30ed\u30f3\u30bf\u30fc\u30ec": "KAWASAKI FRONTALE",
-        "\u6a2a\u6d5cF\u30fb\u30de\u30ea\u30ce\u30b9": "YOKOHAMA F. MARINOS",
-        "\u6a2a\u6d5cFC": "YOKOHAMA FC",
-        "Y.S.C.C.\u6a2a\u6d5c": "Y.S.C.C. YOKOHAMA",
-        "\u6e58\u5357\u30d9\u30eb\u30de\u30fc\u30ec": "SHONAN BELLMARE",
-        "SC\u76f8\u6a21\u539f": "SC SAGAMIHARA",
-        "\u30f4\u30a1\u30f3\u30d5\u30a9\u30fc\u30ec\u7532\u5e9c": "VENTFORET KOFU",
-        "\u677e\u672c\u5c71\u96c5FC": "MATSUMOTO YAMAGA FC",
-        "AC\u9577\u91ce\u30d5\u30a3\u30eb\u30bb\u30fc\u30ed": "AC NAGANO PARCEIRO",
-        "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f": "ALBIREX NIIGATA",
-        "\u30ab\u30bf\u30fc\u30ec\u5bc5\u5c71": "KATALLER TOYAMA",
-        "\u30c4\u30a7\u30fc\u30bc\u30f3\u91d1\u6ca2": "ZWEIGEN KANAZAWA",
-        "\u6e05\u6c34\u30a8\u30b9\u30d1\u30eb\ufffdX": "SHIMIZU S-PULSE",
-        "\u30b8\u30e5\u30d3\u30ed\u5c36\u7530": "JUBILO IWATA",
-        "\u85e4\u679dMYFC": "FUJIEDA MYFC",
-        "\u30a2\u30b9\u30eb\u30af\u30e9\u30ed\u6cbc\u6d25": "AZUL CLARO NUMAZU",
-        "\u540d\u53e4\u5c4b\u30b0\u30e9\u30f3\u30d1\u30b9": "NAGOYA GRAMPUS",
-        "FC\u5c90\u961c": "FC GIFU",
-        "\u4eac\u90fd\u30b5\u30f3\u30acF.C.": "KYOTO SANGA F.C.",
-        "\u30ac\u30f3\u30d0\u5927\u962a": "GAMBA OSAKA",
-        "\u30bb\u30ec\u30c3\u30bd\u5927\u962a": "CEREZO OSAKA",
-        "FC\u5927\u962a": "FC OSAKA",
-        "\u30f4\u30a3\u30c5\u30eb\u795e\u6238": "VISSEL KOBE",
-        "\u5948\u826f\u30af\u30e9\u30d6": "NARA CLUB",
-        "\u30ac\u30a4\u30ca\u30fc\u30ec\u9ce5\u53d6": "GAINARE TOTTORI",
-        "\u30d5\u30a1\u30b8\u30a2\u30fc\u30ce\u5ca1\u5c71": "FAGIANO OKAYAMA",
-        "\u30b5\u30f3\u30d5\u30ec\u30c3\u30cc\u5e83\u5cf6": "SANFRECCE HIROSHIMA",
-        "\u30ec\u30ce\u30d5\u30a1\u5c71\u53e3FC": "RENOFA YAMAGUCHI FC",
-        "\u30ab\u30de\u30bf\u30de\u30fc\u30ec\u8b89\u5c90": "KAMATAMARE SANUKI",
-        "\u5fb3\u5cf6\u30f4\u30a9\u30eb\u30c6\u30a3\u30b9": "TOKUSHIMA VORTIS",
-        "\u611b\u5a9bFC": "EHIME FC",
-        "FC\u4eca\u6cbb": "FC IMABARI",
-        "\u30a2\u30d3\u30b9\u30d1\u798f\u5ca1": "AVISPA FUKUOKA",
-        "\u30ae\u30e9\u30f4\u30a1\u30f3\u30c4\u5317\u4e5d\u5dde": "GIRAVANZ KITAKYUSHU",
-        "\u30b5\u30ac\u30f3\u9ce5\u6816": "SAGAN TOSU",
-        "V\u30fb\u30d5\u30a1\u30fc\u30ec\u30f3\u9577\u5d0e": "V-VAREN NAGASAKI",
-        "\u30ed\u30a2\u30c3\u30bd\u718a\u672c": "ROASSO KUMAMOTO",
-        "\u5927\u5206\u30c8\u30ea\u30cb\u30bf": "OITA TRINITA",
-        "\u30c6\u30b2\u30d0\u30b8\u30e3\u30fc\u30ed\u5bae\u5d0e": "TEGEVAJARO MIYAZAKI",
-        "\u9e7a\u5150\u5cf6\u30e5\u30ca\u30a4\u30c6\u30c3\u30c9FC": "KAGOSHIMA UNITED FC",
-        "FC\u7409\u7403": "FC RYUKYU",
-        "\u9ad8\u77e5\u30e5\u30ca\u30a4\u30c6\u30c3\u30c9SC": "KOCHI UNITED SC",
-        "\u30ec\u30a4\u30e9\u30af\u6ecb\u8cc0FC": "REILAC SHIGA FC"
-      };
+      const J_CLUB_ENG = { "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC" };
       const engOpp = J_CLUB_ENG[m.opponent] || m.opponent.toUpperCase();
+
       return `
           <div class="dash-card white-theme" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white;">
             <div class="dash-card-header" style="background:${mainColor}; border-bottom:none; padding:8px 15px;">
@@ -2239,7 +1627,10 @@ async function renderDashboard() {
               ${haBadge.replace('font-size:1rem;', 'font-size:0.85rem;')}
             </div>
             <div class="dash-card-body" style="background: white; color: #111; padding:10px 15px;">
+              
+              <!-- Top area (Date, Venue + Weather) -->
               <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                 <!-- Left Side: Date and Venue -->
                  <div style="display:flex; flex-direction:column; gap:6px;">
                     <div style="display:flex; align-items:center; gap:8px;">
                        <span class="dash-mw" style="background: #e8e8ed; color: #111; padding: 2px 8px; border-radius:6px; font-size:0.9rem; border:none;">${m.matchweek || "EX"}</span>
@@ -2250,17 +1641,24 @@ async function renderDashboard() {
                        <span style="font-weight:700;">${m.venue}</span>
                     </div>
                  </div>
+
+                 <!-- Right Side: Weather -->
                  <div id="dash-weather-${m.club}" data-venue="${m.venue}" data-date="${m.date}" style="text-align:right;">
                     <span class="val-weather" style="font-size:1.8rem; display:flex; align-items:center; gap: 8px;"></span>
                  </div>
               </div>
+              
+              <!-- Opponent Title -->
               <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:10px; border-bottom: 1px solid #f0f0f5; padding-bottom:10px;">
                  <span class="dash-vs" style="color:#888; font-size:1.1rem; font-weight:800;">VS</span>
                  <h3 class="dash-opp-name" style="color:#111; font-weight:900; margin:0; font-size:1.6rem; font-family:var(--font-main); letter-spacing:1px;">${m.opponent}</h3>
               </div>
+              
+               <!-- Split Layout -->
               <div style="display:flex; gap: 15px;">
+                 <!-- Left (My Team) -->
                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <img src="${myEmblem}" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${myShortName === '\u65b0\u6f5f' ? '\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f' : '\u30ed\u30a2\u30c3\u30bd\u718a\u672c'}', event)">
+                    <img src="${myEmblem}" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${myShortName === '新潟' ? 'アルビレックス新潟' : 'ロアッソ熊本'}', event)">
                     <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
                        <span class="val-rank-num-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-my">-</span> pts</span>
@@ -2272,7 +1670,11 @@ async function renderDashboard() {
                     </div>
                     <div class="val-prev-form-my" style="min-height:18px;"></div>
                  </div>
+                 
+                 <!-- Divider -->
                  <div style="width:1px; background:#e8e8ed;"></div>
+                 
+                 <!-- Right (Opponent) -->
                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
                     <img src="${m.emblem}" class="dash-opp-emblem" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${m.opponent}', event)">
                     <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
@@ -2291,10 +1693,15 @@ async function renderDashboard() {
           </div>
         `;
     };
-    html += renderCard(nextNiigata, "ALBIREX NIIGATA", "var(--albirex-orange)", "\u65b0\u6f5f");
-    html += renderCard(nextKumamoto, "ROASSO KUMAMOTO", "var(--roasso-red)", "\u718a\u672c");
+
+    html += renderCard(nextNiigata, "ALBIREX NIIGATA", "var(--albirex-orange)", "新潟");
+    html += renderCard(nextKumamoto, "ROASSO KUMAMOTO", "var(--roasso-red)", "熊本");
     container.innerHTML = html;
+
+    // Header Announcements (N Gate etc)
     updateHeaderAnnouncements();
+
+    // Bind buttons
     container.querySelectorAll('.dash-card').forEach(card => {
       card.onclick = () => {
         const mId = card.dataset.mid;
@@ -2303,34 +1710,40 @@ async function renderDashboard() {
         if (match) openDetailSheet(match);
       };
     });
+
+    // Bind new quick links
     const btnFeed = document.getElementById("dash-to-feed");
     const btnCal = document.getElementById("dash-to-calendar");
     if (btnFeed) btnFeed.onclick = () => switchMode("feed");
     if (btnCal) btnCal.onclick = () => switchMode("calendar");
+
     document.getElementById("dash-to-standings").onclick = () => {
       openSubPane("standings-overlay");
       loadStandings();
     };
     document.getElementById("dash-to-links").onclick = () => openSubPane("links-overlay");
-    const btnScoreboard = document.getElementById("dash-to-scoreboard");
-    if (btnScoreboard) btnScoreboard.onclick = () => switchMode("scoreboard");
-    const btnVision = document.getElementById("dash-to-vision");
-    if (btnVision) btnVision.onclick = () => switchMode("vision");
+
+    // Auto Fetch Weather Function inline
     const fetchWeatherForDash = async (idPrefix, clubPrefix) => {
       const wBox = document.getElementById(idPrefix);
       if (!wBox) return;
       const venue = wBox.dataset.venue;
       const dateStr = wBox.dataset.date;
+
       const cacheKey = `weather_html_${venue}_${dateStr}`;
       const cachedHTML = localStorage.getItem(cacheKey);
       const cachedTime = localStorage.getItem(`${cacheKey}_time`);
+
+      // 3時間のキャッシュ有効期限
       if (cachedHTML && cachedTime && (Date.now() - parseInt(cachedTime) < 10800000)) {
         wBox.querySelector('.val-weather').innerHTML = cachedHTML;
         return;
       }
+
       const mDate = new Date(dateStr);
       const now = new Date();
       const diffDays = (mDate - now) / (1000 * 60 * 60 * 24);
+
       if (diffDays >= -4 && diffDays <= 14) {
         const searchLocation = COMMON_STADIUM_CITY_MAP[venue] || venue;
         try {
@@ -2353,12 +1766,13 @@ async function renderDashboard() {
               const code = wData.daily.weather_code[dIdx];
               const max = wData.daily.temperature_2m_max[dIdx];
               const min = wData.daily.temperature_2m_min[dIdx];
-              let emoji = "\u2601";
-              if (code <= 1) emoji = "\u2600";
-              else if (code <= 3) emoji = "\u2601";
-              else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "\u2614";
-              else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "\u2744";
-              const finalHTML = `${emoji} <div style="display:flex; align-items:baseline; gap:6px; font-family:var(--font-kick); font-weight:900; font-size:1.4rem;"><span style="color:#ff3b30;">${Math.round(max)}</span> <span style="font-size:1.2rem; color:#aaa;">/</span> <span style="color:#007aff;">${Math.round(min)}</span> <span style="font-size:1rem; color:#111;">\u2103</span></div>`;
+              let emoji = "☁️";
+              if (code <= 1) emoji = "☀️";
+              else if (code <= 3) emoji = "☁️";
+              else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
+              else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
+              
+              const finalHTML = `${emoji} <div style="display:flex; align-items:baseline; gap:6px; font-family:var(--font-kick); font-weight:900; font-size:1.4rem;"><span style="color:#ff3b30;">${Math.round(max)}</span> <span style="font-size:1.2rem; color:#aaa;">/</span> <span style="color:#007aff;">${Math.round(min)}</span> <span style="font-size:1rem; color:#111;">℃</span></div>`;
               wBox.querySelector(".val-weather").innerHTML = finalHTML;
               localStorage.setItem(cacheKey, finalHTML);
               localStorage.setItem(`${cacheKey}_time`, Date.now().toString());
@@ -2366,32 +1780,39 @@ async function renderDashboard() {
           }
         } catch (e) { }
       } else {
-        wBox.querySelector(".val-weather").innerHTML = `<span style="font-size:0.6rem;color:#999;line-height:2;">\u53d6\u5f97\u671f\u9593\u5916</span>`;
+        wBox.querySelector(".val-weather").innerHTML = `<span style="font-size:0.6rem;color:#999;line-height:2;">取得期間外</span>`;
       }
     };
+
     if (nextNiigata) fetchWeatherForDash(`dash-weather-niigata`, 'niigata');
     if (nextKumamoto) fetchWeatherForDash(`dash-weather-kumamoto`, 'kumamoto');
+
+    // Ensure standings are available on dashboard
     const refreshStandings = async () => {
       const data = cachedStandings;
       if (!data) return;
+      
       const updateStatsCard = (m, myKeyword) => {
         if (!m) return;
         const nMyKey = normalizeName(myKeyword);
         const myData = data.find(r => r.team && normalizeName(r.team).includes(nMyKey));
-        const J_TEAM_KWS = ["FC\u6771\u4eac", "\u6771\u4eacV", "\u6a2a\u6d5cF\u30fb\u30de\u30ea\u30ce\u30b9", "\u6a2a\u6d5cFC", "YS\u6a2a\u6d5c", "FC\u5927\u962a", "G\u5927\u962a", "C\u5927\u962a", "\u30bb\u30ec\u30c3\u30bd", "FC\u5c90\u961c", "FC\u4eca\u6cbb", "FC\u7409\u7403", "\u672d\u5e4c", "\u9e7a\u5cf6", "\u6d66\u548c", "\u6749", "\u753a\u753d", "\u5ddd\u5d0e", "\u6e58\u5357", "\u65b0\u6f5f", "\u5bc5\u5c71", "\u91d1\u6ca2", "\u6e05\u6c34", "\u85e4\u679d", "\u6cbc\u6d25", "\u5c36\u753d", "\u540d\u53e4\u5c4b", "\u5c90\u961c", "\u4eac\u90fd", "\u795e\u6238", "\u5948\u826f", "\u9ce5\u53d6", "\u5ca1\u5c71", "\u5e83\u5cf6", "\u5c71\u53e3", "\u8b89\u5c90", "\u5fb3\u5cf6", "\u611b\u5a9b", "\u4eca\u6cbb", "\u798f\u5ca1", "\u535d\u4e5d\u5dde", "\u9ce5\u6816", "\u9577\u5d0e", "\u718a\u672c", "\u5927\u5206", "\u5bae\u5d0e", "\u9e7a\u5150\u5cf6", "\u7409\u7403", "\u9ad8\u77e5", "\u6ecb\u8cc0", "\u516b\u6238", "\u76db\u5ca1", "\u79cb\u7530", "\u5c71\u5f62", "\u4ed9\u53f0", "\u798f\u5cf6", "\u6c34\u6238", "\u7fa4\u99ac", "\u6803\u6728", "\u5927\u5bae", "\u5343\u8449", "\u76f8\u6a21\u539f", "\u7532\u5e9c", "\u677e\u672c", "\u9577\u91ce"];
+        
+        // Match opponent rank
+        const J_TEAM_KWS = ["FC東京", "東京V", "横浜FM", "横浜FC", "YS横浜", "FC大阪", "G大阪", "C大阪", "セレッソ", "FC岐阜", "FC今治", "FC琉球", "札幌", "鹿島", "浦和", "柏", "町田", "川崎", "湘南", "新潟", "富山", "金沢", "清水", "藤枝", "沼津", "磐田", "名古屋", "岐阜", "京都", "神戸", "奈良", "鳥取", "岡山", "広島", "山口", "讃岐", "徳島", "愛媛", "今治", "福岡", "北九州", "鳥栖", "長崎", "熊本", "大分", "宮崎", "鹿児島", "琉球", "高知", "滋賀", "八戸", "盛岡", "秋田", "山形", "仙台", "福島", "水戸", "群馬", "栃木", "大宮", "千葉", "相模原", "甲府", "松本", "長野"];
         let oppData = null;
         let bestLen = 0;
         const nOpp = normalizeName(m.opponent);
         for (let kw of J_TEAM_KWS) {
            const nKw = normalizeName(kw);
            if (nOpp.includes(nKw)) {
-              const found = data.find(r => r.team && normalizeName(r.team).includes(nKw));
-              if (found && kw.length > bestLen) {
-                 oppData = found;
-                 bestLen = kw.length;
-              }
+             const found = data.find(r => r.team && normalizeName(r.team).includes(nKw));
+             if (found && kw.length > bestLen) {
+                oppData = found;
+                bestLen = kw.length;
+             }
            }
         }
+
         const card = document.getElementById(`dash-card-${m.club}`);
         if (card) {
           if (myData) {
@@ -2408,136 +1829,180 @@ async function renderDashboard() {
           }
         }
       };
-      updateStatsCard(nextNiigata, "\u65b0\u6f5f");
-      updateStatsCard(nextKumamoto, "\u718a\u672c");
+      updateStatsCard(nextNiigata, "新潟");
+      updateStatsCard(nextKumamoto, "熊本");
     };
     refreshStandings();
+
+    // 前節表示を更新（独立関数に委譲）
     updateDashboardPrevResults();
   }
 
+  // --- 前節表示更新（renderDashboard再呼び出しでもリセットされない独立関数） ---
+  // --- Update Previous Match Results on Dashboard ---
   function updateDashboardPrevResults() {
+    if (!officialResults.length) return;
+
     const now = new Date();
     const cutoffStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
-    const sorted = [...scheduleData].sort((a, b) => normalizeDateString(a.date).localeCompare(normalizeDateString(b.date)));
-    const nextNiigata = sorted.find(m => normalizeDateString(m.date) >= cutoffStr && m.club === "niigata");
-    const nextKumamoto = sorted.find(m => normalizeDateString(m.date) >= cutoffStr && m.club === "kumamoto");
+
+    // Find next matches to determine cutoff dates
+    const sorted = [...scheduleData].sort((a, b) => a.date.localeCompare(b.date));
+    let nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
+    let nextKumamoto = sorted.find(m => m.date >= cutoffStr && m.club === "kumamoto");
+
     const escapeAttr = (value) => String(value || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
-    const parseScorePair = (score) => {
-      const parts = String(score || "").match(/(\d+)\s*[-:]\s*(\d+)/);
-      return parts ? [Number(parts[1]), Number(parts[2])] : [NaN, NaN];
-    };
-    const toTeamResult = (r, kw, club) => {
-      const date = normalizeDateString(r.date);
-      if (!date) return null;
-      if (r.club && r.opponent) {
-        if (club && r.club !== club) return null;
-        const [sM, sO] = parseScorePair(r.score || `${r.score_my}-${r.score_opp}`);
-        if (!Number.isFinite(sM) || !Number.isFinite(sO)) return null;
-        const opponent = r.opponent || "";
+    const getOpponentInfoFromResult = (r, kw) => {
+      if (r.score !== undefined) {
         return {
-          date,
-          isHome: r.home_away ? r.home_away === "H" : getMatchIsHome(r),
-          sM,
-          sO,
-          opponent,
-          pk: r.pk || "",
-          emblem: resolveEmblemUrl(opponent, r.emblem || ""),
-          key: `${date}|${club || r.club}|${normalizeName(opponent)}`
+          name: r.opponent || "",
+          emblem: resolveEmblemUrl(r.opponent, r.emblem || (scheduleData.find(m => m.date === r.date && m.club === r.club && robustTeamMatch(m.opponent, r.opponent))?.emblem || ""))
         };
       }
-      if (!r.home || !r.away) return null;
-      if (!robustTeamMatch(r.home, kw) && !robustTeamMatch(r.away, kw)) return null;
-      const isHome = robustTeamMatch(r.home, kw);
-      const sM = Number(isHome ? r.home_score : r.away_score);
-      const sO = Number(isHome ? r.away_score : r.home_score);
-      if (!Number.isFinite(sM) || !Number.isFinite(sO)) return null;
-      const opponent = ((isHome ? r.away : r.home) || "").replace(/\u306e\u8a66\u5408\u8a73\u7d30|\u306e\u7d50\u679c/g, "").trim();
-      return {
-        date,
-        isHome,
-        sM,
-        sO,
-        opponent,
-        pk: r.pk || "",
-        emblem: resolveEmblemUrl(opponent, r.emblem || ""),
-        key: `${date}|${club || kw}|${normalizeName(opponent)}`
-      };
-    };
-    const getPastResults = (kw, club, cutoff) => {
-      const seen = new Set();
-      return [...officialResults, ...scheduleData]
-        .map(r => toTeamResult(r, kw, club))
-        .filter(Boolean)
-        .filter(r => {
-          if (r.date >= cutoff || seen.has(r.key)) return false;
-          seen.add(r.key);
-          return true;
-        })
-        .sort((a, b) => b.date.localeCompare(a.date));
-    };
-    const resultMeta = (r) => {
-      let symbol = "DRAW";
-      let badgeColor = "#f1f3f4";
-      let badgeText = "#5f6368";
-      let scoreStr = `${r.sM} - ${r.sO}`;
-      if (r.sM > r.sO) { symbol = "WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
-      else if (r.sM < r.sO) { symbol = "LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
-      else if (r.pk) {
-        const pkMatch = String(r.pk).match(/(\d+)\s*PK\s*(\d+)/i);
-        if (pkMatch) {
-          const pkM = Number(r.isHome ? pkMatch[1] : pkMatch[2]);
-          const pkO = Number(r.isHome ? pkMatch[2] : pkMatch[1]);
-          scoreStr = `(${pkM}) ${r.sM}-${r.sO} (${pkO})`;
-          if (pkM > pkO) { symbol = "PK WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
-          else { symbol = "PK LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
-        }
+
+      const isRHome = robustTeamMatch(r.home, kw);
+      const name = ((isRHome ? r.away : r.home) || "").replace(/の試合詳細|の結果/g, "").trim();
+      let emblem = resolveEmblemUrl(name, scheduleData.find(m => m.date === r.date && robustTeamMatch(m.opponent, name))?.emblem || "");
+      if (!emblem) {
+        const reversed = Object.entries(EMBLEM_MAP).find(([k, v]) => robustTeamMatch(v, name));
+        if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
       }
-      return { symbol, badgeColor, badgeText, scoreStr };
+      return { name, emblem };
     };
+
     const updateUI = (club, teamKw, match) => {
       const card = document.getElementById(`dash-card-${club}`);
       if (!card) return;
-      const cutoff = match ? normalizeDateString(match.date) : "9999-12-31";
-      const updateHalf = (prefix, kw, resultClub) => {
-        const past = getPastResults(kw, resultClub, cutoff);
+      
+      const cutoff = match ? match.date : "9999-12-31";
+      
+      const updateHalf = (prefix, kw) => {
+        const past = officialResults.filter(r => {
+          const dMatch = r.date < cutoff;
+          const status = (r.status || "").toLowerCase();
+          const isFinished = status.includes("finish") || status.includes("ft") || status.includes("終");
+          
+          // Static JSON Support
+          if (r.club && r.opponent) {
+            const tMatchStatic = (kw === "新潟" ? r.club === "niigata" : r.club === "kumamoto");
+            const hasScoreStatic = r.score !== undefined;
+            return dMatch && tMatchStatic && hasScoreStatic;
+          }
+          
+          // GAS Support
+          const tMatch = robustTeamMatch(r.home, kw) || robustTeamMatch(r.away, kw);
+          const hasScore = r.home_score !== "" && r.home_score !== null;
+          return dMatch && tMatch && (hasScore || isFinished);
+        }).sort((a,b) => b.date.localeCompare(a.date));
+
         if (!past.length) return;
         const last = past[0];
-        const meta = resultMeta(last);
-        const resHtml = `<span class="dash-result-pill" style="border-color:${meta.badgeColor}; background:${meta.badgeColor}; color:${meta.badgeText};"><span></span>${meta.symbol}</span>`;
-        const formHtml = `<div class="dash-form-strip">${past.slice(0, 5).reverse().map(r => {
-          const rMeta = resultMeta(r);
-          const rSym = rMeta.symbol.includes("WIN") ? "\u25cb" : rMeta.symbol.includes("LOSE") ? "\u25cf" : "\u25b3";
-          const emblemHtml = r.emblem
-            ? `<img class="dash-form-emblem" src="${escapeAttr(r.emblem)}" alt="${escapeAttr(r.opponent)}">`
+        
+        let isHome, sM, sO, opp, symbol, badgeColor, badgeText, scoreStr;
+
+        if (last.score !== undefined) {
+           isHome = last.home_away === "H";
+           const scores = last.score.split("-");
+           sM = parseInt(scores[0]);
+           sO = parseInt(scores[1]);
+           opp = last.opponent;
+        } else {
+           isHome = robustTeamMatch(last.home, kw);
+           sM = parseInt(isHome ? last.home_score : last.away_score);
+           sO = parseInt(isHome ? last.away_score : last.home_score);
+           opp = (isHome ? last.away : last.home).replace(/の試合詳細|の結果/g, "").trim();
+        }
+        
+        symbol = "DRAW";
+        badgeColor = "#f1f3f4";
+        badgeText = "#5f6368";
+        scoreStr = `${sM} - ${sO}`;
+        
+        if (sM > sO) { symbol = "WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
+        else if (sM < sO) { symbol = "LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
+        else if (last.pk) {
+          const pkMatch = last.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+          if (pkMatch) {
+            const pkM = parseInt(isHome ? pkMatch[1] : pkMatch[2]);
+            const pkO = parseInt(isHome ? pkMatch[2] : pkMatch[1]);
+            scoreStr = `(${pkM}) ${sM}-${sO} (${pkO})`;
+            if (pkM > pkO) { symbol = "PK WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
+            else { symbol = "PK LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
+          }
+        }
+
+        const resHtml = `<span style="border:1px solid ${badgeColor}; background:${badgeColor}; color:${badgeText}; border-radius:12px; padding:3px 8px; font-size:0.7rem; font-weight:800; display:inline-flex; align-items:center; gap:4px;"><span style="font-size:0.5rem;">●</span> ${symbol}</span>`;
+
+        let formHtml = `<div class="dash-form-strip">`;
+        const recent5 = past.slice(0, 5).reverse();
+        recent5.forEach(r => {
+          let rM, rO, rSym = "△";
+          if (r.score !== undefined) {
+             const isRHome = r.home_away === "H";
+             const rScores = r.score.split("-");
+             rM = parseInt(rScores[0]);
+             rO = parseInt(rScores[1]);
+          } else {
+             const isRHome = robustTeamMatch(r.home, kw);
+             rM = parseInt(isRHome ? r.home_score : r.away_score);
+             rO = parseInt(isRHome ? r.away_score : r.home_score);
+          }
+
+          if (rM > rO) { rSym = "〇"; }
+          else if (rM < rO) { rSym = "●"; }
+          else if (r.pk) {
+            const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+            if (pkMatch) {
+              const isRHome = (r.score !== undefined) ? (r.home_away === "H") : robustTeamMatch(r.home, kw);
+              const pkM = parseInt(isRHome ? pkMatch[1] : pkMatch[2]);
+              const pkO = parseInt(isRHome ? pkMatch[2] : pkMatch[1]);
+              if (pkM > pkO) { rSym = "△"; }
+              else { rSym = "▲"; }
+            }
+          }
+          const recentOpp = getOpponentInfoFromResult(r, kw);
+          const recentHA = (r.score !== undefined ? r.home_away : (robustTeamMatch(r.home, kw) ? "H" : "A")) || "";
+          const emblemHtml = recentOpp.emblem
+            ? `<img class="dash-form-emblem" src="${escapeAttr(recentOpp.emblem)}" alt="${escapeAttr(recentOpp.name)}">`
             : `<span class="dash-form-emblem-placeholder"></span>`;
-          return `<span class="dash-form-item" title="${escapeAttr(r.date)} ${escapeAttr(r.opponent)} ${rMeta.scoreStr}"><span class="dash-form-symbol">${rSym}</span>${emblemHtml}<span class="dash-form-ha">${r.isHome ? "H" : "A"}</span></span>`;
-        }).join("")}</div>`;
+          formHtml += `<span class="dash-form-item"><span class="dash-form-symbol">${rSym}</span>${emblemHtml}<span class="dash-form-ha">${recentHA}</span></span>`;
+        });
+        formHtml += `</div>`;
+
         const elDate = card.querySelector(`.val-prev-date-${prefix}`);
         const elOpp = card.querySelector(`.val-prev-opp-name-${prefix}`);
         const elHA = card.querySelector(`.val-prev-ha-${prefix}`);
         const elScore = card.querySelector(`.val-prev-score-${prefix}`);
         const elRes = card.querySelector(`.val-prev-res-${prefix}`);
         const elForm = card.querySelector(`.val-prev-form-${prefix}`);
+        
         if (elDate) elDate.innerText = last.date.substring(5).replace("-", "/");
-        if (elOpp) elOpp.innerText = last.opponent;
-        if (elHA) elHA.innerText = last.isHome ? "(H)" : "(A)";
-        if (elScore) elScore.innerText = meta.scoreStr;
+        if (elOpp) elOpp.innerText = opp;
+        if (elHA) elHA.innerText = isHome ? "(H)" : "(A)";
+        if (elScore) elScore.innerText = scoreStr;
         if (elRes) elRes.innerHTML = resHtml;
         if (elForm) elForm.innerHTML = formHtml;
       };
-      updateHalf("my", teamKw, club);
-      if (match) updateHalf("opp", match.opponent, null);
+
+      updateHalf('my', teamKw);
+      if (match) updateHalf('opp', match.opponent);
     };
-    updateUI("niigata", "\u65b0\u6f5f", nextNiigata);
-    updateUI("kumamoto", "\u718a\u672c", nextKumamoto);
+
+    updateUI("niigata", "新潟", nextNiigata);
+    updateUI("kumamoto", "熊本", nextKumamoto);
+
+    // --- Dashboard Weather Sync ---
     setTimeout(() => {
       const wN = document.getElementById("dash-weather-niigata");
       const wK = document.getElementById("dash-weather-kumamoto");
-      if (typeof updateWeatherUI === "function") {
+      // Use schedule.js updateWeatherUI function to inject SVG icons
+      if (typeof updateWeatherUI === 'function') {
         if (wN && nextNiigata) updateWeatherUI(wN, nextNiigata.date, nextNiigata.venue);
         if (wK && nextKumamoto) updateWeatherUI(wK, nextKumamoto.date, nextKumamoto.venue);
       }
     }, 100);
+
+    // Add update timestamp to dashboard
     const dashboardContainer = document.getElementById("dashboard-cards-container");
     let timeBox = document.getElementById("dash-update-time");
     if (!timeBox && dashboardContainer) {
@@ -2545,47 +2010,53 @@ async function renderDashboard() {
       timeBox.id = "dash-update-time";
       dashboardContainer.appendChild(timeBox);
     }
-    if (timeBox) {
-      timeBox.style.cssText = "font-size:0.65rem; color:white; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:10px; margin-top:15px; display:inline-block; font-weight:700;";
-      timeBox.innerText = historicalDataLoaded
-        ? `\u6700\u7d42\u540c\u671f: ${new Date().toLocaleTimeString()} (必要な履歴のみ読み込み)`
-        : "\u5c65\u6b74\u30c7\u30fc\u30bf\u8aad\u307f\u8fbc\u307f\u4e2d...";
-    }
+    if (timeBox) timeBox.style.cssText = "font-size:0.65rem; color:white; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:10px; margin-top:15px; display:inline-block; font-weight:700;";
+    if (timeBox) timeBox.innerText = `最終同期: ${new Date().toLocaleTimeString()} (Data: v20260424)`;
   }
+
+
   // --- Rendering Feed ---
+
+
   // --- Rendering Feed ---
-  function renderFeed(yearFilter = selectedYear === null ? getPivotYear() : selectedYear) {
-    const renderYear = yearFilter === null || yearFilter === undefined ? null : Number(yearFilter);
-    renderedFeedYear = renderYear;
+
+
+  function renderFeed() {
     feedSlider.innerHTML = "";
     scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
     const ymMap = {};
     scheduleData.forEach(m => {
-      const d = parseDate(m.date);
-      if (renderYear !== null && d.getFullYear() !== renderYear) return;
-      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      const d = parseDate(m.date), key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
       if (!ymMap[key]) ymMap[key] = []; ymMap[key].push(m);
     });
+
     Object.keys(ymMap).sort().forEach(key => {
       const [year, month] = key.split("-").map(Number);
       const section = document.createElement("div"); section.className = "month-section"; section.dataset.ym = key; section.dataset.year = year; section.dataset.ym_title = `${year} / ${String(month).padStart(2, "0")}`;
+
       ymMap[key].forEach(match => {
         const mId = `${match.date}_${match.club}_${match.opponent}`;
         const isAtt = localStorage.getItem(`attend_${mId}`) === "true";
-        const scoreData = getStoredOrOfficialScore(match);
-        const sMy = scoreData.my, sOpp = scoreData.opp;
-        const sPkM = scoreData.pkMy, sPkO = scoreData.pkOpp;
+        const sMy = localStorage.getItem(`score_my_${mId}`) || "", sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
+        const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "", sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
         let res = null;
         let scoreDisplay = "";
-        const scoreMeta = getScoreMetaFromValues(sMy, sOpp, sPkM, sPkO);
-        if (scoreMeta) {
-          res = scoreMeta.result;
-          scoreDisplay = scoreMeta.score;
+
+        if (sMy !== "" && sOpp !== "") {
+          const ms = Number(sMy), os = Number(sOpp);
+          if (ms === os && sPkM !== "" && sPkO !== "") {
+            scoreDisplay = `(${sPkM}) ${ms} - ${os} (${sPkO})`;
+            res = Number(sPkM) > Number(sPkO) ? "pk-win" : "pk-lose";
+          } else {
+            scoreDisplay = `${ms} - ${os}`;
+            if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = "draw";
+          }
         }
         const isHome = getMatchIsHome(match);
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
         const emblemUrl = resolveEmblemUrl(match.opponent, match.emblem);
+
         let resultHtml = "";
         if (res) {
           resultHtml = `
@@ -2594,7 +2065,8 @@ async function renderDashboard() {
               <div class="match-score-text">${scoreDisplay}</div>
             </div>`;
         }
-        card.innerHTML = `${resultHtml}<div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name" title="\u9577\u62bc\u3057\u3067HOME/AWAY\u306e\u30af\u30e9\u30d6\u540d\u3092\u30b3\u30d4\ufffdE">${escapeHtml(match.opponent)}</h3><img class="emblem" src="${escapeHtml(emblemUrl)}"></div>`;
+
+        card.innerHTML = `${resultHtml}<div class="match-meta"><span class="match-mw-pill">${match.matchweek || "EX"}</span><span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name" title="長押しでHOME/AWAYのクラブ名をコピー">${escapeHtml(match.opponent)}</h3><img class="emblem" src="${escapeHtml(emblemUrl)}"></div>`;
         bindClubNameLongPress(card.querySelector(".opponent-name"), card, match);
         card.onclick = () => {
           if (card.dataset.suppressClick === "true") {
@@ -2611,11 +2083,13 @@ async function renderDashboard() {
     rebuildYearTabs();
     updateClubVisibility();
   }
+
   // --- Initializing App ---
   renderFeed();
   const today = new Date(), todayY = today.getFullYear(), tKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
   applyYearFilter(allSections.some(s => Number(s.dataset.year) === todayY) ? todayY : 2025, true);
   const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
+
   // Use requestAnimationFrame and small timeout to ensure layout is ready for iPhone
   requestAnimationFrame(() => {
     setTimeout(() => {
@@ -2623,6 +2097,7 @@ async function renderDashboard() {
       switchMode('dashboard');
     }, 100);
   });
+
   // Navigation
   prevBtn.onclick = () => { if (currentIndex > 0) scrollToIndex(currentIndex - 1); };
   nextBtn.onclick = () => { if (currentIndex < visibleSections.length - 1) scrollToIndex(currentIndex + 1); };
@@ -2632,6 +2107,7 @@ async function renderDashboard() {
     const i = visibleSections.findIndex(s => s.dataset.ym === k);
     if (i !== -1) scrollToIndex(i);
   };
+
   // YM Picker
   function openYmPicker() {
     if (!activeMonthTitle.textContent.includes("/")) return; // Not fully initialized
@@ -2641,23 +2117,28 @@ async function renderDashboard() {
       if (!yearMap[y]) yearMap[y] = [];
       yearMap[y].push({ ym: sec.dataset.ym, m: sec.dataset.ym.split("-")[1] });
     });
+
     const years = Object.keys(yearMap).sort((a, b) => Number(a) - Number(b));
     if (!years.length) return;
+
     const activeSec = visibleSections[currentIndex] || allSections[currentIndex] || allSections[0];
     let pickerYear = activeSec?.dataset.year || String(selectedYear || years[years.length - 1]);
     if (!yearMap[pickerYear]) pickerYear = years[years.length - 1];
+
     ymPickerList.innerHTML = `
       <div class="ym-picker-columns">
-        <div class="ym-picker-years" aria-label="\u5e74"></div>
+        <div class="ym-picker-years" aria-label="年"></div>
         <div class="ym-picker-month-panel">
           <div class="ym-picker-year-label"></div>
           <div class="ym-picker-months"></div>
         </div>
       </div>
     `;
+
     const yearCol = ymPickerList.querySelector(".ym-picker-years");
     const yearLabel = ymPickerList.querySelector(".ym-picker-year-label");
     const monthGrid = ymPickerList.querySelector(".ym-picker-months");
+
     const renderYears = () => {
       yearCol.innerHTML = "";
       years.forEach(y => {
@@ -2673,14 +2154,15 @@ async function renderDashboard() {
         yearCol.appendChild(btn);
       });
     };
+
     const renderMonths = () => {
-      yearLabel.textContent = `${pickerYear}\u5e74`;
+      yearLabel.textContent = `${pickerYear}年`;
       monthGrid.innerHTML = "";
       yearMap[pickerYear]
         .sort((a, b) => Number(a.m) - Number(b.m))
         .forEach(item => {
         const btn = document.createElement("button"); btn.className = "ym-picker-btn";
-        btn.textContent = Number(item.m) + "\u6708";
+        btn.textContent = Number(item.m) + "月";
         if (visibleSections[currentIndex] && visibleSections[currentIndex].dataset.ym === item.ym) {
           btn.classList.add("current");
         }
@@ -2693,6 +2175,7 @@ async function renderDashboard() {
         monthGrid.appendChild(btn);
       });
     };
+
     renderYears();
     renderMonths();
     ymPickerOverlay.classList.add("active");
@@ -2705,9 +2188,11 @@ async function renderDashboard() {
   activeMonthTitle.onclick = openYmPicker;
   document.getElementById("ym-picker-close").onclick = closeYmPicker;
   ymPickerBackdrop.onclick = closeYmPicker;
+
   // Club Filter
   toggleNiigata.onclick = () => { toggleNiigata.classList.toggle("active"); updateClubVisibility(); };
   toggleKumamoto.onclick = () => { toggleKumamoto.classList.toggle("active"); updateClubVisibility(); };
+
   // Menus
   const toggleMenu = (isOpen) => {
     if (isOpen) {
@@ -2721,6 +2206,7 @@ async function renderDashboard() {
   hamBtn.onclick = () => toggleMenu(true);
   document.getElementById("menu-close").onclick = () => toggleMenu(false);
   sideMenuBackdrop.onclick = () => toggleMenu(false);
+
   function openSubPane(id) {
     document.getElementById(id).classList.add("active");
   }
@@ -2733,9 +2219,11 @@ async function renderDashboard() {
       if (pane) pane.classList.remove("active");
     };
   });
+
   // Close menu after clicking item
   const menuItems = document.querySelectorAll(".menu-card");
   menuItems.forEach(btn => btn.addEventListener('click', () => toggleMenu(false)));
+
   document.getElementById("menu-dashboard").onclick = () => switchMode("dashboard");
   document.getElementById("menu-feed").onclick = () => switchMode("feed");
   document.getElementById("menu-calendar").onclick = () => switchMode("calendar");
@@ -2745,9 +2233,9 @@ async function renderDashboard() {
     openSubPane("standings-overlay");
     loadStandings();
   };
-  const menuVision = document.getElementById("menu-vision");
-  if (menuVision) {
-    menuVision.onclick = () => switchMode("vision");
+  const menuScoreboard = document.getElementById("menu-scoreboard");
+  if (menuScoreboard) {
+    menuScoreboard.onclick = () => switchMode("scoreboard");
   }
   const dashStandingsBtn = document.getElementById("dash-to-standings");
   if (dashStandingsBtn) {
@@ -2761,15 +2249,16 @@ async function renderDashboard() {
     const btn = document.getElementById("menu-reload");
     const label = btn.querySelector(".m-label");
     const originalLabel = label.textContent;
-    label.textContent = "\u66f4\u65b0\u4e2d...";
+    label.textContent = "更新中...";
     btn.style.pointerEvents = "none";
     btn.style.opacity = "0.7";
+
     try {
       await refreshAllData(true); // Force GAS
-      alert("\u6700\u65b0\u30c7\u30fc\u30bf\u3092\u53d6\u5f97\u3057\u3066\u53cd\u6620\u3057\u307e\u3057\u305f\u3002");
+      alert("最新データを取得して反映しました。");
     } catch (e) {
       console.error(e);
-      alert("\u66f4\u65b0\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002");
+      alert("更新に失敗しました。");
     } finally {
       label.textContent = originalLabel;
       btn.style.pointerEvents = "auto";
@@ -2777,6 +2266,8 @@ async function renderDashboard() {
       toggleMenu(false);
     }
   };
+
+
   // Data Backup Logic
   document.getElementById("export-btn").onclick = () => {
     const data = {};
@@ -2794,6 +2285,7 @@ async function renderDashboard() {
     a.click();
     URL.revokeObjectURL(url);
   };
+
   const importFile = document.getElementById("import-file");
   document.getElementById("import-trigger").onclick = () => importFile.click();
   importFile.onchange = (e) => {
@@ -2804,15 +2296,17 @@ async function renderDashboard() {
       try {
         const data = JSON.parse(ev.target.result);
         Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
-        alert("\u30a4\u30f3\u30dd\u30fc\u30c8\u304c\u5b8c\u4e86\u3057\u307e\u3057\u305f\u3002\u30a2\u30d7\u30ea\u3092\u518d\u8aad\u307f\u8fbc\u307f\u3057\u307e\u3059\u3002");
+        alert("インポートが完了しました。アプリを再読み込みします。");
         location.reload();
       } catch (err) {
-        alert("\u5931\u6557: \u6b63\u3057\u3044\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u30d5\u30a1\u30a4\u30eb\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002");
+        alert("失敗: 正しいバックアップファイルを選択してください。");
       }
     };
     reader.readAsText(file);
   };
+
   ultraFeed.addEventListener("scroll", updateActiveUI);
+
   // Search Logic
   searchInput.oninput = (e) => {
     const q = e.target.value.toLowerCase().trim();
@@ -2836,64 +2330,75 @@ async function renderDashboard() {
       }
     }
   };
+
   sheetBackdrop.onclick = () => closeDetailSheet();
   document.querySelector(".sheet-handle").onclick = () => closeDetailSheet();
   pickerBackdrop.onclick = () => closeMatchPicker();
   document.querySelector(".close-pop").onclick = () => closeMatchPicker();
-  // \ud83d\udccb Export Attendance Schedule
+
+  // 📋 Export Attendance Schedule
   const exportListBtn = document.getElementById("export-list-btn");
   if (exportListBtn) {
     exportListBtn.onclick = async () => {
-      let txt = "\u3010\u89b3\u6226\u4e88\u5b9a\u30ea\u30b9\u30c8\u3011\n\n";
+      let txt = "【観戦予定リスト】\n\n";
       const attMatches = scheduleData.filter(match => {
         const mId = `${match.date}_${match.club}_${match.opponent}`;
         return localStorage.getItem(`attend_${mId}`) === "true";
       }).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
       if (attMatches.length === 0) {
-        alert("\u89b3\u6226\u4e88\u5b9a\u306e\u8a66\u5408\u306f\u307e\u306d\u3042\u308a\u307e\u305b\u3093\u3002");
+        alert("観戦予定の試合はまだありません。");
         return;
       }
       attMatches.forEach(m => {
         const isHome = getMatchIsHome(m);
         txt += `${m.date} ${m.day} ${m.time} - vs ${m.opponent}\n`;
-        txt += `\ud83d\udccd ${m.venue} (${isHome ? 'HOME' : 'AWAY'})\n\n`;
+        txt += `📍 ${m.venue} (${isHome ? 'HOME' : 'AWAY'})\n\n`;
       });
       txt += "Powered by Match Day Ultra";
       try {
         await navigator.clipboard.writeText(txt);
-        alert("\u89b3\u6226\u4e88\u5b9a\u30ea\u30b9\u30c8\u3092\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u306b\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f\u3002\nLINE\u3084\u30e1\u30e2\u5e33\u306b\u8cbc\u308a\u4ed8\u3051\u3066\u5171\u6709\u3067\u304d\u307e\u3059\u3002");
+        alert("観戦予定リストをクリップボードにコピーしました！\nLINEやメモ帳に貼り付けて共有できます。");
       } catch (err) {
-        alert("\u30b3\u30d4\u30fc\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002\u3053\u306e\u30d6\u30e9\u30a6\u30b6\u306f\u30b5\u30dd\u30fc\u30c8\u3055\u308c\u3066\u3044\u306a\u3044\u53ef\u80fd\u6027\u304c\u3042\u308a\u307e\u3059\u3002");
+        alert("コピーに失敗しました。このブラウザではサポートされていない可能性があります。");
       }
     };
   }
-  // \u26a1 Fast Input Modal
+
+  // ⚡ Fast Input Modal
   const fastInputBtn = document.getElementById("fast-input-btn");
   const fastInputSheet = document.getElementById("fast-input-sheet");
   const fastInputList = document.getElementById("fast-input-list");
   const saveFastInputBtn = document.getElementById("save-fast-input");
   const closeFastInputBtn = document.getElementById("close-fast-input");
+
   let fastSelectedYear = 2026;
+
   function renderFastInput() {
     fastInputList.innerHTML = "";
-    // \u9078\u629e\u3055\u308c\u305f\u5e74\u306e\u8a66\u5408\u3092\u5168\u4ef6\u53d6\u5f97\uff08\u672a\u6765\u306e\u8a66\u5408\u3082\u542b\u3081\u308b\uff09
+
+    // 選択された年の試合の全件を取得（未来の試合も含める）
     const yearMatches = scheduleData.filter(m => {
       return parseDate(m.date).getFullYear() === fastSelectedYear;
     }).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
     if (yearMatches.length === 0) {
-      fastInputList.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-grey);">${fastSelectedYear}\u5e74\u306e\u8a72\u5f53\u3059\u308b\u8a66\u5408\u306f\u3042\u308a\u307e\u305b\u3093\u3002</div>`;
+      fastInputList.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-grey);">${fastSelectedYear}年の該当する試合はありません。</div>`;
     } else {
       yearMatches.forEach(m => {
         const mYear = parseDate(m.date).getFullYear();
         const mId = `${m.date}_${m.club}_${m.opponent}`;
         const sMy = localStorage.getItem(`score_my_${mId}`) || "";
         const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
+
         const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
         const sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
         const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
-        // 2026\u5e74\u3067\u304b\u3064\u73fe\u5728\u306e\u5165\u529b\u5024\u304c\u540c\u70b9\u306e\u5834\u5408\ufffdE\u307fPK\u9818\u57df\u3092\u8868\u793a\u3059\u308b
+
+        // 2026年でかつ現在の入力値が同点の場合のみPK領域を表示する
         const isDraw = sMy !== "" && sOpp !== "" && sMy === sOpp;
         const showPk = mYear === 2026 && isDraw;
+
         const div = document.createElement("div");
         div.style.cssText = "padding: 15px; border-bottom: 1px solid #e3e3e8; display: flex; align-items: center; justify-content: space-between; gap: 10px;";
         div.innerHTML = `
@@ -2909,7 +2414,7 @@ async function renderDashboard() {
                <input type="number" class="fast-opp-score" data-year="${mYear}" data-mid="${mId}" data-type="opp" value="${sOpp}" style="width:45px; height:35px; text-align:center; font-size:1.1rem; font-weight:900; background:#f2f2f7; border:none; border-radius:8px; color:var(--text-main);" placeholder="-">
              </div>
              
-             <!-- PK\u5165\u529b\u9818\u57df\ufffdE\ufffdE\ufffdE\ufffdE026\u5e74\u304b\u3064\u540c\u70b9\u6642\ufffdE\u307f\u8868\u793a\ufffdE\ufffdE\ufffdE\ufffdE-->
+             <!-- PK入力領域（2026年かつ同点時のみ表示） -->
              <div class="fast-pk-area" style="display: ${showPk ? 'flex' : 'none'}; gap: 4px; align-items: center;">
                <span style="font-size:0.7rem; font-weight:700; color:var(--text-grey);">PK</span>
                <input type="number" data-mid="${mId}" data-type="pkMy" value="${sPkM}" style="width:35px; height:25px; text-align:center; font-size:0.9rem; font-weight:800; background:#fffdf5; border:1px solid #ddd; border-radius:6px; color:var(--text-main);" placeholder="-">
@@ -2917,6 +2422,7 @@ async function renderDashboard() {
                <input type="number" data-mid="${mId}" data-type="pkOpp" value="${sPkO}" style="width:35px; height:25px; text-align:center; font-size:0.9rem; font-weight:800; background:#fffdf5; border:1px solid #ddd; border-radius:6px; color:var(--text-main);" placeholder="-">
              </div>
            </div>
+
            <button class="u-attend-btn ${isAttend ? 'active' : ''} ${m.club}" data-mid="${mId}" data-type="attend" style="width:45px; height:45px; padding:0; margin:0; display:flex; align-items:center; justify-content:center; border-radius:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; pointer-events: none;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></button>
          `;
         fastInputList.appendChild(div);
@@ -2924,15 +2430,16 @@ async function renderDashboard() {
     }
     fastInputSheet.classList.add("active");
   }
+
   // Handle manual attend toggle and dynamic PK display in fast input
   if (fastInputList) {
-    // \u30b9\u30b3\u30a2\u5165\u529b\u6642\u306e\u52d5\u7684\u306aPK\u9818\u57df\u306e\u8868\u793a\u5201E\ufffdE\ufffd\ufffdE\ufffd
+    // スコア入力時の動的なPK領域の表示切替
     fastInputList.oninput = (e) => {
       const inp = e.target;
       if (inp.classList.contains("fast-my-score") || inp.classList.contains("fast-opp-score")) {
         const mYear = parseInt(inp.dataset.year);
         if (mYear === 2026) {
-          const container = inp.closest("div").parentElement; // .flex-end \u9818\u57df
+          const container = inp.closest("div").parentElement; // .flex-end 領域
           const pkArea = container.querySelector(".fast-pk-area");
           if (pkArea) {
             const mS = container.querySelector(".fast-my-score").value;
@@ -2942,7 +2449,8 @@ async function renderDashboard() {
         }
       }
     };
-    // \u89b3\u6226\u30c8\u30b0\u30eb\u306e\u30cf\u30f3\u30c9\u30ea\u30f3\u30b0
+
+    // 観戦トグルのハンドリング
     fastInputList.onclick = (e) => {
       const btn = e.target.closest("button[data-type='attend']");
       if (btn) {
@@ -2950,13 +2458,16 @@ async function renderDashboard() {
       }
     };
   }
+
   if (fastInputBtn) {
     fastInputBtn.onclick = () => {
       renderFastInput();
       fastInputSheet.classList.add("active");
     };
   }
+
   if (closeFastInputBtn) closeFastInputBtn.onclick = () => fastInputSheet.classList.remove("active");
+
   document.querySelectorAll(".fast-year-tab").forEach(tab => {
     tab.onclick = () => {
       document.querySelectorAll(".fast-year-tab").forEach(t => {
@@ -2971,22 +2482,26 @@ async function renderDashboard() {
       renderFastInput();
     };
   });
+
   if (saveFastInputBtn) {
     saveFastInputBtn.onclick = () => {
       const inputs = fastInputList.querySelectorAll("input[type='number']");
       let savedCount = 0;
       const scoreMap = {};
+
       inputs.forEach(inp => {
         const mId = inp.dataset.mid;
         if (!scoreMap[mId]) scoreMap[mId] = {};
         scoreMap[mId][inp.dataset.type] = inp.value;
       });
+
       const attendBtns = fastInputList.querySelectorAll("button[data-type='attend']");
       attendBtns.forEach(btn => {
         const mId = btn.dataset.mid;
         if (!scoreMap[mId]) scoreMap[mId] = {};
         scoreMap[mId].attend = btn.classList.contains("active");
       });
+
       Object.keys(scoreMap).forEach(mId => {
         const s = scoreMap[mId];
         let hasEdit = false;
@@ -2998,6 +2513,7 @@ async function renderDashboard() {
           localStorage.removeItem(`score_my_${mId}`);
           localStorage.removeItem(`score_opp_${mId}`);
         }
+
         if (s.pkMy !== undefined && s.pkOpp !== undefined && (s.pkMy !== "" || s.pkOpp !== "")) {
           localStorage.setItem(`score_my_pk_${mId}`, s.pkMy);
           localStorage.setItem(`score_opp_pk_${mId}`, s.pkOpp);
@@ -3005,26 +2521,31 @@ async function renderDashboard() {
           localStorage.removeItem(`score_my_pk_${mId}`);
           localStorage.removeItem(`score_opp_pk_${mId}`);
         }
+
         if (s.attend !== undefined) {
           localStorage.setItem(`attend_${mId}`, s.attend);
           hasEdit = true;
         }
+
         if (hasEdit) savedCount++;
       });
+
       if (savedCount > 0) {
         renderFeed();
         if (calendarView && !calendarView.classList.contains("hidden-view")) {
           switchMode("calendar");
         }
-        alert("\u4e00\u62ec\u5165\u529b\u306e\u5185\u5bb9\u3092\u4fdd\u5b58\u3057\u307e\u3057\u305f\u3002");
+        alert(`一括入力の内容を保存しました。`);
       }
       fastInputSheet.classList.remove("active");
     };
   }
-  // \ud83d\udccb Text Bulk Input Parsing (New Screen Flow)
+
+  // 📋 Text Bulk Input Parsing (New Screen Flow)
   const openBulkPasteBtn = document.getElementById("open-bulk-paste-btn");
   const bulkPasteSaveBtn = document.getElementById("bulk-paste-save-btn");
   const bulkPasteArea = document.getElementById("bulk-paste-area-new");
+
   if (openBulkPasteBtn) {
     openBulkPasteBtn.onclick = () => {
       toggleMenu(false);
@@ -3032,16 +2553,19 @@ async function renderDashboard() {
       openSubPane("bulk-paste-overlay");
     };
   }
+
   if (bulkPasteSaveBtn) {
     bulkPasteSaveBtn.onclick = () => {
       const text = bulkPasteArea.value;
       if (!text) return;
-      const blocks = text.split(/\u7b2c(\d+)\u7bc0/);
+
+      const blocks = text.split(/第(\d+)節/);
       let savedCount = 0;
       for (let i = 1; i < blocks.length; i += 2) {
         const mwNum = blocks[i];
         const content = blocks[i + 1];
-        const scoreMatch = content.match(/(\u25cb|\u25cf|\u25b3|[-])?\s*(\d+)-(\d+)(?:\s*PK(\d+)-(\d+))?/);
+
+        const scoreMatch = content.match(/(○|●|△|[-])?\s*(\d+)-(\d+)(?:\s*PK(\d+)-(\d+))?/);
         if (scoreMatch) {
           const myScore = scoreMatch[2];
           const oppScore = scoreMatch[3];
@@ -3052,12 +2576,15 @@ async function renderDashboard() {
           if (mDateMatch) {
             mPadDate = `${String(mDateMatch[1]).padStart(2, '0')}-${String(mDateMatch[2]).padStart(2, '0')}`;
           }
+
           const candidates = scheduleData.filter(m => m.matchweek === `MW${mwNum}`);
           let target = null;
+
           for (const c of candidates) {
-            const oppNameBase = c.opponent.replace(/[A-Za-z\uFF41-\uFF5A\uFF21-\uFF3A\s\u30fb.()]/g, '').substring(0, 2);
+            const oppNameBase = c.opponent.replace(/[A-Za-zＡ-Ｚａ-ｚ\s・.()]/g, '').substring(0, 2);
             const isNameMatch = oppNameBase.length > 0 && content.includes(oppNameBase);
             const isDateMatch = mPadDate && c.date.endsWith(mPadDate);
+
             if (isNameMatch && isDateMatch) {
               target = c;
               break;
@@ -3077,17 +2604,19 @@ async function renderDashboard() {
           }
         }
       }
+
       if (savedCount > 0) {
         renderFeed();
-        alert(`${savedCount}\u4ef6\u306e\u8a66\u5408\u7d50\u679c\u3092\u53cd\u6620\u3057\u307e\u3057\u305f\u3002`);
+        alert(`${savedCount}件の試合結果を反映しました。`);
         bulkPasteArea.value = "";
         closeSubPane("bulk-paste-overlay");
       } else {
-        alert("\u8a66\u5408\u30c7\u30fc\u30bf\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f\u3002\u5165\u529b\u5f62\u5f0f\u3092\u78ba\u8a8d\u3057\u3066\u304f\u3060\u3055\u3044\u3002");
+        alert("該当する試合データが見つかりませんでした。入力形式を確認してください。");
       }
     };
   }
-  // \ud83d\udce2 Chants Accordion Logic
+
+  // 📢 Chants Accordion Logic
   document.querySelectorAll('.u-chant-title').forEach(title => {
     title.onclick = () => {
       const parent = title.parentElement;
@@ -3095,46 +2624,54 @@ async function renderDashboard() {
     };
   });
   // =========================================================
-  // \ud83d\udd04 GAS API \u81ea\u52d5\u540c\u671f\uff08\u8a66\u5408\u7d50\u679c + \u9801E\ufffdE\ufffd\ufffdE\ufffd\u8868\ufffdE\ufffdE\ufffdE\ufffdE  // =========================================================
+  // 🔄 GAS API 自動同期（試合結果 + 順位表）
+  // =========================================================
   const gasUrl = 'https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec';
+
+
   // --- Standings View ---
+
   async function loadStandings() {
     const container = document.getElementById("standings-content");
     if (!container) return;
-    container.innerHTML = `<div style="text-align:center;padding:40px;color:#888;">\u8aad\u307f\u8fbc\u307f\u4e2d...</div>`;
+    container.innerHTML = `<div style="text-align:center;padding:40px;color:#888;">読み込み中...</div>`;
     try {
       const json = await fetchData("standings");
       if (!json || !json.data || !Array.isArray(json.data)) throw new Error("no data");
-      // \u30b0\u30eb\u30fc\u30d7\u5225\u306b\u6574\u7406
+
+      // グループ別に整理
       const groups = {};
       json.data.forEach(row => {
         if (!groups[row.group]) groups[row.group] = [];
         groups[row.group].push(row);
       });
-      // \u30b0\u30eb\u30fc\u30d7\u8868\u793a\u9806 EAST / WEST
+
+      // グループ表示順: WEST-A → WEST-B → EAST-A → EAST-B
       const GROUP_ORDER = ['WEST-A', 'WEST-B', 'EAST-A', 'EAST-B'];
       const sortedGroups = Object.keys(groups).sort((a, b) => {
         const ai = GROUP_ORDER.findIndex(k => a.includes(k));
         const bi = GROUP_ORDER.findIndex(k => b.includes(k));
         return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
       });
-      // \u30ab\u30e9\u30e0\u5b9a\u7fa9
+      // カラム定義
       const COLS = [
-        { label: '\u9806\u4f4d', key: 'rank', type: 'num' },
-        { label: '\u30c1\u30fc\u30e0', key: 'team', type: 'str' },
-        { label: '\u52dd\u70b9', key: 'points', type: 'num' },
-        { label: '\u8a66\u5408', key: 'played', type: 'num' },
-        { label: '\u52dd', key: 'won', type: 'num' },
-        { label: 'PK\u52dd', key: 'pk_won', type: 'num' },
-        { label: 'PK\u6557', key: 'pk_lost', type: 'num' },
-        { label: '\u6557', key: 'lost', type: 'num' },
-        { label: '\u5f97\u70b9', key: 'goals_for', type: 'num' },
-        { label: '\u5931\u70b9', key: 'goals_against', type: 'num' },
-        { label: '\u5dee', key: 'goal_diff', type: 'num' },
+        { label: '順', key: 'rank', type: 'num' },
+        { label: 'チーム', key: 'team', type: 'str' },
+        { label: '勝点', key: 'points', type: 'num' },
+        { label: '試合', key: 'played', type: 'num' },
+        { label: '勝', key: 'won', type: 'num' },
+        { label: 'PK勝', key: 'pk_won', type: 'num' },
+        { label: 'PK負', key: 'pk_lost', type: 'num' },
+        { label: '負', key: 'lost', type: 'num' },
+        { label: '得', key: 'goals_for', type: 'num' },
+        { label: '失', key: 'goals_against', type: 'num' },
+        { label: '差', key: 'goal_diff', type: 'num' },
       ];
-      // \u30bd\u30fc\u30c8\u72b6\u614b\u3092\u30b0\u30eb\u30fc\u30d7\u6bce\u306b\u7ba1\u7406
+
+      // ソート状態をグループ毎に管理
       const sortState = {};
       sortedGroups.forEach(g => { sortState[g] = { key: 'rank', dir: 'asc' }; });
+
       function buildGroupTable(groupName, rows) {
         const { key: sKey, dir: sDir } = sortState[groupName];
         const sorted = [...rows].sort((a, b) => {
@@ -3155,8 +2692,8 @@ async function renderDashboard() {
           return '<th class="' + cls + '" data-key="' + c.key + '" data-group="' + groupName + '">' + c.label + '</th>';
         }).join('');
         const tbodyHTML = sorted.map(row => {
-          const isNiigata = (row.team || '').includes('\u65b0\u6f5f');
-          const isKumamoto = (row.team || '').includes('\u718a\u672c');
+          const isNiigata = (row.team || '').includes('新潟');
+          const isKumamoto = (row.team || '').includes('熊本');
           const trcls = isNiigata ? 'standing-niigata' : isKumamoto ? 'standing-kumamoto' : '';
           const emblemUrl = getEmblemUrlForTeam(row.team);
           const emblemHTML = emblemUrl ? '<img class="standing-team-emblem" src="' + escapeHtml(emblemUrl) + '" alt="' + escapeHtml(row.team) + '">' : '<span class="standing-team-emblem-placeholder"></span>';
@@ -3182,12 +2719,13 @@ async function renderDashboard() {
           + '<tbody>' + tbodyHTML + '</tbody>'
           + '</table></div></div>';
       }
+
       function renderAll() {
         const now = new Date().toLocaleString("ja-JP");
         let html = sortedGroups.map(g => buildGroupTable(g, groups[g])).join('');
-        html += '<p style="text-align:center;font-size:0.75rem;color:#999;margin-top:16px;padding-bottom:8px;">\u66f4\u65b0: ' + now + '</p>';
+        html += '<p style="text-align:center;font-size:0.75rem;color:#999;margin-top:16px;padding-bottom:8px;">更新: ' + now + '</p>';
         container.innerHTML = html;
-        // \u30bd\u30fc\u30c8\u30af\u30ea\u30c3\u30af\u30a4\u30d9\u30f3\u30c8\u3092\u518d\u30d0\u30a4\u30f3\u30c9
+        // ソートクリックイベントを再バインド
         container.querySelectorAll('.standings-table th[data-key]').forEach(th => {
           th.onclick = () => {
             const group = th.dataset.group;
@@ -3203,262 +2741,28 @@ async function renderDashboard() {
           };
         });
       }
+
       renderAll();
     } catch (e) {
-      container.innerHTML = `<div style="text-align:center;padding:40px;color:#e74c3c;">\u53d6\u5f97\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002<br>\u518d\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002</div>`;
+      container.innerHTML = `<div style="text-align:center;padding:40px;color:#e74c3c;">取得に失敗しました。<br>再度お試しください。</div>`;
     }
   }
-  // --- J-League Historical Data Loader ---
-  function shortenCompetition(comp) {
-    if (!comp) return "J\u30ea\u30fc\u30b0";
-    if (comp.includes("\u30c7\u30a3\u30d3\u30b8\u30e7\u30f31") || comp.includes("J1")) return "J1";
-    if (comp.includes("\u30c7\u30a3\u30d3\u30b8\u30e7\u30f32") || comp.includes("J2")) return "J2";
-    if (comp.includes("J3")) return "J3";
-    if (comp.includes("\u5929\u7687\u676f")) return "\u5929\u7687\u676f";
-    if (comp.includes("\u30e4\u30de\u30b6\u30ad\u30ca\u30d3\u30b9\u30b3") || comp.includes("\u30ca\u30d3\u30b9\u30b3")) return "\u30ca\u30d3\u30b9\u30b3\u676f";
-    if (comp.includes("\u30eb\u30f4\u30a1\u30f3")) return "\u30eb\u30f4\u30a1\u30f3\u676f";
-    return comp.replace("J\u30ea\u30fc\u30b0", "J").trim();
-  }
-  function decorateMatchWithJsonDetails(target, m, isHome) {
-    if (!target) return;
-    
-    // Add referee details
-    const refereeValues = getRefereeValues(m.referees);
-    target.referee = refereeValues.referee;
-    target.assistant_referees = refereeValues.assistants;
-    target.manager = isHome ? (m.home_details ? m.home_details.manager : "") : (m.away_details ? m.away_details.manager : "");
-    target.j_official_url = m.url || "";
-    target.weather = m.weather || "";
-    target.temperature = m.temperature !== undefined && m.temperature !== null ? m.temperature : "";
-    target.humidity = m.humidity !== undefined && m.humidity !== null ? m.humidity : "";
-    target.attendance = m.attendance !== undefined && m.attendance !== null ? m.attendance : "";
-    
-    // Add goals
-    const rawOwnGoals = isHome ? m.home_goals : m.away_goals;
-    target.goals = Array.isArray(rawOwnGoals) ? rawOwnGoals.map(g => ({
-      minute: g.time ? g.time.replace("'", "") : "",
-      scorer: g.name
-    })) : [];
-    
-    const rawOppGoals = isHome ? m.away_goals : m.home_goals;
-    target.opponent_goals = Array.isArray(rawOppGoals) ? rawOppGoals.map(g => ({
-      minute: g.time ? g.time.replace("'", "") : "",
-      scorer: g.name
-    })) : [];
-    
-    // Add starting and bench members
-    const homeDetails = m.home_details || {};
-    const awayDetails = m.away_details || {};
-    
-    const ownDetails = isHome ? homeDetails : awayDetails;
-    const opponentDetails = isHome ? awayDetails : homeDetails;
-    target.starting_members = mapMemberList(ownDetails.starting);
-    target.bench_members = mapMemberList(ownDetails.substitutes);
-    target.opponent_starting_members = mapMemberList(opponentDetails.starting);
-    target.opponent_bench_members = mapMemberList(opponentDetails.substitutes);
-    
-    // Add substitutions
-    target.substitutions = mapSubstitutions(ownDetails);
-    target.opponent_substitutions = mapSubstitutions(opponentDetails);
-    
-    // Add warnings/cards
-    target.warnings = mapWarnings(ownDetails);
-    target.opponent_warnings = mapWarnings(opponentDetails);
-  }
-  function processHistoricalMatches(matches, year) {
-    if (!Array.isArray(matches)) return;
-    
-    matches.forEach(m => {
-      const isNiigata = robustTeamMatch(m.home_team, "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f") || robustTeamMatch(m.away_team, "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f");
-      const isKumamoto = robustTeamMatch(m.home_team, "\u30ed\u30a2\u30c3\u30bd\u718a\u672c") || robustTeamMatch(m.away_team, "\u30ed\u30a2\u30c3\u30bd\u718a\u672c");
-      
-      if (!isNiigata && !isKumamoto) return;
-      
-      const club = isNiigata ? "niigata" : "kumamoto";
-      const clubKeyword = isNiigata ? "\u30a2\u30eb\u30d3\u30ec\u30c3\u30af\u30b9\u65b0\u6f5f" : "\u30ed\u30a2\u30c3\u30bd\u718a\u672c";
-      const isHome = robustTeamMatch(m.home_team, clubKeyword);
-      const opponent = isHome ? m.away_team : m.home_team;
-      const dateStr = normalizeDateString(m.date);
-      
-      // Build the officialResult
-      const d = new Date(dateStr);
-      const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-      const dayStr = days[d.getDay()];
-      
-      const hScore = parseInt(m.home_score);
-      const aScore = parseInt(m.away_score);
-      let resultMark = "\u25b3";
-      if (isHome) {
-        if (hScore > aScore) resultMark = "\u25cb";
-        else if (hScore < aScore) resultMark = "\u25cf";
-      } else {
-        if (aScore > hScore) resultMark = "\u25cb";
-        else if (aScore < hScore) resultMark = "\u25cf";
-      }
-      
-      const scoreStr = isHome ? `${m.home_score}-${m.away_score}` : `${m.away_score}-${m.home_score}`;
-      const compShort = shortenCompetition(m.competition);
-      const detailsStr = `${compShort} ${isHome ? "H" : "A"} ${resultMark} ${scoreStr}`;
-      
-      let emblem = resolveEmblemUrl(opponent, "") || "";
-      if (!emblem) {
-        const reversed = Object.entries(EMBLEM_MAP).find(([k,v]) => robustTeamMatch(v, opponent));
-        if (reversed) emblem = `https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`;
-      }
-      
-      const sectionText = String(m.section || "").trim();
-      const matchweekDisplay = sectionText ? sectionText.replace(/\u7b2c(\d+)\u7bc0.*/, "\u7b2c$1\u7bc0") : "\u516c\u5f0f\u6226";
-      const mwNum = sectionText.replace(/\D/g, "");
-      const mwToken = mwNum ? "MW" + mwNum : "EX";
-      
-      const resultObj = {
-        club: club,
-        matchweek: matchweekDisplay,
-        date: dateStr,
-        day: dayStr,
-        time: m.kickoff || "",
-        opponent: opponent,
-        venue: m.stadium || "",
-        emblem: emblem,
-        details: detailsStr,
-        home_away: isHome ? "H" : "A",
-        score: scoreStr,
-        result_mark: resultMark,
-        stage: matchweekDisplay,
-        tournament: compShort,
-        raw_json: m
-      };
-      
-      decorateMatchWithJsonDetails(resultObj, m, isHome);
-      const existsResult = officialResults.find(r => r.date === dateStr && r.club === club && robustTeamMatch(r.opponent || "", opponent));
-      if (existsResult) {
-        Object.assign(existsResult, resultObj);
-        decorateMatchWithJsonDetails(existsResult, m, isHome);
-      } else {
-        officialResults.push(resultObj);
-      }
 
-      const scheduleObj = {
-        club: club,
-        matchweek: mwToken,
-        date: dateStr,
-        day: dayStr,
-        time: m.kickoff || "",
-        opponent: opponent,
-        venue: m.stadium || "",
-        emblem: emblem,
-        details: detailsStr,
-        home_away: isHome ? "H" : "A",
-        score: scoreStr,
-        result_mark: resultMark,
-        stage: matchweekDisplay,
-        tournament: compShort,
-        raw_json: m
-      };
-      decorateMatchWithJsonDetails(scheduleObj, m, isHome);
-
-      const existsSchedule = scheduleData.find(s => s.date === dateStr && s.club === club && robustTeamMatch(s.opponent, opponent));
-      if (existsSchedule) {
-        Object.assign(existsSchedule, scheduleObj);
-        decorateMatchWithJsonDetails(existsSchedule, m, isHome);
-      } else {
-        scheduleData.push(scheduleObj);
-      }
-    });
-  }
-  function decorateAllMatches() {
-    scheduleData.forEach(m => {
-      const offRes = findOfficialResult(m);
-      if (offRes) {
-        ["score", "result_mark", "stage", "tournament", "details", "home_away", "raw_json", "referee", "assistant_referees", "manager", "j_official_url", "weather", "temperature", "humidity", "attendance", "goals", "opponent_goals", "starting_members", "bench_members", "opponent_starting_members", "opponent_bench_members", "substitutions", "opponent_substitutions", "warnings", "opponent_warnings"].forEach(key => {
-          if (offRes[key] !== undefined && offRes[key] !== null) {
-            m[key] = offRes[key];
-          }
-        });
-      }
-    });
-  }
-  async function loadHistoricalYear(year, options = {}) {
-    const y = Number(year);
-    if (!Number.isFinite(y) || y < 1999 || y > new Date().getFullYear()) return false;
-    if (loadedHistoricalYears.has(y)) return true;
-    if (loadingHistoricalYears.has(y)) return loadingHistoricalYears.get(y);
-    const promise = (async () => {
-      try {
-        const res = await fetch(`vision/data/${y}.json?v=20260522h`);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const matches = await res.json();
-        processHistoricalMatches(matches, y);
-        loadedHistoricalYears.add(y);
-        scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
-        decorateAllMatches();
-        rebuildYearTabs();
-        if (options.rerender && (selectedYear === y || selectedYear === null)) {
-          renderFeed(selectedYear === null ? y : selectedYear);
-          applyYearFilter(selectedYear === null ? y : selectedYear, true);
-          if (currentMode === "dashboard") renderDashboard();
-          else if (currentMode === "calendar") renderCalendar();
-        }
-        return true;
-      } catch (e) {
-        console.warn(`Failed to load historical matches for year ${y}:`, e);
-        return false;
-      } finally {
-        loadingHistoricalYears.delete(y);
-      }
-    })();
-    loadingHistoricalYears.set(y, promise);
-    return promise;
-  }
-  async function loadHistoricalYears(years) {
-    for (const year of years) {
-      await loadHistoricalYear(year);
-      await new Promise(resolve => setTimeout(resolve, 0));
-    }
-  }
-  async function loadHistoricalData() {
-    if (historicalDataPromise) return historicalDataPromise;
-    historicalDataLoaded = false;
-    historicalDataPromise = (async () => {
-    const currentYear = new Date().getFullYear();
-    const priorityYears = [selectedYear, currentYear]
-      .filter(y => Number.isFinite(Number(y)) && Number(y) >= 1999 && Number(y) <= currentYear)
-      .map(Number);
-    const years = Array.from(new Set(priorityYears));
-    await loadHistoricalYears(years);
-
-    scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
-    
-    decorateAllMatches();
-    historicalDataLoaded = true;
-    
-    rebuildYearTabs();
-    renderFeed(selectedYear === null ? currentYear : selectedYear);
-    applyYearFilter(selectedYear === null ? currentYear : selectedYear, true);
-    if (currentMode === "dashboard") renderDashboard();
-    else if (currentMode === "calendar") renderCalendar();
-    return true;
-    })();
-    return historicalDataPromise;
-  }
-  // \u30a2\u30d7\u30ea\u8d77\u52d5\u6642\u306b\u521d\u671f\u5316
+  // アプリ起動時に初期化
   updateHeaderAnnouncements();
-  // \u30a2\u30d7\u30ea\u8d77\u52d5\u6642\u306b\u30d0\u30c3\u30af\u30b0\u30e9\u30a6\u30f3\u30c9\u3067\u7d50\u679c\u540c\u671f\u304a\u3088\u3073\u6b74\u53f2\u30c7\u30fc\u30bf\u3092\u30ed\u30fc\u30c9
-  setTimeout(() => {
-    refreshAllData(true)
-      .catch((e) => {
-        console.error("refreshAllData error", e);
-      })
-      .finally(() => {
-        loadHistoricalData().catch((e) => console.warn("historical data fallback failed", e));
-      });
-  }, 800);
+
+  // アプリ起動時にバックグラウンドで結果同期（3秒後）
+  setTimeout(() => refreshAllData(true), 800);
+
 });
+
+
 window.switchChantClub = function (club, btn) {
   // Update buttons
   const tabs = btn.closest('.standings-tabs').querySelectorAll('.u-tab-btn');
   tabs.forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
+
   // Update content visibility
   const pane = btn.closest('.u-chant-area');
   pane.querySelectorAll('.chant-club-group').forEach(group => {

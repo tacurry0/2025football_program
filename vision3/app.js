@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   "use strict";
 
   const STORAGE_KEY = "stadiumVisionApp.v2";
@@ -37,17 +37,6 @@
         { pos: "", no: "30", family: "奥村", given: "仁" },
         { pos: "FW", no: "18", family: "若月", given: "大和" },
         { pos: "", no: "55", family: "マテウス", given: "モラエス", half: true }
-      ],
-      reserves: [
-        { pos: "GK", no: "21", family: "阿部", given: "航斗" },
-        { pos: "DF", no: "3", family: "稲村", given: "隼翔" },
-        { pos: "", no: "31", family: "堀米", given: "悠斗" },
-        { pos: "MF", no: "6", family: "秋山", given: "裕紀" },
-        { pos: "", no: "8", family: "宮本", given: "英治" },
-        { pos: "", no: "11", family: "笠井", given: "佳祐" },
-        { pos: "FW", no: "9", family: "鈴木", given: "孝司" },
-        { pos: "", no: "16", family: "小見", given: "洋太" },
-        { pos: "", no: "99", family: "谷口", given: "海斗" }
       ]
     },
     away: {
@@ -64,21 +53,9 @@
         { pos: "", no: "36", family: "森村", given: "俊太" },
         { pos: "FW", no: "28", family: "東家", given: "聡樹" },
         { pos: "MF", no: "18", family: "夏川", given: "大和" }
-      ],
-      reserves: [
-        { pos: "GK", no: "31", family: "永井", given: "建成" },
-        { pos: "DF", no: "2", family: "高田", given: "快成" },
-        { pos: "", no: "6", family: "舘野", given: "俊祐" },
-        { pos: "MF", no: "10", family: "久保", given: "吏久斗" },
-        { pos: "", no: "21", family: "武井", given: "成豪" },
-        { pos: "", no: "47", family: "オランカンミ", given: "", half: true },
-        { pos: "FW", no: "14", family: "古川", given: "大悟" },
-        { pos: "", no: "20", family: "芳賀", given: "日陽" },
-        { pos: "", no: "38", family: "澤崎", given: "凌大" }
       ]
     },
     match: {
-      phase: "fulltime",
       league: "明治安田\nJ2・J3 百年構想リーグ",
       round: "第12節",
       firstHome: "0",
@@ -110,9 +87,9 @@
       message: "ご来場ありがとうございました"
     },
     top: {
-      year: "",
+      year: "2024",
       kickoff: "14:00K.O.",
-      eventName: "",
+      eventName: "DAMZサンクスデー",
       homeEnglish: "ALBIREX NIIGATA",
       awayEnglish: "FC OSAKA"
     },
@@ -123,11 +100,7 @@
       { role: "第4の審判員", name: "赤阪　修" },
       { role: "", name: "" },
       { role: "", name: "" }
-    ],
-    announcements: {
-      startingSide: "away",
-      reserveSide: "away"
-    }
+    ]
   };
 
   const kanaMap = {
@@ -174,20 +147,18 @@
   }
 
   const DEFAULT_LEAGUE_IMAGE = makeDefaultLeagueImage();
-  const DEFAULT_LEAGUE_ASSET = "icons/100l.png?v=20260521b";
+  const DEFAULT_LEAGUE_ASSET = "icons/100l.png?v=20260520d";
   const LEAGUE_LOGO_ASSETS = {
-    hundred: "icons/100l.png?v=20260521b",
-    j1: "icons/j1.png?v=20260521b",
-    j2: "icons/j2.png?v=20260521b"
+    hundred: "icons/100l.png?v=20260520d",
+    j1: "icons/j1.png?v=20260520d",
+    j2: "icons/j2.png?v=20260520d"
   };
   const LEAGUE_LOGO_OPTIONS = Object.values(LEAGUE_LOGO_ASSETS);
 
   const channel = "BroadcastChannel" in window ? new BroadcastChannel(CHANNEL_NAME) : null;
   const MAX_SCORERS = 8;
   const MAX_REFEREES = 6;
-  const MAX_RESERVES = 9;
-  const CLUB_EMBLEMS_URL = "club_emblems.json?v=20260521b";
-  const MATCHES_URL = "albirex_niigata_matches.json?v=20260521b";
+  const CLUB_EMBLEMS_URL = "club_emblems.json?v=20260520d";
   const CLUB_ENGLISH_LIST = [
     ["AC長野パルセイロ", "AC NAGANO PARCEIRO"],
     ["FC今治", "FC IMABARI"],
@@ -269,14 +240,10 @@
   let clubEmblemsReady = Promise.resolve(false);
   let cachedOfficialRecord = null;
   let cachedOfficialRecordUrl = "";
-  let availableMatches = [];
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
   }
-
-  defaultState.home.startingPlayers = clone(defaultState.home.players);
-  defaultState.away.startingPlayers = clone(defaultState.away.players);
 
   function makeBlankScorers() {
     return Array.from({ length: MAX_SCORERS }, () => ({ minute: "", family: "", given: "", half: false }));
@@ -284,35 +251,6 @@
 
   function makeBlankReferees() {
     return Array.from({ length: MAX_REFEREES }, () => ({ role: "", name: "" }));
-  }
-
-  function blankPlayer() {
-    return { pos: "", no: "", family: "", given: "", half: false, yellow: false };
-  }
-
-  function makeBlankPlayers(count) {
-    return Array.from({ length: count }, blankPlayer);
-  }
-
-  function normalizePlayer(player, fallback = blankPlayer()) {
-    const source = player && typeof player === "object" ? player : {};
-    return {
-      pos: source.pos ?? fallback.pos ?? "",
-      no: source.no ?? fallback.no ?? "",
-      family: source.family ?? fallback.family ?? "",
-      given: source.given ?? fallback.given ?? "",
-      half: source.half === undefined ? Boolean(fallback.half) : Boolean(source.half),
-      yellow: Boolean(source.yellow)
-    };
-  }
-
-  function normalizePlayerList(input, fallback, count) {
-    const list = makeBlankPlayers(count);
-    const source = Array.isArray(input) ? input : fallback;
-    (source || []).slice(0, count).forEach((player, index) => {
-      list[index] = normalizePlayer(player, list[index]);
-    });
-    return list;
   }
 
   function scorerFullName(scorer) {
@@ -403,15 +341,17 @@
       if (!input[side]) return;
       state[side].club = input[side].club ?? state[side].club;
       if (Array.isArray(input[side].players)) {
-        state[side].players = normalizePlayerList(input[side].players, state[side].players, 11);
-      }
-      if (Array.isArray(input[side].startingPlayers)) {
-        state[side].startingPlayers = normalizePlayerList(input[side].startingPlayers, state[side].startingPlayers || state[side].players, 11);
-      } else {
-        state[side].startingPlayers = normalizePlayerList(state[side].startingPlayers || state[side].players, state[side].players, 11);
-      }
-      if (Array.isArray(input[side].reserves)) {
-        state[side].reserves = normalizePlayerList(input[side].reserves, state[side].reserves, MAX_RESERVES);
+        input[side].players.slice(0, 11).forEach((player, index) => {
+          const defaultHalf = Boolean(state[side].players[index] && state[side].players[index].half);
+          state[side].players[index] = {
+            pos: player.pos ?? "",
+            no: player.no ?? "",
+            family: player.family ?? "",
+            given: player.given ?? "",
+            half: player.half === undefined ? defaultHalf : Boolean(player.half),
+            yellow: Boolean(player.yellow)
+          };
+        });
       }
     });
 
@@ -419,7 +359,6 @@
       Object.keys(state.match).forEach((key) => {
         state.match[key] = input.match[key] ?? state.match[key];
       });
-      state.match.phase = input.match.phase === "kickoff" ? "kickoff" : "fulltime";
     }
 
     if (input.result) {
@@ -450,11 +389,6 @@
 
     if (Array.isArray(input.referees)) {
       state.referees = normalizeRefereeList(input.referees, state.referees);
-    }
-
-    if (input.announcements) {
-      state.announcements.startingSide = input.announcements.startingSide === "home" ? "home" : "away";
-      state.announcements.reserveSide = input.announcements.reserveSide === "home" ? "home" : "away";
     }
 
     return state;
@@ -558,37 +492,14 @@
     if (longName) {
       if (count === 1) return 54;
       if (count === 2) return total >= 8 ? 112 : 126;
-      if (count === 3) return 176;
-      if (count === 4) return 228;
-      return Math.min(270, Math.max(228, count * 48));
+      if (count === 3) return 136;
+      if (count === 4) return 184;
+      return Math.min(228, Math.max(184, count * 42));
     }
-    if (count === 1) return total <= 4 ? 58 : 49;
-    if (count === 2) {
-      if (total === 5) return 108;
-      return total <= 3 ? (longName ? 136 : 150) : (longName ? 118 : 126);
-    }
-    if (count === 3) return total <= 4 ? 212 : (total === 5 ? 190 : 196);
-    return 214;
-  }
-
-  function balanceNameWidths(familyWidth, givenWidth, familyUnits, givenUnits, totalUnits, compact, longName) {
-    if (!compact && !longName && familyUnits === 3 && givenUnits === 1 && totalUnits === 4) {
-      return { familyWidth: Math.max(familyWidth, 212), givenWidth: Math.max(givenWidth, 58) };
-    }
-    if (!compact && !longName && familyUnits === 3 && givenUnits === 2 && totalUnits === 5) {
-      return { familyWidth: Math.max(familyWidth, 190), givenWidth: Math.max(givenWidth, 108) };
-    }
-    if (!compact && !longName && familyUnits === 2 && givenUnits === 3 && totalUnits === 5) {
-      return { familyWidth: Math.max(familyWidth, 108), givenWidth: Math.max(givenWidth, 190) };
-    }
-    return { familyWidth, givenWidth };
-  }
-
-  function shouldUseTightName(familyUnits, givenUnits, totalUnits, compact) {
-    if (!givenUnits || compact) return false;
-    if (totalUnits >= 7) return true;
-    return totalUnits === 5
-      && ((familyUnits === 3 && givenUnits === 2) || (familyUnits === 2 && givenUnits === 3));
+    if (count === 1) return longName ? 43 : 49;
+    if (count === 2) return total <= 3 ? (longName ? 136 : 150) : (longName ? 118 : 126);
+    if (count === 3) return longName ? 132 : 146;
+    return longName ? 142 : 158;
   }
 
   function createNameBlock(kind, text, compact) {
@@ -625,25 +536,16 @@
     const longName = !compact && (familyUnits.length > 3 || givenUnits.length > 3);
     if (longName) name.classList.add("long-name");
     if (compact) name.classList.add("compact-name");
-    if (shouldUseTightName(familyUnits.length, givenUnits.length, totalUnits, compact)) name.classList.add("tight-name");
+    if (player.given && !compact && totalUnits >= 7) name.classList.add("tight-name");
     name.dataset.compact = compact ? "1" : "0";
     name.dataset.familyUnits = String(familyUnits.length);
     name.dataset.givenUnits = String(givenUnits.length);
     name.dataset.familyVisual = String(compact ? compactUnitLength(familyUnits) : familyUnits.length);
     name.dataset.givenVisual = String(compact ? compactUnitLength(givenUnits) : givenUnits.length);
     name.dataset.totalUnits = String(totalUnits);
-    const initialWidths = balanceNameWidths(
-      nameBlockWidth(familyUnits.length, totalUnits, longName, compact, compactUnitLength(familyUnits)),
-      nameBlockWidth(givenUnits.length, totalUnits, longName, compact, compactUnitLength(givenUnits)),
-      familyUnits.length,
-      givenUnits.length,
-      totalUnits,
-      compact,
-      longName
-    );
-    name.style.setProperty("--family-width", `${initialWidths.familyWidth}px`);
-    name.style.setProperty("--given-width", `${initialWidths.givenWidth}px`);
-    name.style.setProperty("--name-gap", `${compact ? (totalUnits >= 6 ? 14 : 24) : (totalUnits === 5 ? 18 : (totalUnits >= 8 ? 20 : 28))}px`);
+    name.style.setProperty("--family-width", `${nameBlockWidth(familyUnits.length, totalUnits, longName, compact, compactUnitLength(familyUnits))}px`);
+    name.style.setProperty("--given-width", `${nameBlockWidth(givenUnits.length, totalUnits, longName, compact, compactUnitLength(givenUnits))}px`);
+    name.style.setProperty("--name-gap", `${compact ? (totalUnits >= 6 ? 14 : 24) : (totalUnits >= 8 ? 20 : 28)}px`);
     name.append(createNameBlock("family-name", player.family, compact));
     name.append(createNameBlock("given-name", player.given, compact));
     if (player.yellow) {
@@ -658,16 +560,13 @@
   function renderLineup(container, players, side) {
     if (!container) return;
     container.textContent = "";
-    let lastPos = "";
     players.forEach((player) => {
       const row = document.createElement("div");
       row.className = "player-row";
 
       const pos = document.createElement("div");
       pos.className = "pos";
-      const currentPos = (player.pos || "").trim();
-      pos.textContent = currentPos === lastPos ? "" : currentPos;
-      lastPos = currentPos;
+      pos.textContent = player.pos;
 
       const num = document.createElement("div");
       num.className = `num ${side}-num`;
@@ -774,17 +673,6 @@
     document.querySelectorAll(".top-club-name strong").forEach((node) => {
       fitSingleLineLabel(node, { maxFont: 74, padding: 0, baseSpacingEm: 0.014, minScale: 0.48, shrinkFont: true, minFont: 42 });
     });
-    document.querySelectorAll(".member-club-name").forEach((node) => {
-      const isAway = node.closest(".member-side-away");
-      fitSingleLineLabel(node, {
-        maxFont: 74,
-        padding: 42,
-        baseSpacingEm: isAway ? 0.18 : 0.045,
-        fillShort: Boolean(isAway),
-        maxSpacingEm: 0.5,
-        minScale: 0.7
-      });
-    });
   }
 
   function scheduleClubLabelFit() {
@@ -838,43 +726,29 @@
     let givenWidth = nameBlockWidth(givenUnits, totalUnits, longName, compact, givenVisual);
     let gap = compact
       ? (totalUnits >= 6 ? 14 : 24)
-      : (tightName ? (totalUnits === 5 ? 18 : (totalUnits >= 8 ? 18 : 24)) : (totalUnits >= 8 ? 20 : 28));
+      : (tightName ? (totalUnits >= 8 ? 18 : 24) : (totalUnits >= 8 ? 20 : 28));
 
     if (compact) {
       familyWidth = familyUnits ? Math.max(68, Math.min(220, familyVisual * 42 + 12)) : 0;
       givenWidth = givenUnits ? Math.max(68, Math.min(235, givenVisual * 42 + 12)) : 0;
     }
-    ({ familyWidth, givenWidth } = balanceNameWidths(
-      familyWidth,
-      givenWidth,
-      familyUnits,
-      givenUnits,
-      totalUnits,
-      compact,
-      longName
-    ));
 
     if (!hasGiven) {
       familyWidth = available;
       givenWidth = 0;
       gap = 0;
     } else {
-      const effectiveGap = (compact || tightName) ? gap : 0;
-      const preferred = familyWidth + givenWidth + effectiveGap;
+      const preferred = familyWidth + givenWidth + gap;
       if (preferred > available) {
         const minGap = compact ? 8 : 12;
-        if (compact || tightName) {
-          gap = Math.max(minGap, Math.min(gap, available * (compact ? 0.04 : 0.07)));
-        } else {
-          gap = 0;
-        }
-        const blocksAvailable = Math.max(90, available - ((compact || tightName) ? gap : 0));
+        gap = Math.max(minGap, Math.min(gap, available * (compact ? 0.04 : 0.07)));
+        const blocksAvailable = Math.max(90, available - gap);
         const ratio = Math.min(1, blocksAvailable / Math.max(1, familyWidth + givenWidth));
         familyWidth = Math.max(compact ? 54 : 44, familyWidth * ratio);
         givenWidth = Math.max(compact ? 54 : 44, givenWidth * ratio);
-        const overflow = familyWidth + givenWidth + ((compact || tightName) ? gap : 0) - available;
+        const overflow = familyWidth + givenWidth + gap - available;
         if (overflow > 0) {
-          const secondRatio = (available - ((compact || tightName) ? gap : 0)) / Math.max(1, familyWidth + givenWidth);
+          const secondRatio = (available - gap) / Math.max(1, familyWidth + givenWidth);
           familyWidth *= secondRatio;
           givenWidth *= secondRatio;
         }
@@ -1035,59 +909,6 @@
     renderScorers(document.getElementById("resultAwayScorers"), state.result.awayScorers);
   }
 
-  function renderMemberRows(container, players, side, count) {
-    if (!container) return;
-    container.textContent = "";
-    const list = normalizePlayerList(players, [], count);
-    let lastPos = "";
-    list.forEach((player) => {
-      const row = document.createElement("div");
-      row.className = "member-row";
-
-      const pos = document.createElement("div");
-      pos.className = "pos member-pos";
-      const currentPos = (player.pos || "").trim();
-      pos.textContent = currentPos === lastPos ? "" : currentPos;
-      lastPos = currentPos;
-
-      const num = document.createElement("div");
-      num.className = `num member-num ${side}-num`;
-      num.textContent = player.no || "";
-
-      const name = createPlayerName({ ...player, yellow: false });
-      name.classList.add("member-player-name");
-
-      const filler = document.createElement("div");
-      filler.className = "member-filler";
-
-      row.append(pos, num, name, filler);
-      container.appendChild(row);
-    });
-  }
-
-  function setFitText(node, value) {
-    if (!node) return;
-    node.textContent = "";
-    const label = document.createElement("span");
-    label.className = "fit-label-text";
-    label.textContent = value || "";
-    node.appendChild(label);
-  }
-
-  function renderAnnouncementBoards(state) {
-    document.querySelectorAll("[data-member-screen]").forEach((board) => {
-      const screen = board.dataset.memberScreen;
-      const isReserve = screen === "reserve";
-      const side = state.announcements && state.announcements[isReserve ? "reserveSide" : "startingSide"] === "home" ? "home" : "away";
-      const team = state[side] || state.away;
-      board.classList.toggle("member-side-home", side === "home");
-      board.classList.toggle("member-side-away", side === "away");
-      setFitText(board.querySelector(".member-club-name"), team.club || "");
-      const list = isReserve ? team.reserves : (team.startingPlayers || team.players);
-      renderMemberRows(board.querySelector(".member-list"), list, side, isReserve ? MAX_RESERVES : 11);
-    });
-  }
-
   function renderRefereeRows(state) {
     const list = document.querySelector(".referees-list");
     if (!list) return;
@@ -1101,40 +922,32 @@
 
   function renderDisplay(state) {
     applyColors(state);
-    document.querySelectorAll(".canvas, .vision-board").forEach((node) => {
-      node.classList.toggle("is-kickoff", state.match && state.match.phase === "kickoff");
-      node.classList.toggle("is-fulltime", !state.match || state.match.phase !== "kickoff");
-    });
     renderFields(state);
     renderRefereeRows(state);
     renderLineup(document.getElementById("homeLineup"), state.home.players, "home");
     renderLineup(document.getElementById("awayLineup"), state.away.players, "away");
     renderImages(state);
     renderResult(state);
-    renderAnnouncementBoards(state);
     renderClubEmblems(state);
     scheduleClubLabelFit();
     schedulePlayerNameFit();
   }
 
-  function createPlayerEditor(container, side, state, listKey = "players", options = {}) {
+  function createPlayerEditor(container, side, state) {
     if (!container) return;
-    const includeYellow = options.includeYellow !== false;
-    const count = listKey === "reserves" ? MAX_RESERVES : 11;
-    const players = normalizePlayerList(state[side] && state[side][listKey], [], count);
     container.textContent = "";
     const header = document.createElement("div");
-    header.className = `player-edit-row player-edit-head${includeYellow ? "" : " no-yellow"}`;
-    ["POS", "No.", "姓", "名", "半角", ...(includeYellow ? ["YC"] : [])].forEach((label) => {
+    header.className = "player-edit-row player-edit-head";
+    ["POS", "No.", "姓", "名", "半角", "YC"].forEach((label) => {
       const span = document.createElement("span");
       span.textContent = label;
       header.appendChild(span);
     });
     container.appendChild(header);
 
-    players.forEach((player, index) => {
+    state[side].players.forEach((player, index) => {
       const row = document.createElement("div");
-      row.className = `player-edit-row${includeYellow ? "" : " no-yellow"}`;
+      row.className = "player-edit-row";
       [
         ["pos", "GK"],
         ["no", "64"],
@@ -1142,7 +955,7 @@
         ["given", "奏哉"]
       ].forEach(([key, placeholder]) => {
         const input = document.createElement("input");
-        input.name = `${side}.${listKey}.${index}.${key}`;
+        input.name = `${side}.players.${index}.${key}`;
         input.value = player[key];
         input.placeholder = placeholder;
         row.appendChild(input);
@@ -1152,23 +965,19 @@
       toggle.className = `half-toggle${player.half ? " active" : ""}`;
       toggle.dataset.halfToggle = "true";
       toggle.dataset.side = side;
-      toggle.dataset.list = listKey;
       toggle.dataset.index = String(index);
       toggle.textContent = player.half ? "半角ON" : "半角";
       toggle.title = "カタカナの半角表示を切り替えます";
       row.appendChild(toggle);
-      if (includeYellow) {
-        const yellowToggle = document.createElement("button");
-        yellowToggle.type = "button";
-        yellowToggle.className = `yellow-toggle${player.yellow ? " active" : ""}`;
-        yellowToggle.dataset.yellowToggle = "true";
-        yellowToggle.dataset.side = side;
-        yellowToggle.dataset.list = listKey;
-        yellowToggle.dataset.index = String(index);
-        yellowToggle.textContent = player.yellow ? "警告" : "なし";
-        yellowToggle.title = "イエローカード表示を切り替えます";
-        row.appendChild(yellowToggle);
-      }
+      const yellowToggle = document.createElement("button");
+      yellowToggle.type = "button";
+      yellowToggle.className = `yellow-toggle${player.yellow ? " active" : ""}`;
+      yellowToggle.dataset.yellowToggle = "true";
+      yellowToggle.dataset.side = side;
+      yellowToggle.dataset.index = String(index);
+      yellowToggle.textContent = player.yellow ? "警告" : "なし";
+      yellowToggle.title = "イエローカード表示を切り替えます";
+      row.appendChild(yellowToggle);
       container.appendChild(row);
     });
   }
@@ -1420,51 +1229,6 @@
     return clubEmblemsReady;
   }
 
-  function normalizeMatchRecord(record, index) {
-    const source = record && typeof record === "object" ? record : {};
-    const season = String(source.season || "").trim();
-    const section = String(source.section || "").trim();
-    const matchCard = String(source.match_card || "").trim();
-    const home = String(source.home || "").trim();
-    const away = String(source.away || "").trim();
-    return {
-      id: `${season}-${index}`,
-      season,
-      competition: String(source.competition || "").trim(),
-      section,
-      matchCard,
-      score: String(source.score || "").trim(),
-      url: String(source.url || "").trim(),
-      date: String(source.date || "").trim(),
-      kickoff: String(source.kickoff || "").trim(),
-      home,
-      away
-    };
-  }
-
-  function matchOptionLabel(match) {
-    const parts = [
-      match.competition,
-      match.section,
-      match.matchCard ? `${match.matchCard}戦` : "",
-      match.date,
-      match.kickoff,
-      match.home && match.away ? `${match.home} vs ${match.away}` : "",
-      match.score
-    ].filter(Boolean);
-    return parts.join(" / ");
-  }
-
-  async function loadAvailableMatches() {
-    const response = await fetch(MATCHES_URL, { cache: "no-store" });
-    if (!response.ok) throw new Error(`albirex_niigata_matches.json (${response.status})`);
-    const data = await response.json();
-    availableMatches = Array.isArray(data)
-      ? data.map(normalizeMatchRecord).filter((match) => match.season && match.url)
-      : [];
-    return availableMatches;
-  }
-
   function clubOptionNames() {
     return Object.keys(clubEmblems).sort((a, b) => a.localeCompare(b, "ja"));
   }
@@ -1582,7 +1346,7 @@
   }
 
   function makeBlankPlayer() {
-    return blankPlayer();
+    return { pos: "", no: "", family: "", given: "", half: false, yellow: false };
   }
 
   function makePlayerFromLine(line) {
@@ -1609,9 +1373,9 @@
     return players;
   }
 
-  function withDisplayPositions(players, maxPlayers = 11) {
+  function withDisplayPositions(players) {
     let previousPos = "";
-    return (players || []).slice(0, maxPlayers).map((player) => {
+    return (players || []).slice(0, 11).map((player) => {
       if (!player || (!player.no && !player.family && !player.given)) return makeBlankPlayer();
       const rawPos = player.pos || "";
       const displayPos = rawPos && rawPos === previousPos ? "" : rawPos;
@@ -1694,7 +1458,7 @@
   }
 
   function extractTeamBench(text, sideIndex) {
-    return withDisplayPositions(parseRegisteredPlayerLines(extractIndexedSection(text, "控え", sideIndex)), MAX_RESERVES);
+    return parseRegisteredPlayerLines(extractIndexedSection(text, "控え", sideIndex));
   }
 
   function parseSubstitutionLines(section) {
@@ -2017,8 +1781,6 @@
     const awayClub = scoreMatch[8].trim();
     const homePlayers = extractTeamStarters(text, homeClub, 0, false);
     const awayPlayers = extractTeamStarters(text, awayClub, 1, false);
-    const homeReserves = extractTeamBench(text, 0);
-    const awayReserves = extractTeamBench(text, 1);
     const homeFinalPlayers = buildFinalPlayers(text, homeClub, 0);
     const awayFinalPlayers = buildFinalPlayers(text, awayClub, 1);
     const goalTableScorers = extractGoalTableScorers(text);
@@ -2033,8 +1795,6 @@
       awayClub,
       homePlayers,
       awayPlayers,
-      homeReserves,
-      awayReserves,
       homeFinalPlayers,
       awayFinalPlayers,
       homeScorers: hasScorers(homeScorers) ? homeScorers : goalTableScorers.homeScorers,
@@ -2062,12 +1822,8 @@
     next.away.club = record.awayClub;
     next.top.homeEnglish = getClubEnglishName(record.homeClub) || next.top.homeEnglish;
     next.top.awayEnglish = getClubEnglishName(record.awayClub) || next.top.awayEnglish;
-    next.home.startingPlayers = normalizePlayerList(record.homePlayers, next.home.startingPlayers || next.home.players, 11);
-    next.away.startingPlayers = normalizePlayerList(record.awayPlayers, next.away.startingPlayers || next.away.players, 11);
     next.home.players = kickoffMode ? record.homePlayers : record.homeFinalPlayers;
     next.away.players = kickoffMode ? record.awayPlayers : record.awayFinalPlayers;
-    next.home.reserves = normalizePlayerList(record.homeReserves, next.home.reserves, MAX_RESERVES);
-    next.away.reserves = normalizePlayerList(record.awayReserves, next.away.reserves, MAX_RESERVES);
     next.result.homeScorers = kickoffMode ? makeBlankScorers() : normalizeScorerList(record.homeScorers, makeBlankScorers());
     next.result.awayScorers = kickoffMode ? makeBlankScorers() : normalizeScorerList(record.awayScorers, makeBlankScorers());
     if (hasReferees(record.referees)) {
@@ -2082,7 +1838,6 @@
       next.match.totalHome = "";
       next.match.totalAway = "";
     }
-    next.match.phase = kickoffMode ? "kickoff" : "fulltime";
     if (record.attendanceCount) next.attendance.count = record.attendanceCount;
     const homeColor = getOfficialClubColor(record.homeClub);
     const awayColor = getOfficialClubColor(record.awayClub);
@@ -2276,9 +2031,7 @@
       result: "result.html",
       attendance: "attendance.html",
       top: "top.html",
-      referees: "referees.html",
-      announce: "starting.html",
-      reserve: "reserve.html"
+      referees: "referees.html"
     };
     const activate = (target) => {
       buttons.forEach((button) => {
@@ -2305,9 +2058,7 @@
       "result.html": "result",
       "attendance.html": "attendance",
       "top.html": "top",
-      "referees.html": "referees",
-      "starting.html": "starting-lineup",
-      "reserve.html": "reserve"
+      "referees.html": "referees"
     }[path] || "screen";
   }
 
@@ -2428,7 +2179,7 @@
   }
 
   function setNameFont(ctx, size) {
-    ctx.font = `700 ${size}px "ScoreboardShinGo", "Noto Sans JP", sans-serif`;
+    ctx.font = `900 ${size}px "ScoreboardShinGo", "Noto Sans JP", sans-serif`;
   }
 
   function drawShadowText(ctx, text, x, y, options) {
@@ -2542,11 +2293,11 @@
     fillRectWithBorder(ctx, x, y, w, h, gradient(ctx, x, y, h, [[0, "#21151a"], [1, "#120b0f"]]), "rgba(0,0,0,0.88)", 2);
     drawDots(ctx, x, y, w, h, "rgba(93,70,78,0.12)", 9, 1.5, 1);
     setHeavyFont(ctx, 88);
-    drawShadowText(ctx, String(left ?? ""), x + 130, y + h / 2, { color: "#f2ddf8", maxWidth: 115 });
+    drawShadowText(ctx, String(left ?? ""), x + 80, y + h / 2, { color: "#f2ddf8", maxWidth: 115 });
     setHeavyFont(ctx, total ? 56 : 72);
     drawShadowText(ctx, label, x + w / 2, y + h / 2, { color: "#f2ddf8", maxWidth: 220 });
     setHeavyFont(ctx, 88);
-    drawShadowText(ctx, String(right ?? ""), x + w - 130, y + h / 2, { color: "#f2ddf8", maxWidth: 115 });
+    drawShadowText(ctx, String(right ?? ""), x + w - 80, y + h / 2, { color: "#f2ddf8", maxWidth: 115 });
   }
 
   function drawSpreadText(ctx, text, x, y, width, color, maxSize, compact) {
@@ -2707,32 +2458,18 @@
       const totalCount = familyCount + givenCount;
       const familyVisual = compact ? compactUnitLength(visualKanaUnits(family)) : familyCount;
       const givenVisual = compact ? compactUnitLength(visualKanaUnits(given)) : givenCount;
-      let familyWidth = nameBlockWidth(familyCount, totalCount, longName, compact, familyVisual);
-      let givenWidth = nameBlockWidth(givenCount, totalCount, longName, compact, givenVisual);
-      const tightName = shouldUseTightName(familyCount, givenCount, totalCount, compact);
-      let gap = compact
-        ? (totalCount >= 6 ? 14 : 24)
-        : (tightName ? (totalCount === 5 ? 18 : (totalCount >= 8 ? 18 : 24)) : (totalCount >= 8 ? 20 : 28));
+    let familyWidth = nameBlockWidth(familyCount, totalCount, longName, compact, familyVisual);
+    let givenWidth = nameBlockWidth(givenCount, totalCount, longName, compact, givenVisual);
+    const tightName = !compact && totalCount >= 7;
+      let gap = compact ? (totalCount >= 6 ? 14 : 24) : (totalCount >= 8 ? 20 : 28);
       if (compact) {
         familyWidth = Math.max(68, Math.min(220, familyVisual * 42 + 12));
         givenWidth = Math.max(68, Math.min(235, givenVisual * 42 + 12));
       }
-      ({ familyWidth, givenWidth } = balanceNameWidths(
-        familyWidth,
-        givenWidth,
-        familyCount,
-        givenCount,
-        totalCount,
-        compact,
-        longName
-      ));
       const available = Math.max(80, nameRight - nameX);
-      const effectiveGap = (compact || tightName) ? gap : 0;
-      if (familyWidth + givenWidth + effectiveGap > available) {
-        gap = (compact || tightName)
-          ? Math.max(compact ? 8 : 12, Math.min(gap, available * (compact ? 0.04 : 0.07)))
-          : 0;
-        const ratio = (available - ((compact || tightName) ? gap : 0)) / Math.max(1, familyWidth + givenWidth);
+      if (familyWidth + givenWidth + gap > available) {
+        gap = Math.max(compact ? 8 : 12, Math.min(gap, available * (compact ? 0.04 : 0.07)));
+        const ratio = (available - gap) / Math.max(1, familyWidth + givenWidth);
         familyWidth *= ratio;
         givenWidth *= ratio;
       }
@@ -2778,17 +2515,14 @@
 
     const boxX = x + 14;
     const boxW = w - 28;
-    const kickoffMode = state.match && state.match.phase === "kickoff";
     let scoreY = y + 195;
     drawScoreBox(ctx, boxX, scoreY, boxW, 140, state.match.firstHome, "前半", state.match.firstAway, false);
     scoreY += 178;
     drawScoreBox(ctx, boxX, scoreY, boxW, 140, state.match.secondHome, "後半", state.match.secondAway, false);
-    if (!kickoffMode) {
-      scoreY += 160;
-      fillRectWithBorder(ctx, boxX, scoreY, boxW, 16, gradient(ctx, boxX, scoreY, 16, [[0, "#f8e9bd"], [0.24, "#e7bf68"], [0.62, "#b46a1e"], [1, "#58230c"]]), "rgba(78,27,8,0.92)", 2);
-      scoreY += 38;
-      drawScoreBox(ctx, boxX, scoreY, boxW, 140, state.match.totalHome, "TOTAL", state.match.totalAway, true);
-    }
+    scoreY += 160;
+    fillRectWithBorder(ctx, boxX, scoreY, boxW, 16, gradient(ctx, boxX, scoreY, 16, [[0, "#f8e9bd"], [0.24, "#e7bf68"], [0.62, "#b46a1e"], [1, "#58230c"]]), "rgba(78,27,8,0.92)", 2);
+    scoreY += 38;
+    drawScoreBox(ctx, boxX, scoreY, boxW, 140, state.match.totalHome, "TOTAL", state.match.totalAway, true);
 
     const logoY = scoreY + 140 + 12;
     const logoSpaceH = (y + h) - logoY - 12;
@@ -2996,7 +2730,7 @@
     ].join(";");
     document.body.appendChild(frame);
     const loadPromise = waitForFrameLoad(frame, 6000);
-    frame.src = src || "display.html?v=20260521b";
+    frame.src = src || "display.html?v=20260520d";
     await loadPromise;
     const win = frame.contentWindow;
     if (win && win.scoreboardVision) {
@@ -3015,7 +2749,7 @@
   async function exportCurrentImage(state, targetSrc) {
     const next = normalizeState(state);
     const previewFrame = getPreviewFrame();
-    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20260521b";
+    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20260520d";
     let captureFrame = null;
 
     let blob;
@@ -3047,8 +2781,6 @@
   function renderAdminEditors(state) {
     createPlayerEditor(document.getElementById("homeEditor"), "home", state);
     createPlayerEditor(document.getElementById("awayEditor"), "away", state);
-    createPlayerEditor(document.getElementById("homeReserveEditor"), "home", state, "reserves", { includeYellow: false });
-    createPlayerEditor(document.getElementById("awayReserveEditor"), "away", state, "reserves", { includeYellow: false });
     createScorerEditor(document.getElementById("homeScorerEditor"), "home", state);
     createScorerEditor(document.getElementById("awayScorerEditor"), "away", state);
   }
@@ -3101,13 +2833,12 @@
       const button = toggle || yellowToggle;
       state = readForm(form, state);
       const side = button.dataset.side;
-      const listKey = button.dataset.list || "players";
       const index = Number(button.dataset.index);
-      if (!state[side] || !state[side][listKey] || !state[side][listKey][index]) return;
+      if (!state[side] || !state[side].players[index]) return;
       if (toggle) {
-        state[side][listKey][index].half = !state[side][listKey][index].half;
+        state[side].players[index].half = !state[side].players[index].half;
       } else {
-        state[side][listKey][index].yellow = !state[side][listKey][index].yellow;
+        state[side].players[index].yellow = !state[side].players[index].yellow;
       }
       saveState(state, true);
       renderDisplay(state);
@@ -3161,346 +2892,94 @@
       });
     }
 
-    const matchYearSelect = document.getElementById("matchYearSelect");
-    const matchSectionSelect = document.getElementById("matchSectionSelect");
-    const matchKickoffButton = document.getElementById("matchKickoffButton");
-    const matchFulltimeButton = document.getElementById("matchFulltimeButton");
+    const officialUrlInput = document.getElementById("officialUrlInput");
+    const officialImportMode = document.getElementById("officialImportMode");
+    const officialImportButton = document.getElementById("officialImportButton");
+    const officialKickoffButton = document.getElementById("officialKickoffButton");
+    const officialFulltimeButton = document.getElementById("officialFulltimeButton");
     const officialImportStatus = document.getElementById("officialImportStatus");
-
-    let loadedMatchesForYear = [];
-    let selectedMatchRecord = null;
-
     const setOfficialStatus = (message, type) => {
       if (!officialImportStatus) return;
       officialImportStatus.textContent = message || "";
       officialImportStatus.classList.toggle("error", type === "error");
       officialImportStatus.classList.toggle("success", type === "success");
     };
-
-    const setMatchButtons = (enabled) => {
-      [matchKickoffButton, matchFulltimeButton].forEach((button) => {
+    const setOfficialModeButtons = (enabled) => {
+      [officialKickoffButton, officialFulltimeButton].forEach((button) => {
         if (button) button.disabled = !enabled;
       });
     };
-
-    const getGoalsPerHalf = (goals) => {
-      let firstHalf = 0;
-      let secondHalf = 0;
-      (goals || []).forEach(goal => {
-        const time = String(goal.time || "").trim();
-        const minMatch = time.match(/^(\d+)/);
-        if (minMatch) {
-          const min = parseInt(minMatch[1], 10);
-          if (min <= 45) {
-            firstHalf++;
-          } else {
-            secondHalf++;
-          }
-        }
-      });
-      return { firstHalf, secondHalf };
+    const ensureOfficialRecord = async (forceFetch = false) => {
+      const url = officialUrlInput ? officialUrlInput.value : "";
+      const normalizedUrl = normalizeOfficialUrl(url);
+      if (!forceFetch && cachedOfficialRecord && cachedOfficialRecordUrl === normalizedUrl) {
+        return cachedOfficialRecord;
+      }
+      const raw = await withTimeout(
+        fetchOfficialRecordText(url),
+        12000,
+        new Error("公式記録の取得がタイムアウトしました。")
+      );
+      cachedOfficialRecord = parseOfficialRecord(raw);
+      cachedOfficialRecordUrl = normalizedUrl;
+      setOfficialModeButtons(true);
+      return cachedOfficialRecord;
     };
-
-    function mapJsonMatchToRecord(matchData) {
-      const isHomeNiigata = matchData.home_team.includes("新潟");
-      const homeDetails = matchData.home_details || {};
-      const awayDetails = matchData.away_details || {};
-      
-      const mapPlayer = (p, cards = [], clearYellow = false) => {
-        const parsed = splitPlayerName(p.name);
-        const hasYellow = !clearYellow && (cards || []).some(card => 
-          card.type === "警告" && compactOfficialText(card.name) === compactOfficialText(p.name)
-        );
-        return {
-          pos: p.position || "",
-          no: String(p.number || ""),
-          family: parsed.family,
-          given: parsed.given,
-          half: parsed.half,
-          yellow: hasYellow
-        };
-      };
-      
-      const homePlayers = (homeDetails.starting || []).map(p => mapPlayer(p, homeDetails.cards, true));
-      const awayPlayers = (awayDetails.starting || []).map(p => mapPlayer(p, awayDetails.cards, true));
-      const homeReserves = (homeDetails.substitutes || []).map(p => mapPlayer(p, homeDetails.cards, true));
-      const awayReserves = (awayDetails.substitutes || []).map(p => mapPlayer(p, awayDetails.cards, true));
-      
-      const parseSubs = (substitutions) => {
-        const subs = [];
-        for (let i = 0; i < (substitutions || []).length; i += 2) {
-          const outSub = substitutions[i];
-          const inSub = substitutions[i + 1];
-          if (outSub && inSub && outSub.in_out === "▽" && inSub.in_out === "▲") {
-            subs.push({ outName: outSub.name, inName: inSub.name });
-          }
-        }
-        return subs;
-      };
-      
-      const applySubsAndDismissals = (starters, bench, substitutions, cards) => {
-        const finalPlayers = starters.map(p => ({ ...p }));
-        const subs = parseSubs(substitutions);
-        subs.forEach(sub => {
-          const outIndex = findPlayerIndexByName(finalPlayers, sub.outName);
-          if (outIndex === -1) return;
-          const incoming = findRegisteredPlayerByName(bench, sub.inName) || playerFromName(sub.inName);
-          finalPlayers[outIndex] = { ...incoming, yellow: false };
-        });
-        
-        finalPlayers.forEach(p => {
-          if (!p.family && !p.given) return;
-          const name = playerFullName(p);
-          p.yellow = (cards || []).some(card => 
-            card.type === "警告" && compactOfficialText(card.name) === compactOfficialText(name)
-          );
-        });
-        
-        const dismissedNames = (cards || [])
-          .filter(card => card.type === "退場")
-          .map(card => card.name);
-          
-        dismissedNames.forEach(name => {
-          const index = findPlayerIndexByName(finalPlayers, name);
-          if (index >= 0) {
-            finalPlayers[index] = makeBlankPlayer();
-          }
-        });
-        
-        return withDisplayPositions(finalPlayers);
-      };
-      
-      const startersWithYellowHome = (homeDetails.starting || []).map(p => mapPlayer(p, homeDetails.cards, false));
-      const startersWithYellowAway = (awayDetails.starting || []).map(p => mapPlayer(p, awayDetails.cards, false));
-      const benchWithYellowHome = (homeDetails.substitutes || []).map(p => mapPlayer(p, homeDetails.cards, false));
-      const benchWithYellowAway = (awayDetails.substitutes || []).map(p => mapPlayer(p, awayDetails.cards, false));
-
-      const homeFinalPlayers = applySubsAndDismissals(startersWithYellowHome, benchWithYellowHome, homeDetails.substitutions, homeDetails.cards);
-      const awayFinalPlayers = applySubsAndDismissals(startersWithYellowAway, benchWithYellowAway, awayDetails.substitutions, awayDetails.cards);
-      
-      const mapScorers = (goals) => {
-        const scorers = [];
-        (goals || []).forEach(goal => {
-          const parsed = splitPlayerName(goal.name);
-          scorers.push({
-            minute: String(goal.time || "").replace(/['分]/g, ""),
-            family: parsed.family,
-            given: parsed.given,
-            half: parsed.half
-          });
-        });
-        return normalizeScorerList(scorers, makeBlankScorers());
-      };
-      
-      const homeScorers = mapScorers(matchData.home_goals);
-      const awayScorers = mapScorers(matchData.away_goals);
-      
-      const refereesList = [];
-      const refsObj = matchData.referees || {};
-      if (refsObj["主審"]) pushReferee(refereesList, "主審", refsObj["主審"]);
-      if (refsObj["副審"]) {
-        const parts = refsObj["副審"].split(/[,，、]+/);
-        parts.forEach(part => pushReferee(refereesList, "副審", part.trim()));
-      }
-      if (refsObj["第4の審判員"]) pushReferee(refereesList, "第4の審判員", refsObj["第4の審判員"]);
-      if (refsObj["VAR／AVAR"]) {
-        const parts = refsObj["VAR／AVAR"].split(/[／/]+/);
-        if (parts[0]) pushReferee(refereesList, "VAR", parts[0].trim());
-        if (parts[1]) pushReferee(refereesList, "AVAR", parts[1].trim());
-      }
-      const referees = normalizeRefereeList(refereesList, makeBlankReferees());
-      
-      const homeTotal = parseInt(matchData.home_score || "0", 10);
-      const awayTotal = parseInt(matchData.away_score || "0", 10);
-
-      const homeFirstHalf = getGoalsPerHalf(matchData.home_goals).firstHalf;
-      const homeSecondHalf = Math.max(0, homeTotal - homeFirstHalf);
-
-      const awayFirstHalf = getGoalsPerHalf(matchData.away_goals).firstHalf;
-      const awaySecondHalf = Math.max(0, awayTotal - awayFirstHalf);
-
-      return {
-        homeClub: matchData.home_team,
-        awayClub: matchData.away_team,
-        homePlayers,
-        awayPlayers,
-        homeReserves,
-        awayReserves,
-        homeFinalPlayers,
-        awayFinalPlayers,
-        homeScorers,
-        awayScorers,
-        attendanceCount: formatAttendanceCount(matchData.attendance),
-        referees,
-        leagueName: matchData.competition || "",
-        leagueLogo: getLeagueLogoFromText(matchData.competition || ""),
-        match: {
-          round: (() => {
-            const raw = matchData.section || "";
-            const match = raw.match(/第?\s*(\d+)\s*節/);
-            if (match) {
-              return `第${match[1]}節`;
-            }
-            return raw;
-          })(),
-          firstHome: String(homeFirstHalf),
-          firstAway: String(awayFirstHalf),
-          secondHome: String(homeSecondHalf),
-          secondAway: String(awaySecondHalf),
-          totalHome: String(homeTotal),
-          totalAway: String(awayTotal)
-        }
-      };
-    }
-
-    const loadMatchesForYear = async (year) => {
-      if (!year) {
-        loadedMatchesForYear = [];
-        return [];
-      }
-      setOfficialStatus(`${year}年の試合データを読み込み中...`, "");
-      const response = await fetch(`data/${year}.json?v=${new Date().getTime()}`, { cache: "no-store" });
-      if (!response.ok) throw new Error(`${year}.json の読み込みに失敗しました (${response.status})`);
-      const data = await response.json();
-      loadedMatchesForYear = Array.isArray(data) ? data : [];
-      return loadedMatchesForYear;
+    const applyOfficialMode = (record, importMode) => {
+      state = applyOfficialRecord(readForm(form, state), record, importMode);
+      saveState(state, true);
+      renderAdminEditors(state);
+      fillForm(form, state);
+      renderDisplay(state);
+      if (officialImportMode) officialImportMode.value = importMode;
+      setOfficialStatus(`${record.homeClub} vs ${record.awayClub} を${importMode === "kickoff" ? "試合開始前" : "試合終了時"}として反映しました。`, "success");
     };
-
-    const updateDropdownOptions = () => {
-      if (!matchSectionSelect) return;
-      
-      matchSectionSelect.textContent = "";
-      const secPlaceholder = document.createElement("option");
-      secPlaceholder.value = "";
-      secPlaceholder.textContent = "節を選択";
-      matchSectionSelect.appendChild(secPlaceholder);
-      
-      loadedMatchesForYear.forEach((m, idx) => {
-        const option = document.createElement("option");
-        option.value = String(idx);
-        
-        let cleanSection = (m.section || "").replace(/^第/, "");
-        cleanSection = cleanSection.replace(/節.*$/, "節");
-        
-        const isHomeNiigata = m.home_team.includes("新潟");
-        const ha = isHomeNiigata ? "H" : "A";
-        const opponent = isHomeNiigata ? m.away_team : m.home_team;
-        
-        option.textContent = `${cleanSection} ${ha} ${opponent}`;
-        matchSectionSelect.appendChild(option);
-      });
-      matchSectionSelect.disabled = !loadedMatchesForYear.length;
-      
-      updateSelectedMatch();
+    const applyOfficialModeFromCache = async (importMode, forceFetch = false) => {
+      const record = await ensureOfficialRecord(forceFetch);
+      applyOfficialMode(record, importMode);
     };
+    setOfficialModeButtons(Boolean(cachedOfficialRecord));
 
-    const updateSelectedMatch = () => {
-      const year = matchYearSelect.value;
-      const selectIndex = matchSectionSelect.value;
-      
-      if (!year || selectIndex === "") {
-        selectedMatchRecord = null;
-        setMatchButtons(false);
-        if (!year) {
-          setOfficialStatus("年を選択してください。", "");
-        } else {
-          setOfficialStatus("節を選択してください。", "");
-        }
-        return;
-      }
-      
-      const matched = loadedMatchesForYear[parseInt(selectIndex, 10)];
-      
-      if (matched) {
-        selectedMatchRecord = matched;
-        setMatchButtons(true);
-        setOfficialStatus(`${matched.season}年 ${matched.section} ${matched.home_team} vs ${matched.away_team} が選択されました。`, "success");
-      } else {
-        selectedMatchRecord = null;
-        setMatchButtons(false);
-        setOfficialStatus("条件に一致する試合が見つかりませんでした。", "error");
-      }
-    };
-
-    const applySelectedMatch = (importMode) => {
-      if (!selectedMatchRecord) {
-        setOfficialStatus("試合データが正しく選択されていません。", "error");
-        return;
-      }
-      
-      try {
-        const record = mapJsonMatchToRecord(selectedMatchRecord);
-        state = applyOfficialRecord(readForm(form, state), record, importMode);
-        saveState(state, true);
-        renderAdminEditors(state);
-        fillForm(form, state);
-        renderDisplay(state);
-        setOfficialStatus(`${record.homeClub} vs ${record.awayClub} を${importMode === "kickoff" ? "試合開始前" : "試合終了時"}として反映しました。`, "success");
-      } catch (error) {
-        console.error(error);
-        setOfficialStatus(`データの反映に失敗しました: ${error.message}`, "error");
-      }
-    };
-
-    const populateYearSelect = () => {
-      if (!matchYearSelect) return;
-      matchYearSelect.textContent = "";
-      const placeholder = document.createElement("option");
-      placeholder.value = "";
-      placeholder.textContent = "年を選択";
-      matchYearSelect.appendChild(placeholder);
-      
-      for (let y = 2026; y >= 1999; y--) {
-        const option = document.createElement("option");
-        option.value = String(y);
-        option.textContent = `${y}年`;
-        matchYearSelect.appendChild(option);
-      }
-    };
-
-    const loadMatchPicker = async () => {
-      populateYearSelect();
-      setMatchButtons(false);
-      setOfficialStatus("年を選択してください。", "");
-    };
-
-    if (matchYearSelect) {
-      matchYearSelect.addEventListener("change", async () => {
-        const year = matchYearSelect.value;
-        if (!year) {
-          loadedMatchesForYear = [];
-          updateDropdownOptions();
-          return;
-        }
-        
+    if (officialUrlInput && officialImportButton) {
+      officialImportButton.addEventListener("click", async () => {
+        const originalLabel = officialImportButton.textContent;
+        officialImportButton.textContent = "取得中...";
+        officialImportButton.disabled = true;
+        setOfficialModeButtons(false);
+        setOfficialStatus("公式記録を取得しています。", "");
         try {
-          matchYearSelect.disabled = true;
-          await loadMatchesForYear(year);
-          updateDropdownOptions();
+          const importMode = officialImportMode ? officialImportMode.value : "fulltime";
+          await applyOfficialModeFromCache(importMode, true);
         } catch (error) {
           console.error(error);
-          setOfficialStatus(`${year}年の試合データの取得に失敗しました。`, "error");
+          setOfficialStatus(error.message || "公式記録の反映に失敗しました。", "error");
         } finally {
-          matchYearSelect.disabled = false;
+          officialImportButton.textContent = originalLabel;
+          officialImportButton.disabled = false;
+          setOfficialModeButtons(Boolean(cachedOfficialRecord));
         }
       });
     }
-
-    if (matchSectionSelect) {
-      matchSectionSelect.addEventListener("change", updateSelectedMatch);
-    }
-
     [
-      [matchKickoffButton, "kickoff"],
-      [matchFulltimeButton, "fulltime"]
+      [officialKickoffButton, "kickoff"],
+      [officialFulltimeButton, "fulltime"]
     ].forEach(([button, importMode]) => {
       if (!button) return;
-      button.addEventListener("click", () => {
-        applySelectedMatch(importMode);
+      button.addEventListener("click", async () => {
+        const originalLabel = button.textContent;
+        button.textContent = "反映中...";
+        button.disabled = true;
+        try {
+          await applyOfficialModeFromCache(importMode, false);
+        } catch (error) {
+          console.error(error);
+          setOfficialStatus(error.message || "公式記録の反映に失敗しました。", "error");
+        } finally {
+          button.textContent = originalLabel;
+          setOfficialModeButtons(Boolean(cachedOfficialRecord));
+        }
       });
     });
-
-    loadMatchPicker();
 
     const exportButton = document.getElementById("exportImageButton");
     if (exportButton) {
@@ -3571,8 +3050,6 @@
     }
   });
 })();
-
-
 
 
 

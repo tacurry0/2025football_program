@@ -1,11 +1,11 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>大型ビジョン 管理画面</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260521b" />
+    <link rel="stylesheet" href="styles.css?v=20260520d" />
   </head>
   <body class="admin-page">
     <header class="admin-header">
@@ -15,23 +15,19 @@
       </div>
       <div class="admin-actions">
         <select class="export-target-select" id="exportTargetSelect" aria-label="画像出力する画面">
-          <option value="display.html?v=20260521b">スタメン</option>
-          <option value="result.html?v=20260521b">結果</option>
-          <option value="attendance.html?v=20260521b">来場者</option>
-          <option value="top.html?v=20260521b">対戦トップ</option>
-          <option value="referees.html?v=20260521b">審判</option>
-          <option value="starting.html?v=20260521b">スタメン発表</option>
-          <option value="reserve.html?v=20260521b">リザーブ</option>
+          <option value="display.html?v=20260520d">スタメン</option>
+          <option value="result.html?v=20260520d">結果</option>
+          <option value="attendance.html?v=20260520d">来場者</option>
+          <option value="top.html?v=20260520d">対戦トップ</option>
+          <option value="referees.html?v=20260520d">審判</option>
         </select>
         <button class="admin-button export-button" id="exportImageButton" type="button">画像出力</button>
-        <a class="admin-link" href="display.html?v=20260521b" target="_blank" rel="noopener">スタメン画面</a>
-        <a class="admin-link" href="result.html?v=20260521b" target="_blank" rel="noopener">結果画面</a>
-        <a class="admin-link" href="attendance.html?v=20260521b" target="_blank" rel="noopener">来場者画面</a>
-        <a class="admin-link" href="top.html?v=20260521b" target="_blank" rel="noopener">対戦トップ</a>
-        <a class="admin-link" href="referees.html?v=20260521b" target="_blank" rel="noopener">審判画面</a>
-        <a class="admin-link" href="starting.html?v=20260521b" target="_blank" rel="noopener">スタメン発表</a>
-        <a class="admin-link" href="reserve.html?v=20260521b" target="_blank" rel="noopener">リザーブ</a>
-        <a class="admin-link" href="preview.html?v=20260521b" target="_blank" rel="noopener">全画面プレビュー</a>
+        <a class="admin-link" href="display.html?v=20260520d" target="_blank" rel="noopener">スタメン画面</a>
+        <a class="admin-link" href="result.html?v=20260520d" target="_blank" rel="noopener">結果画面</a>
+        <a class="admin-link" href="attendance.html?v=20260520d" target="_blank" rel="noopener">来場者画面</a>
+        <a class="admin-link" href="top.html?v=20260520d" target="_blank" rel="noopener">対戦トップ</a>
+        <a class="admin-link" href="referees.html?v=20260520d" target="_blank" rel="noopener">審判画面</a>
+        <a class="admin-link" href="preview.html?v=20260520d" target="_blank" rel="noopener">全画面プレビュー</a>
         <button class="admin-button" id="resetButton" type="button">初期値に戻す</button>
       </div>
     </header>
@@ -40,22 +36,22 @@
       <form class="control-panel" id="controlForm" autocomplete="off">
         <section class="control-section import-section">
           <h2>公式記録から反映</h2>
-          <div class="official-match-picker" aria-label="JSONから試合を選択">
+          <div class="official-url-row">
             <label>
-              <span>年</span>
-              <select id="matchYearSelect">
-                <option value="">年を選択</option>
-              </select>
+              <span>J.LEAGUE Data Site URL</span>
+              <input id="officialUrlInput" type="url" placeholder="https://data.j-league.or.jp/SFMS02/?match_card_id=33403" />
             </label>
             <label>
-              <span>節</span>
-              <select id="matchSectionSelect" disabled>
-                <option value="">年を選択</option>
+              <span>反映内容</span>
+              <select id="officialImportMode">
+                <option value="kickoff">試合開始前</option>
+                <option value="fulltime" selected>試合終了時</option>
               </select>
             </label>
-            <div class="official-mode-actions">
-              <button class="admin-button secondary" id="matchKickoffButton" type="button" disabled>試合前で反映</button>
-              <button class="admin-button secondary" id="matchFulltimeButton" type="button" disabled>試合後で反映</button>
+            <button class="admin-button" id="officialImportButton" type="button">取得して反映</button>
+            <div class="official-mode-actions" aria-label="取得済み公式記録の切替">
+              <button class="admin-button secondary" id="officialKickoffButton" type="button" disabled>試合前</button>
+              <button class="admin-button secondary" id="officialFulltimeButton" type="button" disabled>試合終了後</button>
             </div>
           </div>
           <p class="official-import-status" id="officialImportStatus" aria-live="polite"></p>
@@ -67,8 +63,6 @@
           <button class="admin-tab" type="button" data-tab-target="attendance" role="tab" aria-selected="false">来場者数</button>
           <button class="admin-tab" type="button" data-tab-target="top" role="tab" aria-selected="false">対戦トップ</button>
           <button class="admin-tab" type="button" data-tab-target="referees" role="tab" aria-selected="false">審判</button>
-          <button class="admin-tab" type="button" data-tab-target="announce" role="tab" aria-selected="false">スタメン発表</button>
-          <button class="admin-tab" type="button" data-tab-target="reserve" role="tab" aria-selected="false">リザーブ</button>
         </div>
 
         <section class="control-section">
@@ -168,9 +162,9 @@
               <label>
                 <span>上部大会表記</span>
                 <select id="leagueLogoSelect">
-                  <option value="icons/100l.png?v=20260521b">J2・J3 百年構想リーグ</option>
-                  <option value="icons/j1.png?v=20260521b">明治安田 J1 LEAGUE</option>
-                  <option value="icons/j2.png?v=20260521b">明治安田 J2 LEAGUE</option>
+                  <option value="icons/100l.png?v=20260520d">J2・J3 百年構想リーグ</option>
+                  <option value="icons/j1.png?v=20260520d">明治安田 J1 LEAGUE</option>
+                  <option value="icons/j2.png?v=20260520d">明治安田 J2 LEAGUE</option>
                 </select>
               </label>
             </div>
@@ -179,8 +173,6 @@
                 <span>下部ロゴ画像</span>
                 <input id="logoInput" type="file" accept="image/*" />
               </label>
-            </div>
-            <div class="logo-controls">
               <button class="admin-button" id="clearLogo" type="button">画像を消す</button>
             </div>
           </div>
@@ -196,42 +188,6 @@
           <div class="player-editor" id="awayEditor"></div>
         </section>
 
-        <section class="control-section" data-tab-panel="announce" hidden>
-          <h2>スタメン発表</h2>
-          <div class="field-grid">
-            <label>
-              <span>表示チーム</span>
-              <select name="announcements.startingSide">
-                <option value="home">左チーム</option>
-                <option value="away">右チーム</option>
-              </select>
-            </label>
-          </div>
-        </section>
-
-        <section class="control-section" data-tab-panel="reserve" hidden>
-          <h2>リザーブ</h2>
-          <div class="field-grid">
-            <label>
-              <span>表示チーム</span>
-              <select name="announcements.reserveSide">
-                <option value="home">左チーム</option>
-                <option value="away">右チーム</option>
-              </select>
-            </label>
-          </div>
-        </section>
-
-        <section class="control-section" data-tab-panel="reserve" hidden>
-          <h2>左チーム リザーブ</h2>
-          <div class="player-editor" id="homeReserveEditor"></div>
-        </section>
-
-        <section class="control-section" data-tab-panel="reserve" hidden>
-          <h2>右チーム リザーブ</h2>
-          <div class="player-editor" id="awayReserveEditor"></div>
-        </section>
-
         <section class="control-section" data-tab-panel="result" hidden>
           <h2>左チーム 得点者</h2>
           <div class="scorer-editor" id="homeScorerEditor"></div>
@@ -244,13 +200,19 @@
 
         <section class="control-section" data-tab-panel="attendance" hidden>
           <h2>来場者数</h2>
-          <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; margin: 0 auto; max-width: 480px;">
-            <div style="font-size: 15px; font-weight: 800; color: #aebbd0; letter-spacing: 0.1em; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">本日の来場者数</div>
-            <div style="display: flex; align-items: center; gap: 10px; width: 100%; justify-content: center;">
-              <input name="attendance.count" type="text" placeholder="16,994" style="text-align: center; font-size: 24px; font-weight: 900; letter-spacing: 0.05em; padding: 8px 16px; min-height: 48px; width: 220px; border-radius: 6px;" />
-              <span style="font-size: 20px; font-weight: 900; color: #ffffff;">人</span>
-            </div>
-            <div style="font-size: 14px; font-weight: 700; color: #8a9bb3; letter-spacing: 0.05em;">ご来場ありがとうございました</div>
+          <div class="field-grid wide">
+            <label>
+              <span>タイトル</span>
+              <input name="attendance.title" type="text" />
+            </label>
+            <label>
+              <span>人数</span>
+              <input name="attendance.count" type="text" placeholder="16,994" />
+            </label>
+            <label>
+              <span>下部メッセージ</span>
+              <input name="attendance.message" type="text" />
+            </label>
           </div>
         </section>
 
@@ -319,28 +281,24 @@
         <div class="preview-toolbar">
           <span>表示プレビュー</span>
           <div class="preview-switcher" aria-label="プレビュー切替">
-            <button class="preview-button active" type="button" data-preview-src="display.html?v=20260521b" data-preview-width="1920" data-preview-height="1080">スタメン</button>
-            <button class="preview-button" type="button" data-preview-src="result.html?v=20260521b" data-preview-width="1920" data-preview-height="1080">結果</button>
-            <button class="preview-button" type="button" data-preview-src="attendance.html?v=20260521b" data-preview-width="1920" data-preview-height="1080">来場者</button>
-            <button class="preview-button" type="button" data-preview-src="top.html?v=20260521b" data-preview-width="1920" data-preview-height="1080">対戦トップ</button>
-            <button class="preview-button" type="button" data-preview-src="referees.html?v=20260521b" data-preview-width="1920" data-preview-height="1080">審判</button>
-            <button class="preview-button" type="button" data-preview-src="starting.html?v=20260521b" data-preview-width="1920" data-preview-height="1080">スタメン発表</button>
-            <button class="preview-button" type="button" data-preview-src="reserve.html?v=20260521b" data-preview-width="1920" data-preview-height="1080">リザーブ</button>
-            <button class="preview-button" type="button" data-preview-src="preview.html?v=20260521b" data-preview-width="1920" data-preview-height="1080">全画面</button>
+            <button class="preview-button active" type="button" data-preview-src="display.html?v=20260520d" data-preview-width="1920" data-preview-height="1080">スタメン</button>
+            <button class="preview-button" type="button" data-preview-src="result.html?v=20260520d" data-preview-width="1920" data-preview-height="1080">結果</button>
+            <button class="preview-button" type="button" data-preview-src="attendance.html?v=20260520d" data-preview-width="1920" data-preview-height="1080">来場者</button>
+            <button class="preview-button" type="button" data-preview-src="top.html?v=20260520d" data-preview-width="1920" data-preview-height="1080">対戦トップ</button>
+            <button class="preview-button" type="button" data-preview-src="referees.html?v=20260520d" data-preview-width="1920" data-preview-height="1080">審判</button>
+            <button class="preview-button" type="button" data-preview-src="preview.html?v=20260520d" data-preview-width="1920" data-preview-height="1080">全画面</button>
           </div>
         </div>
         <div class="preview-stage">
-          <iframe class="vision-preview" src="display.html?v=20260521b" title="大型ビジョンプレビュー" data-preview-width="1920" data-preview-height="1080"></iframe>
+          <iframe class="vision-preview" src="display.html?v=20260520d" title="大型ビジョンプレビュー" data-preview-width="1920" data-preview-height="1080"></iframe>
         </div>
       </section>
     </main>
 
-    <script src="vendor/html2canvas.min.js?v=20260521b"></script>
-    <script src="app.js?v=20260521b"></script>
+    <script src="vendor/html2canvas.min.js?v=20260520d"></script>
+    <script src="app.js?v=20260520d"></script>
   </body>
 </html>
-
-
 
 
 
