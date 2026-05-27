@@ -1231,62 +1231,61 @@ var scheduleData = window.scheduleData = window.scheduleData || [
     "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
     "details": ""
   },
-  {
-    "club": "niigata",
-    "matchweek": "PO1",
-    "date": "2026-05-30",
-    "day": "Sat",
-    "time": "14:00",
-    "opponent": "プレーオフ",
-    "venue": "デンカビッグスワンスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
-    "details": ""
-  },
-  {
-    "club": "kumamoto",
-    "matchweek": "PO",
-    "date": "2026-05-30",
-    "day": "Sat",
-    "time": "00:00",
-    "opponent": "プレーオフ",
-    "venue": "未定",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
-    "details": ""
-  },
-  {
-    "club": "niigata",
-    "matchweek": "PO2",
-    "date": "2026-06-06",
-    "day": "Sat",
-    "time": "00:00",
-    "opponent": "プレーオフ",
-    "venue": "未定",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
-    "details": ""
-  },
-  {
-    "club": "kumamoto",
-    "matchweek": "PO2",
-    "date": "2026-06-06",
-    "day": "Sat",
-    "time": "00:00",
-    "opponent": "プレーオフ",
-    "venue": "未定",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
-    "details": ""
-  }
-  ,
-  {
-    "club": "niigata",
-    "matchweek": "EX",
-    "date": "2026-06-13",
-    "day": "Sat",
-    "time": "00:00",
-    "opponent": "オールスター",
-    "venue": "MUFGスタジアム",
-    "emblem": "https://jleague.r10s.jp/img/common/img_club_niigata.png",
-    "details": ""
-  }
+    {
+        "club":  "niigata",
+        "matchweek":  "PO1",
+        "date":  "2026-05-30",
+        "day":  "Sat",
+        "time":  "14:00",
+        "opponent":  "鹿児島ユナイテッドFC",
+        "venue":  "デンカビッグスワンスタジアム",
+        "emblem":  "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
+        "details":  ""
+    },
+    {
+        "club":  "kumamoto",
+        "matchweek":  "PO1",
+        "date":  "2026-05-30",
+        "day":  "Sat",
+        "time":  "16:00",
+        "opponent":  "愛媛FC",
+        "venue":  "ニンジニアスタジアム",
+        "emblem":  "https://jleague.r10s.jp/img/common/img_club_ehime.png",
+        "details":  ""
+    },
+    {
+        "club":  "niigata",
+        "matchweek":  "PO2",
+        "date":  "2026-06-06",
+        "day":  "Sat",
+        "time":  "00:00",
+        "opponent":  "プレーオフ",
+        "venue":  "未定",
+        "emblem":  "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+        "details":  ""
+    },
+    {
+        "club":  "kumamoto",
+        "matchweek":  "PO2",
+        "date":  "2026-06-06",
+        "day":  "Sat",
+        "time":  "00:00",
+        "opponent":  "プレーオフ",
+        "venue":  "未定",
+        "emblem":  "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
+        "details":  ""
+    },
+    {
+        "club":  "niigata",
+        "matchweek":  "EX",
+        "date":  "2026-06-13",
+        "day":  "Sat",
+        "time":  "00:00",
+        "opponent":  "オールスター",
+        "venue":  "MUFGスタジアム",
+        "emblem":  "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+        "details":  ""
+    }
 ];
 
 window.SCHEDULE_DATA_FILES = window.SCHEDULE_DATA_FILES || [
