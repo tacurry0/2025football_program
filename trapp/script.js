@@ -45,7 +45,17 @@ window.openClubSite = async function(clubName, event) {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  if (window.scheduleDataReady) {
+    try {
+      await window.scheduleDataReady;
+    } catch (error) {
+      console.error(error);
+      window.scheduleData = window.scheduleData || [];
+    }
+  }
+
+  var scheduleData = window.scheduleData = window.scheduleData || [];
   const feedSlider = document.getElementById("feed-slider");
   const calendarBody = document.getElementById("calendar-body");
   const ultraFeed = document.getElementById("ultra-feed");
@@ -88,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let allSections = [];
   let visibleSections = [];
   let selectedYear = null;
+  let renderedFeedYear = undefined;
   let currentMode = "dashboard"; // dashboard, feed, calendar or scoreboard
 
   const CLUB_ENGLISH_NAMES = {
@@ -362,6 +373,176 @@ document.addEventListener("DOMContentLoaded", () => {
       return isHomeMatch(match && match.club, match && match.venue);
     }
 
+    const HISTORY_START_YEAR = 1999;
+    const HISTORY_END_YEAR = 2025;
+    const loadedHistoryYears = new Set();
+    const loadingHistoryYears = new Map();
+
+    function getHistoryYears() {
+      const years = [];
+      for (let y = HISTORY_START_YEAR; y <= HISTORY_END_YEAR; y++) years.push(y);
+      return years;
+    }
+
+    function toIsoDate(dateText) {
+      const m = String(dateText || "").match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+      if (!m) return String(dateText || "");
+      return `${m[1]}-${String(m[2]).padStart(2, "0")}-${String(m[3]).padStart(2, "0")}`;
+    }
+
+    function getHistoryMatchweek(section) {
+      const text = String(section || "");
+      const m = text.match(/第\d+節|第\d+回戦/);
+      return m ? m[0] : (text || "EX");
+    }
+
+    function getCompetitionShort(competition) {
+      const text = String(competition || "");
+      if (text.includes("J1")) return "J1";
+      if (text.includes("J2") || text.includes("ディビジョン2")) return "J2";
+      if (text.includes("J3")) return "J3";
+      if (text.includes("天皇杯")) return "EC";
+      if (text.includes("ルヴァン") || text.includes("Ｊリーグカップ")) return "LC";
+      return text;
+    }
+
+    function normalizeMinute(value) {
+      return String(value || "").replace(/'$/, "");
+    }
+
+    function mapHistoryMembers(members) {
+      return Array.isArray(members) ? members.map(member => ({
+        position: member.position || "",
+        number: member.number || "",
+        name: member.name || ""
+      })) : [];
+    }
+
+    function mapHistoryGoals(goals) {
+      return Array.isArray(goals) ? goals.map(goal => ({
+        minute: normalizeMinute(goal.time),
+        scorer: goal.name || ""
+      })) : [];
+    }
+
+    function mapHistoryWarnings(cards) {
+      return Array.isArray(cards) ? cards
+        .filter(card => String(card.type || "").includes("警告"))
+        .map(card => ({ minute: normalizeMinute(card.time), player: card.name || "" })) : [];
+    }
+
+    function mapHistorySubs(subs) {
+      if (!Array.isArray(subs)) return [];
+      const mapped = [];
+      subs.forEach((row, index) => {
+        if (row.in_out !== "▽") return;
+        const nextIn = subs.slice(index + 1).find(next => next.in_out === "▲" || next.in_out === "▽");
+        if (!nextIn || nextIn.in_out !== "▲") return;
+        mapped.push({ minute: normalizeMinute(row.time), out: row.name || "", in: nextIn.name || "" });
+      });
+      return mapped;
+    }
+
+    function historyItemToMatch(item, club, ownName) {
+      const isHome = item.home_team === ownName;
+      const opponent = isHome ? item.away_team : item.home_team;
+      const ownScore = Number(isHome ? item.home_score : item.away_score);
+      const opponentScore = Number(isHome ? item.away_score : item.home_score);
+      const resultMark = ownScore > opponentScore ? "○" : ownScore < opponentScore ? "●" : "△";
+      const date = toIsoDate(item.date);
+      const d = parseDate(date);
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const ownDetails = isHome ? item.home_details : item.away_details;
+      const ownGoals = isHome ? item.home_goals : item.away_goals;
+      const opponentGoals = isHome ? item.away_goals : item.home_goals;
+      const comp = getCompetitionShort(item.competition);
+
+      return {
+        club,
+        matchweek: getHistoryMatchweek(item.section),
+        date,
+        day: days[d.getDay()],
+        time: item.kickoff || "",
+        opponent,
+        venue: item.stadium || "",
+        emblem: resolveEmblemUrl(opponent, ""),
+        details: [comp, isHome ? "H" : "A", resultMark, `${ownScore}-${opponentScore}`].filter(Boolean).join(" "),
+        home_away: isHome ? "H" : "A",
+        result_mark: resultMark,
+        score: `${ownScore}-${opponentScore}`,
+        tournament: item.competition || "",
+        stage: item.section || "",
+        weather: item.weather || "",
+        temperature: item.temperature || "",
+        humidity: String(item.humidity || "").replace(/%$/, ""),
+        attendance: item.attendance || "",
+        manager: ownDetails && ownDetails.manager || "",
+        j_official_url: item.url || "",
+        match_card_id: item.match_card_id || "",
+        home: item.home_team || "",
+        away: item.away_team || "",
+        home_score: item.home_score || "",
+        away_score: item.away_score || "",
+        goals: mapHistoryGoals(ownGoals),
+        opponent_goals: mapHistoryGoals(opponentGoals),
+        starting_members: mapHistoryMembers(ownDetails && ownDetails.starting),
+        bench_members: mapHistoryMembers(ownDetails && ownDetails.substitutes),
+        substitutions: mapHistorySubs(ownDetails && ownDetails.substitutions),
+        warnings: mapHistoryWarnings(ownDetails && ownDetails.cards)
+      };
+    }
+
+    async function fetchHistoryFile(path) {
+      try {
+        const res = await fetch(`${path}?v=20260527source`);
+        if (!res.ok) return [];
+        return await res.json();
+      } catch (error) {
+        return [];
+      }
+    }
+
+    async function ensureHistoryYearLoaded(year) {
+      year = Number(year);
+      if (!year || year > HISTORY_END_YEAR || year < HISTORY_START_YEAR || loadedHistoryYears.has(year)) return;
+      if (loadingHistoryYears.has(year)) return loadingHistoryYears.get(year);
+
+      const promise = (async () => {
+        const files = [`./data/history/${year}.json`, `./data/history/${year}_kumamoto.json`];
+        const payloads = await Promise.all(files.map(fetchHistoryFile));
+        const seen = new Set(scheduleData.map(m => getScheduleResultKey(m.date, m.club, m.opponent)));
+        const resultSeen = new Set(getResultArray(officialResults).map(r => getResultKey(r)));
+        const ownTeams = [
+          ["niigata", "アルビレックス新潟"],
+          ["kumamoto", "ロアッソ熊本"]
+        ];
+
+        payloads.flat().forEach(item => {
+          if (!item || !item.date || item.home_score === "" || item.away_score === "") return;
+          ownTeams.forEach(([club, ownName]) => {
+            if (item.home_team !== ownName && item.away_team !== ownName) return;
+            const match = historyItemToMatch(item, club, ownName);
+            const key = getScheduleResultKey(match.date, match.club, match.opponent);
+            if (!seen.has(key)) {
+              scheduleData.push(match);
+              seen.add(key);
+            }
+            const resultKey = getResultKey(match);
+            if (!resultSeen.has(resultKey)) {
+              officialResults.push(match);
+              resultSeen.add(resultKey);
+            }
+          });
+        });
+        rebuildOfficialResultIndex();
+        loadedHistoryYears.add(year);
+      })();
+
+      loadingHistoryYears.set(year, promise);
+      await promise;
+      loadingHistoryYears.delete(year);
+    }
+
     async function updateWeatherUI(container, date, venue) {
       if (!container) return;
       const STADIUM_CITY_MAP = {
@@ -488,6 +669,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mode === "dashboard") renderDashboard();
     if (mode === "scoreboard") ensureScoreboardFrame();
     if (mode === "feed") {
+      if (renderedFeedYear !== selectedYear) renderFeed(selectedYear);
       requestAnimationFrame(() => scrollToIndex(currentIndex));
     }
     if (hamBtn) hamBtn.innerHTML = mode === "scoreboard" ? ellipsisIconHtml : hamburgerIconHtml;
@@ -515,9 +697,10 @@ document.addEventListener("DOMContentLoaded", () => {
     yearTabContainer.innerHTML = "";
     yearTabs = {};
 
-    const years = Array.from(new Set(scheduleData
-      .map(m => parseDate(m.date).getFullYear())
-      .filter(Boolean)))
+    const years = Array.from(new Set([
+      ...getHistoryYears(),
+      ...scheduleData.map(m => parseDate(m.date).getFullYear()).filter(Boolean)
+    ]))
       .sort((a, b) => a - b);
 
     years.forEach(y => {
@@ -526,8 +709,8 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.id = `toggle-year-${y}`;
       btn.className = "year-tab";
       btn.textContent = y;
-      btn.onclick = () => {
-        applyYearFilter(Number(y));
+      btn.onclick = async () => {
+        await applyYearFilter(Number(y));
       };
       yearTabContainer.appendChild(btn);
       yearTabs[y] = btn;
@@ -553,17 +736,22 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollToIndex(idx !== -1 ? idx : 0);
   }
 
-  function applyYearFilter(year, skipScroll = false) {
+  async function applyYearFilter(year, skipScroll = false) {
     selectedYear = year;
+    if (year && year <= HISTORY_END_YEAR) {
+      feedSlider.innerHTML = `<div class="month-section" style="display:flex;align-items:center;justify-content:center;color:#888;font-weight:800;">${year} 読み込み中...</div>`;
+      await ensureHistoryYearLoaded(year);
+    }
+    if (renderedFeedYear !== selectedYear) {
+      renderFeed(selectedYear);
+    }
+
     Object.keys(yearTabs).forEach(k => {
       const isActive = (k === "all" && selectedYear === null) || (Number(k) === selectedYear);
       if (yearTabs[k]) yearTabs[k].classList.toggle("active", isActive);
     });
 
-    allSections.forEach(sec => {
-      const y = Number(sec.dataset.year || 0);
-      sec.style.display = (selectedYear === null || y === selectedYear) ? "flex" : "none";
-    });
+    allSections.forEach(sec => { sec.style.display = "flex"; });
     rebuildVisibleSections();
     if (!skipScroll) { currentIndex = 0; scrollToIndex(0); }
     if (currentMode === "calendar") renderCalendar();
@@ -1325,14 +1513,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Results & Data Management ---
   let officialResults = [];
   let cachedStandings = null;
+  let officialResultIndex = new Map();
 
   // Initialize data from localStorage cache
-  const rSave = localStorage.getItem("trapp_results_cache");
-  if (rSave) { try { officialResults = JSON.parse(rSave); } catch (e) { } }
-  if (window.STATIC_RESULTS) {
-    officialResults = mergeResultArrays(window.STATIC_RESULTS, officialResults);
-  }
-  
   const lSave = localStorage.getItem("trapp_standings_cache");
   if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
 
@@ -1349,23 +1532,17 @@ document.addEventListener("DOMContentLoaded", () => {
     return ["gas", date, result.section || "", normalizeName(result.home), normalizeName(result.away)].join("|");
   }
 
-  function mergeResultArrays(...sources) {
-    const seen = new Set();
-    const merged = [];
-    sources.forEach(source => {
-      getResultArray(source).forEach(result => {
-        const key = getResultKey(result);
-        if (seen.has(key)) return;
-        seen.add(key);
-        merged.push(result);
-      });
-    });
-    return merged;
+  function getScheduleResultKey(date, club, opponent) {
+    return [date || "", club || "", normalizeName(opponent || "")].join("|");
   }
 
-  function withMergedResultsPayload(basePayload, mergedResults) {
-    if (!basePayload || Array.isArray(basePayload)) return mergedResults;
-    return { ...basePayload, data: mergedResults };
+  function rebuildOfficialResultIndex() {
+    officialResultIndex = new Map();
+    getResultArray(officialResults).forEach(result => {
+      if (result.date && result.club && result.opponent) {
+        officialResultIndex.set(getScheduleResultKey(result.date, result.club, result.opponent), result);
+      }
+    });
   }
 
   async function fetchLocalJson(type) {
@@ -1378,80 +1555,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return null;
   }
 
-  function commitResultsPayload(resJson) {
-    const merged = mergeResultArrays(window.STATIC_RESULTS || [], officialResults, resJson);
-    if (!merged.length) return;
-
-    officialResults = merged;
-    localStorage.setItem("trapp_results_cache", JSON.stringify(officialResults));
-    injectResultsIntoSchedule(officialResults);
-    syncResultsToLocalStorage(officialResults);
-
-    renderFeed();
-    applyYearFilter(selectedYear, true);
-    if (currentMode === "dashboard") renderDashboard();
-    else if (currentMode === "calendar") renderCalendar();
-    if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
-  }
-
-  function injectResultsIntoSchedule(results) {
-    let added = 0;
-    getResultArray(results).forEach(r => {
-      if (!r.date || !r.club || !r.opponent) return;
-      const exists = scheduleData.find(m => m.date === r.date && m.club === r.club && m.opponent === r.opponent);
-      if (exists) return;
-
-      const d = parseDate(r.date);
-      const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-      const dayStr = r.day || days[d.getDay()];
-      let emblem = resolveEmblemUrl(r.opponent, r.emblem) || "";
-      if (!emblem) {
-        const reversed = Object.entries(EMBLEM_MAP).find(([k,v]) => robustTeamMatch(v, r.opponent));
-        if (reversed) emblem = localizeEmblemUrl(`https://jleague.r10s.jp/img/common/img_club_${reversed[0]}.png`);
-      }
-
-      scheduleData.push({
-         club: r.club,
-         matchweek: r.matchweek || "EX",
-         date: r.date,
-         day: dayStr,
-         time: r.time || "",
-         opponent: r.opponent,
-         venue: r.venue || "",
-         home_away: r.home_away || "",
-         emblem: emblem,
-         details: r.details || ""
-      });
-      added++;
-    });
-    return added;
-  }
-
   /**
    * Universal fetch with fallback and stale check
    */
   async function fetchData(type, forceGas = false) {
-    if (type === "results" && window.STATIC_RESULTS) {
-       const localJson = await fetchLocalJson(type);
-       const localMerged = mergeResultArrays(window.STATIC_RESULTS, officialResults, localJson);
-       if (!forceGas && localJson) {
-         return withMergedResultsPayload(localJson, localMerged);
-       }
-
-       const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
-       try {
-         const gasUrlWithCacheBuster = `${gasUrl}&nocache=1&t=${Date.now()}`;
-         const res = await fetch(gasUrlWithCacheBuster);
-         const gasJson = await res.json();
-         const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
-         if (gasArr.length > 0) {
-           const merged = mergeResultArrays(window.STATIC_RESULTS, officialResults, localJson, gasJson);
-           return withMergedResultsPayload(gasJson, merged);
-         }
-       } catch (e) { console.error(`GAS fetch failed: ${type}`); }
-       return withMergedResultsPayload(localJson || window.STATIC_RESULTS, localMerged);
-    }
-
     const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
     let staticJson = await fetchLocalJson(type);
 
@@ -1472,13 +1579,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function refreshAllData(forceGas = false) {
     await clubEmblemMapReady;
 
-    const resultsPromise = fetchData("results", forceGas);
     const standingsPromise = fetchData("standings", forceGas);
-    const resJson = await resultsPromise;
-    if (resJson) {
-      commitResultsPayload(resJson);
-    }
-
     const stdJson = await standingsPromise;
     if (stdJson && stdJson.data) {
       cachedStandings = stdJson.data;
@@ -1496,6 +1597,9 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   function findOfficialResult(match) {
     if (!officialResults || !officialResults.length) return null;
+    const indexed = officialResultIndex.get(getScheduleResultKey(match.date, match.club, match.opponent));
+    if (indexed) return indexed;
+
     const myKw = match.club === "niigata" ? "新潟" : "熊本";
     
     return officialResults.find(r => {
@@ -1529,9 +1633,16 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   function syncResultsToLocalStorage(results) {
     let changed = false;
+    const matchByKey = new Map();
     scheduleData.forEach(m => {
-      const r = findOfficialResult(m);
-      if (r) {
+      matchByKey.set(getScheduleResultKey(m.date, m.club, m.opponent), m);
+    });
+
+    getResultArray(results).forEach(r => {
+      if (!r.date || !r.club || !r.opponent) return;
+      const m = matchByKey.get(getScheduleResultKey(r.date, r.club, r.opponent));
+      if (!m) return;
+
         let sM = null, sO = null, pkM = null, pkO = null;
         
         // Static JSON Format Support
@@ -1581,19 +1692,19 @@ document.addEventListener("DOMContentLoaded", () => {
             changed = true;
           }
         }
-      }
     });
     return changed;
   }
 
-  if (window.STATIC_RESULTS && window.STATIC_RESULTS.length) {
-    officialResults = mergeResultArrays(window.STATIC_RESULTS, officialResults);
-    injectResultsIntoSchedule(window.STATIC_RESULTS);
-    syncResultsToLocalStorage(window.STATIC_RESULTS);
-  }
-
-  // Initial load
-  refreshAllData();
+  // 順位表だけを後から軽く更新する。日程/結果は schedule.json と data/history に一本化。
+  setTimeout(async () => {
+    const stdJson = await fetchLocalJson("standings");
+    if (stdJson && stdJson.data) {
+      cachedStandings = stdJson.data;
+      localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
+      if (currentMode === "dashboard") renderDashboard();
+    }
+  }, 1200);
 
 
   // extract the city map into reusable object
@@ -2061,11 +2172,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Rendering Feed ---
 
 
-  function renderFeed() {
+  function renderFeed(year = selectedYear) {
+    renderedFeedYear = year;
     feedSlider.innerHTML = "";
     scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
     const ymMap = {};
-    scheduleData.forEach(m => {
+    const sourceMatches = year === null
+      ? scheduleData
+      : scheduleData.filter(m => parseDate(m.date).getFullYear() === Number(year));
+
+    sourceMatches.forEach(m => {
       const d = parseDate(m.date), key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
       if (!ymMap[key]) ymMap[key] = []; ymMap[key].push(m);
     });
@@ -2077,10 +2193,18 @@ document.addEventListener("DOMContentLoaded", () => {
       ymMap[key].forEach(match => {
         const mId = `${match.date}_${match.club}_${match.opponent}`;
         const isAtt = localStorage.getItem(`attend_${mId}`) === "true";
-        const sMy = localStorage.getItem(`score_my_${mId}`) || "", sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
+        let sMy = localStorage.getItem(`score_my_${mId}`) || "", sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
         const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "", sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
         let res = null;
         let scoreDisplay = "";
+
+        if ((sMy === "" || sOpp === "") && match.score) {
+          const scores = String(match.score).split("-").map(x => x.trim());
+          if (scores.length === 2) {
+            sMy = scores[0];
+            sOpp = scores[1];
+          }
+        }
 
         if (sMy !== "" && sOpp !== "") {
           const ms = Number(sMy), os = Number(sOpp);
@@ -2125,9 +2249,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- Initializing App ---
-  renderFeed();
   const today = new Date(), todayY = today.getFullYear(), tKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
-  applyYearFilter(allSections.some(s => Number(s.dataset.year) === todayY) ? todayY : 2025, true);
+  const initialYear = scheduleData.some(m => parseDate(m.date).getFullYear() === todayY) ? todayY : 2025;
+  renderFeed(initialYear);
+  applyYearFilter(initialYear, true);
   const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
 
   // Use requestAnimationFrame and small timeout to ensure layout is ready for iPhone
@@ -2791,8 +2916,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // アプリ起動時に初期化
   updateHeaderAnnouncements();
 
-  // アプリ起動時にバックグラウンドで結果同期（3秒後）
-  setTimeout(() => refreshAllData(true), 800);
+  // 最新データが必要な場合はメニューの再読み込みから同期する
 
 });
 

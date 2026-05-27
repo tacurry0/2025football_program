@@ -121,6 +121,9 @@ html, body {
   border-left: 1px solid rgba(255, 255, 255, 0.4);
   z-index: 3000; transition: right 0.5s var(--ease-expo);
   box-shadow: -15px 0 40px rgba(0,0,0,0.08); padding-top: 80px;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom));
+  box-sizing: border-box; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 #menu-close {
   position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; 
@@ -131,7 +134,7 @@ html, body {
 #menu-close svg { width: 24px; height: 24px; }
 #menu-close:active { transform: scale(0.9); background: rgba(0,0,0,0.1); }
 #side-menu.active { right: 0; }
-.menu-inner { padding: 0 30px; }
+.menu-inner { padding: 0 30px 24px; }
 .menu-title { font-family: var(--font-kick); font-size: 1.1rem; color: var(--text-grey); margin-bottom: 25px; letter-spacing: 0.2em; font-weight: 800; }
 
 .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

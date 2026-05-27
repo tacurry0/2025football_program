@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v15-history';
+const cacheName = 'football-app-v20-source';
 const assetsToCache = [
   './',
   './index.html',
@@ -10,12 +10,9 @@ const assetsToCache = [
   './scoreboard.css',
   './scoreboard.js',
   './vendor/html2canvas.min.js',
-  './results_data.js',
   './schedule/schedule.js',
-  './schedule/schedule.json',
-  './schedule/niigata_2024_schedule.json',
+  './schedule.json',
   './club_emblems.json',
-  './data/results.json',
   './emblems/アルビレックス新潟.png',
   './emblems/ロアッソ熊本.png',
   './manifest.json',
