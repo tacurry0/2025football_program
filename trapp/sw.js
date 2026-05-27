@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v20-source';
+const cacheName = 'football-app-v21-nocache-schedule';
 const assetsToCache = [
   './',
   './index.html',
@@ -26,9 +26,24 @@ self.addEventListener('install', e => {
       return cache.addAll(assetsToCache);
     })
   );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.filter(key => key !== cacheName).map(key => caches.delete(key))
+    )).then(() => self.clients.claim())
+  );
 });
 
 self.addEventListener('fetch', e => {
+  const url = new URL(e.request.url);
+  if (url.origin === location.origin && url.pathname.endsWith('/schedule.json')) {
+    e.respondWith(fetch(e.request).catch(() => caches.match('./schedule.json')));
+    return;
+  }
+
   e.respondWith(
     caches.match(e.request).then(response => {
       return response || fetch(e.request);

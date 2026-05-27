@@ -401,20 +401,20 @@
         "date":  "2026-05-30",
         "day":  "Sat",
         "time":  "14:00",
-        "opponent":  "プレーオフ",
+        "opponent":  "鹿児島ユナイテッドFC",
         "venue":  "デンカビッグスワンスタジアム",
-        "emblem":  "https://jleague.r10s.jp/img/common/img_club_niigata.png",
+        "emblem":  "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
         "details":  ""
     },
     {
         "club":  "kumamoto",
-        "matchweek":  "PO",
+        "matchweek":  "PO1",
         "date":  "2026-05-30",
         "day":  "Sat",
-        "time":  "00:00",
-        "opponent":  "プレーオフ",
-        "venue":  "未定",
-        "emblem":  "https://jleague.r10s.jp/img/common/img_club_kumamoto.png",
+        "time":  "16:00",
+        "opponent":  "愛媛FC",
+        "venue":  "ニンジニアスタジアム",
+        "emblem":  "https://jleague.r10s.jp/img/common/img_club_ehime.png",
         "details":  ""
     },
     {
