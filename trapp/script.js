@@ -374,7 +374,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const HISTORY_START_YEAR = 1999;
-    const HISTORY_END_YEAR = 2025;
+    const HISTORY_END_YEAR = Math.max(2026, new Date().getFullYear());
     const loadedHistoryYears = new Set();
     const loadingHistoryYears = new Map();
 
@@ -509,6 +509,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const promise = (async () => {
         const files = [`./data/history/${year}.json`, `./data/history/${year}_kumamoto.json`];
+        if (year === 2026) files.push("./data/data_kumamoto/_kumamoto.json");
         const payloads = await Promise.all(files.map(fetchHistoryFile));
         const seen = new Set(scheduleData.map(m => getScheduleResultKey(m.date, m.club, m.opponent)));
         const resultSeen = new Set(getResultArray(officialResults).map(r => getResultKey(r)));
@@ -1514,10 +1515,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   let officialResults = [];
   let cachedStandings = null;
   let officialResultIndex = new Map();
+  const STANDINGS_CACHE_KEY = "trapp_standings_cache";
+  const RESULTS_CACHE_KEY = "trapp_results_cache";
 
   // Initialize data from localStorage cache
-  const lSave = localStorage.getItem("trapp_standings_cache");
-  if (lSave) { try { cachedStandings = JSON.parse(lSave); } catch (e) { } }
+  const lSave = localStorage.getItem(STANDINGS_CACHE_KEY);
+  if (lSave) {
+    try {
+      const parsed = JSON.parse(lSave);
+      cachedStandings = Array.isArray(parsed) ? parsed : (parsed && parsed.data) || null;
+    } catch (e) { }
+  }
+  let cachedResults = [];
+  const rSave = localStorage.getItem(RESULTS_CACHE_KEY);
+  if (rSave) {
+    try {
+      const parsed = JSON.parse(rSave);
+      cachedResults = getResultArray(parsed);
+    } catch (e) { }
+  }
 
   function getResultArray(payload) {
     if (!payload) return [];
@@ -1545,6 +1561,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  function saveStandingsCache(data, meta = {}) {
+    if (!Array.isArray(data) || !data.length) return;
+    cachedStandings = data;
+    localStorage.setItem(STANDINGS_CACHE_KEY, JSON.stringify({
+      data,
+      savedAt: new Date().toISOString(),
+      source: meta.source || "unknown",
+      timestamp: meta.timestamp || null
+    }));
+  }
+
+  function saveResultsCache(data, meta = {}) {
+    if (!Array.isArray(data) || !data.length) return;
+    cachedResults = data;
+    localStorage.setItem(RESULTS_CACHE_KEY, JSON.stringify({
+      data,
+      savedAt: new Date().toISOString(),
+      source: meta.source || "unknown",
+      timestamp: meta.timestamp || null
+    }));
+  }
+
+  function mergeOfficialResults(results) {
+    const seen = new Set(getResultArray(officialResults).map(r => getResultKey(r)));
+    getResultArray(results).forEach(result => {
+      const key = getResultKey(result);
+      if (!seen.has(key)) {
+        officialResults.push(result);
+        seen.add(key);
+      }
+    });
+    rebuildOfficialResultIndex();
+  }
+
   async function fetchLocalJson(type) {
     try {
       const res = await fetch(`./data/${type}.json?t=${Date.now()}`);
@@ -1568,6 +1618,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const gasJson = await res.json();
       const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
       const staticArr = (staticJson && staticJson.data) ? staticJson.data : (Array.isArray(staticJson) ? staticJson : []);
+      if (forceGas && gasArr.length > 0) return gasJson;
+      if (type === "standings" && gasArr.length > 0) return gasJson;
       if (gasArr.length >= staticArr.length && gasArr.length > 0) return gasJson;
     } catch (e) { console.error(`GAS fetch failed: ${type}`); }
     return staticJson;
@@ -1582,8 +1634,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const standingsPromise = fetchData("standings", forceGas);
     const stdJson = await standingsPromise;
     if (stdJson && stdJson.data) {
-      cachedStandings = stdJson.data;
-      localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
+      saveStandingsCache(stdJson.data, { source: stdJson.fromCache ? "gas-cache" : "gas", timestamp: stdJson.timestamp });
     }
 
     if (currentMode === "dashboard") renderDashboard();
@@ -1698,13 +1749,58 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 順位表だけを後から軽く更新する。日程/結果は schedule.json と data/history に一本化。
   setTimeout(async () => {
-    const stdJson = await fetchLocalJson("standings");
+    const stdJson = await fetchData("standings");
     if (stdJson && stdJson.data) {
-      cachedStandings = stdJson.data;
-      localStorage.setItem("trapp_standings_cache", JSON.stringify(cachedStandings));
+      saveStandingsCache(stdJson.data, { source: stdJson.fromCache ? "gas-cache" : "gas", timestamp: stdJson.timestamp });
       if (currentMode === "dashboard") renderDashboard();
     }
   }, 1200);
+
+  setTimeout(async () => {
+    const resultJson = await fetchData("results", true);
+    if (resultJson && resultJson.data) {
+      saveResultsCache(resultJson.data, { source: resultJson.fromCache ? "gas-cache" : "gas", timestamp: resultJson.timestamp });
+      mergeOfficialResults(resultJson.data);
+      if (currentMode === "dashboard") updateDashboardPrevResults();
+    }
+  }, 1800);
+
+  function getTodayIso() {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  }
+
+  function addDaysToIso(dateStr, days) {
+    const date = parseDate(dateStr);
+    if (isNaN(date.getTime())) return dateStr || "";
+    date.setDate(date.getDate() + days);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+  }
+
+  function getDashboardMatch(club, cutoffStr = getTodayIso()) {
+    const clubMatches = scheduleData
+      .filter(m => m.club === club)
+      .sort((a, b) => a.date.localeCompare(b.date));
+    return clubMatches.find(m => m.date >= cutoffStr) || clubMatches.slice().reverse().find(m => m.date < cutoffStr) || null;
+  }
+
+  function getDashboardResultCutoff(match, todayIso = getTodayIso()) {
+    if (!match) return "9999-12-31";
+    return match.date < todayIso ? addDaysToIso(match.date, 1) : match.date;
+  }
+
+  function findStandingRow(data, teamName) {
+    if (!Array.isArray(data) || !teamName) return null;
+    const target = normalizeName(teamName);
+    return data.find(r => r.team && normalizeName(r.team) === target)
+      || data.find(r => r.team && robustTeamMatch(r.team, teamName))
+      || data.find(r => {
+        if (!r.team) return false;
+        const rowTeam = normalizeName(r.team);
+        return rowTeam.includes(target) || target.includes(rowTeam);
+      })
+      || null;
+  }
 
 
   // extract the city map into reusable object
@@ -1737,29 +1833,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
 
-    // Sort logic to find "Next" Match
-    const now = new Date();
-    // Use today's local date as cutoff to keep today's matches visible until tomorrow
-    const y = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
-    const cutoffStr = `${y}-${mm}-${dd}`;
+    // Use today's local date as cutoff to keep today's matches visible until tomorrow.
+    // If no future match exists in the bundled schedule, keep the latest match card visible.
+    const cutoffStr = getTodayIso();
 
     // Check if toggle buttons exist, respect club visibility
     const showNiigata = true; // Dashboard shows both actively or check toggles
     const showKumamoto = true;
 
-    let nextNiigata = null;
-    let nextKumamoto = null;
-
-    // sorted ascending array
-    const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
-
-    for (let m of sorted) {
-      if (m.date >= cutoffStr && !nextNiigata && m.club === "niigata") nextNiigata = m;
-      if (m.date >= cutoffStr && !nextKumamoto && m.club === "kumamoto") nextKumamoto = m;
-      if (nextNiigata && nextKumamoto) break;
-    }
+    let nextNiigata = getDashboardMatch("niigata", cutoffStr);
+    let nextKumamoto = getDashboardMatch("kumamoto", cutoffStr);
 
     let html = "";
     const renderCard = (m, clubName, mainColor, myShortName) => {
@@ -1945,24 +2028,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       
       const updateStatsCard = (m, myKeyword) => {
         if (!m) return;
-        const nMyKey = normalizeName(myKeyword);
-        const myData = data.find(r => r.team && normalizeName(r.team).includes(nMyKey));
-        
-        // Match opponent rank
-        const J_TEAM_KWS = ["FC東京", "東京V", "横浜FM", "横浜FC", "YS横浜", "FC大阪", "G大阪", "C大阪", "セレッソ", "FC岐阜", "FC今治", "FC琉球", "札幌", "鹿島", "浦和", "柏", "町田", "川崎", "湘南", "新潟", "富山", "金沢", "清水", "藤枝", "沼津", "磐田", "名古屋", "岐阜", "京都", "神戸", "奈良", "鳥取", "岡山", "広島", "山口", "讃岐", "徳島", "愛媛", "今治", "福岡", "北九州", "鳥栖", "長崎", "熊本", "大分", "宮崎", "鹿児島", "琉球", "高知", "滋賀", "八戸", "盛岡", "秋田", "山形", "仙台", "福島", "水戸", "群馬", "栃木", "大宮", "千葉", "相模原", "甲府", "松本", "長野"];
-        let oppData = null;
-        let bestLen = 0;
-        const nOpp = normalizeName(m.opponent);
-        for (let kw of J_TEAM_KWS) {
-           const nKw = normalizeName(kw);
-           if (nOpp.includes(nKw)) {
-             const found = data.find(r => r.team && normalizeName(r.team).includes(nKw));
-             if (found && kw.length > bestLen) {
-                oppData = found;
-                bestLen = kw.length;
-             }
-           }
-        }
+        const myData = findStandingRow(data, myKeyword);
+        const oppData = findStandingRow(data, m.opponent);
 
         const card = document.getElementById(`dash-card-${m.club}`);
         if (card) {
@@ -1994,13 +2061,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   function updateDashboardPrevResults() {
     if (!officialResults.length) return;
 
-    const now = new Date();
-    const cutoffStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+    const cutoffStr = getTodayIso();
 
-    // Find next matches to determine cutoff dates
-    const sorted = [...scheduleData].sort((a, b) => a.date.localeCompare(b.date));
-    let nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
-    let nextKumamoto = sorted.find(m => m.date >= cutoffStr && m.club === "kumamoto");
+    // Find dashboard matches to determine cutoff dates. Past fallback cards include their own result.
+    let nextNiigata = getDashboardMatch("niigata", cutoffStr);
+    let nextKumamoto = getDashboardMatch("kumamoto", cutoffStr);
 
     const escapeAttr = (value) => String(value || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
     const getOpponentInfoFromResult = (r, kw) => {
@@ -2025,17 +2090,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       const card = document.getElementById(`dash-card-${club}`);
       if (!card) return;
       
-      const cutoff = match ? match.date : "9999-12-31";
+      const cutoff = getDashboardResultCutoff(match, cutoffStr);
       
       const updateHalf = (prefix, kw) => {
-        const past = officialResults.filter(r => {
+        const pastAll = officialResults.filter(r => {
           const dMatch = r.date < cutoff;
           const status = (r.status || "").toLowerCase();
           const isFinished = status.includes("finish") || status.includes("ft") || status.includes("終");
           
           // Static JSON Support
           if (r.club && r.opponent) {
-            const tMatchStatic = (kw === "新潟" ? r.club === "niigata" : r.club === "kumamoto");
+            const staticClub = kw === "新潟" ? "niigata" : (kw === "熊本" ? "kumamoto" : null);
+            const tMatchStatic = staticClub && r.club === staticClub;
             const hasScoreStatic = r.score !== undefined;
             return dMatch && tMatchStatic && hasScoreStatic;
           }
@@ -2045,6 +2111,15 @@ document.addEventListener("DOMContentLoaded", async () => {
           const hasScore = r.home_score !== "" && r.home_score !== null;
           return dMatch && tMatch && (hasScore || isFinished);
         }).sort((a,b) => b.date.localeCompare(a.date));
+
+        const past = [];
+        const seenDates = new Set();
+        pastAll.forEach(r => {
+          // One club has only one target match per day here; this removes GAS/local-history duplicates.
+          if (seenDates.has(r.date)) return;
+          seenDates.add(r.date);
+          past.push(r);
+        });
 
         if (!past.length) return;
         const last = past[0];
@@ -2252,7 +2327,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const today = new Date(), todayY = today.getFullYear(), tKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
   const initialYear = scheduleData.some(m => parseDate(m.date).getFullYear() === todayY) ? todayY : 2025;
   renderFeed(initialYear);
-  applyYearFilter(initialYear, true);
+  await applyYearFilter(initialYear, true);
+  mergeOfficialResults(cachedResults);
   const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
 
   // Use requestAnimationFrame and small timeout to ensure layout is ready for iPhone
@@ -2803,6 +2879,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const json = await fetchData("standings");
       if (!json || !json.data || !Array.isArray(json.data)) throw new Error("no data");
+      saveStandingsCache(json.data, { source: json.fromCache ? "gas-cache" : "gas", timestamp: json.timestamp });
 
       // グループ別に整理
       const groups = {};
