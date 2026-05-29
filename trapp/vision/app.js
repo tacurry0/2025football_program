@@ -174,11 +174,11 @@
   }
 
   const DEFAULT_LEAGUE_IMAGE = makeDefaultLeagueImage();
-  const DEFAULT_LEAGUE_ASSET = "icons/100l.png?v=20260529navvision2";
+  const DEFAULT_LEAGUE_ASSET = "icons/100l.png?v=20260529homevision2";
   const LEAGUE_LOGO_ASSETS = {
-    hundred: "icons/100l.png?v=20260529navvision2",
-    j1: "icons/j1.png?v=20260529navvision2",
-    j2: "icons/j2.png?v=20260529navvision2"
+    hundred: "icons/100l.png?v=20260529homevision2",
+    j1: "icons/j1.png?v=20260529homevision2",
+    j2: "icons/j2.png?v=20260529homevision2"
   };
   const LEAGUE_LOGO_OPTIONS = Object.values(LEAGUE_LOGO_ASSETS);
 
@@ -186,7 +186,7 @@
   const MAX_SCORERS = 8;
   const MAX_REFEREES = 6;
   const MAX_RESERVES = 9;
-  const CLUB_EMBLEMS_URL = "club_emblems.json?v=20260529niigata1";
+  const CLUB_EMBLEMS_URL = "club_emblems.json?v=20260529homevision2";
   const HISTORY_DATA_DIR = "../data/history";
   const CLUB_ENGLISH_LIST = [
     ["AC長野パルセイロ", "AC NAGANO PARCEIRO"],

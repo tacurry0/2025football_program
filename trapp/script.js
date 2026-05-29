@@ -46,14 +46,41 @@ window.openClubSite = async function(clubName, event) {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const waitForScheduleReady = () => {
+    if (!window.scheduleDataReady) return Promise.resolve();
+    const timeout = new Promise(resolve => setTimeout(resolve, 1200));
+    return Promise.race([window.scheduleDataReady, timeout]);
+  };
+
+  async function loadScheduleFallback() {
+    if (Array.isArray(window.scheduleData) && window.scheduleData.length) return window.scheduleData;
+    const urls = ["./schedule.json", "./schedule/schedule.json"];
+    for (const url of urls) {
+      try {
+        const res = await fetch(`${url}?v=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) continue;
+        const items = await res.json();
+        if (Array.isArray(items) && items.length) {
+          window.scheduleData = items;
+          return items;
+        }
+      } catch (error) {
+        console.warn(`schedule fallback failed: ${url}`, error);
+      }
+    }
+    window.scheduleData = window.scheduleData || [];
+    return window.scheduleData;
+  }
+
   if (window.scheduleDataReady) {
     try {
-      await window.scheduleDataReady;
+      await waitForScheduleReady();
     } catch (error) {
       console.error(error);
       window.scheduleData = window.scheduleData || [];
     }
   }
+  await loadScheduleFallback();
 
   var scheduleData = window.scheduleData = window.scheduleData || [];
   const feedSlider = document.getElementById("feed-slider");
@@ -507,6 +534,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         .map(card => ({ minute: normalizeMinute(card.time), player: card.name || "" })) : [];
     }
 
+    function splitOfficialNames(value) {
+      if (Array.isArray(value)) return value.filter(Boolean).map(name => String(name).trim()).filter(Boolean);
+      return String(value || "")
+        .split(/[、,／/]/)
+        .map(name => name.trim())
+        .filter(Boolean);
+    }
+
     function mapHistorySubs(subs) {
       if (!Array.isArray(subs)) return [];
       const mapped = [];
@@ -529,9 +564,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       const d = parseDate(date);
       const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       const ownDetails = isHome ? item.home_details : item.away_details;
+      const opponentDetails = isHome ? item.away_details : item.home_details;
       const ownGoals = isHome ? item.home_goals : item.away_goals;
       const opponentGoals = isHome ? item.away_goals : item.home_goals;
       const comp = getCompetitionShort(item.competition);
+      const referees = item.referees || {};
+      const assistantReferees = splitOfficialNames(referees["副審"] || referees.assistant_referees);
+      const varAvar = splitOfficialNames(referees["VAR／AVAR"] || referees["VAR/AVAR"] || referees.var_avar);
 
       return {
         club,
@@ -559,6 +598,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         away: item.away_team || "",
         home_score: item.home_score || "",
         away_score: item.away_score || "",
+        referees,
+        referee: referees["主審"] || referees.referee || "",
+        assistant_referees: assistantReferees,
+        fourth_official: referees["第4の審判員"] || referees.fourth_official || "",
+        var_referee: referees.VAR || varAvar[0] || "",
+        avar_referee: referees.AVAR || varAvar[1] || "",
+        home_manager: item.home_details && item.home_details.manager || "",
+        away_manager: item.away_details && item.away_details.manager || "",
+        home_starting_members: mapHistoryMembers(item.home_details && item.home_details.starting),
+        home_bench_members: mapHistoryMembers(item.home_details && item.home_details.substitutes),
+        away_starting_members: mapHistoryMembers(item.away_details && item.away_details.starting),
+        away_bench_members: mapHistoryMembers(item.away_details && item.away_details.substitutes),
+        opponent_manager: opponentDetails && opponentDetails.manager || "",
+        opponent_starting_members: mapHistoryMembers(opponentDetails && opponentDetails.starting),
+        opponent_bench_members: mapHistoryMembers(opponentDetails && opponentDetails.substitutes),
         goals: mapHistoryGoals(ownGoals),
         opponent_goals: mapHistoryGoals(opponentGoals),
         starting_members: mapHistoryMembers(ownDetails && ownDetails.starting),
@@ -603,6 +657,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!seen.has(key)) {
               scheduleData.push(match);
               seen.add(key);
+            } else {
+              const existing = scheduleData.find(m => getScheduleResultKey(m.date, m.club, m.opponent) === key);
+              if (existing) {
+                const keep = {
+                  matchweek: existing.matchweek || match.matchweek,
+                  day: existing.day || match.day,
+                  time: existing.time || match.time,
+                  opponent: existing.opponent || match.opponent,
+                  emblem: existing.emblem || match.emblem,
+                  venue: existing.venue || match.venue
+                };
+                Object.assign(existing, match, keep);
+              }
             }
             const resultKey = getResultKey(match);
             if (!resultSeen.has(resultKey)) {
@@ -1092,6 +1159,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderOfficialInfo(match) {
+    const refs = match.referees || {};
+    const varAvar = splitOfficialNames(refs["VAR／AVAR"] || refs["VAR/AVAR"] || refs.var_avar);
+    const assistantReferees = Array.isArray(match.assistant_referees)
+      ? match.assistant_referees.join(" / ")
+      : (match.assistant_referees || refs["副審"] || "");
+    const temperature = match.temperature !== undefined && match.temperature !== null && match.temperature !== "" ? `${match.temperature}℃` : "";
+    const humidity = match.humidity !== undefined && match.humidity !== null && match.humidity !== "" ? `${match.humidity}%` : "";
+    const attendanceNumber = Number(String(match.attendance || "").replace(/,/g, ""));
+    const attendance = match.attendance !== undefined && match.attendance !== null && match.attendance !== ""
+      ? `${Number.isFinite(attendanceNumber) ? attendanceNumber.toLocaleString("ja-JP") : String(match.attendance)}人`
+      : "";
+
     const primary = [
       ["RESULT", match.result_mark],
       ["SCORE", match.score],
@@ -1101,12 +1180,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const items = [
       ["天候", match.weather],
-      ["気温", match.temperature !== undefined && match.temperature !== null ? `${match.temperature}℃` : ""],
-      ["湿度", match.humidity !== undefined && match.humidity !== null ? `${match.humidity}%` : ""],
-      ["入場者", match.attendance !== undefined && match.attendance !== null ? `${Number(match.attendance).toLocaleString("ja-JP")}人` : ""],
-      ["主審", match.referee],
-      ["副審", Array.isArray(match.assistant_referees) ? match.assistant_referees.join(" / ") : ""],
-      ["監督", match.manager]
+      ["気温", temperature],
+      ["湿度", humidity],
+      ["入場者", attendance],
+      ["主審", match.referee || refs["主審"]],
+      ["副審", assistantReferees],
+      ["第4の審判員", match.fourth_official || refs["第4の審判員"]],
+      ["VAR", match.var_referee || refs.VAR || varAvar[0]],
+      ["AVAR", match.avar_referee || refs.AVAR || varAvar[1]],
+      ["監督", match.manager],
+      ["相手監督", match.opponent_manager]
     ].filter(([, value]) => value !== undefined && value !== null && value !== "");
 
     if (!items.length && !match.j_official_url) return "";
@@ -1139,13 +1222,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
   }
 
-  function renderMemberList(title, members, type) {
+  function renderMemberList(title, members, type, clickable = true) {
     if (!Array.isArray(members) || !members.length) return "";
     const rows = members.map(member => {
       const name = getMemberName(member);
       const position = typeof member === "object" && member ? member.position : "";
       const number = typeof member === "object" && member ? member.number : "";
       const hasMeta = Boolean(number || position);
+      const nameHtml = clickable
+        ? renderPlayerButton(name)
+        : `<span class="u-member-static">${escapeHtml(name)}</span>`;
       return `
         <li class="u-member-row ${type} ${hasMeta ? "" : "simple"}">
           ${hasMeta ? `
@@ -1154,7 +1240,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               ${position ? `<span class="u-member-position">${escapeHtml(position)}</span>` : ""}
             </span>
           ` : ""}
-          <span class="u-member-name">${renderPlayerButton(name)}</span>
+          <span class="u-member-name">${nameHtml}</span>
         </li>
       `;
     }).join("");
@@ -1167,19 +1253,45 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderMatchMembers(match) {
-    const starters = renderMemberList("STARTING XI", match.starting_members, "starter");
-    const bench = renderMemberList("BENCH", match.bench_members, "bench");
-    if (!starters && !bench) return "";
+    const isOwnHome = getMatchIsHome(match);
+    const ownLabel = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
+    const ownStarters = match.starting_members || (isOwnHome ? match.home_starting_members : match.away_starting_members) || [];
+    const ownBench = match.bench_members || (isOwnHome ? match.home_bench_members : match.away_bench_members) || [];
+    const oppStarters = match.opponent_starting_members || (isOwnHome ? match.away_starting_members : match.home_starting_members) || [];
+    const oppBench = match.opponent_bench_members || (isOwnHome ? match.away_bench_members : match.home_bench_members) || [];
+
+    const renderSquad = (teamName, sideLabel, starters, bench, type, clickable) => {
+      const starterHtml = renderMemberList("STARTING XI", starters, `${type} starter`, clickable);
+      const benchHtml = renderMemberList("BENCH", bench, `${type} bench`, clickable);
+      if (!starterHtml && !benchHtml) return "";
+      return `
+        <div class="u-squad-card ${type}">
+          <div class="u-squad-head">
+            <span>${escapeHtml(sideLabel)}</span>
+            <strong>${escapeHtml(teamName)}</strong>
+          </div>
+          <div class="u-member-columns">
+            ${starterHtml}
+            ${benchHtml}
+          </div>
+        </div>
+      `;
+    };
+
+    const ownSquad = renderSquad(ownLabel, isOwnHome ? "HOME" : "AWAY", ownStarters, ownBench, "own", true);
+    const opponentName = match.opponent || (isOwnHome ? match.away : match.home) || "";
+    const opponentSquad = renderSquad(opponentName, isOwnHome ? "AWAY" : "HOME", oppStarters, oppBench, "opponent", false);
+    if (!ownSquad && !opponentSquad) return "";
 
     return `
       <section class="u-match-members">
         <div class="u-section-head">
           <h4>メンバー</h4>
-          <span>${(match.starting_members || []).length + (match.bench_members || []).length} PLAYERS</span>
+          <span>${ownStarters.length + ownBench.length + oppStarters.length + oppBench.length} PLAYERS</span>
         </div>
-        <div class="u-member-columns">
-          ${starters}
-          ${bench}
+        <div class="u-squad-grid">
+          ${ownSquad}
+          ${opponentSquad}
         </div>
       </section>
     `;
@@ -1405,6 +1517,412 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  function getOwnJapaneseClubName(club) {
+    if (club === "niigata") return "アルビレックス新潟";
+    if (club === "kumamoto") return "ロアッソ熊本";
+    return club || "";
+  }
+
+  function getDetailMatchData(match) {
+    const official = findOfficialResult(match);
+    return official ? { ...match, ...official } : match;
+  }
+
+  function getHomeAwayDisplay(match, fallbackOwnScore = "", fallbackOpponentScore = "") {
+    const isOwnHome = getMatchIsHome(match);
+    const ownName = getOwnJapaneseClubName(match.club);
+    let homeName = match.home || (isOwnHome ? ownName : match.opponent);
+    let awayName = match.away || (isOwnHome ? match.opponent : ownName);
+    const opponentName = match.opponent || "";
+
+    if (robustTeamMatch(homeName, ownName)) homeName = ownName;
+    if (robustTeamMatch(awayName, ownName)) awayName = ownName;
+    if (opponentName && robustTeamMatch(homeName, opponentName)) homeName = opponentName;
+    if (opponentName && robustTeamMatch(awayName, opponentName)) awayName = opponentName;
+    let homeScore = match.home_score !== undefined && match.home_score !== null ? String(match.home_score) : "";
+    let awayScore = match.away_score !== undefined && match.away_score !== null ? String(match.away_score) : "";
+
+    if ((!homeScore || !awayScore) && match.score) {
+      const scores = String(match.score).split("-").map(value => value.trim());
+      if (scores.length === 2) {
+        if (isOwnHome) {
+          homeScore = scores[0];
+          awayScore = scores[1];
+        } else {
+          homeScore = scores[1];
+          awayScore = scores[0];
+        }
+      }
+    }
+
+    if ((!homeScore || !awayScore) && fallbackOwnScore !== "" && fallbackOpponentScore !== "") {
+      if (isOwnHome) {
+        homeScore = fallbackOwnScore;
+        awayScore = fallbackOpponentScore;
+      } else {
+        homeScore = fallbackOpponentScore;
+        awayScore = fallbackOwnScore;
+      }
+    }
+
+    return {
+      homeName,
+      awayName,
+      homeScore: homeScore || "-",
+      awayScore: awayScore || "-",
+      homeEmblem: robustTeamMatch(homeName, ownName) ? (match.club === "niigata" ? "./emblems/アルビレックス新潟.png" : "./emblems/ロアッソ熊本.png") : resolveEmblemUrl(homeName, ""),
+      awayEmblem: robustTeamMatch(awayName, ownName) ? (match.club === "niigata" ? "./emblems/アルビレックス新潟.png" : "./emblems/ロアッソ熊本.png") : resolveEmblemUrl(awayName, "")
+    };
+  }
+
+  function getLineupPair(match) {
+    const isOwnHome = getMatchIsHome(match);
+    return {
+      home: isOwnHome
+        ? (match.starting_members || match.home_starting_members || [])
+        : (match.opponent_starting_members || match.home_starting_members || []),
+      away: isOwnHome
+        ? (match.opponent_starting_members || match.away_starting_members || [])
+        : (match.starting_members || match.away_starting_members || [])
+    };
+  }
+
+  function getBenchPair(match) {
+    const isOwnHome = getMatchIsHome(match);
+    return {
+      home: isOwnHome
+        ? (match.bench_members || match.home_bench_members || [])
+        : (match.opponent_bench_members || match.home_bench_members || []),
+      away: isOwnHome
+        ? (match.opponent_bench_members || match.away_bench_members || [])
+        : (match.bench_members || match.away_bench_members || [])
+    };
+  }
+
+  function formatVisionRoundLabel(match) {
+    const values = [match.matchweek, match.stage, match.section].filter(Boolean);
+    for (const value of values) {
+      const raw = String(value);
+      const section = raw.match(/第?\s*(\d+)\s*節/);
+      if (section) return `第${section[1]}節`;
+      const mw = raw.match(/MW\s*(\d+)/i);
+      if (mw) return `第${mw[1]}節`;
+    }
+    return "MATCH";
+  }
+
+  function splitVisionPlayerName(name) {
+    const clean = String(name || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+    if (!clean) return { family: "", given: "", half: false };
+    if (/^舞行龍\s*ジェームズ$/.test(clean)) {
+      return { family: "舞行龍", given: "ジェームズ", half: true };
+    }
+    const parts = clean.split(" ");
+    const family = parts.shift() || "";
+    const given = parts.join(" ");
+    const kanaOnly = /^[ァ-ヶーA-Za-z0-9・.\-\s]+$/.test(clean);
+    return { family, given, half: kanaOnly && clean.length > 4 };
+  }
+
+  function mapVisionPlayer(member) {
+    const parsed = splitVisionPlayerName(getMemberName(member));
+    return {
+      pos: String(member && member.position || ""),
+      no: String(member && member.number || ""),
+      family: parsed.family,
+      given: parsed.given,
+      half: parsed.half,
+      yellow: false
+    };
+  }
+
+  function fillVisionPlayers(players, count) {
+    const list = (Array.isArray(players) ? players : []).slice(0, count).map(mapVisionPlayer);
+    while (list.length < count) {
+      list.push({ pos: "", no: "", family: "", given: "", half: false, yellow: false });
+    }
+    return list;
+  }
+
+  function countVisionGoals(goals) {
+    const counts = { first: 0, second: 0 };
+    (Array.isArray(goals) ? goals : []).forEach(goal => {
+      const minute = Number.parseInt(String(goal.minute || goal.time || "").replace(/\D.*$/, ""), 10);
+      if (!Number.isFinite(minute)) return;
+      if (minute <= 45) counts.first += 1;
+      else counts.second += 1;
+    });
+    return counts;
+  }
+
+  function getVisionScores(match, phase, scoreBoard) {
+    if (phase !== "post") {
+      return { firstHome: "", firstAway: "", secondHome: "", secondAway: "", totalHome: "", totalAway: "" };
+    }
+
+    const isOwnHome = getMatchIsHome(match);
+    const ownGoals = countVisionGoals(match.goals);
+    const opponentGoals = countVisionGoals(match.opponent_goals);
+    const homeGoalCounts = isOwnHome ? ownGoals : opponentGoals;
+    const awayGoalCounts = isOwnHome ? opponentGoals : ownGoals;
+
+    return {
+      firstHome: String(homeGoalCounts.first),
+      firstAway: String(awayGoalCounts.first),
+      secondHome: String(homeGoalCounts.second),
+      secondAway: String(awayGoalCounts.second),
+      totalHome: scoreBoard.homeScore === "-" ? "" : String(scoreBoard.homeScore),
+      totalAway: scoreBoard.awayScore === "-" ? "" : String(scoreBoard.awayScore)
+    };
+  }
+
+  function getVisionLeagueLogo(match) {
+    const year = parseDate(match.date).getFullYear();
+    const text = `${match.tournament || ""} ${match.competition || ""} ${match.league || ""}`;
+    if (year === 2026 || /百年構想/.test(text)) return "icons/100l.png?v=20260529homevision2";
+    if (/J1|Ｊ１/.test(text)) return "icons/j1.png?v=20260529homevision2";
+    if (/J2|Ｊ２/.test(text)) return "icons/j2.png?v=20260529homevision2";
+    return "icons/100l.png?v=20260529homevision2";
+  }
+
+  function getVisionClubColor(name, fallback) {
+    const key = String(name || "").normalize("NFKC");
+    const map = [
+      [/アルビレックス|新潟/, "#ff6600"],
+      [/柏|レイソル/, "#ffe600"],
+      [/浦和|レッズ/, "#d71920"],
+      [/鹿島|アントラーズ/, "#b6192a"],
+      [/横浜|マリノス/, "#005bac"],
+      [/川崎|フロンターレ/, "#00a0df"],
+      [/名古屋|グランパス/, "#e50012"],
+      [/G大阪|ガンバ/, "#003f8f"],
+      [/C大阪|セレッソ/, "#f08cb8"],
+      [/神戸|ヴィッセル/, "#8a1538"]
+    ];
+    const found = map.find(([pattern]) => pattern.test(key));
+    return found ? found[1] : fallback;
+  }
+
+  function buildVisionStateForMatch(match, phase) {
+    const detail = getDetailMatchData(match);
+    const scoreBoard = getHomeAwayDisplay(detail);
+    const lineups = getLineupPair(detail);
+    const benches = getBenchPair(detail);
+    const scores = getVisionScores(detail, phase, scoreBoard);
+
+    return {
+      colors: {
+        home: getVisionClubColor(scoreBoard.homeName, "#ff6600"),
+        away: getVisionClubColor(scoreBoard.awayName, "#ffe600"),
+        center: "#d83618"
+      },
+      textColors: {
+        homeClub: "#ffffff",
+        awayClub: "#ffffff",
+        homeNumber: "#ffffff",
+        awayNumber: "#ffffff"
+      },
+      images: {
+        league: getVisionLeagueLogo(detail),
+        bottom: ""
+      },
+      image: "",
+      home: {
+        club: scoreBoard.homeName,
+        players: fillVisionPlayers(lineups.home, 11),
+        startingPlayers: fillVisionPlayers(lineups.home, 11),
+        reserves: fillVisionPlayers(benches.home, 9)
+      },
+      away: {
+        club: scoreBoard.awayName,
+        players: fillVisionPlayers(lineups.away, 11),
+        startingPlayers: fillVisionPlayers(lineups.away, 11),
+        reserves: fillVisionPlayers(benches.away, 9)
+      },
+      match: {
+        phase: phase === "post" ? "fulltime" : "kickoff",
+        league: parseDate(detail.date).getFullYear() === 2026 ? "明治安田\nJ2・J3 百年構想リーグ" : (detail.tournament || ""),
+        round: formatVisionRoundLabel(detail),
+        firstHome: scores.firstHome,
+        firstAway: scores.firstAway,
+        secondHome: scores.secondHome,
+        secondAway: scores.secondAway,
+        totalHome: scores.totalHome,
+        totalAway: scores.totalAway
+      },
+      result: {
+        homeScorers: [],
+        awayScorers: []
+      },
+      attendance: {
+        title: "本日の来場者数",
+        count: detail.attendance || "",
+        message: "ご来場ありがとうございました"
+      },
+      top: {
+        year: detail.date ? String(parseDate(detail.date).getFullYear()) : "",
+        kickoff: detail.time ? `${detail.time}K.O.` : "",
+        eventName: "",
+        homeEnglish: getClubEnglishName(scoreBoard.homeName),
+        awayEnglish: getClubEnglishName(scoreBoard.awayName)
+      },
+      referees: [
+        { role: "主　審", name: detail.referee || "" },
+        { role: "副　審", name: Array.isArray(detail.assistant_referees) ? detail.assistant_referees[0] || "" : "" },
+        { role: "副　審", name: Array.isArray(detail.assistant_referees) ? detail.assistant_referees[1] || "" : "" },
+        { role: "第4の審判員", name: detail.fourth_official || "" },
+        { role: "VAR", name: detail.var_referee || "" },
+        { role: "AVAR", name: detail.avar_referee || "" }
+      ],
+      announcements: {
+        startingSide: "home",
+        reserveSide: "home"
+      }
+    };
+  }
+
+  function fitVisionPreviewFrame(frame) {
+    const shell = frame && frame.closest(".vision-display-shell");
+    if (!shell) return;
+    const scale = Math.max(0.1, shell.clientWidth / 1920);
+    frame.style.width = "1920px";
+    frame.style.height = "1080px";
+    frame.style.transform = `scale(${scale})`;
+    shell.style.height = `${1080 * scale}px`;
+  }
+
+  function applyVisionStateToFrame(frame, state, attempt = 0) {
+    try {
+      const vision = frame && frame.contentWindow && frame.contentWindow.scoreboardVision;
+      if (vision && typeof vision.applyState === "function") {
+        const apply = () => vision.applyState(state);
+        if (typeof vision.whenReady === "function") {
+          Promise.resolve(vision.whenReady()).then(apply).catch(apply);
+        } else {
+          apply();
+        }
+        return;
+      }
+    } catch (error) {
+      // Same-origin localhost preview can be briefly unavailable while the iframe boots.
+    }
+    if (attempt < 45) {
+      window.setTimeout(() => applyVisionStateToFrame(frame, state, attempt + 1), 100);
+    }
+  }
+
+  function ensureVisionPreviewModal() {
+    let backdrop = document.getElementById("vision-preview-backdrop");
+    let modal = document.getElementById("vision-preview-modal");
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.id = "vision-preview-backdrop";
+      backdrop.className = "vision-preview-backdrop";
+      document.body.appendChild(backdrop);
+    }
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "vision-preview-modal";
+      modal.className = "vision-preview-modal";
+      document.body.appendChild(modal);
+    }
+    backdrop.onclick = closeVisionPreviewModal;
+    return { backdrop, modal };
+  }
+
+  function closeVisionPreviewModal() {
+    document.getElementById("vision-preview-backdrop")?.classList.remove("active");
+    document.getElementById("vision-preview-modal")?.classList.remove("active");
+  }
+
+  function renderVisionPreview(match, phase) {
+    const { backdrop, modal } = ensureVisionPreviewModal();
+    const detail = getDetailMatchData(match);
+    const score = getHomeAwayDisplay(detail);
+    const visionState = buildVisionStateForMatch(detail, phase);
+    const phaseLabel = phase === "post" ? "試合後" : "試合前";
+    const phaseEnglish = phase === "post" ? "FULL TIME" : "STARTING LINEUP";
+
+    modal.innerHTML = `
+      <div class="vision-preview-header">
+        <div>
+          <span>${phaseLabel}</span>
+          <strong>大型ビジョン / ${phaseEnglish}</strong>
+        </div>
+        <button type="button" class="vision-preview-close" aria-label="閉じる">×</button>
+      </div>
+      <div class="vision-preview-subhead">
+        <span>${escapeHtml(formatVisionRoundLabel(detail))}</span>
+        <strong>${escapeHtml(score.homeName)} vs ${escapeHtml(score.awayName)}</strong>
+      </div>
+      <div class="vision-display-shell">
+        <iframe
+          class="vision-display-frame"
+          src="./vision/display.html?v=20260529homevision2"
+          title="大型ビジョン スタメンプレビュー"
+          aria-label="大型ビジョン スタメンプレビュー"
+        ></iframe>
+      </div>
+      <div class="vision-preview-actions">
+        <button type="button" data-phase="pre" class="${phase === "pre" ? "active" : ""}">試合前</button>
+        <button type="button" data-phase="post" class="${phase === "post" ? "active" : ""}">試合後</button>
+      </div>
+    `;
+    modal.classList.add("actual-vision");
+    backdrop.classList.add("active");
+    modal.classList.add("active");
+
+    const frame = modal.querySelector(".vision-display-frame");
+    const resize = () => fitVisionPreviewFrame(frame);
+    frame.addEventListener("load", () => {
+      resize();
+      applyVisionStateToFrame(frame, visionState);
+    });
+    window.setTimeout(() => {
+      resize();
+      applyVisionStateToFrame(frame, visionState);
+    }, 120);
+    window.addEventListener("resize", resize, { once: true });
+    modal.querySelector(".vision-preview-close").onclick = closeVisionPreviewModal;
+    modal.querySelectorAll(".vision-preview-actions [data-phase]").forEach(btn => {
+      btn.onclick = () => renderVisionPreview(match, btn.dataset.phase);
+    });
+  }
+
+  function openVisionPreviewPicker(match) {
+    const { backdrop, modal } = ensureVisionPreviewModal();
+    modal.classList.remove("actual-vision");
+    modal.innerHTML = `
+      <div class="vision-preview-header">
+        <div>
+          <span>大型ビジョン</span>
+          <strong>スタメン画面プレビュー</strong>
+        </div>
+        <button type="button" class="vision-preview-close" aria-label="閉じる">×</button>
+      </div>
+      <div class="vision-preview-subhead">
+        <span>${escapeHtml(formatVisionRoundLabel(match))}</span>
+        <strong>${escapeHtml((getHomeAwayDisplay(match).homeName || "") + " vs " + (getHomeAwayDisplay(match).awayName || ""))}</strong>
+      </div>
+      <div class="vision-phase-picker">
+        <button type="button" data-phase="pre">
+          <span>試合前</span>
+          <strong>大型ビジョンのスタメン</strong>
+        </button>
+        <button type="button" data-phase="post">
+          <span>試合後</span>
+          <strong>結果入りのスタメン</strong>
+        </button>
+      </div>
+    `;
+    backdrop.classList.add("active");
+    modal.classList.add("active");
+    modal.querySelector(".vision-preview-close").onclick = closeVisionPreviewModal;
+    modal.querySelectorAll("[data-phase]").forEach(btn => {
+      btn.onclick = () => renderVisionPreview(match, btn.dataset.phase);
+    });
+  }
+
   // --- Detail Sheet & Persistence ---
 
   function openDetailSheet(match) {
@@ -1471,58 +1989,96 @@ document.addEventListener("DOMContentLoaded", async () => {
       pkHtml = `<div class="u-pk-area" style="${isD ? 'display:flex;' : 'display:none;'}"><span class="u-pk-label">PK</span><input type="number" class="u-score-input pk-my" value="${sPkM}"><span class="u-score-sep">-</span><input type="number" class="u-score-input pk-opp" value="${sPkO}"></div>`;
     }
 
-    const homeAway = getMatchIsHome(match) ? "HOME" : "AWAY";
+    const homeAway = getMatchIsHome(detailData) ? "HOME" : "AWAY";
     const clubName = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
-    const clubEmblem = match.club === "niigata" ? "./emblems/アルビレックス新潟.png" : "./emblems/ロアッソ熊本.png";
-
-    const engOpp = J_CLUB_ENG[match.opponent] || match.opponent.toUpperCase();
-    const opponentEmblem = resolveEmblemUrl(match.opponent, match.emblem);
+    const scoreBoard = getHomeAwayDisplay(detailData, sMy, sOpp);
+    const homeEnglish = J_CLUB_ENG[scoreBoard.homeName] || getClubEnglishName(scoreBoard.homeName);
+    const awayEnglish = J_CLUB_ENG[scoreBoard.awayName] || getClubEnglishName(scoreBoard.awayName);
+    const detailRound = formatVisionRoundLabel(detailData);
+    const resultStatusLabel = scoreBoard.homeScore !== "-" || scoreBoard.awayScore !== "-" ? "MATCH RESULT" : "MATCH PREVIEW";
+    const resultMark = detailData.result_mark || "";
+    const visionButtonHtml = match.club === "niigata" && getMatchIsHome(match)
+      ? `<button type="button" class="u-vision-open-btn" id="detail-vision-preview">ビジョンプレビュー</button>`
+      : "";
 
     sheetContent.innerHTML = `
-      <div class="sheet-header club-${match.club}">
-        <div class="sheet-meta">
-          <span class="sheet-club">${clubName}</span>
+      <section class="u-result-hero result-detail-v2 club-${match.club}">
+        <div class="u-result-titleline">
+          <span>${escapeHtml(resultStatusLabel)}</span>
+          <strong>${escapeHtml(detailRound)}</strong>
+          ${resultMark ? `<em>${escapeHtml(resultMark)}</em>` : ""}
+        </div>
+        <div class="u-result-kicker">
+          <span>${escapeHtml(clubName)}</span>
+          <strong>${escapeHtml(detailData.stage || detailData.matchweek || "MATCH")}</strong>
+        </div>
+        <div class="u-result-scoreboard">
+          <div class="u-result-team">
+            <img src="${escapeHtml(scoreBoard.homeEmblem)}" alt="${escapeHtml(scoreBoard.homeName)}">
+            <div>
+              <span>HOME</span>
+              <strong>${escapeHtml(scoreBoard.homeName)}</strong>
+              <small>${escapeHtml(homeEnglish)}</small>
+            </div>
+          </div>
+          <div class="u-result-score">
+            <strong>${escapeHtml(scoreBoard.homeScore)}</strong>
+            <span>:</span>
+            <strong>${escapeHtml(scoreBoard.awayScore)}</strong>
+          </div>
+          <div class="u-result-team away">
+            <img src="${escapeHtml(scoreBoard.awayEmblem)}" alt="${escapeHtml(scoreBoard.awayName)}">
+            <div>
+              <span>AWAY</span>
+              <strong>${escapeHtml(scoreBoard.awayName)}</strong>
+              <small>${escapeHtml(awayEnglish)}</small>
+            </div>
+          </div>
+        </div>
+        <div class="u-result-meta-strip">
+          <span>${escapeHtml(detailData.date || match.date)} ${escapeHtml(detailData.day || match.day || "")} ${escapeHtml(detailData.time || match.time || "")}</span>
+          <span>${escapeHtml(detailData.venue || match.venue || "")}</span>
           <span class="sheet-ha badge-${homeAway.toLowerCase()}">${homeAway}</span>
         </div>
-        <span class="sheet-mw">${match.matchweek || "EX"}</span>
-        <div class="sheet-opp-row" style="align-items: flex-start; margin-bottom: 5px;">
-          <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
-            <h2 class="sheet-opp" style="margin-bottom:0;">${match.opponent}</h2>
-            <div class="sheet-opp-eng" style="font-size: 0.75rem; color: #666; font-family: var(--font-kick); font-weight: 800; letter-spacing: 0.5px; margin-top: 2px;">${engOpp}</div>
-          </div>
-          <img class="sheet-opp-emblem" src="${escapeHtml(opponentEmblem)}" style="cursor:pointer;" onclick="openClubSite('${match.opponent}', event)">
+        <div class="u-result-actions">
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(detailData.venue || match.venue || "")}" target="_blank" rel="noopener">MAP</a>
+          ${detailData.j_official_url ? `<a href="${escapeHtml(detailData.j_official_url)}" target="_blank" rel="noopener">DATA</a>` : ""}
+          ${visionButtonHtml}
         </div>
-        <div class="sheet-venue-row" style="display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:8px;">
-          <p class="sheet-venue-info" style="margin:0;">${match.date} | ${match.venue}</p>
-          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(match.venue)}" target="_blank" style="background:#f2f2f7; color:var(--text-main); font-size:0.75rem; padding:6px 12px; border-radius:15px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-weight:700;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> MAPで開く</a>
-        </div>
-      </div>
-      <div id="u-auto-weather-area" style="display: none; gap: 20px; justify-content: center; margin: 20px 0; background: rgba(242, 242, 247, 0.5); padding: 15px; border-radius: 18px; backdrop-filter: blur(5px);">
-        <div style="display:flex; flex-direction:column; align-items:center; flex: 1;">
-           <span style="font-size:0.65rem; color:#888; font-weight:700; margin-bottom:6px;">FORECAST</span>
-           <div id="u-weather-display" style="display:flex; flex-direction:column; align-items:center;">
+      </section>
+
+      <section id="u-auto-weather-area" class="u-weather-card" style="display:none;">
+        <div>
+           <span>FORECAST</span>
+           <div id="u-weather-display">
              <span class="w-icon" style="font-size: 1.8rem;">-</span>
            </div>
         </div>
-        <div style="width:1px; background:#ddd; height:40px; align-self:center;"></div>
-        <div style="display:flex; flex-direction:column; align-items:center; flex: 1;">
-           <span style="font-size:0.65rem; color:#888; font-weight:700; margin-bottom:6px;">TEMPERATURE</span>
-           <div style="display:flex; align-items: baseline; gap: 4px;">
-             <span id="u-temp-max" style="font-size: 1.6rem; font-family:var(--font-kick); font-weight:900; color:#ff3b30;">-</span>
-             <span style="font-size:0.7rem; color:#888; font-weight:800; margin-right:4px;">℃</span>
-             <span style="font-size: 0.8rem; color:#ddd;">/</span>
-             <span id="u-temp-min" style="font-size: 1.2rem; font-family:var(--font-kick); font-weight:800; color:#007aff; margin-left:4px;">-</span>
-             <span style="font-size:0.6rem; color:#888; font-weight:800;">℃</span>
+        <div class="u-weather-divider"></div>
+        <div>
+           <span>TEMPERATURE</span>
+           <div class="u-weather-temps">
+             <span id="u-temp-max">-</span>
+             <small>℃</small>
+             <em>/</em>
+             <span id="u-temp-min">-</span>
+             <small>℃</small>
            </div>
         </div>
-      </div>
+      </section>
 
-      <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
-      ${pkHtml}
       ${goalsHtml}
       ${officialInfoHtml}
       ${membersHtml}
       ${eventsHtml}
+      <section class="u-manual-record">
+        <div class="u-section-head">
+          <h4>手動記録</h4>
+          <span>SCORE / MEMO</span>
+        </div>
+        <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
+        ${pkHtml}
+      </section>
       <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
         <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
         <span class="btn-text">観戦予定</span>
@@ -1540,6 +2096,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       <button class="close-sheet-btn">保存して閉じる</button>
     `;
 
+    const visionPreviewBtn = sheetContent.querySelector("#detail-vision-preview");
+    if (visionPreviewBtn) {
+      visionPreviewBtn.onclick = () => openVisionPreviewPicker(detailData);
+    }
     bindPlayerLinks(match);
 
     // Use the unified weather helper
@@ -1790,13 +2350,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function fetchLocalJson(type) {
-    try {
-      const res = await fetch(`./data/${type}.json?t=${Date.now()}`);
-      if (res.ok) return await res.json();
-    } catch (e) {
-      console.warn(`Static load failed: ${type}`);
+    const paths = {
+      standings: ["./data/standings.json", "./standings.json"],
+      results: ["./data/results.json", "./results.json"]
+    }[type] || [`./data/${type}.json`];
+
+    for (const path of paths) {
+      try {
+        const res = await fetch(`${path}?t=${Date.now()}`, { cache: "no-store" });
+        if (res.ok) return await res.json();
+      } catch (e) {
+        console.warn(`Static load failed: ${path}`);
+      }
     }
     return null;
+  }
+
+  function standingsHaveDashboardTeams(rows) {
+    if (!Array.isArray(rows)) return false;
+    const hasNiigata = rows.some(row => robustTeamMatch(row.team, "アルビレックス新潟") || robustTeamMatch(row.team, "新潟"));
+    const hasKumamoto = rows.some(row => robustTeamMatch(row.team, "ロアッソ熊本") || robustTeamMatch(row.team, "熊本"));
+    return hasNiigata && hasKumamoto;
   }
 
   /**
@@ -1812,6 +2386,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       const gasJson = await res.json();
       const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
       const staticArr = (staticJson && staticJson.data) ? staticJson.data : (Array.isArray(staticJson) ? staticJson : []);
+      if (type === "standings" && standingsHaveDashboardTeams(staticArr) && !standingsHaveDashboardTeams(gasArr)) {
+        return staticJson;
+      }
       if (gasArr.length >= staticArr.length && gasArr.length > 0) return gasJson;
     } catch (e) { console.error(`GAS fetch failed: ${type}`); }
     return staticJson;
@@ -1988,6 +2565,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function renderDashboard() {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
+    document.body.setAttribute("data-dashboard-full-ready", "true");
 
     // Sort logic to find "Next" Match
     const now = new Date();
@@ -2561,6 +3139,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const initialYear = todayY >= HISTORY_START_YEAR && todayY <= HISTORY_END_YEAR ? todayY : 2025;
   selectedYear = initialYear;
   if (cachedLeagueResults.length) mergeOfficialResults(cachedLeagueResults);
+  if (!cachedStandings || !standingsHaveDashboardTeams(cachedStandings)) {
+    const localStandings = await fetchLocalJson("standings");
+    const localRows = localStandings && localStandings.data ? localStandings.data : (Array.isArray(localStandings) ? localStandings : []);
+    if (localRows.length) {
+      cachedStandings = localRows;
+      writeTimedCache("trapp_standings_cache", cachedStandings);
+    }
+  }
+  await ensureHistoryYearLoaded(initialYear);
   document.body.setAttribute("data-mode", "dashboard");
   if (ultraDashboard) ultraDashboard.className = "active-view";
   if (ultraFeed) ultraFeed.className = "hidden-view";

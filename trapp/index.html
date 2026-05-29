@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260529navvision4">
+  <link rel="stylesheet" href="style.css?v=20260529homevision2">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./emblems/アルビレックス新潟.png">
@@ -784,29 +784,33 @@ We can't help falling in love with you
 
     <!-- View 3: Stadium Vision Controller -->
     <main id="vision-view" class="hidden-view">
-      <iframe class="vision-app-frame" data-src="vision/index.html?v=20260529navvision4" title="大型ビジョン管理画面"></iframe>
+      <iframe class="vision-app-frame" data-src="vision/index.html?v=20260529homevision2" title="大型ビジョン管理画面"></iframe>
     </main>
   </div>
 
   <!-- 📱 Navigation Pill -->
   <footer id="ultra-nav">
     <div class="nav-panel">
-      <div class="nav-year-row nav-scroll-row">
-        <button id="prev-year" class="nav-icon" aria-label="前の年">‹</button>
-        <div id="nav-year-tabs" class="nav-scroll-track" aria-label="年">
-          <button id="toggle-year-2025" class="year-tab">2025</button>
-          <button id="toggle-year-2026" class="year-tab">2026</button>
-          <button id="toggle-year-2027" class="year-tab">2027</button>
+      <div class="nav-panel-main">
+        <div class="nav-row-stack">
+          <div class="nav-year-row nav-scroll-row">
+            <button id="prev-year" class="nav-icon" aria-label="前の年">‹</button>
+            <div id="nav-year-tabs" class="nav-scroll-track" aria-label="年">
+              <button id="toggle-year-2025" class="year-tab">2025</button>
+              <button id="toggle-year-2026" class="year-tab">2026</button>
+              <button id="toggle-year-2027" class="year-tab">2027</button>
+            </div>
+            <button id="next-year" class="nav-icon" aria-label="次の年">›</button>
+          </div>
+          <div class="nav-month-row nav-scroll-row">
+            <button id="prev-month" class="nav-icon" aria-label="前の月">‹</button>
+            <div id="nav-month-tabs" class="nav-scroll-track" aria-label="月"></div>
+            <button id="next-month" class="nav-icon" aria-label="次の月">›</button>
+          </div>
         </div>
-        <button id="next-year" class="nav-icon" aria-label="次の年">›</button>
-      </div>
-      <div class="nav-month-row nav-scroll-row">
-        <button id="prev-month" class="nav-icon" aria-label="前の月">‹</button>
-        <div id="nav-month-tabs" class="nav-scroll-track" aria-label="月"></div>
-        <button id="next-month" class="nav-icon" aria-label="次の月">›</button>
+        <button id="go-today" class="today-bubble">LIVE</button>
       </div>
     </div>
-    <button id="go-today" class="today-bubble">LIVE</button>
   </footer>
 
   <div id="detail-sheet-backdrop"></div>
@@ -855,8 +859,8 @@ We can't help falling in love with you
   </div>
 
 
-<script src="schedule/schedule.js?v=20260528critical"></script>
-<script src="script.js?v=20260529navvision4"></script>
+<script src="schedule/schedule.js?v=20260529homevision2"></script>
+<script src="script.js?v=20260529homevision2"></script>
 
 </body>
 </html>
