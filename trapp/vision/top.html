@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=1" />
+    <title>大型ビジョン 対戦トップ</title>
+    <link rel="stylesheet" href="styles.css?v=20260529niigata1" />
+  </head>
+  <body class="display-page top-page">
+    <main class="canvas top-canvas" aria-label="大型ビジョン対戦トップ">
+      <section class="top-board">
+        <div class="top-match-meta">
+          <div class="top-league-mark">
+            <span data-field="top.year"></span>
+            <img id="topLeagueImage" alt="大会表記" />
+          </div>
+          <div class="top-round-kickoff">
+            <span data-field="match.round"></span>
+            <strong data-field="top.kickoff"></strong>
+          </div>
+        </div>
+
+        <h1 class="top-event-name" data-field="top.eventName"></h1>
+
+        <div class="top-emblem-row">
+          <div class="gloss-emblem top-home-emblem">
+            <img id="topHomeEmblem" alt="" />
+          </div>
+          <div class="gloss-emblem top-away-emblem">
+            <img id="topAwayEmblem" alt="" />
+          </div>
+        </div>
+
+        <div class="top-club-row">
+          <div class="top-club-name top-club-home">
+            <span class="top-club-ja" data-field="home.club"></span>
+            <strong data-field="top.homeEnglish"></strong>
+          </div>
+          <div class="top-club-name top-club-away">
+            <span class="top-club-ja" data-field="away.club"></span>
+            <strong data-field="top.awayEnglish"></strong>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="vendor/html2canvas.min.js?v=20260529niigata1"></script>
+    <script src="app.js?v=20260529niigata1"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+

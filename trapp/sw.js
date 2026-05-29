@@ -1,18 +1,37 @@
 
-const cacheName = 'football-app-v21-nocache-schedule';
+const cacheName = 'football-app-v36-nav-vision';
 const assetsToCache = [
   './',
   './index.html',
   './style.css',
   './script.js',
-  './scoreboard.html',
-  './scoreboard-display.html',
-  './scoreboard.css',
-  './scoreboard.js',
   './vendor/html2canvas.min.js',
+  './vision/index.html',
+  './vision/display.html',
+  './vision/result.html',
+  './vision/attendance.html',
+  './vision/top.html',
+  './vision/referees.html',
+  './vision/starting.html',
+  './vision/reserve.html',
+  './vision/preview.html',
+  './vision/styles.css',
+  './vision/app.js',
+  './vision/club_emblems.json',
+  './vision/orange-bg.svg',
+  './vision/top_back.png',
+  './vision/icons/100l.png',
+  './vision/icons/j1.png',
+  './vision/icons/j2.png',
+  './vision/vendor/html2canvas.min.js',
+  './vision/fonts/jleaguekick-bold.woff2',
+  './vision/fonts/BIZUDPGothic-Regular.ttf',
+  './vision/fonts/BIZUDPGothic-Bold.ttf',
+  './vision/fonts/AOTFShinGoProDeBold.otf',
   './schedule/schedule.js',
   './schedule.json',
   './club_emblems.json',
+  './data/history/2026.json',
   './emblems/アルビレックス新潟.png',
   './emblems/ロアッソ熊本.png',
   './manifest.json',
@@ -41,6 +60,17 @@ self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   if (url.origin === location.origin && url.pathname.endsWith('/schedule.json')) {
     e.respondWith(fetch(e.request).catch(() => caches.match('./schedule.json')));
+    return;
+  }
+
+  if (url.origin === location.origin && /\/data\/history\/\d{4}\.json$/.test(url.pathname)) {
+    e.respondWith(
+      fetch(e.request).then(response => {
+        const copy = response.clone();
+        caches.open(cacheName).then(cache => cache.put(e.request, copy));
+        return response;
+      }).catch(() => caches.match(e.request))
+    );
     return;
   }
 

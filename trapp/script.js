@@ -61,8 +61,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const ultraFeed = document.getElementById("ultra-feed");
   const calendarView = document.getElementById("calendar-view");
   const ultraDashboard = document.getElementById("ultra-dashboard");
-  const scoreboardView = document.getElementById("scoreboard-view");
+  const visionView = document.getElementById("vision-view");
 
+  const prevYearBtn = document.getElementById("prev-year");
+  const nextYearBtn = document.getElementById("next-year");
   const prevBtn = document.getElementById("prev-month");
   const nextBtn = document.getElementById("next-month");
   const goTodayBtn = document.getElementById("go-today");
@@ -72,6 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const toggleKumamoto = document.getElementById("toggle-kumamoto");
 
   const yearTabContainer = document.getElementById("nav-year-tabs");
+  const navMonthTabs = document.getElementById("nav-month-tabs");
   let yearTabs = {};
 
   const detailSheet = document.getElementById("detail-sheet");
@@ -99,7 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let visibleSections = [];
   let selectedYear = null;
   let renderedFeedYear = undefined;
-  let currentMode = "dashboard"; // dashboard, feed, calendar or scoreboard
+  let currentMode = "dashboard"; // dashboard, feed, calendar or vision
 
   const CLUB_ENGLISH_NAMES = {
     "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "岩手": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "福島": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "いわき": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "鹿島": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "水戸": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "栃木": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "ザスパクサツ群馬": "THESPAKUSATSU GUNMA", "群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "浦和": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "大宮": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "柏": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "東京V": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "町田": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "川崎": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FM": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "湘南": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "松本": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "長野": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "清水": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "藤枝": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "名古屋": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "京都": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "G大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "C大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "神戸": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "奈良": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "山口": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "徳島": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "愛媛": "EHIME FC", "FC今治": "FC IMABARI", "今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "大分": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "鹿児島": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "高知": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC", "滋賀": "REILAC SHIGA FC"
@@ -136,6 +139,53 @@ document.addEventListener("DOMContentLoaded", async () => {
       "ガンバ": "ガンバ", "G大阪": "ガンバ", "Ｇ大阪": "ガンバ",
       "FC東京": "東京", "東京V": "東京V", "東京ヴェルディ": "東京V",
       "FC大阪": "大阪", "FC今治": "今治", "今治": "今治", "FC岐阜": "岐阜", "FC琉球": "琉球"
+    };
+
+    const TEAM_ALIAS_OVERRIDES = {
+      "アルビレックス新潟": "新潟", "新潟": "新潟",
+      "ロアッソ熊本": "熊本", "熊本": "熊本",
+      "鹿児島ユナイテッドFC": "鹿児島", "鹿児島": "鹿児島",
+      "愛媛FC": "愛媛", "愛媛": "愛媛",
+      "レノファ山口FC": "山口", "山口": "山口",
+      "カターレ富山": "富山", "富山": "富山",
+      "ツエーゲン金沢": "金沢", "金沢": "金沢",
+      "徳島ヴォルティス": "徳島", "徳島": "徳島",
+      "高知ユナイテッドSC": "高知", "高知": "高知",
+      "奈良クラブ": "奈良", "奈良": "奈良",
+      "カマタマーレ讃岐": "讃岐", "讃岐": "讃岐",
+      "FC今治": "今治", "今治": "今治",
+      "FC大阪": "FC大阪", "F大阪": "FC大阪",
+      "ガンバ大阪": "G大阪", "G大阪": "G大阪",
+      "セレッソ大阪": "C大阪", "C大阪": "C大阪",
+      "テゲバジャーロ宮崎": "宮崎", "宮崎": "宮崎",
+      "サガン鳥栖": "鳥栖", "鳥栖": "鳥栖",
+      "ガイナーレ鳥取": "鳥取", "鳥取": "鳥取",
+      "大分トリニータ": "大分", "大分": "大分",
+      "レイラック滋賀FC": "滋賀", "レイラック滋賀": "滋賀", "滋賀": "滋賀",
+      "ギラヴァンツ北九州": "北九州", "北九州": "北九州",
+      "FC琉球": "琉球", "琉球": "琉球",
+      "ベガルタ仙台": "仙台", "仙台": "仙台",
+      "ブラウブリッツ秋田": "秋田", "秋田": "秋田",
+      "湘南ベルマーレ": "湘南", "湘南": "湘南",
+      "横浜FC": "横浜FC",
+      "SC相模原": "相模原", "相模原": "相模原",
+      "ザスパ群馬": "群馬", "ザスパクサツ群馬": "群馬", "群馬": "群馬",
+      "モンテディオ山形": "山形", "山形": "山形",
+      "栃木シティ": "栃木シティ", "栃木C": "栃木シティ",
+      "栃木SC": "栃木SC",
+      "ヴァンラーレ八戸": "八戸", "八戸": "八戸",
+      "ヴァンフォーレ甲府": "甲府", "甲府": "甲府",
+      "北海道コンサドーレ札幌": "札幌", "札幌": "札幌",
+      "いわきFC": "いわき", "いわき": "いわき",
+      "RB大宮アルディージャ": "大宮", "大宮アルディージャ": "大宮", "大宮": "大宮",
+      "藤枝MYFC": "藤枝", "藤枝": "藤枝",
+      "FC岐阜": "岐阜", "岐阜": "岐阜",
+      "松本山雅FC": "松本", "松本": "松本",
+      "ジュビロ磐田": "磐田", "磐田": "磐田",
+      "福島ユナイテッドFC": "福島", "福島ユナイテッド": "福島", "福島": "福島",
+      "AC長野パルセイロ": "長野", "長野": "長野",
+      "FC東京": "FC東京",
+      "東京ヴェルディ": "東京V", "東京V": "東京V"
     };
 
     // エンブレムURLからチーム名を特定する（文字化け対策）
@@ -338,25 +388,51 @@ document.addEventListener("DOMContentLoaded", async () => {
       return getEmblemUrlForTeam(teamName) || localizeEmblemUrl(fallback) || "";
     }
 
+    function cleanResultTeamName(value) {
+      return normalizeName(value).replace(/の試合詳細|の結果/g, "").trim();
+    }
+
+    function compactTeamKey(value) {
+      return cleanResultTeamName(value).replace(/[・\.\s_\-]/g, "");
+    }
+
+    function canonicalTeamName(value) {
+      const key = compactTeamKey(value);
+      if (!key) return "";
+
+      for (const [alias, canonical] of Object.entries(TEAM_ALIAS_OVERRIDES)) {
+        if (compactTeamKey(alias) === key) return canonical;
+      }
+
+      for (const [alias, canonical] of Object.entries(TEAM_ALIAS_OVERRIDES)) {
+        const aliasKey = compactTeamKey(alias);
+        if (aliasKey.length >= 4 && (key.includes(aliasKey) || aliasKey.includes(key))) {
+          return canonical;
+        }
+      }
+
+      for (const [alias, canonical] of Object.entries(GLOBAL_TEAM_MAP)) {
+        if (compactTeamKey(alias) === key) return canonical;
+      }
+
+      return key;
+    }
+
     function robustTeamMatch(name1, name2) {
       if (!name1 || !name2) return false;
-      const n1 = normalizeName(name1).replace("の試合詳細", "").replace("の結果", "").replace("SC", "").replace("FC", "").replace("F.C.", "");
-      const n2 = normalizeName(name2).replace("の試合詳細", "").replace("の結果", "").replace("SC", "").replace("FC", "").replace("F.C.", "");
+      const n1 = compactTeamKey(name1);
+      const n2 = compactTeamKey(name2);
+      const c1 = canonicalTeamName(name1);
+      const c2 = canonicalTeamName(name2);
       
+      if (c1 && c1 === c2) return true;
       if (n1 === n2) return true;
-      if (n1.length >= 2 && n2.length >= 2 && (n1.includes(n2) || n2.includes(n1))) return true;
 
-      // マッピングによる解決
-      const getAlias = (n) => {
-        for (let key in GLOBAL_TEAM_MAP) {
-          const nk = normalizeName(key);
-          if (n.includes(nk) || nk.includes(n)) return GLOBAL_TEAM_MAP[key];
-        }
-        return n;
-      };
-      const a1 = getAlias(n1);
-      const a2 = getAlias(n2);
-      return a1 === a2 && a1.length >= 2;
+      // Known ambiguous location-only names must not be matched by substring.
+      const ambiguous = new Set(["大阪", "東京", "栃木", "横浜"]);
+      if (ambiguous.has(c1) || ambiguous.has(c2) || ambiguous.has(n1) || ambiguous.has(n2)) return false;
+
+      return n1.length >= 4 && n2.length >= 4 && (n1.includes(n2) || n2.includes(n1));
     }
 
     function isHomeMatch(club, venue) {
@@ -536,6 +612,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           });
         });
         rebuildOfficialResultIndex();
+        syncResultsToLocalStorage(officialResults);
         loadedHistoryYears.add(year);
       })();
 
@@ -629,18 +706,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     function updateHeaderAnnouncements() {
       const container = document.getElementById("header-n-gate-container");
       if (!container) return;
-      let showNGate = false;
       const now = new Date();
       const cutoffStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
       const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
-      const nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
-
-      if (nextNiigata && getMatchIsHome(nextNiigata)) {
-        const mDate = parseDate(nextNiigata.date);
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const diffDays = Math.round((mDate - today) / (1000 * 60 * 60 * 24));
-        if (diffDays === 0) showNGate = true;
-      }
+      const todayNiigataHome = sorted.find(m => m.date === cutoffStr && m.club === "niigata" && getMatchIsHome(m));
+      const showNGate = Boolean(todayNiigataHome);
 
       if (showNGate) {
         container.innerHTML = `<a href="https://www.albirex.co.jp/ticket/ngate/form/" target="_blank" class="btn-ngate-header">Nゲート抽選</a>`;
@@ -650,8 +720,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
   // --- View Management ---
-  function ensureScoreboardFrame() {
-    const frame = document.querySelector("#scoreboard-view .scoreboard-app-frame");
+  function ensureVisionFrame() {
+    const frame = document.querySelector("#vision-view .vision-app-frame");
     if (frame && !frame.getAttribute("src")) {
       frame.setAttribute("src", frame.dataset.src);
     }
@@ -664,16 +734,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (ultraDashboard) ultraDashboard.className = mode === "dashboard" ? "active-view" : "hidden-view";
     if (ultraFeed) ultraFeed.className = mode === "feed" ? "active-view" : "hidden-view";
     if (calendarView) calendarView.className = mode === "calendar" ? "active-view" : "hidden-view";
-    if (scoreboardView) scoreboardView.className = mode === "scoreboard" ? "active-view" : "hidden-view";
+    if (visionView) visionView.className = mode === "vision" ? "active-view" : "hidden-view";
 
-    if (mode === "calendar") renderCalendar();
+    if (mode === "calendar") {
+      renderCalendar();
+      updateYearTabState();
+      rebuildMonthTabs();
+    }
     if (mode === "dashboard") renderDashboard();
-    if (mode === "scoreboard") ensureScoreboardFrame();
+    if (mode === "vision") ensureVisionFrame();
     if (mode === "feed") {
       if (renderedFeedYear !== selectedYear) renderFeed(selectedYear);
-      requestAnimationFrame(() => scrollToIndex(currentIndex));
+      requestAnimationFrame(() => {
+        scrollToIndex(currentIndex);
+        updateYearTabState();
+        rebuildMonthTabs();
+      });
     }
-    if (hamBtn) hamBtn.innerHTML = mode === "scoreboard" ? ellipsisIconHtml : hamburgerIconHtml;
+    if (hamBtn) hamBtn.innerHTML = mode === "vision" ? ellipsisIconHtml : hamburgerIconHtml;
     sideMenu.classList.remove("active");
   }
 
@@ -693,37 +771,99 @@ document.addEventListener("DOMContentLoaded", async () => {
     visibleSections = allSections.filter(s => s.style.display !== "none");
   }
 
+  function scrollActiveNavItem(container, selector) {
+    if (!container) return;
+    const centerActive = () => {
+      const active = container.querySelector(selector);
+      if (!active || !container.clientWidth) return;
+      const left = active.offsetLeft - (container.clientWidth - active.offsetWidth) / 2;
+      container.scrollTo({ left: Math.max(0, left), behavior: "auto" });
+    };
+    requestAnimationFrame(centerActive);
+    setTimeout(centerActive, 80);
+    setTimeout(centerActive, 240);
+  }
+
+  function getAvailableYears() {
+    return Array.from(new Set([
+      ...getHistoryYears(),
+      ...scheduleData.map(m => {
+        if (!m || !m.date) return null;
+        const d = parseDate(m.date);
+        return Number.isNaN(d.getTime()) ? null : d.getFullYear();
+      }).filter(Boolean)
+    ]))
+      .sort((a, b) => a - b);
+  }
+
+  function getVisibleYearWindow(year) {
+    const years = getAvailableYears();
+    if (!years.length) return [];
+    const target = Number(year) || years[years.length - 1];
+    let index = years.indexOf(target);
+    if (index === -1) {
+      index = years.findIndex(y => y > target);
+      if (index === -1) index = years.length - 1;
+    }
+    const start = Math.max(0, Math.min(index - 1, years.length - 3));
+    return years.slice(start, start + 3);
+  }
+
+  function updateYearTabState() {
+    Object.keys(yearTabs).forEach(k => {
+      if (yearTabs[k]) yearTabs[k].classList.toggle("active", Number(k) === selectedYear);
+    });
+    scrollActiveNavItem(yearTabContainer, ".year-tab.active");
+  }
+
+  function getMonthItemsForYear(year) {
+    const monthMap = new Map();
+    scheduleData.forEach(m => {
+      if (!m || !m.date) return;
+      const d = parseDate(m.date);
+      if (Number.isNaN(d.getTime()) || d.getFullYear() !== Number(year)) return;
+      const ym = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      if (!monthMap.has(ym)) {
+        monthMap.set(ym, { ym, month: d.getMonth() + 1 });
+      }
+    });
+    return Array.from(monthMap.values()).sort((a, b) => a.month - b.month);
+  }
+
+  function rebuildMonthTabs() {
+    if (!navMonthTabs) return;
+    navMonthTabs.innerHTML = "";
+    visibleSections.forEach((sec, idx) => {
+      const ym = sec.dataset.ym || "";
+      const month = Number(ym.split("-")[1]);
+      const btn = document.createElement("button");
+      btn.className = "month-tab";
+      btn.textContent = `${month}\u6708`;
+      btn.classList.toggle("active", idx === currentIndex);
+      btn.onclick = () => scrollToIndex(idx);
+      navMonthTabs.appendChild(btn);
+    });
+    scrollActiveNavItem(navMonthTabs, ".month-tab.active");
+  }
+
   function rebuildYearTabs() {
     if (!yearTabContainer) return;
     yearTabContainer.innerHTML = "";
     yearTabs = {};
 
-    const years = Array.from(new Set([
-      ...getHistoryYears(),
-      ...scheduleData.map(m => parseDate(m.date).getFullYear()).filter(Boolean)
-    ]))
-      .sort((a, b) => a - b);
-
-    years.forEach(y => {
-      y = String(y);
+    getAvailableYears().forEach(y => {
+      const key = String(y);
       const btn = document.createElement("button");
-      btn.id = `toggle-year-${y}`;
+      btn.id = `toggle-year-${key}`;
       btn.className = "year-tab";
-      btn.textContent = y;
+      btn.textContent = key;
       btn.onclick = async () => {
-        await applyYearFilter(Number(y));
+        await applyYearFilter(Number(key));
       };
       yearTabContainer.appendChild(btn);
-      yearTabs[y] = btn;
+      yearTabs[key] = btn;
     });
-
-    const allBtn = document.createElement("button");
-    allBtn.id = "toggle-year-all";
-    allBtn.className = "year-tab";
-    allBtn.textContent = "ALL";
-    allBtn.onclick = () => goToCurrentMonthAll();
-    yearTabContainer.appendChild(allBtn);
-    yearTabs.all = allBtn;
+    updateYearTabState();
   }
 
   function getCurrentMonthKey() {
@@ -731,31 +871,53 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}`;
   }
 
-  function goToCurrentMonthAll() {
-    applyYearFilter(null, true);
+  async function goToCurrentMonthAll() {
+    const n = new Date();
+    await applyYearFilter(n.getFullYear(), true);
     const idx = visibleSections.findIndex(s => s.dataset.ym === getCurrentMonthKey());
     scrollToIndex(idx !== -1 ? idx : 0);
   }
 
-  async function applyYearFilter(year, skipScroll = false) {
-    selectedYear = year;
-    if (year && year <= HISTORY_END_YEAR) {
-      feedSlider.innerHTML = `<div class="month-section" style="display:flex;align-items:center;justify-content:center;color:#888;font-weight:800;">${year} 読み込み中...</div>`;
-      await ensureHistoryYearLoaded(year);
+  async function shiftYear(delta) {
+    const years = getAvailableYears();
+    if (!years.length) return;
+    let index = years.indexOf(Number(selectedYear));
+    if (index === -1) {
+      const now = new Date().getFullYear();
+      index = years.indexOf(now);
+      if (index === -1) index = years.length - 1;
     }
-    if (renderedFeedYear !== selectedYear) {
+    const nextIndex = Math.max(0, Math.min(years.length - 1, index + delta));
+    if (nextIndex !== index) await applyYearFilter(years[nextIndex]);
+  }
+
+  async function applyYearFilter(year, skipScroll = false) {
+    const normalizedYear = year === null || year === undefined || year === "" ? null : Number(year);
+    selectedYear = Number.isFinite(normalizedYear) && normalizedYear > 0 ? normalizedYear : null;
+    const shouldLoadHistory = selectedYear && selectedYear <= HISTORY_END_YEAR;
+    const shouldForceRender = shouldLoadHistory && !loadedHistoryYears.has(selectedYear);
+
+    if (shouldLoadHistory) {
+      feedSlider.innerHTML = `<div class="month-section" style="display:flex;align-items:center;justify-content:center;color:#888;font-weight:800;">${year} 読み込み中...</div>`;
+      await ensureHistoryYearLoaded(selectedYear);
+    }
+    if (renderedFeedYear !== selectedYear || shouldForceRender) {
       renderFeed(selectedYear);
     }
 
-    Object.keys(yearTabs).forEach(k => {
-      const isActive = (k === "all" && selectedYear === null) || (Number(k) === selectedYear);
-      if (yearTabs[k]) yearTabs[k].classList.toggle("active", isActive);
-    });
+    updateYearTabState();
 
     allSections.forEach(sec => { sec.style.display = "flex"; });
     rebuildVisibleSections();
-    if (!skipScroll) { currentIndex = 0; scrollToIndex(0); }
+    if (!skipScroll) {
+      currentIndex = 0;
+      scrollToIndex(0);
+    } else {
+      rebuildMonthTabs();
+    }
     if (currentMode === "calendar") renderCalendar();
+    if (currentMode === "dashboard") renderDashboard();
+    updateHeaderAnnouncements();
   }
 
   function scrollToIndex(idx) {
@@ -764,6 +926,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (activeMonthTitle) {
       activeMonthTitle.textContent = visibleSections[idx].dataset.ym_title || "";
     }
+    rebuildMonthTabs();
     if (currentMode === "feed") {
       const offset = visibleSections[idx].offsetLeft;
       ultraFeed.scrollTo({ left: offset, behavior: "smooth" });
@@ -780,6 +943,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (activeMonthTitle) {
         activeMonthTitle.textContent = visibleSections[newIdx].dataset.ym_title || "";
       }
+      rebuildMonthTabs();
       if (currentMode === "calendar") renderCalendar();
     }
   }
@@ -789,6 +953,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const kOn = toggleKumamoto.classList.contains("active");
     document.querySelectorAll(".card.club-niigata").forEach(c => c.style.display = nOn ? "flex" : "none");
     document.querySelectorAll(".card.club-kumamoto").forEach(c => c.style.display = kOn ? "flex" : "none");
+    [document.getElementById("menu-vision"), document.getElementById("dash-to-vision")].forEach((control) => {
+      if (!control) return;
+      control.hidden = !nOn;
+      control.setAttribute("aria-hidden", nOn ? "false" : "true");
+    });
+    if (!nOn && currentMode === "vision") switchMode("dashboard");
     if (currentMode === "calendar") renderCalendar();
   }
 
@@ -1514,26 +1684,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- Results & Data Management ---
   let officialResults = [];
   let cachedStandings = null;
+  let cachedLeagueResults = [];
   let officialResultIndex = new Map();
-  const STANDINGS_CACHE_KEY = "trapp_standings_cache";
-  const RESULTS_CACHE_KEY = "trapp_results_cache";
+  const STANDINGS_CACHE_MAX_AGE = 5 * 60 * 1000;
+  const RESULTS_CACHE_MAX_AGE = 6 * 60 * 60 * 1000;
+
+  function readTimedCache(key, maxAgeMs) {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(key) || "null");
+      if (!parsed || !Array.isArray(parsed.data)) return null;
+      const savedAt = Number(parsed.savedAt || 0);
+      if (!savedAt || Date.now() - savedAt > maxAgeMs) return null;
+      return parsed.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function writeTimedCache(key, data) {
+    localStorage.setItem(key, JSON.stringify({ savedAt: Date.now(), data }));
+  }
 
   // Initialize data from localStorage cache
-  const lSave = localStorage.getItem(STANDINGS_CACHE_KEY);
-  if (lSave) {
-    try {
-      const parsed = JSON.parse(lSave);
-      cachedStandings = Array.isArray(parsed) ? parsed : (parsed && parsed.data) || null;
-    } catch (e) { }
-  }
-  let cachedResults = [];
-  const rSave = localStorage.getItem(RESULTS_CACHE_KEY);
-  if (rSave) {
-    try {
-      const parsed = JSON.parse(rSave);
-      cachedResults = getResultArray(parsed);
-    } catch (e) { }
-  }
+  cachedStandings = readTimedCache("trapp_standings_cache", STANDINGS_CACHE_MAX_AGE);
+  cachedLeagueResults = readTimedCache("trapp_results_cache", RESULTS_CACHE_MAX_AGE) || [];
 
   function getResultArray(payload) {
     if (!payload) return [];
@@ -1542,14 +1716,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getResultKey(result) {
     const date = result.date || "";
-    if (result.club && result.opponent) {
-      return ["static", date, result.club, result.matchweek || "", normalizeName(result.opponent)].join("|");
+    if (result.home || result.away) {
+      return [
+        "match",
+        date,
+        canonicalTeamName(result.home),
+        canonicalTeamName(result.away),
+        result.home_score || "",
+        result.away_score || ""
+      ].join("|");
     }
-    return ["gas", date, result.section || "", normalizeName(result.home), normalizeName(result.away)].join("|");
+    if (result.club && result.opponent) {
+      const own = result.club === "niigata" ? "新潟" : result.club === "kumamoto" ? "熊本" : result.club;
+      const sides = [canonicalTeamName(own), canonicalTeamName(result.opponent)].sort().join(":");
+      return ["match", date, sides, result.score || ""].join("|");
+    }
+    return ["match", date, result.section || "", canonicalTeamName(result.home), canonicalTeamName(result.away)].join("|");
   }
 
   function getScheduleResultKey(date, club, opponent) {
-    return [date || "", club || "", normalizeName(opponent || "")].join("|");
+    return [date || "", club || "", canonicalTeamName(opponent || "")].join("|");
   }
 
   function rebuildOfficialResultIndex() {
@@ -1561,38 +1747,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  function saveStandingsCache(data, meta = {}) {
-    if (!Array.isArray(data) || !data.length) return;
-    cachedStandings = data;
-    localStorage.setItem(STANDINGS_CACHE_KEY, JSON.stringify({
-      data,
-      savedAt: new Date().toISOString(),
-      source: meta.source || "unknown",
-      timestamp: meta.timestamp || null
-    }));
-  }
-
-  function saveResultsCache(data, meta = {}) {
-    if (!Array.isArray(data) || !data.length) return;
-    cachedResults = data;
-    localStorage.setItem(RESULTS_CACHE_KEY, JSON.stringify({
-      data,
-      savedAt: new Date().toISOString(),
-      source: meta.source || "unknown",
-      timestamp: meta.timestamp || null
-    }));
+  function normalizeOfficialResult(result) {
+    if (!result) return null;
+    const normalized = { ...result };
+    if (normalized.home) normalized.home = cleanResultTeamName(normalized.home);
+    if (normalized.away) normalized.away = cleanResultTeamName(normalized.away);
+    if (normalized.opponent) normalized.opponent = cleanResultTeamName(normalized.opponent);
+    return normalized;
   }
 
   function mergeOfficialResults(results) {
-    const seen = new Set(getResultArray(officialResults).map(r => getResultKey(r)));
-    getResultArray(results).forEach(result => {
+    const resultSeen = new Set(getResultArray(officialResults).map(r => getResultKey(r)));
+    let changed = false;
+
+    getResultArray(results).forEach(raw => {
+      const result = normalizeOfficialResult(raw);
+      if (!result || !result.date) return;
       const key = getResultKey(result);
-      if (!seen.has(key)) {
-        officialResults.push(result);
-        seen.add(key);
-      }
+      if (resultSeen.has(key)) return;
+      officialResults.push(result);
+      resultSeen.add(key);
+      changed = true;
     });
-    rebuildOfficialResultIndex();
+
+    if (changed) rebuildOfficialResultIndex();
+    return changed;
+  }
+
+  async function refreshLeagueResults(forceGas = false) {
+    const json = await fetchData("results", forceGas);
+    const results = getResultArray(json);
+
+    if (results.length) {
+      cachedLeagueResults = results.map(normalizeOfficialResult).filter(Boolean);
+      writeTimedCache("trapp_results_cache", cachedLeagueResults);
+      mergeOfficialResults(cachedLeagueResults);
+      return cachedLeagueResults;
+    }
+
+    if (cachedLeagueResults.length) mergeOfficialResults(cachedLeagueResults);
+    return cachedLeagueResults;
   }
 
   async function fetchLocalJson(type) {
@@ -1618,8 +1812,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       const gasJson = await res.json();
       const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
       const staticArr = (staticJson && staticJson.data) ? staticJson.data : (Array.isArray(staticJson) ? staticJson : []);
-      if (forceGas && gasArr.length > 0) return gasJson;
-      if (type === "standings" && gasArr.length > 0) return gasJson;
       if (gasArr.length >= staticArr.length && gasArr.length > 0) return gasJson;
     } catch (e) { console.error(`GAS fetch failed: ${type}`); }
     return staticJson;
@@ -1632,15 +1824,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     await clubEmblemMapReady;
 
     const standingsPromise = fetchData("standings", forceGas);
+    const resultsPromise = refreshLeagueResults(forceGas);
+
     const stdJson = await standingsPromise;
     if (stdJson && stdJson.data) {
-      saveStandingsCache(stdJson.data, { source: stdJson.fromCache ? "gas-cache" : "gas", timestamp: stdJson.timestamp });
+      cachedStandings = stdJson.data;
+      writeTimedCache("trapp_standings_cache", cachedStandings);
     }
 
     if (currentMode === "dashboard") renderDashboard();
     else if (currentMode === "calendar") renderCalendar();
-    
-    if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
+
+    await resultsPromise;
+    if (currentMode === "dashboard") renderDashboard();
+    else if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
   }
 
   /**
@@ -1747,60 +1944,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     return changed;
   }
 
-  // 順位表だけを後から軽く更新する。日程/結果は schedule.json と data/history に一本化。
+  // ホーム画面に必要な順位表とリーグ全体の直近結果を後から更新する。
   setTimeout(async () => {
-    const stdJson = await fetchData("standings");
-    if (stdJson && stdJson.data) {
-      saveStandingsCache(stdJson.data, { source: stdJson.fromCache ? "gas-cache" : "gas", timestamp: stdJson.timestamp });
+    fetchData("standings").then(stdJson => {
+      if (stdJson && stdJson.data) {
+        cachedStandings = stdJson.data;
+        writeTimedCache("trapp_standings_cache", cachedStandings);
+        if (currentMode === "dashboard") renderDashboard();
+      }
+    });
+    refreshLeagueResults().then(() => {
       if (currentMode === "dashboard") renderDashboard();
-    }
-  }, 1200);
-
-  setTimeout(async () => {
-    const resultJson = await fetchData("results", true);
-    if (resultJson && resultJson.data) {
-      saveResultsCache(resultJson.data, { source: resultJson.fromCache ? "gas-cache" : "gas", timestamp: resultJson.timestamp });
-      mergeOfficialResults(resultJson.data);
-      if (currentMode === "dashboard") updateDashboardPrevResults();
-    }
-  }, 1800);
-
-  function getTodayIso() {
-    const now = new Date();
-    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-  }
-
-  function addDaysToIso(dateStr, days) {
-    const date = parseDate(dateStr);
-    if (isNaN(date.getTime())) return dateStr || "";
-    date.setDate(date.getDate() + days);
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-  }
-
-  function getDashboardMatch(club, cutoffStr = getTodayIso()) {
-    const clubMatches = scheduleData
-      .filter(m => m.club === club)
-      .sort((a, b) => a.date.localeCompare(b.date));
-    return clubMatches.find(m => m.date >= cutoffStr) || clubMatches.slice().reverse().find(m => m.date < cutoffStr) || null;
-  }
-
-  function getDashboardResultCutoff(match, todayIso = getTodayIso()) {
-    if (!match) return "9999-12-31";
-    return match.date < todayIso ? addDaysToIso(match.date, 1) : match.date;
-  }
-
-  function findStandingRow(data, teamName) {
-    if (!Array.isArray(data) || !teamName) return null;
-    const target = normalizeName(teamName);
-    return data.find(r => r.team && normalizeName(r.team) === target)
-      || data.find(r => r.team && robustTeamMatch(r.team, teamName))
-      || data.find(r => {
-        if (!r.team) return false;
-        const rowTeam = normalizeName(r.team);
-        return rowTeam.includes(target) || target.includes(rowTeam);
-      })
-      || null;
-  }
+    });
+  }, 0);
 
 
   // extract the city map into reusable object
@@ -1833,16 +1989,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
 
-    // Use today's local date as cutoff to keep today's matches visible until tomorrow.
-    // If no future match exists in the bundled schedule, keep the latest match card visible.
-    const cutoffStr = getTodayIso();
+    // Sort logic to find "Next" Match
+    const now = new Date();
+    // Use today's local date as cutoff to keep today's matches visible until tomorrow
+    const y = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const cutoffStr = `${y}-${mm}-${dd}`;
 
     // Check if toggle buttons exist, respect club visibility
     const showNiigata = true; // Dashboard shows both actively or check toggles
     const showKumamoto = true;
 
-    let nextNiigata = getDashboardMatch("niigata", cutoffStr);
-    let nextKumamoto = getDashboardMatch("kumamoto", cutoffStr);
+    let nextNiigata = null;
+    let nextKumamoto = null;
+
+    // sorted ascending array
+    const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
+    for (let m of sorted) {
+      if (m.date >= cutoffStr && !nextNiigata && m.club === "niigata") nextNiigata = m;
+      if (m.date >= cutoffStr && !nextKumamoto && m.club === "kumamoto") nextKumamoto = m;
+      if (nextNiigata && nextKumamoto) break;
+    }
 
     let html = "";
     const renderCard = (m, clubName, mainColor, myShortName) => {
@@ -2025,11 +2194,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const refreshStandings = async () => {
       const data = cachedStandings;
       if (!data) return;
+
+      const findStandingRow = (teamName) => {
+        if (!teamName) return null;
+        return data.find(row => row.team && robustTeamMatch(row.team, teamName)) || null;
+      };
       
       const updateStatsCard = (m, myKeyword) => {
         if (!m) return;
-        const myData = findStandingRow(data, myKeyword);
-        const oppData = findStandingRow(data, m.opponent);
+        const myData = findStandingRow(myKeyword);
+        const oppData = findStandingRow(m.opponent);
 
         const card = document.getElementById(`dash-card-${m.club}`);
         if (card) {
@@ -2061,11 +2235,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   function updateDashboardPrevResults() {
     if (!officialResults.length) return;
 
-    const cutoffStr = getTodayIso();
+    const now = new Date();
+    const cutoffStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
 
-    // Find dashboard matches to determine cutoff dates. Past fallback cards include their own result.
-    let nextNiigata = getDashboardMatch("niigata", cutoffStr);
-    let nextKumamoto = getDashboardMatch("kumamoto", cutoffStr);
+    // Find next matches to determine cutoff dates
+    const sorted = [...scheduleData].sort((a, b) => a.date.localeCompare(b.date));
+    let nextNiigata = sorted.find(m => m.date >= cutoffStr && m.club === "niigata");
+    let nextKumamoto = sorted.find(m => m.date >= cutoffStr && m.club === "kumamoto");
 
     const escapeAttr = (value) => String(value || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
     const getOpponentInfoFromResult = (r, kw) => {
@@ -2086,58 +2262,115 @@ document.addEventListener("DOMContentLoaded", async () => {
       return { name, emblem };
     };
 
+    const ownKeywordForClub = (club) => {
+      if (club === "niigata") return "新潟";
+      if (club === "kumamoto") return "熊本";
+      return club || "";
+    };
+
+    const getResultInfoForTeam = (result, teamName) => {
+      if (!result || !teamName) return null;
+      const date = result.date || "";
+      let isHome = false;
+      let opponent = "";
+      let scoreMine = NaN;
+      let scoreOpponent = NaN;
+
+      if (result.home || result.away) {
+        const home = result.home || "";
+        const away = result.away || "";
+        const matchesHome = robustTeamMatch(home, teamName);
+        const matchesAway = robustTeamMatch(away, teamName);
+        if (!matchesHome && !matchesAway) return null;
+        isHome = matchesHome;
+        opponent = isHome ? away : home;
+        const homeScore = parseInt(result.home_score, 10);
+        const awayScore = parseInt(result.away_score, 10);
+        if (Number.isFinite(homeScore) && Number.isFinite(awayScore)) {
+          scoreMine = isHome ? homeScore : awayScore;
+          scoreOpponent = isHome ? awayScore : homeScore;
+        }
+      } else if (result.club && result.opponent) {
+        const ownKeyword = ownKeywordForClub(result.club);
+        const matchesOwnClub = robustTeamMatch(ownKeyword, teamName);
+        const matchesOpponent = robustTeamMatch(result.opponent, teamName);
+        if (!matchesOwnClub && !matchesOpponent) return null;
+        isHome = matchesOwnClub ? result.home_away === "H" : result.home_away === "A";
+        opponent = matchesOwnClub ? result.opponent : ownKeyword;
+      } else {
+        return null;
+      }
+
+      if ((!Number.isFinite(scoreMine) || !Number.isFinite(scoreOpponent)) && result.score !== undefined) {
+        const scores = String(result.score).split("-").map(value => parseInt(value.trim(), 10));
+        if (scores.length === 2 && Number.isFinite(scores[0]) && Number.isFinite(scores[1])) {
+          const ownKeyword = ownKeywordForClub(result.club);
+          const targetIsOwnClub = result.club && robustTeamMatch(ownKeyword, teamName);
+          scoreMine = targetIsOwnClub ? scores[0] : scores[1];
+          scoreOpponent = targetIsOwnClub ? scores[1] : scores[0];
+        }
+      }
+
+      return {
+        date,
+        isHome,
+        ha: isHome ? "H" : "A",
+        opponent: String(opponent || "").replace(/の試合詳細|の結果/g, "").trim(),
+        scoreMine,
+        scoreOpponent,
+        pk: result.pk || ""
+      };
+    };
+
     const updateUI = (club, teamKw, match) => {
       const card = document.getElementById(`dash-card-${club}`);
       if (!card) return;
       
-      const cutoff = getDashboardResultCutoff(match, cutoffStr);
+      const cutoff = match ? match.date : "9999-12-31";
       
       const updateHalf = (prefix, kw) => {
-        const pastAll = officialResults.filter(r => {
-          const dMatch = r.date < cutoff;
-          const status = (r.status || "").toLowerCase();
+        const candidates = officialResults.map(r => ({
+          result: r,
+          info: getResultInfoForTeam(r, kw)
+        })).filter(({ result, info }) => {
+          if (!info) return false;
+          const dMatch = info.date < cutoff;
+          const status = (result.status || "").toLowerCase();
           const isFinished = status.includes("finish") || status.includes("ft") || status.includes("終");
-          
-          // Static JSON Support
-          if (r.club && r.opponent) {
-            const staticClub = kw === "新潟" ? "niigata" : (kw === "熊本" ? "kumamoto" : null);
-            const tMatchStatic = staticClub && r.club === staticClub;
-            const hasScoreStatic = r.score !== undefined;
-            return dMatch && tMatchStatic && hasScoreStatic;
-          }
-          
-          // GAS Support
-          const tMatch = robustTeamMatch(r.home, kw) || robustTeamMatch(r.away, kw);
-          const hasScore = r.home_score !== "" && r.home_score !== null;
-          return dMatch && tMatch && (hasScore || isFinished);
-        }).sort((a,b) => b.date.localeCompare(a.date));
+          const hasScore = Number.isFinite(info.scoreMine) && Number.isFinite(info.scoreOpponent);
+          const opponentIsSelf = robustTeamMatch(info.opponent, kw);
+          return dMatch && !opponentIsSelf && (hasScore || isFinished);
+        }).sort((a,b) => b.info.date.localeCompare(a.info.date));
 
         const past = [];
-        const seenDates = new Set();
-        pastAll.forEach(r => {
-          // One club has only one target match per day here; this removes GAS/local-history duplicates.
-          if (seenDates.has(r.date)) return;
-          seenDates.add(r.date);
-          past.push(r);
+        const seenMatches = new Set();
+        candidates.forEach(item => {
+          const own = canonicalTeamName(kw);
+          const opponent = canonicalTeamName(item.info.opponent);
+          const sides = [own, opponent].sort().join(":");
+          const key = [
+            item.info.date,
+            sides,
+            item.info.scoreMine,
+            item.info.scoreOpponent
+          ].join("|");
+          if (seenMatches.has(key)) return;
+          seenMatches.add(key);
+          past.push(item);
         });
 
         if (!past.length) return;
-        const last = past[0];
+        const last = past[0].result;
+        const lastInfo = past[0].info;
+        if (!lastInfo) return;
+        if (!Number.isFinite(lastInfo.scoreMine) || !Number.isFinite(lastInfo.scoreOpponent)) return;
         
         let isHome, sM, sO, opp, symbol, badgeColor, badgeText, scoreStr;
 
-        if (last.score !== undefined) {
-           isHome = last.home_away === "H";
-           const scores = last.score.split("-");
-           sM = parseInt(scores[0]);
-           sO = parseInt(scores[1]);
-           opp = last.opponent;
-        } else {
-           isHome = robustTeamMatch(last.home, kw);
-           sM = parseInt(isHome ? last.home_score : last.away_score);
-           sO = parseInt(isHome ? last.away_score : last.home_score);
-           opp = (isHome ? last.away : last.home).replace(/の試合詳細|の結果/g, "").trim();
-        }
+        isHome = lastInfo.isHome;
+        sM = lastInfo.scoreMine;
+        sO = lastInfo.scoreOpponent;
+        opp = lastInfo.opponent;
         
         symbol = "DRAW";
         badgeColor = "#f1f3f4";
@@ -2146,8 +2379,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         if (sM > sO) { symbol = "WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
         else if (sM < sO) { symbol = "LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
-        else if (last.pk) {
-          const pkMatch = last.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+        else if (lastInfo.pk) {
+          const pkMatch = lastInfo.pk.match(/(\d+)\s*PK\s*(\d+)/i);
           if (pkMatch) {
             const pkM = parseInt(isHome ? pkMatch[1] : pkMatch[2]);
             const pkO = parseInt(isHome ? pkMatch[2] : pkMatch[1]);
@@ -2161,37 +2394,35 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let formHtml = `<div class="dash-form-strip">`;
         const recent5 = past.slice(0, 5).reverse();
-        recent5.forEach(r => {
-          let rM, rO, rSym = "△";
-          if (r.score !== undefined) {
-             const isRHome = r.home_away === "H";
-             const rScores = r.score.split("-");
-             rM = parseInt(rScores[0]);
-             rO = parseInt(rScores[1]);
-          } else {
-             const isRHome = robustTeamMatch(r.home, kw);
-             rM = parseInt(isRHome ? r.home_score : r.away_score);
-             rO = parseInt(isRHome ? r.away_score : r.home_score);
-          }
+        recent5.forEach(({ result: r, info: rInfo }) => {
+          if (!rInfo) return;
+          let rM = rInfo.scoreMine;
+          let rO = rInfo.scoreOpponent;
+          if (!Number.isFinite(rM) || !Number.isFinite(rO)) return;
+          let rSym = "△";
 
           if (rM > rO) { rSym = "〇"; }
           else if (rM < rO) { rSym = "●"; }
-          else if (r.pk) {
-            const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+          else if (rInfo.pk) {
+            const pkMatch = rInfo.pk.match(/(\d+)\s*PK\s*(\d+)/i);
             if (pkMatch) {
-              const isRHome = (r.score !== undefined) ? (r.home_away === "H") : robustTeamMatch(r.home, kw);
+              const isRHome = rInfo.isHome;
               const pkM = parseInt(isRHome ? pkMatch[1] : pkMatch[2]);
               const pkO = parseInt(isRHome ? pkMatch[2] : pkMatch[1]);
               if (pkM > pkO) { rSym = "△"; }
               else { rSym = "▲"; }
             }
           }
-          const recentOpp = getOpponentInfoFromResult(r, kw);
-          const recentHA = (r.score !== undefined ? r.home_away : (robustTeamMatch(r.home, kw) ? "H" : "A")) || "";
+          const recentOpp = {
+            name: rInfo.opponent,
+            emblem: resolveEmblemUrl(rInfo.opponent, "")
+          };
+          const recentHA = rInfo.ha || "";
+          const itemTitle = `${rInfo.date.substring(5).replace("-", "/")} vs ${recentOpp.name} ${rM}-${rO} ${recentHA}`;
           const emblemHtml = recentOpp.emblem
             ? `<img class="dash-form-emblem" src="${escapeAttr(recentOpp.emblem)}" alt="${escapeAttr(recentOpp.name)}">`
             : `<span class="dash-form-emblem-placeholder"></span>`;
-          formHtml += `<span class="dash-form-item"><span class="dash-form-symbol">${rSym}</span>${emblemHtml}<span class="dash-form-ha">${recentHA}</span></span>`;
+          formHtml += `<span class="dash-form-item" title="${escapeAttr(itemTitle)}" aria-label="${escapeAttr(itemTitle)}"><span class="dash-form-symbol">${rSym}</span>${emblemHtml}<span class="dash-form-ha">${recentHA}</span></span>`;
         });
         formHtml += `</div>`;
 
@@ -2237,7 +2468,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       dashboardContainer.appendChild(timeBox);
     }
     if (timeBox) timeBox.style.cssText = "font-size:0.65rem; color:white; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:10px; margin-top:15px; display:inline-block; font-weight:700;";
-    if (timeBox) timeBox.innerText = `最終同期: ${new Date().toLocaleTimeString()} (Data: v20260424)`;
+    if (timeBox) timeBox.innerText = `最終同期: ${new Date().toLocaleTimeString()} (Data: GAS最新)`;
   }
 
 
@@ -2320,31 +2551,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     allSections = Array.from(document.querySelectorAll(".month-section"));
     rebuildYearTabs();
+    rebuildVisibleSections();
     updateClubVisibility();
+    rebuildMonthTabs();
   }
 
   // --- Initializing App ---
   const today = new Date(), todayY = today.getFullYear(), tKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
-  const initialYear = scheduleData.some(m => parseDate(m.date).getFullYear() === todayY) ? todayY : 2025;
-  renderFeed(initialYear);
-  await applyYearFilter(initialYear, true);
-  mergeOfficialResults(cachedResults);
-  const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
+  const initialYear = todayY >= HISTORY_START_YEAR && todayY <= HISTORY_END_YEAR ? todayY : 2025;
+  selectedYear = initialYear;
+  if (cachedLeagueResults.length) mergeOfficialResults(cachedLeagueResults);
+  document.body.setAttribute("data-mode", "dashboard");
+  if (ultraDashboard) ultraDashboard.className = "active-view";
+  if (ultraFeed) ultraFeed.className = "hidden-view";
+  if (calendarView) calendarView.className = "hidden-view";
+  if (visionView) visionView.className = "hidden-view";
+  renderDashboard();
 
-  // Use requestAnimationFrame and small timeout to ensure layout is ready for iPhone
+  // Build the heavier feed/calendar navigation after the must-show dashboard cards.
   requestAnimationFrame(() => {
-    setTimeout(() => {
+    setTimeout(async () => {
+      await applyYearFilter(initialYear, true);
+      const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
       scrollToIndex(tIdx !== -1 ? tIdx : 0);
-      switchMode('dashboard');
-    }, 100);
+    }, 0);
   });
 
   // Navigation
+  if (prevYearBtn) prevYearBtn.onclick = () => shiftYear(-1);
+  if (nextYearBtn) nextYearBtn.onclick = () => shiftYear(1);
   prevBtn.onclick = () => { if (currentIndex > 0) scrollToIndex(currentIndex - 1); };
   nextBtn.onclick = () => { if (currentIndex < visibleSections.length - 1) scrollToIndex(currentIndex + 1); };
-  goTodayBtn.onclick = () => {
+  goTodayBtn.onclick = async () => {
     const n = new Date(), y = n.getFullYear(), k = `${y}-${String(n.getMonth() + 1).padStart(2, "0")}`;
-    applyYearFilter(y, true);
+    await applyYearFilter(y, true);
     const i = visibleSections.findIndex(s => s.dataset.ym === k);
     if (i !== -1) scrollToIndex(i);
   };
@@ -2352,6 +2592,89 @@ document.addEventListener("DOMContentLoaded", async () => {
   // YM Picker
   function openYmPicker() {
     if (!activeMonthTitle.textContent.includes("/")) return; // Not fully initialized
+    const pickerYearsAll = getAvailableYears().map(String);
+    if (!pickerYearsAll.length) return;
+
+    const activePickerSection = visibleSections[currentIndex] || allSections[currentIndex] || allSections[0];
+    let selectedPickerYear = String(activePickerSection?.dataset.year || selectedYear || pickerYearsAll[pickerYearsAll.length - 1]);
+    if (!pickerYearsAll.includes(selectedPickerYear)) selectedPickerYear = pickerYearsAll[pickerYearsAll.length - 1];
+
+    ymPickerList.innerHTML = `
+      <div class="ym-picker-columns">
+        <div class="ym-picker-years" aria-label="year"></div>
+        <div class="ym-picker-month-panel">
+          <div class="ym-picker-year-label"></div>
+          <div class="ym-picker-months"></div>
+        </div>
+      </div>
+    `;
+
+    const pickerYearCol = ymPickerList.querySelector(".ym-picker-years");
+    const pickerYearLabel = ymPickerList.querySelector(".ym-picker-year-label");
+    const pickerMonthGrid = ymPickerList.querySelector(".ym-picker-months");
+
+    const drawPickerYears = () => {
+      pickerYearCol.innerHTML = "";
+      pickerYearsAll.forEach(yearOption => {
+        const btn = document.createElement("button");
+        btn.className = "ym-picker-year-btn";
+        btn.textContent = yearOption;
+        btn.classList.toggle("active", yearOption === selectedPickerYear);
+        btn.onclick = async () => {
+          selectedPickerYear = yearOption;
+          drawPickerYears();
+          await drawPickerMonths();
+        };
+        pickerYearCol.appendChild(btn);
+      });
+      scrollActiveNavItem(pickerYearCol, ".ym-picker-year-btn.active");
+    };
+
+    const drawPickerMonths = async () => {
+      const requestedYear = selectedPickerYear;
+      const yearNumber = Number(requestedYear);
+      pickerYearLabel.textContent = `${requestedYear}\u5e74`;
+      pickerMonthGrid.innerHTML = "";
+
+      if (yearNumber && yearNumber <= HISTORY_END_YEAR && !loadedHistoryYears.has(yearNumber)) {
+        pickerYearLabel.textContent = `${requestedYear}\u5e74 loading...`;
+        await ensureHistoryYearLoaded(yearNumber);
+        if (requestedYear !== selectedPickerYear) return;
+        pickerYearLabel.textContent = `${requestedYear}\u5e74`;
+      }
+
+      const monthItems = getMonthItemsForYear(yearNumber);
+      if (!monthItems.length) {
+        const empty = document.createElement("button");
+        empty.className = "ym-picker-btn disabled";
+        empty.textContent = "-";
+        pickerMonthGrid.appendChild(empty);
+        return;
+      }
+
+      monthItems.forEach(item => {
+        const btn = document.createElement("button");
+        btn.className = "ym-picker-btn";
+        btn.textContent = `${item.month}\u6708`;
+        if (visibleSections[currentIndex] && visibleSections[currentIndex].dataset.ym === item.ym) {
+          btn.classList.add("current");
+        }
+        btn.onclick = async () => {
+          closeYmPicker();
+          await applyYearFilter(yearNumber, true);
+          const idx = visibleSections.findIndex(sec => sec.dataset.ym === item.ym);
+          if (idx !== -1) scrollToIndex(idx);
+        };
+        pickerMonthGrid.appendChild(btn);
+      });
+    };
+
+    drawPickerYears();
+    void drawPickerMonths();
+    ymPickerOverlay.classList.add("active");
+    ymPickerBackdrop.classList.add("active");
+    return;
+
     const yearMap = {};
     allSections.forEach(sec => {
       const y = sec.dataset.year;
@@ -2474,9 +2797,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     openSubPane("standings-overlay");
     loadStandings();
   };
-  const menuScoreboard = document.getElementById("menu-scoreboard");
-  if (menuScoreboard) {
-    menuScoreboard.onclick = () => switchMode("scoreboard");
+  const menuVision = document.getElementById("menu-vision");
+  if (menuVision) {
+    menuVision.onclick = () => switchMode("vision");
   }
   const dashStandingsBtn = document.getElementById("dash-to-standings");
   if (dashStandingsBtn) {
@@ -2484,6 +2807,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       openSubPane("standings-overlay");
       loadStandings();
     };
+  }
+  const dashVisionBtn = document.getElementById("dash-to-vision");
+  if (dashVisionBtn) {
+    dashVisionBtn.onclick = () => switchMode("vision");
   }
   document.getElementById("menu-data").onclick = () => openSubPane("data-overlay");
   document.getElementById("menu-reload").onclick = async () => {
@@ -2558,7 +2885,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       searchPopup.style.display = "block";
     } else { searchPopup.style.display = "none"; }
   };
-  searchPopup.onclick = (e) => {
+  searchPopup.onclick = async (e) => {
     const item = e.target.closest(".search-item");
     if (item) {
       const { date, club, opponent } = item.dataset;
@@ -2566,7 +2893,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (x) {
         searchPopup.style.display = "none"; searchInput.value = "";
         const d = parseDate(date), ty = d.getFullYear(), tk = `${ty}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-        applyYearFilter(ty, true); const i = visibleSections.findIndex(s => s.dataset.ym === tk);
+        await applyYearFilter(ty, true); const i = visibleSections.findIndex(s => s.dataset.ym === tk);
         if (i !== -1) { scrollToIndex(i); setTimeout(() => openDetailSheet(x), 500); }
       }
     }
@@ -2879,7 +3206,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const json = await fetchData("standings");
       if (!json || !json.data || !Array.isArray(json.data)) throw new Error("no data");
-      saveStandingsCache(json.data, { source: json.fromCache ? "gas-cache" : "gas", timestamp: json.timestamp });
 
       // グループ別に整理
       const groups = {};

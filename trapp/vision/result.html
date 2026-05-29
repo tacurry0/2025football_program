@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=1" />
+    <title>大型ビジョン 試合結果</title>
+    <link rel="stylesheet" href="styles.css?v=20260529niigata1" />
+  </head>
+  <body class="display-page result-page">
+    <main class="canvas result-canvas" aria-label="大型ビジョン試合結果">
+      <section class="result-board">
+        <header class="result-header">
+          <h1 class="result-club-bar result-home-club" data-field="home.club"></h1>
+          <div class="result-league">
+            <img id="resultLeagueImage" alt="大会表記" />
+          </div>
+          <h1 class="result-club-bar result-away-club" data-field="away.club"></h1>
+        </header>
+
+        <div class="result-round" data-field="match.round"></div>
+
+        <div class="result-content">
+          <div class="result-side result-side-home">
+            <img class="result-emblem" id="resultHomeEmblem" alt="" />
+            <div class="result-scorers" id="resultHomeScorers"></div>
+          </div>
+
+          <div class="result-score-area">
+            <div class="result-score-box">
+              <span data-field="match.firstHome"></span>
+              <strong>前半</strong>
+              <span data-field="match.firstAway"></span>
+            </div>
+            <div class="result-score-box">
+              <span data-field="match.secondHome"></span>
+              <strong>後半</strong>
+              <span data-field="match.secondAway"></span>
+            </div>
+            <div class="result-gold-line"></div>
+            <div class="result-score-box result-score-total">
+              <span data-field="match.totalHome"></span>
+              <strong>TOTAL</strong>
+              <span data-field="match.totalAway"></span>
+            </div>
+          </div>
+
+          <div class="result-side result-side-away">
+            <img class="result-emblem" id="resultAwayEmblem" alt="" />
+            <div class="result-scorers" id="resultAwayScorers"></div>
+          </div>
+        </div>
+
+        <img class="result-adidas" src="icons/adidas-default.png?v=20260529niigata1" alt="" />
+      </section>
+    </main>
+    <script src="vendor/html2canvas.min.js?v=20260529niigata1"></script>
+    <script src="app.js?v=20260529niigata1"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
