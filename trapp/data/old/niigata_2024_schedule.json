@@ -1,0 +1,6479 @@
+[
+  {
+    "club": "niigata",
+    "matchweek": "MW1",
+    "date": "2024-02-24",
+    "day": "Sat",
+    "time": "14:05",
+    "opponent": "サガン鳥栖",
+    "venue": "駅前不動産スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
+    "details": "J1 / 第1節 / A / ○ / 2 - 1 / 晴 / 9,610人",
+    "tournament": "J1",
+    "stage": "第1節",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "2 - 1",
+    "weather": "晴",
+    "attendance": 9610,
+    "temperature": 11.9,
+    "humidity": 20,
+    "referee": "笠原 寛貴",
+    "assistant_referees": [
+      "赤阪 修",
+      "植田 文平"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "2",
+        "name": "新井 直人"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "8",
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裯紀"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "9",
+        "name": "鈴木 孝司"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "早川 史哉",
+      "堀米 悠斗",
+      "長谷川 元希",
+      "ダニーロ ゴメス",
+      "島田 譲",
+      "高木 善朗"
+    ],
+    "substitutions": [
+      {
+        "minute": "72",
+        "out": "鈴木 孝司",
+        "in": "高木 善朗"
+      },
+      {
+        "minute": "72",
+        "out": "松田 詠太郎",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "72",
+        "out": "小見 洋太",
+        "in": "長谷川 元希"
+      },
+      {
+        "minute": "90+7",
+        "out": "舞行龍ジェームズ",
+        "in": "早川 史哉"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "31",
+        "player": "新井 直人"
+      },
+      {
+        "minute": "41",
+        "player": "宮本 英治"
+      }
+    ],
+    "manager": "松橋 力���",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30434",
+    "match_card_id": "30434",
+    "source_opponent": "鳥栖",
+    "source_venue": "駅スタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW2",
+    "date": "2024-03-02",
+    "day": "Sat",
+    "time": "15:03",
+    "opponent": "ガンバ大阪",
+    "venue": "パナソニック スタジアム 吹田",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gosaka.png",
+    "details": "J1 / 第2節 / A / ● / 0 - 1 / 晴 / 28,669人",
+    "tournament": "J1",
+    "stage": "第2節",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "0 - 1",
+    "weather": "晴",
+    "attendance": 28669,
+    "temperature": 8.7,
+    "humidity": 38,
+    "referee": "高崎 航地",
+    "assistant_referees": [
+      "聳城 巧",
+      "田中 利幸"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "2",
+        "name": "新井 直人"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "20",
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裯紀"
+      },
+      {
+        "position": "MF",
+        "number": "14",
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "33",
+        "name": "高木 善朗"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "遠藤 凌",
+      "堀米 悠斗",
+      "宮本 英治",
+      "ダニーロ ゴメス",
+      "小見 洋太",
+      "長倉 幹樹"
+    ],
+    "substitutions": [
+      {
+        "minute": "75",
+        "out": "高木 善朗",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "75",
+        "out": "松田 詠太郎",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": "75",
+        "out": "谷口 海斗",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": "84",
+        "out": "新井 直人",
+        "in": "堀米 悠斗"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30448",
+    "match_card_id": "30448",
+    "source_opponent": "G大阪",
+    "source_venue": "パナスタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW3",
+    "date": "2024-03-09",
+    "day": "Sat",
+    "time": "14:05",
+    "opponent": "名古屋グランパス",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagoya.png",
+    "details": "J1 / 第3節 / H / ○ / 1 - 0 / 曇時々晴時々雪 / 22,942人",
+    "tournament": "J1",
+    "stage": "第3節",
+    "home_away": "H",
+    "result_mark": "○",
+    "score": "1 - 0",
+    "weather": "曇時々晴時々雪",
+    "attendance": 22942,
+    "temperature": 5.7,
+    "humidity": 74,
+    "referee": "池内 明彦",
+    "assistant_referees": [
+      "西尾 英朗",
+      "塩津 祐介"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "31",
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "8",
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "33",
+        "name": "高木 善朗"
+      },
+      {
+        "position": "FW",
+        "number": "99",
+        "name": "小野 裕二"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "新井 直人",
+      "遠藤 凌",
+      "長谷川 元希",
+      "島田 譲",
+      "谷口 海斗",
+      "長倉 幹樹"
+    ],
+    "substitutions": [
+      {
+        "minute": "69",
+        "out": "小野 裕二",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": "69",
+        "out": "松田 詠太郎",
+        "in": "長��� 幹樹"
+      },
+      {
+        "minute": "78",
+        "out": "高木 善朗",
+        "in": "長谷川 元希"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "83",
+        "player": "新井 直人"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30452",
+    "match_card_id": "30452",
+    "source_opponent": "名古屋",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW4",
+    "date": "2024-03-16",
+    "day": "Sat",
+    "time": "16:03",
+    "opponent": "東京ヴェルディ",
+    "venue": "味の素スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": "J1 / 第4節 / A / △ / 2 - 2 / 晴 / 17,055人",
+    "tournament": "J1",
+    "stage": "第4節",
+    "home_away": "A",
+    "result_mark": "△",
+    "score": "2 - 2",
+    "weather": "晴",
+    "attendance": 17055,
+    "temperature": 16.3,
+    "humidity": 30,
+    "referee": "上村 篤史",
+    "assistant_referees": [
+      "淺田 武士",
+      "武田 光晴"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "31",
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "8",
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "33",
+        "name": "高木 善朗"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "新井 直人",
+      "遠藤 凌",
+      "長谷川 元希",
+      "島田 譲",
+      "太田 修介",
+      "長倉 幹樹"
+    ],
+    "substitutions": [
+      {
+        "minute": "67",
+        "out": "高木 善朗",
+        "in": "太田 修介"
+      },
+      {
+        "minute": "67",
+        "out": "松田 詠太郎",
+        "in": "長谷川 元希"
+      },
+      {
+        "minute": "67",
+        "out": "谷口 海斗",
+        "in": "長��� 幹樹"
+      },
+      {
+        "minute": "83",
+        "out": "藤原 奏哉",
+        "in": "新井 直人"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "38",
+        "player": "藤原 奏哉"
+      },
+      {
+        "minute": "90+4",
+        "player": "舞行龍ジェームズ"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30466",
+    "match_card_id": "30466",
+    "source_opponent": "東京V",
+    "source_venue": "味スタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW5",
+    "date": "2024-03-30",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "柏レイソル",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
+    "details": "J1 / 第5節 / H / △ / 1 - 1 / 晴 / 20,359人",
+    "tournament": "J1",
+    "stage": "第5節",
+    "home_away": "H",
+    "result_mark": "△",
+    "score": "1 - 1",
+    "weather": "晴",
+    "attendance": 20359,
+    "temperature": 15.0,
+    "humidity": 42,
+    "referee": "山下 良美",
+    "assistant_referees": [
+      "西橋 勲",
+      "平間 亮"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "35",
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "DF",
+        "number": "31",
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "20",
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "11",
+        "name": "太田 修介"
+      },
+      {
+        "position": "FW",
+        "number": "33",
+        "name": "高木 善朗"
+      },
+      {
+        "position": "FW",
+        "number": "7",
+        "name": "谷口 海斗"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "早川 史哉",
+      "遠藤 凌",
+      "宮本 英治",
+      "長谷川 元希",
+      "小見 洋太",
+      "長倉 幹樹"
+    ],
+    "substitutions": [
+      {
+        "minute": "78",
+        "out": "太田 修介",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": "78",
+        "out": "高木 善朗",
+        "in": "長谷川 元希"
+      },
+      {
+        "minute": "78",
+        "out": "谷口 海斗",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": "86",
+        "out": "堀米 悠斗",
+        "in": "早川 史哉"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "63",
+        "player": "高木 善朗"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30472",
+    "match_card_id": "30472",
+    "source_opponent": "柏",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW6",
+    "date": "2024-04-03",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "ジュビロ磐田",
+    "venue": "ヤマハスタジアム（磐田）",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
+    "details": "J1 / 第6節 / A / ● / 0 - 2 / 曇 / 8,355人",
+    "tournament": "J1",
+    "stage": "第6節",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "0 - 2",
+    "weather": "曇",
+    "attendance": 8355,
+    "temperature": 15.7,
+    "humidity": 52,
+    "referee": "今村 義朗",
+    "assistant_referees": [
+      "武部 陽介",
+      "藤澤 達也"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "32",
+        "name": "長谷川 巧"
+      },
+      {
+        "position": "DF",
+        "number": "26",
+        "name": "遠藤 凌"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": "17",
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": "19",
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": "8",
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "14",
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": "27",
+        "name": "長倉 幹樹"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "舞行龍ジェームズ",
+      "森 璃太",
+      "秋山 裕紀",
+      "奥村 仁",
+      "谷口 海斗",
+      "太田 修介"
+    ],
+    "substitutions": [
+      {
+        "minute": "76",
+        "out": "長��� 幹樹",
+        "in": "太田 修介"
+      },
+      {
+        "minute": "76",
+        "out": "長谷川 元希",
+        "in": "奥村 仁"
+      },
+      {
+        "minute": "76",
+        "out": "ダニーロ ゴメス",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": "82",
+        "out": "星 雄次",
+        "in": "秋山 裕紀"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "7",
+        "player": "小見 洋太"
+      },
+      {
+        "minute": "44",
+        "player": "星 雄次"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30484",
+    "match_card_id": "30484",
+    "source_opponent": "磐田",
+    "source_venue": "ヤマハ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW7",
+    "date": "2024-04-07",
+    "day": "Sun",
+    "time": "14:03",
+    "opponent": "セレッソ大阪",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
+    "details": "J1 / 第7節 / H / ● / 0 - 1 / 晴 / 19,833人",
+    "tournament": "J1",
+    "stage": "第7節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "0 - 1",
+    "weather": "晴",
+    "attendance": 19833,
+    "temperature": 19.7,
+    "humidity": 50,
+    "referee": "荒木 友輔",
+    "assistant_referees": [
+      "熊谷 幸剛",
+      "岩田 浩義"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "31",
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "20",
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "11",
+        "name": "太田 修介"
+      },
+      {
+        "position": "FW",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "33",
+        "name": "高木 善朗"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "早川 史哉",
+      "千葉 和彦",
+      "宮本 英治",
+      "長谷川 元希",
+      "小見 洋太",
+      "長倉 幹樹"
+    ],
+    "substitutions": [
+      {
+        "minute": "70",
+        "out": "島田 譲",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": "70",
+        "out": "太田 修介",
+        "in": "宮本 英治"
+      },
+      {
+        "minute": "70",
+        "out": "谷口 海斗",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": "78",
+        "out": "高木 善朗",
+        "in": "長谷川 元希"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "12",
+        "player": "トーマス デン"
+      },
+      {
+        "minute": "50",
+        "player": "島田 譲"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30492",
+    "match_card_id": "30492",
+    "source_opponent": "C大阪",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW8",
+    "date": "2024-04-13",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "北海道コンサドーレ札幌",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sapporo.png",
+    "details": "J1 / 第8節 / H / △ / 1 - 1 / 晴 / 17,936人",
+    "tournament": "J1",
+    "stage": "第8節",
+    "home_away": "H",
+    "result_mark": "△",
+    "score": "1 - 1",
+    "weather": "晴",
+    "attendance": 17936,
+    "temperature": 19.3,
+    "humidity": 50,
+    "referee": "岡部 拓人",
+    "assistant_referees": [
+      "大塚 晴弘",
+      "坊薗 真琴"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "8",
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "14",
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": "7",
+        "name": "谷口 海斗"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "森 璃太",
+      "千葉 和彦",
+      "ダニーロ ゴメス",
+      "島田 譲",
+      "奥村 仁",
+      "長倉 幹樹"
+    ],
+    "substitutions": [
+      {
+        "minute": "61",
+        "out": "松田 詠太郎",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "77",
+        "out": "谷口 海斗",
+        "in": "長��� 幹樹"
+      },
+      {
+        "minute": "77",
+        "out": "長谷川 元希",
+        "in": "奥村 仁"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "53",
+        "player": "トーマス デン"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30501",
+    "match_card_id": "30501",
+    "source_opponent": "札幌",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン 2回戦",
+    "date": "2024-04-17",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "いわきFC",
+    "venue": "ハワイアンズスタジアムいわき",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
+    "details": "ルヴァン / 2回戦 / A / ○ / 2 - 0 / 晴 / 3,618人",
+    "tournament": "ルヴァン",
+    "stage": "2回戦",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "2 - 0",
+    "weather": "晴",
+    "attendance": 3618,
+    "temperature": 14.0,
+    "humidity": 90,
+    "referee": "笠原 寛貴",
+    "assistant_referees": [
+      "聳城 巧",
+      "塚田 健太"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "21",
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": "32",
+        "name": "長谷川 巧"
+      },
+      {
+        "position": "DF",
+        "number": "35",
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "DF",
+        "number": "45",
+        "name": "稲村 隼翔"
+      },
+      {
+        "position": "DF",
+        "number": "24",
+        "name": "森 璃太"
+      },
+      {
+        "position": "MF",
+        "number": "17",
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": "19",
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": "20",
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": "11",
+        "name": "太田 修介"
+      },
+      {
+        "position": "FW",
+        "number": "9",
+        "name": "鈴木 孝司"
+      },
+      {
+        "position": "FW",
+        "number": "27",
+        "name": "長倉 幹樹"
+      }
+    ],
+    "bench_members": [
+      "吉満 大介",
+      "舞行龍ジェームズ",
+      "早川 史哉",
+      "秋山 裕紀",
+      "宮本 英治",
+      "松田 詠太郎",
+      "奥村 仁",
+      "谷口 海斗",
+      "小見 洋太"
+    ],
+    "substitutions": [
+      {
+        "minute": "38",
+        "out": "森 璃太",
+        "in": "早川 史哉"
+      },
+      {
+        "minute": "63",
+        "out": "長倉 幹樹",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": "63",
+        "out": "ダニーロ ゴメス",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": "77",
+        "out": "太田 修介",
+        "in": "松田 詠太郎"
+      },
+      {
+        "minute": "77",
+        "out": "星 雄次",
+        "in": "秋山 裕紀"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "61",
+        "player": "太田 修介"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=29647",
+    "match_card_id": "29647",
+    "source_opponent": "いわき",
+    "source_venue": "ハワスタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW9",
+    "date": "2024-04-20",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "京都サンガF.C.",
+    "venue": "サンガスタジアム by ＫＹＯＣＥＲＡ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": "J1 / 第9節 / A / ○ / 1 - 0 / 曇 / 9,022人",
+    "tournament": "J1",
+    "stage": "第9節",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "1 - 0",
+    "weather": "曇",
+    "attendance": 9022,
+    "temperature": 26.6,
+    "humidity": 32,
+    "referee": "福島 孝一郎",
+    "assistant_referees": [
+      "船橋 昭次",
+      "藤澤 達也"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "35",
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "8",
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "33",
+        "name": "高木 善朗"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "長谷川 巧",
+      "稲村 隼翔",
+      "長谷川 元希",
+      "島田 譲",
+      "太田 修介",
+      "小野 裕二"
+    ],
+    "substitutions": [
+      {
+        "minute": "66",
+        "out": "高木 善朗",
+        "in": "長谷川 元希"
+      },
+      {
+        "minute": "66",
+        "out": "小見 洋太",
+        "in": "太田 修介"
+      },
+      {
+        "minute": "66",
+        "out": "谷口 海斗",
+        "in": "小野 裕二"
+      },
+      {
+        "minute": "84",
+        "out": "松田 詠太郎",
+        "in": "長谷川 巧"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "31",
+        "player": "早川 史哉"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30512",
+    "match_card_id": "30512",
+    "source_opponent": "京都",
+    "source_venue": "サンガＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW10",
+    "date": "2024-04-27",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "FC東京",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ftokyo.png",
+    "details": "J1 / 第10節 / H / ● / 1 - 3 / 曇 / 24,438人",
+    "tournament": "J1",
+    "stage": "第10節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "1 - 3",
+    "weather": "曇",
+    "attendance": 24438,
+    "temperature": 21.5,
+    "humidity": 48,
+    "referee": "山本 雄大",
+    "assistant_referees": [
+      "堀越 雅弘",
+      "津野 洋平"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "35",
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "8",
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "33",
+        "name": "高木 善朗"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "長谷川 巧",
+      "稲村 隼翔",
+      "長谷川 元希",
+      "島田 譲",
+      "太田 修介",
+      "小野 裕二"
+    ],
+    "substitutions": [
+      {
+        "minute": "64",
+        "out": "谷口 海斗",
+        "in": "小野 裕二"
+      },
+      {
+        "minute": "64",
+        "out": "小見 洋太",
+        "in": "稲村 隼翔"
+      },
+      {
+        "minute": "64",
+        "out": "千葉 和彦",
+        "in": "太田 修介"
+      },
+      {
+        "minute": "73",
+        "out": "高木 善朗",
+        "in": "長谷川 巧"
+      },
+      {
+        "minute": "73",
+        "out": "松田 詠太郎",
+        "in": "長谷川 元希"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "26",
+        "player": "宮本 英治"
+      },
+      {
+        "minute": "35",
+        "player": "千葉 和彦"
+      },
+      {
+        "minute": "82",
+        "player": "太田 修介"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30521",
+    "match_card_id": "30521",
+    "source_opponent": "FC東京",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW11",
+    "date": "2024-05-03",
+    "day": "Fri",
+    "time": "14:03",
+    "opponent": "サンフレッチェ広島",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_hiroshima.png",
+    "details": "J1 / 第11節 / H / △ / 1 - 1 / 晴 / 25,854人",
+    "tournament": "J1",
+    "stage": "第11節",
+    "home_away": "H",
+    "result_mark": "△",
+    "score": "1 - 1",
+    "weather": "晴",
+    "attendance": 25854,
+    "temperature": 21.6,
+    "humidity": 38,
+    "referee": "川俣 秀",
+    "assistant_referees": [
+      "五十嵐 泰之",
+      "長谷川 雅"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "26",
+        "name": "遠藤 凌"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": "11",
+        "name": "太田 修介"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "8",
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": "14",
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": "99",
+        "name": "小野 裕二"
+      },
+      {
+        "position": "FW",
+        "number": "9",
+        "name": "鈴木 孝司"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "千葉 和彦",
+      "ダニーロ ゴメス",
+      "星 雄次",
+      "島田 譲",
+      "高木 善朗",
+      "長倉 幹樹"
+    ],
+    "substitutions": [
+      {
+        "minute": "28",
+        "out": "宮本 英治",
+        "in": "島田 譲"
+      },
+      {
+        "minute": "37",
+        "out": "太田 修介",
+        "in": "星 雄次"
+      },
+      {
+        "minute": "66",
+        "out": "小野 裕二",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "66",
+        "out": "鈴木 孝司",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": "66",
+        "out": "長谷川 元希",
+        "in": "高木 善朗"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "8",
+        "player": "太田 修介"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30531",
+    "match_card_id": "30531",
+    "source_opponent": "広島",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW12",
+    "date": "2024-05-06",
+    "day": "Mon",
+    "time": "13:03",
+    "opponent": "ヴィッセル神戸",
+    "venue": "ノエビアスタジアム神戸",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kobe.png",
+    "details": "J1 / 第12節 / A / ● / 2 - 3 / 屋内 / 21,073人",
+    "tournament": "J1",
+    "stage": "第12節",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "2 - 3",
+    "weather": "屋内",
+    "attendance": 21073,
+    "temperature": 23.6,
+    "humidity": 48,
+    "referee": "荒木 友輔",
+    "assistant_referees": [
+      "西橋 勲",
+      "道山 悟至"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "26",
+        "name": "遠藤 凌"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "19",
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": "11",
+        "name": "太田 修介"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "20",
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": "14",
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": "33",
+        "name": "高木 善朗"
+      },
+      {
+        "position": "FW",
+        "number": "99",
+        "name": "小野 裕二"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "長谷川 巧",
+      "千葉 和彦",
+      "ダニーロ ゴメス",
+      "奥村 仁",
+      "鈴木 孝司",
+      "長倉 幹樹"
+    ],
+    "substitutions": [
+      {
+        "minute": "7",
+        "out": "高木 善朗",
+        "in": "鈴木 孝司"
+      },
+      {
+        "minute": "64",
+        "out": "小野 裕二",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": "64",
+        "out": "太田 修介",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "64",
+        "out": "島田 譲",
+        "in": "奥村 仁"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30541",
+    "match_card_id": "30541",
+    "source_opponent": "神戸",
+    "source_venue": "ノエスタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW13",
+    "date": "2024-05-11",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "浦和レッズ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
+    "details": "J1 / 第13節 / H / ● / 2 - 4 / 晴 / 24,652人",
+    "tournament": "J1",
+    "stage": "第13節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "2 - 4",
+    "weather": "晴",
+    "attendance": 24652,
+    "temperature": 25.6,
+    "humidity": 32,
+    "referee": "笠原 寛貴",
+    "assistant_referees": [
+      "日比野 真",
+      "平間 亮"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "26",
+        "name": "遠藤 凌"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "20",
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": "14",
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": "27",
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": "99",
+        "name": "小野 裕二"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "稲村 隼翔",
+      "星 雄次",
+      "奥村 仁",
+      "谷口 海斗",
+      "太田 修介",
+      "小見 洋太"
+    ],
+    "substitutions": [
+      {
+        "minute": "51",
+        "out": "長谷川 元希",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": "66",
+        "out": "松田 詠太郎",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": "66",
+        "out": "小野 裕二",
+        "in": "太田 修介"
+      },
+      {
+        "minute": "75",
+        "out": "島田 譲",
+        "in": "奥村 仁"
+      },
+      {
+        "minute": "75",
+        "out": "早川 史哉",
+        "in": "星 雄次"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "82",
+        "player": "藤原 奏哉"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30551",
+    "match_card_id": "30551",
+    "source_opponent": "浦和",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW14",
+    "date": "2024-05-15",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "横浜F・マリノス",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafm.png",
+    "details": "J1 / 第14節 / H / ○ / 3 - 1 / 曇 / 15,065人",
+    "tournament": "J1",
+    "stage": "第14節",
+    "home_away": "H",
+    "result_mark": "○",
+    "score": "3 - 1",
+    "weather": "曇",
+    "attendance": 15065,
+    "temperature": 21.4,
+    "humidity": 48,
+    "referee": "福島 孝一郎",
+    "assistant_referees": [
+      "熊谷 幸剛",
+      "中野 卓"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "19",
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": "32",
+        "name": "長谷川 巧"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "30",
+        "name": "奥村 仁"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "27",
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": "9",
+        "name": "鈴木 孝司"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "早川 史哉",
+      "遠藤 凌",
+      "稲村 隼翔",
+      "島田 譲",
+      "石山 青空",
+      "谷口 海斗"
+    ],
+    "substitutions": [
+      {
+        "minute": "19",
+        "out": "長谷川 巧",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": "78",
+        "out": "鈴木 孝司",
+        "in": "稲村 隼翔"
+      },
+      {
+        "minute": "78",
+        "out": "舞行龍ジェームズ",
+        "in": "早川 史哉"
+      },
+      {
+        "minute": "90+1",
+        "out": "星 雄次",
+        "in": "島田 譲"
+      },
+      {
+        "minute": "90+1",
+        "out": "奥村 仁",
+        "in": "遠藤 凌"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30564",
+    "match_card_id": "30564",
+    "source_opponent": "横浜FM",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW15",
+    "date": "2024-05-19",
+    "day": "Sun",
+    "time": "16:03",
+    "opponent": "湘南ベルマーレ",
+    "venue": "レモンガススタジアム平塚",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_shonan.png",
+    "details": "J1 / 第15節 / A / ● / 1 - 2 / 雨 / 11,427人",
+    "tournament": "J1",
+    "stage": "第15節",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "1 - 2",
+    "weather": "雨",
+    "attendance": 11427,
+    "temperature": 21.1,
+    "humidity": 69,
+    "referee": "先立 圭吾",
+    "assistant_referees": [
+      "大塚 晴弘",
+      "森川 浩次"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "35",
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "DF",
+        "number": "19",
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "30",
+        "name": "奥村 仁"
+      },
+      {
+        "position": "MF",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "27",
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": "9",
+        "name": "鈴木 孝司"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "早川 史哉",
+      "遠藤 凌",
+      "稲村 隼翔",
+      "島田 譲",
+      "松田 詠太郎",
+      "石山 青空"
+    ],
+    "substitutions": [
+      {
+        "minute": "72",
+        "out": "千葉 和彦",
+        "in": "稲村 隼翔"
+      },
+      {
+        "minute": "72",
+        "out": "小見 洋太",
+        "in": "松田 詠太郎"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "2",
+        "player": "藤原 奏哉"
+      },
+      {
+        "minute": "22",
+        "player": "奥村 仁"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30579",
+    "match_card_id": "30579",
+    "source_opponent": "湘南",
+    "source_venue": "レモンＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン 3回戦",
+    "date": "2024-05-22",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "ブラウブリッツ秋田",
+    "venue": "ソユースタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
+    "details": "ルヴァン / 3回戦 / A / ○ / 2 - 0 / 晴 / 2,810人",
+    "tournament": "ルヴァン",
+    "stage": "3回戦",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "2 - 0",
+    "weather": "晴",
+    "attendance": 2810,
+    "temperature": 18.3,
+    "humidity": 50,
+    "referee": "飯田 淳平",
+    "assistant_referees": [
+      "淺田 武士",
+      "手代木 直美"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "21",
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": "19",
+        "name": "星 雄次"
+      },
+      {
+        "position": "DF",
+        "number": "26",
+        "name": "遠藤 凌"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "DF",
+        "number": "45",
+        "name": "稲村 隼翔"
+      },
+      {
+        "position": "MF",
+        "number": "22",
+        "name": "松田 詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": "40",
+        "name": "石山 青空"
+      },
+      {
+        "position": "MF",
+        "number": "20",
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": "27",
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": "46",
+        "name": "笠井 佳祐"
+      }
+    ],
+    "bench_members": [
+      "吉満 大介",
+      "トーマス デン",
+      "藤原 奏哉",
+      "千葉 和彦",
+      "秋山 裕紀",
+      "奥村 仁",
+      "谷口 海斗",
+      "鈴木 孝司"
+    ],
+    "substitutions": [
+      {
+        "minute": "46",
+        "out": "星 雄次",
+        "in": "藤原 奏哉"
+      },
+      {
+        "minute": "67",
+        "out": "小見 洋太",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": "67",
+        "out": "笠井 佳祐",
+        "in": "奥村 仁"
+      },
+      {
+        "minute": "71",
+        "out": "遠藤 凌",
+        "in": "トーマス デン"
+      },
+      {
+        "minute": "108",
+        "out": "石山 青空",
+        "in": "秋山 裕紀"
+      },
+      {
+        "minute": "120",
+        "out": "長倉 幹樹",
+        "in": "鈴木 孝司"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=29666",
+    "match_card_id": "29666",
+    "source_opponent": "秋田",
+    "source_venue": "ソユスタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW16",
+    "date": "2024-05-25",
+    "day": "Sat",
+    "time": "16:03",
+    "opponent": "アビスパ福岡",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": "J1 / 第16節 / H / ● / 1 - 2 / 晴時々曇 / 20,197人",
+    "tournament": "J1",
+    "stage": "第16節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "1 - 2",
+    "weather": "晴時々曇",
+    "attendance": 20197,
+    "temperature": 16.9,
+    "humidity": 56,
+    "referee": "ダミアン シルヴェストジャク",
+    "assistant_referees": [
+      "マレク アリス",
+      "バルトシュ ハイニヒ"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "35",
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "30",
+        "name": "奥村 仁"
+      },
+      {
+        "position": "MF",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "27",
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": "9",
+        "name": "鈴木 孝司"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "森 璃太",
+      "遠藤 凌",
+      "堀米 悠斗",
+      "島田 譲",
+      "松田 詠太郎",
+      "石山 青空"
+    ],
+    "substitutions": [
+      {
+        "minute": "69",
+        "out": "奥村 仁",
+        "in": "石山 青空"
+      },
+      {
+        "minute": "69",
+        "out": "小見 洋太",
+        "in": "松田 詠太郎"
+      },
+      {
+        "minute": "84",
+        "out": "千葉 和彦",
+        "in": "島田 譲"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30584",
+    "match_card_id": "30584",
+    "source_opponent": "福岡",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW17",
+    "date": "2024-06-01",
+    "day": "Sat",
+    "time": "15:03",
+    "opponent": "FC町田ゼルビア",
+    "venue": "町田ＧＩＯＮスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "J1 / 第17節 / A / ○ / 3 - 1 / 晴 / 10,411人",
+    "tournament": "J1",
+    "stage": "第17節",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "3 - 1",
+    "weather": "晴",
+    "attendance": 10411,
+    "temperature": 25.4,
+    "humidity": 33,
+    "referee": "川俣 秀",
+    "assistant_referees": [
+      "堀越 雅弘",
+      "田中 利幸"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": "1",
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": "25",
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": "5",
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": "3",
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": "18",
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": "16",
+        "name": "小見 洋太"
+      },
+      {
+        "position": "MF",
+        "number": "6",
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": "30",
+        "name": "奥村 仁"
+      },
+      {
+        "position": "MF",
+        "number": "7",
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": "9",
+        "name": "鈴木 孝司"
+      },
+      {
+        "position": "FW",
+        "number": "27",
+        "name": "長倉 幹樹"
+      }
+    ],
+    "bench_members": [
+      "阿部 航斗",
+      "遠藤 凌",
+      "堀米 悠斗",
+      "ダニーロ ゴメス",
+      "島田 譲",
+      "松田 詠太郎",
+      "石山 青空"
+    ],
+    "substitutions": [
+      {
+        "minute": "79",
+        "out": "早川 史哉",
+        "in": "堀米 悠斗"
+      },
+      {
+        "minute": "79",
+        "out": "秋山 裕紀",
+        "in": "島田 譲"
+      },
+      {
+        "minute": "86",
+        "out": "鈴木 孝司",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "90+6",
+        "out": "小見 洋太",
+        "in": "松田 詠太郎"
+      },
+      {
+        "minute": "90+6",
+        "out": "奥村 仁",
+        "in": "石山 青空"
+      }
+    ],
+    "warnings": [
+      {
+        "minute": "74",
+        "player": "舞行龍ジェームズ"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30593",
+    "match_card_id": "30593",
+    "source_opponent": "町田",
+    "source_venue": "Ｇスタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン プレーオフ (1)",
+    "date": "2024-06-05",
+    "day": "Wed",
+    "time": "",
+    "opponent": "V・ファーレン長崎",
+    "venue": "デンカＳ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "ルヴァン / プレーオフ (1) / H / ○ / 2 - 1 / 曇 / 7,325人",
+    "tournament": "ルヴァン",
+    "stage": "プレーオフ (1)",
+    "home_away": "H",
+    "result_mark": "○",
+    "score": "2 - 1",
+    "weather": "曇",
+    "attendance": 7325,
+    "temperature": null,
+    "humidity": null,
+    "referee": null,
+    "assistant_referees": null,
+    "starting_members": null,
+    "bench_members": null,
+    "substitutions": null,
+    "warnings": null,
+    "manager": null,
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=31030",
+    "match_card_id": "31030",
+    "source_opponent": "長崎",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン プレーオフ (2)",
+    "date": "2024-06-09",
+    "day": "Sun",
+    "time": "",
+    "opponent": "V・ファーレン長崎",
+    "venue": "トラスタ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "ルヴァン / プレーオフ (2) / A / △ / 1 - 1 / 曇のち雨 / 6,534人",
+    "tournament": "ルヴァン",
+    "stage": "プレーオフ (2)",
+    "home_away": "A",
+    "result_mark": "△",
+    "score": "1 - 1",
+    "weather": "曇のち雨",
+    "attendance": 6534,
+    "temperature": null,
+    "humidity": null,
+    "referee": null,
+    "assistant_referees": null,
+    "starting_members": null,
+    "bench_members": null,
+    "substitutions": null,
+    "warnings": null,
+    "manager": null,
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=31035",
+    "match_card_id": "31035",
+    "source_opponent": "長崎",
+    "source_venue": "トラスタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "天皇杯 2回戦",
+    "date": "2024-06-12",
+    "day": "Wed",
+    "time": "",
+    "opponent": "ギラヴァンツ北九州",
+    "venue": "デンカＳ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kitakyushu.png",
+    "details": "天皇杯 / 2回戦 / H / ○ / 4 - 4 (PK 3-1) / 晴 / 6,519人",
+    "tournament": "天皇杯",
+    "stage": "2回戦",
+    "home_away": "H",
+    "result_mark": "○",
+    "score": "4 - 4 (PK 3-1)",
+    "weather": "晴",
+    "attendance": 6519,
+    "temperature": null,
+    "humidity": null,
+    "referee": null,
+    "assistant_referees": null,
+    "starting_members": null,
+    "bench_members": null,
+    "substitutions": null,
+    "warnings": null,
+    "manager": null,
+    "j_official_url": null,
+    "match_card_id": null,
+    "source_opponent": "北九州",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW18",
+    "date": "2024-06-16",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "鹿島アントラーズ",
+    "venue": "県立カシマサッカースタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashima.png",
+    "details": "J1 / 第18節 / A / △ / 1 - 1 / 晴 / 15,499人",
+    "tournament": "J1",
+    "stage": "第18節",
+    "home_away": "A",
+    "result_mark": "△",
+    "score": "1 - 1",
+    "weather": "晴",
+    "attendance": 15499,
+    "temperature": 24.9,
+    "humidity": 87,
+    "referee": "西村雄一",
+    "assistant_referees": [
+      "日比野真",
+      "長谷川雅"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川史哉"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見洋太"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 30,
+        "name": "奥村仁"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木孝司"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 26,
+        "name": "遠藤凌"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": 40,
+        "name": "石山雅紀"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "56'",
+        "out": "小見洋太",
+        "in": "長谷川元希"
+      },
+      {
+        "minute": "80'",
+        "out": "秋山裕紀",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "80'",
+        "out": "奥村仁",
+        "in": "松田詠太郎"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30606",
+    "match_card_id": "30606",
+    "source_opponent": "鹿島",
+    "source_venue": "カシマ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW19",
+    "date": "2024-06-22",
+    "day": "Sat",
+    "time": "18:03",
+    "opponent": "川崎フロンターレ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
+    "details": "J1 / 第19節 / H / △ / 2 - 2 / 曇 / 33,885人",
+    "tournament": "J1",
+    "stage": "第19節",
+    "home_away": "H",
+    "result_mark": "△",
+    "score": "2 - 2",
+    "weather": "曇",
+    "attendance": 33885,
+    "temperature": 27.5,
+    "humidity": 56,
+    "referee": "笠原寛貴",
+    "assistant_referees": [
+      "浅田武士",
+      "真鍋寿明"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見洋太"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 30,
+        "name": "奥村仁"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木孝司"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川史哉"
+      },
+      {
+        "position": "DF",
+        "number": 26,
+        "name": "遠藤凌"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉和彦"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": 40,
+        "name": "石山雅紀"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "72'",
+        "out": "小見洋太",
+        "in": "長谷川元希"
+      },
+      {
+        "minute": "72'",
+        "out": "奥村仁",
+        "in": "松田詠太郎"
+      },
+      {
+        "minute": "90+9'",
+        "out": "谷口海斗",
+        "in": "石山雅紀"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "堀米悠斗",
+        "minute": "54'"
+      },
+      {
+        "player": "舞行龍ジェームズ",
+        "minute": "70'"
+      }
+    ],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30612",
+    "match_card_id": "30612",
+    "source_opponent": "川崎F",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW20",
+    "date": "2024-06-26",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "サンフレッチェ広島",
+    "venue": "エディオンピースウイング広島",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_hiroshima.png",
+    "details": "J1 / 第20節 / A / △ / 1 - 1 / 曇 / 22,774人",
+    "tournament": "J1",
+    "stage": "第20節",
+    "home_away": "A",
+    "result_mark": "△",
+    "score": "1 - 1",
+    "weather": "曇",
+    "attendance": 22774,
+    "temperature": 24.1,
+    "humidity": 51,
+    "referee": "中村太",
+    "assistant_referees": [
+      "大塚晴弘",
+      "露野寛平"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川史哉"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 16,
+        "name": "小見洋太"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満大介"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村仁"
+      },
+      {
+        "position": "MF",
+        "number": 40,
+        "name": "石山雅紀"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木孝司"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "66'",
+        "out": "松田詠太郎",
+        "in": "奥村仁"
+      },
+      {
+        "minute": "66'",
+        "out": "長谷川元希",
+        "in": "石山雅紀"
+      },
+      {
+        "minute": "81'",
+        "out": "谷口海斗",
+        "in": "鈴木孝司"
+      },
+      {
+        "minute": "87'",
+        "out": "小見洋太",
+        "in": "小野裕二"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "稲村隼翔",
+        "minute": "90'"
+      }
+    ],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30628",
+    "match_card_id": "30628",
+    "source_opponent": "広島",
+    "source_venue": "Ｅピース"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW21",
+    "date": "2024-06-29",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "北海道コンサドーレ札幌",
+    "venue": "札幌ドーム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_sapporo.png",
+    "details": "J1 / 第21節 / A / ○ / 1 - 0 / 屋内 / 13,859人",
+    "tournament": "J1",
+    "stage": "第21節",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "1 - 0",
+    "weather": "屋内",
+    "attendance": 13859,
+    "temperature": 24.2,
+    "humidity": 59,
+    "referee": "上田益也",
+    "assistant_referees": [
+      "五十嵐泰之",
+      "上田崇"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見洋太"
+      },
+      {
+        "position": "FW",
+        "number": 30,
+        "name": "奥村仁"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口海斗"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満大介"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川史哉"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木善朗"
+      },
+      {
+        "position": "MF",
+        "number": 40,
+        "name": "石山雅紀"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "65'",
+        "out": "奥村仁",
+        "in": "長谷川元希"
+      },
+      {
+        "minute": "65'",
+        "out": "小見洋太",
+        "in": "高木善朗"
+      },
+      {
+        "minute": "89'",
+        "out": "松田詠太郎",
+        "in": "石山雅紀"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30630",
+    "match_card_id": "30630",
+    "source_opponent": "札幌",
+    "source_venue": "札幌ド"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW22",
+    "date": "2024-07-06",
+    "day": "Sat",
+    "time": "18:33",
+    "opponent": "サガン鳥栖",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
+    "details": "J1 / 第22節 / H / ● / 3 - 4 / 曇 / 23,217人",
+    "tournament": "J1",
+    "stage": "第22節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "3 - 4",
+    "weather": "曇",
+    "attendance": 23217,
+    "temperature": 26.9,
+    "humidity": 90,
+    "referee": "川俣秀",
+    "assistant_referees": [
+      "堀越雅宏",
+      "田中利幸"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見洋太"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口海斗"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満大介"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川史哉"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村隼翔"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木善朗"
+      },
+      {
+        "position": "MF",
+        "number": 40,
+        "name": "石山雅紀"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "62'",
+        "out": "小見洋太",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "62'",
+        "out": "長谷川元希",
+        "in": "高木善朗"
+      },
+      {
+        "minute": "62'",
+        "out": "谷口海斗",
+        "in": "小野裕二"
+      },
+      {
+        "minute": "62'",
+        "out": "松田詠太郎",
+        "in": "石山雅紀"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "舞行龍ジェームズ",
+        "minute": "34'"
+      },
+      {
+        "player": "ダニーロ ゴメス",
+        "minute": "67'"
+      }
+    ],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30645",
+    "match_card_id": "30645",
+    "source_opponent": "鳥栖",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "天皇杯 3回戦",
+    "date": "2024-07-10",
+    "day": "Wed",
+    "time": "",
+    "opponent": "V・ファーレン長崎",
+    "venue": "トラスタ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagasaki.png",
+    "details": "天皇杯 / 3回戦 / A / ● / 1 - 6 / 雨 / 2,732人",
+    "tournament": "天皇杯",
+    "stage": "3回戦",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "1 - 6",
+    "weather": "雨",
+    "attendance": 2732,
+    "temperature": null,
+    "humidity": null,
+    "referee": null,
+    "assistant_referees": null,
+    "starting_members": null,
+    "bench_members": null,
+    "substitutions": null,
+    "warnings": null,
+    "manager": null,
+    "j_official_url": null,
+    "match_card_id": null,
+    "source_opponent": "長崎",
+    "source_venue": "トラスタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW23",
+    "date": "2024-07-13",
+    "day": "Sat",
+    "time": "19:03",
+    "opponent": "FC東京",
+    "venue": "国立競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_ftokyo.png",
+    "details": "J1 / 第23節 / A / ● / 0 - 2 / 曇 / 57,885人",
+    "tournament": "J1",
+    "stage": "第23節",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "0 - 2",
+    "weather": "曇",
+    "attendance": 57885,
+    "temperature": 28.4,
+    "humidity": 64,
+    "referee": "上村篤史",
+    "assistant_referees": [
+      "武部陽介",
+      "藤澤達也"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 26,
+        "name": "遠藤凌"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見洋太"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉幹樹"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満大介"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川巧"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉和彦"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本英治"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木善朗"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "76'",
+        "out": "小見洋太",
+        "in": "宮本英治"
+      },
+      {
+        "minute": "76'",
+        "out": "秋山裕紀",
+        "in": "松田詠太郎"
+      },
+      {
+        "minute": "83'",
+        "out": "谷口海斗",
+        "in": "長谷川巧"
+      },
+      {
+        "minute": "83'",
+        "out": "長倉幹樹",
+        "in": "小野裕二"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "遠藤凌",
+        "minute": "24'"
+      },
+      {
+        "player": "堀米悠斗",
+        "minute": "36'"
+      }
+    ],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30651",
+    "match_card_id": "30651",
+    "source_opponent": "FC東京",
+    "source_venue": "国立"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW24",
+    "date": "2024-07-20",
+    "day": "Sat",
+    "time": "19:03",
+    "opponent": "セレッソ大阪",
+    "venue": "ヨドコウ桜スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_cosaka.png",
+    "details": "J1 / 第24節 / A / ○ / 2 - 1 / 晴 / 18,468人",
+    "tournament": "J1",
+    "stage": "第24節",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "2 - 1",
+    "weather": "晴",
+    "attendance": 18468,
+    "temperature": 31.6,
+    "humidity": 37,
+    "referee": "飯村将史",
+    "assistant_referees": [
+      "森川浩次",
+      "道山悟至"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本英治"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満大介"
+      },
+      {
+        "position": "DF",
+        "number": 26,
+        "name": "遠藤凌"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川巧"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木善朗"
+      },
+      {
+        "position": "MF",
+        "number": 40,
+        "name": "石山雅紀"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口海斗"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "75'",
+        "out": "長谷川元希",
+        "in": "島田譲"
+      },
+      {
+        "minute": "75'",
+        "out": "長倉幹樹",
+        "in": "谷口海斗"
+      },
+      {
+        "minute": "90+4'",
+        "out": "小野裕二",
+        "in": "石山雅紀"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30666",
+    "match_card_id": "30666",
+    "source_opponent": "C大阪",
+    "source_venue": "ヨドコウ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW25",
+    "date": "2024-08-07",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "ジュビロ磐田",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
+    "details": "J1 / 第25節 / H / △ / 2 - 2 / 晴 / 17,861人",
+    "tournament": "J1",
+    "stage": "第25節",
+    "home_away": "H",
+    "result_mark": "△",
+    "score": "2 - 2",
+    "weather": "晴",
+    "attendance": 17861,
+    "temperature": 27.3,
+    "humidity": 81,
+    "referee": "清水勇人",
+    "assistant_referees": [
+      "熊谷幸剛",
+      "岩崎創一"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本英治"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川巧"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉和彦"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村隼翔"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口海斗"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "69'",
+        "out": "宮本英治",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": "69'",
+        "out": "長谷川元希",
+        "in": "島田譲"
+      },
+      {
+        "minute": "80'",
+        "out": "小野裕二",
+        "in": "谷口海斗"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "小野裕二",
+        "minute": "19'"
+      }
+    ],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30674",
+    "match_card_id": "30674",
+    "source_opponent": "磐田",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW26",
+    "date": "2024-08-12",
+    "day": "Mon",
+    "time": "19:03",
+    "opponent": "京都サンガF.C.",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kyoto.png",
+    "details": "J1 / 第26節 / H / ○ / 2 - 0 / 曇 / 27,643人",
+    "tournament": "J1",
+    "stage": "第26節",
+    "home_away": "H",
+    "result_mark": "○",
+    "score": "2 - 0",
+    "weather": "曇",
+    "attendance": 27643,
+    "temperature": 27.0,
+    "humidity": 89,
+    "referee": "岡部拓人",
+    "assistant_referees": [
+      "浅田武士",
+      "岩田浩義"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本英治"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川巧"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村隼翔"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木孝司"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "67'",
+        "out": "長谷川元希",
+        "in": "谷口海斗"
+      },
+      {
+        "minute": "76'",
+        "out": "ダニーロ ゴメス",
+        "in": "松田詠太郎"
+      },
+      {
+        "minute": "76'",
+        "out": "小野裕二",
+        "in": "鈴木孝司"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30689",
+    "match_card_id": "30689",
+    "source_opponent": "京都",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW27",
+    "date": "2024-08-17",
+    "day": "Sat",
+    "time": "19:33",
+    "opponent": "アビスパ福岡",
+    "venue": "ベスト電器スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_fukuoka.png",
+    "details": "J1 / 第27節 / A / ○ / 1 - 0 / 晴 / 8,524人",
+    "tournament": "J1",
+    "stage": "第27節",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "1 - 0",
+    "weather": "晴",
+    "attendance": 8524,
+    "temperature": 30.2,
+    "humidity": 64,
+    "referee": "先立八夜",
+    "assistant_referees": [
+      "武田光司",
+      "真鍋寿明"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本健人"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本英治"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木孝司"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 26,
+        "name": "遠藤凌"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 22,
+        "name": "松田詠太郎"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "82'",
+        "out": "長倉幹樹",
+        "in": "小見洋太"
+      },
+      {
+        "minute": "90+2'",
+        "out": "谷口海斗",
+        "in": "長谷川元希"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30699",
+    "match_card_id": "30699",
+    "source_opponent": "福岡",
+    "source_venue": "ベススタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW28",
+    "date": "2024-08-25",
+    "day": "Sun",
+    "time": "19:03",
+    "opponent": "FC町田ゼルビア",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "J1 / 第28節 / H / △ / 0 - 0 / 雨のち曇 / 18,588人",
+    "tournament": "J1",
+    "stage": "第28節",
+    "home_away": "H",
+    "result_mark": "△",
+    "score": "0 - 0",
+    "weather": "雨のち曇",
+    "attendance": 18588,
+    "temperature": 25.6,
+    "humidity": 90,
+    "referee": "御厨貴久",
+    "assistant_referees": [
+      "西橋勲",
+      "阿部将茂"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本英治"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木孝司"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉幹樹"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川巧"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村隼翔"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村仁"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 16,
+        "name": "小見洋太"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "68'",
+        "out": "宮本英治",
+        "in": "奥村仁"
+      },
+      {
+        "minute": "68'",
+        "out": "長倉幹樹",
+        "in": "谷口海斗"
+      },
+      {
+        "minute": "76'",
+        "out": "鈴木孝司",
+        "in": "小見洋太"
+      },
+      {
+        "minute": "76'",
+        "out": "藤原奏哉",
+        "in": "長谷川巧"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "宮本英治",
+        "minute": "56'"
+      }
+    ],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30707",
+    "match_card_id": "30707",
+    "source_opponent": "町田",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン 準々決勝 (1)",
+    "date": "2024-09-04",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "FC町田ゼルビア",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "ルヴァン / 準々決勝 (1) / H / ○ / 5 - 0 / 晴 / 9,130人",
+    "tournament": "ルヴァン",
+    "stage": "準々決勝 (1)",
+    "home_away": "H",
+    "result_mark": "○",
+    "score": "5 - 0",
+    "weather": "晴",
+    "attendance": 9130,
+    "temperature": 27.5,
+    "humidity": 75,
+    "referee": "池内明彦",
+    "assistant_referees": [
+      "熊谷幸剛",
+      "平間亮"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本健人"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本英治"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満大介"
+      },
+      {
+        "position": "DF",
+        "number": 26,
+        "name": "遠藤凌"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川巧"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村仁"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木善朗"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木孝司"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "45+11'",
+        "out": "舞行龍ジェームズ",
+        "in": "遠藤凌"
+      },
+      {
+        "minute": "70'",
+        "out": "ダニーロ ゴメス",
+        "in": "長谷川元希"
+      },
+      {
+        "minute": "70'",
+        "out": "谷口海斗",
+        "in": "長谷川巧"
+      },
+      {
+        "minute": "70'",
+        "out": "小野裕二",
+        "in": "高木善朗"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=31150",
+    "match_card_id": "31150",
+    "source_opponent": "町田",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン 準々決勝 (2)",
+    "date": "2024-09-08",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "FC町田ゼルビア",
+    "venue": "町田ＧＩＯＮスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_machida.png",
+    "details": "ルヴァン / 準々決勝 (2) / A / ● / 0 - 2 / 晴 / 6,726人",
+    "tournament": "ルヴァン",
+    "stage": "準々決勝 (2)",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "0 - 2",
+    "weather": "晴",
+    "attendance": 6726,
+    "temperature": 28.3,
+    "humidity": 72,
+    "referee": "福島孝一郎",
+    "assistant_referees": [
+      "梅田智起",
+      "塚田智宏"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 26,
+        "name": "遠藤凌"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本英治"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川元希"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木孝司"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満大介"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川巧"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉和彦"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本健人"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星雄次"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田譲"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木善朗"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口海斗"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": "70'",
+        "out": "長谷川元希",
+        "in": "小野裕二"
+      },
+      {
+        "minute": "70'",
+        "out": "ダニーロ ゴメス",
+        "in": "長谷川巧"
+      },
+      {
+        "minute": "70'",
+        "out": "鈴木孝司",
+        "in": "谷口海斗"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "藤原奏哉",
+        "minute": "88'"
+      }
+    ],
+    "manager": "松橋力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=31154",
+    "match_card_id": "31154",
+    "source_opponent": "町田",
+    "source_venue": "Ｇスタ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW30",
+    "date": "2024-09-14",
+    "day": "Sat",
+    "time": "19:05",
+    "opponent": "湘南ベルマーレ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_shonan.png",
+    "details": "J1 / 第30節 / H / ○ / 3 - 1 / 晴 / 21,666人",
+    "tournament": "J1",
+    "stage": "第30節",
+    "home_away": "H",
+    "result_mark": "○",
+    "score": "3 - 1",
+    "weather": "晴",
+    "attendance": 21666,
+    "temperature": 28.8,
+    "humidity": 81,
+    "referee": "上村 篤史",
+    "assistant_referees": [
+      "坂本 晋悟",
+      "岩﨑 創一"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村 隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川 巧"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木 善朗"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木 孝司"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 71,
+        "out": "小野 裕二",
+        "in": "高木 善朗"
+      },
+      {
+        "minute": 71,
+        "out": "橋本 健人",
+        "in": "トーマス デン"
+      },
+      {
+        "minute": 81,
+        "out": "太田 修介",
+        "in": "長谷川 巧"
+      },
+      {
+        "minute": 81,
+        "out": "谷口 海斗",
+        "in": "長谷川 元希"
+      },
+      {
+        "minute": 88,
+        "out": "長倉 幹樹",
+        "in": "鈴木 孝司"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30724",
+    "match_card_id": "30724",
+    "source_opponent": "湘南",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW29",
+    "date": "2024-09-18",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "名古屋グランパス",
+    "venue": "豊田スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagoya.png",
+    "details": "J1 / 第29節 / A / ● / 0 - 3 / 晴 / 10,083人",
+    "tournament": "J1",
+    "stage": "第29節",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "0 - 3",
+    "weather": "晴",
+    "attendance": 10083,
+    "temperature": 30.3,
+    "humidity": 60,
+    "referee": "大橋 侑祐",
+    "assistant_referees": [
+      "日比野 真",
+      "長谷川 雅"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木 孝司"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木 善朗"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 55,
+        "out": "トーマス デン",
+        "in": "千葉 和彦"
+      },
+      {
+        "minute": 73,
+        "out": "太田 修介",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": 73,
+        "out": "鈴木 孝司",
+        "in": "小野 裕二"
+      },
+      {
+        "minute": 73,
+        "out": "長谷川 元希",
+        "in": "高木 善朗"
+      },
+      {
+        "minute": 85,
+        "out": "宮本 英治",
+        "in": "島田 譲"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "秋山 裕紀",
+        "minute": "62'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30713",
+    "match_card_id": "30713",
+    "source_opponent": "名古屋",
+    "source_venue": "豊田ス"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW31",
+    "date": "2024-09-22",
+    "day": "Sun",
+    "time": "18:03",
+    "opponent": "ヴィッセル神戸",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kobe.png",
+    "details": "J1 / 第31節 / H / ● / 2 - 3 / 曇時々雨 / 23,492人",
+    "tournament": "J1",
+    "stage": "第31節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "2 - 3",
+    "weather": "曇時々雨",
+    "attendance": 23492,
+    "temperature": 23.8,
+    "humidity": 83,
+    "referee": "小屋 幸栄",
+    "assistant_referees": [
+      "塩津 祐介",
+      "田中 利幸"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木 善朗"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村 仁"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木 孝司"
+      },
+      {
+        "position": "FW",
+        "number": 11,
+        "name": "太田 修介"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 71,
+        "out": "高木 善朗",
+        "in": "奥村 仁"
+      },
+      {
+        "minute": 71,
+        "out": "舞行龍ジェームズ",
+        "in": "トーマス デン"
+      },
+      {
+        "minute": 83,
+        "out": "小野 裕二",
+        "in": "鈴木 孝司"
+      },
+      {
+        "minute": 83,
+        "out": "谷口 海斗",
+        "in": "長谷川 元希"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "宮本 英治",
+        "minute": "13'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30735",
+    "match_card_id": "30735",
+    "source_opponent": "神戸",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW32",
+    "date": "2024-09-27",
+    "day": "Fri",
+    "time": "19:03",
+    "opponent": "川崎フロンターレ",
+    "venue": "Ｕｖａｎｃｅとどろきスタジアム ｂｙ Ｆｕｊｉｔｓｕ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
+    "details": "J1 / 第32節 / A / ● / 1 - 5 / 雨 / 20,142人",
+    "tournament": "J1",
+    "stage": "第32節",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "1 - 5",
+    "weather": "雨",
+    "attendance": 20142,
+    "temperature": 23.9,
+    "humidity": 85,
+    "referee": "中村 太",
+    "assistant_referees": [
+      "西橋 勲",
+      "坊薗 真琴"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木 善朗"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "FW",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木 孝司"
+      },
+      {
+        "position": "FW",
+        "number": 11,
+        "name": "太田 修介"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 66,
+        "out": "高木 善朗",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": 66,
+        "out": "谷口 海斗",
+        "in": "太田 修介"
+      },
+      {
+        "minute": 66,
+        "out": "小野 裕二",
+        "in": "長谷川 元希"
+      },
+      {
+        "minute": 74,
+        "out": "秋山 裕紀",
+        "in": "星 雄次"
+      },
+      {
+        "minute": 80,
+        "out": "長倉 幹樹",
+        "in": "鈴木 孝司"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "小島 亨介",
+        "minute": "11'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30747",
+    "match_card_id": "30747",
+    "source_opponent": "川崎F",
+    "source_venue": "U等々力"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW33",
+    "date": "2024-10-05",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "鹿島アントラーズ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashima.png",
+    "details": "J1 / 第33節 / H / ● / 0 - 4 / 晴 / 27,552人",
+    "tournament": "J1",
+    "stage": "第33節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "0 - 4",
+    "weather": "晴",
+    "attendance": 27552,
+    "temperature": 23.4,
+    "humidity": 59,
+    "referee": "木村 博之",
+    "assistant_referees": [
+      "熊谷 幸剛",
+      "村井 良輔"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木 善朗"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      },
+      {
+        "position": "FW",
+        "number": 9,
+        "name": "鈴木 孝司"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田 譲"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 57,
+        "out": "鈴木 孝司",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": 57,
+        "out": "高木 善朗",
+        "in": "小野 裕二"
+      },
+      {
+        "minute": 57,
+        "out": "千葉 和彦",
+        "in": "太田 修介"
+      },
+      {
+        "minute": 57,
+        "out": "小見 洋太",
+        "in": "トーマス デン"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "長倉 幹樹",
+        "minute": "68'"
+      },
+      {
+        "player": "小野 裕二",
+        "minute": "89'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30756",
+    "match_card_id": "30756",
+    "source_opponent": "鹿島",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン 準決勝 (1)",
+    "date": "2024-10-09",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "川崎フロンターレ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
+    "details": "ルヴァン / 準決勝 (1) / H / ○ / 4 - 1 / 晴 / 12,501人",
+    "tournament": "ルヴァン",
+    "stage": "準決勝 (1)",
+    "home_away": "H",
+    "result_mark": "○",
+    "score": "4 - 1",
+    "weather": "晴",
+    "attendance": 12501,
+    "temperature": 19.9,
+    "humidity": 84,
+    "referee": "山本 雄大",
+    "assistant_referees": [
+      "浜本 祐介",
+      "長谷川 雅"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村 隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満 大介"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川 巧"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村 仁"
+      },
+      {
+        "position": "FW",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 32,
+        "out": "谷口 海斗",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": 62,
+        "out": "小野 裕二",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": 62,
+        "out": "星 雄次",
+        "in": "宮本 英治"
+      },
+      {
+        "minute": 62,
+        "out": "太田 修介",
+        "in": "ダニーロ ゴメス"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "舞行龍ジェームズ",
+        "minute": "66'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=31265",
+    "match_card_id": "31265",
+    "source_opponent": "川崎F",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン 準決勝 (2)",
+    "date": "2024-10-13",
+    "day": "Sun",
+    "time": "15:03",
+    "opponent": "川崎フロンターレ",
+    "venue": "Ｕｖａｎｃｅとどろきスタジアム ｂｙ Ｆｕｊｉｔｓｕ",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kawasakif.png",
+    "details": "ルヴァン / 準決勝 (2) / A / ○ / 2 - 0 / 晴 / 21,159人",
+    "tournament": "ルヴァン",
+    "stage": "準決勝 (2)",
+    "home_away": "A",
+    "result_mark": "○",
+    "score": "2 - 0",
+    "weather": "晴",
+    "attendance": 21159,
+    "temperature": 25.7,
+    "humidity": 38,
+    "referee": "池内 明彦",
+    "assistant_referees": [
+      "武田 光晴",
+      "西村 幹也"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村 隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満 大介"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "DF",
+        "number": 32,
+        "name": "長谷川 巧"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 20,
+        "name": "島田 譲"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村 仁"
+      },
+      {
+        "position": "FW",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 68,
+        "out": "ダニーロ ゴメス",
+        "in": "太田 修介"
+      },
+      {
+        "minute": 74,
+        "out": "小見 洋太",
+        "in": "小野 裕二"
+      },
+      {
+        "minute": 74,
+        "out": "長谷川 元希",
+        "in": "長谷川 巧"
+      },
+      {
+        "minute": 74,
+        "out": "星 雄次",
+        "in": "秋山 裕紀"
+      },
+      {
+        "minute": 87,
+        "out": "長倉 幹樹",
+        "in": "奥村 仁"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=31267",
+    "match_card_id": "31267",
+    "source_opponent": "川崎F",
+    "source_venue": "U等々力"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW34",
+    "date": "2024-10-18",
+    "day": "Fri",
+    "time": "19:33",
+    "opponent": "横浜F・マリノス",
+    "venue": "日産スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafm.png",
+    "details": "J1 / 第34節 / A / △ / 0 - 0 / 雨 / 18,781人",
+    "tournament": "J1",
+    "stage": "第34節",
+    "home_away": "A",
+    "result_mark": "△",
+    "score": "0 - 0",
+    "weather": "雨",
+    "attendance": 18781,
+    "temperature": 21.4,
+    "humidity": 90,
+    "referee": "谷本 涼",
+    "assistant_referees": [
+      "熊谷 幸剛",
+      "森川 浩次"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "DF",
+        "number": 35,
+        "name": "千葉 和彦"
+      },
+      {
+        "position": "MF",
+        "number": 14,
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村 仁"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 45,
+        "out": "小野 裕二",
+        "in": "長谷川 元希"
+      },
+      {
+        "minute": 63,
+        "out": "太田 修介",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": 78,
+        "out": "宮本 英治",
+        "in": "星 雄次"
+      },
+      {
+        "minute": 78,
+        "out": "小見 洋太",
+        "in": "奥村 仁"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "長谷川 元希",
+        "minute": "59'"
+      },
+      {
+        "player": "奥村 仁",
+        "minute": "83'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30768",
+    "match_card_id": "30768",
+    "source_opponent": "横浜FM",
+    "source_venue": "日産ス"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW35",
+    "date": "2024-10-23",
+    "day": "Wed",
+    "time": "19:03",
+    "opponent": "東京ヴェルディ",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_tokyov.png",
+    "details": "J1 / 第35節 / H / ● / 0 - 2 / 雨時々曇 / 13,368人",
+    "tournament": "J1",
+    "stage": "第35節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "0 - 2",
+    "weather": "雨時々曇",
+    "attendance": 13368,
+    "temperature": 21.0,
+    "humidity": 90,
+    "referee": "高崎 航地",
+    "assistant_referees": [
+      "大塚 晴弘",
+      "阿部 将茂"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川 元希"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川 史哉"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村 仁"
+      },
+      {
+        "position": "MF",
+        "number": 33,
+        "name": "高木 善朗"
+      },
+      {
+        "position": "FW",
+        "number": 11,
+        "name": "太田 修介"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 63,
+        "out": "宮本 英治",
+        "in": "秋山 裕紀"
+      },
+      {
+        "minute": 68,
+        "out": "小見 洋太",
+        "in": "奥村 仁"
+      },
+      {
+        "minute": 68,
+        "out": "ダニーロ ゴメス",
+        "in": "太田 修介"
+      },
+      {
+        "minute": 89,
+        "out": "長谷川 元希",
+        "in": "橋本 健人"
+      },
+      {
+        "minute": 89,
+        "out": "堀米 悠斗",
+        "in": "高木 善朗"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "トーマス デン",
+        "minute": "80'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30772",
+    "match_card_id": "30772",
+    "source_opponent": "東京V",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "ルヴァン 決勝",
+    "date": "2024-11-02",
+    "day": "Sat",
+    "time": "13:09",
+    "opponent": "名古屋グランパス",
+    "venue": "国立競技場",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_nagoya.png",
+    "details": "ルヴァン / 決勝 / A / ● / 3 - 3 (PK 4-5) / 雨 / 62,517人",
+    "tournament": "ルヴァン",
+    "stage": "決勝",
+    "home_away": "A",
+    "result_mark": "●",
+    "score": "3 - 3 (PK 4-5)",
+    "weather": "雨",
+    "attendance": 62517,
+    "temperature": 19.3,
+    "humidity": 72,
+    "referee": "福島 孝一郎",
+    "assistant_referees": [
+      "淺田 武士",
+      "坂本 晋悟"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村 隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川 元希"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 23,
+        "name": "吉満 大介"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川 史哉"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村 仁"
+      },
+      {
+        "position": "FW",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 65,
+        "out": "宮本 英治",
+        "in": "長��� 幹樹"
+      },
+      {
+        "minute": 65,
+        "out": "太田 修介",
+        "in": "星 雄次"
+      },
+      {
+        "minute": 65,
+        "out": "長谷川 元希",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": 72,
+        "out": "谷口 海斗",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": 72,
+        "out": "小野 裕二",
+        "in": "奥村 仁"
+      },
+      {
+        "minute": 114,
+        "out": "舞行龍ジェームズ",
+        "in": "トーマス デン"
+      }
+    ],
+    "warnings": [],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=31274",
+    "match_card_id": "31274",
+    "source_opponent": "名古屋",
+    "source_venue": "国立"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW36",
+    "date": "2024-11-09",
+    "day": "Sat",
+    "time": "15:03",
+    "opponent": "柏レイソル",
+    "venue": "三協フロンテア柏スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_kashiwa.png",
+    "details": "J1 / 第36節 / A / △ / 1 - 1 / 晴一時曇 / 14,472人",
+    "tournament": "J1",
+    "stage": "第36節",
+    "home_away": "A",
+    "result_mark": "△",
+    "score": "1 - 1",
+    "weather": "晴一時曇",
+    "attendance": 14472,
+    "temperature": 17.1,
+    "humidity": 38,
+    "referee": "荒木 友輔",
+    "assistant_referees": [
+      "三原 純",
+      "植田 文平"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村 隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川 元希"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川 史哉"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 30,
+        "name": "奥村 仁"
+      },
+      {
+        "position": "FW",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 66,
+        "out": "小野 裕二",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": 66,
+        "out": "谷口 海斗",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": 77,
+        "out": "ダニーロ ゴメス",
+        "in": "奥村 仁"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "稲村 隼翔",
+        "minute": "90'+1"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30781",
+    "match_card_id": "30781",
+    "source_opponent": "柏",
+    "source_venue": "三協Ｆ柏"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW37",
+    "date": "2024-11-30",
+    "day": "Sat",
+    "time": "14:03",
+    "opponent": "ガンバ大阪",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gosaka.png",
+    "details": "J1 / 第37節 / H / ● / 0 - 1 / 雨時々曇 / 27,628人",
+    "tournament": "J1",
+    "stage": "第37節",
+    "home_away": "H",
+    "result_mark": "●",
+    "score": "0 - 1",
+    "weather": "雨時々曇",
+    "attendance": 27628,
+    "temperature": 10.6,
+    "humidity": 78,
+    "referee": "池内 明彦",
+    "assistant_referees": [
+      "塩津 祐介",
+      "坂本 晋悟"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 45,
+        "name": "稲村 隼翔"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川 元希"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川 史哉"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "FW",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 66,
+        "out": "小見 洋太",
+        "in": "谷口 海斗"
+      },
+      {
+        "minute": 66,
+        "out": "ダニーロ ゴメス",
+        "in": "太田 修介"
+      },
+      {
+        "minute": 74,
+        "out": "小野 裕二",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": 87,
+        "out": "橋本 健人",
+        "in": "堀米 悠斗"
+      },
+      {
+        "minute": 87,
+        "out": "星 雄次",
+        "in": "宮本 英治"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "舞行龍ジェームズ",
+        "minute": "22'"
+      },
+      {
+        "player": "橋本 健人",
+        "minute": "56'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30791",
+    "match_card_id": "30791",
+    "source_opponent": "G大阪",
+    "source_venue": "デンカＳ"
+  },
+  {
+    "club": "niigata",
+    "matchweek": "MW38",
+    "date": "2024-12-08",
+    "day": "Sun",
+    "time": "14:04",
+    "opponent": "浦和レッズ",
+    "venue": "埼玉スタジアム２００２",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_urawa.png",
+    "details": "J1 / 第38節 / A / △ / 0 - 0 / 晴 / 55,184人",
+    "tournament": "J1",
+    "stage": "第38節",
+    "home_away": "A",
+    "result_mark": "△",
+    "score": "0 - 0",
+    "weather": "晴",
+    "attendance": 55184,
+    "temperature": 12.4,
+    "humidity": 29,
+    "referee": "西村 雄一",
+    "assistant_referees": [
+      "日比野 真",
+      "長谷川 雅"
+    ],
+    "starting_members": [
+      {
+        "position": "GK",
+        "number": 1,
+        "name": "小島 亨介"
+      },
+      {
+        "position": "DF",
+        "number": 25,
+        "name": "藤原 奏哉"
+      },
+      {
+        "position": "DF",
+        "number": 5,
+        "name": "舞行龍ジェームズ"
+      },
+      {
+        "position": "DF",
+        "number": 18,
+        "name": "早川 史哉"
+      },
+      {
+        "position": "DF",
+        "number": 31,
+        "name": "堀米 悠斗"
+      },
+      {
+        "position": "MF",
+        "number": 6,
+        "name": "秋山 裕紀"
+      },
+      {
+        "position": "MF",
+        "number": 8,
+        "name": "宮本 英治"
+      },
+      {
+        "position": "MF",
+        "number": 11,
+        "name": "太田 修介"
+      },
+      {
+        "position": "MF",
+        "number": 7,
+        "name": "谷口 海斗"
+      },
+      {
+        "position": "FW",
+        "number": 99,
+        "name": "小野 裕二"
+      },
+      {
+        "position": "FW",
+        "number": 14,
+        "name": "長谷川 元希"
+      }
+    ],
+    "bench_members": [
+      {
+        "position": "GK",
+        "number": 21,
+        "name": "阿部 航斗"
+      },
+      {
+        "position": "DF",
+        "number": 3,
+        "name": "トーマス デン"
+      },
+      {
+        "position": "DF",
+        "number": 42,
+        "name": "橋本 健人"
+      },
+      {
+        "position": "MF",
+        "number": 17,
+        "name": "ダニーロ ゴメス"
+      },
+      {
+        "position": "MF",
+        "number": 19,
+        "name": "星 雄次"
+      },
+      {
+        "position": "FW",
+        "number": 16,
+        "name": "小見 洋太"
+      },
+      {
+        "position": "FW",
+        "number": 27,
+        "name": "長倉 幹樹"
+      }
+    ],
+    "substitutions": [
+      {
+        "minute": 57,
+        "out": "小野 裕二",
+        "in": "長倉 幹樹"
+      },
+      {
+        "minute": 57,
+        "out": "谷口 海斗",
+        "in": "ダニーロ ゴメス"
+      },
+      {
+        "minute": 57,
+        "out": "太田 修介",
+        "in": "小見 洋太"
+      },
+      {
+        "minute": 90,
+        "out": "舞行龍ジェームズ",
+        "in": "トーマス デン"
+      },
+      {
+        "minute": 90,
+        "out": "堀米 悠斗",
+        "in": "橋本 健人"
+      }
+    ],
+    "warnings": [
+      {
+        "player": "舞行龍ジェームズ",
+        "minute": "73'"
+      }
+    ],
+    "manager": "松橋 力蔵",
+    "j_official_url": "https://data.j-league.or.jp/SFMS02/?match_card_id=30802",
+    "match_card_id": "30802",
+    "source_opponent": "浦和",
+    "source_venue": "埼玉"
+  }
+]

@@ -1,0 +1,302 @@
+[
+  {
+    "league": "J1",
+    "club_name": "鹿島アントラーズ",
+    "official_site": "https://www.antlers.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "水戸ホーリーホック",
+    "official_site": "https://www.mito-hollyhock.net"
+  },
+  {
+    "league": "J1",
+    "club_name": "浦和レッズ",
+    "official_site": "https://www.urawa-reds.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "ジェフユナイテッド千葉",
+    "official_site": "https://jefunited.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "柏レイソル",
+    "official_site": "https://www.reysol.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "FC東京",
+    "official_site": "https://www.fctokyo.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "東京ヴェルディ",
+    "official_site": "https://www.verdy.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "FC町田ゼルビア",
+    "official_site": "https://www.zelvia.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "川崎フロンターレ",
+    "official_site": "https://www.frontale.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "横浜F・マリノス",
+    "official_site": "https://www.f-marinos.com"
+  },
+  {
+    "league": "J1",
+    "club_name": "清水エスパルス",
+    "official_site": "https://www.s-pulse.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "名古屋グランパス",
+    "official_site": "https://nagoya-grampus.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "京都サンガF.C.",
+    "official_site": "https://www.sanga-fc.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "ガンバ大阪",
+    "official_site": "https://www.gamba-osaka.net"
+  },
+  {
+    "league": "J1",
+    "club_name": "セレッソ大阪",
+    "official_site": "https://www.cerezo.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "ヴィッセル神戶",
+    "official_site": "https://www.vissel-kobe.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "ファジアーノ岡山",
+    "official_site": "https://www.fagiano-okayama.com"
+  },
+  {
+    "league": "J1",
+    "club_name": "サンフレッチェ広島",
+    "official_site": "https://www.sanfrecce.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "アビスパ福岡",
+    "official_site": "https://www.avispa.co.jp"
+  },
+  {
+    "league": "J1",
+    "club_name": "V・ファーレン長崎",
+    "official_site": "https://www.v-varen.com"
+  },
+  {
+    "league": "J2",
+    "club_name": "北海道コンサドーレ札幌",
+    "official_site": "https://www.consadole-sapporo.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "ヴァンラーレ八戸",
+    "official_site": "https://www.vanraure.net"
+  },
+  {
+    "league": "J2",
+    "club_name": "ベガルタ仙台",
+    "official_site": "https://www.vegalta.co.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "ブラウブリッツ秋田",
+    "official_site": "https://blaublitz.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "モンテディオ山形",
+    "official_site": "https://www.montedioyamagata.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "いわきFC",
+    "official_site": "https://iwakifc.com"
+  },
+  {
+    "league": "J2",
+    "club_name": "栃木シティ",
+    "official_site": "https://tochigi-city.com"
+  },
+  {
+    "league": "J2",
+    "club_name": "RB大宮アルディージャ",
+    "official_site": "https://www.ardija.co.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "横浜FC",
+    "official_site": "https://www.yokohamafc.com"
+  },
+  {
+    "league": "J2",
+    "club_name": "湘南ベルマーレ",
+    "official_site": "https://www.bellmare.co.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "ヴァンフォーレ甲府",
+    "official_site": "https://www.ventforet.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "アルビレックス新潟",
+    "official_site": "https://www.albirex.co.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "カターレ富山",
+    "official_site": "https://www.kataller.co.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "ジュビロ磐田",
+    "official_site": "https://www.jubilo-iwata.co.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "藤枝MYFC",
+    "official_site": "https://myfc.co.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "徳島ヴォルティス",
+    "official_site": "https://www.vortis.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "FC今治",
+    "official_site": "https://www.fcimabari.com"
+  },
+  {
+    "league": "J2",
+    "club_name": "サガン鳥栖",
+    "official_site": "https://www.sagan-tosu.net"
+  },
+  {
+    "league": "J2",
+    "club_name": "大分トリニータ",
+    "official_site": "https://www.oita-trinita.co.jp"
+  },
+  {
+    "league": "J2",
+    "club_name": "テゲバジャーロ宮崎",
+    "official_site": "https://www.tegevajaro.com"
+  },
+  {
+    "league": "J3",
+    "club_name": "福島ユナイテッドFC",
+    "official_site": "https://fufc.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "栃木SC",
+    "official_site": "https://www.tochigisc.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "ザスパクサツ群馬",
+    "official_site": "https://www.thespa.co.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "SC相模原",
+    "official_site": "https://www.scsagamihara.com"
+  },
+  {
+    "league": "J3",
+    "club_name": "松本山雅FC",
+    "official_site": "https://www.yamaga-fc.com"
+  },
+  {
+    "league": "J3",
+    "club_name": "AC長野パルセイロ",
+    "official_site": "https://parceiro.co.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "ツエーゲン金沢",
+    "official_site": "https://www.zweigen-kanazawa.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "FC岐阜",
+    "official_site": "https://www.fc-gifu.com"
+  },
+  {
+    "league": "J3",
+    "club_name": "レイラック滋賀FC",
+    "official_site": "https://reilac-shiga.co.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "FC大阪",
+    "official_site": "https://fc-osaka.com"
+  },
+  {
+    "league": "J3",
+    "club_name": "奈良クラブ",
+    "official_site": "https://naraclub.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "ガイナーレ鳥取",
+    "official_site": "https://www.gainare.co.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "レノファ山口FC",
+    "official_site": "https://www.renofa.com"
+  },
+  {
+    "league": "J3",
+    "club_name": "カマタマーレ讃岐",
+    "official_site": "https://www.kamatamare.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "愛媛FC",
+    "official_site": "https://www.ehimefc.com"
+  },
+  {
+    "league": "J3",
+    "club_name": "高知ユナイテッドSC",
+    "official_site": "https://kochi-usc.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "ギラヴァンツ北九州",
+    "official_site": "https://www.giravanz.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "ロアッソ熊本",
+    "official_site": "https://roasso-k.com"
+  },
+  {
+    "league": "J3",
+    "club_name": "鹿児島ユナイテッドFC",
+    "official_site": "https://www.kufc.co.jp"
+  },
+  {
+    "league": "J3",
+    "club_name": "FC琉球",
+    "official_site": "https://fcryukyu.com"
+  }
+]

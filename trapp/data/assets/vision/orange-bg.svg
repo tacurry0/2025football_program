@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="864" viewBox="0 0 1536 864">
+  <defs>
+    <linearGradient id="sideOrange" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ef8a22"/>
+      <stop offset="0.23" stop-color="#f0691d"/>
+      <stop offset="0.5" stop-color="#ff3826"/>
+      <stop offset="0.77" stop-color="#f0691d"/>
+      <stop offset="1" stop-color="#ef8a22"/>
+    </linearGradient>
+    <radialGradient id="centerRed" cx="50%" cy="52%" r="55%">
+      <stop offset="0" stop-color="#ff3f28" stop-opacity="0.9"/>
+      <stop offset="0.52" stop-color="#ff3f28" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#ff3f28" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="meshDots" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1.35" cy="1.35" r="0.95" fill="#8f2b14" opacity="0.21"/>
+      <circle cx="4.35" cy="4.35" r="0.95" fill="#ff9d3c" opacity="0.16"/>
+    </pattern>
+  </defs>
+  <rect width="1536" height="864" fill="url(#sideOrange)"/>
+  <rect width="1536" height="864" fill="url(#centerRed)"/>
+  <rect width="1536" height="864" fill="url(#meshDots)" opacity="0.88"/>
+  <g fill="none" stroke="#ff9b45" stroke-width="1.35" opacity="0.3">
+    <path d="M250 -20C434 112 580 160 768 160S1102 112 1286 -20"/>
+    <path d="M296 70C460 160 594 199 768 199S1076 160 1240 70"/>
+    <path d="M348 166C498 226 620 253 768 253S1038 226 1188 166"/>
+    <path d="M380 285C516 323 635 341 768 341S1020 323 1156 285"/>
+    <path d="M396 424C524 443 642 452 768 452S1012 443 1140 424"/>
+    <path d="M375 574C510 534 632 516 768 516S1026 534 1161 574"/>
+    <path d="M326 727C486 640 608 605 768 605S1050 640 1210 727"/>
+    <path d="M252 884C414 725 560 672 768 672S1122 725 1284 884"/>
+  </g>
+  <g fill="none" stroke="#ff9b45" stroke-width="1.05" opacity="0.2">
+    <path d="M224 -14C334 216 348 638 220 878"/>
+    <path d="M354 -14C452 216 458 638 354 878"/>
+    <path d="M486 -14C550 234 552 621 486 878"/>
+    <path d="M620 -14C648 248 648 608 620 878"/>
+    <path d="M768 -14V878"/>
+    <path d="M916 -14C888 248 888 608 916 878"/>
+    <path d="M1050 -14C986 234 984 621 1050 878"/>
+    <path d="M1182 -14C1084 216 1078 638 1182 878"/>
+    <path d="M1312 -14C1202 216 1188 638 1316 878"/>
+  </g>
+</svg>
