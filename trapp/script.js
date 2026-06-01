@@ -2236,6 +2236,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (attEl) attEl.remove();
         }
       }
+      updateDashboardPrevResults();
     };
     sheetContent.querySelectorAll("input, textarea").forEach(inp => inp.oninput = saveAndRefresh);
   }
@@ -2319,6 +2320,82 @@ document.addEventListener("DOMContentLoaded", async () => {
     return normalized;
   }
 
+  function getResultFixtureKey(result) {
+    if (!result) return "";
+    const date = result.date || "";
+    if (result.home || result.away) {
+      const sides = [canonicalTeamName(result.home || ""), canonicalTeamName(result.away || "")].sort().join(":");
+      return ["fixture", date, sides].join("|");
+    }
+    if (result.club && result.opponent) {
+      const own = result.club === "niigata" ? "新潟" : result.club === "kumamoto" ? "熊本" : result.club;
+      const sides = [canonicalTeamName(own), canonicalTeamName(result.opponent)].sort().join(":");
+      return ["fixture", date, sides].join("|");
+    }
+    return ["fixture", date, canonicalTeamName(result.section || "")].join("|");
+  }
+
+  function buildStoredResultFromMatch(match) {
+    if (!match || !match.date || !match.club || !match.opponent) return null;
+    const mId = `${match.date}_${match.club}_${match.opponent}`;
+    const myRaw = localStorage.getItem(`score_my_${mId}`);
+    const oppRaw = localStorage.getItem(`score_opp_${mId}`);
+    if (myRaw === null || oppRaw === null || myRaw === "" || oppRaw === "") return null;
+
+    const myScore = parseInt(myRaw, 10);
+    const opponentScore = parseInt(oppRaw, 10);
+    if (!Number.isFinite(myScore) || !Number.isFinite(opponentScore)) return null;
+
+    const ownName = getOwnJapaneseClubName(match.club);
+    const isOwnHome = getMatchIsHome(match);
+    const homeScore = isOwnHome ? myScore : opponentScore;
+    const awayScore = isOwnHome ? opponentScore : myScore;
+    const pkMy = localStorage.getItem(`score_my_pk_${mId}`);
+    const pkOpp = localStorage.getItem(`score_opp_pk_${mId}`);
+
+    const result = normalizeOfficialResult({
+      date: match.date,
+      club: match.club,
+      opponent: match.opponent,
+      home_away: isOwnHome ? "H" : "A",
+      home: isOwnHome ? ownName : match.opponent,
+      away: isOwnHome ? match.opponent : ownName,
+      home_score: String(homeScore),
+      away_score: String(awayScore),
+      score: `${myScore}-${opponentScore}`,
+      status: "finished",
+      emblem: match.emblem || "",
+      _source: "localStorage"
+    });
+
+    if (pkMy !== null && pkOpp !== null && pkMy !== "" && pkOpp !== "") {
+      result.pk = `${isOwnHome ? pkMy : pkOpp} PK ${isOwnHome ? pkOpp : pkMy}`;
+    }
+
+    return result;
+  }
+
+  function getStoredMatchResults() {
+    return scheduleData.map(buildStoredResultFromMatch).filter(Boolean);
+  }
+
+  function getDashboardResults() {
+    const storedResults = getStoredMatchResults();
+    const merged = [...storedResults];
+    const seenFixtures = new Set(storedResults.map(getResultFixtureKey));
+
+    getResultArray(officialResults).forEach(raw => {
+      const result = normalizeOfficialResult(raw);
+      if (!result || !result.date) return;
+      const key = getResultFixtureKey(result);
+      if (key && seenFixtures.has(key)) return;
+      merged.push(result);
+      if (key) seenFixtures.add(key);
+    });
+
+    return merged;
+  }
+
   function mergeOfficialResults(results) {
     const resultSeen = new Set(getResultArray(officialResults).map(r => getResultKey(r)));
     let changed = false;
@@ -2355,7 +2432,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function fetchLocalJson(type) {
     const paths = {
       standings: ["./data/standings/current.json"],
-      results: ["./data/results/results.json"]
+      results: []
     }[type] || [`./data/${type}.json`];
 
     for (const path of paths) {
@@ -2814,7 +2891,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- 前節表示更新（renderDashboard再呼び出しでもリセットされない独立関数） ---
   // --- Update Previous Match Results on Dashboard ---
   function updateDashboardPrevResults() {
-    if (!officialResults.length) return;
+    const dashboardResults = getDashboardResults();
+    if (!dashboardResults.length) return;
 
     const now = new Date();
     const cutoffStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
@@ -2910,7 +2988,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const cutoff = match ? match.date : "9999-12-31";
       
       const updateHalf = (prefix, kw) => {
-        const candidates = officialResults.map(r => ({
+        const candidates = dashboardResults.map(r => ({
           result: r,
           info: getResultInfoForTeam(r, kw)
         })).filter(({ result, info }) => {
@@ -3690,6 +3768,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (savedCount > 0) {
         renderFeed();
+        updateDashboardPrevResults();
         if (calendarView && !calendarView.classList.contains("hidden-view")) {
           switchMode("calendar");
         }
@@ -3765,6 +3844,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (savedCount > 0) {
         renderFeed();
+        updateDashboardPrevResults();
         alert(`${savedCount}件の試合結果を反映しました。`);
         bulkPasteArea.value = "";
         closeSubPane("bulk-paste-overlay");

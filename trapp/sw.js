@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v40-assets-refactor';
+const cacheName = 'football-app-v41-history-results';
 const assetsToCache = [
   './',
   './index.html',
@@ -34,7 +34,6 @@ const assetsToCache = [
   './data/clubs/club_emblems.json',
   './data/clubs/official_sites.json',
   './data/standings/current.json',
-  './data/results/results.json',
   './data/history/niigata/2026.json',
   './data/history/kumamoto/2026.json',
   './data/assets/emblems/アルビレックス新潟.png',
