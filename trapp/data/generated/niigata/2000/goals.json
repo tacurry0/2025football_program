@@ -1,0 +1,497 @@
+[
+  {
+    "match_id": "5350",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "59'",
+    "minute": 59,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5354",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "65'",
+    "minute": 65,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5359",
+    "season": 2000,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "time": "41'",
+    "minute": 41,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5359",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "46'",
+    "minute": 46,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5359",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "52'",
+    "minute": 52,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5373",
+    "season": 2000,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "time": "77'",
+    "minute": 77,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5378",
+    "season": 2000,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": true
+  },
+  {
+    "match_id": "5022",
+    "season": 2000,
+    "player_key": "式田 高義",
+    "player_name": "式田 高義",
+    "time": "82'",
+    "minute": 82,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5388",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "09'",
+    "minute": 9,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5388",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "117'",
+    "minute": 117,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5397",
+    "season": 2000,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "time": "38'",
+    "minute": 38,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5397",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "95'",
+    "minute": 95,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5414",
+    "season": 2000,
+    "player_key": "服部 浩紀",
+    "player_name": "服部 浩紀",
+    "time": "51'",
+    "minute": 51,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5414",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "84'",
+    "minute": 84,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5429",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "time": "24'",
+    "minute": 24,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5429",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "55'",
+    "minute": 55,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5432",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "17'",
+    "minute": 17,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5432",
+    "season": 2000,
+    "player_key": "服部 浩紀",
+    "player_name": "服部 浩紀",
+    "time": "24'",
+    "minute": 24,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5432",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "36'",
+    "minute": 36,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5432",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "42'",
+    "minute": 42,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5432",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "54'",
+    "minute": 54,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5432",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5439",
+    "season": 2000,
+    "player_key": "堂森 勝利",
+    "player_name": "堂森 勝利",
+    "time": "14'",
+    "minute": 14,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5439",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "38'",
+    "minute": 38,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5439",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "86'",
+    "minute": 86,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "20'",
+    "minute": 20,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "56'",
+    "minute": 56,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "86'",
+    "minute": 86,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "87'",
+    "minute": 87,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5453",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5459",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "60'",
+    "minute": 60,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5472",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "64'",
+    "minute": 64,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5477",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "36'",
+    "minute": 36,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5477",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "98'",
+    "minute": 98,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5485",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "14'",
+    "minute": 14,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5487",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "33'",
+    "minute": 33,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5493",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "07'",
+    "minute": 7,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5493",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "27'",
+    "minute": 27,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5499",
+    "season": 2000,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "time": "01'",
+    "minute": 1,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5504",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "45'",
+    "minute": 45,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5504",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "67'",
+    "minute": 67,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5520",
+    "season": 2000,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "time": "28'",
+    "minute": 28,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5522",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "46'",
+    "minute": 46,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5522",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "52'",
+    "minute": 52,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5522",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "75'",
+    "minute": 75,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5522",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "84'",
+    "minute": 84,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5527",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "time": "52'",
+    "minute": 52,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5533",
+    "season": 2000,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "time": "84'",
+    "minute": 84,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5541",
+    "season": 2000,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "time": "75'",
+    "minute": 75,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5542",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "44'",
+    "minute": 44,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5542",
+    "season": 2000,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "time": "56'",
+    "minute": 56,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5542",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "99'",
+    "minute": 99,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5548",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "time": "66'",
+    "minute": 66,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5553",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "39'",
+    "minute": 39,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "5564",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "time": "26'",
+    "minute": 26,
+    "is_own_goal": false
+  }
+]

@@ -1,0 +1,317 @@
+[
+  {
+    "match_id": "14006",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "time": "20'",
+    "minute": 20,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "13960",
+    "season": 2012,
+    "player_key": "アラン ミネイロ",
+    "player_name": "アラン ミネイロ",
+    "time": "38'",
+    "minute": 38,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14019",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "time": "90'+4",
+    "minute": 94,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14026",
+    "season": 2012,
+    "player_key": "アラン ミネイロ",
+    "player_name": "アラン ミネイロ",
+    "time": "05'",
+    "minute": 5,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14047",
+    "season": 2012,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "time": "85'",
+    "minute": 85,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "13967",
+    "season": 2012,
+    "player_key": "平井 将生",
+    "player_name": "平井 将生",
+    "time": "27'",
+    "minute": 27,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14069",
+    "season": 2012,
+    "player_key": "菊地 直哉",
+    "player_name": "菊地 直哉",
+    "time": "63'",
+    "minute": 63,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14090",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "time": "29'",
+    "minute": 29,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14095",
+    "season": 2012,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "63'",
+    "minute": 63,
+    "is_own_goal": true
+  },
+  {
+    "match_id": "14115",
+    "season": 2012,
+    "player_key": "藤田 征也",
+    "player_name": "藤田 征也",
+    "time": "39'",
+    "minute": 39,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "13979",
+    "season": 2012,
+    "player_key": "木暮 郁哉",
+    "player_name": "木暮 郁哉",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "13979",
+    "season": 2012,
+    "player_key": "平井 将生",
+    "player_name": "平井 将生",
+    "time": "73'",
+    "minute": 73,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "13979",
+    "season": 2012,
+    "player_key": "鈴木 大輔",
+    "player_name": "鈴木 大輔",
+    "time": "90'",
+    "minute": 90,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "13979",
+    "season": 2012,
+    "player_key": "鈴木 武蔵",
+    "player_name": "鈴木 武蔵",
+    "time": "90'+4",
+    "minute": 94,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14133",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "time": "37'",
+    "minute": 37,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14138",
+    "season": 2012,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "time": "05'",
+    "minute": 5,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14160",
+    "season": 2012,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "time": "32'",
+    "minute": 32,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14160",
+    "season": 2012,
+    "player_key": "アラン ミネイロ",
+    "player_name": "アラン ミネイロ",
+    "time": "67'",
+    "minute": 67,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14167",
+    "season": 2012,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "time": "63'",
+    "minute": 63,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14180",
+    "season": 2012,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "time": "18'",
+    "minute": 18,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14180",
+    "season": 2012,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "time": "65'",
+    "minute": 65,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14193",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "time": "38'",
+    "minute": 38,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14215",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "time": "90'+1",
+    "minute": 91,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14232",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "time": "56'",
+    "minute": 56,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14232",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "time": "64'",
+    "minute": 64,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14232",
+    "season": 2012,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "73'",
+    "minute": 73,
+    "is_own_goal": true
+  },
+  {
+    "match_id": "14232",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "time": "90'",
+    "minute": 90,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14232",
+    "season": 2012,
+    "player_key": "坪内 秀介",
+    "player_name": "坪内 秀介",
+    "time": "90'+5",
+    "minute": 95,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14248",
+    "season": 2012,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "time": "38'",
+    "minute": 38,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14267",
+    "season": 2012,
+    "player_key": "石川 直樹",
+    "player_name": "石川 直樹",
+    "time": "59'",
+    "minute": 59,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14283",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "time": "17'",
+    "minute": 17,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14295",
+    "season": 2012,
+    "player_key": "坪内 秀介",
+    "player_name": "坪内 秀介",
+    "time": "08'",
+    "minute": 8,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14295",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "time": "43'",
+    "minute": 43,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14295",
+    "season": 2012,
+    "player_key": "アラン ミネイロ",
+    "player_name": "アラン ミネイロ",
+    "time": "71'",
+    "minute": 71,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "14295",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "time": "80'",
+    "minute": 80,
+    "is_own_goal": false
+  }
+]

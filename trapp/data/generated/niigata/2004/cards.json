@@ -1,0 +1,650 @@
+[
+  {
+    "match_id": "7731",
+    "season": 2004,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "7731",
+    "season": 2004,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "7739",
+    "season": 2004,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "7751",
+    "season": 2004,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "7755",
+    "season": 2004,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "7761",
+    "season": 2004,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "07'",
+    "minute": 7
+  },
+  {
+    "match_id": "7761",
+    "season": 2004,
+    "player_key": "上野 優作",
+    "player_name": "上野 優作",
+    "type": "警告",
+    "time": "27'",
+    "minute": 27
+  },
+  {
+    "match_id": "7775",
+    "season": 2004,
+    "player_key": "桑原 裕義",
+    "player_name": "桑原 裕義",
+    "type": "警告",
+    "time": "00'",
+    "minute": 0
+  },
+  {
+    "match_id": "7775",
+    "season": 2004,
+    "player_key": "栗原 圭介",
+    "player_name": "栗原 圭介",
+    "type": "警告",
+    "time": "07'",
+    "minute": 7
+  },
+  {
+    "match_id": "7775",
+    "season": 2004,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "7775",
+    "season": 2004,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "7679",
+    "season": 2004,
+    "player_key": "森田 浩史",
+    "player_name": "森田 浩史",
+    "type": "警告",
+    "time": "50'",
+    "minute": 50
+  },
+  {
+    "match_id": "7789",
+    "season": 2004,
+    "player_key": "喜多 靖",
+    "player_name": "喜多 靖",
+    "type": "警告",
+    "time": "07'",
+    "minute": 7
+  },
+  {
+    "match_id": "7789",
+    "season": 2004,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "7793",
+    "season": 2004,
+    "player_key": "上野 優作",
+    "player_name": "上野 優作",
+    "type": "警告",
+    "time": "06'",
+    "minute": 6
+  },
+  {
+    "match_id": "7793",
+    "season": 2004,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "14'",
+    "minute": 14
+  },
+  {
+    "match_id": "7804",
+    "season": 2004,
+    "player_key": "桑原 裕義",
+    "player_name": "桑原 裕義",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "7804",
+    "season": 2004,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "7804",
+    "season": 2004,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "退場",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "7815",
+    "season": 2004,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "7815",
+    "season": 2004,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "7815",
+    "season": 2004,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "62'",
+    "minute": 62
+  },
+  {
+    "match_id": "7682",
+    "season": 2004,
+    "player_key": "桑原 裕義",
+    "player_name": "桑原 裕義",
+    "type": "警告",
+    "time": "04'",
+    "minute": 4
+  },
+  {
+    "match_id": "7682",
+    "season": 2004,
+    "player_key": "梅山 修",
+    "player_name": "梅山 修",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "7682",
+    "season": 2004,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "7682",
+    "season": 2004,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "7682",
+    "season": 2004,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "7684",
+    "season": 2004,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "7684",
+    "season": 2004,
+    "player_key": "栗原 圭介",
+    "player_name": "栗原 圭介",
+    "type": "警告",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "7821",
+    "season": 2004,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "7821",
+    "season": 2004,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "7821",
+    "season": 2004,
+    "player_key": "野澤 洋輔",
+    "player_name": "野澤 洋輔",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "7828",
+    "season": 2004,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "17'",
+    "minute": 17
+  },
+  {
+    "match_id": "7828",
+    "season": 2004,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "7828",
+    "season": 2004,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "7835",
+    "season": 2004,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "7844",
+    "season": 2004,
+    "player_key": "梅山 修",
+    "player_name": "梅山 修",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "7685",
+    "season": 2004,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "7688",
+    "season": 2004,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "15'",
+    "minute": 15
+  },
+  {
+    "match_id": "7688",
+    "season": 2004,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "7850",
+    "season": 2004,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "7850",
+    "season": 2004,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "7850",
+    "season": 2004,
+    "player_key": "栗原 圭介",
+    "player_name": "栗原 圭介",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "7865",
+    "season": 2004,
+    "player_key": "オゼアス",
+    "player_name": "オゼアス",
+    "type": "警告",
+    "time": "07'",
+    "minute": 7
+  },
+  {
+    "match_id": "7878",
+    "season": 2004,
+    "player_key": "松尾 直人",
+    "player_name": "松尾 直人",
+    "type": "警告",
+    "time": "21'",
+    "minute": 21
+  },
+  {
+    "match_id": "7878",
+    "season": 2004,
+    "player_key": "オゼアス",
+    "player_name": "オゼアス",
+    "type": "警告",
+    "time": "39'",
+    "minute": 39
+  },
+  {
+    "match_id": "7878",
+    "season": 2004,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "60'",
+    "minute": 60
+  },
+  {
+    "match_id": "7878",
+    "season": 2004,
+    "player_key": "オゼアス",
+    "player_name": "オゼアス",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "7878",
+    "season": 2004,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "7878",
+    "season": 2004,
+    "player_key": "オゼアス",
+    "player_name": "オゼアス",
+    "type": "退場",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "7884",
+    "season": 2004,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "7884",
+    "season": 2004,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "7884",
+    "season": 2004,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "7889",
+    "season": 2004,
+    "player_key": "喜多 靖",
+    "player_name": "喜多 靖",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "7906",
+    "season": 2004,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "05'",
+    "minute": 5
+  },
+  {
+    "match_id": "7906",
+    "season": 2004,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "7941",
+    "season": 2004,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "62'",
+    "minute": 62
+  },
+  {
+    "match_id": "7935",
+    "season": 2004,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "06'",
+    "minute": 6
+  },
+  {
+    "match_id": "7935",
+    "season": 2004,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "7935",
+    "season": 2004,
+    "player_key": "オゼアス",
+    "player_name": "オゼアス",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "7935",
+    "season": 2004,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "41'",
+    "minute": 41
+  },
+  {
+    "match_id": "7935",
+    "season": 2004,
+    "player_key": "鈴木 健太郎",
+    "player_name": "鈴木 健太郎",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "7947",
+    "season": 2004,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "7947",
+    "season": 2004,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  },
+  {
+    "match_id": "7947",
+    "season": 2004,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "7955",
+    "season": 2004,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "7955",
+    "season": 2004,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "7955",
+    "season": 2004,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "7963",
+    "season": 2004,
+    "player_key": "松尾 直人",
+    "player_name": "松尾 直人",
+    "type": "警告",
+    "time": "05'",
+    "minute": 5
+  },
+  {
+    "match_id": "7963",
+    "season": 2004,
+    "player_key": "鈴木 健太郎",
+    "player_name": "鈴木 健太郎",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "7963",
+    "season": 2004,
+    "player_key": "鈴木 健太郎",
+    "player_name": "鈴木 健太郎",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "7963",
+    "season": 2004,
+    "player_key": "鈴木 健太郎",
+    "player_name": "鈴木 健太郎",
+    "type": "退場",
+    "time": "84'",
+    "minute": 84
+  }
+]

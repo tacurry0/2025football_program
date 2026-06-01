@@ -1,0 +1,632 @@
+[
+  {
+    "match_id": "14839",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "14845",
+    "season": 2013,
+    "player_key": "藤田 征也",
+    "player_name": "藤田 征也",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "14845",
+    "season": 2013,
+    "player_key": "藤田 征也",
+    "player_name": "藤田 征也",
+    "type": "警告",
+    "time": "21'",
+    "minute": 21
+  },
+  {
+    "match_id": "14845",
+    "season": 2013,
+    "player_key": "藤田 征也",
+    "player_name": "藤田 征也",
+    "type": "退場",
+    "time": "21'",
+    "minute": 21
+  },
+  {
+    "match_id": "14858",
+    "season": 2013,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "04'",
+    "minute": 4
+  },
+  {
+    "match_id": "14858",
+    "season": 2013,
+    "player_key": "金 根煥",
+    "player_name": "金 根煥",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "14802",
+    "season": 2013,
+    "player_key": "岡本 英也",
+    "player_name": "岡本 英也",
+    "type": "警告",
+    "time": "01'",
+    "minute": 1
+  },
+  {
+    "match_id": "14870",
+    "season": 2013,
+    "player_key": "大井 健太郎",
+    "player_name": "大井 健太郎",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "14870",
+    "season": 2013,
+    "player_key": "レオ シルバ",
+    "player_name": "レオ シルバ",
+    "type": "警告",
+    "time": "90'+1",
+    "minute": 91
+  },
+  {
+    "match_id": "14810",
+    "season": 2013,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "type": "警告",
+    "time": "17'",
+    "minute": 17
+  },
+  {
+    "match_id": "14810",
+    "season": 2013,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "14810",
+    "season": 2013,
+    "player_key": "坪内 秀介",
+    "player_name": "坪内 秀介",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "14810",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "90'+2",
+    "minute": 92
+  },
+  {
+    "match_id": "14872",
+    "season": 2013,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "14872",
+    "season": 2013,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "14872",
+    "season": 2013,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "14872",
+    "season": 2013,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "退場",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "14811",
+    "season": 2013,
+    "player_key": "レオ シルバ",
+    "player_name": "レオ シルバ",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "14884",
+    "season": 2013,
+    "player_key": "大井 健太郎",
+    "player_name": "大井 健太郎",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "14898",
+    "season": 2013,
+    "player_key": "レオ シルバ",
+    "player_name": "レオ シルバ",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "14898",
+    "season": 2013,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "type": "警告",
+    "time": "45'",
+    "minute": 45
+  },
+  {
+    "match_id": "14898",
+    "season": 2013,
+    "player_key": "田中 達也",
+    "player_name": "田中 達也",
+    "type": "警告",
+    "time": "60'",
+    "minute": 60
+  },
+  {
+    "match_id": "14898",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "14815",
+    "season": 2013,
+    "player_key": "坪内 秀介",
+    "player_name": "坪内 秀介",
+    "type": "警告",
+    "time": "10'",
+    "minute": 10
+  },
+  {
+    "match_id": "14815",
+    "season": 2013,
+    "player_key": "レオ シルバ",
+    "player_name": "レオ シルバ",
+    "type": "警告",
+    "time": "59'",
+    "minute": 59
+  },
+  {
+    "match_id": "14900",
+    "season": 2013,
+    "player_key": "成岡 翔",
+    "player_name": "成岡 翔",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "14917",
+    "season": 2013,
+    "player_key": "レオ シルバ",
+    "player_name": "レオ シルバ",
+    "type": "警告",
+    "time": "47'",
+    "minute": 47
+  },
+  {
+    "match_id": "14817",
+    "season": 2013,
+    "player_key": "濱田 水輝",
+    "player_name": "濱田 水輝",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "14817",
+    "season": 2013,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "14817",
+    "season": 2013,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "90'+1",
+    "minute": 91
+  },
+  {
+    "match_id": "14936",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "09'",
+    "minute": 9
+  },
+  {
+    "match_id": "14947",
+    "season": 2013,
+    "player_key": "成岡 翔",
+    "player_name": "成岡 翔",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "14959",
+    "season": 2013,
+    "player_key": "岡本 英也",
+    "player_name": "岡本 英也",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "14959",
+    "season": 2013,
+    "player_key": "成岡 翔",
+    "player_name": "成岡 翔",
+    "type": "警告",
+    "time": "43'",
+    "minute": 43
+  },
+  {
+    "match_id": "14965",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "15004",
+    "season": 2013,
+    "player_key": "川口 尚紀",
+    "player_name": "川口 尚紀",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "15004",
+    "season": 2013,
+    "player_key": "レオ シルバ",
+    "player_name": "レオ シルバ",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "15004",
+    "season": 2013,
+    "player_key": "川又 堅碁",
+    "player_name": "川又 堅碁",
+    "type": "警告",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "15004",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "15004",
+    "season": 2013,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "15004",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "15004",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "退場",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "15008",
+    "season": 2013,
+    "player_key": "藤田 征也",
+    "player_name": "藤田 征也",
+    "type": "警告",
+    "time": "01'",
+    "minute": 1
+  },
+  {
+    "match_id": "15008",
+    "season": 2013,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "15016",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "15016",
+    "season": 2013,
+    "player_key": "川口 尚紀",
+    "player_name": "川口 尚紀",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "15016",
+    "season": 2013,
+    "player_key": "川口 尚紀",
+    "player_name": "川口 尚紀",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "15016",
+    "season": 2013,
+    "player_key": "川口 尚紀",
+    "player_name": "川口 尚紀",
+    "type": "退場",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "15029",
+    "season": 2013,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "15039",
+    "season": 2013,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "08'",
+    "minute": 8
+  },
+  {
+    "match_id": "15039",
+    "season": 2013,
+    "player_key": "ホージェル ガウーショ",
+    "player_name": "ホージェル ガウーショ",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "15039",
+    "season": 2013,
+    "player_key": "川又 堅碁",
+    "player_name": "川又 堅碁",
+    "type": "警告",
+    "time": "90'+2",
+    "minute": 92
+  },
+  {
+    "match_id": "15043",
+    "season": 2013,
+    "player_key": "田中 達也",
+    "player_name": "田中 達也",
+    "type": "警告",
+    "time": "10'",
+    "minute": 10
+  },
+  {
+    "match_id": "15043",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "15055",
+    "season": 2013,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "16'",
+    "minute": 16
+  },
+  {
+    "match_id": "15055",
+    "season": 2013,
+    "player_key": "大井 健太郎",
+    "player_name": "大井 健太郎",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "15076",
+    "season": 2013,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "15076",
+    "season": 2013,
+    "player_key": "レオ シルバ",
+    "player_name": "レオ シルバ",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "15076",
+    "season": 2013,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "60'",
+    "minute": 60
+  },
+  {
+    "match_id": "15076",
+    "season": 2013,
+    "player_key": "川口 尚紀",
+    "player_name": "川口 尚紀",
+    "type": "警告",
+    "time": "64'",
+    "minute": 64
+  },
+  {
+    "match_id": "15076",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "15082",
+    "season": 2013,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "15082",
+    "season": 2013,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "type": "警告",
+    "time": "27'",
+    "minute": 27
+  },
+  {
+    "match_id": "15082",
+    "season": 2013,
+    "player_key": "東口 順昭",
+    "player_name": "東口 順昭",
+    "type": "警告",
+    "time": "39'",
+    "minute": 39
+  },
+  {
+    "match_id": "15082",
+    "season": 2013,
+    "player_key": "川口 尚紀",
+    "player_name": "川口 尚紀",
+    "type": "警告",
+    "time": "42'",
+    "minute": 42
+  },
+  {
+    "match_id": "15082",
+    "season": 2013,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "15092",
+    "season": 2013,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "15112",
+    "season": 2013,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "15139",
+    "season": 2013,
+    "player_key": "成岡 翔",
+    "player_name": "成岡 翔",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "15139",
+    "season": 2013,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  }
+]

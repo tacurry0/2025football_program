@@ -1,0 +1,317 @@
+[
+  {
+    "match_id": "26523",
+    "season": 2022,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "26523",
+    "season": 2022,
+    "player_key": "本間 至恩",
+    "player_name": "本間 至恩",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "26523",
+    "season": 2022,
+    "player_key": "島田 譲",
+    "player_name": "島田 譲",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "26535",
+    "season": 2022,
+    "player_key": "イッペイ シノヅカ",
+    "player_name": "イッペイ シノヅカ",
+    "type": "警告",
+    "time": "27'",
+    "minute": 27
+  },
+  {
+    "match_id": "26550",
+    "season": 2022,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "26558",
+    "season": 2022,
+    "player_key": "伊藤 涼太郎",
+    "player_name": "伊藤 涼太郎",
+    "type": "警告",
+    "time": "12'",
+    "minute": 12
+  },
+  {
+    "match_id": "26558",
+    "season": 2022,
+    "player_key": "本間 至恩",
+    "player_name": "本間 至恩",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "26558",
+    "season": 2022,
+    "player_key": "高 宇洋",
+    "player_name": "高 宇洋",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "26590",
+    "season": 2022,
+    "player_key": "高 宇洋",
+    "player_name": "高 宇洋",
+    "type": "警告",
+    "time": "10'",
+    "minute": 10
+  },
+  {
+    "match_id": "26608",
+    "season": 2022,
+    "player_key": "堀米 悠斗",
+    "player_name": "堀米 悠斗",
+    "type": "警告",
+    "time": "43'",
+    "minute": 43
+  },
+  {
+    "match_id": "26629",
+    "season": 2022,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
+  },
+  {
+    "match_id": "26647",
+    "season": 2022,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "26660",
+    "season": 2022,
+    "player_key": "島田 譲",
+    "player_name": "島田 譲",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "26684",
+    "season": 2022,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "27'",
+    "minute": 27
+  },
+  {
+    "match_id": "26702",
+    "season": 2022,
+    "player_key": "伊藤 涼太郎",
+    "player_name": "伊藤 涼太郎",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  },
+  {
+    "match_id": "26730",
+    "season": 2022,
+    "player_key": "田上 大地",
+    "player_name": "田上 大地",
+    "type": "警告",
+    "time": "59'",
+    "minute": 59
+  },
+  {
+    "match_id": "26742",
+    "season": 2022,
+    "player_key": "高 宇洋",
+    "player_name": "高 宇洋",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "26742",
+    "season": 2022,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "26752",
+    "season": 2022,
+    "player_key": "高 宇洋",
+    "player_name": "高 宇洋",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "26760",
+    "season": 2022,
+    "player_key": "鈴木 孝司",
+    "player_name": "鈴木 孝司",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "26760",
+    "season": 2022,
+    "player_key": "島田 譲",
+    "player_name": "島田 譲",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "26760",
+    "season": 2022,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "26781",
+    "season": 2022,
+    "player_key": "松田 詠太郎",
+    "player_name": "松田 詠太郎",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "26812",
+    "season": 2022,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "26828",
+    "season": 2022,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "26828",
+    "season": 2022,
+    "player_key": "堀米 悠斗",
+    "player_name": "堀米 悠斗",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "26834",
+    "season": 2022,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "26834",
+    "season": 2022,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
+  },
+  {
+    "match_id": "26855",
+    "season": 2022,
+    "player_key": "伊藤 涼太郎",
+    "player_name": "伊藤 涼太郎",
+    "type": "警告",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "26864",
+    "season": 2022,
+    "player_key": "田上 大地",
+    "player_name": "田上 大地",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "26876",
+    "season": 2022,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "26892",
+    "season": 2022,
+    "player_key": "松田 詠太郎",
+    "player_name": "松田 詠太郎",
+    "type": "警告",
+    "time": "13'",
+    "minute": 13
+  },
+  {
+    "match_id": "26914",
+    "season": 2022,
+    "player_key": "三戸 舜介",
+    "player_name": "三戸 舜介",
+    "type": "警告",
+    "time": "47'",
+    "minute": 47
+  },
+  {
+    "match_id": "26930",
+    "season": 2022,
+    "player_key": "高 宇洋",
+    "player_name": "高 宇洋",
+    "type": "警告",
+    "time": "90'+1",
+    "minute": 91
+  },
+  {
+    "match_id": "27738",
+    "season": 2022,
+    "player_key": "長谷川 巧",
+    "player_name": "長谷川 巧",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  }
+]

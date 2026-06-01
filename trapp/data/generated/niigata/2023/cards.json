@@ -1,0 +1,425 @@
+[
+  {
+    "match_id": "28179",
+    "season": 2023,
+    "player_key": "トーマス デン",
+    "player_name": "トーマス デン",
+    "type": "警告",
+    "time": "45'+1",
+    "minute": 46
+  },
+  {
+    "match_id": "28179",
+    "season": 2023,
+    "player_key": "島田 譲",
+    "player_name": "島田 譲",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  },
+  {
+    "match_id": "28179",
+    "season": 2023,
+    "player_key": "グスタボ ネスカウ",
+    "player_name": "グスタボ ネスカウ",
+    "type": "警告",
+    "time": "90'+9",
+    "minute": 99
+  },
+  {
+    "match_id": "28190",
+    "season": 2023,
+    "player_key": "三戸 舜介",
+    "player_name": "三戸 舜介",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "28202",
+    "season": 2023,
+    "player_key": "ダニーロ ゴメス",
+    "player_name": "ダニーロ ゴメス",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "28210",
+    "season": 2023,
+    "player_key": "早川 史哉",
+    "player_name": "早川 史哉",
+    "type": "警告",
+    "time": "18'",
+    "minute": 18
+  },
+  {
+    "match_id": "28210",
+    "season": 2023,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "退場",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "28219",
+    "season": 2023,
+    "player_key": "島田 譲",
+    "player_name": "島田 譲",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "28219",
+    "season": 2023,
+    "player_key": "トーマス デン",
+    "player_name": "トーマス デン",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "29353",
+    "season": 2023,
+    "player_key": "千葉 和彦",
+    "player_name": "千葉 和彦",
+    "type": "警告",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "29353",
+    "season": 2023,
+    "player_key": "長谷川 巧",
+    "player_name": "長谷川 巧",
+    "type": "警告",
+    "time": "39'",
+    "minute": 39
+  },
+  {
+    "match_id": "29353",
+    "season": 2023,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "28238",
+    "season": 2023,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "28248",
+    "season": 2023,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "28248",
+    "season": 2023,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "28248",
+    "season": 2023,
+    "player_key": "千葉 和彦",
+    "player_name": "千葉 和彦",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "28259",
+    "season": 2023,
+    "player_key": "渡邊 泰基",
+    "player_name": "渡邊 泰基",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  },
+  {
+    "match_id": "28259",
+    "season": 2023,
+    "player_key": "田上 大地",
+    "player_name": "田上 大地",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "28259",
+    "season": 2023,
+    "player_key": "伊藤 涼太郎",
+    "player_name": "伊藤 涼太郎",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "28266",
+    "season": 2023,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "28266",
+    "season": 2023,
+    "player_key": "堀米 悠斗",
+    "player_name": "堀米 悠斗",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "28286",
+    "season": 2023,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "28295",
+    "season": 2023,
+    "player_key": "島田 譲",
+    "player_name": "島田 譲",
+    "type": "警告",
+    "time": "06'",
+    "minute": 6
+  },
+  {
+    "match_id": "28310",
+    "season": 2023,
+    "player_key": "田上 大地",
+    "player_name": "田上 大地",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "28310",
+    "season": 2023,
+    "player_key": "伊藤 涼太郎",
+    "player_name": "伊藤 涼太郎",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "29357",
+    "season": 2023,
+    "player_key": "グスタボ ネスカウ",
+    "player_name": "グスタボ ネスカウ",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "28317",
+    "season": 2023,
+    "player_key": "渡邊 泰基",
+    "player_name": "渡邊 泰基",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "28317",
+    "season": 2023,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "28334",
+    "season": 2023,
+    "player_key": "秋山 裕紀",
+    "player_name": "秋山 裕紀",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "28343",
+    "season": 2023,
+    "player_key": "高 宇洋",
+    "player_name": "高 宇洋",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "28343",
+    "season": 2023,
+    "player_key": "小島 亨介",
+    "player_name": "小島 亨介",
+    "type": "警告",
+    "time": "90'+6",
+    "minute": 96
+  },
+  {
+    "match_id": "28343",
+    "season": 2023,
+    "player_key": "新井 直人",
+    "player_name": "新井 直人",
+    "type": "退場",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "28353",
+    "season": 2023,
+    "player_key": "田上 大地",
+    "player_name": "田上 大地",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "28353",
+    "season": 2023,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "type": "警告",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "28353",
+    "season": 2023,
+    "player_key": "高 宇洋",
+    "player_name": "高 宇洋",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "28362",
+    "season": 2023,
+    "player_key": "新井 直人",
+    "player_name": "新井 直人",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "28370",
+    "season": 2023,
+    "player_key": "秋山 裕紀",
+    "player_name": "秋山 裕紀",
+    "type": "警告",
+    "time": "06'",
+    "minute": 6
+  },
+  {
+    "match_id": "28370",
+    "season": 2023,
+    "player_key": "渡邊 泰基",
+    "player_name": "渡邊 泰基",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "28370",
+    "season": 2023,
+    "player_key": "新井 直人",
+    "player_name": "新井 直人",
+    "type": "警告",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "28380",
+    "season": 2023,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "28392",
+    "season": 2023,
+    "player_key": "秋山 裕紀",
+    "player_name": "秋山 裕紀",
+    "type": "警告",
+    "time": "90'+6",
+    "minute": 96
+  },
+  {
+    "match_id": "28425",
+    "season": 2023,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "28439",
+    "season": 2023,
+    "player_key": "三戸 舜介",
+    "player_name": "三戸 舜介",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "28448",
+    "season": 2023,
+    "player_key": "星 雄次",
+    "player_name": "星 雄次",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "28448",
+    "season": 2023,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "28458",
+    "season": 2023,
+    "player_key": "三戸 舜介",
+    "player_name": "三戸 舜介",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "28463",
+    "season": 2023,
+    "player_key": "星 雄次",
+    "player_name": "星 雄次",
+    "type": "警告",
+    "time": "24'",
+    "minute": 24
+  }
+]

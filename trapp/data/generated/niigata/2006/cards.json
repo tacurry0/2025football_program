@@ -1,0 +1,668 @@
+[
+  {
+    "match_id": "9201",
+    "season": 2006,
+    "player_key": "梅山 修",
+    "player_name": "梅山 修",
+    "type": "警告",
+    "time": "01'",
+    "minute": 1
+  },
+  {
+    "match_id": "9201",
+    "season": 2006,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "9211",
+    "season": 2006,
+    "player_key": "海本 幸治郎",
+    "player_name": "海本 幸治郎",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "9211",
+    "season": 2006,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "9220",
+    "season": 2006,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "9220",
+    "season": 2006,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "9220",
+    "season": 2006,
+    "player_key": "シルビーニョ",
+    "player_name": "シルビーニョ",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "9143",
+    "season": 2006,
+    "player_key": "シルビーニョ",
+    "player_name": "シルビーニョ",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "9143",
+    "season": 2006,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "9143",
+    "season": 2006,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "43'",
+    "minute": 43
+  },
+  {
+    "match_id": "9241",
+    "season": 2006,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "9244",
+    "season": 2006,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "9144",
+    "season": 2006,
+    "player_key": "シルビーニョ",
+    "player_name": "シルビーニョ",
+    "type": "警告",
+    "time": "17'",
+    "minute": 17
+  },
+  {
+    "match_id": "9144",
+    "season": 2006,
+    "player_key": "岡山 哲也",
+    "player_name": "岡山 哲也",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "9144",
+    "season": 2006,
+    "player_key": "藤井 大輔",
+    "player_name": "藤井 大輔",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "9270",
+    "season": 2006,
+    "player_key": "中原 貴之",
+    "player_name": "中原 貴之",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "9270",
+    "season": 2006,
+    "player_key": "中野 洋司",
+    "player_name": "中野 洋司",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "9146",
+    "season": 2006,
+    "player_key": "鈴木 健太郎",
+    "player_name": "鈴木 健太郎",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "9146",
+    "season": 2006,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "9279",
+    "season": 2006,
+    "player_key": "中野 洋司",
+    "player_name": "中野 洋司",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  },
+  {
+    "match_id": "9283",
+    "season": 2006,
+    "player_key": "中原 貴之",
+    "player_name": "中原 貴之",
+    "type": "警告",
+    "time": "12'",
+    "minute": 12
+  },
+  {
+    "match_id": "9283",
+    "season": 2006,
+    "player_key": "中野 洋司",
+    "player_name": "中野 洋司",
+    "type": "警告",
+    "time": "14'",
+    "minute": 14
+  },
+  {
+    "match_id": "9283",
+    "season": 2006,
+    "player_key": "中原 貴之",
+    "player_name": "中原 貴之",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "9283",
+    "season": 2006,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "62'",
+    "minute": 62
+  },
+  {
+    "match_id": "9283",
+    "season": 2006,
+    "player_key": "梅山 修",
+    "player_name": "梅山 修",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  },
+  {
+    "match_id": "9283",
+    "season": 2006,
+    "player_key": "中原 貴之",
+    "player_name": "中原 貴之",
+    "type": "退場",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "9149",
+    "season": 2006,
+    "player_key": "梅山 修",
+    "player_name": "梅山 修",
+    "type": "警告",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "9151",
+    "season": 2006,
+    "player_key": "シルビーニョ",
+    "player_name": "シルビーニョ",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "9153",
+    "season": 2006,
+    "player_key": "梅山 修",
+    "player_name": "梅山 修",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "9302",
+    "season": 2006,
+    "player_key": "北野 貴之",
+    "player_name": "北野 貴之",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "9302",
+    "season": 2006,
+    "player_key": "中原 貴之",
+    "player_name": "中原 貴之",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "9313",
+    "season": 2006,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "9313",
+    "season": 2006,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "9313",
+    "season": 2006,
+    "player_key": "海本 慶治",
+    "player_name": "海本 慶治",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "9318",
+    "season": 2006,
+    "player_key": "中野 洋司",
+    "player_name": "中野 洋司",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "9318",
+    "season": 2006,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "9318",
+    "season": 2006,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "9333",
+    "season": 2006,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "05'",
+    "minute": 5
+  },
+  {
+    "match_id": "9333",
+    "season": 2006,
+    "player_key": "梅山 修",
+    "player_name": "梅山 修",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "9345",
+    "season": 2006,
+    "player_key": "中野 洋司",
+    "player_name": "中野 洋司",
+    "type": "警告",
+    "time": "17'",
+    "minute": 17
+  },
+  {
+    "match_id": "9345",
+    "season": 2006,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "9345",
+    "season": 2006,
+    "player_key": "海本 慶治",
+    "player_name": "海本 慶治",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "9345",
+    "season": 2006,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "9345",
+    "season": 2006,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "9345",
+    "season": 2006,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "9345",
+    "season": 2006,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "退場",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "9352",
+    "season": 2006,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "9352",
+    "season": 2006,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "9364",
+    "season": 2006,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "9364",
+    "season": 2006,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "9364",
+    "season": 2006,
+    "player_key": "内田 潤",
+    "player_name": "内田 潤",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "9376",
+    "season": 2006,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "9383",
+    "season": 2006,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "9392",
+    "season": 2006,
+    "player_key": "梅山 修",
+    "player_name": "梅山 修",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "9392",
+    "season": 2006,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "9392",
+    "season": 2006,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "62'",
+    "minute": 62
+  },
+  {
+    "match_id": "9392",
+    "season": 2006,
+    "player_key": "藤井 大輔",
+    "player_name": "藤井 大輔",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "9405",
+    "season": 2006,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "16'",
+    "minute": 16
+  },
+  {
+    "match_id": "9405",
+    "season": 2006,
+    "player_key": "内田 潤",
+    "player_name": "内田 潤",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "9405",
+    "season": 2006,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "9406",
+    "season": 2006,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "9406",
+    "season": 2006,
+    "player_key": "海本 慶治",
+    "player_name": "海本 慶治",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "9419",
+    "season": 2006,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "15'",
+    "minute": 15
+  },
+  {
+    "match_id": "9437",
+    "season": 2006,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "9445",
+    "season": 2006,
+    "player_key": "中原 貴之",
+    "player_name": "中原 貴之",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "9453",
+    "season": 2006,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "9453",
+    "season": 2006,
+    "player_key": "内田 潤",
+    "player_name": "内田 潤",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "9467",
+    "season": 2006,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "46'",
+    "minute": 46
+  },
+  {
+    "match_id": "9467",
+    "season": 2006,
+    "player_key": "シルビーニョ",
+    "player_name": "シルビーニョ",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "9469",
+    "season": 2006,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "9469",
+    "season": 2006,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "9469",
+    "season": 2006,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "退場",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "9490",
+    "season": 2006,
+    "player_key": "中野 洋司",
+    "player_name": "中野 洋司",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "9490",
+    "season": 2006,
+    "player_key": "エジミウソン",
+    "player_name": "エジミウソン",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  }
+]

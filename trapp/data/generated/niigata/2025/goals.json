@@ -1,0 +1,344 @@
+[
+  {
+    "match_id": "31362",
+    "season": 2025,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "time": "26'",
+    "minute": 26,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31381",
+    "season": 2025,
+    "player_key": "矢村 健",
+    "player_name": "矢村 健",
+    "time": "44'",
+    "minute": 44,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31396",
+    "season": 2025,
+    "player_key": "矢村 健",
+    "player_name": "矢村 健",
+    "time": "17'",
+    "minute": 17,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31396",
+    "season": 2025,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "62'",
+    "minute": 62,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31404",
+    "season": 2025,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "42'",
+    "minute": 42,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31404",
+    "season": 2025,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "time": "58'",
+    "minute": 58,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31424",
+    "season": 2025,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "18'",
+    "minute": 18,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31424",
+    "season": 2025,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "time": "74'",
+    "minute": 74,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31424",
+    "season": 2025,
+    "player_key": "矢村 健",
+    "player_name": "矢村 健",
+    "time": "82'",
+    "minute": 82,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32235",
+    "season": 2025,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "12'",
+    "minute": 12,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31343",
+    "season": 2025,
+    "player_key": "笠井 佳祐",
+    "player_name": "笠井 佳祐",
+    "time": "19'",
+    "minute": 19,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31343",
+    "season": 2025,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "time": "63'",
+    "minute": 63,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32251",
+    "season": 2025,
+    "player_key": "矢村 健",
+    "player_name": "矢村 健",
+    "time": "19'",
+    "minute": 19,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32268",
+    "season": 2025,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "time": "14'",
+    "minute": 14,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32275",
+    "season": 2025,
+    "player_key": "ミゲル シルヴェイラ",
+    "player_name": "ミゲル シルヴェイラ",
+    "time": "85'",
+    "minute": 85,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32282",
+    "season": 2025,
+    "player_key": "笠井 佳祐",
+    "player_name": "笠井 佳祐",
+    "time": "66'",
+    "minute": 66,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32282",
+    "season": 2025,
+    "player_key": "ダニーロ ゴメス",
+    "player_name": "ダニーロ ゴメス",
+    "time": "90'+9",
+    "minute": 99,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32307",
+    "season": 2025,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "74'",
+    "minute": 74,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32320",
+    "season": 2025,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "15'",
+    "minute": 15,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32326",
+    "season": 2025,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "31'",
+    "minute": 31,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32326",
+    "season": 2025,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "time": "71'",
+    "minute": 71,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32346",
+    "season": 2025,
+    "player_key": "ダニーロ ゴメス",
+    "player_name": "ダニーロ ゴメス",
+    "time": "73'",
+    "minute": 73,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32352",
+    "season": 2025,
+    "player_key": "稲村 隼翔",
+    "player_name": "稲村 隼翔",
+    "time": "04'",
+    "minute": 4,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32352",
+    "season": 2025,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "36'",
+    "minute": 36,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32298",
+    "season": 2025,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "time": "90'+5",
+    "minute": 95,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32377",
+    "season": 2025,
+    "player_key": "ダニーロ ゴメス",
+    "player_name": "ダニーロ ゴメス",
+    "time": "29'",
+    "minute": 29,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32400",
+    "season": 2025,
+    "player_key": "堀米 悠斗",
+    "player_name": "堀米 悠斗",
+    "time": "02'",
+    "minute": 2,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32406",
+    "season": 2025,
+    "player_key": "白井 永地",
+    "player_name": "白井 永地",
+    "time": "07'",
+    "minute": 7,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32414",
+    "season": 2025,
+    "player_key": "マテウス モラエス",
+    "player_name": "マテウス モラエス",
+    "time": "17'",
+    "minute": 17,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32467",
+    "season": 2025,
+    "player_key": "新井 泰貴",
+    "player_name": "新井 泰貴",
+    "time": "15'",
+    "minute": 15,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32467",
+    "season": 2025,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "time": "49'",
+    "minute": 49,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32475",
+    "season": 2025,
+    "player_key": "白井 永地",
+    "player_name": "白井 永地",
+    "time": "67'",
+    "minute": 67,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32495",
+    "season": 2025,
+    "player_key": "島村 拓弥",
+    "player_name": "島村 拓弥",
+    "time": "74'",
+    "minute": 74,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32495",
+    "season": 2025,
+    "player_key": "若月 大和",
+    "player_name": "若月 大和",
+    "time": "90'",
+    "minute": 90,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32505",
+    "season": 2025,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "85'",
+    "minute": 85,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32505",
+    "season": 2025,
+    "player_key": "マテウス モラエス",
+    "player_name": "マテウス モラエス",
+    "time": "90'+1",
+    "minute": 91,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32517",
+    "season": 2025,
+    "player_key": "笠井 佳祐",
+    "player_name": "笠井 佳祐",
+    "time": "72'",
+    "minute": 72,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32524",
+    "season": 2025,
+    "player_key": "マテウス モラエス",
+    "player_name": "マテウス モラエス",
+    "time": "09'",
+    "minute": 9,
+    "is_own_goal": false
+  }
+]

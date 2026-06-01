@@ -1,0 +1,722 @@
+[
+  {
+    "match_id": "5350",
+    "season": 2000,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "16'",
+    "minute": 16
+  },
+  {
+    "match_id": "5350",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "5354",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "5354",
+    "season": 2000,
+    "player_key": "式田 高義",
+    "player_name": "式田 高義",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "5354",
+    "season": 2000,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "5354",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "5363",
+    "season": 2000,
+    "player_key": "マルコ",
+    "player_name": "マルコ",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "5373",
+    "season": 2000,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "5373",
+    "season": 2000,
+    "player_key": "服部 浩紀",
+    "player_name": "服部 浩紀",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "5373",
+    "season": 2000,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "5373",
+    "season": 2000,
+    "player_key": "マルコ",
+    "player_name": "マルコ",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "5011",
+    "season": 2000,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "5378",
+    "season": 2000,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "5378",
+    "season": 2000,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "5022",
+    "season": 2000,
+    "player_key": "中野 圭一郎",
+    "player_name": "中野 圭一郎",
+    "type": "警告",
+    "time": "04'",
+    "minute": 4
+  },
+  {
+    "match_id": "5022",
+    "season": 2000,
+    "player_key": "堂森 勝利",
+    "player_name": "堂森 勝利",
+    "type": "警告",
+    "time": "18'",
+    "minute": 18
+  },
+  {
+    "match_id": "5022",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "type": "警告",
+    "time": "46'",
+    "minute": 46
+  },
+  {
+    "match_id": "5383",
+    "season": 2000,
+    "player_key": "中野 圭一郎",
+    "player_name": "中野 圭一郎",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "5388",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "5388",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "21'",
+    "minute": 21
+  },
+  {
+    "match_id": "5393",
+    "season": 2000,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "18'",
+    "minute": 18
+  },
+  {
+    "match_id": "5397",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "16'",
+    "minute": 16
+  },
+  {
+    "match_id": "5397",
+    "season": 2000,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "5397",
+    "season": 2000,
+    "player_key": "吉原 慎也",
+    "player_name": "吉原 慎也",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "5397",
+    "season": 2000,
+    "player_key": "ナシメント",
+    "player_name": "ナシメント",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "5402",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "5409",
+    "season": 2000,
+    "player_key": "井上 公平",
+    "player_name": "井上 公平",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "5409",
+    "season": 2000,
+    "player_key": "中野 圭一郎",
+    "player_name": "中野 圭一郎",
+    "type": "警告",
+    "time": "60'",
+    "minute": 60
+  },
+  {
+    "match_id": "5414",
+    "season": 2000,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "42'",
+    "minute": 42
+  },
+  {
+    "match_id": "5414",
+    "season": 2000,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "5414",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  },
+  {
+    "match_id": "5419",
+    "season": 2000,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "05'",
+    "minute": 5
+  },
+  {
+    "match_id": "5419",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "60'",
+    "minute": 60
+  },
+  {
+    "match_id": "5429",
+    "season": 2000,
+    "player_key": "吉原 慎也",
+    "player_name": "吉原 慎也",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "5429",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "5432",
+    "season": 2000,
+    "player_key": "服部 浩紀",
+    "player_name": "服部 浩紀",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  },
+  {
+    "match_id": "5432",
+    "season": 2000,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "5439",
+    "season": 2000,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "42'",
+    "minute": 42
+  },
+  {
+    "match_id": "5439",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "59'",
+    "minute": 59
+  },
+  {
+    "match_id": "5439",
+    "season": 2000,
+    "player_key": "服部 浩紀",
+    "player_name": "服部 浩紀",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "14'",
+    "minute": 14
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "41'",
+    "minute": 41
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "堂森 勝利",
+    "player_name": "堂森 勝利",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "5442",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "退場",
+    "time": "41'",
+    "minute": 41
+  },
+  {
+    "match_id": "5451",
+    "season": 2000,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "5451",
+    "season": 2000,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "100'",
+    "minute": 100
+  },
+  {
+    "match_id": "5453",
+    "season": 2000,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "14'",
+    "minute": 14
+  },
+  {
+    "match_id": "5453",
+    "season": 2000,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "5459",
+    "season": 2000,
+    "player_key": "井上 公平",
+    "player_name": "井上 公平",
+    "type": "警告",
+    "time": "39'",
+    "minute": 39
+  },
+  {
+    "match_id": "5459",
+    "season": 2000,
+    "player_key": "柴 暢彦",
+    "player_name": "柴 暢彦",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "5459",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "5459",
+    "season": 2000,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "93'",
+    "minute": 93
+  },
+  {
+    "match_id": "5459",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "97'",
+    "minute": 97
+  },
+  {
+    "match_id": "5469",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "5485",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "5485",
+    "season": 2000,
+    "player_key": "中野 圭一郎",
+    "player_name": "中野 圭一郎",
+    "type": "警告",
+    "time": "59'",
+    "minute": 59
+  },
+  {
+    "match_id": "5485",
+    "season": 2000,
+    "player_key": "堂森 勝利",
+    "player_name": "堂森 勝利",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "5485",
+    "season": 2000,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "5487",
+    "season": 2000,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "112'",
+    "minute": 112
+  },
+  {
+    "match_id": "5493",
+    "season": 2000,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "5493",
+    "season": 2000,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "5493",
+    "season": 2000,
+    "player_key": "木寺 浩一",
+    "player_name": "木寺 浩一",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "5504",
+    "season": 2000,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "5504",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "5520",
+    "season": 2000,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "5520",
+    "season": 2000,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "5527",
+    "season": 2000,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "5533",
+    "season": 2000,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "34'",
+    "minute": 34
+  },
+  {
+    "match_id": "5541",
+    "season": 2000,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "5541",
+    "season": 2000,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "5548",
+    "season": 2000,
+    "player_key": "式田 高義",
+    "player_name": "式田 高義",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "5548",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "5548",
+    "season": 2000,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "5548",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "5548",
+    "season": 2000,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "5548",
+    "season": 2000,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "退場",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "5553",
+    "season": 2000,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "5564",
+    "season": 2000,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "5564",
+    "season": 2000,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  }
+]

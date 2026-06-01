@@ -1,0 +1,677 @@
+[
+  {
+    "match_id": "6599",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "72'",
+    "minute": 72,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6606",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "51'",
+    "minute": 51,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6606",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6617",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "time": "31'",
+    "minute": 31,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6617",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "44'",
+    "minute": 44,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6622",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "81'",
+    "minute": 81,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6631",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "13'",
+    "minute": 13,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6640",
+    "season": 2002,
+    "player_key": "宮沢 克行",
+    "player_name": "宮沢 克行",
+    "time": "14'",
+    "minute": 14,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6650",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "39'",
+    "minute": 39,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6650",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "85'",
+    "minute": 85,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6653",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "28'",
+    "minute": 28,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6653",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "52'",
+    "minute": 52,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6653",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "time": "70'",
+    "minute": 70,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "33'",
+    "minute": 33,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "time": "54'",
+    "minute": 54,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "75'",
+    "minute": 75,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6664",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "23'",
+    "minute": 23,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6664",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "75'",
+    "minute": 75,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6674",
+    "season": 2002,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "time": "38'",
+    "minute": 38,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6674",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "47'",
+    "minute": 47,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6674",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "74'",
+    "minute": 74,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6674",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "74'",
+    "minute": 74,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6676",
+    "season": 2002,
+    "player_key": "宮沢 克行",
+    "player_name": "宮沢 克行",
+    "time": "21'",
+    "minute": 21,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6676",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "44'",
+    "minute": 44,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6676",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "56'",
+    "minute": 56,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6676",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "time": "63'",
+    "minute": 63,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6676",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6676",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6684",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "67'",
+    "minute": 67,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6691",
+    "season": 2002,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "23'",
+    "minute": 23,
+    "is_own_goal": true
+  },
+  {
+    "match_id": "6694",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "time": "20'",
+    "minute": 20,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6694",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "53'",
+    "minute": 53,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6699",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "08'",
+    "minute": 8,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6699",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "12'",
+    "minute": 12,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6699",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "time": "75'",
+    "minute": 75,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6705",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "time": "64'",
+    "minute": 64,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6719",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "time": "57'",
+    "minute": 57,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6728",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "86'",
+    "minute": 86,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6733",
+    "season": 2002,
+    "player_key": "宮沢 克行",
+    "player_name": "宮沢 克行",
+    "time": "05'",
+    "minute": 5,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6733",
+    "season": 2002,
+    "player_key": "宮沢 克行",
+    "player_name": "宮沢 克行",
+    "time": "47'",
+    "minute": 47,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6741",
+    "season": 2002,
+    "player_key": "宮沢 克行",
+    "player_name": "宮沢 克行",
+    "time": "17'",
+    "minute": 17,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6748",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "time": "46'",
+    "minute": 46,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6748",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "74'",
+    "minute": 74,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6754",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "time": "35'",
+    "minute": 35,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6754",
+    "season": 2002,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "time": "44'",
+    "minute": 44,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6759",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "time": "11'",
+    "minute": 11,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6765",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6765",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "time": "84'",
+    "minute": 84,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6776",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "time": "71'",
+    "minute": 71,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6778",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "05'",
+    "minute": 5,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6778",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "time": "68'",
+    "minute": 68,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6788",
+    "season": 2002,
+    "player_key": "宮沢 克行",
+    "player_name": "宮沢 克行",
+    "time": "72'",
+    "minute": 72,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6788",
+    "season": 2002,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6792",
+    "season": 2002,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "time": "62'",
+    "minute": 62,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6796",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "23'",
+    "minute": 23,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6801",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "46'",
+    "minute": 46,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6801",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6808",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "26'",
+    "minute": 26,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6816",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "time": "34'",
+    "minute": 34,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6819",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "21'",
+    "minute": 21,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6819",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "51'",
+    "minute": 51,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6819",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "time": "56'",
+    "minute": 56,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6819",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "time": "77'",
+    "minute": 77,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6819",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6830",
+    "season": 2002,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6836",
+    "season": 2002,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "time": "16'",
+    "minute": 16,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6840",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "50'",
+    "minute": 50,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6840",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "time": "51'",
+    "minute": 51,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6843",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "53'",
+    "minute": 53,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6843",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "80'",
+    "minute": 80,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6856",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "time": "27'",
+    "minute": 27,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6856",
+    "season": 2002,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "time": "46'",
+    "minute": 46,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "6856",
+    "season": 2002,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  }
+]

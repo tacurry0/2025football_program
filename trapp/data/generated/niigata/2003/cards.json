@@ -1,0 +1,785 @@
+[
+  {
+    "match_id": "7264",
+    "season": 2003,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "7264",
+    "season": 2003,
+    "player_key": "栗原 圭介",
+    "player_name": "栗原 圭介",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "7266",
+    "season": 2003,
+    "player_key": "栗原 圭介",
+    "player_name": "栗原 圭介",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "7266",
+    "season": 2003,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "7272",
+    "season": 2003,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "7272",
+    "season": 2003,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "7280",
+    "season": 2003,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "7280",
+    "season": 2003,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "7286",
+    "season": 2003,
+    "player_key": "丸山 良明",
+    "player_name": "丸山 良明",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "7286",
+    "season": 2003,
+    "player_key": "森田 浩史",
+    "player_name": "森田 浩史",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "7293",
+    "season": 2003,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "21'",
+    "minute": 21
+  },
+  {
+    "match_id": "7293",
+    "season": 2003,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "7293",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "47'",
+    "minute": 47
+  },
+  {
+    "match_id": "7293",
+    "season": 2003,
+    "player_key": "丸山 良明",
+    "player_name": "丸山 良明",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "7300",
+    "season": 2003,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "06'",
+    "minute": 6
+  },
+  {
+    "match_id": "7300",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "7300",
+    "season": 2003,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "7305",
+    "season": 2003,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "7308",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "10'",
+    "minute": 10
+  },
+  {
+    "match_id": "7308",
+    "season": 2003,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "7317",
+    "season": 2003,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "7317",
+    "season": 2003,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "7324",
+    "season": 2003,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "39'",
+    "minute": 39
+  },
+  {
+    "match_id": "7324",
+    "season": 2003,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "7340",
+    "season": 2003,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "7340",
+    "season": 2003,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "7340",
+    "season": 2003,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "7343",
+    "season": 2003,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "24'",
+    "minute": 24
+  },
+  {
+    "match_id": "7343",
+    "season": 2003,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "7343",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "7343",
+    "season": 2003,
+    "player_key": "末岡 龍二",
+    "player_name": "末岡 龍二",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "7343",
+    "season": 2003,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "7343",
+    "season": 2003,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "退場",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "7351",
+    "season": 2003,
+    "player_key": "上野 優作",
+    "player_name": "上野 優作",
+    "type": "警告",
+    "time": "01'",
+    "minute": 1
+  },
+  {
+    "match_id": "7359",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "15'",
+    "minute": 15
+  },
+  {
+    "match_id": "7359",
+    "season": 2003,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "7362",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "17'",
+    "minute": 17
+  },
+  {
+    "match_id": "7362",
+    "season": 2003,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "7362",
+    "season": 2003,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "7362",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "7362",
+    "season": 2003,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "7362",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "7362",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "退場",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "7375",
+    "season": 2003,
+    "player_key": "尾崎 瑛一郎",
+    "player_name": "尾崎 瑛一郎",
+    "type": "警告",
+    "time": "17'",
+    "minute": 17
+  },
+  {
+    "match_id": "7375",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "41'",
+    "minute": 41
+  },
+  {
+    "match_id": "7375",
+    "season": 2003,
+    "player_key": "尾崎 瑛一郎",
+    "player_name": "尾崎 瑛一郎",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "7375",
+    "season": 2003,
+    "player_key": "尾崎 瑛一郎",
+    "player_name": "尾崎 瑛一郎",
+    "type": "退場",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "7383",
+    "season": 2003,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "7388",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "7388",
+    "season": 2003,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "7396",
+    "season": 2003,
+    "player_key": "上野 優作",
+    "player_name": "上野 優作",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "7396",
+    "season": 2003,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "34'",
+    "minute": 34
+  },
+  {
+    "match_id": "7396",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "7401",
+    "season": 2003,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "7404",
+    "season": 2003,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "7411",
+    "season": 2003,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "7411",
+    "season": 2003,
+    "player_key": "杉山 弘一",
+    "player_name": "杉山 弘一",
+    "type": "警告",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "7411",
+    "season": 2003,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "7411",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "60'",
+    "minute": 60
+  },
+  {
+    "match_id": "7411",
+    "season": 2003,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "退場",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "7419",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "7419",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "7431",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "7443",
+    "season": 2003,
+    "player_key": "鈴木 健太郎",
+    "player_name": "鈴木 健太郎",
+    "type": "警告",
+    "time": "10'",
+    "minute": 10
+  },
+  {
+    "match_id": "7445",
+    "season": 2003,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "7445",
+    "season": 2003,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "42'",
+    "minute": 42
+  },
+  {
+    "match_id": "7452",
+    "season": 2003,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "45'",
+    "minute": 45
+  },
+  {
+    "match_id": "7452",
+    "season": 2003,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "7461",
+    "season": 2003,
+    "player_key": "鈴木 健太郎",
+    "player_name": "鈴木 健太郎",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "7461",
+    "season": 2003,
+    "player_key": "杉山 弘一",
+    "player_name": "杉山 弘一",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "7461",
+    "season": 2003,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "7467",
+    "season": 2003,
+    "player_key": "山口 素弘",
+    "player_name": "山口 素弘",
+    "type": "警告",
+    "time": "50'",
+    "minute": 50
+  },
+  {
+    "match_id": "7467",
+    "season": 2003,
+    "player_key": "栗原 圭介",
+    "player_name": "栗原 圭介",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "7472",
+    "season": 2003,
+    "player_key": "熱田 眞",
+    "player_name": "熱田 眞",
+    "type": "警告",
+    "time": "00'",
+    "minute": 0
+  },
+  {
+    "match_id": "7472",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "62'",
+    "minute": 62
+  },
+  {
+    "match_id": "7475",
+    "season": 2003,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "7485",
+    "season": 2003,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "7485",
+    "season": 2003,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "7489",
+    "season": 2003,
+    "player_key": "鈴木 健太郎",
+    "player_name": "鈴木 健太郎",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "7489",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "7489",
+    "season": 2003,
+    "player_key": "アンデルソン",
+    "player_name": "アンデルソン",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "7497",
+    "season": 2003,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "7499",
+    "season": 2003,
+    "player_key": "ファビーニョ",
+    "player_name": "ファビーニョ",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "7508",
+    "season": 2003,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "16'",
+    "minute": 16
+  },
+  {
+    "match_id": "7508",
+    "season": 2003,
+    "player_key": "栗原 圭介",
+    "player_name": "栗原 圭介",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "7521",
+    "season": 2003,
+    "player_key": "上野 優作",
+    "player_name": "上野 優作",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "7521",
+    "season": 2003,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  }
+]

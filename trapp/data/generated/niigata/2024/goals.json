@@ -1,0 +1,560 @@
+[
+  {
+    "match_id": "30434",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "45'+3",
+    "minute": 48,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30434",
+    "season": 2024,
+    "player_key": "新井 直人",
+    "player_name": "新井 直人",
+    "time": "54'",
+    "minute": 54,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30452",
+    "season": 2024,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "88'",
+    "minute": 88,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30466",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "32'",
+    "minute": 32,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30466",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "69'",
+    "minute": 69,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30472",
+    "season": 2024,
+    "player_key": "千葉 和彦",
+    "player_name": "千葉 和彦",
+    "time": "57'",
+    "minute": 57,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30501",
+    "season": 2024,
+    "player_key": "秋山 裕紀",
+    "player_name": "秋山 裕紀",
+    "time": "80'",
+    "minute": 80,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "29647",
+    "season": 2024,
+    "player_key": "長谷川 巧",
+    "player_name": "長谷川 巧",
+    "time": "06'",
+    "minute": 6,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "29647",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "90'+1",
+    "minute": 91,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30512",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "59'",
+    "minute": 59,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30521",
+    "season": 2024,
+    "player_key": "早川 史哉",
+    "player_name": "早川 史哉",
+    "time": "90'",
+    "minute": 90,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30531",
+    "season": 2024,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "time": "90'+4",
+    "minute": 94,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30541",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "time": "51'",
+    "minute": 51,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30541",
+    "season": 2024,
+    "player_key": "遠藤 凌",
+    "player_name": "遠藤 凌",
+    "time": "76'",
+    "minute": 76,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30551",
+    "season": 2024,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "time": "75'",
+    "minute": 75,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30551",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "87'",
+    "minute": 87,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30564",
+    "season": 2024,
+    "player_key": "鈴木 孝司",
+    "player_name": "鈴木 孝司",
+    "time": "51'",
+    "minute": 51,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30564",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "53'",
+    "minute": 53,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30564",
+    "season": 2024,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "time": "82'",
+    "minute": 82,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30579",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "30'",
+    "minute": 30,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "29666",
+    "season": 2024,
+    "player_key": "石山 青空",
+    "player_name": "石山 青空",
+    "time": "99'",
+    "minute": 99,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "29666",
+    "season": 2024,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "time": "111'",
+    "minute": 111,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30584",
+    "season": 2024,
+    "player_key": "早川 史哉",
+    "player_name": "早川 史哉",
+    "time": "90'+3",
+    "minute": 93,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30593",
+    "season": 2024,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "time": "24'",
+    "minute": 24,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30593",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "time": "45'",
+    "minute": 45,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30593",
+    "season": 2024,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "52'",
+    "minute": 52,
+    "is_own_goal": true
+  },
+  {
+    "match_id": "31030",
+    "season": 2024,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "time": "69'",
+    "minute": 69,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31030",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "82'",
+    "minute": 82,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31035",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "80'",
+    "minute": 80,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30606",
+    "season": 2024,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "time": "43'",
+    "minute": 43,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30612",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30612",
+    "season": 2024,
+    "player_key": "鈴木 孝司",
+    "player_name": "鈴木 孝司",
+    "time": "90'+7",
+    "minute": 97,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30628",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "11'",
+    "minute": 11,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30630",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "52'",
+    "minute": 52,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30645",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "17'",
+    "minute": 17,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30645",
+    "season": 2024,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30645",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "time": "84'",
+    "minute": 84,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30666",
+    "season": 2024,
+    "player_key": "松田 詠太郎",
+    "player_name": "松田 詠太郎",
+    "time": "36'",
+    "minute": 36,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30666",
+    "season": 2024,
+    "player_key": "小野 裕二",
+    "player_name": "小野 裕二",
+    "time": "47'",
+    "minute": 47,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30674",
+    "season": 2024,
+    "player_key": "宮本 英治",
+    "player_name": "宮本 英治",
+    "time": "14'",
+    "minute": 14,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30674",
+    "season": 2024,
+    "player_key": "秋山 裕紀",
+    "player_name": "秋山 裕紀",
+    "time": "27'",
+    "minute": 27,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30689",
+    "season": 2024,
+    "player_key": "小野 裕二",
+    "player_name": "小野 裕二",
+    "time": "25'",
+    "minute": 25,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30689",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "70'",
+    "minute": 70,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30699",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "49'",
+    "minute": 49,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31150",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "16'",
+    "minute": 16,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31150",
+    "season": 2024,
+    "player_key": "小野 裕二",
+    "player_name": "小野 裕二",
+    "time": "42'",
+    "minute": 42,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31150",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "49'",
+    "minute": 49,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31150",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "87'",
+    "minute": 87,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31150",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "90'+5",
+    "minute": 95,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30724",
+    "season": 2024,
+    "player_key": "小野 裕二",
+    "player_name": "小野 裕二",
+    "time": "08'",
+    "minute": 8,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30724",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "32'",
+    "minute": 32,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30724",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "75'",
+    "minute": 75,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30735",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "time": "31'",
+    "minute": 31,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30735",
+    "season": 2024,
+    "player_key": "小野 裕二",
+    "player_name": "小野 裕二",
+    "time": "36'",
+    "minute": 36,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30747",
+    "season": 2024,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "time": "86'",
+    "minute": 86,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31265",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "25'",
+    "minute": 25,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31265",
+    "season": 2024,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "time": "45'",
+    "minute": 45,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31265",
+    "season": 2024,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "time": "50'",
+    "minute": 50,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31265",
+    "season": 2024,
+    "player_key": "星 雄次",
+    "player_name": "星 雄次",
+    "time": "53'",
+    "minute": 53,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31267",
+    "season": 2024,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "time": "31'",
+    "minute": 31,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31267",
+    "season": 2024,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "30781",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "time": "90'+4",
+    "minute": 94,
+    "is_own_goal": false
+  }
+]

@@ -1,0 +1,695 @@
+[
+  {
+    "match_id": "6599",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "6599",
+    "season": 2002,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "6599",
+    "season": 2002,
+    "player_key": "丸山 良明",
+    "player_name": "丸山 良明",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6606",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "6614",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "47'",
+    "minute": 47
+  },
+  {
+    "match_id": "6617",
+    "season": 2002,
+    "player_key": "野澤 洋輔",
+    "player_name": "野澤 洋輔",
+    "type": "退場",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "6622",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "type": "警告",
+    "time": "04'",
+    "minute": 4
+  },
+  {
+    "match_id": "6622",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "6622",
+    "season": 2002,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "6631",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "6637",
+    "season": 2002,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "6637",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6640",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "6650",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "59'",
+    "minute": 59
+  },
+  {
+    "match_id": "6650",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "6650",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "6653",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "6653",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "6653",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "丸山 良明",
+    "player_name": "丸山 良明",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "三田 光",
+    "player_name": "三田 光",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "6659",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6664",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6674",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "6676",
+    "season": 2002,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "6691",
+    "season": 2002,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "15'",
+    "minute": 15
+  },
+  {
+    "match_id": "6691",
+    "season": 2002,
+    "player_key": "丸山 良明",
+    "player_name": "丸山 良明",
+    "type": "警告",
+    "time": "64'",
+    "minute": 64
+  },
+  {
+    "match_id": "6691",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "6694",
+    "season": 2002,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "43'",
+    "minute": 43
+  },
+  {
+    "match_id": "6694",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "6694",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "退場",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6699",
+    "season": 2002,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "6699",
+    "season": 2002,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "43'",
+    "minute": 43
+  },
+  {
+    "match_id": "6699",
+    "season": 2002,
+    "player_key": "長谷川 太郎",
+    "player_name": "長谷川 太郎",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6712",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "41'",
+    "minute": 41
+  },
+  {
+    "match_id": "6712",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "6712",
+    "season": 2002,
+    "player_key": "長谷川 太郎",
+    "player_name": "長谷川 太郎",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "6728",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "6733",
+    "season": 2002,
+    "player_key": "山形 辰徳",
+    "player_name": "山形 辰徳",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6735",
+    "season": 2002,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "6741",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "6748",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "6754",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "6754",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "6765",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "14'",
+    "minute": 14
+  },
+  {
+    "match_id": "6776",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6778",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "6788",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "6788",
+    "season": 2002,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "42'",
+    "minute": 42
+  },
+  {
+    "match_id": "6788",
+    "season": 2002,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "6788",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "6792",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "6792",
+    "season": 2002,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "6801",
+    "season": 2002,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "6801",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "6801",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "6801",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "6816",
+    "season": 2002,
+    "player_key": "マルクス",
+    "player_name": "マルクス",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "6816",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "6816",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "6819",
+    "season": 2002,
+    "player_key": "船越 優蔵",
+    "player_name": "船越 優蔵",
+    "type": "警告",
+    "time": "34'",
+    "minute": 34
+  },
+  {
+    "match_id": "6830",
+    "season": 2002,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  },
+  {
+    "match_id": "6830",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "6830",
+    "season": 2002,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "6830",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "6836",
+    "season": 2002,
+    "player_key": "丸山 良明",
+    "player_name": "丸山 良明",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "6840",
+    "season": 2002,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "06'",
+    "minute": 6
+  },
+  {
+    "match_id": "6843",
+    "season": 2002,
+    "player_key": "ベット",
+    "player_name": "ベット",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "6843",
+    "season": 2002,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "退場",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "6853",
+    "season": 2002,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "6856",
+    "season": 2002,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "6856",
+    "season": 2002,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "6856",
+    "season": 2002,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "6856",
+    "season": 2002,
+    "player_key": "安 英学",
+    "player_name": "安 英学",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "6856",
+    "season": 2002,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "退場",
+    "time": "58'",
+    "minute": 58
+  }
+]

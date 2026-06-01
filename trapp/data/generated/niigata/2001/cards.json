@@ -1,0 +1,767 @@
+[
+  {
+    "match_id": "5946",
+    "season": 2001,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "5946",
+    "season": 2001,
+    "player_key": "リンドマール",
+    "player_name": "リンドマール",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "5946",
+    "season": 2001,
+    "player_key": "西ヶ谷 隆之",
+    "player_name": "西ヶ谷 隆之",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "5949",
+    "season": 2001,
+    "player_key": "黒崎 久志",
+    "player_name": "黒崎 久志",
+    "type": "警告",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "5949",
+    "season": 2001,
+    "player_key": "リンドマール",
+    "player_name": "リンドマール",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "5949",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "退場",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "5949",
+    "season": 2001,
+    "player_key": "リンドマール",
+    "player_name": "リンドマール",
+    "type": "退場",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "5953",
+    "season": 2001,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "107'",
+    "minute": 107
+  },
+  {
+    "match_id": "5962",
+    "season": 2001,
+    "player_key": "新井 健二",
+    "player_name": "新井 健二",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "5651",
+    "season": 2001,
+    "player_key": "井上 公平",
+    "player_name": "井上 公平",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "5967",
+    "season": 2001,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "5974",
+    "season": 2001,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "10'",
+    "minute": 10
+  },
+  {
+    "match_id": "5974",
+    "season": 2001,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "5974",
+    "season": 2001,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "退場",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "5663",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "5663",
+    "season": 2001,
+    "player_key": "新井 健二",
+    "player_name": "新井 健二",
+    "type": "警告",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "5980",
+    "season": 2001,
+    "player_key": "井上 公平",
+    "player_name": "井上 公平",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "5980",
+    "season": 2001,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "5985",
+    "season": 2001,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "16'",
+    "minute": 16
+  },
+  {
+    "match_id": "5985",
+    "season": 2001,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "5985",
+    "season": 2001,
+    "player_key": "新井 健二",
+    "player_name": "新井 健二",
+    "type": "警告",
+    "time": "98'",
+    "minute": 98
+  },
+  {
+    "match_id": "5992",
+    "season": 2001,
+    "player_key": "西ヶ谷 隆之",
+    "player_name": "西ヶ谷 隆之",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "5992",
+    "season": 2001,
+    "player_key": "西ヶ谷 隆之",
+    "player_name": "西ヶ谷 隆之",
+    "type": "警告",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "5992",
+    "season": 2001,
+    "player_key": "西ヶ谷 隆之",
+    "player_name": "西ヶ谷 隆之",
+    "type": "退場",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "5996",
+    "season": 2001,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "5996",
+    "season": 2001,
+    "player_key": "井上 公平",
+    "player_name": "井上 公平",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "6001",
+    "season": 2001,
+    "player_key": "大西 昌之",
+    "player_name": "大西 昌之",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6011",
+    "season": 2001,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "6011",
+    "season": 2001,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "6011",
+    "season": 2001,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "111'",
+    "minute": 111
+  },
+  {
+    "match_id": "6011",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "113'",
+    "minute": 113
+  },
+  {
+    "match_id": "6011",
+    "season": 2001,
+    "player_key": "新井 健二",
+    "player_name": "新井 健二",
+    "type": "警告",
+    "time": "119'",
+    "minute": 119
+  },
+  {
+    "match_id": "6011",
+    "season": 2001,
+    "player_key": "新井 健二",
+    "player_name": "新井 健二",
+    "type": "警告",
+    "time": "119'",
+    "minute": 119
+  },
+  {
+    "match_id": "6011",
+    "season": 2001,
+    "player_key": "新井 健二",
+    "player_name": "新井 健二",
+    "type": "退場",
+    "time": "119'",
+    "minute": 119
+  },
+  {
+    "match_id": "6013",
+    "season": 2001,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "6013",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "18'",
+    "minute": 18
+  },
+  {
+    "match_id": "6024",
+    "season": 2001,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "6026",
+    "season": 2001,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "6033",
+    "season": 2001,
+    "player_key": "井上 公平",
+    "player_name": "井上 公平",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "6033",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "6037",
+    "season": 2001,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "6037",
+    "season": 2001,
+    "player_key": "西ヶ谷 隆之",
+    "player_name": "西ヶ谷 隆之",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "6045",
+    "season": 2001,
+    "player_key": "マルキーニョ",
+    "player_name": "マルキーニョ",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "6045",
+    "season": 2001,
+    "player_key": "井上 公平",
+    "player_name": "井上 公平",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "6056",
+    "season": 2001,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "47'",
+    "minute": 47
+  },
+  {
+    "match_id": "6056",
+    "season": 2001,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "6056",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "6062",
+    "season": 2001,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "6070",
+    "season": 2001,
+    "player_key": "アンドラジーニャ",
+    "player_name": "アンドラジーニャ",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  },
+  {
+    "match_id": "6073",
+    "season": 2001,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "6083",
+    "season": 2001,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "06'",
+    "minute": 6
+  },
+  {
+    "match_id": "6083",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "6083",
+    "season": 2001,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "6083",
+    "season": 2001,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "退場",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "6087",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "24'",
+    "minute": 24
+  },
+  {
+    "match_id": "6104",
+    "season": 2001,
+    "player_key": "マルキーニョ",
+    "player_name": "マルキーニョ",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "6104",
+    "season": 2001,
+    "player_key": "野澤 洋輔",
+    "player_name": "野澤 洋輔",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6110",
+    "season": 2001,
+    "player_key": "マルキーニョ",
+    "player_name": "マルキーニョ",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "6119",
+    "season": 2001,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "6119",
+    "season": 2001,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "6119",
+    "season": 2001,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "6119",
+    "season": 2001,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "6122",
+    "season": 2001,
+    "player_key": "西ヶ谷 隆之",
+    "player_name": "西ヶ谷 隆之",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "6130",
+    "season": 2001,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "09'",
+    "minute": 9
+  },
+  {
+    "match_id": "6130",
+    "season": 2001,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "18'",
+    "minute": 18
+  },
+  {
+    "match_id": "6130",
+    "season": 2001,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "43'",
+    "minute": 43
+  },
+  {
+    "match_id": "6130",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "6130",
+    "season": 2001,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "6137",
+    "season": 2001,
+    "player_key": "氏原 良二",
+    "player_name": "氏原 良二",
+    "type": "警告",
+    "time": "12'",
+    "minute": 12
+  },
+  {
+    "match_id": "6142",
+    "season": 2001,
+    "player_key": "井上 公平",
+    "player_name": "井上 公平",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "6142",
+    "season": 2001,
+    "player_key": "マルキーニョ",
+    "player_name": "マルキーニョ",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "6146",
+    "season": 2001,
+    "player_key": "アンドラジーニャ",
+    "player_name": "アンドラジーニャ",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "6146",
+    "season": 2001,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "6151",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "退場",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "6165",
+    "season": 2001,
+    "player_key": "寺川 能人",
+    "player_name": "寺川 能人",
+    "type": "警告",
+    "time": "41'",
+    "minute": 41
+  },
+  {
+    "match_id": "6171",
+    "season": 2001,
+    "player_key": "小林 悟",
+    "player_name": "小林 悟",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "6176",
+    "season": 2001,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "6176",
+    "season": 2001,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6186",
+    "season": 2001,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "09'",
+    "minute": 9
+  },
+  {
+    "match_id": "6186",
+    "season": 2001,
+    "player_key": "神田 勝夫",
+    "player_name": "神田 勝夫",
+    "type": "警告",
+    "time": "96'",
+    "minute": 96
+  },
+  {
+    "match_id": "6187",
+    "season": 2001,
+    "player_key": "黒崎 久志",
+    "player_name": "黒崎 久志",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "6187",
+    "season": 2001,
+    "player_key": "西ヶ谷 隆之",
+    "player_name": "西ヶ谷 隆之",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "6202",
+    "season": 2001,
+    "player_key": "黒崎 久志",
+    "player_name": "黒崎 久志",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "6202",
+    "season": 2001,
+    "player_key": "マルキーニョ",
+    "player_name": "マルキーニョ",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "6202",
+    "season": 2001,
+    "player_key": "深澤 仁博",
+    "player_name": "深澤 仁博",
+    "type": "警告",
+    "time": "100'",
+    "minute": 100
+  }
+]

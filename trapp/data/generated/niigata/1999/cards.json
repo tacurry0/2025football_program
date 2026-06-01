@@ -1,0 +1,461 @@
+[
+  {
+    "match_id": "4759",
+    "season": 1999,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "4759",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "4768",
+    "season": 1999,
+    "player_key": "水越 潤",
+    "player_name": "水越 潤",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "4769",
+    "season": 1999,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  },
+  {
+    "match_id": "4769",
+    "season": 1999,
+    "player_key": "瀬戸 春樹",
+    "player_name": "瀬戸 春樹",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  },
+  {
+    "match_id": "4769",
+    "season": 1999,
+    "player_key": "中野 圭一郎",
+    "player_name": "中野 圭一郎",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "4775",
+    "season": 1999,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "type": "警告",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "4775",
+    "season": 1999,
+    "player_key": "水越 潤",
+    "player_name": "水越 潤",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "4775",
+    "season": 1999,
+    "player_key": "サウロ",
+    "player_name": "サウロ",
+    "type": "警告",
+    "time": "46'",
+    "minute": 46
+  },
+  {
+    "match_id": "4781",
+    "season": 1999,
+    "player_key": "サウロ",
+    "player_name": "サウロ",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "4785",
+    "season": 1999,
+    "player_key": "水越 潤",
+    "player_name": "水越 潤",
+    "type": "警告",
+    "time": "41'",
+    "minute": 41
+  },
+  {
+    "match_id": "4785",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "4789",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "4789",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "4789",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "4789",
+    "season": 1999,
+    "player_key": "サウロ",
+    "player_name": "サウロ",
+    "type": "警告",
+    "time": "60'",
+    "minute": 60
+  },
+  {
+    "match_id": "4789",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "退場",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "4796",
+    "season": 1999,
+    "player_key": "リカルド",
+    "player_name": "リカルド",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "4796",
+    "season": 1999,
+    "player_key": "瀬戸 春樹",
+    "player_name": "瀬戸 春樹",
+    "type": "警告",
+    "time": "64'",
+    "minute": 64
+  },
+  {
+    "match_id": "4802",
+    "season": 1999,
+    "player_key": "サウロ",
+    "player_name": "サウロ",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "4802",
+    "season": 1999,
+    "player_key": "吉原 慎也",
+    "player_name": "吉原 慎也",
+    "type": "退場",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "4807",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "4811",
+    "season": 1999,
+    "player_key": "田畑 輝樹",
+    "player_name": "田畑 輝樹",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "4811",
+    "season": 1999,
+    "player_key": "田畑 輝樹",
+    "player_name": "田畑 輝樹",
+    "type": "警告",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "4811",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "4811",
+    "season": 1999,
+    "player_key": "田畑 輝樹",
+    "player_name": "田畑 輝樹",
+    "type": "退場",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "4815",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "08'",
+    "minute": 8
+  },
+  {
+    "match_id": "4828",
+    "season": 1999,
+    "player_key": "サウロ",
+    "player_name": "サウロ",
+    "type": "警告",
+    "time": "08'",
+    "minute": 8
+  },
+  {
+    "match_id": "4828",
+    "season": 1999,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "4828",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "4833",
+    "season": 1999,
+    "player_key": "リカルド",
+    "player_name": "リカルド",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "4833",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "50'",
+    "minute": 50
+  },
+  {
+    "match_id": "4833",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "64'",
+    "minute": 64
+  },
+  {
+    "match_id": "4833",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "4833",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "退場",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "4838",
+    "season": 1999,
+    "player_key": "サウロ",
+    "player_name": "サウロ",
+    "type": "警告",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "4839",
+    "season": 1999,
+    "player_key": "島田 周輔",
+    "player_name": "島田 周輔",
+    "type": "警告",
+    "time": "10'",
+    "minute": 10
+  },
+  {
+    "match_id": "4839",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "43'",
+    "minute": 43
+  },
+  {
+    "match_id": "4846",
+    "season": 1999,
+    "player_key": "中野 圭一郎",
+    "player_name": "中野 圭一郎",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "4849",
+    "season": 1999,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "103'",
+    "minute": 103
+  },
+  {
+    "match_id": "4859",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
+  },
+  {
+    "match_id": "4866",
+    "season": 1999,
+    "player_key": "秋葉 忠宏",
+    "player_name": "秋葉 忠宏",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "4866",
+    "season": 1999,
+    "player_key": "高橋 直樹",
+    "player_name": "高橋 直樹",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "4876",
+    "season": 1999,
+    "player_key": "鈴木 慎吾",
+    "player_name": "鈴木 慎吾",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "4883",
+    "season": 1999,
+    "player_key": "中野 圭一郎",
+    "player_name": "中野 圭一郎",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "4901",
+    "season": 1999,
+    "player_key": "柴 暢彦",
+    "player_name": "柴 暢彦",
+    "type": "警告",
+    "time": "47'",
+    "minute": 47
+  },
+  {
+    "match_id": "4901",
+    "season": 1999,
+    "player_key": "木澤 正徳",
+    "player_name": "木澤 正徳",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "4908",
+    "season": 1999,
+    "player_key": "鳴尾 直軌",
+    "player_name": "鳴尾 直軌",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "4916",
+    "season": 1999,
+    "player_key": "セルジオ",
+    "player_name": "セルジオ",
+    "type": "警告",
+    "time": "59'",
+    "minute": 59
+  },
+  {
+    "match_id": "4927",
+    "season": 1999,
+    "player_key": "サウロ",
+    "player_name": "サウロ",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "4931",
+    "season": 1999,
+    "player_key": "式田 高義",
+    "player_name": "式田 高義",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  }
+]

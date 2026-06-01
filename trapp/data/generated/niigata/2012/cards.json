@@ -1,0 +1,659 @@
+[
+  {
+    "match_id": "14000",
+    "season": 2012,
+    "player_key": "鈴木 大輔",
+    "player_name": "鈴木 大輔",
+    "type": "警告",
+    "time": "09'",
+    "minute": 9
+  },
+  {
+    "match_id": "14000",
+    "season": 2012,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "14006",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "14026",
+    "season": 2012,
+    "player_key": "大井 健太郎",
+    "player_name": "大井 健太郎",
+    "type": "警告",
+    "time": "21'",
+    "minute": 21
+  },
+  {
+    "match_id": "14026",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "14047",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "14047",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "14047",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "14047",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "14047",
+    "season": 2012,
+    "player_key": "石川 直樹",
+    "player_name": "石川 直樹",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "14047",
+    "season": 2012,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
+  },
+  {
+    "match_id": "14053",
+    "season": 2012,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "type": "警告",
+    "time": "32'",
+    "minute": 32
+  },
+  {
+    "match_id": "14053",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "14064",
+    "season": 2012,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "45'+1",
+    "minute": 46
+  },
+  {
+    "match_id": "14064",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "14064",
+    "season": 2012,
+    "player_key": "菊地 直哉",
+    "player_name": "菊地 直哉",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "14064",
+    "season": 2012,
+    "player_key": "鈴木 大輔",
+    "player_name": "鈴木 大輔",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "14064",
+    "season": 2012,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "14064",
+    "season": 2012,
+    "player_key": "東口 順昭",
+    "player_name": "東口 順昭",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "14064",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "14064",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "退場",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "14083",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "14090",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "14090",
+    "season": 2012,
+    "player_key": "菊地 直哉",
+    "player_name": "菊地 直哉",
+    "type": "警告",
+    "time": "45'+2",
+    "minute": 47
+  },
+  {
+    "match_id": "14090",
+    "season": 2012,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "14095",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "14095",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "45'+2",
+    "minute": 47
+  },
+  {
+    "match_id": "14095",
+    "season": 2012,
+    "player_key": "東口 順昭",
+    "player_name": "東口 順昭",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "14095",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "退場",
+    "time": "45'+2",
+    "minute": 47
+  },
+  {
+    "match_id": "14109",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "13'",
+    "minute": 13
+  },
+  {
+    "match_id": "14109",
+    "season": 2012,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "16'",
+    "minute": 16
+  },
+  {
+    "match_id": "14109",
+    "season": 2012,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "13974",
+    "season": 2012,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "34'",
+    "minute": 34
+  },
+  {
+    "match_id": "13975",
+    "season": 2012,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "13975",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "45'+1",
+    "minute": 46
+  },
+  {
+    "match_id": "13975",
+    "season": 2012,
+    "player_key": "鈴木 大輔",
+    "player_name": "鈴木 大輔",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "14115",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "05'",
+    "minute": 5
+  },
+  {
+    "match_id": "14115",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "14115",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "14115",
+    "season": 2012,
+    "player_key": "東口 順昭",
+    "player_name": "東口 順昭",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "14133",
+    "season": 2012,
+    "player_key": "鈴木 武蔵",
+    "player_name": "鈴木 武蔵",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "14133",
+    "season": 2012,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "type": "警告",
+    "time": "90'+1",
+    "minute": 91
+  },
+  {
+    "match_id": "14138",
+    "season": 2012,
+    "player_key": "三門 雄大",
+    "player_name": "三門 雄大",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "14138",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "14149",
+    "season": 2012,
+    "player_key": "田中 亜土夢",
+    "player_name": "田中 亜土夢",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "14149",
+    "season": 2012,
+    "player_key": "大井 健太郎",
+    "player_name": "大井 健太郎",
+    "type": "警告",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "14160",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "14167",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "29'",
+    "minute": 29
+  },
+  {
+    "match_id": "14167",
+    "season": 2012,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "62'",
+    "minute": 62
+  },
+  {
+    "match_id": "14167",
+    "season": 2012,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "14167",
+    "season": 2012,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "14167",
+    "season": 2012,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "退場",
+    "time": "69'",
+    "minute": 69
+  },
+  {
+    "match_id": "14180",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "14188",
+    "season": 2012,
+    "player_key": "鈴木 大輔",
+    "player_name": "鈴木 大輔",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "14188",
+    "season": 2012,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "14193",
+    "season": 2012,
+    "player_key": "坪内 秀介",
+    "player_name": "坪内 秀介",
+    "type": "警告",
+    "time": "46'",
+    "minute": 46
+  },
+  {
+    "match_id": "14206",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "type": "警告",
+    "time": "62'",
+    "minute": 62
+  },
+  {
+    "match_id": "14215",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  },
+  {
+    "match_id": "14215",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "90'+5",
+    "minute": 95
+  },
+  {
+    "match_id": "14239",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "14248",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "09'",
+    "minute": 9
+  },
+  {
+    "match_id": "14248",
+    "season": 2012,
+    "player_key": "鈴木 大輔",
+    "player_name": "鈴木 大輔",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "14248",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "90'+2",
+    "minute": 92
+  },
+  {
+    "match_id": "14257",
+    "season": 2012,
+    "player_key": "金 珍洙",
+    "player_name": "金 珍洙",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "14257",
+    "season": 2012,
+    "player_key": "大井 健太郎",
+    "player_name": "大井 健太郎",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "14267",
+    "season": 2012,
+    "player_key": "ブルーノ ロペス",
+    "player_name": "ブルーノ ロペス",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "14278",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "47'",
+    "minute": 47
+  },
+  {
+    "match_id": "14278",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "14278",
+    "season": 2012,
+    "player_key": "村上 佑介",
+    "player_name": "村上 佑介",
+    "type": "退場",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "14283",
+    "season": 2012,
+    "player_key": "坪内 秀介",
+    "player_name": "坪内 秀介",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "14283",
+    "season": 2012,
+    "player_key": "ミシェウ",
+    "player_name": "ミシェウ",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "14283",
+    "season": 2012,
+    "player_key": "本間 勲",
+    "player_name": "本間 勲",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "14295",
+    "season": 2012,
+    "player_key": "坪内 秀介",
+    "player_name": "坪内 秀介",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  }
+]

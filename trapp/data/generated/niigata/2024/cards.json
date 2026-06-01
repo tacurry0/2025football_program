@@ -1,0 +1,407 @@
+[
+  {
+    "match_id": "30434",
+    "season": 2024,
+    "player_key": "新井 直人",
+    "player_name": "新井 直人",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "30434",
+    "season": 2024,
+    "player_key": "宮本 英治",
+    "player_name": "宮本 英治",
+    "type": "警告",
+    "time": "41'",
+    "minute": 41
+  },
+  {
+    "match_id": "30452",
+    "season": 2024,
+    "player_key": "新井 直人",
+    "player_name": "新井 直人",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "30466",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "30466",
+    "season": 2024,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
+  },
+  {
+    "match_id": "30472",
+    "season": 2024,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "63'",
+    "minute": 63
+  },
+  {
+    "match_id": "30484",
+    "season": 2024,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "type": "警告",
+    "time": "07'",
+    "minute": 7
+  },
+  {
+    "match_id": "30484",
+    "season": 2024,
+    "player_key": "星 雄次",
+    "player_name": "星 雄次",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "30492",
+    "season": 2024,
+    "player_key": "トーマス デン",
+    "player_name": "トーマス デン",
+    "type": "警告",
+    "time": "12'",
+    "minute": 12
+  },
+  {
+    "match_id": "30492",
+    "season": 2024,
+    "player_key": "島田 譲",
+    "player_name": "島田 譲",
+    "type": "警告",
+    "time": "50'",
+    "minute": 50
+  },
+  {
+    "match_id": "30501",
+    "season": 2024,
+    "player_key": "トーマス デン",
+    "player_name": "トーマス デン",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "29647",
+    "season": 2024,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "30512",
+    "season": 2024,
+    "player_key": "早川 史哉",
+    "player_name": "早川 史哉",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "30521",
+    "season": 2024,
+    "player_key": "宮本 英治",
+    "player_name": "宮本 英治",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "30521",
+    "season": 2024,
+    "player_key": "千葉 和彦",
+    "player_name": "千葉 和彦",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "30521",
+    "season": 2024,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "30531",
+    "season": 2024,
+    "player_key": "太田 修介",
+    "player_name": "太田 修介",
+    "type": "警告",
+    "time": "08'",
+    "minute": 8
+  },
+  {
+    "match_id": "30531",
+    "season": 2024,
+    "player_key": "早川 史哉",
+    "player_name": "早川 史哉",
+    "type": "退場",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "30551",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "30579",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "02'",
+    "minute": 2
+  },
+  {
+    "match_id": "30579",
+    "season": 2024,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "30593",
+    "season": 2024,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "30612",
+    "season": 2024,
+    "player_key": "堀米 悠斗",
+    "player_name": "堀米 悠斗",
+    "type": "警告",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "30612",
+    "season": 2024,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "30628",
+    "season": 2024,
+    "player_key": "稲村 隼翔",
+    "player_name": "稲村 隼翔",
+    "type": "警告",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "30645",
+    "season": 2024,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "34'",
+    "minute": 34
+  },
+  {
+    "match_id": "30645",
+    "season": 2024,
+    "player_key": "ダニーロ ゴメス",
+    "player_name": "ダニーロ ゴメス",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "30651",
+    "season": 2024,
+    "player_key": "遠藤 凌",
+    "player_name": "遠藤 凌",
+    "type": "警告",
+    "time": "24'",
+    "minute": 24
+  },
+  {
+    "match_id": "30651",
+    "season": 2024,
+    "player_key": "堀米 悠斗",
+    "player_name": "堀米 悠斗",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "30674",
+    "season": 2024,
+    "player_key": "小野 裕二",
+    "player_name": "小野 裕二",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "30707",
+    "season": 2024,
+    "player_key": "宮本 英治",
+    "player_name": "宮本 英治",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "31154",
+    "season": 2024,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "30713",
+    "season": 2024,
+    "player_key": "秋山 裕紀",
+    "player_name": "秋山 裕紀",
+    "type": "警告",
+    "time": "62'",
+    "minute": 62
+  },
+  {
+    "match_id": "30735",
+    "season": 2024,
+    "player_key": "宮本 英治",
+    "player_name": "宮本 英治",
+    "type": "警告",
+    "time": "13'",
+    "minute": 13
+  },
+  {
+    "match_id": "30747",
+    "season": 2024,
+    "player_key": "小島 亨介",
+    "player_name": "小島 亨介",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "30756",
+    "season": 2024,
+    "player_key": "長倉 幹樹",
+    "player_name": "長倉 幹樹",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "30756",
+    "season": 2024,
+    "player_key": "小野 裕二",
+    "player_name": "小野 裕二",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "31265",
+    "season": 2024,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "30768",
+    "season": 2024,
+    "player_key": "長谷川 元希",
+    "player_name": "長谷川 元希",
+    "type": "警告",
+    "time": "59'",
+    "minute": 59
+  },
+  {
+    "match_id": "30768",
+    "season": 2024,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "30772",
+    "season": 2024,
+    "player_key": "トーマス デン",
+    "player_name": "トーマス デン",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "30781",
+    "season": 2024,
+    "player_key": "稲村 隼翔",
+    "player_name": "稲村 隼翔",
+    "type": "警告",
+    "time": "90'+1",
+    "minute": 91
+  },
+  {
+    "match_id": "30791",
+    "season": 2024,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "30791",
+    "season": 2024,
+    "player_key": "橋本 健人",
+    "player_name": "橋本 健人",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "30802",
+    "season": 2024,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  }
+]

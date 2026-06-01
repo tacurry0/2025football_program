@@ -1,0 +1,434 @@
+[
+  {
+    "match_id": "20289",
+    "season": 2018,
+    "player_key": "小川 佳純",
+    "player_name": "小川 佳純",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "20289",
+    "season": 2018,
+    "player_key": "坂井 大将",
+    "player_name": "坂井 大将",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "20295",
+    "season": 2018,
+    "player_key": "アレックス ムラーリャ",
+    "player_name": "アレックス ムラーリャ",
+    "type": "警告",
+    "time": "77'",
+    "minute": 77
+  },
+  {
+    "match_id": "20295",
+    "season": 2018,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "21051",
+    "season": 2018,
+    "player_key": "柳 育崇",
+    "player_name": "柳 育崇",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "20311",
+    "season": 2018,
+    "player_key": "ターレス",
+    "player_name": "ターレス",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "20335",
+    "season": 2018,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
+  },
+  {
+    "match_id": "20335",
+    "season": 2018,
+    "player_key": "ターレス",
+    "player_name": "ターレス",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "20352",
+    "season": 2018,
+    "player_key": "磯村 亮太",
+    "player_name": "磯村 亮太",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "21056",
+    "season": 2018,
+    "player_key": "田中 達也",
+    "player_name": "田中 達也",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "21056",
+    "season": 2018,
+    "player_key": "柳 育崇",
+    "player_name": "柳 育崇",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "21056",
+    "season": 2018,
+    "player_key": "岡本 將成",
+    "player_name": "岡本 將成",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "21056",
+    "season": 2018,
+    "player_key": "岡本 將成",
+    "player_name": "岡本 將成",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "21056",
+    "season": 2018,
+    "player_key": "岡本 將成",
+    "player_name": "岡本 將成",
+    "type": "退場",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "20368",
+    "season": 2018,
+    "player_key": "ソン ジュフン",
+    "player_name": "ソン ジュフン",
+    "type": "警告",
+    "time": "08'",
+    "minute": 8
+  },
+  {
+    "match_id": "20368",
+    "season": 2018,
+    "player_key": "磯村 亮太",
+    "player_name": "磯村 亮太",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "20368",
+    "season": 2018,
+    "player_key": "安田 理大",
+    "player_name": "安田 理大",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "20377",
+    "season": 2018,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "21058",
+    "season": 2018,
+    "player_key": "磯村 亮太",
+    "player_name": "磯村 亮太",
+    "type": "警告",
+    "time": "44'",
+    "minute": 44
+  },
+  {
+    "match_id": "20386",
+    "season": 2018,
+    "player_key": "安田 理大",
+    "player_name": "安田 理大",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "20399",
+    "season": 2018,
+    "player_key": "安田 理大",
+    "player_name": "安田 理大",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "20430",
+    "season": 2018,
+    "player_key": "戸嶋 祥郎",
+    "player_name": "戸嶋 祥郎",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "21062",
+    "season": 2018,
+    "player_key": "柳 育崇",
+    "player_name": "柳 育崇",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "20443",
+    "season": 2018,
+    "player_key": "富澤 清太郎",
+    "player_name": "富澤 清太郎",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "20443",
+    "season": 2018,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "20449",
+    "season": 2018,
+    "player_key": "富澤 清太郎",
+    "player_name": "富澤 清太郎",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "20480",
+    "season": 2018,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "20486",
+    "season": 2018,
+    "player_key": "ターレス",
+    "player_name": "ターレス",
+    "type": "警告",
+    "time": "35'",
+    "minute": 35
+  },
+  {
+    "match_id": "20486",
+    "season": 2018,
+    "player_key": "戸嶋 祥郎",
+    "player_name": "戸嶋 祥郎",
+    "type": "警告",
+    "time": "45'",
+    "minute": 45
+  },
+  {
+    "match_id": "20486",
+    "season": 2018,
+    "player_key": "安田 理大",
+    "player_name": "安田 理大",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "20486",
+    "season": 2018,
+    "player_key": "加藤 大",
+    "player_name": "加藤 大",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "20509",
+    "season": 2018,
+    "player_key": "ターレス",
+    "player_name": "ターレス",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "20509",
+    "season": 2018,
+    "player_key": "富澤 清太郎",
+    "player_name": "富澤 清太郎",
+    "type": "警告",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "20519",
+    "season": 2018,
+    "player_key": "河田 篤秀",
+    "player_name": "河田 篤秀",
+    "type": "警告",
+    "time": "06'",
+    "minute": 6
+  },
+  {
+    "match_id": "20519",
+    "season": 2018,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
+  },
+  {
+    "match_id": "20557",
+    "season": 2018,
+    "player_key": "原 輝綺",
+    "player_name": "原 輝綺",
+    "type": "警告",
+    "time": "12'",
+    "minute": 12
+  },
+  {
+    "match_id": "20557",
+    "season": 2018,
+    "player_key": "加藤 大",
+    "player_name": "加藤 大",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "20579",
+    "season": 2018,
+    "player_key": "渡邊 泰基",
+    "player_name": "渡邊 泰基",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "20584",
+    "season": 2018,
+    "player_key": "広瀬 健太",
+    "player_name": "広瀬 健太",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "20596",
+    "season": 2018,
+    "player_key": "河田 篤秀",
+    "player_name": "河田 篤秀",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "20609",
+    "season": 2018,
+    "player_key": "安田 理大",
+    "player_name": "安田 理大",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "20622",
+    "season": 2018,
+    "player_key": "カウエ",
+    "player_name": "カウエ",
+    "type": "警告",
+    "time": "66'",
+    "minute": 66
+  },
+  {
+    "match_id": "20622",
+    "season": 2018,
+    "player_key": "田中 達也",
+    "player_name": "田中 達也",
+    "type": "警告",
+    "time": "90'+1",
+    "minute": 91
+  },
+  {
+    "match_id": "20634",
+    "season": 2018,
+    "player_key": "高木 善朗",
+    "player_name": "高木 善朗",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "20658",
+    "season": 2018,
+    "player_key": "カウエ",
+    "player_name": "カウエ",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "20690",
+    "season": 2018,
+    "player_key": "渡邉 新太",
+    "player_name": "渡邉 新太",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "20712",
+    "season": 2018,
+    "player_key": "大武 峻",
+    "player_name": "大武 峻",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "20731",
+    "season": 2018,
+    "player_key": "加藤 大",
+    "player_name": "加藤 大",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  }
+]
