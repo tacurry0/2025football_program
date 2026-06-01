@@ -142,5 +142,23 @@
     "time": "87'",
     "minute": 87,
     "is_own_goal": false
+  },
+  {
+    "match_id": "33418",
+    "season": 2026,
+    "player_key": "加藤 徹也",
+    "player_name": "加藤 徹也",
+    "time": "60'",
+    "minute": 60,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33418",
+    "season": 2026,
+    "player_key": "笠井 佳祐",
+    "player_name": "笠井 佳祐",
+    "time": "78'",
+    "minute": 78,
+    "is_own_goal": false
   }
 ]
