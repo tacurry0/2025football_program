@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function toIsoDate(dateText) {
-      const m = String(dateText || "").match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+      const m = String(dateText || "").trim().match(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/);
       if (!m) return String(dateText || "");
       return `${m[1]}-${String(m[2]).padStart(2, "0")}-${String(m[3]).padStart(2, "0")}`;
     }
@@ -534,8 +534,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function mapHistoryWarnings(cards) {
       return Array.isArray(cards) ? cards
-        .filter(card => String(card.type || "").includes("警告"))
-        .map(card => ({ minute: normalizeMinute(card.time), player: card.name || "" })) : [];
+        .filter(card => String(card.type || "").includes("警告") || String(card.type || "").includes("退場"))
+        .map(card => ({
+          minute: normalizeMinute(card.time),
+          player: card.name || "",
+          card: String(card.type || "").includes("退場") ? "red" : "yellow",
+          label: card.type || "警告"
+        })) : [];
     }
 
     function splitOfficialNames(value) {
@@ -614,9 +619,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         home_bench_members: mapHistoryMembers(item.home_details && item.home_details.substitutes),
         away_starting_members: mapHistoryMembers(item.away_details && item.away_details.starting),
         away_bench_members: mapHistoryMembers(item.away_details && item.away_details.substitutes),
+        home_substitutions: mapHistorySubs(item.home_details && item.home_details.substitutions),
+        away_substitutions: mapHistorySubs(item.away_details && item.away_details.substitutions),
+        home_cards: mapHistoryWarnings(item.home_details && item.home_details.cards),
+        away_cards: mapHistoryWarnings(item.away_details && item.away_details.cards),
+        home_goals: mapHistoryGoals(item.home_goals),
+        away_goals: mapHistoryGoals(item.away_goals),
         opponent_manager: opponentDetails && opponentDetails.manager || "",
         opponent_starting_members: mapHistoryMembers(opponentDetails && opponentDetails.starting),
         opponent_bench_members: mapHistoryMembers(opponentDetails && opponentDetails.substitutes),
+        opponent_substitutions: mapHistorySubs(opponentDetails && opponentDetails.substitutions),
+        opponent_cards: mapHistoryWarnings(opponentDetails && opponentDetails.cards),
         goals: mapHistoryGoals(ownGoals),
         opponent_goals: mapHistoryGoals(opponentGoals),
         starting_members: mapHistoryMembers(ownDetails && ownDetails.starting),
@@ -1161,6 +1174,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `<button type="button" class="u-player-link ${className}" data-player="${escapeHtml(name)}">${escapeHtml(name)}</button>`;
   }
 
+  function formatRoundDisplayLabel(values, fallback = "MATCH") {
+    const candidates = Array.isArray(values) ? values : [values];
+    for (const value of candidates) {
+      if (value === undefined || value === null || value === "") continue;
+      const raw = String(value).trim();
+      if (!raw) continue;
+      const section = raw.match(/第?\s*(\d+)\s*節/);
+      if (section) return `第${section[1]}節`;
+      const round = raw.match(/第?\s*(\d+)\s*回戦/);
+      if (round) return `第${round[1]}回戦`;
+      const mw = raw.match(/^MW\s*(\d+)$/i);
+      if (mw) return `第${mw[1]}節`;
+      if (/^\d+$/.test(raw)) return `第${raw}節`;
+      if (/^PO\s*\d+$/i.test(raw)) return raw.replace(/\s+/g, "").toUpperCase();
+      if (!/^EX$/i.test(raw) && !/^MATCH$/i.test(raw)) {
+        return raw.replace(/\s*第\s*\d+\s*日\s*/g, "").trim() || fallback;
+      }
+    }
+    return fallback;
+  }
+
   function renderOfficialInfo(match) {
     const refs = match.referees || {};
     const varAvar = splitOfficialNames(refs["VAR／AVAR"] || refs["VAR/AVAR"] || refs.var_avar);
@@ -1174,50 +1208,44 @@ document.addEventListener("DOMContentLoaded", async () => {
       ? `${Number.isFinite(attendanceNumber) ? attendanceNumber.toLocaleString("ja-JP") : String(match.attendance)}人`
       : "";
 
-    const primary = [
-      ["RESULT", match.result_mark],
-      ["SCORE", match.score],
-      ["STAGE", match.stage || match.matchweek],
-      ["COMP", match.tournament]
-    ].filter(([, value]) => value !== undefined && value !== null && value !== "");
-
-    const items = [
+    const conditionItems = [
       ["天候", match.weather],
       ["気温", temperature],
       ["湿度", humidity],
-      ["入場者", attendance],
+      ["入場者", attendance]
+    ].filter(([, value]) => value !== undefined && value !== null && value !== "");
+    const officialItems = [
       ["主審", match.referee || refs["主審"]],
       ["副審", assistantReferees],
       ["第4の審判員", match.fourth_official || refs["第4の審判員"]],
       ["VAR", match.var_referee || refs.VAR || varAvar[0]],
-      ["AVAR", match.avar_referee || refs.AVAR || varAvar[1]],
-      ["監督", match.manager],
-      ["相手監督", match.opponent_manager]
+      ["AVAR", match.avar_referee || refs.AVAR || varAvar[1]]
     ].filter(([, value]) => value !== undefined && value !== null && value !== "");
+    const groups = [
+      ["CONDITION", conditionItems],
+      ["OFFICIALS", officialItems]
+    ].filter(([, items]) => items.length);
 
-    if (!items.length && !match.j_official_url) return "";
+    if (!groups.length && !match.j_official_url) return "";
 
     return `
-      <section class="u-match-record">
-        <div class="u-section-head">
+      <section class="match-facts-strip">
+        <div class="match-facts-head">
           <h4>公式記録</h4>
-          ${match.j_official_url ? `<a class="u-official-link" href="${escapeHtml(match.j_official_url)}" target="_blank" rel="noopener">DATA SITE</a>` : ""}
+          ${match.j_official_url ? `<a class="u-official-link" href="${escapeHtml(match.j_official_url)}" target="_blank" rel="noopener">J.LEAGUE DATA</a>` : ""}
         </div>
-        ${primary.length ? `
-          <div class="u-record-primary">
-            ${primary.map(([label, value]) => `
-              <div class="u-record-primary-item">
-                <span>${escapeHtml(label)}</span>
-                <strong>${formatRecordValue(value)}</strong>
+        <div class="match-facts-groups">
+          ${groups.map(([groupLabel, items]) => `
+            <div class="match-facts-group">
+              <span class="match-facts-group-label">${escapeHtml(groupLabel)}</span>
+              <div class="match-facts-row">
+                ${items.map(([label, value]) => `
+                  <div class="match-fact-item">
+                    <span>${escapeHtml(label)}</span>
+                    <strong>${formatRecordValue(value)}</strong>
+                  </div>
+                `).join("")}
               </div>
-            `).join("")}
-          </div>
-        ` : ""}
-        <div class="u-record-pills">
-          ${items.map(([label, value]) => `
-            <div class="u-record-item">
-              <span>${escapeHtml(label)}</span>
-              <strong>${formatRecordValue(value)}</strong>
             </div>
           `).join("")}
         </div>
@@ -1257,44 +1285,130 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderMatchMembers(match) {
     const isOwnHome = getMatchIsHome(match);
-    const ownLabel = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
-    const ownStarters = match.starting_members || (isOwnHome ? match.home_starting_members : match.away_starting_members) || [];
-    const ownBench = match.bench_members || (isOwnHome ? match.home_bench_members : match.away_bench_members) || [];
-    const oppStarters = match.opponent_starting_members || (isOwnHome ? match.away_starting_members : match.home_starting_members) || [];
-    const oppBench = match.opponent_bench_members || (isOwnHome ? match.away_bench_members : match.home_bench_members) || [];
+    const sideData = {
+      home: {
+        label: "HOME",
+        teamName: match.home || (isOwnHome ? getOwnJapaneseClubName(match.club) : match.opponent) || "",
+        starters: match.home_starting_members || (isOwnHome ? match.starting_members : match.opponent_starting_members) || [],
+        bench: match.home_bench_members || (isOwnHome ? match.bench_members : match.opponent_bench_members) || [],
+        substitutions: match.home_substitutions || (isOwnHome ? match.substitutions : match.opponent_substitutions) || [],
+        cards: match.home_cards || (isOwnHome ? match.warnings : match.opponent_cards) || [],
+        goals: match.home_goals || (isOwnHome ? match.goals : match.opponent_goals) || [],
+        manager: match.home_manager || (isOwnHome ? match.manager : match.opponent_manager) || "",
+        own: isOwnHome
+      },
+      away: {
+        label: "AWAY",
+        teamName: match.away || (!isOwnHome ? getOwnJapaneseClubName(match.club) : match.opponent) || "",
+        starters: match.away_starting_members || (!isOwnHome ? match.starting_members : match.opponent_starting_members) || [],
+        bench: match.away_bench_members || (!isOwnHome ? match.bench_members : match.opponent_bench_members) || [],
+        substitutions: match.away_substitutions || (!isOwnHome ? match.substitutions : match.opponent_substitutions) || [],
+        cards: match.away_cards || (!isOwnHome ? match.warnings : match.opponent_cards) || [],
+        goals: match.away_goals || (!isOwnHome ? match.goals : match.opponent_goals) || [],
+        manager: match.away_manager || (!isOwnHome ? match.manager : match.opponent_manager) || "",
+        own: !isOwnHome
+      }
+    };
 
-    const renderSquad = (teamName, sideLabel, starters, bench, type, clickable) => {
-      const starterHtml = renderMemberList("STARTING XI", starters, `${type} starter`, clickable);
-      const benchHtml = renderMemberList("BENCH", bench, `${type} bench`, clickable);
-      if (!starterHtml && !benchHtml) return "";
+    const makeEventMap = (side) => {
+      const map = new Map();
+      const add = (name, event) => {
+        const key = compactPlayerName(name);
+        if (!key) return;
+        if (!map.has(key)) map.set(key, []);
+        map.get(key).push(event);
+      };
+      const minuteText = minute => {
+        const clean = String(minute || "")
+          .trim()
+          .replace(/[’′']/g, "")
+          .replace(/分/g, "")
+          .replace(/\s+/g, "");
+        return clean ? `${clean}'` : "";
+      };
+      (side.goals || []).forEach(goal => {
+        add(goal.scorer, { type: "goal", minute: goal.minute, text: minuteText(goal.minute) });
+      });
+      (side.substitutions || []).forEach(sub => {
+        add(sub.out, { type: "sub-out", minute: sub.minute, text: `${minuteText(sub.minute)}→${sub.in || ""}` });
+        add(sub.in, { type: "sub-in", minute: sub.minute, text: `${minuteText(sub.minute)}←${sub.out || ""}` });
+      });
+      (side.cards || []).forEach(card => {
+        add(card.player || card.name, { type: card.card === "red" ? "card-red" : "card-yellow", minute: card.minute || card.time, text: minuteText(card.minute || card.time) });
+      });
+      return map;
+    };
+
+    const renderEvents = (events) => {
+      if (!events || !events.length) return "";
       return `
-        <div class="u-squad-card ${type}">
-          <div class="u-squad-head">
-            <span>${escapeHtml(sideLabel)}</span>
-            <strong>${escapeHtml(teamName)}</strong>
-          </div>
-          <div class="u-member-columns">
-            ${starterHtml}
-            ${benchHtml}
-          </div>
+        <span class="lineup-events">
+          ${events.map(event => event.type === "card-yellow" || event.type === "card-red"
+            ? `<span class="lineup-event ${event.type}"><i></i>${escapeHtml(event.text)}</span>`
+            : `<span class="lineup-event ${event.type}">${escapeHtml(event.text)}</span>`
+          ).join(" ")}
+        </span>
+      `;
+    };
+
+    const renderPlayerRow = (member, events, clickable) => {
+      const name = getMemberName(member);
+      const position = typeof member === "object" && member ? member.position : "";
+      const number = typeof member === "object" && member ? member.number : "";
+      const nameLength = Array.from(String(name || "").replace(/\s+/g, "")).length;
+      const nameClass = nameLength >= 10 ? " very-long" : nameLength >= 7 ? " long" : "";
+      const nameHtml = clickable ? renderPlayerButton(name) : `<span class="u-member-static">${escapeHtml(name)}</span>`;
+      return `
+        <li class="lineup-player-row ${events && events.length ? "has-events" : ""}">
+          <span class="lineup-pos">${escapeHtml(position || "-")}</span>
+          <span class="lineup-num">${escapeHtml(number || "-")}</span>
+          <span class="lineup-name${nameClass}">${nameHtml}</span>
+          ${renderEvents(events)}
+        </li>
+      `;
+    };
+
+    const renderSide = (sideKey) => {
+      const side = sideData[sideKey];
+      const starters = Array.isArray(side.starters) ? side.starters : [];
+      const bench = Array.isArray(side.bench) ? side.bench : [];
+      if (!starters.length && !bench.length) return "";
+      const eventMap = makeEventMap(side);
+      const rows = (members) => members.map(member => {
+        const events = eventMap.get(compactPlayerName(getMemberName(member))) || [];
+        return renderPlayerRow(member, events, side.own);
+      }).join("");
+      return `
+        <div class="lineup-team ${sideKey} ${side.own ? "own" : "opponent"}">
+          ${starters.length ? `
+            <div class="lineup-block">
+              <h5>STARTING XI</h5>
+              <ul class="lineup-list starters">${rows(starters)}</ul>
+            </div>
+          ` : ""}
+          ${bench.length ? `
+            <div class="lineup-block bench-block">
+              <h5>BENCH</h5>
+              <ul class="lineup-list bench">${rows(bench)}</ul>
+              ${side.manager ? `<div class="lineup-manager-row"><span>監督</span><strong>${escapeHtml(side.manager)}</strong></div>` : ""}
+            </div>
+          ` : ""}
         </div>
       `;
     };
 
-    const ownSquad = renderSquad(ownLabel, isOwnHome ? "HOME" : "AWAY", ownStarters, ownBench, "own", true);
-    const opponentName = match.opponent || (isOwnHome ? match.away : match.home) || "";
-    const opponentSquad = renderSquad(opponentName, isOwnHome ? "AWAY" : "HOME", oppStarters, oppBench, "opponent", false);
-    if (!ownSquad && !opponentSquad) return "";
+    const homeHtml = renderSide("home");
+    const awayHtml = renderSide("away");
+    if (!homeHtml && !awayHtml) return "";
 
     return `
-      <section class="u-match-members">
-        <div class="u-section-head">
-          <h4>メンバー</h4>
-          <span>${ownStarters.length + ownBench.length + oppStarters.length + oppBench.length} PLAYERS</span>
+      <section class="lineup-summary">
+        <div class="lineup-summary-head">
+          <h4>LINEUPS</h4>
         </div>
-        <div class="u-squad-grid">
-          ${ownSquad}
-          ${opponentSquad}
+        <div class="lineup-grid">
+          ${homeHtml}
+          ${awayHtml}
         </div>
       </section>
     `;
@@ -1439,7 +1553,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       <li class="u-player-match-row">
         <div>
           <strong>${escapeHtml(match.date)}</strong>
-          <span>${escapeHtml(match.stage || match.matchweek || "")} ${getMatchIsHome(match) ? "HOME" : "AWAY"}</span>
+          <span>${escapeHtml(formatRoundDisplayLabel([match.stage, match.matchweek], ""))} ${getMatchIsHome(match) ? "HOME" : "AWAY"}</span>
           <span>vs ${escapeHtml(match.opponent)}</span>
         </div>
         <div>
@@ -1603,15 +1717,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function formatVisionRoundLabel(match) {
-    const values = [match.matchweek, match.stage, match.section].filter(Boolean);
-    for (const value of values) {
-      const raw = String(value);
-      const section = raw.match(/第?\s*(\d+)\s*節/);
-      if (section) return `第${section[1]}節`;
-      const mw = raw.match(/MW\s*(\d+)/i);
-      if (mw) return `第${mw[1]}節`;
-    }
-    return "MATCH";
+    return formatRoundDisplayLabel([match.matchweek, match.stage, match.section, match.round], "MATCH");
   }
 
   function splitVisionPlayerName(name) {
@@ -1635,7 +1741,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       family: parsed.family,
       given: parsed.given,
       half: parsed.half,
-      yellow: false
+      yellow: Boolean(member && member.yellow)
     };
   }
 
@@ -1645,6 +1751,76 @@ document.addEventListener("DOMContentLoaded", async () => {
       list.push({ pos: "", no: "", family: "", given: "", half: false, yellow: false });
     }
     return list;
+  }
+
+  function cloneVisionMember(member) {
+    if (!member) return { position: "", number: "", name: "" };
+    if (typeof member === "string") return { position: "", number: "", name: member };
+    return {
+      position: member.position || "",
+      number: member.number || "",
+      name: getMemberName(member),
+      yellow: Boolean(member.yellow)
+    };
+  }
+
+  function findVisionMemberByName(members, name) {
+    const key = compactPlayerName(name);
+    if (!key) return null;
+    return (Array.isArray(members) ? members : []).find(member => compactPlayerName(getMemberName(member)) === key) || null;
+  }
+
+  function normalizeVisionCard(card) {
+    return {
+      player: card && (card.player || card.name) || "",
+      card: String(card && (card.card || card.type) || "").includes("退場") || String(card && card.card || "").toLowerCase() === "red" ? "red" : "yellow"
+    };
+  }
+
+  function applyVisionCards(members, cards) {
+    const normalizedCards = (Array.isArray(cards) ? cards : []).map(normalizeVisionCard);
+    const redKeys = new Set(normalizedCards.filter(card => card.card === "red").map(card => compactPlayerName(card.player)).filter(Boolean));
+    const yellowKeys = new Set(normalizedCards.filter(card => card.card !== "red").map(card => compactPlayerName(card.player)).filter(Boolean));
+    return members.map(member => {
+      const key = compactPlayerName(getMemberName(member));
+      if (redKeys.has(key)) return { position: "", number: "", name: "" };
+      return { ...member, yellow: yellowKeys.has(key) || Boolean(member.yellow) };
+    });
+  }
+
+  function buildVisionFinalMembers(starters, bench, substitutions, cards) {
+    const finalMembers = (Array.isArray(starters) ? starters : []).map(cloneVisionMember);
+    (Array.isArray(substitutions) ? substitutions : []).forEach(sub => {
+      const outName = sub && (sub.out || sub.outName);
+      const inName = sub && (sub.in || sub.inName);
+      const outKey = compactPlayerName(outName);
+      if (!outKey) return;
+      const outIndex = finalMembers.findIndex(member => compactPlayerName(getMemberName(member)) === outKey);
+      if (outIndex === -1) return;
+      const incoming = findVisionMemberByName(bench, inName) || { position: "", number: "", name: inName || "" };
+      finalMembers[outIndex] = cloneVisionMember(incoming);
+    });
+    return applyVisionCards(finalMembers, cards);
+  }
+
+  function getVisionSideSource(match, sideKey) {
+    const isOwnHome = getMatchIsHome(match);
+    if (sideKey === "home") {
+      return {
+        starters: match.home_starting_members || (isOwnHome ? match.starting_members : match.opponent_starting_members) || [],
+        bench: match.home_bench_members || (isOwnHome ? match.bench_members : match.opponent_bench_members) || [],
+        substitutions: match.home_substitutions || (isOwnHome ? match.substitutions : match.opponent_substitutions) || [],
+        cards: match.home_cards || (isOwnHome ? match.warnings : match.opponent_cards) || [],
+        goals: match.home_goals || (isOwnHome ? match.goals : match.opponent_goals) || []
+      };
+    }
+    return {
+      starters: match.away_starting_members || (!isOwnHome ? match.starting_members : match.opponent_starting_members) || [],
+      bench: match.away_bench_members || (!isOwnHome ? match.bench_members : match.opponent_bench_members) || [],
+      substitutions: match.away_substitutions || (!isOwnHome ? match.substitutions : match.opponent_substitutions) || [],
+      cards: match.away_cards || (!isOwnHome ? match.warnings : match.opponent_cards) || [],
+      goals: match.away_goals || (!isOwnHome ? match.goals : match.opponent_goals) || []
+    };
   }
 
   function countVisionGoals(goals) {
@@ -1659,7 +1835,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getVisionScores(match, phase, scoreBoard) {
-    if (phase !== "post") {
+    if (phase === "pre") {
       return { firstHome: "", firstAway: "", secondHome: "", secondAway: "", totalHome: "", totalAway: "" };
     }
 
@@ -1688,29 +1864,104 @@ document.addEventListener("DOMContentLoaded", async () => {
     return "../data/assets/icons/100l.png?v=20260601assets1";
   }
 
+  function normalizeVisionClubName(name) {
+    return String(name || "")
+      .normalize("NFKC")
+      .replace(/[\s・.．\-ー]/g, "")
+      .toUpperCase();
+  }
+
+  const VISION_CLUB_COLOR_LIST = [
+    ["北海道コンサドーレ札幌", "#d6001c"], ["札幌", "#d6001c"],
+    ["ヴァンラーレ八戸", "#0f8a4b"], ["八戸", "#0f8a4b"],
+    ["いわてグルージャ盛岡", "#d71920"], ["岩手", "#d71920"], ["盛岡", "#d71920"],
+    ["ベガルタ仙台", "#f5d000"], ["仙台", "#f5d000"],
+    ["ブラウブリッツ秋田", "#004098"], ["秋田", "#004098"],
+    ["モンテディオ山形", "#0068b7"], ["山形", "#0068b7"],
+    ["福島ユナイテッドFC", "#e60012"], ["福島", "#e60012"],
+    ["いわきFC", "#d6001c"], ["いわき", "#d6001c"],
+    ["鹿島アントラーズ", "#b51e3a"], ["鹿島", "#b51e3a"],
+    ["水戸ホーリーホック", "#005bac"], ["水戸", "#005bac"],
+    ["栃木SC", "#ffd900"], ["栃木", "#ffd900"], ["栃木C", "#e60012"],
+    ["ザスパ群馬", "#003f8f"], ["群馬", "#003f8f"],
+    ["浦和レッズ", "#e60012"], ["浦和", "#e60012"],
+    ["RB大宮アルディージャ", "#f58220"], ["大宮アルディージャ", "#f58220"], ["大宮", "#f58220"],
+    ["ジェフユナイテッド千葉", "#ffd800"], ["千葉", "#ffd800"],
+    ["柏レイソル", "#fff100"], ["柏", "#fff100"],
+    ["FC東京", "#003f8f"], ["東京", "#003f8f"],
+    ["東京ヴェルディ", "#00843d"], ["東京V", "#00843d"],
+    ["FC町田ゼルビア", "#005bac"], ["町田", "#005bac"],
+    ["川崎フロンターレ", "#00a0e9"], ["川崎F", "#00a0e9"], ["川崎", "#00a0e9"],
+    ["横浜F・マリノス", "#005bac"], ["横浜FM", "#005bac"],
+    ["横浜FC", "#00a3e0"],
+    ["湘南ベルマーレ", "#7ab800"], ["湘南", "#7ab800"],
+    ["SC相模原", "#00a650"], ["相模原", "#00a650"],
+    ["ヴァンフォーレ甲府", "#005bac"], ["甲府", "#005bac"],
+    ["松本山雅FC", "#00843d"], ["松本", "#00843d"],
+    ["AC長野パルセイロ", "#f58220"], ["長野", "#f58220"],
+    ["アルビレックス新潟", "#ff6600"], ["新潟", "#ff6600"],
+    ["カターレ富山", "#005bac"], ["富山", "#005bac"],
+    ["ツエーゲン金沢", "#e60012"], ["金沢", "#e60012"],
+    ["清水エスパルス", "#f58220"], ["清水", "#f58220"],
+    ["ジュビロ磐田", "#62b5e5"], ["磐田", "#62b5e5"],
+    ["藤枝MYFC", "#6f2da8"], ["藤枝", "#6f2da8"],
+    ["アスルクラロ沼津", "#00a0e9"], ["沼津", "#00a0e9"],
+    ["名古屋グランパス", "#e60012"], ["名古屋", "#e60012"],
+    ["FC岐阜", "#005bac"], ["岐阜", "#005bac"],
+    ["京都サンガF.C.", "#6f2da8"], ["京都", "#6f2da8"],
+    ["ガンバ大阪", "#005bac"], ["G大阪", "#005bac"],
+    ["セレッソ大阪", "#e91e63"], ["C大阪", "#e91e63"],
+    ["FC大阪", "#005bac"],
+    ["ヴィッセル神戸", "#a50034"], ["神戸", "#a50034"],
+    ["奈良クラブ", "#003f8f"], ["奈良", "#003f8f"],
+    ["ガイナーレ鳥取", "#78be20"], ["鳥取", "#78be20"],
+    ["ファジアーノ岡山", "#b00020"], ["岡山", "#b00020"],
+    ["サンフレッチェ広島", "#51318f"], ["広島", "#51318f"],
+    ["レノファ山口FC", "#f58220"], ["山口", "#f58220"],
+    ["カマタマーレ讃岐", "#77bc1f"], ["讃岐", "#77bc1f"],
+    ["徳島ヴォルティス", "#004098"], ["徳島", "#004098"],
+    ["愛媛FC", "#f58220"], ["愛媛", "#f58220"],
+    ["FC今治", "#003f8f"], ["今治", "#003f8f"],
+    ["アビスパ福岡", "#003f8f"], ["福岡", "#003f8f"],
+    ["ギラヴァンツ北九州", "#f5d000"], ["北九州", "#f5d000"],
+    ["サガン鳥栖", "#00a0e9"], ["鳥栖", "#00a0e9"],
+    ["V・ファーレン長崎", "#f58220"], ["長崎", "#f58220"],
+    ["ロアッソ熊本", "#cc0000"], ["熊本", "#cc0000"],
+    ["大分トリニータ", "#005bac"], ["大分", "#005bac"],
+    ["テゲバジャーロ宮崎", "#e60012"], ["宮崎", "#e60012"],
+    ["鹿児島ユナイテッドFC", "#005bac"], ["鹿児島", "#005bac"],
+    ["FC琉球", "#8a1538"], ["琉球", "#8a1538"],
+    ["高知ユナイテッドSC", "#b51e3a"], ["高知", "#b51e3a"],
+    ["レイラック滋賀FC", "#005bac"], ["レイラック滋賀", "#005bac"], ["滋賀", "#005bac"]
+  ];
+
+  const VISION_CLUB_COLOR_MAP = VISION_CLUB_COLOR_LIST.reduce((map, [name, color]) => {
+    map.set(normalizeVisionClubName(name), color);
+    return map;
+  }, new Map());
+
   function getVisionClubColor(name, fallback) {
-    const key = String(name || "").normalize("NFKC");
-    const map = [
-      [/アルビレックス|新潟/, "#ff6600"],
-      [/柏|レイソル/, "#ffe600"],
-      [/浦和|レッズ/, "#d71920"],
-      [/鹿島|アントラーズ/, "#b6192a"],
-      [/横浜|マリノス/, "#005bac"],
-      [/川崎|フロンターレ/, "#00a0df"],
-      [/名古屋|グランパス/, "#e50012"],
-      [/G大阪|ガンバ/, "#003f8f"],
-      [/C大阪|セレッソ/, "#f08cb8"],
-      [/神戸|ヴィッセル/, "#8a1538"]
-    ];
-    const found = map.find(([pattern]) => pattern.test(key));
+    const key = normalizeVisionClubName(name);
+    if (!key) return fallback;
+    if (VISION_CLUB_COLOR_MAP.has(key)) return VISION_CLUB_COLOR_MAP.get(key);
+    const found = Array.from(VISION_CLUB_COLOR_MAP.entries()).find(([candidate]) => (
+      candidate.length >= 2 && (key.includes(candidate) || candidate.includes(key))
+    ));
     return found ? found[1] : fallback;
   }
 
   function buildVisionStateForMatch(match, phase) {
     const detail = getDetailMatchData(match);
     const scoreBoard = getHomeAwayDisplay(detail);
-    const lineups = getLineupPair(detail);
-    const benches = getBenchPair(detail);
+    const homeSource = getVisionSideSource(detail, "home");
+    const awaySource = getVisionSideSource(detail, "away");
+    const useFinalMembers = phase === "final";
+    const homeVisibleMembers = useFinalMembers
+      ? buildVisionFinalMembers(homeSource.starters, homeSource.bench, homeSource.substitutions, homeSource.cards)
+      : homeSource.starters;
+    const awayVisibleMembers = useFinalMembers
+      ? buildVisionFinalMembers(awaySource.starters, awaySource.bench, awaySource.substitutions, awaySource.cards)
+      : awaySource.starters;
     const scores = getVisionScores(detail, phase, scoreBoard);
 
     return {
@@ -1732,18 +1983,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       image: "",
       home: {
         club: scoreBoard.homeName,
-        players: fillVisionPlayers(lineups.home, 11),
-        startingPlayers: fillVisionPlayers(lineups.home, 11),
-        reserves: fillVisionPlayers(benches.home, 9)
+        players: fillVisionPlayers(homeVisibleMembers, 11),
+        startingPlayers: fillVisionPlayers(homeSource.starters, 11),
+        reserves: fillVisionPlayers(homeSource.bench, 9)
       },
       away: {
         club: scoreBoard.awayName,
-        players: fillVisionPlayers(lineups.away, 11),
-        startingPlayers: fillVisionPlayers(lineups.away, 11),
-        reserves: fillVisionPlayers(benches.away, 9)
+        players: fillVisionPlayers(awayVisibleMembers, 11),
+        startingPlayers: fillVisionPlayers(awaySource.starters, 11),
+        reserves: fillVisionPlayers(awaySource.bench, 9)
       },
       match: {
-        phase: phase === "post" ? "fulltime" : "kickoff",
+        phase: phase === "pre" ? "kickoff" : "fulltime",
         league: parseDate(detail.date).getFullYear() === 2026 ? "明治安田\nJ2・J3 百年構想リーグ" : (detail.tournament || ""),
         round: formatVisionRoundLabel(detail),
         firstHome: scores.firstHome,
@@ -1838,19 +2089,90 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("vision-preview-modal")?.classList.remove("active");
   }
 
+  const VISION_PHASES = {
+    pre: { label: "試合前", english: "STARTING LINEUP", button: "試合前", description: "スタメン表示" },
+    post: { label: "試合後", english: "FULL TIME", button: "試合後", description: "結果入りスタメン" },
+    final: { label: "試合終了時点", english: "FINAL ON PITCH", button: "終了時点", description: "交代・警告反映" }
+  };
+
+  function visionPlayerDisplayName(player) {
+    return [player && player.family, player && player.given].filter(Boolean).join(" ").trim();
+  }
+
+  function isVisionKanaPlayer(player) {
+    const name = visionPlayerDisplayName(player);
+    return /[ァ-ヶー]/.test(name) && /^[ァ-ヶーA-Za-z0-9・.\-\s]+$/.test(name);
+  }
+
+  function collectVisionKanaPlayers(state) {
+    const rows = [];
+    ["home", "away"].forEach(side => {
+      const players = state && state[side] && Array.isArray(state[side].players) ? state[side].players : [];
+      players.forEach((player, index) => {
+        const name = visionPlayerDisplayName(player);
+        if (!name || !isVisionKanaPlayer(player)) return;
+        rows.push({ side, index, name, half: Boolean(player.half) });
+      });
+    });
+    return rows;
+  }
+
+  function renderVisionKanaControls(state) {
+    const kanaPlayers = collectVisionKanaPlayers(state);
+    if (!kanaPlayers.length) return "";
+    return `
+      <div class="vision-kana-panel">
+        <div class="vision-kana-head">
+          <span>カタカナ名</span>
+          <strong>半角表示</strong>
+        </div>
+        <div class="vision-kana-list">
+          ${kanaPlayers.map(player => `
+            <button
+              type="button"
+              class="vision-kana-toggle ${player.half ? "active" : ""}"
+              data-vision-kana-toggle="true"
+              data-side="${player.side}"
+              data-index="${player.index}"
+            >
+              <span>${escapeHtml(player.name)}</span>
+              <strong>${player.half ? "半角ON" : "半角OFF"}</strong>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function bindVisionKanaControls(modal, frame, visionState) {
+    modal.querySelectorAll("[data-vision-kana-toggle]").forEach(button => {
+      button.onclick = () => {
+        const side = button.dataset.side;
+        const index = Number(button.dataset.index);
+        const player = visionState && visionState[side] && visionState[side].players && visionState[side].players[index];
+        if (!player) return;
+        player.half = !player.half;
+        button.classList.toggle("active", player.half);
+        const label = button.querySelector("strong");
+        if (label) label.textContent = player.half ? "半角ON" : "半角OFF";
+        applyVisionStateToFrame(frame, visionState);
+      };
+    });
+  }
+
   function renderVisionPreview(match, phase) {
     const { backdrop, modal } = ensureVisionPreviewModal();
     const detail = getDetailMatchData(match);
     const score = getHomeAwayDisplay(detail);
-    const visionState = buildVisionStateForMatch(detail, phase);
-    const phaseLabel = phase === "post" ? "試合後" : "試合前";
-    const phaseEnglish = phase === "post" ? "FULL TIME" : "STARTING LINEUP";
+    const phaseKey = VISION_PHASES[phase] ? phase : "pre";
+    const visionState = buildVisionStateForMatch(detail, phaseKey);
+    const phaseMeta = VISION_PHASES[phaseKey];
 
     modal.innerHTML = `
       <div class="vision-preview-header">
         <div>
-          <span>${phaseLabel}</span>
-          <strong>大型ビジョン / ${phaseEnglish}</strong>
+          <span>${phaseMeta.label}</span>
+          <strong>大型ビジョン / ${phaseMeta.english}</strong>
         </div>
         <button type="button" class="vision-preview-close" aria-label="閉じる">×</button>
       </div>
@@ -1861,14 +2183,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="vision-display-shell">
         <iframe
           class="vision-display-frame"
-          src="./vision/display.html?v=20260529homevision2"
+          src="./vision/display.html?v=20260601vision3"
           title="大型ビジョン スタメンプレビュー"
           aria-label="大型ビジョン スタメンプレビュー"
         ></iframe>
       </div>
+      ${renderVisionKanaControls(visionState)}
       <div class="vision-preview-actions">
-        <button type="button" data-phase="pre" class="${phase === "pre" ? "active" : ""}">試合前</button>
-        <button type="button" data-phase="post" class="${phase === "post" ? "active" : ""}">試合後</button>
+        ${Object.entries(VISION_PHASES).map(([key, item]) => `
+          <button type="button" data-phase="${key}" class="${phaseKey === key ? "active" : ""}">${item.button}</button>
+        `).join("")}
       </div>
     `;
     modal.classList.add("actual-vision");
@@ -1887,6 +2211,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, 120);
     window.addEventListener("resize", resize, { once: true });
     modal.querySelector(".vision-preview-close").onclick = closeVisionPreviewModal;
+    bindVisionKanaControls(modal, frame, visionState);
     modal.querySelectorAll(".vision-preview-actions [data-phase]").forEach(btn => {
       btn.onclick = () => renderVisionPreview(match, btn.dataset.phase);
     });
@@ -1908,14 +2233,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         <strong>${escapeHtml((getHomeAwayDisplay(match).homeName || "") + " vs " + (getHomeAwayDisplay(match).awayName || ""))}</strong>
       </div>
       <div class="vision-phase-picker">
-        <button type="button" data-phase="pre">
-          <span>試合前</span>
-          <strong>大型ビジョンのスタメン</strong>
-        </button>
-        <button type="button" data-phase="post">
-          <span>試合後</span>
-          <strong>結果入りのスタメン</strong>
-        </button>
+        ${Object.entries(VISION_PHASES).map(([key, item]) => `
+          <button type="button" data-phase="${key}">
+            <span>${escapeHtml(item.label)}</span>
+            <strong>${escapeHtml(item.description)}</strong>
+          </button>
+        `).join("")}
       </div>
     `;
     backdrop.classList.add("active");
@@ -1930,66 +2253,37 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function openDetailSheet(match) {
     const mId = `${match.date}_${match.club}_${match.opponent}`;
+    const offRes = findOfficialResult(match);
     const sMemo = localStorage.getItem(`memo_${mId}`) || "";
     const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
-    const sMy = localStorage.getItem(`score_my_${mId}`) || "";
-    const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
+    let sMy = localStorage.getItem(`score_my_${mId}`) || "";
+    let sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
+    let sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
+    let sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
     const sWeather = localStorage.getItem(`weather_${mId}`) || "";
     const sTemp = localStorage.getItem(`temp_${mId}`) || "";
+    const officialScores = extractOwnResultScores(offRes, match);
+    if ((sMy === "" || sOpp === "") && officialScores) {
+      sMy = String(officialScores.ownScore);
+      sOpp = String(officialScores.opponentScore);
+    }
+    if ((sPkM === "" || sPkO === "") && officialScores && officialScores.pkOwn !== null && officialScores.pkOpponent !== null) {
+      sPkM = String(officialScores.pkOwn);
+      sPkO = String(officialScores.pkOpponent);
+    }
 
     const J_CLUB_ENG = {
       "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC"
     };
 
-    let goalsHtml = "";
-    const offRes = findOfficialResult(match);
-    if (offRes && ((offRes.goals && offRes.goals.length) || (offRes.opponent_goals && offRes.opponent_goals.length))) {
-      const ownGoals = offRes.goals || [];
-      const opponentGoals = offRes.opponent_goals || [];
-      goalsHtml = `
-        <section class="u-goals-area">
-          <h4>GOALS</h4>
-          ${ownGoals.length ? `
-            <div class="u-goal-team">
-              <span>新潟</span>
-              <ul>
-                ${ownGoals.map(g => `
-                  <li>
-                    <span class="u-goal-minute">${escapeHtml(g.minute || "")}'</span>
-                    ${renderPlayerButton(g.scorer, "goal-scorer")}
-                  </li>
-                `).join("")}
-              </ul>
-            </div>
-          ` : ""}
-          ${opponentGoals.length ? `
-            <div class="u-goal-team opponent">
-              <span>${escapeHtml(match.opponent)}</span>
-              <ul>
-                ${opponentGoals.map(g => `
-                  <li>
-                    <span class="u-goal-minute">${escapeHtml(g.minute || "")}'</span>
-                    <strong>${escapeHtml(g.scorer || "")}</strong>
-                  </li>
-                `).join("")}
-              </ul>
-            </div>
-          ` : ""}
-        </section>
-      `;
-    }
-
     const detailData = offRes ? { ...match, ...offRes } : match;
     const officialInfoHtml = renderOfficialInfo(detailData);
     const membersHtml = renderMatchMembers(detailData);
-    const eventsHtml = renderMatchEvents(detailData);
 
     let pkHtml = "";
     if (parseDate(match.date).getFullYear() === 2026) {
-      const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
-      const sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
       const isD = (sMy !== "" && sOpp !== "" && sMy === sOpp);
-      pkHtml = `<div class="u-pk-area" style="${isD ? 'display:flex;' : 'display:none;'}"><span class="u-pk-label">PK</span><input type="number" class="u-score-input pk-my" value="${sPkM}"><span class="u-score-sep">-</span><input type="number" class="u-score-input pk-opp" value="${sPkO}"></div>`;
+      pkHtml = `<div class="u-pk-area score-editor-pk" style="${isD ? 'display:grid;' : 'display:none;'}"><span class="u-pk-label">PK</span><input type="number" class="u-score-input pk-my" value="${sPkM}" placeholder="-"><span class="u-score-sep">-</span><input type="number" class="u-score-input pk-opp" value="${sPkO}" placeholder="-"></div>`;
     }
 
     const homeAway = getMatchIsHome(detailData) ? "HOME" : "AWAY";
@@ -1999,55 +2293,81 @@ document.addEventListener("DOMContentLoaded", async () => {
     const awayEnglish = J_CLUB_ENG[scoreBoard.awayName] || getClubEnglishName(scoreBoard.awayName);
     const detailRound = formatVisionRoundLabel(detailData);
     const resultStatusLabel = scoreBoard.homeScore !== "-" || scoreBoard.awayScore !== "-" ? "MATCH RESULT" : "MATCH PREVIEW";
-    const resultMark = detailData.result_mark || "";
     const visionButtonHtml = match.club === "niigata" && getMatchIsHome(match)
       ? `<button type="button" class="u-vision-open-btn" id="detail-vision-preview">ビジョンプレビュー</button>`
       : "";
+    const hasOwnScore = sMy !== "" && sOpp !== "";
+    const ownScoreNumber = Number(sMy);
+    const oppScoreNumber = Number(sOpp);
+    const pkOwnNumber = Number(sPkM);
+    const pkOppNumber = Number(sPkO);
+    let outcomeLabel = resultStatusLabel;
+    let outcomeClass = "pending";
+    if (hasOwnScore && Number.isFinite(ownScoreNumber) && Number.isFinite(oppScoreNumber)) {
+      if (ownScoreNumber === oppScoreNumber && sPkM !== "" && sPkO !== "" && Number.isFinite(pkOwnNumber) && Number.isFinite(pkOppNumber)) {
+        outcomeLabel = pkOwnNumber > pkOppNumber ? "PK WIN" : "PK LOSE";
+        outcomeClass = pkOwnNumber > pkOppNumber ? "win" : "lose";
+      } else if (ownScoreNumber > oppScoreNumber) {
+        outcomeLabel = "WIN";
+        outcomeClass = "win";
+      } else if (ownScoreNumber < oppScoreNumber) {
+        outcomeLabel = "LOSE";
+        outcomeClass = "lose";
+      } else {
+        outcomeLabel = "DRAW";
+        outcomeClass = "draw";
+      }
+    }
+    const pkDisplay = hasOwnScore && ownScoreNumber === oppScoreNumber && sPkM !== "" && sPkO !== "" ? `PK ${sPkM} - ${sPkO}` : "";
+    const matchDateText = [detailData.date || match.date, detailData.day || match.day].filter(Boolean).join(" ");
+    const matchTimeText = detailData.time || match.time || "";
+    const venueText = detailData.venue || match.venue || "-";
 
     sheetContent.innerHTML = `
-      <section class="u-result-hero result-detail-v2 club-${match.club}">
-        <div class="u-result-titleline">
-          <span>${escapeHtml(resultStatusLabel)}</span>
-          <strong>${escapeHtml(detailRound)}</strong>
-          ${resultMark ? `<em>${escapeHtml(resultMark)}</em>` : ""}
+      <section class="match-detail-card match-detail-compact club-${match.club}">
+        <div class="match-detail-top">
+          <div>
+            <span>ROUND</span>
+            <strong>${escapeHtml(detailRound)}</strong>
+          </div>
+          <div class="match-detail-chips">
+            <span class="sheet-ha badge-${homeAway.toLowerCase()}">${homeAway}</span>
+          </div>
         </div>
-        <div class="u-result-kicker">
-          <span>${escapeHtml(clubName)}</span>
-          <strong>${escapeHtml(detailData.stage || detailData.matchweek || "MATCH")}</strong>
-        </div>
-        <div class="u-result-scoreboard">
-          <div class="u-result-team">
+        <div class="match-detail-board">
+          <div class="match-detail-team">
             <img src="${escapeHtml(scoreBoard.homeEmblem)}" alt="${escapeHtml(scoreBoard.homeName)}">
-            <div>
-              <span>HOME</span>
-              <strong>${escapeHtml(scoreBoard.homeName)}</strong>
-              <small>${escapeHtml(homeEnglish)}</small>
+            <span>HOME</span>
+            <strong>${escapeHtml(scoreBoard.homeName)}</strong>
+            <small>${escapeHtml(homeEnglish)}</small>
+          </div>
+          <div class="match-detail-scorebox">
+            <span class="match-detail-outcome ${outcomeClass}">${escapeHtml(outcomeLabel)}</span>
+            <div class="match-detail-score">
+              <strong>${escapeHtml(scoreBoard.homeScore)}</strong>
+              <span>:</span>
+              <strong>${escapeHtml(scoreBoard.awayScore)}</strong>
             </div>
+            ${pkDisplay ? `<small>${escapeHtml(pkDisplay)}</small>` : ""}
           </div>
-          <div class="u-result-score">
-            <strong>${escapeHtml(scoreBoard.homeScore)}</strong>
-            <span>:</span>
-            <strong>${escapeHtml(scoreBoard.awayScore)}</strong>
-          </div>
-          <div class="u-result-team away">
+          <div class="match-detail-team away">
             <img src="${escapeHtml(scoreBoard.awayEmblem)}" alt="${escapeHtml(scoreBoard.awayName)}">
-            <div>
-              <span>AWAY</span>
-              <strong>${escapeHtml(scoreBoard.awayName)}</strong>
-              <small>${escapeHtml(awayEnglish)}</small>
-            </div>
+            <span>AWAY</span>
+            <strong>${escapeHtml(scoreBoard.awayName)}</strong>
+            <small>${escapeHtml(awayEnglish)}</small>
           </div>
         </div>
-        <div class="u-result-meta-strip">
-          <span>${escapeHtml(detailData.date || match.date)} ${escapeHtml(detailData.day || match.day || "")} ${escapeHtml(detailData.time || match.time || "")}</span>
-          <span>${escapeHtml(detailData.venue || match.venue || "")}</span>
-          <span class="sheet-ha badge-${homeAway.toLowerCase()}">${homeAway}</span>
+        <div class="match-detail-info">
+          <div>
+            <span>DATE</span>
+            <strong>${escapeHtml(matchDateText || "-")}${matchTimeText ? ` <em>${escapeHtml(matchTimeText)}</em>` : ""}</strong>
+          </div>
+          <div>
+            <span>VENUE</span>
+            <strong>${escapeHtml(venueText)}</strong>
+          </div>
         </div>
-        <div class="u-result-actions">
-          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(detailData.venue || match.venue || "")}" target="_blank" rel="noopener">MAP</a>
-          ${detailData.j_official_url ? `<a href="${escapeHtml(detailData.j_official_url)}" target="_blank" rel="noopener">DATA</a>` : ""}
-          ${visionButtonHtml}
-        </div>
+        ${visionButtonHtml ? `<div class="match-detail-actions">${visionButtonHtml}</div>` : ""}
       </section>
 
       <section id="u-auto-weather-area" class="u-weather-card" style="display:none;">
@@ -2070,16 +2390,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       </section>
 
-      ${goalsHtml}
       ${officialInfoHtml}
       ${membersHtml}
-      ${eventsHtml}
-      <section class="u-manual-record">
+      <section class="u-manual-record score-editor-card">
         <div class="u-section-head">
           <h4>手動記録</h4>
           <span>SCORE / MEMO</span>
         </div>
-        <div class="sheet-score-area"><input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-"><span class="u-score-sep">:</span><input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-"></div>
+        <div class="score-editor-grid">
+          <label>
+            <span>${escapeHtml(clubName)}</span>
+            <input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-">
+          </label>
+          <span class="u-score-sep">:</span>
+          <label>
+            <span>${escapeHtml(match.opponent || scoreBoard.awayName)}</span>
+            <input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-">
+          </label>
+        </div>
         ${pkHtml}
       </section>
       <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
@@ -2202,7 +2530,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pkA = sheetContent.querySelector(".u-pk-area");
       if (pkA) {
         const isDraw = (mS !== "" && oS !== "" && mS === oS);
-        pkA.style.display = isDraw ? "flex" : "none";
+        pkA.style.display = isDraw ? "grid" : "none";
         if (isDraw) {
           pm = sheetContent.querySelector(".pk-my").value; 
           po = sheetContent.querySelector(".pk-opp").value;
@@ -2216,11 +2544,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const card = document.querySelector(`.card[data-mid="${mId}"]`);
       if (card) {
-        let res = null; if (mS !== "" && oS !== "") {
-          const ms = Number(mS), os = Number(oS); if (ms > os) res = "win"; else if (ms < os) res = "lose"; else if (pm !== "" && po !== "") res = Number(pm) > Number(po) ? "pk-win" : "pk-lose"; else res = "draw";
+        let res = null;
+        let scoreDisplay = "";
+        if (mS !== "" && oS !== "") {
+          const ms = Number(mS), os = Number(oS);
+          if (ms === os && pm !== "" && po !== "") {
+            res = Number(pm) > Number(po) ? "pk-win" : "pk-lose";
+            scoreDisplay = `(${pm}) ${ms} - ${os} (${po})`;
+          } else {
+            if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = "draw";
+            scoreDisplay = `${ms} - ${os}`;
+          }
         }
-        const badge = card.querySelector(".result-badge"); badge.className = "result-badge " + (res ? "badge-" + res : "");
-        badge.textContent = res ? res.replace("-", " ").toUpperCase() : "";
+        let resultBox = card.querySelector(".result-box");
+        if (res && !resultBox) {
+          resultBox = document.createElement("div");
+          resultBox.className = "result-box";
+          resultBox.innerHTML = `<div class="result-badge"></div><div class="match-score-text"></div>`;
+          card.insertBefore(resultBox, card.firstChild);
+        }
+        if (resultBox) {
+          if (res) {
+            const badge = resultBox.querySelector(".result-badge");
+            const scoreText = resultBox.querySelector(".match-score-text");
+            if (badge) {
+              badge.className = "result-badge badge-" + res;
+              badge.textContent = res.replace("-", " ").toUpperCase();
+            }
+            if (scoreText) scoreText.textContent = scoreDisplay;
+          } else {
+            resultBox.remove();
+          }
+        }
 
         // Update Attendance Emoji in Feed
         const metaDiv = card.querySelector(".match-meta");
@@ -2252,6 +2607,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   let officialResultIndex = new Map();
   const STANDINGS_CACHE_MAX_AGE = 5 * 60 * 1000;
   const RESULTS_CACHE_MAX_AGE = 6 * 60 * 60 * 1000;
+  const RESULT_GAS_SOURCE_PARAMS = [
+    { league: "j2" },
+    { league: "playoff" },
+    { league: "all" },
+    { league: "playoff", competition_years: "20261", competition_frame_ids: "36" },
+    { league: "playoff", competition_years: "20261", competition_frame_ids: "28" },
+    { league: "playoff", competition_years: "20261", competition_frame_ids: "20" },
+    { league: "playoff", competition_years: "20261", competition_frame_ids: "33" },
+    { league: "playoff", competition_years: "20261", competition_frame_ids: "26" },
+    { league: "j2", stage: "playoff" },
+    { league: "j2", competition: "playoff" }
+  ];
 
   function readTimedCache(key, maxAgeMs) {
     try {
@@ -2279,7 +2646,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getResultKey(result) {
-    const date = result.date || "";
+    const date = toIsoDate(result.date || "");
     if (result.home || result.away) {
       return [
         "match",
@@ -2299,14 +2666,51 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getScheduleResultKey(date, club, opponent) {
-    return [date || "", club || "", canonicalTeamName(opponent || "")].join("|");
+    return [toIsoDate(date || ""), club || "", canonicalTeamName(opponent || "")].join("|");
+  }
+
+  function resultMatchesScheduleMatch(result, match) {
+    if (!result || !match) return false;
+    const resultDate = toIsoDate(result.date || "");
+    const matchDate = toIsoDate(match.date || "");
+    if (resultDate && matchDate && resultDate !== matchDate) return false;
+
+    if (result.club && result.opponent) {
+      return result.club === match.club && robustTeamMatch(result.opponent, match.opponent);
+    }
+
+    if (result.home || result.away) {
+      const ownName = getOwnJapaneseClubName(match.club);
+      const ownShortName = match.club === "niigata" ? "新潟" : match.club === "kumamoto" ? "熊本" : match.club;
+      const home = cleanResultTeamName(result.home || "");
+      const away = cleanResultTeamName(result.away || "");
+      const ownIsHome = robustTeamMatch(home, ownName) || robustTeamMatch(home, ownShortName);
+      const ownIsAway = robustTeamMatch(away, ownName) || robustTeamMatch(away, ownShortName);
+      const opponentIsHome = robustTeamMatch(home, match.opponent);
+      const opponentIsAway = robustTeamMatch(away, match.opponent);
+      return (ownIsHome && opponentIsAway) || (ownIsAway && opponentIsHome);
+    }
+
+    return false;
+  }
+
+  function findScheduleMatchForResult(result) {
+    const normalized = normalizeOfficialResult(result);
+    if (!normalized || !normalized.date) return null;
+    return scheduleData.find(match => resultMatchesScheduleMatch(normalized, match)) || null;
   }
 
   function rebuildOfficialResultIndex() {
     officialResultIndex = new Map();
     getResultArray(officialResults).forEach(result => {
-      if (result.date && result.club && result.opponent) {
-        officialResultIndex.set(getScheduleResultKey(result.date, result.club, result.opponent), result);
+      const normalized = normalizeOfficialResult(result);
+      if (!normalized || !normalized.date) return;
+      if (normalized.club && normalized.opponent) {
+        officialResultIndex.set(getScheduleResultKey(normalized.date, normalized.club, normalized.opponent), normalized);
+      }
+      const match = findScheduleMatchForResult(normalized);
+      if (match) {
+        officialResultIndex.set(getScheduleResultKey(match.date, match.club, match.opponent), normalized);
       }
     });
   }
@@ -2314,6 +2718,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function normalizeOfficialResult(result) {
     if (!result) return null;
     const normalized = { ...result };
+    if (normalized.date) normalized.date = toIsoDate(normalized.date);
     if (normalized.home) normalized.home = cleanResultTeamName(normalized.home);
     if (normalized.away) normalized.away = cleanResultTeamName(normalized.away);
     if (normalized.opponent) normalized.opponent = cleanResultTeamName(normalized.opponent);
@@ -2322,7 +2727,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getResultFixtureKey(result) {
     if (!result) return "";
-    const date = result.date || "";
+    const date = toIsoDate(result.date || "");
     if (result.home || result.away) {
       const sides = [canonicalTeamName(result.home || ""), canonicalTeamName(result.away || "")].sort().join(":");
       return ["fixture", date, sides].join("|");
@@ -2333,6 +2738,70 @@ document.addEventListener("DOMContentLoaded", async () => {
       return ["fixture", date, sides].join("|");
     }
     return ["fixture", date, canonicalTeamName(result.section || "")].join("|");
+  }
+
+  function parseScorePair(value) {
+    const match = String(value ?? "").match(/(\d+)\s*[-:]\s*(\d+)/);
+    if (!match) return null;
+    const first = parseInt(match[1], 10);
+    const second = parseInt(match[2], 10);
+    return Number.isFinite(first) && Number.isFinite(second) ? [first, second] : null;
+  }
+
+  function parsePkPair(value) {
+    const match = String(value || "").match(/(\d+)\s*PK\s*(\d+)/i);
+    if (!match) return null;
+    const first = parseInt(match[1], 10);
+    const second = parseInt(match[2], 10);
+    return Number.isFinite(first) && Number.isFinite(second) ? [first, second] : null;
+  }
+
+  function extractOwnResultScores(result, match) {
+    const normalized = normalizeOfficialResult(result);
+    if (!normalized || !match) return null;
+
+    const ownName = getOwnJapaneseClubName(match.club);
+    const ownShortName = match.club === "niigata" ? "新潟" : match.club === "kumamoto" ? "熊本" : match.club;
+    let isOwnHome = getMatchIsHome(match);
+    let ownScore = NaN;
+    let opponentScore = NaN;
+
+    if (normalized.home || normalized.away) {
+      const homeMatchesOwn = robustTeamMatch(normalized.home, ownName) || robustTeamMatch(normalized.home, ownShortName);
+      const awayMatchesOwn = robustTeamMatch(normalized.away, ownName) || robustTeamMatch(normalized.away, ownShortName);
+      if (!homeMatchesOwn && !awayMatchesOwn) return null;
+      isOwnHome = homeMatchesOwn;
+
+      const homeScore = parseInt(normalized.home_score, 10);
+      const awayScore = parseInt(normalized.away_score, 10);
+      if (Number.isFinite(homeScore) && Number.isFinite(awayScore)) {
+        ownScore = isOwnHome ? homeScore : awayScore;
+        opponentScore = isOwnHome ? awayScore : homeScore;
+      }
+    }
+
+    if ((!Number.isFinite(ownScore) || !Number.isFinite(opponentScore)) && normalized.score !== undefined) {
+      const pair = parseScorePair(normalized.score);
+      if (pair) {
+        if (normalized.home || normalized.away) {
+          ownScore = isOwnHome ? pair[0] : pair[1];
+          opponentScore = isOwnHome ? pair[1] : pair[0];
+        } else {
+          ownScore = pair[0];
+          opponentScore = pair[1];
+        }
+      }
+    }
+
+    if (!Number.isFinite(ownScore) || !Number.isFinite(opponentScore)) return null;
+
+    const pkPair = parsePkPair(normalized.pk);
+    return {
+      ownScore,
+      opponentScore,
+      pkOwn: pkPair ? (isOwnHome ? pkPair[0] : pkPair[1]) : null,
+      pkOpponent: pkPair ? (isOwnHome ? pkPair[1] : pkPair[0]) : null
+    };
   }
 
   function buildStoredResultFromMatch(match) {
@@ -2411,7 +2880,59 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     if (changed) rebuildOfficialResultIndex();
+    if (changed) renderedFeedYear = undefined;
     return changed;
+  }
+
+  function mergeResultPayloads(payloads) {
+    const rowsByFixture = new Map();
+    const order = [];
+
+    payloads.forEach(payload => {
+      getResultArray(payload).forEach(raw => {
+        const result = normalizeOfficialResult(raw);
+        if (!result || !result.date) return;
+        const fixtureKey = getResultFixtureKey(result) || getResultKey(result);
+        if (!rowsByFixture.has(fixtureKey)) order.push(fixtureKey);
+        rowsByFixture.set(fixtureKey, result);
+      });
+    });
+
+    return {
+      data: order.map(key => rowsByFixture.get(key))
+    };
+  }
+
+  function buildGasUrl(type, params = {}) {
+    const query = new URLSearchParams({ type, ...params });
+    if (!query.has("league")) query.set("league", "j2");
+    query.set("nocache", "1");
+    query.set("t", String(Date.now()));
+    return `${GAS_EXEC_URL}?${query.toString()}`;
+  }
+
+  async function fetchGasJson(type, params = {}, timeoutMs = 12000) {
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+    try {
+      const res = await fetch(buildGasUrl(type, params), controller ? { signal: controller.signal } : undefined);
+      if (!res.ok) throw new Error(`GAS ${type} HTTP ${res.status}`);
+      return await res.json();
+    } finally {
+      if (timeoutId) clearTimeout(timeoutId);
+    }
+  }
+
+  async function fetchGasResults(forceGas = false) {
+    const timeoutMs = forceGas ? 45000 : 6500;
+    const sourceParams = forceGas ? RESULT_GAS_SOURCE_PARAMS : RESULT_GAS_SOURCE_PARAMS.slice(0, 3);
+    const settled = await Promise.allSettled(
+      sourceParams.map(params => fetchGasJson("results", params, timeoutMs))
+    );
+    const payloads = settled
+      .filter(item => item.status === "fulfilled" && getResultArray(item.value).length)
+      .map(item => item.value);
+    return payloads.length ? mergeResultPayloads(payloads) : null;
   }
 
   async function refreshLeagueResults(forceGas = false) {
@@ -2422,18 +2943,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       cachedLeagueResults = results.map(normalizeOfficialResult).filter(Boolean);
       writeTimedCache("trapp_results_cache", cachedLeagueResults);
       mergeOfficialResults(cachedLeagueResults);
+      syncResultsToLocalStorage(cachedLeagueResults);
       return cachedLeagueResults;
     }
 
-    if (cachedLeagueResults.length) mergeOfficialResults(cachedLeagueResults);
+    if (cachedLeagueResults.length) {
+      mergeOfficialResults(cachedLeagueResults);
+      syncResultsToLocalStorage(cachedLeagueResults);
+    }
     return cachedLeagueResults;
   }
 
   async function fetchLocalJson(type) {
     const paths = {
       standings: ["./data/standings/current.json"],
-      results: []
+      results: ["./data/results/playoffs.json", "./data/results/current.json", "./data/results/results.json", "./data/results.json"]
     }[type] || [`./data/${type}.json`];
+
+    if (type === "results") {
+      const payloads = [];
+      for (const path of paths) {
+        try {
+          const res = await fetch(`${path}?t=${Date.now()}`, { cache: "no-store" });
+          if (res.ok) payloads.push(await res.json());
+        } catch (e) {
+          console.warn(`Static load failed: ${path}`);
+        }
+      }
+      return payloads.length ? mergeResultPayloads(payloads) : null;
+    }
 
     for (const path of paths) {
       try {
@@ -2457,20 +2995,28 @@ document.addEventListener("DOMContentLoaded", async () => {
    * Universal fetch with fallback and stale check
    */
   async function fetchData(type, forceGas = false) {
-    const gasUrl = `${GAS_EXEC_URL}?type=${type}&league=j2`;
     let staticJson = await fetchLocalJson(type);
 
+    if (type === "results") {
+      try {
+        const gasJson = await fetchGasResults(forceGas);
+        const payloads = [staticJson, gasJson].filter(Boolean);
+        if (payloads.length) return mergeResultPayloads(payloads);
+      } catch (e) {
+        console.warn(`GAS fetch failed, using local fallback: ${type}`);
+      }
+      return staticJson;
+    }
+
     try {
-      const gasUrlWithCacheBuster = `${gasUrl}&nocache=1&t=${Date.now()}`;
-      const res = await fetch(gasUrlWithCacheBuster);
-      const gasJson = await res.json();
+      const gasJson = await fetchGasJson(type, { league: "j2" }, forceGas ? 45000 : 12000);
       const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
       const staticArr = (staticJson && staticJson.data) ? staticJson.data : (Array.isArray(staticJson) ? staticJson : []);
       if (type === "standings" && standingsHaveDashboardTeams(staticArr) && !standingsHaveDashboardTeams(gasArr)) {
         return staticJson;
       }
       if (gasArr.length >= staticArr.length && gasArr.length > 0) return gasJson;
-    } catch (e) { console.error(`GAS fetch failed: ${type}`); }
+    } catch (e) { console.warn(`GAS fetch failed, using local fallback: ${type}`); }
     return staticJson;
   }
 
@@ -2494,6 +3040,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await resultsPromise;
     if (currentMode === "dashboard") renderDashboard();
+    else if (currentMode === "feed") renderFeed();
+    else if (currentMode === "calendar") renderCalendar();
     else if (typeof updateDashboardPrevResults === "function") updateDashboardPrevResults();
   }
 
@@ -2507,15 +3055,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const myKw = match.club === "niigata" ? "新潟" : "熊本";
     
-    return officialResults.find(r => {
+    return officialResults.map(normalizeOfficialResult).filter(Boolean).find(r => {
+      if (resultMatchesScheduleMatch(r, match)) return true;
+
       // Static JSON Format Support
       if (r.club && r.opponent) {
-        if (r.date === match.date && r.club === match.club && robustTeamMatch(r.opponent, match.opponent)) return true;
+        if (toIsoDate(r.date) === toIsoDate(match.date) && r.club === match.club && robustTeamMatch(r.opponent, match.opponent)) return true;
       }
 
       // GAS Format Support
       if (!r.home || !r.away) return false;
-      const dateMatch = r.date === match.date;
+      const dateMatch = toIsoDate(r.date) === toIsoDate(match.date);
       const teamMatch = robustTeamMatch(r.home, myKw) || robustTeamMatch(r.away, myKw);
       if (!teamMatch) return false;
       
@@ -2544,60 +3094,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     getResultArray(results).forEach(r => {
-      if (!r.date || !r.club || !r.opponent) return;
-      const m = matchByKey.get(getScheduleResultKey(r.date, r.club, r.opponent));
+      r = normalizeOfficialResult(r);
+      if (!r || !r.date) return;
+      const m = r.club && r.opponent
+        ? matchByKey.get(getScheduleResultKey(r.date, r.club, r.opponent))
+        : findScheduleMatchForResult(r);
       if (!m) return;
 
-        let sM = null, sO = null, pkM = null, pkO = null;
-        
-        // Static JSON Format Support
-        if (r.score !== undefined) {
-          const scores = String(r.score).split("-").map(x => x.trim());
-          if (scores.length === 2 && scores[0] !== "") {
-            sM = scores[0];
-            sO = scores[1];
-            if (r.pk) {
-               const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
-               if (pkMatch) {
-                 const isHome = r.home_away === "H";
-                 pkM = isHome ? pkMatch[1] : pkMatch[2];
-                 pkO = isHome ? pkMatch[2] : pkMatch[1];
-               }
-            }
-          }
-        }
-        // GAS Format Support
-        else if (r.home_score !== "" && r.home_score !== null) {
-          const isHome = robustTeamMatch(r.home, m.club === "niigata" ? "新潟" : "熊本");
-          sM = isHome ? r.home_score : r.away_score;
-          sO = isHome ? r.away_score : r.home_score;
-          if (r.pk && r.home_score === r.away_score) {
-            const pkMatch = r.pk.match(/(\d+)\s*PK\s*(\d+)/i);
-            if (pkMatch) {
-              pkM = isHome ? pkMatch[1] : pkMatch[2];
-              pkO = isHome ? pkMatch[2] : pkMatch[1];
-            }
-          }
-        }
+      const scores = extractOwnResultScores(r, m);
+      if (!scores) return;
 
-        if (sM !== null && sO !== null) {
-          const mId = `${m.date}_${m.club}_${m.opponent}`;
-          if (localStorage.getItem(`score_my_${mId}`) !== String(sM) || 
-              localStorage.getItem(`score_opp_${mId}`) !== String(sO)) {
-            localStorage.setItem(`score_my_${mId}`, sM);
-            localStorage.setItem(`score_opp_${mId}`, sO);
-            
-            if (pkM !== null && pkO !== null) {
-              localStorage.setItem(`score_my_pk_${mId}`, pkM);
-              localStorage.setItem(`score_opp_pk_${mId}`, pkO);
-            } else {
-              localStorage.removeItem(`score_my_pk_${mId}`);
-              localStorage.removeItem(`score_opp_pk_${mId}`);
-            }
-            changed = true;
-          }
+      const mId = `${m.date}_${m.club}_${m.opponent}`;
+      const sM = String(scores.ownScore);
+      const sO = String(scores.opponentScore);
+      const pkM = scores.pkOwn !== null ? String(scores.pkOwn) : null;
+      const pkO = scores.pkOpponent !== null ? String(scores.pkOpponent) : null;
+      const scoreChanged = localStorage.getItem(`score_my_${mId}`) !== sM ||
+        localStorage.getItem(`score_opp_${mId}`) !== sO;
+      const pkChanged = pkM !== null && pkO !== null
+        ? (localStorage.getItem(`score_my_pk_${mId}`) !== pkM || localStorage.getItem(`score_opp_pk_${mId}`) !== pkO)
+        : (localStorage.getItem(`score_my_pk_${mId}`) !== null || localStorage.getItem(`score_opp_pk_${mId}`) !== null);
+
+      if (scoreChanged || pkChanged) {
+        localStorage.setItem(`score_my_${mId}`, sM);
+        localStorage.setItem(`score_opp_${mId}`, sO);
+        if (pkM !== null && pkO !== null) {
+          localStorage.setItem(`score_my_pk_${mId}`, pkM);
+          localStorage.setItem(`score_opp_pk_${mId}`, pkO);
+        } else {
+          localStorage.removeItem(`score_my_pk_${mId}`);
+          localStorage.removeItem(`score_opp_pk_${mId}`);
         }
+        changed = true;
+      }
     });
+    if (changed) renderedFeedYear = undefined;
     return changed;
   }
 
@@ -2612,6 +3143,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     refreshLeagueResults().then(() => {
       if (currentMode === "dashboard") renderDashboard();
+      else if (currentMode === "feed") renderFeed();
+      else if (currentMode === "calendar") renderCalendar();
     });
   }, 0);
 
@@ -2929,7 +3462,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const getResultInfoForTeam = (result, teamName) => {
       if (!result || !teamName) return null;
-      const date = result.date || "";
+      result = normalizeOfficialResult(result);
+      if (!result) return null;
+      const date = toIsoDate(result.date || "");
       let isHome = false;
       let opponent = "";
       let scoreMine = NaN;
@@ -3039,10 +3574,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (sM > sO) { symbol = "WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
         else if (sM < sO) { symbol = "LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
         else if (lastInfo.pk) {
-          const pkMatch = lastInfo.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+          const pkMatch = parsePkPair(lastInfo.pk);
           if (pkMatch) {
-            const pkM = parseInt(isHome ? pkMatch[1] : pkMatch[2]);
-            const pkO = parseInt(isHome ? pkMatch[2] : pkMatch[1]);
+            const pkM = isHome ? pkMatch[0] : pkMatch[1];
+            const pkO = isHome ? pkMatch[1] : pkMatch[0];
             scoreStr = `(${pkM}) ${sM}-${sO} (${pkO})`;
             if (pkM > pkO) { symbol = "PK WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
             else { symbol = "PK LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
@@ -3063,11 +3598,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (rM > rO) { rSym = "〇"; }
           else if (rM < rO) { rSym = "●"; }
           else if (rInfo.pk) {
-            const pkMatch = rInfo.pk.match(/(\d+)\s*PK\s*(\d+)/i);
+            const pkMatch = parsePkPair(rInfo.pk);
             if (pkMatch) {
               const isRHome = rInfo.isHome;
-              const pkM = parseInt(isRHome ? pkMatch[1] : pkMatch[2]);
-              const pkO = parseInt(isRHome ? pkMatch[2] : pkMatch[1]);
+              const pkM = isRHome ? pkMatch[0] : pkMatch[1];
+              const pkO = isRHome ? pkMatch[1] : pkMatch[0];
               if (pkM > pkO) { rSym = "△"; }
               else { rSym = "▲"; }
             }
@@ -3092,7 +3627,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const elRes = card.querySelector(`.val-prev-res-${prefix}`);
         const elForm = card.querySelector(`.val-prev-form-${prefix}`);
         
-        if (elDate) elDate.innerText = last.date.substring(5).replace("-", "/");
+        if (elDate) elDate.innerText = lastInfo.date.substring(5).replace("-", "/");
         if (elOpp) elOpp.innerText = opp;
         if (elHA) elHA.innerText = isHome ? "(H)" : "(A)";
         if (elScore) elScore.innerText = scoreStr;
@@ -3159,9 +3694,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const mId = `${match.date}_${match.club}_${match.opponent}`;
         const isAtt = localStorage.getItem(`attend_${mId}`) === "true";
         let sMy = localStorage.getItem(`score_my_${mId}`) || "", sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
-        const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "", sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
+        let sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "", sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
         let res = null;
         let scoreDisplay = "";
+        const officialScores = extractOwnResultScores(findOfficialResult(match), match);
 
         if ((sMy === "" || sOpp === "") && match.score) {
           const scores = String(match.score).split("-").map(x => x.trim());
@@ -3169,6 +3705,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             sMy = scores[0];
             sOpp = scores[1];
           }
+        }
+
+        if ((sMy === "" || sOpp === "") && officialScores) {
+          sMy = String(officialScores.ownScore);
+          sOpp = String(officialScores.opponentScore);
+        }
+        if ((sPkM === "" || sPkO === "") && officialScores && officialScores.pkOwn !== null && officialScores.pkOpponent !== null) {
+          sPkM = String(officialScores.pkOwn);
+          sPkO = String(officialScores.pkOpponent);
         }
 
         if (sMy !== "" && sOpp !== "") {
@@ -3219,7 +3764,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const today = new Date(), todayY = today.getFullYear(), tKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
   const initialYear = todayY >= HISTORY_START_YEAR && todayY <= HISTORY_END_YEAR ? todayY : 2025;
   selectedYear = initialYear;
-  if (cachedLeagueResults.length) mergeOfficialResults(cachedLeagueResults);
+  if (cachedLeagueResults.length) {
+    mergeOfficialResults(cachedLeagueResults);
+    syncResultsToLocalStorage(cachedLeagueResults);
+  }
   if (!cachedStandings || !standingsHaveDashboardTeams(cachedStandings)) {
     const localStandings = await fetchLocalJson("standings");
     const localRows = localStandings && localStandings.data ? localStandings.data : (Array.isArray(localStandings) ? localStandings : []);
