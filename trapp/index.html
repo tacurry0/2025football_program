@@ -807,6 +807,7 @@ We can't help falling in love with you
             <div class="pa-scope-switch">
               <button type="button" class="pa-scope-btn active" data-pa-scope="all">カップ含む全試合</button>
               <button type="button" class="pa-scope-btn" data-pa-scope="league">リーグ戦のみ</button>
+              <button type="button" class="pa-scope-btn" data-pa-scope="special">特別試合</button>
             </div>
           </div>
         </div>
@@ -830,37 +831,90 @@ We can't help falling in love with you
                 <input type="checkbox" id="pa-played-only">
                 <span>出場ありのみ</span>
               </label>
+              <label class="pa-check-field">
+                <input type="checkbox" id="pa-katakana-only">
+                <span>カタカナ名</span>
+              </label>
               <button type="button" id="pa-filter-reset" class="pa-filter-reset">リセット</button>
             </div>
           </div>
-          <div class="pa-number-filters" aria-label="数値条件">
-            <label class="pa-number-field" for="pa-played-min">
-              <span>出場数 以上</span>
-              <input type="number" id="pa-played-min" min="0" inputmode="numeric" placeholder="例: 10">
-            </label>
-            <label class="pa-number-field" for="pa-played-max">
-              <span>出場数 以下</span>
-              <input type="number" id="pa-played-max" min="0" inputmode="numeric" placeholder="例: 30">
-            </label>
-            <label class="pa-number-field" for="pa-starts-min">
-              <span>先発数 以上</span>
-              <input type="number" id="pa-starts-min" min="0" inputmode="numeric" placeholder="例: 5">
-            </label>
-            <label class="pa-number-field" for="pa-goals-min">
-              <span>得点数 以上</span>
-              <input type="number" id="pa-goals-min" min="0" inputmode="numeric" placeholder="例: 3">
-            </label>
-          </div>
-          <div class="pa-position-filter" aria-label="ポジション条件">
-            <div class="pa-filter-title">
-              <span>ポジション</span>
-              <div class="pa-logic-toggle" aria-label="ポジション条件">
-                <button type="button" class="pa-position-mode-btn active" data-pa-position-mode="or">OR</button>
-                <button type="button" class="pa-position-mode-btn" data-pa-position-mode="and">AND</button>
+          <details class="pa-advanced-filters" id="pa-advanced-filters">
+            <summary>詳細条件</summary>
+            <div class="pa-advanced-filter-body">
+              <div class="pa-number-filters" aria-label="数値条件">
+                <label class="pa-number-field" for="pa-number-filter">
+                  <span>背番号</span>
+                  <input type="number" id="pa-number-filter" min="0" inputmode="numeric" placeholder="例: 10">
+                </label>
+                <label class="pa-number-field" for="pa-played-min">
+                  <span>出場数 以上</span>
+                  <input type="number" id="pa-played-min" min="0" inputmode="numeric" placeholder="例: 10">
+                </label>
+                <label class="pa-number-field" for="pa-played-max">
+                  <span>出場数 以下</span>
+                  <input type="number" id="pa-played-max" min="0" inputmode="numeric" placeholder="例: 30">
+                </label>
+                <label class="pa-number-field" for="pa-starts-min">
+                  <span>先発数 以上</span>
+                  <input type="number" id="pa-starts-min" min="0" inputmode="numeric" placeholder="例: 5">
+                </label>
+                <label class="pa-number-field" for="pa-goals-min">
+                  <span>得点数 以上</span>
+                  <input type="number" id="pa-goals-min" min="0" inputmode="numeric" placeholder="例: 3">
+                </label>
+                <label class="pa-number-field" for="pa-played-rate-min">
+                  <span>出場勝率 %以上</span>
+                  <input type="number" id="pa-played-rate-min" min="0" max="100" inputmode="decimal" placeholder="例: 40">
+                </label>
+                <label class="pa-number-field" for="pa-scored-rate-min">
+                  <span>ゴール試合勝率 %以上</span>
+                  <input type="number" id="pa-scored-rate-min" min="0" max="100" inputmode="decimal" placeholder="例: 50">
+                </label>
+                <label class="pa-number-field" for="pa-scored-ppm-min">
+                  <span>ゴール試合 平均勝点以上</span>
+                  <input type="number" id="pa-scored-ppm-min" min="0" max="3" step="0.1" inputmode="decimal" placeholder="例: 2.0">
+                </label>
+                <label class="pa-number-field" for="pa-yellow-min">
+                  <span>警告数 以上</span>
+                  <input type="number" id="pa-yellow-min" min="0" inputmode="numeric" placeholder="例: 2">
+                </label>
+                <label class="pa-number-field" for="pa-red-min">
+                  <span>退場数 以上</span>
+                  <input type="number" id="pa-red-min" min="0" inputmode="numeric" placeholder="例: 1">
+                </label>
+                <label class="pa-number-field" for="pa-seasons-min">
+                  <span>所属年数 以上</span>
+                  <input type="number" id="pa-seasons-min" min="1" inputmode="numeric" placeholder="例: 3">
+                </label>
+                <label class="pa-number-field" for="pa-seasons-max">
+                  <span>所属年数 以下</span>
+                  <input type="number" id="pa-seasons-max" min="1" inputmode="numeric" placeholder="例: 5">
+                </label>
+                <label class="pa-number-field" for="pa-month-filter">
+                  <span>対象月</span>
+                  <input type="number" id="pa-month-filter" min="1" max="12" inputmode="numeric" placeholder="例: 5">
+                </label>
+                <label class="pa-number-field" for="pa-month-goals-min">
+                  <span>対象月 得点以上</span>
+                  <input type="number" id="pa-month-goals-min" min="0" inputmode="numeric" placeholder="例: 2">
+                </label>
+                <label class="pa-number-field" for="pa-month-played-rate-min">
+                  <span>対象月 出場勝率%以上</span>
+                  <input type="number" id="pa-month-played-rate-min" min="0" max="100" inputmode="decimal" placeholder="例: 50">
+                </label>
+              </div>
+              <div class="pa-position-filter" aria-label="ポジション条件">
+                <div class="pa-filter-title">
+                  <span>ポジション</span>
+                  <div class="pa-logic-toggle" aria-label="ポジション条件">
+                    <button type="button" class="pa-position-mode-btn active" data-pa-position-mode="or">OR</button>
+                    <button type="button" class="pa-position-mode-btn" data-pa-position-mode="and">AND</button>
+                  </div>
+                </div>
+                <div id="pa-position-options" class="pa-position-options"></div>
               </div>
             </div>
-            <div id="pa-position-options" class="pa-position-options"></div>
-          </div>
+          </details>
         </div>
 
         <div class="pa-table-headline">
