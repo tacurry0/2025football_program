@@ -975,12 +975,14 @@ html, body {
 }
 
 .pa-mobile-number {
-  min-width: 42px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: rgba(var(--albirex-orange-rgb),0.11);
-  color: #8b3900;
+  min-width: 34px;
+  color: #111;
+  font-family: var(--font-kick);
+  font-size: 1.24rem;
+  line-height: 1;
+  letter-spacing: 0;
   text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
 .pa-mobile-name {
@@ -1305,6 +1307,37 @@ html, body {
   text-align: right;
 }
 
+.pa-player-number-badge {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  min-width: 38px;
+  color: #111;
+  font-family: var(--font-kick);
+  font-size: 1.48rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.pa-player-number-badge.modal {
+  min-height: 28px;
+  margin-right: 2px;
+}
+
+.pa-player-number-badge.summary {
+  color: var(--albirex-orange);
+  font-size: 1.72rem;
+}
+
+.pa-player-number-badge.detail {
+  flex: 0 0 auto;
+  min-width: 46px;
+  font-size: 1.9rem;
+  color: var(--albirex-orange);
+}
+
 .pa-year-match-summary {
   display: grid;
   gap: 10px;
@@ -1325,6 +1358,13 @@ html, body {
   justify-content: space-between;
   gap: 10px;
   align-items: center;
+}
+
+.pa-year-match-summary-meta {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .pa-year-match-summary-head strong {
@@ -1639,6 +1679,20 @@ body.pa-modal-open {
   padding: 8px 10px;
   border-radius: 12px;
   background: rgba(0,0,0,0.035);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.pa-match-row:hover,
+.pa-match-row:focus {
+  background: rgba(var(--albirex-orange-rgb),0.075);
+  border-color: rgba(var(--albirex-orange-rgb),0.24);
+  outline: none;
+}
+
+.pa-match-row:active {
+  transform: scale(0.992);
 }
 
 .pa-match-main,
@@ -1723,6 +1777,136 @@ body.pa-modal-open {
 .pa-event-chip.goal { background: rgba(var(--albirex-orange-rgb),0.16); color: #8b3900; }
 .pa-event-chip.yellow { background: #fde68a; color: #713f12; }
 .pa-event-chip.red { background: #fecaca; color: #991b1b; }
+
+.pa-match-detail-panel {
+  display: grid;
+  gap: 12px;
+  padding: 13px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.74);
+  border: 1px solid rgba(0,0,0,0.055);
+}
+
+.pa-match-detail-panel + .pa-match-detail-panel {
+  margin-top: 10px;
+}
+
+.pa-match-detail-scoreboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 128px;
+  align-items: center;
+  gap: 12px;
+}
+
+.pa-match-detail-side {
+  min-width: 0;
+}
+
+.pa-match-detail-side span,
+.pa-match-detail-side small,
+.pa-match-detail-grid span,
+.pa-match-detail-player span {
+  display: block;
+  color: var(--text-grey);
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.pa-match-detail-side strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-main);
+  font-size: 1.12rem;
+  font-weight: 900;
+}
+
+.pa-match-detail-result {
+  min-height: 76px;
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.04);
+}
+
+.pa-match-detail-result span {
+  min-width: 30px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.pa-match-detail-result span.win { background: #16a34a; }
+.pa-match-detail-result span.draw { background: #f59e0b; }
+.pa-match-detail-result span.loss { background: #ef4444; }
+.pa-match-detail-result span.pending { background: #71717a; }
+
+.pa-match-detail-result strong {
+  font-family: var(--font-kick);
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.pa-match-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.pa-match-detail-grid div {
+  min-width: 0;
+  min-height: 54px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 8px 9px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.034);
+  box-sizing: border-box;
+}
+
+.pa-match-detail-grid strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #111;
+  font-size: 0.88rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.pa-match-detail-grid.player {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pa-match-detail-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pa-match-detail-player div {
+  min-width: 0;
+}
+
+.pa-match-detail-player strong {
+  display: block;
+  color: var(--text-main);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.pa-match-detail-events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
 
 body[data-mode="player-analysis"] #active-month-title,
 body[data-mode="player-analysis"] #club-selection,
@@ -3433,6 +3617,9 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
   .pa-profile-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
   .pa-profile-stat { min-height: 52px; padding: 8px; }
   .pa-profile-stat strong { font-size: 0.96rem; }
+  .pa-player-number-badge { min-width: 32px; font-size: 1.3rem; }
+  .pa-player-number-badge.summary { font-size: 1.48rem; }
+  .pa-player-number-badge.detail { min-width: 38px; font-size: 1.62rem; }
   .pa-year-match-summary { padding: 10px; gap: 8px; }
   .pa-yearly-table { min-width: 780px; }
   .pa-yearly-table-wrap { max-height: 320px; }
@@ -3452,6 +3639,11 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
   .pa-match-role > span { margin-bottom: 3px; font-size: 0.7rem; }
   .pa-match-events { justify-content: flex-end; }
   .pa-match-score strong { font-size: 1rem; }
+  .pa-match-detail-scoreboard { grid-template-columns: 1fr; gap: 8px; }
+  .pa-match-detail-result { min-height: 58px; grid-template-columns: auto auto; justify-content: center; }
+  .pa-match-detail-grid,
+  .pa-match-detail-grid.player { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pa-match-detail-grid strong { font-size: 0.82rem; }
   
   #calendar-view, .month-section { padding: 140px 8px 130px; }
   #calendar-body { gap: 2px; }

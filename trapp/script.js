@@ -174,6 +174,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     profileTab: "total",
     modalPlayer: null,
     modalYearRows: [],
+    modalMatchYear: null,
+    modalMatchYearRow: null,
+    modalMatchItems: [],
     modalRankingRows: []
   };
   const PLAYER_POSITION_ORDER = ["GK", "DF", "MF", "FW"];
@@ -1929,7 +1932,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return `
         <button type="button" class="pa-mobile-player-card ${selected ? "selected" : ""}" data-pa-key="${escapeHtml(key)}">
           <span class="pa-mobile-card-top">
-            <span class="pa-mobile-number">No. ${escapeHtml(formatPlayerList(player.numbers))}</span>
+            <span class="pa-mobile-number">${escapeHtml(formatPlayerList(player.numbers))}</span>
             <strong class="pa-mobile-name" title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
             <span class="pa-mobile-position">${escapeHtml(formatPlayerList(player.positions))}</span>
           </span>
@@ -2159,6 +2162,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     return appearance.appearance_type || "-";
   }
 
+  function renderPlayerNumberBadge(numbers, className = "") {
+    return `<span class="pa-player-number-badge ${escapeHtml(className)}">${escapeHtml(formatPlayerList(numbers))}</span>`;
+  }
+
   async function getPlayerYearMatchDetails(player, year) {
     const normalizedYear = Number(year);
     if (!Number.isInteger(normalizedYear)) return [];
@@ -2205,7 +2212,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       <section class="pa-year-match-summary">
         <div class="pa-year-match-summary-head">
           <span>${escapeHtml(String(year))}年データ</span>
-          <strong>${escapeHtml(formatPlayerList(yearRow.positions))}</strong>
+          <div class="pa-year-match-summary-meta">
+            ${renderPlayerNumberBadge(yearRow.numbers, "summary")}
+            <strong>${escapeHtml(formatPlayerList(yearRow.positions))}</strong>
+          </div>
         </div>
         ${renderPlayerProfileKpis(yearRow, [yearRow])}
         ${renderPlayerAnalysisDetailSections(yearRow)}
@@ -2215,13 +2225,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="pa-match-list">
         ${items.map(item => {
           const match = item.match || {};
+          const matchId = String(match.match_id || item.appearance?.match_id || "");
           const score = `${formatPlayerNumber(match.target_score)}-${formatPlayerNumber(match.opponent_score)}`;
           const events = [
             ...item.goals.map(goal => `<span class="pa-event-chip goal">GOAL ${escapeHtml(goal.time || "")}</span>`),
             ...item.cards.map(card => `<span class="pa-event-chip ${String(card.type || "").includes("退場") ? "red" : "yellow"}">${escapeHtml(card.type || "カード")} ${escapeHtml(card.time || "")}</span>`)
           ].join("");
           return `
-            <article class="pa-match-row">
+            <article class="pa-match-row" data-pa-match-id="${escapeHtml(matchId)}" role="button" tabindex="0" aria-label="${escapeHtml(formatPlayerMatchDate(match))} ${escapeHtml(match.opponent || "")} の試合詳細">
               <div class="pa-match-main">
                 <span>${escapeHtml(formatPlayerMatchDate(match))}</span>
                 <strong>vs ${escapeHtml(match.opponent || "-")}</strong>
@@ -2256,6 +2267,94 @@ document.addEventListener("DOMContentLoaded", async () => {
       <span class="pa-chip scope">${escapeHtml(getPlayerAnalysisScopeLabel())}</span>
     `;
     return renderPlayerAnalysisModalShell("MATCH LOG", `${playerName} / ${year}年`, body, meta);
+  }
+
+  function formatPlayerAttendance(value) {
+    if (!hasPlayerValue(value)) return "-";
+    const n = Number(String(value).replace(/,/g, ""));
+    return Number.isFinite(n) ? `${n.toLocaleString("ja-JP")}人` : String(value);
+  }
+
+  function formatPlayerAppearanceMinutes(appearance) {
+    if (!appearance) return "-";
+    const from = hasPlayerValue(appearance.minute_in) ? `${appearance.minute_in}分` : "";
+    const to = hasPlayerValue(appearance.minute_out) ? `${appearance.minute_out}分` : "";
+    if (from && to) return `${from} - ${to}`;
+    if (from) return `${from}から`;
+    if (to) return `${to}まで`;
+    return "-";
+  }
+
+  function renderPlayerMatchDetail(player, year, item, yearRow) {
+    const match = item && item.match ? item.match : {};
+    const appearance = item && item.appearance ? item.appearance : null;
+    const score = `${formatPlayerNumber(match.target_score)}-${formatPlayerNumber(match.opponent_score)}`;
+    const eventChips = [
+      ...(item?.goals || []).map(goal => `<span class="pa-event-chip goal">GOAL ${escapeHtml(goal.time || "")}</span>`),
+      ...(item?.cards || []).map(card => `<span class="pa-event-chip ${String(card.type || "").includes("退場") ? "red" : "yellow"}">${escapeHtml(card.type || "カード")} ${escapeHtml(card.time || "")}</span>`)
+    ].join("");
+    const detailRows = [
+      ["大会", formatPlayerMatchCompetitionLine(match)],
+      ["節", formatPlayerMatchSection(match.section) || "-"],
+      ["開催", match.target_side === "home" ? "HOME" : "AWAY"],
+      ["会場", match.stadium || "-"],
+      ["天候", match.weather || "-"],
+      ["入場者", formatPlayerAttendance(match.attendance)]
+    ];
+    const playerRows = [
+      ["出場", formatPlayerAppearanceRole(appearance)],
+      ["時間", formatPlayerAppearanceMinutes(appearance)],
+      ["得点", formatPlayerNumber((item?.goals || []).length)],
+      ["カード", (item?.cards || []).length ? `${(item?.cards || []).length}枚` : "-"]
+    ];
+
+    const body = `
+      <button type="button" class="pa-modal-back-btn" data-pa-match-log-back>試合一覧に戻る</button>
+      <section class="pa-match-detail-panel">
+        <div class="pa-match-detail-scoreboard">
+          <div class="pa-match-detail-side">
+            <span>${escapeHtml(formatPlayerMatchDate(match))}</span>
+            <strong>vs ${escapeHtml(match.opponent || "-")}</strong>
+            <small>${escapeHtml(formatPlayerMatchCompetitionLine(match))}</small>
+          </div>
+          <div class="pa-match-detail-result">
+            <span class="${escapeHtml(getMatchResultClass(match.result))}">${escapeHtml(getMatchResultLabel(match.result))}</span>
+            <strong>${escapeHtml(score)}</strong>
+          </div>
+        </div>
+        <div class="pa-match-detail-grid">
+          ${detailRows.map(([label, value]) => `
+            <div>
+              <span>${escapeHtml(label)}</span>
+              <strong>${escapeHtml(value)}</strong>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+      <section class="pa-match-detail-panel">
+        <div class="pa-match-detail-player">
+          ${renderPlayerNumberBadge(yearRow?.numbers || player.numbers, "detail")}
+          <div>
+            <span>${escapeHtml(player.player_name || "-")}</span>
+            <strong>${escapeHtml(formatPlayerList(yearRow?.positions || player.positions))}</strong>
+          </div>
+        </div>
+        <div class="pa-match-detail-grid player">
+          ${playerRows.map(([label, value]) => `
+            <div>
+              <span>${escapeHtml(label)}</span>
+              <strong>${escapeHtml(value)}</strong>
+            </div>
+          `).join("")}
+        </div>
+        ${eventChips ? `<div class="pa-match-detail-events">${eventChips}</div>` : ""}
+      </section>
+    `;
+    const meta = `
+      <span class="pa-chip">${escapeHtml(String(year))}</span>
+      <span class="pa-chip scope">${escapeHtml(getPlayerAnalysisScopeLabel())}</span>
+    `;
+    return renderPlayerAnalysisModalShell("MATCH DETAIL", `${player.player_name || "-"} / ${formatPlayerMatchDate(match)}`, body, meta);
   }
 
   function renderPlayerProfileYearTable(yearRows) {
@@ -2325,7 +2424,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const activeTab = allowedTabs.includes(playerAnalysisState.profileTab) ? playerAnalysisState.profileTab : "total";
 
     const meta = `
-      <span class="pa-chip">No. ${escapeHtml(formatPlayerList(aggregate.numbers || player.numbers))}</span>
+      ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal")}
       <span class="pa-chip">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
       <span class="pa-chip">${escapeHtml(getPlayerSeasonSpan(yearRows))}</span>
       <span class="pa-chip scope">${escapeHtml(scopeLabel)}</span>
@@ -2357,6 +2456,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function openPlayerAnalysisProfile(player) {
     if (!player) return;
     playerAnalysisState.modalPlayer = player;
+    playerAnalysisState.modalMatchYear = null;
+    playerAnalysisState.modalMatchYearRow = null;
+    playerAnalysisState.modalMatchItems = [];
     setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell(
       "PLAYER PROFILE",
       player.player_name || "-",
@@ -2386,7 +2488,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <h2>${escapeHtml(player.player_name || "-")}</h2>
         </div>
         <div class="pa-detail-meta">
-          <span class="pa-chip">No. ${escapeHtml(formatPlayerList(player.numbers))}</span>
+          ${renderPlayerNumberBadge(player.numbers, "modal")}
           <span class="pa-chip">${escapeHtml(formatPlayerList(player.positions))}</span>
         </div>
       </div>
@@ -2686,7 +2788,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         ));
         const items = await getPlayerYearMatchDetails(playerAnalysisState.modalPlayer, year);
         const yearRow = (playerAnalysisState.modalYearRows || []).find(row => getPlayerYearValue(row) === year);
+        playerAnalysisState.modalMatchYear = year;
+        playerAnalysisState.modalMatchYearRow = yearRow || null;
+        playerAnalysisState.modalMatchItems = items;
         setPlayerAnalysisModalContent(renderPlayerYearMatchList(playerAnalysisState.modalPlayer, year, items, yearRow));
+        return;
+      }
+      const matchRow = event.target.closest(".pa-match-row[data-pa-match-id]");
+      if (matchRow && playerAnalysisState.modalPlayer) {
+        const matchId = String(matchRow.dataset.paMatchId || "");
+        const item = (playerAnalysisState.modalMatchItems || []).find(entry => String(entry.match?.match_id || entry.appearance?.match_id || "") === matchId);
+        if (!item) return;
+        setPlayerAnalysisModalContent(renderPlayerMatchDetail(
+          playerAnalysisState.modalPlayer,
+          playerAnalysisState.modalMatchYear,
+          item,
+          playerAnalysisState.modalMatchYearRow
+        ));
+        return;
+      }
+      if (event.target.closest("[data-pa-match-log-back]") && playerAnalysisState.modalPlayer) {
+        setPlayerAnalysisModalContent(renderPlayerYearMatchList(
+          playerAnalysisState.modalPlayer,
+          playerAnalysisState.modalMatchYear,
+          playerAnalysisState.modalMatchItems || [],
+          playerAnalysisState.modalMatchYearRow
+        ));
         return;
       }
       if (event.target.closest("[data-pa-profile-back]") && playerAnalysisState.modalPlayer) {
