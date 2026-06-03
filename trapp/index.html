@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260603playerui4">
+  <link rel="stylesheet" href="style.css?v=20260603player-list1">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./data/assets/emblems/アルビレックス新潟.png">
@@ -949,12 +949,14 @@ We can't help falling in love with you
               <span>並び順</span>
               <select id="pa-sort-key-select">
                 <option value="played_matches">出場試合数</option>
+                <option value="played_minutes">出場時間</option>
                 <option value="starter_matches">先発数</option>
                 <option value="sub_matches">途中出場数</option>
                 <option value="goals">得点数</option>
                 <option value="scored_matches">ゴール試合数</option>
                 <option value="played_win_rate">出場時勝率</option>
                 <option value="scored_win_rate">ゴール試合勝率</option>
+                <option value="position_order">ポジション順</option>
                 <option value="player_name">選手名</option>
               </select>
             </label>
@@ -965,6 +967,7 @@ We can't help falling in love with you
                 <option value="asc">昇順</option>
               </select>
             </label>
+            <button type="button" id="pa-list-detail-toggle" class="pa-list-detail-toggle" aria-pressed="true">詳細 ON</button>
           </div>
         </div>
         <div class="pa-table-scroll">
@@ -973,7 +976,7 @@ We can't help falling in love with you
               <tr>
                 <th data-sort="player_name">選手名</th>
                 <th>背番号</th>
-                <th>ポジション</th>
+                <th data-sort="position_order">ポジション</th>
                 <th class="pa-num" data-sort="played_matches">出場試合数</th>
                 <th class="pa-num" data-sort="starter_matches">先発数</th>
                 <th class="pa-num" data-sort="sub_matches">途中出場数</th>
@@ -1074,7 +1077,7 @@ We can't help falling in love with you
 
 
 <script src="schedule/schedule.js?v=20260601results2"></script>
-<script src="script.js?v=20260603playerui4"></script>
+<script src="script.js?v=20260603player-list1"></script>
 
 </body>
 </html>

@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let selectedYear = null;
   let renderedFeedYear = undefined;
   let currentMode = "dashboard"; // dashboard, feed, calendar, player-analysis or vision
+  let lineupDetailExpanded = false;
   const PLAYER_ANALYSIS_YEAR_START = 1999;
   const PLAYER_ANALYSIS_YEAR_END = 2026;
   const playerAnalysisCache = new Map();
@@ -149,6 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     filtered: [],
     sortKey: "played_matches",
     sortDirection: "desc",
+    listDetail: true,
     selectedKey: null,
     query: "",
     positions: [],
@@ -906,6 +908,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       sortSelect: document.getElementById("pa-sort-select"),
       sortKeySelect: document.getElementById("pa-sort-key-select"),
       sortDirectionSelect: document.getElementById("pa-sort-direction-select"),
+      listDetailToggle: document.getElementById("pa-list-detail-toggle"),
       mobileList: document.getElementById("pa-mobile-list"),
       detail: document.getElementById("pa-detail-card")
     };
@@ -1804,8 +1807,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   function sortPlayerAnalysisRows(rows) {
     const { sortKey, sortDirection } = playerAnalysisState;
     return [...rows].sort((a, b) => {
-      const aValue = a[sortKey];
-      const bValue = b[sortKey];
+      const aValue = getPlayerAnalysisSortValue(a, sortKey);
+      const bValue = getPlayerAnalysisSortValue(b, sortKey);
       const aMissing = !hasPlayerValue(aValue);
       const bMissing = !hasPlayerValue(bValue);
       if (aMissing && bMissing) return a.__paIndex - b.__paIndex;
@@ -1825,8 +1828,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  function getPlayerAnalysisSortValue(player, sortKey = playerAnalysisState.sortKey) {
+    if (sortKey === "played_minutes") {
+      return player && player.__paRankingMetrics ? player.__paRankingMetrics.played_minutes : null;
+    }
+    if (sortKey === "position_order") {
+      const positions = getPlayerPositions(player);
+      if (!positions.length) return null;
+      return Math.min(...positions.map(position => {
+        const index = PLAYER_POSITION_ORDER.indexOf(position);
+        return index === -1 ? PLAYER_POSITION_ORDER.length : index;
+      }));
+    }
+    return player ? player[sortKey] : null;
+  }
+
+  function getPlayerAnalysisSortMetric(player) {
+    const sortKey = playerAnalysisState.sortKey;
+    if (sortKey === "played_minutes") return ["出場時間", formatPlayerMinutes(getPlayerAnalysisSortValue(player, sortKey))];
+    if (sortKey === "starter_matches") return ["先発", formatPlayerNumber(player.starter_matches)];
+    if (sortKey === "sub_matches") return ["途中", formatPlayerNumber(player.sub_matches)];
+    if (sortKey === "goals") return ["得点", formatPlayerNumber(player.goals)];
+    if (sortKey === "scored_matches") return ["ゴール試合", formatPlayerNumber(player.scored_matches)];
+    if (sortKey === "played_win_rate") return ["勝率", formatPlayerRate(player.played_win_rate)];
+    if (sortKey === "scored_win_rate") return ["ゴール勝率", formatPlayerRate(player.scored_win_rate)];
+    if (sortKey === "position_order") return ["位置", formatPlayerList(player.positions)];
+    if (sortKey === "player_name") return ["名前順", formatPlayerList(player.positions)];
+    return ["出場", formatPlayerNumber(player.played_matches)];
+  }
+
   function updatePlayerAnalysisSortIndicators() {
-    const { tableHead, sortSelect, sortKeySelect, sortDirectionSelect } = getPlayerAnalysisElements();
+    const { tableHead, sortSelect, sortKeySelect, sortDirectionSelect, listDetailToggle } = getPlayerAnalysisElements();
     if (!tableHead) return;
     tableHead.querySelectorAll("th[data-sort]").forEach(th => {
       const active = th.dataset.sort === playerAnalysisState.sortKey;
@@ -1841,6 +1873,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (sortKeySelect) sortKeySelect.value = playerAnalysisState.sortKey;
     if (sortDirectionSelect) sortDirectionSelect.value = playerAnalysisState.sortDirection;
+    if (listDetailToggle) {
+      listDetailToggle.setAttribute("aria-pressed", playerAnalysisState.listDetail ? "true" : "false");
+      listDetailToggle.textContent = `詳細 ${playerAnalysisState.listDetail ? "ON" : "OFF"}`;
+    }
   }
 
   function resetPlayerAnalysisNumericState() {
@@ -1991,8 +2027,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function applyPlayerAnalysisSortControls() {
     const { sortKeySelect, sortDirectionSelect } = getPlayerAnalysisElements();
+    const previousKey = playerAnalysisState.sortKey;
     if (sortKeySelect) playerAnalysisState.sortKey = sortKeySelect.value || "played_matches";
-    if (sortDirectionSelect) playerAnalysisState.sortDirection = sortDirectionSelect.value === "asc" ? "asc" : "desc";
+    if (sortDirectionSelect) {
+      if (playerAnalysisState.sortKey === "position_order" && previousKey !== "position_order") {
+        playerAnalysisState.sortDirection = "asc";
+        sortDirectionSelect.value = "asc";
+      } else {
+        playerAnalysisState.sortDirection = sortDirectionSelect.value === "asc" ? "asc" : "desc";
+      }
+    }
     renderPlayerAnalysisTable();
   }
 
@@ -2443,25 +2487,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       setupPlayerAnalysisNumberCycles(mobileList);
       return;
     }
-    const maxPlayed = Math.max(1, ...rows.map(player => toPlayerNumber(player.played_matches) || 0));
+    const getPlayedMinutes = player => toPlayerNumber(player && player.__paRankingMetrics && player.__paRankingMetrics.played_minutes) || 0;
+    const maxPlayedMinutes = Math.max(1, ...rows.map(player => getPlayedMinutes(player) || (toPlayerNumber(player.played_matches) || 0)));
     const maxGoals = Math.max(1, ...rows.map(player => toPlayerNumber(player.goals) || 0));
     mobileList.innerHTML = rows.map(player => {
       const key = getPlayerAnalysisKey(player);
       const selected = key === playerAnalysisState.selectedKey;
       const name = player.player_name || "-";
       const played = toPlayerNumber(player.played_matches) || 0;
+      const playedMinutes = getPlayedMinutes(player);
       const starts = toPlayerNumber(player.starter_matches) || 0;
       const goals = toPlayerNumber(player.goals) || 0;
       const playedRate = toPlayerNumber(player.played_win_rate);
-      const scoredRate = toPlayerNumber(player.scored_win_rate);
       const playedPpm = toPlayerNumber(player.played_points_per_match);
       const yellow = toPlayerNumber(player.yellow_cards) || 0;
       const red = toPlayerNumber(player.red_cards) || 0;
       const seasonCount = getPlayerSeasonCount(player);
-      const playedBar = Math.max(0, Math.min(100, (played / maxPlayed) * 100));
+      const playedBarSource = playedMinutes || played;
+      const playedBar = Math.max(0, Math.min(100, (playedBarSource / maxPlayedMinutes) * 100));
       const startBar = played ? Math.max(0, Math.min(100, (starts / played) * 100)) : 0;
       const goalBar = Math.max(0, Math.min(100, (goals / maxGoals) * 100));
       const numbers = getPlayerNumbers(player);
+      const isGoalkeeper = getPlayerPositions(player).includes("GK");
       const displayNumbers = numbers.length ? numbers : ["-"];
       const numberCount = Math.max(1, displayNumbers.length);
       const numberAnimation = `paNumberFade${Math.min(numberCount, 8)}`;
@@ -2471,10 +2518,28 @@ document.addEventListener("DOMContentLoaded", async () => {
           : "";
         return `<span class="${index === 0 ? "is-active" : ""}"${animationStyle}>${escapeHtml(number)}</span>`;
       }).join("");
+      if (!playerAnalysisState.listDetail) {
+        const [metricLabel, metricValue] = getPlayerAnalysisSortMetric(player);
+        return `
+          <button type="button" class="pa-mobile-player-card compact ${selected ? "selected" : ""}" data-pa-key="${escapeHtml(key)}" style="--pa-number-count:${numberCount};--pa-number-duration:${numberCount * 5}s;">
+            <span class="pa-mobile-shirt ${isGoalkeeper ? "gk" : ""}" aria-label="背番号 ${escapeHtml(formatPlayerList(player.numbers))}">
+              <span class="pa-mobile-number-cycle" data-pa-number-count="${numberCount}">${numberCycle}</span>
+            </span>
+            <span class="pa-mobile-compact-name">
+              <small>${escapeHtml(formatPlayerList(player.positions))}</small>
+              <strong title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
+            </span>
+            <span class="pa-mobile-compact-metric">
+              <small>${escapeHtml(metricLabel)}</small>
+              <b>${escapeHtml(metricValue)}</b>
+            </span>
+          </button>
+        `;
+      }
       return `
         <button type="button" class="pa-mobile-player-card ${selected ? "selected" : ""}" data-pa-key="${escapeHtml(key)}" style="--pa-played-bar:${playedBar}%;--pa-start-bar:${startBar}%;--pa-goal-bar:${goalBar}%;--pa-number-count:${numberCount};--pa-number-duration:${numberCount * 5}s;">
           <span class="pa-mobile-identity">
-            <span class="pa-mobile-shirt" aria-label="背番号 ${escapeHtml(formatPlayerList(player.numbers))}">
+            <span class="pa-mobile-shirt ${isGoalkeeper ? "gk" : ""}" aria-label="背番号 ${escapeHtml(formatPlayerList(player.numbers))}">
               <span class="pa-mobile-number-cycle" data-pa-number-count="${numberCount}">${numberCycle}</span>
             </span>
             <span class="pa-mobile-title">
@@ -2488,18 +2553,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           <span class="pa-mobile-focus-row">
             <span><small>出場</small><b>${escapeHtml(formatPlayerNumber(played))}</b></span>
             <span><small>先発</small><b>${escapeHtml(formatPlayerNumber(starts))}</b></span>
+            <span class="time"><small>出場時間</small><b>${escapeHtml(formatPlayerMinutes(playedMinutes))}</b></span>
             <span><small>得点</small><b>${escapeHtml(formatPlayerNumber(goals))}</b></span>
             <span><small>勝率</small><b>${escapeHtml(formatPlayerRate(playedRate))}</b></span>
+            <span><small>PPM</small><b>${escapeHtml(formatPlayerDecimal(playedPpm))}</b></span>
+            <span><small>警告</small><b>${escapeHtml(formatPlayerNumber(yellow))}</b></span>
+            <span><small>退場</small><b>${escapeHtml(formatPlayerNumber(red))}</b></span>
           </span>
           <span class="pa-mobile-bars" aria-hidden="true">
-            <span><small>出場数</small><em><i class="played"></i></em></span>
+            <span><small>出場時間</small><em><i class="played"></i></em></span>
             <span><small>先発率</small><em><i class="starts"></i></em></span>
             <span><small>得点数</small><em><i class="goals"></i></em></span>
-          </span>
-          <span class="pa-mobile-card-foot">
-            <span>得点勝率 ${escapeHtml(formatPlayerRate(scoredRate))}</span>
-            <span>PPM ${escapeHtml(formatPlayerDecimal(playedPpm))}</span>
-            <span>警告 ${escapeHtml(formatPlayerNumber(yellow))} / 退場 ${escapeHtml(formatPlayerNumber(red))}</span>
           </span>
         </button>
       `;
@@ -3359,6 +3423,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (els.sortSelect) els.sortSelect.onchange = () => applyPlayerAnalysisSortSelection(els.sortSelect.value);
     if (els.sortKeySelect) els.sortKeySelect.onchange = applyPlayerAnalysisSortControls;
     if (els.sortDirectionSelect) els.sortDirectionSelect.onchange = applyPlayerAnalysisSortControls;
+    if (els.listDetailToggle) {
+      els.listDetailToggle.onclick = () => {
+        playerAnalysisState.listDetail = !playerAnalysisState.listDetail;
+        renderPlayerAnalysisTable();
+      };
+    }
     if (els.rankings) {
       els.rankings.onclick = (event) => {
         const card = event.target.closest(".pa-rank-card[data-pa-ranking]");
@@ -3382,7 +3452,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         playerAnalysisState.sortDirection = playerAnalysisState.sortDirection === "asc" ? "desc" : "asc";
       } else {
         playerAnalysisState.sortKey = nextKey;
-        playerAnalysisState.sortDirection = nextKey === "player_name" ? "asc" : "desc";
+        playerAnalysisState.sortDirection = nextKey === "player_name" || nextKey === "position_order" ? "asc" : "desc";
       }
       renderPlayerAnalysisTable();
     };
@@ -4118,9 +4188,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!homeHtml && !awayHtml) return "";
 
     return `
-      <section class="lineup-summary">
+      <section class="lineup-summary ${lineupDetailExpanded ? "show-events" : ""}">
         <div class="lineup-summary-head">
           <h4>LINEUPS</h4>
+          <button type="button" class="lineup-detail-toggle" aria-pressed="${lineupDetailExpanded ? "true" : "false"}">
+            詳細 ${lineupDetailExpanded ? "ON" : "OFF"}
+          </button>
         </div>
         <div class="lineup-grid">
           ${homeHtml}
@@ -4385,6 +4458,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!opened) openPlayerSheet(btn.dataset.player, sourceMatch);
       };
     });
+  }
+
+  function bindLineupDetailToggle() {
+    const toggle = sheetContent.querySelector(".lineup-detail-toggle");
+    if (!toggle) return;
+    const summary = toggle.closest(".lineup-summary");
+    const update = () => {
+      if (summary) summary.classList.toggle("show-events", lineupDetailExpanded);
+      toggle.setAttribute("aria-pressed", lineupDetailExpanded ? "true" : "false");
+      toggle.textContent = `詳細 ${lineupDetailExpanded ? "ON" : "OFF"}`;
+    };
+    update();
+    toggle.onclick = () => {
+      lineupDetailExpanded = !lineupDetailExpanded;
+      update();
+    };
   }
 
   function getOwnJapaneseClubName(club) {
@@ -5185,6 +5274,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       visionPreviewBtn.onclick = () => openVisionPreviewPicker(detailData);
     }
     bindPlayerLinks(match);
+    bindLineupDetailToggle();
 
     // Use the unified weather helper
     const wBox = sheetContent.querySelector("#u-auto-weather-area");
