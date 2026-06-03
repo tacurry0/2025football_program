@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260601assets4">
+  <link rel="stylesheet" href="style.css?v=20260603playerui4">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./data/assets/emblems/アルビレックス新潟.png">
@@ -793,30 +793,40 @@ We can't help falling in love with you
     <!-- View 3: Albirex Player Analysis -->
     <main id="player-analysis-view" class="hidden-view">
       <section class="player-analysis-page" aria-labelledby="pa-title">
-        <div class="pa-topbar">
-          <div class="pa-heading">
-            <span class="pa-kicker">ALBIREX NIIGATA</span>
-            <h1 id="pa-title">選手分析</h1>
-          </div>
-          <label class="pa-year-field" for="pa-year-select">
-            <span>年度</span>
-            <select id="pa-year-select" autocomplete="off"></select>
-          </label>
-          <div class="pa-scope-field" aria-label="対象試合">
-            <span>対象試合</span>
-            <div class="pa-scope-switch">
-              <button type="button" class="pa-scope-btn active" data-pa-scope="all">カップ含む全試合</button>
-              <button type="button" class="pa-scope-btn" data-pa-scope="league">リーグ戦のみ</button>
-              <button type="button" class="pa-scope-btn" data-pa-scope="special">特別試合</button>
+        <div class="pa-overview-board">
+          <div class="pa-board-main">
+            <div class="pa-topbar">
+              <div class="pa-heading">
+                <span class="pa-kicker">ALBIREX NIIGATA</span>
+                <h1 id="pa-title">選手分析</h1>
+              </div>
+              <label class="pa-year-field" for="pa-year-select">
+                <span>年度</span>
+                <select id="pa-year-select" autocomplete="off"></select>
+              </label>
+              <div class="pa-scope-field" aria-label="対象試合">
+                <span>対象試合</span>
+                <div class="pa-scope-switch">
+                  <button type="button" class="pa-scope-btn active" data-pa-scope="all">カップ含む全試合</button>
+                  <button type="button" class="pa-scope-btn" data-pa-scope="league">リーグ戦のみ</button>
+                  <button type="button" class="pa-scope-btn" data-pa-scope="special">特別試合</button>
+                </div>
+              </div>
             </div>
+
+            <div id="pa-status" class="pa-status" role="status" aria-live="polite"></div>
+            <div id="pa-summary-cards" class="pa-summary-grid"></div>
           </div>
+          <aside class="pa-board-rankings" aria-label="ランキング">
+            <div id="pa-rankings" class="pa-rankings"></div>
+          </aside>
         </div>
 
-        <div id="pa-status" class="pa-status" role="status" aria-live="polite"></div>
-        <div id="pa-summary-cards" class="pa-summary-grid"></div>
-        <div id="pa-rankings" class="pa-rankings"></div>
-
-        <div class="pa-controls" aria-label="選手分析の絞り込み">
+        <div class="pa-workbench">
+        <button type="button" id="pa-filter-fab" class="pa-filter-fab" aria-controls="pa-filter-panel" aria-expanded="false">FILTER</button>
+        <div id="pa-filter-backdrop" class="pa-filter-backdrop" hidden></div>
+        <div id="pa-filter-panel" class="pa-controls" aria-label="選手分析の絞り込み">
+          <button type="button" id="pa-filter-close" class="pa-filter-close" aria-label="フィルターを閉じる">×</button>
           <div class="pa-filter-main">
             <label class="pa-search-field" for="pa-player-search">
               <span>選手名</span>
@@ -841,6 +851,17 @@ We can't help falling in love with you
           <details class="pa-advanced-filters" id="pa-advanced-filters">
             <summary>詳細条件</summary>
             <div class="pa-advanced-filter-body">
+              <div class="pa-advanced-filter-toolbar">
+                <div class="pa-filter-title">
+                  <span>数値条件</span>
+                  <div class="pa-logic-toggle" aria-label="詳細条件の評価方法">
+                    <button type="button" class="pa-detail-filter-mode-btn active" data-pa-detail-filter-mode="and">AND</button>
+                    <button type="button" class="pa-detail-filter-mode-btn" data-pa-detail-filter-mode="or">OR</button>
+                  </div>
+                </div>
+                <button type="button" id="pa-add-filter-condition" class="pa-add-filter-condition">条件を追加</button>
+              </div>
+              <div id="pa-advanced-filter-rows" class="pa-advanced-filter-rows" aria-label="詳細条件"></div>
               <div class="pa-number-filters" aria-label="数値条件">
                 <label class="pa-number-field" for="pa-number-filter">
                   <span>背番号</span>
@@ -917,9 +938,34 @@ We can't help falling in love with you
           </details>
         </div>
 
+        <section class="pa-data-panel" aria-label="選手一覧">
         <div class="pa-table-headline">
-          <span id="pa-table-count">0人</span>
-          <span>PLAYER DATA</span>
+          <div>
+            <span id="pa-table-count">0人</span>
+            <strong>PLAYER DATA</strong>
+          </div>
+          <div class="pa-sort-controls" aria-label="並び順">
+            <label class="pa-sort-select-field" for="pa-sort-key-select">
+              <span>並び順</span>
+              <select id="pa-sort-key-select">
+                <option value="played_matches">出場試合数</option>
+                <option value="starter_matches">先発数</option>
+                <option value="sub_matches">途中出場数</option>
+                <option value="goals">得点数</option>
+                <option value="scored_matches">ゴール試合数</option>
+                <option value="played_win_rate">出場時勝率</option>
+                <option value="scored_win_rate">ゴール試合勝率</option>
+                <option value="player_name">選手名</option>
+              </select>
+            </label>
+            <label class="pa-sort-select-field compact" for="pa-sort-direction-select">
+              <span>順</span>
+              <select id="pa-sort-direction-select">
+                <option value="desc">降順</option>
+                <option value="asc">昇順</option>
+              </select>
+            </label>
+          </div>
         </div>
         <div class="pa-table-scroll">
           <table class="pa-table">
@@ -945,6 +991,8 @@ We can't help falling in love with you
         <div id="pa-mobile-list" class="pa-mobile-list" aria-label="選手一覧"></div>
 
         <section id="pa-detail-card" class="pa-detail-card" aria-live="polite"></section>
+        </section>
+        </div>
       </section>
     </main>
 
@@ -1026,7 +1074,7 @@ We can't help falling in love with you
 
 
 <script src="schedule/schedule.js?v=20260601results2"></script>
-<script src="script.js?v=20260601results5"></script>
+<script src="script.js?v=20260603playerui4"></script>
 
 </body>
 </html>

@@ -136,7 +136,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const playerAnalysisCache = new Map();
   const playerAnalysisScopedCache = new Map();
   const playerAnalysisDatasetCache = new Map();
+  const playerAnalysisRankingMetricsCache = new Map();
   const playerAnalysisAllPromises = new Map();
+  let playerAnalysisAllYearRowsEntry = null;
   const playerAnalysisSeasonMetaCache = new Map();
   const playerAnalysisMonthlyMetaCache = new Map();
   const playerAnalysisSpecialAvailabilityCache = new Map();
@@ -166,6 +168,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     redMin: "",
     seasonsMin: "",
     seasonsMax: "",
+    compactFilterType: "",
+    compactFilterValue: "",
+    compactFilterMonth: "5",
+    advancedFilterLogic: "and",
+    advancedFilters: [{ type: "", value: "", month: "5" }],
     scorersOnly: false,
     playedOnly: false,
     katakanaOnly: false,
@@ -862,8 +869,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       rankings: document.getElementById("pa-rankings"),
       scopeButtons: document.querySelectorAll(".pa-scope-btn"),
       search: document.getElementById("pa-player-search"),
+      filterPanel: document.getElementById("pa-filter-panel"),
+      filterFab: document.getElementById("pa-filter-fab"),
+      filterBackdrop: document.getElementById("pa-filter-backdrop"),
+      filterClose: document.getElementById("pa-filter-close"),
       positionOptions: document.getElementById("pa-position-options"),
       positionModeButtons: document.querySelectorAll(".pa-position-mode-btn"),
+      compactFilterType: document.getElementById("pa-filter-type-select"),
+      compactFilterValue: document.getElementById("pa-filter-value-input"),
+      compactFilterMonth: document.getElementById("pa-filter-month-select"),
+      detailFilterModeButtons: document.querySelectorAll(".pa-detail-filter-mode-btn"),
+      advancedFilterRows: document.getElementById("pa-advanced-filter-rows"),
+      addFilterCondition: document.getElementById("pa-add-filter-condition"),
       numberFilter: document.getElementById("pa-number-filter"),
       playedMin: document.getElementById("pa-played-min"),
       playedMax: document.getElementById("pa-played-max"),
@@ -886,9 +903,25 @@ document.addEventListener("DOMContentLoaded", async () => {
       tableHead: document.getElementById("pa-table-head"),
       tableBody: document.getElementById("pa-table-body"),
       tableCount: document.getElementById("pa-table-count"),
+      sortSelect: document.getElementById("pa-sort-select"),
+      sortKeySelect: document.getElementById("pa-sort-key-select"),
+      sortDirectionSelect: document.getElementById("pa-sort-direction-select"),
       mobileList: document.getElementById("pa-mobile-list"),
       detail: document.getElementById("pa-detail-card")
     };
+  }
+
+  function setPlayerAnalysisFilterPanel(open) {
+    const els = getPlayerAnalysisElements();
+    if (!els.filterPanel) return;
+    const active = Boolean(open);
+    els.filterPanel.classList.toggle("active", active);
+    if (els.filterFab) els.filterFab.setAttribute("aria-expanded", active ? "true" : "false");
+    if (els.filterBackdrop) {
+      els.filterBackdrop.hidden = !active;
+      els.filterBackdrop.classList.toggle("active", active);
+    }
+    document.body.classList.toggle("pa-filter-open", active);
   }
 
   function hasPlayerValue(value) {
@@ -961,6 +994,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       groupKey: compact.toLowerCase()
     };
 
+    if (compact === "曺永哲" || compact === "チョヨンチョル") {
+      return { key: "曺 永哲", name: "曺 永哲", groupKey: "曺永哲" };
+    }
     if (compact === "マイケルジェームズ" || compact === "舞行龍ジェームズ") {
       return { key: "舞行龍ジェームズ", name: "舞行龍ジェームズ", groupKey: "舞行龍ジェームズ" };
     }
@@ -1048,6 +1084,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     playerAnalysisCache.set(normalizedYear, entry);
     return entry;
+  }
+
+  async function loadAllPlayerAnalysisYearRows() {
+    if (playerAnalysisAllYearRowsEntry) return playerAnalysisAllYearRowsEntry;
+    playerAnalysisAllYearRowsEntry = (async () => {
+      const entry = { rows: [], missing: false };
+      try {
+        const res = await fetch("./data/generated/niigata/all_years_player_analysis.json");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const payload = await res.json();
+        entry.rows = normalizePlayerAnalysisRows(payload, null);
+        entry.missing = entry.rows.length === 0;
+      } catch (error) {
+        console.error("Failed to load all years player analysis", error);
+        entry.rows = [];
+        entry.missing = true;
+        entry.error = error;
+      }
+      return entry;
+    })();
+    return playerAnalysisAllYearRowsEntry;
   }
 
   function getPlayerAnalysisScopeLabel(scope = playerAnalysisState.matchScope) {
@@ -1414,11 +1471,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function loadAllPlayerAnalysisYears(scope = playerAnalysisState.matchScope) {
     if (!playerAnalysisAllPromises.has(scope)) {
-      const promise = Promise.all(getPlayerAnalysisYears().map(year => loadScopedPlayerAnalysisYear(year, scope)))
-        .then(entries => {
-          const rows = entries.flatMap(entry => entry.rows || []);
-          return { rows: aggregatePlayerAnalysisRows(rows), missing: rows.length === 0 };
-        });
+      const promise = scope === "all"
+        ? loadAllPlayerAnalysisYearRows().then(entry => ({
+          rows: aggregatePlayerAnalysisRows(entry.rows || []),
+          missing: entry.missing || (entry.rows || []).length === 0
+        }))
+        : Promise.all(getPlayerAnalysisYears().map(year => loadScopedPlayerAnalysisYear(year, scope)))
+          .then(entries => {
+            const rows = entries.flatMap(entry => entry.rows || []);
+            return { rows: aggregatePlayerAnalysisRows(rows), missing: rows.length === 0 };
+          });
       playerAnalysisAllPromises.set(scope, promise);
     }
     return playerAnalysisAllPromises.get(scope);
@@ -1427,6 +1489,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function getPlayerAnalysisYearRowsForPlayer(player) {
     const groupKey = getPlayerGroupKey(player);
     if (!groupKey) return [];
+    if (playerAnalysisState.matchScope === "all") {
+      const entry = await loadAllPlayerAnalysisYearRows();
+      return (entry.rows || [])
+        .filter(row => getPlayerGroupKey(row) === groupKey)
+        .sort((a, b) => (getPlayerYearValue(b) || 0) - (getPlayerYearValue(a) || 0));
+    }
     await loadAllPlayerAnalysisYears(playerAnalysisState.matchScope);
     return getPlayerAnalysisYears()
       .flatMap(year => playerAnalysisScopedCache.get(`${year}:${playerAnalysisState.matchScope}`)?.rows || [])
@@ -1542,7 +1610,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function needsPlayerSeasonMeta() {
     return parsePlayerFilterNumber(playerAnalysisState.seasonsMin) !== null
-      || parsePlayerFilterNumber(playerAnalysisState.seasonsMax) !== null;
+      || parsePlayerFilterNumber(playerAnalysisState.seasonsMax) !== null
+      || getActivePlayerAnalysisAdvancedFilters().some(filter => filter.type === "seasons-min" || filter.type === "seasons-max");
   }
 
   function normalizePlayerMonthFilter(value) {
@@ -1557,9 +1626,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function needsPlayerMonthlyMeta() {
-    return normalizePlayerMonthFilter(playerAnalysisState.monthFilter) !== null
+    return (normalizePlayerMonthFilter(playerAnalysisState.monthFilter) !== null
       && (parsePlayerFilterNumber(playerAnalysisState.monthGoalsMin) !== null
-        || parsePlayerFilterNumber(playerAnalysisState.monthPlayedRateMin) !== null);
+        || parsePlayerFilterNumber(playerAnalysisState.monthPlayedRateMin) !== null))
+      || getActivePlayerAnalysisAdvancedFilters().some(filter => isPlayerAnalysisMonthCompactFilter(filter.type));
   }
 
   function getPlayerMonthlyCacheKey(year = playerAnalysisState.year, scope = playerAnalysisState.matchScope, month = normalizePlayerMonthFilter(playerAnalysisState.monthFilter)) {
@@ -1621,66 +1691,109 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getPlayerMonthlyStats(player) {
     const month = normalizePlayerMonthFilter(playerAnalysisState.monthFilter);
+    return getPlayerMonthlyStatsForMonth(player, month);
+  }
+
+  function getPlayerMonthlyStatsForMonth(player, month) {
     if (!month) return { played: 0, wins: 0, draws: 0, losses: 0, goals: 0 };
     const meta = playerAnalysisMonthlyMetaCache.get(getPlayerMonthlyCacheKey(playerAnalysisState.year, playerAnalysisState.matchScope, month));
     if (!(meta instanceof Map)) return { played: 0, wins: 0, draws: 0, losses: 0, goals: 0 };
     return meta.get(getPlayerGroupKey(player)) || { played: 0, wins: 0, draws: 0, losses: 0, goals: 0 };
   }
 
+  function getActivePlayerAnalysisAdvancedFilters() {
+    return (playerAnalysisState.advancedFilters || [])
+      .map(filter => ({
+        type: String(filter && filter.type || ""),
+        value: String(filter && filter.value || "").trim(),
+        month: String(filter && filter.month || "5")
+      }))
+      .filter(filter => filter.type && filter.value !== "");
+  }
+
+  function getPlayerAnalysisAdvancedFilterOptions() {
+    return [
+      ["", "条件なし"],
+      ["number", "背番号"],
+      ["played-min", "出場試合数 以上"],
+      ["played-max", "出場試合数 以下"],
+      ["starts-min", "先発数 以上"],
+      ["goals-min", "得点数 以上"],
+      ["played-rate-min", "出場時勝率 %以上"],
+      ["scored-rate-min", "ゴール試合勝率 %以上"],
+      ["scored-ppm-min", "ゴール試合平均勝ち点 以上"],
+      ["month-goals-min", "対象月の得点数 以上"],
+      ["month-played-rate-min", "対象月の出場時勝率 %以上"],
+      ["yellow-min", "警告数 以上"],
+      ["red-min", "退場数 以上"],
+      ["seasons-min", "所属年数 以上"],
+      ["seasons-max", "所属年数 以下"]
+    ];
+  }
+
+  function createPlayerAnalysisAdvancedFilter() {
+    return { type: "", value: "", month: "5" };
+  }
+
+  function matchesPlayerAnalysisAdvancedFilter(player, filter) {
+    const value = parsePlayerFilterNumber(filter.value);
+    if (value === null) return true;
+    const numbers = getPlayerNumbers(player);
+    const played = toPlayerNumber(player.played_matches) || 0;
+    const starts = toPlayerNumber(player.starter_matches) || 0;
+    const goals = toPlayerNumber(player.goals) || 0;
+    const playedRate = toPlayerNumber(player.played_win_rate);
+    const scoredRate = toPlayerNumber(player.scored_win_rate);
+    const scoredPpm = toPlayerNumber(player.scored_points_per_match);
+    const yellow = toPlayerNumber(player.yellow_cards) || 0;
+    const red = toPlayerNumber(player.red_cards) || 0;
+    const seasonCount = getPlayerSeasonCount(player);
+
+    if (filter.type === "number") return numbers.some(number => Number(number) === value || number === String(filter.value).trim());
+    if (filter.type === "played-min") return played >= value;
+    if (filter.type === "played-max") return played <= value;
+    if (filter.type === "starts-min") return starts >= value;
+    if (filter.type === "goals-min") return goals >= value;
+    if (filter.type === "played-rate-min") return playedRate !== null && playedRate >= value;
+    if (filter.type === "scored-rate-min") return scoredRate !== null && scoredRate >= value;
+    if (filter.type === "scored-ppm-min") return scoredPpm !== null && scoredPpm >= value;
+    if (filter.type === "yellow-min") return yellow >= value;
+    if (filter.type === "red-min") return red >= value;
+    if (filter.type === "seasons-min") return seasonCount >= value;
+    if (filter.type === "seasons-max") return seasonCount <= value;
+    if (filter.type === "month-goals-min" || filter.type === "month-played-rate-min") {
+      const month = normalizePlayerMonthFilter(filter.month);
+      const monthlyStats = getPlayerMonthlyStatsForMonth(player, month);
+      if (filter.type === "month-goals-min") return monthlyStats.goals >= value;
+      const monthlyPlayedRate = calculatePlayerRate(monthlyStats.wins, monthlyStats.played);
+      return monthlyPlayedRate !== null && monthlyPlayedRate >= value;
+    }
+    return true;
+  }
+
   function getPlayerAnalysisFilteredRows() {
     const query = playerAnalysisState.query.normalize("NFKC").toLowerCase().trim();
     const selectedPositions = playerAnalysisState.positions || [];
-    const numberFilter = String(playerAnalysisState.numberFilter || "").trim();
-    const playedMin = parsePlayerFilterNumber(playerAnalysisState.playedMin);
-    const playedMax = parsePlayerFilterNumber(playerAnalysisState.playedMax);
-    const startsMin = parsePlayerFilterNumber(playerAnalysisState.startsMin);
-    const goalsMin = parsePlayerFilterNumber(playerAnalysisState.goalsMin);
-    const playedRateMin = parsePlayerFilterNumber(playerAnalysisState.playedRateMin);
-    const scoredRateMin = parsePlayerFilterNumber(playerAnalysisState.scoredRateMin);
-    const scoredPpmMin = parsePlayerFilterNumber(playerAnalysisState.scoredPpmMin);
-    const month = normalizePlayerMonthFilter(playerAnalysisState.monthFilter);
-    const monthGoalsMin = parsePlayerFilterNumber(playerAnalysisState.monthGoalsMin);
-    const monthPlayedRateMin = parsePlayerFilterNumber(playerAnalysisState.monthPlayedRateMin);
-    const yellowMin = parsePlayerFilterNumber(playerAnalysisState.yellowMin);
-    const redMin = parsePlayerFilterNumber(playerAnalysisState.redMin);
-    const seasonsMin = parsePlayerFilterNumber(playerAnalysisState.seasonsMin);
-    const seasonsMax = parsePlayerFilterNumber(playerAnalysisState.seasonsMax);
+    const activeFilters = getActivePlayerAnalysisAdvancedFilters();
+    const advancedFilterLogic = playerAnalysisState.advancedFilterLogic === "or" ? "or" : "and";
     return playerAnalysisState.data.filter(player => {
       const name = String(player.player_name || "").normalize("NFKC").toLowerCase();
       const positions = getPlayerPositions(player);
-      const numbers = getPlayerNumbers(player);
       const played = toPlayerNumber(player.played_matches) || 0;
-      const starts = toPlayerNumber(player.starter_matches) || 0;
       const goals = toPlayerNumber(player.goals) || 0;
-      const playedRate = toPlayerNumber(player.played_win_rate);
-      const scoredRate = toPlayerNumber(player.scored_win_rate);
-      const scoredPpm = toPlayerNumber(player.scored_points_per_match);
-      const yellow = toPlayerNumber(player.yellow_cards) || 0;
-      const red = toPlayerNumber(player.red_cards) || 0;
-      const seasonCount = getPlayerSeasonCount(player);
-      const monthlyStats = month && (monthGoalsMin !== null || monthPlayedRateMin !== null) ? getPlayerMonthlyStats(player) : null;
-      const monthlyPlayedRate = monthlyStats ? calculatePlayerRate(monthlyStats.wins, monthlyStats.played) : null;
       if (query && !name.includes(query)) return false;
-      if (numberFilter && !numbers.some(number => number === numberFilter)) return false;
       if (selectedPositions.length) {
         const matchesPosition = playerAnalysisState.positionMode === "and"
           ? selectedPositions.every(pos => positions.includes(pos))
           : selectedPositions.some(pos => positions.includes(pos));
         if (!matchesPosition) return false;
       }
-      if (playedMin !== null && played < playedMin) return false;
-      if (playedMax !== null && played > playedMax) return false;
-      if (startsMin !== null && starts < startsMin) return false;
-      if (goalsMin !== null && goals < goalsMin) return false;
-      if (playedRateMin !== null && (playedRate === null || playedRate < playedRateMin)) return false;
-      if (scoredRateMin !== null && (scoredRate === null || scoredRate < scoredRateMin)) return false;
-      if (scoredPpmMin !== null && (scoredPpm === null || scoredPpm < scoredPpmMin)) return false;
-      if (monthGoalsMin !== null && (!monthlyStats || monthlyStats.goals < monthGoalsMin)) return false;
-      if (monthPlayedRateMin !== null && (monthlyPlayedRate === null || monthlyPlayedRate < monthPlayedRateMin)) return false;
-      if (yellowMin !== null && yellow < yellowMin) return false;
-      if (redMin !== null && red < redMin) return false;
-      if (seasonsMin !== null && seasonCount < seasonsMin) return false;
-      if (seasonsMax !== null && seasonCount > seasonsMax) return false;
+      if (activeFilters.length) {
+        const matchesAdvanced = advancedFilterLogic === "or"
+          ? activeFilters.some(filter => matchesPlayerAnalysisAdvancedFilter(player, filter))
+          : activeFilters.every(filter => matchesPlayerAnalysisAdvancedFilter(player, filter));
+        if (!matchesAdvanced) return false;
+      }
       if (playerAnalysisState.scorersOnly && goals <= 0) return false;
       if (playerAnalysisState.playedOnly && played <= 0) return false;
       if (playerAnalysisState.katakanaOnly && !KATAKANA_PLAYER_RE.test(String(player.player_name || ""))) return false;
@@ -1713,7 +1826,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function updatePlayerAnalysisSortIndicators() {
-    const { tableHead } = getPlayerAnalysisElements();
+    const { tableHead, sortSelect, sortKeySelect, sortDirectionSelect } = getPlayerAnalysisElements();
     if (!tableHead) return;
     tableHead.querySelectorAll("th[data-sort]").forEach(th => {
       const active = th.dataset.sort === playerAnalysisState.sortKey;
@@ -1721,6 +1834,166 @@ document.addEventListener("DOMContentLoaded", async () => {
       th.classList.toggle("sort-desc", active && playerAnalysisState.sortDirection === "desc");
       th.setAttribute("aria-sort", active ? (playerAnalysisState.sortDirection === "asc" ? "ascending" : "descending") : "none");
     });
+    if (sortSelect) {
+      const value = `${playerAnalysisState.sortKey}:${playerAnalysisState.sortDirection}`;
+      const hasOption = Array.from(sortSelect.options).some(option => option.value === value);
+      if (hasOption) sortSelect.value = value;
+    }
+    if (sortKeySelect) sortKeySelect.value = playerAnalysisState.sortKey;
+    if (sortDirectionSelect) sortDirectionSelect.value = playerAnalysisState.sortDirection;
+  }
+
+  function resetPlayerAnalysisNumericState() {
+    playerAnalysisState.numberFilter = "";
+    playerAnalysisState.playedMin = "";
+    playerAnalysisState.playedMax = "";
+    playerAnalysisState.startsMin = "";
+    playerAnalysisState.goalsMin = "";
+    playerAnalysisState.playedRateMin = "";
+    playerAnalysisState.scoredRateMin = "";
+    playerAnalysisState.scoredPpmMin = "";
+    playerAnalysisState.monthFilter = "";
+    playerAnalysisState.monthGoalsMin = "";
+    playerAnalysisState.monthPlayedRateMin = "";
+    playerAnalysisState.yellowMin = "";
+    playerAnalysisState.redMin = "";
+    playerAnalysisState.seasonsMin = "";
+    playerAnalysisState.seasonsMax = "";
+  }
+
+  function getPlayerAnalysisCompactFilterMap() {
+    return {
+      "number": "numberFilter",
+      "played-min": "playedMin",
+      "played-max": "playedMax",
+      "starts-min": "startsMin",
+      "goals-min": "goalsMin",
+      "played-rate-min": "playedRateMin",
+      "scored-rate-min": "scoredRateMin",
+      "scored-ppm-min": "scoredPpmMin",
+      "month-goals-min": "monthGoalsMin",
+      "month-played-rate-min": "monthPlayedRateMin",
+      "yellow-min": "yellowMin",
+      "red-min": "redMin",
+      "seasons-min": "seasonsMin",
+      "seasons-max": "seasonsMax"
+    };
+  }
+
+  function isPlayerAnalysisMonthCompactFilter(type) {
+    return type === "month-goals-min" || type === "month-played-rate-min";
+  }
+
+  function updatePlayerAnalysisCompactFilterControls(els = getPlayerAnalysisElements()) {
+    if (!els.compactFilterMonth) return;
+    const isMonthFilter = isPlayerAnalysisMonthCompactFilter(els.compactFilterType ? els.compactFilterType.value : playerAnalysisState.compactFilterType);
+    const field = els.compactFilterMonth.closest(".pa-filter-month-field");
+    const container = els.compactFilterMonth.closest(".pa-compact-number-filter");
+    if (container) container.classList.toggle("month-active", isMonthFilter);
+    if (field) field.hidden = !isMonthFilter;
+    els.compactFilterMonth.disabled = !isMonthFilter;
+  }
+
+  function applyPlayerAnalysisCompactFilterState(els) {
+    const type = els.compactFilterType ? els.compactFilterType.value : "";
+    const value = els.compactFilterValue ? els.compactFilterValue.value : "";
+    const month = els.compactFilterMonth ? els.compactFilterMonth.value : playerAnalysisState.compactFilterMonth;
+    playerAnalysisState.compactFilterType = type;
+    playerAnalysisState.compactFilterValue = value;
+    playerAnalysisState.compactFilterMonth = month || "5";
+    resetPlayerAnalysisNumericState();
+    const targetKey = getPlayerAnalysisCompactFilterMap()[type];
+    if (targetKey && String(value).trim() !== "") {
+      playerAnalysisState[targetKey] = value;
+      if (isPlayerAnalysisMonthCompactFilter(type)) {
+        playerAnalysisState.monthFilter = playerAnalysisState.compactFilterMonth;
+      }
+    }
+    updatePlayerAnalysisCompactFilterControls(els);
+    [
+      "numberFilter", "playedMin", "playedMax", "startsMin", "goalsMin",
+      "playedRateMin", "scoredRateMin", "scoredPpmMin", "monthFilter",
+      "monthGoalsMin", "monthPlayedRateMin", "yellowMin", "redMin",
+      "seasonsMin", "seasonsMax"
+    ].forEach(key => {
+      const inputKey = key === "numberFilter" ? "numberFilter" : key.charAt(0).toLowerCase() + key.slice(1);
+      if (els[inputKey]) els[inputKey].value = playerAnalysisState[key] || "";
+    });
+  }
+
+  function applyPlayerAnalysisSortSelection(value) {
+    const [key, direction] = String(value || "").split(":");
+    if (!key) return;
+    playerAnalysisState.sortKey = key;
+    playerAnalysisState.sortDirection = direction === "asc" ? "asc" : "desc";
+    renderPlayerAnalysisTable();
+  }
+
+  function renderPlayerAnalysisDetailFilterModes() {
+    const { detailFilterModeButtons } = getPlayerAnalysisElements();
+    detailFilterModeButtons.forEach(button => {
+      const active = button.dataset.paDetailFilterMode === playerAnalysisState.advancedFilterLogic;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  function renderPlayerAnalysisAdvancedFilterRows() {
+    const { advancedFilterRows } = getPlayerAnalysisElements();
+    if (!advancedFilterRows) return;
+    const filters = playerAnalysisState.advancedFilters && playerAnalysisState.advancedFilters.length
+      ? playerAnalysisState.advancedFilters
+      : [createPlayerAnalysisAdvancedFilter()];
+    const options = getPlayerAnalysisAdvancedFilterOptions();
+    advancedFilterRows.innerHTML = filters.map((filter, index) => {
+      const type = String(filter.type || "");
+      const monthActive = isPlayerAnalysisMonthCompactFilter(type);
+      return `
+        <div class="pa-filter-condition-row ${monthActive ? "month-active" : ""}" data-pa-filter-index="${index}">
+          <label class="pa-select-field">
+            <span>条件 ${index + 1}</span>
+            <select data-pa-filter-type>
+              ${options.map(([value, label]) => `<option value="${escapeHtml(value)}" ${value === type ? "selected" : ""}>${escapeHtml(label)}</option>`).join("")}
+            </select>
+          </label>
+          <label class="pa-select-field pa-filter-month-field" ${monthActive ? "" : "hidden"}>
+            <span>月</span>
+            <select data-pa-filter-month ${monthActive ? "" : "disabled"}>
+              ${Array.from({ length: 12 }, (_, itemIndex) => {
+                const month = String(itemIndex + 1);
+                return `<option value="${month}" ${String(filter.month || "5") === month ? "selected" : ""}>${month}月</option>`;
+              }).join("")}
+            </select>
+          </label>
+          <label class="pa-number-field compact">
+            <span>数値</span>
+            <input type="number" data-pa-filter-value min="0" inputmode="decimal" value="${escapeHtml(String(filter.value || ""))}" placeholder="例: 10">
+          </label>
+          <button type="button" class="pa-filter-condition-remove" data-pa-filter-remove="${index}" aria-label="条件 ${index + 1} を削除">×</button>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function readPlayerAnalysisAdvancedFilterRows() {
+    const { advancedFilterRows } = getPlayerAnalysisElements();
+    if (!advancedFilterRows) return;
+    const rows = Array.from(advancedFilterRows.querySelectorAll(".pa-filter-condition-row"));
+    playerAnalysisState.advancedFilters = rows.map(row => ({
+      type: row.querySelector("[data-pa-filter-type]")?.value || "",
+      value: row.querySelector("[data-pa-filter-value]")?.value || "",
+      month: row.querySelector("[data-pa-filter-month]")?.value || "5"
+    }));
+    if (!playerAnalysisState.advancedFilters.length) {
+      playerAnalysisState.advancedFilters = [createPlayerAnalysisAdvancedFilter()];
+    }
+  }
+
+  function applyPlayerAnalysisSortControls() {
+    const { sortKeySelect, sortDirectionSelect } = getPlayerAnalysisElements();
+    if (sortKeySelect) playerAnalysisState.sortKey = sortKeySelect.value || "played_matches";
+    if (sortDirectionSelect) playerAnalysisState.sortDirection = sortDirectionSelect.value === "asc" ? "asc" : "desc";
+    renderPlayerAnalysisTable();
   }
 
   function renderPlayerAnalysisSummary(rows) {
@@ -1734,15 +2007,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     const totalGoals = rows.reduce((sum, row) => sum + (toPlayerNumber(row.goals) || 0), 0);
     const topAppearance = [...rows].sort((a, b) => (toPlayerNumber(b.played_matches) || 0) - (toPlayerNumber(a.played_matches) || 0))[0];
     const topScorer = [...rows].sort((a, b) => (toPlayerNumber(b.goals) || 0) - (toPlayerNumber(a.goals) || 0))[0];
+    const topStarter = [...rows].sort((a, b) => (toPlayerNumber(b.starter_matches) || 0) - (toPlayerNumber(a.starter_matches) || 0))[0];
+    const topWinRate = [...rows]
+      .filter(row => (toPlayerNumber(row.played_matches) || 0) > 0 && toPlayerNumber(row.played_win_rate) !== null)
+      .sort((a, b) => (toPlayerNumber(b.played_win_rate) || 0) - (toPlayerNumber(a.played_win_rate) || 0)
+        || (toPlayerNumber(b.played_matches) || 0) - (toPlayerNumber(a.played_matches) || 0))[0];
     const yearLabel = playerAnalysisState.year === "all" ? "全期間" : `${playerAnalysisState.year}年`;
     const scopeLabel = getPlayerAnalysisScopeLabel();
     const cards = [
       ["対象", yearLabel, scopeLabel],
-      ["登録選手", rows.length, "選手数"],
+      ["選手数", rows.length, `${playedPlayers}人が出場`],
       ["出場あり", playedPlayers, "出場試合数 1以上"],
       ["総得点", totalGoals, "選手別得点の合計"],
       ["最多出場", formatPlayerNumber(topAppearance && topAppearance.played_matches), topAppearance ? topAppearance.player_name : "-"],
-      ["得点トップ", formatPlayerNumber(topScorer && topScorer.goals), topScorer ? topScorer.player_name : "-"]
+      ["最多先発", formatPlayerNumber(topStarter && topStarter.starter_matches), topStarter ? topStarter.player_name : "-"],
+      ["得点トップ", formatPlayerNumber(topScorer && topScorer.goals), topScorer ? topScorer.player_name : "-"],
+      ["出場勝率トップ", formatPlayerRate(topWinRate && topWinRate.played_win_rate), topWinRate ? topWinRate.player_name : "-"]
     ];
     summary.innerHTML = cards.map(([label, value, caption]) => `
       <div class="pa-summary-card">
@@ -1753,14 +2033,249 @@ document.addEventListener("DOMContentLoaded", async () => {
     `).join("");
   }
 
+  function createPlayerRankingMetric() {
+    return {
+      played_minutes: 0,
+      sub_goals: 0,
+      first_half_goals: 0,
+      second_half_goals: 0,
+      additional_time_goals: 0,
+      extra_time_goals: 0,
+      hat_tricks: 0,
+      gk_matches: 0,
+      gk_goals_against: 0,
+      gk_goals_against_avg: null,
+      gk_clean_sheets: 0
+    };
+  }
+
+  function getPlayerRankingValue(player, config) {
+    if (!player || !config) return null;
+    if (config.metricKey) {
+      const metrics = player.__paRankingMetrics || {};
+      return toPlayerNumber(metrics[config.metricKey]);
+    }
+    return toPlayerNumber(player[config.sortKey]);
+  }
+
+  function formatPlayerMinutes(value) {
+    const n = toPlayerNumber(value);
+    return n === null ? "-" : `${Math.round(n).toLocaleString("ja-JP")}分`;
+  }
+
+  function formatPlayerGoalsAgainstAverage(value) {
+    const n = toPlayerNumber(value);
+    return n === null ? "-" : n.toFixed(2);
+  }
+
+  function parsePlayerGoalMinute(goal) {
+    const raw = String((goal && (goal.time || goal.minute)) || "");
+    const fromRaw = raw.match(/\d+/);
+    const fromMinute = toPlayerNumber(goal && goal.minute);
+    const minute = fromMinute !== null ? fromMinute : (fromRaw ? Number(fromRaw[0]) : null);
+    return {
+      minute,
+      isAdditional: /\+/.test(raw),
+      isExtra: minute !== null && minute > 90 && !/\+/.test(raw)
+    };
+  }
+
+  function calculatePlayerAppearanceMinutes(appearance) {
+    if (!appearance || !appearance.played) return 0;
+    const start = toPlayerNumber(appearance.minute_in) || 0;
+    const endValue = toPlayerNumber(appearance.minute_out);
+    const end = endValue === null ? 90 : endValue;
+    return Math.max(0, end - start);
+  }
+
+  function ensurePlayerRankingMetric(metrics, source, sourceYear) {
+    const identity = getPlayerCanonicalIdentity(source, sourceYear);
+    const key = identity.groupKey;
+    if (!key) return null;
+    if (!metrics.has(key)) metrics.set(key, createPlayerRankingMetric());
+    return metrics.get(key);
+  }
+
+  async function buildPlayerAnalysisRankingMetrics(year = playerAnalysisState.year, scope = playerAnalysisState.matchScope) {
+    const metrics = new Map();
+    const years = year === "all" ? getPlayerAnalysisYears() : [Number(year)];
+
+    for (const targetYear of years) {
+      if (!Number.isInteger(targetYear)) continue;
+      const dataset = await loadPlayerAnalysisDatasetYear(targetYear);
+      if (dataset.missing) continue;
+      const targetMatches = (dataset.matches || []).filter(match => isPlayerAnalysisScopeMatch(match, scope));
+      if (!targetMatches.length) continue;
+
+      const matchMap = new Map(targetMatches.map(match => [String(match.match_id), match]));
+      const appearanceByMatchPlayer = new Map();
+
+      (dataset.appearances || []).forEach(appearance => {
+        const match = matchMap.get(String(appearance.match_id));
+        if (!match) return;
+        const identity = getPlayerCanonicalIdentity(appearance, targetYear);
+        const groupKey = identity.groupKey;
+        if (!groupKey) return;
+        if (appearance.played) {
+          appearanceByMatchPlayer.set(`${String(appearance.match_id)}|${groupKey}`, appearance);
+          const metric = ensurePlayerRankingMetric(metrics, appearance, targetYear);
+          if (!metric) return;
+          metric.played_minutes += calculatePlayerAppearanceMinutes(appearance);
+          if (String(appearance.position || "").trim() === "GK") {
+            metric.gk_matches += 1;
+            metric.gk_goals_against += toPlayerNumber(match.opponent_score) || 0;
+            if ((toPlayerNumber(match.opponent_score) || 0) === 0) metric.gk_clean_sheets += 1;
+          }
+        }
+      });
+
+      const goalsByMatchPlayer = new Map();
+      (dataset.goals || []).forEach(goal => {
+        const match = matchMap.get(String(goal.match_id));
+        if (!match || goal.is_own_goal || !goal.player_key) return;
+        const identity = getPlayerCanonicalIdentity(goal, targetYear);
+        const groupKey = identity.groupKey;
+        const metric = ensurePlayerRankingMetric(metrics, goal, targetYear);
+        if (!metric || !groupKey) return;
+        const matchPlayerKey = `${String(goal.match_id)}|${groupKey}`;
+        const appearance = appearanceByMatchPlayer.get(matchPlayerKey);
+        if (appearance && (appearance.sub_in || String(appearance.appearance_type || "") === "sub")) {
+          metric.sub_goals += 1;
+        }
+        const goalMinute = parsePlayerGoalMinute(goal);
+        if (goalMinute.isExtra) metric.extra_time_goals += 1;
+        else if (goalMinute.isAdditional) metric.additional_time_goals += 1;
+        else if (goalMinute.minute !== null && goalMinute.minute <= 45) metric.first_half_goals += 1;
+        else metric.second_half_goals += 1;
+
+        goalsByMatchPlayer.set(matchPlayerKey, (goalsByMatchPlayer.get(matchPlayerKey) || 0) + 1);
+      });
+
+      goalsByMatchPlayer.forEach((goalCount, matchPlayerKey) => {
+        if (goalCount < 3) return;
+        const groupKey = String(matchPlayerKey).split("|").pop();
+        const metric = metrics.get(groupKey);
+        if (metric) metric.hat_tricks += 1;
+      });
+    }
+
+    metrics.forEach(metric => {
+      metric.gk_goals_against_avg = metric.gk_matches
+        ? Math.round((metric.gk_goals_against / metric.gk_matches) * 100) / 100
+        : null;
+    });
+
+    return metrics;
+  }
+
+  async function ensurePlayerAnalysisRankingMetrics(rows) {
+    const cacheKey = `${playerAnalysisState.matchScope}:${playerAnalysisState.year}`;
+    let metrics = playerAnalysisRankingMetricsCache.get(cacheKey);
+    if (!metrics) {
+      metrics = await buildPlayerAnalysisRankingMetrics(playerAnalysisState.year, playerAnalysisState.matchScope);
+      playerAnalysisRankingMetricsCache.set(cacheKey, metrics);
+    }
+    (rows || []).forEach(row => {
+      row.__paRankingMetrics = metrics.get(getPlayerGroupKey(row)) || createPlayerRankingMetric();
+    });
+  }
+
   function getPlayerAnalysisRankingConfigs() {
     return [
       {
-        id: "scored-win-rate",
-        title: "ゴールした試合の勝率ランキング",
-        sortKey: "scored_win_rate",
-        valueFormatter: formatPlayerRate,
-        filterFn: player => (toPlayerNumber(player.scored_matches) || 0) > 0 && toPlayerNumber(player.scored_win_rate) !== null
+        id: "goals",
+        title: "ゴール数ランキング",
+        sortKey: "goals",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (toPlayerNumber(player.goals) || 0) > 0
+      },
+      {
+        id: "played-minutes",
+        title: "出場時間ランキング",
+        metricKey: "played_minutes",
+        valueFormatter: formatPlayerMinutes,
+        filterFn: player => (getPlayerRankingValue(player, { metricKey: "played_minutes" }) || 0) > 0
+      },
+      {
+        id: "played-matches",
+        title: "出場試合数ランキング",
+        sortKey: "played_matches",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (toPlayerNumber(player.played_matches) || 0) > 0
+      },
+      {
+        id: "starts",
+        title: "スタメン数ランキング",
+        sortKey: "starter_matches",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (toPlayerNumber(player.starter_matches) || 0) > 0
+      },
+      {
+        id: "subs",
+        title: "途中出場数ランキング",
+        sortKey: "sub_matches",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (toPlayerNumber(player.sub_matches) || 0) > 0
+      },
+      {
+        id: "sub-goals",
+        title: "途中出場でのゴール数ランキング",
+        metricKey: "sub_goals",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (getPlayerRankingValue(player, { metricKey: "sub_goals" }) || 0) > 0
+      },
+      {
+        id: "first-half-goals",
+        title: "前半ゴール数ランキング",
+        metricKey: "first_half_goals",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (getPlayerRankingValue(player, { metricKey: "first_half_goals" }) || 0) > 0
+      },
+      {
+        id: "second-half-goals",
+        title: "後半ゴール数ランキング",
+        metricKey: "second_half_goals",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (getPlayerRankingValue(player, { metricKey: "second_half_goals" }) || 0) > 0
+      },
+      {
+        id: "additional-time-goals",
+        title: "アディショナルタイムゴール数ランキング",
+        metricKey: "additional_time_goals",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (getPlayerRankingValue(player, { metricKey: "additional_time_goals" }) || 0) > 0
+      },
+      {
+        id: "extra-time-goals",
+        title: "延長ゴール数ランキング",
+        metricKey: "extra_time_goals",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (getPlayerRankingValue(player, { metricKey: "extra_time_goals" }) || 0) > 0
+      },
+      {
+        id: "hat-tricks",
+        title: "ハットトリック数ランキング",
+        metricKey: "hat_tricks",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (getPlayerRankingValue(player, { metricKey: "hat_tricks" }) || 0) > 0
+      },
+      {
+        id: "gk-goals-against-average",
+        title: "GK出場時失点平均ランキング",
+        metricKey: "gk_goals_against_avg",
+        sortDirection: "asc",
+        valueFormatter: formatPlayerGoalsAgainstAverage,
+        filterFn: player => {
+          const metrics = player.__paRankingMetrics || {};
+          return (toPlayerNumber(metrics.gk_matches) || 0) > 0 && toPlayerNumber(metrics.gk_goals_against_avg) !== null;
+        }
+      },
+      {
+        id: "gk-clean-sheets",
+        title: "GK出場時無失点試合数ランキング",
+        metricKey: "gk_clean_sheets",
+        valueFormatter: formatPlayerNumber,
+        filterFn: player => (getPlayerRankingValue(player, { metricKey: "gk_clean_sheets" }) || 0) > 0
       },
       {
         id: "played-win-rate",
@@ -1770,18 +2285,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         filterFn: player => (toPlayerNumber(player.played_matches) || 0) > 0 && toPlayerNumber(player.played_win_rate) !== null
       },
       {
-        id: "goals",
-        title: "得点ランキング",
-        sortKey: "goals",
-        valueFormatter: formatPlayerNumber,
-        filterFn: player => (toPlayerNumber(player.goals) || 0) > 0
-      },
-      {
-        id: "starts",
-        title: "スタメン数ランキング",
-        sortKey: "starter_matches",
-        valueFormatter: formatPlayerNumber,
-        filterFn: player => (toPlayerNumber(player.starter_matches) || 0) > 0
+        id: "scored-win-rate",
+        title: "ゴールした試合の勝率ランキング",
+        sortKey: "scored_win_rate",
+        valueFormatter: formatPlayerRate,
+        filterFn: player => (toPlayerNumber(player.scored_matches) || 0) > 0 && toPlayerNumber(player.scored_win_rate) !== null
       }
     ];
   }
@@ -1790,19 +2298,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     return rows
       .filter(config.filterFn || (() => true))
       .sort((a, b) => {
-        const diff = (toPlayerNumber(b[config.sortKey]) || 0) - (toPlayerNumber(a[config.sortKey]) || 0);
+        const aValue = getPlayerRankingValue(a, config);
+        const bValue = getPlayerRankingValue(b, config);
+        const diff = config.sortDirection === "asc"
+          ? (aValue ?? Number.POSITIVE_INFINITY) - (bValue ?? Number.POSITIVE_INFINITY)
+          : (bValue || 0) - (aValue || 0);
         return diff || ((toPlayerNumber(b.played_matches) || 0) - (toPlayerNumber(a.played_matches) || 0)) || a.__paIndex - b.__paIndex;
       });
   }
 
   function buildPlayerRanking(rows, config) {
-    const items = rows
-      .filter(config.filterFn || (() => true))
-      .sort((a, b) => {
-        const diff = (toPlayerNumber(b[config.sortKey]) || 0) - (toPlayerNumber(a[config.sortKey]) || 0);
-        return diff || ((toPlayerNumber(b.played_matches) || 0) - (toPlayerNumber(a.played_matches) || 0)) || a.__paIndex - b.__paIndex;
-      })
-      .slice(0, 5);
+    const items = getPlayerRankingRows(rows, config).slice(0, 5);
     if (!items.length) return "";
     return `
       <section class="pa-rank-card" data-pa-ranking="${escapeHtml(config.id)}" role="button" tabindex="0" aria-label="${escapeHtml(config.title)}を全順位で表示">
@@ -1815,7 +2321,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <li>
               <b>${index + 1}</b>
               <span>${escapeHtml(player.player_name || "-")}</span>
-              <em>${escapeHtml(config.valueFormatter(player[config.sortKey], player))}</em>
+              <em>${escapeHtml(config.valueFormatter(getPlayerRankingValue(player, config), player))}</em>
             </li>
           `).join("")}
         </ol>
@@ -1904,7 +2410,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               <b>${index + 1}</b>
               <button type="button" class="pa-modal-player-link" data-pa-key="${escapeHtml(key)}">${escapeHtml(player.player_name || "-")}</button>
               <span>${escapeHtml(formatPlayerList(player.positions))}</span>
-              <em>${escapeHtml(config.valueFormatter(player[config.sortKey], player))}</em>
+              <em>${escapeHtml(config.valueFormatter(getPlayerRankingValue(player, config), player))}</em>
             </li>
           `;
         }).join("")}
@@ -1918,33 +2424,87 @@ document.addEventListener("DOMContentLoaded", async () => {
     setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell("PLAYER RANKING", config.title, body, meta));
   }
 
+  function setupPlayerAnalysisNumberCycles(container) {
+    if (!container) return;
+    const cycles = Array.from(container.querySelectorAll(".pa-mobile-number-cycle"));
+    cycles.forEach(cycle => {
+      cycle.dataset.paNumberIndex = "0";
+      Array.from(cycle.querySelectorAll("span")).forEach((span, index) => {
+        span.classList.toggle("is-active", index === 0);
+      });
+    });
+  }
+
   function renderPlayerAnalysisMobileList(rows) {
     const { mobileList } = getPlayerAnalysisElements();
     if (!mobileList) return;
     if (!rows.length) {
       mobileList.innerHTML = `<div class="pa-mobile-empty">データがありません</div>`;
+      setupPlayerAnalysisNumberCycles(mobileList);
       return;
     }
+    const maxPlayed = Math.max(1, ...rows.map(player => toPlayerNumber(player.played_matches) || 0));
+    const maxGoals = Math.max(1, ...rows.map(player => toPlayerNumber(player.goals) || 0));
     mobileList.innerHTML = rows.map(player => {
       const key = getPlayerAnalysisKey(player);
       const selected = key === playerAnalysisState.selectedKey;
       const name = player.player_name || "-";
+      const played = toPlayerNumber(player.played_matches) || 0;
+      const starts = toPlayerNumber(player.starter_matches) || 0;
+      const goals = toPlayerNumber(player.goals) || 0;
+      const playedRate = toPlayerNumber(player.played_win_rate);
+      const scoredRate = toPlayerNumber(player.scored_win_rate);
+      const playedPpm = toPlayerNumber(player.played_points_per_match);
+      const yellow = toPlayerNumber(player.yellow_cards) || 0;
+      const red = toPlayerNumber(player.red_cards) || 0;
+      const seasonCount = getPlayerSeasonCount(player);
+      const playedBar = Math.max(0, Math.min(100, (played / maxPlayed) * 100));
+      const startBar = played ? Math.max(0, Math.min(100, (starts / played) * 100)) : 0;
+      const goalBar = Math.max(0, Math.min(100, (goals / maxGoals) * 100));
+      const numbers = getPlayerNumbers(player);
+      const displayNumbers = numbers.length ? numbers : ["-"];
+      const numberCount = Math.max(1, displayNumbers.length);
+      const numberAnimation = `paNumberFade${Math.min(numberCount, 8)}`;
+      const numberCycle = displayNumbers.map((number, index) => {
+        const animationStyle = numberCount > 1
+          ? ` style="animation-name:${numberAnimation};animation-duration:${numberCount * 5}s;animation-delay:${index * 5}s;"`
+          : "";
+        return `<span class="${index === 0 ? "is-active" : ""}"${animationStyle}>${escapeHtml(number)}</span>`;
+      }).join("");
       return `
-        <button type="button" class="pa-mobile-player-card ${selected ? "selected" : ""}" data-pa-key="${escapeHtml(key)}">
-          <span class="pa-mobile-card-top">
-            <span class="pa-mobile-number">${escapeHtml(formatPlayerList(player.numbers))}</span>
-            <strong class="pa-mobile-name" title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
-            <span class="pa-mobile-position">${escapeHtml(formatPlayerList(player.positions))}</span>
+        <button type="button" class="pa-mobile-player-card ${selected ? "selected" : ""}" data-pa-key="${escapeHtml(key)}" style="--pa-played-bar:${playedBar}%;--pa-start-bar:${startBar}%;--pa-goal-bar:${goalBar}%;--pa-number-count:${numberCount};--pa-number-duration:${numberCount * 5}s;">
+          <span class="pa-mobile-identity">
+            <span class="pa-mobile-shirt" aria-label="背番号 ${escapeHtml(formatPlayerList(player.numbers))}">
+              <span class="pa-mobile-number-cycle" data-pa-number-count="${numberCount}">${numberCycle}</span>
+            </span>
+            <span class="pa-mobile-title">
+              <span class="pa-mobile-title-row">
+                <span class="pa-mobile-position">${escapeHtml(formatPlayerList(player.positions))}</span>
+                <small>${escapeHtml(formatPlayerNumber(seasonCount))}年</small>
+              </span>
+              <strong class="pa-mobile-name" title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
+            </span>
           </span>
-          <span class="pa-mobile-stats">
-            <span><b>${escapeHtml(formatPlayerNumber(player.played_matches))}</b><small>出場</small></span>
-            <span><b>${escapeHtml(formatPlayerNumber(player.starter_matches))}</b><small>先発</small></span>
-            <span><b>${escapeHtml(formatPlayerNumber(player.goals))}</b><small>得点</small></span>
-            <span><b>${escapeHtml(formatPlayerRate(player.played_win_rate))}</b><small>出場勝率</small></span>
+          <span class="pa-mobile-focus-row">
+            <span><small>出場</small><b>${escapeHtml(formatPlayerNumber(played))}</b></span>
+            <span><small>先発</small><b>${escapeHtml(formatPlayerNumber(starts))}</b></span>
+            <span><small>得点</small><b>${escapeHtml(formatPlayerNumber(goals))}</b></span>
+            <span><small>勝率</small><b>${escapeHtml(formatPlayerRate(playedRate))}</b></span>
+          </span>
+          <span class="pa-mobile-bars" aria-hidden="true">
+            <span><small>出場数</small><em><i class="played"></i></em></span>
+            <span><small>先発率</small><em><i class="starts"></i></em></span>
+            <span><small>得点数</small><em><i class="goals"></i></em></span>
+          </span>
+          <span class="pa-mobile-card-foot">
+            <span>得点勝率 ${escapeHtml(formatPlayerRate(scoredRate))}</span>
+            <span>PPM ${escapeHtml(formatPlayerDecimal(playedPpm))}</span>
+            <span>警告 ${escapeHtml(formatPlayerNumber(yellow))} / 退場 ${escapeHtml(formatPlayerNumber(red))}</span>
           </span>
         </button>
       `;
     }).join("");
+    setupPlayerAnalysisNumberCycles(mobileList);
   }
 
   function renderPlayerAnalysisTable() {
@@ -2330,6 +2890,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
           `).join("")}
         </div>
+        <div class="pa-match-detail-actions">
+          <button type="button" class="pa-match-detail-open-btn" data-pa-open-schedule-match data-pa-match-id="${escapeHtml(String(match.match_id || appearance?.match_id || ""))}">試合詳細</button>
+          <span class="pa-match-detail-link-status" aria-live="polite"></span>
+        </div>
       </section>
       <section class="pa-match-detail-panel">
         <div class="pa-match-detail-player">
@@ -2355,6 +2919,36 @@ document.addEventListener("DOMContentLoaded", async () => {
       <span class="pa-chip scope">${escapeHtml(getPlayerAnalysisScopeLabel())}</span>
     `;
     return renderPlayerAnalysisModalShell("MATCH DETAIL", `${player.player_name || "-"} / ${formatPlayerMatchDate(match)}`, body, meta);
+  }
+
+  function findScheduleMatchForPlayerAnalysisMatch(match) {
+    if (!match) return null;
+    const date = toIsoDate(match.date || "");
+    const opponent = match.opponent || "";
+    return scheduleData.find(item => {
+      if (!item || item.club !== "niigata") return false;
+      if (toIsoDate(item.date || "") !== date) return false;
+      if (opponent && !robustTeamMatch(item.opponent, opponent)) return false;
+      return true;
+    }) || scheduleData.find(item => {
+      if (!item || item.club !== "niigata") return false;
+      if (toIsoDate(item.date || "") !== date) return false;
+      const stadiumMatch = match.stadium && item.venue && String(item.venue).normalize("NFKC") === String(match.stadium).normalize("NFKC");
+      return stadiumMatch || !opponent;
+    }) || null;
+  }
+
+  async function openScheduleMatchFromPlayerAnalysis(match) {
+    if (!match || !match.date) return false;
+    const year = Number(toIsoDate(match.date).slice(0, 4));
+    if (Number.isInteger(year)) {
+      await ensureHistoryYearLoaded(year);
+    }
+    const scheduleMatch = findScheduleMatchForPlayerAnalysisMatch(match);
+    if (!scheduleMatch) return false;
+    closePlayerAnalysisModal();
+    openDetailSheet(scheduleMatch);
+    return true;
   }
 
   function renderPlayerProfileYearTable(yearRows) {
@@ -2499,21 +3093,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function applyPlayerAnalysisFilters() {
     const els = getPlayerAnalysisElements();
     playerAnalysisState.query = els.search ? els.search.value : "";
-    playerAnalysisState.numberFilter = els.numberFilter ? els.numberFilter.value : "";
-    playerAnalysisState.playedMin = els.playedMin ? els.playedMin.value : "";
-    playerAnalysisState.playedMax = els.playedMax ? els.playedMax.value : "";
-    playerAnalysisState.startsMin = els.startsMin ? els.startsMin.value : "";
-    playerAnalysisState.goalsMin = els.goalsMin ? els.goalsMin.value : "";
-    playerAnalysisState.playedRateMin = els.playedRateMin ? els.playedRateMin.value : "";
-    playerAnalysisState.scoredRateMin = els.scoredRateMin ? els.scoredRateMin.value : "";
-    playerAnalysisState.scoredPpmMin = els.scoredPpmMin ? els.scoredPpmMin.value : "";
-    playerAnalysisState.monthFilter = els.monthFilter ? els.monthFilter.value : "";
-    playerAnalysisState.monthGoalsMin = els.monthGoalsMin ? els.monthGoalsMin.value : "";
-    playerAnalysisState.monthPlayedRateMin = els.monthPlayedRateMin ? els.monthPlayedRateMin.value : "";
-    playerAnalysisState.yellowMin = els.yellowMin ? els.yellowMin.value : "";
-    playerAnalysisState.redMin = els.redMin ? els.redMin.value : "";
-    playerAnalysisState.seasonsMin = els.seasonsMin ? els.seasonsMin.value : "";
-    playerAnalysisState.seasonsMax = els.seasonsMax ? els.seasonsMax.value : "";
+    readPlayerAnalysisAdvancedFilterRows();
+    resetPlayerAnalysisNumericState();
     playerAnalysisState.scorersOnly = Boolean(els.scorersOnly && els.scorersOnly.checked);
     playerAnalysisState.playedOnly = Boolean(els.playedOnly && els.playedOnly.checked);
     playerAnalysisState.katakanaOnly = Boolean(els.katakanaOnly && els.katakanaOnly.checked);
@@ -2524,7 +3105,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (needsPlayerMonthlyMeta()) {
       setPlayerAnalysisStatus("月別条件を集計中...");
-      await ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope);
+      const months = Array.from(new Set(getActivePlayerAnalysisAdvancedFilters()
+        .filter(filter => isPlayerAnalysisMonthCompactFilter(filter.type))
+        .map(filter => normalizePlayerMonthFilter(filter.month))
+        .filter(Boolean)));
+      if (!months.length) {
+        await ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope);
+      } else {
+        await Promise.all(months.map(month => ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope, month)));
+      }
       setPlayerAnalysisStatus("", false);
     }
     renderPlayerAnalysisTable();
@@ -2550,6 +3139,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.redMin = "";
     playerAnalysisState.seasonsMin = "";
     playerAnalysisState.seasonsMax = "";
+    playerAnalysisState.compactFilterType = "";
+    playerAnalysisState.compactFilterValue = "";
+    playerAnalysisState.compactFilterMonth = "5";
+    playerAnalysisState.advancedFilterLogic = "and";
+    playerAnalysisState.advancedFilters = [createPlayerAnalysisAdvancedFilter()];
     playerAnalysisState.scorersOnly = false;
     playerAnalysisState.playedOnly = false;
     playerAnalysisState.katakanaOnly = false;
@@ -2569,6 +3163,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (els.redMin) els.redMin.value = "";
     if (els.seasonsMin) els.seasonsMin.value = "";
     if (els.seasonsMax) els.seasonsMax.value = "";
+    if (els.compactFilterType) els.compactFilterType.value = "";
+    if (els.compactFilterValue) els.compactFilterValue.value = "";
+    if (els.compactFilterMonth) els.compactFilterMonth.value = playerAnalysisState.compactFilterMonth;
+    updatePlayerAnalysisCompactFilterControls(els);
+    renderPlayerAnalysisDetailFilterModes();
+    renderPlayerAnalysisAdvancedFilterRows();
     if (els.scorersOnly) els.scorersOnly.checked = false;
     if (els.playedOnly) els.playedOnly.checked = false;
     if (els.katakanaOnly) els.katakanaOnly.checked = false;
@@ -2582,6 +3182,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       yearSelect, search, numberFilter, playedMin, playedMax, startsMin, goalsMin,
       playedRateMin, scoredRateMin, scoredPpmMin, monthFilter, monthGoalsMin, monthPlayedRateMin,
       yellowMin, redMin, seasonsMin, seasonsMax,
+      compactFilterType, compactFilterValue, compactFilterMonth,
       scorersOnly, playedOnly, katakanaOnly
     } = getPlayerAnalysisElements();
     if (yearSelect) yearSelect.value = String(playerAnalysisState.year);
@@ -2614,12 +3215,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (redMin) redMin.value = playerAnalysisState.redMin;
     if (seasonsMin) seasonsMin.value = playerAnalysisState.seasonsMin;
     if (seasonsMax) seasonsMax.value = playerAnalysisState.seasonsMax;
+    if (compactFilterType) compactFilterType.value = playerAnalysisState.compactFilterType;
+    if (compactFilterValue) compactFilterValue.value = playerAnalysisState.compactFilterValue;
+    if (compactFilterMonth) compactFilterMonth.value = playerAnalysisState.compactFilterMonth;
+    updatePlayerAnalysisCompactFilterControls(getPlayerAnalysisElements());
+    renderPlayerAnalysisDetailFilterModes();
+    renderPlayerAnalysisAdvancedFilterRows();
     if (scorersOnly) scorersOnly.checked = playerAnalysisState.scorersOnly;
     if (playedOnly) playedOnly.checked = playerAnalysisState.playedOnly;
     if (katakanaOnly) katakanaOnly.checked = playerAnalysisState.katakanaOnly;
 
     renderPlayerAnalysisPositions(entry.rows);
     renderPlayerAnalysisSummary(entry.rows);
+    await ensurePlayerAnalysisRankingMetrics(entry.rows);
     renderPlayerAnalysisRankings(entry.rows);
 
     if (entry.missing) {
@@ -2629,7 +3237,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (needsPlayerMonthlyMeta()) {
       setPlayerAnalysisStatus("月別条件を集計中...");
-      await ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope);
+      const months = Array.from(new Set(getActivePlayerAnalysisAdvancedFilters()
+        .filter(filter => isPlayerAnalysisMonthCompactFilter(filter.type))
+        .map(filter => normalizePlayerMonthFilter(filter.month))
+        .filter(Boolean)));
+      if (!months.length) {
+        await ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope);
+      } else {
+        await Promise.all(months.map(month => ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope, month)));
+      }
       setPlayerAnalysisStatus("", false);
     }
     renderPlayerAnalysisTable();
@@ -2647,6 +3263,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       playerAnalysisState.year = els.yearSelect.value === "all" ? "all" : (Number(els.yearSelect.value) || 2026);
       renderPlayerAnalysisYear(playerAnalysisState.year);
     };
+    if (els.filterFab) els.filterFab.onclick = () => setPlayerAnalysisFilterPanel(true);
+    if (els.filterClose) els.filterClose.onclick = () => setPlayerAnalysisFilterPanel(false);
+    if (els.filterBackdrop) els.filterBackdrop.onclick = () => setPlayerAnalysisFilterPanel(false);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setPlayerAnalysisFilterPanel(false);
+    });
     els.scopeButtons.forEach(button => {
       button.onclick = () => {
         if (button.hidden) return;
@@ -2694,6 +3316,49 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (els.playedOnly) els.playedOnly.onchange = applyPlayerAnalysisFilters;
     if (els.katakanaOnly) els.katakanaOnly.onchange = applyPlayerAnalysisFilters;
     if (els.filterReset) els.filterReset.onclick = resetPlayerAnalysisFilters;
+    els.detailFilterModeButtons.forEach(button => {
+      button.onclick = () => {
+        playerAnalysisState.advancedFilterLogic = button.dataset.paDetailFilterMode === "or" ? "or" : "and";
+        renderPlayerAnalysisDetailFilterModes();
+        applyPlayerAnalysisFilters();
+      };
+    });
+    if (els.advancedFilterRows) {
+      els.advancedFilterRows.onchange = (event) => {
+        readPlayerAnalysisAdvancedFilterRows();
+        if (event.target.closest("[data-pa-filter-type]")) {
+          renderPlayerAnalysisAdvancedFilterRows();
+        }
+        applyPlayerAnalysisFilters();
+      };
+      els.advancedFilterRows.oninput = (event) => {
+        if (!event.target.closest("[data-pa-filter-value]")) return;
+        applyPlayerAnalysisFilters();
+      };
+      els.advancedFilterRows.onclick = (event) => {
+        const removeButton = event.target.closest("[data-pa-filter-remove]");
+        if (!removeButton) return;
+        const index = Number(removeButton.dataset.paFilterRemove);
+        if (!Number.isInteger(index)) return;
+        readPlayerAnalysisAdvancedFilterRows();
+        playerAnalysisState.advancedFilters.splice(index, 1);
+        if (!playerAnalysisState.advancedFilters.length) {
+          playerAnalysisState.advancedFilters = [createPlayerAnalysisAdvancedFilter()];
+        }
+        renderPlayerAnalysisAdvancedFilterRows();
+        applyPlayerAnalysisFilters();
+      };
+    }
+    if (els.addFilterCondition) {
+      els.addFilterCondition.onclick = () => {
+        readPlayerAnalysisAdvancedFilterRows();
+        playerAnalysisState.advancedFilters.push(createPlayerAnalysisAdvancedFilter());
+        renderPlayerAnalysisAdvancedFilterRows();
+      };
+    }
+    if (els.sortSelect) els.sortSelect.onchange = () => applyPlayerAnalysisSortSelection(els.sortSelect.value);
+    if (els.sortKeySelect) els.sortKeySelect.onchange = applyPlayerAnalysisSortControls;
+    if (els.sortDirectionSelect) els.sortDirectionSelect.onchange = applyPlayerAnalysisSortControls;
     if (els.rankings) {
       els.rankings.onclick = (event) => {
         const card = event.target.closest(".pa-rank-card[data-pa-ranking]");
@@ -2794,6 +3459,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         setPlayerAnalysisModalContent(renderPlayerYearMatchList(playerAnalysisState.modalPlayer, year, items, yearRow));
         return;
       }
+      const scheduleMatchButton = event.target.closest("[data-pa-open-schedule-match]");
+      if (scheduleMatchButton && playerAnalysisState.modalPlayer) {
+        const matchId = String(scheduleMatchButton.dataset.paMatchId || "");
+        const item = (playerAnalysisState.modalMatchItems || []).find(entry => String(entry.match?.match_id || entry.appearance?.match_id || "") === matchId);
+        if (!item) return;
+        scheduleMatchButton.disabled = true;
+        const status = modal.querySelector(".pa-match-detail-link-status");
+        if (status) status.textContent = "日程詳細を開いています...";
+        const opened = await openScheduleMatchFromPlayerAnalysis(item.match);
+        if (!opened) {
+          scheduleMatchButton.disabled = false;
+          if (status) status.textContent = "日程側の試合詳細が見つかりません";
+        }
+        return;
+      }
       const matchRow = event.target.closest(".pa-match-row[data-pa-match-id]");
       if (matchRow && playerAnalysisState.modalPlayer) {
         const matchId = String(matchRow.dataset.paMatchId || "");
@@ -2822,6 +3502,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     updatePlayerAnalysisSortIndicators();
+    renderPlayerAnalysisDetailFilterModes();
+    renderPlayerAnalysisAdvancedFilterRows();
+    updatePlayerAnalysisCompactFilterControls(els);
     playerAnalysisState.initialized = true;
   }
 
@@ -2842,6 +3525,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (calendarView) calendarView.className = mode === "calendar" ? "active-view" : "hidden-view";
     if (playerAnalysisView) playerAnalysisView.className = mode === "player-analysis" ? "active-view" : "hidden-view";
     if (visionView) visionView.className = mode === "vision" ? "active-view" : "hidden-view";
+    if (mode !== "player-analysis") setPlayerAnalysisFilterPanel(false);
 
     if (mode === "calendar") {
       renderCalendar();
@@ -3656,12 +4340,49 @@ document.addEventListener("DOMContentLoaded", async () => {
     sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
   }
 
+  function findPlayerAnalysisRowByIdentity(rows, playerName, year) {
+    const identity = getPlayerCanonicalIdentity({ player_name: playerName, player_key: playerName, season: year }, year);
+    const targetKey = String(identity.groupKey || "").trim();
+    return (rows || []).find(row => {
+      if (targetKey && getPlayerGroupKey(row) === targetKey) return true;
+      const rowIdentity = getPlayerCanonicalIdentity(row, getPlayerYearValue(row) || year);
+      return targetKey && rowIdentity.groupKey === targetKey;
+    }) || null;
+  }
+
+  async function openPlayerAnalysisProfileFromSchedule(playerName, sourceMatch) {
+    if (!playerName || !sourceMatch || sourceMatch.club !== "niigata") return false;
+    const matchYear = Number(toIsoDate(sourceMatch.date || "").slice(0, 4));
+    const targetYear = Number.isInteger(matchYear) && matchYear > 0 ? matchYear : playerAnalysisState.year;
+    const previousScope = playerAnalysisState.matchScope;
+    playerAnalysisState.matchScope = "all";
+    playerAnalysisState.year = targetYear;
+
+    let entry = await loadScopedPlayerAnalysisYear(targetYear, "all");
+    let player = findPlayerAnalysisRowByIdentity(entry.rows, playerName, targetYear);
+    if (!player) {
+      const allRowsEntry = await loadAllPlayerAnalysisYearRows();
+      const matchingRows = (allRowsEntry.rows || []).filter(row => {
+        const identity = getPlayerCanonicalIdentity({ player_name: playerName, player_key: playerName, season: targetYear }, targetYear);
+        return getPlayerGroupKey(row) === identity.groupKey;
+      });
+      player = aggregatePlayerAnalysisRows(matchingRows)[0] || findPlayerAnalysisRowByIdentity(allRowsEntry.rows, playerName, targetYear);
+    }
+    if (!player) {
+      playerAnalysisState.matchScope = previousScope || playerAnalysisState.matchScope;
+      return false;
+    }
+    openPlayerAnalysisProfile(player);
+    return true;
+  }
+
   function bindPlayerLinks(sourceMatch) {
     sheetContent.querySelectorAll(".u-player-link").forEach(btn => {
-      btn.onclick = (event) => {
+      btn.onclick = async (event) => {
         event.preventDefault();
         event.stopPropagation();
-        openPlayerSheet(btn.dataset.player, sourceMatch);
+        const opened = await openPlayerAnalysisProfileFromSchedule(btn.dataset.player, sourceMatch);
+        if (!opened) openPlayerSheet(btn.dataset.player, sourceMatch);
       };
     });
   }
