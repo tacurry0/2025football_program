@@ -1,0 +1,630 @@
+[
+  {
+    "match_card_id": "8417",
+    "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=8417",
+    "season": "2005",
+    "competition": "Jリーグ ディビジョン1",
+    "section": "第1節第1日",
+    "home_team": "ＦＣ東京",
+    "away_team": "アルビレックス新潟",
+    "home_score": "4",
+    "away_score": "0",
+    "date": "2005/03/05",
+    "kickoff": "19:04",
+    "stadium": "味の素スタジアム",
+    "attendance": "28450",
+    "weather": "曇のち雨",
+    "temperature": "4.0",
+    "humidity": "74%",
+    "home_goals": [
+      {
+        "time": "11'",
+        "name": "石川 直宏"
+      },
+      {
+        "time": "21'",
+        "name": "今野 泰幸"
+      },
+      {
+        "time": "59'",
+        "name": "ルーカス"
+      },
+      {
+        "time": "62'",
+        "name": "ルーカス"
+      }
+    ],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "SH",
+        "home": "25",
+        "away": "12"
+      },
+      {
+        "type": "CK",
+        "home": "2",
+        "away": "4"
+      },
+      {
+        "type": "FK",
+        "home": "17",
+        "away": "15"
+      }
+    ],
+    "home_details": {
+      "starting": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "土肥 洋一"
+        },
+        {
+          "position": "DF",
+          "number": "20",
+          "name": "加地 亮"
+        },
+        {
+          "position": "DF",
+          "number": "3",
+          "name": "ジャーン"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "茂庭 照幸"
+        },
+        {
+          "position": "DF",
+          "number": "17",
+          "name": "金沢 浄"
+        },
+        {
+          "position": "MF",
+          "number": "6",
+          "name": "今野 泰幸"
+        },
+        {
+          "position": "MF",
+          "number": "27",
+          "name": "栗澤 僚一"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "宮沢 正史"
+        },
+        {
+          "position": "FW",
+          "number": "18",
+          "name": "石川 直宏"
+        },
+        {
+          "position": "FW",
+          "number": "13",
+          "name": "戸田 光洋"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "ルーカス"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "22",
+          "name": "塩田 仁史"
+        },
+        {
+          "position": "DF",
+          "number": "8",
+          "name": "藤山 竜仁"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "浅利 悟"
+        },
+        {
+          "position": "MF",
+          "number": "10",
+          "name": "三浦 文丈"
+        },
+        {
+          "position": "FW",
+          "number": "19",
+          "name": "ダニーロ"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "石川 直宏",
+          "time": "82'"
+        },
+        {
+          "in_out": "▲",
+          "name": "ダニーロ",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "宮沢 正史",
+          "time": "87'"
+        },
+        {
+          "in_out": "▲",
+          "name": "三浦 文丈",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "ルーカス",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "浅利 悟",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "原 博実"
+    },
+    "away_details": {
+      "starting": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "野澤 洋輔"
+        },
+        {
+          "position": "DF",
+          "number": "17",
+          "name": "海本 幸治郎"
+        },
+        {
+          "position": "DF",
+          "number": "19",
+          "name": "海本 慶治"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "丸山 良明"
+        },
+        {
+          "position": "DF",
+          "number": "25",
+          "name": "青野 大介"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "本間 勲"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "山口 素弘"
+        },
+        {
+          "position": "MF",
+          "number": "9",
+          "name": "ファビーニョ"
+        },
+        {
+          "position": "FW",
+          "number": "10",
+          "name": "エジミウソン"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "上野 優作"
+        },
+        {
+          "position": "FW",
+          "number": "18",
+          "name": "鈴木 慎吾"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "木寺 浩一"
+        },
+        {
+          "position": "DF",
+          "number": "3",
+          "name": "萩村 滋則"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "梅山 修"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "アンデルソン リマ"
+        },
+        {
+          "position": "MF",
+          "number": "20",
+          "name": "岡山 哲也"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "本間 勲",
+          "time": "65'"
+        },
+        {
+          "in_out": "▲",
+          "name": "アンデルソン リマ",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "青野 大介",
+          "time": "65'"
+        },
+        {
+          "in_out": "▲",
+          "name": "梅山 修",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "上野 優作",
+          "time": "83'"
+        },
+        {
+          "in_out": "▲",
+          "name": "岡山 哲也",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "海本 幸治郎",
+          "time": "35'"
+        },
+        {
+          "type": "警告",
+          "name": "上野 優作",
+          "time": "67'"
+        },
+        {
+          "type": "警告",
+          "name": "海本 幸治郎",
+          "time": "78'"
+        },
+        {
+          "type": "退場",
+          "name": "海本 幸治郎",
+          "time": "78'"
+        }
+      ],
+      "manager": "反町 康治"
+    },
+    "referees": {
+      "主審": "山西 博文",
+      "副審": "手塚 洋 , 原田 昌彦",
+      "第4の審判員": "五十川 和也"
+    }
+  },
+  {
+    "match_card_id": "8427",
+    "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=8427",
+    "season": "2005",
+    "competition": "Jリーグ ディビジョン1",
+    "section": "第2節第2日",
+    "home_team": "アルビレックス新潟",
+    "away_team": "大分トリニータ",
+    "home_score": "2",
+    "away_score": "1",
+    "date": "2005/03/13",
+    "kickoff": "14:08",
+    "stadium": "新潟スタジアム",
+    "attendance": "35337",
+    "weather": "曇時々雪一時晴",
+    "temperature": "3.0",
+    "humidity": "64%",
+    "home_goals": [
+      {
+        "time": "29'",
+        "name": "鈴木 慎吾"
+      },
+      {
+        "time": "65'",
+        "name": "海本 慶治"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "44'",
+        "name": "マグノ アウベス"
+      }
+    ],
+    "stats": [
+      {
+        "type": "SH",
+        "home": "9",
+        "away": "16"
+      },
+      {
+        "type": "CK",
+        "home": "5",
+        "away": "10"
+      },
+      {
+        "type": "FK",
+        "home": "12",
+        "away": "19"
+      }
+    ],
+    "home_details": {
+      "starting": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "野澤 洋輔"
+        },
+        {
+          "position": "DF",
+          "number": "7",
+          "name": "アンデルソン リマ"
+        },
+        {
+          "position": "DF",
+          "number": "19",
+          "name": "海本 慶治"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "丸山 良明"
+        },
+        {
+          "position": "DF",
+          "number": "4",
+          "name": "鈴木 健太郎"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "寺川 能人"
+        },
+        {
+          "position": "MF",
+          "number": "3",
+          "name": "萩村 滋則"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "山口 素弘"
+        },
+        {
+          "position": "FW",
+          "number": "10",
+          "name": "エジミウソン"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "上野 優作"
+        },
+        {
+          "position": "FW",
+          "number": "18",
+          "name": "鈴木 慎吾"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "木寺 浩一"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "梅山 修"
+        },
+        {
+          "position": "DF",
+          "number": "29",
+          "name": "喜多 靖"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "本間 勲"
+        },
+        {
+          "position": "MF",
+          "number": "20",
+          "name": "岡山 哲也"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "アンデルソン リマ",
+          "time": "77'"
+        },
+        {
+          "in_out": "▲",
+          "name": "梅山 修",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "エジミウソン",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "本間 勲",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "エジミウソン",
+          "time": "78'"
+        }
+      ],
+      "manager": "反町 康治"
+    },
+    "away_details": {
+      "starting": [
+        {
+          "position": "GK",
+          "number": "16",
+          "name": "高嵜 理貴"
+        },
+        {
+          "position": "DF",
+          "number": "22",
+          "name": "上本 大海"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "パトリック"
+        },
+        {
+          "position": "DF",
+          "number": "4",
+          "name": "深谷 友基"
+        },
+        {
+          "position": "MF",
+          "number": "17",
+          "name": "根本 裕一"
+        },
+        {
+          "position": "MF",
+          "number": "9",
+          "name": "吉田 孝行"
+        },
+        {
+          "position": "MF",
+          "number": "6",
+          "name": "梅田 高志"
+        },
+        {
+          "position": "MF",
+          "number": "14",
+          "name": "阿部 吉朗"
+        },
+        {
+          "position": "MF",
+          "number": "10",
+          "name": "マグノ アウベス"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "ドド"
+        },
+        {
+          "position": "FW",
+          "number": "13",
+          "name": "高松 大樹"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "29",
+          "name": "江角 浩司"
+        },
+        {
+          "position": "DF",
+          "number": "3",
+          "name": "柴小屋 雄一"
+        },
+        {
+          "position": "DF",
+          "number": "15",
+          "name": "吉村 光示"
+        },
+        {
+          "position": "MF",
+          "number": "19",
+          "name": "原田 拓"
+        },
+        {
+          "position": "FW",
+          "number": "33",
+          "name": "木島 良輔"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "根本 裕一",
+          "time": "56'"
+        },
+        {
+          "in_out": "▲",
+          "name": "原田 拓",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "ドド",
+          "time": "60'"
+        },
+        {
+          "in_out": "▲",
+          "name": "木島 良輔",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "上本 大海",
+          "time": "86'"
+        },
+        {
+          "in_out": "▲",
+          "name": "吉村 光示",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "パトリック",
+          "time": "31'"
+        },
+        {
+          "type": "警告",
+          "name": "木島 良輔",
+          "time": "72'"
+        },
+        {
+          "type": "警告",
+          "name": "上本 大海",
+          "time": "83'"
+        }
+      ],
+      "manager": "皇甫 官"
+    },
+    "referees": {
+      "主審": "奥谷 彰男",
+      "副審": "金子 聡一郎 , 村上 孝治",
+      "第4の審判員": "牧野 明久"
+    }
+  }
+]
