@@ -549,6 +549,33 @@
     "is_own_goal": false
   },
   {
+    "match_id": "31274",
+    "season": 2024,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "time": "71'",
+    "minute": 71,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31274",
+    "season": 2024,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "time": "90'+11",
+    "minute": 101,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31274",
+    "season": 2024,
+    "player_key": "小見 洋太",
+    "player_name": "小見 洋太",
+    "time": "111'",
+    "minute": 111,
+    "is_own_goal": false
+  },
+  {
     "match_id": "30781",
     "season": 2024,
     "player_key": "藤原 奏哉",

@@ -1,0 +1,371 @@
+[
+  {
+    "match_id": "31437",
+    "season": 2025,
+    "player_key": "古長谷 千博",
+    "player_name": "古長谷 千博",
+    "time": "10'",
+    "minute": 10,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31437",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31445",
+    "season": 2025,
+    "player_key": "半代 将都",
+    "player_name": "半代 将都",
+    "time": "28'",
+    "minute": 28,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31445",
+    "season": 2025,
+    "player_key": "渡邉 怜歩",
+    "player_name": "渡邉 怜歩",
+    "time": "49'",
+    "minute": 49,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31445",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "90'+1",
+    "minute": 91,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31476",
+    "season": 2025,
+    "player_key": "半代 将都",
+    "player_name": "半代 将都",
+    "time": "77'",
+    "minute": 77,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31482",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "43'",
+    "minute": 43,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31492",
+    "season": 2025,
+    "player_key": "藤井 皓也",
+    "player_name": "藤井 皓也",
+    "time": "23'",
+    "minute": 23,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31492",
+    "season": 2025,
+    "player_key": "藤井 皓也",
+    "player_name": "藤井 皓也",
+    "time": "36'",
+    "minute": 36,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31492",
+    "season": 2025,
+    "player_key": "袴田 裕太郎",
+    "player_name": "袴田 裕太郎",
+    "time": "52'",
+    "minute": 52,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31619",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "03'",
+    "minute": 3,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31636",
+    "season": 2025,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "time": "45'",
+    "minute": 45,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31636",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "63'",
+    "minute": 63,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31680",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "30'",
+    "minute": 30,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31680",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "70'",
+    "minute": 70,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31684",
+    "season": 2025,
+    "player_key": "藤井 皓也",
+    "player_name": "藤井 皓也",
+    "time": "27'",
+    "minute": 27,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31697",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "18'",
+    "minute": 18,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31710",
+    "season": 2025,
+    "player_key": "神代 慶人",
+    "player_name": "神代 慶人",
+    "time": "90'+4",
+    "minute": 94,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31719",
+    "season": 2025,
+    "player_key": "神代 慶人",
+    "player_name": "神代 慶人",
+    "time": "71'",
+    "minute": 71,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31728",
+    "season": 2025,
+    "player_key": "古長谷 千博",
+    "player_name": "古長谷 千博",
+    "time": "90'+2",
+    "minute": 92,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31731",
+    "season": 2025,
+    "player_key": "神代 慶人",
+    "player_name": "神代 慶人",
+    "time": "04'",
+    "minute": 4,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31731",
+    "season": 2025,
+    "player_key": "藤井 皓也",
+    "player_name": "藤井 皓也",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31749",
+    "season": 2025,
+    "player_key": "神代 慶人",
+    "player_name": "神代 慶人",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31749",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "75'",
+    "minute": 75,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31751",
+    "season": 2025,
+    "player_key": "古長谷 千博",
+    "player_name": "古長谷 千博",
+    "time": "44'",
+    "minute": 44,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31751",
+    "season": 2025,
+    "player_key": "古長谷 千博",
+    "player_name": "古長谷 千博",
+    "time": "51'",
+    "minute": 51,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31770",
+    "season": 2025,
+    "player_key": "古長谷 千博",
+    "player_name": "古長谷 千博",
+    "time": "68'",
+    "minute": 68,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31770",
+    "season": 2025,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "time": "80'",
+    "minute": 80,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31773",
+    "season": 2025,
+    "player_key": "古長谷 千博",
+    "player_name": "古長谷 千博",
+    "time": "48'",
+    "minute": 48,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31773",
+    "season": 2025,
+    "player_key": "半代 将都",
+    "player_name": "半代 将都",
+    "time": "88'",
+    "minute": 88,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31787",
+    "season": 2025,
+    "player_key": "藤井 皓也",
+    "player_name": "藤井 皓也",
+    "time": "16'",
+    "minute": 16,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31787",
+    "season": 2025,
+    "player_key": "神代 慶人",
+    "player_name": "神代 慶人",
+    "time": "41'",
+    "minute": 41,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31803",
+    "season": 2025,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "time": "33'",
+    "minute": 33,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31819",
+    "season": 2025,
+    "player_key": "塩浜 遼",
+    "player_name": "塩浜 遼",
+    "time": "09'",
+    "minute": 9,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31819",
+    "season": 2025,
+    "player_key": "神代 慶人",
+    "player_name": "神代 慶人",
+    "time": "21'",
+    "minute": 21,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31828",
+    "season": 2025,
+    "player_key": "三島 頌平",
+    "player_name": "三島 頌平",
+    "time": "42'",
+    "minute": 42,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31828",
+    "season": 2025,
+    "player_key": "阿部 海斗",
+    "player_name": "阿部 海斗",
+    "time": "90'+1",
+    "minute": 91,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31834",
+    "season": 2025,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "12'",
+    "minute": 12,
+    "is_own_goal": true
+  },
+  {
+    "match_id": "31834",
+    "season": 2025,
+    "player_key": "神代 慶人",
+    "player_name": "神代 慶人",
+    "time": "67'",
+    "minute": 67,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31856",
+    "season": 2025,
+    "player_key": "豊田 歩",
+    "player_name": "豊田 歩",
+    "time": "78'",
+    "minute": 78,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "31897",
+    "season": 2025,
+    "player_key": "神代 慶人",
+    "player_name": "神代 慶人",
+    "time": "02'",
+    "minute": 2,
+    "is_own_goal": false
+  }
+]

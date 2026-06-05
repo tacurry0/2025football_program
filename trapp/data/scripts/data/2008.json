@@ -3,27 +3,29 @@
     "match_card_id": "10811",
     "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=10811",
     "season": "2008",
-    "competition": "пј’пјҗпјҗпјҳпјӘгғӘгғјгӮ°гҖҖгғҮгӮЈгғ“гӮёгғ§гғіпј‘ з¬¬пј‘зҜҖз¬¬пј’ж—Ҙ",
-    "section": "",
-    "home_team": "еӨ§е®®гӮўгғ«гғҮгӮЈгғјгӮёгғЈ",
-    "away_team": "гӮўгғ«гғ“гғ¬гғғгӮҜгӮ№ж–°жҪҹ",
+    "competition": "Jリーグ ディビジョン1",
+    "section": "第1節第2日",
+    "home_team": "大宮アルディージャ",
+    "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/03/09",
     "kickoff": "16:00",
-    "stadium": "пј®пјЎпјЈпј«пј•гӮ№гӮҝгӮёгӮўгғ еӨ§е®®",
+    "stadium": "ＮＡＣＫ５スタジアム大宮",
     "attendance": "12505",
-    "weather": "жҷҙ",
+    "weather": "晴",
     "temperature": "15.6",
     "humidity": "29%",
     "home_goals": [
       {
-        "time": "гҖҖгҖҖгҖҖ25'",
-        "name": "гғҡгғүгғӯгҖҖгӮёгғҘгғӢгӮӘгғјгғ«"
+        "time": "25'",
+        "name": "ペドロ ジュニオール"
       },
       {
-        "time": "гҖҖгҖҖгҖҖ44'",
-        "name": "е°Ҹжһ—гҖҖеӨ§жӮҹ"
+        "time": "44'",
+        "name": "小林 大悟"
       }
     ],
     "away_goals": [],
@@ -45,23 +47,271 @@
       }
     ],
     "home_details": {
-      "starting": [],
-      "substitutes": [],
-      "substitutions": [],
-      "cards": [],
-      "manager": ""
+      "starting": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "江角 浩司"
+        },
+        {
+          "position": "DF",
+          "number": "22",
+          "name": "田中 輝和"
+        },
+        {
+          "position": "DF",
+          "number": "3",
+          "name": "レアンドロ"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "冨田 大介"
+        },
+        {
+          "position": "DF",
+          "number": "4",
+          "name": "波戸 康広"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "小林 大悟"
+        },
+        {
+          "position": "MF",
+          "number": "32",
+          "name": "小林 慶行"
+        },
+        {
+          "position": "MF",
+          "number": "6",
+          "name": "片岡 洋介"
+        },
+        {
+          "position": "MF",
+          "number": "11",
+          "name": "藤本 主税"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "吉原 宏太"
+        },
+        {
+          "position": "FW",
+          "number": "13",
+          "name": "ペドロ ジュニオール"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "荒谷 弘樹"
+        },
+        {
+          "position": "DF",
+          "number": "19",
+          "name": "村山 祐介"
+        },
+        {
+          "position": "MF",
+          "number": "25",
+          "name": "内田 智也"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "斉藤 雅人"
+        },
+        {
+          "position": "MF",
+          "number": "23",
+          "name": "金澤 慎"
+        },
+        {
+          "position": "FW",
+          "number": "28",
+          "name": "土岐田 洸平"
+        },
+        {
+          "position": "FW",
+          "number": "10",
+          "name": "デニス マルケス"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "藤本 主税",
+          "time": "70'"
+        },
+        {
+          "in_out": "▲",
+          "name": "内田 智也",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "吉原 宏太",
+          "time": "78'"
+        },
+        {
+          "in_out": "▲",
+          "name": "土岐田 洸平",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "小林 大悟",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "金澤 慎",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "片岡 洋介",
+          "time": "66'"
+        }
+      ],
+      "manager": "樋口 靖洋"
     },
     "away_details": {
-      "starting": [],
-      "substitutes": [],
-      "substitutions": [],
-      "cards": [],
-      "manager": ""
+      "starting": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "北野 貴之"
+        },
+        {
+          "position": "DF",
+          "number": "17",
+          "name": "内田 潤"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "千代反田 充"
+        },
+        {
+          "position": "DF",
+          "number": "6",
+          "name": "永田 充"
+        },
+        {
+          "position": "DF",
+          "number": "28",
+          "name": "松尾 直人"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "本間 勲"
+        },
+        {
+          "position": "MF",
+          "number": "3",
+          "name": "千葉 和彦"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "寺川 能人"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "ダヴィ"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "アレッサンドロ"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "矢野 貴章"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "野澤 洋輔"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "中野 洋司"
+        },
+        {
+          "position": "DF",
+          "number": "24",
+          "name": "長谷部 彩翔"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "松下 年宏"
+        },
+        {
+          "position": "MF",
+          "number": "13",
+          "name": "木暮 郁哉"
+        },
+        {
+          "position": "MF",
+          "number": "23",
+          "name": "田中 亜土夢"
+        },
+        {
+          "position": "FW",
+          "number": "20",
+          "name": "河原 和寿"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "寺川 能人",
+          "time": "72'"
+        },
+        {
+          "in_out": "▲",
+          "name": "河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "千葉 和彦",
+          "time": "84'"
+        },
+        {
+          "in_out": "▲",
+          "name": "松下 年宏",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "本間 勲",
+          "time": "77'"
+        }
+      ],
+      "manager": "鈴木 淳"
     },
     "referees": {
-      "дё»еҜ©": "зүҮеұұгҖҖзҫ©з¶ҷ",
-      "еүҜеҜ©": "дёӯдә•гҖҖжҒ’ , йҮ‘з”°гҖҖеӨ§еҗү",
-      "з¬¬4гҒ®еҜ©еҲӨе“Ў": "еүҚеі¶гҖҖе’ҢеҪҰ"
+      "主審": "片山 義継",
+      "副審": "中井 恒 , 金田 大吉",
+      "第4の審判員": "前島 和彦"
     }
   },
   {
@@ -74,6 +324,8 @@
     "away_team": "ＦＣ東京",
     "home_score": "2",
     "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/03/15",
     "kickoff": "16:03",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -405,6 +657,8 @@
     "away_team": "大宮アルディージャ",
     "home_score": "2",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/03/20",
     "kickoff": "16:00",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -722,6 +976,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "3",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/03/23",
     "kickoff": "14:05",
     "stadium": "九州石油ドーム",
@@ -1064,6 +1320,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "3",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/03/30",
     "kickoff": "16:03",
     "stadium": "埼玉スタジアム２００２",
@@ -1411,6 +1669,8 @@
     "away_team": "鹿島アントラーズ",
     "home_score": "0",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/04/02",
     "kickoff": "19:04",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -1749,6 +2009,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/04/06",
     "kickoff": "16:00",
     "stadium": "日立柏サッカー場",
@@ -2053,6 +2315,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/04/13",
     "kickoff": "16:03",
     "stadium": "万博記念競技場",
@@ -2374,6 +2638,8 @@
     "away_team": "大分トリニータ",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/04/16",
     "kickoff": "19:00",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -2708,6 +2974,8 @@
     "away_team": "京都サンガF.C.",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/04/19",
     "kickoff": "16:00",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -3067,6 +3335,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/04/26",
     "kickoff": "13:33",
     "stadium": "札幌ドーム",
@@ -3396,6 +3666,8 @@
     "away_team": "東京ヴェルディ",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/04/29",
     "kickoff": "15:04",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -3720,6 +3992,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "3",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/05/03",
     "kickoff": "13:05",
     "stadium": "九州石油ドーム",
@@ -4051,6 +4325,8 @@
     "away_team": "清水エスパルス",
     "home_score": "3",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/05/06",
     "kickoff": "14:34",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -4373,6 +4649,8 @@
     "away_team": "ジュビロ磐田",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/05/10",
     "kickoff": "19:04",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -4691,29 +4969,31 @@
     "match_card_id": "10919",
     "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=10919",
     "season": "2008",
-    "competition": "пј’пјҗпјҗпјҳпјӘгғӘгғјгӮ°гҖҖгғҮгӮЈгғ“гӮёгғ§гғіпј‘ з¬¬пј‘пј“зҜҖз¬¬пј’ж—Ҙ",
-    "section": "",
-    "home_team": "гғҙгӮЈгғғгӮ»гғ«зҘһжҲё",
-    "away_team": "гӮўгғ«гғ“гғ¬гғғгӮҜгӮ№ж–°жҪҹ",
+    "competition": "Jリーグ ディビジョン1",
+    "section": "第13節第2日",
+    "home_team": "ヴィッセル神戸",
+    "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/05/18",
     "kickoff": "16:03",
-    "stadium": "гғӣгғјгғ гӮәгӮ№гӮҝгӮёгӮўгғ зҘһжҲё",
+    "stadium": "ホームズスタジアム神戸",
     "attendance": "9117",
-    "weather": "жҷҙ",
+    "weather": "晴",
     "temperature": "20.8",
     "humidity": "67%",
     "home_goals": [
       {
-        "time": "гҖҖгҖҖгҖҖ31'",
-        "name": "еӨ§д№…дҝқгҖҖеҳүдәә"
+        "time": "31'",
+        "name": "大久保 嘉人"
       }
     ],
     "away_goals": [
       {
-        "time": "41'гҖҖгҖҖгҖҖ",
-        "name": "гӮўгғ¬гғғгӮөгғігғүгғӯ"
+        "time": "41'",
+        "name": "アレッサンドロ"
       }
     ],
     "stats": [
@@ -4734,23 +5014,271 @@
       }
     ],
     "home_details": {
-      "starting": [],
-      "substitutes": [],
-      "substitutions": [],
-      "cards": [],
-      "manager": ""
+      "starting": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "榎本 達也"
+        },
+        {
+          "position": "DF",
+          "number": "25",
+          "name": "石櫃 洋祐"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "小林 久晃"
+        },
+        {
+          "position": "DF",
+          "number": "4",
+          "name": "北本 久仁衛"
+        },
+        {
+          "position": "DF",
+          "number": "15",
+          "name": "内山 俊彦"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "栗原 圭介"
+        },
+        {
+          "position": "MF",
+          "number": "6",
+          "name": "金 南一"
+        },
+        {
+          "position": "MF",
+          "number": "10",
+          "name": "ボッティ"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "古賀 誠史"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "レアンドロ"
+        },
+        {
+          "position": "FW",
+          "number": "13",
+          "name": "大久保 嘉人"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "30",
+          "name": "徳重 健太"
+        },
+        {
+          "position": "DF",
+          "number": "32",
+          "name": "柳川 雅樹"
+        },
+        {
+          "position": "MF",
+          "number": "18",
+          "name": "田中 英雄"
+        },
+        {
+          "position": "MF",
+          "number": "20",
+          "name": "鈴木 規郎"
+        },
+        {
+          "position": "MF",
+          "number": "22",
+          "name": "馬場 賢治"
+        },
+        {
+          "position": "MF",
+          "number": "26",
+          "name": "松岡 亮輔"
+        },
+        {
+          "position": "FW",
+          "number": "17",
+          "name": "吉田 孝行"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "栗原 圭介",
+          "time": "45'"
+        },
+        {
+          "in_out": "▲",
+          "name": "田中 英雄",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "ボッティ",
+          "time": "59'"
+        },
+        {
+          "in_out": "▲",
+          "name": "松岡 亮輔",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "内山 俊彦",
+          "time": "77'"
+        },
+        {
+          "in_out": "▲",
+          "name": "鈴木 規郎",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "レアンドロ",
+          "time": "77'"
+        }
+      ],
+      "manager": "松田 浩"
     },
     "away_details": {
-      "starting": [],
-      "substitutes": [],
-      "substitutions": [],
-      "cards": [],
-      "manager": ""
+      "starting": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "北野 貴之"
+        },
+        {
+          "position": "DF",
+          "number": "17",
+          "name": "内田 潤"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "千代反田 充"
+        },
+        {
+          "position": "DF",
+          "number": "6",
+          "name": "永田 充"
+        },
+        {
+          "position": "DF",
+          "number": "28",
+          "name": "松尾 直人"
+        },
+        {
+          "position": "MF",
+          "number": "3",
+          "name": "千葉 和彦"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "寺川 能人"
+        },
+        {
+          "position": "MF",
+          "number": "10",
+          "name": "マルシオ リシャルデス"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "松下 年宏"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "アレッサンドロ"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "矢野 貴章"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "野澤 洋輔"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "中野 洋司"
+        },
+        {
+          "position": "DF",
+          "number": "24",
+          "name": "長谷部 彩翔"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "本間 勲"
+        },
+        {
+          "position": "MF",
+          "number": "23",
+          "name": "田中 亜土夢"
+        },
+        {
+          "position": "FW",
+          "number": "20",
+          "name": "河原 和寿"
+        },
+        {
+          "position": "FW",
+          "number": "18",
+          "name": "川又 堅碁"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "寺川 能人",
+          "time": "64'"
+        },
+        {
+          "in_out": "▲",
+          "name": "本間 勲",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "アレッサンドロ",
+          "time": "84'"
+        },
+        {
+          "in_out": "▲",
+          "name": "田中 亜土夢",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "寺川 能人",
+          "time": "10'"
+        }
+      ],
+      "manager": "鈴木 淳"
     },
     "referees": {
-      "дё»еҜ©": "еҘҘи°·гҖҖеҪ°з”·",
-      "еүҜеҜ©": "дёӯеҺҹгҖҖзҫҺжҷәйӣ„ , й•·и°·гҖҖеҝ еҝ—",
-      "з¬¬4гҒ®еҜ©еҲӨе“Ў": "е»ЈзҖ¬гҖҖж ј"
+      "主審": "奥谷 彰男",
+      "副審": "中原 美智雄 , 長谷 忠志",
+      "第4の審判員": "廣瀬 格"
     }
   },
   {
@@ -4763,6 +5291,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/05/25",
     "kickoff": "15:00",
     "stadium": "ニッパツ三ツ沢球技場",
@@ -5082,6 +5612,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/05/31",
     "kickoff": "14:00",
     "stadium": "熊谷スポーツ文化公園陸上競技場",
@@ -5406,6 +5938,8 @@
     "away_team": "横浜Ｆ・マリノス",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/06/08",
     "kickoff": "15:00",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -5735,6 +6269,8 @@
     "away_team": "川崎フロンターレ",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/06/28",
     "kickoff": "16:03",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -6058,6 +6594,8 @@
     "away_team": "名古屋グランパス",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/07/05",
     "kickoff": "19:03",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -6375,6 +6913,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/07/13",
     "kickoff": "19:00",
     "stadium": "ニッパツ三ツ沢球技場",
@@ -6689,6 +7229,8 @@
     "away_team": "ジェフユナイテッド千葉",
     "home_score": "2",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/07/16",
     "kickoff": "19:33",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -7036,6 +7578,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "3",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/07/20",
     "kickoff": "19:03",
     "stadium": "日本平スタジアム",
@@ -7347,6 +7891,8 @@
     "away_team": "コンサドーレ札幌",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/07/27",
     "kickoff": "18:03",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -7680,6 +8226,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "4",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/08/09",
     "kickoff": "18:03",
     "stadium": "味の素スタジアム",
@@ -8031,6 +8579,8 @@
     "away_team": "大分トリニータ",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/08/16",
     "kickoff": "19:03",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -8335,6 +8885,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/08/23",
     "kickoff": "19:04",
     "stadium": "京都市西京極総合運動公園陸上競技場兼球技場",
@@ -8664,6 +9216,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "4",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/08/28",
     "kickoff": "19:03",
     "stadium": "等々力陸上競技場",
@@ -9004,6 +9558,8 @@
     "away_team": "柏レイソル",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/09/14",
     "kickoff": "16:03",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -9327,6 +9883,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/09/20",
     "kickoff": "19:03",
     "stadium": "名古屋市瑞穂陸上競技場",
@@ -9645,6 +10203,8 @@
     "away_team": "ヴィッセル神戸",
     "home_score": "3",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/09/23",
     "kickoff": "14:05",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -9996,6 +10556,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/09/28",
     "kickoff": "16:04",
     "stadium": "ヤマハスタジアム（磐田）",
@@ -10314,6 +10876,8 @@
     "away_team": "横浜Ｆ・マリノス",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/10/04",
     "kickoff": "15:04",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -10613,6 +11177,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/10/18",
     "kickoff": "16:03",
     "stadium": "フクダ電子アリーナ",
@@ -10911,6 +11477,8 @@
     "away_team": "浦和レッズ",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/10/26",
     "kickoff": "14:04",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -11194,6 +11762,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/11/09",
     "kickoff": "16:04",
     "stadium": "県立カシマサッカースタジアム",
@@ -11498,6 +12068,8 @@
     "away_team": "大宮アルディージャ",
     "home_score": "2",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/11/23",
     "kickoff": "16:00",
     "stadium": "東北電力ビッグスワンスタジアム",
@@ -11840,6 +12412,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/11/30",
     "kickoff": "16:04",
     "stadium": "味の素スタジアム",
@@ -12148,41 +12722,43 @@
     "match_card_id": "11104",
     "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=11104",
     "season": "2008",
-    "competition": "пј’пјҗпјҗпјҳпјӘгғӘгғјгӮ°гҖҖгғҮгӮЈгғ“гӮёгғ§гғіпј‘ з¬¬пј“пј”зҜҖз¬¬пј‘ж—Ҙ",
-    "section": "",
-    "home_team": "гӮўгғ«гғ“гғ¬гғғгӮҜгӮ№ж–°жҪҹ",
-    "away_team": "гӮ¬гғігғҗеӨ§йҳӘ",
+    "competition": "Jリーグ ディビジョン1",
+    "section": "第34節第1日",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ガンバ大阪",
     "home_score": "3",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2008/12/06",
     "kickoff": "14:34",
-    "stadium": "жқұеҢ—йӣ»еҠӣгғ“гғғгӮ°гӮ№гғҜгғігӮ№гӮҝгӮёгӮўгғ",
+    "stadium": "東北電力ビッグスワンスタジアム",
     "attendance": "34287",
-    "weather": "йӣЁ",
+    "weather": "雨",
     "temperature": "4.1",
     "humidity": "71%",
     "home_goals": [
       {
-        "time": "гҖҖгҖҖгҖҖ10'",
-        "name": "жң¬й–“гҖҖеӢІ"
+        "time": "10'",
+        "name": "本間 勲"
       },
       {
-        "time": "гҖҖгҖҖгҖҖ31'",
-        "name": "жқҫдёӢгҖҖе№ҙе®Ҹ"
+        "time": "31'",
+        "name": "松下 年宏"
       },
       {
-        "time": "гҖҖгҖҖгҖҖ89'",
-        "name": "еҶ…з”°гҖҖжҪӨ"
+        "time": "89'",
+        "name": "内田 潤"
       }
     ],
     "away_goals": [
       {
-        "time": "32'гҖҖгҖҖгҖҖ",
-        "name": "еҜәз”°гҖҖзҙідёҖ"
+        "time": "32'",
+        "name": "寺田 紳一"
       },
       {
-        "time": "61'гҖҖгҖҖгҖҖ",
-        "name": "гғ«гғјгӮ«гӮ№"
+        "time": "61'",
+        "name": "ルーカス"
       }
     ],
     "stats": [
@@ -12203,23 +12779,266 @@
       }
     ],
     "home_details": {
-      "starting": [],
-      "substitutes": [],
-      "substitutions": [],
-      "cards": [],
-      "manager": ""
+      "starting": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "北野 貴之"
+        },
+        {
+          "position": "DF",
+          "number": "17",
+          "name": "内田 潤"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "千代反田 充"
+        },
+        {
+          "position": "DF",
+          "number": "6",
+          "name": "永田 充"
+        },
+        {
+          "position": "DF",
+          "number": "28",
+          "name": "松尾 直人"
+        },
+        {
+          "position": "MF",
+          "number": "10",
+          "name": "マルシオ リシャルデス"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "本間 勲"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "寺川 能人"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "松下 年宏"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "アレッサンドロ"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "矢野 貴章"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "野澤 洋輔"
+        },
+        {
+          "position": "DF",
+          "number": "19",
+          "name": "海本 慶治"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "中野 洋司"
+        },
+        {
+          "position": "MF",
+          "number": "13",
+          "name": "木暮 郁哉"
+        },
+        {
+          "position": "MF",
+          "number": "23",
+          "name": "田中 亜土夢"
+        },
+        {
+          "position": "FW",
+          "number": "20",
+          "name": "河原 和寿"
+        },
+        {
+          "position": "FW",
+          "number": "18",
+          "name": "川又 堅碁"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "千代反田 充",
+          "time": "77'"
+        },
+        {
+          "in_out": "▲",
+          "name": "海本 慶治",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "寺川 能人",
+          "time": "15'"
+        }
+      ],
+      "manager": "鈴木 淳"
     },
     "away_details": {
-      "starting": [],
-      "substitutes": [],
-      "substitutions": [],
-      "cards": [],
-      "manager": ""
+      "starting": [
+        {
+          "position": "GK",
+          "number": "22",
+          "name": "藤ヶ谷 陽介"
+        },
+        {
+          "position": "DF",
+          "number": "13",
+          "name": "安田 理大"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "中澤 聡太"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "山口 智"
+        },
+        {
+          "position": "DF",
+          "number": "19",
+          "name": "下平 匠"
+        },
+        {
+          "position": "MF",
+          "number": "27",
+          "name": "橋本 英郎"
+        },
+        {
+          "position": "MF",
+          "number": "17",
+          "name": "明神 智和"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "佐々木 勇人"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "遠藤 保仁"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "寺田 紳一"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "ルーカス"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "松代 直樹"
+        },
+        {
+          "position": "DF",
+          "number": "6",
+          "name": "福元 洋平"
+        },
+        {
+          "position": "MF",
+          "number": "20",
+          "name": "倉田 秋"
+        },
+        {
+          "position": "MF",
+          "number": "23",
+          "name": "武井 択也"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "播戸 竜二"
+        },
+        {
+          "position": "FW",
+          "number": "14",
+          "name": "平井 将生"
+        },
+        {
+          "position": "FW",
+          "number": "18",
+          "name": "ロニー"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "下平 匠",
+          "time": "45'"
+        },
+        {
+          "in_out": "▲",
+          "name": "播戸 竜二",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "寺田 紳一",
+          "time": "83'"
+        },
+        {
+          "in_out": "▲",
+          "name": "平井 将生",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "橋本 英郎",
+          "time": "20'"
+        },
+        {
+          "type": "警告",
+          "name": "播戸 竜二",
+          "time": "80'"
+        },
+        {
+          "type": "警告",
+          "name": "山口 智",
+          "time": "87'"
+        },
+        {
+          "type": "警告",
+          "name": "中澤 聡太",
+          "time": "89'"
+        }
+      ],
+      "manager": "西野 朗"
     },
     "referees": {
-      "дё»еҜ©": "е®¶жң¬гҖҖж”ҝжҳҺ",
-      "еүҜеҜ©": "еұұеҙҺгҖҖиЈ•еҪҰ , жӯҰз”°гҖҖйҖІ",
-      "з¬¬4гҒ®еҜ©еҲӨе“Ў": "дёӢжқ‘гҖҖжҳҢжҳӯ"
+      "主審": "家本 政明",
+      "副審": "山崎 裕彦 , 武田 進",
+      "第4の審判員": "下村 昌昭"
     }
   }
 ]

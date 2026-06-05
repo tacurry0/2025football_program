@@ -333,6 +333,15 @@
     "minute": 48
   },
   {
+    "match_id": "10085",
+    "season": 2007,
+    "player_key": "松下 年宏",
+    "player_name": "松下 年宏",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
     "match_id": "9964",
     "season": 2007,
     "player_key": "本間 勲",
@@ -484,6 +493,42 @@
     "type": "警告",
     "time": "80'",
     "minute": 80
+  },
+  {
+    "match_id": "10173",
+    "season": 2007,
+    "player_key": "矢野 貴章",
+    "player_name": "矢野 貴章",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "10173",
+    "season": 2007,
+    "player_key": "千代反田 充",
+    "player_name": "千代反田 充",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
+  },
+  {
+    "match_id": "10173",
+    "season": 2007,
+    "player_key": "マルシオ リシャルデス",
+    "player_name": "マルシオ リシャルデス",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "10173",
+    "season": 2007,
+    "player_key": "シルビーニョ",
+    "player_name": "シルビーニョ",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
   },
   {
     "match_id": "10182",

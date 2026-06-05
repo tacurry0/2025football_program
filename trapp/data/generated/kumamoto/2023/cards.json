@@ -1,0 +1,470 @@
+[
+  {
+    "match_id": "28479",
+    "season": 2023,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "警告",
+    "time": "07'",
+    "minute": 7
+  },
+  {
+    "match_id": "28479",
+    "season": 2023,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "28479",
+    "season": 2023,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "退場",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "28485",
+    "season": 2023,
+    "player_key": "黒木 晃平",
+    "player_name": "黒木 晃平",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  },
+  {
+    "match_id": "28485",
+    "season": 2023,
+    "player_key": "土信田 悠生",
+    "player_name": "土信田 悠生",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "28504",
+    "season": 2023,
+    "player_key": "竹本 雄飛",
+    "player_name": "竹本 雄飛",
+    "type": "警告",
+    "time": "14'",
+    "minute": 14
+  },
+  {
+    "match_id": "28504",
+    "season": 2023,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "警告",
+    "time": "18'",
+    "minute": 18
+  },
+  {
+    "match_id": "28504",
+    "season": 2023,
+    "player_key": "平川 怜",
+    "player_name": "平川 怜",
+    "type": "警告",
+    "time": "50'",
+    "minute": 50
+  },
+  {
+    "match_id": "28529",
+    "season": 2023,
+    "player_key": "相澤 佑哉",
+    "player_name": "相澤 佑哉",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "28529",
+    "season": 2023,
+    "player_key": "粟飯原 尚平",
+    "player_name": "粟飯原 尚平",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "28540",
+    "season": 2023,
+    "player_key": "粟飯原 尚平",
+    "player_name": "粟飯原 尚平",
+    "type": "警告",
+    "time": "22'",
+    "minute": 22
+  },
+  {
+    "match_id": "28540",
+    "season": 2023,
+    "player_key": "上村 周平",
+    "player_name": "上村 周平",
+    "type": "警告",
+    "time": "90'+2",
+    "minute": 92
+  },
+  {
+    "match_id": "28556",
+    "season": 2023,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "31'",
+    "minute": 31
+  },
+  {
+    "match_id": "28578",
+    "season": 2023,
+    "player_key": "相澤 佑哉",
+    "player_name": "相澤 佑哉",
+    "type": "警告",
+    "time": "15'",
+    "minute": 15
+  },
+  {
+    "match_id": "28578",
+    "season": 2023,
+    "player_key": "田代 琉我",
+    "player_name": "田代 琉我",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "28578",
+    "season": 2023,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "28579",
+    "season": 2023,
+    "player_key": "田代 琉我",
+    "player_name": "田代 琉我",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "28579",
+    "season": 2023,
+    "player_key": "粟飯原 尚平",
+    "player_name": "粟飯原 尚平",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "28601",
+    "season": 2023,
+    "player_key": "上村 周平",
+    "player_name": "上村 周平",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "28612",
+    "season": 2023,
+    "player_key": "粟飯原 尚平",
+    "player_name": "粟飯原 尚平",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "28612",
+    "season": 2023,
+    "player_key": "粟飯原 尚平",
+    "player_name": "粟飯原 尚平",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "28612",
+    "season": 2023,
+    "player_key": "田代 琉我",
+    "player_name": "田代 琉我",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
+  },
+  {
+    "match_id": "28612",
+    "season": 2023,
+    "player_key": "粟飯原 尚平",
+    "player_name": "粟飯原 尚平",
+    "type": "退場",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "28631",
+    "season": 2023,
+    "player_key": "島村 拓弥",
+    "player_name": "島村 拓弥",
+    "type": "警告",
+    "time": "27'",
+    "minute": 27
+  },
+  {
+    "match_id": "28631",
+    "season": 2023,
+    "player_key": "石川 大地",
+    "player_name": "石川 大地",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "28644",
+    "season": 2023,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "警告",
+    "time": "15'",
+    "minute": 15
+  },
+  {
+    "match_id": "28644",
+    "season": 2023,
+    "player_key": "田代 琉我",
+    "player_name": "田代 琉我",
+    "type": "警告",
+    "time": "90'+3",
+    "minute": 93
+  },
+  {
+    "match_id": "28665",
+    "season": 2023,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "28'",
+    "minute": 28
+  },
+  {
+    "match_id": "28665",
+    "season": 2023,
+    "player_key": "大崎 舜",
+    "player_name": "大崎 舜",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "28667",
+    "season": 2023,
+    "player_key": "上村 周平",
+    "player_name": "上村 周平",
+    "type": "警告",
+    "time": "33'",
+    "minute": 33
+  },
+  {
+    "match_id": "28667",
+    "season": 2023,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "28688",
+    "season": 2023,
+    "player_key": "島村 拓弥",
+    "player_name": "島村 拓弥",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "28688",
+    "season": 2023,
+    "player_key": "大崎 舜",
+    "player_name": "大崎 舜",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "28689",
+    "season": 2023,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "警告",
+    "time": "07'",
+    "minute": 7
+  },
+  {
+    "match_id": "28689",
+    "season": 2023,
+    "player_key": "大西 遼太郎",
+    "player_name": "大西 遼太郎",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "28709",
+    "season": 2023,
+    "player_key": "黒木 晃平",
+    "player_name": "黒木 晃平",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "28721",
+    "season": 2023,
+    "player_key": "平川 怜",
+    "player_name": "平川 怜",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "28725",
+    "season": 2023,
+    "player_key": "大西 遼太郎",
+    "player_name": "大西 遼太郎",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "28725",
+    "season": 2023,
+    "player_key": "大本 祐槻",
+    "player_name": "大本 祐槻",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "28764",
+    "season": 2023,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "28764",
+    "season": 2023,
+    "player_key": "黒木 晃平",
+    "player_name": "黒木 晃平",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "28764",
+    "season": 2023,
+    "player_key": "田辺 圭佑",
+    "player_name": "田辺 圭佑",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "28774",
+    "season": 2023,
+    "player_key": "上村 周平",
+    "player_name": "上村 周平",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "28820",
+    "season": 2023,
+    "player_key": "粟飯原 尚平",
+    "player_name": "粟飯原 尚平",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "28820",
+    "season": 2023,
+    "player_key": "平川 怜",
+    "player_name": "平川 怜",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "28828",
+    "season": 2023,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "28828",
+    "season": 2023,
+    "player_key": "岡崎 慎",
+    "player_name": "岡崎 慎",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "28840",
+    "season": 2023,
+    "player_key": "上村 周平",
+    "player_name": "上村 周平",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "28886",
+    "season": 2023,
+    "player_key": "大西 遼太郎",
+    "player_name": "大西 遼太郎",
+    "type": "警告",
+    "time": "17'",
+    "minute": 17
+  },
+  {
+    "match_id": "28868",
+    "season": 2023,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "警告",
+    "time": "55'",
+    "minute": 55
+  },
+  {
+    "match_id": "28898",
+    "season": 2023,
+    "player_key": "竹本 雄飛",
+    "player_name": "竹本 雄飛",
+    "type": "警告",
+    "time": "15'",
+    "minute": 15
+  },
+  {
+    "match_id": "28898",
+    "season": 2023,
+    "player_key": "大本 祐槻",
+    "player_name": "大本 祐槻",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  }
+]

@@ -9,6 +9,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/02/08",
     "kickoff": "13:08",
     "stadium": "ニンジニアスタジアム",
@@ -361,6 +363,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "4",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/02/15",
     "kickoff": "14:03",
     "stadium": "鳴門・大塚スポーツパーク ポカリスエットスタジアム",
@@ -746,6 +750,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/02/22",
     "kickoff": "14:03",
     "stadium": "四国化成ＭＥＧＬＩＯスタジアム",
@@ -1121,6 +1127,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/03/01",
     "kickoff": "14:03",
     "stadium": "アシックス里山スタジアム",
@@ -1498,6 +1506,8 @@
     "away_team": "高知ユナイテッドＳＣ",
     "home_score": "2",
     "away_score": "2",
+    "pk_home_score": "3",
+    "pk_away_score": "4",
     "date": "2026/03/07",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -1505,8 +1515,26 @@
     "weather": "曇時々晴",
     "temperature": "9.0",
     "humidity": "49%",
-    "home_goals": [],
-    "away_goals": [],
+    "home_goals": [
+      {
+        "time": "64'",
+        "name": "新井 泰貴"
+      },
+      {
+        "time": "88'",
+        "name": "マテウス モラエス"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "04'",
+        "name": "新谷 聖基"
+      },
+      {
+        "time": "33'",
+        "name": "関野 元弥"
+      }
+    ],
     "stats": [
       {
         "type": "SH",
@@ -1837,6 +1865,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "2",
+    "pk_away_score": "4",
     "date": "2026/03/14",
     "kickoff": "14:03",
     "stadium": "ロートフィールド奈良",
@@ -2195,6 +2225,8 @@
     "away_team": "カターレ富山",
     "home_score": "2",
     "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/03/20",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -2601,6 +2633,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "3",
+    "pk_away_score": "4",
     "date": "2026/03/29",
     "kickoff": "14:03",
     "stadium": "東大阪市花園ラグビー場",
@@ -2980,6 +3014,8 @@
     "away_team": "ツエーゲン金沢",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "4",
+    "pk_away_score": "1",
     "date": "2026/04/04",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -3324,6 +3360,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/04/12",
     "kickoff": "14:03",
     "stadium": "ＧＩＫＥＮスタジアム",
@@ -3687,6 +3725,8 @@
     "away_team": "ＦＣ今治",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/04/18",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -4056,6 +4096,8 @@
     "away_team": "ＦＣ大阪",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/04/25",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -4419,6 +4461,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/04/29",
     "kickoff": "14:03",
     "stadium": "富山県総合運動公園陸上競技場",
@@ -4812,6 +4856,8 @@
     "away_team": "カマタマーレ讃岐",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/05/03",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -5194,6 +5240,8 @@
     "away_team": "徳島ヴォルティス",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/05/06",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -5583,6 +5631,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "3",
+    "pk_away_score": "2",
     "date": "2026/05/10",
     "kickoff": "13:34",
     "stadium": "金沢ゴーゴーカレースタジアム",
@@ -5590,8 +5640,18 @@
     "weather": "晴",
     "temperature": "18.8",
     "humidity": "60%",
-    "home_goals": [],
-    "away_goals": [],
+    "home_goals": [
+      {
+        "time": "45'+2",
+        "name": "山本 義道"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "90'+1",
+        "name": "藤原 奏哉"
+      }
+    ],
     "stats": [
       {
         "type": "SH",
@@ -5962,6 +6022,8 @@
     "away_team": "奈良クラブ",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/05/16",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -6309,6 +6371,8 @@
     "away_team": "愛媛ＦＣ",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/05/23",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",
@@ -6666,6 +6730,8 @@
     "away_team": "鹿児島ユナイテッドＦＣ",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2026/05/30",
     "kickoff": "14:03",
     "stadium": "デンカビッグスワンスタジアム",

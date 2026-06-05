@@ -9,6 +9,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "4",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/03/05",
     "kickoff": "19:04",
     "stadium": "味の素スタジアム",
@@ -329,6 +331,8 @@
     "away_team": "大分トリニータ",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/03/13",
     "kickoff": "14:08",
     "stadium": "新潟スタジアム",
@@ -637,6 +641,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/03/19",
     "kickoff": "15:01",
     "stadium": "埼玉スタジアム２００２",
@@ -945,6 +951,8 @@
     "away_team": "ヴィッセル神戸",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/03/26",
     "kickoff": "14:00",
     "stadium": "新潟スタジアム",
@@ -1244,6 +1252,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "4",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/04/02",
     "kickoff": "14:06",
     "stadium": "日産スタジアム",
@@ -1560,6 +1570,8 @@
     "away_team": "大宮アルディージャ",
     "home_score": "3",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/04/09",
     "kickoff": "16:04",
     "stadium": "新潟スタジアム",
@@ -1876,6 +1888,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/04/13",
     "kickoff": "19:02",
     "stadium": "万博記念競技場",
@@ -2200,6 +2214,8 @@
     "away_team": "ジュビロ磐田",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/04/16",
     "kickoff": "19:04",
     "stadium": "新潟スタジアム",
@@ -2493,6 +2509,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/04/23",
     "kickoff": "16:02",
     "stadium": "国立霞ヶ丘競技場",
@@ -2779,6 +2797,8 @@
     "away_team": "清水エスパルス",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/04/28",
     "kickoff": "19:00",
     "stadium": "新潟スタジアム",
@@ -3067,6 +3087,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "5",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/05/01",
     "kickoff": "16:05",
     "stadium": "広島ビッグアーチ",
@@ -3376,6 +3398,8 @@
     "away_team": "川崎フロンターレ",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/05/04",
     "kickoff": "15:04",
     "stadium": "新潟スタジアム",
@@ -3688,6 +3712,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/05/08",
     "kickoff": "15:01",
     "stadium": "柏の葉公園総合競技場",
@@ -3967,6 +3993,8 @@
     "away_team": "鹿島アントラーズ",
     "home_score": "2",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/05/14",
     "kickoff": "15:04",
     "stadium": "新潟スタジアム",
@@ -4288,6 +4316,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/05/21",
     "kickoff": "14:05",
     "stadium": "埼玉スタジアム２００２",
@@ -4581,6 +4611,8 @@
     "away_team": "大宮アルディージャ",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/05/28",
     "kickoff": "15:00",
     "stadium": "新潟スタジアム",
@@ -4890,6 +4922,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/06/04",
     "kickoff": "15:01",
     "stadium": "神戸ウイングスタジアム",
@@ -5194,6 +5228,8 @@
     "away_team": "浦和レッズ",
     "home_score": "3",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/06/11",
     "kickoff": "13:04",
     "stadium": "新潟スタジアム",
@@ -5521,6 +5557,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/07/03",
     "kickoff": "19:05",
     "stadium": "埼玉スタジアム２００２",
@@ -5833,6 +5871,8 @@
     "away_team": "ヴィッセル神戸",
     "home_score": "3",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/07/06",
     "kickoff": "19:00",
     "stadium": "新潟スタジアム",
@@ -6153,6 +6193,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "3",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/07/09",
     "kickoff": "18:34",
     "stadium": "市原臨海競技場",
@@ -6474,6 +6516,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/07/13",
     "kickoff": "19:04",
     "stadium": "長居スタジアム",
@@ -6788,6 +6832,8 @@
     "away_team": "名古屋グランパスエイト",
     "home_score": "3",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/07/17",
     "kickoff": "18:04",
     "stadium": "新潟スタジアム",
@@ -7100,6 +7146,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/07/24",
     "kickoff": "19:04",
     "stadium": "大分スポーツ公園総合競技場",
@@ -7407,6 +7455,8 @@
     "away_team": "ガンバ大阪",
     "home_score": "4",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/08/20",
     "kickoff": "19:02",
     "stadium": "新潟スタジアム",
@@ -7737,6 +7787,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "7",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/08/24",
     "kickoff": "19:04",
     "stadium": "県立カシマサッカースタジアム",
@@ -8063,6 +8115,8 @@
     "away_team": "ジェフユナイテッド千葉",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/08/27",
     "kickoff": "19:02",
     "stadium": "新潟スタジアム",
@@ -8331,6 +8385,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "4",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/09/03",
     "kickoff": "18:34",
     "stadium": "埼玉スタジアム２００２",
@@ -8657,6 +8713,8 @@
     "away_team": "セレッソ大阪",
     "home_score": "1",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/09/10",
     "kickoff": "19:00",
     "stadium": "新潟スタジアム",
@@ -8980,6 +9038,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/09/18",
     "kickoff": "15:05",
     "stadium": "日本平スタジアム",
@@ -9308,6 +9368,8 @@
     "away_team": "サンフレッチェ広島",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/09/25",
     "kickoff": "15:04",
     "stadium": "新潟スタジアム",
@@ -9622,6 +9684,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "3",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/10/01",
     "kickoff": "15:03",
     "stadium": "等々力陸上競技場",
@@ -9928,6 +9992,8 @@
     "away_team": "東京ヴェルディ１９６９",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/10/15",
     "kickoff": "14:03",
     "stadium": "新潟スタジアム",
@@ -10237,6 +10303,8 @@
     "away_team": "横浜Ｆ・マリノス",
     "home_score": "1",
     "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/10/22",
     "kickoff": "16:02",
     "stadium": "新潟スタジアム",
@@ -10551,6 +10619,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "1",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/10/29",
     "kickoff": "15:36",
     "stadium": "神戸ウイングスタジアム",
@@ -10869,6 +10939,8 @@
     "away_team": "柏レイソル",
     "home_score": "2",
     "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/11/12",
     "kickoff": "14:05",
     "stadium": "新潟スタジアム",
@@ -11171,6 +11243,8 @@
     "away_team": "アルビレックス新潟",
     "home_score": "2",
     "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/11/20",
     "kickoff": "14:00",
     "stadium": "ヤマハスタジアム（磐田）",
@@ -11481,6 +11555,8 @@
     "away_team": "ＦＣ東京",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/11/23",
     "kickoff": "15:04",
     "stadium": "新潟スタジアム",
@@ -11758,24 +11834,26 @@
     "match_card_id": "8706",
     "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=8706",
     "season": "2005",
-    "competition": "пј’пјҗпјҗпј•пјӘгғӘгғјгӮ°гҖҖгғҮгӮЈгғ“гӮёгғ§гғіпј‘ з¬¬пј“пј“зҜҖз¬¬пј’ж—Ҙ",
-    "section": "",
-    "home_team": "еҗҚеҸӨеұӢгӮ°гғ©гғігғ‘гӮ№гӮЁгӮӨгғҲ",
-    "away_team": "гӮўгғ«гғ“гғ¬гғғгӮҜгӮ№ж–°жҪҹ",
+    "competition": "Jリーグ ディビジョン1",
+    "section": "第33節第2日",
+    "home_team": "名古屋グランパスエイト",
+    "away_team": "アルビレックス新潟",
     "home_score": "0",
     "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/11/27",
     "kickoff": "15:04",
-    "stadium": "еҗҚеҸӨеұӢеёӮз‘һз©ӮйҷёдёҠз«¶жҠҖе ҙ",
+    "stadium": "名古屋市瑞穂陸上競技場",
     "attendance": "10088",
-    "weather": "жӣҮ",
+    "weather": "曇",
     "temperature": "15.1",
     "humidity": "47%",
     "home_goals": [],
     "away_goals": [
       {
-        "time": "49'гҖҖгҖҖгҖҖ",
-        "name": "гӮўгғігғҮгғ«гӮҪгғігҖҖгғӘгғһ"
+        "time": "49'",
+        "name": "アンデルソン リマ"
       }
     ],
     "stats": [
@@ -11796,23 +11874,276 @@
       }
     ],
     "home_details": {
-      "starting": [],
-      "substitutes": [],
-      "substitutions": [],
-      "cards": [],
-      "manager": ""
+      "starting": [
+        {
+          "position": "GK",
+          "number": "22",
+          "name": "川島 永嗣"
+        },
+        {
+          "position": "DF",
+          "number": "17",
+          "name": "安 英学"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "秋田 豊"
+        },
+        {
+          "position": "DF",
+          "number": "3",
+          "name": "井川 祐輔"
+        },
+        {
+          "position": "MF",
+          "number": "20",
+          "name": "角田 誠"
+        },
+        {
+          "position": "MF",
+          "number": "14",
+          "name": "吉村 圭司"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "中村 直志"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "鴨川 奨"
+        },
+        {
+          "position": "MF",
+          "number": "24",
+          "name": "本田 圭佑"
+        },
+        {
+          "position": "MF",
+          "number": "10",
+          "name": "藤田 俊哉"
+        },
+        {
+          "position": "FW",
+          "number": "23",
+          "name": "豊田 陽平"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "楢﨑 正剛"
+        },
+        {
+          "position": "DF",
+          "number": "16",
+          "name": "増川 隆洋"
+        },
+        {
+          "position": "MF",
+          "number": "13",
+          "name": "山口 慶"
+        },
+        {
+          "position": "MF",
+          "number": "35",
+          "name": "井上 渉"
+        },
+        {
+          "position": "FW",
+          "number": "37",
+          "name": "津田 知宏"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "吉村 圭司",
+          "time": "70'"
+        },
+        {
+          "in_out": "▲",
+          "name": "山口 慶",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "豊田 陽平",
+          "time": "75'"
+        },
+        {
+          "in_out": "▲",
+          "name": "増川 隆洋",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "角田 誠",
+          "time": "16'"
+        },
+        {
+          "type": "警告",
+          "name": "秋田 豊",
+          "time": "17'"
+        },
+        {
+          "type": "警告",
+          "name": "井川 祐輔",
+          "time": "48'"
+        },
+        {
+          "type": "警告",
+          "name": "鴨川 奨",
+          "time": "65'"
+        }
+      ],
+      "manager": "中田 仁司"
     },
     "away_details": {
-      "starting": [],
-      "substitutes": [],
-      "substitutions": [],
-      "cards": [],
-      "manager": ""
+      "starting": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "木寺 浩一"
+        },
+        {
+          "position": "DF",
+          "number": "31",
+          "name": "藤井 大輔"
+        },
+        {
+          "position": "DF",
+          "number": "19",
+          "name": "海本 慶治"
+        },
+        {
+          "position": "DF",
+          "number": "3",
+          "name": "萩村 滋則"
+        },
+        {
+          "position": "DF",
+          "number": "36",
+          "name": "菊地 直哉"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "本間 勲"
+        },
+        {
+          "position": "MF",
+          "number": "35",
+          "name": "田中 亜土夢"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "寺川 能人"
+        },
+        {
+          "position": "FW",
+          "number": "7",
+          "name": "アンデルソン リマ"
+        },
+        {
+          "position": "FW",
+          "number": "10",
+          "name": "エジミウソン"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "ファビーニョ"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "野澤 洋輔"
+        },
+        {
+          "position": "MF",
+          "number": "6",
+          "name": "桑原 裕義"
+        },
+        {
+          "position": "MF",
+          "number": "13",
+          "name": "宮沢 克行"
+        },
+        {
+          "position": "MF",
+          "number": "20",
+          "name": "岡山 哲也"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "上野 優作"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "田中 亜土夢",
+          "time": "61'"
+        },
+        {
+          "in_out": "▲",
+          "name": "岡山 哲也",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "菊地 直哉",
+          "time": "76'"
+        },
+        {
+          "in_out": "▲",
+          "name": "桑原 裕義",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "エジミウソン",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "上野 優作",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "菊地 直哉",
+          "time": "20'"
+        },
+        {
+          "type": "警告",
+          "name": "田中 亜土夢",
+          "time": "51'"
+        },
+        {
+          "type": "警告",
+          "name": "藤井 大輔",
+          "time": "53'"
+        }
+      ],
+      "manager": "反町 康治"
     },
     "referees": {
-      "дё»еҜ©": "жқҫе°ҫгҖҖдёҖ",
-      "еүҜеҜ©": "й«ҳж©ӢгҖҖдҪід№… , зӣёи‘үгҖҖеҝ иҮЈ",
-      "з¬¬4гҒ®еҜ©еҲӨе“Ў": "йҮҺз”°гҖҖзҘҗжЁ№"
+      "主審": "松尾 一",
+      "副審": "高橋 佳久 , 相葉 忠臣",
+      "第4の審判員": "野田 祐樹"
     }
   },
   {
@@ -11825,6 +12156,8 @@
     "away_team": "浦和レッズ",
     "home_score": "0",
     "away_score": "4",
+    "pk_home_score": "",
+    "pk_away_score": "",
     "date": "2005/12/03",
     "kickoff": "14:04",
     "stadium": "新潟スタジアム",

@@ -475,5 +475,14 @@
     "time": "83'",
     "minute": 83,
     "is_own_goal": false
+  },
+  {
+    "match_id": "8706",
+    "season": 2005,
+    "player_key": "アンデルソン リマ",
+    "player_name": "アンデルソン リマ",
+    "time": "49'",
+    "minute": 49,
+    "is_own_goal": false
   }
 ]

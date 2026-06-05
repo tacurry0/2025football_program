@@ -1,0 +1,263 @@
+[
+  {
+    "match_id": "24651",
+    "season": 2020,
+    "player_key": "石川 啓人",
+    "player_name": "石川 啓人",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "24656",
+    "season": 2020,
+    "player_key": "鈴木 翔登",
+    "player_name": "鈴木 翔登",
+    "type": "警告",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "24688",
+    "season": 2020,
+    "player_key": "酒井 崇一",
+    "player_name": "酒井 崇一",
+    "type": "警告",
+    "time": "37'",
+    "minute": 37
+  },
+  {
+    "match_id": "24688",
+    "season": 2020,
+    "player_key": "髙橋 利樹",
+    "player_name": "髙橋 利樹",
+    "type": "警告",
+    "time": "81'",
+    "minute": 81
+  },
+  {
+    "match_id": "24696",
+    "season": 2020,
+    "player_key": "酒井 崇一",
+    "player_name": "酒井 崇一",
+    "type": "警告",
+    "time": "64'",
+    "minute": 64
+  },
+  {
+    "match_id": "24696",
+    "season": 2020,
+    "player_key": "相澤 祥太",
+    "player_name": "相澤 祥太",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "24705",
+    "season": 2020,
+    "player_key": "髙橋 利樹",
+    "player_name": "髙橋 利樹",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "24723",
+    "season": 2020,
+    "player_key": "小笠原 佳祐",
+    "player_name": "小笠原 佳祐",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "24730",
+    "season": 2020,
+    "player_key": "浅川 隼人",
+    "player_name": "浅川 隼人",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
+  },
+  {
+    "match_id": "24876",
+    "season": 2020,
+    "player_key": "酒井 崇一",
+    "player_name": "酒井 崇一",
+    "type": "警告",
+    "time": "57'",
+    "minute": 57
+  },
+  {
+    "match_id": "24876",
+    "season": 2020,
+    "player_key": "髙橋 利樹",
+    "player_name": "髙橋 利樹",
+    "type": "警告",
+    "time": "64'",
+    "minute": 64
+  },
+  {
+    "match_id": "24876",
+    "season": 2020,
+    "player_key": "伊東 俊",
+    "player_name": "伊東 俊",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "24894",
+    "season": 2020,
+    "player_key": "内山 圭",
+    "player_name": "内山 圭",
+    "type": "警告",
+    "time": "90'+1",
+    "minute": 91
+  },
+  {
+    "match_id": "24916",
+    "season": 2020,
+    "player_key": "小笠原 佳祐",
+    "player_name": "小笠原 佳祐",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  },
+  {
+    "match_id": "24919",
+    "season": 2020,
+    "player_key": "河原 創",
+    "player_name": "河原 創",
+    "type": "警告",
+    "time": "56'",
+    "minute": 56
+  },
+  {
+    "match_id": "24919",
+    "season": 2020,
+    "player_key": "髙橋 利樹",
+    "player_name": "髙橋 利樹",
+    "type": "退場",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "24934",
+    "season": 2020,
+    "player_key": "小笠原 佳祐",
+    "player_name": "小笠原 佳祐",
+    "type": "警告",
+    "time": "30'",
+    "minute": 30
+  },
+  {
+    "match_id": "24934",
+    "season": 2020,
+    "player_key": "上村 周平",
+    "player_name": "上村 周平",
+    "type": "警告",
+    "time": "36'",
+    "minute": 36
+  },
+  {
+    "match_id": "24738",
+    "season": 2020,
+    "player_key": "菅田 真啓",
+    "player_name": "菅田 真啓",
+    "type": "警告",
+    "time": "86'",
+    "minute": 86
+  },
+  {
+    "match_id": "24757",
+    "season": 2020,
+    "player_key": "菅田 真啓",
+    "player_name": "菅田 真啓",
+    "type": "警告",
+    "time": "60'",
+    "minute": 60
+  },
+  {
+    "match_id": "24757",
+    "season": 2020,
+    "player_key": "谷口 海斗",
+    "player_name": "谷口 海斗",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "24772",
+    "season": 2020,
+    "player_key": "伊東 俊",
+    "player_name": "伊東 俊",
+    "type": "警告",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "24787",
+    "season": 2020,
+    "player_key": "衛藤 幹弥",
+    "player_name": "衛藤 幹弥",
+    "type": "警告",
+    "time": "16'",
+    "minute": 16
+  },
+  {
+    "match_id": "24787",
+    "season": 2020,
+    "player_key": "黒木 晃平",
+    "player_name": "黒木 晃平",
+    "type": "警告",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "24816",
+    "season": 2020,
+    "player_key": "石川 啓人",
+    "player_name": "石川 啓人",
+    "type": "警告",
+    "time": "45'+1",
+    "minute": 46
+  },
+  {
+    "match_id": "24816",
+    "season": 2020,
+    "player_key": "浅川 隼人",
+    "player_name": "浅川 隼人",
+    "type": "警告",
+    "time": "87'",
+    "minute": 87
+  },
+  {
+    "match_id": "24825",
+    "season": 2020,
+    "player_key": "石川 啓人",
+    "player_name": "石川 啓人",
+    "type": "警告",
+    "time": "45'",
+    "minute": 45
+  },
+  {
+    "match_id": "24825",
+    "season": 2020,
+    "player_key": "小笠原 佳祐",
+    "player_name": "小笠原 佳祐",
+    "type": "警告",
+    "time": "50'",
+    "minute": 50
+  },
+  {
+    "match_id": "24827",
+    "season": 2020,
+    "player_key": "酒井 崇一",
+    "player_name": "酒井 崇一",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  }
+]

@@ -1,0 +1,371 @@
+[
+  {
+    "match_id": "30054",
+    "season": 2024,
+    "player_key": "田代 琉我",
+    "player_name": "田代 琉我",
+    "type": "警告",
+    "time": "90'+10",
+    "minute": 100
+  },
+  {
+    "match_id": "30067",
+    "season": 2024,
+    "player_key": "阿部 海斗",
+    "player_name": "阿部 海斗",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "30067",
+    "season": 2024,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "30077",
+    "season": 2024,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "type": "警告",
+    "time": "03'",
+    "minute": 3
+  },
+  {
+    "match_id": "30077",
+    "season": 2024,
+    "player_key": "岡崎 慎",
+    "player_name": "岡崎 慎",
+    "type": "警告",
+    "time": "75'",
+    "minute": 75
+  },
+  {
+    "match_id": "29633",
+    "season": 2024,
+    "player_key": "岡崎 慎",
+    "player_name": "岡崎 慎",
+    "type": "警告",
+    "time": "58'",
+    "minute": 58
+  },
+  {
+    "match_id": "29633",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "29633",
+    "season": 2024,
+    "player_key": "大本 祐槻",
+    "player_name": "大本 祐槻",
+    "type": "警告",
+    "time": "89'",
+    "minute": 89
+  },
+  {
+    "match_id": "30087",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "警告",
+    "time": "45'+2",
+    "minute": 47
+  },
+  {
+    "match_id": "30087",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "警告",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "30087",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "退場",
+    "time": "71'",
+    "minute": 71
+  },
+  {
+    "match_id": "30089",
+    "season": 2024,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "30089",
+    "season": 2024,
+    "player_key": "岡崎 慎",
+    "player_name": "岡崎 慎",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
+  },
+  {
+    "match_id": "30104",
+    "season": 2024,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "警告",
+    "time": "82'",
+    "minute": 82
+  },
+  {
+    "match_id": "30116",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "警告",
+    "time": "50'",
+    "minute": 50
+  },
+  {
+    "match_id": "30116",
+    "season": 2024,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "30126",
+    "season": 2024,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "type": "警告",
+    "time": "20'",
+    "minute": 20
+  },
+  {
+    "match_id": "30126",
+    "season": 2024,
+    "player_key": "大﨑 舜",
+    "player_name": "大﨑 舜",
+    "type": "警告",
+    "time": "90'+1",
+    "minute": 91
+  },
+  {
+    "match_id": "30148",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "警告",
+    "time": "45'+4",
+    "minute": 49
+  },
+  {
+    "match_id": "29656",
+    "season": 2024,
+    "player_key": "大﨑 舜",
+    "player_name": "大﨑 舜",
+    "type": "警告",
+    "time": "67'",
+    "minute": 67
+  },
+  {
+    "match_id": "30164",
+    "season": 2024,
+    "player_key": "大西 遼太郎",
+    "player_name": "大西 遼太郎",
+    "type": "警告",
+    "time": "19'",
+    "minute": 19
+  },
+  {
+    "match_id": "30164",
+    "season": 2024,
+    "player_key": "伊東 俊",
+    "player_name": "伊東 俊",
+    "type": "警告",
+    "time": "45'",
+    "minute": 45
+  },
+  {
+    "match_id": "30177",
+    "season": 2024,
+    "player_key": "松岡 瑠夢",
+    "player_name": "松岡 瑠夢",
+    "type": "警告",
+    "time": "09'",
+    "minute": 9
+  },
+  {
+    "match_id": "30192",
+    "season": 2024,
+    "player_key": "大﨑 舜",
+    "player_name": "大﨑 舜",
+    "type": "警告",
+    "time": "83'",
+    "minute": 83
+  },
+  {
+    "match_id": "30229",
+    "season": 2024,
+    "player_key": "豊田 歩",
+    "player_name": "豊田 歩",
+    "type": "警告",
+    "time": "10'",
+    "minute": 10
+  },
+  {
+    "match_id": "30229",
+    "season": 2024,
+    "player_key": "石川 大地",
+    "player_name": "石川 大地",
+    "type": "警告",
+    "time": "59'",
+    "minute": 59
+  },
+  {
+    "match_id": "30230",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "警告",
+    "time": "03'",
+    "minute": 3
+  },
+  {
+    "match_id": "30230",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "警告",
+    "time": "45'+4",
+    "minute": 49
+  },
+  {
+    "match_id": "30230",
+    "season": 2024,
+    "player_key": "阿部 海斗",
+    "player_name": "阿部 海斗",
+    "type": "警告",
+    "time": "64'",
+    "minute": 64
+  },
+  {
+    "match_id": "30230",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "退場",
+    "time": "45'+4",
+    "minute": 49
+  },
+  {
+    "match_id": "30246",
+    "season": 2024,
+    "player_key": "伊東 俊",
+    "player_name": "伊東 俊",
+    "type": "警告",
+    "time": "38'",
+    "minute": 38
+  },
+  {
+    "match_id": "30246",
+    "season": 2024,
+    "player_key": "上村 周平",
+    "player_name": "上村 周平",
+    "type": "警告",
+    "time": "70'",
+    "minute": 70
+  },
+  {
+    "match_id": "30262",
+    "season": 2024,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "type": "警告",
+    "time": "48'",
+    "minute": 48
+  },
+  {
+    "match_id": "30278",
+    "season": 2024,
+    "player_key": "伊東 俊",
+    "player_name": "伊東 俊",
+    "type": "警告",
+    "time": "45'+1",
+    "minute": 46
+  },
+  {
+    "match_id": "30318",
+    "season": 2024,
+    "player_key": "黒木 晃平",
+    "player_name": "黒木 晃平",
+    "type": "警告",
+    "time": "88'",
+    "minute": 88
+  },
+  {
+    "match_id": "30318",
+    "season": 2024,
+    "player_key": "江﨑 巧朗",
+    "player_name": "江﨑 巧朗",
+    "type": "警告",
+    "time": "***",
+    "minute": null
+  },
+  {
+    "match_id": "30326",
+    "season": 2024,
+    "player_key": "唐山 翔自",
+    "player_name": "唐山 翔自",
+    "type": "警告",
+    "time": "73'",
+    "minute": 73
+  },
+  {
+    "match_id": "30326",
+    "season": 2024,
+    "player_key": "豊田 歩",
+    "player_name": "豊田 歩",
+    "type": "警告",
+    "time": "78'",
+    "minute": 78
+  },
+  {
+    "match_id": "30363",
+    "season": 2024,
+    "player_key": "石川 大地",
+    "player_name": "石川 大地",
+    "type": "警告",
+    "time": "53'",
+    "minute": 53
+  },
+  {
+    "match_id": "30403",
+    "season": 2024,
+    "player_key": "大﨑 舜",
+    "player_name": "大﨑 舜",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
+  },
+  {
+    "match_id": "30419",
+    "season": 2024,
+    "player_key": "石川 大地",
+    "player_name": "石川 大地",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
+  }
+]

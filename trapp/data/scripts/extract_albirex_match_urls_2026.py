@@ -6,7 +6,8 @@ Albirex Niigata Full Match Scraper
 - アルビレックス新潟の全期間・全大会の試合URLを収集
 - リーグ戦、カップ戦、サテライト、天皇杯などすべて取得
 - 年別に自動振り分けしてJSON保存 (例: 1999.json, 2026.json)
-- 大会名と節（例: 1回戦第1戦）を正確に分離
+- 大会名と節の正確な分離、PK戦スコア（ホーム/アウェイ分割）の取得に対応
+- 文字化け（キリル文字化）対策済み
 """
 
 import json
@@ -63,8 +64,8 @@ def save_resume(data):
 def get_soup(url):
     r = requests.get(url, headers=HEADERS, timeout=30)
     r.raise_for_status()
-    r.encoding = r.apparent_encoding or r.encoding
-    return BeautifulSoup(r.text, "html.parser")
+    # 文字化け対策: r.content(生のバイトデータ)を渡し、BeautifulSoupに文字コードを自動判別させる
+    return BeautifulSoup(r.content, "html.parser")
 
 
 def collect_match_urls():
@@ -122,6 +123,8 @@ def parse_detail(url):
         "away_team": "",
         "home_score": "",
         "away_score": "",
+        "pk_home_score": "",
+        "pk_away_score": "",
         "date": "",
         "kickoff": "",
         "stadium": "",
@@ -145,19 +148,16 @@ def parse_detail(url):
     if t_txt:
         title_text = normalize_text(t_txt.get_text(separator=" ", strip=True))
 
-        # 【修正箇所1】カップ戦の「1回戦」「準決勝」やリーグ戦の「第〇節」などに幅広く対応
-        m_section = re.search(r"^(.*?)\s+((?:第\d+節|\d+回戦|準々決勝|準決勝|決勝|グループ|プール|順位決定戦).*)$", title_text)
+        m_section = re.search(r"^(.*?)\s+((?:第\d+節|第\d+日|\d+回戦|準々決勝|準決勝|決勝|グループ|プール|順位決定戦).*)$", title_text)
         if m_section:
             front_part = m_section.group(1).strip()
             data["section"] = m_section.group(2).strip()
         else:
             front_part = title_text
 
-        # 【修正箇所2】先頭の4桁の数字「だけ」を確実に年として抜き出す
         m_year = re.search(r"^(\d{4})", front_part)
         if m_year:
             data["season"] = m_year.group(1)
-            # 4桁数字以降のテキストを大会名とする。「特別」などの文字が残っていれば消す
             data["competition"] = re.sub(r"^特別\s*", "", front_part[4:].strip())
         else:
             data["competition"] = front_part
@@ -175,27 +175,42 @@ def parse_detail(url):
         data["home_score"] = clean(scores[0].get_text(strip=True))
         data["away_score"] = clean(scores[1].get_text(strip=True))
 
-    score_board = soup.find("div", class_="score-board-pk")
-    if score_board:
-        l_area = score_board.find("td", class_="left-area")
-        r_area = score_board.find("td", class_="right-area")
+    for board_class in ["score-board", "score-board-pk"]:
+        for board in soup.find_all("div", class_=board_class):
+            
+            board_text = normalize_text(board.get_text(separator=" "))
+            m_pk = re.search(r"(\d+)\s*PK戦\s*(\d+)", board_text)
+            if m_pk and not data["pk_home_score"]:
+                data["pk_home_score"] = m_pk.group(1)
+                data["pk_away_score"] = m_pk.group(2)
 
-        def extract_goals(area):
-            goals = []
-            if area:
+            l_areas = board.find_all("td", class_="left-area")
+            r_areas = board.find_all("td", class_="right-area")
+
+            def extract_goals(area):
+                goals = []
                 for tr in area.find_all("tr"):
                     tds = tr.find_all("td")
                     if len(tds) >= 2:
                         t1 = clean(tds[0].get_text(strip=True))
                         t2 = clean(tds[1].get_text(strip=True))
+                        
                         if "'" in t1:
                             goals.append({"time": t1, "name": t2})
-                        else:
+                        elif "'" in t2:
                             goals.append({"time": t2, "name": t1})
-            return goals
+                return goals
 
-        data["home_goals"] = extract_goals(l_area)
-        data["away_goals"] = extract_goals(r_area)
+            for l_area, r_area in zip(l_areas, r_areas):
+                h_goals = extract_goals(l_area)
+                a_goals = extract_goals(r_area)
+                
+                for g in h_goals:
+                    if g not in data["home_goals"]:
+                        data["home_goals"].append(g)
+                for g in a_goals:
+                    if g not in data["away_goals"]:
+                        data["away_goals"].append(g)
 
     stats_area = soup.find("div", class_="score-board-other")
     if stats_area:
@@ -271,7 +286,6 @@ def parse_detail(url):
             if isinstance(src[k], list): data["away_details"][k].extend(src[k])
             elif src[k]: data["away_details"][k] = src[k]
 
-    # タイトルから年号が取れなかった場合は試合日から補完
     if not data["season"] and data.get("date"):
         m_date = re.search(r"^(\d{4})", data["date"])
         if m_date:
@@ -281,7 +295,6 @@ def parse_detail(url):
 
 
 def save_year_record(record):
-    # ファイル名に使えない文字が入らないよう念のための処置
     year = str(record.get("season") or "unknown")
     year = re.sub(r'[\\/:*?"<>|]', "_", year)
     
@@ -327,7 +340,7 @@ def main():
             save_resume({"completed": sorted(completed)})
 
             saved_count += 1
-            print(f"[{idx}/{len(matches)}] OK {match_id} | {record.get('season')} {record.get('competition')} | {record.get('section')}")
+            print(f"[{idx}/{len(matches)}] OK {match_id} | {record.get('season')} {record.get('competition')} {record.get('section')}")
             time.sleep(1)
 
         except Exception as e:

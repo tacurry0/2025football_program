@@ -32,6 +32,12 @@
       <div id="search-wrap">
         <input type="text" id="search-input" placeholder="Search" autocomplete="off">
       </div>
+      <div id="schedule-filter-shell" class="schedule-filter-shell">
+        <details id="schedule-competition-filter" class="schedule-competition-filter">
+          <summary>大会</summary>
+          <div id="schedule-competition-options" class="schedule-competition-options" aria-label="大会の絞り込み"></div>
+        </details>
+      </div>
       <div id="search-popup" class="search-popup"></div>
     </div>
   </header>
@@ -813,6 +819,10 @@ We can't help falling in love with you
                 </div>
               </div>
             </div>
+            <details id="pa-competition-details" class="pa-competition-details">
+              <summary>詳細選択</summary>
+              <div id="pa-competition-options" class="pa-competition-options" aria-label="大会名の選択"></div>
+            </details>
 
             <div id="pa-status" class="pa-status" role="status" aria-live="polite"></div>
             <div id="pa-summary-cards" class="pa-summary-grid"></div>
@@ -948,14 +958,30 @@ We can't help falling in love with you
             <label class="pa-sort-select-field" for="pa-sort-key-select">
               <span>並び順</span>
               <select id="pa-sort-key-select">
+                <option value="number">背番号</option>
                 <option value="played_matches">出場試合数</option>
                 <option value="played_minutes">出場時間</option>
+                <option value="played_wins">出場時勝利数</option>
+                <option value="played_draws">出場時引分数</option>
+                <option value="played_losses">出場時敗戦数</option>
                 <option value="starter_matches">先発数</option>
+                <option value="starter_win_rate">先発時勝率</option>
+                <option value="starter_points_per_match">先発時平均勝ち点</option>
                 <option value="sub_matches">途中出場数</option>
+                <option value="sub_win_rate">途中出場時勝率</option>
+                <option value="sub_points_per_match">途中出場時平均勝ち点</option>
+                <option value="bench_only_matches">ベンチ入りのみ</option>
                 <option value="goals">得点数</option>
                 <option value="scored_matches">ゴール試合数</option>
                 <option value="played_win_rate">出場時勝率</option>
+                <option value="played_points_per_match">出場時平均勝ち点</option>
                 <option value="scored_win_rate">ゴール試合勝率</option>
+                <option value="scored_points_per_match">ゴール試合平均勝ち点</option>
+                <option value="yellow_cards">警告数</option>
+                <option value="red_cards">退場数</option>
+                <option value="carded_matches">カードを受けた試合数</option>
+                <option value="carded_win_rate">カード時勝率</option>
+                <option value="season_count">所属年数</option>
                 <option value="position_order">ポジション順</option>
                 <option value="player_name">選手名</option>
               </select>

@@ -1,0 +1,191 @@
+[
+  {
+    "match_id": "32974",
+    "season": 2026,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "time": "56'",
+    "minute": 56,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32974",
+    "season": 2026,
+    "player_key": "三島 頌平",
+    "player_name": "三島 頌平",
+    "time": "74'",
+    "minute": 74,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "32979",
+    "season": 2026,
+    "player_key": "飯星 明良",
+    "player_name": "飯星 明良",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33425",
+    "season": 2026,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "time": "42'",
+    "minute": 42,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33425",
+    "season": 2026,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "71'",
+    "minute": 71,
+    "is_own_goal": true
+  },
+  {
+    "match_id": "33425",
+    "season": 2026,
+    "player_key": "藤井 皓也",
+    "player_name": "藤井 皓也",
+    "time": "81'",
+    "minute": 81,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33425",
+    "season": 2026,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33432",
+    "season": 2026,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "time": "45'",
+    "minute": 45,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33432",
+    "season": 2026,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "time": "47'",
+    "minute": 47,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33432",
+    "season": 2026,
+    "player_key": "鹿取 勇斗",
+    "player_name": "鹿取 勇斗",
+    "time": "77'",
+    "minute": 77,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33453",
+    "season": 2026,
+    "player_key": "岩下 航",
+    "player_name": "岩下 航",
+    "time": "50'",
+    "minute": 50,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33468",
+    "season": 2026,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "time": "62'",
+    "minute": 62,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33468",
+    "season": 2026,
+    "player_key": "青木 俊輔",
+    "player_name": "青木 俊輔",
+    "time": "87'",
+    "minute": 87,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33475",
+    "season": 2026,
+    "player_key": "上村 周平",
+    "player_name": "上村 周平",
+    "time": "09'",
+    "minute": 9,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33481",
+    "season": 2026,
+    "player_key": "青木 俊輔",
+    "player_name": "青木 俊輔",
+    "time": "53'",
+    "minute": 53,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33481",
+    "season": 2026,
+    "player_key": "大本 祐槻",
+    "player_name": "大本 祐槻",
+    "time": "72'",
+    "minute": 72,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33484",
+    "season": 2026,
+    "player_key": "半代 将都",
+    "player_name": "半代 将都",
+    "time": "45'+1",
+    "minute": 46,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33484",
+    "season": 2026,
+    "player_key": "大本 祐槻",
+    "player_name": "大本 祐槻",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33495",
+    "season": 2026,
+    "player_key": "大本 祐槻",
+    "player_name": "大本 祐槻",
+    "time": "57'",
+    "minute": 57,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33498",
+    "season": 2026,
+    "player_key": "鹿取 勇斗",
+    "player_name": "鹿取 勇斗",
+    "time": "90'+5",
+    "minute": 95,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33002",
+    "season": 2026,
+    "player_key": "鹿取 勇斗",
+    "player_name": "鹿取 勇斗",
+    "time": "62'",
+    "minute": 62,
+    "is_own_goal": false
+  }
+]

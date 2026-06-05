@@ -54,6 +54,24 @@
     "is_own_goal": false
   },
   {
+    "match_id": "33354",
+    "season": 2026,
+    "player_key": "新井 泰貴",
+    "player_name": "新井 泰貴",
+    "time": "64'",
+    "minute": 64,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33354",
+    "season": 2026,
+    "player_key": "マテウス モラエス",
+    "player_name": "マテウス モラエス",
+    "time": "88'",
+    "minute": 88,
+    "is_own_goal": false
+  },
+  {
     "match_id": "33363",
     "season": 2026,
     "player_key": "マテウス モラエス",
@@ -123,6 +141,15 @@
     "player_name": "シマブク カズヨシ",
     "time": "23'",
     "minute": 23,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "33412",
+    "season": 2026,
+    "player_key": "藤原 奏哉",
+    "player_name": "藤原 奏哉",
+    "time": "90'+1",
+    "minute": 91,
     "is_own_goal": false
   },
   {

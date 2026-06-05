@@ -198,6 +198,15 @@
     "is_own_goal": false
   },
   {
+    "match_id": "10085",
+    "season": 2007,
+    "player_key": "深井 正樹",
+    "player_name": "深井 正樹",
+    "time": "15'",
+    "minute": 15,
+    "is_own_goal": false
+  },
+  {
     "match_id": "10101",
     "season": 2007,
     "player_key": "エジミウソン",
@@ -315,6 +324,24 @@
     "is_own_goal": false
   },
   {
+    "match_id": "10143",
+    "season": 2007,
+    "player_key": "マルシオ リシャルデス",
+    "player_name": "マルシオ リシャルデス",
+    "time": "40'",
+    "minute": 40,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "10143",
+    "season": 2007,
+    "player_key": "マルシオ リシャルデス",
+    "player_name": "マルシオ リシャルデス",
+    "time": "58'",
+    "minute": 58,
+    "is_own_goal": false
+  },
+  {
     "match_id": "10152",
     "season": 2007,
     "player_key": "マルシオ リシャルデス",
@@ -357,6 +384,15 @@
     "player_name": "エジミウソン",
     "time": "79'",
     "minute": 79,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "10173",
+    "season": 2007,
+    "player_key": "マルシオ リシャルデス",
+    "player_name": "マルシオ リシャルデス",
+    "time": "12'",
+    "minute": 12,
     "is_own_goal": false
   },
   {
