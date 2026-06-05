@@ -6008,4 +6008,5 @@ body[data-mode="dashboard"] #header-n-gate-container { pointer-events: auto; }
 .cal-emblem,
 .dash-form-emblem,
 .club-pip.active {
-  filt
+  filter: drop-shadow(0 5px 9px rgba(0,0,0,0.16));
+}
