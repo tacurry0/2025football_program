@@ -11758,24 +11758,24 @@
     "match_card_id": "8706",
     "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=8706",
     "season": "2005",
-    "competition": "Jリーグ ディビジョン1",
-    "section": "第33節第2日",
-    "home_team": "名古屋グランパスエイト",
-    "away_team": "アルビレックス新潟",
+    "competition": "пј’пјҗпјҗпј•пјӘгғӘгғјгӮ°гҖҖгғҮгӮЈгғ“гӮёгғ§гғіпј‘ з¬¬пј“пј“зҜҖз¬¬пј’ж—Ҙ",
+    "section": "",
+    "home_team": "еҗҚеҸӨеұӢгӮ°гғ©гғігғ‘гӮ№гӮЁгӮӨгғҲ",
+    "away_team": "гӮўгғ«гғ“гғ¬гғғгӮҜгӮ№ж–°жҪҹ",
     "home_score": "0",
     "away_score": "1",
     "date": "2005/11/27",
     "kickoff": "15:04",
-    "stadium": "名古屋市瑞穂陸上競技場",
+    "stadium": "еҗҚеҸӨеұӢеёӮз‘һз©ӮйҷёдёҠз«¶жҠҖе ҙ",
     "attendance": "10088",
-    "weather": "曇",
+    "weather": "жӣҮ",
     "temperature": "15.1",
     "humidity": "47%",
     "home_goals": [],
     "away_goals": [
       {
-        "time": "49'",
-        "name": "アンデルソン リマ"
+        "time": "49'гҖҖгҖҖгҖҖ",
+        "name": "гӮўгғігғҮгғ«гӮҪгғігҖҖгғӘгғһ"
       }
     ],
     "stats": [
@@ -11796,276 +11796,23 @@
       }
     ],
     "home_details": {
-      "starting": [
-        {
-          "position": "GK",
-          "number": "22",
-          "name": "川島 永嗣"
-        },
-        {
-          "position": "DF",
-          "number": "17",
-          "name": "安 英学"
-        },
-        {
-          "position": "DF",
-          "number": "2",
-          "name": "秋田 豊"
-        },
-        {
-          "position": "DF",
-          "number": "3",
-          "name": "井川 祐輔"
-        },
-        {
-          "position": "MF",
-          "number": "20",
-          "name": "角田 誠"
-        },
-        {
-          "position": "MF",
-          "number": "14",
-          "name": "吉村 圭司"
-        },
-        {
-          "position": "MF",
-          "number": "7",
-          "name": "中村 直志"
-        },
-        {
-          "position": "MF",
-          "number": "15",
-          "name": "鴨川 奨"
-        },
-        {
-          "position": "MF",
-          "number": "24",
-          "name": "本田 圭佑"
-        },
-        {
-          "position": "MF",
-          "number": "10",
-          "name": "藤田 俊哉"
-        },
-        {
-          "position": "FW",
-          "number": "23",
-          "name": "豊田 陽平"
-        }
-      ],
-      "substitutes": [
-        {
-          "position": "GK",
-          "number": "1",
-          "name": "楢﨑 正剛"
-        },
-        {
-          "position": "DF",
-          "number": "16",
-          "name": "増川 隆洋"
-        },
-        {
-          "position": "MF",
-          "number": "13",
-          "name": "山口 慶"
-        },
-        {
-          "position": "MF",
-          "number": "35",
-          "name": "井上 渉"
-        },
-        {
-          "position": "FW",
-          "number": "37",
-          "name": "津田 知宏"
-        }
-      ],
-      "substitutions": [
-        {
-          "in_out": "▽",
-          "name": "吉村 圭司",
-          "time": "70'"
-        },
-        {
-          "in_out": "▲",
-          "name": "山口 慶",
-          "time": ""
-        },
-        {
-          "in_out": "▽",
-          "name": "豊田 陽平",
-          "time": "75'"
-        },
-        {
-          "in_out": "▲",
-          "name": "増川 隆洋",
-          "time": ""
-        }
-      ],
-      "cards": [
-        {
-          "type": "警告",
-          "name": "角田 誠",
-          "time": "16'"
-        },
-        {
-          "type": "警告",
-          "name": "秋田 豊",
-          "time": "17'"
-        },
-        {
-          "type": "警告",
-          "name": "井川 祐輔",
-          "time": "48'"
-        },
-        {
-          "type": "警告",
-          "name": "鴨川 奨",
-          "time": "65'"
-        }
-      ],
-      "manager": "中田 仁司"
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
     },
     "away_details": {
-      "starting": [
-        {
-          "position": "GK",
-          "number": "1",
-          "name": "木寺 浩一"
-        },
-        {
-          "position": "DF",
-          "number": "31",
-          "name": "藤井 大輔"
-        },
-        {
-          "position": "DF",
-          "number": "19",
-          "name": "海本 慶治"
-        },
-        {
-          "position": "DF",
-          "number": "3",
-          "name": "萩村 滋則"
-        },
-        {
-          "position": "DF",
-          "number": "36",
-          "name": "菊地 直哉"
-        },
-        {
-          "position": "MF",
-          "number": "15",
-          "name": "本間 勲"
-        },
-        {
-          "position": "MF",
-          "number": "35",
-          "name": "田中 亜土夢"
-        },
-        {
-          "position": "MF",
-          "number": "16",
-          "name": "寺川 能人"
-        },
-        {
-          "position": "FW",
-          "number": "7",
-          "name": "アンデルソン リマ"
-        },
-        {
-          "position": "FW",
-          "number": "10",
-          "name": "エジミウソン"
-        },
-        {
-          "position": "FW",
-          "number": "9",
-          "name": "ファビーニョ"
-        }
-      ],
-      "substitutes": [
-        {
-          "position": "GK",
-          "number": "21",
-          "name": "野澤 洋輔"
-        },
-        {
-          "position": "MF",
-          "number": "6",
-          "name": "桑原 裕義"
-        },
-        {
-          "position": "MF",
-          "number": "13",
-          "name": "宮沢 克行"
-        },
-        {
-          "position": "MF",
-          "number": "20",
-          "name": "岡山 哲也"
-        },
-        {
-          "position": "FW",
-          "number": "11",
-          "name": "上野 優作"
-        }
-      ],
-      "substitutions": [
-        {
-          "in_out": "▽",
-          "name": "田中 亜土夢",
-          "time": "61'"
-        },
-        {
-          "in_out": "▲",
-          "name": "岡山 哲也",
-          "time": ""
-        },
-        {
-          "in_out": "▽",
-          "name": "菊地 直哉",
-          "time": "76'"
-        },
-        {
-          "in_out": "▲",
-          "name": "桑原 裕義",
-          "time": ""
-        },
-        {
-          "in_out": "▽",
-          "name": "エジミウソン",
-          "time": "89'"
-        },
-        {
-          "in_out": "▲",
-          "name": "上野 優作",
-          "time": ""
-        }
-      ],
-      "cards": [
-        {
-          "type": "警告",
-          "name": "菊地 直哉",
-          "time": "20'"
-        },
-        {
-          "type": "警告",
-          "name": "田中 亜土夢",
-          "time": "51'"
-        },
-        {
-          "type": "警告",
-          "name": "藤井 大輔",
-          "time": "53'"
-        }
-      ],
-      "manager": "反町 康治"
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
     },
     "referees": {
-      "主審": "松尾 一",
-      "副審": "高橋 佳久 , 相葉 忠臣",
-      "第4の審判員": "野田 祐樹"
+      "дё»еҜ©": "жқҫе°ҫгҖҖдёҖ",
+      "еүҜеҜ©": "й«ҳж©ӢгҖҖдҪід№… , зӣёи‘үгҖҖеҝ иҮЈ",
+      "з¬¬4гҒ®еҜ©еҲӨе“Ў": "йҮҺз”°гҖҖзҘҗжЁ№"
     }
   },
   {

@@ -126,15 +126,6 @@
     "is_own_goal": false
   },
   {
-    "match_id": "10919",
-    "season": 2008,
-    "player_key": "アレッサンドロ",
-    "player_name": "アレッサンドロ",
-    "time": "41'",
-    "minute": 41,
-    "is_own_goal": false
-  },
-  {
     "match_id": "10778",
     "season": 2008,
     "player_key": "マルシオ リシャルデス",
@@ -294,33 +285,6 @@
     "player_name": "アレッサンドロ",
     "time": "56'",
     "minute": 56,
-    "is_own_goal": false
-  },
-  {
-    "match_id": "11104",
-    "season": 2008,
-    "player_key": "本間 勲",
-    "player_name": "本間 勲",
-    "time": "10'",
-    "minute": 10,
-    "is_own_goal": false
-  },
-  {
-    "match_id": "11104",
-    "season": 2008,
-    "player_key": "松下 年宏",
-    "player_name": "松下 年宏",
-    "time": "31'",
-    "minute": 31,
-    "is_own_goal": false
-  },
-  {
-    "match_id": "11104",
-    "season": 2008,
-    "player_key": "内田 潤",
-    "player_name": "内田 潤",
-    "time": "89'",
-    "minute": 89,
     "is_own_goal": false
   }
 ]
