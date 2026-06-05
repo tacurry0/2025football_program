@@ -1022,6 +1022,74 @@ document.addEventListener("DOMContentLoaded", async () => {
     return PLAYER_ANALYSIS_CLUBS[getPlayerAnalysisClub(club)] || PLAYER_ANALYSIS_CLUBS.niigata;
   }
 
+  function normalizePlayerImageName(name) {
+    return String(name || "")
+      .normalize("NFKC")
+      .replace(/\u00a0/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function getPlayerImageDirectories(club = playerAnalysisState.selectedClub) {
+    const key = getPlayerAnalysisClub(club);
+    return [
+      `./data/assets/images/player_${key}`,
+      `./data/assets/player_${key}`
+    ];
+  }
+
+  function getPlayerImageSources(playerName, club = playerAnalysisState.selectedClub) {
+    const normalizedName = normalizePlayerImageName(playerName);
+    if (!normalizedName) return [];
+    const filename = `${encodeURIComponent(normalizedName)}.jpg`;
+    return getPlayerImageDirectories(club).map(dir => `${dir}/${filename}`);
+  }
+
+  function renderPlayerPhoto(playerName, club = playerAnalysisState.selectedClub, className = "") {
+    const sources = getPlayerImageSources(playerName, club);
+    if (!sources.length) return "";
+    const fallback = sources[1] || "";
+    const altName = normalizePlayerImageName(playerName);
+    const classes = ["player-photo", className].filter(Boolean).join(" ");
+    return `
+      <figure class="${escapeHtml(classes)}">
+        <img
+          src="${escapeHtml(sources[0])}"
+          ${fallback ? `data-fallback-src="${escapeHtml(fallback)}"` : ""}
+          data-player-photo
+          alt="${escapeHtml(`${altName}の写真`)}"
+          loading="eager"
+          decoding="async"
+        >
+      </figure>
+    `;
+  }
+
+  function setupPlayerPhotos(root = document) {
+    if (!root) return;
+    root.querySelectorAll("img[data-player-photo]").forEach(img => {
+      if (img.dataset.playerPhotoBound === "true") return;
+      img.dataset.playerPhotoBound = "true";
+      const frame = img.closest(".player-photo");
+      const show = () => frame?.classList.add("is-loaded");
+      const hide = () => frame?.remove();
+      img.addEventListener("load", show);
+      img.addEventListener("error", () => {
+        const fallback = img.dataset.fallbackSrc;
+        if (fallback && img.dataset.fallbackTried !== "true") {
+          img.dataset.fallbackTried = "true";
+          img.src = fallback;
+          return;
+        }
+        hide();
+      });
+      if (img.complete) {
+        if (img.naturalWidth > 0) show();
+        else if (!img.src) hide();
+      }
+    });
+  }
+
   function getPlayerAnalysisYears(club = playerAnalysisState.selectedClub) {
     const info = getPlayerAnalysisClubInfo(club);
     const years = [];
@@ -2711,6 +2779,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function setPlayerAnalysisModalContent(html) {
     const { backdrop, modal } = ensurePlayerAnalysisModal();
     modal.innerHTML = html;
+    setupPlayerPhotos(modal);
     backdrop.classList.add("active");
     modal.classList.add("active");
     document.body.classList.add("pa-modal-open");
@@ -3078,8 +3147,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     return appearance.appearance_type || "-";
   }
 
-  function renderPlayerNumberBadge(numbers, className = "") {
-    return `<span class="pa-player-number-badge ${escapeHtml(className)}">${escapeHtml(formatPlayerList(numbers))}</span>`;
+  function isPlayerGoalkeeper(player) {
+    return getPlayerPositions(player).includes("GK");
+  }
+
+  function renderPlayerNumberBadge(numbers, className = "", player = null) {
+    const classes = ["pa-player-number-badge", className, isPlayerGoalkeeper(player) ? "gk" : ""]
+      .filter(Boolean)
+      .join(" ");
+    return `<span class="${escapeHtml(classes)}">${escapeHtml(formatPlayerList(numbers))}</span>`;
   }
 
   function getActivePlayerAnalysisModalCategories() {
@@ -3162,7 +3238,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="pa-year-match-summary-head">
           <span>${escapeHtml(String(year))}年データ</span>
           <div class="pa-year-match-summary-meta">
-            ${renderPlayerNumberBadge(yearRow.numbers, "summary")}
+            ${renderPlayerNumberBadge(yearRow.numbers, "summary", yearRow)}
             <strong>${escapeHtml(formatPlayerList(yearRow.positions))}</strong>
           </div>
         </div>
@@ -3290,7 +3366,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </section>
       <section class="pa-match-detail-panel">
         <div class="pa-match-detail-player">
-          ${renderPlayerNumberBadge(yearRow?.numbers || player.numbers, "detail")}
+          ${renderPlayerNumberBadge(yearRow?.numbers || player.numbers, "detail", yearRow || player)}
           <div>
             <span>${escapeHtml(player.player_name || "-")}</span>
             <strong>${escapeHtml(formatPlayerList(yearRow?.positions || player.positions))}</strong>
@@ -3370,7 +3446,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             ${yearRows.map(row => `
               <tr>
                 <td><button type="button" class="pa-year-detail-btn" data-pa-year-detail="${escapeHtml(formatPlayerNumber(getPlayerYearValue(row)))}">${escapeHtml(formatPlayerNumber(getPlayerYearValue(row)))}</button></td>
-                <td><span class="pa-yearly-number">${escapeHtml(formatPlayerList(row.numbers))}</span></td>
+                <td><span class="pa-yearly-number ${isPlayerGoalkeeper(row) ? "gk" : ""}">${escapeHtml(formatPlayerList(row.numbers))}</span></td>
                 <td>${escapeHtml(formatPlayerList(row.positions))}</td>
                 <td class="pa-num">${escapeHtml(formatPlayerNumber(row.played_matches))}</td>
                 <td class="pa-num">${escapeHtml(formatPlayerNumber(row.starter_matches))}</td>
@@ -3411,12 +3487,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const activeTab = allowedTabs.includes(playerAnalysisState.profileTab) ? playerAnalysisState.profileTab : "total";
 
     const meta = `
-      ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal")}
+      ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal", aggregate)}
       <span class="pa-chip">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
       <span class="pa-chip">${escapeHtml(getPlayerSeasonSpan(yearRows))}</span>
       <span class="pa-chip scope">${escapeHtml(scopeLabel)}</span>
     `;
     const body = `
+      ${renderPlayerPhoto(aggregate.player_name || player.player_name || "", playerAnalysisState.selectedClub, "pa-player-photo")}
       ${renderPlayerAnalysisCategoryChecklist()}
       <div class="pa-profile-tabs" role="tablist" aria-label="選手データ表示切り替え">
         <button type="button" class="pa-profile-tab" data-pa-profile-tab="total" role="tab">累計</button>
@@ -3501,18 +3578,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     detail.classList.add("active");
     detail.innerHTML = `
+      ${renderPlayerPhoto(player.player_name || "", playerAnalysisState.selectedClub, "pa-detail-photo")}
       <div class="pa-detail-header">
         <div>
           <span class="pa-kicker">PLAYER DETAIL</span>
           <h2>${escapeHtml(player.player_name || "-")}</h2>
         </div>
         <div class="pa-detail-meta">
-          ${renderPlayerNumberBadge(player.numbers, "modal")}
+          ${renderPlayerNumberBadge(player.numbers, "modal", player)}
           <span class="pa-chip">${escapeHtml(formatPlayerList(player.positions))}</span>
         </div>
       </div>
       ${renderPlayerAnalysisDetailSections(player)}
     `;
+    setupPlayerPhotos(detail);
   }
 
   async function applyPlayerAnalysisFilters() {
@@ -4978,6 +5057,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     sheetContent.innerHTML = `
       <section class="u-player-profile">
+        ${renderPlayerPhoto(profile.playerName, club, "u-player-photo")}
         <button type="button" class="u-player-back">← 試合詳細へ戻る</button>
         <div class="u-player-header">
           <span>${escapeHtml(clubInfo.englishName)}</span>
@@ -5002,6 +5082,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </section>
     `;
 
+    setupPlayerPhotos(sheetContent);
     const backBtn = sheetContent.querySelector(".u-player-back");
     if (backBtn && sourceMatch) backBtn.onclick = () => openDetailSheet(sourceMatch);
     sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
