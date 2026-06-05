@@ -34,8 +34,8 @@
       </div>
       <div id="schedule-filter-shell" class="schedule-filter-shell">
         <details id="schedule-competition-filter" class="schedule-competition-filter">
-          <summary>大会</summary>
-          <div id="schedule-competition-options" class="schedule-competition-options" aria-label="大会の絞り込み"></div>
+          <summary>種別</summary>
+          <div id="schedule-competition-options" class="schedule-competition-options" aria-label="種別の絞り込み"></div>
         </details>
       </div>
       <div id="search-popup" class="search-popup"></div>
@@ -803,8 +803,14 @@ We can't help falling in love with you
           <div class="pa-board-main">
             <div class="pa-topbar">
               <div class="pa-heading">
-                <span class="pa-kicker">ALBIREX NIIGATA</span>
-                <h1 id="pa-title">選手分析</h1>
+                <span class="pa-kicker">PLAYER ANALYSIS</span>
+                <button type="button" id="pa-club-select" class="pa-club-select" aria-haspopup="true" aria-expanded="false">
+                  <span id="pa-title">ALBIREX NIIGATA</span>
+                </button>
+                <div id="pa-club-menu" class="pa-club-menu" hidden>
+                  <button type="button" data-pa-club="niigata">ALBIREX NIIGATA</button>
+                  <button type="button" data-pa-club="kumamoto">ROASSO KUMAMOTO</button>
+                </div>
               </div>
               <label class="pa-year-field" for="pa-year-select">
                 <span>年度</span>
