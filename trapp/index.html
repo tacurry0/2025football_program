@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260608player-analysis1">
+  <link rel="stylesheet" href="style.css?v=20260608player-analysis5">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./data/assets/emblems/アルビレックス新潟.png">
@@ -799,6 +799,7 @@ We can't help falling in love with you
     <!-- View 3: Albirex Player Analysis -->
     <main id="player-analysis-view" class="hidden-view">
       <section class="player-analysis-page" aria-labelledby="pa-title">
+        <div id="pa-analysis-screen" class="pa-screen active" data-pa-screen="analysis">
         <div class="pa-overview-board">
           <div class="pa-board-main">
             <div class="pa-topbar">
@@ -834,17 +835,6 @@ We can't help falling in love with you
             <div id="pa-summary-cards" class="pa-summary-grid"></div>
           </div>
           <aside class="pa-board-rankings" aria-label="ランキング">
-            <div class="pa-ranking-toolbar">
-              <label class="pa-sort-select-field compact" for="pa-impact-min-select">
-                <span>IMPACT</span>
-                <select id="pa-impact-min-select">
-                  <option value="0">全員</option>
-                  <option value="10" selected>10試合以上</option>
-                  <option value="30">30試合以上</option>
-                  <option value="50">50試合以上</option>
-                </select>
-              </label>
-            </div>
             <div id="pa-rankings" class="pa-rankings"></div>
           </aside>
         </div>
@@ -965,30 +955,6 @@ We can't help falling in love with you
           </details>
         </div>
 
-        <section id="pa-compare-panel" class="pa-compare-panel" aria-label="選手比較とコンビ分析">
-          <div class="pa-compare-head">
-            <div>
-              <span class="pa-kicker">PLAYER COMPARE</span>
-              <h3>選手比較 / コンビ分析</h3>
-            </div>
-          </div>
-          <div id="pa-compare-controls" class="pa-compare-controls">
-            <label class="pa-compare-select-field" for="pa-compare-player-0">
-              <span>選手A</span>
-              <select id="pa-compare-player-0" data-pa-compare-index="0"></select>
-            </label>
-            <label class="pa-compare-select-field" for="pa-compare-player-1">
-              <span>選手B</span>
-              <select id="pa-compare-player-1" data-pa-compare-index="1"></select>
-            </label>
-            <label class="pa-compare-select-field" for="pa-compare-player-2">
-              <span>選手C</span>
-              <select id="pa-compare-player-2" data-pa-compare-index="2"></select>
-            </label>
-          </div>
-          <div id="pa-compare-result" class="pa-compare-result" aria-live="polite"></div>
-        </section>
-
         <section class="pa-data-panel" aria-label="選手一覧">
         <div class="pa-table-headline">
           <div>
@@ -1018,7 +984,9 @@ We can't help falling in love with you
                 <option value="played_points_per_match">出場時平均勝ち点</option>
                 <option value="scored_win_rate">ゴール試合勝率</option>
                 <option value="scored_points_per_match">ゴール試合平均勝ち点</option>
-                <option value="impact_score">インパクトスコア</option>
+                <option value="attack_impact">攻撃インパクト</option>
+                <option value="defense_impact">守備インパクト</option>
+                <option value="total_impact">総合インパクト</option>
                 <option value="yellow_cards">警告数</option>
                 <option value="red_cards">退場数</option>
                 <option value="carded_matches">カードを受けた試合数</option>
@@ -1064,6 +1032,84 @@ We can't help falling in love with you
         <section id="pa-detail-card" class="pa-detail-card" aria-live="polite"></section>
         </section>
         </div>
+        </div>
+
+        <section id="pa-compare-panel" class="pa-screen pa-compare-panel" data-pa-screen="compare" aria-label="選手比較とコンビ分析">
+          <div class="pa-compare-head">
+            <div>
+              <span class="pa-kicker">PLAYER COMPARE</span>
+              <h3>選手比較 / コンビ分析</h3>
+            </div>
+          </div>
+          <div id="pa-compare-time-controls" class="pa-time-controls" data-pa-time-scope="compare">
+            <label class="pa-time-field">
+              <span>年</span>
+              <select data-pa-time-year="compare"></select>
+            </label>
+            <button type="button" class="pa-period-toggle" data-pa-period-toggle="compare" aria-pressed="false">期間</button>
+            <div class="pa-period-fields" data-pa-period-fields="compare" hidden>
+              <label><span>開始</span><select data-pa-period-start="compare"></select></label>
+              <span class="pa-period-separator">～</span>
+              <label><span>終了</span><select data-pa-period-end="compare"></select></label>
+            </div>
+          </div>
+          <div id="pa-compare-controls" class="pa-compare-controls">
+            <div class="pa-compare-select-field" data-pa-compare-field="0">
+              <span>選手A</span>
+              <select id="pa-compare-player-0" data-pa-compare-index="0"></select>
+            </div>
+            <div class="pa-compare-select-field" data-pa-compare-field="1">
+              <span>選手B</span>
+              <select id="pa-compare-player-1" data-pa-compare-index="1"></select>
+            </div>
+            <div class="pa-compare-select-field" data-pa-compare-field="2">
+              <span>選手C</span>
+              <select id="pa-compare-player-2" data-pa-compare-index="2"></select>
+            </div>
+          </div>
+          <div id="pa-compare-result" class="pa-compare-result" aria-live="polite"></div>
+        </section>
+
+        <section id="pa-opponent-panel" class="pa-screen pa-opponent-panel" data-pa-screen="opponents" aria-label="対戦クラブ別分析">
+          <div class="pa-compare-head">
+            <div>
+              <span class="pa-kicker">OPPONENT</span>
+              <h3>対戦クラブ別</h3>
+            </div>
+          </div>
+          <div id="pa-opponent-time-controls" class="pa-time-controls" data-pa-time-scope="opponent">
+            <label class="pa-time-field">
+              <span>年</span>
+              <select data-pa-time-year="opponent"></select>
+            </label>
+            <button type="button" class="pa-period-toggle" data-pa-period-toggle="opponent" aria-pressed="false">期間</button>
+            <div class="pa-period-fields" data-pa-period-fields="opponent" hidden>
+              <label><span>開始</span><select data-pa-period-start="opponent"></select></label>
+              <span class="pa-period-separator">～</span>
+              <label><span>終了</span><select data-pa-period-end="opponent"></select></label>
+            </div>
+          </div>
+          <div class="pa-compare-select-field pa-opponent-search-field">
+            <span>選手名</span>
+            <select id="pa-opponent-player-select"></select>
+          </div>
+          <div id="pa-opponent-result" class="pa-compare-result" aria-live="polite"></div>
+        </section>
+
+        <nav id="pa-bottom-tabs" class="pa-bottom-tabs" aria-label="選手分析メニュー">
+          <button type="button" class="pa-bottom-tab active" data-pa-screen-target="analysis">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M9 19v-8M14 19V8M19 19v-5"/></svg>
+            <span>分析</span>
+          </button>
+          <button type="button" class="pa-bottom-tab" data-pa-screen-target="compare">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10M7 17h10M6 7a2 2 0 1 0 0 .1M18 17a2 2 0 1 0 0 .1"/></svg>
+            <span>比較</span>
+          </button>
+          <button type="button" class="pa-bottom-tab" data-pa-screen-target="opponents">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-4.4 7-11a7 7 0 0 0-14 0c0 6.6 7 11 7 11z"/><path d="M9 10h6"/></svg>
+            <span>対戦クラブ別</span>
+          </button>
+        </nav>
       </section>
     </main>
 
@@ -1145,7 +1191,7 @@ We can't help falling in love with you
 
 
 <script src="schedule/schedule.js?v=20260601results2"></script>
-<script src="script.js?v=20260608player-analysis1"></script>
+  <script src="script.js?v=20260608player-analysis5"></script>
 
 </body>
 </html>
