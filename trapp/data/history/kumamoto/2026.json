@@ -7242,5 +7242,382 @@
       "副審": "阿部 将茂 , 西田 裕貴",
       "第4の審判員": "金渕 佑亮"
     }
+  },
+  {
+    "match_card_id": "33649",
+    "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33649",
+    "season": "2026",
+    "competition": "明治安田J2・J3百年構想リーグ プレーオフラウンド 第2戦第2日",
+    "section": "",
+    "home_team": "ＳＣ相模原",
+    "away_team": "ロアッソ熊本",
+    "home_score": "3",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2026/06/06",
+    "kickoff": "14:03",
+    "stadium": "相模原ギオンスタジアム",
+    "attendance": "2244",
+    "weather": "晴",
+    "temperature": "27.3",
+    "humidity": "38%",
+    "home_goals": [
+      {
+        "time": "44'",
+        "name": "中山 陸"
+      },
+      {
+        "time": "55'",
+        "name": "中山 陸"
+      },
+      {
+        "time": "58'",
+        "name": "杉本 蓮"
+      }
+    ],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "SH",
+        "home": "14",
+        "away": "11"
+      },
+      {
+        "type": "CK",
+        "home": "7",
+        "away": "1"
+      },
+      {
+        "type": "FK",
+        "home": "10",
+        "away": "18"
+      }
+    ],
+    "home_details": {
+      "starting": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "金 珉浩"
+        },
+        {
+          "position": "DF",
+          "number": "37",
+          "name": "山内 琳太郎"
+        },
+        {
+          "position": "DF",
+          "number": "4",
+          "name": "島川 俊郎"
+        },
+        {
+          "position": "DF",
+          "number": "13",
+          "name": "常田 克人"
+        },
+        {
+          "position": "MF",
+          "number": "18",
+          "name": "三鬼 海"
+        },
+        {
+          "position": "MF",
+          "number": "10",
+          "name": "中山 陸"
+        },
+        {
+          "position": "MF",
+          "number": "17",
+          "name": "竹内 崇人"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "高野 遼"
+        },
+        {
+          "position": "FW",
+          "number": "7",
+          "name": "棚橋 尭士"
+        },
+        {
+          "position": "FW",
+          "number": "9",
+          "name": "佐々木 快"
+        },
+        {
+          "position": "FW",
+          "number": "24",
+          "name": "杉本 蓮"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "三浦 基瑛"
+        },
+        {
+          "position": "GK",
+          "number": "22",
+          "name": "杉本 大地"
+        },
+        {
+          "position": "DF",
+          "number": "2",
+          "name": "綿引 康"
+        },
+        {
+          "position": "DF",
+          "number": "19",
+          "name": "沖田 空"
+        },
+        {
+          "position": "MF",
+          "number": "6",
+          "name": "徳永 裕大"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "神戸 康輔"
+        },
+        {
+          "position": "MF",
+          "number": "15",
+          "name": "前田 泰良"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "武藤 雄樹"
+        },
+        {
+          "position": "FW",
+          "number": "20",
+          "name": "川畑 優翔"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "三鬼 海",
+          "time": "60'"
+        },
+        {
+          "in_out": "▲",
+          "name": "沖田 空",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "棚橋 尭士",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "前田 泰良",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "中山 陸",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "川畑 優翔",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "杉本 蓮",
+          "time": "87'"
+        },
+        {
+          "in_out": "▲",
+          "name": "綿引 康",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "島川 俊郎",
+          "time": "87'"
+        },
+        {
+          "in_out": "▲",
+          "name": "神戸 康輔",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "シュタルフ 悠紀リヒャルト"
+    },
+    "away_details": {
+      "starting": [
+        {
+          "position": "GK",
+          "number": "23",
+          "name": "佐藤 優也"
+        },
+        {
+          "position": "DF",
+          "number": "4",
+          "name": "薬師田 澪"
+        },
+        {
+          "position": "DF",
+          "number": "24",
+          "name": "李 泰河"
+        },
+        {
+          "position": "DF",
+          "number": "26",
+          "name": "戸田 峻平"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "上村 周平"
+        },
+        {
+          "position": "MF",
+          "number": "25",
+          "name": "那須 健一"
+        },
+        {
+          "position": "MF",
+          "number": "39",
+          "name": "青木 俊輔"
+        },
+        {
+          "position": "MF",
+          "number": "41",
+          "name": "大本 祐槻"
+        },
+        {
+          "position": "FW",
+          "number": "10",
+          "name": "鹿取 勇斗"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "ベ ジョンミン"
+        },
+        {
+          "position": "FW",
+          "number": "18",
+          "name": "半代 将都"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "佐藤 史騎"
+        },
+        {
+          "position": "DF",
+          "number": "6",
+          "name": "岩下 航"
+        },
+        {
+          "position": "MF",
+          "number": "5",
+          "name": "小林 慶太"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "藤井 皓也"
+        },
+        {
+          "position": "MF",
+          "number": "17",
+          "name": "永井 颯太"
+        },
+        {
+          "position": "MF",
+          "number": "19",
+          "name": "渡邉 怜歩"
+        },
+        {
+          "position": "MF",
+          "number": "22",
+          "name": "松田 詠太郎"
+        },
+        {
+          "position": "MF",
+          "number": "27",
+          "name": "根岸 恵汰"
+        },
+        {
+          "position": "FW",
+          "number": "14",
+          "name": "石原 央羅"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "ベ ジョンミン",
+          "time": "46'"
+        },
+        {
+          "in_out": "▲",
+          "name": "藤井 皓也",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "青木 俊輔",
+          "time": "60'"
+        },
+        {
+          "in_out": "▲",
+          "name": "永井 颯太",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "大本 祐槻",
+          "time": "60'"
+        },
+        {
+          "in_out": "▲",
+          "name": "松田 詠太郎",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "那須 健一",
+          "time": "70'"
+        },
+        {
+          "in_out": "▲",
+          "name": "渡邉 怜歩",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "上村 周平",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "根岸 恵汰",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "片野坂 知宏"
+    },
+    "referees": {
+      "主審": "酒井 達矢",
+      "副審": "金次 雄之介 , 大藤 翔平",
+      "第4の審判員": "長谷川 豊"
+    }
   }
 ]

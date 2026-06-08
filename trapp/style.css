@@ -406,6 +406,15 @@ html, body {
   align-items: start;
 }
 
+.pa-workbench > .pa-controls {
+  grid-row: 1 / span 2;
+}
+
+.pa-compare-panel,
+.pa-data-panel {
+  grid-column: 2;
+}
+
 .pa-data-panel {
   display: grid;
   gap: 10px;
@@ -701,6 +710,7 @@ html, body {
 
 .pa-summary-card,
 .pa-rank-card,
+.pa-compare-panel,
 .pa-detail-card {
   background: rgba(255,255,255,0.88);
   border: 1px solid rgba(255,255,255,0.78);
@@ -766,6 +776,12 @@ html, body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
+}
+
+.pa-ranking-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
 }
 
 .pa-rank-card {
@@ -845,6 +861,237 @@ html, body {
   font-style: normal;
   text-align: right;
   white-space: nowrap;
+}
+
+.pa-rank-empty {
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.035);
+  color: var(--text-grey);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-align: center;
+}
+
+.pa-compare-panel {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.pa-compare-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pa-compare-head h3 {
+  margin: 2px 0 0;
+  font-size: 1.06rem;
+  line-height: 1.2;
+}
+
+.pa-compare-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.pa-compare-select-field,
+.pa-ranking-toolbar .pa-sort-select-field {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.pa-compare-select-field span,
+.pa-ranking-toolbar .pa-sort-select-field span {
+  color: var(--text-grey);
+  font-size: 0.68rem;
+  font-weight: 900;
+}
+
+.pa-compare-select-field select {
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 9px;
+  border-radius: 11px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.92);
+  color: var(--text-main);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.pa-compare-result {
+  display: grid;
+  gap: 12px;
+}
+
+.pa-compare-empty {
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.035);
+  color: var(--text-grey);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.pa-compare-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.72);
+}
+
+.pa-compare-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.pa-compare-table.compact {
+  min-width: 860px;
+}
+
+.pa-compare-table th,
+.pa-compare-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.055);
+  text-align: left;
+  vertical-align: top;
+}
+
+.pa-compare-table th {
+  color: var(--text-grey);
+  font-size: 0.7rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.pa-compare-table td {
+  color: var(--text-main);
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.pa-compare-table tr:last-child th,
+.pa-compare-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pa-combo-analysis {
+  display: grid;
+  gap: 8px;
+}
+
+.pa-combo-analysis h4 {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.pa-sample-note {
+  display: inline-flex;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(var(--albirex-orange-rgb),0.12);
+  color: #9b4000;
+  font-size: 0.62rem;
+  font-weight: 900;
+  vertical-align: middle;
+}
+
+.pa-impact-note,
+.pa-combo-note {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(var(--albirex-orange-rgb),0.08);
+  color: #7a3300;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  font-weight: 800;
+}
+
+.pa-combo-note {
+  background: rgba(0,0,0,0.035);
+  color: var(--text-grey);
+}
+
+.pa-opponent-section {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+}
+
+.pa-profile-empty {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.035);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.pa-opponent-rank-list {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pa-opponent-rank-list li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.034);
+}
+
+.pa-opponent-rank-list b {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-family: var(--font-kick);
+  font-size: 0.82rem;
+  letter-spacing: 0;
+}
+
+.pa-opponent-rank-list span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 900;
+}
+
+.pa-opponent-rank-list strong {
+  color: var(--albirex-orange);
+  font-family: var(--font-kick);
+  font-size: 1rem;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.pa-opponent-rank-list small {
+  grid-column: 2 / -1;
+  color: var(--text-grey);
+  font-size: 0.72rem;
+  font-weight: 800;
 }
 
 .pa-controls {
@@ -1874,6 +2121,15 @@ html, body {
   object-position: top center;
 }
 
+.player-photo.club-niigata {
+  background: #f2f3f5;
+}
+
+.player-photo.club-niigata img {
+  object-fit: contain;
+  object-position: center top;
+}
+
 .pa-player-photo {
   height: clamp(220px, 38vh, 360px);
 }
@@ -2129,10 +2385,23 @@ body[data-pa-club="kumamoto"] .pa-yearly-number.gk {
   color: var(--roasso-red);
 }
 
+body[data-pa-club="kumamoto"] .pa-mobile-shirt:not(.gk),
+body[data-pa-club="kumamoto"] .pa-player-number-badge:not(.gk),
+body[data-pa-club="kumamoto"] .pa-yearly-number:not(.gk) {
+  background: var(--roasso-red);
+  color: #fff;
+}
+
+body[data-pa-club="kumamoto"] .pa-mobile-shirt:not(.gk) .pa-mobile-number-cycle span {
+  color: #fff;
+}
+
 body[data-pa-club="kumamoto"] .pa-mobile-shirt.gk .pa-mobile-number-cycle span {
   color: var(--roasso-red);
 }
 
+body[data-pa-club="kumamoto"] .pa-player-number-badge:not(.gk),
+body[data-pa-club="kumamoto"] .pa-yearly-number:not(.gk),
 body[data-pa-club="kumamoto"] .pa-player-number-badge.gk,
 body[data-pa-club="kumamoto"] .pa-yearly-number.gk {
   min-height: 28px;
@@ -4441,6 +4710,12 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
     gap: 10px;
     padding: 0 10px 24px;
   }
+  .pa-workbench > .pa-controls,
+  .pa-compare-panel,
+  .pa-data-panel {
+    grid-column: auto;
+    grid-row: auto;
+  }
   .pa-board-main,
   .pa-board-rankings,
   .pa-data-panel {
@@ -4554,6 +4829,10 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
     font-size: 1.82rem;
   }
   .pa-board-rankings { margin-top: 8px; }
+  .pa-ranking-toolbar {
+    justify-content: flex-start;
+    padding: 0 2px 4px;
+  }
   .pa-rankings {
     display: flex;
     grid-template-columns: none;
@@ -4578,6 +4857,39 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
   }
   .pa-rank-card h3 { font-size: 0.82rem; }
   .pa-rank-list { gap: 7px; }
+  .pa-compare-panel {
+    margin: 0 10px 12px;
+    padding: 10px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  }
+  .pa-compare-head h3 {
+    font-size: 1rem;
+  }
+  .pa-compare-controls {
+    grid-template-columns: 1fr;
+  }
+  .pa-compare-select-field select {
+    min-height: 40px;
+    font-size: 0.86rem;
+  }
+  .pa-compare-table {
+    min-width: 640px;
+    font-size: 0.78rem;
+  }
+  .pa-compare-table.compact {
+    min-width: 820px;
+  }
+  .pa-opponent-rank-list li {
+    grid-template-columns: 26px minmax(0, 1fr);
+  }
+  .pa-opponent-rank-list strong {
+    grid-column: 2;
+  }
+  .pa-opponent-rank-list small {
+    grid-column: 2;
+  }
   body.pa-filter-open {
     overflow: hidden;
   }

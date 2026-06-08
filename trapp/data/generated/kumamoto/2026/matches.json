@@ -435,5 +435,28 @@
     "opponent_score": 0,
     "result": "win",
     "points": 3
+  },
+  {
+    "match_id": "33649",
+    "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33649",
+    "season": "2026",
+    "competition": "明治安田J2・J3百年構想リーグ プレーオフラウンド 第2戦第2日",
+    "section": "",
+    "date": "2026/06/06",
+    "kickoff": "14:03",
+    "stadium": "相模原ギオンスタジアム",
+    "attendance": 2244,
+    "weather": "晴",
+    "home_team": "ＳＣ相模原",
+    "away_team": "ロアッソ熊本",
+    "home_score": 3,
+    "away_score": 0,
+    "target_team": "ロアッソ熊本",
+    "target_side": "away",
+    "opponent": "ＳＣ相模原",
+    "target_score": 0,
+    "opponent_score": 3,
+    "result": "loss",
+    "points": 0
   }
 ]

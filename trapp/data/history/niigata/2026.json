@@ -7109,5 +7109,375 @@
       "副審": "川崎 秋仁 , 小出 貴彦",
       "第4の審判員": "大原 謙哉"
     }
+  },
+  {
+    "match_card_id": "33642",
+    "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=33642",
+    "season": "2026",
+    "competition": "明治安田J2・J3百年構想リーグ プレーオフラウンド 第2戦第2日",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "北海道コンサドーレ札幌",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "5",
+    "pk_away_score": "4",
+    "date": "2026/06/06",
+    "kickoff": "14:03",
+    "stadium": "デンカビッグスワンスタジアム",
+    "attendance": "7963",
+    "weather": "晴",
+    "temperature": "25.9",
+    "humidity": "60%",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "SH",
+        "home": "15",
+        "away": "6"
+      },
+      {
+        "type": "CK",
+        "home": "7",
+        "away": "4"
+      },
+      {
+        "type": "FK",
+        "home": "10",
+        "away": "17"
+      }
+    ],
+    "home_details": {
+      "starting": [
+        {
+          "position": "GK",
+          "number": "71",
+          "name": "内山 翔太"
+        },
+        {
+          "position": "DF",
+          "number": "3",
+          "name": "加藤 徹也"
+        },
+        {
+          "position": "DF",
+          "number": "25",
+          "name": "藤原 奏哉"
+        },
+        {
+          "position": "DF",
+          "number": "34",
+          "name": "藤原 優大"
+        },
+        {
+          "position": "DF",
+          "number": "77",
+          "name": "舩木 翔"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "大西 悠介"
+        },
+        {
+          "position": "MF",
+          "number": "8",
+          "name": "白井 永地"
+        },
+        {
+          "position": "MF",
+          "number": "17",
+          "name": "シマブク カズヨシ"
+        },
+        {
+          "position": "MF",
+          "number": "30",
+          "name": "奥村 仁"
+        },
+        {
+          "position": "MF",
+          "number": "46",
+          "name": "笠井 佳祐"
+        },
+        {
+          "position": "FW",
+          "number": "18",
+          "name": "若月 大和"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "21",
+          "name": "田代 琉我"
+        },
+        {
+          "position": "GK",
+          "number": "23",
+          "name": "吉満 大介"
+        },
+        {
+          "position": "DF",
+          "number": "5",
+          "name": "舞行龍ジェームズ"
+        },
+        {
+          "position": "DF",
+          "number": "15",
+          "name": "早川 史哉"
+        },
+        {
+          "position": "DF",
+          "number": "24",
+          "name": "森 璃太"
+        },
+        {
+          "position": "DF",
+          "number": "38",
+          "name": "森 昂大"
+        },
+        {
+          "position": "MF",
+          "number": "28",
+          "name": "島村 拓弥"
+        },
+        {
+          "position": "MF",
+          "number": "40",
+          "name": "石山 青空"
+        },
+        {
+          "position": "MF",
+          "number": "48",
+          "name": "大竹 優心"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "笠井 佳祐",
+          "time": "74'"
+        },
+        {
+          "in_out": "▲",
+          "name": "島村 拓弥",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "大西 悠介",
+          "time": "102'"
+        },
+        {
+          "in_out": "▲",
+          "name": "大竹 優心",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "若月 大和",
+          "time": "105'"
+        },
+        {
+          "in_out": "▲",
+          "name": "森 璃太",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "藤原 優大",
+          "time": "114'"
+        },
+        {
+          "in_out": "▲",
+          "name": "森 昂大",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "船越 優蔵"
+    },
+    "away_details": {
+      "starting": [
+        {
+          "position": "GK",
+          "number": "24",
+          "name": "田川 知樹"
+        },
+        {
+          "position": "DF",
+          "number": "15",
+          "name": "家泉 怜依"
+        },
+        {
+          "position": "DF",
+          "number": "17",
+          "name": "内田 瑞己"
+        },
+        {
+          "position": "DF",
+          "number": "3",
+          "name": "パク ミンギュ"
+        },
+        {
+          "position": "MF",
+          "number": "18",
+          "name": "木戸 柊摩"
+        },
+        {
+          "position": "MF",
+          "number": "31",
+          "name": "堀米 悠斗"
+        },
+        {
+          "position": "MF",
+          "number": "27",
+          "name": "荒野 拓馬"
+        },
+        {
+          "position": "FW",
+          "number": "71",
+          "name": "白井 陽斗"
+        },
+        {
+          "position": "FW",
+          "number": "35",
+          "name": "原 康介"
+        },
+        {
+          "position": "FW",
+          "number": "11",
+          "name": "青木 亮太"
+        },
+        {
+          "position": "FW",
+          "number": "23",
+          "name": "大森 真吾"
+        }
+      ],
+      "substitutes": [
+        {
+          "position": "GK",
+          "number": "1",
+          "name": "菅野 孝憲"
+        },
+        {
+          "position": "DF",
+          "number": "25",
+          "name": "大﨑 玲央"
+        },
+        {
+          "position": "DF",
+          "number": "28",
+          "name": "岡田 大和"
+        },
+        {
+          "position": "DF",
+          "number": "50",
+          "name": "浦上 仁騎"
+        },
+        {
+          "position": "MF",
+          "number": "7",
+          "name": "スパチョーク"
+        },
+        {
+          "position": "MF",
+          "number": "13",
+          "name": "堀米 勇輝"
+        },
+        {
+          "position": "MF",
+          "number": "16",
+          "name": "長谷川 竜也"
+        },
+        {
+          "position": "FW",
+          "number": "22",
+          "name": "キングロード サフォ"
+        },
+        {
+          "position": "FW",
+          "number": "40",
+          "name": "佐藤 陽成"
+        }
+      ],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "原 康介",
+          "time": "56'"
+        },
+        {
+          "in_out": "▲",
+          "name": "スパチョーク",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "堀米 悠斗",
+          "time": "68'"
+        },
+        {
+          "in_out": "▲",
+          "name": "長谷川 竜也",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "大森 真吾",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "キングロード サフォ",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "青木 亮太",
+          "time": "91'"
+        },
+        {
+          "in_out": "▲",
+          "name": "佐藤 陽成",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "白井 陽斗",
+          "time": "91'"
+        },
+        {
+          "in_out": "▲",
+          "name": "岡田 大和",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "木戸 柊摩",
+          "time": "91'"
+        },
+        {
+          "in_out": "▲",
+          "name": "大﨑 玲央",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "内田 瑞己",
+          "time": "120'"
+        }
+      ],
+      "manager": "川井 健太"
+    },
+    "referees": {
+      "主審": "瀬田 貴仁",
+      "副審": "宇治原 拓也 , 宮原 一也",
+      "第4の審判員": "竹内 清人"
+    }
   }
 ]
