@@ -575,6 +575,74 @@ html, body {
   flex: 0 0 136px;
 }
 
+.pa-main-time-controls {
+  display: grid;
+  gap: 6px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.pa-main-year-row {
+  display: grid;
+  grid-template-columns: minmax(122px, 1fr) auto;
+  gap: 6px;
+  align-items: end;
+}
+
+.pa-main-period-toggle {
+  min-width: 54px;
+  min-height: 44px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.9);
+  color: var(--text-main);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.pa-main-period-toggle.active {
+  border-color: rgba(var(--albirex-orange-rgb),0.36);
+  background: var(--albirex-orange);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(var(--albirex-orange-rgb),0.26);
+}
+
+.pa-main-period-fields {
+  display: grid;
+  grid-template-columns: minmax(74px, 1fr) auto minmax(74px, 1fr);
+  gap: 6px;
+  align-items: end;
+}
+
+.pa-main-period-fields[hidden] {
+  display: none;
+}
+
+.pa-main-period-fields label {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  color: var(--text-grey);
+  font-size: 0.62rem;
+  font-weight: 900;
+}
+
+.pa-main-period-fields select {
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.92);
+  color: var(--text-main);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 850;
+  padding: 0 8px;
+}
+
 .pa-scope-field {
   width: min(330px, 42vw);
   flex: 0 1 330px;
@@ -599,15 +667,23 @@ html, body {
 }
 
 .pa-topbar .pa-year-field,
-.pa-topbar .pa-scope-field {
+.pa-topbar .pa-scope-field,
+.pa-topbar .pa-main-period-fields label {
   color: rgba(255,255,255,0.74);
 }
 
-.pa-topbar .pa-year-field select {
+.pa-topbar .pa-year-field select,
+.pa-topbar .pa-main-period-fields select,
+.pa-topbar .pa-main-period-toggle {
   border-color: rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.92);
   color: #161618;
   box-shadow: 0 10px 24px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.75);
+}
+
+.pa-topbar .pa-main-period-toggle.active {
+  background: var(--albirex-orange);
+  color: #fff;
 }
 
 .pa-scope-switch {
@@ -896,8 +972,15 @@ html, body {
 .pa-opponent-panel {
   display: grid;
   gap: 12px;
-  padding: 14px;
+  padding: 12px;
   margin-bottom: 16px;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.76));
+  border: 1px solid rgba(255,255,255,0.78);
+  box-shadow: 0 18px 46px rgba(0,0,0,0.06), var(--premium-inner);
+  backdrop-filter: blur(18px) saturate(1.06);
+  -webkit-backdrop-filter: blur(18px) saturate(1.06);
 }
 
 .pa-compare-head {
@@ -905,6 +988,13 @@ html, body {
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(18,18,20,0.98) 0%, rgba(31,31,35,0.96) 58%, rgba(var(--albirex-orange-rgb),0.9) 100%);
+  color: #fff;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12), var(--premium-inner);
+  overflow: hidden;
 }
 
 .pa-compare-head h3 {
@@ -913,10 +1003,18 @@ html, body {
   line-height: 1.2;
 }
 
+.pa-compare-head .pa-kicker {
+  color: rgba(255,255,255,0.76);
+}
+
 .pa-compare-controls {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.74);
+  border: 1px solid rgba(0,0,0,0.045);
 }
 
 .pa-time-controls {
@@ -1098,6 +1196,10 @@ html, body {
 
 .pa-opponent-search-field {
   max-width: 420px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.74);
+  border: 1px solid rgba(0,0,0,0.045);
 }
 
 .pa-compare-result {
@@ -5077,7 +5179,7 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
   .pa-board-main { gap: 12px; }
   .pa-topbar {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 96px;
+    grid-template-columns: minmax(0, 1fr) minmax(142px, auto);
     align-items: start;
     gap: 10px 8px;
     padding: 10px 4px 6px;
@@ -5095,10 +5197,17 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
     font-size: 2.34rem;
     line-height: 0.94;
   }
-  .pa-year-field {
+  .pa-main-time-controls {
     grid-column: 2;
     align-self: start;
-    width: 96px;
+    width: 100%;
+  }
+  .pa-main-year-row {
+    grid-template-columns: minmax(86px, 1fr) auto;
+    gap: 5px;
+  }
+  .pa-year-field {
+    width: auto;
     flex: none;
     gap: 3px;
     color: #5f636b;
@@ -5106,6 +5215,27 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
   .pa-year-field span {
     font-size: 0.58rem;
     text-align: right;
+  }
+  .pa-main-period-toggle {
+    min-width: 50px;
+    min-height: 36px;
+    border-radius: 999px;
+    padding: 0 8px;
+    font-size: 0.68rem;
+  }
+  .pa-main-period-fields {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 4px;
+  }
+  .pa-main-period-fields label span {
+    font-size: 0.56rem;
+  }
+  .pa-main-period-fields select {
+    min-height: 32px;
+    border-radius: 999px;
+    padding: 0 5px;
+    font-size: 0.72rem;
+    text-align: center;
   }
   .pa-scope-field {
     grid-column: 1 / -1;
@@ -5209,14 +5339,20 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
     margin: 0 10px 12px;
     padding: 10px;
     border-radius: 18px;
-    background: #fff;
+    background: rgba(255,255,255,0.96);
     box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  }
+  .pa-compare-head {
+    padding: 10px;
+    border-radius: 16px;
   }
   .pa-compare-head h3 {
     font-size: 1rem;
   }
   .pa-compare-controls {
     grid-template-columns: 1fr;
+    padding: 10px;
+    border-radius: 16px;
   }
   .pa-time-controls {
     grid-template-columns: 1fr auto;
@@ -5240,15 +5376,14 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
     max-height: 190px;
   }
   .pa-compare-table {
-    min-width: 640px;
+    min-width: 620px;
     font-size: 0.78rem;
   }
   .pa-compare-result > .pa-compare-table-wrap {
-    display: none;
+    display: block;
   }
   .pa-compare-mobile-cards {
-    display: grid;
-    gap: 10px;
+    display: none;
   }
   .pa-compare-table.compact {
     min-width: 760px;

@@ -984,11 +984,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       screens: document.querySelectorAll(".pa-screen[data-pa-screen]"),
       bottomTabs: document.getElementById("pa-bottom-tabs"),
       bottomTabButtons: document.querySelectorAll(".pa-bottom-tab[data-pa-screen-target]"),
-      compareTimeControls: document.getElementById("pa-compare-time-controls"),
       comparePanel: document.getElementById("pa-compare-panel"),
       compareControls: document.getElementById("pa-compare-controls"),
       compareResult: document.getElementById("pa-compare-result"),
-      opponentTimeControls: document.getElementById("pa-opponent-time-controls"),
       opponentPanel: document.getElementById("pa-opponent-panel"),
       opponentSelect: document.getElementById("pa-opponent-player-select"),
       opponentResult: document.getElementById("pa-opponent-result"),
@@ -1465,6 +1463,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (nextClub === playerAnalysisState.selectedClub) return;
     playerAnalysisState.selectedClub = nextClub;
     playerAnalysisState.year = normalizePlayerAnalysisYearForClub(playerAnalysisState.year, nextClub);
+    playerAnalysisState.timeMode = "year";
+    playerAnalysisState.rangeStartYear = "";
+    playerAnalysisState.rangeEndYear = "";
     playerAnalysisState.selectedKey = null;
     playerAnalysisState.compareKeys = ["", "", ""];
     playerAnalysisState.compareYear = "";
@@ -2160,8 +2161,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (directYear) years.add(directYear);
     });
     if (!years.size) {
-      if (playerAnalysisState.year === "all") {
-        getPlayerAnalysisYears().forEach(year => years.add(year));
+      if (playerAnalysisState.timeMode === "range" || playerAnalysisState.year === "all") {
+        getPlayerAnalysisTimeYears().forEach(year => years.add(year));
       } else {
         const year = Number(playerAnalysisState.year);
         if (Number.isInteger(year)) years.add(year);
@@ -3159,7 +3160,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       .filter(row => (toPlayerNumber(row.played_matches) || 0) > 0 && toPlayerNumber(row.played_win_rate) !== null)
       .sort((a, b) => (toPlayerNumber(b.played_win_rate) || 0) - (toPlayerNumber(a.played_win_rate) || 0)
         || (toPlayerNumber(b.played_matches) || 0) - (toPlayerNumber(a.played_matches) || 0))[0];
-    const yearLabel = playerAnalysisState.year === "all" ? "全期間" : `${playerAnalysisState.year}年`;
+    const yearLabel = getPlayerAnalysisTimeLabel();
     const scopeLabel = getPlayerAnalysisScopeLabel();
     const cards = [
       ["対象", yearLabel, scopeLabel],
@@ -3687,7 +3688,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const items = getRankedPlayerRankingItems(playerAnalysisState.data, config);
     const rows = items.map(item => item.player);
     playerAnalysisState.modalRankingRows = rows;
-    const yearLabel = playerAnalysisState.year === "all" ? "全期間" : `${playerAnalysisState.year}年`;
+    const yearLabel = getPlayerAnalysisTimeLabel();
     const body = `
       ${rows.length ? `
       <ol class="pa-ranking-modal-list">
@@ -3718,6 +3719,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nextScreen = ["analysis", "compare", "opponents"].includes(screen) ? screen : "analysis";
     playerAnalysisState.activeScreen = nextScreen;
     const { screens, bottomTabButtons } = getPlayerAnalysisElements();
+    const page = document.querySelector(".player-analysis-page");
+    if (page) page.dataset.paActiveScreen = nextScreen;
     screens.forEach(panel => {
       const active = panel.dataset.paScreen === nextScreen;
       panel.classList.toggle("active", active);
@@ -3743,88 +3746,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${player.player_name || "-"} / ${formatPlayerList(player.positions)} / ${formatPlayerList(player.numbers)}`;
   }
 
-  function getPlayerTimeYearsDescending() {
-    return getPlayerAnalysisYears().sort((a, b) => b - a);
-  }
-
-  function getDefaultPlayerTimeYear() {
-    const selected = Number(playerAnalysisState.year);
-    const years = getPlayerTimeYearsDescending();
-    if (Number.isInteger(selected) && years.includes(selected)) return String(selected);
-    return String(years[0] || new Date().getFullYear());
-  }
-
-  function normalizePlayerTimeState(scope) {
-    const prefix = scope === "opponent" ? "opponent" : "compare";
-    const modeKey = `${prefix}TimeMode`;
-    const yearKey = `${prefix}Year`;
-    const startKey = `${prefix}StartYear`;
-    const endKey = `${prefix}EndYear`;
-    const years = getPlayerTimeYearsDescending();
-    const defaultYear = getDefaultPlayerTimeYear();
-    playerAnalysisState[modeKey] = playerAnalysisState[modeKey] === "range" ? "range" : "year";
-    if (!years.includes(Number(playerAnalysisState[yearKey]))) playerAnalysisState[yearKey] = defaultYear;
-    if (!years.includes(Number(playerAnalysisState[startKey]))) playerAnalysisState[startKey] = String(years[years.length - 1] || defaultYear);
-    if (!years.includes(Number(playerAnalysisState[endKey]))) playerAnalysisState[endKey] = defaultYear;
-    const start = Number(playerAnalysisState[startKey]);
-    const end = Number(playerAnalysisState[endKey]);
-    if (Number.isInteger(start) && Number.isInteger(end) && start > end) {
-      playerAnalysisState[startKey] = String(end);
-      playerAnalysisState[endKey] = String(start);
-    }
-  }
-
   function getPlayerTimeScopeYears(scope) {
     return getPlayerAnalysisTimeYears();
-  }
-
-  function renderPlayerTimeYearOptions(selectedYear) {
-    return getPlayerTimeYearsDescending().map(year => (
-      `<option value="${escapeHtml(String(year))}" ${String(year) === String(selectedYear) ? "selected" : ""}>${escapeHtml(`${year}年`)}</option>`
-    )).join("");
-  }
-
-  function renderPlayerTimeControls(scope) {
-    normalizePlayerTimeState(scope);
-    const { compareTimeControls, opponentTimeControls } = getPlayerAnalysisElements();
-    const controls = scope === "opponent" ? opponentTimeControls : compareTimeControls;
-    if (!controls) return;
-    const prefix = scope === "opponent" ? "opponent" : "compare";
-    const mode = playerAnalysisState[`${prefix}TimeMode`];
-    const yearSelect = controls.querySelector(`[data-pa-time-year="${scope}"]`);
-    const toggle = controls.querySelector(`[data-pa-period-toggle="${scope}"]`);
-    const period = controls.querySelector(`[data-pa-period-fields="${scope}"]`);
-    const startSelect = controls.querySelector(`[data-pa-period-start="${scope}"]`);
-    const endSelect = controls.querySelector(`[data-pa-period-end="${scope}"]`);
-    if (yearSelect) yearSelect.innerHTML = renderPlayerTimeYearOptions(playerAnalysisState[`${prefix}Year`]);
-    if (startSelect) startSelect.innerHTML = renderPlayerTimeYearOptions(playerAnalysisState[`${prefix}StartYear`]);
-    if (endSelect) endSelect.innerHTML = renderPlayerTimeYearOptions(playerAnalysisState[`${prefix}EndYear`]);
-    if (toggle) {
-      toggle.classList.toggle("active", mode === "range");
-      toggle.setAttribute("aria-pressed", mode === "range" ? "true" : "false");
-    }
-    if (period) period.hidden = mode !== "range";
-    controls.classList.toggle("range-active", mode === "range");
-  }
-
-  function setPlayerTimeMode(scope, mode) {
-    const prefix = scope === "opponent" ? "opponent" : "compare";
-    playerAnalysisState[`${prefix}TimeMode`] = mode === "range" ? "range" : "year";
-    normalizePlayerTimeState(scope);
-  }
-
-  function updatePlayerTimeValue(scope, field, value) {
-    const prefix = scope === "opponent" ? "opponent" : "compare";
-    const keyMap = {
-      year: `${prefix}Year`,
-      start: `${prefix}StartYear`,
-      end: `${prefix}EndYear`
-    };
-    const key = keyMap[field];
-    if (!key) return false;
-    playerAnalysisState[key] = value;
-    normalizePlayerTimeState(scope);
-    return true;
   }
 
   function mergePlayerRankingMetric(target, source) {
@@ -3878,7 +3801,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function renderPlayerOpponentControls() {
     const { opponentSelect } = getPlayerAnalysisElements();
-    renderPlayerTimeControls("opponent");
     const rows = await getPlayerRowsForTimeScope("opponent");
     playerAnalysisState.opponentScopeRows = rows;
     const validKeys = new Set(rows.map(getPlayerGroupKey));
@@ -3975,7 +3897,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function renderPlayerCompareControls() {
     const { compareControls } = getPlayerAnalysisElements();
     if (!compareControls) return;
-    renderPlayerTimeControls("compare");
     const rows = await getPlayerRowsForTimeScope("compare");
     playerAnalysisState.compareScopeRows = rows;
     const validKeys = new Set(rows.map(getPlayerGroupKey));
@@ -4197,6 +4118,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (button) button.setAttribute("aria-expanded", collapse ? "false" : "true");
         const icon = button && button.querySelector("b");
         if (icon) icon.textContent = collapse ? "+" : "−";
+        if (section.matches("[data-pa-opponent-section]")) {
+          section.classList.remove("is-expanded");
+          const opponentButton = section.querySelector("[data-pa-opponent-toggle]");
+          if (opponentButton) opponentButton.textContent = "すべて表示";
+        }
       });
       return true;
     }
@@ -4512,28 +4438,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     const hiddenCount = Math.max(0, rankedItems.length - 5);
     if (!rankedItems.length) {
       return `
-        <section class="pa-profile-section pa-opponent-section">
-          <h3>${escapeHtml(playerName || "選手")}が得意な相手</h3>
-          <div class="pa-muted pa-profile-empty">${escapeHtml(emptyText)}</div>
+        <section class="pa-profile-section pa-opponent-section" data-pa-profile-section>
+          <button type="button" class="pa-profile-section-toggle" data-pa-profile-section-toggle aria-expanded="true">
+            <span>${escapeHtml(playerName || "選手")}が得意な相手</span>
+            <b aria-hidden="true">-</b>
+          </button>
+          <div class="pa-profile-section-body">
+            <div class="pa-muted pa-profile-empty">${escapeHtml(emptyText)}</div>
+          </div>
         </section>
       `;
     }
     return `
-      <section class="pa-profile-section pa-opponent-section ${hiddenCount ? "has-more" : ""}" data-pa-opponent-section>
-        <h3>${escapeHtml(playerName || "選手")}が得意な相手</h3>
-        <ol class="pa-opponent-rank-list">
-          ${rankedItems.map((item, index) => `
-            <li class="${index >= 5 ? "pa-opponent-extra" : ""}">
-              <b>${escapeHtml(item.rank === null ? "-" : formatPlayerNumber(item.rank))}</b>
-              <span>${escapeHtml(item.opponent)}</span>
-              <strong>${mode === "defense"
-                ? `${escapeHtml(formatPlayerGoalsAgainstAverage(item.goalsAgainstAvg))}${escapeHtml(valueLabel)}`
-                : `${escapeHtml(formatPlayerNumber(item.goals))}${escapeHtml(valueLabel)}`}</strong>
-              <small>${escapeHtml(formatPlayerNumber(mode === "defense" ? item.matches : item.scoredMatches))}試合 / ${escapeHtml(formatPlayerRecord(item.wins, item.draws, item.losses))} / 勝率 ${escapeHtml(formatPlayerRate(item.winRate))}</small>
-            </li>
-          `).join("")}
-        </ol>
-        ${hiddenCount ? `<button type="button" class="pa-opponent-more" data-pa-opponent-toggle>すべて表示</button>` : ""}
+      <section class="pa-profile-section pa-opponent-section ${hiddenCount ? "has-more" : ""}" data-pa-opponent-section data-pa-profile-section>
+        <button type="button" class="pa-profile-section-toggle" data-pa-profile-section-toggle aria-expanded="true">
+          <span>${escapeHtml(playerName || "選手")}が得意な相手</span>
+          <b aria-hidden="true">-</b>
+        </button>
+        <div class="pa-profile-section-body">
+          <ol class="pa-opponent-rank-list">
+            ${rankedItems.map((item, index) => `
+              <li class="${index >= 5 ? "pa-opponent-extra" : ""}">
+                <b>${escapeHtml(item.rank === null ? "-" : formatPlayerNumber(item.rank))}</b>
+                <span>${escapeHtml(item.opponent)}</span>
+                <strong>${mode === "defense"
+                  ? `${escapeHtml(formatPlayerGoalsAgainstAverage(item.goalsAgainstAvg))}${escapeHtml(valueLabel)}`
+                  : `${escapeHtml(formatPlayerNumber(item.goals))}${escapeHtml(valueLabel)}`}</strong>
+                <small>${escapeHtml(formatPlayerNumber(mode === "defense" ? item.matches : item.scoredMatches))}試合 / ${escapeHtml(formatPlayerRecord(item.wins, item.draws, item.losses))} / 勝率 ${escapeHtml(formatPlayerRate(item.winRate))}</small>
+              </li>
+            `).join("")}
+          </ol>
+          ${hiddenCount ? `<button type="button" class="pa-opponent-more" data-pa-opponent-toggle>すべて表示</button>` : ""}
+        </div>
       </section>
     `;
   }
@@ -4917,9 +4853,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const currentInsights = insights.current || { opponentGoals: [] };
     const totalOpponentMode = isPlayerGoalkeeper(aggregate) || isPlayerGoalkeeper(player) ? "defense" : "attack";
     const currentOpponentMode = isPlayerGoalkeeper(player) ? "defense" : "attack";
-    const yearLabel = playerAnalysisState.year === "all" ? "全期間" : `${playerAnalysisState.year}年`;
+    const yearLabel = getPlayerAnalysisTimeLabel();
     const scopeLabel = getPlayerAnalysisScopeLabel(getActivePlayerAnalysisModalScope());
-    const showCurrentTab = playerAnalysisState.year !== "all";
+    const showCurrentTab = playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all";
     const allowedTabs = showCurrentTab ? ["total", "yearly", "current"] : ["total", "yearly"];
     const activeTab = allowedTabs.includes(playerAnalysisState.profileTab) ? playerAnalysisState.profileTab : "total";
 
@@ -4973,10 +4909,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       `<div class="pa-profile-loading"><strong>${escapeHtml(player.player_name || "-")}</strong><small>年別データを集計中...</small></div>`
     ));
     const modalScope = getActivePlayerAnalysisModalScope();
-    const yearRows = await getPlayerAnalysisYearRowsForPlayer(player, modalScope, null);
+    const activeYears = new Set(getPlayerAnalysisTimeYears());
+    const yearRows = (await getPlayerAnalysisYearRowsForPlayer(player, modalScope, null))
+      .filter(row => !activeYears.size || activeYears.has(getPlayerYearValue(row)));
     const insights = {
       total: await buildPlayerPerformanceExtras(player, yearRows, modalScope, null),
-      current: playerAnalysisState.year !== "all"
+      current: (playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all")
         ? await buildPlayerPerformanceExtras(player, [player], modalScope, null)
         : null
     };
@@ -5242,11 +5180,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     setPlayerAnalysisScreen(playerAnalysisState.activeScreen);
 
     els.yearSelect.onchange = () => {
+      playerAnalysisState.timeMode = "year";
       playerAnalysisState.year = normalizePlayerAnalysisYearForClub(els.yearSelect.value);
       playerAnalysisState.competitionFilterActive = false;
       playerAnalysisState.selectedCompetitions = [];
       renderPlayerAnalysisYear(playerAnalysisState.year);
     };
+    if (els.mainPeriodToggle) {
+      els.mainPeriodToggle.onclick = () => {
+        playerAnalysisState.timeMode = playerAnalysisState.timeMode === "range" ? "year" : "range";
+        playerAnalysisState.competitionFilterActive = false;
+        playerAnalysisState.selectedCompetitions = [];
+        renderPlayerAnalysisYear(playerAnalysisState.year);
+      };
+    }
+    if (els.mainPeriodStart) {
+      els.mainPeriodStart.onchange = () => {
+        playerAnalysisState.timeMode = "range";
+        playerAnalysisState.rangeStartYear = els.mainPeriodStart.value;
+        playerAnalysisState.competitionFilterActive = false;
+        playerAnalysisState.selectedCompetitions = [];
+        renderPlayerAnalysisYear(playerAnalysisState.year);
+      };
+    }
+    if (els.mainPeriodEnd) {
+      els.mainPeriodEnd.onchange = () => {
+        playerAnalysisState.timeMode = "range";
+        playerAnalysisState.rangeEndYear = els.mainPeriodEnd.value;
+        playerAnalysisState.competitionFilterActive = false;
+        playerAnalysisState.selectedCompetitions = [];
+        renderPlayerAnalysisYear(playerAnalysisState.year);
+      };
+    }
     let clubPointerAt = 0;
     const toggleClubMenuFromEvent = (event) => {
       if (event.type === "click" && Date.now() - clubPointerAt < 450) return;
@@ -5283,37 +5248,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!button) return;
         setPlayerAnalysisScreen(button.dataset.paScreenTarget);
       };
-    }
-    const handleScopedTimeClick = (scope, event) => {
-      const toggle = event.target.closest(`[data-pa-period-toggle="${scope}"]`);
-      if (!toggle) return;
-      const prefix = scope === "opponent" ? "opponent" : "compare";
-      setPlayerTimeMode(scope, playerAnalysisState[`${prefix}TimeMode`] === "range" ? "year" : "range");
-      if (scope === "opponent") renderPlayerOpponentPanel();
-      else renderPlayerComparisonPanel();
-    };
-    const handleScopedTimeChange = (scope, event) => {
-      const yearSelect = event.target.closest(`[data-pa-time-year="${scope}"]`);
-      const startSelect = event.target.closest(`[data-pa-period-start="${scope}"]`);
-      const endSelect = event.target.closest(`[data-pa-period-end="${scope}"]`);
-      const changed = yearSelect
-        ? updatePlayerTimeValue(scope, "year", yearSelect.value)
-        : startSelect
-          ? updatePlayerTimeValue(scope, "start", startSelect.value)
-          : endSelect
-            ? updatePlayerTimeValue(scope, "end", endSelect.value)
-            : false;
-      if (!changed) return;
-      if (scope === "opponent") renderPlayerOpponentPanel();
-      else renderPlayerComparisonPanel();
-    };
-    if (els.compareTimeControls) {
-      els.compareTimeControls.onclick = (event) => handleScopedTimeClick("compare", event);
-      els.compareTimeControls.onchange = (event) => handleScopedTimeChange("compare", event);
-    }
-    if (els.opponentTimeControls) {
-      els.opponentTimeControls.onclick = (event) => handleScopedTimeClick("opponent", event);
-      els.opponentTimeControls.onchange = (event) => handleScopedTimeChange("opponent", event);
     }
     if (els.opponentSelect) {
       els.opponentSelect.onchange = () => {
