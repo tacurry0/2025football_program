@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260609player-analysis3">
+  <link rel="stylesheet" href="style.css?v=20260609player-analysis4">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./data/assets/emblems/アルビレックス新潟.png">
@@ -1052,20 +1052,25 @@ We can't help falling in love with you
             </div>
           </div>
           <div id="pa-compare-controls" class="pa-compare-controls">
-            <label class="pa-compare-select-field pa-compare-year-field" for="pa-compare-selection-year">
-              <span>選択年度</span>
-              <select id="pa-compare-selection-year" autocomplete="off"></select>
-            </label>
             <div class="pa-compare-select-field" data-pa-compare-field="0">
-              <span>選手A</span>
+              <div class="pa-compare-field-top">
+                <span>選手A</span>
+                <select class="pa-compare-year-select" data-pa-compare-year-index="0" aria-label="選手Aの選択年度"></select>
+              </div>
               <select id="pa-compare-player-0" data-pa-compare-index="0"></select>
             </div>
             <div class="pa-compare-select-field" data-pa-compare-field="1">
-              <span>選手B</span>
+              <div class="pa-compare-field-top">
+                <span>選手B</span>
+                <select class="pa-compare-year-select" data-pa-compare-year-index="1" aria-label="選手Bの選択年度"></select>
+              </div>
               <select id="pa-compare-player-1" data-pa-compare-index="1"></select>
             </div>
             <div class="pa-compare-select-field" data-pa-compare-field="2">
-              <span>選手C</span>
+              <div class="pa-compare-field-top">
+                <span>選手C</span>
+                <select class="pa-compare-year-select" data-pa-compare-year-index="2" aria-label="選手Cの選択年度"></select>
+              </div>
               <select id="pa-compare-player-2" data-pa-compare-index="2"></select>
             </div>
           </div>
@@ -1079,9 +1084,20 @@ We can't help falling in love with you
               <h3>対戦クラブ別</h3>
             </div>
           </div>
-          <div class="pa-compare-select-field pa-opponent-search-field">
-            <span>選手名</span>
-            <select id="pa-opponent-player-select"></select>
+          <div class="pa-opponent-picker">
+            <label class="pa-compare-select-field pa-opponent-year-field" for="pa-opponent-selection-year">
+              <span>選択年度</span>
+              <select id="pa-opponent-selection-year" autocomplete="off"></select>
+            </label>
+            <label class="pa-compare-select-field pa-opponent-search-field" for="pa-opponent-player-search">
+              <span>選手名</span>
+              <input id="pa-opponent-player-search" type="search" list="pa-opponent-player-suggestions" placeholder="名前を入力" autocomplete="off">
+              <datalist id="pa-opponent-player-suggestions"></datalist>
+            </label>
+            <label class="pa-compare-select-field pa-opponent-select-field" for="pa-opponent-player-select">
+              <span>一覧</span>
+              <select id="pa-opponent-player-select"></select>
+            </label>
           </div>
           <div id="pa-opponent-result" class="pa-compare-result" aria-live="polite"></div>
         </section>
@@ -1181,7 +1197,7 @@ We can't help falling in love with you
 
 
 <script src="schedule/schedule.js?v=20260601results2"></script>
-  <script src="script.js?v=20260609player-analysis3"></script>
+  <script src="script.js?v=20260609player-analysis4"></script>
 
 </body>
 </html>

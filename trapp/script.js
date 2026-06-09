@@ -230,7 +230,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     compareEndYear: "",
     compareKeys: ["", "", ""],
     compareScopeRows: [],
-    compareChoiceRows: [],
+    compareChoiceYears: ["", "", ""],
+    compareChoiceRows: [[], [], []],
     compareRenderToken: 0,
     opponentTimeMode: "year",
     opponentYear: "",
@@ -238,6 +239,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     opponentEndYear: "",
     opponentPlayerKey: "",
     opponentScopeRows: [],
+    opponentChoiceRows: [],
     opponentRenderToken: 0
   };
   const PLAYER_POSITION_ORDER = ["GK", "DF", "MF", "FW"];
@@ -986,10 +988,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       bottomTabs: document.getElementById("pa-bottom-tabs"),
       bottomTabButtons: document.querySelectorAll(".pa-bottom-tab[data-pa-screen-target]"),
       comparePanel: document.getElementById("pa-compare-panel"),
-      compareYearSelect: document.getElementById("pa-compare-selection-year"),
+      compareYearSelects: document.querySelectorAll("[data-pa-compare-year-index]"),
       compareControls: document.getElementById("pa-compare-controls"),
       compareResult: document.getElementById("pa-compare-result"),
       opponentPanel: document.getElementById("pa-opponent-panel"),
+      opponentYearSelect: document.getElementById("pa-opponent-selection-year"),
+      opponentSearch: document.getElementById("pa-opponent-player-search"),
+      opponentDatalist: document.getElementById("pa-opponent-player-suggestions"),
       opponentSelect: document.getElementById("pa-opponent-player-select"),
       opponentResult: document.getElementById("pa-opponent-result"),
       mobileList: document.getElementById("pa-mobile-list"),
@@ -1470,13 +1475,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.rangeEndYear = "";
     playerAnalysisState.selectedKey = null;
     playerAnalysisState.compareKeys = ["", "", ""];
-    playerAnalysisState.compareChoiceRows = [];
+    playerAnalysisState.compareChoiceYears = ["", "", ""];
+    playerAnalysisState.compareChoiceRows = [[], [], []];
     playerAnalysisState.compareScopeRows = [];
     playerAnalysisState.compareYear = "";
     playerAnalysisState.compareStartYear = "";
     playerAnalysisState.compareEndYear = "";
     playerAnalysisState.compareTimeMode = "year";
     playerAnalysisState.opponentPlayerKey = "";
+    playerAnalysisState.opponentChoiceRows = [];
     playerAnalysisState.opponentYear = "";
     playerAnalysisState.opponentStartYear = "";
     playerAnalysisState.opponentEndYear = "";
@@ -3865,54 +3872,101 @@ document.addEventListener("DOMContentLoaded", async () => {
     return buildPlayerRowsForYears(years);
   }
 
-  function normalizePlayerCompareSelectionYear() {
+  function normalizePlayerCompareSelectionYear(index = 0) {
     const years = getPlayerAnalysisYears();
-    const selected = Number(playerAnalysisState.compareYear);
+    const targetIndex = Number.isInteger(index) && index >= 0 && index < 3 ? index : 0;
+    if (!Array.isArray(playerAnalysisState.compareChoiceYears)) {
+      playerAnalysisState.compareChoiceYears = ["", "", ""];
+    }
+    while (playerAnalysisState.compareChoiceYears.length < 3) playerAnalysisState.compareChoiceYears.push("");
+    const selected = Number(playerAnalysisState.compareChoiceYears[targetIndex]);
     if (Number.isInteger(selected) && years.includes(selected)) return String(selected);
     const activeYear = Number(playerAnalysisState.year);
     const fallback = Number.isInteger(activeYear) && years.includes(activeYear)
       ? activeYear
       : (years[years.length - 1] || PLAYER_ANALYSIS_YEAR_END);
-    playerAnalysisState.compareYear = String(fallback);
-    return playerAnalysisState.compareYear;
+    playerAnalysisState.compareChoiceYears[targetIndex] = String(fallback);
+    return playerAnalysisState.compareChoiceYears[targetIndex];
   }
 
-  function renderPlayerCompareSelectionYearOptions(select) {
+  function renderPlayerCompareSelectionYearOptions(select, index = 0) {
     if (!select) return;
-    const selectedYear = normalizePlayerCompareSelectionYear();
+    const selectedYear = normalizePlayerCompareSelectionYear(index);
     select.innerHTML = getPlayerAnalysisYears().slice().reverse().map(year => (
       `<option value="${escapeHtml(String(year))}" ${String(year) === selectedYear ? "selected" : ""}>${escapeHtml(`${year}`)}</option>`
     )).join("");
     select.value = selectedYear;
   }
 
-  async function getPlayerCompareChoiceRows() {
-    const year = Number(normalizePlayerCompareSelectionYear());
+  async function getPlayerCompareChoiceRows(index = 0) {
+    const year = Number(normalizePlayerCompareSelectionYear(index));
+    if (!Number.isInteger(year)) return [];
+    const entry = await loadScopedPlayerAnalysisYear(year, "all", null);
+    return getPlayerSortedRows(entry.rows || []);
+  }
+
+  function normalizePlayerOpponentSelectionYear() {
+    const years = getPlayerAnalysisYears();
+    const selected = Number(playerAnalysisState.opponentYear);
+    if (Number.isInteger(selected) && years.includes(selected)) return String(selected);
+    const activeYear = Number(playerAnalysisState.year);
+    const fallback = Number.isInteger(activeYear) && years.includes(activeYear)
+      ? activeYear
+      : (years[years.length - 1] || PLAYER_ANALYSIS_YEAR_END);
+    playerAnalysisState.opponentYear = String(fallback);
+    return playerAnalysisState.opponentYear;
+  }
+
+  function renderPlayerOpponentSelectionYearOptions(select) {
+    if (!select) return;
+    const selectedYear = normalizePlayerOpponentSelectionYear();
+    select.innerHTML = getPlayerAnalysisYears().slice().reverse().map(year => (
+      `<option value="${escapeHtml(String(year))}" ${String(year) === selectedYear ? "selected" : ""}>${escapeHtml(`${year}`)}</option>`
+    )).join("");
+    select.value = selectedYear;
+  }
+
+  async function getPlayerOpponentChoiceRows() {
+    const year = Number(normalizePlayerOpponentSelectionYear());
     if (!Number.isInteger(year)) return [];
     const entry = await loadScopedPlayerAnalysisYear(year, "all", null);
     return getPlayerSortedRows(entry.rows || []);
   }
 
   async function renderPlayerOpponentControls() {
-    const { opponentSelect } = getPlayerAnalysisElements();
+    const { opponentYearSelect, opponentSearch, opponentDatalist, opponentSelect } = getPlayerAnalysisElements();
+    renderPlayerOpponentSelectionYearOptions(opponentYearSelect);
     const rows = await getPlayerRowsForTimeScope("opponent");
+    const choiceRows = await getPlayerOpponentChoiceRows();
     playerAnalysisState.opponentScopeRows = rows;
-    const validKeys = new Set(rows.map(getPlayerGroupKey));
+    playerAnalysisState.opponentChoiceRows = choiceRows;
+    const validKeys = new Set(choiceRows.map(getPlayerGroupKey));
     if (!validKeys.has(playerAnalysisState.opponentPlayerKey)) {
       const selectedGroupKey = playerAnalysisState.selectedKey
         ? getPlayerGroupKey(findPlayerAnalysisRowByKey(playerAnalysisState.selectedKey))
         : "";
       playerAnalysisState.opponentPlayerKey = selectedGroupKey && validKeys.has(selectedGroupKey)
         ? selectedGroupKey
-        : (rows[0] ? getPlayerGroupKey(rows[0]) : "");
+        : (choiceRows[0] ? getPlayerGroupKey(choiceRows[0]) : "");
     }
     if (opponentSelect) {
-      opponentSelect.innerHTML = rows.length
-        ? rows.map(player => {
+      opponentSelect.innerHTML = choiceRows.length
+        ? choiceRows.map(player => {
           const key = getPlayerGroupKey(player);
           return `<option value="${escapeHtml(key)}" ${key === playerAnalysisState.opponentPlayerKey ? "selected" : ""}>${escapeHtml(getPlayerSelectLabel(player))}</option>`;
         }).join("")
         : `<option value="">-</option>`;
+    }
+    if (opponentDatalist) {
+      opponentDatalist.innerHTML = choiceRows.map(player => {
+        const key = getPlayerGroupKey(player);
+        const label = getPlayerSelectLabel(player);
+        return `<option value="${escapeHtml(label)}" data-pa-player-key="${escapeHtml(key)}"></option>`;
+      }).join("");
+    }
+    if (opponentSearch) {
+      const selected = choiceRows.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey);
+      opponentSearch.value = selected ? getPlayerSelectLabel(selected) : "";
     }
     return rows;
   }
@@ -3921,7 +3975,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { opponentResult } = getPlayerAnalysisElements();
     const rows = await renderPlayerOpponentControls();
     if (!opponentResult) return;
-    const player = rows.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey);
+    const choices = playerAnalysisState.opponentChoiceRows || [];
+    const player = rows.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey)
+      || createPlayerComparisonEmptyRow(choices.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey));
     if (!player) {
       opponentResult.innerHTML = `<div class="pa-compare-empty">選手データがありません。</div>`;
       return;
@@ -3941,7 +3997,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getPlayerCompareSelectedPlayers() {
     const rows = playerAnalysisState.compareScopeRows || [];
-    const choices = playerAnalysisState.compareChoiceRows || [];
+    const choices = (Array.isArray(playerAnalysisState.compareChoiceRows) ? playerAnalysisState.compareChoiceRows : [])
+      .flat()
+      .filter(Boolean);
     const dataByKey = new Map(rows.map(row => [getPlayerGroupKey(row), row]));
     const choiceByKey = new Map(choices.map(row => [getPlayerGroupKey(row), row]));
     return (playerAnalysisState.compareKeys || [])
@@ -4007,14 +4065,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderPlayerComparisonPanel();
   }
 
-  async function getCompareCandidateRows(index, rows = playerAnalysisState.compareChoiceRows || []) {
+  async function getCompareCandidateRows(index, rows = (playerAnalysisState.compareChoiceRows || [])[index] || []) {
     const selectedOtherKeys = new Set((playerAnalysisState.compareKeys || []).filter((key, keyIndex) => key && keyIndex !== index));
     const requiredKeys = (playerAnalysisState.compareKeys || [])
       .slice(0, index)
-      .map(key => rows.find(row => getPlayerGroupKey(row) === key))
-      .filter(Boolean)
-      .map(getPlayerGroupKey);
-    const years = [Number(normalizePlayerCompareSelectionYear())].filter(Number.isInteger);
+      .filter(Boolean);
+    const years = [Number(normalizePlayerCompareSelectionYear(index))].filter(Number.isInteger);
     const entries = requiredKeys.length
       ? await getPlayerPlayedMatchEntries("all", null, years)
       : [];
@@ -4027,23 +4083,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function renderPlayerCompareControls() {
-    const { compareControls, compareYearSelect } = getPlayerAnalysisElements();
+    const { compareControls, compareYearSelects } = getPlayerAnalysisElements();
     if (!compareControls) return;
-    renderPlayerCompareSelectionYearOptions(compareYearSelect);
+    compareYearSelects.forEach(select => {
+      renderPlayerCompareSelectionYearOptions(select, Number(select.dataset.paCompareYearIndex));
+    });
     const rows = await getPlayerRowsForTimeScope("compare");
-    const choiceRows = await getPlayerCompareChoiceRows();
+    const choiceRowsByIndex = await Promise.all([0, 1, 2].map(index => getPlayerCompareChoiceRows(index)));
     playerAnalysisState.compareScopeRows = rows;
-    playerAnalysisState.compareChoiceRows = choiceRows;
-    const validKeys = new Set(choiceRows.map(getPlayerGroupKey));
+    playerAnalysisState.compareChoiceRows = choiceRowsByIndex;
     playerAnalysisState.compareKeys = (playerAnalysisState.compareKeys || ["", "", ""])
       .slice(0, 3)
-      .map(key => validKeys.has(key) ? key : "");
+      .map((key, index) => {
+        const validKeys = new Set((choiceRowsByIndex[index] || []).map(getPlayerGroupKey));
+        return validKeys.has(key) ? key : "";
+      });
     while (playerAnalysisState.compareKeys.length < 3) playerAnalysisState.compareKeys.push("");
 
     await Promise.all([0, 1, 2].map(async index => {
       const select = compareControls.querySelector(`select[data-pa-compare-index="${index}"]`);
       if (!select) return;
-      const candidates = await getCompareCandidateRows(index, choiceRows);
+      const candidates = await getCompareCandidateRows(index, choiceRowsByIndex[index] || []);
       const selectedKey = playerAnalysisState.compareKeys[index] || "";
       if (selectedKey && !candidates.some(player => getPlayerGroupKey(player) === selectedKey)) {
         playerAnalysisState.compareKeys[index] = "";
@@ -5393,13 +5453,40 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderPlayerOpponentPanel();
       };
     }
-    if (els.compareYearSelect) {
-      els.compareYearSelect.onchange = () => {
-        playerAnalysisState.compareYear = els.compareYearSelect.value || "";
-        playerAnalysisState.compareKeys = ["", "", ""];
-        renderPlayerComparisonPanel();
+    if (els.opponentYearSelect) {
+      els.opponentYearSelect.onchange = () => {
+        playerAnalysisState.opponentYear = els.opponentYearSelect.value || "";
+        playerAnalysisState.opponentPlayerKey = "";
+        renderPlayerOpponentPanel();
       };
     }
+    if (els.opponentSearch) {
+      const selectOpponentFromSearch = () => {
+        const value = String(els.opponentSearch.value || "").trim();
+        const rows = playerAnalysisState.opponentChoiceRows || [];
+        const exact = rows.find(row => getPlayerSelectLabel(row) === value || String(row.player_name || "").trim() === value);
+        if (!exact) return;
+        const key = getPlayerGroupKey(exact);
+        if (!key || key === playerAnalysisState.opponentPlayerKey) return;
+        playerAnalysisState.opponentPlayerKey = key;
+        if (els.opponentSelect) els.opponentSelect.value = key;
+        renderPlayerOpponentPanel();
+      };
+      els.opponentSearch.onchange = selectOpponentFromSearch;
+      els.opponentSearch.oninput = selectOpponentFromSearch;
+    }
+    els.compareYearSelects.forEach(select => {
+      select.onchange = () => {
+        const index = Number(select.dataset.paCompareYearIndex);
+        if (!Number.isInteger(index)) return;
+        if (!Array.isArray(playerAnalysisState.compareChoiceYears)) {
+          playerAnalysisState.compareChoiceYears = ["", "", ""];
+        }
+        playerAnalysisState.compareChoiceYears[index] = select.value || "";
+        playerAnalysisState.compareKeys = (playerAnalysisState.compareKeys || ["", "", ""]).map((key, keyIndex) => keyIndex >= index ? "" : key);
+        renderPlayerComparisonPanel();
+      };
+    });
     if (els.opponentPanel) {
       els.opponentPanel.onclick = (event) => {
         const button = event.target.closest("[data-pa-opponent-toggle]");
