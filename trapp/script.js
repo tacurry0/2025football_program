@@ -221,6 +221,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     modalMatchItems: [],
     modalRankingRows: [],
     activeScreen: "analysis",
+    timeMode: "year",
+    rangeStartYear: "",
+    rangeEndYear: "",
     compareTimeMode: "year",
     compareYear: "",
     compareStartYear: "",
@@ -925,6 +928,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   function getPlayerAnalysisElements() {
     return {
       yearSelect: document.getElementById("pa-year-select"),
+      mainTimeControls: document.getElementById("pa-main-time-controls"),
+      mainPeriodToggle: document.getElementById("pa-main-period-toggle"),
+      mainPeriodFields: document.getElementById("pa-main-period-fields"),
+      mainPeriodStart: document.getElementById("pa-main-period-start"),
+      mainPeriodEnd: document.getElementById("pa-main-period-end"),
       clubSelect: document.getElementById("pa-club-select"),
       clubName: document.getElementById("pa-title"),
       clubMenu: document.getElementById("pa-club-menu"),
@@ -1729,7 +1737,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function getPlayerAnalysisAvailableCompetitions(year = playerAnalysisState.year, scope = playerAnalysisState.matchScope) {
-    const years = year === "all" ? getPlayerAnalysisYears() : [Number(year)];
+    const years = Array.isArray(year) ? year.map(Number).filter(Number.isInteger) : (year === "all" ? getPlayerAnalysisYears() : [Number(year)]);
     const names = new Set();
     for (const targetYear of years) {
       if (!Number.isInteger(targetYear)) continue;
@@ -1996,11 +2004,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function hasPlayerAnalysisSpecialMatches(year = playerAnalysisState.year) {
-    const cacheKey = `${getPlayerAnalysisClub()}:${year}`;
+    const cacheKey = `${getPlayerAnalysisClub()}:${Array.isArray(year) ? year.join("-") : year}`;
     if (playerAnalysisSpecialAvailabilityCache.has(cacheKey)) {
       return playerAnalysisSpecialAvailabilityCache.get(cacheKey);
     }
-    const years = year === "all" ? getPlayerAnalysisYears() : [Number(year)];
+    const years = Array.isArray(year) ? year.map(Number).filter(Number.isInteger) : (year === "all" ? getPlayerAnalysisYears() : [Number(year)]);
     const availability = (async () => {
       for (const targetYear of years) {
         if (!Number.isInteger(targetYear)) continue;
@@ -2490,6 +2498,75 @@ document.addEventListener("DOMContentLoaded", async () => {
       .sort((a, b) => (getPlayerYearValue(b) || 0) - (getPlayerYearValue(a) || 0));
   }
 
+  function normalizePlayerAnalysisTimeState() {
+    const years = getPlayerAnalysisYears();
+    const latestYear = years[years.length - 1] || PLAYER_ANALYSIS_YEAR_END;
+    const earliestYear = years[0] || latestYear;
+    if (playerAnalysisState.timeMode !== "range") playerAnalysisState.timeMode = "year";
+    if (playerAnalysisState.year !== "all") {
+      playerAnalysisState.year = normalizePlayerAnalysisYearForClub(playerAnalysisState.year);
+    }
+    if (!years.includes(Number(playerAnalysisState.rangeStartYear))) {
+      playerAnalysisState.rangeStartYear = String(earliestYear);
+    }
+    if (!years.includes(Number(playerAnalysisState.rangeEndYear))) {
+      playerAnalysisState.rangeEndYear = String(Number.isInteger(Number(playerAnalysisState.year)) ? playerAnalysisState.year : latestYear);
+    }
+    const start = Number(playerAnalysisState.rangeStartYear);
+    const end = Number(playerAnalysisState.rangeEndYear);
+    if (Number.isInteger(start) && Number.isInteger(end) && start > end) {
+      playerAnalysisState.rangeStartYear = String(end);
+      playerAnalysisState.rangeEndYear = String(start);
+    }
+  }
+
+  function getPlayerAnalysisTimeYears() {
+    normalizePlayerAnalysisTimeState();
+    if (playerAnalysisState.timeMode === "range") {
+      const start = Number(playerAnalysisState.rangeStartYear);
+      const end = Number(playerAnalysisState.rangeEndYear);
+      return getPlayerAnalysisYears().filter(year => year >= start && year <= end);
+    }
+    if (playerAnalysisState.year === "all") return getPlayerAnalysisYears();
+    const year = Number(playerAnalysisState.year);
+    return Number.isInteger(year) ? [year] : [];
+  }
+
+  function getPlayerAnalysisTimeValue() {
+    return playerAnalysisState.timeMode === "range"
+      ? getPlayerAnalysisTimeYears()
+      : playerAnalysisState.year;
+  }
+
+  function getPlayerAnalysisTimeLabel() {
+    if (playerAnalysisState.timeMode === "range") {
+      const years = getPlayerAnalysisTimeYears();
+      if (!years.length) return "-";
+      return years[0] === years[years.length - 1] ? `${years[0]}年` : `${years[0]}年〜${years[years.length - 1]}年`;
+    }
+    return playerAnalysisState.year === "all" ? "全期間" : `${playerAnalysisState.year}年`;
+  }
+
+  function renderPlayerAnalysisPeriodOptions(select, selectedYear) {
+    if (!select) return;
+    select.innerHTML = getPlayerAnalysisYears().slice().reverse().map(year => (
+      `<option value="${escapeHtml(String(year))}" ${String(year) === String(selectedYear) ? "selected" : ""}>${escapeHtml(`${year}`)}</option>`
+    )).join("");
+  }
+
+  function renderPlayerAnalysisMainTimeControls() {
+    const { mainPeriodToggle, mainPeriodFields, mainPeriodStart, mainPeriodEnd } = getPlayerAnalysisElements();
+    normalizePlayerAnalysisTimeState();
+    const range = playerAnalysisState.timeMode === "range";
+    if (mainPeriodToggle) {
+      mainPeriodToggle.classList.toggle("active", range);
+      mainPeriodToggle.setAttribute("aria-pressed", range ? "true" : "false");
+    }
+    if (mainPeriodFields) mainPeriodFields.hidden = !range;
+    renderPlayerAnalysisPeriodOptions(mainPeriodStart, playerAnalysisState.rangeStartYear);
+    renderPlayerAnalysisPeriodOptions(mainPeriodEnd, playerAnalysisState.rangeEndYear);
+  }
+
   function renderPlayerAnalysisYears() {
     const { yearSelect } = getPlayerAnalysisElements();
     if (!yearSelect) return;
@@ -2505,6 +2582,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       yearSelect.appendChild(option);
     });
     yearSelect.value = String(playerAnalysisState.year);
+    renderPlayerAnalysisMainTimeControls();
   }
 
   function updatePlayerAnalysisScopeButtons(specialAvailable = true) {
@@ -2647,7 +2725,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const promise = (async () => {
       const meta = new Map();
-      const years = year === "all" ? getPlayerAnalysisYears() : [Number(year)];
+        const years = Array.isArray(year) ? year.map(Number).filter(Number.isInteger) : (year === "all" ? getPlayerAnalysisYears() : [Number(year)]);
       for (const targetYear of years) {
         if (!Number.isInteger(targetYear)) continue;
         const dataset = await loadPlayerAnalysisDatasetYear(targetYear);
@@ -2690,7 +2768,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getPlayerMonthlyStatsForMonth(player, month) {
     if (!month) return { played: 0, wins: 0, draws: 0, losses: 0, goals: 0 };
-    const meta = playerAnalysisMonthlyMetaCache.get(getPlayerMonthlyCacheKey(playerAnalysisState.year, playerAnalysisState.matchScope, month));
+    const meta = playerAnalysisMonthlyMetaCache.get(getPlayerMonthlyCacheKey(getPlayerAnalysisTimeValue(), playerAnalysisState.matchScope, month));
     if (!(meta instanceof Map)) return { played: 0, wins: 0, draws: 0, losses: 0, goals: 0 };
     return meta.get(getPlayerGroupKey(player)) || { played: 0, wins: 0, draws: 0, losses: 0, goals: 0 };
   }
@@ -3237,7 +3315,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function buildPlayerAnalysisRankingMetrics(year = playerAnalysisState.year, scope = playerAnalysisState.matchScope, competitionNames = getActivePlayerAnalysisCompetitionFilter()) {
     const metrics = new Map();
-    const years = year === "all" ? getPlayerAnalysisYears() : [Number(year)];
+    const years = Array.isArray(year) ? year.map(Number).filter(Number.isInteger) : (year === "all" ? getPlayerAnalysisYears() : [Number(year)]);
 
     for (const targetYear of years) {
       if (!Number.isInteger(targetYear)) continue;
@@ -3334,11 +3412,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     return metrics;
   }
 
-  async function ensurePlayerAnalysisRankingMetrics(rows) {
-    const cacheKey = `${getPlayerAnalysisFilterCacheKey()}:${playerAnalysisState.year}`;
+  async function ensurePlayerAnalysisRankingMetrics(rows, yearValue = getPlayerAnalysisTimeValue()) {
+    const yearKey = Array.isArray(yearValue) ? yearValue.join("-") : yearValue;
+    const cacheKey = `${getPlayerAnalysisFilterCacheKey()}:${yearKey}`;
     let metrics = playerAnalysisRankingMetricsCache.get(cacheKey);
     if (!metrics) {
-      metrics = await buildPlayerAnalysisRankingMetrics(playerAnalysisState.year, playerAnalysisState.matchScope, getActivePlayerAnalysisCompetitionFilter());
+      metrics = await buildPlayerAnalysisRankingMetrics(yearValue, playerAnalysisState.matchScope, getActivePlayerAnalysisCompetitionFilter());
       playerAnalysisRankingMetricsCache.set(cacheKey, metrics);
     }
     (rows || []).forEach(row => {
@@ -3696,16 +3775,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getPlayerTimeScopeYears(scope) {
-    normalizePlayerTimeState(scope);
-    const prefix = scope === "opponent" ? "opponent" : "compare";
-    if (playerAnalysisState[`${prefix}TimeMode`] !== "range") {
-      return [Number(playerAnalysisState[`${prefix}Year`])].filter(Number.isInteger);
-    }
-    const start = Number(playerAnalysisState[`${prefix}StartYear`]);
-    const end = Number(playerAnalysisState[`${prefix}EndYear`]);
-    return getPlayerTimeYearsDescending()
-      .filter(year => Number.isInteger(start) && Number.isInteger(end) && year >= start && year <= end)
-      .sort((a, b) => a - b);
+    return getPlayerAnalysisTimeYears();
   }
 
   function renderPlayerTimeYearOptions(selectedYear) {
@@ -4984,14 +5054,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (needsPlayerMonthlyMeta()) {
       setPlayerAnalysisStatus("月別条件を集計中...");
+      const timeValue = getPlayerAnalysisTimeValue();
       const months = Array.from(new Set(getActivePlayerAnalysisAdvancedFilters()
         .filter(filter => isPlayerAnalysisMonthCompactFilter(filter.type))
         .map(filter => normalizePlayerMonthFilter(filter.month))
         .filter(Boolean)));
       if (!months.length) {
-        await ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope);
+        await ensurePlayerAnalysisMonthlyMeta(timeValue, playerAnalysisState.matchScope);
       } else {
-        await Promise.all(months.map(month => ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope, month)));
+        await Promise.all(months.map(month => ensurePlayerAnalysisMonthlyMeta(timeValue, playerAnalysisState.matchScope, month)));
       }
       setPlayerAnalysisStatus("", false);
     }
@@ -5056,7 +5127,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function renderPlayerAnalysisYear(year = playerAnalysisState.year) {
-    playerAnalysisState.year = normalizePlayerAnalysisYearForClub(year);
+    if (playerAnalysisState.timeMode !== "range") {
+      playerAnalysisState.year = normalizePlayerAnalysisYearForClub(year);
+    }
+    normalizePlayerAnalysisTimeState();
     renderPlayerAnalysisClubControl();
     const {
       yearSelect, search, numberFilter, playedMin, playedMax, startsMin, goalsMin,
@@ -5065,26 +5139,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       compactFilterType, compactFilterValue, compactFilterMonth,
       scorersOnly, playedOnly, katakanaOnly
     } = getPlayerAnalysisElements();
+    renderPlayerAnalysisYears();
     if (yearSelect) yearSelect.value = String(playerAnalysisState.year);
-    const specialAvailable = await hasPlayerAnalysisSpecialMatches(playerAnalysisState.year);
+    const timeValue = getPlayerAnalysisTimeValue();
+    const activeYears = getPlayerAnalysisTimeYears();
+    const specialAvailable = await hasPlayerAnalysisSpecialMatches(timeValue);
     if (!specialAvailable && playerAnalysisState.matchScope === "special") {
       playerAnalysisState.matchScope = "all";
     }
     updatePlayerAnalysisScopeButtons(specialAvailable);
-    const availableCompetitions = await getPlayerAnalysisAvailableCompetitions(playerAnalysisState.year, playerAnalysisState.matchScope);
+    const availableCompetitions = await getPlayerAnalysisAvailableCompetitions(timeValue, playerAnalysisState.matchScope);
     if (playerAnalysisState.competitionFilterActive) {
       playerAnalysisState.selectedCompetitions = playerAnalysisState.selectedCompetitions.filter(name => availableCompetitions.includes(name));
     } else {
       playerAnalysisState.selectedCompetitions = availableCompetitions.slice();
     }
     renderPlayerAnalysisCompetitionOptions(availableCompetitions);
-    const loadingLabel = playerAnalysisState.year === "all" ? "全期間" : `${playerAnalysisState.year}年`;
+    const loadingLabel = getPlayerAnalysisTimeLabel();
     setPlayerAnalysisStatus(`${loadingLabel} / ${getPlayerAnalysisScopeLabel()} の選手分析データを読み込み中...`);
     const competitionFilter = getActivePlayerAnalysisCompetitionFilter();
 
-    const entry = playerAnalysisState.year === "all"
-      ? await loadAllPlayerAnalysisYears(playerAnalysisState.matchScope, competitionFilter)
-      : await loadScopedPlayerAnalysisYear(playerAnalysisState.year, playerAnalysisState.matchScope, competitionFilter);
+    const entry = playerAnalysisState.timeMode === "range"
+      ? {
+        rows: await buildPlayerRowsForYears(activeYears, playerAnalysisState.matchScope, competitionFilter),
+        missing: !activeYears.length
+      }
+      : playerAnalysisState.year === "all"
+        ? await loadAllPlayerAnalysisYears(playerAnalysisState.matchScope, competitionFilter)
+        : await loadScopedPlayerAnalysisYear(playerAnalysisState.year, playerAnalysisState.matchScope, competitionFilter);
+    entry.missing = entry.missing || !entry.rows.length;
     playerAnalysisState.data = entry.rows;
     playerAnalysisState.selectedKey = null;
     if (search) search.value = playerAnalysisState.query;
@@ -5115,7 +5198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     renderPlayerAnalysisPositions(entry.rows);
     renderPlayerAnalysisSummary(entry.rows);
-    await ensurePlayerAnalysisRankingMetrics(entry.rows);
+    await ensurePlayerAnalysisRankingMetrics(entry.rows, timeValue);
     ensurePlayerImpactScores(entry.rows);
     renderPlayerAnalysisRankings(entry.rows);
     if (needsPlayerSeasonMeta() && !playerAnalysisSeasonMetaCache.has(getPlayerAnalysisFilterCacheKey())) {
@@ -5125,7 +5208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     if (entry.missing) {
-      setPlayerAnalysisStatus(playerAnalysisState.year === "all" ? "選手分析データはまだありません" : "この年度の選手分析データはまだありません");
+      setPlayerAnalysisStatus(playerAnalysisState.timeMode === "range" || playerAnalysisState.year === "all" ? "選手分析データはまだありません" : "この年度の選手分析データはまだありません");
     } else {
       setPlayerAnalysisStatus("", false);
     }
@@ -5136,9 +5219,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         .map(filter => normalizePlayerMonthFilter(filter.month))
         .filter(Boolean)));
       if (!months.length) {
-        await ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope);
+        await ensurePlayerAnalysisMonthlyMeta(timeValue, playerAnalysisState.matchScope);
       } else {
-        await Promise.all(months.map(month => ensurePlayerAnalysisMonthlyMeta(playerAnalysisState.year, playerAnalysisState.matchScope, month)));
+        await Promise.all(months.map(month => ensurePlayerAnalysisMonthlyMeta(timeValue, playerAnalysisState.matchScope, month)));
       }
       setPlayerAnalysisStatus("", false);
     }

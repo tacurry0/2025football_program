@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260608player-analysis5">
+  <link rel="stylesheet" href="style.css?v=20260609player-analysis1">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./data/assets/emblems/アルビレックス新潟.png">
@@ -799,7 +799,6 @@ We can't help falling in love with you
     <!-- View 3: Albirex Player Analysis -->
     <main id="player-analysis-view" class="hidden-view">
       <section class="player-analysis-page" aria-labelledby="pa-title">
-        <div id="pa-analysis-screen" class="pa-screen active" data-pa-screen="analysis">
         <div class="pa-overview-board">
           <div class="pa-board-main">
             <div class="pa-topbar">
@@ -813,10 +812,20 @@ We can't help falling in love with you
                   <button type="button" data-pa-club="kumamoto">ROASSO KUMAMOTO</button>
                 </div>
               </div>
-              <label class="pa-year-field" for="pa-year-select">
-                <span>年度</span>
-                <select id="pa-year-select" autocomplete="off"></select>
-              </label>
+              <div id="pa-main-time-controls" class="pa-main-time-controls">
+                <div class="pa-main-year-row">
+                  <label class="pa-year-field" for="pa-year-select">
+                    <span>年度</span>
+                    <select id="pa-year-select" autocomplete="off"></select>
+                  </label>
+                  <button type="button" id="pa-main-period-toggle" class="pa-main-period-toggle" aria-pressed="false">期間</button>
+                </div>
+                <div id="pa-main-period-fields" class="pa-main-period-fields" hidden>
+                  <label><span>開始</span><select id="pa-main-period-start"></select></label>
+                  <span class="pa-period-separator">～</span>
+                  <label><span>終了</span><select id="pa-main-period-end"></select></label>
+                </div>
+              </div>
               <div class="pa-scope-field" aria-label="対象試合">
                 <span>対象試合</span>
                 <div class="pa-scope-switch">
@@ -839,6 +848,7 @@ We can't help falling in love with you
           </aside>
         </div>
 
+        <div id="pa-analysis-screen" class="pa-screen active" data-pa-screen="analysis">
         <div class="pa-workbench">
         <button type="button" id="pa-filter-fab" class="pa-filter-fab" aria-controls="pa-filter-panel" aria-expanded="false">FILTER</button>
         <div id="pa-filter-backdrop" class="pa-filter-backdrop" hidden></div>
@@ -1041,18 +1051,6 @@ We can't help falling in love with you
               <h3>選手比較 / コンビ分析</h3>
             </div>
           </div>
-          <div id="pa-compare-time-controls" class="pa-time-controls" data-pa-time-scope="compare">
-            <label class="pa-time-field">
-              <span>年</span>
-              <select data-pa-time-year="compare"></select>
-            </label>
-            <button type="button" class="pa-period-toggle" data-pa-period-toggle="compare" aria-pressed="false">期間</button>
-            <div class="pa-period-fields" data-pa-period-fields="compare" hidden>
-              <label><span>開始</span><select data-pa-period-start="compare"></select></label>
-              <span class="pa-period-separator">～</span>
-              <label><span>終了</span><select data-pa-period-end="compare"></select></label>
-            </div>
-          </div>
           <div id="pa-compare-controls" class="pa-compare-controls">
             <div class="pa-compare-select-field" data-pa-compare-field="0">
               <span>選手A</span>
@@ -1075,18 +1073,6 @@ We can't help falling in love with you
             <div>
               <span class="pa-kicker">OPPONENT</span>
               <h3>対戦クラブ別</h3>
-            </div>
-          </div>
-          <div id="pa-opponent-time-controls" class="pa-time-controls" data-pa-time-scope="opponent">
-            <label class="pa-time-field">
-              <span>年</span>
-              <select data-pa-time-year="opponent"></select>
-            </label>
-            <button type="button" class="pa-period-toggle" data-pa-period-toggle="opponent" aria-pressed="false">期間</button>
-            <div class="pa-period-fields" data-pa-period-fields="opponent" hidden>
-              <label><span>開始</span><select data-pa-period-start="opponent"></select></label>
-              <span class="pa-period-separator">～</span>
-              <label><span>終了</span><select data-pa-period-end="opponent"></select></label>
             </div>
           </div>
           <div class="pa-compare-select-field pa-opponent-search-field">
@@ -1191,7 +1177,7 @@ We can't help falling in love with you
 
 
 <script src="schedule/schedule.js?v=20260601results2"></script>
-  <script src="script.js?v=20260608player-analysis5"></script>
+  <script src="script.js?v=20260609player-analysis1"></script>
 
 </body>
 </html>
