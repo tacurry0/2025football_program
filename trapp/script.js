@@ -230,6 +230,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     compareEndYear: "",
     compareKeys: ["", "", ""],
     compareScopeRows: [],
+    compareChoiceRows: [],
     compareRenderToken: 0,
     opponentTimeMode: "year",
     opponentYear: "",
@@ -985,6 +986,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       bottomTabs: document.getElementById("pa-bottom-tabs"),
       bottomTabButtons: document.querySelectorAll(".pa-bottom-tab[data-pa-screen-target]"),
       comparePanel: document.getElementById("pa-compare-panel"),
+      compareYearSelect: document.getElementById("pa-compare-selection-year"),
       compareControls: document.getElementById("pa-compare-controls"),
       compareResult: document.getElementById("pa-compare-result"),
       opponentPanel: document.getElementById("pa-opponent-panel"),
@@ -1468,6 +1470,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.rangeEndYear = "";
     playerAnalysisState.selectedKey = null;
     playerAnalysisState.compareKeys = ["", "", ""];
+    playerAnalysisState.compareChoiceRows = [];
+    playerAnalysisState.compareScopeRows = [];
     playerAnalysisState.compareYear = "";
     playerAnalysisState.compareStartYear = "";
     playerAnalysisState.compareEndYear = "";
@@ -3225,16 +3229,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     return n === null ? "-" : n.toFixed(2);
   }
 
-  function parsePlayerGoalMinute(goal) {
-    const raw = String((goal && (goal.time || goal.minute)) || "");
+  function parsePlayerMinuteInfo(source) {
+    const raw = String((source && (source.time || source.minute_text || source.minute)) || "");
     const fromRaw = raw.match(/\d+/);
-    const fromMinute = toPlayerNumber(goal && goal.minute);
+    const fromMinute = toPlayerNumber(source && source.minute);
     const minute = fromMinute !== null ? fromMinute : (fromRaw ? Number(fromRaw[0]) : null);
     return {
       minute,
       isAdditional: /\+/.test(raw),
       isExtra: minute !== null && minute > 90 && !/\+/.test(raw)
     };
+  }
+
+  function parsePlayerGoalMinute(goal) {
+    return parsePlayerMinuteInfo(goal);
   }
 
   function comparePlayerGoalOrder(a, b) {
@@ -3264,11 +3272,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function parsePlayerCardMinute(card) {
-    const direct = toPlayerNumber(card && card.minute);
-    if (direct !== null) return direct;
-    const raw = String((card && (card.time || card.minute_text)) || "");
-    const found = raw.match(/\d+/);
-    return found ? Number(found[0]) : null;
+    return parsePlayerMinuteInfo(card).minute;
   }
 
   function getPlayerRedCardMinuteFromCards(cards) {
@@ -3294,15 +3298,72 @@ document.addEventListener("DOMContentLoaded", async () => {
     return map;
   }
 
-  function calculatePlayerAppearanceMinutes(appearance, forcedEndMinute = null) {
+  function getPlayerMatchEndMinute(match, appearances = [], goals = [], cards = []) {
+    const year = toPlayerNumber(match && match.season) || toPlayerNumber((goals[0] || appearances[0] || cards[0] || {}).season);
+    const extraSubMinutes = (Array.isArray(appearances) ? appearances : [])
+      .flatMap(appearance => [toPlayerNumber(appearance && appearance.minute_in), toPlayerNumber(appearance && appearance.minute_out)])
+      .filter(minute => minute !== null && minute > 90);
+    const extraGoalMinutes = (Array.isArray(goals) ? goals : [])
+      .map(parsePlayerGoalMinute)
+      .filter(info => info.isExtra)
+      .map(info => info.minute)
+      .filter(minute => minute !== null);
+    const hasExtraGoal = extraGoalMinutes.length > 0;
+    const hasExtraCard = (Array.isArray(cards) ? cards : [])
+      .map(parsePlayerMinuteInfo)
+      .some(info => info.isExtra);
+    const hasExtraSub = extraSubMinutes.some(minute => minute > 105);
+    if (!hasExtraGoal && !hasExtraCard && !hasExtraSub) return 90;
+    if (year === 1999) {
+      if (extraGoalMinutes.length) return Math.min(...extraGoalMinutes);
+      const targetScore = toPlayerNumber(match && match.target_score);
+      const opponentScore = toPlayerNumber(match && match.opponent_score);
+      if (targetScore !== null && opponentScore !== null && targetScore !== opponentScore && extraSubMinutes.length) {
+        return Math.max(...extraSubMinutes);
+      }
+    }
+    return 120;
+  }
+
+  function buildPlayerMatchEndMinuteMap(matches = [], appearances = [], goals = [], cards = []) {
+    const matchMap = new Map((matches || []).map(match => [String(match.match_id), match]));
+    const appearancesByMatch = new Map();
+    const goalsByMatch = new Map();
+    const cardsByMatch = new Map();
+    (Array.isArray(appearances) ? appearances : []).forEach(appearance => {
+      const key = String(appearance && appearance.match_id);
+      if (!matchMap.has(key)) return;
+      if (!appearancesByMatch.has(key)) appearancesByMatch.set(key, []);
+      appearancesByMatch.get(key).push(appearance);
+    });
+    (Array.isArray(goals) ? goals : []).forEach(goal => {
+      const key = String(goal && goal.match_id);
+      if (!matchMap.has(key)) return;
+      if (!goalsByMatch.has(key)) goalsByMatch.set(key, []);
+      goalsByMatch.get(key).push(goal);
+    });
+    (Array.isArray(cards) ? cards : []).forEach(card => {
+      const key = String(card && card.match_id);
+      if (!matchMap.has(key)) return;
+      if (!cardsByMatch.has(key)) cardsByMatch.set(key, []);
+      cardsByMatch.get(key).push(card);
+    });
+    return new Map(Array.from(matchMap.entries()).map(([matchId, match]) => [
+      matchId,
+      getPlayerMatchEndMinute(match, appearancesByMatch.get(matchId) || [], goalsByMatch.get(matchId) || [], cardsByMatch.get(matchId) || [])
+    ]));
+  }
+
+  function calculatePlayerAppearanceMinutes(appearance, forcedEndMinute = null, matchEndMinute = 90) {
     if (!appearance || !appearance.played) return 0;
     const start = toPlayerNumber(appearance.minute_in) || 0;
     const endValue = toPlayerNumber(appearance.minute_out);
     const forcedEnd = toPlayerNumber(forcedEndMinute);
+    const defaultEnd = toPlayerNumber(matchEndMinute) || 90;
     const endCandidates = [];
     if (endValue !== null) endCandidates.push(endValue);
     if (forcedEnd !== null) endCandidates.push(forcedEnd);
-    const end = endCandidates.length ? Math.min(...endCandidates) : 90;
+    const end = endCandidates.length ? Math.min(...endCandidates) : defaultEnd;
     return Math.max(0, end - start);
   }
 
@@ -3326,6 +3387,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!targetMatches.length) continue;
 
       const matchMap = new Map(targetMatches.map(match => [String(match.match_id), match]));
+      const matchEndMinuteById = buildPlayerMatchEndMinuteMap(targetMatches, dataset.appearances, dataset.goals, dataset.cards);
       const appearanceByMatchPlayer = new Map();
       const redCardMinuteByMatchPlayer = buildPlayerRedCardMinuteMap(
         (dataset.cards || []).filter(card => matchMap.has(String(card.match_id))),
@@ -3345,7 +3407,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (!metric) return;
           const opponentScore = toPlayerNumber(match.opponent_score) || 0;
           metric.played_metric_matches += 1;
-          metric.played_minutes += calculatePlayerAppearanceMinutes(appearance, redCardMinuteByMatchPlayer.get(matchPlayerKey));
+          metric.played_minutes += calculatePlayerAppearanceMinutes(
+            appearance,
+            redCardMinuteByMatchPlayer.get(matchPlayerKey),
+            matchEndMinuteById.get(String(appearance.match_id))
+          );
           metric.played_goals_against += opponentScore;
           if (opponentScore === 0) metric.played_clean_sheets += 1;
           if (match.result !== "loss") metric.played_non_losses += 1;
@@ -3799,6 +3865,34 @@ document.addEventListener("DOMContentLoaded", async () => {
     return buildPlayerRowsForYears(years);
   }
 
+  function normalizePlayerCompareSelectionYear() {
+    const years = getPlayerAnalysisYears();
+    const selected = Number(playerAnalysisState.compareYear);
+    if (Number.isInteger(selected) && years.includes(selected)) return String(selected);
+    const activeYear = Number(playerAnalysisState.year);
+    const fallback = Number.isInteger(activeYear) && years.includes(activeYear)
+      ? activeYear
+      : (years[years.length - 1] || PLAYER_ANALYSIS_YEAR_END);
+    playerAnalysisState.compareYear = String(fallback);
+    return playerAnalysisState.compareYear;
+  }
+
+  function renderPlayerCompareSelectionYearOptions(select) {
+    if (!select) return;
+    const selectedYear = normalizePlayerCompareSelectionYear();
+    select.innerHTML = getPlayerAnalysisYears().slice().reverse().map(year => (
+      `<option value="${escapeHtml(String(year))}" ${String(year) === selectedYear ? "selected" : ""}>${escapeHtml(`${year}`)}</option>`
+    )).join("");
+    select.value = selectedYear;
+  }
+
+  async function getPlayerCompareChoiceRows() {
+    const year = Number(normalizePlayerCompareSelectionYear());
+    if (!Number.isInteger(year)) return [];
+    const entry = await loadScopedPlayerAnalysisYear(year, "all", null);
+    return getPlayerSortedRows(entry.rows || []);
+  }
+
   async function renderPlayerOpponentControls() {
     const { opponentSelect } = getPlayerAnalysisElements();
     const rows = await getPlayerRowsForTimeScope("opponent");
@@ -3847,9 +3941,47 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getPlayerCompareSelectedPlayers() {
     const rows = playerAnalysisState.compareScopeRows || [];
+    const choices = playerAnalysisState.compareChoiceRows || [];
+    const dataByKey = new Map(rows.map(row => [getPlayerGroupKey(row), row]));
+    const choiceByKey = new Map(choices.map(row => [getPlayerGroupKey(row), row]));
     return (playerAnalysisState.compareKeys || [])
-      .map(key => rows.find(row => getPlayerGroupKey(row) === key))
+      .map(key => dataByKey.get(key) || createPlayerComparisonEmptyRow(choiceByKey.get(key)))
       .filter(Boolean);
+  }
+
+  function createPlayerComparisonEmptyRow(player) {
+    if (!player) return null;
+    const row = {
+      ...player,
+      played_matches: 0,
+      played_wins: 0,
+      played_draws: 0,
+      played_losses: 0,
+      played_win_rate: null,
+      played_points_per_match: null,
+      starter_matches: 0,
+      starter_wins: 0,
+      starter_draws: 0,
+      starter_losses: 0,
+      starter_win_rate: null,
+      sub_matches: 0,
+      sub_wins: 0,
+      sub_draws: 0,
+      sub_losses: 0,
+      sub_win_rate: null,
+      goals: 0,
+      scored_matches: 0,
+      scored_wins: 0,
+      scored_draws: 0,
+      scored_losses: 0,
+      scored_win_rate: null,
+      scored_points_per_match: null,
+      __paYearRows: [],
+      __paRankingMetrics: createPlayerRankingMetric(),
+      __paNoCompareData: true
+    };
+    ensurePlayerImpactScores([row]);
+    return row;
   }
 
   function getPlayerCompareLabel(player) {
@@ -3875,16 +4007,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderPlayerComparisonPanel();
   }
 
-  async function getCompareCandidateRows(index, rows = playerAnalysisState.compareScopeRows || []) {
+  async function getCompareCandidateRows(index, rows = playerAnalysisState.compareChoiceRows || []) {
     const selectedOtherKeys = new Set((playerAnalysisState.compareKeys || []).filter((key, keyIndex) => key && keyIndex !== index));
     const requiredKeys = (playerAnalysisState.compareKeys || [])
       .slice(0, index)
       .map(key => rows.find(row => getPlayerGroupKey(row) === key))
       .filter(Boolean)
       .map(getPlayerGroupKey);
-    const years = getPlayerTimeScopeYears("compare");
+    const years = [Number(normalizePlayerCompareSelectionYear())].filter(Number.isInteger);
     const entries = requiredKeys.length
-      ? await getPlayerPlayedMatchEntries(playerAnalysisState.matchScope, getActivePlayerAnalysisCompetitionFilter(), years)
+      ? await getPlayerPlayedMatchEntries("all", null, years)
       : [];
     return rows.filter(player => {
       const key = getPlayerGroupKey(player);
@@ -3895,11 +4027,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function renderPlayerCompareControls() {
-    const { compareControls } = getPlayerAnalysisElements();
+    const { compareControls, compareYearSelect } = getPlayerAnalysisElements();
     if (!compareControls) return;
+    renderPlayerCompareSelectionYearOptions(compareYearSelect);
     const rows = await getPlayerRowsForTimeScope("compare");
+    const choiceRows = await getPlayerCompareChoiceRows();
     playerAnalysisState.compareScopeRows = rows;
-    const validKeys = new Set(rows.map(getPlayerGroupKey));
+    playerAnalysisState.compareChoiceRows = choiceRows;
+    const validKeys = new Set(choiceRows.map(getPlayerGroupKey));
     playerAnalysisState.compareKeys = (playerAnalysisState.compareKeys || ["", "", ""])
       .slice(0, 3)
       .map(key => validKeys.has(key) ? key : "");
@@ -3908,7 +4043,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await Promise.all([0, 1, 2].map(async index => {
       const select = compareControls.querySelector(`select[data-pa-compare-index="${index}"]`);
       if (!select) return;
-      const candidates = await getCompareCandidateRows(index, rows);
+      const candidates = await getCompareCandidateRows(index, choiceRows);
       const selectedKey = playerAnalysisState.compareKeys[index] || "";
       if (selectedKey && !candidates.some(player => getPlayerGroupKey(player) === selectedKey)) {
         playerAnalysisState.compareKeys[index] = "";
@@ -3967,7 +4102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     return `
       <div class="pa-compare-table-wrap">
-        <table class="pa-compare-table">
+        <table class="pa-compare-table pa-compare-metrics-table">
           <thead>
             <tr>
               <th>指標</th>
@@ -4563,6 +4698,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (dataset.missing) return [];
     const targetMatches = (dataset.matches || []).filter(match => isPlayerAnalysisScopeMatch(match, scope, competitionNames));
     const matchMap = new Map(targetMatches.map(match => [String(match.match_id), match]));
+    const matchEndMinuteById = buildPlayerMatchEndMinuteMap(targetMatches, dataset.appearances, dataset.goals, dataset.cards);
     const appearances = (dataset.appearances || [])
       .filter(appearance => appearance.played && matchMap.has(String(appearance.match_id)) && getPlayerCanonicalIdentity(appearance, normalizedYear).groupKey === groupKey);
 
@@ -4589,6 +4725,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return {
         appearance,
         match,
+        matchEndMinute: matchEndMinuteById.get(String(appearance.match_id)) || 90,
         goals: goalsByMatch.get(String(appearance.match_id)) || [],
         cards: cardsByMatch.get(String(appearance.match_id)) || []
       };
@@ -4665,11 +4802,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     return Number.isFinite(n) ? `${n.toLocaleString("ja-JP")}人` : String(value);
   }
 
-  function formatPlayerAppearanceMinutes(appearance, cards = []) {
+  function formatPlayerAppearanceMinutes(appearance, cards = [], matchEndMinute = 90) {
     if (!appearance) return "-";
     const from = hasPlayerValue(appearance.minute_in) ? `${appearance.minute_in}分` : "";
     const redMinute = getPlayerRedCardMinuteFromCards(cards);
-    const minuteOut = hasPlayerValue(appearance.minute_out) ? appearance.minute_out : (redMinute !== null ? redMinute : "");
+    const fallbackEnd = appearance.played ? (toPlayerNumber(matchEndMinute) || 90) : "";
+    const minuteOut = hasPlayerValue(appearance.minute_out) ? appearance.minute_out : (redMinute !== null ? redMinute : fallbackEnd);
     const to = hasPlayerValue(minuteOut) ? `${minuteOut}分` : "";
     if (from && to) return `${from} - ${to}`;
     if (from) return `${from}から`;
@@ -4695,7 +4833,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ];
     const playerRows = [
       ["出場", formatPlayerAppearanceRole(appearance)],
-      ["時間", formatPlayerAppearanceMinutes(appearance, item?.cards || [])],
+      ["時間", formatPlayerAppearanceMinutes(appearance, item?.cards || [], item?.matchEndMinute || 90)],
       ["得点", formatPlayerNumber((item?.goals || []).length)],
       ["カード", (item?.cards || []).length ? `${(item?.cards || []).length}枚` : "-"]
     ];
@@ -5253,6 +5391,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       els.opponentSelect.onchange = () => {
         playerAnalysisState.opponentPlayerKey = els.opponentSelect.value || "";
         renderPlayerOpponentPanel();
+      };
+    }
+    if (els.compareYearSelect) {
+      els.compareYearSelect.onchange = () => {
+        playerAnalysisState.compareYear = els.compareYearSelect.value || "";
+        playerAnalysisState.compareKeys = ["", "", ""];
+        renderPlayerComparisonPanel();
       };
     }
     if (els.opponentPanel) {
