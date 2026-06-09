@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const playerAnalysisRankingMetricsCache = new Map();
   const playerAnalysisAllPromises = new Map();
   const playerAnalysisAllYearRowsCache = new Map();
+  const playerAnalysisSupplementCache = new Map();
   const playerAnalysisSeasonMetaCache = new Map();
   const playerAnalysisMonthlyMetaCache = new Map();
   const playerAnalysisSpecialAvailabilityCache = new Map();
@@ -238,9 +239,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     opponentStartYear: "",
     opponentEndYear: "",
     opponentPlayerKey: "",
+    opponentClub: "",
+    opponentClubs: [],
+    opponentPlayerDetail: false,
     opponentScopeRows: [],
     opponentChoiceRows: [],
-    opponentRenderToken: 0
+    opponentRenderToken: 0,
+    playerOpponentRenderToken: 0
   };
   const PLAYER_POSITION_ORDER = ["GK", "DF", "MF", "FW"];
   const KATAKANA_PLAYER_RE = /[ァ-ヴー]/;
@@ -993,10 +998,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       compareResult: document.getElementById("pa-compare-result"),
       opponentPanel: document.getElementById("pa-opponent-panel"),
       opponentYearSelect: document.getElementById("pa-opponent-selection-year"),
-      opponentSearch: document.getElementById("pa-opponent-player-search"),
-      opponentDatalist: document.getElementById("pa-opponent-player-suggestions"),
-      opponentSelect: document.getElementById("pa-opponent-player-select"),
+      opponentSearch: document.getElementById("pa-opponent-club-search"),
+      opponentDatalist: document.getElementById("pa-opponent-club-suggestions"),
+      opponentSelect: document.getElementById("pa-opponent-club-select"),
       opponentResult: document.getElementById("pa-opponent-result"),
+      playerOpponentPanel: document.getElementById("pa-player-opponent-panel"),
+      playerOpponentYearSelect: document.getElementById("pa-player-opponent-selection-year"),
+      playerOpponentSearch: document.getElementById("pa-player-opponent-search"),
+      playerOpponentDatalist: document.getElementById("pa-player-opponent-suggestions"),
+      playerOpponentSelect: document.getElementById("pa-player-opponent-select"),
+      playerOpponentResult: document.getElementById("pa-player-opponent-result"),
       mobileList: document.getElementById("pa-mobile-list"),
       detail: document.getElementById("pa-detail-card")
     };
@@ -1488,6 +1499,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.opponentStartYear = "";
     playerAnalysisState.opponentEndYear = "";
     playerAnalysisState.opponentTimeMode = "year";
+    playerAnalysisState.opponentClub = "";
+    playerAnalysisState.opponentClubs = [];
+    playerAnalysisState.opponentPlayerDetail = false;
+    playerAnalysisState.opponentScopeRows = [];
     playerAnalysisState.profileTab = "total";
     playerAnalysisState.modalPlayer = null;
     closePlayerAnalysisModal();
@@ -1583,6 +1598,156 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
   }
 
+  async function loadPlayerAnalysisSupplementPlayers(club = playerAnalysisState.selectedClub) {
+    const info = getPlayerAnalysisClubInfo(club);
+    if (info.key !== "niigata") return [];
+    if (!playerAnalysisSupplementCache.has(info.key)) {
+      playerAnalysisSupplementCache.set(info.key, (async () => {
+        try {
+          const res = await fetch(`./data/generated/${info.dataDir}/wiki_players.json`);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const payload = await res.json();
+          return (Array.isArray(payload) ? payload : [])
+            .filter(item => item && item.player_name && Array.isArray(item.seasons))
+            .filter(item => {
+              const tables = Array.isArray(item.source_tables) ? item.source_tables : [];
+              return tables.some(table => ["current", "loan_in", "loan_out"].includes(table));
+            })
+            .map(item => ({
+              ...item,
+              player_name: formatPlayerAnalysisSupplementName(item.player_name),
+              seasons: item.seasons.map(Number).filter(Number.isInteger),
+              positions: Array.isArray(item.positions) ? item.positions.map(String).filter(Boolean) : [],
+              numbers: Array.isArray(item.numbers) ? item.numbers.map(String).filter(Boolean) : [],
+              season_texts: Array.isArray(item.season_texts) ? item.season_texts.map(String).filter(Boolean) : []
+            }));
+        } catch (error) {
+          console.warn(`Failed to load supplemental players for ${info.key}`, error);
+          return [];
+        }
+      })());
+    }
+    return playerAnalysisSupplementCache.get(info.key);
+  }
+
+  function formatPlayerAnalysisSupplementName(name) {
+    const value = String(name || "").normalize("NFKC").replace(/\s+/g, " ").trim();
+    const overrides = {
+      "古長谷千博": "古長谷 千博",
+      "松浦大翔": "松浦 大翔",
+      "佐藤海宏": "佐藤 海宏",
+      "松岡敏也": "松岡 敏也",
+      "藤原優大": "藤原 優大",
+      "吉田陣平": "吉田 陣平",
+      "森璃太": "森 璃太",
+      "内山翔太": "内山 翔太"
+    };
+    if (overrides[value]) return overrides[value];
+    if (/[\s　・･]/.test(value) || /[ァ-ヴー]/.test(value)) return value;
+    if (/^[一-龥々〆ヵヶ]{4}$/.test(value)) return `${value.slice(0, 2)} ${value.slice(2)}`;
+    return value;
+  }
+
+  function createPlayerAnalysisSupplementRow(meta, sourceYear, index = 0, club = playerAnalysisState.selectedClub) {
+    const year = Number(sourceYear);
+    const info = getPlayerAnalysisClubInfo(club);
+    const identity = getPlayerCanonicalIdentity(meta, year);
+    const groupKey = identity.groupKey || normalizePlayerIdentityText(meta.player_name).toLowerCase();
+    const row = {
+      season: year,
+      team: info.name,
+      player_key: identity.key || meta.player_name,
+      player_name: identity.name || meta.player_name,
+      numbers: Array.isArray(meta.numbers) ? [...meta.numbers] : [],
+      positions: sortPlayerPositions(Array.isArray(meta.positions) ? [...meta.positions] : []),
+      played_matches: 0,
+      played_wins: 0,
+      played_draws: 0,
+      played_losses: 0,
+      played_win_rate: null,
+      played_points_per_match: null,
+      starter_matches: 0,
+      starter_wins: 0,
+      starter_draws: 0,
+      starter_losses: 0,
+      starter_win_rate: null,
+      starter_points_per_match: null,
+      sub_matches: 0,
+      sub_wins: 0,
+      sub_draws: 0,
+      sub_losses: 0,
+      sub_win_rate: null,
+      sub_points_per_match: null,
+      bench_only_matches: 0,
+      goals: 0,
+      scored_matches: 0,
+      scored_wins: 0,
+      scored_draws: 0,
+      scored_losses: 0,
+      scored_win_rate: null,
+      scored_points_per_match: null,
+      yellow_cards: 0,
+      red_cards: 0,
+      carded_matches: 0,
+      carded_wins: 0,
+      carded_draws: 0,
+      carded_losses: 0,
+      carded_win_rate: null,
+      __paSourceYear: year,
+      __paIndex: `supplement-${index}`,
+      __paGroupKey: groupKey,
+      __paSupplemental: true,
+      __paNoAppearance: true,
+      __paSeasonText: Array.isArray(meta.season_texts) ? meta.season_texts.join(" / ") : ""
+    };
+    row.__paKey = `${groupKey || row.player_key || row.player_name}-supplement-${year}-${index}`;
+    return row;
+  }
+
+  async function mergePlayerAnalysisSupplementRows(rows, sourceYear, club = playerAnalysisState.selectedClub) {
+    const info = getPlayerAnalysisClubInfo(club);
+    const year = Number(sourceYear);
+    if (info.key !== "niigata" || !Number.isInteger(year) || !getPlayerAnalysisYears(info.key).includes(year)) {
+      return rows;
+    }
+    const supplements = await loadPlayerAnalysisSupplementPlayers(info.key);
+    if (!supplements.length) return rows;
+    const existing = new Set((rows || []).map(getPlayerGroupKey).filter(Boolean));
+    const nextRows = [...(rows || [])];
+    supplements.forEach((meta, index) => {
+      if (!meta.seasons.includes(year)) return;
+      const row = createPlayerAnalysisSupplementRow(meta, year, index, info.key);
+      const key = getPlayerGroupKey(row);
+      if (!key || existing.has(key)) return;
+      existing.add(key);
+      nextRows.push(row);
+    });
+    return nextRows.sort((a, b) => (toPlayerNumber(b.played_matches) || 0) - (toPlayerNumber(a.played_matches) || 0)
+      || (toPlayerNumber(b.goals) || 0) - (toPlayerNumber(a.goals) || 0)
+      || String(a.player_name || "").localeCompare(String(b.player_name || ""), "ja"));
+  }
+
+  async function mergePlayerAnalysisSupplementAggregateRows(rows, club = playerAnalysisState.selectedClub) {
+    const info = getPlayerAnalysisClubInfo(club);
+    if (info.key !== "niigata") return rows;
+    const supplements = await loadPlayerAnalysisSupplementPlayers(info.key);
+    if (!supplements.length) return rows;
+    const years = new Set(getPlayerAnalysisYears(info.key));
+    const existing = new Set((rows || []).map(getPlayerGroupKey).filter(Boolean));
+    const nextRows = [...(rows || [])];
+    supplements.forEach((meta, index) => {
+      const activeYears = meta.seasons.filter(year => years.has(year));
+      if (!activeYears.length) return;
+      const sample = createPlayerAnalysisSupplementRow(meta, activeYears[0], index, info.key);
+      const key = getPlayerGroupKey(sample);
+      if (!key || existing.has(key)) return;
+      existing.add(key);
+      const aggregate = aggregatePlayerAnalysisRows(activeYears.map(year => createPlayerAnalysisSupplementRow(meta, year, index, info.key)))[0];
+      if (aggregate) nextRows.push(aggregate);
+    });
+    return nextRows;
+  }
+
   function setPlayerAnalysisStatus(message, isActive = true) {
     const { status } = getPlayerAnalysisElements();
     if (!status) return;
@@ -1606,7 +1771,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const res = await fetch(`./data/generated/${info.dataDir}/${normalizedYear}/player_analysis.json`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const payload = await res.json();
-      entry.rows = normalizePlayerAnalysisRows(payload, normalizedYear);
+      entry.rows = await mergePlayerAnalysisSupplementRows(normalizePlayerAnalysisRows(payload, normalizedYear), normalizedYear, info.key);
       entry.missing = entry.rows.length === 0;
     } catch (error) {
       console.error(`Failed to load player analysis for ${info.key} ${normalizedYear}`, error);
@@ -1627,7 +1792,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const res = await fetch(`./data/generated/${info.dataDir}/all_years_player_analysis.json`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const payload = await res.json();
-        entry.rows = normalizePlayerAnalysisRows(payload, null);
+        entry.rows = await mergePlayerAnalysisSupplementAggregateRows(normalizePlayerAnalysisRows(payload, null), info.key);
         entry.missing = entry.rows.length === 0;
       } catch (error) {
         console.error(`Failed to load all years player analysis for ${info.key}`, error);
@@ -2006,8 +2171,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cacheKey = `${normalizedYear}:${getPlayerAnalysisFilterCacheKey(scope, competitionNames)}`;
     if (playerAnalysisScopedCache.has(cacheKey)) return playerAnalysisScopedCache.get(cacheKey);
     const dataset = await loadPlayerAnalysisDatasetYear(normalizedYear);
+    const scopedRows = dataset.missing ? [] : buildScopedPlayerAnalysisRows(dataset, normalizedYear, scope, competitionNames);
     const entry = {
-      rows: dataset.missing ? [] : buildScopedPlayerAnalysisRows(dataset, normalizedYear, scope, competitionNames),
+      rows: await mergePlayerAnalysisSupplementRows(scopedRows, normalizedYear, playerAnalysisState.selectedClub),
       missing: dataset.missing
     };
     entry.missing = entry.missing || entry.rows.length === 0;
@@ -2183,10 +2349,35 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function normalizeOpponentClubName(name) {
-    return String(name || "")
+    const normalized = String(name || "")
       .normalize("NFKC")
       .replace(/\s+/g, " ")
       .trim();
+    const compact = normalized.replace(/[\s　・･.]/g, "").toLowerCase();
+    const aliases = new Map([
+      ["コンサドーレ札幌", "北海道コンサドーレ札幌"],
+      ["北海道コンサドーレ札幌", "北海道コンサドーレ札幌"],
+      ["札幌", "北海道コンサドーレ札幌"],
+      ["東京ヴェルディ1969", "東京ヴェルディ"],
+      ["東京ヴェルディ", "東京ヴェルディ"],
+      ["ヴェルディ川崎", "東京ヴェルディ"],
+      ["東京v", "東京ヴェルディ"],
+      ["京都パープルサンガ", "京都サンガF.C."],
+      ["京都サンガfc", "京都サンガF.C."],
+      ["京都サンガf.c.", "京都サンガF.C."],
+      ["京都サンガ", "京都サンガF.C."],
+      ["京都", "京都サンガF.C."],
+      ["名古屋グランパスエイト", "名古屋グランパス"],
+      ["名古屋グランパス", "名古屋グランパス"],
+      ["名古屋", "名古屋グランパス"],
+      ["ジェフユナイテッド市原", "ジェフユナイテッド千葉"],
+      ["ジェフユナイテッド市原千葉", "ジェフユナイテッド千葉"],
+      ["ジェフユナイテッド千葉", "ジェフユナイテッド千葉"],
+      ["ジェフ千葉", "ジェフユナイテッド千葉"],
+      ["市原", "ジェフユナイテッド千葉"],
+      ["千葉", "ジェフユナイテッド千葉"]
+    ]);
+    return aliases.get(compact) || normalized;
   }
 
   function createPlayerMatchStats() {
@@ -3174,20 +3365,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     const yearLabel = getPlayerAnalysisTimeLabel();
     const scopeLabel = getPlayerAnalysisScopeLabel();
     const cards = [
-      ["対象", yearLabel, scopeLabel],
-      ["選手数", rows.length, `${playedPlayers}人が出場`],
-      ["出場あり", playedPlayers, "出場試合数 1以上"],
-      ["総得点", totalGoals, "選手別得点の合計"],
-      ["最多出場", formatPlayerNumber(topAppearance && topAppearance.played_matches), topAppearance ? topAppearance.player_name : "-"],
-      ["最多先発", formatPlayerNumber(topStarter && topStarter.starter_matches), topStarter ? topStarter.player_name : "-"],
-      ["得点トップ", formatPlayerNumber(topScorer && topScorer.goals), topScorer ? topScorer.player_name : "-"],
-      ["出場勝率トップ", formatPlayerRate(topWinRate && topWinRate.played_win_rate), topWinRate ? topWinRate.player_name : "-"]
+      { label: "対象", value: yearLabel, caption: scopeLabel, tone: "scope" },
+      { label: "選手数", value: rows.length, caption: `${playedPlayers}人が出場`, tone: "players" },
+      { label: "出場あり", value: playedPlayers, caption: "出場試合数 1以上", tone: "played" },
+      { label: "総得点", value: totalGoals, caption: "選手別得点の合計", tone: "goals" },
+      { label: "最多出場", value: formatPlayerNumber(topAppearance && topAppearance.played_matches), caption: topAppearance ? topAppearance.player_name : "-", tone: "appearances" },
+      { label: "最多先発", value: formatPlayerNumber(topStarter && topStarter.starter_matches), caption: topStarter ? topStarter.player_name : "-", tone: "starts" },
+      { label: "得点トップ", value: formatPlayerNumber(topScorer && topScorer.goals), caption: topScorer ? topScorer.player_name : "-", tone: "scorer" },
+      { label: "出場勝率トップ", value: formatPlayerRate(topWinRate && topWinRate.played_win_rate), caption: topWinRate ? topWinRate.player_name : "-", tone: "rate" }
     ];
-    summary.innerHTML = cards.map(([label, value, caption]) => `
-      <div class="pa-summary-card">
-        <span>${escapeHtml(label)}</span>
-        <strong>${escapeHtml(String(value))}</strong>
-        <small>${escapeHtml(caption)}</small>
+    summary.innerHTML = cards.map((card, index) => `
+      <div class="pa-summary-card tone-${escapeHtml(card.tone)}" style="--pa-card-index:${index + 1}">
+        <i aria-hidden="true">${escapeHtml(String(index + 1).padStart(2, "0"))}</i>
+        <span>${escapeHtml(card.label)}</span>
+        <strong>${escapeHtml(String(card.value))}</strong>
+        <small>${escapeHtml(card.caption)}</small>
       </div>
     `).join("");
   }
@@ -3789,7 +3981,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function setPlayerAnalysisScreen(screen) {
-    const nextScreen = ["analysis", "compare", "opponents"].includes(screen) ? screen : "analysis";
+    const nextScreen = ["analysis", "compare", "opponents", "player-opponents"].includes(screen) ? screen : "analysis";
     playerAnalysisState.activeScreen = nextScreen;
     const { screens, bottomTabButtons } = getPlayerAnalysisElements();
     const page = document.querySelector(".player-analysis-page");
@@ -3806,6 +3998,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     if (nextScreen === "compare") renderPlayerComparisonPanel();
     if (nextScreen === "opponents") renderPlayerOpponentPanel();
+    if (nextScreen === "player-opponents") renderPlayerOpponentPlayerPanel();
   }
 
   function getPlayerSortedRows(rows = playerAnalysisState.data || []) {
@@ -3816,7 +4009,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getPlayerSelectLabel(player) {
-    return `${player.player_name || "-"} / ${formatPlayerList(player.positions)} / ${formatPlayerList(player.numbers)}`;
+    return player.player_name || "-";
   }
 
   function getPlayerTimeScopeYears(scope) {
@@ -3905,94 +4098,209 @@ document.addEventListener("DOMContentLoaded", async () => {
     return getPlayerSortedRows(entry.rows || []);
   }
 
-  function normalizePlayerOpponentSelectionYear() {
-    const years = getPlayerAnalysisYears();
-    const selected = Number(playerAnalysisState.opponentYear);
-    if (Number.isInteger(selected) && years.includes(selected)) return String(selected);
-    const activeYear = Number(playerAnalysisState.year);
-    const fallback = Number.isInteger(activeYear) && years.includes(activeYear)
-      ? activeYear
-      : (years[years.length - 1] || PLAYER_ANALYSIS_YEAR_END);
-    playerAnalysisState.opponentYear = String(fallback);
-    return playerAnalysisState.opponentYear;
+  function normalizeOpponentSearchText(value) {
+    return normalizeOpponentClubName(value)
+      .replace(/[\s　・･.・]/g, "")
+      .toLowerCase();
   }
 
-  function renderPlayerOpponentSelectionYearOptions(select) {
-    if (!select) return;
-    const selectedYear = normalizePlayerOpponentSelectionYear();
-    select.innerHTML = getPlayerAnalysisYears().slice().reverse().map(year => (
-      `<option value="${escapeHtml(String(year))}" ${String(year) === selectedYear ? "selected" : ""}>${escapeHtml(`${year}`)}</option>`
-    )).join("");
-    select.value = selectedYear;
+  function getRankedOpponentClubPlayerItems(items = []) {
+    let previous = null;
+    let rank = 0;
+    return [...items]
+      .sort((a, b) => b.goals - a.goals
+        || b.scoredMatches - a.scoredMatches
+        || String(a.playerName || "").localeCompare(String(b.playerName || ""), "ja"))
+      .map((item, index) => {
+        if (!previous || item.goals !== previous.goals) rank = index + 1;
+        previous = item;
+        return { ...item, rank };
+      });
   }
 
-  async function getPlayerOpponentChoiceRows() {
-    const year = Number(normalizePlayerOpponentSelectionYear());
-    if (!Number.isInteger(year)) return [];
-    const entry = await loadScopedPlayerAnalysisYear(year, "all", null);
-    return getPlayerSortedRows(entry.rows || []);
+  async function buildPlayerOpponentClubAnalysis(rows = []) {
+    const scope = playerAnalysisState.matchScope;
+    const competitionNames = getActivePlayerAnalysisCompetitionFilter();
+    const years = getPlayerTimeScopeYears("opponents");
+    const playerByGroup = new Map((rows || []).map(player => [getPlayerGroupKey(player), player]).filter(([key]) => key));
+    const opponents = new Set();
+    const rankingSource = new Map();
+
+    for (const year of years) {
+      if (!Number.isInteger(Number(year))) continue;
+      const dataset = await loadPlayerAnalysisDatasetYear(year);
+      if (dataset.missing) continue;
+      const targetMatches = (dataset.matches || []).filter(match => isPlayerAnalysisScopeMatch(match, scope, competitionNames));
+      const matchMap = new Map(targetMatches.map(match => [String(match.match_id), match]));
+      targetMatches.forEach(match => {
+        const opponent = normalizeOpponentClubName(match.opponent) || "-";
+        opponents.add(opponent);
+        if (!rankingSource.has(opponent)) rankingSource.set(opponent, new Map());
+      });
+      (dataset.goals || []).forEach(goal => {
+        if (!goal || goal.is_own_goal || !goal.player_key) return;
+        const match = matchMap.get(String(goal.match_id));
+        if (!match) return;
+        const groupKey = getPlayerCanonicalIdentity(goal, year).groupKey;
+        const player = playerByGroup.get(groupKey);
+        if (!player) return;
+        const opponent = normalizeOpponentClubName(match.opponent) || "-";
+        opponents.add(opponent);
+        if (!rankingSource.has(opponent)) rankingSource.set(opponent, new Map());
+        const byPlayer = rankingSource.get(opponent);
+        if (!byPlayer.has(groupKey)) {
+          byPlayer.set(groupKey, {
+            player,
+            groupKey,
+            playerKey: getPlayerAnalysisKey(player),
+            playerName: player.player_name || goal.player_name || "-",
+            positions: getPlayerPositions(player),
+            numbers: getPlayerNumbers(player),
+            goals: 0,
+            scoredMatchIds: new Set(),
+            scoredMatches: new Map(),
+            wins: 0,
+            draws: 0,
+            losses: 0
+          });
+        }
+        const stats = byPlayer.get(groupKey);
+        stats.goals += 1;
+        const matchId = String(match.match_id);
+        if (!stats.scoredMatches.has(matchId)) {
+          stats.scoredMatches.set(matchId, { match, goals: 0 });
+        }
+        stats.scoredMatches.get(matchId).goals += 1;
+        if (!stats.scoredMatchIds.has(matchId)) {
+          stats.scoredMatchIds.add(matchId);
+          if (match.result === "win") stats.wins += 1;
+          else if (match.result === "draw") stats.draws += 1;
+          else if (match.result === "loss") stats.losses += 1;
+        }
+      });
+    }
+
+    const rankings = new Map();
+    rankingSource.forEach((byPlayer, opponent) => {
+      const items = Array.from(byPlayer.values()).map(stats => {
+        const scoredMatches = stats.scoredMatchIds.size;
+        return {
+          ...stats,
+          scoredMatches,
+          matchRows: Array.from(stats.scoredMatches.values()).sort((a, b) => String(b.match.date || "").localeCompare(String(a.match.date || ""))),
+          winRate: calculatePlayerRate(stats.wins, scoredMatches)
+        };
+      }).filter(item => item.goals > 0);
+      rankings.set(opponent, getRankedOpponentClubPlayerItems(items));
+    });
+    const clubs = Array.from(opponents).sort((a, b) => a.localeCompare(b, "ja"));
+    return { clubs, rankings };
   }
 
-  async function renderPlayerOpponentControls() {
-    const { opponentYearSelect, opponentSearch, opponentDatalist, opponentSelect } = getPlayerAnalysisElements();
-    renderPlayerOpponentSelectionYearOptions(opponentYearSelect);
-    const rows = await getPlayerRowsForTimeScope("opponent");
-    const choiceRows = await getPlayerOpponentChoiceRows();
-    playerAnalysisState.opponentScopeRows = rows;
-    playerAnalysisState.opponentChoiceRows = choiceRows;
-    const validKeys = new Set(choiceRows.map(getPlayerGroupKey));
-    if (!validKeys.has(playerAnalysisState.opponentPlayerKey)) {
-      const selectedGroupKey = playerAnalysisState.selectedKey
-        ? getPlayerGroupKey(findPlayerAnalysisRowByKey(playerAnalysisState.selectedKey))
-        : "";
-      playerAnalysisState.opponentPlayerKey = selectedGroupKey && validKeys.has(selectedGroupKey)
-        ? selectedGroupKey
-        : (choiceRows[0] ? getPlayerGroupKey(choiceRows[0]) : "");
+  function renderPlayerOpponentControls(clubs = []) {
+    const { opponentSearch, opponentDatalist, opponentSelect } = getPlayerAnalysisElements();
+    playerAnalysisState.opponentClubs = clubs;
+    if (!clubs.includes(playerAnalysisState.opponentClub)) {
+      playerAnalysisState.opponentClub = clubs[0] || "";
     }
     if (opponentSelect) {
-      opponentSelect.innerHTML = choiceRows.length
-        ? choiceRows.map(player => {
-          const key = getPlayerGroupKey(player);
-          return `<option value="${escapeHtml(key)}" ${key === playerAnalysisState.opponentPlayerKey ? "selected" : ""}>${escapeHtml(getPlayerSelectLabel(player))}</option>`;
-        }).join("")
+      opponentSelect.innerHTML = clubs.length
+        ? clubs.map(club => `<option value="${escapeHtml(club)}" ${club === playerAnalysisState.opponentClub ? "selected" : ""}>${escapeHtml(club)}</option>`).join("")
         : `<option value="">-</option>`;
+      opponentSelect.value = playerAnalysisState.opponentClub;
     }
     if (opponentDatalist) {
-      opponentDatalist.innerHTML = choiceRows.map(player => {
-        const key = getPlayerGroupKey(player);
-        const label = getPlayerSelectLabel(player);
-        return `<option value="${escapeHtml(label)}" data-pa-player-key="${escapeHtml(key)}"></option>`;
-      }).join("");
+      opponentDatalist.innerHTML = clubs.map(club => `<option value="${escapeHtml(club)}"></option>`).join("");
     }
     if (opponentSearch) {
-      const selected = choiceRows.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey);
-      opponentSearch.value = selected ? getPlayerSelectLabel(selected) : "";
+      opponentSearch.value = playerAnalysisState.opponentClub || "";
     }
-    return rows;
+  }
+
+  function renderOpponentClubPlayerMatchRows(item, expanded = false) {
+    const rows = Array.isArray(item && item.matchRows) ? item.matchRows : [];
+    if (!rows.length) return "";
+    return `
+      <div class="pa-opponent-player-matches" ${expanded ? "" : "hidden"}>
+        ${rows.map(({ match, goals }) => {
+          const score = `${formatPlayerNumber(match && match.target_score)}-${formatPlayerNumber(match && match.opponent_score)}`;
+          const result = match && match.result === "win" ? "○" : match && match.result === "draw" ? "△" : match && match.result === "loss" ? "●" : "-";
+          const matchId = match && match.match_id !== undefined ? String(match.match_id) : "";
+          const matchYear = Number(toIsoDate(match && match.date || "").slice(0, 4)) || "";
+          return `
+            <button type="button" class="pa-opponent-player-match" data-pa-opponent-match-detail data-pa-match-id="${escapeHtml(matchId)}" data-pa-match-year="${escapeHtml(String(matchYear))}">
+              <span>${escapeHtml(formatPlayerMatchDate(match))}</span>
+              <b>${escapeHtml(result)} ${escapeHtml(score)}</b>
+              <small>${escapeHtml([match && (match.competition || match.tournament), match && (match.target_side === "home" ? "H" : "A")].filter(Boolean).join(" / "))}</small>
+              <strong>${escapeHtml(formatPlayerNumber(goals))}得点</strong>
+            </button>
+          `;
+        }).join("")}
+      </div>
+    `;
+  }
+
+  function renderPlayerOpponentClubResult(opponent, items = []) {
+    if (!opponent) return `<div class="pa-compare-empty">対戦クラブを選択してください。</div>`;
+    if (!items.length) {
+      return `
+        <section class="pa-profile-section pa-opponent-section">
+          <div class="pa-profile-section-head">
+            <h4>${escapeHtml(opponent)}に強い選手</h4>
+          </div>
+          <div class="pa-compare-empty">このクラブへの得点データがありません。</div>
+        </section>
+      `;
+    }
+    const detailOn = !!playerAnalysisState.opponentPlayerDetail;
+    return `
+      <section class="pa-profile-section pa-opponent-section">
+        <div class="pa-profile-section-head">
+          <h4>${escapeHtml(opponent)}に強い選手</h4>
+          <button type="button" class="pa-opponent-detail-toggle ${detailOn ? "active" : ""}" data-pa-opponent-detail-toggle aria-pressed="${detailOn ? "true" : "false"}">
+            詳細 ${detailOn ? "ON" : "OFF"}
+          </button>
+        </div>
+        <div class="pa-opponent-player-card-list">
+          ${items.map(item => `
+            <article class="pa-opponent-player-card" data-pa-opponent-player-card>
+              <div class="pa-opponent-player-card-main">
+                <span class="pa-opponent-player-rank">${escapeHtml(String(item.rank))}</span>
+                <span class="pa-opponent-player-info">
+                  <small>${escapeHtml(formatPlayerList(item.positions))}</small>
+                  <button type="button" class="pa-player-link pa-opponent-player-name" data-pa-key="${escapeHtml(item.playerKey || "")}" data-pa-group-key="${escapeHtml(item.groupKey || "")}">${escapeHtml(item.playerName || "-")}</button>
+                </span>
+                <span class="pa-opponent-player-metric">
+                  <small>得点</small>
+                  <b>${escapeHtml(formatPlayerNumber(item.goals))}</b>
+                </span>
+              </div>
+              <div class="pa-opponent-player-sub">
+                <span>${escapeHtml(formatPlayerNumber(item.scoredMatches))}試合</span>
+                <span>${escapeHtml(formatPlayerRecord(item.wins, item.draws, item.losses))}</span>
+                <span>勝率 ${escapeHtml(formatPlayerRate(item.winRate))}</span>
+              </div>
+              ${renderOpponentClubPlayerMatchRows(item, detailOn)}
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    `;
   }
 
   async function renderPlayerOpponentPanel() {
     const { opponentResult } = getPlayerAnalysisElements();
-    const rows = await renderPlayerOpponentControls();
     if (!opponentResult) return;
-    const choices = playerAnalysisState.opponentChoiceRows || [];
-    const player = rows.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey)
-      || createPlayerComparisonEmptyRow(choices.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey));
-    if (!player) {
-      opponentResult.innerHTML = `<div class="pa-compare-empty">選手データがありません。</div>`;
-      return;
-    }
     const token = playerAnalysisState.opponentRenderToken + 1;
     playerAnalysisState.opponentRenderToken = token;
     opponentResult.innerHTML = `<div class="pa-profile-loading"><strong>対戦クラブ別</strong><small>集計中...</small></div>`;
-    const extras = await buildPlayerPerformanceExtras(player, player.__paYearRows || [player], playerAnalysisState.matchScope, getActivePlayerAnalysisCompetitionFilter());
+    const rows = await getPlayerRowsForTimeScope("opponents");
+    playerAnalysisState.opponentScopeRows = rows;
+    const analysis = await buildPlayerOpponentClubAnalysis(rows);
     if (playerAnalysisState.opponentRenderToken !== token) return;
-    const mode = isPlayerGoalkeeper(player) ? "defense" : "attack";
-    opponentResult.innerHTML = renderPlayerOpponentGoalSection(
-      player.player_name || "-",
-      mode === "defense" ? extras.opponentDefense : extras.opponentGoals,
-      { mode }
-    );
+    renderPlayerOpponentControls(analysis.clubs);
+    const opponent = playerAnalysisState.opponentClub;
+    opponentResult.innerHTML = renderPlayerOpponentClubResult(opponent, analysis.rankings.get(opponent) || []);
   }
 
   function getPlayerCompareSelectedPlayers() {
@@ -4043,7 +4351,120 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getPlayerCompareLabel(player) {
-    return `${player.player_name || "-"} / ${formatPlayerList(player.positions)} / ${formatPlayerList(player.numbers)}`;
+    return player.player_name || "-";
+  }
+
+  function normalizePlayerOpponentSelectionYear() {
+    const years = getPlayerAnalysisYears();
+    const selected = Number(playerAnalysisState.opponentYear);
+    if (Number.isInteger(selected) && years.includes(selected)) return String(selected);
+    const activeYear = Number(playerAnalysisState.year);
+    const fallback = Number.isInteger(activeYear) && years.includes(activeYear)
+      ? activeYear
+      : (years[years.length - 1] || PLAYER_ANALYSIS_YEAR_END);
+    playerAnalysisState.opponentYear = String(fallback);
+    return playerAnalysisState.opponentYear;
+  }
+
+  function renderPlayerOpponentSelectionYearOptions(select) {
+    if (!select) return;
+    const selectedYear = normalizePlayerOpponentSelectionYear();
+    select.innerHTML = getPlayerAnalysisYears().slice().reverse().map(year => (
+      `<option value="${escapeHtml(String(year))}" ${String(year) === selectedYear ? "selected" : ""}>${escapeHtml(`${year}`)}</option>`
+    )).join("");
+    select.value = selectedYear;
+  }
+
+  async function getPlayerOpponentChoiceRows() {
+    const year = Number(normalizePlayerOpponentSelectionYear());
+    if (!Number.isInteger(year)) return [];
+    const entry = await loadScopedPlayerAnalysisYear(year, "all", null);
+    return getPlayerSortedRows(entry.rows || []);
+  }
+
+  function normalizePlayerSearchText(value) {
+    return String(value || "")
+      .normalize("NFKC")
+      .replace(/[\s　・･.]/g, "")
+      .toLowerCase();
+  }
+
+  function findPlayerOpponentSearchMatch(value, rows = []) {
+    const text = String(value || "").trim();
+    const normalized = normalizePlayerSearchText(text);
+    if (!normalized) return null;
+    const exact = rows.find(row => {
+      const label = getPlayerSelectLabel(row);
+      return label === text
+        || String(row.player_name || "").trim() === text
+        || normalizePlayerSearchText(row.player_name) === normalized
+        || normalizePlayerSearchText(label) === normalized;
+    });
+    if (exact) return exact;
+    const partial = normalized.length >= 2
+      ? rows.filter(row => normalizePlayerSearchText(row.player_name).includes(normalized)
+        || normalizePlayerSearchText(getPlayerSelectLabel(row)).includes(normalized))
+      : [];
+    return partial.length === 1 ? partial[0] : null;
+  }
+
+  async function renderPlayerOpponentPlayerControls() {
+    const { playerOpponentYearSelect, playerOpponentSearch, playerOpponentDatalist, playerOpponentSelect } = getPlayerAnalysisElements();
+    renderPlayerOpponentSelectionYearOptions(playerOpponentYearSelect);
+    const rows = await getPlayerRowsForTimeScope("player-opponents");
+    const choiceRows = await getPlayerOpponentChoiceRows();
+    playerAnalysisState.opponentScopeRows = rows;
+    playerAnalysisState.opponentChoiceRows = choiceRows;
+    const validKeys = new Set(choiceRows.map(getPlayerGroupKey));
+    if (!validKeys.has(playerAnalysisState.opponentPlayerKey)) {
+      const selectedGroupKey = playerAnalysisState.selectedKey
+        ? getPlayerGroupKey(findPlayerAnalysisRowByKey(playerAnalysisState.selectedKey))
+        : "";
+      playerAnalysisState.opponentPlayerKey = selectedGroupKey && validKeys.has(selectedGroupKey)
+        ? selectedGroupKey
+        : (choiceRows[0] ? getPlayerGroupKey(choiceRows[0]) : "");
+    }
+    if (playerOpponentSelect) {
+      playerOpponentSelect.innerHTML = choiceRows.length
+        ? choiceRows.map(player => {
+          const key = getPlayerGroupKey(player);
+          return `<option value="${escapeHtml(key)}" ${key === playerAnalysisState.opponentPlayerKey ? "selected" : ""}>${escapeHtml(getPlayerSelectLabel(player))}</option>`;
+        }).join("")
+        : `<option value="">-</option>`;
+      playerOpponentSelect.value = playerAnalysisState.opponentPlayerKey;
+    }
+    if (playerOpponentDatalist) {
+      playerOpponentDatalist.innerHTML = choiceRows.map(player => `<option value="${escapeHtml(getPlayerSelectLabel(player))}"></option>`).join("");
+    }
+    if (playerOpponentSearch) {
+      const selected = choiceRows.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey);
+      playerOpponentSearch.value = selected ? getPlayerSelectLabel(selected) : "";
+    }
+    return rows;
+  }
+
+  async function renderPlayerOpponentPlayerPanel() {
+    const { playerOpponentResult } = getPlayerAnalysisElements();
+    const rows = await renderPlayerOpponentPlayerControls();
+    if (!playerOpponentResult) return;
+    const choices = playerAnalysisState.opponentChoiceRows || [];
+    const player = rows.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey)
+      || createPlayerComparisonEmptyRow(choices.find(row => getPlayerGroupKey(row) === playerAnalysisState.opponentPlayerKey));
+    if (!player) {
+      playerOpponentResult.innerHTML = `<div class="pa-compare-empty">選手データがありません。</div>`;
+      return;
+    }
+    const token = playerAnalysisState.playerOpponentRenderToken + 1;
+    playerAnalysisState.playerOpponentRenderToken = token;
+    playerOpponentResult.innerHTML = `<div class="pa-profile-loading"><strong>選手別対戦クラブ</strong><small>集計中...</small></div>`;
+    const extras = await buildPlayerPerformanceExtras(player, player.__paYearRows || [player], playerAnalysisState.matchScope, getActivePlayerAnalysisCompetitionFilter());
+    if (playerAnalysisState.playerOpponentRenderToken !== token) return;
+    const mode = isPlayerGoalkeeper(player) ? "defense" : "attack";
+    playerOpponentResult.innerHTML = renderPlayerOpponentGoalSection(
+      player.player_name || "-",
+      mode === "defense" ? extras.opponentDefense : extras.opponentGoals,
+      { mode }
+    );
   }
 
   function updatePlayerCompareSelection(index, key) {
@@ -4070,7 +4491,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const requiredKeys = (playerAnalysisState.compareKeys || [])
       .slice(0, index)
       .filter(Boolean);
-    const years = [Number(normalizePlayerCompareSelectionYear(index))].filter(Number.isInteger);
+    const years = getPlayerAnalysisYears();
     const entries = requiredKeys.length
       ? await getPlayerPlayedMatchEntries("all", null, years)
       : [];
@@ -4202,9 +4623,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
   }
 
+  function getPlayerFamilyNameLabel(player) {
+    const name = String((player && player.player_name) || "-").normalize("NFKC").trim();
+    if (!name || name === "-") return "-";
+    const parts = name.split(/[\s　]+/).filter(Boolean);
+    return parts[0] || name;
+  }
+
   function renderPlayerCombinationAnalysis(analysis) {
     if (!analysis || !analysis.players || analysis.players.length < 2) return "";
     const players = analysis.players;
+    const shortNames = players.map(getPlayerFamilyNameLabel);
     const patternStats = analysis.patterns || new Map();
     const title = players.length === 3
       ? `${players.map(player => player.player_name || "-").join(" × ")} トリオ分析`
@@ -4212,18 +4641,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     const rows = players.length === 3
       ? [
           ["3人同時出場", patternStats.get(7) || analysis.together],
-          [`${players[0].player_name || "-"} + ${players[1].player_name || "-"}のみ出場`, patternStats.get(3)],
-          [`${players[0].player_name || "-"} + ${players[2].player_name || "-"}のみ出場`, patternStats.get(5)],
-          [`${players[1].player_name || "-"} + ${players[2].player_name || "-"}のみ出場`, patternStats.get(6)],
-          [`${players[0].player_name || "-"}のみ出場`, patternStats.get(1)],
-          [`${players[1].player_name || "-"}のみ出場`, patternStats.get(2)],
-          [`${players[2].player_name || "-"}のみ出場`, patternStats.get(4)],
+          [`${shortNames[0]} + ${shortNames[1]}のみ出場`, patternStats.get(3)],
+          [`${shortNames[0]} + ${shortNames[2]}のみ出場`, patternStats.get(5)],
+          [`${shortNames[1]} + ${shortNames[2]}のみ出場`, patternStats.get(6)],
+          [`${shortNames[0]}のみ出場`, patternStats.get(1)],
+          [`${shortNames[1]}のみ出場`, patternStats.get(2)],
+          [`${shortNames[2]}のみ出場`, patternStats.get(4)],
           ["全員非出場", patternStats.get(0)]
         ]
       : [
           ["同時出場", patternStats.get(3) || analysis.together],
-          [`${players[0].player_name || "-"}のみ出場`, patternStats.get(1) || analysis.onlyA],
-          [`${players[1].player_name || "-"}のみ出場`, patternStats.get(2) || analysis.onlyB],
+          [`${shortNames[0]}のみ出場`, patternStats.get(1) || analysis.onlyA],
+          [`${shortNames[1]}のみ出場`, patternStats.get(2) || analysis.onlyB],
           ["両方非出場", patternStats.get(0) || analysis.neither]
         ];
     return `
@@ -4982,6 +5411,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     return true;
   }
 
+  function renderOpponentClubMatchFallback(match) {
+    const result = match && match.result === "win" ? "○" : match && match.result === "draw" ? "△" : match && match.result === "loss" ? "●" : "-";
+    const score = `${formatPlayerNumber(match && match.target_score)}-${formatPlayerNumber(match && match.opponent_score)}`;
+    const body = `
+      <section class="pa-profile-section">
+        <div class="pa-match-detail-summary">
+          <span>${escapeHtml(formatPlayerMatchDate(match))}</span>
+          <strong>${escapeHtml(result)} ${escapeHtml(score)}</strong>
+          <small>${escapeHtml([match && (match.competition || match.tournament), match && match.section, match && (match.target_side === "home" ? "HOME" : "AWAY")].filter(Boolean).join(" / "))}</small>
+        </div>
+      </section>
+    `;
+    return renderPlayerAnalysisModalShell("MATCH DETAIL", match && match.opponent ? `vs ${match.opponent}` : "試合詳細", body);
+  }
+
+  async function openOpponentClubMatchResultDetail(matchId, matchYear) {
+    const year = Number(matchYear);
+    if (!matchId || !Number.isInteger(year)) return;
+    const dataset = await loadPlayerAnalysisDatasetYear(year);
+    const match = (dataset.matches || []).find(item => String(item.match_id) === String(matchId));
+    if (!match) return;
+    const opened = await openScheduleMatchFromPlayerAnalysis(match);
+    if (!opened) {
+      setPlayerAnalysisModalContent(renderOpponentClubMatchFallback(match));
+    }
+  }
+
   function renderPlayerProfileYearTable(yearRows) {
     if (!yearRows.length) {
       return `<div class="pa-muted" style="padding:16px;text-align:center;">データがありません</div>`;
@@ -5364,6 +5820,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderPlayerAnalysisTable();
     await renderPlayerComparisonPanel();
     if (playerAnalysisState.activeScreen === "opponents") await renderPlayerOpponentPanel();
+    if (playerAnalysisState.activeScreen === "player-opponents") await renderPlayerOpponentPlayerPanel();
     setPlayerAnalysisScreen(playerAnalysisState.activeScreen);
     playerAnalysisState.loadedOnce = true;
   }
@@ -5448,10 +5905,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
     }
     if (els.opponentSelect) {
-      els.opponentSelect.onchange = () => {
-        playerAnalysisState.opponentPlayerKey = els.opponentSelect.value || "";
+      const selectOpponentClub = () => {
+        playerAnalysisState.opponentClub = els.opponentSelect.value || "";
+        playerAnalysisState.opponentPlayerDetail = false;
         renderPlayerOpponentPanel();
       };
+      els.opponentSelect.onchange = selectOpponentClub;
+      els.opponentSelect.oninput = selectOpponentClub;
     }
     if (els.opponentYearSelect) {
       els.opponentYearSelect.onchange = () => {
@@ -5463,17 +5923,49 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (els.opponentSearch) {
       const selectOpponentFromSearch = () => {
         const value = String(els.opponentSearch.value || "").trim();
-        const rows = playerAnalysisState.opponentChoiceRows || [];
-        const exact = rows.find(row => getPlayerSelectLabel(row) === value || String(row.player_name || "").trim() === value);
-        if (!exact) return;
-        const key = getPlayerGroupKey(exact);
-        if (!key || key === playerAnalysisState.opponentPlayerKey) return;
-        playerAnalysisState.opponentPlayerKey = key;
-        if (els.opponentSelect) els.opponentSelect.value = key;
+        const clubs = playerAnalysisState.opponentClubs || [];
+        const normalized = normalizeOpponentSearchText(value);
+        const exact = clubs.find(club => club === value || normalizeOpponentSearchText(club) === normalized);
+        const partial = !exact && normalized.length >= 2
+          ? clubs.filter(club => normalizeOpponentSearchText(club).includes(normalized))
+          : [];
+        const selected = exact || (partial.length === 1 ? partial[0] : "");
+        if (!selected || selected === playerAnalysisState.opponentClub) return;
+        playerAnalysisState.opponentClub = selected;
+        playerAnalysisState.opponentPlayerDetail = false;
+        if (els.opponentSelect) els.opponentSelect.value = selected;
         renderPlayerOpponentPanel();
       };
       els.opponentSearch.onchange = selectOpponentFromSearch;
       els.opponentSearch.oninput = selectOpponentFromSearch;
+    }
+    if (els.playerOpponentSelect) {
+      const selectPlayerOpponent = () => {
+        playerAnalysisState.opponentPlayerKey = els.playerOpponentSelect.value || "";
+        renderPlayerOpponentPlayerPanel();
+      };
+      els.playerOpponentSelect.onchange = selectPlayerOpponent;
+      els.playerOpponentSelect.oninput = selectPlayerOpponent;
+    }
+    if (els.playerOpponentYearSelect) {
+      els.playerOpponentYearSelect.onchange = () => {
+        playerAnalysisState.opponentYear = els.playerOpponentYearSelect.value || "";
+        playerAnalysisState.opponentPlayerKey = "";
+        renderPlayerOpponentPlayerPanel();
+      };
+    }
+    if (els.playerOpponentSearch) {
+      const selectPlayerOpponentFromSearch = () => {
+        const match = findPlayerOpponentSearchMatch(els.playerOpponentSearch.value, playerAnalysisState.opponentChoiceRows || []);
+        if (!match) return;
+        const key = getPlayerGroupKey(match);
+        if (!key || key === playerAnalysisState.opponentPlayerKey) return;
+        playerAnalysisState.opponentPlayerKey = key;
+        if (els.playerOpponentSelect) els.playerOpponentSelect.value = key;
+        renderPlayerOpponentPlayerPanel();
+      };
+      els.playerOpponentSearch.onchange = selectPlayerOpponentFromSearch;
+      els.playerOpponentSearch.oninput = selectPlayerOpponentFromSearch;
     }
     els.compareYearSelects.forEach(select => {
       select.onchange = () => {
@@ -5487,8 +5979,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderPlayerComparisonPanel();
       };
     });
-    if (els.opponentPanel) {
-      els.opponentPanel.onclick = (event) => {
+    [els.opponentPanel, els.playerOpponentPanel].filter(Boolean).forEach(panel => {
+      panel.onclick = (event) => {
+        const detailToggle = event.target.closest("[data-pa-opponent-detail-toggle]");
+        if (detailToggle) {
+          playerAnalysisState.opponentPlayerDetail = !playerAnalysisState.opponentPlayerDetail;
+          renderPlayerOpponentPanel();
+          return;
+        }
+        const matchDetailButton = event.target.closest("[data-pa-opponent-match-detail]");
+        if (matchDetailButton) {
+          openOpponentClubMatchResultDetail(matchDetailButton.dataset.paMatchId || "", matchDetailButton.dataset.paMatchYear || "")
+            .catch(error => console.warn("Failed to open opponent match detail", error));
+          return;
+        }
+        const profileButton = event.target.closest(".pa-player-link");
+        if (profileButton) {
+          const key = profileButton.dataset.paKey;
+          const groupKey = profileButton.dataset.paGroupKey;
+          const player = (playerAnalysisState.opponentScopeRows || []).find(row => getPlayerAnalysisKey(row) === key)
+            || (playerAnalysisState.opponentScopeRows || []).find(row => groupKey && getPlayerGroupKey(row) === groupKey);
+          if (player) openPlayerAnalysisProfile(player);
+          return;
+        }
         const button = event.target.closest("[data-pa-opponent-toggle]");
         if (!button) return;
         const section = button.closest("[data-pa-opponent-section]");
@@ -5496,7 +6009,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         section.classList.toggle("is-expanded");
         button.textContent = section.classList.contains("is-expanded") ? "閉じる" : "すべて表示";
       };
-    }
+    });
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") setPlayerAnalysisFilterPanel(false);
     });

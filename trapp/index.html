@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260609player-analysis4">
+  <link rel="stylesheet" href="style.css?v=20260609player-analysis10">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./data/assets/emblems/アルビレックス新潟.png">
@@ -1085,21 +1085,36 @@ We can't help falling in love with you
             </div>
           </div>
           <div class="pa-opponent-picker">
-            <label class="pa-compare-select-field pa-opponent-year-field" for="pa-opponent-selection-year">
-              <span>選択年度</span>
-              <select id="pa-opponent-selection-year" autocomplete="off"></select>
+            <label class="pa-compare-select-field pa-opponent-search-field" for="pa-opponent-club-search">
+              <span>対戦クラブ検索</span>
+              <input id="pa-opponent-club-search" type="search" list="pa-opponent-club-suggestions" placeholder="クラブ名を入力" autocomplete="off">
+              <datalist id="pa-opponent-club-suggestions"></datalist>
             </label>
-            <label class="pa-compare-select-field pa-opponent-search-field" for="pa-opponent-player-search">
-              <span>選手名</span>
-              <input id="pa-opponent-player-search" type="search" list="pa-opponent-player-suggestions" placeholder="名前を入力" autocomplete="off">
-              <datalist id="pa-opponent-player-suggestions"></datalist>
-            </label>
-            <label class="pa-compare-select-field pa-opponent-select-field" for="pa-opponent-player-select">
-              <span>一覧</span>
-              <select id="pa-opponent-player-select"></select>
+            <label class="pa-compare-select-field pa-opponent-select-field" for="pa-opponent-club-select">
+              <span>対戦クラブ</span>
+              <select id="pa-opponent-club-select"></select>
             </label>
           </div>
           <div id="pa-opponent-result" class="pa-compare-result" aria-live="polite"></div>
+        </section>
+
+        <section id="pa-player-opponent-panel" class="pa-screen pa-opponent-panel" data-pa-screen="player-opponents" aria-label="選手別対戦クラブ分析">
+          <div class="pa-compare-head">
+            <div>
+              <span class="pa-kicker">PLAYER OPPONENT</span>
+              <h3>選手別対戦クラブ</h3>
+            </div>
+          </div>
+          <div class="pa-compare-controls pa-player-opponent-controls">
+            <label class="pa-compare-select-field" for="pa-player-opponent-select">
+              <span class="pa-compare-field-top">
+                <span>選手</span>
+                <select id="pa-player-opponent-selection-year" class="pa-compare-year-select" autocomplete="off"></select>
+              </span>
+              <select id="pa-player-opponent-select" autocomplete="off"></select>
+            </label>
+          </div>
+          <div id="pa-player-opponent-result" class="pa-compare-result" aria-live="polite"></div>
         </section>
 
         <nav id="pa-bottom-tabs" class="pa-bottom-tabs" aria-label="選手分析メニュー">
@@ -1114,6 +1129,10 @@ We can't help falling in love with you
           <button type="button" class="pa-bottom-tab" data-pa-screen-target="opponents">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-4.4 7-11a7 7 0 0 0-14 0c0 6.6 7 11 7 11z"/><path d="M9 10h6"/></svg>
             <span>対戦クラブ別</span>
+          </button>
+          <button type="button" class="pa-bottom-tab" data-pa-screen-target="player-opponents">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M19 8v6M16 11h6"/></svg>
+            <span>選手別</span>
           </button>
         </nav>
       </section>
@@ -1197,7 +1216,7 @@ We can't help falling in love with you
 
 
 <script src="schedule/schedule.js?v=20260601results2"></script>
-  <script src="script.js?v=20260609player-analysis4"></script>
+  <script src="script.js?v=20260609player-analysis10"></script>
 
 </body>
 </html>
