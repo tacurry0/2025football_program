@@ -171,6 +171,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const playerAnalysisMonthlyMetaCache = new Map();
   const playerAnalysisSpecialAvailabilityCache = new Map();
   const playerAnalysisPlayedSetsCache = new Map();
+  const playerChantAvailabilityCache = new Map();
+  const PLAYER_CHANT_AUDIO_DIR = "./data/assets/chants";
+  const PLAYER_CHANT_MAX_INDEX = 20;
   const playerAnalysisState = {
     selectedClub: "niigata",
     year: 2026,
@@ -1008,6 +1011,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       playerOpponentDatalist: document.getElementById("pa-player-opponent-suggestions"),
       playerOpponentSelect: document.getElementById("pa-player-opponent-select"),
       playerOpponentResult: document.getElementById("pa-player-opponent-result"),
+      scrollTopFab: document.getElementById("pa-scroll-top-fab"),
       mobileList: document.getElementById("pa-mobile-list"),
       detail: document.getElementById("pa-detail-card")
     };
@@ -1024,6 +1028,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       els.filterBackdrop.classList.toggle("active", active);
     }
     document.body.classList.toggle("pa-filter-open", active);
+  }
+
+  function updatePlayerAnalysisScrollTopButton() {
+    const { scrollTopFab } = getPlayerAnalysisElements();
+    if (!scrollTopFab) return;
+    const visible = currentMode === "player-analysis" && playerAnalysisView && playerAnalysisView.scrollTop > 80;
+    scrollTopFab.hidden = !visible;
+    scrollTopFab.classList.toggle("visible", visible);
+  }
+
+  function scrollPlayerAnalysisToTop(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    if (playerAnalysisView) {
+      try {
+        playerAnalysisView.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (error) {
+        playerAnalysisView.scrollTop = 0;
+      }
+      playerAnalysisView.scrollTop = 0;
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+    requestAnimationFrame(updatePlayerAnalysisScrollTopButton);
+    setTimeout(updatePlayerAnalysisScrollTopButton, 320);
   }
 
   function hasPlayerValue(value) {
@@ -1423,6 +1456,215 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (img.naturalWidth > 0) show();
         else tryNextSource();
       }
+    });
+  }
+
+  function getPlayerChantNameCandidates(playerName, player = null) {
+    const identity = player ? getPlayerCanonicalIdentity(player, getPlayerYearValue(player)) : null;
+    const rawNames = [
+      playerName,
+      player && player.player_name,
+      player && player.player_key,
+      identity && identity.name,
+      identity && identity.key
+    ];
+    if (playerName) rawNames.push(...getPlayerImageAliasNames(playerName, player));
+    return Array.from(new Set(rawNames
+      .filter(Boolean)
+      .flatMap(name => {
+        const baseName = normalizePlayerImageName(name);
+        if (!baseName) return [];
+        return [
+          baseName,
+          baseName.replace(/\s*[・･]\s*/g, "・").replace(/\s+/g, " ").trim(),
+          baseName.replace(/\s*[・･]\s*/g, " ").replace(/\s+/g, " ").trim(),
+          normalizePlayerIdentityText(baseName)
+        ];
+      })
+      .map(name => String(name || "").trim())
+      .filter(Boolean)));
+  }
+
+  function renderPlayerChantAudioSlot(playerName, player = null) {
+    const candidates = getPlayerChantNameCandidates(playerName, player);
+    if (!candidates.length) return "";
+    return `<div class="player-chant-slot" data-player-chant-slot data-player-chant-candidates="${escapeHtml(candidates.join("|"))}" hidden></div>`;
+  }
+
+  function getPlayerChantAudioUrl(baseName, type, index) {
+    const suffix = type === "call" ? `_コール${index}` : `_${index}`;
+    return `${PLAYER_CHANT_AUDIO_DIR}/${encodeURIComponent(`${baseName}${suffix}`)}.mp3`;
+  }
+
+  async function playerChantAssetExists(url) {
+    try {
+      const response = await fetch(url, { method: "HEAD", cache: "no-store" });
+      if (response.ok) return true;
+      if (response.status !== 405 && response.status !== 501) return false;
+    } catch (error) {
+      return false;
+    }
+
+    try {
+      const response = await fetch(url, { headers: { Range: "bytes=0-0" }, cache: "no-store" });
+      return response.ok || response.status === 206;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async function findPlayerChantTrack(candidates, type, index) {
+    for (const candidate of candidates) {
+      const url = getPlayerChantAudioUrl(candidate, type, index);
+      if (await playerChantAssetExists(url)) {
+        return { type, index, url };
+      }
+    }
+    return null;
+  }
+
+  async function findPlayerChantTracksByType(candidates, type) {
+    const tracks = [];
+    for (let index = 1; index <= PLAYER_CHANT_MAX_INDEX; index += 1) {
+      const track = await findPlayerChantTrack(candidates, type, index);
+      if (!track) break;
+      tracks.push(track);
+    }
+    return tracks;
+  }
+
+  function loadPlayerChantTracks(candidates) {
+    const cleanCandidates = Array.from(new Set((candidates || []).map(name => String(name || "").trim()).filter(Boolean)));
+    const cacheKey = cleanCandidates.join("|");
+    if (!cacheKey) return Promise.resolve({ calls: [], chants: [] });
+    if (!playerChantAvailabilityCache.has(cacheKey)) {
+      playerChantAvailabilityCache.set(cacheKey, (async () => {
+        const [calls, chants] = await Promise.all([
+          findPlayerChantTracksByType(cleanCandidates, "call"),
+          findPlayerChantTracksByType(cleanCandidates, "chant")
+        ]);
+        return {
+          calls,
+          chants
+        };
+      })());
+    }
+    return playerChantAvailabilityCache.get(cacheKey);
+  }
+
+  function renderPlayerChantTrackGroup(title, tracks) {
+    if (!tracks.length) return "";
+    return `
+      <div class="player-chant-group">
+        <h3>${escapeHtml(title)}</h3>
+        <div class="player-chant-list">
+          ${tracks.map(track => {
+            const label = `${title}${track.index}`;
+            return `
+              <div class="player-chant-track">
+                <button type="button" class="player-chant-toggle" data-player-chant-toggle aria-expanded="false">
+                  <span>${escapeHtml(label)}</span>
+                  <b aria-hidden="true">+</b>
+                </button>
+                <div class="player-chant-panel" hidden>
+                  <audio controls preload="none" src="${escapeHtml(track.url)}" data-player-chant-audio aria-label="${escapeHtml(label)}"></audio>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderPlayerChantAudioContent(groups) {
+    const calls = groups && Array.isArray(groups.calls) ? groups.calls : [];
+    const chants = groups && Array.isArray(groups.chants) ? groups.chants : [];
+    const count = calls.length + chants.length;
+    if (!count) return "";
+    return `
+      <section class="player-chant-player" aria-label="コールとチャント">
+        <div class="player-chant-head">
+          <span>CALL & CHANT</span>
+          <strong>コール / チャント</strong>
+        </div>
+        ${renderPlayerChantTrackGroup("コール", calls)}
+        ${renderPlayerChantTrackGroup("チャント", chants)}
+      </section>
+    `;
+  }
+
+  function bindPlayerChantAudios(root = document) {
+    if (!root) return;
+    root.querySelectorAll("[data-player-chant-toggle]").forEach(button => {
+      if (button.dataset.playerChantToggleBound === "true") return;
+      button.dataset.playerChantToggleBound = "true";
+      button.addEventListener("click", () => {
+        const track = button.closest(".player-chant-track");
+        const player = button.closest(".player-chant-player");
+        const panel = track && track.querySelector(".player-chant-panel");
+        const nextOpen = !track?.classList.contains("active");
+        if (!track || !panel || !player) return;
+        player.querySelectorAll(".player-chant-track.active").forEach(openTrack => {
+          if (openTrack === track) return;
+          openTrack.classList.remove("active");
+          const openButton = openTrack.querySelector("[data-player-chant-toggle]");
+          const openPanel = openTrack.querySelector(".player-chant-panel");
+          const openIcon = openButton && openButton.querySelector("b");
+          const openAudio = openTrack.querySelector("audio[data-player-chant-audio]");
+          if (openButton) openButton.setAttribute("aria-expanded", "false");
+          if (openIcon) openIcon.textContent = "+";
+          if (openPanel) openPanel.hidden = true;
+          if (openAudio) openAudio.pause();
+        });
+        track.classList.toggle("active", nextOpen);
+        panel.hidden = !nextOpen;
+        button.setAttribute("aria-expanded", nextOpen ? "true" : "false");
+        const icon = button.querySelector("b");
+        if (icon) icon.textContent = nextOpen ? "-" : "+";
+        if (!nextOpen) {
+          const audio = track.querySelector("audio[data-player-chant-audio]");
+          if (audio) audio.pause();
+        }
+      });
+    });
+    root.querySelectorAll("audio[data-player-chant-audio]").forEach(audio => {
+      if (audio.dataset.playerChantBound === "true") return;
+      audio.dataset.playerChantBound = "true";
+      audio.addEventListener("play", () => {
+        document.querySelectorAll("audio[data-player-chant-audio]").forEach(other => {
+          if (other !== audio) other.pause();
+        });
+      });
+    });
+  }
+
+  function setupPlayerChantAudio(root = document) {
+    if (!root) return;
+    root.querySelectorAll("[data-player-chant-slot]").forEach(slot => {
+      const candidateKey = String(slot.dataset.playerChantCandidates || "");
+      if (!candidateKey || slot.dataset.playerChantHydrated === candidateKey) return;
+      slot.dataset.playerChantHydrated = candidateKey;
+      const candidates = candidateKey.split("|").map(name => name.trim()).filter(Boolean);
+      loadPlayerChantTracks(candidates)
+        .then(groups => {
+          if (!slot.isConnected || slot.dataset.playerChantHydrated !== candidateKey) return;
+          const content = renderPlayerChantAudioContent(groups);
+          if (!content) {
+            slot.hidden = true;
+            slot.innerHTML = "";
+            return;
+          }
+          slot.innerHTML = content;
+          slot.hidden = false;
+          bindPlayerChantAudios(slot);
+        })
+        .catch(error => {
+          console.warn("Failed to load player chant audio", error);
+          if (!slot.isConnected || slot.dataset.playerChantHydrated !== candidateKey) return;
+          slot.hidden = true;
+          slot.innerHTML = "";
+        });
     });
   }
 
@@ -3923,12 +4165,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { backdrop, modal } = ensurePlayerAnalysisModal();
     modal.innerHTML = html;
     setupPlayerPhotos(modal);
+    setupPlayerChantAudio(modal);
     backdrop.classList.add("active");
     modal.classList.add("active");
     document.body.classList.add("pa-modal-open");
   }
 
   function renderPlayerAnalysisModalShell(kicker, title, body, metaHtml = "") {
+    const metaClass = metaHtml && String(metaHtml).includes("profile-number") ? " profile" : "";
     return `
       <div class="pa-modal-head">
         <div class="pa-modal-title">
@@ -3937,7 +4181,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <button type="button" class="pa-modal-close" data-pa-modal-close aria-label="閉じる">×</button>
       </div>
-      ${metaHtml ? `<div class="pa-modal-meta">${metaHtml}</div>` : ""}
+      ${metaHtml ? `<div class="pa-modal-meta${metaClass}">${metaHtml}</div>` : ""}
       <div class="pa-modal-body">${body}</div>
     `;
   }
@@ -3999,6 +4243,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (nextScreen === "compare") renderPlayerComparisonPanel();
     if (nextScreen === "opponents") renderPlayerOpponentPanel();
     if (nextScreen === "player-opponents") renderPlayerOpponentPlayerPanel();
+    updatePlayerAnalysisScrollTopButton();
   }
 
   function getPlayerSortedRows(rows = playerAnalysisState.data || []) {
@@ -5159,15 +5404,26 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderPlayerAnalysisCategoryChecklist() {
     const selected = new Set(getActivePlayerAnalysisModalCategories());
     const options = ["league", "cup", "special"];
+    const selectedLabel = options
+      .filter(category => selected.has(category))
+      .map(getPlayerAnalysisCategoryLabel)
+      .join(" / ") || "未選択";
     return `
-      <div class="pa-category-filter" aria-label="試合カテゴリの選択">
-        ${options.map(category => `
-          <label class="pa-category-check">
-            <input type="checkbox" data-pa-category="${escapeHtml(category)}" ${selected.has(category) ? "checked" : ""}>
-            <span>${escapeHtml(getPlayerAnalysisCategoryLabel(category))}</span>
-          </label>
-        `).join("")}
-      </div>
+      <details class="pa-category-filter" aria-label="試合カテゴリの選択">
+        <summary>
+          <span>対象試合</span>
+          <strong>${escapeHtml(selectedLabel)}</strong>
+          <b aria-hidden="true">+</b>
+        </summary>
+        <div class="pa-category-options">
+          ${options.map(category => `
+            <label class="pa-category-check">
+              <input type="checkbox" data-pa-category="${escapeHtml(category)}" ${selected.has(category) ? "checked" : ""}>
+              <span>${escapeHtml(getPlayerAnalysisCategoryLabel(category))}</span>
+            </label>
+          `).join("")}
+        </div>
+      </details>
     `;
   }
 
@@ -5499,7 +5755,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderPlayerAnalysisProfile(player, yearRows, insights = {}) {
     const aggregate = aggregatePlayerAnalysisRows(yearRows)[0] || player;
     const stateAggregate = (playerAnalysisState.data || []).find(row => getPlayerGroupKey(row) === getPlayerGroupKey(aggregate));
-    if (stateAggregate) {
+    const shouldUseStateMetrics = stateAggregate
+      && yearRows.length <= 1
+      && (toPlayerNumber(stateAggregate.played_matches) || 0) === (toPlayerNumber(aggregate.played_matches) || 0)
+      && (toPlayerNumber(stateAggregate.goals) || 0) === (toPlayerNumber(aggregate.goals) || 0);
+    if (shouldUseStateMetrics) {
       aggregate.__paImpact = stateAggregate.__paImpact;
       aggregate.__paRankingMetrics = stateAggregate.__paRankingMetrics;
     }
@@ -5508,19 +5768,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const totalOpponentMode = isPlayerGoalkeeper(aggregate) || isPlayerGoalkeeper(player) ? "defense" : "attack";
     const currentOpponentMode = isPlayerGoalkeeper(player) ? "defense" : "attack";
     const yearLabel = getPlayerAnalysisTimeLabel();
-    const scopeLabel = getPlayerAnalysisScopeLabel(getActivePlayerAnalysisModalScope());
     const showCurrentTab = playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all";
     const allowedTabs = showCurrentTab ? ["total", "yearly", "current"] : ["total", "yearly"];
     const activeTab = allowedTabs.includes(playerAnalysisState.profileTab) ? playerAnalysisState.profileTab : "total";
 
     const meta = `
-      ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal", aggregate)}
-      <span class="pa-chip">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
-      <span class="pa-chip">${escapeHtml(getPlayerSeasonSpan(yearRows))}</span>
-      <span class="pa-chip scope">${escapeHtml(scopeLabel)}</span>
+      ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal profile-number", aggregate)}
+      <span class="pa-chip profile-position">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
     `;
     const body = `
         ${renderPlayerPhoto(aggregate.player_name || player.player_name || "", playerAnalysisState.selectedClub, "pa-player-photo", aggregate)}
+      ${renderPlayerChantAudioSlot(aggregate.player_name || player.player_name || "", aggregate)}
       ${renderPlayerAnalysisCategoryChecklist()}
       <div class="pa-profile-tabs" role="tablist" aria-label="選手データ表示切り替え">
         <button type="button" class="pa-profile-tab" data-pa-profile-tab="total" role="tab">累計</button>
@@ -5564,16 +5822,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     ));
     const modalScope = getActivePlayerAnalysisModalScope();
     const activeYears = new Set(getPlayerAnalysisTimeYears());
-    const yearRows = (await getPlayerAnalysisYearRowsForPlayer(player, modalScope, null))
-      .filter(row => !activeYears.size || activeYears.has(getPlayerYearValue(row)));
+    const yearRows = await getPlayerAnalysisYearRowsForPlayer(player, modalScope, null);
+    const currentRows = yearRows.filter(row => !activeYears.size || activeYears.has(getPlayerYearValue(row)));
+    const currentPlayer = currentRows.length === 1 ? currentRows[0] : (currentRows.length ? aggregatePlayerAnalysisRows(currentRows)[0] || player : player);
     const insights = {
       total: await buildPlayerPerformanceExtras(player, yearRows, modalScope, null),
       current: (playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all")
-        ? await buildPlayerPerformanceExtras(player, [player], modalScope, null)
+        ? await buildPlayerPerformanceExtras(player, currentRows.length ? currentRows : [player], modalScope, null)
         : null
     };
     playerAnalysisState.modalYearRows = yearRows;
-    renderPlayerAnalysisProfile(player, yearRows, insights);
+    renderPlayerAnalysisProfile(currentPlayer, yearRows, insights);
   }
 
   async function refreshPlayerAnalysisModalForCategories() {
@@ -5616,6 +5875,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     detail.classList.add("active");
     detail.innerHTML = `
       ${renderPlayerPhoto(player.player_name || "", playerAnalysisState.selectedClub, "pa-detail-photo", player)}
+      ${renderPlayerChantAudioSlot(player.player_name || "", player)}
       <div class="pa-detail-header">
         <div>
           <span class="pa-kicker">PLAYER DETAIL</span>
@@ -5629,6 +5889,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ${renderPlayerAnalysisDetailSections(player)}
     `;
     setupPlayerPhotos(detail);
+    setupPlayerChantAudio(detail);
   }
 
   async function applyPlayerAnalysisFilters() {
@@ -5897,6 +6158,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (els.filterFab) els.filterFab.onclick = () => setPlayerAnalysisFilterPanel(true);
     if (els.filterClose) els.filterClose.onclick = () => setPlayerAnalysisFilterPanel(false);
     if (els.filterBackdrop) els.filterBackdrop.onclick = () => setPlayerAnalysisFilterPanel(false);
+    if (els.scrollTopFab) {
+      els.scrollTopFab.onclick = scrollPlayerAnalysisToTop;
+      els.scrollTopFab.addEventListener("click", scrollPlayerAnalysisToTop);
+    }
+    if (playerAnalysisView) {
+      playerAnalysisView.addEventListener("scroll", updatePlayerAnalysisScrollTopButton, { passive: true });
+      updatePlayerAnalysisScrollTopButton();
+    }
     if (els.bottomTabs) {
       els.bottomTabs.onclick = (event) => {
         const button = event.target.closest("[data-pa-screen-target]");
@@ -6318,6 +6587,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (playerAnalysisView) playerAnalysisView.className = mode === "player-analysis" ? "active-view" : "hidden-view";
     if (visionView) visionView.className = mode === "vision" ? "active-view" : "hidden-view";
     if (mode !== "player-analysis") setPlayerAnalysisFilterPanel(false);
+    updatePlayerAnalysisScrollTopButton();
 
     if (mode === "calendar") {
       renderCalendar();
@@ -6333,6 +6603,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       } else {
         renderPlayerAnalysisTable();
       }
+      requestAnimationFrame(updatePlayerAnalysisScrollTopButton);
     }
     if (mode === "vision") ensureVisionFrame();
     if (mode === "feed") {
@@ -7275,6 +7546,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     sheetContent.innerHTML = `
       <section class="u-player-profile">
         ${renderPlayerPhoto(profile.playerName, club, "u-player-photo")}
+        ${renderPlayerChantAudioSlot(profile.playerName)}
         <button type="button" class="u-player-back">← 試合詳細へ戻る</button>
         <div class="u-player-header">
           <span>${escapeHtml(clubInfo.englishName)}</span>
@@ -7300,6 +7572,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
 
     setupPlayerPhotos(sheetContent);
+    setupPlayerChantAudio(sheetContent);
     const backBtn = sheetContent.querySelector(".u-player-back");
     if (backBtn && sourceMatch) backBtn.onclick = () => openDetailSheet(sourceMatch);
     sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
