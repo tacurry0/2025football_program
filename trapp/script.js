@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     available: []
   };
   const SCHEDULE_COMPETITION_FILTER_OPTIONS = ["リーグ", "カップ", "その他"];
-  const PLAYER_ANALYSIS_YEAR_START = 1999;
+  const PLAYER_ANALYSIS_YEAR_START = 1994;
   const PLAYER_ANALYSIS_YEAR_END = 2026;
   const PLAYER_ANALYSIS_CLUBS = {
     niigata: {
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       name: "アルビレックス新潟",
       shortName: "新潟",
       englishName: "ALBIREX NIIGATA",
-      yearStart: 1999
+      yearStart: 1994
     },
     kumamoto: {
       key: "kumamoto",
@@ -1078,6 +1078,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     return text || "-";
   }
 
+  function normalizePlayerNumberValues(value) {
+    const raw = Array.isArray(value)
+      ? value
+      : String(value || "").split(/[、,\/]/);
+    return raw.map(number => String(number || "").trim()).filter(Boolean);
+  }
+
   function formatPlayerNumber(value) {
     const n = toPlayerNumber(value);
     return n === null ? "-" : String(n);
@@ -1321,6 +1328,417 @@ document.addEventListener("DOMContentLoaded", async () => {
     "大西遼太郎": "RYOTARO ONISHI"
   };
 
+  const PLAYER_ENGLISH_NAME_AUTO_OVERRIDES = {
+  "イヨハ理ヘンリー": "OSAMU HENRY IYOHA",
+  "三島康平": "KOHEI MISHIMA",
+  "三戸舜介": "SHUNSUKE MITO",
+  "三田光": "HIKARU MITA",
+  "三門雄大": "YTA MIKADO",
+  "三鬼海": "UMI SANKI",
+  "上原拓郎": "TAKUROU UEHARA",
+  "上村健一": "KEN'ICHI KAMIMURA",
+  "上里一将": "ISSHOU UESATO",
+  "上野優作": "YUUSAKU UENO",
+  "中原貴之": "TAKAYUKI NAKAHARA",
+  "中原輝": "TERU NAKAHARA",
+  "中山悟志": "SATOSHI NAKAYAMA",
+  "中山雄登": "OSU TOU NAKAYAMA",
+  "中島元彦": "MOTOHIKO NAKAJIMA",
+  "中村太亮": "TA AKIRA NAKAMURA",
+  "中村幸聖": "SACHI HIJIRI NAKAMURA",
+  "中野圭一郎": "KEIICHIROU NAKANO",
+  "中野洋司": "YOUJI NAKANO",
+  "丸山壮大": "SOUDAI MARUYAMA",
+  "丸山嵩大": "KASA DAI MARUYAMA",
+  "丸山皓己": "KOU ONORE MARUYAMA",
+  "丸山良明": "YOSHIAKI MARUYAMA",
+  "五十嵐新": "SHIN IGARASHI",
+  "五領淳樹": "ATSUSHI KI GO RYOU",
+  "井上公平": "KOUHEI INOUE",
+  "井畑翔太郎": "SHOTARO IHATA",
+  "仲間隼斗": "HAYATO NAKAMA",
+  "伊東俊": "SHUN ITO",
+  "伊藤優汰": "YUTA ITO",
+  "伊藤涼太郎": "RYOTARO ITO",
+  "似鳥康太": "KOTA NITADORI",
+  "佐藤優平": "YUHEI SATO",
+  "佐藤慎之介": "SHINNOSUKE SATO",
+  "佐藤昭大": "AKIHIRO SATO",
+  "佐野翼": "TSUBASA SANO",
+  "光永祐也": "YUUYA MITSUNAGA",
+  "八久保颯": "SATSU HACHI KUBO",
+  "六車拓也": "TAKUYA MUGURUMA",
+  "内山圭": "KEI UCHIYAMA",
+  "内田潤": "JUN UCHIDA",
+  "前田信弘": "NOBUHIRO MAEDA",
+  "前野貴徳": "TAKANORI MAENO",
+  "加藤健太": "KENTA KATOU",
+  "加藤大": "DAI KATOU",
+  "加藤悠馬": "YUUMA KATOU",
+  "加藤竜二": "RYUUJI KATOU",
+  "北嶋秀朗": "HIDEO KITAJIMA",
+  "北川佳男": "YOSHIO KITAGAWA",
+  "北村知也": "TOMOYA KITAMURA",
+  "北野貴之": "TAKAYUKI KITANO",
+  "千代反田充": "JUU CHIYO TANDA",
+  "千葉和彦": "KAZUHIKO CHIBA",
+  "千葉真也": "SHINYA CHIBA",
+  "南雄太": "YUUTA MINAMI",
+  "原一樹": "KAZUKI HARA",
+  "原田拓": "TAKU HARADA",
+  "原裕太郎": "YUUTAROU HARA",
+  "原輝綺": "TERU KI HARA",
+  "古長谷千博": "CHIHIRO FURUNAGA TANI",
+  "吉井孝輔": "TAKASUKE YOSHII",
+  "吉原慎也": "SHINYA YOSHIHARA",
+  "吉原秀祐": "SHUU SUKE YOSHIHARA",
+  "吉田光希": "MIKI YOSHIDA",
+  "吉田智志": "SATOSHI YOSHIDA",
+  "唐山翔自": "SHOU JI TOUZAN",
+  "喜名哲裕": "AKIHIRO KI MEI",
+  "喜多靖": "YASUSHI KITA",
+  "園田拓也": "TAKUYA SONODA",
+  "土信田悠生": "YUU NAMA TSUCHI SHINODA",
+  "坂井大将": "TAISHOU SAKAI",
+  "坂元大希": "TAIKI SAKAMOTO",
+  "坂本亘基": "KOU MOTO SAKAMOTO",
+  "坂本將貴": "MASAKI SAKAMOTO",
+  "坂本広大": "KOUDAI SAKAMOTO",
+  "坂田良太": "RYOUTA SAKATA",
+  "坪内秀介": "HIDEYUKI TSUBOUCHI",
+  "城定信次": "SHINJI SHIRO TEI",
+  "堀米勇輝": "YUUKI HORIGOME",
+  "堀米悠斗": "YUUTO HORIGOME",
+  "堂森勝利": "SHOURI DOU MORI",
+  "堤俊輔": "SHUNSUKE TSUTSUMI",
+  "塩浜遼": "RYOU SHIOHAMA",
+  "増田卓也": "TAKUYA MASUDA",
+  "増田繁人": "SHIGETO MASUDA",
+  "多々良敦斗": "ATSUSHI TO TATARA",
+  "大井健太郎": "KENTAROU OOI",
+  "大島秀夫": "HIDEO OOSHIMA",
+  "大崎舜": "SHUN OOSAKI",
+  "大橋正博": "MASAHIRO OOHASHI",
+  "大武峻": "SHUN OOTAKE",
+  "大西昌之": "MASAYUKI OONISHI",
+  "大谷尚輝": "NAOKI OOTANI",
+  "大谷幸輝": "YUKITERU OOTANI",
+  "大谷昌司": "SHOUJI OOTANI",
+  "大迫希": "MARE OOSAKO",
+  "大野和成": "KAZUNARI OONO",
+  "大﨑舜": "SHUN DAI DAI",
+  "太洋一": "YOUICHI TA",
+  "太田修介": "SHUUSUKE OOTA",
+  "奥山武宰士": "TAKESHI SAI SAMURAI OKUYAMA",
+  "宇留野純": "JUN URUNO",
+  "守田達弥": "TATSUYA MORITA",
+  "安柄俊": "GARA SHUN AN",
+  "安田理大": "RIDAI YASUDA",
+  "安英学": "EIGAKU AN",
+  "宮㟢海斗": "KAITO MIYA",
+  "宮原愛輝": "AI TERU MIYAHARA",
+  "宮崎大志郎": "TAISHI ROU MIYAZAKI",
+  "宮崎幾笑": "KI WARAI MIYAZAKI",
+  "宮本英治": "EIJI MIYAMOTO",
+  "宮沢克行": "KATSUYUKI MIYAZAWA",
+  "富山貴光": "TAKAMITSU TOYAMA",
+  "富澤清太郎": "SEITAROU TOMIZAWA",
+  "寺川能人": "NOU NIN TERAKAWA",
+  "小原基樹": "MOTOKI KOHARA",
+  "小塚和季": "WA KI KOZUKA",
+  "小島亨介": "TOORU SUKE KOJIMA",
+  "小島圭巽": "KEI TATSUMI KOJIMA",
+  "小川佳純": "YOSHIZUMI OGAWA",
+  "小枇ランディーエメカ": "SHOU BI RANDII EMEKA",
+  "小林弘記": "HIROSHI KI KOBAYASHI",
+  "小林悟": "SATOSHI KOBAYASHI",
+  "小林慶行": "YOSHI GYOU KOBAYASHI",
+  "小林裕紀": "HIROKI KOBAYASHI",
+  "小林陽介": "YOUSUKE KOBAYASHI",
+  "小林高道": "TAKA MICHI KOBAYASHI",
+  "小森田友明": "TOMOAKI KOMORIDA",
+  "小泉慶": "YOSHI KOIZUMI",
+  "小澤英明": "HIDEAKI OZAWA",
+  "小牧成亘": "SEI KOU KOMAKI",
+  "小笠原佳祐": "KEISUKE OGASAWARA",
+  "小見洋太": "YOUTA OMI",
+  "小谷祐喜": "YUUKI KOTANI",
+  "小谷野顕治": "KENJI KOYANO",
+  "尾崎瑛一郎": "EIICHI ROU OZAKI",
+  "山下訓広": "KUN KOU YAMASHITA",
+  "山内祐一": "YUUICHI YAMAUCHI",
+  "山口武士": "BUSHI YAMAGUCHI",
+  "山口素弘": "MOTOHIRO YAMAGUCHI",
+  "山崎亮平": "RYOUHEI YAMAZAKI",
+  "山崎侑輝": "YUU TERU YAMAZAKI",
+  "山形辰徳": "TATSUNORI YAMAGATA",
+  "山本康裕": "YASUHIRO YAMAMOTO",
+  "山本海人": "AMA YAMAMOTO",
+  "山本翔平": "SHOUHEI YAMAMOTO",
+  "山根成陽": "SEIYOU YAMANE",
+  "岡山哲也": "TETSUYA OKAYAMA",
+  "岡崎慎": "SHIN OKAZAKI",
+  "岡本將成": "SHOU SEI OKAMOTO",
+  "岡本知剛": "CHI TSUYOSHI OKAMOTO",
+  "岡本英也": "HIDEYA OKAMOTO",
+  "岡本賢明": "KENMEI OKAMOTO",
+  "岡村和哉": "KAZUYA OKAMURA",
+  "岡﨑亮平": "RYOUHEI OKA OKA",
+  "岩丸史也": "FUMIYA IWAMARU",
+  "岩﨑陽平": "YOUHEI IWA IWA",
+  "島田周輔": "SHUU SUKE SHIMADA",
+  "島田譲": "YUZURU SHIMADA",
+  "崔根植": "NE SHOKU SAI",
+  "嶋田慎太郎": "SHINTAROU SHIMADA",
+  "川又堅碁": "KEN GO KAWAMATA",
+  "川口尚紀": "NAOKI KAWAGUCHI",
+  "川浪吾郎": "GOROU KAWANAMI",
+  "巻誠一郎": "SEIICHIROU KAN",
+  "市村篤司": "ATSUSHI ICHIMURA",
+  "常盤聡": "SATOSHI TOKIWA",
+  "平井将生": "SHOKI HIRAI",
+  "平川怜": "REI HIRAKAWA",
+  "平木良樹": "YOSHIKI HIRAKI",
+  "平松宗": "SHU HIRAMATSU",
+  "平繁龍一": "RYUICHI HIRASHIGE",
+  "平間智和": "TOMOKAZU HIRAMA",
+  "広瀬健太": "KENTA HIROSE",
+  "廣井友信": "TOMONOBU HIROI",
+  "式田高義": "TAKAYOSHI SHIKIDA",
+  "恒松伴典": "TOMONORI TSUNEMATSU",
+  "成岡翔": "SHO NARUOKA",
+  "戸嶋祥郎": "SHOU ROU TOSHIMA",
+  "押久保汐音": "SHIONE OU KUBO",
+  "指宿洋史": "HIROSHI IBUSUKI",
+  "斉藤紀由": "KI YU SAITOU",
+  "新井健二": "KENJI ARAI",
+  "新井直人": "NAOTO ARAI",
+  "明堂和也": "KAZUYA MYOUDOU",
+  "曺永哲": "EI SATOSHI SOU",
+  "有村光史": "MITSUFUMI ARIMURA",
+  "服部浩紀": "HIROKI HATTORI",
+  "木下正貴": "MASATAKA KINOSHITA",
+  "木寺浩一": "KOUICHI KITERA",
+  "木島良輔": "RYOUSUKE KIJIMA",
+  "木暮郁哉": "IKUYA KOGURE",
+  "木村祐志": "YUUJI KIMURA",
+  "木澤正徳": "MASANORI KISAWA",
+  "末岡龍二": "RYUUJI SUEOKA",
+  "本間勲": "ISAO HONMA",
+  "本間至恩": "SHION HONMA",
+  "杉山弘一": "KOUICHI SUGIYAMA",
+  "杉山直宏": "NAOHIRO SUGIYAMA",
+  "李明載": "MEI SAI SUMOMO",
+  "村上佑介": "YUUSUKE MURAKAMI",
+  "村上巧": "KOU MURAKAMI",
+  "東出壮太": "SOUTA HIGASHIDE",
+  "東口順昭": "JUNSHOU HIGASHIGUCHI",
+  "東山達稀": "TOORU MARE HIGASHIYAMA",
+  "東野広太郎": "KOUTAROU HIGASHINO",
+  "松下年宏": "TOSHIHIRO MATSUSHITA",
+  "松原健": "TAKESHI MATSUBARA",
+  "松尾直人": "NAOTO MATSUO",
+  "松岡康暢": "YASUSHI NOBU MATSUOKA",
+  "松岡瑠夢": "RU YUME MATSUOKA",
+  "松橋章太": "SHOUTA MATSUHASHI",
+  "林祥太": "SHOUTA HAYASHI",
+  "林裕煥": "HIROSHI KAN HAYASHI",
+  "柳育崇": "IKU SUU YANAGI",
+  "柴暢彦": "NOBUHIKO SHIBA",
+  "栗原圭介": "KEISUKE KURIHARA",
+  "根占真伍": "MAKOTO GO NEJIME",
+  "桑原裕義": "HIROYOSHI KUWAHARA",
+  "梅山修": "OSAMU UMEYAMA",
+  "梶山陽平": "YOUHEI KAJIYAMA",
+  "森俊介": "SHUNSUKE MORI",
+  "森川泰臣": "YASUTAKA MORIKAWA",
+  "森田浩史": "HIROSHI MORITA",
+  "植村洋斗": "HIROSHI TO UEMURA",
+  "植田龍仁朗": "RYUUJIN AKIRA UEDA",
+  "樋口叶": "KANOU HIGUCHI",
+  "横山知伸": "TOMONOBU YOKOYAMA",
+  "橋本健人": "TAKETO HASHIMOTO",
+  "橋本拳人": "KOBUSHI NIN HASHIMOTO",
+  "橋本陸斗": "RIKU TO HASHIMOTO",
+  "武富孝介": "KOUSUKE TAKETOMI",
+  "武田洋平": "YOUHEI TAKEDA",
+  "武田直隆": "NAOTAKA TAKEDA",
+  "武者大夢": "TAIMU MUSHA",
+  "氏原良二": "RYOUJI UJIHARA",
+  "水越潤": "JUN MIZUKOSHI",
+  "水野晃樹": "KOUKI MIZUNO",
+  "水野泰輔": "TAISUKE MIZUNO",
+  "永井建成": "KENSEI NAGAI",
+  "永田充": "JUU NAGATA",
+  "江﨑巧朗": "KOU AKIRA KOU KOU",
+  "池田誠": "MAKOTO IKEDA",
+  "池谷友喜": "TOMOKI IKETANI",
+  "河原創": "SOU KAWARA",
+  "河原和寿": "KAZUTOSHI KAWARA",
+  "河原塚毅": "TSUYOSHI KAWARA TSUKA",
+  "河田波大": "NAMI DAI KAWATA",
+  "河田篤秀": "ATSUSHI SHUU KAWATA",
+  "河端和哉": "KAZUYA KAWABATA",
+  "河野健一": "KEN'ICHI KOUNO",
+  "浅倉廉": "REN ASAKURA",
+  "浅川隼人": "HAYATO ASAKAWA",
+  "海本幸治郎": "KOUJIROU UMI HON",
+  "海本慶治": "KEIJI UMI HON",
+  "深井正樹": "MASAKI FUKAI",
+  "深澤仁博": "HITOSHI HIROSHI FUKAZAWA",
+  "清武功暉": "KOU KI KIYOTAKE",
+  "渡辺匠": "TAKUMI WATANABE",
+  "渡辺泰広": "YASUHIRO WATANABE",
+  "渡邉新太": "SHINTA WATANABE",
+  "渡邊凌磨": "RYOU MA WATANABE",
+  "渡邊泰基": "YASUSHI MOTO WATANABE",
+  "澤田崇": "SUU SAWADA",
+  "濱田水輝": "MIZUKI HAMADA",
+  "瀬口拓弥": "TAKUMI SEGUCHI",
+  "瀬戸春樹": "HARUKI SETO",
+  "熊谷雅彦": "MASAHIKO KUMAGAYA",
+  "熱田眞": "MAKOTO ATSUTA",
+  "營田一燈": "ITTOU EI TA",
+  "片山奨典": "SHOU TEN KATAYAMA",
+  "片渕浩一郎": "KOUICHIROU KATABUCHI",
+  "生方繁": "HAN UBUKATA",
+  "田上大地": "DAICHI TAGAMI",
+  "田中亜土夢": "ADO YUME TANAKA",
+  "田中俊一": "TOSHIKAZU TANAKA",
+  "田中秀哉": "SHUUYA TANAKA",
+  "田中達也": "TATSUYA TANAKA",
+  "田口潤人": "JUN NIN TAGUCHI",
+  "田尻康晴": "YASUHARU TAJIRI",
+  "田村翔太": "SHOUTA TAMURA",
+  "田畑輝樹": "TERUKI TAHATA",
+  "田辺圭佑": "KEISUKE TANABE",
+  "町田多聞": "TABUN MACHIDA",
+  "畑実": "MI HATAKE",
+  "白谷建人": "TAKERU SHIRATANI",
+  "皆川佑介": "YUUSUKE MINAGAWA",
+  "相澤佑哉": "YUU YA AIZAWA",
+  "相澤祥太": "SHOUTA AIZAWA",
+  "矢村健": "TAKESHI YAMURA",
+  "矢野大輔": "DAISUKE YANO",
+  "矢野貴章": "TAKAAKI YANO",
+  "石井俊也": "TOSHIYA ISHII",
+  "石川啓人": "KEI NIN ISHIKAWA",
+  "石川大地": "DAICHI ISHIKAWA",
+  "石川直樹": "NAOKI ISHIKAWA",
+  "磯村亮太": "RYOUTA ISOMURA",
+  "神代慶人": "KEITO KAMISHIRO",
+  "神田勝夫": "KATSUO KANDA",
+  "福王忠世": "TADAYO FUKUOU",
+  "福田晃斗": "AKIRA TO FUKUDA",
+  "秋山裕紀": "HIROKI AKIYAMA",
+  "秋葉忠宏": "TADAHIRO AKIBA",
+  "稲川碧希": "HEKI MARE INAGAWA",
+  "稲村隼翔": "HAYABUSA SHOU INAMURA",
+  "稲田康志": "YASUSHI INEDA",
+  "端山豪": "GOU HAYAMA",
+  "竹本雄飛": "YUUHI TAKEMOTO",
+  "竹重安希彦": "AN MARE HIKO TAKESHIGE",
+  "笹垣拓也": "TAKUYA SASA KAKI",
+  "筑城和人": "KAZUHITO TSUKU SHIRO",
+  "筒井紀章": "KISHOU TSUTSUI",
+  "篠原弘次郎": "KOUJIROU SHINOHARA",
+  "米原秀亮": "SHUU AKIRA YONEHARA",
+  "粟飯原尚平": "SHOUHEI AIHARA",
+  "網田慎": "SHIN AMITA",
+  "船越優蔵": "YUU KURA FUNAKOSHI",
+  "芹澤飛勇": "HI ISAMI SERIZAWA",
+  "若杉拓哉": "TAKUYA WAKASUGI",
+  "荻原拓也": "TAKUYA OGIWARA",
+  "菅沼実": "MI SUGENUMA",
+  "菅沼駿哉": "SHUN YA SUGENUMA",
+  "菅田真啓": "MASAHIRO SUGATA",
+  "菊地直哉": "NAOYA KIKUCHI",
+  "萩村滋則": "SHIGENORI HAGIMURA",
+  "薗田淳": "ATSUSHI SONODA",
+  "藏川洋平": "YOUHEI KURA KAWA",
+  "藤井大輔": "DAISUKE FUJII",
+  "藤川虎太朗": "TORATA AKIRA FUJIKAWA",
+  "藤本主税": "CHIKARA FUJIMOTO",
+  "藤本大": "DAI FUJIMOTO",
+  "藤田一途": "ICHIZU FUJITA",
+  "藤田俊哉": "TOSHIYA FUJITA",
+  "藤田和輝": "KAZUTERU FUJITA",
+  "藤田征也": "SEI YA FUJITA",
+  "藤田慎一": "SHIN'ICHI FUJITA",
+  "衛藤幹弥": "MIKIYA ETO",
+  "袴田裕太郎": "YUUTAROU HAKAMADA",
+  "西ヶ谷隆之": "TAKAYUKI NISHIGAYA",
+  "西大伍": "DAIGO NISHI",
+  "西弘則": "HIRONORI NISHI",
+  "西村竜馬": "RYOMA NISHIMURA",
+  "西村遥己": "HARUKI NISHIMURA",
+  "西森正明": "MASAAKI NISHIMORI",
+  "諏訪雄大": "YUDAI SUWA",
+  "谷口海斗": "KAITO TANIGUCHI",
+  "谷山湧人": "YUTO TANIYAMA",
+  "豊田歩": "AYUMU TOYODA",
+  "車智鎬": "SATORU KOU KURUMA",
+  "道脇豊": "YUTAKA MICHIWAKI",
+  "遠藤凌": "RYOU ENDOU",
+  "鄭大世": "HARUTOSHI TEI",
+  "酒井匠": "TAKUMI SAKAI",
+  "酒井宣福": "SEN FUKU SAKAI",
+  "酒井崇一": "SUU ICHI SAKAI",
+  "酒井高徳": "TAKANORI SAKAI",
+  "酒井高聖": "TAKA HIJIRI SAKAI",
+  "野村政孝": "MASATAKA NOMURA",
+  "野津田岳人": "GAKUJIN NOZUTA",
+  "野澤洋輔": "YOUSUKE NOZAWA",
+  "野田裕喜": "HIROKI NODA",
+  "金井大樹": "TAIJU KANAI",
+  "金根煥": "KONKAN KIN",
+  "金永根": "EI NE KIN",
+  "金珍洙": "CHIN SHU KIN",
+  "鈴木健太郎": "KENTAROU SUZUKI",
+  "鈴木大輔": "DAISUKE SUZUKI",
+  "鈴木孝司": "TAKASHI SUZUKI",
+  "鈴木慎吾": "SHINGO SUZUKI",
+  "鈴木武蔵": "MUSASHI SUZUKI",
+  "鈴木祐輔": "YUUSUKE SUZUKI",
+  "鈴木翔登": "SHOU TOU SUZUKI",
+  "鏑木享": "KYOU KABURAKI",
+  "長倉幹樹": "KAN KI NAGAKURA",
+  "長沢駿": "SHUN NAGASAWA",
+  "長谷川元希": "MOTO MARE HASEGAWA",
+  "長谷川太一": "TAICHI HASEGAWA",
+  "長谷川太郎": "TAROU HASEGAWA",
+  "長谷川巧": "KOU HASEGAWA",
+  "長谷川紡": "BOU HASEGAWA",
+  "長谷部彩翔": "SAI SHOU HASEBE",
+  "関光博": "MITSUHIRO KAN",
+  "阿部敏之": "TOSHIYUKI ABE",
+  "阿部海斗": "KAITO ABE",
+  "阿部航斗": "KOU TO ABE",
+  "青木剛": "TSUYOSHI AOKI",
+  "青木良太": "RYOUTA AOKI",
+  "青野大介": "DAISUKE AONO",
+  "養父雄仁": "KATSUHITO YOUFU",
+  "高宇洋": "U HIROSHI TAKA",
+  "高木善朗": "YOSHIROU TAKAGI",
+  "高橋泰": "YASUSHI TAKAHASHI",
+  "高橋直樹": "NAOKI TAKAHASHI",
+  "高橋祐太郎": "YUUTAROU TAKAHASHI",
+  "高瀬優孝": "YUUKOU TAKASE",
+  "髙柳一誠": "ISSEI",
+  "髙橋利樹": "TOSHIKI",
+  "髙澤優也": "YUUYA",
+  "鳴尾直軌": "CHOKU KI NARUO",
+  "黒崎久志": "HISASHI KUROSAKI",
+  "黒河貴矢": "TAKASHI YA KUROKAWA",
+  "齊藤和樹": "KAZUKI SAITOU",
+  "齋藤恵太": "KEITA SAITOU"
+  };
+
+  const PLAYER_ENGLISH_NAME_LOOKUP = {
+    ...PLAYER_ENGLISH_NAME_AUTO_OVERRIDES,
+    ...PLAYER_ENGLISH_NAME_OVERRIDES
+  };
+
   const KATAKANA_ROMAJI_DIGRAPHS = {
     "キャ": "KYA", "キュ": "KYU", "キョ": "KYO",
     "シャ": "SHA", "シュ": "SHU", "ショ": "SHO",
@@ -1390,12 +1808,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   function getPlayerEnglishName(player) {
     const rawName = String((player && player.player_name) || player || "").normalize("NFKC").trim();
     const compact = normalizePlayerIdentityText(rawName);
-    const override = PLAYER_ENGLISH_NAME_OVERRIDES[compact];
+    const override = PLAYER_ENGLISH_NAME_LOOKUP[compact];
     if (override) return override;
     if (/^[\u30A0-\u30FF\s・･ー]+$/.test(rawName)) {
       return rawName.split(/[\s・･]+/).filter(Boolean).map(romanizeKatakana).join(" ").toUpperCase();
     }
-    if (/[\u3400-\u9FFF]/.test(rawName)) return "JAPANESE PLAYER";
+    if (/[\u3400-\u9FFF]/.test(rawName)) return rawName.replace(/[\s　]+/g, " ").toUpperCase();
     return rawName.toUpperCase();
   }
 
@@ -3089,10 +3507,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getPlayerNumbers(player) {
-    const raw = Array.isArray(player && player.numbers)
-      ? player.numbers
-      : String((player && player.numbers) || "").split(",");
-    return raw.map(number => String(number || "").trim()).filter(Boolean);
+    return normalizePlayerNumberValues(player && player.numbers);
   }
 
   function getPlayerSeasonCount(player) {
@@ -4172,7 +4587,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderPlayerAnalysisModalShell(kicker, title, body, metaHtml = "") {
-    const metaClass = metaHtml && String(metaHtml).includes("profile-number") ? " profile" : "";
     return `
       <div class="pa-modal-head">
         <div class="pa-modal-title">
@@ -4181,7 +4595,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <button type="button" class="pa-modal-close" data-pa-modal-close aria-label="閉じる">×</button>
       </div>
-      ${metaHtml ? `<div class="pa-modal-meta${metaClass}">${metaHtml}</div>` : ""}
+      ${metaHtml ? `<div class="pa-modal-meta">${metaHtml}</div>` : ""}
       <div class="pa-modal-body">${body}</div>
     `;
   }
@@ -5385,7 +5799,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderPlayerNumberBadge(numbers, className = "", player = null) {
-    const classes = ["pa-player-number-badge", className, isPlayerGoalkeeper(player) ? "gk" : ""]
+    const classTokens = String(className || "").split(/\s+/).filter(Boolean);
+    const isGoalkeeper = isPlayerGoalkeeper(player);
+    if (classTokens.includes("modal")) {
+      const displayNumbers = normalizePlayerNumberValues(numbers);
+      const badgeNumbers = displayNumbers.length ? displayNumbers : ["-"];
+      const wrapperClasses = ["pa-player-number-badge-set", ...classTokens, isGoalkeeper ? "gk" : ""]
+        .filter(Boolean)
+        .join(" ");
+      const itemClasses = ["pa-player-number-badge", "modal-box", isGoalkeeper ? "gk" : ""]
+        .filter(Boolean)
+        .join(" ");
+      return `
+        <span class="${escapeHtml(wrapperClasses)}" aria-label="背番号 ${escapeHtml(formatPlayerList(badgeNumbers))}">
+          ${badgeNumbers.map(number => `<span class="${escapeHtml(itemClasses)}">${escapeHtml(number)}</span>`).join("")}
+        </span>
+      `;
+    }
+    const classes = ["pa-player-number-badge", ...classTokens, isGoalkeeper ? "gk" : ""]
       .filter(Boolean)
       .join(" ");
     return `<span class="${escapeHtml(classes)}">${escapeHtml(formatPlayerList(numbers))}</span>`;
@@ -5773,8 +6204,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const activeTab = allowedTabs.includes(playerAnalysisState.profileTab) ? playerAnalysisState.profileTab : "total";
 
     const meta = `
-      ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal profile-number", aggregate)}
-      <span class="pa-chip profile-position">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
+      ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal", aggregate)}
+      <span class="pa-player-position-text">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
     `;
     const body = `
         ${renderPlayerPhoto(aggregate.player_name || player.player_name || "", playerAnalysisState.selectedClub, "pa-player-photo", aggregate)}
@@ -5883,7 +6314,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="pa-detail-meta">
           ${renderPlayerNumberBadge(player.numbers, "modal", player)}
-          <span class="pa-chip">${escapeHtml(formatPlayerList(player.positions))}</span>
+          <span class="pa-player-position-text">${escapeHtml(formatPlayerList(player.positions))}</span>
         </div>
       </div>
       ${renderPlayerAnalysisDetailSections(player)}
@@ -7778,8 +8209,56 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
   }
 
+  function formatVisionJapaneseRoundValue(value) {
+    if (value === undefined || value === null || value === "") return "";
+    const normalized = String(value)
+      .normalize("NFKC")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!normalized || /^EX$/i.test(normalized) || /^MATCH$/i.test(normalized)) return "";
+    const clean = normalized
+      .replace(/\s*第\s*\d+\s*日\s*/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!clean) return "";
+
+    const playoffRound = clean.match(/(?:プレーオフラウンド|プレイオフラウンド)\s*第?\s*(\d+)\s*戦/i);
+    if (playoffRound) return `プレーオフラウンド第${playoffRound[1]}戦`;
+    const playoffCode = clean.match(/^PO\s*(\d+)$/i);
+    if (playoffCode) return `プレーオフラウンド第${playoffCode[1]}戦`;
+    const promotionPlayoff = clean.match(/(?:昇格プレーオフ|J1参入プレーオフ|J1昇格プレーオフ).*?第?\s*(\d+)\s*戦/i);
+    if (promotionPlayoff) return `昇格プレーオフ第${promotionPlayoff[1]}戦`;
+
+    const matchweek = clean.match(/^MW\s*(\d+)$/i);
+    if (matchweek) return `第${matchweek[1]}節`;
+    const section = clean.match(/第?\s*(\d+)\s*節/);
+    if (section) return `第${section[1]}節`;
+    const cupRound = clean.match(/第?\s*(\d+)\s*回戦/);
+    if (cupRound) return `第${cupRound[1]}回戦`;
+    const knockoutLeg = clean.match(/(準々決勝|準決勝|決勝)\s*第?\s*(\d+)\s*戦/);
+    if (knockoutLeg) return `${knockoutLeg[1]}第${knockoutLeg[2]}戦`;
+    if (/準々決勝/.test(clean)) return "準々決勝";
+    if (/準決勝/.test(clean)) return "準決勝";
+    if (/決勝/.test(clean)) return "決勝";
+    if (/^\d+$/.test(clean)) return `第${clean}節`;
+
+    return clean.replace(/\s+/g, "");
+  }
+
   function formatVisionRoundLabel(match) {
-    return formatRoundDisplayLabel([match.matchweek, match.stage, match.section, match.round], "EX");
+    const candidates = [
+      match && match.matchweek,
+      match && match.stage,
+      match && match.section,
+      match && match.round,
+      match && match.tournament,
+      match && match.competition
+    ];
+    for (const value of candidates) {
+      const label = formatVisionJapaneseRoundValue(value);
+      if (label) return label;
+    }
+    return "特別試合";
   }
 
   function splitVisionPlayerName(name) {
@@ -8163,7 +8642,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function isVisionKanaPlayer(player) {
     const name = visionPlayerDisplayName(player);
-    return /[ァ-ヶー]/.test(name) && /^[ァ-ヶーA-Za-z0-9・.\-\s]+$/.test(name);
+    return /[ァ-ヶー]/.test(name);
   }
 
   function collectVisionKanaPlayers(state) {

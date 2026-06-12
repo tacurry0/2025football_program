@@ -1,0 +1,1676 @@
+{
+  "generated_at": "2026-06-12",
+  "clubs": {
+    "albirex_niigata": "アルビレックス新潟",
+    "roasso_kumamoto": "ロアッソ熊本"
+  },
+  "players": [
+    {
+      "name": "イグナス",
+      "name_en": "Ignace Moleka Nzoko",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1997,
+              "number": 14,
+              "position": "MF"
+            },
+            {
+              "year": 1998,
+              "number": 14,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ソウザ",
+      "name_en": "Souza",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2001,
+              "number": null,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ニートン",
+      "name_en": "Gibson Neathan Wade",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1997,
+              "number": 12,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ハファエル",
+      "name_en": "Rafael Lemes dos Santos",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2011,
+              "number": 24,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "パトリック",
+      "name_en": "Patrick",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 12,
+              "position": "FW"
+            },
+            {
+              "year": 1997,
+              "number": null,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "マイケル",
+      "name_en": "Michael",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1995,
+              "number": null,
+              "position": "MF"
+            },
+            {
+              "year": 1996,
+              "number": 7,
+              "position": "MF"
+            },
+            {
+              "year": 1997,
+              "number": 7,
+              "position": "MF"
+            },
+            {
+              "year": 1998,
+              "number": 7,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "マルセウ",
+      "name_en": "Marcel Silva Sacramento",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2005,
+              "number": 37,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "マース",
+      "name_en": "Maes",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 10,
+              "position": "FW"
+            },
+            {
+              "year": 1997,
+              "number": null,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ラファエル・ハットン",
+      "name_en": "Rafael Hatton",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2015,
+              "number": 35,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ロイ",
+      "name_en": "Roy",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 9,
+              "position": "MF"
+            },
+            {
+              "year": 1997,
+              "number": null,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ロメロ",
+      "name_en": "Romero",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "上野 剛一",
+      "name_en": "Koichi Ueno",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2002,
+              "number": 31,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "中島 ファラン 一生",
+      "name_en": "Issey Nakajima-Farran",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2003,
+              "number": 23,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "中野 一彦",
+      "name_en": "Kazuhiko Nakano",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 4,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "丸山 富洋",
+      "name_en": "Tomihiro Maruyama",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 19,
+              "position": "DF"
+            },
+            {
+              "year": 1997,
+              "number": null,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "佐藤 嘉寛",
+      "name_en": "Yoshihiro Sato",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 17,
+              "position": "DF"
+            },
+            {
+              "year": 1997,
+              "number": null,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "佐藤 大介",
+      "name_en": "Daisuke Sato",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "八十 祐治",
+      "name_en": "Yuji Yaso",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 13,
+              "position": "MF"
+            },
+            {
+              "year": 1997,
+              "number": null,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "兼子 一樹",
+      "name_en": "Kazuki Kaneko",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1998,
+              "number": 26,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "原 祐俊",
+      "name_en": "Hirotoshi Hara",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": "FW"
+            },
+            {
+              "year": 1997,
+              "number": 16,
+              "position": "FW"
+            },
+            {
+              "year": 1998,
+              "number": 16,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "古俣 健次",
+      "name_en": "Kenji Komata",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 18,
+              "position": "MF"
+            },
+            {
+              "year": 1997,
+              "number": 18,
+              "position": "MF"
+            },
+            {
+              "year": 1998,
+              "number": 18,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "古長谷 千博",
+      "name_en": "Chihiro Konagaya",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2026,
+              "number": 14,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "吉澤 正悟",
+      "name_en": "Shogo Yoshizawa",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2005,
+              "number": 32,
+              "position": "MF"
+            },
+            {
+              "year": 2006,
+              "number": null,
+              "position": "MF"
+            },
+            {
+              "year": 2007,
+              "number": 23,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "和久井 秀俊",
+      "name_en": "Hidetoshi Wakui",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2003,
+              "number": 34,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "垣内 友二",
+      "name_en": "Yuji Kakiuchi",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": "MF"
+            },
+            {
+              "year": 1997,
+              "number": 5,
+              "position": "MF"
+            },
+            {
+              "year": 1998,
+              "number": 5,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "太田 裕和",
+      "name_en": "Hirokazu Ota",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1997,
+              "number": 8,
+              "position": "FW"
+            },
+            {
+              "year": 1998,
+              "number": 8,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "奥山 達之",
+      "name_en": "Tatsuyuki Okuyama",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1994,
+              "number": null,
+              "position": "DF"
+            },
+            {
+              "year": 1995,
+              "number": null,
+              "position": "DF"
+            },
+            {
+              "year": 1996,
+              "number": 24,
+              "position": "DF"
+            },
+            {
+              "year": 1997,
+              "number": 24,
+              "position": "DF"
+            },
+            {
+              "year": 1998,
+              "number": null,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "宮島 伸好",
+      "name_en": "Nobuyoshi Miyajima",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 5,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "小原 信也",
+      "name_en": "Shinya Ohara",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "小林 哲也",
+      "name_en": "Tetsuya Kobayashi",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 1,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "山田 将司",
+      "name_en": "Masashi Yamada",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2003,
+              "number": 24,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "岡田 秀市",
+      "name_en": "Shuichi Okada",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1997,
+              "number": 27,
+              "position": "MF"
+            },
+            {
+              "year": 1998,
+              "number": 12,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "川口 正人",
+      "name_en": "Masato Kawaguchi",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2002,
+              "number": 26,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "平岡 宏章",
+      "name_en": "Hiroaki Hiraoka",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": "DF"
+            },
+            {
+              "year": 1997,
+              "number": 3,
+              "position": "DF"
+            },
+            {
+              "year": 1998,
+              "number": 3,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "成海 優",
+      "name_en": "Yu Narumi",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "月城 征一",
+      "name_en": "Seiichi Tsukishiro",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1997,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "木村 良",
+      "name_en": "Ryo Kimura",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "木村 隆二",
+      "name_en": "Ryuji Kimura",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "木野 陽",
+      "name_en": "Akira Kino",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "杉山 学",
+      "name_en": "Manabu Sugiyama",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 16,
+              "position": "FW"
+            },
+            {
+              "year": 1997,
+              "number": 11,
+              "position": "FW"
+            },
+            {
+              "year": 1998,
+              "number": 11,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "杉山 雄一",
+      "name_en": "Yuichi Sugiyama",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "松田 和也",
+      "name_en": "Kazuya Matsuda",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 14,
+              "position": "MF"
+            },
+            {
+              "year": 1997,
+              "number": null,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "栗原 明洋",
+      "name_en": "Akihiro Kurihara",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2004,
+              "number": 24,
+              "position": "MF"
+            },
+            {
+              "year": 2005,
+              "number": null,
+              "position": "MF"
+            },
+            {
+              "year": 2006,
+              "number": 24,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "森岡 健二",
+      "name_en": "Kenji Morioka",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1998,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "水木 勇人",
+      "name_en": "Hayato Mizuki",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2003,
+              "number": 31,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "河野 雅樹",
+      "name_en": "Masaki Kono",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 26,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "沼尻 健太",
+      "name_en": "Kenta Numajiri",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2002,
+              "number": 34,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "浜口 友希",
+      "name_en": "Yuki Hamaguchi",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2002,
+              "number": 33,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "浜野 征哉",
+      "name_en": "Yukiya Hamano",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 25,
+              "position": "GK"
+            },
+            {
+              "year": 1997,
+              "number": 1,
+              "position": "GK"
+            },
+            {
+              "year": 1998,
+              "number": 1,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "渡辺 聡",
+      "name_en": "Satoshi Watanabe",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "濱田 祥裕",
+      "name_en": "Yoshihiro Hamada",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 2,
+              "position": "DF"
+            },
+            {
+              "year": 1997,
+              "number": 2,
+              "position": "DF"
+            },
+            {
+              "year": 1998,
+              "number": 2,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "玉田 真人",
+      "name_en": "Masato Tamada",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": "GK"
+            },
+            {
+              "year": 1997,
+              "number": 22,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "田中 泰裕",
+      "name_en": "Yasuhiro Tanaka",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2003,
+              "number": 25,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "神田 勝利",
+      "name_en": "Katsutoshi Kanda",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1995,
+              "number": null,
+              "position": "MF"
+            },
+            {
+              "year": 1996,
+              "number": 8,
+              "position": "MF"
+            },
+            {
+              "year": 1997,
+              "number": null,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "荒井 忍",
+      "name_en": "Shinobu Arai",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2002,
+              "number": 25,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "菊池 修",
+      "name_en": "Osamu Kikuchi",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1997,
+              "number": 25,
+              "position": "GK"
+            },
+            {
+              "year": 1998,
+              "number": 22,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "葛野 昌宏",
+      "name_en": "Masahiro Kuzuno",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": "DF"
+            },
+            {
+              "year": 1997,
+              "number": 4,
+              "position": "DF"
+            },
+            {
+              "year": 1998,
+              "number": 4,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "藤田 敬三",
+      "name_en": "Keizo Fujita",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1995,
+              "number": null,
+              "position": "FW"
+            },
+            {
+              "year": 1996,
+              "number": 21,
+              "position": "FW"
+            },
+            {
+              "year": 1997,
+              "number": 21,
+              "position": "FW"
+            },
+            {
+              "year": 1998,
+              "number": 21,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "西原 幹人",
+      "name_en": "Mikito Nishihara",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2003,
+              "number": 21,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "軽部 雅也",
+      "name_en": "Masaya Karube",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2002,
+              "number": null,
+              "position": "DF"
+            },
+            {
+              "year": 2003,
+              "number": 14,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "近 彰彦",
+      "name_en": "Akihiko Kon",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1995,
+              "number": null,
+              "position": "DF"
+            },
+            {
+              "year": 1996,
+              "number": 6,
+              "position": "DF"
+            },
+            {
+              "year": 1997,
+              "number": 6,
+              "position": "DF"
+            },
+            {
+              "year": 1998,
+              "number": 6,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "酒井 悠基",
+      "name_en": "Yuki Sakai",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2004,
+              "number": 25,
+              "position": "DF"
+            },
+            {
+              "year": 2005,
+              "number": null,
+              "position": "DF"
+            },
+            {
+              "year": 2006,
+              "number": 33,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "野上 毅",
+      "name_en": "Takeshi Nogami",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "鈴木 洋平",
+      "name_en": "Yohei Suzuki",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            },
+            {
+              "year": 1997,
+              "number": 23,
+              "position": "DF"
+            },
+            {
+              "year": 1998,
+              "number": 23,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "長島 敦久",
+      "name_en": "Atsuhisa Nagashima",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": 11,
+              "position": "FW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "関根 伸人",
+      "name_en": "Nobuhito Sekine",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "韮沢 政紀",
+      "name_en": "Masanori Nirasawa",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 1996,
+              "number": null,
+              "position": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "高木 貴弘",
+      "name_en": "Takahiro Takagi",
+      "source_group": "niigata",
+      "affiliations": [
+        {
+          "club": "albirex_niigata",
+          "registrations": [
+            {
+              "year": 2010,
+              "number": 25,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ショファー ネオ",
+      "name_en": "Choffart Neo",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2023,
+              "number": 41,
+              "position": "GK"
+            },
+            {
+              "year": 2026,
+              "number": 41,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "バーンズ アントン",
+      "name_en": "Anton Burns",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2025,
+              "number": 50,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "レオ ケンタ",
+      "name_en": "Kenta Leo",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2021,
+              "number": 22,
+              "position": "DF"
+            },
+            {
+              "year": 2022,
+              "number": 22,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "上村 朋生",
+      "name_en": "Tomoki Uemura",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2024,
+              "number": 42,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "北里 大地",
+      "name_en": "Daichi Kitazato",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2020,
+              "number": 40,
+              "position": "GK"
+            },
+            {
+              "year": 2021,
+              "number": 40,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "吉岡 優希",
+      "name_en": "Yuki Yoshioka",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2026,
+              "number": 28,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "宮本 哲宏",
+      "name_en": "Tetsuhiro Miyamoto",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2023,
+              "number": 42,
+              "position": "GK"
+            },
+            {
+              "year": 2024,
+              "number": 41,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "小園 泰士朗",
+      "name_en": "Taishiro Kozono",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2025,
+              "number": 40,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "岡田 大和",
+      "name_en": "Yamato Okada",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2024,
+              "number": 38,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "廣田 公明",
+      "name_en": "Komei Hirota",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2021,
+              "number": 42,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "東郷 翼",
+      "name_en": "Tsubasa Togo",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2023,
+              "number": 25,
+              "position": "MF"
+            },
+            {
+              "year": 2024,
+              "number": 25,
+              "position": "MF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "西村 遥己",
+      "name_en": "Haruki Nishimura",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2026,
+              "number": 21,
+              "position": "GK"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "長嶋 志歩",
+      "name_en": "Shiho Nagashima",
+      "source_group": "kumamoto",
+      "affiliations": [
+        {
+          "club": "roasso_kumamoto",
+          "registrations": [
+            {
+              "year": 2025,
+              "number": 30,
+              "position": "DF"
+            },
+            {
+              "year": 2026,
+              "number": 30,
+              "position": "DF"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
