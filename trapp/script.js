@@ -2260,27 +2260,67 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function loadPlayerAnalysisSupplementPlayers(club = playerAnalysisState.selectedClub) {
     const info = getPlayerAnalysisClubInfo(club);
-    if (info.key !== "niigata") return [];
+    const supplementClubCodes = {
+      niigata: "albirex_niigata",
+      kumamoto: "roasso_kumamoto"
+    };
+    const supplementClubCode = supplementClubCodes[info.key];
+    if (!supplementClubCode) return [];
     if (!playerAnalysisSupplementCache.has(info.key)) {
       playerAnalysisSupplementCache.set(info.key, (async () => {
         try {
-          const res = await fetch(`./data/generated/${info.dataDir}/wiki_players.json`);
+          const res = await fetch("./data/generated/players_niigata_kumamoto.json");
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const payload = await res.json();
-          return (Array.isArray(payload) ? payload : [])
-            .filter(item => item && item.player_name && Array.isArray(item.seasons))
-            .filter(item => {
-              const tables = Array.isArray(item.source_tables) ? item.source_tables : [];
-              return tables.some(table => ["current", "loan_in", "loan_out"].includes(table));
-            })
-            .map(item => ({
-              ...item,
-              player_name: formatPlayerAnalysisSupplementName(item.player_name),
-              seasons: item.seasons.map(Number).filter(Number.isInteger),
-              positions: Array.isArray(item.positions) ? item.positions.map(String).filter(Boolean) : [],
-              numbers: Array.isArray(item.numbers) ? item.numbers.map(String).filter(Boolean) : [],
-              season_texts: Array.isArray(item.season_texts) ? item.season_texts.map(String).filter(Boolean) : []
-            }));
+          const items = Array.isArray(payload && payload.players) ? payload.players : [];
+          const supplements = new Map();
+          const addUnique = (list, value) => {
+            const text = String(value ?? "").trim();
+            if (text && !list.includes(text)) list.push(text);
+          };
+          items.forEach(item => {
+            const playerName = String(item && (item.name || item.player_name) || "")
+              .normalize("NFKC")
+              .replace(/\s+/g, " ")
+              .trim();
+            if (!playerName) return;
+            (Array.isArray(item.affiliations) ? item.affiliations : []).forEach(affiliation => {
+              if (!affiliation || affiliation.club !== supplementClubCode) return;
+              const registrations = Array.isArray(affiliation.registrations) ? affiliation.registrations : [];
+              registrations.forEach(registration => {
+                if (!registration) return;
+                const year = Number(registration.year);
+                if (!Number.isInteger(year)) return;
+                if (!supplements.has(playerName)) {
+                  supplements.set(playerName, {
+                    player_name: playerName,
+                    seasons: [],
+                    numbers: [],
+                    positions: [],
+                    seasonDetails: {},
+                    season_texts: []
+                  });
+                }
+                const meta = supplements.get(playerName);
+                if (!meta.seasons.includes(year)) meta.seasons.push(year);
+                const detailKey = String(year);
+                if (!meta.seasonDetails[detailKey]) {
+                  meta.seasonDetails[detailKey] = { numbers: [], positions: [] };
+                }
+                const detail = meta.seasonDetails[detailKey];
+                addUnique(meta.numbers, registration.number);
+                addUnique(detail.numbers, registration.number);
+                addUnique(meta.positions, registration.position);
+                addUnique(detail.positions, registration.position);
+              });
+            });
+          });
+          return Array.from(supplements.values()).map(meta => ({
+            ...meta,
+            seasons: meta.seasons.sort((a, b) => a - b),
+            numbers: meta.numbers.sort((a, b) => Number(a) - Number(b) || a.localeCompare(b, "ja")),
+            positions: sortPlayerPositions(meta.positions)
+          }));
         } catch (error) {
           console.warn(`Failed to load supplemental players for ${info.key}`, error);
           return [];
@@ -2313,13 +2353,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const info = getPlayerAnalysisClubInfo(club);
     const identity = getPlayerCanonicalIdentity(meta, year);
     const groupKey = identity.groupKey || normalizePlayerIdentityText(meta.player_name).toLowerCase();
+    const seasonDetail = meta && meta.seasonDetails ? meta.seasonDetails[String(year)] : null;
+    const numbers = seasonDetail && Array.isArray(seasonDetail.numbers) ? seasonDetail.numbers : meta.numbers;
+    const positions = seasonDetail && Array.isArray(seasonDetail.positions) ? seasonDetail.positions : meta.positions;
     const row = {
       season: year,
       team: info.name,
       player_key: identity.key || meta.player_name,
       player_name: identity.name || meta.player_name,
-      numbers: Array.isArray(meta.numbers) ? [...meta.numbers] : [],
-      positions: sortPlayerPositions(Array.isArray(meta.positions) ? [...meta.positions] : []),
+      numbers: Array.isArray(numbers) ? [...numbers] : [],
+      positions: sortPlayerPositions(Array.isArray(positions) ? [...positions] : []),
       played_matches: 0,
       played_wins: 0,
       played_draws: 0,
@@ -2367,7 +2410,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function mergePlayerAnalysisSupplementRows(rows, sourceYear, club = playerAnalysisState.selectedClub) {
     const info = getPlayerAnalysisClubInfo(club);
     const year = Number(sourceYear);
-    if (info.key !== "niigata" || !Number.isInteger(year) || !getPlayerAnalysisYears(info.key).includes(year)) {
+    if (!Number.isInteger(year) || !getPlayerAnalysisYears(info.key).includes(year)) {
       return rows;
     }
     const supplements = await loadPlayerAnalysisSupplementPlayers(info.key);
@@ -2389,7 +2432,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function mergePlayerAnalysisSupplementAggregateRows(rows, club = playerAnalysisState.selectedClub) {
     const info = getPlayerAnalysisClubInfo(club);
-    if (info.key !== "niigata") return rows;
     const supplements = await loadPlayerAnalysisSupplementPlayers(info.key);
     if (!supplements.length) return rows;
     const years = new Set(getPlayerAnalysisYears(info.key));
@@ -2832,11 +2874,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (playerAnalysisScopedCache.has(cacheKey)) return playerAnalysisScopedCache.get(cacheKey);
     const dataset = await loadPlayerAnalysisDatasetYear(normalizedYear);
     const scopedRows = dataset.missing ? [] : buildScopedPlayerAnalysisRows(dataset, normalizedYear, scope, competitionNames);
+    const rows = await mergePlayerAnalysisSupplementRows(scopedRows, normalizedYear, playerAnalysisState.selectedClub);
     const entry = {
-      rows: await mergePlayerAnalysisSupplementRows(scopedRows, normalizedYear, playerAnalysisState.selectedClub),
-      missing: dataset.missing
+      rows,
+      missing: rows.length === 0
     };
-    entry.missing = entry.missing || entry.rows.length === 0;
     playerAnalysisScopedCache.set(cacheKey, entry);
     return entry;
   }
