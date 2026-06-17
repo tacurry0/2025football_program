@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260612player-analysis15">
+  <link rel="stylesheet" href="style.css?v=20260617player-analysis16">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./data/assets/emblems/アルビレックス新潟.png">
@@ -976,35 +976,84 @@ We can't help falling in love with you
             <label class="pa-sort-select-field" for="pa-sort-key-select">
               <span>並び順</span>
               <select id="pa-sort-key-select">
-                <option value="number">背番号</option>
-                <option value="played_matches">出場試合数</option>
-                <option value="played_minutes">出場時間</option>
-                <option value="played_wins">出場時勝利数</option>
-                <option value="played_draws">出場時引分数</option>
-                <option value="played_losses">出場時敗戦数</option>
-                <option value="starter_matches">先発数</option>
-                <option value="starter_win_rate">先発時勝率</option>
-                <option value="starter_points_per_match">先発時平均勝ち点</option>
-                <option value="sub_matches">途中出場数</option>
-                <option value="sub_win_rate">途中出場時勝率</option>
-                <option value="sub_points_per_match">途中出場時平均勝ち点</option>
-                <option value="bench_only_matches">ベンチ入りのみ</option>
-                <option value="goals">得点数</option>
-                <option value="scored_matches">ゴール試合数</option>
-                <option value="played_win_rate">出場時勝率</option>
-                <option value="played_points_per_match">出場時平均勝ち点</option>
-                <option value="scored_win_rate">ゴール試合勝率</option>
-                <option value="scored_points_per_match">ゴール試合平均勝ち点</option>
-                <option value="attack_impact">攻撃インパクト</option>
-                <option value="defense_impact">守備インパクト</option>
-                <option value="total_impact">総合インパクト</option>
-                <option value="yellow_cards">警告数</option>
-                <option value="red_cards">退場数</option>
-                <option value="carded_matches">カードを受けた試合数</option>
-                <option value="carded_win_rate">カード時勝率</option>
-                <option value="season_count">所属年数</option>
-                <option value="position_order">ポジション順</option>
-                <option value="player_name">選手名</option>
+                <optgroup label="基本">
+                  <option value="number">背番号</option>
+                  <option value="position_order">ポジション順</option>
+                  <option value="player_name">選手名</option>
+                  <option value="season_count">所属年数</option>
+                </optgroup>
+                <optgroup label="出場時">
+                  <option value="played_matches">出場試合数</option>
+                  <option value="played_minutes">出場時間</option>
+                  <option value="played_wins">出場時勝利数</option>
+                  <option value="played_draws">出場時引分数</option>
+                  <option value="played_losses">出場時敗戦数</option>
+                  <option value="played_points">出場時勝ち点</option>
+                  <option value="played_win_rate">出場時勝率</option>
+                  <option value="played_points_per_match">出場時平均勝ち点</option>
+                  <option value="played_goals_for">出場時得点数</option>
+                  <option value="played_goals_against">出場時失点数</option>
+                  <option value="played_goal_diff">出場時得失点差</option>
+                  <option value="played_goals_against_avg">出場試合失点率</option>
+                  <option value="played_clean_sheets">出場時無失点試合数</option>
+                </optgroup>
+                <optgroup label="出場時間中">
+                  <option value="on_pitch_goals_for">出場時間中得点数</option>
+                  <option value="on_pitch_goals_against">出場時間中失点数</option>
+                  <option value="on_pitch_goal_diff">出場時間中得失点差</option>
+                </optgroup>
+                <optgroup label="先発時">
+                  <option value="starter_matches">先発数</option>
+                  <option value="starter_points">先発時勝ち点</option>
+                  <option value="starter_win_rate">先発時勝率</option>
+                  <option value="starter_points_per_match">先発時平均勝ち点</option>
+                  <option value="starter_goals_for">先発時得点数</option>
+                  <option value="starter_goals_against">先発時失点数</option>
+                  <option value="starter_goal_diff">先発時得失点差</option>
+                </optgroup>
+                <optgroup label="非スタメン時">
+                  <option value="non_starter_matches">非スタメン時試合数</option>
+                  <option value="non_starter_points">非スタメン時勝ち点</option>
+                  <option value="non_starter_win_rate">非スタメン時勝率</option>
+                  <option value="non_starter_points_per_match">非スタメン時平均勝ち点</option>
+                  <option value="non_starter_goals_for">非スタメン時得点数</option>
+                  <option value="non_starter_goals_against">非スタメン時失点数</option>
+                  <option value="non_starter_goal_diff">非スタメン時得失点差</option>
+                </optgroup>
+                <optgroup label="途中出場時">
+                  <option value="sub_matches">途中出場数</option>
+                  <option value="sub_points">途中出場時勝ち点</option>
+                  <option value="sub_win_rate">途中出場時勝率</option>
+                  <option value="sub_points_per_match">途中出場時平均勝ち点</option>
+                  <option value="sub_goals_for">途中出場時得点数</option>
+                  <option value="sub_goals_against">途中出場時失点数</option>
+                  <option value="sub_goal_diff">途中出場時得失点差</option>
+                </optgroup>
+                <optgroup label="未出場時">
+                  <option value="bench_only_matches">ベンチ入りのみ</option>
+                  <option value="non_played_matches">未出場試合数</option>
+                  <option value="non_played_points">未出場時勝ち点</option>
+                  <option value="non_played_win_rate">未出場時勝率</option>
+                  <option value="non_played_points_per_match">未出場時平均勝ち点</option>
+                  <option value="non_played_goals_for">未出場時得点数</option>
+                  <option value="non_played_goals_against">未出場時失点数</option>
+                  <option value="non_played_goal_diff">未出場時得失点差</option>
+                </optgroup>
+                <optgroup label="得点・カード">
+                  <option value="goals">得点数</option>
+                  <option value="scored_matches">ゴール試合数</option>
+                  <option value="scored_win_rate">ゴール試合勝率</option>
+                  <option value="scored_points_per_match">ゴール試合平均勝ち点</option>
+                  <option value="yellow_cards">警告数</option>
+                  <option value="red_cards">退場数</option>
+                  <option value="carded_matches">カードを受けた試合数</option>
+                  <option value="carded_win_rate">カード時勝率</option>
+                </optgroup>
+                <optgroup label="インパクト">
+                  <option value="attack_impact">攻撃インパクト</option>
+                  <option value="defense_impact">守備インパクト</option>
+                  <option value="total_impact">総合インパクト</option>
+                </optgroup>
               </select>
             </label>
             <label class="pa-sort-select-field compact" for="pa-sort-direction-select">
@@ -1015,6 +1064,7 @@ We can't help falling in love with you
               </select>
             </label>
             <button type="button" id="pa-list-detail-toggle" class="pa-list-detail-toggle" aria-pressed="true">詳細 ON</button>
+            <div id="pa-sort-summary" class="pa-sort-summary" aria-live="polite"></div>
           </div>
         </div>
         <div class="pa-table-scroll">
@@ -1222,7 +1272,7 @@ We can't help falling in love with you
 
 
 <script src="schedule/schedule.js?v=20260601results2"></script>
-  <script src="script.js?v=20260612player-analysis15"></script>
+  <script src="script.js?v=20260617player-analysis16"></script>
 
 </body>
 </html>

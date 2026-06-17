@@ -163,6 +163,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const playerAnalysisCache = new Map();
   const playerAnalysisScopedCache = new Map();
   const playerAnalysisDatasetCache = new Map();
+  const playerAnalysisHistoryCache = new Map();
   const playerAnalysisRankingMetricsCache = new Map();
   const playerAnalysisAllPromises = new Map();
   const playerAnalysisAllYearRowsCache = new Map();
@@ -991,6 +992,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       sortSelect: document.getElementById("pa-sort-select"),
       sortKeySelect: document.getElementById("pa-sort-key-select"),
       sortDirectionSelect: document.getElementById("pa-sort-direction-select"),
+      sortSummary: document.getElementById("pa-sort-summary"),
       listDetailToggle: document.getElementById("pa-list-detail-toggle"),
       screens: document.querySelectorAll(".pa-screen[data-pa-screen]"),
       bottomTabs: document.getElementById("pa-bottom-tabs"),
@@ -1098,6 +1100,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   function formatPlayerDecimal(value) {
     const n = toPlayerNumber(value);
     return n === null ? "-" : n.toFixed(2).replace(/\.?0+$/, "");
+  }
+
+  function formatPlayerSignedNumber(value) {
+    const n = toPlayerNumber(value);
+    if (n === null) return "-";
+    return n > 0 ? `+${n}` : String(n);
   }
 
   function formatPlayerRecord(wins, draws, losses) {
@@ -2348,7 +2356,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return value;
   }
 
-  function createPlayerAnalysisSupplementRow(meta, sourceYear, index = 0, club = playerAnalysisState.selectedClub) {
+  function createPlayerAnalysisSupplementRow(meta, sourceYear, index = 0, club = playerAnalysisState.selectedClub, absenceMatches = null) {
     const year = Number(sourceYear);
     const info = getPlayerAnalysisClubInfo(club);
     const identity = getPlayerCanonicalIdentity(meta, year);
@@ -2356,6 +2364,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const seasonDetail = meta && meta.seasonDetails ? meta.seasonDetails[String(year)] : null;
     const numbers = seasonDetail && Array.isArray(seasonDetail.numbers) ? seasonDetail.numbers : meta.numbers;
     const positions = seasonDetail && Array.isArray(seasonDetail.positions) ? seasonDetail.positions : meta.positions;
+    const absenceCounter = Array.isArray(absenceMatches)
+      ? createPlayerAnalysisCounterFromMatches(absenceMatches)
+      : createPlayerAnalysisCounter();
     const row = {
       season: year,
       team: info.name,
@@ -2369,12 +2380,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       played_losses: 0,
       played_win_rate: null,
       played_points_per_match: null,
+      played_goals_against: 0,
+      played_goals_against_avg: null,
+      played_clean_sheets: 0,
       starter_matches: 0,
       starter_wins: 0,
       starter_draws: 0,
       starter_losses: 0,
       starter_win_rate: null,
       starter_points_per_match: null,
+      non_starter_matches: absenceCounter.matches,
+      non_starter_wins: absenceCounter.wins,
+      non_starter_draws: absenceCounter.draws,
+      non_starter_losses: absenceCounter.losses,
+      non_starter_win_rate: calculatePlayerRate(absenceCounter.wins, absenceCounter.matches),
+      non_starter_points_per_match: calculatePlayerPointsPerMatch(absenceCounter.wins, absenceCounter.draws, absenceCounter.matches),
       sub_matches: 0,
       sub_wins: 0,
       sub_draws: 0,
@@ -2382,6 +2402,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       sub_win_rate: null,
       sub_points_per_match: null,
       bench_only_matches: 0,
+      non_played_matches: absenceCounter.matches,
+      non_played_wins: absenceCounter.wins,
+      non_played_draws: absenceCounter.draws,
+      non_played_losses: absenceCounter.losses,
+      non_played_win_rate: calculatePlayerRate(absenceCounter.wins, absenceCounter.matches),
+      non_played_points_per_match: calculatePlayerPointsPerMatch(absenceCounter.wins, absenceCounter.draws, absenceCounter.matches),
       goals: 0,
       scored_matches: 0,
       scored_wins: 0,
@@ -2403,11 +2429,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       __paNoAppearance: true,
       __paSeasonText: Array.isArray(meta.season_texts) ? meta.season_texts.join(" / ") : ""
     };
+    assignPlayerAnalysisCounterFields(row, "played", createPlayerAnalysisCounter());
+    row.played_goals_against_avg = null;
+    row.played_clean_sheets = 0;
+    assignPlayerAnalysisCounterFields(row, "starter", createPlayerAnalysisCounter());
+    assignPlayerAnalysisCounterFields(row, "non_starter", absenceCounter);
+    assignPlayerAnalysisCounterFields(row, "sub", createPlayerAnalysisCounter());
+    assignPlayerAnalysisCounterFields(row, "non_played", absenceCounter);
     row.__paKey = `${groupKey || row.player_key || row.player_name}-supplement-${year}-${index}`;
     return row;
   }
 
-  async function mergePlayerAnalysisSupplementRows(rows, sourceYear, club = playerAnalysisState.selectedClub) {
+  async function mergePlayerAnalysisSupplementRows(rows, sourceYear, club = playerAnalysisState.selectedClub, absenceMatches = null) {
     const info = getPlayerAnalysisClubInfo(club);
     const year = Number(sourceYear);
     if (!Number.isInteger(year) || !getPlayerAnalysisYears(info.key).includes(year)) {
@@ -2419,7 +2452,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nextRows = [...(rows || [])];
     supplements.forEach((meta, index) => {
       if (!meta.seasons.includes(year)) return;
-      const row = createPlayerAnalysisSupplementRow(meta, year, index, info.key);
+      const row = createPlayerAnalysisSupplementRow(meta, year, index, info.key, absenceMatches);
       const key = getPlayerGroupKey(row);
       if (!key || existing.has(key)) return;
       existing.add(key);
@@ -2702,17 +2735,113 @@ document.addEventListener("DOMContentLoaded", async () => {
     return entry;
   }
 
-  function createPlayerAnalysisCounter() {
-    return { matches: 0, wins: 0, draws: 0, losses: 0, points: 0 };
+  async function loadPlayerAnalysisHistoryYear(year, club = playerAnalysisState.selectedClub) {
+    const info = getPlayerAnalysisClubInfo(club);
+    const normalizedYear = Number(year);
+    if (!Number.isInteger(normalizedYear) || !getPlayerAnalysisYears(info.key).includes(normalizedYear)) return [];
+    const cacheKey = `${info.key}:${normalizedYear}`;
+    if (playerAnalysisHistoryCache.has(cacheKey)) return playerAnalysisHistoryCache.get(cacheKey);
+    const promise = (async () => {
+      try {
+        const res = await fetch(`./data/history/${info.dataDir}/${normalizedYear}.json`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const payload = await res.json();
+        return Array.isArray(payload) ? payload : [];
+      } catch (error) {
+        console.warn(`Failed to load player analysis history for ${info.key} ${normalizedYear}`, error);
+        return [];
+      }
+    })();
+    playerAnalysisHistoryCache.set(cacheKey, promise);
+    return promise;
   }
 
-  function addPlayerAnalysisResult(counter, result, points) {
+  function findPlayerAnalysisHistoryMatch(historyMatches, match) {
+    if (!match) return null;
+    const matchId = String(match.match_id || "");
+    const date = toIsoDate(match.date || "");
+    const homeTeam = String(match.home_team || "").normalize("NFKC");
+    const awayTeam = String(match.away_team || "").normalize("NFKC");
+    return (historyMatches || []).find(item => String(item.match_card_id || item.match_id || "") === matchId)
+      || (historyMatches || []).find(item => {
+        if (toIsoDate(item.date || "") !== date) return false;
+        const historyHome = String(item.home_team || "").normalize("NFKC");
+        const historyAway = String(item.away_team || "").normalize("NFKC");
+        return (!homeTeam || robustTeamMatch(historyHome, homeTeam))
+          && (!awayTeam || robustTeamMatch(historyAway, awayTeam));
+      })
+      || null;
+  }
+
+  function parsePlayerGoalEventMinute(goal) {
+    const raw = String((goal && (goal.time || goal.minute_text || goal.minute)) || "").normalize("NFKC");
+    const add = raw.match(/(\d+)\s*['’′]?\s*\+\s*(\d+)/);
+    if (add) return Number(add[1]) + Number(add[2]);
+    const minute = toPlayerNumber(goal && goal.minute);
+    if (minute !== null) return minute;
+    const direct = raw.match(/\d+/);
+    return direct ? Number(direct[0]) : null;
+  }
+
+  function getPlayerAnalysisGoalEventsForMatch(match, historyMatch, datasetGoals = []) {
+    if (!match) return [];
+    if (historyMatch) {
+      const ownSide = match.target_side === "home" ? "home" : "away";
+      const goalsFor = Array.isArray(historyMatch[`${ownSide}_goals`]) ? historyMatch[`${ownSide}_goals`] : [];
+      const opponentGoals = Array.isArray(historyMatch[ownSide === "home" ? "away_goals" : "home_goals"])
+        ? historyMatch[ownSide === "home" ? "away_goals" : "home_goals"]
+        : [];
+      return [
+        ...goalsFor.map(goal => ({ side: "for", minute: parsePlayerGoalEventMinute(goal) })),
+        ...opponentGoals.map(goal => ({ side: "against", minute: parsePlayerGoalEventMinute(goal) }))
+      ].filter(event => event.minute !== null);
+    }
+    return (datasetGoals || [])
+      .filter(goal => String(goal.match_id) === String(match.match_id) && !goal.is_own_goal)
+      .map(goal => ({ side: "for", minute: parsePlayerGoalEventMinute(goal) }))
+      .filter(event => event.minute !== null);
+  }
+
+  function createPlayerAnalysisCounter() {
+    return { matches: 0, wins: 0, draws: 0, losses: 0, points: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 };
+  }
+
+  function addPlayerAnalysisResult(counter, result, points, match = null) {
     if (!counter) return;
     counter.matches += 1;
     if (result === "win") counter.wins += 1;
     else if (result === "draw") counter.draws += 1;
     else if (result === "loss") counter.losses += 1;
     counter.points += toPlayerNumber(points) || (result === "win" ? 3 : result === "draw" ? 1 : 0);
+    if (match) {
+      const goalsFor = toPlayerNumber(match.target_score) || 0;
+      const goalsAgainst = toPlayerNumber(match.opponent_score) || 0;
+      counter.goalsFor += goalsFor;
+      counter.goalsAgainst += goalsAgainst;
+      counter.goalDiff += goalsFor - goalsAgainst;
+    }
+  }
+
+  function createPlayerAnalysisCounterFromMatches(matches = []) {
+    const counter = createPlayerAnalysisCounter();
+    (Array.isArray(matches) ? matches : []).forEach(match => {
+      addPlayerAnalysisResult(counter, match && match.result, match && match.points, match);
+    });
+    return counter;
+  }
+
+  function assignPlayerAnalysisCounterFields(target, prefix, counter) {
+    const source = counter || createPlayerAnalysisCounter();
+    target[`${prefix}_matches`] = source.matches;
+    target[`${prefix}_wins`] = source.wins;
+    target[`${prefix}_draws`] = source.draws;
+    target[`${prefix}_losses`] = source.losses;
+    target[`${prefix}_points`] = source.points;
+    target[`${prefix}_win_rate`] = calculatePlayerRate(source.wins, source.matches);
+    target[`${prefix}_points_per_match`] = calculatePlayerPointsPerMatch(source.wins, source.draws, source.matches);
+    target[`${prefix}_goals_for`] = source.goalsFor;
+    target[`${prefix}_goals_against`] = source.goalsAgainst;
+    target[`${prefix}_goal_diff`] = source.goalDiff;
   }
 
   function sortPlayerPositions(values) {
@@ -2740,9 +2869,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         numbers: new Set(),
         positions: new Set(),
         played: createPlayerAnalysisCounter(),
+        playedMatchIds: new Set(),
+        starterMatchIds: new Set(),
+        played_goals_against: 0,
+        played_clean_sheets: 0,
         starter: createPlayerAnalysisCounter(),
+        non_starter: createPlayerAnalysisCounter(),
         sub: createPlayerAnalysisCounter(),
         bench_only: createPlayerAnalysisCounter(),
+        non_played: createPlayerAnalysisCounter(),
         scored: createPlayerAnalysisCounter(),
         scoredMatchIds: new Set(),
         carded: createPlayerAnalysisCounter(),
@@ -2776,12 +2911,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         played_losses: player.played.losses,
         played_win_rate: calculatePlayerRate(player.played.wins, player.played.matches),
         played_points_per_match: calculatePlayerPointsPerMatch(player.played.wins, player.played.draws, player.played.matches),
+        played_goals_against: player.played_goals_against,
+        played_goals_against_avg: calculatePlayerAveragePerMatch(player.played_goals_against, player.played.matches),
+        played_clean_sheets: player.played_clean_sheets,
         starter_matches: player.starter.matches,
         starter_wins: player.starter.wins,
         starter_draws: player.starter.draws,
         starter_losses: player.starter.losses,
         starter_win_rate: calculatePlayerRate(player.starter.wins, player.starter.matches),
         starter_points_per_match: calculatePlayerPointsPerMatch(player.starter.wins, player.starter.draws, player.starter.matches),
+        non_starter_matches: player.non_starter.matches,
+        non_starter_wins: player.non_starter.wins,
+        non_starter_draws: player.non_starter.draws,
+        non_starter_losses: player.non_starter.losses,
+        non_starter_win_rate: calculatePlayerRate(player.non_starter.wins, player.non_starter.matches),
+        non_starter_points_per_match: calculatePlayerPointsPerMatch(player.non_starter.wins, player.non_starter.draws, player.non_starter.matches),
         sub_matches: player.sub.matches,
         sub_wins: player.sub.wins,
         sub_draws: player.sub.draws,
@@ -2789,6 +2933,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         sub_win_rate: calculatePlayerRate(player.sub.wins, player.sub.matches),
         sub_points_per_match: calculatePlayerPointsPerMatch(player.sub.wins, player.sub.draws, player.sub.matches),
         bench_only_matches: player.bench_only.matches,
+        non_played_matches: player.non_played.matches,
+        non_played_wins: player.non_played.wins,
+        non_played_draws: player.non_played.draws,
+        non_played_losses: player.non_played.losses,
+        non_played_win_rate: calculatePlayerRate(player.non_played.wins, player.non_played.matches),
+        non_played_points_per_match: calculatePlayerPointsPerMatch(player.non_played.wins, player.non_played.draws, player.non_played.matches),
         goals: player.goals,
         scored_matches: player.scoredMatchIds.size,
         scored_wins: player.scored.wins,
@@ -2807,6 +2957,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         __paIndex: index,
         __paGroupKey: player.group_key || getPlayerCanonicalIdentity(player, sourceYear).groupKey
       };
+      assignPlayerAnalysisCounterFields(row, "played", player.played);
+      row.played_goals_against_avg = calculatePlayerAveragePerMatch(player.played_goals_against, player.played.matches);
+      row.played_clean_sheets = player.played_clean_sheets;
+      assignPlayerAnalysisCounterFields(row, "starter", player.starter);
+      assignPlayerAnalysisCounterFields(row, "non_starter", player.non_starter);
+      assignPlayerAnalysisCounterFields(row, "sub", player.sub);
+      assignPlayerAnalysisCounterFields(row, "non_played", player.non_played);
+      assignPlayerAnalysisCounterFields(row, "scored", player.scored);
+      assignPlayerAnalysisCounterFields(row, "carded", player.carded);
       row.__paKey = `${row.__paGroupKey || row.player_key || row.player_name || "player"}-${index}`;
       return row;
     }).sort((a, b) => (toPlayerNumber(b.played_matches) || 0) - (toPlayerNumber(a.played_matches) || 0)
@@ -2825,12 +2984,30 @@ document.addEventListener("DOMContentLoaded", async () => {
       const player = ensureScopedPlayer(players, appearance);
       if (!player) return;
       if (appearance.played) {
-        addPlayerAnalysisResult(player.played, match.result, match.points);
-        if (appearance.starter) addPlayerAnalysisResult(player.starter, match.result, match.points);
-        else if (appearance.sub_in) addPlayerAnalysisResult(player.sub, match.result, match.points);
+        const matchId = String(appearance.match_id);
+        const opponentScore = toPlayerNumber(match.opponent_score) || 0;
+        player.playedMatchIds.add(matchId);
+        if (appearance.starter) player.starterMatchIds.add(matchId);
+        player.played_goals_against += opponentScore;
+        if (opponentScore === 0) player.played_clean_sheets += 1;
+        addPlayerAnalysisResult(player.played, match.result, match.points, match);
+        if (appearance.starter) addPlayerAnalysisResult(player.starter, match.result, match.points, match);
+        else if (appearance.sub_in) addPlayerAnalysisResult(player.sub, match.result, match.points, match);
       } else if (appearance.bench) {
-        addPlayerAnalysisResult(player.bench_only, match.result, match.points);
+        addPlayerAnalysisResult(player.bench_only, match.result, match.points, match);
       }
+    });
+
+    players.forEach(player => {
+      targetMatches.forEach(match => {
+        const matchId = String(match.match_id);
+        if (!player.playedMatchIds.has(matchId)) {
+          addPlayerAnalysisResult(player.non_played, match.result, match.points, match);
+        }
+        if (!player.starterMatchIds.has(matchId)) {
+          addPlayerAnalysisResult(player.non_starter, match.result, match.points, match);
+        }
+      });
     });
 
     const scoredOnce = new Set();
@@ -2843,7 +3020,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       player.scoredMatchIds.add(String(goal.match_id));
       const scoredKey = `${goal.player_key}|${goal.match_id}`;
       if (!scoredOnce.has(scoredKey)) {
-        addPlayerAnalysisResult(player.scored, match.result, match.points);
+        addPlayerAnalysisResult(player.scored, match.result, match.points, match);
         scoredOnce.add(scoredKey);
       }
     });
@@ -2860,7 +3037,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       player.cardedMatchIds.add(String(card.match_id));
       const cardKey = `${card.player_key}|${card.match_id}`;
       if (!cardedOnce.has(cardKey)) {
-        addPlayerAnalysisResult(player.carded, match.result, match.points);
+        addPlayerAnalysisResult(player.carded, match.result, match.points, match);
         cardedOnce.add(cardKey);
       }
     });
@@ -2874,7 +3051,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (playerAnalysisScopedCache.has(cacheKey)) return playerAnalysisScopedCache.get(cacheKey);
     const dataset = await loadPlayerAnalysisDatasetYear(normalizedYear);
     const scopedRows = dataset.missing ? [] : buildScopedPlayerAnalysisRows(dataset, normalizedYear, scope, competitionNames);
-    const rows = await mergePlayerAnalysisSupplementRows(scopedRows, normalizedYear, playerAnalysisState.selectedClub);
+    const absenceMatches = dataset.missing
+      ? []
+      : (dataset.matches || []).filter(match => isPlayerAnalysisScopeMatch(match, scope, competitionNames));
+    const rows = await mergePlayerAnalysisSupplementRows(scopedRows, normalizedYear, playerAnalysisState.selectedClub, absenceMatches);
     const entry = {
       rows,
       missing: rows.length === 0
@@ -2914,6 +3094,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const matchCount = toPlayerNumber(matches);
     if (!matchCount) return null;
     return Math.round(((winCount * 3 + drawCount) / matchCount) * 100) / 100;
+  }
+
+  function calculatePlayerAveragePerMatch(total, matches) {
+    const totalValue = toPlayerNumber(total) || 0;
+    const matchCount = toPlayerNumber(matches);
+    if (!matchCount) return null;
+    return Math.round((totalValue / matchCount) * 100) / 100;
   }
 
   function formatPlayerFixed(value, digits = 2) {
@@ -2975,14 +3162,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       + (appearanceCorrection * 10)
     );
 
-    const goalsAgainstAvg = toPlayerNumber(metrics.played_goals_against_avg);
+    const goalsAgainstAvg = toPlayerNumber(hasPlayerValue(metrics.played_goals_against_avg)
+      ? metrics.played_goals_against_avg
+      : player && player.played_goals_against_avg);
     let goalsAgainstScore = null;
     if (goalsAgainstAvg !== null && scales.maxGoalsAgainstAvg !== null) {
       goalsAgainstScore = scales.maxGoalsAgainstAvg === scales.minGoalsAgainstAvg
         ? 40
         : ((scales.maxGoalsAgainstAvg - goalsAgainstAvg) / (scales.maxGoalsAgainstAvg - scales.minGoalsAgainstAvg)) * 40;
     }
-    const cleanSheetRate = playedMatches ? (toPlayerNumber(metrics.played_clean_sheets) || 0) / playedMatches : null;
+    const cleanSheets = hasPlayerValue(metrics.played_clean_sheets)
+      ? metrics.played_clean_sheets
+      : player && player.played_clean_sheets;
+    const cleanSheetRate = playedMatches ? (toPlayerNumber(cleanSheets) || 0) / playedMatches : null;
     const nonLossRate = playedMatches ? ((toPlayerNumber(player && player.played_wins) || 0) + (toPlayerNumber(player && player.played_draws) || 0)) / playedMatches : null;
     const defense = goalsAgainstScore === null
       ? null
@@ -3083,7 +3275,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function createPlayerMatchStats() {
-    return { matches: 0, wins: 0, draws: 0, losses: 0, points: 0, goalsFor: 0, goalsAgainst: 0 };
+    return { matches: 0, wins: 0, draws: 0, losses: 0, points: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 };
   }
 
   function addMatchToPlayerStats(stats, match) {
@@ -3093,8 +3285,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     else if (match.result === "draw") stats.draws += 1;
     else if (match.result === "loss") stats.losses += 1;
     stats.points += toPlayerNumber(match.points) || (match.result === "win" ? 3 : match.result === "draw" ? 1 : 0);
-    stats.goalsFor += toPlayerNumber(match.target_score) || 0;
-    stats.goalsAgainst += toPlayerNumber(match.opponent_score) || 0;
+    const goalsFor = toPlayerNumber(match.target_score) || 0;
+    const goalsAgainst = toPlayerNumber(match.opponent_score) || 0;
+    stats.goalsFor += goalsFor;
+    stats.goalsAgainst += goalsAgainst;
+    stats.goalDiff += goalsFor - goalsAgainst;
   }
 
   function finalizePlayerMatchStats(stats) {
@@ -3106,6 +3301,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       goalsForAvg: matches ? Math.round(((stats.goalsFor || 0) / matches) * 100) / 100 : null,
       goalsAgainstAvg: matches ? Math.round(((stats.goalsAgainst || 0) / matches) * 100) / 100 : null
     };
+  }
+
+  async function buildPlayerAnalysisTeamStats(yearValue = getPlayerAnalysisTimeValue(), scope = playerAnalysisState.matchScope, competitionNames = getActivePlayerAnalysisCompetitionFilter()) {
+    const years = Array.isArray(yearValue)
+      ? yearValue.map(Number).filter(Number.isInteger)
+      : (yearValue === "all" ? getPlayerAnalysisYears() : [Number(yearValue)].filter(Number.isInteger));
+    const stats = { ...createPlayerMatchStats(), cleanSheets: 0 };
+    for (const year of years) {
+      const dataset = await loadPlayerAnalysisDatasetYear(year);
+      if (dataset.missing) continue;
+      (dataset.matches || []).forEach(match => {
+        if (!isPlayerAnalysisScopeMatch(match, scope, competitionNames)) return;
+        addMatchToPlayerStats(stats, match);
+        if ((toPlayerNumber(match.opponent_score) || 0) === 0) stats.cleanSheets += 1;
+      });
+    }
+    return finalizePlayerMatchStats(stats);
   }
 
   async function buildPlayerPerformanceExtras(player, yearRows = null, scope = playerAnalysisState.matchScope, competitionNames = getActivePlayerAnalysisCompetitionFilter()) {
@@ -3316,9 +3528,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const groups = new Map();
     const sumFields = [
       "played_matches", "played_wins", "played_draws", "played_losses",
+      "played_points", "played_goals_for", "played_goals_against", "played_goal_diff", "played_clean_sheets",
       "starter_matches", "starter_wins", "starter_draws", "starter_losses",
+      "starter_points", "starter_goals_for", "starter_goals_against", "starter_goal_diff",
+      "non_starter_matches", "non_starter_wins", "non_starter_draws", "non_starter_losses",
+      "non_starter_points", "non_starter_goals_for", "non_starter_goals_against", "non_starter_goal_diff",
       "sub_matches", "sub_wins", "sub_draws", "sub_losses",
-      "bench_only_matches", "goals", "scored_matches", "scored_wins",
+      "sub_points", "sub_goals_for", "sub_goals_against", "sub_goal_diff",
+      "bench_only_matches", "non_played_matches", "non_played_wins",
+      "non_played_draws", "non_played_losses", "non_played_points",
+      "non_played_goals_for", "non_played_goals_against", "non_played_goal_diff",
+      "goals", "scored_matches", "scored_wins",
       "scored_draws", "scored_losses", "yellow_cards", "red_cards",
       "carded_matches", "carded_wins", "carded_draws", "carded_losses"
     ];
@@ -3365,12 +3585,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       player.numbers.sort((a, b) => Number(a) - Number(b) || a.localeCompare(b, "ja"));
       player.__paYearRows.sort((a, b) => (getPlayerYearValue(b) || 0) - (getPlayerYearValue(a) || 0));
       player.played_win_rate = calculatePlayerRate(player.played_wins, player.played_matches);
+      player.played_goals_against_avg = calculatePlayerAveragePerMatch(player.played_goals_against, player.played_matches);
+      player.played_goal_diff = (toPlayerNumber(player.played_goals_for) || 0) - (toPlayerNumber(player.played_goals_against) || 0);
       player.starter_win_rate = calculatePlayerRate(player.starter_wins, player.starter_matches);
+      player.starter_goal_diff = (toPlayerNumber(player.starter_goals_for) || 0) - (toPlayerNumber(player.starter_goals_against) || 0);
+      player.non_starter_win_rate = calculatePlayerRate(player.non_starter_wins, player.non_starter_matches);
+      player.non_starter_goal_diff = (toPlayerNumber(player.non_starter_goals_for) || 0) - (toPlayerNumber(player.non_starter_goals_against) || 0);
       player.sub_win_rate = calculatePlayerRate(player.sub_wins, player.sub_matches);
+      player.sub_goal_diff = (toPlayerNumber(player.sub_goals_for) || 0) - (toPlayerNumber(player.sub_goals_against) || 0);
       player.scored_win_rate = calculatePlayerRate(player.scored_wins, player.scored_matches);
       player.played_points_per_match = calculatePlayerPointsPerMatch(player.played_wins, player.played_draws, player.played_matches);
       player.starter_points_per_match = calculatePlayerPointsPerMatch(player.starter_wins, player.starter_draws, player.starter_matches);
+      player.non_starter_points_per_match = calculatePlayerPointsPerMatch(player.non_starter_wins, player.non_starter_draws, player.non_starter_matches);
       player.sub_points_per_match = calculatePlayerPointsPerMatch(player.sub_wins, player.sub_draws, player.sub_matches);
+      player.non_played_win_rate = calculatePlayerRate(player.non_played_wins, player.non_played_matches);
+      player.non_played_goal_diff = (toPlayerNumber(player.non_played_goals_for) || 0) - (toPlayerNumber(player.non_played_goals_against) || 0);
+      player.non_played_points_per_match = calculatePlayerPointsPerMatch(player.non_played_wins, player.non_played_draws, player.non_played_matches);
       player.scored_points_per_match = calculatePlayerPointsPerMatch(player.scored_wins, player.scored_draws, player.scored_matches);
       player.carded_win_rate = calculatePlayerRate(player.carded_wins, player.carded_matches);
       player.__paIndex = index;
@@ -3807,6 +4037,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (sortKey === "played_minutes") {
       return player && player.__paRankingMetrics ? player.__paRankingMetrics.played_minutes : null;
     }
+    if (sortKey === "played_goals_against_avg" || sortKey === "played_clean_sheets") {
+      const directValue = player ? player[sortKey] : null;
+      if (hasPlayerValue(directValue)) return directValue;
+      return player && player.__paRankingMetrics ? player.__paRankingMetrics[sortKey] : null;
+    }
+    if (sortKey === "on_pitch_goals_for" || sortKey === "on_pitch_goals_against" || sortKey === "on_pitch_goal_diff") {
+      return player && player.__paRankingMetrics ? player.__paRankingMetrics[sortKey] : null;
+    }
     if (sortKey === "impact_score" || sortKey === "total_impact") return getPlayerImpactValue(player, "total");
     if (sortKey === "attack_impact") return getPlayerImpactValue(player, "attack");
     if (sortKey === "defense_impact") return getPlayerImpactValue(player, "defense");
@@ -3824,21 +4062,124 @@ document.addEventListener("DOMContentLoaded", async () => {
     return player ? player[sortKey] : null;
   }
 
+  function shouldPlayerAnalysisSortAscByDefault(sortKey) {
+    if (["number", "position_order", "player_name", "played_goals_against_avg"].includes(sortKey)) return true;
+    return String(sortKey || "").endsWith("_goals_against");
+  }
+
+  function getPlayerAnalysisSortInfo(sortKey = playerAnalysisState.sortKey) {
+    const info = {
+      number: { label: "背番号", shortLabel: "背番号", type: "number", noAverage: true },
+      position_order: { label: "ポジション順", shortLabel: "位置", type: "text", noAverage: true },
+      player_name: { label: "選手名", shortLabel: "名前順", type: "text", noAverage: true },
+      season_count: { label: "所属年数", shortLabel: "所属年数", type: "number" },
+      played_matches: { label: "出場試合数", shortLabel: "出場", type: "number", teamMetric: "matches", teamLabel: "チーム試合数" },
+      played_minutes: { label: "出場時間", shortLabel: "出場時間", type: "minutes" },
+      played_wins: { label: "出場時勝利数", shortLabel: "出場時勝利", type: "number", teamMetric: "wins", teamLabel: "チーム勝利数" },
+      played_draws: { label: "出場時引分数", shortLabel: "出場時引分", type: "number", teamMetric: "draws", teamLabel: "チーム引分数" },
+      played_losses: { label: "出場時敗戦数", shortLabel: "出場時敗戦", type: "number", teamMetric: "losses", teamLabel: "チーム敗戦数" },
+      played_points: { label: "出場時勝ち点", shortLabel: "出場時勝ち点", type: "number", teamMetric: "points", teamLabel: "チーム勝ち点" },
+      played_win_rate: { label: "出場時勝率", shortLabel: "出場時勝率", type: "rate", teamMetric: "winRate", teamLabel: "チーム勝率" },
+      played_points_per_match: { label: "出場時平均勝ち点", shortLabel: "出場時平均勝ち点", type: "decimal", teamMetric: "pointsPerMatch", teamLabel: "シーズン平均勝ち点" },
+      played_goals_for: { label: "出場時得点数", shortLabel: "出場時得点", type: "number", teamMetric: "goalsFor", teamLabel: "チーム得点" },
+      played_goals_against: { label: "出場時失点数", shortLabel: "出場時失点", type: "number", teamMetric: "goalsAgainst", teamLabel: "チーム失点" },
+      played_goal_diff: { label: "出場時得失点差", shortLabel: "出場時得失点差", type: "signed", teamMetric: "goalDiff", teamLabel: "チーム得失点差" },
+      played_goals_against_avg: { label: "出場試合失点率", shortLabel: "出場時失点率", type: "goalsAgainstAverage", teamMetric: "goalsAgainstAvg", teamLabel: "シーズン失点率" },
+      played_clean_sheets: { label: "出場時無失点試合数", shortLabel: "出場時無失点", type: "number", teamMetric: "cleanSheets", teamLabel: "チーム無失点試合" },
+      on_pitch_goals_for: { label: "出場時間中得点数", shortLabel: "時間中得点", type: "number", teamMetric: "goalsFor", teamLabel: "チーム得点" },
+      on_pitch_goals_against: { label: "出場時間中失点数", shortLabel: "時間中失点", type: "number", teamMetric: "goalsAgainst", teamLabel: "チーム失点" },
+      on_pitch_goal_diff: { label: "出場時間中得失点差", shortLabel: "時間中得失点差", type: "signed", teamMetric: "goalDiff", teamLabel: "チーム得失点差" },
+      starter_matches: { label: "先発数", shortLabel: "先発", type: "number", teamMetric: "matches", teamLabel: "チーム試合数" },
+      starter_points: { label: "先発時勝ち点", shortLabel: "先発勝ち点", type: "number", teamMetric: "points", teamLabel: "チーム勝ち点" },
+      starter_win_rate: { label: "先発時勝率", shortLabel: "先発勝率", type: "rate", teamMetric: "winRate", teamLabel: "チーム勝率" },
+      starter_points_per_match: { label: "先発時平均勝ち点", shortLabel: "先発平均勝ち点", type: "decimal", teamMetric: "pointsPerMatch", teamLabel: "シーズン平均勝ち点" },
+      starter_goals_for: { label: "先発時得点数", shortLabel: "先発得点", type: "number", teamMetric: "goalsFor", teamLabel: "チーム得点" },
+      starter_goals_against: { label: "先発時失点数", shortLabel: "先発失点", type: "number", teamMetric: "goalsAgainst", teamLabel: "チーム失点" },
+      starter_goal_diff: { label: "先発時得失点差", shortLabel: "先発得失点差", type: "signed", teamMetric: "goalDiff", teamLabel: "チーム得失点差" },
+      non_starter_matches: { label: "非スタメン時試合数", shortLabel: "非スタメン", type: "number", teamMetric: "matches", teamLabel: "チーム試合数" },
+      non_starter_points: { label: "非スタメン時勝ち点", shortLabel: "非スタメン勝ち点", type: "number", teamMetric: "points", teamLabel: "チーム勝ち点" },
+      non_starter_win_rate: { label: "非スタメン時勝率", shortLabel: "非スタメン勝率", type: "rate", teamMetric: "winRate", teamLabel: "チーム勝率" },
+      non_starter_points_per_match: { label: "非スタメン時平均勝ち点", shortLabel: "非スタメン平均勝ち点", type: "decimal", teamMetric: "pointsPerMatch", teamLabel: "シーズン平均勝ち点" },
+      non_starter_goals_for: { label: "非スタメン時得点数", shortLabel: "非スタメン得点", type: "number", teamMetric: "goalsFor", teamLabel: "チーム得点" },
+      non_starter_goals_against: { label: "非スタメン時失点数", shortLabel: "非スタメン失点", type: "number", teamMetric: "goalsAgainst", teamLabel: "チーム失点" },
+      non_starter_goal_diff: { label: "非スタメン時得失点差", shortLabel: "非スタメン得失点差", type: "signed", teamMetric: "goalDiff", teamLabel: "チーム得失点差" },
+      sub_matches: { label: "途中出場数", shortLabel: "途中", type: "number" },
+      sub_points: { label: "途中出場時勝ち点", shortLabel: "途中勝ち点", type: "number", teamMetric: "points", teamLabel: "チーム勝ち点" },
+      sub_win_rate: { label: "途中出場時勝率", shortLabel: "途中勝率", type: "rate", teamMetric: "winRate", teamLabel: "チーム勝率" },
+      sub_points_per_match: { label: "途中出場時平均勝ち点", shortLabel: "途中平均勝ち点", type: "decimal", teamMetric: "pointsPerMatch", teamLabel: "シーズン平均勝ち点" },
+      sub_goals_for: { label: "途中出場時得点数", shortLabel: "途中得点", type: "number", teamMetric: "goalsFor", teamLabel: "チーム得点" },
+      sub_goals_against: { label: "途中出場時失点数", shortLabel: "途中失点", type: "number", teamMetric: "goalsAgainst", teamLabel: "チーム失点" },
+      sub_goal_diff: { label: "途中出場時得失点差", shortLabel: "途中得失点差", type: "signed", teamMetric: "goalDiff", teamLabel: "チーム得失点差" },
+      bench_only_matches: { label: "ベンチ入りのみ", shortLabel: "ベンチのみ", type: "number" },
+      non_played_matches: { label: "未出場試合数", shortLabel: "未出場", type: "number", teamMetric: "matches", teamLabel: "チーム試合数" },
+      non_played_points: { label: "未出場時勝ち点", shortLabel: "未出場勝ち点", type: "number", teamMetric: "points", teamLabel: "チーム勝ち点" },
+      non_played_win_rate: { label: "未出場時勝率", shortLabel: "未出場勝率", type: "rate", teamMetric: "winRate", teamLabel: "チーム勝率" },
+      non_played_points_per_match: { label: "未出場時平均勝ち点", shortLabel: "未出場平均勝ち点", type: "decimal", teamMetric: "pointsPerMatch", teamLabel: "シーズン平均勝ち点" },
+      non_played_goals_for: { label: "未出場時得点数", shortLabel: "未出場得点", type: "number", teamMetric: "goalsFor", teamLabel: "チーム得点" },
+      non_played_goals_against: { label: "未出場時失点数", shortLabel: "未出場失点", type: "number", teamMetric: "goalsAgainst", teamLabel: "チーム失点" },
+      non_played_goal_diff: { label: "未出場時得失点差", shortLabel: "未出場得失点差", type: "signed", teamMetric: "goalDiff", teamLabel: "チーム得失点差" },
+      goals: { label: "得点数", shortLabel: "得点", type: "number" },
+      scored_matches: { label: "ゴール試合数", shortLabel: "ゴール試合", type: "number" },
+      scored_win_rate: { label: "ゴール試合勝率", shortLabel: "ゴール勝率", type: "rate" },
+      scored_points_per_match: { label: "ゴール試合平均勝ち点", shortLabel: "ゴール平均勝ち点", type: "decimal" },
+      yellow_cards: { label: "警告数", shortLabel: "警告", type: "number" },
+      red_cards: { label: "退場数", shortLabel: "退場", type: "number" },
+      carded_matches: { label: "カードを受けた試合数", shortLabel: "カード試合", type: "number" },
+      carded_win_rate: { label: "カード時勝率", shortLabel: "カード時勝率", type: "rate" },
+      attack_impact: { label: "攻撃インパクト", shortLabel: "攻撃インパクト", type: "impact" },
+      defense_impact: { label: "守備インパクト", shortLabel: "守備インパクト", type: "impact" },
+      total_impact: { label: "総合インパクト", shortLabel: "総合インパクト", type: "impact" },
+      impact_score: { label: "総合インパクト", shortLabel: "総合インパクト", type: "impact" }
+    };
+    return info[sortKey] || null;
+  }
+
+  function formatPlayerAnalysisMetricValue(value, type = "number") {
+    if (type === "rate") return formatPlayerRate(value);
+    if (type === "decimal") return formatPlayerDecimal(value);
+    if (type === "minutes") return formatPlayerMinutes(value);
+    if (type === "goalsAgainstAverage") return formatPlayerGoalsAgainstAverage(value);
+    if (type === "signed") return formatPlayerSignedNumber(value);
+    if (type === "impact") return value === null ? "データ不足" : formatPlayerFixed(value, 1);
+    if (type === "text") return formatPlayerList(value);
+    return formatPlayerNumber(value);
+  }
+
+  function formatPlayerAnalysisSortValue(player, sortKey = playerAnalysisState.sortKey) {
+    const info = getPlayerAnalysisSortInfo(sortKey);
+    if (sortKey === "number") return formatPlayerList(player && player.numbers);
+    if (sortKey === "position_order") return formatPlayerList(player && player.positions);
+    if (sortKey === "player_name") return player && player.player_name ? player.player_name : "-";
+    if (sortKey === "season_count") return formatPlayerNumber(getPlayerSeasonCount(player));
+    if (sortKey === "attack_impact") return formatPlayerImpactScore(player, "attack");
+    if (sortKey === "defense_impact") return formatPlayerImpactScore(player, "defense");
+    if (sortKey === "impact_score" || sortKey === "total_impact") return formatPlayerImpactScore(player, "total");
+    return formatPlayerAnalysisMetricValue(getPlayerAnalysisSortValue(player, sortKey), info && info.type);
+  }
+
   function getPlayerAnalysisSortMetric(player) {
     const sortKey = playerAnalysisState.sortKey;
+    const info = getPlayerAnalysisSortInfo(sortKey);
+    if (info) return [info.shortLabel || info.label, formatPlayerAnalysisSortValue(player, sortKey)];
     if (sortKey === "number") return ["背番号", formatPlayerList(player.numbers)];
     if (sortKey === "played_minutes") return ["出場時間", formatPlayerMinutes(getPlayerAnalysisSortValue(player, sortKey))];
     if (sortKey === "played_wins") return ["出場時勝利", formatPlayerNumber(player.played_wins)];
     if (sortKey === "played_draws") return ["出場時引分", formatPlayerNumber(player.played_draws)];
     if (sortKey === "played_losses") return ["出場時敗戦", formatPlayerNumber(player.played_losses)];
     if (sortKey === "played_points_per_match") return ["出場時平均勝ち点", formatPlayerDecimal(player.played_points_per_match)];
+    if (sortKey === "played_goals_against_avg") return ["出場時失点率", formatPlayerGoalsAgainstAverage(getPlayerAnalysisSortValue(player, sortKey))];
+    if (sortKey === "played_clean_sheets") return ["出場時無失点", formatPlayerNumber(getPlayerAnalysisSortValue(player, sortKey))];
     if (sortKey === "starter_matches") return ["先発", formatPlayerNumber(player.starter_matches)];
     if (sortKey === "starter_win_rate") return ["先発勝率", formatPlayerRate(player.starter_win_rate)];
     if (sortKey === "starter_points_per_match") return ["先発平均勝ち点", formatPlayerDecimal(player.starter_points_per_match)];
+    if (sortKey === "non_starter_win_rate") return ["非スタメン勝率", formatPlayerRate(player.non_starter_win_rate)];
+    if (sortKey === "non_starter_points_per_match") return ["非スタメン平均勝ち点", formatPlayerDecimal(player.non_starter_points_per_match)];
     if (sortKey === "sub_matches") return ["途中", formatPlayerNumber(player.sub_matches)];
     if (sortKey === "sub_win_rate") return ["途中勝率", formatPlayerRate(player.sub_win_rate)];
     if (sortKey === "sub_points_per_match") return ["途中平均勝ち点", formatPlayerDecimal(player.sub_points_per_match)];
     if (sortKey === "bench_only_matches") return ["ベンチのみ", formatPlayerNumber(player.bench_only_matches)];
+    if (sortKey === "non_played_win_rate") return ["未出場勝率", formatPlayerRate(player.non_played_win_rate)];
+    if (sortKey === "non_played_points_per_match") return ["未出場平均勝ち点", formatPlayerDecimal(player.non_played_points_per_match)];
     if (sortKey === "goals") return ["得点", formatPlayerNumber(player.goals)];
     if (sortKey === "scored_matches") return ["ゴール試合", formatPlayerNumber(player.scored_matches)];
     if (sortKey === "played_win_rate") return ["勝率", formatPlayerRate(player.played_win_rate)];
@@ -3855,6 +4196,67 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (sortKey === "position_order") return ["位置", formatPlayerList(player.positions)];
     if (sortKey === "player_name") return ["名前順", formatPlayerList(player.positions)];
     return ["出場", formatPlayerNumber(player.played_matches)];
+  }
+
+  function formatPlayerAnalysisAverageValue(value, type = "number") {
+    const n = toPlayerNumber(value);
+    if (n === null) return "-";
+    if (type === "rate") return formatPlayerRate(n);
+    if (type === "minutes") return formatPlayerMinutes(n);
+    if (type === "signed") return n > 0 ? `+${formatPlayerDecimal(n)}` : formatPlayerDecimal(n);
+    if (type === "impact") return formatPlayerFixed(n, 1);
+    return formatPlayerDecimal(n);
+  }
+
+  function getPlayerAnalysisTeamSortValue(sortKey, teamStats = playerAnalysisState.teamStats) {
+    const info = getPlayerAnalysisSortInfo(sortKey);
+    if (!info || !info.teamMetric || !teamStats) return null;
+    if (info.teamMetric === "goalDiff") {
+      return (toPlayerNumber(teamStats.goalsFor) || 0) - (toPlayerNumber(teamStats.goalsAgainst) || 0);
+    }
+    if (info.teamMetric === "cleanSheets") return teamStats.cleanSheets;
+    return teamStats[info.teamMetric];
+  }
+
+  function renderPlayerAnalysisSortSummary(rows = playerAnalysisState.filtered || []) {
+    const { sortSummary } = getPlayerAnalysisElements();
+    if (!sortSummary) return;
+    const sortKey = playerAnalysisState.sortKey;
+    const info = getPlayerAnalysisSortInfo(sortKey);
+    if (!info) {
+      sortSummary.innerHTML = "";
+      return;
+    }
+    const values = (rows || [])
+      .map(player => getPlayerAnalysisSortValue(player, sortKey))
+      .map(toPlayerNumber)
+      .filter(value => value !== null);
+    const average = !info.noAverage && values.length
+      ? values.reduce((sum, value) => sum + value, 0) / values.length
+      : null;
+    const teamValue = getPlayerAnalysisTeamSortValue(sortKey);
+    const cards = [
+      {
+        label: `${info.label} 選手平均`,
+        value: average === null ? "-" : formatPlayerAnalysisAverageValue(average, info.type),
+        hidden: info.noAverage
+      },
+      {
+        label: info.teamLabel || "チーム数値",
+        value: formatPlayerAnalysisMetricValue(teamValue, info.type),
+        hidden: teamValue === null
+      }
+    ].filter(card => !card.hidden);
+    if (!cards.length) {
+      sortSummary.innerHTML = `<span>${escapeHtml(info.label)}</span>`;
+      return;
+    }
+    sortSummary.innerHTML = cards.map(card => `
+      <div>
+        <span>${escapeHtml(card.label)}</span>
+        <strong>${escapeHtml(card.value)}</strong>
+      </div>
+    `).join("");
   }
 
   function updatePlayerAnalysisSortIndicators() {
@@ -4030,7 +4432,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const previousKey = playerAnalysisState.sortKey;
     if (sortKeySelect) playerAnalysisState.sortKey = sortKeySelect.value || "played_matches";
     if (sortDirectionSelect) {
-      if (["number", "position_order", "player_name"].includes(playerAnalysisState.sortKey) && previousKey !== playerAnalysisState.sortKey) {
+      if (shouldPlayerAnalysisSortAscByDefault(playerAnalysisState.sortKey) && previousKey !== playerAnalysisState.sortKey) {
         playerAnalysisState.sortDirection = "asc";
         sortDirectionSelect.value = "asc";
       } else {
@@ -4098,6 +4500,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       played_goals_against_avg: null,
       played_clean_sheets: 0,
       played_non_losses: 0,
+      on_pitch_goals_for: 0,
+      on_pitch_goals_against: 0,
+      on_pitch_goal_diff: 0,
       gk_matches: 0,
       gk_goals_against: 0,
       gk_goals_against_avg: null,
@@ -4265,6 +4670,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     return Math.max(0, end - start);
   }
 
+  function isPlayerGoalEventDuringAppearance(eventMinute, appearance, forcedEndMinute = null, matchEndMinute = 90) {
+    const minute = toPlayerNumber(eventMinute);
+    if (!appearance || !appearance.played || minute === null) return false;
+    const start = toPlayerNumber(appearance.minute_in) || 0;
+    const endValue = toPlayerNumber(appearance.minute_out);
+    const forcedEnd = toPlayerNumber(forcedEndMinute);
+    const defaultEnd = toPlayerNumber(matchEndMinute) || 90;
+    const endCandidates = [];
+    if (endValue !== null) endCandidates.push(endValue);
+    if (forcedEnd !== null) endCandidates.push(forcedEnd);
+    const end = endCandidates.length ? Math.min(...endCandidates) : defaultEnd;
+    return minute >= start && minute <= end;
+  }
+
   function ensurePlayerRankingMetric(metrics, source, sourceYear) {
     const identity = getPlayerCanonicalIdentity(source, sourceYear);
     const key = identity.groupKey;
@@ -4285,6 +4704,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!targetMatches.length) continue;
 
       const matchMap = new Map(targetMatches.map(match => [String(match.match_id), match]));
+      const historyMatches = await loadPlayerAnalysisHistoryYear(targetYear);
+      const goalEventsByMatchId = new Map(targetMatches.map(match => {
+        const historyMatch = findPlayerAnalysisHistoryMatch(historyMatches, match);
+        return [
+          String(match.match_id),
+          getPlayerAnalysisGoalEventsForMatch(match, historyMatch, dataset.goals)
+        ];
+      }));
       const matchEndMinuteById = buildPlayerMatchEndMinuteMap(targetMatches, dataset.appearances, dataset.goals, dataset.cards);
       const appearanceByMatchPlayer = new Map();
       const redCardMinuteByMatchPlayer = buildPlayerRedCardMinuteMap(
@@ -4313,6 +4740,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           metric.played_goals_against += opponentScore;
           if (opponentScore === 0) metric.played_clean_sheets += 1;
           if (match.result !== "loss") metric.played_non_losses += 1;
+          const goalEvents = goalEventsByMatchId.get(String(appearance.match_id)) || [];
+          goalEvents.forEach(event => {
+            if (!isPlayerGoalEventDuringAppearance(
+              event.minute,
+              appearance,
+              redCardMinuteByMatchPlayer.get(matchPlayerKey),
+              matchEndMinuteById.get(String(appearance.match_id))
+            )) return;
+            if (event.side === "against") metric.on_pitch_goals_against += 1;
+            else metric.on_pitch_goals_for += 1;
+          });
           if (String(appearance.position || "").trim() === "GK") {
             metric.gk_matches += 1;
             metric.gk_goals_against += opponentScore;
@@ -4372,6 +4810,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       metric.gk_goals_against_avg = metric.gk_matches
         ? Math.round((metric.gk_goals_against / metric.gk_matches) * 100) / 100
         : null;
+      metric.on_pitch_goal_diff = (toPlayerNumber(metric.on_pitch_goals_for) || 0) - (toPlayerNumber(metric.on_pitch_goals_against) || 0);
     });
 
     return metrics;
@@ -4723,7 +5162,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       "played_minutes", "played_metric_matches", "sub_goals", "first_half_goals",
       "second_half_goals", "additional_time_goals", "extra_time_goals", "hat_tricks",
       "important_goal_points", "played_goals_against", "played_clean_sheets",
-      "played_non_losses", "gk_matches", "gk_goals_against", "gk_clean_sheets"
+      "played_non_losses", "on_pitch_goals_for", "on_pitch_goals_against",
+      "on_pitch_goal_diff", "gk_matches", "gk_goals_against", "gk_clean_sheets"
     ].forEach(field => {
       target[field] = (toPlayerNumber(target[field]) || 0) + (toPlayerNumber(source[field]) || 0);
     });
@@ -4737,6 +5177,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ? Math.round((metric.gk_goals_against / metric.gk_matches) * 100) / 100
       : null;
     metric.important_goal_points = Math.round((metric.important_goal_points || 0) * 10) / 10;
+    metric.on_pitch_goal_diff = (toPlayerNumber(metric.on_pitch_goals_for) || 0) - (toPlayerNumber(metric.on_pitch_goals_against) || 0);
     return metric;
   }
 
@@ -5026,16 +5467,33 @@ document.addEventListener("DOMContentLoaded", async () => {
       played_losses: 0,
       played_win_rate: null,
       played_points_per_match: null,
+      played_goals_against: 0,
+      played_goals_against_avg: null,
+      played_clean_sheets: 0,
       starter_matches: 0,
       starter_wins: 0,
       starter_draws: 0,
       starter_losses: 0,
       starter_win_rate: null,
+      starter_points_per_match: null,
+      non_starter_matches: 0,
+      non_starter_wins: 0,
+      non_starter_draws: 0,
+      non_starter_losses: 0,
+      non_starter_win_rate: null,
+      non_starter_points_per_match: null,
       sub_matches: 0,
       sub_wins: 0,
       sub_draws: 0,
       sub_losses: 0,
       sub_win_rate: null,
+      sub_points_per_match: null,
+      non_played_matches: 0,
+      non_played_wins: 0,
+      non_played_draws: 0,
+      non_played_losses: 0,
+      non_played_win_rate: null,
+      non_played_points_per_match: null,
       goals: 0,
       scored_matches: 0,
       scored_wins: 0,
@@ -5047,6 +5505,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       __paRankingMetrics: createPlayerRankingMetric(),
       __paNoCompareData: true
     };
+    assignPlayerAnalysisCounterFields(row, "played", createPlayerAnalysisCounter());
+    row.played_goals_against_avg = null;
+    row.played_clean_sheets = 0;
+    assignPlayerAnalysisCounterFields(row, "starter", createPlayerAnalysisCounter());
+    assignPlayerAnalysisCounterFields(row, "non_starter", createPlayerAnalysisCounter());
+    assignPlayerAnalysisCounterFields(row, "sub", createPlayerAnalysisCounter());
+    assignPlayerAnalysisCounterFields(row, "non_played", createPlayerAnalysisCounter());
     ensurePlayerImpactScores([row]);
     return row;
   }
@@ -5558,6 +6023,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       renderPlayerAnalysisMobileList(filtered);
       renderPlayerAnalysisDetail(null);
       updatePlayerAnalysisSortIndicators();
+      renderPlayerAnalysisSortSummary(filtered);
       return;
     }
 
@@ -5589,27 +6055,58 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderPlayerAnalysisMobileList(filtered);
     renderPlayerAnalysisDetail(null);
     updatePlayerAnalysisSortIndicators();
+    renderPlayerAnalysisSortSummary(filtered);
   }
 
   function buildPlayerAnalysisDetailItems(player) {
     const playedRecord = formatPlayerRecord(player.played_wins, player.played_draws, player.played_losses);
     const starterRecord = formatPlayerRecord(player.starter_wins, player.starter_draws, player.starter_losses);
+    const nonStarterRecord = formatPlayerRecord(player.non_starter_wins, player.non_starter_draws, player.non_starter_losses);
     const subRecord = formatPlayerRecord(player.sub_wins, player.sub_draws, player.sub_losses);
+    const nonPlayedRecord = formatPlayerRecord(player.non_played_wins, player.non_played_draws, player.non_played_losses);
     const scoredRecord = formatPlayerRecord(player.scored_wins, player.scored_draws, player.scored_losses);
     return {
       playedRecord,
       starterRecord,
+      nonStarterRecord,
       subRecord,
+      nonPlayedRecord,
       scoredRecord,
       items: [
         ["出場試合数", formatPlayerNumber(player.played_matches)],
         ["出場時の勝敗", playedRecord],
         ["出場時勝率", formatPlayerRate(player.played_win_rate)],
         ["出場時平均勝ち点", formatPlayerDecimal(player.played_points_per_match)],
+        ["出場試合失点率", formatPlayerGoalsAgainstAverage(getPlayerAnalysisSortValue(player, "played_goals_against_avg"))],
+        ["出場時無失点試合数", formatPlayerNumber(getPlayerAnalysisSortValue(player, "played_clean_sheets"))],
+        ["出場時得点数", formatPlayerNumber(player.played_goals_for)],
+        ["出場時失点数", formatPlayerNumber(player.played_goals_against)],
+        ["出場時得失点差", formatPlayerSignedNumber(player.played_goal_diff)],
+        ["出場時間中得点数", formatPlayerNumber(getPlayerAnalysisSortValue(player, "on_pitch_goals_for"))],
+        ["出場時間中失点数", formatPlayerNumber(getPlayerAnalysisSortValue(player, "on_pitch_goals_against"))],
+        ["出場時間中得失点差", formatPlayerSignedNumber(getPlayerAnalysisSortValue(player, "on_pitch_goal_diff"))],
         ["先発時の勝敗", starterRecord],
         ["先発時勝率", formatPlayerRate(player.starter_win_rate)],
+        ["先発時得点数", formatPlayerNumber(player.starter_goals_for)],
+        ["先発時失点数", formatPlayerNumber(player.starter_goals_against)],
+        ["先発時得失点差", formatPlayerSignedNumber(player.starter_goal_diff)],
+        ["非スタメン時の勝敗", nonStarterRecord],
+        ["非スタメン時勝率", formatPlayerRate(player.non_starter_win_rate)],
+        ["非スタメン時平均勝ち点", formatPlayerDecimal(player.non_starter_points_per_match)],
+        ["非スタメン時得点数", formatPlayerNumber(player.non_starter_goals_for)],
+        ["非スタメン時失点数", formatPlayerNumber(player.non_starter_goals_against)],
+        ["非スタメン時得失点差", formatPlayerSignedNumber(player.non_starter_goal_diff)],
         ["途中出場時の勝敗", subRecord],
         ["途中出場時勝率", formatPlayerRate(player.sub_win_rate)],
+        ["途中出場時得点数", formatPlayerNumber(player.sub_goals_for)],
+        ["途中出場時失点数", formatPlayerNumber(player.sub_goals_against)],
+        ["途中出場時得失点差", formatPlayerSignedNumber(player.sub_goal_diff)],
+        ["未出場時の勝敗", nonPlayedRecord],
+        ["未出場時勝率", formatPlayerRate(player.non_played_win_rate)],
+        ["未出場時平均勝ち点", formatPlayerDecimal(player.non_played_points_per_match)],
+        ["未出場時得点数", formatPlayerNumber(player.non_played_goals_for)],
+        ["未出場時失点数", formatPlayerNumber(player.non_played_goals_against)],
+        ["未出場時得失点差", formatPlayerSignedNumber(player.non_played_goal_diff)],
         ["得点数", formatPlayerNumber(player.goals)],
         ["ゴールした試合数", formatPlayerNumber(player.scored_matches)],
         ["ゴールした試合の勝敗", scoredRecord],
@@ -5644,7 +6141,20 @@ document.addEventListener("DOMContentLoaded", async () => {
           ["出場", formatPlayerNumber(player.played_matches), "試合"],
           ["勝敗", detail.playedRecord, ""],
           ["勝率", formatPlayerRate(player.played_win_rate), ""],
-          ["平均勝ち点", formatPlayerDecimal(player.played_points_per_match), "Pts"]
+          ["平均勝ち点", formatPlayerDecimal(player.played_points_per_match), "Pts"],
+          ["得点", formatPlayerNumber(player.played_goals_for), "点"],
+          ["失点", formatPlayerNumber(player.played_goals_against), "点"],
+          ["得失点差", formatPlayerSignedNumber(player.played_goal_diff), ""],
+          ["失点率", formatPlayerGoalsAgainstAverage(getPlayerAnalysisSortValue(player, "played_goals_against_avg")), "失点/試合"],
+          ["無失点", formatPlayerNumber(getPlayerAnalysisSortValue(player, "played_clean_sheets")), "試合"]
+        ]
+      },
+      {
+        title: "出場時間中",
+        items: [
+          ["得点", formatPlayerNumber(getPlayerAnalysisSortValue(player, "on_pitch_goals_for")), "点"],
+          ["失点", formatPlayerNumber(getPlayerAnalysisSortValue(player, "on_pitch_goals_against")), "点"],
+          ["得失点差", formatPlayerSignedNumber(getPlayerAnalysisSortValue(player, "on_pitch_goal_diff")), ""]
         ]
       },
       {
@@ -5653,9 +6163,29 @@ document.addEventListener("DOMContentLoaded", async () => {
           ["先発", formatPlayerNumber(player.starter_matches), "試合"],
           ["先発勝敗", detail.starterRecord, ""],
           ["先発勝率", formatPlayerRate(player.starter_win_rate), ""],
+          ["先発得点", formatPlayerNumber(player.starter_goals_for), "点"],
+          ["先発失点", formatPlayerNumber(player.starter_goals_against), "点"],
+          ["先発得失点差", formatPlayerSignedNumber(player.starter_goal_diff), ""],
+          ["非スタメン", formatPlayerNumber(player.non_starter_matches), "試合"],
+          ["非スタメン勝敗", detail.nonStarterRecord, ""],
+          ["非スタメン勝率", formatPlayerRate(player.non_starter_win_rate), ""],
+          ["非スタメン平均勝ち点", formatPlayerDecimal(player.non_starter_points_per_match), "Pts"],
+          ["非スタメン得点", formatPlayerNumber(player.non_starter_goals_for), "点"],
+          ["非スタメン失点", formatPlayerNumber(player.non_starter_goals_against), "点"],
+          ["非スタメン得失点差", formatPlayerSignedNumber(player.non_starter_goal_diff), ""],
           ["途中出場", formatPlayerNumber(player.sub_matches), "試合"],
           ["途中勝敗", detail.subRecord, ""],
-          ["途中勝率", formatPlayerRate(player.sub_win_rate), ""]
+          ["途中勝率", formatPlayerRate(player.sub_win_rate), ""],
+          ["途中得点", formatPlayerNumber(player.sub_goals_for), "点"],
+          ["途中失点", formatPlayerNumber(player.sub_goals_against), "点"],
+          ["途中得失点差", formatPlayerSignedNumber(player.sub_goal_diff), ""],
+          ["未出場", formatPlayerNumber(player.non_played_matches), "試合"],
+          ["未出場勝敗", detail.nonPlayedRecord, ""],
+          ["未出場勝率", formatPlayerRate(player.non_played_win_rate), ""],
+          ["未出場平均勝ち点", formatPlayerDecimal(player.non_played_points_per_match), "Pts"],
+          ["未出場得点", formatPlayerNumber(player.non_played_goals_for), "点"],
+          ["未出場失点", formatPlayerNumber(player.non_played_goals_against), "点"],
+          ["未出場得失点差", formatPlayerSignedNumber(player.non_played_goal_diff), ""]
         ]
       },
       {
@@ -6236,6 +6766,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       aggregate.__paImpact = stateAggregate.__paImpact;
       aggregate.__paRankingMetrics = stateAggregate.__paRankingMetrics;
     }
+    if (insights.totalMetrics) aggregate.__paRankingMetrics = insights.totalMetrics;
+    if (insights.currentMetrics) player.__paRankingMetrics = insights.currentMetrics;
     const totalInsights = insights.total || { opponentGoals: [] };
     const currentInsights = insights.current || { opponentGoals: [] };
     const totalOpponentMode = isPlayerGoalkeeper(aggregate) || isPlayerGoalkeeper(player) ? "defense" : "attack";
@@ -6298,11 +6830,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const yearRows = await getPlayerAnalysisYearRowsForPlayer(player, modalScope, null);
     const currentRows = yearRows.filter(row => !activeYears.size || activeYears.has(getPlayerYearValue(row)));
     const currentPlayer = currentRows.length === 1 ? currentRows[0] : (currentRows.length ? aggregatePlayerAnalysisRows(currentRows)[0] || player : player);
+    const groupKey = getPlayerGroupKey(player);
+    const totalMetricYears = getPlayerAnalysisYearsForPlayers([player], yearRows);
+    const currentMetricYears = getPlayerAnalysisYearsForPlayers([player], currentRows.length ? currentRows : [player]);
+    const totalMetricMap = await buildPlayerAnalysisRankingMetrics(totalMetricYears, modalScope, null);
+    const currentMetricMap = (playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all")
+      ? await buildPlayerAnalysisRankingMetrics(currentMetricYears, modalScope, null)
+      : null;
     const insights = {
       total: await buildPlayerPerformanceExtras(player, yearRows, modalScope, null),
       current: (playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all")
         ? await buildPlayerPerformanceExtras(player, currentRows.length ? currentRows : [player], modalScope, null)
-        : null
+        : null,
+      totalMetrics: totalMetricMap.get(groupKey) || null,
+      currentMetrics: currentMetricMap ? currentMetricMap.get(groupKey) || null : null
     };
     playerAnalysisState.modalYearRows = yearRows;
     renderPlayerAnalysisProfile(currentPlayer, yearRows, insights);
@@ -6493,6 +7034,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       : playerAnalysisState.year === "all"
         ? await loadAllPlayerAnalysisYears(playerAnalysisState.matchScope, competitionFilter)
         : await loadScopedPlayerAnalysisYear(playerAnalysisState.year, playerAnalysisState.matchScope, competitionFilter);
+    playerAnalysisState.teamStats = await buildPlayerAnalysisTeamStats(timeValue, playerAnalysisState.matchScope, competitionFilter);
     entry.missing = entry.missing || !entry.rows.length;
     playerAnalysisState.data = entry.rows;
     playerAnalysisState.selectedKey = null;
@@ -6890,7 +7432,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         playerAnalysisState.sortDirection = playerAnalysisState.sortDirection === "asc" ? "desc" : "asc";
       } else {
         playerAnalysisState.sortKey = nextKey;
-        playerAnalysisState.sortDirection = nextKey === "player_name" || nextKey === "position_order" ? "asc" : "desc";
+        playerAnalysisState.sortDirection = shouldPlayerAnalysisSortAscByDefault(nextKey) ? "asc" : "desc";
       }
       renderPlayerAnalysisTable();
     };
