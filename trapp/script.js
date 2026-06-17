@@ -9473,20 +9473,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     const offRes = findOfficialResult(match);
     const sMemo = localStorage.getItem(`memo_${mId}`) || "";
     const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
-    let sMy = localStorage.getItem(`score_my_${mId}`) || "";
-    let sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
-    let sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
-    let sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
+    let sMy = "";
+    let sOpp = "";
+    let sPkM = "";
+    let sPkO = "";
     const sWeather = localStorage.getItem(`weather_${mId}`) || "";
     const sTemp = localStorage.getItem(`temp_${mId}`) || "";
     const officialScores = extractOwnResultScores(offRes, match);
-    if ((sMy === "" || sOpp === "") && officialScores) {
+    if (officialScores) {
       sMy = String(officialScores.ownScore);
       sOpp = String(officialScores.opponentScore);
-    }
-    if ((sPkM === "" || sPkO === "") && officialScores && officialScores.pkOwn !== null && officialScores.pkOpponent !== null) {
-      sPkM = String(officialScores.pkOwn);
-      sPkO = String(officialScores.pkOpponent);
+      if (officialScores.pkOwn !== null && officialScores.pkOpponent !== null) {
+        sPkM = String(officialScores.pkOwn);
+        sPkO = String(officialScores.pkOpponent);
+      }
+    } else if (match.score) {
+      const scores = String(match.score).split("-").map(value => value.trim());
+      if (scores.length === 2) {
+        sMy = scores[0];
+        sOpp = scores[1];
+      }
     }
 
     const J_CLUB_ENG = {
@@ -9496,12 +9502,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const detailData = offRes ? { ...match, ...offRes } : match;
     const officialInfoHtml = renderOfficialInfo(detailData);
     const membersHtml = renderMatchMembers(detailData);
-
-    let pkHtml = "";
-    if (parseDate(match.date).getFullYear() === 2026) {
-      const isD = (sMy !== "" && sOpp !== "" && sMy === sOpp);
-      pkHtml = `<div class="u-pk-area score-editor-pk" style="${isD ? 'display:grid;' : 'display:none;'}"><span class="u-pk-label">PK</span><input type="number" class="u-score-input pk-my" value="${sPkM}" placeholder="-"><span class="u-score-sep">-</span><input type="number" class="u-score-input pk-opp" value="${sPkO}" placeholder="-"></div>`;
-    }
 
     const homeAway = getMatchIsHome(detailData) ? "HOME" : "AWAY";
     const clubName = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
@@ -9610,24 +9610,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       ${officialInfoHtml}
       ${membersHtml}
-      <section class="u-manual-record score-editor-card">
-        <div class="u-section-head">
-          <h4>手動記録</h4>
-          <span>SCORE / MEMO</span>
-        </div>
-        <div class="score-editor-grid">
-          <label>
-            <span>${escapeHtml(clubName)}</span>
-            <input type="number" class="u-score-input my-score" value="${sMy}" placeholder="-">
-          </label>
-          <span class="u-score-sep">:</span>
-          <label>
-            <span>${escapeHtml(match.opponent || scoreBoard.awayName)}</span>
-            <input type="number" class="u-score-input opp-score" value="${sOpp}" placeholder="-">
-          </label>
-        </div>
-        ${pkHtml}
-      </section>
       <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
         <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
         <span class="btn-text">観戦予定</span>
@@ -9736,66 +9718,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     const saveAndRefresh = () => {
-      const mS = sheetContent.querySelector(".my-score").value;
-      const oS = sheetContent.querySelector(".opp-score").value;
       const mVal = sheetContent.querySelector(".memo-field").value;
       const isAtt = toggleBtn.classList.contains("active");
 
-      localStorage.setItem(`score_my_${mId}`, mS); localStorage.setItem(`score_opp_${mId}`, oS);
       localStorage.setItem(`memo_${mId}`, mVal);
       localStorage.setItem(`attend_${mId}`, isAtt);
 
-      let pm = "", po = "";
-      const pkA = sheetContent.querySelector(".u-pk-area");
-      if (pkA) {
-        const isDraw = (mS !== "" && oS !== "" && mS === oS);
-        pkA.style.display = isDraw ? "grid" : "none";
-        if (isDraw) {
-          pm = sheetContent.querySelector(".pk-my").value; 
-          po = sheetContent.querySelector(".pk-opp").value;
-          localStorage.setItem(`score_my_pk_${mId}`, pm); 
-          localStorage.setItem(`score_opp_pk_${mId}`, po);
-        } else {
-          localStorage.removeItem(`score_my_pk_${mId}`);
-          localStorage.removeItem(`score_opp_pk_${mId}`);
-        }
-      }
-
       const card = document.querySelector(`.card[data-mid="${mId}"]`);
       if (card) {
-        let res = null;
-        let scoreDisplay = "";
-        if (mS !== "" && oS !== "") {
-          const ms = Number(mS), os = Number(oS);
-          if (ms === os && pm !== "" && po !== "") {
-            res = Number(pm) > Number(po) ? "pk-win" : "pk-lose";
-            scoreDisplay = `(${pm}) ${ms} - ${os} (${po})`;
-          } else {
-            if (ms > os) res = "win"; else if (ms < os) res = "lose"; else res = "draw";
-            scoreDisplay = `${ms} - ${os}`;
-          }
-        }
-        let resultBox = card.querySelector(".result-box");
-        if (res && !resultBox) {
-          resultBox = document.createElement("div");
-          resultBox.className = "result-box";
-          resultBox.innerHTML = `<div class="result-badge"></div><div class="match-score-text"></div>`;
-          card.insertBefore(resultBox, card.firstChild);
-        }
-        if (resultBox) {
-          if (res) {
-            const badge = resultBox.querySelector(".result-badge");
-            const scoreText = resultBox.querySelector(".match-score-text");
-            if (badge) {
-              badge.className = "result-badge badge-" + res;
-              badge.textContent = res.replace("-", " ").toUpperCase();
-            }
-            if (scoreText) scoreText.textContent = scoreDisplay;
-          } else {
-            resultBox.remove();
-          }
-        }
-
         // Update Attendance Emoji in Feed
         const metaDiv = card.querySelector(".match-meta");
         let attEl = metaDiv.querySelector(".match-att-emoji");
@@ -10081,9 +10011,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getDashboardResults() {
-    const storedResults = getStoredMatchResults();
-    const merged = [...storedResults];
-    const seenFixtures = new Set(storedResults.map(getResultFixtureKey));
+    const merged = [];
+    const seenFixtures = new Set();
 
     getResultArray(officialResults).forEach(raw => {
       const result = normalizeOfficialResult(raw);
@@ -10949,27 +10878,25 @@ document.addEventListener("DOMContentLoaded", async () => {
       ymMap[key].forEach(match => {
         const mId = `${match.date}_${match.club}_${match.opponent}`;
         const isAtt = localStorage.getItem(`attend_${mId}`) === "true";
-        let sMy = localStorage.getItem(`score_my_${mId}`) || "", sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
-        let sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "", sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
+        let sMy = "", sOpp = "";
+        let sPkM = "", sPkO = "";
         let res = null;
         let scoreDisplay = "";
         const officialScores = extractOwnResultScores(findOfficialResult(match), match);
 
-        if ((sMy === "" || sOpp === "") && match.score) {
+        if (officialScores) {
+          sMy = String(officialScores.ownScore);
+          sOpp = String(officialScores.opponentScore);
+          if (officialScores.pkOwn !== null && officialScores.pkOpponent !== null) {
+            sPkM = String(officialScores.pkOwn);
+            sPkO = String(officialScores.pkOpponent);
+          }
+        } else if (match.score) {
           const scores = String(match.score).split("-").map(x => x.trim());
           if (scores.length === 2) {
             sMy = scores[0];
             sOpp = scores[1];
           }
-        }
-
-        if ((sMy === "" || sOpp === "") && officialScores) {
-          sMy = String(officialScores.ownScore);
-          sOpp = String(officialScores.opponentScore);
-        }
-        if ((sPkM === "" || sPkO === "") && officialScores && officialScores.pkOwn !== null && officialScores.pkOpponent !== null) {
-          sPkM = String(officialScores.pkOwn);
-          sPkO = String(officialScores.pkOpponent);
         }
 
         if (sMy !== "" && sOpp !== "") {
@@ -11414,183 +11341,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch (err) {
         alert("コピーに失敗しました。このブラウザではサポートされていない可能性があります。");
       }
-    };
-  }
-
-  // ⚡ Fast Input Modal
-  const fastInputBtn = document.getElementById("fast-input-btn");
-  const fastInputSheet = document.getElementById("fast-input-sheet");
-  const fastInputList = document.getElementById("fast-input-list");
-  const saveFastInputBtn = document.getElementById("save-fast-input");
-  const closeFastInputBtn = document.getElementById("close-fast-input");
-
-  let fastSelectedYear = 2026;
-
-  function renderFastInput() {
-    fastInputList.innerHTML = "";
-
-    // 選択された年の試合の全件を取得（未来の試合も含める）
-    const yearMatches = scheduleData.filter(m => {
-      return parseDate(m.date).getFullYear() === fastSelectedYear;
-    }).sort((a, b) => parseDate(a.date) - parseDate(b.date));
-
-    if (yearMatches.length === 0) {
-      fastInputList.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-grey);">${fastSelectedYear}年の該当する試合はありません。</div>`;
-    } else {
-      yearMatches.forEach(m => {
-        const mYear = parseDate(m.date).getFullYear();
-        const mId = `${m.date}_${m.club}_${m.opponent}`;
-        const sMy = localStorage.getItem(`score_my_${mId}`) || "";
-        const sOpp = localStorage.getItem(`score_opp_${mId}`) || "";
-
-        const sPkM = localStorage.getItem(`score_my_pk_${mId}`) || "";
-        const sPkO = localStorage.getItem(`score_opp_pk_${mId}`) || "";
-        const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
-
-        // 2026年でかつ現在の入力値が同点の場合のみPK領域を表示する
-        const isDraw = sMy !== "" && sOpp !== "" && sMy === sOpp;
-        const showPk = mYear === 2026 && isDraw;
-
-        const div = document.createElement("div");
-        div.style.cssText = "padding: 15px; border-bottom: 1px solid #e3e3e8; display: flex; align-items: center; justify-content: space-between; gap: 10px;";
-        div.innerHTML = `
-           <div style="flex:1;">
-             <div style="font-size: 0.8rem; color: var(--text-grey); font-weight:700;">${m.date} | ${m.club.toUpperCase()}</div>
-             <div style="font-size: 1.1rem; font-weight:900; font-family: var(--font-kick); margin-top:4px;">vs ${m.opponent}</div>
-           </div>
-           
-           <div style="display: flex; flex-direction: column; gap: 5px; align-items: flex-end;">
-             <div style="display: flex; gap: 4px; align-items: center;">
-               <input type="number" class="fast-my-score" data-year="${mYear}" data-mid="${mId}" data-type="my" value="${sMy}" style="width:45px; height:35px; text-align:center; font-size:1.1rem; font-weight:900; background:#f2f2f7; border:none; border-radius:8px; color:var(--text-main);" placeholder="-">
-               <span style="font-weight:900; color:var(--text-grey);">-</span>
-               <input type="number" class="fast-opp-score" data-year="${mYear}" data-mid="${mId}" data-type="opp" value="${sOpp}" style="width:45px; height:35px; text-align:center; font-size:1.1rem; font-weight:900; background:#f2f2f7; border:none; border-radius:8px; color:var(--text-main);" placeholder="-">
-             </div>
-             
-             <!-- PK入力領域（2026年かつ同点時のみ表示） -->
-             <div class="fast-pk-area" style="display: ${showPk ? 'flex' : 'none'}; gap: 4px; align-items: center;">
-               <span style="font-size:0.7rem; font-weight:700; color:var(--text-grey);">PK</span>
-               <input type="number" data-mid="${mId}" data-type="pkMy" value="${sPkM}" style="width:35px; height:25px; text-align:center; font-size:0.9rem; font-weight:800; background:#fffdf5; border:1px solid #ddd; border-radius:6px; color:var(--text-main);" placeholder="-">
-               <span style="font-weight:900; color:var(--text-grey);">-</span>
-               <input type="number" data-mid="${mId}" data-type="pkOpp" value="${sPkO}" style="width:35px; height:25px; text-align:center; font-size:0.9rem; font-weight:800; background:#fffdf5; border:1px solid #ddd; border-radius:6px; color:var(--text-main);" placeholder="-">
-             </div>
-           </div>
-
-           <button class="u-attend-btn ${isAttend ? 'active' : ''} ${m.club}" data-mid="${mId}" data-type="attend" style="width:45px; height:45px; padding:0; margin:0; display:flex; align-items:center; justify-content:center; border-radius:12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; pointer-events: none;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></button>
-         `;
-        fastInputList.appendChild(div);
-      });
-    }
-    fastInputSheet.classList.add("active");
-  }
-
-  // Handle manual attend toggle and dynamic PK display in fast input
-  if (fastInputList) {
-    // スコア入力時の動的なPK領域の表示切替
-    fastInputList.oninput = (e) => {
-      const inp = e.target;
-      if (inp.classList.contains("fast-my-score") || inp.classList.contains("fast-opp-score")) {
-        const mYear = parseInt(inp.dataset.year);
-        if (mYear === 2026) {
-          const container = inp.closest("div").parentElement; // .flex-end 領域
-          const pkArea = container.querySelector(".fast-pk-area");
-          if (pkArea) {
-            const mS = container.querySelector(".fast-my-score").value;
-            const oS = container.querySelector(".fast-opp-score").value;
-            pkArea.style.display = (mS !== "" && oS !== "" && mS === oS) ? "flex" : "none";
-          }
-        }
-      }
-    };
-
-    // 観戦トグルのハンドリング
-    fastInputList.onclick = (e) => {
-      const btn = e.target.closest("button[data-type='attend']");
-      if (btn) {
-        btn.classList.toggle("active");
-      }
-    };
-  }
-
-  if (fastInputBtn) {
-    fastInputBtn.onclick = () => {
-      renderFastInput();
-      fastInputSheet.classList.add("active");
-    };
-  }
-
-  if (closeFastInputBtn) closeFastInputBtn.onclick = () => fastInputSheet.classList.remove("active");
-
-  document.querySelectorAll(".fast-year-tab").forEach(tab => {
-    tab.onclick = () => {
-      document.querySelectorAll(".fast-year-tab").forEach(t => {
-        t.classList.remove("active");
-        t.style.background = "#f2f2f7";
-        t.style.color = "var(--text-grey)";
-      });
-      tab.classList.add("active");
-      tab.style.background = "var(--text-main)";
-      tab.style.color = "white";
-      fastSelectedYear = Number(tab.dataset.y);
-      renderFastInput();
-    };
-  });
-
-  if (saveFastInputBtn) {
-    saveFastInputBtn.onclick = () => {
-      const inputs = fastInputList.querySelectorAll("input[type='number']");
-      let savedCount = 0;
-      const scoreMap = {};
-
-      inputs.forEach(inp => {
-        const mId = inp.dataset.mid;
-        if (!scoreMap[mId]) scoreMap[mId] = {};
-        scoreMap[mId][inp.dataset.type] = inp.value;
-      });
-
-      const attendBtns = fastInputList.querySelectorAll("button[data-type='attend']");
-      attendBtns.forEach(btn => {
-        const mId = btn.dataset.mid;
-        if (!scoreMap[mId]) scoreMap[mId] = {};
-        scoreMap[mId].attend = btn.classList.contains("active");
-      });
-
-      Object.keys(scoreMap).forEach(mId => {
-        const s = scoreMap[mId];
-        let hasEdit = false;
-        if (s.my !== undefined && s.opp !== undefined && (s.my !== "" || s.opp !== "")) {
-          localStorage.setItem(`score_my_${mId}`, s.my);
-          localStorage.setItem(`score_opp_${mId}`, s.opp);
-          hasEdit = true;
-        } else if (s.my === "" && s.opp === "") {
-          localStorage.removeItem(`score_my_${mId}`);
-          localStorage.removeItem(`score_opp_${mId}`);
-        }
-
-        if (s.pkMy !== undefined && s.pkOpp !== undefined && (s.pkMy !== "" || s.pkOpp !== "")) {
-          localStorage.setItem(`score_my_pk_${mId}`, s.pkMy);
-          localStorage.setItem(`score_opp_pk_${mId}`, s.pkOpp);
-        } else if (s.pkMy === "" && s.pkOpp === "") {
-          localStorage.removeItem(`score_my_pk_${mId}`);
-          localStorage.removeItem(`score_opp_pk_${mId}`);
-        }
-
-        if (s.attend !== undefined) {
-          localStorage.setItem(`attend_${mId}`, s.attend);
-          hasEdit = true;
-        }
-
-        if (hasEdit) savedCount++;
-      });
-
-      if (savedCount > 0) {
-        renderFeed();
-        updateDashboardPrevResults();
-        if (calendarView && !calendarView.classList.contains("hidden-view")) {
-          switchMode("calendar");
-        }
-        alert(`一括入力の内容を保存しました。`);
-      }
-      fastInputSheet.classList.remove("active");
     };
   }
 

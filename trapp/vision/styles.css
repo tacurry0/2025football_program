@@ -597,6 +597,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100px;
+  color: #ffffff;
   font-size: 65px;
   font-weight: 900;
   letter-spacing: 0.13em;
@@ -622,7 +623,7 @@ body {
   height: 140px;
   margin-bottom: 38px;
   padding: 0 14px;
-  color: var(--soft-ink);
+  color: #ffffff;
   background:
     radial-gradient(circle, rgba(93, 70, 78, 0.12) 0 1.55px, transparent 1.9px) 0 0 / 9px 9px,
     linear-gradient(180deg, #21151a 0%, #120b0f 100%);
@@ -637,6 +638,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #ffffff;
   line-height: 1;
   font-weight: 900;
   text-shadow:

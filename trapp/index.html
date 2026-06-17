@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260617ascii-fix">
+  <link rel="stylesheet" href="style.css?v=20260617manual-score-off">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="./data/assets/emblems/アルビレックス新潟.png">
@@ -725,11 +725,6 @@ We can't help falling in love with you
         <button id="open-bulk-paste-btn" class="u-backup-btn export" style="background:#007bff; color:white; border:none; margin-top: 5px;">一括入力画面へ</button>
       </div>
 
-      <div class="u-backup-group" style="margin-top: 20px;">
-        <label>結果の手動入力</label>
-        <button id="fast-input-btn" class="u-backup-btn export" style="background:var(--albirex-orange); color:white; border:none;">過去の結果を一括入力</button>
-      </div>
-      
       <div class="u-backup-group">
         <label>観戦予定</label>
         <button id="export-list-btn" class="u-backup-btn export" style="background:#28a745; color:white; border:none;">観戦予定リストをコピー</button>
@@ -1251,29 +1246,8 @@ We can't help falling in love with you
     <div id="ym-picker-list"></div>
   </div>
 
-  <!-- ⚡ Fast Input Overlay -->
-  <div id="fast-input-sheet" class="sub-pane" style="z-index: 4000;">
-    <div class="pane-header" style="flex-direction: column; align-items: stretch; gap: 15px; padding-bottom: 15px;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="margin: 0;">一括入力・編集</h3>
-        <button class="close-pane" id="close-fast-input">✕</button>
-      </div>
-      <div id="fast-year-tabs" style="display: flex; justify-content: center; gap: 10px;">
-        <button class="fast-year-tab" data-y="2024" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: #f2f2f7; color: var(--text-grey); font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2024</button>
-        <button class="fast-year-tab" data-y="2025" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: #f2f2f7; color: var(--text-grey); font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2025</button>
-        <button class="fast-year-tab active" data-y="2026" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: var(--text-main); color: white; font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2026</button>
-        <button class="fast-year-tab" data-y="2027" style="padding: 8px 24px; border-radius: 20px; font-weight: 800; border: none; background: #f2f2f7; color: var(--text-grey); font-family: var(--font-kick); font-size: 1.1rem; cursor: pointer;">2027</button>
-      </div>
-    </div>
-    <div class="pane-content" id="fast-input-list" style="padding-bottom: 80px; overflow-y: auto; height: calc(100% - 60px);">
-      <!-- JavaScript will inject match rows here -->
-    </div>
-    <button id="save-fast-input" class="close-sheet-btn" style="position:absolute; bottom:0; left:0; border-radius:0; margin:0; z-index: 4010;">一括保存</button>
-  </div>
-
-
-<script src="schedule/schedule.js?v=20260617ascii-fix"></script>
-  <script src="script.js?v=20260617ascii-fix"></script>
+<script src="schedule/schedule.js?v=20260617manual-score-off"></script>
+  <script src="script.js?v=20260617manual-score-off"></script>
 
 </body>
 </html>
