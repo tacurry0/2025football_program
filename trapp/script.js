@@ -778,12 +778,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     async function fetchHistoryFile(path) {
+      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timeoutId = controller ? setTimeout(() => controller.abort(), 8000) : null;
       try {
-        const res = await fetch(`${path}?v=20260527source`);
+        const options = controller ? { signal: controller.signal } : undefined;
+        const res = await fetch(`${path}?v=20260527source`, options);
         if (!res.ok) return [];
         return await res.json();
       } catch (error) {
+        console.warn(`history fetch failed: ${path}`, error);
         return [];
+      } finally {
+        if (timeoutId) clearTimeout(timeoutId);
       }
     }
 
@@ -838,8 +844,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       })();
 
       loadingHistoryYears.set(year, promise);
-      await promise;
-      loadingHistoryYears.delete(year);
+      try {
+        await promise;
+      } finally {
+        loadingHistoryYears.delete(year);
+      }
     }
 
     async function updateWeatherUI(container, date, venue) {
@@ -7781,9 +7790,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (shouldLoadHistory) {
       feedSlider.innerHTML = `<div class="month-section" style="display:flex;align-items:center;justify-content:center;color:#888;font-weight:800;">${year} 読み込み中...</div>`;
-      await ensureHistoryYearLoaded(selectedYear);
+      try {
+        await ensureHistoryYearLoaded(selectedYear);
+      } catch (error) {
+        console.error(`history ${selectedYear} load failed`, error);
+      }
     }
-    if (renderedFeedYear !== selectedYear || shouldForceRender) {
+    if (renderedFeedYear !== selectedYear || shouldForceRender || !feedSlider.querySelector(".month-section[data-ym]")) {
       renderFeed(selectedYear);
     }
 
@@ -10392,16 +10405,16 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
               
                <!-- Split Layout -->
-              <div style="display:flex; gap: 15px;">
+              <div class="dash-card-split" style="display:flex; gap: 15px;">
                  <!-- Left (My Team) -->
-                 <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                 <div class="dash-side-panel" style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
                     <img src="${myEmblem}" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${myShortName === '新潟' ? 'アルビレックス新潟' : 'ロアッソ熊本'}', event)">
                     <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
                        <span class="val-rank-num-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-my">-</span> pts</span>
                     </div>
-                    <div style="font-size:0.75rem; color:#555; font-weight:700; margin-bottom:4px;"><span class="val-prev-date-my">-</span> <span style="color:#aaa; font-weight:500;">vs</span> <span class="val-prev-opp-name-my">-</span><span class="val-prev-ha-my" style="margin-left:2px;font-weight:900;color:#888;"></span></div>
-                    <div style="display:flex; align-items:center; gap:6px;">
+                    <div class="dash-prev-meta"><span class="val-prev-date-my">-</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-my" alt=""><span class="val-prev-ha-my dash-prev-ha">-</span></div>
+                    <div class="dash-prev-score-row" style="display:flex; align-items:center; gap:6px;">
                        <span class="val-prev-score-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
                        <span class="val-prev-res-my">-</span>
                     </div>
@@ -10412,14 +10425,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                  <div style="width:1px; background:#e8e8ed;"></div>
                  
                  <!-- Right (Opponent) -->
-                 <div style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                 <div class="dash-side-panel" style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
                     <img src="${escapeHtml(resolveEmblemUrl(m.opponent, m.emblem))}" class="dash-opp-emblem" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${m.opponent}', event)">
                     <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
                        <span class="val-rank-num-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-opp">-</span> pts</span>
                     </div>
-                    <div style="font-size:0.75rem; color:#555; font-weight:700; margin-bottom:4px;"><span class="val-prev-date-opp">-</span> <span style="color:#aaa; font-weight:500;">vs</span> <span class="val-prev-opp-name-opp">-</span><span class="val-prev-ha-opp" style="margin-left:2px;font-weight:900;color:#888;"></span></div>
-                    <div style="display:flex; align-items:center; gap:6px;">
+                    <div class="dash-prev-meta"><span class="val-prev-date-opp">-</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-opp" alt=""><span class="val-prev-ha-opp dash-prev-ha">-</span></div>
+                    <div class="dash-prev-score-row" style="display:flex; align-items:center; gap:6px;">
                        <span class="val-prev-score-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
                        <span class="val-prev-res-opp">-</span>
                     </div>
@@ -10440,10 +10453,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Bind buttons
     container.querySelectorAll('.dash-card').forEach(card => {
+      const mId = card.dataset.mid;
+      const match = scheduleData.find(x => `${x.date}_${x.club}_${x.opponent}` === mId);
+      const opponentName = card.querySelector('.dash-opp-name');
+      if (match) bindClubNameLongPress(opponentName, card, match);
       card.onclick = () => {
-        const mId = card.dataset.mid;
+        if (card.dataset.suppressClick === "true") {
+          delete card.dataset.suppressClick;
+          return;
+        }
         if (!mId) return;
-        const match = scheduleData.find(x => `${x.date}_${x.club}_${x.opponent}` === mId);
         if (match) openDetailSheet(match);
       };
     });
@@ -10724,8 +10743,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             const pkM = isHome ? pkMatch[0] : pkMatch[1];
             const pkO = isHome ? pkMatch[1] : pkMatch[0];
             scoreStr = `(${pkM}) ${sM}-${sO} (${pkO})`;
-            if (pkM > pkO) { symbol = "PK WIN"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
-            else { symbol = "PK LOSE"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
+            if (pkM > pkO) { symbol = "PK"; badgeColor = "#e6f4ea"; badgeText = "#137333"; }
+            else { symbol = "PK"; badgeColor = "#fce8e6"; badgeText = "#c5221f"; }
           }
         }
 
@@ -10771,13 +10790,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         const elScore = card.querySelector(`.val-prev-score-${prefix}`);
         const elRes = card.querySelector(`.val-prev-res-${prefix}`);
         const elForm = card.querySelector(`.val-prev-form-${prefix}`);
+        const elPrevEmblem = card.querySelector(`.val-prev-opp-emblem-${prefix}`);
+        const prevOppEmblem = resolveEmblemUrl(opp, "");
         
         if (elDate) elDate.innerText = lastInfo.date.substring(5).replace("-", "/");
         if (elOpp) elOpp.innerText = opp;
-        if (elHA) elHA.innerText = isHome ? "(H)" : "(A)";
+        if (elHA) elHA.innerText = isHome ? "H" : "A";
         if (elScore) elScore.innerText = scoreStr;
         if (elRes) elRes.innerHTML = resHtml;
         if (elForm) elForm.innerHTML = formHtml;
+        if (elPrevEmblem) {
+          if (prevOppEmblem) {
+            elPrevEmblem.src = prevOppEmblem;
+            elPrevEmblem.alt = opp;
+            elPrevEmblem.title = opp;
+            elPrevEmblem.style.visibility = "visible";
+          } else {
+            elPrevEmblem.removeAttribute("src");
+            elPrevEmblem.alt = "";
+            elPrevEmblem.style.visibility = "hidden";
+          }
+        }
       };
 
       updateHalf('my', teamKw);

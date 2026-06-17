@@ -104,6 +104,43 @@ html, body {
 .dash-form-emblem { width: 18px; height: 18px; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12)); }
 .dash-form-emblem-placeholder { width: 18px; height: 18px; display: block; }
 .dash-form-ha { font-family: var(--font-kick); font-size: 1.08rem; line-height: 1; font-weight: 900; color: #555; }
+.dash-card-split { align-items: stretch; }
+.dash-side-panel { min-width: 0; }
+.dash-prev-meta {
+  width: 100%;
+  min-height: 32px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #555;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+.dash-prev-vs { color: #aaa; font-weight: 700; }
+.dash-prev-opp-emblem {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
+}
+.dash-prev-ha { font-family: var(--font-kick); font-size: 1.06rem; font-weight: 900; color: #555; }
+.dash-prev-meta-text { min-width: 0; }
+.dash-prev-opponent { display: none; }
+.dash-prev-score-row {
+  min-height: 30px;
+  justify-content: center;
+}
+.dash-opp-name {
+  cursor: copy;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
 
 #club-selection { display: flex; gap: 15px; }
 .club-pip { height: 30px; filter: grayscale(1) opacity(0.3); transition: 0.4s var(--ease-expo); cursor: pointer; }
