@@ -2,6 +2,20 @@ window.scheduleData = window.scheduleData || [];
 
 const SCHEDULE_DATA_FILE = "data/schedule/2026_2027.json";
 
+function normalizeCriticalAscii(value) {
+  return typeof value === "string"
+    ? value.replace(/[\uFF21-\uFF3A\uFF41-\uFF5A\uFF10-\uFF19]/g, char => String.fromCharCode(char.charCodeAt(0) - 0xFEE0))
+    : value;
+}
+
+function normalizeCriticalMatch(match) {
+  if (!match || typeof match !== "object") return match;
+  ["opponent", "venue", "stadium", "home", "away", "home_team", "away_team", "team", "competition", "tournament", "league", "matchweek"].forEach(key => {
+    if (typeof match[key] === "string") match[key] = normalizeCriticalAscii(match[key]);
+  });
+  return match;
+}
+
 function getCriticalFirstIsoDate(dateStr) {
   const match = String(dateStr || "").match(/\d{4}-\d{1,2}-\d{1,2}/);
   if (!match) return "";
@@ -91,7 +105,7 @@ window.scheduleDataReady = (async () => {
   const res = await fetch(scheduleUrl.toString(), { cache: "no-store" });
   if (!res.ok) throw new Error(`${SCHEDULE_DATA_FILE} load failed: ${res.status}`);
   const items = await res.json();
-  window.scheduleData = Array.isArray(items) ? items : [];
+  window.scheduleData = Array.isArray(items) ? items.map(normalizeCriticalMatch) : [];
   renderCriticalDashboard(window.scheduleData);
   window.scheduleDataSource = {
     file: SCHEDULE_DATA_FILE,

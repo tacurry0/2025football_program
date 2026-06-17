@@ -52,6 +52,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     return Promise.race([window.scheduleDataReady, timeout]);
   };
 
+  const ASCII_NORMALIZE_FIELDS = new Set([
+    "opponent", "venue", "stadium", "source_venue",
+    "home", "away", "home_team", "away_team", "homeName", "awayName",
+    "team", "club_name", "competition", "tournament", "league", "section",
+    "matchweek", "round", "group"
+  ]);
+
+  function normalizeAsciiText(value) {
+    return typeof value === "string"
+      ? value.replace(/[\uFF21-\uFF3A\uFF41-\uFF5A\uFF10-\uFF19]/g, char => String.fromCharCode(char.charCodeAt(0) - 0xFEE0))
+      : value;
+  }
+
+  function normalizeAsciiFieldsInPlace(value, key = "") {
+    if (typeof value === "string") {
+      return ASCII_NORMALIZE_FIELDS.has(key) ? normalizeAsciiText(value) : value;
+    }
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => {
+        value[index] = normalizeAsciiFieldsInPlace(item, key);
+      });
+      return value;
+    }
+    if (value && typeof value === "object") {
+      Object.keys(value).forEach(childKey => {
+        value[childKey] = normalizeAsciiFieldsInPlace(value[childKey], childKey);
+      });
+    }
+    return value;
+  }
+
   async function loadScheduleFallback() {
     if (Array.isArray(window.scheduleData) && window.scheduleData.length) return window.scheduleData;
     const urls = ["./data/schedule/2026_2027.json"];
@@ -61,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!res.ok) continue;
         const items = await res.json();
         if (Array.isArray(items) && items.length) {
-          window.scheduleData = items;
+          window.scheduleData = normalizeAsciiFieldsInPlace(items);
           return items;
         }
       } catch (error) {
@@ -82,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   await loadScheduleFallback();
 
-  var scheduleData = window.scheduleData = window.scheduleData || [];
+  var scheduleData = window.scheduleData = normalizeAsciiFieldsInPlace(window.scheduleData || []);
   const feedSlider = document.getElementById("feed-slider");
   const calendarBody = document.getElementById("calendar-body");
   const ultraFeed = document.getElementById("ultra-feed");
@@ -443,19 +474,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     async function copyText(text) {
+      let clipboardError = null;
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return;
+        try {
+          await navigator.clipboard.writeText(text);
+          return;
+        } catch (error) {
+          clipboardError = error;
+        }
       }
       const area = document.createElement("textarea");
       area.value = text;
+      area.setAttribute("readonly", "");
       area.style.position = "fixed";
       area.style.left = "-9999px";
+      area.style.top = "0";
       document.body.appendChild(area);
-      area.focus();
+      area.focus({ preventScroll: true });
       area.select();
-      document.execCommand("copy");
+      area.setSelectionRange(0, area.value.length);
+      const copied = document.execCommand && document.execCommand("copy");
       area.remove();
+      if (!copied) throw clipboardError || new Error("copy command failed");
     }
 
     function bindClubNameLongPress(nameEl, card, match) {
@@ -463,37 +503,72 @@ document.addEventListener("DOMContentLoaded", async () => {
       let timer = null;
       let startX = 0;
       let startY = 0;
+      let armed = false;
+      let copying = false;
+      let copied = false;
       const clear = () => {
         if (timer) clearTimeout(timer);
         timer = null;
       };
+      const reset = () => {
+        clear();
+        armed = false;
+        nameEl.classList.remove("longpress-ready");
+      };
+      const runCopy = async () => {
+        if (copying || copied) return;
+        copying = true;
+        card.dataset.suppressClick = "true";
+        const text = getMatchCopyClubNames(match).join("\n");
+        try {
+          await copyText(text);
+          copied = true;
+          showCopyToast("クラブ名をコピーしました");
+        } catch (error) {
+          console.error(error);
+          showCopyToast("コピーに失敗しました");
+        } finally {
+          copying = false;
+          nameEl.classList.remove("longpress-ready");
+        }
+      };
       const start = (event) => {
+        if (event.button && event.button !== 0) return;
         startX = event.clientX || 0;
         startY = event.clientY || 0;
+        armed = false;
+        copying = false;
+        copied = false;
         clear();
-        timer = setTimeout(async () => {
+        timer = setTimeout(() => {
           timer = null;
+          armed = true;
           card.dataset.suppressClick = "true";
-          const text = getMatchCopyClubNames(match).join("\n");
-          try {
-            await copyText(text);
-            showCopyToast("クラブ名をコピーしました");
-          } catch (error) {
-            console.error(error);
-            showCopyToast("コピーに失敗しました");
-          }
+          nameEl.classList.add("longpress-ready");
+          if (navigator.vibrate) navigator.vibrate(12);
         }, 620);
       };
       const move = (event) => {
         const dx = Math.abs((event.clientX || 0) - startX);
         const dy = Math.abs((event.clientY || 0) - startY);
-        if (dx > 12 || dy > 12) clear();
+        if (!armed && (dx > 12 || dy > 12)) reset();
+      };
+      const end = (event) => {
+        clear();
+        if (!armed) return;
+        event.preventDefault();
+        runCopy();
+        armed = false;
       };
       nameEl.addEventListener("pointerdown", start);
       nameEl.addEventListener("pointermove", move);
-      nameEl.addEventListener("pointerup", clear);
-      nameEl.addEventListener("pointercancel", clear);
-      nameEl.addEventListener("contextmenu", (event) => event.preventDefault());
+      nameEl.addEventListener("pointerup", end);
+      nameEl.addEventListener("pointercancel", reset);
+      nameEl.addEventListener("pointerleave", () => { if (!armed) reset(); });
+      nameEl.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        if (armed) runCopy();
+      });
     }
 
     let clubEmblemMap = {};
@@ -784,7 +859,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const options = controller ? { signal: controller.signal } : undefined;
         const res = await fetch(`${path}?v=20260527source`, options);
         if (!res.ok) return [];
-        return await res.json();
+        return normalizeAsciiFieldsInPlace(await res.json());
       } catch (error) {
         console.warn(`history fetch failed: ${path}`, error);
         return [];
@@ -2721,7 +2796,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const loadPart = async (name) => {
       const res = await fetch(`./data/generated/${info.dataDir}/${normalizedYear}/${name}.json`);
       if (!res.ok) throw new Error(`${name}.json HTTP ${res.status}`);
-      const payload = await res.json();
+      const payload = normalizeAsciiFieldsInPlace(await res.json());
       return Array.isArray(payload) ? payload : [];
     };
 
@@ -2758,7 +2833,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const res = await fetch(`./data/history/${info.dataDir}/${normalizedYear}.json`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const payload = await res.json();
+        const payload = normalizeAsciiFieldsInPlace(await res.json());
         return Array.isArray(payload) ? payload : [];
       } catch (error) {
         console.warn(`Failed to load player analysis history for ${info.key} ${normalizedYear}`, error);
@@ -9781,8 +9856,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Initialize data from localStorage cache
-  cachedStandings = readTimedCache("trapp_standings_cache", STANDINGS_CACHE_MAX_AGE);
-  cachedLeagueResults = readTimedCache("trapp_results_cache", RESULTS_CACHE_MAX_AGE) || [];
+  cachedStandings = normalizeAsciiFieldsInPlace(readTimedCache("trapp_standings_cache", STANDINGS_CACHE_MAX_AGE));
+  cachedLeagueResults = normalizeAsciiFieldsInPlace(readTimedCache("trapp_results_cache", RESULTS_CACHE_MAX_AGE) || []);
 
   function getResultArray(payload) {
     if (!payload) return [];
@@ -9862,6 +9937,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function normalizeOfficialResult(result) {
     if (!result) return null;
     const normalized = { ...result };
+    normalizeAsciiFieldsInPlace(normalized);
     if (normalized.date) normalized.date = toIsoDate(normalized.date);
     if (normalized.home) normalized.home = cleanResultTeamName(normalized.home);
     if (normalized.away) normalized.away = cleanResultTeamName(normalized.away);
@@ -10121,7 +10197,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       for (const path of paths) {
         try {
           const res = await fetch(`${path}?t=${Date.now()}`, { cache: "no-store" });
-          if (res.ok) payloads.push(await res.json());
+          if (res.ok) payloads.push(normalizeAsciiFieldsInPlace(await res.json()));
         } catch (e) {
           console.warn(`Static load failed: ${path}`);
         }
@@ -10132,7 +10208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     for (const path of paths) {
       try {
         const res = await fetch(`${path}?t=${Date.now()}`, { cache: "no-store" });
-        if (res.ok) return await res.json();
+        if (res.ok) return normalizeAsciiFieldsInPlace(await res.json());
       } catch (e) {
         console.warn(`Static load failed: ${path}`);
       }
@@ -10155,7 +10231,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (type === "results") {
       try {
-        const gasJson = await fetchGasResults(forceGas);
+        const gasJson = normalizeAsciiFieldsInPlace(await fetchGasResults(forceGas));
         const payloads = [staticJson, gasJson].filter(Boolean);
         if (payloads.length) return mergeResultPayloads(payloads);
       } catch (e) {
@@ -10165,7 +10241,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      const gasJson = await fetchGasJson(type, { league: "j2" }, forceGas ? 45000 : 12000);
+      const gasJson = normalizeAsciiFieldsInPlace(await fetchGasJson(type, { league: "j2" }, forceGas ? 45000 : 12000));
       const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
       const staticArr = (staticJson && staticJson.data) ? staticJson.data : (Array.isArray(staticJson) ? staticJson : []);
       if (type === "standings" && standingsHaveDashboardTeams(staticArr) && !standingsHaveDashboardTeams(gasArr)) {
@@ -11670,14 +11746,15 @@ document.addEventListener("DOMContentLoaded", async () => {
           return '<th class="' + cls + '" data-key="' + c.key + '" data-group="' + groupName + '">' + c.label + '</th>';
         }).join('');
         const tbodyHTML = sorted.map(row => {
-          const isNiigata = (row.team || '').includes('新潟');
-          const isKumamoto = (row.team || '').includes('熊本');
+          const teamName = normalizeAsciiText(row.team || '');
+          const isNiigata = teamName.includes('新潟');
+          const isKumamoto = teamName.includes('熊本');
           const trcls = isNiigata ? 'standing-niigata' : isKumamoto ? 'standing-kumamoto' : '';
-          const emblemUrl = getEmblemUrlForTeam(row.team);
-          const emblemHTML = emblemUrl ? '<img class="standing-team-emblem" src="' + escapeHtml(emblemUrl) + '" alt="' + escapeHtml(row.team) + '">' : '<span class="standing-team-emblem-placeholder"></span>';
+          const emblemUrl = getEmblemUrlForTeam(teamName);
+          const emblemHTML = emblemUrl ? '<img class="standing-team-emblem" src="' + escapeHtml(emblemUrl) + '" alt="' + escapeHtml(teamName) + '">' : '<span class="standing-team-emblem-placeholder"></span>';
           return '<tr class="' + trcls + '">'
             + '<td class="col-rank">' + row.rank + '</td>'
-            + '<td class="standing-team" style="cursor:pointer;" onclick="openClubSite(\'' + row.team + '\', event)"><span class="standing-team-name">' + emblemHTML + '<span>' + row.team + '</span></span></td>'
+            + '<td class="standing-team" style="cursor:pointer;" onclick="openClubSite(\'' + teamName + '\', event)"><span class="standing-team-name">' + emblemHTML + '<span>' + teamName + '</span></span></td>'
             + '<td class="col-pts"><strong>' + row.points + '</strong></td>'
             + '<td>' + row.played + '</td>'
             + '<td>' + row.won + '</td>'

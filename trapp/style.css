@@ -137,9 +137,17 @@ html, body {
 }
 .dash-opp-name {
   cursor: copy;
+  -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;
+}
+.opponent-name {
+  -webkit-touch-callout: none;
+}
+.opponent-name.longpress-ready,
+.dash-opp-name.longpress-ready {
+  opacity: 0.72;
 }
 
 #club-selection { display: flex; gap: 15px; }
