@@ -1,7 +1,17 @@
 window.scheduleData = window.scheduleData || [];
 
+const SCHEDULE_DATA_FILE = "data/schedule/2026_2027.json";
+
+function getCriticalFirstIsoDate(dateStr) {
+  const match = String(dateStr || "").match(/\d{4}-\d{1,2}-\d{1,2}/);
+  if (!match) return "";
+  const [y, m, d] = match[0].split("-").map(Number);
+  return `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+}
+
 function getCriticalDateParts(dateStr) {
-  const [y, m, d] = String(dateStr || "").split("-").map(Number);
+  const firstDate = getCriticalFirstIsoDate(dateStr) || String(dateStr || "");
+  const [y, m, d] = firstDate.split("-").map(Number);
   const date = new Date(y, (m || 1) - 1, d || 1);
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return {
@@ -76,15 +86,15 @@ function renderCriticalDashboard(matches) {
 }
 
 window.scheduleDataReady = (async () => {
-  const scheduleUrl = new URL("./data/schedule/2026.json", window.location.href);
+  const scheduleUrl = new URL(`./${SCHEDULE_DATA_FILE}`, window.location.href);
   scheduleUrl.searchParams.set("v", Date.now().toString());
   const res = await fetch(scheduleUrl.toString(), { cache: "no-store" });
-  if (!res.ok) throw new Error(`data/schedule/2026.json load failed: ${res.status}`);
+  if (!res.ok) throw new Error(`${SCHEDULE_DATA_FILE} load failed: ${res.status}`);
   const items = await res.json();
-  window.scheduleData = items.filter(item => String(item.date || "").startsWith("2026-"));
+  window.scheduleData = Array.isArray(items) ? items : [];
   renderCriticalDashboard(window.scheduleData);
   window.scheduleDataSource = {
-    file: "data/schedule/2026.json",
+    file: SCHEDULE_DATA_FILE,
     count: window.scheduleData.length,
     loadedAt: new Date().toISOString()
   };

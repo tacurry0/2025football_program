@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function loadScheduleFallback() {
     if (Array.isArray(window.scheduleData) && window.scheduleData.length) return window.scheduleData;
-    const urls = ["./data/schedule/2026.json"];
+    const urls = ["./data/schedule/2026_2027.json"];
     for (const url of urls) {
       try {
         const res = await fetch(`${url}?v=${Date.now()}`, { cache: "no-store" });
@@ -259,8 +259,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   // --- Date/Theme Helpers ---
+  function getFirstIsoDateText(dateText) {
+    const m = String(dateText || "").trim().match(/(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})/);
+    if (!m) return "";
+    return `${m[1]}-${String(m[2]).padStart(2, "0")}-${String(m[3]).padStart(2, "0")}`;
+  }
+
   function parseDate(s) {
-    const [y, m, d] = s.split("-").map(Number);
+    const [y, m, d] = (getFirstIsoDateText(s) || String(s || "")).split("-").map(Number);
     return new Date(y, m - 1, d || 1);
   }
 
@@ -615,9 +621,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function toIsoDate(dateText) {
-      const m = String(dateText || "").trim().match(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/);
-      if (!m) return String(dateText || "");
-      return `${m[1]}-${String(m[2]).padStart(2, "0")}-${String(m[3]).padStart(2, "0")}`;
+      return getFirstIsoDateText(dateText) || String(dateText || "");
     }
 
     function getHistoryMatchweek(section) {

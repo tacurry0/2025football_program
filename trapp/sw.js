@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v41-history-results';
+const cacheName = 'football-app-v42-schedule-2026-2027';
 const assetsToCache = [
   './',
   './index.html',
@@ -30,7 +30,7 @@ const assetsToCache = [
   './data/assets/fonts/BIZUDPGothic-Bold.ttf',
   './data/assets/fonts/AOTFShinGoProDeBold.otf',
   './schedule/schedule.js',
-  './data/schedule/2026.json',
+  './data/schedule/2026_2027.json',
   './data/clubs/club_emblems.json',
   './data/clubs/official_sites.json',
   './data/standings/current.json',
@@ -62,8 +62,8 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
-  if (url.origin === location.origin && url.pathname.endsWith('/data/schedule/2026.json')) {
-    e.respondWith(fetch(e.request).catch(() => caches.match('./data/schedule/2026.json')));
+  if (url.origin === location.origin && url.pathname.endsWith('/data/schedule/2026_2027.json')) {
+    e.respondWith(fetch(e.request).catch(() => caches.match('./data/schedule/2026_2027.json')));
     return;
   }
 
