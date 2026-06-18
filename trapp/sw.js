@@ -1,11 +1,11 @@
 
-const cacheName = 'football-app-v44-manual-score-off';
+const cacheName = 'football-app-v45-pwa-install';
 const assetsToCache = [
   './',
   './index.html',
   './style.css',
   './script.js',
-  './vendor/html2canvas.min.js',
+  './pwa.js',
   './vision/index.html',
   './vision/display.html',
   './vision/result.html',
@@ -61,7 +61,24 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+
   const url = new URL(e.request.url);
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request).then(response => {
+        const copy = response.clone();
+        return caches.open(cacheName)
+          .then(cache => cache.put(e.request, copy))
+          .then(() => response);
+      }).catch(() => (
+        caches.match(e.request, { ignoreSearch: true })
+          .then(response => response || caches.match('./index.html'))
+      ))
+    );
+    return;
+  }
+
   if (url.origin === location.origin && url.pathname.endsWith('/data/schedule/2026_2027.json')) {
     e.respondWith(fetch(e.request).catch(() => caches.match('./data/schedule/2026_2027.json')));
     return;
@@ -79,7 +96,7 @@ self.addEventListener('fetch', e => {
   }
 
   e.respondWith(
-    caches.match(e.request).then(response => {
+    caches.match(e.request, { ignoreSearch: true }).then(response => {
       return response || fetch(e.request);
     })
   );

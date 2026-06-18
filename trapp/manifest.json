@@ -1,6 +1,9 @@
 {
   "name": "takarei app",
   "short_name": "takarei",
+  "id": "./",
+  "scope": "./",
+  "lang": "ja",
   "description": "J-League Match & Standings Tracker for Niigata and Kumamoto",
   "start_url": "index.html",
   "display": "standalone",

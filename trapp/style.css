@@ -315,6 +315,22 @@ html, body {
 .menu-card .m-icon { width: 32px; height: 32px; color: var(--text-main); }
 .menu-card .m-label { font-size: 0.85rem; font-weight: 800; color: var(--text-main); }
 
+.menu-install-card {
+  grid-column: 1 / -1;
+  min-height: 76px;
+  aspect-ratio: auto;
+  flex-direction: row;
+  gap: 14px;
+  padding: 14px 20px;
+  border-color: rgba(var(--albirex-orange-rgb), 0.22);
+  background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(var(--albirex-orange-rgb),0.1));
+}
+.menu-install-card[hidden] { display: none; }
+.menu-install-card .m-icon { flex: 0 0 auto; color: var(--albirex-orange); }
+.menu-install-copy { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; }
+.menu-install-card .m-label { font-size: 0.9rem; }
+.menu-install-card .m-note { color: var(--text-grey); font-size: 0.7rem; font-weight: 700; }
+
 .menu-version {
   margin-top: auto;
   padding-top: 22px;
@@ -374,6 +390,73 @@ html, body {
   opacity: 1;
   transform: translate(-50%, 0);
 }
+
+body.pwa-guide-open { overflow: hidden; }
+.pwa-install-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 6000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+.pwa-install-guide[hidden] { display: none; }
+.pwa-install-guide-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.42);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.pwa-install-guide-card {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 28px 24px 26px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 22px 60px rgba(0,0,0,0.22);
+  color: var(--text-main);
+  font-family: var(--font-main);
+}
+.pwa-install-guide-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: #f2f2f7;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.pwa-install-guide-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  place-items: center;
+  border-radius: 15px;
+  background: rgba(var(--albirex-orange-rgb),0.12);
+  color: var(--albirex-orange);
+}
+.pwa-install-guide-icon svg { width: 25px; height: 25px; }
+.pwa-install-guide-kicker {
+  margin: 0 0 4px;
+  color: var(--albirex-orange);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pwa-install-guide h2 { margin: 0 0 18px; font-size: 1.35rem; line-height: 1.25; }
+.pwa-install-guide ol { display: grid; gap: 12px; margin: 0; padding-left: 1.4em; }
+.pwa-install-guide li { padding-left: 4px; font-size: 0.9rem; font-weight: 700; line-height: 1.55; }
+.pwa-install-guide li::marker { color: var(--albirex-orange); font-weight: 900; }
+.pwa-share-symbol { display: inline-block; color: #007aff; font-size: 1rem; font-weight: 900; }
 
 /* 💾 Data Backup Pane Styles */
 .u-backup-area { text-align: left; padding: 20px 30px; font-family: var(--font-main); }
