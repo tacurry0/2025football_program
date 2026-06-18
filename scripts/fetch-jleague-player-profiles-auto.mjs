@@ -156,7 +156,10 @@ function parseHeightWeight(value) {
 }
 
 function safeCacheName(value) {
-  return String(value).replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 160);
+  const converted = Array.from(String(value || ''))
+    .map(ch => /[A-Za-z0-9_.-]/.test(ch) ? ch : `u${ch.codePointAt(0).toString(16)}`)
+    .join('');
+  return (converted || 'empty').slice(0, 160);
 }
 
 async function readJsonSafe(filePath, fallback = null) {
