@@ -187,7 +187,7 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 22000) {
       ...options,
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 football-profile-generator/6.0',
+        'User-Agent': 'Mozilla/5.0 football-profile-generator/6.1',
         'Accept-Language': 'ja,en-US;q=0.8,en;q=0.6',
         ...(options.headers || {})
       }
@@ -384,8 +384,27 @@ function collectSectionLines(lines, heading, stopHeadings = []) {
   return out;
 }
 
+function recordFromCells(cells) {
+  const values = cells.map(compactText).filter(Boolean);
+  const yearIndex = values.findIndex(value => /^\d{4}$/.test(value));
+  if (yearIndex === -1) return null;
+  const row = values.slice(yearIndex);
+  if (row.length < 7) return null;
+  if (!/^(J1|J2|J3|Ｊ１|Ｊ２|Ｊ３)$/.test(row[2])) return null;
+  return {
+    season: row[0],
+    team: compactText(row[1]),
+    league: row[2].replace('Ｊ', 'J'),
+    league_matches: row[3] || '',
+    league_goals: row[4] || '',
+    cup_matches: row[5] || '',
+    cup_goals: row[6] || ''
+  };
+}
+
 function parseAnnualRecords(lines) {
   const records = [];
+
   for (const line of lines) {
     const normalized = compactText(line);
     const m = normalized.match(/^(\d{4})\s+(.+?)\s+(J1|J2|J3|Ｊ１|Ｊ２|Ｊ３)\s+(.+)$/);
@@ -401,7 +420,58 @@ function parseAnnualRecords(lines) {
       cup_goals: rest[3] || ''
     });
   }
-  return records;
+
+  // Some local HTML-to-text conversions split table cells into separate lines:
+  // 2015 / J-22 / J3 / 7 / 0 / - / -
+  for (let i = 0; i < lines.length; i += 1) {
+    const record = recordFromCells(lines.slice(i, i + 7));
+    if (record) {
+      records.push(record);
+      i += 6;
+    }
+  }
+
+  return dedupeAnnualRecords(records);
+}
+
+function tableRowsFromHtml(html) {
+  const rows = [];
+  const source = String(html || '');
+  for (const tr of source.matchAll(/<tr[\s\S]*?<\/tr>/gi)) {
+    const cells = [];
+    const rowHtml = tr[0];
+    for (const cell of rowHtml.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)) {
+      const text = stripTags(cell[1]);
+      if (text) cells.push(text);
+    }
+    if (cells.length) rows.push(cells);
+  }
+  return rows;
+}
+
+function parseAnnualRecordsFromHtml(html) {
+  const records = [];
+  for (const cells of tableRowsFromHtml(html)) {
+    const record = recordFromCells(cells);
+    if (record) records.push(record);
+
+    // Fallback for rows that were collapsed into one or two text cells.
+    const combined = compactText(cells.join(' '));
+    records.push(...parseAnnualRecords([combined]));
+  }
+  return dedupeAnnualRecords(records);
+}
+
+function dedupeAnnualRecords(records) {
+  const seen = new Set();
+  const out = [];
+  for (const record of records) {
+    const key = [record.season, record.team, record.league, record.league_matches, record.league_goals, record.cup_matches, record.cup_goals].join('|');
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(record);
+  }
+  return out;
 }
 
 function parseFirstRecord(lines) {
@@ -421,7 +491,9 @@ async function fetchPlayerDetail(indexPlayer) {
   const annualLines = collectSectionLines(lines, '年度別成績', ['戻る', 'HOME']);
   const firstAppearanceLines = collectSectionLines(lines, '初出場', ['初得点', 'リーグ別成績', '年度別成績']);
   const firstGoalLines = collectSectionLines(lines, '初得点', ['リーグ別成績', '年度別成績']);
-  const annual_records = parseAnnualRecords(annualLines);
+  const annual_records = parseAnnualRecordsFromHtml(html).length
+    ? parseAnnualRecordsFromHtml(html)
+    : parseAnnualRecords(annualLines);
   return {
     source: 'jleague_data_site',
     source_confidence: 'high',
