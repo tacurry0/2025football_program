@@ -6,19 +6,20 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const HISTORY_DIR = path.join(ROOT, 'trapp', 'data', 'history');
-const DEFAULT_OUTPUT = path.join(ROOT, 'trapp', 'data', 'players', 'profiles.json');
-const DEFAULT_REPORT = path.join(ROOT, 'trapp', 'data', 'players', 'profile_resolution_report.json');
+const DEFAULT_OUTPUT_DIR = path.join(ROOT, 'trapp', 'data', 'players');
 const DEFAULT_CACHE_DIR = path.join(ROOT, '.cache', 'jleague-data-site-profiles');
 const DATA_SITE_BASE = 'https://data.j-league.or.jp';
 
 const CLUB_CONFIG = {
   niigata: {
     label: 'アルビレックス新潟',
+    outputFile: 'niigata.json',
     dataSiteNames: ['新潟'],
     historyNames: ['新潟', 'アルビレックス新潟']
   },
   kumamoto: {
     label: 'ロアッソ熊本',
+    outputFile: 'kumamoto.json',
     dataSiteNames: ['熊本'],
     historyNames: ['熊本', 'ロアッソ熊本']
   }
@@ -52,8 +53,7 @@ function hasFlag(name) {
 }
 
 const clubs = String(getArg('--clubs', 'niigata,kumamoto')).split(',').map(v => v.trim()).filter(Boolean);
-const outputPath = path.resolve(getArg('--out', DEFAULT_OUTPUT));
-const reportPath = path.resolve(getArg('--report', DEFAULT_REPORT));
+const outputDir = path.resolve(getArg('--out-dir', DEFAULT_OUTPUT_DIR));
 const cacheDir = path.resolve(getArg('--cache', DEFAULT_CACHE_DIR));
 const limit = Number(getArg('--limit', '0'));
 const pageDelayMs = Number(getArg('--page-delay', '350'));
@@ -97,8 +97,6 @@ function createNameKeys(name) {
     add(match[1]);
   }
 
-  // Data Site often stores aliases as: アレックス ムラーリャ（アレックス サンターナ）
-  // History JSON often stores only the registered short name.
   return Array.from(keys);
 }
 
@@ -186,7 +184,7 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 22000) {
       ...options,
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 football-profile-generator/5.0',
+        'User-Agent': 'Mozilla/5.0 football-profile-generator/6.0',
         'Accept-Language': 'ja,en-US;q=0.8,en;q=0.6',
         ...(options.headers || {})
       }
@@ -452,40 +450,16 @@ function teamMatchesClub(team, club) {
 }
 
 function profileBelongsToClub(profile, club) {
-  // 採用条件は「所属歴＝年度別成績に対象クラブがある」だけ。
-  // 最終所属は別クラブになりやすいので、判定には使わない。
   return (profile.annual_records || []).some(row => teamMatchesClub(row.team, club));
 }
 
-function chooseCandidate(candidates, club) {
-  const verified = candidates.filter(candidate => candidate.profile && profileBelongsToClub(candidate.profile, club));
-  if (verified.length === 1) return { status: 'matched_by_club_history', candidate: verified[0], verified };
-  if (verified.length > 1) return { status: 'needs_review_same_name_same_club_history', candidate: null, verified };
-  if (candidates.length) return { status: 'candidate_found_but_no_club_history', candidate: null, verified };
-  return { status: 'not_in_master', candidate: null, verified };
-}
-
-function buildResolver(player, allCandidates, selected, status, verified) {
+function makeCompactProfile(profile, player, club) {
+  const matchedAnnualRecords = profile.annual_records.filter(row => teamMatchesClub(row.team, club));
   return {
-    status,
-    source: 'jleague_data_site',
-    rule: 'exact_or_alias_name_match_then_annual_record_team_match',
-    selected_player_id: selected?.profile?.player_id || '',
-    candidates: allCandidates.map(candidate => ({
-      player_id: candidate.index.player_id,
-      name: candidate.index.name,
-      name_keys: candidate.index.name_keys,
-      name_en: candidate.index.name_en,
-      final_team: candidate.index.final_team,
-      position: candidate.index.position,
-      birth_date: candidate.index.birth_date,
-      verified_affiliation: Boolean(candidate.profile && profileBelongsToClub(candidate.profile, player.club)),
-      annual_teams: candidate.profile?.affiliated_teams || [],
-      annual_records: candidate.profile?.annual_records || [],
-      url: candidate.index.links.jleague_data,
-      error: candidate.error || undefined
-    })),
-    verified_count: verified.length,
+    ...profile,
+    app_player_name: player.name,
+    club,
+    matched_annual_records: matchedAnnualRecords,
     history_hint: {
       numbers: player.numbers,
       positions: player.positions,
@@ -503,34 +477,25 @@ async function resolvePlayer(player, club, masterByName) {
     }
   }
 
-  const indexCandidates = Array.from(candidateMap.values());
-  const evaluated = [];
-  for (const indexPlayer of indexCandidates) {
+  const profiles = [];
+  for (const indexPlayer of candidateMap.values()) {
     try {
       const profile = await fetchPlayerDetail(indexPlayer);
-      evaluated.push({ index: indexPlayer, profile });
-    } catch (error) {
-      evaluated.push({ index: indexPlayer, profile: null, error: error.message });
+      if (profileBelongsToClub(profile, club)) {
+        profiles.push(makeCompactProfile(profile, player, club));
+      }
+    } catch {
+      // 取得できない候補は、通常JSONにもmissingにも入れない。
+      // 対象クラブ所属を確認できなかった選手名だけmissingへ回す。
     }
   }
 
-  const selected = chooseCandidate(evaluated, club);
-  if (selected.status === 'matched_by_club_history') {
-    const profile = selected.candidate.profile;
-    profile.app_player_name = player.name;
-    profile.club = club;
-    profile.resolver = buildResolver({ ...player, club }, evaluated, selected.candidate, selected.status, selected.verified);
-    profile.history_hint = profile.resolver.history_hint;
-    return { status: 'matched', profile, candidates: evaluated };
-  }
+  return profiles;
+}
 
-  return {
-    status: selected.status,
-    profile: null,
-    candidates: evaluated,
-    verified: selected.verified,
-    resolver: buildResolver({ ...player, club }, evaluated, null, selected.status, selected.verified)
-  };
+function putProfile(clubJson, playerName, profiles) {
+  if (!profiles.length) return;
+  clubJson[playerName] = profiles.length === 1 ? profiles[0] : profiles;
 }
 
 async function main() {
@@ -548,89 +513,64 @@ async function main() {
   }
   console.log(`Master players: ${master.length}`);
 
-  const output = {
+  const generatedAt = new Date().toISOString();
+  const missing = {
     _meta: {
-      generated_at: new Date().toISOString(),
+      generated_at: generatedAt,
       source: 'J.LEAGUE Data Site SFIX03/SFIX04',
-      script: 'scripts/fetch-jleague-player-profiles-auto.mjs',
-      matching_rule: 'name exact/alias match, then annual_records team includes target club; final_team is not used for adoption'
+      note: 'Names only. These players were not confirmed as Niigata/Kumamoto affiliated by annual_records.'
     }
   };
-  const report = {
-    generated_at: new Date().toISOString(),
-    source: 'J.LEAGUE Data Site SFIX03/SFIX04',
-    summary: {
-      total_players: 0,
-      matched: 0,
-      needs_review_same_name_same_club_history: 0,
-      candidate_found_but_no_club_history: 0,
-      not_in_master: 0,
-      errors: 0
-    },
-    clubs: {}
-  };
+
+  const summary = {};
 
   for (const club of clubs) {
     if (!CLUB_CONFIG[club]) { console.warn(`Unknown club skipped: ${club}`); continue; }
     const players = await collectHistoryPlayers(club);
     const targets = limit > 0 ? players.slice(0, limit) : players;
-    output[club] = {};
-    report.clubs[club] = {
-      label: CLUB_CONFIG[club].label,
-      total_players: targets.length,
-      matched: [],
-      needs_review_same_name_same_club_history: [],
-      candidate_found_but_no_club_history: [],
-      not_in_master: [],
-      errors: []
+    const clubJson = {
+      _meta: {
+        generated_at: generatedAt,
+        club,
+        club_label: CLUB_CONFIG[club].label,
+        source: 'J.LEAGUE Data Site SFIX03/SFIX04',
+        matching_rule: 'name exact/alias match, then annual_records team includes target club; final_team is not used for adoption'
+      }
     };
-    report.summary.total_players += targets.length;
-    console.log(`\n[${club}] ${targets.length} players`);
+    missing[club] = [];
+    summary[club] = { total: targets.length, matched: 0, missing: 0, duplicate_profile_names: 0 };
 
+    console.log(`\n[${club}] ${targets.length} players`);
     for (let i = 0; i < targets.length; i += 1) {
       const player = targets[i];
       process.stdout.write(`${String(i + 1).padStart(3, ' ')}/${targets.length} ${player.name} ... `);
-      try {
-        const resolved = await resolvePlayer(player, club, masterByName);
-        if (resolved.profile) {
-          output[club][player.name] = resolved.profile;
-          report.clubs[club].matched.push({
-            name: player.name,
-            player_id: resolved.profile.player_id,
-            official_name: resolved.profile.name,
-            final_team: resolved.profile.final_team,
-            affiliated_teams: resolved.profile.affiliated_teams,
-            matched_annual_records: resolved.profile.annual_records.filter(row => teamMatchesClub(row.team, club)),
-            url: resolved.profile.links.jleague_data
-          });
-          report.summary.matched += 1;
-          console.log(`OK player_id=${resolved.profile.player_id}`);
-        } else {
-          const row = { name: player.name, history_hint: player, resolver: resolved.resolver };
-          report.clubs[club][resolved.status].push(row);
-          report.summary[resolved.status] += 1;
-          const label = resolved.status === 'candidate_found_but_no_club_history'
-            ? 'CANDIDATE_NO_CLUB_HISTORY'
-            : resolved.status === 'needs_review_same_name_same_club_history'
-              ? 'REVIEW_SAME_NAME'
-              : 'NOT_IN_MASTER';
-          console.log(label);
-        }
-      } catch (error) {
-        report.clubs[club].errors.push({ name: player.name, history_hint: player, error: error.message });
-        report.summary.errors += 1;
-        console.log(`ERROR ${error.message}`);
+      const profiles = await resolvePlayer(player, club, masterByName);
+      if (profiles.length) {
+        putProfile(clubJson, player.name, profiles);
+        summary[club].matched += 1;
+        if (profiles.length > 1) summary[club].duplicate_profile_names += 1;
+        console.log(profiles.length === 1 ? `OK player_id=${profiles[0].player_id}` : `OK ${profiles.length} profiles`);
+      } else {
+        missing[club].push(player.name);
+        summary[club].missing += 1;
+        console.log('MISSING');
       }
     }
+
+    const outputPath = path.join(outputDir, CLUB_CONFIG[club].outputFile);
+    await writeJson(outputPath, clubJson);
   }
 
-  await writeJson(outputPath, output);
-  await writeJson(reportPath, report);
+  missing._meta.summary = summary;
+  await writeJson(path.join(outputDir, 'missing.json'), missing);
+
   console.log('\nSaved:');
-  console.log(`- ${relPath(outputPath)}`);
-  console.log(`- ${relPath(reportPath)}`);
+  for (const club of clubs) {
+    if (CLUB_CONFIG[club]) console.log(`- ${relPath(path.join(outputDir, CLUB_CONFIG[club].outputFile))}`);
+  }
+  console.log(`- ${relPath(path.join(outputDir, 'missing.json'))}`);
   console.log('\nSummary:');
-  console.log(report.summary);
+  console.log(summary);
 }
 
 main().catch(error => { console.error(error); process.exit(1); });
