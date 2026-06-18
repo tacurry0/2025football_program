@@ -1,0 +1,3993 @@
+{
+  "entities": {
+    "Q2431": {
+      "pageid": 3376,
+      "ns": 0,
+      "title": "Q2431",
+      "lastrevid": 2496222986,
+      "modified": "2026-05-23T02:51:34Z",
+      "type": "item",
+      "id": "Q2431",
+      "labels": {
+        "fr": {
+          "language": "fr",
+          "value": "1985"
+        },
+        "be-tarask": {
+          "language": "be-tarask",
+          "value": "1985"
+        },
+        "nan": {
+          "language": "nan",
+          "value": "1985 nî"
+        },
+        "de": {
+          "language": "de",
+          "value": "1985"
+        },
+        "en": {
+          "language": "en",
+          "value": "1985"
+        },
+        "af": {
+          "language": "af",
+          "value": "1985"
+        },
+        "am": {
+          "language": "am",
+          "value": "1985 እ.ኤ.አ."
+        },
+        "an": {
+          "language": "an",
+          "value": "1985"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "1985"
+        },
+        "arz": {
+          "language": "arz",
+          "value": "1985"
+        },
+        "ast": {
+          "language": "ast",
+          "value": "1985"
+        },
+        "av": {
+          "language": "av",
+          "value": "1985"
+        },
+        "ay": {
+          "language": "ay",
+          "value": "1985"
+        },
+        "az": {
+          "language": "az",
+          "value": "1985"
+        },
+        "bcl": {
+          "language": "bcl",
+          "value": "1985"
+        },
+        "be": {
+          "language": "be",
+          "value": "1985"
+        },
+        "bg": {
+          "language": "bg",
+          "value": "1985"
+        },
+        "bn": {
+          "language": "bn",
+          "value": "১৯৮৫"
+        },
+        "bpy": {
+          "language": "bpy",
+          "value": "মারি ১৯৮৫"
+        },
+        "br": {
+          "language": "br",
+          "value": "1985"
+        },
+        "bs": {
+          "language": "bs",
+          "value": "1985"
+        },
+        "ca": {
+          "language": "ca",
+          "value": "1985"
+        },
+        "cbk-zam": {
+          "language": "cbk-zam",
+          "value": "1985"
+        },
+        "ckb": {
+          "language": "ckb",
+          "value": "١٩٨٥"
+        },
+        "co": {
+          "language": "co",
+          "value": "1985"
+        },
+        "cs": {
+          "language": "cs",
+          "value": "1985"
+        },
+        "csb": {
+          "language": "csb",
+          "value": "1985"
+        },
+        "cv": {
+          "language": "cv",
+          "value": "1985"
+        },
+        "cy": {
+          "language": "cy",
+          "value": "1985"
+        },
+        "da": {
+          "language": "da",
+          "value": "1985"
+        },
+        "diq": {
+          "language": "diq",
+          "value": "1985"
+        },
+        "el": {
+          "language": "el",
+          "value": "1985"
+        },
+        "eo": {
+          "language": "eo",
+          "value": "1985"
+        },
+        "es": {
+          "language": "es",
+          "value": "1985"
+        },
+        "et": {
+          "language": "et",
+          "value": "1985"
+        },
+        "eu": {
+          "language": "eu",
+          "value": "1985"
+        },
+        "fa": {
+          "language": "fa",
+          "value": "۱۹۸۵"
+        },
+        "fi": {
+          "language": "fi",
+          "value": "1985"
+        },
+        "fo": {
+          "language": "fo",
+          "value": "1985"
+        },
+        "frp": {
+          "language": "frp",
+          "value": "1985"
+        },
+        "frr": {
+          "language": "frr",
+          "value": "1985"
+        },
+        "fur": {
+          "language": "fur",
+          "value": "1985"
+        },
+        "fy": {
+          "language": "fy",
+          "value": "1985"
+        },
+        "ga": {
+          "language": "ga",
+          "value": "1985"
+        },
+        "gag": {
+          "language": "gag",
+          "value": "1985"
+        },
+        "gan": {
+          "language": "gan",
+          "value": "1985年"
+        },
+        "gd": {
+          "language": "gd",
+          "value": "1985"
+        },
+        "gl": {
+          "language": "gl",
+          "value": "1985"
+        },
+        "gn": {
+          "language": "gn",
+          "value": "1985"
+        },
+        "gv": {
+          "language": "gv",
+          "value": "1985"
+        },
+        "he": {
+          "language": "he",
+          "value": "1985"
+        },
+        "hi": {
+          "language": "hi",
+          "value": "१९८५"
+        },
+        "hif": {
+          "language": "hif",
+          "value": "1985"
+        },
+        "hr": {
+          "language": "hr",
+          "value": "1985."
+        },
+        "ht": {
+          "language": "ht",
+          "value": "1985"
+        },
+        "hu": {
+          "language": "hu",
+          "value": "1985"
+        },
+        "hy": {
+          "language": "hy",
+          "value": "1985"
+        },
+        "ia": {
+          "language": "ia",
+          "value": "1985"
+        },
+        "id": {
+          "language": "id",
+          "value": "1985"
+        },
+        "ig": {
+          "language": "ig",
+          "value": "1985"
+        },
+        "ilo": {
+          "language": "ilo",
+          "value": "1985"
+        },
+        "io": {
+          "language": "io",
+          "value": "1985"
+        },
+        "is": {
+          "language": "is",
+          "value": "1985"
+        },
+        "it": {
+          "language": "it",
+          "value": "1985"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "1985年"
+        },
+        "jbo": {
+          "language": "jbo",
+          "value": "1985moi"
+        },
+        "jv": {
+          "language": "jv",
+          "value": "1985"
+        },
+        "ka": {
+          "language": "ka",
+          "value": "1985"
+        },
+        "kk": {
+          "language": "kk",
+          "value": "1985 жыл"
+        },
+        "kn": {
+          "language": "kn",
+          "value": "೧೯೮೫"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "1985년"
+        },
+        "krc": {
+          "language": "krc",
+          "value": "1985 джыл"
+        },
+        "ksh": {
+          "language": "ksh",
+          "value": "Joohr 1985"
+        },
+        "ku": {
+          "language": "ku",
+          "value": "1985"
+        },
+        "kv": {
+          "language": "kv",
+          "value": "1985 во"
+        },
+        "kw": {
+          "language": "kw",
+          "value": "1985"
+        },
+        "la": {
+          "language": "la",
+          "value": "1985"
+        },
+        "lb": {
+          "language": "lb",
+          "value": "1985"
+        },
+        "li": {
+          "language": "li",
+          "value": "1985"
+        },
+        "lij": {
+          "language": "lij",
+          "value": "1985"
+        },
+        "lmo": {
+          "language": "lmo",
+          "value": "1985"
+        },
+        "ln": {
+          "language": "ln",
+          "value": "1985"
+        },
+        "lt": {
+          "language": "lt",
+          "value": "1985 m."
+        },
+        "lv": {
+          "language": "lv",
+          "value": "1985. gads"
+        },
+        "map-bms": {
+          "language": "map-bms",
+          "value": "1985"
+        },
+        "mdf": {
+          "language": "mdf",
+          "value": "1985"
+        },
+        "mhr": {
+          "language": "mhr",
+          "value": "1985"
+        },
+        "mi": {
+          "language": "mi",
+          "value": "1985"
+        },
+        "mk": {
+          "language": "mk",
+          "value": "1985"
+        },
+        "ml": {
+          "language": "ml",
+          "value": "1985"
+        },
+        "mr": {
+          "language": "mr",
+          "value": "इ.स. १९८५"
+        },
+        "ms": {
+          "language": "ms",
+          "value": "1985"
+        },
+        "my": {
+          "language": "my",
+          "value": "၁၉၈၅"
+        },
+        "myv": {
+          "language": "myv",
+          "value": "1985 ие"
+        },
+        "nah": {
+          "language": "nah",
+          "value": "1985"
+        },
+        "nap": {
+          "language": "nap",
+          "value": "1985"
+        },
+        "nds": {
+          "language": "nds",
+          "value": "1985"
+        },
+        "nds-nl": {
+          "language": "nds-nl",
+          "value": "1985"
+        },
+        "ne": {
+          "language": "ne",
+          "value": "सन् १९८५"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "1985"
+        },
+        "nn": {
+          "language": "nn",
+          "value": "1985"
+        },
+        "nov": {
+          "language": "nov",
+          "value": "1985"
+        },
+        "nrm": {
+          "language": "nrm",
+          "value": "1985"
+        },
+        "oc": {
+          "language": "oc",
+          "value": "1985"
+        },
+        "os": {
+          "language": "os",
+          "value": "1985-æм аз"
+        },
+        "pa": {
+          "language": "pa",
+          "value": "੧੯੮੫"
+        },
+        "pag": {
+          "language": "pag",
+          "value": "1985"
+        },
+        "pam": {
+          "language": "pam",
+          "value": "1985"
+        },
+        "pap": {
+          "language": "pap",
+          "value": "1985"
+        },
+        "pdc": {
+          "language": "pdc",
+          "value": "1985"
+        },
+        "pi": {
+          "language": "pi",
+          "value": "१९८५"
+        },
+        "pl": {
+          "language": "pl",
+          "value": "1985"
+        },
+        "pms": {
+          "language": "pms",
+          "value": "1985"
+        },
+        "pnb": {
+          "language": "pnb",
+          "value": "1985"
+        },
+        "pt": {
+          "language": "pt",
+          "value": "1985"
+        },
+        "qu": {
+          "language": "qu",
+          "value": "1985"
+        },
+        "ro": {
+          "language": "ro",
+          "value": "1985"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "1985 год"
+        },
+        "rue": {
+          "language": "rue",
+          "value": "1985"
+        },
+        "sah": {
+          "language": "sah",
+          "value": "1985"
+        },
+        "scn": {
+          "language": "scn",
+          "value": "1985"
+        },
+        "se": {
+          "language": "se",
+          "value": "1985"
+        },
+        "sh": {
+          "language": "sh",
+          "value": "1985"
+        },
+        "sk": {
+          "language": "sk",
+          "value": "1985"
+        },
+        "sl": {
+          "language": "sl",
+          "value": "1985"
+        },
+        "so": {
+          "language": "so",
+          "value": "1985"
+        },
+        "sq": {
+          "language": "sq",
+          "value": "1985"
+        },
+        "sr": {
+          "language": "sr",
+          "value": "1985."
+        },
+        "stq": {
+          "language": "stq",
+          "value": "1985"
+        },
+        "su": {
+          "language": "su",
+          "value": "1985"
+        },
+        "sv": {
+          "language": "sv",
+          "value": "1985"
+        },
+        "sw": {
+          "language": "sw",
+          "value": "1985"
+        },
+        "ta": {
+          "language": "ta",
+          "value": "1985"
+        },
+        "te": {
+          "language": "te",
+          "value": "1985"
+        },
+        "tet": {
+          "language": "tet",
+          "value": "1985"
+        },
+        "tg": {
+          "language": "tg",
+          "value": "1985"
+        },
+        "th": {
+          "language": "th",
+          "value": "พ.ศ. 2528"
+        },
+        "tk": {
+          "language": "tk",
+          "value": "1985"
+        },
+        "tl": {
+          "language": "tl",
+          "value": "1985"
+        },
+        "tpi": {
+          "language": "tpi",
+          "value": "1985"
+        },
+        "tr": {
+          "language": "tr",
+          "value": "1985"
+        },
+        "tt": {
+          "language": "tt",
+          "value": "1985 ел"
+        },
+        "ty": {
+          "language": "ty",
+          "value": "1985"
+        },
+        "udm": {
+          "language": "udm",
+          "value": "1985 ар"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "1985"
+        },
+        "ur": {
+          "language": "ur",
+          "value": "1985ء"
+        },
+        "uz": {
+          "language": "uz",
+          "value": "1985"
+        },
+        "vec": {
+          "language": "vec",
+          "value": "1985"
+        },
+        "vi": {
+          "language": "vi",
+          "value": "1985"
+        },
+        "vls": {
+          "language": "vls",
+          "value": "1985"
+        },
+        "vo": {
+          "language": "vo",
+          "value": "1985"
+        },
+        "wa": {
+          "language": "wa",
+          "value": "1985"
+        },
+        "war": {
+          "language": "war",
+          "value": "1985"
+        },
+        "xal": {
+          "language": "xal",
+          "value": "1985 җил"
+        },
+        "yi": {
+          "language": "yi",
+          "value": "1985"
+        },
+        "yo": {
+          "language": "yo",
+          "value": "1985"
+        },
+        "zea": {
+          "language": "zea",
+          "value": "1985"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "1985年"
+        },
+        "en-ca": {
+          "language": "en-ca",
+          "value": "1985"
+        },
+        "en-gb": {
+          "language": "en-gb",
+          "value": "1985"
+        },
+        "pt-br": {
+          "language": "pt-br",
+          "value": "1985"
+        },
+        "yue": {
+          "language": "yue",
+          "value": "1985年"
+        },
+        "mn": {
+          "language": "mn",
+          "value": "1985 он"
+        },
+        "wuu": {
+          "language": "wuu",
+          "value": "1985年"
+        },
+        "min": {
+          "language": "min",
+          "value": "1985"
+        },
+        "ce": {
+          "language": "ce",
+          "value": "1985 шо"
+        },
+        "eml": {
+          "language": "eml",
+          "value": "1985"
+        },
+        "nb": {
+          "language": "nb",
+          "value": "1985"
+        },
+        "hsb": {
+          "language": "hsb",
+          "value": "1985"
+        },
+        "na": {
+          "language": "na",
+          "value": "1985"
+        },
+        "szl": {
+          "language": "szl",
+          "value": "1985"
+        },
+        "or": {
+          "language": "or",
+          "value": "୧୯୮୫"
+        },
+        "lzh": {
+          "language": "lzh",
+          "value": "一九八五年"
+        },
+        "rup": {
+          "language": "rup",
+          "value": "1985"
+        },
+        "vro": {
+          "language": "vro",
+          "value": "1985"
+        },
+        "sgs": {
+          "language": "sgs",
+          "value": "1985"
+        },
+        "crh-latn": {
+          "language": "crh-latn",
+          "value": "1985"
+        },
+        "mrj": {
+          "language": "mrj",
+          "value": "1985 и"
+        },
+        "sc": {
+          "language": "sc",
+          "value": "1985"
+        },
+        "zu": {
+          "language": "zu",
+          "value": "1985"
+        },
+        "sco": {
+          "language": "sco",
+          "value": "1985"
+        },
+        "kaa": {
+          "language": "kaa",
+          "value": "1985 jıl"
+        },
+        "gsw": {
+          "language": "gsw",
+          "value": "1985"
+        },
+        "ba": {
+          "language": "ba",
+          "value": "1985 йыл"
+        },
+        "hak": {
+          "language": "hak",
+          "value": "1985-ngièn"
+        },
+        "bar": {
+          "language": "bar",
+          "value": "1985"
+        },
+        "ab": {
+          "language": "ab",
+          "value": "1985"
+        },
+        "cdo": {
+          "language": "cdo",
+          "value": "1985 nièng"
+        },
+        "bho": {
+          "language": "bho",
+          "value": "१९८५"
+        },
+        "xmf": {
+          "language": "xmf",
+          "value": "1985"
+        },
+        "ceb": {
+          "language": "ceb",
+          "value": "1985"
+        },
+        "lez": {
+          "language": "lez",
+          "value": "1985 йис"
+        },
+        "si": {
+          "language": "si",
+          "value": "1985"
+        },
+        "nso": {
+          "language": "nso",
+          "value": "1985"
+        },
+        "ky": {
+          "language": "ky",
+          "value": "1985"
+        },
+        "mai": {
+          "language": "mai",
+          "value": "१९८५"
+        },
+        "fit": {
+          "language": "fit",
+          "value": "1985"
+        },
+        "dsb": {
+          "language": "dsb",
+          "value": "1985"
+        },
+        "crh": {
+          "language": "crh",
+          "value": "1985"
+        },
+        "olo": {
+          "language": "olo",
+          "value": "1985"
+        },
+        "kbp": {
+          "language": "kbp",
+          "value": "1985"
+        },
+        "bjn": {
+          "language": "bjn",
+          "value": "1985"
+        },
+        "mg": {
+          "language": "mg",
+          "value": "1985"
+        },
+        "lfn": {
+          "language": "lfn",
+          "value": "1985"
+        },
+        "sd": {
+          "language": "sd",
+          "value": "1985ع"
+        },
+        "azb": {
+          "language": "azb",
+          "value": "۱۹۸۵ (میلادی)"
+        },
+        "shn": {
+          "language": "shn",
+          "value": "1985"
+        },
+        "hyw": {
+          "language": "hyw",
+          "value": "1985 թուական"
+        },
+        "zh-tw": {
+          "language": "zh-tw",
+          "value": "1985年"
+        },
+        "ha": {
+          "language": "ha",
+          "value": "1985"
+        },
+        "ban": {
+          "language": "ban",
+          "value": "1985"
+        },
+        "gcr": {
+          "language": "gcr",
+          "value": "1985"
+        },
+        "lld": {
+          "language": "lld",
+          "value": "1985"
+        },
+        "smn": {
+          "language": "smn",
+          "value": "1985"
+        },
+        "avk": {
+          "language": "avk",
+          "value": "1985"
+        },
+        "ary": {
+          "language": "ary",
+          "value": "1985"
+        },
+        "ug": {
+          "language": "ug",
+          "value": "1985 - يىلى"
+        },
+        "bo": {
+          "language": "bo",
+          "value": "༡༩༨༥ལོ།"
+        },
+        "mzn": {
+          "language": "mzn",
+          "value": "۱۹۸۵"
+        },
+        "tly": {
+          "language": "tly",
+          "value": "1985"
+        },
+        "roa-tara": {
+          "language": "roa-tara",
+          "value": "1985"
+        },
+        "zh-hant": {
+          "language": "zh-hant",
+          "value": "1985年"
+        },
+        "za": {
+          "language": "za",
+          "value": "1985 nienz"
+        },
+        "acm": {
+          "language": "acm",
+          "value": "1985"
+        },
+        "apc": {
+          "language": "apc",
+          "value": "1985"
+        },
+        "no": {
+          "language": "no",
+          "value": "1985"
+        }
+      },
+      "descriptions": {
+        "fr": {
+          "language": "fr",
+          "value": "année du XXe siècle"
+        },
+        "de": {
+          "language": "de",
+          "value": "Jahr"
+        },
+        "en": {
+          "language": "en",
+          "value": "year"
+        },
+        "es": {
+          "language": "es",
+          "value": "año"
+        },
+        "it": {
+          "language": "it",
+          "value": "anno"
+        },
+        "ca": {
+          "language": "ca",
+          "value": "any"
+        },
+        "cs": {
+          "language": "cs",
+          "value": "rok"
+        },
+        "eo": {
+          "language": "eo",
+          "value": "jaro"
+        },
+        "fi": {
+          "language": "fi",
+          "value": "vuosi"
+        },
+        "ia": {
+          "language": "ia",
+          "value": "anno"
+        },
+        "is": {
+          "language": "is",
+          "value": "ár"
+        },
+        "la": {
+          "language": "la",
+          "value": "annus"
+        },
+        "da": {
+          "language": "da",
+          "value": "år"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "jaar"
+        },
+        "nn": {
+          "language": "nn",
+          "value": "år"
+        },
+        "pl": {
+          "language": "pl",
+          "value": "rok kalendarzowy w XX wieku"
+        },
+        "pt": {
+          "language": "pt",
+          "value": "ano"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "год XX века"
+        },
+        "sv": {
+          "language": "sv",
+          "value": "år"
+        },
+        "tr": {
+          "language": "tr",
+          "value": "yıl"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "年"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "年"
+        },
+        "ilo": {
+          "language": "ilo",
+          "value": "tawen"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "연도"
+        },
+        "mr": {
+          "language": "mr",
+          "value": "इसवी सनाच्या दुसर्या सहस्रकातील एक वर्ष"
+        },
+        "nb": {
+          "language": "nb",
+          "value": "år"
+        },
+        "el": {
+          "language": "el",
+          "value": "έτος"
+        },
+        "hy": {
+          "language": "hy",
+          "value": "տարեթիվ"
+        },
+        "bn": {
+          "language": "bn",
+          "value": "বছর"
+        },
+        "bg": {
+          "language": "bg",
+          "value": "година"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "سنة"
+        },
+        "an": {
+          "language": "an",
+          "value": "anyo"
+        },
+        "af": {
+          "language": "af",
+          "value": "jaar"
+        },
+        "ast": {
+          "language": "ast",
+          "value": "añu"
+        },
+        "he": {
+          "language": "he",
+          "value": "שנה"
+        },
+        "hr": {
+          "language": "hr",
+          "value": "Godina"
+        },
+        "srn": {
+          "language": "srn",
+          "value": "Yari"
+        },
+        "br": {
+          "language": "br",
+          "value": "bloavezh"
+        },
+        "nds": {
+          "language": "nds",
+          "value": "Johr"
+        },
+        "gl": {
+          "language": "gl",
+          "value": "ano"
+        },
+        "ro": {
+          "language": "ro",
+          "value": "an"
+        },
+        "mk": {
+          "language": "mk",
+          "value": "година"
+        },
+        "gsw": {
+          "language": "gsw",
+          "value": "joor"
+        },
+        "en-ca": {
+          "language": "en-ca",
+          "value": "year"
+        },
+        "ms": {
+          "language": "ms",
+          "value": "Tahun"
+        },
+        "ht": {
+          "language": "ht",
+          "value": "Lane"
+        },
+        "fy": {
+          "language": "fy",
+          "value": "jier"
+        },
+        "be-tarask": {
+          "language": "be-tarask",
+          "value": "год"
+        },
+        "nan": {
+          "language": "nan",
+          "value": "nî"
+        },
+        "ka": {
+          "language": "ka",
+          "value": "წელი"
+        },
+        "th": {
+          "language": "th",
+          "value": "ปี"
+        },
+        "sh": {
+          "language": "sh",
+          "value": "godina"
+        },
+        "ku": {
+          "language": "ku",
+          "value": "Sal"
+        },
+        "sk": {
+          "language": "sk",
+          "value": "Rok"
+        },
+        "bs": {
+          "language": "bs",
+          "value": "godina"
+        },
+        "sl": {
+          "language": "sl",
+          "value": "Leto"
+        },
+        "id": {
+          "language": "id",
+          "value": "tahun kalender"
+        },
+        "lv": {
+          "language": "lv",
+          "value": "gads"
+        },
+        "sr": {
+          "language": "sr",
+          "value": "година"
+        },
+        "zh-hans": {
+          "language": "zh-hans",
+          "value": "年份"
+        },
+        "tl": {
+          "language": "tl",
+          "value": "taon"
+        },
+        "yi": {
+          "language": "yi",
+          "value": "יאר"
+        },
+        "en-gb": {
+          "language": "en-gb",
+          "value": "year"
+        },
+        "war": {
+          "language": "war",
+          "value": "Tuig"
+        },
+        "or": {
+          "language": "or",
+          "value": "ବର୍ଷ"
+        },
+        "min": {
+          "language": "min",
+          "value": "taun"
+        },
+        "hu": {
+          "language": "hu",
+          "value": "év"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "рік"
+        },
+        "zh-hant": {
+          "language": "zh-hant",
+          "value": "年份"
+        },
+        "be": {
+          "language": "be",
+          "value": "год"
+        },
+        "vi": {
+          "language": "vi",
+          "value": "năm"
+        },
+        "lt": {
+          "language": "lt",
+          "value": "Metai"
+        },
+        "mhr": {
+          "language": "mhr",
+          "value": "Идалык"
+        },
+        "yue": {
+          "language": "yue",
+          "value": "年"
+        },
+        "fa": {
+          "language": "fa",
+          "value": "سال"
+        },
+        "dsb": {
+          "language": "dsb",
+          "value": "lěto"
+        },
+        "hsb": {
+          "language": "hsb",
+          "value": "lěto"
+        },
+        "et": {
+          "language": "et",
+          "value": "aasta"
+        },
+        "io": {
+          "language": "io",
+          "value": "yaro"
+        },
+        "vo": {
+          "language": "vo",
+          "value": "yel"
+        },
+        "lfn": {
+          "language": "lfn",
+          "value": "anio"
+        },
+        "zh-tw": {
+          "language": "zh-tw",
+          "value": "儒略曆或格里曆之年份"
+        },
+        "az": {
+          "language": "az",
+          "value": "il"
+        },
+        "sq": {
+          "language": "sq",
+          "value": "Viti 1985"
+        },
+        "bar": {
+          "language": "bar",
+          "value": "Joar"
+        },
+        "ckb": {
+          "language": "ckb",
+          "value": "ساڵ"
+        },
+        "de-at": {
+          "language": "de-at",
+          "value": "Jahr"
+        },
+        "de-ch": {
+          "language": "de-ch",
+          "value": "Jahr"
+        },
+        "eu": {
+          "language": "eu",
+          "value": "urte"
+        },
+        "frr": {
+          "language": "frr",
+          "value": "Juar"
+        },
+        "wuu": {
+          "language": "wuu",
+          "value": "年"
+        },
+        "gu": {
+          "language": "gu",
+          "value": "વર્ષ"
+        },
+        "pt-br": {
+          "language": "pt-br",
+          "value": "ano"
+        },
+        "se": {
+          "language": "se",
+          "value": "jahki"
+        },
+        "sje": {
+          "language": "sje",
+          "value": "jahke"
+        },
+        "sma": {
+          "language": "sma",
+          "value": "jaepie"
+        },
+        "smj": {
+          "language": "smj",
+          "value": "jahke"
+        },
+        "sw": {
+          "language": "sw",
+          "value": "mwaka"
+        },
+        "ur": {
+          "language": "ur",
+          "value": "سال"
+        },
+        "zh-cn": {
+          "language": "zh-cn",
+          "value": "年份"
+        },
+        "zh-hk": {
+          "language": "zh-hk",
+          "value": "年份"
+        },
+        "zh-mo": {
+          "language": "zh-mo",
+          "value": "年份"
+        },
+        "zh-sg": {
+          "language": "zh-sg",
+          "value": "年份"
+        },
+        "my": {
+          "language": "my",
+          "value": "အနောက်တိုင်းပြက္ခဒိန်နှစ်"
+        },
+        "lij": {
+          "language": "lij",
+          "value": "ànno"
+        },
+        "myv": {
+          "language": "myv",
+          "value": "Ие"
+        },
+        "mi": {
+          "language": "mi",
+          "value": "tau"
+        },
+        "cy": {
+          "language": "cy",
+          "value": "blwyddyn"
+        },
+        "cv": {
+          "language": "cv",
+          "value": "Çулталăк"
+        },
+        "gcr": {
+          "language": "gcr",
+          "value": "lannen"
+        },
+        "gd": {
+          "language": "gd",
+          "value": "bliadhna"
+        },
+        "gv": {
+          "language": "gv",
+          "value": "blein"
+        },
+        "rw": {
+          "language": "rw",
+          "value": "umwaka"
+        },
+        "rmy": {
+          "language": "rmy",
+          "value": "bersh"
+        },
+        "ga": {
+          "language": "ga",
+          "value": "bliain"
+        },
+        "wa": {
+          "language": "wa",
+          "value": "anêye"
+        },
+        "pap": {
+          "language": "pap",
+          "value": "aña"
+        },
+        "hi": {
+          "language": "hi",
+          "value": "वर्ष"
+        },
+        "ml": {
+          "language": "ml",
+          "value": "വർഷം"
+        },
+        "lb": {
+          "language": "lb",
+          "value": "Joer"
+        },
+        "shn": {
+          "language": "shn",
+          "value": "ပီႊ"
+        },
+        "ace": {
+          "language": "ace",
+          "value": "bahsa"
+        },
+        "bjn": {
+          "language": "bjn",
+          "value": "bahasa"
+        },
+        "co": {
+          "language": "co",
+          "value": "annu"
+        },
+        "diq": {
+          "language": "diq",
+          "value": "lısan"
+        },
+        "eml": {
+          "language": "eml",
+          "value": "langua"
+        },
+        "ext": {
+          "language": "ext",
+          "value": "luenga"
+        },
+        "frp": {
+          "language": "frp",
+          "value": "lengoua"
+        },
+        "fur": {
+          "language": "fur",
+          "value": "lenghe"
+        },
+        "jv": {
+          "language": "jv",
+          "value": "basa"
+        },
+        "kg": {
+          "language": "kg",
+          "value": "ndinga"
+        },
+        "lzh": {
+          "language": "lzh",
+          "value": "曆之一年也"
+        },
+        "mg": {
+          "language": "mg",
+          "value": "fiteny"
+        },
+        "pcd": {
+          "language": "pcd",
+          "value": "langue"
+        },
+        "smn": {
+          "language": "smn",
+          "value": "ihe"
+        },
+        "su": {
+          "language": "su",
+          "value": "basa"
+        },
+        "ty": {
+          "language": "ty",
+          "value": "reo"
+        },
+        "wo": {
+          "language": "wo",
+          "value": "làkk"
+        },
+        "gag": {
+          "language": "gag",
+          "value": "yıl"
+        },
+        "av": {
+          "language": "av",
+          "value": "сон"
+        },
+        "kaa": {
+          "language": "kaa",
+          "value": "XX ásirdiń jılı"
+        }
+      },
+      "aliases": {
+        "be-tarask": [
+          {
+            "language": "be-tarask",
+            "value": "1985 год"
+          }
+        ],
+        "nan": [
+          {
+            "language": "nan",
+            "value": "1985-nî"
+          },
+          {
+            "language": "nan",
+            "value": "1985"
+          }
+        ],
+        "es": [
+          {
+            "language": "es",
+            "value": "año 1985"
+          },
+          {
+            "language": "es",
+            "value": "MCMLXXXV"
+          }
+        ],
+        "ar": [
+          {
+            "language": "ar",
+            "value": "١٩٨٥"
+          }
+        ],
+        "shn": [
+          {
+            "language": "shn",
+            "value": "၁၉၈၅"
+          }
+        ],
+        "gag": [
+          {
+            "language": "gag",
+            "value": "MCMLXXXV"
+          }
+        ]
+      },
+      "claims": {
+        "P373": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P373",
+              "hash": "305f6fe03a76cc8ac455c13c991cbd1fe631c8c5",
+              "datavalue": {
+                "value": "1985",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "id": "q2431$BD076BBE-8DBA-4EFB-B9EC-86FD807EFFB6",
+            "rank": "normal"
+          }
+        ],
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "dfd008e47580611b1da8e8bce95c09d6c0d68948",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3186692,
+                  "id": "Q3186692"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q2431$4FAEB0BB-5D83-4A90-ADA6-DE8601F77EE5",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "a24809b5ffd9a1cc7827b6c04825f0f38cb49bf9",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 235684,
+                  "id": "Q235684"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$b173dd22-ed9a-42de-ba0a-1689f81c4b2e",
+            "rank": "normal"
+          }
+        ],
+        "P361": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P361",
+              "hash": "8bcb3da47ad91c3abe8e3f4e4ee7e90bde2f68e8",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 34644,
+                  "id": "Q34644"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q2431$E6549167-C726-4121-8B50-84A81A63B69B",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P361",
+              "hash": "976016fa23b5e5b8ef28c398183835c9fd55a716",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6927,
+                  "id": "Q6927"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$bd443bb9-4643-ff4c-a67a-5f50fc560312",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P361",
+              "hash": "e3c367fdc44bc556d8839226aa42bcc3d7a19edb",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 25860,
+                  "id": "Q25860"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$1b6b5451-4e22-bca8-5dd8-c369967580f5",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P361",
+              "hash": "ff5dd10f636e7f79c8d832ebe59120df3560c6c3",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 12138,
+                  "id": "Q12138"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$ad744508-d7de-48dd-a046-de428bf48ece",
+            "rank": "normal"
+          }
+        ],
+        "P155": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P155",
+              "hash": "9dc2525afb55a32696972c941c403b8f6a4bbbf5",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2432,
+                  "id": "Q2432"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q2431$56394C5A-BB2D-470E-98A1-00F063E55D72",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P156": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P156",
+              "hash": "69ec1ac56a70e30f351fe1149be784f1bb5aa8cf",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2430,
+                  "id": "Q2430"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q2431$17E72120-0DA0-418F-9268-9BC5571B3AB5",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P910": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P910",
+              "hash": "adbe74d1cd6d01e354f0e99bee87fe31f2ed995d",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6938423,
+                  "id": "Q6938423"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$ECC0A7F3-3DB4-4986-9CF7-7DA177C240D6",
+            "rank": "normal"
+          }
+        ],
+        "P585": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P585",
+              "hash": "a6d22a800b06cfe7723877af38f0362be749f2eb",
+              "datavalue": {
+                "value": {
+                  "time": "+1985-01-01T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 9,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q2431$DB78D2BA-FFE7-4E88-B5B3-B01A419ECCB5",
+            "rank": "normal"
+          }
+        ],
+        "P935": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P935",
+              "hash": "4c9853f942436c61495f3fb55c1a678f6d2cd3b4",
+              "datavalue": {
+                "value": "1985",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "id": "Q2431$67E60DA6-BE52-469B-A62C-F6485B7861CF",
+            "rank": "normal"
+          }
+        ],
+        "P3417": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P3417",
+              "hash": "c1fe4d5ab7c7dc6e44e391439b80fbc66fc25c62",
+              "datavalue": {
+                "value": "1985-3",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$4313E172-D171-4FC1-9088-5C37A7EAFA93",
+            "rank": "normal"
+          }
+        ],
+        "P2959": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2959",
+              "hash": "7fa4ce29b10b8df7507a6b4c4bad77fd978d2d4d",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 31803009,
+                  "id": "Q31803009"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$5012D863-3CF5-4B11-9F9A-90B5B1F82C4F",
+            "rank": "normal"
+          }
+        ],
+        "P5461": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P5461",
+              "hash": "be4050d9b1e2f6bef6c61b8b36a2d22fbd126dc0",
+              "datavalue": {
+                "value": "F",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P1013": [
+                {
+                  "snaktype": "value",
+                  "property": "P1013",
+                  "hash": "d807e87622b343a5567375e739ad5039a7ad81c4",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 55518340,
+                      "id": "Q55518340"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P1013"
+            ],
+            "id": "Q2431$B4C4BF01-691E-4446-9419-EB0270099345",
+            "rank": "normal"
+          }
+        ],
+        "P1889": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1889",
+              "hash": "96193ceda9026b9db623d2beb512413e26457c1a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 44069399,
+                  "id": "Q44069399"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P3831": [
+                {
+                  "snaktype": "value",
+                  "property": "P3831",
+                  "hash": "fbf43873ea855676a2b99da8faadc448afc3e2b5",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 44018216,
+                      "id": "Q44018216"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P3831"
+            ],
+            "id": "Q2431$56D42FA9-40AF-4A3D-9EA1-091BDEBC9D79",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "7d60bfa842f0ae31491a6625438f17f7ba19f168",
+                "snaks": {
+                  "P3452": [
+                    {
+                      "snaktype": "value",
+                      "property": "P3452",
+                      "hash": "4d3cb04a31b767209e8ae7223b380e8e24cce98e",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 44069399,
+                          "id": "Q44069399"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P3452"
+                ]
+              }
+            ]
+          }
+        ],
+        "P244": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P244",
+              "hash": "4ab1046794fdcc8decefb7757025dcc29da7a4e4",
+              "datavalue": {
+                "value": "sh91005435",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$BE05C8FD-BBD4-4618-9952-484F1FD8B96F",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "ac5d47e9fbcc281bc0d27a205ae02e22ad24ce31",
+                "snaks": {
+                  "P854": [
+                    {
+                      "snaktype": "value",
+                      "property": "P854",
+                      "hash": "b560dc6b281a39d061e189d2eb299a426a06f1a2",
+                      "datavalue": {
+                        "value": "https://github.com/JohnMarkOckerbloom/ftl/blob/master/data/wikimap",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ],
+                  "P813": [
+                    {
+                      "snaktype": "value",
+                      "property": "P813",
+                      "hash": "0dcf4f64e93fdcc654e2c7534285881fe48b9f3d",
+                      "datavalue": {
+                        "value": {
+                          "time": "+2019-04-03T00:00:00Z",
+                          "timezone": 0,
+                          "before": 0,
+                          "after": 0,
+                          "precision": 11,
+                          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                        },
+                        "type": "time"
+                      },
+                      "datatype": "time"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P854",
+                  "P813"
+                ]
+              }
+            ]
+          }
+        ],
+        "P6262": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P6262",
+              "hash": "0800f4edc5f3e3a4618f8572247ff70e5f193f9a",
+              "datavalue": {
+                "value": "80s:1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P407": [
+                {
+                  "snaktype": "value",
+                  "property": "P407",
+                  "hash": "daf1c4fcb58181b02dff9cc89deb084004ddae4b",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 1860,
+                      "id": "Q1860"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ],
+              "P1810": [
+                {
+                  "snaktype": "value",
+                  "property": "P1810",
+                  "hash": "195f6a0e378a551c028f1d3f6ddcca5756dea8f6",
+                  "datavalue": {
+                    "value": "1985",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ],
+              "P9675": [
+                {
+                  "snaktype": "value",
+                  "property": "P9675",
+                  "hash": "b2ec03d51dcd239d540306da3f27da8aa2877c12",
+                  "datavalue": {
+                    "value": "3949",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P407",
+              "P1810",
+              "P9675"
+            ],
+            "id": "Q2431$3884a968-4f36-9f8e-91c8-e3daddb51534",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P6262",
+              "hash": "7c32a7a3ad24756658bfad774a2f9886b6042e60",
+              "datavalue": {
+                "value": "apple:1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P1810": [
+                {
+                  "snaktype": "value",
+                  "property": "P1810",
+                  "hash": "195f6a0e378a551c028f1d3f6ddcca5756dea8f6",
+                  "datavalue": {
+                    "value": "1985",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ],
+              "P407": [
+                {
+                  "snaktype": "value",
+                  "property": "P407",
+                  "hash": "daf1c4fcb58181b02dff9cc89deb084004ddae4b",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 1860,
+                      "id": "Q1860"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ],
+              "P9675": [
+                {
+                  "snaktype": "value",
+                  "property": "P9675",
+                  "hash": "24a266f7429fa21bda2e63a59e6fb1d1d6304fe3",
+                  "datavalue": {
+                    "value": "4752",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P1810",
+              "P407",
+              "P9675"
+            ],
+            "id": "Q2431$1E0DAD6A-59EC-456F-ADFC-A3AE14E86395",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P6262",
+              "hash": "252b3102bfc0262defe7d7409cc86aed20109ec9",
+              "datavalue": {
+                "value": "years:1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P1810": [
+                {
+                  "snaktype": "value",
+                  "property": "P1810",
+                  "hash": "195f6a0e378a551c028f1d3f6ddcca5756dea8f6",
+                  "datavalue": {
+                    "value": "1985",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ],
+              "P407": [
+                {
+                  "snaktype": "value",
+                  "property": "P407",
+                  "hash": "daf1c4fcb58181b02dff9cc89deb084004ddae4b",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 1860,
+                      "id": "Q1860"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P1810",
+              "P407"
+            ],
+            "id": "Q2431$d4b95d22-4635-2b8c-0839-63c046024b52",
+            "rank": "normal"
+          }
+        ],
+        "P6228": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P6228",
+              "hash": "6b33e505a93688c1e0d43b2725426d66016a272b",
+              "datavalue": {
+                "value": "10687",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P1810": [
+                {
+                  "snaktype": "value",
+                  "property": "P1810",
+                  "hash": "195f6a0e378a551c028f1d3f6ddcca5756dea8f6",
+                  "datavalue": {
+                    "value": "1985",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P1810"
+            ],
+            "id": "Q2431$497646D2-6639-4F21-9107-0CBC3EB77C99",
+            "rank": "normal"
+          }
+        ],
+        "P460": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P460",
+              "hash": "65e2081265a75ab065e0b773489138a0399b53ed",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 109521992,
+                  "id": "Q109521992"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$3c4ae5ce-48f0-0630-c24f-5088568fd095",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P460",
+              "hash": "878f385788f3a394dc5f5c66712a8db0ce9f066a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 109530588,
+                  "id": "Q109530588"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$cd3aafd2-4184-2822-5f2b-d8e246eb0e66",
+            "rank": "normal"
+          }
+        ],
+        "P8189": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P8189",
+              "hash": "ecce01383d1031deb33ae59f1c914a115ac0db41",
+              "datavalue": {
+                "value": "987007539454705171",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P14457": [
+                {
+                  "snaktype": "value",
+                  "property": "P14457",
+                  "hash": "b8fd37d6e3af3b7c4afb33e835d26a51b995e738",
+                  "datavalue": {
+                    "value": {
+                      "text": "Nineteen eighty-five, A.D.",
+                      "language": "en"
+                    },
+                    "type": "monolingualtext"
+                  },
+                  "datatype": "monolingualtext"
+                },
+                {
+                  "snaktype": "value",
+                  "property": "P14457",
+                  "hash": "01a3cd4d4b1509067ac8175ce7f2c9206e049722",
+                  "datavalue": {
+                    "value": {
+                      "text": "שנת 1985",
+                      "language": "he"
+                    },
+                    "type": "monolingualtext"
+                  },
+                  "datatype": "monolingualtext"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P14457"
+            ],
+            "id": "Q2431$E5BD83B6-0309-4C13-90A8-2B017CF084A0",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "c8a47202c92936005b390eb36ddd267921b51f43",
+                "snaks": {
+                  "P248": [
+                    {
+                      "snaktype": "value",
+                      "property": "P248",
+                      "hash": "0ea73b3596b49258a7b7ec6495950779b99e875d",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 188915,
+                          "id": "Q188915"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P248"
+                ]
+              }
+            ]
+          }
+        ],
+        "P2354": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2354",
+              "hash": "3f454f7555d9457250393bf161df4862c0f799ca",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 362140,
+                  "id": "Q362140"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$FBB08383-55C5-46AC-94BC-2AAA7503AB63",
+            "rank": "normal"
+          }
+        ],
+        "P7084": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P7084",
+              "hash": "73b739fa3575d358159646d2ad78b77b62d3053f",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6182595,
+                  "id": "Q6182595"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P4224": [
+                {
+                  "snaktype": "value",
+                  "property": "P4224",
+                  "hash": "509a7bbb92f745dc119e540b03feea2b3c07e48f",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 13406463,
+                      "id": "Q13406463"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P4224"
+            ],
+            "id": "Q2431$7B5423D6-FB96-475F-B76A-6527DF6FAF53",
+            "rank": "normal"
+          }
+        ],
+        "P11194": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P11194",
+              "hash": "10f123525da40612a6e6a7b6adc07be64630e09d",
+              "datavalue": {
+                "value": "year/1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$70D35F36-39EF-44AB-8438-230CA565371E",
+            "rank": "normal"
+          }
+        ],
+        "P11408": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P11408",
+              "hash": "21a3ca891c46af3015c32c7442f3633cbb620e94",
+              "datavalue": {
+                "value": "1985年",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$1b93e9f2-f796-4a14-b9d3-b5c053acde1c",
+            "rank": "normal"
+          }
+        ],
+        "P3847": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P3847",
+              "hash": "bab95cfd5fb3302c989216ff1ed4da1d72909e4a",
+              "datavalue": {
+                "value": "time:1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$F2FFC82C-762F-4036-8EBC-EE6D4EFBF0AA",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "188463f164ce8afa9bd3f5d88d577b2c5dba923c",
+                "snaks": {
+                  "P854": [
+                    {
+                      "snaktype": "value",
+                      "property": "P854",
+                      "hash": "ae6afa28a2a8df26a13c38d9d204fac3f5d396a5",
+                      "datavalue": {
+                        "value": "https://openlibrary.org/subjects/time:1985",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ],
+                  "P1476": [
+                    {
+                      "snaktype": "value",
+                      "property": "P1476",
+                      "hash": "334a4f82f462ece0675f9307a1824b0f5f2a6a3f",
+                      "datavalue": {
+                        "value": {
+                          "text": "1985 | Open Library",
+                          "language": "en"
+                        },
+                        "type": "monolingualtext"
+                      },
+                      "datatype": "monolingualtext"
+                    }
+                  ],
+                  "P813": [
+                    {
+                      "snaktype": "value",
+                      "property": "P813",
+                      "hash": "ae701db0819dbedba880fa0c07359195a86ac0fe",
+                      "datavalue": {
+                        "value": {
+                          "time": "+2023-08-06T00:00:00Z",
+                          "timezone": 0,
+                          "before": 0,
+                          "after": 0,
+                          "precision": 11,
+                          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                        },
+                        "type": "time"
+                      },
+                      "datatype": "time"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P854",
+                  "P1476",
+                  "P813"
+                ]
+              }
+            ]
+          }
+        ],
+        "P12288": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12288",
+              "hash": "547ed9d8dd3f1c23de3cce9dfd52c9c755f4c8e6",
+              "datavalue": {
+                "value": "1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$A92B8C6B-4090-46CA-9B83-57A304E93CE6",
+            "rank": "normal"
+          }
+        ],
+        "P527": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "b9e9f30f76496c0774c3070af7d80e1fa9012d57",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3162151,
+                  "id": "Q3162151"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$B79ED864-8769-4E97-9771-03ACA6E7E880",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "fb75e4f087f85384167133cf87017ac5bde6d571",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 13070124,
+                  "id": "Q13070124"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$7DE840D5-A739-4F0C-A8B8-525F4137547C",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "0f917920dd0312ca64e3b06f365049b7ce7d90b4",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 13071493,
+                  "id": "Q13071493"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$6DBFC9CB-56FE-4E7E-A9A5-15D5D22951F9",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "95d5f05a64eee903afe6c51b1fb8078f46837211",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 13080433,
+                  "id": "Q13080433"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$9AF0A073-1BCE-46BE-BBF0-FF18C25B4517",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "93925e2fad5f9060d5f282e508364bdfe292827a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 13072294,
+                  "id": "Q13072294"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$52DB6CBB-C4DD-4CBC-80D9-8A5A6C835DC5",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "97e99a8540cc55bf43282b5bf7766f41192d890c",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 16647464,
+                  "id": "Q16647464"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$4FBC630D-A78F-4D61-93D7-DF9346E036C9",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "46d7b80a486df7c9c0956dc0c46490244c958546",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 13066045,
+                  "id": "Q13066045"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$9A00341E-8852-489C-96EB-B2699AFD3B20",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "6a4b39ad995f702a9c11d532c1046aeb8ab0d297",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 16528152,
+                  "id": "Q16528152"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$AC3544B2-EDF2-48A6-A28B-225F37068DDA",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "fb4ea85af30f8d11d4da050d4b83b9f14bd78b31",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 16676416,
+                  "id": "Q16676416"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$9B6ED9D4-19A2-402B-8F15-785BC7D7A44E",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "0fca14faf3225cbc99bfc0e522284f384078e1a8",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 16667788,
+                  "id": "Q16667788"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$84F8CC32-5C99-44DB-8581-2BAB102215B6",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "3af0726535064c276c7330ffe3291d6eabbd430a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 13068516,
+                  "id": "Q13068516"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$501CF3BA-183C-47EF-9D54-E8F5A427894E",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "24e975be62487d05fdeb71cda1681d03a5f7b8d7",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3042490,
+                  "id": "Q3042490"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$1E8DD9F8-5A89-4F6D-8446-6FD685FD50C9",
+            "rank": "normal"
+          }
+        ],
+        "P2671": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2671",
+              "hash": "3dbb01bf6686f3b9b4c78ecc325971e3e446d5bc",
+              "datavalue": {
+                "value": "/g/11b77d3ky8",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$d45b5201-49c5-ea8b-4398-db86adfac631",
+            "rank": "normal"
+          }
+        ],
+        "P12686": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12686",
+              "hash": "a346c36253ae11b3c9156efaf66ba801da6cf113",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6647944,
+                  "id": "Q6647944"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$767176DA-5953-4EB4-8936-75EFDE7BBAE1",
+            "rank": "normal"
+          }
+        ],
+        "P12687": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12687",
+              "hash": "806c0c866e16c3306038ae7a23254e0d38a89400",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6938449,
+                  "id": "Q6938449"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2431$8B5A6F5D-0240-4089-9C6E-006150BAF152",
+            "rank": "normal"
+          }
+        ],
+        "P13425": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13425",
+              "hash": "b505f9f89a73dd2d0545aac9c2278b388687ae31",
+              "datavalue": {
+                "value": "instant.1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$CFE37441-4B91-4D73-9237-3B506A6D9B1F",
+            "rank": "normal"
+          }
+        ],
+        "P11924": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P11924",
+              "hash": "88ef4ef7ae0919b0b58e5ba8f9a41ed165c0f9df",
+              "datavalue": {
+                "value": "year-1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$14EB729D-C08A-43AC-9920-B5926DD0B90C",
+            "rank": "normal"
+          }
+        ],
+        "P13591": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13591",
+              "hash": "5bf8ea82acc7cefe3f3d7257c1ec6455ae4abc74",
+              "datavalue": {
+                "value": "concept/fb0ce3bc-14de-4680-9def-66e890d3089d",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$A6103D61-D4B5-4305-B775-F3D49E63C778",
+            "rank": "normal"
+          }
+        ],
+        "P13600": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13600",
+              "hash": "5ed76aa9b7a379f11ac03b5430ae94a3d78d885f",
+              "datavalue": {
+                "value": "1985",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$402b8c92-4d11-b1f5-cb31-b994b9cbb164",
+            "rank": "normal"
+          }
+        ],
+        "P12653": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12653",
+              "hash": "c9050989f36c5fd841a68e27f3688e743c29decc",
+              "datavalue": {
+                "value": "2149",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2431$F5CBA7EC-6196-4C34-9695-8DE8F4FC8103",
+            "rank": "normal"
+          }
+        ]
+      },
+      "sitelinks": {
+        "enwikiquote": {
+          "site": "enwikiquote",
+          "title": "1985",
+          "badges": []
+        },
+        "ptwikiquote": {
+          "site": "ptwikiquote",
+          "title": "1985",
+          "badges": []
+        },
+        "cywikiquote": {
+          "site": "cywikiquote",
+          "title": "1985",
+          "badges": []
+        },
+        "commonswiki": {
+          "site": "commonswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "enwiki": {
+          "site": "enwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "dewiki": {
+          "site": "dewiki",
+          "title": "1985",
+          "badges": []
+        },
+        "frwiki": {
+          "site": "frwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "eswiki": {
+          "site": "eswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ruwiki": {
+          "site": "ruwiki",
+          "title": "1985 год",
+          "badges": []
+        },
+        "itwiki": {
+          "site": "itwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "jawiki": {
+          "site": "jawiki",
+          "title": "1985年",
+          "badges": []
+        },
+        "nlwiki": {
+          "site": "nlwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "plwiki": {
+          "site": "plwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ptwiki": {
+          "site": "ptwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "zhwiki": {
+          "site": "zhwiki",
+          "title": "1985年",
+          "badges": []
+        },
+        "svwiki": {
+          "site": "svwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "fawiki": {
+          "site": "fawiki",
+          "title": "۱۹۸۵",
+          "badges": []
+        },
+        "hewiki": {
+          "site": "hewiki",
+          "title": "1985",
+          "badges": []
+        },
+        "trwiki": {
+          "site": "trwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "huwiki": {
+          "site": "huwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "fiwiki": {
+          "site": "fiwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "arwiki": {
+          "site": "arwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "viwiki": {
+          "site": "viwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "nowiki": {
+          "site": "nowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ukwiki": {
+          "site": "ukwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "kowiki": {
+          "site": "kowiki",
+          "title": "1985년",
+          "badges": []
+        },
+        "cawiki": {
+          "site": "cawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "cswiki": {
+          "site": "cswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "srwiki": {
+          "site": "srwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "rowiki": {
+          "site": "rowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "idwiki": {
+          "site": "idwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "dawiki": {
+          "site": "dawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "simplewiki": {
+          "site": "simplewiki",
+          "title": "1985",
+          "badges": []
+        },
+        "bgwiki": {
+          "site": "bgwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "abwiki": {
+          "site": "abwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "afwiki": {
+          "site": "afwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "alswiki": {
+          "site": "alswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "amwiki": {
+          "site": "amwiki",
+          "title": "1985 እ.ኤ.አ.",
+          "badges": []
+        },
+        "anwiki": {
+          "site": "anwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "arzwiki": {
+          "site": "arzwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "astwiki": {
+          "site": "astwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "avwiki": {
+          "site": "avwiki",
+          "title": "1985 сон",
+          "badges": []
+        },
+        "azwiki": {
+          "site": "azwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "azbwiki": {
+          "site": "azbwiki",
+          "title": "۱۹۸۵ (میلادی)",
+          "badges": []
+        },
+        "bawiki": {
+          "site": "bawiki",
+          "title": "1985 йыл",
+          "badges": []
+        },
+        "barwiki": {
+          "site": "barwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "bat_smgwiki": {
+          "site": "bat_smgwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "bclwiki": {
+          "site": "bclwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "bewiki": {
+          "site": "bewiki",
+          "title": "1985",
+          "badges": []
+        },
+        "be_x_oldwiki": {
+          "site": "be_x_oldwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "bhwiki": {
+          "site": "bhwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "bjnwiki": {
+          "site": "bjnwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "bnwiki": {
+          "site": "bnwiki",
+          "title": "১৯৮৫",
+          "badges": []
+        },
+        "bpywiki": {
+          "site": "bpywiki",
+          "title": "মারি ১৯৮৫",
+          "badges": []
+        },
+        "brwiki": {
+          "site": "brwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "bswiki": {
+          "site": "bswiki",
+          "title": "1985.",
+          "badges": []
+        },
+        "cbk_zamwiki": {
+          "site": "cbk_zamwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "cdowiki": {
+          "site": "cdowiki",
+          "title": "1985 nièng",
+          "badges": []
+        },
+        "cewiki": {
+          "site": "cewiki",
+          "title": "1985 шо",
+          "badges": []
+        },
+        "cebwiki": {
+          "site": "cebwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ckbwiki": {
+          "site": "ckbwiki",
+          "title": "١٩٨٥",
+          "badges": []
+        },
+        "crhwiki": {
+          "site": "crhwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "csbwiki": {
+          "site": "csbwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "cvwiki": {
+          "site": "cvwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "cywiki": {
+          "site": "cywiki",
+          "title": "1985",
+          "badges": []
+        },
+        "diqwiki": {
+          "site": "diqwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "elwiki": {
+          "site": "elwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "emlwiki": {
+          "site": "emlwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "eowiki": {
+          "site": "eowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "etwiki": {
+          "site": "etwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "euwiki": {
+          "site": "euwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "fiu_vrowiki": {
+          "site": "fiu_vrowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "fowiki": {
+          "site": "fowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "frpwiki": {
+          "site": "frpwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "frrwiki": {
+          "site": "frrwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "furwiki": {
+          "site": "furwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "fywiki": {
+          "site": "fywiki",
+          "title": "1985",
+          "badges": []
+        },
+        "gawiki": {
+          "site": "gawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "gagwiki": {
+          "site": "gagwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ganwiki": {
+          "site": "ganwiki",
+          "title": "1985年",
+          "badges": []
+        },
+        "gdwiki": {
+          "site": "gdwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "glwiki": {
+          "site": "glwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "gnwiki": {
+          "site": "gnwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "gvwiki": {
+          "site": "gvwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "hakwiki": {
+          "site": "hakwiki",
+          "title": "1985-ngièn",
+          "badges": []
+        },
+        "hiwiki": {
+          "site": "hiwiki",
+          "title": "१९८५",
+          "badges": []
+        },
+        "hifwiki": {
+          "site": "hifwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "hrwiki": {
+          "site": "hrwiki",
+          "title": "1985.",
+          "badges": []
+        },
+        "hsbwiki": {
+          "site": "hsbwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "htwiki": {
+          "site": "htwiki",
+          "title": "1985 (almanak gregoryen)",
+          "badges": []
+        },
+        "hywiki": {
+          "site": "hywiki",
+          "title": "1985",
+          "badges": []
+        },
+        "iawiki": {
+          "site": "iawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "igwiki": {
+          "site": "igwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ilowiki": {
+          "site": "ilowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "iowiki": {
+          "site": "iowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "iswiki": {
+          "site": "iswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "jbowiki": {
+          "site": "jbowiki",
+          "title": "1985moi",
+          "badges": []
+        },
+        "jvwiki": {
+          "site": "jvwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "kawiki": {
+          "site": "kawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "kbpwiki": {
+          "site": "kbpwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "kkwiki": {
+          "site": "kkwiki",
+          "title": "1985 жыл",
+          "badges": []
+        },
+        "knwiki": {
+          "site": "knwiki",
+          "title": "೧೯೮೫",
+          "badges": []
+        },
+        "krcwiki": {
+          "site": "krcwiki",
+          "title": "1985 джыл",
+          "badges": []
+        },
+        "kshwiki": {
+          "site": "kshwiki",
+          "title": "Joohr 1985",
+          "badges": []
+        },
+        "kuwiki": {
+          "site": "kuwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "kvwiki": {
+          "site": "kvwiki",
+          "title": "1985-ӧд во",
+          "badges": []
+        },
+        "kwwiki": {
+          "site": "kwwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "lawiki": {
+          "site": "lawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "lbwiki": {
+          "site": "lbwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "lezwiki": {
+          "site": "lezwiki",
+          "title": "1985 йис",
+          "badges": []
+        },
+        "liwiki": {
+          "site": "liwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "lijwiki": {
+          "site": "lijwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "lmowiki": {
+          "site": "lmowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "lnwiki": {
+          "site": "lnwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ltwiki": {
+          "site": "ltwiki",
+          "title": "1985 m.",
+          "badges": []
+        },
+        "lvwiki": {
+          "site": "lvwiki",
+          "title": "1985. gads",
+          "badges": []
+        },
+        "maiwiki": {
+          "site": "maiwiki",
+          "title": "१९८५",
+          "badges": []
+        },
+        "map_bmswiki": {
+          "site": "map_bmswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "mdfwiki": {
+          "site": "mdfwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "mgwiki": {
+          "site": "mgwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "mhrwiki": {
+          "site": "mhrwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "miwiki": {
+          "site": "miwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "minwiki": {
+          "site": "minwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "mkwiki": {
+          "site": "mkwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "mlwiki": {
+          "site": "mlwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "mnwiki": {
+          "site": "mnwiki",
+          "title": "1985 он",
+          "badges": []
+        },
+        "mrwiki": {
+          "site": "mrwiki",
+          "title": "इ.स. १९८५",
+          "badges": []
+        },
+        "mrjwiki": {
+          "site": "mrjwiki",
+          "title": "1985 и",
+          "badges": []
+        },
+        "mswiki": {
+          "site": "mswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "mywiki": {
+          "site": "mywiki",
+          "title": "၁၉၈၅",
+          "badges": []
+        },
+        "myvwiki": {
+          "site": "myvwiki",
+          "title": "1985 ие",
+          "badges": []
+        },
+        "nahwiki": {
+          "site": "nahwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "napwiki": {
+          "site": "napwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ndswiki": {
+          "site": "ndswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "nds_nlwiki": {
+          "site": "nds_nlwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "nnwiki": {
+          "site": "nnwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "nrmwiki": {
+          "site": "nrmwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "nsowiki": {
+          "site": "nsowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "olowiki": {
+          "site": "olowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "orwiki": {
+          "site": "orwiki",
+          "title": "୧୯୮୫",
+          "badges": []
+        },
+        "oswiki": {
+          "site": "oswiki",
+          "title": "1985-æм аз",
+          "badges": []
+        },
+        "pawiki": {
+          "site": "pawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "pagwiki": {
+          "site": "pagwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "pamwiki": {
+          "site": "pamwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "papwiki": {
+          "site": "papwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "pdcwiki": {
+          "site": "pdcwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "pmswiki": {
+          "site": "pmswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "pnbwiki": {
+          "site": "pnbwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "quwiki": {
+          "site": "quwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "roa_rupwiki": {
+          "site": "roa_rupwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ruewiki": {
+          "site": "ruewiki",
+          "title": "1985",
+          "badges": []
+        },
+        "sahwiki": {
+          "site": "sahwiki",
+          "title": "1985 сыл",
+          "badges": []
+        },
+        "scwiki": {
+          "site": "scwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "scnwiki": {
+          "site": "scnwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "sdwiki": {
+          "site": "sdwiki",
+          "title": "1985ع",
+          "badges": []
+        },
+        "sewiki": {
+          "site": "sewiki",
+          "title": "1985",
+          "badges": []
+        },
+        "siwiki": {
+          "site": "siwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "skwiki": {
+          "site": "skwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "slwiki": {
+          "site": "slwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "sowiki": {
+          "site": "sowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "sqwiki": {
+          "site": "sqwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "stqwiki": {
+          "site": "stqwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "suwiki": {
+          "site": "suwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "swwiki": {
+          "site": "swwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "szlwiki": {
+          "site": "szlwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "tawiki": {
+          "site": "tawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "tewiki": {
+          "site": "tewiki",
+          "title": "1985",
+          "badges": []
+        },
+        "tgwiki": {
+          "site": "tgwiki",
+          "title": "Соли 1985",
+          "badges": []
+        },
+        "thwiki": {
+          "site": "thwiki",
+          "title": "พ.ศ. 2528",
+          "badges": []
+        },
+        "tkwiki": {
+          "site": "tkwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "tlwiki": {
+          "site": "tlwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "tpiwiki": {
+          "site": "tpiwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ttwiki": {
+          "site": "ttwiki",
+          "title": "1985 ел",
+          "badges": []
+        },
+        "tywiki": {
+          "site": "tywiki",
+          "title": "1985",
+          "badges": []
+        },
+        "udmwiki": {
+          "site": "udmwiki",
+          "title": "1985 ар",
+          "badges": []
+        },
+        "urwiki": {
+          "site": "urwiki",
+          "title": "1985ء",
+          "badges": []
+        },
+        "uzwiki": {
+          "site": "uzwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "vecwiki": {
+          "site": "vecwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "vlswiki": {
+          "site": "vlswiki",
+          "title": "1985",
+          "badges": []
+        },
+        "vowiki": {
+          "site": "vowiki",
+          "title": "1985",
+          "badges": []
+        },
+        "wawiki": {
+          "site": "wawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "warwiki": {
+          "site": "warwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "xmfwiki": {
+          "site": "xmfwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "yiwiki": {
+          "site": "yiwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "zeawiki": {
+          "site": "zeawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "zh_classicalwiki": {
+          "site": "zh_classicalwiki",
+          "title": "一九八五年",
+          "badges": []
+        },
+        "zh_min_nanwiki": {
+          "site": "zh_min_nanwiki",
+          "title": "1985 nî",
+          "badges": []
+        },
+        "zh_yuewiki": {
+          "site": "zh_yuewiki",
+          "title": "1985年",
+          "badges": []
+        },
+        "zuwiki": {
+          "site": "zuwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "wuuwiki": {
+          "site": "wuuwiki",
+          "title": "1985年",
+          "badges": []
+        },
+        "shnwiki": {
+          "site": "shnwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "hywwiki": {
+          "site": "hywwiki",
+          "title": "1985 թուական",
+          "badges": []
+        },
+        "hawiki": {
+          "site": "hawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "banwiki": {
+          "site": "banwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "gcrwiki": {
+          "site": "gcrwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "smnwiki": {
+          "site": "smnwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ocwiki": {
+          "site": "ocwiki",
+          "title": "Ans 1980",
+          "badges": []
+        },
+        "avkwiki": {
+          "site": "avkwiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ruwikinews": {
+          "site": "ruwikinews",
+          "title": "Категория:1985",
+          "badges": []
+        },
+        "arywiki": {
+          "site": "arywiki",
+          "title": "1985",
+          "badges": []
+        },
+        "ugwiki": {
+          "site": "ugwiki",
+          "title": "1985 - يىلى",
+          "badges": []
+        },
+        "bowiki": {
+          "site": "bowiki",
+          "title": "༡༩༨༥ལོ།",
+          "badges": []
+        },
+        "mznwiki": {
+          "site": "mznwiki",
+          "title": "۱۹۸۵",
+          "badges": []
+        },
+        "tlywiki": {
+          "site": "tlywiki",
+          "title": "1985",
+          "badges": []
+        },
+        "roa_tarawiki": {
+          "site": "roa_tarawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "eowikinews": {
+          "site": "eowikinews",
+          "title": "Kategorio:1985",
+          "badges": []
+        },
+        "kaawiki": {
+          "site": "kaawiki",
+          "title": "1985",
+          "badges": []
+        },
+        "zawiki": {
+          "site": "zawiki",
+          "title": "1985 nienz",
+          "badges": []
+        },
+        "shwiki": {
+          "site": "shwiki",
+          "title": "1985.",
+          "badges": []
+        },
+        "cowiki": {
+          "site": "cowiki",
+          "title": "1985",
+          "badges": []
+        }
+      }
+    }
+  }
+}

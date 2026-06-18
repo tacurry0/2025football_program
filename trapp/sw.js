@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v45-pwa-install';
+const cacheName = 'football-app-v47-player-profile-v2';
 const assetsToCache = [
   './',
   './index.html',
@@ -34,6 +34,8 @@ const assetsToCache = [
   './data/clubs/club_emblems.json',
   './data/clubs/official_sites.json',
   './data/standings/current.json',
+  './data/players/niigata.json',
+  './data/players/kumamoto.json',
   './data/history/niigata/2026.json',
   './data/history/kumamoto/2026.json',
   './data/assets/emblems/アルビレックス新潟.png',
@@ -91,6 +93,17 @@ self.addEventListener('fetch', e => {
         caches.open(cacheName).then(cache => cache.put(e.request, copy));
         return response;
       }).catch(() => caches.match(e.request))
+    );
+    return;
+  }
+
+  if (url.origin === location.origin && /\.(?:js|css)$/.test(url.pathname)) {
+    e.respondWith(
+      fetch(e.request).then(response => {
+        const copy = response.clone();
+        caches.open(cacheName).then(cache => cache.put(e.request, copy));
+        return response;
+      }).catch(() => caches.match(e.request, { ignoreSearch: true }))
     );
     return;
   }

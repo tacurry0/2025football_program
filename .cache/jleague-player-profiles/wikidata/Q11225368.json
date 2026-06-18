@@ -1,0 +1,961 @@
+{
+  "entities": {
+    "Q11225368": {
+      "pageid": 12377270,
+      "ns": 0,
+      "title": "Q11225368",
+      "lastrevid": 2482905712,
+      "modified": "2026-04-19T00:10:34Z",
+      "type": "item",
+      "id": "Q11225368",
+      "labels": {
+        "ja": {
+          "language": "ja",
+          "value": "JAPANサッカーカレッジ"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "日本足球學院"
+        },
+        "en": {
+          "language": "en",
+          "value": "Japan Soccer College"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "JAPAN사커칼리지"
+        },
+        "de": {
+          "language": "de",
+          "value": "Japan Soccer College"
+        }
+      },
+      "descriptions": {
+        "br": {
+          "language": "br",
+          "value": "klub mell-droad"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "نادي كرة قدم في اليابان"
+        },
+        "en": {
+          "language": "en",
+          "value": "Japanese football club"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "voetbalclub uit Japan"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "新潟県聖籠町にあるサッカークラブ"
+        },
+        "de": {
+          "language": "de",
+          "value": "japanische Fußballakademie"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "일본의 축구전문학교"
+        }
+      },
+      "aliases": {
+        "ja": [
+          {
+            "language": "ja",
+            "value": "JAPANサッカー・カレッジ"
+          }
+        ]
+      },
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "de95c192b6d83336c7c4d98d15b566a0ca33065a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 476028,
+                  "id": "Q476028"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q11225368$C74A7F11-9668-4A6B-9C17-23E660216101",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "2c161584dfb16eea6921af122520eb26e12ac3cd",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 24898692,
+                  "id": "Q24898692"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q11225368$6C192257-E7BD-4042-B3E8-1E2BD16CFF23",
+            "rank": "normal"
+          }
+        ],
+        "P625": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P625",
+              "hash": "2675d62fdcc7aaaf787a7517ae87d28ba1eaed7b",
+              "datavalue": {
+                "value": {
+                  "latitude": 37.999089,
+                  "longitude": 139.259197,
+                  "altitude": null,
+                  "precision": 0.000001,
+                  "globe": "http://www.wikidata.org/entity/Q2"
+                },
+                "type": "globecoordinate"
+              },
+              "datatype": "globe-coordinate"
+            },
+            "type": "statement",
+            "id": "Q11225368$B03FE46F-DEDE-4FF6-9344-500CA33D533A",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "a29a646602abf65105ed0f39a44231c962ece9ee",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "c6f1777471211df31724ac60175786f3872c83e9",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 177837,
+                          "id": "Q177837"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P2002": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2002",
+              "hash": "b983a6016689ac3f72c0653c57c99970dc9c1a78",
+              "datavalue": {
+                "value": "JAPAN_Soccer_C",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P3744": [
+                {
+                  "snaktype": "value",
+                  "property": "P3744",
+                  "hash": "baf84961ed719d0625153e6caee625b04a49b0e8",
+                  "datavalue": {
+                    "value": {
+                      "amount": "+7600",
+                      "unit": "1"
+                    },
+                    "type": "quantity"
+                  },
+                  "datatype": "quantity"
+                }
+              ],
+              "P6552": [
+                {
+                  "snaktype": "value",
+                  "property": "P6552",
+                  "hash": "3a543966f80e7e0ccf7a1d4b53640b1ef034358d",
+                  "datavalue": {
+                    "value": "128862964",
+                    "type": "string"
+                  },
+                  "datatype": "external-id"
+                }
+              ],
+              "P580": [
+                {
+                  "snaktype": "value",
+                  "property": "P580",
+                  "hash": "557ae47b05430df163bb28539d714bba786d4410",
+                  "datavalue": {
+                    "value": {
+                      "time": "+2010-04-02T00:00:00Z",
+                      "timezone": 0,
+                      "before": 0,
+                      "after": 0,
+                      "precision": 11,
+                      "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                    },
+                    "type": "time"
+                  },
+                  "datatype": "time"
+                }
+              ],
+              "P585": [
+                {
+                  "snaktype": "value",
+                  "property": "P585",
+                  "hash": "e250896643966aa6637f05d699e01b6a9251acd5",
+                  "datavalue": {
+                    "value": {
+                      "time": "+2020-04-26T00:00:00Z",
+                      "timezone": 0,
+                      "before": 0,
+                      "after": 0,
+                      "precision": 11,
+                      "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                    },
+                    "type": "time"
+                  },
+                  "datatype": "time"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P3744",
+              "P6552",
+              "P580",
+              "P585"
+            ],
+            "id": "Q11225368$C5848B01-5B54-4DB4-B8F9-BFD91F8BC625",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "a29a646602abf65105ed0f39a44231c962ece9ee",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "c6f1777471211df31724ac60175786f3872c83e9",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 177837,
+                          "id": "Q177837"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              },
+              {
+                "hash": "830e0d3d65e6b91e769889d7d1177706b5c1e0ca",
+                "snaks": {
+                  "P813": [
+                    {
+                      "snaktype": "value",
+                      "property": "P813",
+                      "hash": "cd8210fc3215a6112ebad72d11663d1a56b14d67",
+                      "datavalue": {
+                        "value": {
+                          "time": "+2018-05-10T00:00:00Z",
+                          "timezone": 0,
+                          "before": 0,
+                          "after": 0,
+                          "precision": 11,
+                          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                        },
+                        "type": "time"
+                      },
+                      "datatype": "time"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P813"
+                ]
+              }
+            ]
+          }
+        ],
+        "P2013": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2013",
+              "hash": "fd1f2e7943da4a8213b362b068c3b89a532dbd1b",
+              "datavalue": {
+                "value": "JapanSoccerCollege",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q11225368$CB62F208-A57C-4EEC-9559-25EAFB657446",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "a29a646602abf65105ed0f39a44231c962ece9ee",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "c6f1777471211df31724ac60175786f3872c83e9",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 177837,
+                          "id": "Q177837"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P856": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P856",
+              "hash": "f0637912969be40b3d62d608fb8f2ddb467b72dd",
+              "datavalue": {
+                "value": "http://www.cupsnet.com",
+                "type": "string"
+              },
+              "datatype": "url"
+            },
+            "type": "statement",
+            "id": "Q11225368$0DFE1D9B-0611-476C-BD4B-E397F1210911",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "a29a646602abf65105ed0f39a44231c962ece9ee",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "c6f1777471211df31724ac60175786f3872c83e9",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 177837,
+                          "id": "Q177837"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P641": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P641",
+              "hash": "1624e15e061523279bc14bb6497168e45caacb32",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2736,
+                  "id": "Q2736"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q11225368$21D99611-98E5-44A9-8422-EADCF56405FE",
+            "rank": "normal"
+          }
+        ],
+        "P17": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P17",
+              "hash": "55178c20e031f1579d34d802f16f6b9951b631e1",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 17,
+                  "id": "Q17"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q11225368$7544372B-853A-49E1-AC6A-BC9AF996652C",
+            "rank": "normal"
+          }
+        ],
+        "P8687": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P8687",
+              "hash": "2fe7a1423988a194313b2fc3911ac68546e3257a",
+              "datavalue": {
+                "value": {
+                  "amount": "+8158",
+                  "unit": "1"
+                },
+                "type": "quantity"
+              },
+              "datatype": "quantity"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P6552": [
+                {
+                  "snaktype": "value",
+                  "property": "P6552",
+                  "hash": "3a543966f80e7e0ccf7a1d4b53640b1ef034358d",
+                  "datavalue": {
+                    "value": "128862964",
+                    "type": "string"
+                  },
+                  "datatype": "external-id"
+                }
+              ],
+              "P585": [
+                {
+                  "snaktype": "value",
+                  "property": "P585",
+                  "hash": "9e91ae9f10ae076b7a0b5ce11a8d6dd5b9421240",
+                  "datavalue": {
+                    "value": {
+                      "time": "+2021-01-02T00:00:00Z",
+                      "timezone": 0,
+                      "before": 0,
+                      "after": 0,
+                      "precision": 11,
+                      "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                    },
+                    "type": "time"
+                  },
+                  "datatype": "time"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P6552",
+              "P585"
+            ],
+            "id": "Q11225368$76ab8fb4-ecdf-4a64-b44d-3e3a60a7a5fc",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P8687",
+              "hash": "1f7254011ecda832249af5f8222397376fd5c857",
+              "datavalue": {
+                "value": {
+                  "amount": "+7600",
+                  "unit": "1"
+                },
+                "type": "quantity"
+              },
+              "datatype": "quantity"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P6552": [
+                {
+                  "snaktype": "value",
+                  "property": "P6552",
+                  "hash": "3a543966f80e7e0ccf7a1d4b53640b1ef034358d",
+                  "datavalue": {
+                    "value": "128862964",
+                    "type": "string"
+                  },
+                  "datatype": "external-id"
+                }
+              ],
+              "P585": [
+                {
+                  "snaktype": "value",
+                  "property": "P585",
+                  "hash": "e250896643966aa6637f05d699e01b6a9251acd5",
+                  "datavalue": {
+                    "value": {
+                      "time": "+2020-04-26T00:00:00Z",
+                      "timezone": 0,
+                      "before": 0,
+                      "after": 0,
+                      "precision": 11,
+                      "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                    },
+                    "type": "time"
+                  },
+                  "datatype": "time"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P6552",
+              "P585"
+            ],
+            "id": "Q11225368$62c3a698-9880-421d-9579-be422302fd13",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P8687",
+              "hash": "0946e6505ba9edd56538ba22fff1b9017e0657b8",
+              "datavalue": {
+                "value": {
+                  "amount": "+10066",
+                  "unit": "1"
+                },
+                "type": "quantity"
+              },
+              "datatype": "quantity"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P6552": [
+                {
+                  "snaktype": "value",
+                  "property": "P6552",
+                  "hash": "3a543966f80e7e0ccf7a1d4b53640b1ef034358d",
+                  "datavalue": {
+                    "value": "128862964",
+                    "type": "string"
+                  },
+                  "datatype": "external-id"
+                }
+              ],
+              "P585": [
+                {
+                  "snaktype": "value",
+                  "property": "P585",
+                  "hash": "c17bb9539bedf3d57cf18088cbc8c7aef80cc9d6",
+                  "datavalue": {
+                    "value": {
+                      "time": "+2022-02-26T00:00:00Z",
+                      "timezone": 0,
+                      "before": 0,
+                      "after": 0,
+                      "precision": 11,
+                      "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                    },
+                    "type": "time"
+                  },
+                  "datatype": "time"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P6552",
+              "P585"
+            ],
+            "id": "Q11225368$e041744e-a7cd-4343-9abf-4d9ff29eff6c",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P8687",
+              "hash": "69ff8eb612e9a42c4d4cbf623a6c8ea1542a1352",
+              "datavalue": {
+                "value": {
+                  "amount": "+11069",
+                  "unit": "1"
+                },
+                "type": "quantity"
+              },
+              "datatype": "quantity"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P6552": [
+                {
+                  "snaktype": "value",
+                  "property": "P6552",
+                  "hash": "3a543966f80e7e0ccf7a1d4b53640b1ef034358d",
+                  "datavalue": {
+                    "value": "128862964",
+                    "type": "string"
+                  },
+                  "datatype": "external-id"
+                }
+              ],
+              "P585": [
+                {
+                  "snaktype": "value",
+                  "property": "P585",
+                  "hash": "f8752aaee69e878b264b48cf2b5c504be28099d7",
+                  "datavalue": {
+                    "value": {
+                      "time": "+2023-02-05T00:00:00Z",
+                      "timezone": 0,
+                      "before": 0,
+                      "after": 0,
+                      "precision": 11,
+                      "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                    },
+                    "type": "time"
+                  },
+                  "datatype": "time"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P6552",
+              "P585"
+            ],
+            "id": "Q11225368$d85c0768-2884-427a-9867-d6d175e0b1e2",
+            "rank": "preferred"
+          }
+        ],
+        "P2671": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2671",
+              "hash": "55aae63c18a2581dcc7d7cdc64d09bc12fb634e8",
+              "datavalue": {
+                "value": "/g/122yyl4q",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q11225368$B278A5F1-FDC5-4D2D-AFB7-7A58E7BB860E",
+            "rank": "normal"
+          }
+        ],
+        "P11127": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P11127",
+              "hash": "ef435d4c5a0b9708c5406dbf35f41ca1577f24cc",
+              "datavalue": {
+                "value": "H115330700018",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q11225368$C94A428D-AA3F-4172-B549-90E15C4E7855",
+            "rank": "normal"
+          }
+        ],
+        "P131": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P131",
+              "hash": "43d485b28d293a852617f3db96cadcf38dc39b4f",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 1204293,
+                  "id": "Q1204293"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q11225368$88B77F53-DFB9-4674-81FD-31E1340531A7",
+            "rank": "normal"
+          }
+        ],
+        "P10689": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P10689",
+              "hash": "5d8bcd5d56fd87e8d32e188238ef16fe5c0dcd58",
+              "datavalue": {
+                "value": "388815401",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q11225368$8DEA0FFD-8CE1-4A94-85BE-2435C1F7F26F",
+            "rank": "normal"
+          }
+        ],
+        "P126": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P126",
+              "hash": "d84c9955b20cab8e00111e927ab688472b610f2a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 123494037,
+                  "id": "Q123494037"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q11225368$2483B6FE-5AF1-4D1F-834C-736490E7709C",
+            "rank": "normal"
+          }
+        ],
+        "P159": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P159",
+              "hash": "48e3bc8335a317301d00670df3eb2533b4d2164d",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 179691,
+                  "id": "Q179691"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q11225368$4E4E88E3-4991-4DC8-AC20-DD3013964B24",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "aa9765411864d52bd0bc3074880653ca5cf17813",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "d38375ffe6fe142663ff55cd783aa4df4301d83d",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 48183,
+                          "id": "Q48183"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "31c7782feb3e5bb06f1804794723184405e5d3af",
+                      "datavalue": {
+                        "value": "https://de.wikipedia.org/w/index.php?title=Japan_Soccer_College&oldid=240070743",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P6131": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P6131",
+              "hash": "8d4bc5921d0e34f1c6c2fdb7c56fcb54458b538e",
+              "datavalue": {
+                "value": "29233",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q11225368$4B656D05-5FFD-4886-805A-2C9CED568E37",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "aa9765411864d52bd0bc3074880653ca5cf17813",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "d38375ffe6fe142663ff55cd783aa4df4301d83d",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 48183,
+                          "id": "Q48183"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "31c7782feb3e5bb06f1804794723184405e5d3af",
+                      "datavalue": {
+                        "value": "https://de.wikipedia.org/w/index.php?title=Japan_Soccer_College&oldid=240070743",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P7223": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P7223",
+              "hash": "e0810deeda246d87e2d2f2c7db351f7d9b726432",
+              "datavalue": {
+                "value": "23861",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q11225368$A3F72723-4125-4044-992D-31D9AD876282",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "aa9765411864d52bd0bc3074880653ca5cf17813",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "d38375ffe6fe142663ff55cd783aa4df4301d83d",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 48183,
+                          "id": "Q48183"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "31c7782feb3e5bb06f1804794723184405e5d3af",
+                      "datavalue": {
+                        "value": "https://de.wikipedia.org/w/index.php?title=Japan_Soccer_College&oldid=240070743",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P14244": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P14244",
+              "hash": "51a9c7a5e2842ec1490820a77c6eb0f76be6a4a8",
+              "datavalue": {
+                "value": "jsc_cups",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q11225368$3370CA65-D557-4333-BFF3-94C3DF24D7C9",
+            "rank": "normal"
+          }
+        ]
+      },
+      "sitelinks": {
+        "jawiki": {
+          "site": "jawiki",
+          "title": "JAPANサッカーカレッジ",
+          "badges": []
+        },
+        "zhwiki": {
+          "site": "zhwiki",
+          "title": "日本足球學院",
+          "badges": []
+        },
+        "enwiki": {
+          "site": "enwiki",
+          "title": "Japan Soccer College",
+          "badges": []
+        },
+        "dewiki": {
+          "site": "dewiki",
+          "title": "Japan Soccer College",
+          "badges": []
+        }
+      }
+    }
+  }
+}

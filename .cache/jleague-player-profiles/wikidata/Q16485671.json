@@ -1,0 +1,196 @@
+{
+  "entities": {
+    "Q16485671": {
+      "pageid": 18108910,
+      "ns": 0,
+      "title": "Q16485671",
+      "lastrevid": 2280959387,
+      "modified": "2024-11-29T00:14:51Z",
+      "type": "item",
+      "id": "Q16485671",
+      "labels": {
+        "ja": {
+          "language": "ja",
+          "value": "2003年のJリーグ"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "2003年日本職業足球聯賽"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "Чемпионат Японии по футболу 2003"
+        },
+        "en": {
+          "language": "en",
+          "value": "2003 J.League"
+        }
+      },
+      "descriptions": {},
+      "aliases": {
+        "zh": [
+          {
+            "language": "zh",
+            "value": "2003年日本職業足球聯賽各球隊賽績"
+          }
+        ]
+      },
+      "claims": {
+        "P585": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P585",
+              "hash": "2c189c7c872983bd10a28e2acfc03f5c3738d76d",
+              "datavalue": {
+                "value": {
+                  "time": "+2003-00-00T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 9,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q16485671$ADE4EC33-0440-45C3-ACB0-B1004AA12625",
+            "rank": "normal"
+          }
+        ],
+        "P641": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P641",
+              "hash": "1624e15e061523279bc14bb6497168e45caacb32",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2736,
+                  "id": "Q2736"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q16485671$62CA3CA5-1EA6-4CCB-8F11-81C6AFCC60F2",
+            "rank": "normal"
+          }
+        ],
+        "P2671": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2671",
+              "hash": "0219970b15b7d9394fb069bb51ea99026d9c0fed",
+              "datavalue": {
+                "value": "/g/1yp37gjlc",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q16485671$4D5BA6A6-A62D-411A-99F7-00A639763EE5",
+            "rank": "normal"
+          }
+        ],
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "ecbb916a7543708b066e45ad27981718c3e43d13",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 27020041,
+                  "id": "Q27020041"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q16485671$6613879e-49ed-58dd-a9f5-4685d10608cf",
+            "rank": "normal"
+          }
+        ],
+        "P3450": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P3450",
+              "hash": "4e5f63949df6d71a1a7929308f95080e84f34cf0",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 575453,
+                  "id": "Q575453"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P155": [
+                {
+                  "snaktype": "value",
+                  "property": "P155",
+                  "hash": "0008b17fa6bf51591711c39978ddae57e2b78307",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 16483397,
+                      "id": "Q16483397"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ],
+              "P156": [
+                {
+                  "snaktype": "value",
+                  "property": "P156",
+                  "hash": "52e1c29344666851e03c7b19663579df322c42d3",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 16483443,
+                      "id": "Q16483443"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P155",
+              "P156"
+            ],
+            "id": "Q16485671$f7ab6831-4d81-e1c9-74af-4eede2526727",
+            "rank": "normal"
+          }
+        ]
+      },
+      "sitelinks": {
+        "jawiki": {
+          "site": "jawiki",
+          "title": "2003年のJリーグ",
+          "badges": []
+        },
+        "zhwiki": {
+          "site": "zhwiki",
+          "title": "2003年日本職業足球聯賽各球隊賽績",
+          "badges": []
+        }
+      }
+    }
+  }
+}

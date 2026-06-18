@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "generated_at": "2026-06-18T08:52:56.633Z",
+    "source": "J.LEAGUE Data Site SFIX03/SFIX04",
+    "note": "Names only. Remaining unresolved after final name-only supplement.",
+    "summary": {
+      "niigata": {
+        "total_missing_input": 13,
+        "added": 10,
+        "still_missing": 3,
+        "duplicate_profile_names": 0,
+        "skipped_existing": 0
+      },
+      "kumamoto": {
+        "total_missing_input": 9,
+        "added": 6,
+        "still_missing": 3,
+        "duplicate_profile_names": 0,
+        "skipped_existing": 0
+      }
+    }
+  },
+  "niigata": [
+    "奥山 武宰士",
+    "生方 繁",
+    "田中 秀哉"
+  ],
+  "kumamoto": [
+    "加藤 健太",
+    "佐藤 慎之介",
+    "大崎 舜"
+  ]
+}

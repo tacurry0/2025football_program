@@ -1,0 +1,3760 @@
+{
+  "entities": {
+    "Q2064": {
+      "pageid": 2973,
+      "ns": 0,
+      "title": "Q2064",
+      "lastrevid": 2507240525,
+      "modified": "2026-06-17T23:41:02Z",
+      "type": "item",
+      "id": "Q2064",
+      "labels": {
+        "fr": {
+          "language": "fr",
+          "value": "1990"
+        },
+        "en": {
+          "language": "en",
+          "value": "1990"
+        },
+        "be-tarask": {
+          "language": "be-tarask",
+          "value": "1990"
+        },
+        "nan": {
+          "language": "nan",
+          "value": "1990 nî"
+        },
+        "de": {
+          "language": "de",
+          "value": "1990"
+        },
+        "af": {
+          "language": "af",
+          "value": "1990"
+        },
+        "am": {
+          "language": "am",
+          "value": "1990 እ.ኤ.አ."
+        },
+        "an": {
+          "language": "an",
+          "value": "1990"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "1990"
+        },
+        "arz": {
+          "language": "arz",
+          "value": "1990"
+        },
+        "ast": {
+          "language": "ast",
+          "value": "1990"
+        },
+        "av": {
+          "language": "av",
+          "value": "1990"
+        },
+        "ay": {
+          "language": "ay",
+          "value": "1990"
+        },
+        "az": {
+          "language": "az",
+          "value": "1990"
+        },
+        "bcl": {
+          "language": "bcl",
+          "value": "1990"
+        },
+        "be": {
+          "language": "be",
+          "value": "1990"
+        },
+        "bg": {
+          "language": "bg",
+          "value": "1990"
+        },
+        "bn": {
+          "language": "bn",
+          "value": "১৯৯০"
+        },
+        "bpy": {
+          "language": "bpy",
+          "value": "মারি ১৯৯০"
+        },
+        "br": {
+          "language": "br",
+          "value": "1990"
+        },
+        "bs": {
+          "language": "bs",
+          "value": "1990"
+        },
+        "ca": {
+          "language": "ca",
+          "value": "1990"
+        },
+        "ceb": {
+          "language": "ceb",
+          "value": "1990"
+        },
+        "ckb": {
+          "language": "ckb",
+          "value": "١٩٩٠"
+        },
+        "co": {
+          "language": "co",
+          "value": "1990"
+        },
+        "cs": {
+          "language": "cs",
+          "value": "1990"
+        },
+        "csb": {
+          "language": "csb",
+          "value": "1990"
+        },
+        "cv": {
+          "language": "cv",
+          "value": "1990"
+        },
+        "cy": {
+          "language": "cy",
+          "value": "1990"
+        },
+        "da": {
+          "language": "da",
+          "value": "1990"
+        },
+        "diq": {
+          "language": "diq",
+          "value": "1990"
+        },
+        "el": {
+          "language": "el",
+          "value": "1990"
+        },
+        "eo": {
+          "language": "eo",
+          "value": "1990"
+        },
+        "es": {
+          "language": "es",
+          "value": "1990"
+        },
+        "et": {
+          "language": "et",
+          "value": "1990"
+        },
+        "eu": {
+          "language": "eu",
+          "value": "1990"
+        },
+        "fa": {
+          "language": "fa",
+          "value": "۱۹۹۰"
+        },
+        "fi": {
+          "language": "fi",
+          "value": "1990"
+        },
+        "fo": {
+          "language": "fo",
+          "value": "1990"
+        },
+        "frp": {
+          "language": "frp",
+          "value": "1990"
+        },
+        "frr": {
+          "language": "frr",
+          "value": "1990"
+        },
+        "fur": {
+          "language": "fur",
+          "value": "1990"
+        },
+        "fy": {
+          "language": "fy",
+          "value": "1990"
+        },
+        "ga": {
+          "language": "ga",
+          "value": "1990"
+        },
+        "gag": {
+          "language": "gag",
+          "value": "1990"
+        },
+        "gan": {
+          "language": "gan",
+          "value": "1990年"
+        },
+        "gd": {
+          "language": "gd",
+          "value": "1990"
+        },
+        "gl": {
+          "language": "gl",
+          "value": "1990"
+        },
+        "gn": {
+          "language": "gn",
+          "value": "1990"
+        },
+        "gv": {
+          "language": "gv",
+          "value": "1990"
+        },
+        "he": {
+          "language": "he",
+          "value": "1990"
+        },
+        "hi": {
+          "language": "hi",
+          "value": "१९९०"
+        },
+        "hif": {
+          "language": "hif",
+          "value": "1990"
+        },
+        "hr": {
+          "language": "hr",
+          "value": "1990."
+        },
+        "ht": {
+          "language": "ht",
+          "value": "1990"
+        },
+        "hu": {
+          "language": "hu",
+          "value": "1990"
+        },
+        "hy": {
+          "language": "hy",
+          "value": "1990"
+        },
+        "ia": {
+          "language": "ia",
+          "value": "1990"
+        },
+        "id": {
+          "language": "id",
+          "value": "1990"
+        },
+        "ilo": {
+          "language": "ilo",
+          "value": "1990"
+        },
+        "io": {
+          "language": "io",
+          "value": "1990"
+        },
+        "is": {
+          "language": "is",
+          "value": "1990"
+        },
+        "it": {
+          "language": "it",
+          "value": "1990"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "1990年"
+        },
+        "jbo": {
+          "language": "jbo",
+          "value": "1990moi"
+        },
+        "jv": {
+          "language": "jv",
+          "value": "1990"
+        },
+        "ka": {
+          "language": "ka",
+          "value": "1990"
+        },
+        "kk": {
+          "language": "kk",
+          "value": "1990 жыл"
+        },
+        "kn": {
+          "language": "kn",
+          "value": "೧೯೯೦"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "1990년"
+        },
+        "krc": {
+          "language": "krc",
+          "value": "1990 джыл"
+        },
+        "ksh": {
+          "language": "ksh",
+          "value": "Joohr 1990"
+        },
+        "ku": {
+          "language": "ku",
+          "value": "1990"
+        },
+        "kv": {
+          "language": "kv",
+          "value": "1990 во"
+        },
+        "kw": {
+          "language": "kw",
+          "value": "1990"
+        },
+        "la": {
+          "language": "la",
+          "value": "1990"
+        },
+        "lb": {
+          "language": "lb",
+          "value": "1990"
+        },
+        "li": {
+          "language": "li",
+          "value": "1990"
+        },
+        "lij": {
+          "language": "lij",
+          "value": "1990"
+        },
+        "lmo": {
+          "language": "lmo",
+          "value": "1990"
+        },
+        "ln": {
+          "language": "ln",
+          "value": "1990"
+        },
+        "lt": {
+          "language": "lt",
+          "value": "1990 m."
+        },
+        "lv": {
+          "language": "lv",
+          "value": "1990. gads"
+        },
+        "map-bms": {
+          "language": "map-bms",
+          "value": "1990"
+        },
+        "mdf": {
+          "language": "mdf",
+          "value": "1990"
+        },
+        "mhr": {
+          "language": "mhr",
+          "value": "1990"
+        },
+        "mi": {
+          "language": "mi",
+          "value": "1990"
+        },
+        "mk": {
+          "language": "mk",
+          "value": "1990"
+        },
+        "ml": {
+          "language": "ml",
+          "value": "1990"
+        },
+        "mr": {
+          "language": "mr",
+          "value": "इ.स. १९९०"
+        },
+        "ms": {
+          "language": "ms",
+          "value": "1990"
+        },
+        "my": {
+          "language": "my",
+          "value": "၁၉၉၀"
+        },
+        "myv": {
+          "language": "myv",
+          "value": "1990 ие"
+        },
+        "nah": {
+          "language": "nah",
+          "value": "1990"
+        },
+        "nap": {
+          "language": "nap",
+          "value": "1990"
+        },
+        "nds": {
+          "language": "nds",
+          "value": "1990"
+        },
+        "nds-nl": {
+          "language": "nds-nl",
+          "value": "1990"
+        },
+        "ne": {
+          "language": "ne",
+          "value": "सन् १९९०"
+        },
+        "new": {
+          "language": "new",
+          "value": "सन् १९९०"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "1990"
+        },
+        "nn": {
+          "language": "nn",
+          "value": "1990"
+        },
+        "nov": {
+          "language": "nov",
+          "value": "1990"
+        },
+        "nrm": {
+          "language": "nrm",
+          "value": "1990"
+        },
+        "oc": {
+          "language": "oc",
+          "value": "1990"
+        },
+        "os": {
+          "language": "os",
+          "value": "1990-æм аз"
+        },
+        "pa": {
+          "language": "pa",
+          "value": "੧੯੯੦"
+        },
+        "pam": {
+          "language": "pam",
+          "value": "1990"
+        },
+        "pap": {
+          "language": "pap",
+          "value": "1990"
+        },
+        "pi": {
+          "language": "pi",
+          "value": "१९९०"
+        },
+        "pl": {
+          "language": "pl",
+          "value": "1990"
+        },
+        "pnb": {
+          "language": "pnb",
+          "value": "1990"
+        },
+        "pt": {
+          "language": "pt",
+          "value": "1990"
+        },
+        "qu": {
+          "language": "qu",
+          "value": "1990"
+        },
+        "ro": {
+          "language": "ro",
+          "value": "1990"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "1990 год"
+        },
+        "rue": {
+          "language": "rue",
+          "value": "1990"
+        },
+        "sah": {
+          "language": "sah",
+          "value": "1990"
+        },
+        "scn": {
+          "language": "scn",
+          "value": "1990"
+        },
+        "se": {
+          "language": "se",
+          "value": "1990"
+        },
+        "sh": {
+          "language": "sh",
+          "value": "1990"
+        },
+        "sk": {
+          "language": "sk",
+          "value": "1990"
+        },
+        "sl": {
+          "language": "sl",
+          "value": "1990"
+        },
+        "so": {
+          "language": "so",
+          "value": "1990"
+        },
+        "sq": {
+          "language": "sq",
+          "value": "1990"
+        },
+        "sr": {
+          "language": "sr",
+          "value": "1990."
+        },
+        "stq": {
+          "language": "stq",
+          "value": "1990"
+        },
+        "su": {
+          "language": "su",
+          "value": "1990"
+        },
+        "sv": {
+          "language": "sv",
+          "value": "1990"
+        },
+        "sw": {
+          "language": "sw",
+          "value": "1990"
+        },
+        "ta": {
+          "language": "ta",
+          "value": "1990"
+        },
+        "te": {
+          "language": "te",
+          "value": "1990"
+        },
+        "tet": {
+          "language": "tet",
+          "value": "1990"
+        },
+        "tg": {
+          "language": "tg",
+          "value": "1990"
+        },
+        "th": {
+          "language": "th",
+          "value": "พ.ศ. 2533"
+        },
+        "tk": {
+          "language": "tk",
+          "value": "1990"
+        },
+        "tl": {
+          "language": "tl",
+          "value": "1990"
+        },
+        "tpi": {
+          "language": "tpi",
+          "value": "1990"
+        },
+        "tr": {
+          "language": "tr",
+          "value": "1990"
+        },
+        "tt": {
+          "language": "tt",
+          "value": "1990 ел"
+        },
+        "ty": {
+          "language": "ty",
+          "value": "1990"
+        },
+        "udm": {
+          "language": "udm",
+          "value": "1990 ар"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "1990"
+        },
+        "ur": {
+          "language": "ur",
+          "value": "1990ء"
+        },
+        "uz": {
+          "language": "uz",
+          "value": "1990"
+        },
+        "vec": {
+          "language": "vec",
+          "value": "1990"
+        },
+        "vi": {
+          "language": "vi",
+          "value": "1990"
+        },
+        "vls": {
+          "language": "vls",
+          "value": "1990"
+        },
+        "vo": {
+          "language": "vo",
+          "value": "1990"
+        },
+        "wa": {
+          "language": "wa",
+          "value": "1990"
+        },
+        "war": {
+          "language": "war",
+          "value": "1990"
+        },
+        "xal": {
+          "language": "xal",
+          "value": "1990 җил"
+        },
+        "yi": {
+          "language": "yi",
+          "value": "1990"
+        },
+        "yo": {
+          "language": "yo",
+          "value": "1990"
+        },
+        "zea": {
+          "language": "zea",
+          "value": "1990"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "1990年"
+        },
+        "en-ca": {
+          "language": "en-ca",
+          "value": "1990"
+        },
+        "en-gb": {
+          "language": "en-gb",
+          "value": "1990"
+        },
+        "pt-br": {
+          "language": "pt-br",
+          "value": "1990"
+        },
+        "yue": {
+          "language": "yue",
+          "value": "1990年"
+        },
+        "mn": {
+          "language": "mn",
+          "value": "1990 он"
+        },
+        "wuu": {
+          "language": "wuu",
+          "value": "1990年"
+        },
+        "min": {
+          "language": "min",
+          "value": "1990"
+        },
+        "ky": {
+          "language": "ky",
+          "value": "1990"
+        },
+        "eml": {
+          "language": "eml",
+          "value": "1990"
+        },
+        "nb": {
+          "language": "nb",
+          "value": "1990"
+        },
+        "hsb": {
+          "language": "hsb",
+          "value": "1990"
+        },
+        "na": {
+          "language": "na",
+          "value": "1990"
+        },
+        "mo": {
+          "language": "mo",
+          "value": "1990"
+        },
+        "ce": {
+          "language": "ce",
+          "value": "1990 шо"
+        },
+        "sc": {
+          "language": "sc",
+          "value": "1990"
+        },
+        "or": {
+          "language": "or",
+          "value": "୧୯୯୦"
+        },
+        "szl": {
+          "language": "szl",
+          "value": "1990"
+        },
+        "lzh": {
+          "language": "lzh",
+          "value": "一九九〇年"
+        },
+        "vro": {
+          "language": "vro",
+          "value": "1990"
+        },
+        "sgs": {
+          "language": "sgs",
+          "value": "1990"
+        },
+        "crh-latn": {
+          "language": "crh-latn",
+          "value": "1990"
+        },
+        "mrj": {
+          "language": "mrj",
+          "value": "1990 и"
+        },
+        "rup": {
+          "language": "rup",
+          "value": "1990"
+        },
+        "sco": {
+          "language": "sco",
+          "value": "1990"
+        },
+        "gsw": {
+          "language": "gsw",
+          "value": "1990"
+        },
+        "ba": {
+          "language": "ba",
+          "value": "1990 йыл"
+        },
+        "lez": {
+          "language": "lez",
+          "value": "1990 йис"
+        },
+        "hak": {
+          "language": "hak",
+          "value": "1990-ngièn"
+        },
+        "ab": {
+          "language": "ab",
+          "value": "1990"
+        },
+        "bar": {
+          "language": "bar",
+          "value": "1990"
+        },
+        "si": {
+          "language": "si",
+          "value": "1990"
+        },
+        "cdo": {
+          "language": "cdo",
+          "value": "1990 nièng"
+        },
+        "bho": {
+          "language": "bho",
+          "value": "१९९०"
+        },
+        "xmf": {
+          "language": "xmf",
+          "value": "1990"
+        },
+        "olo": {
+          "language": "olo",
+          "value": "1990"
+        },
+        "nso": {
+          "language": "nso",
+          "value": "1990"
+        },
+        "km": {
+          "language": "km",
+          "value": "ឆ្នាំ ១៩៩០"
+        },
+        "mai": {
+          "language": "mai",
+          "value": "१९९०"
+        },
+        "dsb": {
+          "language": "dsb",
+          "value": "1990"
+        },
+        "crh": {
+          "language": "crh",
+          "value": "1990"
+        },
+        "kbp": {
+          "language": "kbp",
+          "value": "1990"
+        },
+        "cbk-zam": {
+          "language": "cbk-zam",
+          "value": "1990"
+        },
+        "mg": {
+          "language": "mg",
+          "value": "1990"
+        },
+        "lfn": {
+          "language": "lfn",
+          "value": "1990"
+        },
+        "tt-cyrl": {
+          "language": "tt-cyrl",
+          "value": "1990 ел"
+        },
+        "sd": {
+          "language": "sd",
+          "value": "1990ع"
+        },
+        "bjn": {
+          "language": "bjn",
+          "value": "1990"
+        },
+        "azb": {
+          "language": "azb",
+          "value": "۱۹۹۰ (میلادی)"
+        },
+        "shn": {
+          "language": "shn",
+          "value": "1990"
+        },
+        "inh": {
+          "language": "inh",
+          "value": "1990 шу"
+        },
+        "hyw": {
+          "language": "hyw",
+          "value": "1990 թուական"
+        },
+        "zh-tw": {
+          "language": "zh-tw",
+          "value": "1990年"
+        },
+        "ha": {
+          "language": "ha",
+          "value": "1990"
+        },
+        "ban": {
+          "language": "ban",
+          "value": "1990"
+        },
+        "gcr": {
+          "language": "gcr",
+          "value": "1990"
+        },
+        "lld": {
+          "language": "lld",
+          "value": "1990"
+        },
+        "smn": {
+          "language": "smn",
+          "value": "1990"
+        },
+        "avk": {
+          "language": "avk",
+          "value": "1990"
+        },
+        "ary": {
+          "language": "ary",
+          "value": "1990"
+        },
+        "ug": {
+          "language": "ug",
+          "value": "1990 - يىلى"
+        },
+        "bo": {
+          "language": "bo",
+          "value": "༡༩༩༠ལོ།"
+        },
+        "mzn": {
+          "language": "mzn",
+          "value": "۱۹۹۰"
+        },
+        "tly": {
+          "language": "tly",
+          "value": "1990"
+        },
+        "roa-tara": {
+          "language": "roa-tara",
+          "value": "1990"
+        },
+        "kaa": {
+          "language": "kaa",
+          "value": "1990"
+        },
+        "za": {
+          "language": "za",
+          "value": "1990 nienz"
+        },
+        "mul": {
+          "language": "mul",
+          "value": "1990"
+        },
+        "zh-hant": {
+          "language": "zh-hant",
+          "value": "1990年"
+        },
+        "acm": {
+          "language": "acm",
+          "value": "1990"
+        },
+        "apc": {
+          "language": "apc",
+          "value": "1990"
+        },
+        "no": {
+          "language": "no",
+          "value": "1990"
+        }
+      },
+      "descriptions": {
+        "fr": {
+          "language": "fr",
+          "value": "année du XXe siècle"
+        },
+        "de": {
+          "language": "de",
+          "value": "Jahr"
+        },
+        "es": {
+          "language": "es",
+          "value": "año"
+        },
+        "en": {
+          "language": "en",
+          "value": "year"
+        },
+        "it": {
+          "language": "it",
+          "value": "anno"
+        },
+        "ca": {
+          "language": "ca",
+          "value": "any"
+        },
+        "cs": {
+          "language": "cs",
+          "value": "rok"
+        },
+        "eo": {
+          "language": "eo",
+          "value": "jaro"
+        },
+        "fi": {
+          "language": "fi",
+          "value": "vuosi"
+        },
+        "ia": {
+          "language": "ia",
+          "value": "anno"
+        },
+        "is": {
+          "language": "is",
+          "value": "ár"
+        },
+        "la": {
+          "language": "la",
+          "value": "annus"
+        },
+        "da": {
+          "language": "da",
+          "value": "år"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "jaar"
+        },
+        "nn": {
+          "language": "nn",
+          "value": "år"
+        },
+        "pl": {
+          "language": "pl",
+          "value": "rok kalendarzowy w XX wieku, zwykły (nieprzestępny)"
+        },
+        "pt": {
+          "language": "pt",
+          "value": "ano"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "год XX века"
+        },
+        "sv": {
+          "language": "sv",
+          "value": "år"
+        },
+        "tr": {
+          "language": "tr",
+          "value": "yıl"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "年"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "年"
+        },
+        "ilo": {
+          "language": "ilo",
+          "value": "tawen"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "연도"
+        },
+        "mr": {
+          "language": "mr",
+          "value": "इसवी सनाच्या दुसर्या सहस्रकातील एक वर्ष"
+        },
+        "nb": {
+          "language": "nb",
+          "value": "år"
+        },
+        "el": {
+          "language": "el",
+          "value": "έτος"
+        },
+        "ne": {
+          "language": "ne",
+          "value": "वर्ष"
+        },
+        "hy": {
+          "language": "hy",
+          "value": "տարեթիվ"
+        },
+        "bn": {
+          "language": "bn",
+          "value": "বছর"
+        },
+        "eu": {
+          "language": "eu",
+          "value": "urtea"
+        },
+        "bg": {
+          "language": "bg",
+          "value": "година"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "سنة"
+        },
+        "an": {
+          "language": "an",
+          "value": "anyo"
+        },
+        "af": {
+          "language": "af",
+          "value": "jaar"
+        },
+        "ast": {
+          "language": "ast",
+          "value": "añu"
+        },
+        "he": {
+          "language": "he",
+          "value": "שנה"
+        },
+        "hr": {
+          "language": "hr",
+          "value": "Godina"
+        },
+        "srn": {
+          "language": "srn",
+          "value": "Yari"
+        },
+        "br": {
+          "language": "br",
+          "value": "bloavezh"
+        },
+        "nds": {
+          "language": "nds",
+          "value": "Johr"
+        },
+        "gl": {
+          "language": "gl",
+          "value": "ano"
+        },
+        "ro": {
+          "language": "ro",
+          "value": "an"
+        },
+        "zh-hant": {
+          "language": "zh-hant",
+          "value": "年份"
+        },
+        "mk": {
+          "language": "mk",
+          "value": "година"
+        },
+        "gsw": {
+          "language": "gsw",
+          "value": "joor"
+        },
+        "en-ca": {
+          "language": "en-ca",
+          "value": "year"
+        },
+        "ms": {
+          "language": "ms",
+          "value": "Tahun"
+        },
+        "ht": {
+          "language": "ht",
+          "value": "Lane"
+        },
+        "fy": {
+          "language": "fy",
+          "value": "jier"
+        },
+        "be-tarask": {
+          "language": "be-tarask",
+          "value": "год"
+        },
+        "nan": {
+          "language": "nan",
+          "value": "nî"
+        },
+        "ka": {
+          "language": "ka",
+          "value": "წელი"
+        },
+        "th": {
+          "language": "th",
+          "value": "ปี"
+        },
+        "sh": {
+          "language": "sh",
+          "value": "godina"
+        },
+        "ku": {
+          "language": "ku",
+          "value": "Sal"
+        },
+        "sk": {
+          "language": "sk",
+          "value": "Rok"
+        },
+        "bs": {
+          "language": "bs",
+          "value": "godina"
+        },
+        "sl": {
+          "language": "sl",
+          "value": "Leto"
+        },
+        "id": {
+          "language": "id",
+          "value": "tahun kalender"
+        },
+        "lv": {
+          "language": "lv",
+          "value": "gads"
+        },
+        "zh-hans": {
+          "language": "zh-hans",
+          "value": "年份"
+        },
+        "tl": {
+          "language": "tl",
+          "value": "taon"
+        },
+        "yi": {
+          "language": "yi",
+          "value": "יאר"
+        },
+        "en-gb": {
+          "language": "en-gb",
+          "value": "year"
+        },
+        "war": {
+          "language": "war",
+          "value": "Tuig"
+        },
+        "or": {
+          "language": "or",
+          "value": "ବର୍ଷ"
+        },
+        "min": {
+          "language": "min",
+          "value": "taun"
+        },
+        "hu": {
+          "language": "hu",
+          "value": "év"
+        },
+        "sr": {
+          "language": "sr",
+          "value": "година"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "рік"
+        },
+        "be": {
+          "language": "be",
+          "value": "год"
+        },
+        "vi": {
+          "language": "vi",
+          "value": "năm"
+        },
+        "lt": {
+          "language": "lt",
+          "value": "Metai"
+        },
+        "mhr": {
+          "language": "mhr",
+          "value": "Идалык"
+        },
+        "yue": {
+          "language": "yue",
+          "value": "年"
+        },
+        "fa": {
+          "language": "fa",
+          "value": "سال میلادی"
+        },
+        "dsb": {
+          "language": "dsb",
+          "value": "lěto"
+        },
+        "hsb": {
+          "language": "hsb",
+          "value": "lěto"
+        },
+        "et": {
+          "language": "et",
+          "value": "aasta"
+        },
+        "io": {
+          "language": "io",
+          "value": "yaro"
+        },
+        "vo": {
+          "language": "vo",
+          "value": "yel"
+        },
+        "lfn": {
+          "language": "lfn",
+          "value": "anio"
+        },
+        "tt": {
+          "language": "tt",
+          "value": "XX гасырның елы"
+        },
+        "tt-cyrl": {
+          "language": "tt-cyrl",
+          "value": "XX гасырның елы"
+        },
+        "zh-tw": {
+          "language": "zh-tw",
+          "value": "儒略曆或格里曆之年份"
+        },
+        "tet": {
+          "language": "tet",
+          "value": "tinan kalendario"
+        },
+        "bar": {
+          "language": "bar",
+          "value": "Joar"
+        },
+        "ckb": {
+          "language": "ckb",
+          "value": "ساڵ"
+        },
+        "de-at": {
+          "language": "de-at",
+          "value": "Jahr"
+        },
+        "de-ch": {
+          "language": "de-ch",
+          "value": "Jahr"
+        },
+        "frr": {
+          "language": "frr",
+          "value": "Juar"
+        },
+        "wuu": {
+          "language": "wuu",
+          "value": "年"
+        },
+        "gu": {
+          "language": "gu",
+          "value": "વર્ષ"
+        },
+        "pt-br": {
+          "language": "pt-br",
+          "value": "ano"
+        },
+        "se": {
+          "language": "se",
+          "value": "jahki"
+        },
+        "sje": {
+          "language": "sje",
+          "value": "jahke"
+        },
+        "sma": {
+          "language": "sma",
+          "value": "jaepie"
+        },
+        "smj": {
+          "language": "smj",
+          "value": "jahke"
+        },
+        "sq": {
+          "language": "sq",
+          "value": "viti"
+        },
+        "sw": {
+          "language": "sw",
+          "value": "mwaka"
+        },
+        "ur": {
+          "language": "ur",
+          "value": "سال"
+        },
+        "zh-cn": {
+          "language": "zh-cn",
+          "value": "年份"
+        },
+        "zh-hk": {
+          "language": "zh-hk",
+          "value": "年份"
+        },
+        "zh-mo": {
+          "language": "zh-mo",
+          "value": "年份"
+        },
+        "zh-sg": {
+          "language": "zh-sg",
+          "value": "年份"
+        },
+        "lij": {
+          "language": "lij",
+          "value": "ànno"
+        },
+        "az": {
+          "language": "az",
+          "value": "İl"
+        },
+        "myv": {
+          "language": "myv",
+          "value": "Ие"
+        },
+        "mi": {
+          "language": "mi",
+          "value": "tau"
+        },
+        "my": {
+          "language": "my",
+          "value": "သက္ကရာဇ်"
+        },
+        "cy": {
+          "language": "cy",
+          "value": "blwyddyn"
+        },
+        "cv": {
+          "language": "cv",
+          "value": "Çулталăк"
+        },
+        "gcr": {
+          "language": "gcr",
+          "value": "lannen"
+        },
+        "gd": {
+          "language": "gd",
+          "value": "Bliadhna"
+        },
+        "gv": {
+          "language": "gv",
+          "value": "blein"
+        },
+        "rw": {
+          "language": "rw",
+          "value": "umwaka"
+        },
+        "rmy": {
+          "language": "rmy",
+          "value": "bersh"
+        },
+        "sco": {
+          "language": "sco",
+          "value": "year"
+        },
+        "ga": {
+          "language": "ga",
+          "value": "bliain"
+        },
+        "wa": {
+          "language": "wa",
+          "value": "anêye"
+        },
+        "pap": {
+          "language": "pap",
+          "value": "aña"
+        },
+        "hi": {
+          "language": "hi",
+          "value": "वर्ष"
+        },
+        "ml": {
+          "language": "ml",
+          "value": "വർഷം"
+        },
+        "lb": {
+          "language": "lb",
+          "value": "Joer"
+        },
+        "rue": {
+          "language": "rue",
+          "value": "рік"
+        },
+        "shn": {
+          "language": "shn",
+          "value": "ပီႊ"
+        },
+        "kaa": {
+          "language": "kaa",
+          "value": "XX ásirdiń jılı"
+        },
+        "smn": {
+          "language": "smn",
+          "value": "ihe"
+        },
+        "co": {
+          "language": "co",
+          "value": "annu"
+        }
+      },
+      "aliases": {
+        "be-tarask": [
+          {
+            "language": "be-tarask",
+            "value": "1990 год"
+          }
+        ],
+        "nan": [
+          {
+            "language": "nan",
+            "value": "1990"
+          },
+          {
+            "language": "nan",
+            "value": "1990-nî"
+          }
+        ],
+        "es": [
+          {
+            "language": "es",
+            "value": "año 1990"
+          },
+          {
+            "language": "es",
+            "value": "MCMXC"
+          }
+        ],
+        "ar": [
+          {
+            "language": "ar",
+            "value": "١٩٩٠"
+          },
+          {
+            "language": "ar",
+            "value": "۱۹۹۰"
+          }
+        ],
+        "en": [
+          {
+            "language": "en",
+            "value": "MCMXC"
+          },
+          {
+            "language": "en",
+            "value": "Nineteen ninety"
+          },
+          {
+            "language": "en",
+            "value": "'90"
+          }
+        ],
+        "eu": [
+          {
+            "language": "eu",
+            "value": "MCMXC"
+          }
+        ],
+        "fr": [
+          {
+            "language": "fr",
+            "value": "MCMXC"
+          }
+        ],
+        "ca": [
+          {
+            "language": "ca",
+            "value": "1990 dC"
+          },
+          {
+            "language": "ca",
+            "value": "MCMXC"
+          }
+        ],
+        "th": [
+          {
+            "language": "th",
+            "value": "ค.ศ. 1990"
+          }
+        ],
+        "he": [
+          {
+            "language": "he",
+            "value": "90"
+          }
+        ],
+        "shn": [
+          {
+            "language": "shn",
+            "value": "၁၉၉၀"
+          }
+        ]
+      },
+      "claims": {
+        "P373": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P373",
+              "hash": "9cd62c65532150e89f919d95a49d0c5fd98afab8",
+              "datavalue": {
+                "value": "1990",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "id": "q2064$CDEC3B21-1C3D-45B7-833F-7C0D8C07B34E",
+            "rank": "normal"
+          }
+        ],
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "dfd008e47580611b1da8e8bce95c09d6c0d68948",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3186692,
+                  "id": "Q3186692"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q2064$28BF98A6-935D-4477-B6BA-4D242581F963",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "73bd6c24466389ea58a56e1ce3b4998fcdf1ab6d",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 235687,
+                  "id": "Q235687"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$f748312a-1519-4238-9c67-204e8139c4a9",
+            "rank": "normal"
+          }
+        ],
+        "P361": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P361",
+              "hash": "2fdb2d03376682cf30be3522f88b32e3309e3ce2",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 34653,
+                  "id": "Q34653"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q2064$B7FDD134-D932-4A27-B5B1-DE166AEE570C",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P361",
+              "hash": "ff5dd10f636e7f79c8d832ebe59120df3560c6c3",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 12138,
+                  "id": "Q12138"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$f5c48d56-104b-453b-9bc1-13d66d3cc56b",
+            "rank": "normal"
+          }
+        ],
+        "P155": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P155",
+              "hash": "547128a159954c782800ddf99df9843fdeb2e873",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2425,
+                  "id": "Q2425"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q2064$564DAC1E-3924-4597-97C3-2CEC1CF46A61",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P156": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P156",
+              "hash": "edc5381e3094cdfc04b92f7a2f4de81cf97ffb2f",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2062,
+                  "id": "Q2062"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q2064$503A093B-75DD-4A09-A491-7E56BDF7E50D",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P910": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P910",
+              "hash": "6c2dab6d9e468d88a1e04ab186ffec0034637c79",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6938654,
+                  "id": "Q6938654"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$802881CE-2128-41C1-ACFE-67332F8E28FD",
+            "rank": "normal"
+          }
+        ],
+        "P585": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P585",
+              "hash": "e7a1014aabf7385ef5bf93bb24cfe308ca42cdbe",
+              "datavalue": {
+                "value": {
+                  "time": "+1990-01-01T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 9,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q2064$3D8B6539-96CE-431E-AC5F-DCB0A4B07AC3",
+            "rank": "normal"
+          }
+        ],
+        "P935": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P935",
+              "hash": "bb24367338254907616d70650af25aaaaf6501c8",
+              "datavalue": {
+                "value": "1990",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "id": "Q2064$922B2075-4241-495F-B3C4-B447F33DDF5E",
+            "rank": "normal"
+          }
+        ],
+        "P2959": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2959",
+              "hash": "e15c1ddf57976e3f1e05ef1d55a12de14d58d11b",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 31803036,
+                  "id": "Q31803036"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$A6A0E7EE-7F93-4954-AB2B-13509B4B4570",
+            "rank": "normal"
+          }
+        ],
+        "P527": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "b67ff6ae61fc7330ed908f4362b5c0b5edb6a158",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 12364951,
+                  "id": "Q12364951"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$1191DBC0-F73E-4CD1-8BF8-F704D9D7ECCD",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "b6459cc594275c582dd906fea15a028621bc6ce3",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3092767,
+                  "id": "Q3092767"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$2C24A4A3-1F7B-481A-BE44-662135432618",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "649ca24256e5fce23f29b9e4729d90289b05ea82",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3294924,
+                  "id": "Q3294924"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$A6F6F94B-5CF9-4755-B7B5-1D73858FD251",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "1ee86f7bb5b1f7dda2fde8d3ccff7b4614ae9d0a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2874568,
+                  "id": "Q2874568"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$371387AA-1AF1-47A6-86D1-FE253CEE69EA",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "43de325ae3cd10bb6857b8c754d5e9096a47d758",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3277975,
+                  "id": "Q3277975"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$84A3925D-D46F-4CDC-B496-2C8C709A4448",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "0c49cca5bcc4057a94b7e8baf1ff763c7e8ef6fb",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3188262,
+                  "id": "Q3188262"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$3CC76FA0-C73A-47E5-BA77-4F8B2A530CA4",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "57ea25fad95e349d14f1f102f06366642593773b",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3188196,
+                  "id": "Q3188196"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$71B27257-CC3C-47B8-8A86-10C4E9813B69",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "2ab5f5eb5bf1ce3c4d9117d032977eafee5e4b7b",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2858052,
+                  "id": "Q2858052"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$BACFD204-DBF9-4468-89F2-8D93E3939EB9",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "b228cf665da8a30842dd2c4f62a1112022b664a9",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3478980,
+                  "id": "Q3478980"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$82d6db22-45a0-ace8-8c95-0e8d1d91698b",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "55a3ab9a0acedfea96000248ffce279bc4616278",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3348939,
+                  "id": "Q3348939"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$9656451a-4e86-528a-3696-42659589b719",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "a6be5ac970bb6fac6e3efc09ca9578c50409c950",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3345438,
+                  "id": "Q3345438"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$c3b495e2-48ce-172f-28ef-8baa240956bf",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P527",
+              "hash": "19bbc5bcbb6e9a930d5d65e75c7f9b53a6c7bd25",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3042495,
+                  "id": "Q3042495"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$19ac4748-40cd-7be7-3af0-8bb50ba7491e",
+            "rank": "normal"
+          }
+        ],
+        "P5461": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P5461",
+              "hash": "6e683142dd3b0d17a9a7c52063089e5286559e2a",
+              "datavalue": {
+                "value": "L",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P1013": [
+                {
+                  "snaktype": "value",
+                  "property": "P1013",
+                  "hash": "d807e87622b343a5567375e739ad5039a7ad81c4",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 55518340,
+                      "id": "Q55518340"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P1013"
+            ],
+            "id": "Q2064$DF7B2BA5-7CCB-46A9-9821-67083A1780DE",
+            "rank": "normal"
+          }
+        ],
+        "P244": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P244",
+              "hash": "8b25fc993601d8310b30b4206af56188b154a965",
+              "datavalue": {
+                "value": "sh92001798",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$577EE9DD-6AC2-4404-B7A8-DF040E743C04",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "ac5d47e9fbcc281bc0d27a205ae02e22ad24ce31",
+                "snaks": {
+                  "P854": [
+                    {
+                      "snaktype": "value",
+                      "property": "P854",
+                      "hash": "b560dc6b281a39d061e189d2eb299a426a06f1a2",
+                      "datavalue": {
+                        "value": "https://github.com/JohnMarkOckerbloom/ftl/blob/master/data/wikimap",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ],
+                  "P813": [
+                    {
+                      "snaktype": "value",
+                      "property": "P813",
+                      "hash": "0dcf4f64e93fdcc654e2c7534285881fe48b9f3d",
+                      "datavalue": {
+                        "value": {
+                          "time": "+2019-04-03T00:00:00Z",
+                          "timezone": 0,
+                          "before": 0,
+                          "after": 0,
+                          "precision": 11,
+                          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                        },
+                        "type": "time"
+                      },
+                      "datatype": "time"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P854",
+                  "P813"
+                ]
+              }
+            ]
+          }
+        ],
+        "P1889": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1889",
+              "hash": "23bcd0b49a95a96b800717d41df5e11c1f282d67",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 44069931,
+                  "id": "Q44069931"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$2C249DC7-94BF-4D69-B72A-173C35A1EED6",
+            "rank": "normal"
+          }
+        ],
+        "P6262": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P6262",
+              "hash": "715a6a63657339d736a82f693a1a2d2adeacc750",
+              "datavalue": {
+                "value": "years:1990",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P407": [
+                {
+                  "snaktype": "value",
+                  "property": "P407",
+                  "hash": "daf1c4fcb58181b02dff9cc89deb084004ddae4b",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 1860,
+                      "id": "Q1860"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ],
+              "P1810": [
+                {
+                  "snaktype": "value",
+                  "property": "P1810",
+                  "hash": "050376b7ca8e13273305c061b9f94cc15d989173",
+                  "datavalue": {
+                    "value": "1990",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P407",
+              "P1810"
+            ],
+            "id": "Q2064$d14da1dd-4c75-afa1-7fab-48cf596fa548",
+            "rank": "normal"
+          }
+        ],
+        "P6228": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P6228",
+              "hash": "268dce1612eb00d8e6c46f2300d9d095b2e60ec4",
+              "datavalue": {
+                "value": "10003",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P1810": [
+                {
+                  "snaktype": "value",
+                  "property": "P1810",
+                  "hash": "050376b7ca8e13273305c061b9f94cc15d989173",
+                  "datavalue": {
+                    "value": "1990",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P1810"
+            ],
+            "id": "Q2064$06207BD3-9E4D-47FF-B784-28641FE400AD",
+            "rank": "normal"
+          }
+        ],
+        "P460": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P460",
+              "hash": "7892bd0131504261d7ba66dac785ff46461e6c19",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 109526358,
+                  "id": "Q109526358"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$8761c99e-4362-f082-4ce1-2b554d359d20",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P460",
+              "hash": "e02422271ea7a627df0d600faac505a02c2d924b",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 109530710,
+                  "id": "Q109530710"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$b5368f8f-495f-5f7f-6e63-724785246c60",
+            "rank": "normal"
+          }
+        ],
+        "P8189": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P8189",
+              "hash": "ea3abe30940bb54e53e812e40ef86b5184464dcb",
+              "datavalue": {
+                "value": "987007553856905171",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P14457": [
+                {
+                  "snaktype": "value",
+                  "property": "P14457",
+                  "hash": "9978c0b18e433a1e61893ff564464ba4b8319d79",
+                  "datavalue": {
+                    "value": {
+                      "text": "Nineteen ninety, A.D.",
+                      "language": "en"
+                    },
+                    "type": "monolingualtext"
+                  },
+                  "datatype": "monolingualtext"
+                },
+                {
+                  "snaktype": "value",
+                  "property": "P14457",
+                  "hash": "63acd979b5b6b919901ba95241ebf765aefb68f2",
+                  "datavalue": {
+                    "value": {
+                      "text": "שנת 1990",
+                      "language": "he"
+                    },
+                    "type": "monolingualtext"
+                  },
+                  "datatype": "monolingualtext"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P14457"
+            ],
+            "id": "Q2064$DD8B5E8E-6024-4100-B11B-D88624D14BFB",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "c8a47202c92936005b390eb36ddd267921b51f43",
+                "snaks": {
+                  "P248": [
+                    {
+                      "snaktype": "value",
+                      "property": "P248",
+                      "hash": "0ea73b3596b49258a7b7ec6495950779b99e875d",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 188915,
+                          "id": "Q188915"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P248"
+                ]
+              }
+            ]
+          }
+        ],
+        "P2354": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2354",
+              "hash": "8d2e579f48b846ef83bf7ba51c0f3e6c6b5e3f28",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 886069,
+                  "id": "Q886069"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$8B837BB0-43BB-4DC9-8ECE-6A28BB5245FD",
+            "rank": "normal"
+          }
+        ],
+        "P7084": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P7084",
+              "hash": "3d2b21a7a8aaa22af0a1b206978517de178332dc",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6182608,
+                  "id": "Q6182608"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P4224": [
+                {
+                  "snaktype": "value",
+                  "property": "P4224",
+                  "hash": "509a7bbb92f745dc119e540b03feea2b3c07e48f",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 13406463,
+                      "id": "Q13406463"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P4224"
+            ],
+            "id": "Q2064$52AD4964-32CA-4EF4-AD0E-954C75B303A2",
+            "rank": "normal"
+          }
+        ],
+        "P10291": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P10291",
+              "hash": "55e14a37bc62dd18da12fc7d716c87764c6a94b0",
+              "datavalue": {
+                "value": "35953",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$0F72E4EE-992F-442A-9002-C6F3D8DF87C0",
+            "rank": "normal"
+          }
+        ],
+        "P11194": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P11194",
+              "hash": "0ac90362766d11bc2e4982df335c1fdfcf4c6c59",
+              "datavalue": {
+                "value": "year/1990",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$ABF3EECD-533C-438E-AC87-FC58C58EE093",
+            "rank": "normal"
+          }
+        ],
+        "P12288": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12288",
+              "hash": "4d38f1368e0ee94c5569d1f85192eafbea065fae",
+              "datavalue": {
+                "value": "1990",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$EB743B70-87D8-4A2B-8D8C-20FC40B4ED55",
+            "rank": "normal"
+          }
+        ],
+        "P2671": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2671",
+              "hash": "31d9e5fd831b033cda1282bf1974474d7ffe8f47",
+              "datavalue": {
+                "value": "/g/11b77d3ky7",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$f501f85f-49ed-75f3-6a4f-07a6f0cfc0cd",
+            "rank": "normal"
+          }
+        ],
+        "P12686": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12686",
+              "hash": "1904c4523b806d866d93aece07184c7512809a6d",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6561832,
+                  "id": "Q6561832"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$7DF81878-9FDB-4859-B44F-096584BA7529",
+            "rank": "normal"
+          }
+        ],
+        "P12687": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12687",
+              "hash": "150edf965dec29eb20d146ce7cf0100c3a7de6e7",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6938689,
+                  "id": "Q6938689"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q2064$56D77037-F0A0-46EF-BF33-E42038BB31B7",
+            "rank": "normal"
+          }
+        ],
+        "P8885": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P8885",
+              "hash": "092338bdb88ffe836873e9113bc3300957203cb1",
+              "datavalue": {
+                "value": "1990년",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$c079d71a-4b89-daa7-7160-5defa68dc3cf",
+            "rank": "normal"
+          }
+        ],
+        "P13425": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13425",
+              "hash": "13ac958805dfec8d46bb89b99c56510f4187d1d0",
+              "datavalue": {
+                "value": "instant.1990",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$3D1EAE76-A6A4-4B17-828C-F8052CE70C54",
+            "rank": "normal"
+          }
+        ],
+        "P11924": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P11924",
+              "hash": "d419fa9bf9d2e70e7f032023821131fd609278a9",
+              "datavalue": {
+                "value": "year-1990",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$AE721585-D47B-440F-A304-D7320A2A611A",
+            "rank": "normal"
+          }
+        ],
+        "P13591": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13591",
+              "hash": "94451a922c1cfb4cb1d1a59135248fef44d30de3",
+              "datavalue": {
+                "value": "concept/8c7e5ad6-3b15-4742-8098-6895d79f3699",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$CCFED4DB-9630-4EAD-8174-ED737FA9EAAD",
+            "rank": "normal"
+          }
+        ],
+        "P13600": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13600",
+              "hash": "0bffefefbe37e1385b2bb1f9c3d47f9fa5556d35",
+              "datavalue": {
+                "value": "1990",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$f109e977-4f4c-8fb4-42f1-667bc0ff3525",
+            "rank": "normal"
+          }
+        ],
+        "P12653": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12653",
+              "hash": "1adab8e060af36a50cd3abaeb9bae35c3e77d7e4",
+              "datavalue": {
+                "value": "2204",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$B3EB3B77-A1DB-475F-AE7A-A92F852BD791",
+            "rank": "normal"
+          }
+        ],
+        "P13204": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13204",
+              "hash": "62a23ad2774500ed0233c41ccae8abc133e819bb",
+              "datavalue": {
+                "value": "u97cpedb",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$948B2AD1-BA26-4931-89D5-131BE7E07BB1",
+            "rank": "normal"
+          }
+        ],
+        "P13772": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13772",
+              "hash": "26bbd8b244d82fcc9218c57bdb5001cd152cde62",
+              "datavalue": {
+                "value": "1990",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$2225B3A0-A523-437D-B0D2-3841D949FE5F",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P13772",
+              "hash": "c50020cdfd402d5801f599f16f294ead117d58c5",
+              "datavalue": {
+                "value": "nineteen-ninety-a-d",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q2064$8831315F-1C32-47C1-BE6F-52E141A76333",
+            "rank": "normal"
+          }
+        ]
+      },
+      "sitelinks": {
+        "enwikiquote": {
+          "site": "enwikiquote",
+          "title": "1990",
+          "badges": []
+        },
+        "ptwikiquote": {
+          "site": "ptwikiquote",
+          "title": "1990",
+          "badges": []
+        },
+        "nnwikiquote": {
+          "site": "nnwikiquote",
+          "title": "1990",
+          "badges": []
+        },
+        "cywikiquote": {
+          "site": "cywikiquote",
+          "title": "1990",
+          "badges": []
+        },
+        "commonswiki": {
+          "site": "commonswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "arwikinews": {
+          "site": "arwikinews",
+          "title": "تصنيف:1990",
+          "badges": []
+        },
+        "enwiki": {
+          "site": "enwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "dewiki": {
+          "site": "dewiki",
+          "title": "1990",
+          "badges": []
+        },
+        "frwiki": {
+          "site": "frwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "eswiki": {
+          "site": "eswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ruwiki": {
+          "site": "ruwiki",
+          "title": "1990 год",
+          "badges": []
+        },
+        "itwiki": {
+          "site": "itwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "jawiki": {
+          "site": "jawiki",
+          "title": "1990年",
+          "badges": []
+        },
+        "nlwiki": {
+          "site": "nlwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "plwiki": {
+          "site": "plwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ptwiki": {
+          "site": "ptwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "zhwiki": {
+          "site": "zhwiki",
+          "title": "1990年",
+          "badges": []
+        },
+        "svwiki": {
+          "site": "svwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "fawiki": {
+          "site": "fawiki",
+          "title": "۱۹۹۰",
+          "badges": []
+        },
+        "hewiki": {
+          "site": "hewiki",
+          "title": "1990",
+          "badges": []
+        },
+        "trwiki": {
+          "site": "trwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "huwiki": {
+          "site": "huwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "fiwiki": {
+          "site": "fiwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "arwiki": {
+          "site": "arwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "viwiki": {
+          "site": "viwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "nowiki": {
+          "site": "nowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ukwiki": {
+          "site": "ukwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "kowiki": {
+          "site": "kowiki",
+          "title": "1990년",
+          "badges": []
+        },
+        "cawiki": {
+          "site": "cawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "cswiki": {
+          "site": "cswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "srwiki": {
+          "site": "srwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "rowiki": {
+          "site": "rowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "idwiki": {
+          "site": "idwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "dawiki": {
+          "site": "dawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "simplewiki": {
+          "site": "simplewiki",
+          "title": "1990",
+          "badges": []
+        },
+        "bgwiki": {
+          "site": "bgwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "abwiki": {
+          "site": "abwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "afwiki": {
+          "site": "afwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "alswiki": {
+          "site": "alswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "amwiki": {
+          "site": "amwiki",
+          "title": "1990 እ.ኤ.አ.",
+          "badges": []
+        },
+        "anwiki": {
+          "site": "anwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "arzwiki": {
+          "site": "arzwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "astwiki": {
+          "site": "astwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "avwiki": {
+          "site": "avwiki",
+          "title": "1990 сон",
+          "badges": []
+        },
+        "azwiki": {
+          "site": "azwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "azbwiki": {
+          "site": "azbwiki",
+          "title": "۱۹۹۰ (میلادی)",
+          "badges": []
+        },
+        "bawiki": {
+          "site": "bawiki",
+          "title": "1990 йыл",
+          "badges": []
+        },
+        "barwiki": {
+          "site": "barwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "bat_smgwiki": {
+          "site": "bat_smgwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "bclwiki": {
+          "site": "bclwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "bewiki": {
+          "site": "bewiki",
+          "title": "1990",
+          "badges": []
+        },
+        "be_x_oldwiki": {
+          "site": "be_x_oldwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "bhwiki": {
+          "site": "bhwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "bjnwiki": {
+          "site": "bjnwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "bnwiki": {
+          "site": "bnwiki",
+          "title": "১৯৯০",
+          "badges": []
+        },
+        "bpywiki": {
+          "site": "bpywiki",
+          "title": "মারি ১৯৯০",
+          "badges": []
+        },
+        "brwiki": {
+          "site": "brwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "bswiki": {
+          "site": "bswiki",
+          "title": "1990.",
+          "badges": []
+        },
+        "cdowiki": {
+          "site": "cdowiki",
+          "title": "1990 nièng",
+          "badges": []
+        },
+        "cewiki": {
+          "site": "cewiki",
+          "title": "1990 шо",
+          "badges": []
+        },
+        "cebwiki": {
+          "site": "cebwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ckbwiki": {
+          "site": "ckbwiki",
+          "title": "١٩٩٠",
+          "badges": []
+        },
+        "crhwiki": {
+          "site": "crhwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "csbwiki": {
+          "site": "csbwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "cvwiki": {
+          "site": "cvwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "cywiki": {
+          "site": "cywiki",
+          "title": "1990",
+          "badges": []
+        },
+        "diqwiki": {
+          "site": "diqwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "elwiki": {
+          "site": "elwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "emlwiki": {
+          "site": "emlwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "eowiki": {
+          "site": "eowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "etwiki": {
+          "site": "etwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "euwiki": {
+          "site": "euwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "fiu_vrowiki": {
+          "site": "fiu_vrowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "fowiki": {
+          "site": "fowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "frpwiki": {
+          "site": "frpwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "frrwiki": {
+          "site": "frrwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "furwiki": {
+          "site": "furwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "fywiki": {
+          "site": "fywiki",
+          "title": "1990",
+          "badges": []
+        },
+        "gawiki": {
+          "site": "gawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "gagwiki": {
+          "site": "gagwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ganwiki": {
+          "site": "ganwiki",
+          "title": "1990年",
+          "badges": []
+        },
+        "gdwiki": {
+          "site": "gdwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "glwiki": {
+          "site": "glwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "gnwiki": {
+          "site": "gnwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "gvwiki": {
+          "site": "gvwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "hakwiki": {
+          "site": "hakwiki",
+          "title": "1990-ngièn",
+          "badges": []
+        },
+        "hiwiki": {
+          "site": "hiwiki",
+          "title": "१९९०",
+          "badges": []
+        },
+        "hifwiki": {
+          "site": "hifwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "hrwiki": {
+          "site": "hrwiki",
+          "title": "1990.",
+          "badges": []
+        },
+        "hsbwiki": {
+          "site": "hsbwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "htwiki": {
+          "site": "htwiki",
+          "title": "1990 (almanak gregoryen)",
+          "badges": []
+        },
+        "hywiki": {
+          "site": "hywiki",
+          "title": "1990",
+          "badges": []
+        },
+        "iawiki": {
+          "site": "iawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ilowiki": {
+          "site": "ilowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "iowiki": {
+          "site": "iowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "iswiki": {
+          "site": "iswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "jbowiki": {
+          "site": "jbowiki",
+          "title": "1990moi",
+          "badges": []
+        },
+        "jvwiki": {
+          "site": "jvwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "kawiki": {
+          "site": "kawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "kbpwiki": {
+          "site": "kbpwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "kkwiki": {
+          "site": "kkwiki",
+          "title": "1990 жыл",
+          "badges": []
+        },
+        "knwiki": {
+          "site": "knwiki",
+          "title": "೧೯೯೦",
+          "badges": []
+        },
+        "krcwiki": {
+          "site": "krcwiki",
+          "title": "1990 джыл",
+          "badges": []
+        },
+        "kshwiki": {
+          "site": "kshwiki",
+          "title": "Joohr 1990",
+          "badges": []
+        },
+        "kuwiki": {
+          "site": "kuwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "kvwiki": {
+          "site": "kvwiki",
+          "title": "1990-ӧд во",
+          "badges": []
+        },
+        "kwwiki": {
+          "site": "kwwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "lawiki": {
+          "site": "lawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "lbwiki": {
+          "site": "lbwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "lezwiki": {
+          "site": "lezwiki",
+          "title": "1990 йис",
+          "badges": []
+        },
+        "liwiki": {
+          "site": "liwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "lijwiki": {
+          "site": "lijwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "lmowiki": {
+          "site": "lmowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "lnwiki": {
+          "site": "lnwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ltwiki": {
+          "site": "ltwiki",
+          "title": "1990 m.",
+          "badges": []
+        },
+        "lvwiki": {
+          "site": "lvwiki",
+          "title": "1990. gads",
+          "badges": []
+        },
+        "maiwiki": {
+          "site": "maiwiki",
+          "title": "१९९०",
+          "badges": []
+        },
+        "map_bmswiki": {
+          "site": "map_bmswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "mdfwiki": {
+          "site": "mdfwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "mgwiki": {
+          "site": "mgwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "mhrwiki": {
+          "site": "mhrwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "miwiki": {
+          "site": "miwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "minwiki": {
+          "site": "minwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "mkwiki": {
+          "site": "mkwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "mlwiki": {
+          "site": "mlwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "mnwiki": {
+          "site": "mnwiki",
+          "title": "1990 он",
+          "badges": []
+        },
+        "mrwiki": {
+          "site": "mrwiki",
+          "title": "इ.स. १९९०",
+          "badges": []
+        },
+        "mrjwiki": {
+          "site": "mrjwiki",
+          "title": "1990 и",
+          "badges": []
+        },
+        "mswiki": {
+          "site": "mswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "mywiki": {
+          "site": "mywiki",
+          "title": "၁၉၉၀",
+          "badges": []
+        },
+        "myvwiki": {
+          "site": "myvwiki",
+          "title": "1990 ие",
+          "badges": []
+        },
+        "nahwiki": {
+          "site": "nahwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "napwiki": {
+          "site": "napwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ndswiki": {
+          "site": "ndswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "nds_nlwiki": {
+          "site": "nds_nlwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "newiki": {
+          "site": "newiki",
+          "title": "सन् १९९०",
+          "badges": []
+        },
+        "newwiki": {
+          "site": "newwiki",
+          "title": "सन् १९९०",
+          "badges": []
+        },
+        "nnwiki": {
+          "site": "nnwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "nrmwiki": {
+          "site": "nrmwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "nsowiki": {
+          "site": "nsowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ocwiki": {
+          "site": "ocwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "olowiki": {
+          "site": "olowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "orwiki": {
+          "site": "orwiki",
+          "title": "୧୯୯୦",
+          "badges": []
+        },
+        "oswiki": {
+          "site": "oswiki",
+          "title": "1990-æм аз",
+          "badges": []
+        },
+        "pawiki": {
+          "site": "pawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "pamwiki": {
+          "site": "pamwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "papwiki": {
+          "site": "papwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "pnbwiki": {
+          "site": "pnbwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "quwiki": {
+          "site": "quwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ruewiki": {
+          "site": "ruewiki",
+          "title": "1990",
+          "badges": []
+        },
+        "sahwiki": {
+          "site": "sahwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "scwiki": {
+          "site": "scwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "scnwiki": {
+          "site": "scnwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "sdwiki": {
+          "site": "sdwiki",
+          "title": "1990ع",
+          "badges": []
+        },
+        "sewiki": {
+          "site": "sewiki",
+          "title": "1990",
+          "badges": []
+        },
+        "siwiki": {
+          "site": "siwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "skwiki": {
+          "site": "skwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "slwiki": {
+          "site": "slwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "sowiki": {
+          "site": "sowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "sqwiki": {
+          "site": "sqwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "stqwiki": {
+          "site": "stqwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "suwiki": {
+          "site": "suwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "swwiki": {
+          "site": "swwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "szlwiki": {
+          "site": "szlwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "tawiki": {
+          "site": "tawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "tewiki": {
+          "site": "tewiki",
+          "title": "1990",
+          "badges": []
+        },
+        "tgwiki": {
+          "site": "tgwiki",
+          "title": "Соли 1990",
+          "badges": []
+        },
+        "thwiki": {
+          "site": "thwiki",
+          "title": "พ.ศ. 2533",
+          "badges": []
+        },
+        "tkwiki": {
+          "site": "tkwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "tlwiki": {
+          "site": "tlwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "tpiwiki": {
+          "site": "tpiwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ttwiki": {
+          "site": "ttwiki",
+          "title": "1990 ел",
+          "badges": []
+        },
+        "tywiki": {
+          "site": "tywiki",
+          "title": "1990",
+          "badges": []
+        },
+        "udmwiki": {
+          "site": "udmwiki",
+          "title": "1990 ар",
+          "badges": []
+        },
+        "urwiki": {
+          "site": "urwiki",
+          "title": "1990ء",
+          "badges": []
+        },
+        "uzwiki": {
+          "site": "uzwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "vecwiki": {
+          "site": "vecwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "vlswiki": {
+          "site": "vlswiki",
+          "title": "1990",
+          "badges": []
+        },
+        "vowiki": {
+          "site": "vowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "wawiki": {
+          "site": "wawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "warwiki": {
+          "site": "warwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "xmfwiki": {
+          "site": "xmfwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "yiwiki": {
+          "site": "yiwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "zeawiki": {
+          "site": "zeawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "zh_classicalwiki": {
+          "site": "zh_classicalwiki",
+          "title": "一九九〇年",
+          "badges": []
+        },
+        "zh_min_nanwiki": {
+          "site": "zh_min_nanwiki",
+          "title": "1990 nî",
+          "badges": []
+        },
+        "zh_yuewiki": {
+          "site": "zh_yuewiki",
+          "title": "1990年",
+          "badges": []
+        },
+        "wuuwiki": {
+          "site": "wuuwiki",
+          "title": "1990年",
+          "badges": []
+        },
+        "shnwiki": {
+          "site": "shnwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "inhwiki": {
+          "site": "inhwiki",
+          "title": "1990 шу",
+          "badges": []
+        },
+        "hywwiki": {
+          "site": "hywwiki",
+          "title": "1990 թուական",
+          "badges": []
+        },
+        "hawiki": {
+          "site": "hawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "banwiki": {
+          "site": "banwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "gcrwiki": {
+          "site": "gcrwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "smnwiki": {
+          "site": "smnwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "avkwiki": {
+          "site": "avkwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ruwikinews": {
+          "site": "ruwikinews",
+          "title": "Категория:1990",
+          "badges": []
+        },
+        "arywiki": {
+          "site": "arywiki",
+          "title": "1990",
+          "badges": []
+        },
+        "ugwiki": {
+          "site": "ugwiki",
+          "title": "1990 - يىلى",
+          "badges": []
+        },
+        "bowiki": {
+          "site": "bowiki",
+          "title": "༡༩༩༠ལོ།",
+          "badges": []
+        },
+        "mznwiki": {
+          "site": "mznwiki",
+          "title": "۱۹۹۰",
+          "badges": []
+        },
+        "tlywiki": {
+          "site": "tlywiki",
+          "title": "1990",
+          "badges": []
+        },
+        "roa_tarawiki": {
+          "site": "roa_tarawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "eowikinews": {
+          "site": "eowikinews",
+          "title": "Kategorio:1990",
+          "badges": []
+        },
+        "kaawiki": {
+          "site": "kaawiki",
+          "title": "1990",
+          "badges": []
+        },
+        "zawiki": {
+          "site": "zawiki",
+          "title": "1990 nienz",
+          "badges": []
+        },
+        "snwiki": {
+          "site": "snwiki",
+          "title": "1990",
+          "badges": []
+        },
+        "shwiki": {
+          "site": "shwiki",
+          "title": "1990.",
+          "badges": []
+        },
+        "cowiki": {
+          "site": "cowiki",
+          "title": "1990",
+          "badges": []
+        },
+        "rkiwiki": {
+          "site": "rkiwiki",
+          "title": "၁၉၉၀",
+          "badges": []
+        }
+      }
+    }
+  }
+}

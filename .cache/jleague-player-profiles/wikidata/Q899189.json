@@ -1,0 +1,1073 @@
+{
+  "entities": {
+    "Q899189": {
+      "pageid": 850010,
+      "ns": 0,
+      "title": "Q899189",
+      "lastrevid": 2479371370,
+      "modified": "2026-04-08T06:40:02Z",
+      "type": "item",
+      "id": "Q899189",
+      "labels": {
+        "de": {
+          "language": "de",
+          "value": "brasilianische Olympia-Fußballmannschaft"
+        },
+        "es": {
+          "language": "es",
+          "value": "selección olímpica de fútbol de Brasil"
+        },
+        "de-ch": {
+          "language": "de-ch",
+          "value": "Brasilianische Fussballnationalmannschaft/Olympische Spiele"
+        },
+        "fr": {
+          "language": "fr",
+          "value": "équipe du Brésil olympique de football"
+        },
+        "it": {
+          "language": "it",
+          "value": "Nazionale olimpica di calcio del Brasile"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "Braziliaans olympisch voetbalelftal"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "олімпійська збірна Бразилії з футболу"
+        },
+        "en": {
+          "language": "en",
+          "value": "Brazil national under-23 football team"
+        },
+        "id": {
+          "language": "id",
+          "value": "Tim nasional sepak bola U-23 Brasil"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "U-23サッカーブラジル代表"
+        },
+        "el": {
+          "language": "el",
+          "value": "Εθνική Βραζιλίας Κ-23 (ποδόσφαιρο ανδρών)"
+        },
+        "pt": {
+          "language": "pt",
+          "value": "Seleção Brasileira de Futebol Sub-23"
+        },
+        "nb": {
+          "language": "nb",
+          "value": "Brasils U23-herrelandslag i fotball"
+        },
+        "zh-hant": {
+          "language": "zh-hant",
+          "value": "巴西U23"
+        },
+        "zh-cn": {
+          "language": "zh-cn",
+          "value": "巴西国奥队"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "巴西U23"
+        },
+        "ro": {
+          "language": "ro",
+          "value": "Echipa națională olimpică de fotbal a Braziliei"
+        },
+        "hu": {
+          "language": "hu",
+          "value": "brazil olimpiai labdarúgó-válogatott"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "منتخب البرازيل تحت 23 سنة لكرة القدم"
+        },
+        "fa": {
+          "language": "fa",
+          "value": "تیم ملی فوتبال زیر ۲۳ سال برزیل"
+        },
+        "th": {
+          "language": "th",
+          "value": "ฟุตบอลทีมชาติบราซิลรุ่นอายุไม่เกิน 23 ปี"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "олимпийская сборная Бразилии по футболу"
+        },
+        "da": {
+          "language": "da",
+          "value": "Brasiliens U/23-fodboldlandshold"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "브라질 U-23 축구 국가대표팀"
+        },
+        "gd": {
+          "language": "gd",
+          "value": "sgioba ball-coise Oilimpigeach Bhraisil"
+        },
+        "tt": {
+          "language": "tt",
+          "value": "Бразилиянең Олимпия футбол җыелмасы"
+        },
+        "eo": {
+          "language": "eo",
+          "value": "olimpika futbala teamo de Brazilo"
+        },
+        "ca": {
+          "language": "ca",
+          "value": "Brasil Olímpica"
+        },
+        "zh-hans": {
+          "language": "zh-hans",
+          "value": "巴西20岁以下国家足球队"
+        },
+        "vi": {
+          "language": "vi",
+          "value": "Đội tuyển bóng đá U-23 quốc gia Brasil"
+        },
+        "ast": {
+          "language": "ast",
+          "value": "seleición olímpica masculina de fútbol de Brasil"
+        },
+        "bn": {
+          "language": "bn",
+          "value": "ব্রাজিল জাতীয় অনূর্ধ্ব-২৩ ফুটবল দল"
+        },
+        "ms": {
+          "language": "ms",
+          "value": "Pasukan bola sepak kebangsaan bawah-23 Brazil"
+        },
+        "he": {
+          "language": "he",
+          "value": "נבחרת הכדורגל האולימפית של ברזיל"
+        },
+        "sl": {
+          "language": "sl",
+          "value": "brazilska olimpijska nogometna reprezentanca"
+        },
+        "sv": {
+          "language": "sv",
+          "value": "Brasiliens U23-herrlandslag i fotboll"
+        },
+        "gl": {
+          "language": "gl",
+          "value": "Brasil sub-23"
+        },
+        "tr": {
+          "language": "tr",
+          "value": "Brezilya 23 yaş altı millî futbol takımı"
+        },
+        "az": {
+          "language": "az",
+          "value": "Braziliya U-23"
+        }
+      },
+      "descriptions": {
+        "en": {
+          "language": "en",
+          "value": "men's national association football team representing Brazil"
+        },
+        "de": {
+          "language": "de",
+          "value": "brasilianische Fußballauswahl bei den Olympischen Spielen"
+        },
+        "en-gb": {
+          "language": "en-gb",
+          "value": "national association football team"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "منتخب كرة قدم وطني"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "nationaal voetbalteam"
+        },
+        "en-ca": {
+          "language": "en-ca",
+          "value": "national association football team"
+        },
+        "hu": {
+          "language": "hu",
+          "value": "Brazília olimpiai labdarúgó-válogatottja"
+        },
+        "it": {
+          "language": "it",
+          "value": "rappresentativa calcistica maschile del Brasile per le Olimpiadi e relative qualificazioni"
+        },
+        "pt": {
+          "language": "pt",
+          "value": "seleção brasileira de futebol formada por jogadores com idade inferior a 23 anos"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "національна футбольна збірна"
+        },
+        "sv": {
+          "language": "sv",
+          "value": "U23-herrlandslag i fotboll som representerar Brasilien"
+        }
+      },
+      "aliases": {
+        "es": [
+          {
+            "language": "es",
+            "value": "selección de fútbol olímpica de Brasil"
+          },
+          {
+            "language": "es",
+            "value": "selección de fútbol sub-23 de Brasil"
+          },
+          {
+            "language": "es",
+            "value": "seleccion olimpica de futbol de Brasil"
+          },
+          {
+            "language": "es",
+            "value": "seleccion de futbol olimpica de Brasil"
+          }
+        ],
+        "de": [
+          {
+            "language": "de",
+            "value": "Brasilianische Fußballnationalmannschaft/Olympische Spiele"
+          },
+          {
+            "language": "de",
+            "value": "Brasilianische U-23 Fußballnationamannschaft"
+          }
+        ],
+        "it": [
+          {
+            "language": "it",
+            "value": "Nazionale di calcio del Brasile Olimpica"
+          },
+          {
+            "language": "it",
+            "value": "Nazionale di calcio del Brasile Olimpico"
+          },
+          {
+            "language": "it",
+            "value": "Nazionale Under-23 di calcio del Brasile"
+          },
+          {
+            "language": "it",
+            "value": "Nazionale di calcio del Brasile Under-23"
+          }
+        ],
+        "fr": [
+          {
+            "language": "fr",
+            "value": "équipe du Brésil de football des moins de 23 ans"
+          }
+        ],
+        "en": [
+          {
+            "language": "en",
+            "value": "Brazil Olympic football team"
+          }
+        ],
+        "uk": [
+          {
+            "language": "uk",
+            "value": "Збірна Бразилії U–23 з футболу"
+          }
+        ],
+        "nl": [
+          {
+            "language": "nl",
+            "value": "Brazil national under-23 football team"
+          }
+        ],
+        "zh-hant": [
+          {
+            "language": "zh-hant",
+            "value": "巴西國奧隊"
+          },
+          {
+            "language": "zh-hant",
+            "value": "巴西21歲以下國家足球隊"
+          },
+          {
+            "language": "zh-hant",
+            "value": "巴西23歲以下國家足球隊"
+          },
+          {
+            "language": "zh-hant",
+            "value": "巴西20歲以下國家足球隊"
+          }
+        ],
+        "zh-cn": [
+          {
+            "language": "zh-cn",
+            "value": "巴西21岁以下国家足球队"
+          },
+          {
+            "language": "zh-cn",
+            "value": "巴西23岁以下國家足球隊"
+          }
+        ],
+        "zh": [
+          {
+            "language": "zh",
+            "value": "巴西奧運隊"
+          },
+          {
+            "language": "zh",
+            "value": "巴西U-23"
+          },
+          {
+            "language": "zh",
+            "value": "巴西奧林匹克足球隊"
+          },
+          {
+            "language": "zh",
+            "value": "巴西23歲以下國家足球隊"
+          },
+          {
+            "language": "zh",
+            "value": "巴西20岁以下国家足球队"
+          },
+          {
+            "language": "zh",
+            "value": "巴西国奥队"
+          },
+          {
+            "language": "zh",
+            "value": "巴西23岁以下国家足球队"
+          }
+        ],
+        "hu": [
+          {
+            "language": "hu",
+            "value": "Brazil U23-as labdarúgó-válogatott"
+          }
+        ],
+        "ar": [
+          {
+            "language": "ar",
+            "value": "منتخب البرازيل تحت ٢٣ سنة لكرة القدم"
+          }
+        ],
+        "ca": [
+          {
+            "language": "ca",
+            "value": "selecció olímpica de futbol del Brasil"
+          },
+          {
+            "language": "ca",
+            "value": "Brasil U23"
+          },
+          {
+            "language": "ca",
+            "value": "Selecció Olímpica de futbol del Brasil"
+          }
+        ],
+        "zh-hans": [
+          {
+            "language": "zh-hans",
+            "value": "巴西国奥队"
+          }
+        ],
+        "el": [
+          {
+            "language": "el",
+            "value": "Εθνική Βραζιλίας Κ-23"
+          }
+        ],
+        "gl": [
+          {
+            "language": "gl",
+            "value": "selección de fútbol sub-23 do Brasil"
+          }
+        ]
+      },
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "4843f351ba0d76dda322dabfed7c20f3263c872e",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 23759293,
+                  "id": "Q23759293"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$CB499752-2BC3-4D5C-8FD3-118D65276CC5",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "4e8743231daecde3db8cf7ec078e057fe06dca3f",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 15944511,
+                  "id": "Q15944511"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$05d39dc1-456b-25cc-5749-b2bf36b0405f",
+            "rank": "normal"
+          }
+        ],
+        "P641": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P641",
+              "hash": "1624e15e061523279bc14bb6497168e45caacb32",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2736,
+                  "id": "Q2736"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$d1c71ab4-4089-913c-c78f-74105fb124b0",
+            "rank": "normal"
+          }
+        ],
+        "P1532": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1532",
+              "hash": "120c164dafe7ef0f01703a864023b6b26ca319e1",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 155,
+                  "id": "Q155"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$d2685e6c-43bd-4e77-9bf0-6b1f7793b385",
+            "rank": "normal"
+          }
+        ],
+        "P646": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P646",
+              "hash": "755277dd6cdfc076e42d48732e26f76f386fd833",
+              "datavalue": {
+                "value": "/m/04ld6tv",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q899189$DE30A1CE-4A6B-4354-A817-87913519C02D",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "2b00cb481cddcac7623114367489b5c194901c4a",
+                "snaks": {
+                  "P248": [
+                    {
+                      "snaktype": "value",
+                      "property": "P248",
+                      "hash": "a94b740202b097dd33355e0e6c00e54b9395e5e0",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 15241312,
+                          "id": "Q15241312"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P577": [
+                    {
+                      "snaktype": "value",
+                      "property": "P577",
+                      "hash": "fde79ecb015112d2f29229ccc1ec514ed3e71fa2",
+                      "datavalue": {
+                        "value": {
+                          "time": "+2013-10-28T00:00:00Z",
+                          "timezone": 0,
+                          "before": 0,
+                          "after": 0,
+                          "precision": 11,
+                          "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                        },
+                        "type": "time"
+                      },
+                      "datatype": "time"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P248",
+                  "P577"
+                ]
+              }
+            ]
+          }
+        ],
+        "P1813": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1813",
+              "hash": "a5ec600ebd720a5128a038768eb17b77c360141b",
+              "datavalue": {
+                "value": {
+                  "text": "Brazilia Sub-23",
+                  "language": "ro"
+                },
+                "type": "monolingualtext"
+              },
+              "datatype": "monolingualtext"
+            },
+            "type": "statement",
+            "id": "Q899189$5dc6acaa-46c6-0163-9eba-994a7b1edfe9",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1813",
+              "hash": "4a42b07961ad7ba30506decdf6055cefa7124f16",
+              "datavalue": {
+                "value": {
+                  "text": "Бразылія (да 23)",
+                  "language": "be-tarask"
+                },
+                "type": "monolingualtext"
+              },
+              "datatype": "monolingualtext"
+            },
+            "type": "statement",
+            "id": "Q899189$7a775906-4184-a066-c6d9-808301a6f38e",
+            "rank": "normal"
+          }
+        ],
+        "P154": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P154",
+              "hash": "1844a6c2ea362a855b71ad46db115df57551e6cf",
+              "datavalue": {
+                "value": "Brasil Olympic Committee crest.svg",
+                "type": "string"
+              },
+              "datatype": "commonsMedia"
+            },
+            "type": "statement",
+            "id": "Q899189$9d167fb6-4557-6a61-49f3-1dd579630ad2",
+            "rank": "normal"
+          }
+        ],
+        "P3441": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P3441",
+              "hash": "f8160508e379d40507570cf2a467730a085ff3f8",
+              "datavalue": {
+                "value": "BRA",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "id": "Q899189$46DEE061-2C20-4C56-AEC2-9E39BBFC6EAC",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P2094": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2094",
+              "hash": "28569d5bfd051c9c2aac5240ac36c858f9f8599b",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 44417376,
+                  "id": "Q44417376"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$FA72EE9F-9E01-43A8-931C-EF89B25C1A0E",
+            "rank": "normal"
+          }
+        ],
+        "P127": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P127",
+              "hash": "48918f436c783670b7df91a60aa3725983f56754",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 244754,
+                  "id": "Q244754"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$12BE6DAF-9588-4FD5-8725-5B2578221390",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P279": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P279",
+              "hash": "b06665ac83ed2e746b6729fda141f4bcdbdfa22d",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 1194951,
+                  "id": "Q1194951"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$1bda785f-4a49-fa84-07be-b64e8e5029ed",
+            "rank": "normal"
+          }
+        ],
+        "P41": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P41",
+              "hash": "193bd18957e601e7f5685f1326f137b26aa3e7b3",
+              "datavalue": {
+                "value": "Flag of Brazil.svg",
+                "type": "string"
+              },
+              "datatype": "commonsMedia"
+            },
+            "type": "statement",
+            "id": "Q899189$4a4f7a6c-4a07-6eb4-a9bd-92b4a08fd8e1",
+            "rank": "normal"
+          }
+        ],
+        "P17": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P17",
+              "hash": "90114304161d20f1934075ea47b8a33a76e95138",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 155,
+                  "id": "Q155"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$84318AA1-C690-46DD-A81D-66670E3CAA47",
+            "rank": "normal"
+          }
+        ],
+        "P634": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P634",
+              "hash": "0777f89f9cca8a390887973d677f071464f5fddf",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2063693,
+                  "id": "Q2063693"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q899189$05dcd9e2-4f79-7dfa-6e97-4407a17a9ba6",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "d2828f1cc8dfe4e754e7ee904ac02e466903c7a1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "6a164248fc96bfa583bbb495cb63ae6401ec203c",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 206855,
+                          "id": "Q206855"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "5a0c4a0ea31f03e3d54934bfea6dc75ac54aeacd",
+                      "datavalue": {
+                        "value": "https://ru.wikipedia.org/?oldid=113777245",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P443": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P443",
+              "hash": "f558e9689227debcb5ef73fd76f5e1b5e7900123",
+              "datavalue": {
+                "value": "LL-Q22809485 (apc)-Hassan Hassoon-منتخب البرازيل تحت 23 سنة لكرة القدم.wav",
+                "type": "string"
+              },
+              "datatype": "commonsMedia"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P407": [
+                {
+                  "snaktype": "value",
+                  "property": "P407",
+                  "hash": "4056042cc7e8a290124543d08686f0ef3565db7a",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 22809485,
+                      "id": "Q22809485"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P407"
+            ],
+            "id": "Q899189$120a0e19-c544-4a1f-9134-701ad12e19cd",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fe9f77e22d7ad2379c22a024809c69d080b41a85",
+                "snaks": {
+                  "P854": [
+                    {
+                      "snaktype": "value",
+                      "property": "P854",
+                      "hash": "1355ce86f5a1ab1e0321b27ee8a27cf75606364d",
+                      "datavalue": {
+                        "value": "https://lingualibre.org/wiki/Q825275",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P854"
+                ]
+              }
+            ]
+          }
+        ],
+        "P7223": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P7223",
+              "hash": "6254fe84b5cdd079cf3f32f8aae9296387f896e5",
+              "datavalue": {
+                "value": "53818",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q899189$b17a16fe-4a4c-8450-cca4-fd66bbcac90d",
+            "rank": "normal"
+          }
+        ],
+        "P6262": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P6262",
+              "hash": "39b5c85cf8f126f85d603c9c75bc314d515ef327",
+              "datavalue": {
+                "value": "football:Brazil_national_under-23_football_team",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P1810": [
+                {
+                  "snaktype": "value",
+                  "property": "P1810",
+                  "hash": "80598949e2964c074bc241000993875855051281",
+                  "datavalue": {
+                    "value": "Brazil national under-23 football team",
+                    "type": "string"
+                  },
+                  "datatype": "string"
+                }
+              ],
+              "P407": [
+                {
+                  "snaktype": "value",
+                  "property": "P407",
+                  "hash": "daf1c4fcb58181b02dff9cc89deb084004ddae4b",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 1860,
+                      "id": "Q1860"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P1810",
+              "P407"
+            ],
+            "id": "Q899189$b846c514-4c1a-b64f-d0d8-fc7f69de02c9",
+            "rank": "normal"
+          }
+        ]
+      },
+      "sitelinks": {
+        "dewiki": {
+          "site": "dewiki",
+          "title": "Brasilianische Fußballnationalmannschaft/Olympische Spiele",
+          "badges": []
+        },
+        "itwiki": {
+          "site": "itwiki",
+          "title": "Nazionale olimpica di calcio del Brasile",
+          "badges": []
+        },
+        "ukwiki": {
+          "site": "ukwiki",
+          "title": "Олімпійська збірна Бразилії з футболу",
+          "badges": []
+        },
+        "idwiki": {
+          "site": "idwiki",
+          "title": "Tim nasional sepak bola U-23 Brasil",
+          "badges": []
+        },
+        "eswiki": {
+          "site": "eswiki",
+          "title": "Selección de fútbol sub-23 de Brasil",
+          "badges": []
+        },
+        "enwiki": {
+          "site": "enwiki",
+          "title": "Brazil national under-23 football team",
+          "badges": []
+        },
+        "ptwiki": {
+          "site": "ptwiki",
+          "title": "Seleção Brasileira de Futebol Sub-23",
+          "badges": []
+        },
+        "nowiki": {
+          "site": "nowiki",
+          "title": "Brasils U23-herrelandslag i fotball",
+          "badges": []
+        },
+        "jawiki": {
+          "site": "jawiki",
+          "title": "U-23サッカーブラジル代表",
+          "badges": []
+        },
+        "ruwiki": {
+          "site": "ruwiki",
+          "title": "Олимпийская сборная Бразилии по футболу",
+          "badges": []
+        },
+        "fawiki": {
+          "site": "fawiki",
+          "title": "تیم ملی فوتبال زیر ۲۳ سال برزیل",
+          "badges": []
+        },
+        "arwiki": {
+          "site": "arwiki",
+          "title": "منتخب البرازيل تحت 23 سنة لكرة القدم",
+          "badges": []
+        },
+        "huwiki": {
+          "site": "huwiki",
+          "title": "Brazil U23-as labdarúgó-válogatott",
+          "badges": []
+        },
+        "dawiki": {
+          "site": "dawiki",
+          "title": "Brasiliens U/23-fodboldlandshold",
+          "badges": []
+        },
+        "zhwiki": {
+          "site": "zhwiki",
+          "title": "巴西23歲以下國家足球隊",
+          "badges": []
+        },
+        "kowiki": {
+          "site": "kowiki",
+          "title": "브라질 U-23 축구 국가대표팀",
+          "badges": []
+        },
+        "thwiki": {
+          "site": "thwiki",
+          "title": "ฟุตบอลทีมชาติบราซิลรุ่นอายุไม่เกิน 23 ปี",
+          "badges": []
+        },
+        "viwiki": {
+          "site": "viwiki",
+          "title": "Đội tuyển bóng đá U-23 quốc gia Brasil",
+          "badges": []
+        },
+        "elwiki": {
+          "site": "elwiki",
+          "title": "Εθνική Βραζιλίας Κ-23 (ποδόσφαιρο ανδρών)",
+          "badges": []
+        },
+        "bnwiki": {
+          "site": "bnwiki",
+          "title": "ব্রাজিল জাতীয় অনূর্ধ্ব-২৩ ফুটবল দল",
+          "badges": []
+        },
+        "mswiki": {
+          "site": "mswiki",
+          "title": "Pasukan bola sepak kebangsaan bawah-23 Brazil",
+          "badges": []
+        },
+        "frwiki": {
+          "site": "frwiki",
+          "title": "Équipe du Brésil des moins de 23 ans de football",
+          "badges": []
+        },
+        "nlwiki": {
+          "site": "nlwiki",
+          "title": "Braziliaans olympisch voetbalelftal (mannen)",
+          "badges": []
+        },
+        "hewiki": {
+          "site": "hewiki",
+          "title": "נבחרת ברזיל בכדורגל עד גיל 23",
+          "badges": []
+        }
+      }
+    }
+  }
+}

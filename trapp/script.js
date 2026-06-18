@@ -199,6 +199,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const playerAnalysisAllPromises = new Map();
   const playerAnalysisAllYearRowsCache = new Map();
   const playerAnalysisSupplementCache = new Map();
+  const playerProfileCache = new Map();
   const playerAnalysisSeasonMetaCache = new Map();
   const playerAnalysisMonthlyMetaCache = new Map();
   const playerAnalysisSpecialAvailabilityCache = new Map();
@@ -234,6 +235,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     redMin: "",
     seasonsMin: "",
     seasonsMax: "",
+    heightMin: "",
+    heightMax: "",
+    weightMin: "",
+    weightMax: "",
+    birthYearMin: "",
+    birthYearMax: "",
     compactFilterType: "",
     compactFilterValue: "",
     compactFilterMonth: "5",
@@ -247,7 +254,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     availableCompetitions: [],
     initialized: false,
     loadedOnce: false,
-    profileTab: "total",
+    profileTab: "profile",
     modalPlayer: null,
     modalView: "profile",
     modalCategories: [],
@@ -1070,6 +1077,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       redMin: document.getElementById("pa-red-min"),
       seasonsMin: document.getElementById("pa-seasons-min"),
       seasonsMax: document.getElementById("pa-seasons-max"),
+      heightMin: document.getElementById("pa-height-min"),
+      heightMax: document.getElementById("pa-height-max"),
+      weightMin: document.getElementById("pa-weight-min"),
+      weightMax: document.getElementById("pa-weight-max"),
+      birthYearMin: document.getElementById("pa-birth-year-min"),
+      birthYearMax: document.getElementById("pa-birth-year-max"),
       scorersOnly: document.getElementById("pa-scorers-only"),
       playedOnly: document.getElementById("pa-played-only"),
       katakanaOnly: document.getElementById("pa-katakana-only"),
@@ -2259,7 +2272,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.opponentClubs = [];
     playerAnalysisState.opponentPlayerDetail = false;
     playerAnalysisState.opponentScopeRows = [];
-    playerAnalysisState.profileTab = "total";
+    playerAnalysisState.profileTab = "profile";
     playerAnalysisState.modalPlayer = null;
     closePlayerAnalysisModal();
     playerAnalysisState.competitionFilterActive = false;
@@ -4019,7 +4032,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       ["yellow-min", "警告数 以上"],
       ["red-min", "退場数 以上"],
       ["seasons-min", "所属年数 以上"],
-      ["seasons-max", "所属年数 以下"]
+      ["seasons-max", "所属年数 以下"],
+      ["height-min", "身長 cm以上"],
+      ["height-max", "身長 cm以下"],
+      ["weight-min", "体重 kg以上"],
+      ["weight-max", "体重 kg以下"],
+      ["birth-year-min", "生まれ年 以降"],
+      ["birth-year-max", "生まれ年 以前"]
     ];
   }
 
@@ -4040,6 +4059,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const yellow = toPlayerNumber(player.yellow_cards) || 0;
     const red = toPlayerNumber(player.red_cards) || 0;
     const seasonCount = getPlayerSeasonCount(player);
+    const height = toPlayerNumber(player.profile_height_cm);
+    const weight = toPlayerNumber(player.profile_weight_kg);
+    const birthYear = toPlayerNumber(player.profile_birth_year);
 
     if (filter.type === "number") return numbers.some(number => Number(number) === value || number === String(filter.value).trim());
     if (filter.type === "played-min") return played >= value;
@@ -4053,6 +4075,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (filter.type === "red-min") return red >= value;
     if (filter.type === "seasons-min") return seasonCount >= value;
     if (filter.type === "seasons-max") return seasonCount <= value;
+    if (filter.type === "height-min") return height !== null && height >= value;
+    if (filter.type === "height-max") return height !== null && height <= value;
+    if (filter.type === "weight-min") return weight !== null && weight >= value;
+    if (filter.type === "weight-max") return weight !== null && weight <= value;
+    if (filter.type === "birth-year-min") return birthYear !== null && birthYear >= value;
+    if (filter.type === "birth-year-max") return birthYear !== null && birthYear <= value;
     if (filter.type === "month-goals-min" || filter.type === "month-played-rate-min") {
       const month = normalizePlayerMonthFilter(filter.month);
       const monthlyStats = getPlayerMonthlyStatsForMonth(player, month);
@@ -4068,12 +4096,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     const selectedPositions = playerAnalysisState.positions || [];
     const activeFilters = getActivePlayerAnalysisAdvancedFilters();
     const advancedFilterLogic = playerAnalysisState.advancedFilterLogic === "or" ? "or" : "and";
+    const heightMin = parsePlayerFilterNumber(playerAnalysisState.heightMin);
+    const heightMax = parsePlayerFilterNumber(playerAnalysisState.heightMax);
+    const weightMin = parsePlayerFilterNumber(playerAnalysisState.weightMin);
+    const weightMax = parsePlayerFilterNumber(playerAnalysisState.weightMax);
+    const birthYearMin = parsePlayerFilterNumber(playerAnalysisState.birthYearMin);
+    const birthYearMax = parsePlayerFilterNumber(playerAnalysisState.birthYearMax);
     return playerAnalysisState.data.filter(player => {
       const name = String(player.player_name || "").normalize("NFKC").toLowerCase();
+      const englishName = String(player.profile_name_en || "").normalize("NFKC").toLowerCase();
       const positions = getPlayerPositions(player);
       const played = toPlayerNumber(player.played_matches) || 0;
       const goals = toPlayerNumber(player.goals) || 0;
-      if (query && !name.includes(query)) return false;
+      const height = toPlayerNumber(player.profile_height_cm);
+      const weight = toPlayerNumber(player.profile_weight_kg);
+      const birthYear = toPlayerNumber(player.profile_birth_year);
+      if (query && !name.includes(query) && !englishName.includes(query)) return false;
+      if (heightMin !== null && (height === null || height < heightMin)) return false;
+      if (heightMax !== null && (height === null || height > heightMax)) return false;
+      if (weightMin !== null && (weight === null || weight < weightMin)) return false;
+      if (weightMax !== null && (weight === null || weight > weightMax)) return false;
+      if (birthYearMin !== null && (birthYear === null || birthYear < birthYearMin)) return false;
+      if (birthYearMax !== null && (birthYear === null || birthYear > birthYearMax)) return false;
       if (selectedPositions.length) {
         const matchesPosition = playerAnalysisState.positionMode === "and"
           ? selectedPositions.every(pos => positions.includes(pos))
@@ -4110,7 +4154,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (aNumber !== null && bNumber !== null) {
         result = aNumber - bNumber;
       } else {
-        result = String(aValue).localeCompare(String(bValue), "ja", { numeric: true });
+        const locale = sortKey === "player_name" ? "en" : "ja";
+        result = String(aValue).localeCompare(String(bValue), locale, { numeric: true, sensitivity: "base" });
       }
       if (result === 0) result = a.__paIndex - b.__paIndex;
       return sortDirection === "asc" ? result : -result;
@@ -4147,6 +4192,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         return index === -1 ? PLAYER_POSITION_ORDER.length : index;
       }));
     }
+    if (sortKey === "player_name") {
+      return player && (player.profile_name_sort || getPlayerGojūonSortKey(player.profile_name_en || getPlayerEnglishName(player)));
+    }
     return player ? player[sortKey] : null;
   }
 
@@ -4159,8 +4207,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const info = {
       number: { label: "背番号", shortLabel: "背番号", type: "number", noAverage: true },
       position_order: { label: "ポジション順", shortLabel: "位置", type: "text", noAverage: true },
-      player_name: { label: "選手名", shortLabel: "名前順", type: "text", noAverage: true },
+      player_name: { label: "名前（50音 / A-Z）", shortLabel: "名前順", type: "text", noAverage: true },
       season_count: { label: "所属年数", shortLabel: "所属年数", type: "number" },
+      profile_height_cm: { label: "身長", shortLabel: "身長", type: "cm" },
+      profile_weight_kg: { label: "体重", shortLabel: "体重", type: "kg" },
+      profile_birth_year: { label: "生まれ年", shortLabel: "生まれ年", type: "year", noAverage: true },
       played_matches: { label: "出場試合数", shortLabel: "出場", type: "number", teamMetric: "matches", teamLabel: "チーム試合数" },
       played_minutes: { label: "出場時間", shortLabel: "出場時間", type: "minutes" },
       played_wins: { label: "出場時勝利数", shortLabel: "出場時勝利", type: "number", teamMetric: "wins", teamLabel: "チーム勝利数" },
@@ -4230,6 +4281,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (type === "signed") return formatPlayerSignedNumber(value);
     if (type === "impact") return value === null ? "データ不足" : formatPlayerFixed(value, 1);
     if (type === "text") return formatPlayerList(value);
+    if (type === "cm") return hasPlayerValue(value) ? `${formatPlayerNumber(value)}cm` : "-";
+    if (type === "kg") return hasPlayerValue(value) ? `${formatPlayerNumber(value)}kg` : "-";
+    if (type === "year") return hasPlayerValue(value) ? `${formatPlayerNumber(value)}年` : "-";
     return formatPlayerNumber(value);
   }
 
@@ -4237,7 +4291,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const info = getPlayerAnalysisSortInfo(sortKey);
     if (sortKey === "number") return formatPlayerList(player && player.numbers);
     if (sortKey === "position_order") return formatPlayerList(player && player.positions);
-    if (sortKey === "player_name") return player && player.player_name ? player.player_name : "-";
+    if (sortKey === "player_name") return player && player.profile_name_en ? player.profile_name_en : (player && player.player_name ? player.player_name : "-");
     if (sortKey === "season_count") return formatPlayerNumber(getPlayerSeasonCount(player));
     if (sortKey === "attack_impact") return formatPlayerImpactScore(player, "attack");
     if (sortKey === "defense_impact") return formatPlayerImpactScore(player, "defense");
@@ -6031,6 +6085,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       const yellow = toPlayerNumber(player.yellow_cards) || 0;
       const red = toPlayerNumber(player.red_cards) || 0;
       const seasonCount = getPlayerSeasonCount(player);
+      const englishName = String(player.profile_name_en || "").toUpperCase();
+      const height = toPlayerNumber(player.profile_height_cm);
+      const weight = toPlayerNumber(player.profile_weight_kg);
+      const birthYear = toPlayerNumber(player.profile_birth_year);
       const playedBarSource = playedMinutes || played;
       const playedBar = Math.max(0, Math.min(100, (playedBarSource / maxPlayedMinutes) * 100));
       const startBar = played ? Math.max(0, Math.min(100, (starts / played) * 100)) : 0;
@@ -6054,8 +6112,8 @@ document.addEventListener("DOMContentLoaded", async () => {
               <span class="pa-mobile-number-cycle" data-pa-number-count="${numberCount}">${numberCycle}</span>
             </span>
             <span class="pa-mobile-compact-name">
-              <small>${escapeHtml(formatPlayerList(player.positions))}</small>
-              <strong title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
+               <small>${escapeHtml(formatPlayerList(player.positions))}</small>
+               <strong title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
             </span>
             <span class="pa-mobile-compact-metric">
               <small>${escapeHtml(metricLabel)}</small>
@@ -6076,8 +6134,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <small>${escapeHtml(formatPlayerNumber(seasonCount))}年</small>
               </span>
               <strong class="pa-mobile-name" title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
+              ${englishName ? `<span class="pa-mobile-english-name">${escapeHtml(englishName)}</span>` : ""}
             </span>
           </span>
+          ${height !== null || weight !== null || birthYear !== null ? `
+            <span class="pa-mobile-profile-meta">
+              ${height !== null ? `<span><small>HEIGHT</small><b>${escapeHtml(formatPlayerNumber(height))}<em>cm</em></b></span>` : ""}
+              ${weight !== null ? `<span><small>WEIGHT</small><b>${escapeHtml(formatPlayerNumber(weight))}<em>kg</em></b></span>` : ""}
+              ${birthYear !== null ? `<span><small>BORN</small><b>${escapeHtml(formatPlayerNumber(birthYear))}</b></span>` : ""}
+            </span>
+          ` : ""}
           <span class="pa-mobile-focus-row">
             <span><small>出場</small><b>${escapeHtml(formatPlayerNumber(played))}</b></span>
             <span><small>先発</small><b>${escapeHtml(formatPlayerNumber(starts))}</b></span>
@@ -6124,7 +6190,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const selected = key === playerAnalysisState.selectedKey;
       return `
         <tr data-pa-key="${escapeHtml(key)}" class="${selected ? "selected" : ""}" tabindex="0">
-          <td class="pa-player-name"><button type="button" class="pa-player-link" data-pa-key="${escapeHtml(key)}">${escapeHtml(player.player_name || "-")}</button></td>
+          <td class="pa-player-name"><button type="button" class="pa-player-link" data-pa-key="${escapeHtml(key)}"><span>${escapeHtml(player.player_name || "-")}</span>${player.profile_name_en ? `<small>${escapeHtml(player.profile_name_en)}</small>` : ""}</button></td>
           <td>${escapeHtml(formatPlayerList(player.numbers))}</td>
           <td>${escapeHtml(formatPlayerList(player.positions))}</td>
           <td class="pa-num">${escapeHtml(formatPlayerNumber(player.played_matches))}</td>
@@ -6785,6 +6851,317 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  async function loadPlayerProfiles(club = playerAnalysisState.selectedClub) {
+    const clubKey = getPlayerAnalysisClub(club);
+    if (!playerProfileCache.has(clubKey)) {
+      playerProfileCache.set(clubKey, (async () => {
+        const exact = new Map();
+        const normalized = new Map();
+        try {
+          const response = await fetch(`./data/players/${clubKey}.json?v=20260618profiles`);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const payload = await response.json();
+          Object.entries(payload || {}).forEach(([key, profile]) => {
+            if (key === "_meta" || !profile || typeof profile !== "object" || Array.isArray(profile)) return;
+            const names = [key, profile.app_player_name, profile.name, profile.official_name]
+              .filter(Boolean)
+              .map(normalizePlayerImageName);
+            names.forEach(name => {
+              if (!name) return;
+              if (!exact.has(name)) exact.set(name, profile);
+              const compact = normalizePlayerIdentityText(name);
+              if (compact && !normalized.has(compact)) normalized.set(compact, profile);
+            });
+          });
+        } catch (error) {
+          console.warn(`Player profiles unavailable for ${clubKey}`, error);
+        }
+        return { exact, normalized };
+      })());
+    }
+    return playerProfileCache.get(clubKey);
+  }
+
+  async function getPlayerProfile(player, club = playerAnalysisState.selectedClub) {
+    const clubKey = getPlayerAnalysisClub(club);
+    const profiles = await loadPlayerProfiles(clubKey);
+    const primary = findPlayerProfile(profiles, player);
+    if (primary) return primary;
+    const fallbackClub = clubKey === "niigata" ? "kumamoto" : "niigata";
+    return findPlayerProfile(await loadPlayerProfiles(fallbackClub), player);
+  }
+
+  function findPlayerProfile(profiles, player) {
+    const name = normalizePlayerImageName(player && player.player_name);
+    if (!name) return null;
+    return profiles.exact.get(name) || profiles.normalized.get(normalizePlayerIdentityText(name)) || null;
+  }
+
+  function getPlayerProfileBirthYear(profile) {
+    const match = String(profile && profile.birth_date || "").match(/^(\d{4})[\/-]/);
+    return match ? Number(match[1]) : null;
+  }
+
+  const PLAYER_GOJUON_MORA_ORDER = [
+    "A", "I", "U", "E", "O",
+    "KA", "GA", "KYA", "GYA", "KI", "GI", "KYU", "GYU", "KU", "GU", "KYO", "GYO", "KE", "GE", "KO", "GO",
+    "SA", "ZA", "SYA", "ZYA", "SI", "ZI", "SYU", "ZYU", "SU", "ZU", "SYO", "ZYO", "SE", "ZE", "SO", "ZO",
+    "TA", "DA", "TYA", "DYA", "TI", "DI", "TYU", "DYU", "TU", "DU", "TYO", "DYO", "TE", "DE", "TO", "DO",
+    "NA", "NYA", "NI", "NYU", "NU", "NYO", "NE", "NO",
+    "HA", "BA", "PA", "HYA", "BYA", "PYA", "HI", "BI", "PI", "HYU", "BYU", "PYU", "HU", "BU", "PU", "HYO", "BYO", "PYO", "HE", "BE", "PE", "HO", "BO", "PO",
+    "MA", "MYA", "MI", "MYU", "MU", "MYO", "ME", "MO",
+    "YA", "YU", "YO",
+    "RA", "RYA", "RI", "RYU", "RU", "RYO", "RE", "RO",
+    "WA", "WO", "N"
+  ];
+  const PLAYER_GOJUON_MORA_RANK = new Map(PLAYER_GOJUON_MORA_ORDER.map((mora, index) => [mora, String(index).padStart(3, "0")]));
+  const PLAYER_GOJUON_MORA_TOKENS = [...PLAYER_GOJUON_MORA_ORDER].sort((a, b) => b.length - a.length);
+
+  function getPlayerGojūonSortKey(value) {
+    const input = String(value || "")
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toUpperCase()
+      .replace(/SHA/g, "SYA").replace(/SHU/g, "SYU").replace(/SHO/g, "SYO").replace(/SHI/g, "SI")
+      .replace(/CHA/g, "TYA").replace(/CHU/g, "TYU").replace(/CHO/g, "TYO").replace(/CHI/g, "TI")
+      .replace(/JA/g, "ZYA").replace(/JU/g, "ZYU").replace(/JO/g, "ZYO").replace(/JI/g, "ZI")
+      .replace(/TSU/g, "TU").replace(/FU/g, "HU")
+      .replace(/[^A-Z]/g, "");
+    const ranks = [];
+    for (let index = 0; index < input.length;) {
+      const token = PLAYER_GOJUON_MORA_TOKENS.find(candidate => input.startsWith(candidate, index));
+      if (token) {
+        ranks.push(PLAYER_GOJUON_MORA_RANK.get(token));
+        index += token.length;
+      } else {
+        ranks.push(`9${String(input.charCodeAt(index)).padStart(3, "0")}`);
+        index += 1;
+      }
+    }
+    return `${ranks.join("-")}|${input}`;
+  }
+
+  function applyPlayerProfileToRow(player, profile) {
+    if (!player || !profile) return player;
+    player.__paProfile = profile;
+    player.profile_height_cm = toPlayerNumber(profile.height_cm);
+    player.profile_weight_kg = toPlayerNumber(profile.weight_kg);
+    player.profile_birth_year = getPlayerProfileBirthYear(profile);
+    player.profile_name_en = String(profile.name_en || "").normalize("NFKC").trim().toUpperCase();
+    const rawName = String(player.player_name || "").normalize("NFKC").trim();
+    const katakanaReading = /^[\u30A0-\u30FF\s・･ー]+$/.test(rawName)
+      ? rawName.split(/[\s・･]+/).filter(Boolean).map(romanizeKatakana).join(" ")
+      : "";
+    player.profile_name_sort = getPlayerGojūonSortKey(katakanaReading || player.profile_name_en || rawName);
+    player.profile_birthplace = String(profile.birthplace || "").trim();
+    return player;
+  }
+
+  async function attachPlayerProfilesToRows(rows, club = playerAnalysisState.selectedClub) {
+    const clubKey = getPlayerAnalysisClub(club);
+    const profiles = await loadPlayerProfiles(clubKey);
+    const items = Array.isArray(rows) ? rows : [];
+    const missing = [];
+    items.forEach(player => {
+      const profile = findPlayerProfile(profiles, player);
+      if (profile) applyPlayerProfileToRow(player, profile);
+      else missing.push(player);
+    });
+    if (missing.length) {
+      const fallbackClub = clubKey === "niigata" ? "kumamoto" : "niigata";
+      const fallbackProfiles = await loadPlayerProfiles(fallbackClub);
+      missing.forEach(player => applyPlayerProfileToRow(player, findPlayerProfile(fallbackProfiles, player)));
+    }
+    return rows;
+  }
+
+  function hasPlayerProfileValue(value) {
+    return value !== null && value !== undefined && String(value).trim() !== "" && String(value).trim() !== "-";
+  }
+
+  function formatPlayerProfileDate(value) {
+    if (!hasPlayerProfileValue(value)) return "-";
+    const match = String(value).trim().match(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/);
+    return match ? `${match[1]}年${Number(match[2])}月${Number(match[3])}日` : String(value);
+  }
+
+  function getPlayerProfileEnglishName(profile, player) {
+    const name = hasPlayerProfileValue(profile && profile.name_en)
+      ? String(profile.name_en).trim()
+      : getPlayerEnglishName(player);
+    return String(name || "").normalize("NFKC").toUpperCase();
+  }
+
+  function normalizePlayerProfileMilestones(items) {
+    const rows = [];
+    let pendingLabel = "";
+    (Array.isArray(items) ? items : []).forEach(rawItem => {
+      const item = String(rawItem || "").normalize("NFKC").trim();
+      if (!item || item === "大会別成績" || /合計$/.test(item)) return;
+      const labelOnly = item.match(/^(.+戦)[：:]$/);
+      if (labelOnly) {
+        pendingLabel = labelOnly[1];
+        return;
+      }
+      const inline = item.match(/^(.+戦)[：:]\s*(.+)$/);
+      if (inline) {
+        rows.push({ label: inline[1], event: inline[2], date: "" });
+        pendingLabel = "";
+        return;
+      }
+      if (/^\d{2,4}[\/-]\d{1,2}[\/-]\d{1,2}$/.test(item) && rows.length) {
+        rows[rows.length - 1].date = item;
+        return;
+      }
+      rows.push({ label: pendingLabel, event: item, date: "" });
+      pendingLabel = "";
+    });
+    return rows;
+  }
+
+  function renderPlayerProfileMilestone(title, items) {
+    const rows = normalizePlayerProfileMilestones(items);
+    if (!rows.length) return "";
+    return `
+      <div class="pa-bio-milestone">
+        <h4>${escapeHtml(title)}</h4>
+        ${rows.map(row => `
+          <div class="pa-bio-milestone-row">
+            ${row.label ? `<span>${escapeHtml(row.label)}</span>` : ""}
+            <strong>${escapeHtml(row.event)}</strong>
+            ${row.date ? `<time>${escapeHtml(row.date)}</time>` : ""}
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  function renderPlayerProfileSeasonHistory(records) {
+    const rows = (Array.isArray(records) ? records : []).filter(record => record && typeof record === "object");
+    if (!rows.length) return "";
+    return `
+      <details class="pa-bio-history" ${rows.length <= 6 ? "open" : ""}>
+        <summary>
+          <span>シーズン別所属歴</span>
+          <small>${escapeHtml(String(rows.length))}シーズン</small>
+        </summary>
+        <div class="pa-bio-season-list">
+          ${rows.map(record => {
+            const leagueStats = hasPlayerProfileValue(record.league_matches)
+              ? `<span>リーグ <b>${escapeHtml(record.league_matches)}</b>試合 <b>${escapeHtml(hasPlayerProfileValue(record.league_goals) ? record.league_goals : "0")}</b>得点</span>`
+              : "";
+            const cupStats = hasPlayerProfileValue(record.cup_matches)
+              ? `<span>カップ <b>${escapeHtml(record.cup_matches)}</b>試合 <b>${escapeHtml(hasPlayerProfileValue(record.cup_goals) ? record.cup_goals : "0")}</b>得点</span>`
+              : "";
+            return `
+              <article class="pa-bio-season-row">
+                <time>${escapeHtml(record.season || "-")}</time>
+                <div class="pa-bio-season-club">
+                  <strong>${escapeHtml(record.team || "-")}</strong>
+                  <small>${escapeHtml(record.league || "-")}</small>
+                </div>
+                <div class="pa-bio-season-stats">${leagueStats}${cupStats}</div>
+              </article>
+            `;
+          }).join("")}
+        </div>
+      </details>
+    `;
+  }
+
+  function renderPlayerProfileBio(profile, player) {
+    const playerName = String((player && player.player_name) || (profile && profile.app_player_name) || "-");
+    const photo = renderPlayerPhoto(playerName, playerAnalysisState.selectedClub, "pa-player-photo", player);
+    if (!profile) {
+      return `
+        <div class="pa-bio-hero no-profile">
+          <div class="pa-bio-visual"><span class="pa-bio-monogram">${escapeHtml(Array.from(playerName)[0] || "P")}</span>${photo}</div>
+          <div class="pa-bio-empty">
+            <strong>${escapeHtml(playerName)}</strong>
+            <span>プロフィール情報はまだ登録されていません</span>
+          </div>
+        </div>
+        ${renderPlayerChantAudioSlot(playerName, player)}
+      `;
+    }
+
+    const birthYear = getPlayerProfileBirthYear(profile);
+    const vitals = [
+      ["HEIGHT", profile.height_cm, "cm"],
+      ["WEIGHT", profile.weight_kg, "kg"],
+      ["BORN", birthYear, ""]
+    ].filter(([, value]) => hasPlayerProfileValue(value));
+    const details = [
+      ["生年月日", formatPlayerProfileDate(profile.birth_date)],
+      ["出身地", profile.birthplace],
+      ["最終所属", profile.final_team]
+    ].filter(([, value]) => hasPlayerProfileValue(value));
+    const teams = Array.from(new Set((Array.isArray(profile.affiliated_teams) ? profile.affiliated_teams : []).filter(hasPlayerProfileValue)));
+    const milestoneHtml = [
+      renderPlayerProfileMilestone("Jリーグ初出場", profile.first_appearances),
+      renderPlayerProfileMilestone("Jリーグ初得点", profile.first_goals)
+    ].filter(Boolean).join("");
+    const sourceUrl = String(profile.links && profile.links.jleague_data || "");
+    const officialName = hasPlayerProfileValue(profile.official_name) && normalizePlayerImageName(profile.official_name) !== normalizePlayerImageName(playerName)
+      ? `<span class="pa-bio-official-name">登録名 ${escapeHtml(profile.official_name)}</span>`
+      : "";
+
+    return `
+      <section class="pa-bio-hero">
+        <div class="pa-bio-visual">
+          <span class="pa-bio-monogram">${escapeHtml(Array.from(playerName)[0] || "P")}</span>
+          ${photo}
+        </div>
+        <div class="pa-bio-overview">
+          <span class="pa-bio-kicker">PROFILE DATA</span>
+          <h3>基本プロフィール</h3>
+          ${officialName}
+          ${hasPlayerProfileValue(profile.position) ? `<span class="pa-bio-position-chip">${escapeHtml(profile.position)}</span>` : ""}
+          <div class="pa-bio-vitals">
+            ${vitals.map(([label, value, unit]) => `
+              <div class="pa-bio-vital">
+                <span>${escapeHtml(label)}</span>
+                <strong>${escapeHtml(value)}${unit ? `<small>${escapeHtml(unit)}</small>` : ""}</strong>
+              </div>
+            `).join("")}
+          </div>
+          <dl class="pa-bio-details">
+            ${details.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}
+          </dl>
+        </div>
+      </section>
+      ${renderPlayerChantAudioSlot(playerName, player)}
+      ${teams.length ? `
+        <section class="pa-bio-section">
+          <div class="pa-bio-section-head">
+            <span>CLUB HISTORY</span>
+            <h3>所属クラブ</h3>
+          </div>
+          <div class="pa-bio-club-route">
+            ${teams.map(team => `<span>${escapeHtml(team)}</span>`).join("")}
+          </div>
+        </section>
+      ` : ""}
+      ${milestoneHtml ? `
+        <section class="pa-bio-section">
+          <div class="pa-bio-section-head">
+            <span>FIRST RECORD</span>
+            <h3>初記録</h3>
+          </div>
+          <div class="pa-bio-milestones">${milestoneHtml}</div>
+        </section>
+      ` : ""}
+      ${renderPlayerProfileSeasonHistory(profile.annual_records)}
+      ${/^https:\/\//.test(sourceUrl) ? `
+        <a class="pa-bio-source-link" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">
+          <span>出典</span>
+          <strong>J.LEAGUE Data Site</strong>
+          <b aria-hidden="true">↗</b>
+        </a>
+      ` : ""}
+    `;
+  }
+
   function renderPlayerProfileYearTable(yearRows) {
     if (!yearRows.length) {
       return `<div class="pa-muted" style="padding:16px;text-align:center;">データがありません</div>`;
@@ -6832,7 +7209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function setPlayerProfileTab(tabName) {
     const modal = document.getElementById("pa-modal");
     if (!modal) return;
-    playerAnalysisState.profileTab = tabName || "total";
+    playerAnalysisState.profileTab = tabName || "profile";
     modal.querySelectorAll(".pa-profile-tab").forEach(button => {
       const active = button.dataset.paProfileTab === playerAnalysisState.profileTab;
       button.classList.toggle("active", active);
@@ -6841,9 +7218,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.querySelectorAll(".pa-profile-panel").forEach(panel => {
       panel.hidden = panel.dataset.paPanel !== playerAnalysisState.profileTab;
     });
+    modal.querySelectorAll("[data-pa-stats-controls]").forEach(controls => {
+      controls.hidden = playerAnalysisState.profileTab === "profile";
+    });
   }
 
-  function renderPlayerAnalysisProfile(player, yearRows, insights = {}) {
+  function renderPlayerAnalysisProfile(player, yearRows, insights = {}, profile = null) {
     const aggregate = aggregatePlayerAnalysisRows(yearRows)[0] || player;
     const stateAggregate = (playerAnalysisState.data || []).find(row => getPlayerGroupKey(row) === getPlayerGroupKey(aggregate));
     const shouldUseStateMetrics = stateAggregate
@@ -6862,21 +7242,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     const currentOpponentMode = isPlayerGoalkeeper(player) ? "defense" : "attack";
     const yearLabel = getPlayerAnalysisTimeLabel();
     const showCurrentTab = playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all";
-    const allowedTabs = showCurrentTab ? ["total", "yearly", "current"] : ["total", "yearly"];
-    const activeTab = allowedTabs.includes(playerAnalysisState.profileTab) ? playerAnalysisState.profileTab : "total";
+    const allowedTabs = showCurrentTab ? ["profile", "total", "yearly", "current"] : ["profile", "total", "yearly"];
+    const activeTab = allowedTabs.includes(playerAnalysisState.profileTab) ? playerAnalysisState.profileTab : "profile";
 
     const meta = `
       ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal", aggregate)}
       <span class="pa-player-position-text">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
     `;
     const body = `
-        ${renderPlayerPhoto(aggregate.player_name || player.player_name || "", playerAnalysisState.selectedClub, "pa-player-photo", aggregate)}
-      ${renderPlayerChantAudioSlot(aggregate.player_name || player.player_name || "", aggregate)}
-      ${renderPlayerAnalysisCategoryChecklist()}
       <div class="pa-profile-tabs" role="tablist" aria-label="選手データ表示切り替え">
+        <button type="button" class="pa-profile-tab" data-pa-profile-tab="profile" role="tab">プロフィール</button>
         <button type="button" class="pa-profile-tab" data-pa-profile-tab="total" role="tab">累計</button>
         <button type="button" class="pa-profile-tab" data-pa-profile-tab="yearly" role="tab">年別</button>
         ${showCurrentTab ? `<button type="button" class="pa-profile-tab" data-pa-profile-tab="current" role="tab">${escapeHtml(yearLabel)}</button>` : ""}
+      </div>
+      <div class="pa-profile-stat-controls" data-pa-stats-controls>
+        ${renderPlayerAnalysisCategoryChecklist()}
+      </div>
+      <div class="pa-profile-panel" data-pa-panel="profile" role="tabpanel">
+        ${renderPlayerProfileBio(profile, aggregate || player)}
       </div>
       <div class="pa-profile-panel" data-pa-panel="total" role="tabpanel">
         ${renderPlayerProfileKpis(aggregate, yearRows)}
@@ -6894,7 +7278,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       ` : ""}
     `;
-    setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell(getPlayerEnglishName(aggregate || player), aggregate.player_name || player.player_name || "-", body, meta));
+    setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell(getPlayerProfileEnglishName(profile, aggregate || player), aggregate.player_name || player.player_name || "-", body, meta));
     setPlayerProfileTab(activeTab);
   }
 
@@ -6909,13 +7293,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.modalMatchYearRow = null;
     playerAnalysisState.modalMatchItems = [];
     setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell(
-      getPlayerEnglishName(player),
+      getPlayerProfileEnglishName(player.__paProfile || null, player),
       player.player_name || "-",
-      `<div class="pa-profile-loading"><strong>${escapeHtml(player.player_name || "-")}</strong><small>年別データを集計中...</small></div>`
+      `<div class="pa-profile-loading"><strong>${escapeHtml(player.player_name || "-")}</strong><small>プロフィールを読み込み中...</small></div>`
     ));
     const modalScope = getActivePlayerAnalysisModalScope();
     const activeYears = new Set(getPlayerAnalysisTimeYears());
-    const yearRows = await getPlayerAnalysisYearRowsForPlayer(player, modalScope, null);
+    const [yearRows, profile] = await Promise.all([
+      getPlayerAnalysisYearRowsForPlayer(player, modalScope, null),
+      getPlayerProfile(player)
+    ]);
     const currentRows = yearRows.filter(row => !activeYears.size || activeYears.has(getPlayerYearValue(row)));
     const currentPlayer = currentRows.length === 1 ? currentRows[0] : (currentRows.length ? aggregatePlayerAnalysisRows(currentRows)[0] || player : player);
     const groupKey = getPlayerGroupKey(player);
@@ -6934,7 +7321,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       currentMetrics: currentMetricMap ? currentMetricMap.get(groupKey) || null : null
     };
     playerAnalysisState.modalYearRows = yearRows;
-    renderPlayerAnalysisProfile(currentPlayer, yearRows, insights);
+    renderPlayerAnalysisProfile(currentPlayer, yearRows, insights, profile);
   }
 
   async function refreshPlayerAnalysisModalForCategories() {
@@ -6999,6 +7386,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.query = els.search ? els.search.value : "";
     readPlayerAnalysisAdvancedFilterRows();
     resetPlayerAnalysisNumericState();
+    playerAnalysisState.heightMin = els.heightMin ? els.heightMin.value : "";
+    playerAnalysisState.heightMax = els.heightMax ? els.heightMax.value : "";
+    playerAnalysisState.weightMin = els.weightMin ? els.weightMin.value : "";
+    playerAnalysisState.weightMax = els.weightMax ? els.weightMax.value : "";
+    playerAnalysisState.birthYearMin = els.birthYearMin ? els.birthYearMin.value : "";
+    playerAnalysisState.birthYearMax = els.birthYearMax ? els.birthYearMax.value : "";
     playerAnalysisState.scorersOnly = Boolean(els.scorersOnly && els.scorersOnly.checked);
     playerAnalysisState.playedOnly = Boolean(els.playedOnly && els.playedOnly.checked);
     playerAnalysisState.katakanaOnly = Boolean(els.katakanaOnly && els.katakanaOnly.checked);
@@ -7044,6 +7437,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.redMin = "";
     playerAnalysisState.seasonsMin = "";
     playerAnalysisState.seasonsMax = "";
+    playerAnalysisState.heightMin = "";
+    playerAnalysisState.heightMax = "";
+    playerAnalysisState.weightMin = "";
+    playerAnalysisState.weightMax = "";
+    playerAnalysisState.birthYearMin = "";
+    playerAnalysisState.birthYearMax = "";
     playerAnalysisState.compactFilterType = "";
     playerAnalysisState.compactFilterValue = "";
     playerAnalysisState.compactFilterMonth = "5";
@@ -7068,6 +7467,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (els.redMin) els.redMin.value = "";
     if (els.seasonsMin) els.seasonsMin.value = "";
     if (els.seasonsMax) els.seasonsMax.value = "";
+    if (els.heightMin) els.heightMin.value = "";
+    if (els.heightMax) els.heightMax.value = "";
+    if (els.weightMin) els.weightMin.value = "";
+    if (els.weightMax) els.weightMax.value = "";
+    if (els.birthYearMin) els.birthYearMin.value = "";
+    if (els.birthYearMax) els.birthYearMax.value = "";
     if (els.compactFilterType) els.compactFilterType.value = "";
     if (els.compactFilterValue) els.compactFilterValue.value = "";
     if (els.compactFilterMonth) els.compactFilterMonth.value = playerAnalysisState.compactFilterMonth;
@@ -7091,6 +7496,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       yearSelect, search, numberFilter, playedMin, playedMax, startsMin, goalsMin,
       playedRateMin, scoredRateMin, scoredPpmMin, monthFilter, monthGoalsMin, monthPlayedRateMin,
       yellowMin, redMin, seasonsMin, seasonsMax,
+      heightMin, heightMax, weightMin, weightMax, birthYearMin, birthYearMax,
       compactFilterType, compactFilterValue, compactFilterMonth,
       scorersOnly, playedOnly, katakanaOnly
     } = getPlayerAnalysisElements();
@@ -7124,6 +7530,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         : await loadScopedPlayerAnalysisYear(playerAnalysisState.year, playerAnalysisState.matchScope, competitionFilter);
     playerAnalysisState.teamStats = await buildPlayerAnalysisTeamStats(timeValue, playerAnalysisState.matchScope, competitionFilter);
     entry.missing = entry.missing || !entry.rows.length;
+    await attachPlayerProfilesToRows(entry.rows);
     playerAnalysisState.data = entry.rows;
     playerAnalysisState.selectedKey = null;
     if (search) search.value = playerAnalysisState.query;
@@ -7142,6 +7549,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (redMin) redMin.value = playerAnalysisState.redMin;
     if (seasonsMin) seasonsMin.value = playerAnalysisState.seasonsMin;
     if (seasonsMax) seasonsMax.value = playerAnalysisState.seasonsMax;
+    if (heightMin) heightMin.value = playerAnalysisState.heightMin;
+    if (heightMax) heightMax.value = playerAnalysisState.heightMax;
+    if (weightMin) weightMin.value = playerAnalysisState.weightMin;
+    if (weightMax) weightMax.value = playerAnalysisState.weightMax;
+    if (birthYearMin) birthYearMin.value = playerAnalysisState.birthYearMin;
+    if (birthYearMax) birthYearMax.value = playerAnalysisState.birthYearMax;
     if (compactFilterType) compactFilterType.value = playerAnalysisState.compactFilterType;
     if (compactFilterValue) compactFilterValue.value = playerAnalysisState.compactFilterValue;
     if (compactFilterMonth) compactFilterMonth.value = playerAnalysisState.compactFilterMonth;
@@ -7391,7 +7804,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const nextScope = ["all", "league", "special"].includes(button.dataset.paScope) ? button.dataset.paScope : "all";
         if (playerAnalysisState.matchScope === nextScope) return;
         playerAnalysisState.matchScope = nextScope;
-        playerAnalysisState.profileTab = "total";
+        playerAnalysisState.profileTab = "profile";
         playerAnalysisState.competitionFilterActive = false;
         playerAnalysisState.selectedCompetitions = [];
         updatePlayerAnalysisScopeButtons();
@@ -7410,7 +7823,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       els.numberFilter, els.playedMin, els.playedMax, els.startsMin, els.goalsMin,
       els.playedRateMin, els.scoredRateMin, els.scoredPpmMin, els.monthFilter,
       els.monthGoalsMin, els.monthPlayedRateMin, els.yellowMin, els.redMin,
-      els.seasonsMin, els.seasonsMax
+      els.seasonsMin, els.seasonsMax,
+      els.heightMin, els.heightMax, els.weightMin, els.weightMax,
+      els.birthYearMin, els.birthYearMax
     ].forEach(input => {
       if (input) input.oninput = applyPlayerAnalysisFilters;
     });

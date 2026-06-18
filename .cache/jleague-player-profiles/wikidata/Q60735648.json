@@ -1,0 +1,1164 @@
+{
+  "entities": {
+    "Q60735648": {
+      "pageid": 60594288,
+      "ns": 0,
+      "title": "Q60735648",
+      "lastrevid": 2484596348,
+      "modified": "2026-04-25T15:07:35Z",
+      "type": "item",
+      "id": "Q60735648",
+      "labels": {
+        "en": {
+          "language": "en",
+          "value": "André Anderson"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "André Anderson"
+        },
+        "ast": {
+          "language": "ast",
+          "value": "André Anderson"
+        },
+        "it": {
+          "language": "it",
+          "value": "André Anderson Pomilio da SIlva"
+        },
+        "es": {
+          "language": "es",
+          "value": "André Anderson"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "アンドレ・アンデルソン"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "A·安達臣"
+        },
+        "fa": {
+          "language": "fa",
+          "value": "آندره اندرسون"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "أندريه أندرسون"
+        },
+        "pap": {
+          "language": "pap",
+          "value": "André Anderson"
+        },
+        "pl": {
+          "language": "pl",
+          "value": "André Anderson"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "Андре Андерсон"
+        },
+        "sl": {
+          "language": "sl",
+          "value": "André Anderson"
+        },
+        "ga": {
+          "language": "ga",
+          "value": "André Anderson"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "Андре Андерсон"
+        },
+        "be-tarask": {
+          "language": "be-tarask",
+          "value": "Андрэ Андэрсан"
+        }
+      },
+      "descriptions": {
+        "nl": {
+          "language": "nl",
+          "value": "voetballer"
+        },
+        "it": {
+          "language": "it",
+          "value": "calciatore italiano (1999-)"
+        },
+        "en": {
+          "language": "en",
+          "value": "Brazilian-Italian footballer"
+        },
+        "fr": {
+          "language": "fr",
+          "value": "joueur de football italien"
+        },
+        "ro": {
+          "language": "ro",
+          "value": "fotbalist italian"
+        },
+        "et": {
+          "language": "et",
+          "value": "Itaalia jalgpallur"
+        },
+        "es": {
+          "language": "es",
+          "value": "futbolista italiano nacido en Brasil"
+        },
+        "gl": {
+          "language": "gl",
+          "value": "futbolista italiano"
+        },
+        "he": {
+          "language": "he",
+          "value": "כדורגלן איטלקי"
+        },
+        "ca": {
+          "language": "ca",
+          "value": "futbolista italià"
+        },
+        "sq": {
+          "language": "sq",
+          "value": "futbollist italian"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "لاعب كرة قدم إيطالي"
+        },
+        "bn": {
+          "language": "bn",
+          "value": "ইতালীয় ফুটবলার"
+        },
+        "ast": {
+          "language": "ast",
+          "value": "futbolista brasilanu"
+        },
+        "pt": {
+          "language": "pt",
+          "value": "futebolista brasileiro"
+        },
+        "eu": {
+          "language": "eu",
+          "value": "futbolari brasildarra"
+        },
+        "pap": {
+          "language": "pap",
+          "value": "futbolista brasileño"
+        },
+        "dag": {
+          "language": "dag",
+          "value": "Brazil boliŋmɛri so ŋun nyɛ doo"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "бразильський футболіст"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "イタリア/ブラジルのフットボール選手"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "Итальянский футболист"
+        },
+        "be-tarask": {
+          "language": "be-tarask",
+          "value": "італьянскі футбаліст"
+        }
+      },
+      "aliases": {
+        "zh": [
+          {
+            "language": "zh",
+            "value": "安德烈·安德森"
+          }
+        ],
+        "pl": [
+          {
+            "language": "pl",
+            "value": "André Anderson Pomilio Lima da Silva Costa"
+          }
+        ],
+        "es": [
+          {
+            "language": "es",
+            "value": "André Anderson Pomilio Lima da Silva"
+          }
+        ],
+        "ru": [
+          {
+            "language": "ru",
+            "value": "Андре Андерсон Помилио Лима да Сильва Коста"
+          }
+        ]
+      },
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "ad7d38a03cdd40cdc373de0dc4e7b7fcbccb31d9",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 5,
+                  "id": "Q5"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$66B887DA-A0E5-4598-85A7-B5D71A644408",
+            "rank": "normal"
+          }
+        ],
+        "P21": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P21",
+              "hash": "85ad4b1c7348f7a5aac521135040d74e91fb5939",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6581097,
+                  "id": "Q6581097"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$B17CDE73-A506-4D4B-829A-D2EB63416EB5",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "5c0fa0d334b12fb6fd96eeccd70c1bfbc0491a41",
+                "snaks": {
+                  "P887": [
+                    {
+                      "snaktype": "value",
+                      "property": "P887",
+                      "hash": "0f89b02e7a7b9408e3cd5c2b9cae2f47d84944d5",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 69652498,
+                          "id": "Q69652498"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P887"
+                ]
+              }
+            ]
+          }
+        ],
+        "P54": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P54",
+              "hash": "fd423c5763f7dacf5c398c0b5f9e1e40a0111869",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 847587,
+                  "id": "Q847587"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$17d2f60d-f02e-47fe-bcef-36be2ed2c439",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P54",
+              "hash": "5b53970083b3859f1269181df0c046f077f6770b",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2609,
+                  "id": "Q2609"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$e0012e8e-4d76-fde0-611d-f3566c270324",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "d5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11920,
+                          "id": "Q11920"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P106": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P106",
+              "hash": "7b3d53654a6e78f49a600edd15aa24d2df7b770f",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 937857,
+                  "id": "Q937857"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$b46efb99-6a06-4f03-a6d9-a7539c5e251b",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P413": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P413",
+              "hash": "2ca2b885872523fa7fa0689a938aa2e0e354d818",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 280658,
+                  "id": "Q280658"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$863ac00b-c4a4-4f64-ad0b-34e7e18afacb",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P734": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P734",
+              "hash": "b6ecb56611b72c136d65f0b22eaf69de15c0d413",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 1848748,
+                  "id": "Q1848748"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$77E04AF3-8498-41DC-A9E4-ACC5120D1126",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "323be97becfd18ea6625da4b3770079385901a18",
+                "snaks": {
+                  "P887": [
+                    {
+                      "snaktype": "value",
+                      "property": "P887",
+                      "hash": "b40d6c0ac6eb965460f92fade101fe40a3c44239",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 97033143,
+                          "id": "Q97033143"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P887"
+                ]
+              }
+            ]
+          }
+        ],
+        "P569": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "hash": "bdc8d55f1024609eab54fd4f411f9d1838f41adf",
+              "datavalue": {
+                "value": {
+                  "time": "+1999-09-23T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q60735648$64CB1269-6CC9-44B3-A463-56E457157FD3",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P2369": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2369",
+              "hash": "feb1e9ef0026a2b934e3ad454b2846d76ba593f2",
+              "datavalue": {
+                "value": "563631",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$C5CA0E16-754C-423F-9B68-4EEEE66EC0F6",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "890dd9c36597016b50b209f50997e8601380ded6",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "26d93e6703ed6b93315f86466e3d7757f90b834e",
+                      "datavalue": {
+                        "value": "https://en.wikipedia.org/w/index.php?title=André_Anderson_(footballer)&oldid=886645969",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P19": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P19",
+              "hash": "f55c99152159d30976c2e229347f3587dd588a8a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 1760928,
+                  "id": "Q1760928"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$3A87EE61-0B9D-4E0A-AF36-4AAD9AA041FD",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "2b43ccde66ee4d86756cfb8d18c69d9494bba728",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "deee5e8071d38eb24b9722c22c2fcadff796d96d",
+                      "datavalue": {
+                        "value": "https://en.wikipedia.org/w/index.php?title=André_Anderson_(footballer)&oldid=889581435",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P641": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P641",
+              "hash": "1624e15e061523279bc14bb6497168e45caacb32",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2736,
+                  "id": "Q2736"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$87C1719E-CDC0-4247-AFBE-5101D7DD6AFA",
+            "rank": "normal"
+          }
+        ],
+        "P735": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P735",
+              "hash": "27c161e7ad43040753487e404d9c482a0e01e4b4",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 6298851,
+                  "id": "Q6298851"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$00EEEDBF-34C0-48FF-AD6E-B21A7988010C",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "323be97becfd18ea6625da4b3770079385901a18",
+                "snaks": {
+                  "P887": [
+                    {
+                      "snaktype": "value",
+                      "property": "P887",
+                      "hash": "b40d6c0ac6eb965460f92fade101fe40a3c44239",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 97033143,
+                          "id": "Q97033143"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P887"
+                ]
+              }
+            ]
+          }
+        ],
+        "P2671": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2671",
+              "hash": "90290f7d7413639f803b548b7732ad4d2bf26ca9",
+              "datavalue": {
+                "value": "/g/11h2c9hvtj",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$70FDCCA3-B3E9-40AC-BBAC-A113E31F1DE1",
+            "rank": "normal"
+          }
+        ],
+        "P27": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P27",
+              "hash": "d26dfabc0397ca53adb41b384dc57fbc88c16872",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 155,
+                  "id": "Q155"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$EDCD3CD6-5F91-4745-A885-D0E95A89FFA4",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P27",
+              "hash": "39a9dac5f024c0b34c9b3cc1868c71b2780cb694",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 38,
+                  "id": "Q38"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$6be2b68b-4a91-ddd2-980b-841ce63fd1a7",
+            "rank": "normal"
+          }
+        ],
+        "P2446": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2446",
+              "hash": "f02f1ea62a912e220d3f5568cc7d13c7ef1b582d",
+              "datavalue": {
+                "value": "601577",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$4a291e74-4a39-d815-1080-95ba9ef82d4b",
+            "rank": "normal"
+          }
+        ],
+        "P7036": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P7036",
+              "hash": "a05220290a8d388375f5c12ce0009f42b525cd64",
+              "datavalue": {
+                "value": "Anderson_André",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$34CFC053-6F8D-4615-B560-41627EF7B4CA",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "3626a87993575ed05d328b8739795693a181cd57",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "f7305ea2d14eabe63281dc2b50b85ac8c7d6295a",
+                      "datavalue": {
+                        "value": "https://en.wikipedia.org/w/index.php?title=André_Anderson_(footballer)&oldid=1096636159",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P1532": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1532",
+              "hash": "bcc570134b712e7cf6bc3ed443b405ea63479e78",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 38,
+                  "id": "Q38"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q60735648$ccbeb823-448f-fb73-3729-d001257d631b",
+            "rank": "normal"
+          }
+        ],
+        "P3537": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P3537",
+              "hash": "250498008deec92c54aad7fce3e802b6f20255ff",
+              "datavalue": {
+                "value": "362109",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$DD6F5875-8981-49B5-8729-2C690791CC5E",
+            "rank": "normal"
+          }
+        ],
+        "P8912": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P8912",
+              "hash": "6c51aea2628ffeb5997486da487cacf801a86d54",
+              "datavalue": {
+                "value": "andre-anderson",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$74885ebd-90e3-447f-8b0c-998586b734da",
+            "rank": "normal"
+          }
+        ],
+        "P2020": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2020",
+              "hash": "0eb84929372a6ca082bced171c7148dbca7c3ffa",
+              "datavalue": {
+                "value": "anderson_38",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$dee66574-4b62-4ae6-baea-e192114e10be",
+            "rank": "normal"
+          }
+        ],
+        "P2193": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2193",
+              "hash": "d9f90930810d5ed8e4ba8886ec59af4e1c5c5203",
+              "datavalue": {
+                "value": "123285",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$667e8b9e-4b76-964e-64e3-b3faa8c6b499",
+            "rank": "normal"
+          }
+        ],
+        "P3047": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P3047",
+              "hash": "475408b3025826f0414b30e6cc270dd806a74f88",
+              "datavalue": {
+                "value": "547756",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$9835ddda-432f-1cf4-a19b-155ab42699e1",
+            "rank": "normal"
+          }
+        ],
+        "P3655": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P3655",
+              "hash": "e204ef5fa3d8bd1d086e35370a50d9ad2c6126d6",
+              "datavalue": {
+                "value": "26624",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$bef95614-4142-d8bd-7858-ffa7475c94ff",
+            "rank": "normal"
+          }
+        ],
+        "P2003": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2003",
+              "hash": "7ba0d10cdeb3d7d98e4a004657d697c32d9a7b19",
+              "datavalue": {
+                "value": "andreanderson_oficial",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$b341253c-4b9d-ab87-e298-2fad7c3f4df2",
+            "rank": "normal"
+          }
+        ],
+        "P12302": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P12302",
+              "hash": "e0e449469d592fc6e3b74907e14776752ed7f021",
+              "datavalue": {
+                "value": "947171",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$7FD36E3F-B509-4C45-9DD9-75DB305D8074",
+            "rank": "normal"
+          }
+        ],
+        "P2048": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2048",
+              "hash": "7e5687527d1ffe39d5ea19e0221cf814dc63e7bf",
+              "datavalue": {
+                "value": {
+                  "amount": "+180",
+                  "unit": "http://www.wikidata.org/entity/Q174728"
+                },
+                "type": "quantity"
+              },
+              "datatype": "quantity"
+            },
+            "type": "statement",
+            "id": "Q60735648$E2760F57-CC0B-4838-BB69-6FB1D70D0771",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "0baf2ea31fe36b4ea8164c7ee86ae04a2b7ad54f",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11920,
+                          "id": "Q11920"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "6012c1bde16ef8246c358b59d273debd27057a55",
+                      "datavalue": {
+                        "value": "https://it.wikipedia.org/w/index.php?title=André_Anderson&oldid=149191635",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P5750": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P5750",
+              "hash": "6677fba11df89ea54d1ebfd887662677f283f7ad",
+              "datavalue": {
+                "value": "ee8f7dc5",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q60735648$EB1DCC74-3015-4D48-81BE-BB9A227BA32A",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "3ec09eb217b12ff758b7e407acbaa32ced31d4b9",
+                "snaks": {
+                  "P854": [
+                    {
+                      "snaktype": "value",
+                      "property": "P854",
+                      "hash": "ed46fb65f85a4dece9e1bddf4213da2b8110b0da",
+                      "datavalue": {
+                        "value": "https://fbref.com/en/players/ee8f7dc5/",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P854"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "sitelinks": {
+        "enwiki": {
+          "site": "enwiki",
+          "title": "André Anderson (footballer)",
+          "badges": []
+        },
+        "itwiki": {
+          "site": "itwiki",
+          "title": "André Anderson",
+          "badges": []
+        },
+        "jawiki": {
+          "site": "jawiki",
+          "title": "アンドレ・アンデルソン・ポミーリオ・リマ・ダ・シウヴァ",
+          "badges": []
+        },
+        "arwiki": {
+          "site": "arwiki",
+          "title": "أندريه أندرسون (لاعب كرة قدم)",
+          "badges": []
+        },
+        "plwiki": {
+          "site": "plwiki",
+          "title": "André Anderson",
+          "badges": []
+        },
+        "fawiki": {
+          "site": "fawiki",
+          "title": "آندره اندرسون (بازیکن فوتبال)",
+          "badges": []
+        },
+        "ukwiki": {
+          "site": "ukwiki",
+          "title": "Андре Андерсон",
+          "badges": []
+        },
+        "eswiki": {
+          "site": "eswiki",
+          "title": "André Anderson",
+          "badges": []
+        },
+        "ruwiki": {
+          "site": "ruwiki",
+          "title": "Андре Андерсон",
+          "badges": []
+        }
+      }
+    }
+  }
+}

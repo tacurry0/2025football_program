@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260618pwa-install">
+  <link rel="stylesheet" href="style.css?v=20260618player-profile-v2">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <meta name="mobile-web-app-capable" content="yes">
@@ -869,7 +869,7 @@ We can't help falling in love with you
           <div class="pa-filter-main">
             <label class="pa-search-field" for="pa-player-search">
               <span>選手名</span>
-              <input type="search" id="pa-player-search" placeholder="選手名で検索" autocomplete="off">
+              <input type="search" id="pa-player-search" placeholder="日本語名・英語名で検索" autocomplete="off">
             </label>
             <div class="pa-filter-actions">
               <label class="pa-check-field">
@@ -887,6 +887,29 @@ We can't help falling in love with you
               <button type="button" id="pa-filter-reset" class="pa-filter-reset">リセット</button>
             </div>
           </div>
+          <section class="pa-profile-filter-card" aria-label="プロフィール条件">
+            <div class="pa-profile-filter-head">
+              <div><span>PROFILE FILTER</span><strong>プロフィール条件</strong></div>
+              <small>未入力は指定なし</small>
+            </div>
+            <div class="pa-profile-filter-ranges">
+              <div class="pa-profile-range">
+                <span>身長 <small>cm</small></span>
+                <label><b>以上</b><input type="number" id="pa-height-min" min="100" max="230" inputmode="numeric" placeholder="170"></label>
+                <label><b>以下</b><input type="number" id="pa-height-max" min="100" max="230" inputmode="numeric" placeholder="190"></label>
+              </div>
+              <div class="pa-profile-range">
+                <span>体重 <small>kg</small></span>
+                <label><b>以上</b><input type="number" id="pa-weight-min" min="40" max="150" inputmode="numeric" placeholder="65"></label>
+                <label><b>以下</b><input type="number" id="pa-weight-max" min="40" max="150" inputmode="numeric" placeholder="85"></label>
+              </div>
+              <div class="pa-profile-range">
+                <span>生まれ年</span>
+                <label><b>以降</b><input type="number" id="pa-birth-year-min" min="1950" max="2030" inputmode="numeric" placeholder="2000"></label>
+                <label><b>以前</b><input type="number" id="pa-birth-year-max" min="1950" max="2030" inputmode="numeric" placeholder="2005"></label>
+              </div>
+            </div>
+          </section>
           <details class="pa-advanced-filters" id="pa-advanced-filters">
             <summary>詳細条件</summary>
             <div class="pa-advanced-filter-body">
@@ -990,8 +1013,13 @@ We can't help falling in love with you
                 <optgroup label="基本">
                   <option value="number">背番号</option>
                   <option value="position_order">ポジション順</option>
-                  <option value="player_name">選手名</option>
+                  <option value="player_name">名前（50音 / A-Z）</option>
                   <option value="season_count">所属年数</option>
+                </optgroup>
+                <optgroup label="プロフィール">
+                  <option value="profile_height_cm">身長</option>
+                  <option value="profile_weight_kg">体重</option>
+                  <option value="profile_birth_year">生まれ年</option>
                 </optgroup>
                 <optgroup label="出場時">
                   <option value="played_matches">出場試合数</option>
@@ -1285,7 +1313,7 @@ We can't help falling in love with you
 
   <script src="pwa.js?v=20260618pwa-install"></script>
   <script src="schedule/schedule.js?v=20260617manual-score-off"></script>
-  <script src="script.js?v=20260617manual-score-off"></script>
+  <script src="script.js?v=20260618player-profile-v2"></script>
 
 </body>
 </html>

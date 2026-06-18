@@ -1,0 +1,262 @@
+{
+  "entities": {
+    "Q3560429": {
+      "pageid": 3389381,
+      "ns": 0,
+      "title": "Q3560429",
+      "lastrevid": 2400226339,
+      "modified": "2025-09-04T08:17:43Z",
+      "type": "item",
+      "id": "Q3560429",
+      "labels": {
+        "ja": {
+          "language": "ja",
+          "value": "2008年のアルビレックス新潟"
+        },
+        "en": {
+          "language": "en",
+          "value": "2008 Albirex Niigata season"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "موسم آلبيركس نيغاتا 2008"
+        }
+      },
+      "descriptions": {
+        "nl": {
+          "language": "nl",
+          "value": "sportseizoen"
+        },
+        "en": {
+          "language": "en",
+          "value": "season of football team"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "сезон футбольної команди"
+        },
+        "fr": {
+          "language": "fr",
+          "value": "saison d'une équipe de football"
+        }
+      },
+      "aliases": {},
+      "claims": {
+        "P641": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P641",
+              "hash": "1624e15e061523279bc14bb6497168e45caacb32",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2736,
+                  "id": "Q2736"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q3560429$D1D546BC-63AC-4E28-BF87-9E9262F6C487",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "9ddb403180b684facfb50183c3b3a99ce0b171d1",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 26887310,
+                  "id": "Q26887310"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q3560429$227B4C09-EB67-4559-A52D-7F2C31E86330",
+            "rank": "normal"
+          }
+        ],
+        "P5138": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P5138",
+              "hash": "5ef018f26f33c336a7476eb363050598dea0596a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 383358,
+                  "id": "Q383358"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q3560429$3F52EF51-83E9-4D0A-AC8D-1B55FE35EA11",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "fa278ebfc458360e5aed63d5058cca83c46134f1",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "e4f6d9441d0600513c4533c672b5ab472dc73694",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 328,
+                          "id": "Q328"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143"
+                ]
+              }
+            ]
+          }
+        ],
+        "P17": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P17",
+              "hash": "55178c20e031f1579d34d802f16f6b9951b631e1",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 17,
+                  "id": "Q17"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q3560429$61A9827F-CF37-4438-A72F-63419A03BBC2",
+            "rank": "normal"
+          }
+        ],
+        "P585": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P585",
+              "hash": "43bdb90ab9b607c864931ed584115ff944210c6b",
+              "datavalue": {
+                "value": {
+                  "time": "+2008-00-00T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 9,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q3560429$23A4BD50-54D6-4DFC-928D-82EAB1A17FCC",
+            "rank": "normal"
+          }
+        ],
+        "P155": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P155",
+              "hash": "4642b250831732bff110eb8c04347bde961206d6",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3560353,
+                  "id": "Q3560353"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q3560429$E6949644-5DD5-4B97-9688-DEDD1760884D",
+            "rank": "normal"
+          }
+        ],
+        "P156": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P156",
+              "hash": "51c098f550b9af23dd8e2da24e22a521b16b17a0",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 3560603,
+                  "id": "Q3560603"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q3560429$96CF8AD5-195B-4D84-A9E8-5BA97DAB6F09",
+            "rank": "normal"
+          }
+        ]
+      },
+      "sitelinks": {
+        "jawiki": {
+          "site": "jawiki",
+          "title": "2008年のアルビレックス新潟",
+          "badges": []
+        },
+        "enwiki": {
+          "site": "enwiki",
+          "title": "2008 Albirex Niigata season",
+          "badges": []
+        }
+      }
+    }
+  }
+}

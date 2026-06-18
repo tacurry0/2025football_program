@@ -1,0 +1,378 @@
+{
+  "entities": {
+    "Q85851059": {
+      "pageid": 85122760,
+      "ns": 0,
+      "title": "Q85851059",
+      "lastrevid": 1908702505,
+      "modified": "2023-06-05T09:01:58Z",
+      "type": "item",
+      "id": "Q85851059",
+      "labels": {
+        "en": {
+          "language": "en",
+          "value": "list of J2 League football transfers winter 2019-20"
+        },
+        "id": {
+          "language": "id",
+          "value": "Daftar transfer J2 League musim dingin 2019–2020"
+        }
+      },
+      "descriptions": {
+        "pap": {
+          "language": "pap",
+          "value": "lista di Wikimedia"
+        },
+        "cs": {
+          "language": "cs",
+          "value": "seznam na projektech Wikimedia"
+        },
+        "sk": {
+          "language": "sk",
+          "value": "zoznamový článok na projektu Wikimedia"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "Wikimedia-lijst"
+        },
+        "ast": {
+          "language": "ast",
+          "value": "artículu de llista de Wikimedia"
+        },
+        "eo": {
+          "language": "eo",
+          "value": "listartikolo en Vikimedio"
+        },
+        "ms": {
+          "language": "ms",
+          "value": "rencana senarai Wikimedia"
+        },
+        "af": {
+          "language": "af",
+          "value": "Wikimedia lysartikel"
+        },
+        "en": {
+          "language": "en",
+          "value": "Wikimedia list article"
+        },
+        "si": {
+          "language": "si",
+          "value": "විකිමීඩියා ලැයිස්තු ලිපිය"
+        },
+        "nn": {
+          "language": "nn",
+          "value": "Wikimedia-listeartikkel"
+        },
+        "ca": {
+          "language": "ca",
+          "value": "article de llista de Wikimedia"
+        },
+        "he": {
+          "language": "he",
+          "value": "רשימת ערכים"
+        },
+        "zh-hant": {
+          "language": "zh-hant",
+          "value": "維基媒體列表條目"
+        },
+        "ta": {
+          "language": "ta",
+          "value": "விக்கிப்பீடியா:பட்டியலிடல்"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "статья-список в проекте Викимедиа"
+        },
+        "id": {
+          "language": "id",
+          "value": "artikel daftar Wikimedia"
+        },
+        "de": {
+          "language": "de",
+          "value": "Wikimedia-Liste"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "قائمة ويكيميديا"
+        },
+        "as": {
+          "language": "as",
+          "value": "ৱিকিপিডিয়া:ৰচনাশৈলীৰ হাতপুথি"
+        },
+        "sr": {
+          "language": "sr",
+          "value": "списак на Викимедији"
+        },
+        "ba": {
+          "language": "ba",
+          "value": "Wikimedia-Listn"
+        },
+        "ia": {
+          "language": "ia",
+          "value": "lista de un projecto de Wikimedia"
+        },
+        "gl": {
+          "language": "gl",
+          "value": "artigo de listas da Wikimedia"
+        },
+        "nb": {
+          "language": "nb",
+          "value": "Wikimedia-listeartikkel"
+        },
+        "bs": {
+          "language": "bs",
+          "value": "spisak na Wikimediji"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "维基媒体列表条目"
+        },
+        "li": {
+          "language": "li",
+          "value": "Wikimedia-lies"
+        },
+        "tg-latn": {
+          "language": "tg-latn",
+          "value": "sahifai fehristiy"
+        },
+        "zh-my": {
+          "language": "zh-my",
+          "value": "维基媒体列表条目"
+        },
+        "hr": {
+          "language": "hr",
+          "value": "popis na Wikimediji"
+        },
+        "fy": {
+          "language": "fy",
+          "value": "Wikimedia-list"
+        },
+        "el": {
+          "language": "el",
+          "value": "κατάλογος εγχειρήματος Wikimedia"
+        },
+        "en-gb": {
+          "language": "en-gb",
+          "value": "Wikimedia list article"
+        },
+        "da": {
+          "language": "da",
+          "value": "Wikimedia liste"
+        },
+        "eu": {
+          "language": "eu",
+          "value": "Wikimediako zerrenda artikulua"
+        },
+        "be": {
+          "language": "be",
+          "value": "спіс артыкулаў у адным з праектаў Вікімедыя"
+        },
+        "sco": {
+          "language": "sco",
+          "value": "Wikimedia leet airticle"
+        },
+        "zh-hk": {
+          "language": "zh-hk",
+          "value": "維基媒體列表條目"
+        },
+        "es": {
+          "language": "es",
+          "value": "artículo de lista de Wikimedia"
+        },
+        "pl": {
+          "language": "pl",
+          "value": "lista w projekcie Wikimedia"
+        },
+        "it": {
+          "language": "it",
+          "value": "lista di un progetto Wikimedia"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "стаття-список у проєкті Вікімедіа"
+        },
+        "sq": {
+          "language": "sq",
+          "value": "artikull-listë e Wikimedias"
+        },
+        "yi": {
+          "language": "yi",
+          "value": "וויקימעדיע ליסטע"
+        },
+        "bn": {
+          "language": "bn",
+          "value": "উইকিমিডিয়ার তালিকা নিবন্ধ"
+        },
+        "oc": {
+          "language": "oc",
+          "value": "lista d'un projècte Wikimèdia"
+        },
+        "sv": {
+          "language": "sv",
+          "value": "Wikimedia-listartikel"
+        },
+        "zea": {
+          "language": "zea",
+          "value": "Wikimedia-lieste"
+        },
+        "an": {
+          "language": "an",
+          "value": "articlo de lista de Wikimedia"
+        },
+        "zh-mo": {
+          "language": "zh-mo",
+          "value": "維基媒體列表條目"
+        },
+        "tg-cyrl": {
+          "language": "tg-cyrl",
+          "value": "саҳифаи феҳристӣ"
+        },
+        "hy": {
+          "language": "hy",
+          "value": "Վիքիմեդիայի նախագծի ցանկ"
+        },
+        "mk": {
+          "language": "mk",
+          "value": "список на статии на Викимедија"
+        },
+        "de-at": {
+          "language": "de-at",
+          "value": "Wikimedia-Liste"
+        },
+        "zh-cn": {
+          "language": "zh-cn",
+          "value": "维基媒体列表条目"
+        },
+        "vi": {
+          "language": "vi",
+          "value": "bài viết danh sách Wikimedia"
+        },
+        "tr": {
+          "language": "tr",
+          "value": "Vikimedya liste maddesi"
+        },
+        "de-ch": {
+          "language": "de-ch",
+          "value": "Wikimedia-Liste"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "ウィキメディアの一覧記事"
+        },
+        "fi": {
+          "language": "fi",
+          "value": "Wikimedia-luetteloartikkeli"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "위키미디어 목록 항목"
+        },
+        "ace": {
+          "language": "ace",
+          "value": "teunuléh dapeuta Wikimèdia"
+        },
+        "en-ca": {
+          "language": "en-ca",
+          "value": "Wikimedia list article"
+        },
+        "zh-sg": {
+          "language": "zh-sg",
+          "value": "维基媒体列表条目"
+        },
+        "tg": {
+          "language": "tg",
+          "value": "саҳифаи феҳристӣ"
+        },
+        "zh-hans": {
+          "language": "zh-hans",
+          "value": "维基媒体列表条目"
+        },
+        "th": {
+          "language": "th",
+          "value": "บทความรายชื่อวิกิมีเดีย"
+        },
+        "fr": {
+          "language": "fr",
+          "value": "page de liste de Wikimedia"
+        },
+        "zh-tw": {
+          "language": "zh-tw",
+          "value": "維基媒體列表條目"
+        },
+        "ro": {
+          "language": "ro",
+          "value": "articol-listă în cadrul unui proiect Wikimedia"
+        },
+        "yo": {
+          "language": "yo",
+          "value": "ojúewé àtojọ Wikimedia"
+        },
+        "lb": {
+          "language": "lb",
+          "value": "Wikimedia-Lëschtenartikel"
+        },
+        "sl": {
+          "language": "sl",
+          "value": "seznam Wikimedie"
+        }
+      },
+      "aliases": {},
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "5ff6e63e2f39587f9d461b31cfc42484ea0330d1",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 13406463,
+                  "id": "Q13406463"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q85851059$2DAB86B5-7613-4E20-BE1E-18BB6F71F038",
+            "rank": "normal"
+          }
+        ],
+        "P360": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P360",
+              "hash": "a825a951f5abc5a41e595b4bae37701d61249999",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 1811518,
+                  "id": "Q1811518"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q85851059$62616E11-FB2D-4ADE-8A91-5CDBA942B300",
+            "rank": "normal"
+          }
+        ]
+      },
+      "sitelinks": {
+        "idwiki": {
+          "site": "idwiki",
+          "title": "Daftar transfer J2 League musim dingin 2019–2020",
+          "badges": []
+        },
+        "enwiki": {
+          "site": "enwiki",
+          "title": "List of J2 League football transfers winter 2019–20",
+          "badges": []
+        }
+      }
+    }
+  }
+}

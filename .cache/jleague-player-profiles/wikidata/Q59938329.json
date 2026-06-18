@@ -1,0 +1,1027 @@
+{
+  "entities": {
+    "Q59938329": {
+      "pageid": 59819065,
+      "ns": 0,
+      "title": "Q59938329",
+      "lastrevid": 2457786850,
+      "modified": "2026-01-26T00:48:23Z",
+      "type": "item",
+      "id": "Q59938329",
+      "labels": {
+        "en": {
+          "language": "en",
+          "value": "2019 J1 League"
+        },
+        "ko": {
+          "language": "ko",
+          "value": "J1리그 2019"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "2019年のJ1リーグ"
+        },
+        "it": {
+          "language": "it",
+          "value": "J1 League 2019"
+        },
+        "fr": {
+          "language": "fr",
+          "value": "championnat du Japon de football 2019"
+        },
+        "ru": {
+          "language": "ru",
+          "value": "Чемпионат Японии по футболу 2019"
+        },
+        "pt": {
+          "language": "pt",
+          "value": "J-League de 2019"
+        },
+        "es": {
+          "language": "es",
+          "value": "J1 League 2019"
+        },
+        "th": {
+          "language": "th",
+          "value": "เจลีก ดิวิชัน 1 ฤดูกาล 2019"
+        },
+        "lt": {
+          "language": "lt",
+          "value": "Japonijos futbolo varžybos 2019 m."
+        },
+        "ar": {
+          "language": "ar",
+          "value": "الدوري الياباني لكرة القدم 2019"
+        },
+        "zh": {
+          "language": "zh",
+          "value": "2019年日本職業足球聯賽"
+        },
+        "de": {
+          "language": "de",
+          "value": "J1 League 2019"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "Джей-ліга 2019"
+        },
+        "arz": {
+          "language": "arz",
+          "value": "الدورى اليابانى لكورة القدم 2019"
+        }
+      },
+      "descriptions": {
+        "it": {
+          "language": "it",
+          "value": "edizione di competizione calcistica"
+        },
+        "nl": {
+          "language": "nl",
+          "value": "sportseizoen van een voetbalcompetitie"
+        },
+        "ja": {
+          "language": "ja",
+          "value": "2019年に行われたサッカーJ1リーグ戦"
+        },
+        "ar": {
+          "language": "ar",
+          "value": "موسم من الدوري الياباني الدرجة الأولى"
+        },
+        "en": {
+          "language": "en",
+          "value": "27th season of J1 League"
+        },
+        "arz": {
+          "language": "arz",
+          "value": "موسم رياضى فى اليابان"
+        },
+        "fr": {
+          "language": "fr",
+          "value": "compétition de football"
+        },
+        "uk": {
+          "language": "uk",
+          "value": "сезон футбольного турніру"
+        },
+        "de": {
+          "language": "de",
+          "value": "27. Spielzeit der höchsten Division der japanischen J"
+        }
+      },
+      "aliases": {},
+      "claims": {
+        "P641": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P641",
+              "hash": "1624e15e061523279bc14bb6497168e45caacb32",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 2736,
+                  "id": "Q2736"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q59938329$2595E133-AE6B-4A80-B31C-838BDAE599C2",
+            "rank": "normal"
+          }
+        ],
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "ecbb916a7543708b066e45ad27981718c3e43d13",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 27020041,
+                  "id": "Q27020041"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q59938329$FCCF90E1-A0D0-4E4D-9CDC-70DE8E5DDF4A",
+            "rank": "normal"
+          }
+        ],
+        "P585": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P585",
+              "hash": "77f348fcb49110a0de3c2faf4865527dc30dcbc9",
+              "datavalue": {
+                "value": {
+                  "time": "+2019-00-00T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 9,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q59938329$EECFAFD9-A2E8-40D3-BC43-AF64517CEC63",
+            "rank": "normal"
+          }
+        ],
+        "P664": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P664",
+              "hash": "3d61cff813847849141f9f5330f491e93766a457",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 276445,
+                  "id": "Q276445"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q59938329$86083C8E-2060-4176-ADDE-04F13710ADA2",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "9dd43964546d14219ad59fe256b28014c0dcf18a",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11920,
+                          "id": "Q11920"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "6790e8a56c463cb27e11352f92b581130f834ff5",
+                      "datavalue": {
+                        "value": "https://it.wikipedia.org/w/index.php?title=J1_League_2019&oldid=108115045",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P582": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P582",
+              "hash": "c58d6145144007311f9196bc172da389e534610c",
+              "datavalue": {
+                "value": {
+                  "time": "+2019-12-07T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q59938329$F74CBB00-2A7A-4C92-A5C0-F5F485148377",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "9dd43964546d14219ad59fe256b28014c0dcf18a",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11920,
+                          "id": "Q11920"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "6790e8a56c463cb27e11352f92b581130f834ff5",
+                      "datavalue": {
+                        "value": "https://it.wikipedia.org/w/index.php?title=J1_League_2019&oldid=108115045",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P393": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P393",
+              "hash": "c0091fe031ee9c8a69940c8fbe7afc1dcbeccfe8",
+              "datavalue": {
+                "value": "27",
+                "type": "string"
+              },
+              "datatype": "string"
+            },
+            "type": "statement",
+            "id": "Q59938329$71654D28-EE9F-4C35-8405-E7A1FD00227C",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "9dd43964546d14219ad59fe256b28014c0dcf18a",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11920,
+                          "id": "Q11920"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "6790e8a56c463cb27e11352f92b581130f834ff5",
+                      "datavalue": {
+                        "value": "https://it.wikipedia.org/w/index.php?title=J1_League_2019&oldid=108115045",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P580": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P580",
+              "hash": "28cfad6d9012a8bd5f66d30f6431c6be58b117f7",
+              "datavalue": {
+                "value": {
+                  "time": "+2019-02-22T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q59938329$B51A4B45-4B50-4D87-B589-E82D7A85DAFE",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "788e3e925e4220aa84d6e0805ec8585eaef179da",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11920,
+                          "id": "Q11920"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "ee217c188332a2bf43822d8e3cdef836fc8ac403",
+                      "datavalue": {
+                        "value": "https://it.wikipedia.org/w/index.php?title=J1_League_2019&oldid=108631288",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P1132": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1132",
+              "hash": "50be1e329c396425fbf9f528b10ddd14e32524a5",
+              "datavalue": {
+                "value": {
+                  "amount": "+18",
+                  "unit": "1"
+                },
+                "type": "quantity"
+              },
+              "datatype": "quantity"
+            },
+            "type": "statement",
+            "id": "Q59938329$62469A11-3136-4A22-9AB3-9ECF8C22A7CA",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "33d62c003ad27b7b24590d41a5261cdbf8f0be52",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11920,
+                          "id": "Q11920"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "f7abd4ddee37d1fbd55b7ee0632202e185597ab2",
+                      "datavalue": {
+                        "value": "https://it.wikipedia.org/w/index.php?title=J1_League_2019&oldid=108678932",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P1350": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1350",
+              "hash": "94c23aa17765e9e2a4d061ac920ce3f45bb7c89b",
+              "datavalue": {
+                "value": {
+                  "amount": "+272",
+                  "unit": "1"
+                },
+                "type": "quantity"
+              },
+              "datatype": "quantity"
+            },
+            "type": "statement",
+            "id": "Q59938329$516B2DC1-A02B-4BA9-B919-092CB489CC90",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "33d62c003ad27b7b24590d41a5261cdbf8f0be52",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "5a343e7e758a4282a01316d3e959b6e653b767fc",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11920,
+                          "id": "Q11920"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "f7abd4ddee37d1fbd55b7ee0632202e185597ab2",
+                      "datavalue": {
+                        "value": "https://it.wikipedia.org/w/index.php?title=J1_League_2019&oldid=108678932",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P18": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P18",
+              "hash": "0e9e466e3d0b8d806227aaadc87031a8e03ec69d",
+              "datavalue": {
+                "value": "J.League.svg",
+                "type": "string"
+              },
+              "datatype": "commonsMedia"
+            },
+            "type": "statement",
+            "id": "Q59938329$170B165C-63D7-4453-95BC-E597AFB75090",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "1fa741886daff6ade28009e9400ee402e6fdc53e",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "f30cbd35620c4ea6d0633aaf0210a8916130469b",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 8447,
+                          "id": "Q8447"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "88f20ca5052db71c86817acbcb3952eb5cbb25e4",
+                      "datavalue": {
+                        "value": "https://fr.wikipedia.org/w/index.php?title=Championnat_du_Japon_de_football_2019&oldid=164209690",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P1351": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1351",
+              "hash": "fd4aeec8062ca1f4504733dd80ed605feedb056f",
+              "datavalue": {
+                "value": {
+                  "amount": "+523",
+                  "unit": "1"
+                },
+                "type": "quantity"
+              },
+              "datatype": "quantity"
+            },
+            "type": "statement",
+            "id": "Q59938329$4017AB4B-4631-4BC6-83E6-DCA820009215",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "157f3e92799c40b4fbe4805380a7609569f2beb2",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "b7f8bea3bb10c237323eb448dc4798948923bd5c",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 11921,
+                          "id": "Q11921"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "75a8f81a4f3996edaf996f9dd254a789c71d6263",
+                      "datavalue": {
+                        "value": "https://pt.wikipedia.org/w/index.php?title=J-League_de_2019&oldid=56646469",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ],
+        "P3450": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P3450",
+              "hash": "b529dfb064e1b4fcc3970a4929f42db2aabc962c",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 276445,
+                  "id": "Q276445"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P155": [
+                {
+                  "snaktype": "value",
+                  "property": "P155",
+                  "hash": "5f7f9c1cad2fb1f02daf80afb112fa0b2a00e614",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 44719545,
+                      "id": "Q44719545"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ],
+              "P156": [
+                {
+                  "snaktype": "value",
+                  "property": "P156",
+                  "hash": "2745e7c44f01841ab5b934c6af3145917e187687",
+                  "datavalue": {
+                    "value": {
+                      "entity-type": "item",
+                      "numeric-id": 83011940,
+                      "id": "Q83011940"
+                    },
+                    "type": "wikibase-entityid"
+                  },
+                  "datatype": "wikibase-item"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P155",
+              "P156"
+            ],
+            "id": "Q59938329$4f2cb067-4ddc-6d16-2fb9-03ae0077ac0f",
+            "rank": "normal"
+          }
+        ],
+        "P2500": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2500",
+              "hash": "5e4570e6932d91b9443505dda308da0f2d47a1ab",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 60049974,
+                  "id": "Q60049974"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q59938329$d4859644-4561-4274-9ccb-b07dfc92e788",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "335082c11ba09afd0e56eeac61f724d02148ac97",
+                "snaks": {
+                  "P3452": [
+                    {
+                      "snaktype": "value",
+                      "property": "P3452",
+                      "hash": "b856fef28184b971dceb0b7ea6b2ebe8628a181e",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 60049974,
+                          "id": "Q60049974"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P3452"
+                ]
+              }
+            ]
+          }
+        ],
+        "P1346": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P1346",
+              "hash": "a751e5c685ffd8ab1a2a5a300616de7958039ce2",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 854932,
+                  "id": "Q854932"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "qualifiers": {
+              "P1355": [
+                {
+                  "snaktype": "value",
+                  "property": "P1355",
+                  "hash": "bdcec8c6057d41bf49ab9cbffeb1818b429b4038",
+                  "datavalue": {
+                    "value": {
+                      "amount": "+22",
+                      "unit": "1"
+                    },
+                    "type": "quantity"
+                  },
+                  "datatype": "quantity"
+                }
+              ],
+              "P1357": [
+                {
+                  "snaktype": "value",
+                  "property": "P1357",
+                  "hash": "250b4c23300021f794a1efb6e99d1b5e8a5362d3",
+                  "datavalue": {
+                    "value": {
+                      "amount": "+4",
+                      "unit": "1"
+                    },
+                    "type": "quantity"
+                  },
+                  "datatype": "quantity"
+                }
+              ],
+              "P1356": [
+                {
+                  "snaktype": "value",
+                  "property": "P1356",
+                  "hash": "4d64193c3f31a72c3ecd0356e96337e1629c58c1",
+                  "datavalue": {
+                    "value": {
+                      "amount": "+8",
+                      "unit": "1"
+                    },
+                    "type": "quantity"
+                  },
+                  "datatype": "quantity"
+                }
+              ]
+            },
+            "qualifiers-order": [
+              "P1355",
+              "P1357",
+              "P1356"
+            ],
+            "id": "Q59938329$8b0611f4-4455-7367-45ff-a7ba1da68d9d",
+            "rank": "normal"
+          }
+        ],
+        "P2671": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2671",
+              "hash": "a6636ca219a412d0547c93d6d944374c6b8cabd3",
+              "datavalue": {
+                "value": "/g/11fj3260_z",
+                "type": "string"
+              },
+              "datatype": "external-id"
+            },
+            "type": "statement",
+            "id": "Q59938329$38678999-3297-47A2-9FCC-4A4844E54AAF",
+            "rank": "normal"
+          }
+        ],
+        "P17": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P17",
+              "hash": "55178c20e031f1579d34d802f16f6b9951b631e1",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 17,
+                  "id": "Q17"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q59938329$3F26BA56-097D-4756-8BD0-7AC29185EB57",
+            "rank": "normal"
+          }
+        ],
+        "P2094": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P2094",
+              "hash": "6c137752b3b79bad9a00b5fae9d171a795a357df",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 31930761,
+                  "id": "Q31930761"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q59938329$62A14738-5A8D-4CDE-8091-8696E28BB496",
+            "rank": "normal"
+          }
+        ],
+        "P155": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P155",
+              "hash": "5f7f9c1cad2fb1f02daf80afb112fa0b2a00e614",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 44719545,
+                  "id": "Q44719545"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q59938329$B57AFEE5-D8EA-414E-8E71-37B05B5EA6F0",
+            "rank": "normal",
+            "references": [
+              {
+                "hash": "8d1cdc9370b50cd2fdd57b89ec82da970efd5471",
+                "snaks": {
+                  "P143": [
+                    {
+                      "snaktype": "value",
+                      "property": "P143",
+                      "hash": "1114560767f181853282b1b9f2ac5c04727036f2",
+                      "datavalue": {
+                        "value": {
+                          "entity-type": "item",
+                          "numeric-id": 565074,
+                          "id": "Q565074"
+                        },
+                        "type": "wikibase-entityid"
+                      },
+                      "datatype": "wikibase-item"
+                    }
+                  ],
+                  "P4656": [
+                    {
+                      "snaktype": "value",
+                      "property": "P4656",
+                      "hash": "05608a8a29bbcda800738bd8ceaaa4c3f2669296",
+                      "datavalue": {
+                        "value": "https://th.wikipedia.org/w/index.php?title=เจ1_ลีก_ฤดูกาล_2019&oldid=12779356",
+                        "type": "string"
+                      },
+                      "datatype": "url"
+                    }
+                  ]
+                },
+                "snaks-order": [
+                  "P143",
+                  "P4656"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "sitelinks": {
+        "enwiki": {
+          "site": "enwiki",
+          "title": "2019 J1 League",
+          "badges": []
+        },
+        "frwiki": {
+          "site": "frwiki",
+          "title": "Championnat du Japon de football 2019",
+          "badges": []
+        },
+        "ruwiki": {
+          "site": "ruwiki",
+          "title": "Чемпионат Японии по футболу 2019",
+          "badges": []
+        },
+        "itwiki": {
+          "site": "itwiki",
+          "title": "J1 League 2019",
+          "badges": []
+        },
+        "jawiki": {
+          "site": "jawiki",
+          "title": "2019年のJ1リーグ",
+          "badges": []
+        },
+        "ptwiki": {
+          "site": "ptwiki",
+          "title": "J-League de 2019",
+          "badges": []
+        },
+        "kowiki": {
+          "site": "kowiki",
+          "title": "J1리그 2019",
+          "badges": []
+        },
+        "eswiki": {
+          "site": "eswiki",
+          "title": "J1 League 2019",
+          "badges": []
+        },
+        "ltwiki": {
+          "site": "ltwiki",
+          "title": "Japonijos futbolo varžybos 2019 m.",
+          "badges": []
+        },
+        "zhwiki": {
+          "site": "zhwiki",
+          "title": "2019年日本職業足球聯賽",
+          "badges": []
+        },
+        "dewiki": {
+          "site": "dewiki",
+          "title": "J1 League 2019",
+          "badges": []
+        },
+        "ukwiki": {
+          "site": "ukwiki",
+          "title": "Джей-ліга 2019",
+          "badges": []
+        },
+        "arzwiki": {
+          "site": "arzwiki",
+          "title": "الدورى اليابانى لكورة القدم 2019",
+          "badges": []
+        },
+        "thwiki": {
+          "site": "thwiki",
+          "title": "เจ1 ลีก ฤดูกาล 2019",
+          "badges": []
+        }
+      }
+    }
+  }
+}
