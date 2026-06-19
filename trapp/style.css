@@ -8235,8 +8235,9 @@ body[data-mode="dashboard"] #header-n-gate-container { pointer-events: auto; }
   }
 
   body[data-mode="player-analysis"] .pa-bio-visual {
-    min-height: 190px;
-    max-height: 230px;
+    height: clamp(260px, 36vh, 320px);
+    min-height: 260px;
+    max-height: 320px;
   }
 
   body[data-mode="player-analysis"] .pa-bio-overview,

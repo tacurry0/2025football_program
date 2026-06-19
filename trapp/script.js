@@ -289,6 +289,115 @@ document.addEventListener("DOMContentLoaded", async () => {
     opponentRenderToken: 0,
     playerOpponentRenderToken: 0
   };
+
+  // Keep this single-page app in sync with the browser's Back/Forward buttons.
+  // Each visible screen owns a history entry and knows how to restore itself.
+  const APP_HISTORY_ID = "trappHistoryId";
+  const appHistoryEntries = new Map();
+  let appHistoryId = 0;
+  let activeAppHistoryId = 0;
+  let appHistoryRestoring = false;
+
+  function getActiveAppHistoryEntry() {
+    return appHistoryEntries.get(activeAppHistoryId) || null;
+  }
+
+  function addAppHistoryEntry(kind, restore, options = {}) {
+    if (appHistoryRestoring || options.history === false) return;
+    const previousEntry = getActiveAppHistoryEntry();
+    const shouldReplace = options.replace === true || previousEntry?.kind === "side-menu";
+    const id = shouldReplace ? activeAppHistoryId : ++appHistoryId;
+    const parentId = shouldReplace ? (previousEntry?.parentId ?? 0) : activeAppHistoryId;
+    const entry = { id, parentId, kind, restore };
+    appHistoryEntries.set(id, entry);
+    activeAppHistoryId = id;
+    const nextState = { ...(window.history.state || {}), [APP_HISTORY_ID]: id, trappKind: kind };
+    if (shouldReplace) {
+      window.history.replaceState(nextState, "");
+    } else {
+      window.history.pushState(nextState, "");
+    }
+  }
+
+  function closeAppHistoryEntry(kind, closeDirect) {
+    const entry = getActiveAppHistoryEntry();
+    const kinds = Array.isArray(kind) ? kind : [kind];
+    if (!appHistoryRestoring && entry && kinds.includes(entry.kind)) {
+      window.history.back();
+      return;
+    }
+    closeDirect();
+  }
+
+  function closeAppHistoryGroup(predicate, closeDirect) {
+    if (!appHistoryRestoring) {
+      let entry = getActiveAppHistoryEntry();
+      let distance = 0;
+      while (entry && predicate(entry.kind)) {
+        distance += 1;
+        entry = appHistoryEntries.get(entry.parentId) || null;
+      }
+      if (distance > 0) {
+        window.history.go(-distance);
+        return;
+      }
+    }
+    closeDirect();
+  }
+
+  function hideNavigableLayers() {
+    detailSheet?.classList.remove("active");
+    sheetBackdrop?.classList.remove("active");
+    pickerOverlay?.classList.remove("active");
+    pickerBackdrop?.classList.remove("active");
+    ymPickerOverlay?.classList.remove("active");
+    ymPickerBackdrop?.classList.remove("active");
+    sideMenu?.classList.remove("active");
+    sideMenuBackdrop?.classList.remove("active");
+    document.querySelectorAll(".sub-pane.active").forEach(pane => pane.classList.remove("active"));
+    document.getElementById("vision-preview-backdrop")?.classList.remove("active");
+    document.getElementById("vision-preview-modal")?.classList.remove("active");
+    document.getElementById("pa-modal-backdrop")?.classList.remove("active");
+    document.getElementById("pa-modal")?.classList.remove("active");
+    document.body.classList.remove("pa-modal-open");
+    document.body.classList.remove("pa-filter-open");
+    const filterPanel = document.getElementById("pa-filter-panel");
+    const filterBackdrop = document.getElementById("pa-filter-backdrop");
+    filterPanel?.classList.remove("active");
+    if (filterBackdrop) {
+      filterBackdrop.hidden = true;
+      filterBackdrop.classList.remove("active");
+    }
+    delete document.body.dataset.paModalOriginMode;
+    document.body.setAttribute("data-mode", currentMode);
+  }
+
+  appHistoryEntries.set(0, {
+    id: 0,
+    parentId: null,
+    kind: "mode:dashboard",
+    restore: () => switchMode("dashboard", { history: false })
+  });
+  window.history.replaceState(
+    { ...(window.history.state || {}), [APP_HISTORY_ID]: 0, trappKind: "mode:dashboard" },
+    ""
+  );
+
+  window.addEventListener("popstate", async event => {
+    const id = Number(event.state?.[APP_HISTORY_ID]);
+    activeAppHistoryId = Number.isInteger(id) && appHistoryEntries.has(id) ? id : 0;
+    const entry = getActiveAppHistoryEntry() || appHistoryEntries.get(0);
+    appHistoryRestoring = true;
+    hideNavigableLayers();
+    try {
+      await entry.restore();
+    } catch (error) {
+      console.error("Failed to restore app history", error);
+      switchMode("dashboard", { history: false });
+    } finally {
+      appHistoryRestoring = false;
+    }
+  });
   const PLAYER_POSITION_ORDER = ["GK", "DF", "MF", "FW"];
   const KATAKANA_PLAYER_RE = /[ァ-ヴー]/;
 
@@ -1120,7 +1229,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
   }
 
-  function setPlayerAnalysisFilterPanel(open) {
+  function setPlayerAnalysisFilterPanel(open, options = {}) {
     const els = getPlayerAnalysisElements();
     if (!els.filterPanel) return;
     const active = Boolean(open);
@@ -1131,6 +1240,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       els.filterBackdrop.classList.toggle("active", active);
     }
     document.body.classList.toggle("pa-filter-open", active);
+    if (active) {
+      addAppHistoryEntry("pa-filter", () => setPlayerAnalysisFilterPanel(true, { history: false }), options);
+    } else if (options.history !== false && getActiveAppHistoryEntry()?.kind === "pa-filter") {
+      window.history.back();
+    }
   }
 
   function updatePlayerAnalysisScrollTopButton() {
@@ -2274,7 +2388,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.opponentScopeRows = [];
     playerAnalysisState.profileTab = "profile";
     playerAnalysisState.modalPlayer = null;
-    closePlayerAnalysisModal();
+    closePlayerAnalysisModal({ history: false });
     playerAnalysisState.competitionFilterActive = false;
     playerAnalysisState.selectedCompetitions = [];
     renderPlayerAnalysisClubControl();
@@ -5193,14 +5307,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { backdrop, modal };
   }
 
-  function closePlayerAnalysisModal() {
-    document.getElementById("pa-modal-backdrop")?.classList.remove("active");
-    document.getElementById("pa-modal")?.classList.remove("active");
-    document.body.classList.remove("pa-modal-open");
+  function closePlayerAnalysisModal(options = {}) {
+    const closeDirect = () => {
+      document.getElementById("pa-modal-backdrop")?.classList.remove("active");
+      document.getElementById("pa-modal")?.classList.remove("active");
+      document.body.classList.remove("pa-modal-open");
+      const originMode = document.body.dataset.paModalOriginMode;
+      if (originMode) {
+        document.body.setAttribute("data-mode", originMode);
+        delete document.body.dataset.paModalOriginMode;
+      }
+    };
+    if (options.history === false) {
+      closeDirect();
+      return;
+    }
+    closeAppHistoryGroup(kind => kind.startsWith("pa-modal:"), closeDirect);
   }
 
   function setPlayerAnalysisModalContent(html) {
     const { backdrop, modal } = ensurePlayerAnalysisModal();
+    if (currentMode !== "player-analysis" && !document.body.dataset.paModalOriginMode) {
+      document.body.dataset.paModalOriginMode = document.body.getAttribute("data-mode") || currentMode;
+      document.body.setAttribute("data-mode", "player-analysis");
+    }
     modal.innerHTML = html;
     setupPlayerPhotos(modal);
     setupPlayerChantAudio(modal);
@@ -5228,7 +5358,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       .find(row => getPlayerAnalysisKey(row) === key);
   }
 
-  function openPlayerAnalysisRankingModal(rankingId) {
+  function openPlayerAnalysisRankingModal(rankingId, options = {}) {
     const config = getPlayerAnalysisRankingConfigs().find(item => item.id === rankingId);
     if (!config) return;
     const items = getRankedPlayerRankingItems(playerAnalysisState.data, config);
@@ -5259,9 +5389,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       <span class="pa-chip">${rows.length}人</span>
     `;
     setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell("PLAYER RANKING", config.title, body, meta));
+    addAppHistoryEntry(
+      "pa-modal:ranking",
+      () => openPlayerAnalysisRankingModal(rankingId, { history: false }),
+      options
+    );
   }
 
-  function setPlayerAnalysisScreen(screen) {
+  function setPlayerAnalysisScreen(screen, options = {}) {
     const nextScreen = ["analysis", "compare", "opponents", "player-opponents"].includes(screen) ? screen : "analysis";
     playerAnalysisState.activeScreen = nextScreen;
     const { screens, bottomTabButtons } = getPlayerAnalysisElements();
@@ -5281,6 +5416,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (nextScreen === "opponents") renderPlayerOpponentPanel();
     if (nextScreen === "player-opponents") renderPlayerOpponentPlayerPanel();
     updatePlayerAnalysisScrollTopButton();
+    if (options.history === true) {
+      addAppHistoryEntry(
+        `pa-screen:${nextScreen}`,
+        () => setPlayerAnalysisScreen(nextScreen, { history: false }),
+        options
+      );
+    }
   }
 
   function getPlayerSortedRows(rows = playerAnalysisState.data || []) {
@@ -6819,7 +6961,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const scheduleMatch = findScheduleMatchForPlayerAnalysisMatch(match);
     if (!scheduleMatch) return false;
-    closePlayerAnalysisModal();
+    closePlayerAnalysisModal({ history: false });
     openDetailSheet(scheduleMatch);
     return true;
   }
@@ -6839,15 +6981,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     return renderPlayerAnalysisModalShell("MATCH DETAIL", match && match.opponent ? `vs ${match.opponent}` : "試合詳細", body);
   }
 
-  async function openOpponentClubMatchResultDetail(matchId, matchYear) {
+  async function openOpponentClubMatchResultDetail(matchId, matchYear, options = {}) {
+    const sourceNavigationId = activeAppHistoryId;
     const year = Number(matchYear);
     if (!matchId || !Number.isInteger(year)) return;
     const dataset = await loadPlayerAnalysisDatasetYear(year);
+    if (activeAppHistoryId !== sourceNavigationId) return;
     const match = (dataset.matches || []).find(item => String(item.match_id) === String(matchId));
     if (!match) return;
     const opened = await openScheduleMatchFromPlayerAnalysis(match);
     if (!opened) {
       setPlayerAnalysisModalContent(renderOpponentClubMatchFallback(match));
+      addAppHistoryEntry(
+        "pa-modal:opponent-match",
+        () => openOpponentClubMatchResultDetail(matchId, matchYear, { history: false }),
+        options
+      );
     }
   }
 
@@ -7284,6 +7433,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function openPlayerAnalysisProfile(player, options = {}) {
     if (!player) return;
+    addAppHistoryEntry(
+      "pa-modal:profile",
+      () => openPlayerAnalysisProfile(player, { ...options, history: false }),
+      options
+    );
+    const profileNavigationId = activeAppHistoryId;
     if (options.resetCategories !== false) {
       playerAnalysisState.modalCategories = getPlayerAnalysisCategoriesForScope(playerAnalysisState.matchScope);
     }
@@ -7320,6 +7475,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       totalMetrics: totalMetricMap.get(groupKey) || null,
       currentMetrics: currentMetricMap ? currentMetricMap.get(groupKey) || null : null
     };
+    if (activeAppHistoryId !== profileNavigationId || getActiveAppHistoryEntry()?.kind !== "pa-modal:profile") return;
     playerAnalysisState.modalYearRows = yearRows;
     renderPlayerAnalysisProfile(currentPlayer, yearRows, insights, profile);
   }
@@ -7349,7 +7505,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       await refreshPlayerAnalysisModalForCategories();
       return;
     }
-    await openPlayerAnalysisProfile(player, { resetCategories: false });
+    await openPlayerAnalysisProfile(player, { resetCategories: false, history: false });
   }
 
   function renderPlayerAnalysisDetail(player) {
@@ -7686,7 +7842,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       els.bottomTabs.onclick = (event) => {
         const button = event.target.closest("[data-pa-screen-target]");
         if (!button) return;
-        setPlayerAnalysisScreen(button.dataset.paScreenTarget);
+        setPlayerAnalysisScreen(button.dataset.paScreenTarget, { history: true });
       };
     }
     if (els.opponentSelect) {
@@ -8017,6 +8173,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       const yearButton = event.target.closest(".pa-year-detail-btn[data-pa-year-detail]");
       if (yearButton && playerAnalysisState.modalPlayer) {
+        const sourceNavigationId = activeAppHistoryId;
         const year = Number(yearButton.dataset.paYearDetail);
         if (!Number.isInteger(year)) return;
         playerAnalysisState.modalView = "match-list";
@@ -8028,12 +8185,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         const modalScope = getActivePlayerAnalysisModalScope();
         const items = await getPlayerYearMatchDetails(playerAnalysisState.modalPlayer, year, modalScope, null);
         const yearRows = await getPlayerAnalysisYearRowsForPlayer(playerAnalysisState.modalPlayer, modalScope, null);
+        if (activeAppHistoryId !== sourceNavigationId) return;
         const yearRow = yearRows.find(row => getPlayerYearValue(row) === year);
         playerAnalysisState.modalYearRows = yearRows;
         playerAnalysisState.modalMatchYear = year;
         playerAnalysisState.modalMatchYearRow = yearRow || null;
         playerAnalysisState.modalMatchItems = items;
         setPlayerAnalysisModalContent(renderPlayerYearMatchList(playerAnalysisState.modalPlayer, year, items, yearRow));
+        const modalPlayer = playerAnalysisState.modalPlayer;
+        addAppHistoryEntry("pa-modal:match-list", () => {
+          playerAnalysisState.modalPlayer = modalPlayer;
+          playerAnalysisState.modalView = "match-list";
+          playerAnalysisState.modalMatchYear = year;
+          playerAnalysisState.modalMatchYearRow = yearRow || null;
+          playerAnalysisState.modalMatchItems = items;
+          setPlayerAnalysisModalContent(renderPlayerYearMatchList(modalPlayer, year, items, yearRow));
+        });
         return;
       }
       const scheduleMatchButton = event.target.closest("[data-pa-open-schedule-match]");
@@ -8063,20 +8230,39 @@ document.addEventListener("DOMContentLoaded", async () => {
           item,
           playerAnalysisState.modalMatchYearRow
         ));
+        const modalPlayer = playerAnalysisState.modalPlayer;
+        const modalYear = playerAnalysisState.modalMatchYear;
+        const modalYearRow = playerAnalysisState.modalMatchYearRow;
+        addAppHistoryEntry("pa-modal:match-detail", () => {
+          playerAnalysisState.modalPlayer = modalPlayer;
+          playerAnalysisState.modalView = "match-detail";
+          playerAnalysisState.modalMatchYear = modalYear;
+          playerAnalysisState.modalMatchYearRow = modalYearRow;
+          playerAnalysisState.modalMatchItems = playerAnalysisState.modalMatchItems || [];
+          setPlayerAnalysisModalContent(renderPlayerMatchDetail(modalPlayer, modalYear, item, modalYearRow));
+        });
         return;
       }
       if (event.target.closest("[data-pa-match-log-back]") && playerAnalysisState.modalPlayer) {
-        playerAnalysisState.modalView = "match-list";
-        setPlayerAnalysisModalContent(renderPlayerYearMatchList(
-          playerAnalysisState.modalPlayer,
-          playerAnalysisState.modalMatchYear,
-          playerAnalysisState.modalMatchItems || [],
-          playerAnalysisState.modalMatchYearRow
-        ));
+        if (getActiveAppHistoryEntry()?.kind === "pa-modal:match-detail") {
+          window.history.back();
+        } else {
+          playerAnalysisState.modalView = "match-list";
+          setPlayerAnalysisModalContent(renderPlayerYearMatchList(
+            playerAnalysisState.modalPlayer,
+            playerAnalysisState.modalMatchYear,
+            playerAnalysisState.modalMatchItems || [],
+            playerAnalysisState.modalMatchYearRow
+          ));
+        }
         return;
       }
       if (event.target.closest("[data-pa-profile-back]") && playerAnalysisState.modalPlayer) {
-        openPlayerAnalysisProfile(playerAnalysisState.modalPlayer, { resetCategories: false });
+        if (getActiveAppHistoryEntry()?.kind === "pa-modal:match-list") {
+          window.history.back();
+        } else {
+          openPlayerAnalysisProfile(playerAnalysisState.modalPlayer, { resetCategories: false });
+        }
       }
     };
 
@@ -8095,7 +8281,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  function switchMode(mode) {
+  function switchMode(mode, options = {}) {
+    const previousMode = currentMode;
     currentMode = mode;
     document.body.setAttribute("data-mode", mode);
 
@@ -8134,6 +8321,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (hamBtn) hamBtn.innerHTML = mode === "vision" ? ellipsisIconHtml : hamburgerIconHtml;
     sideMenu.classList.remove("active");
+    if (options.history !== false && (previousMode !== mode || getActiveAppHistoryEntry()?.kind === "side-menu")) {
+      const activeScreen = playerAnalysisState.activeScreen;
+      addAppHistoryEntry(`mode:${mode}`, () => {
+        switchMode(mode, { history: false });
+        if (mode === "player-analysis") setPlayerAnalysisScreen(activeScreen, { history: false });
+      }, options);
+    }
   }
 
   function openSubPane(id) {
@@ -8434,7 +8628,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
   }
 
-  function openMatchPicker(matches) {
+  function openMatchPicker(matches, options = {}) {
     pickerList.innerHTML = matches.map(m => `
       <div class="picker-item" data-date="${m.date}" data-club="${m.club}" data-opp="${m.opponent}">
         <span class="picker-club ${m.club}">${m.club === 'niigata' ? '新潟' : '熊本'}</span>
@@ -8443,18 +8637,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     `).join("");
     pickerOverlay.classList.add("active");
     pickerBackdrop.classList.add("active");
+    addAppHistoryEntry("match-picker", () => openMatchPicker(matches, { history: false }), options);
 
     pickerList.querySelectorAll(".picker-item").forEach(item => {
       item.onclick = () => {
         const m = matches.find(x => x.date === item.dataset.date && x.club === item.dataset.club && x.opponent === item.dataset.opp);
-        if (m) { closeMatchPicker(); openDetailSheet(m); }
+        if (m) { closeMatchPicker({ history: false }); openDetailSheet(m); }
       };
     });
   }
 
-  function closeMatchPicker() {
-    pickerOverlay.classList.remove("active");
-    pickerBackdrop.classList.remove("active");
+  function closeMatchPicker(options = {}) {
+    const closeDirect = () => {
+      pickerOverlay.classList.remove("active");
+      pickerBackdrop.classList.remove("active");
+    };
+    if (options.history === false) closeDirect();
+    else closeAppHistoryEntry("match-picker", closeDirect);
   }
 
   function compactPlayerName(value) {
@@ -9112,6 +9311,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function openPlayerAnalysisProfileFromSchedule(playerName, sourceMatch) {
     if (!playerName || !sourceMatch || !PLAYER_ANALYSIS_CLUBS[sourceMatch.club]) return false;
+    const sourceNavigationId = activeAppHistoryId;
     initializePlayerAnalysisView();
     const sourceClub = getPlayerAnalysisClub(sourceMatch.club);
     const matchYear = Number(toIsoDate(sourceMatch.date || "").slice(0, 4));
@@ -9122,6 +9322,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerAnalysisState.competitionFilterActive = false;
     playerAnalysisState.selectedCompetitions = [];
     playerAnalysisState.year = targetYear;
+    playerAnalysisState.profileTab = "profile";
     renderPlayerAnalysisClubControl();
     renderPlayerAnalysisYears();
 
@@ -9139,6 +9340,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!player) {
       player = buildScheduleFallbackPlayerAnalysisRow(playerName, sourceClub);
     }
+    if (activeAppHistoryId !== sourceNavigationId) return false;
     openPlayerAnalysisProfile(player);
     return true;
   }
@@ -9716,9 +9918,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { backdrop, modal };
   }
 
-  function closeVisionPreviewModal() {
-    document.getElementById("vision-preview-backdrop")?.classList.remove("active");
-    document.getElementById("vision-preview-modal")?.classList.remove("active");
+  function closeVisionPreviewModal(options = {}) {
+    const closeDirect = () => {
+      document.getElementById("vision-preview-backdrop")?.classList.remove("active");
+      document.getElementById("vision-preview-modal")?.classList.remove("active");
+    };
+    if (options.history === false) closeDirect();
+    else closeAppHistoryGroup(kind => kind.startsWith("vision-preview:"), closeDirect);
   }
 
   const VISION_PHASES = {
@@ -9792,7 +9998,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  function renderVisionPreview(match, phase) {
+  function renderVisionPreview(match, phase, options = {}) {
     const { backdrop, modal } = ensureVisionPreviewModal();
     const detail = getDetailMatchData(match);
     const score = getHomeAwayDisplay(detail);
@@ -9830,6 +10036,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.classList.add("actual-vision");
     backdrop.classList.add("active");
     modal.classList.add("active");
+    addAppHistoryEntry(
+      `vision-preview:${phaseKey}`,
+      () => renderVisionPreview(match, phaseKey, { history: false }),
+      options
+    );
 
     const frame = modal.querySelector(".vision-display-frame");
     const resize = () => fitVisionPreviewFrame(frame);
@@ -9849,7 +10060,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  function openVisionPreviewPicker(match) {
+  function openVisionPreviewPicker(match, options = {}) {
     const { backdrop, modal } = ensureVisionPreviewModal();
     modal.classList.remove("actual-vision");
     modal.innerHTML = `
@@ -9875,6 +10086,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
     backdrop.classList.add("active");
     modal.classList.add("active");
+    addAppHistoryEntry(
+      "vision-preview:picker",
+      () => openVisionPreviewPicker(match, { history: false }),
+      options
+    );
     modal.querySelector(".vision-preview-close").onclick = closeVisionPreviewModal;
     modal.querySelectorAll("[data-phase]").forEach(btn => {
       btn.onclick = () => renderVisionPreview(match, btn.dataset.phase);
@@ -9883,7 +10099,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- Detail Sheet & Persistence ---
 
-  function openDetailSheet(match) {
+  function openDetailSheet(match, options = {}) {
     const mId = `${match.date}_${match.club}_${match.opponent}`;
     const offRes = findOfficialResult(match);
     const sMemo = localStorage.getItem(`memo_${mId}`) || "";
@@ -10116,6 +10332,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     detailSheet.classList.add("active");
     sheetBackdrop.classList.add("active");
+    addAppHistoryEntry("match-detail", () => openDetailSheet(match, { history: false }), options);
 
     // Prevent touch events from leaking through to the feed slider behind
     detailSheet.ontouchstart = (e) => e.stopPropagation();
@@ -10160,7 +10377,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     sheetContent.querySelectorAll("input, textarea").forEach(inp => inp.oninput = saveAndRefresh);
   }
 
-  function closeDetailSheet() { detailSheet.classList.remove("active"); sheetBackdrop.classList.remove("active"); }
+  function closeDetailSheet(options = {}) {
+    const closeDirect = () => {
+      detailSheet.classList.remove("active");
+      sheetBackdrop.classList.remove("active");
+    };
+    if (options.history === false) closeDirect();
+    else closeAppHistoryEntry("match-detail", closeDirect);
+  }
 
   const GAS_EXEC_URL = "https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec";
 
@@ -11412,7 +11636,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   // YM Picker
-  function openYmPicker() {
+  function openYmPicker(options = {}) {
     if (!activeMonthTitle.textContent.includes("/")) return; // Not fully initialized
     const pickerYearsAll = getAvailableYears().map(String);
     if (!pickerYearsAll.length) return;
@@ -11495,6 +11719,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     void drawPickerMonths();
     ymPickerOverlay.classList.add("active");
     ymPickerBackdrop.classList.add("active");
+    addAppHistoryEntry("ym-picker", () => openYmPicker({ history: false }), options);
     return;
 
     const yearMap = {};
@@ -11567,9 +11792,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     ymPickerOverlay.classList.add("active");
     ymPickerBackdrop.classList.add("active");
   }
-  function closeYmPicker() {
-    ymPickerOverlay.classList.remove("active");
-    ymPickerBackdrop.classList.remove("active");
+  function closeYmPicker(options = {}) {
+    const closeDirect = () => {
+      ymPickerOverlay.classList.remove("active");
+      ymPickerBackdrop.classList.remove("active");
+    };
+    if (options.history === false) closeDirect();
+    else closeAppHistoryEntry("ym-picker", closeDirect);
   }
   activeMonthTitle.onclick = openYmPicker;
   document.getElementById("ym-picker-close").onclick = closeYmPicker;
@@ -11580,29 +11809,37 @@ document.addEventListener("DOMContentLoaded", async () => {
   toggleKumamoto.onclick = () => { toggleKumamoto.classList.toggle("active"); updateClubVisibility(); };
 
   // Menus
-  const toggleMenu = (isOpen) => {
+  const toggleMenu = (isOpen, options = {}) => {
     if (isOpen) {
       sideMenu.classList.add("active");
       sideMenuBackdrop.classList.add("active");
+      addAppHistoryEntry("side-menu", () => toggleMenu(true, { history: false }), options);
     } else {
-      sideMenu.classList.remove("active");
-      sideMenuBackdrop.classList.remove("active");
+      const closeDirect = () => {
+        sideMenu.classList.remove("active");
+        sideMenuBackdrop.classList.remove("active");
+      };
+      if (options.history === false) closeDirect();
+      else closeAppHistoryEntry("side-menu", closeDirect);
     }
   };
   hamBtn.onclick = () => toggleMenu(true);
   document.getElementById("menu-close").onclick = () => toggleMenu(false);
   sideMenuBackdrop.onclick = () => toggleMenu(false);
 
-  function openSubPane(id) {
+  function openSubPane(id, options = {}) {
     document.getElementById(id).classList.add("active");
+    addAppHistoryEntry(`sub-pane:${id}`, () => openSubPane(id, { history: false }), options);
   }
-  function closeSubPane(id) {
-    document.getElementById(id).classList.remove("active");
+  function closeSubPane(id, options = {}) {
+    const closeDirect = () => document.getElementById(id).classList.remove("active");
+    if (options.history === false) closeDirect();
+    else closeAppHistoryEntry(`sub-pane:${id}`, closeDirect);
   }
   document.querySelectorAll(".close-pane").forEach(btn => {
     btn.onclick = () => {
       const pane = btn.closest(".sub-pane");
-      if (pane) pane.classList.remove("active");
+      if (pane) closeSubPane(pane.id);
     };
   });
 
