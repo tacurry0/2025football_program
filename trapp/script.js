@@ -11845,7 +11845,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Close menu after clicking item
   const menuItems = document.querySelectorAll(".menu-card");
-  menuItems.forEach(btn => btn.addEventListener('click', () => toggleMenu(false)));
+  // Selecting a destination replaces the menu's history entry below. Closing
+  // it with history.back() here would race that transition and restore the
+  // previous screen immediately.
+  menuItems.forEach(btn => btn.addEventListener('click', () => toggleMenu(false, { history: false })));
 
   document.getElementById("menu-dashboard").onclick = () => switchMode("dashboard");
   document.getElementById("menu-feed").onclick = () => switchMode("feed");

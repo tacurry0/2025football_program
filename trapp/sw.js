@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v49-browser-history';
+const cacheName = 'football-app-v50-menu-history-fix';
 const assetsToCache = [
   './',
   './index.html',
