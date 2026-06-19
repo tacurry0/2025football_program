@@ -1,11 +1,11 @@
-# New UI Sandbox
+# Full Clone Sandbox
 
-既存の本番ページから独立したデザイン検証用ページです。
+元アプリをそのまま読み込み、見た目だけをサンドボックス専用CSSで上書きする検証ページです。
 
-- エントリーポイント: `sandbox/index.html`
-- 既存の `index.html` / `style.css` / `script.js` は変更しません。
-- 既存データは読み取り専用で参照します。
-- Service Worker と PWA manifest は登録しません。
-- 観戦予定の試用データは `takarei_sandbox_` 接頭辞の別キーに保存します。
+- 元の `index.html`、`schedule/schedule.js`、`script.js` を実行
+- トップ画面、全メニュー、全フィルター、過去選手・過去結果をそのまま維持
+- `pwa.js` と manifest は読み込まず、Service Workerを登録しない
+- 元スクリプト内の `localStorage` 参照だけをサンドボックス専用領域へ差し替え
+- 本番ファイルは変更しない
 
-ローカルサーバーでプロジェクトルートを配信し、`/sandbox/` を開いて確認してください。
+デザイン変更は `sandbox/sandbox-theme.css` のみで行います。

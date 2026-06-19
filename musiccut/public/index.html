@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusicCut - オーディオトリミングツール</title>
+  <!-- Google Fonts: Outfit for body, JetBrains Mono for numbers -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="lucide.min.js"></script>
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar: File manager & Uploads -->
+    <aside class="sidebar">
+      <div class="logo-area">
+        <i data-lucide="scissors" class="logo-icon"></i>
+        <h1>MusicCut</h1>
+      </div>
+      
+      <div class="upload-section">
+        <h3>ファイルをアップロード</h3>
+        <label for="file-upload" class="upload-dropzone" id="dropzone">
+          <i data-lucide="upload-cloud" class="upload-icon"></i>
+          <span>ファイルをドラッグ＆ドロップ</span>
+          <span class="upload-sub">またはクリックして選択</span>
+          <input type="file" id="file-upload" accept=".mp3,.m4a,.wav,.ogg,.aac" style="display: none;">
+        </label>
+      </div>
+
+      <div class="file-list-section">
+        <div class="section-header">
+          <h3>ワークスペースのファイル</h3>
+          <button id="btn-refresh" class="icon-button" title="更新">
+            <i data-lucide="rotate-cw"></i>
+          </button>
+        </div>
+        <div class="file-list-container" id="file-list">
+          <div class="empty-list">ファイルがありません</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+      <!-- Active track banner -->
+      <header class="workspace-header">
+        <div class="active-track-info">
+          <div class="track-badge" id="track-format-badge">Ready</div>
+          <h2 id="active-track-title">オーディオファイルを選択してください</h2>
+        </div>
+        <div class="workspace-actions">
+          <span class="workspace-path-label" id="workspace-path">Workspace: loading...</span>
+        </div>
+      </header>
+
+      <!-- Editor Board -->
+      <section class="editor-board">
+        <!-- Audio visualization panel -->
+        <div class="waveform-panel">
+          <div id="wave-loading" class="wave-loader" style="display: none;">
+            <div class="spinner"></div>
+            <span>オーディオを解析中...</span>
+          </div>
+          
+          <div class="waveform-container-wrapper">
+            <!-- Timeline container -->
+            <div id="wave-timeline"></div>
+            <!-- Waveform container -->
+            <div id="waveform"></div>
+          </div>
+
+          <!-- Waveform UI overlay/controls -->
+          <div class="waveform-controls-overlay">
+            <div class="zoom-control">
+              <i data-lucide="zoom-out" class="control-icon-small"></i>
+              <input type="range" id="zoom-slider" min="0" max="500" value="0" class="styled-slider" title="左端で全体表示 (Fit to Screen)">
+              <i data-lucide="zoom-in" class="control-icon-small"></i>
+            </div>
+            <div class="time-display-wrapper">
+              <span id="current-time-display" class="mono-font">00:00.000</span>
+              <span class="divider">/</span>
+              <span id="duration-time-display" class="mono-font">00:00.000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playback toolbar -->
+        <div class="playback-toolbar">
+          <div class="play-controls">
+            <button id="btn-stop" class="playback-btn" title="停止">
+              <i data-lucide="square"></i>
+            </button>
+            <button id="btn-play-pause" class="playback-btn play-main" title="再生/一時停止">
+              <i data-lucide="play" id="play-icon"></i>
+            </button>
+            <button id="btn-play-selection" class="playback-btn secondary" title="選択範囲のみ再生">
+              <i data-lucide="play-circle"></i> <span>範囲再生</span>
+            </button>
+            <button id="btn-loop-toggle" class="playback-btn secondary" title="ループ再生">
+              <i data-lucide="repeat" id="loop-icon"></i> <span>ループ</span>
+            </button>
+          </div>
+
+          <div class="audio-tweaks">
+            <div class="tweak-item">
+              <i data-lucide="volume-2" class="tweak-icon"></i>
+              <input type="range" id="volume-slider" min="0" max="100" value="80" class="styled-slider volume-slider">
+            </div>
+            <div class="tweak-item">
+              <i data-lucide="gauge" class="tweak-icon" title="再生速度"></i>
+              <select id="speed-selector" class="styled-select">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1.0" selected>1.0x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2.0">2.0x</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Configuration Panel (Trim & Split) -->
+        <div class="trim-parameters-panel">
+          <!-- Tabs Navigation -->
+          <div class="panel-tabs">
+            <button class="panel-tab active" id="tab-trim" data-tab="trim">
+              <i data-lucide="scissors"></i> <span>範囲切り取り</span>
+            </button>
+            <button class="panel-tab" id="tab-split" data-tab="split">
+              <i data-lucide="split"></i> <span>複数分割</span>
+            </button>
+            <button class="panel-tab" id="tab-songs" data-tab="songs">
+              <i data-lucide="list-music"></i> <span>曲を自動検出・一括保存</span>
+            </button>
+          </div>
+
+          <!-- Tab Content 1: Trim Mode -->
+          <div class="tab-content" id="content-trim">
+            <div class="time-range-inputs">
+              <!-- Start Time -->
+              <div class="time-input-group">
+                <label>開始位置 (秒)</label>
+                <div class="input-with-button">
+                  <input type="number" id="input-start-time" step="0.001" min="0" value="0.000" class="styled-input mono-font">
+                  <button id="btn-set-start" class="btn-set-time" title="現在の再生位置を設定">
+                    <i data-lucide="navigation-2"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Selection Length (Duration) Input -->
+              <div class="time-input-group">
+                <label>選択範囲の長さ (秒)</label>
+                <div class="selection-status-wrapper">
+                  <input type="number" id="input-duration" step="0.001" min="0.001" value="0.000" class="styled-input mono-font highlight-input">
+                </div>
+              </div>
+
+              <!-- End Time -->
+              <div class="time-input-group">
+                <label>終了位置 (秒)</label>
+                <div class="input-with-button">
+                  <input type="number" id="input-end-time" step="0.001" min="0" value="0.000" class="styled-input mono-font">
+                  <button id="btn-set-end" class="btn-set-time" title="現在の再生位置を設定">
+                    <i data-lucide="navigation-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Options & Execute Row for Trim -->
+            <div class="trim-actions-row">
+              <div class="action-options">
+                <div class="option-field">
+                  <label for="input-suffix">保存時の接尾辞</label>
+                  <input type="text" id="input-suffix" value="_trimmed" class="styled-input suffix-input">
+                </div>
+                <div class="option-field">
+                  <label for="select-mode">トリミングモード</label>
+                  <select id="select-mode" class="styled-select">
+                    <option value="lossless" selected>高速・無劣化 (Lossless)</option>
+                    <option value="reencode">再エンコード (正確なカット)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <button id="btn-execute-trim" class="btn-primary" disabled>
+                <i data-lucide="scissors" class="btn-icon"></i>
+                <span>オーディオをカット</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab Content 2: Split Mode -->
+          <div class="tab-content" id="content-split" style="display: none;">
+            <div class="split-configuration">
+              <div class="split-options-grid">
+                <!-- Preset select -->
+                <div class="option-field">
+                  <label>分割間隔の選択</label>
+                  <div class="split-presets">
+                    <button class="preset-btn active" data-seconds="300" id="btn-preset-5m">5分 (300秒)</button>
+                    <button class="preset-btn" data-seconds="600" id="btn-preset-10m">10分 (600秒)</button>
+                    <button class="preset-btn" data-seconds="custom" id="btn-preset-custom">カスタム指定</button>
+                  </div>
+                </div>
+
+                <!-- Custom Interval Input -->
+                <div class="time-input-group" id="custom-split-group" style="display: none;">
+                  <label>カスタム分割間隔 (秒)</label>
+                  <input type="number" id="input-split-interval" min="1" value="300" class="styled-input mono-font">
+                </div>
+              </div>
+
+              <!-- Options & Execute Row for Split -->
+              <div class="trim-actions-row">
+                <div class="action-options">
+                  <div class="option-field">
+                    <label for="select-split-mode">分割モード</label>
+                    <select id="select-split-mode" class="styled-select">
+                      <option value="lossless" selected>高速・無劣化 (Lossless)</option>
+                      <option value="reencode">再エンコード (正確な分割)</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <button id="btn-execute-split" class="btn-primary" disabled>
+                  <i data-lucide="split" class="btn-icon"></i>
+                  <span>等間隔に分割</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="content-songs" style="display: none;">
+            <div class="song-workflow">
+              <div class="song-detect-controls">
+                <div class="option-field">
+                  <label>無音とみなす音量</label>
+                  <select id="song-threshold" class="styled-select">
+                    <option value="-38">小さな音も曲に含める (-38 dB)</option>
+                    <option value="-32" selected>標準 (-32 dB)</option>
+                    <option value="-26">周囲の音を除きやすい (-26 dB)</option>
+                  </select>
+                </div>
+                <div class="option-field compact-field">
+                  <label>曲間の無音 (秒)</label>
+                  <input id="song-min-silence" type="number" min="0.5" step="0.5" value="3" class="styled-input mono-font">
+                </div>
+                <div class="option-field compact-field">
+                  <label>最短の曲 (秒)</label>
+                  <input id="song-min-length" type="number" min="5" step="5" value="45" class="styled-input mono-font">
+                </div>
+                <button id="btn-detect-songs" class="btn-primary" disabled><i data-lucide="audio-lines"></i><span>曲を検出</span></button>
+              </div>
+              <p class="workflow-help">検出しただけでは保存されません。各候補を試聴し、範囲を調整して「確認済み」にしてください。</p>
+              <div id="song-region-list" class="song-region-list">
+                <div class="empty-history">曲を検出すると、ここに候補が並びます</div>
+              </div>
+              <div class="song-export-row">
+                <span id="song-confirm-summary" class="confirm-summary">確認済み 0 / 0 曲</span>
+                <div class="export-options">
+                  <select id="song-export-mode" class="styled-select">
+                    <option value="reencode" selected>正確なカット（推奨）</option>
+                    <option value="lossless">高速・無劣化</option>
+                  </select>
+                  <button id="btn-export-songs" class="btn-primary" disabled><i data-lucide="save"></i><span>確認済みの曲を一括保存</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- History & Output -->
+      <section class="history-board">
+        <div class="card-title">
+          <i data-lucide="history"></i>
+          <h3>カット履歴</h3>
+        </div>
+        <div class="history-list" id="history-list">
+          <div class="empty-history">トリミングされたファイルはここに表示されます</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Notification Banner -->
+  <div id="toast-notification" class="toast" style="display: none;">
+    <div class="toast-content">
+      <i data-lucide="info" id="toast-icon"></i>
+      <span id="toast-message">メッセージ</span>
+    </div>
+  </div>
+
+  <!-- Import application script as a module -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
