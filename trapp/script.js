@@ -207,6 +207,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const playerChantAvailabilityCache = new Map();
   const PLAYER_CHANT_AUDIO_DIR = "./data/assets/chants";
   const PLAYER_CHANT_MAX_INDEX = 20;
+  const PLAYER_ANALYSIS_MANUAL_STORAGE_KEY = "trapp_player_analysis_manual_players_v1";
+  let manualPlayerEditingId = "";
+  let manualPlayerEditingPhoto = "";
   const playerAnalysisState = {
     selectedClub: "niigata",
     year: 2026,
@@ -359,7 +362,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("vision-preview-modal")?.classList.remove("active");
     document.getElementById("pa-modal-backdrop")?.classList.remove("active");
     document.getElementById("pa-modal")?.classList.remove("active");
+    const playerAddModal = document.getElementById("pa-player-add-modal");
+    const playerAddBackdrop = document.getElementById("pa-player-add-backdrop");
+    playerAddModal?.classList.remove("active");
+    playerAddBackdrop?.classList.remove("active");
+    if (playerAddModal) playerAddModal.hidden = true;
+    if (playerAddBackdrop) playerAddBackdrop.hidden = true;
     document.body.classList.remove("pa-modal-open");
+    document.body.classList.remove("pa-player-add-open");
     document.body.classList.remove("pa-filter-open");
     const filterPanel = document.getElementById("pa-filter-panel");
     const filterBackdrop = document.getElementById("pa-filter-backdrop");
@@ -1224,6 +1234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       playerOpponentSelect: document.getElementById("pa-player-opponent-select"),
       playerOpponentResult: document.getElementById("pa-player-opponent-result"),
       scrollTopFab: document.getElementById("pa-scroll-top-fab"),
+      secretAddTrigger: document.getElementById("pa-secret-add-trigger"),
       mobileList: document.getElementById("pa-mobile-list"),
       detail: document.getElementById("pa-detail-card")
     };
@@ -1250,7 +1261,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   function updatePlayerAnalysisScrollTopButton() {
     const { scrollTopFab } = getPlayerAnalysisElements();
     if (!scrollTopFab) return;
-    const visible = currentMode === "player-analysis" && playerAnalysisView && playerAnalysisView.scrollTop > 80;
+    const scrollOffset = Math.max(
+      Number(playerAnalysisView?.scrollTop || 0),
+      Number(document.scrollingElement?.scrollTop || 0),
+      Number(document.documentElement?.scrollTop || 0),
+      Number(document.body?.scrollTop || 0),
+      Number(window.scrollY || 0)
+    );
+    const visible = currentMode === "player-analysis" && scrollOffset > 80;
     scrollTopFab.hidden = !visible;
     scrollTopFab.classList.toggle("visible", visible);
   }
@@ -1260,20 +1278,200 @@ document.addEventListener("DOMContentLoaded", async () => {
       event.preventDefault();
       event.stopPropagation();
     }
-    if (playerAnalysisView) {
+    const scrollingElement = document.scrollingElement || document.documentElement;
+    [playerAnalysisView, scrollingElement, document.documentElement, document.body].filter(Boolean).forEach(target => {
       try {
-        playerAnalysisView.scrollTo({ top: 0, behavior: "smooth" });
+        target.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       } catch (error) {
-        playerAnalysisView.scrollTop = 0;
+        target.scrollTop = 0;
       }
-      playerAnalysisView.scrollTop = 0;
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }
+      target.scrollTop = 0;
+    });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     requestAnimationFrame(updatePlayerAnalysisScrollTopButton);
     setTimeout(updatePlayerAnalysisScrollTopButton, 320);
+  }
+
+  function closeManualPlayerAddModal() {
+    const modal = document.getElementById("pa-player-add-modal");
+    const backdrop = document.getElementById("pa-player-add-backdrop");
+    modal?.classList.remove("active");
+    backdrop?.classList.remove("active");
+    document.body.classList.remove("pa-player-add-open");
+    manualPlayerEditingId = "";
+    manualPlayerEditingPhoto = "";
+    window.setTimeout(() => {
+      if (modal && !modal.classList.contains("active")) modal.hidden = true;
+      if (backdrop && !backdrop.classList.contains("active")) backdrop.hidden = true;
+    }, 190);
+  }
+
+  function openManualPlayerAddModal(player = null) {
+    const modal = document.getElementById("pa-player-add-modal");
+    const backdrop = document.getElementById("pa-player-add-backdrop");
+    const form = document.getElementById("pa-player-add-form");
+    const yearInput = document.getElementById("pa-player-add-year");
+    const photoName = document.getElementById("pa-player-add-photo-name");
+    const removePhotoField = document.getElementById("pa-player-add-remove-photo-field");
+    const errorBox = document.getElementById("pa-player-add-error");
+    if (!modal || !backdrop || !form) return;
+    form.reset();
+    const editingId = getManualPlayerIds(player)[0] || "";
+    const editingRecord = editingId ? loadManualPlayerRecords().find(record => String(record.id) === editingId) : null;
+    manualPlayerEditingId = editingRecord ? editingId : "";
+    manualPlayerEditingPhoto = String(editingRecord?.photo || "");
+    const activeYear = Number(playerAnalysisState.year);
+    if (yearInput) {
+      yearInput.min = String(getPlayerAnalysisClubInfo().yearStart || PLAYER_ANALYSIS_YEAR_START);
+      yearInput.value = String(editingRecord?.year || (Number.isInteger(activeYear) ? activeYear : PLAYER_ANALYSIS_YEAR_END));
+    }
+    if (editingRecord) {
+      const setValue = (id, value) => {
+        const input = document.getElementById(id);
+        if (input) input.value = value === null || value === undefined ? "" : String(value);
+      };
+      setValue("pa-player-add-number", editingRecord.number);
+      setValue("pa-player-add-name", editingRecord.name);
+      setValue("pa-player-add-name-en", editingRecord.nameEn);
+      setValue("pa-player-add-height", editingRecord.heightCm);
+      setValue("pa-player-add-weight", editingRecord.weightKg);
+      setValue("pa-player-add-birth-date", editingRecord.birthDate);
+      setValue("pa-player-add-birthplace", editingRecord.birthplace);
+      setValue("pa-player-add-final-team", editingRecord.finalTeam);
+      setValue("pa-player-add-affiliated-teams", (editingRecord.affiliatedTeams || []).join("、"));
+      const positions = new Set(Array.isArray(editingRecord.positions) ? editingRecord.positions : []);
+      form.querySelectorAll("input[name='pa-player-add-position']").forEach(input => { input.checked = positions.has(input.value); });
+    }
+    const title = document.getElementById("pa-player-add-title");
+    const submit = document.getElementById("pa-player-add-submit");
+    if (title) title.textContent = editingRecord ? "選手を編集" : "選手を追加";
+    if (submit) submit.textContent = editingRecord ? "更新" : "確定";
+    if (photoName) photoName.textContent = editingRecord?.photo ? "現在の写真を登録済み" : "未選択";
+    if (removePhotoField) removePhotoField.hidden = !editingRecord?.photo;
+    if (errorBox) errorBox.textContent = "";
+    backdrop.hidden = false;
+    modal.hidden = false;
+    document.body.classList.add("pa-player-add-open");
+    requestAnimationFrame(() => {
+      backdrop.classList.add("active");
+      modal.classList.add("active");
+      document.getElementById("pa-player-add-name")?.focus({ preventScroll: true });
+    });
+  }
+
+  function readFileAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ""));
+      reader.onerror = () => reject(reader.error || new Error("画像を読み込めませんでした"));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function prepareManualPlayerPhoto(file) {
+    if (!file) return "";
+    if (!String(file.type || "").startsWith("image/")) throw new Error("写真は画像ファイルを選択してください");
+    const source = await readFileAsDataUrl(file);
+    const image = await new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error("写真を処理できませんでした"));
+      img.src = source;
+    });
+    const maxSide = 900;
+    const scale = Math.min(1, maxSide / Math.max(image.naturalWidth || 1, image.naturalHeight || 1));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round((image.naturalWidth || 1) * scale));
+    canvas.height = Math.max(1, Math.round((image.naturalHeight || 1) * scale));
+    const context = canvas.getContext("2d");
+    if (!context) return source;
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    return canvas.toDataURL("image/jpeg", 0.82);
+  }
+
+  async function saveManualPlayerFromForm(event) {
+    event.preventDefault();
+    const nameInput = document.getElementById("pa-player-add-name");
+    const numberInput = document.getElementById("pa-player-add-number");
+    const yearInput = document.getElementById("pa-player-add-year");
+    const photoInput = document.getElementById("pa-player-add-photo");
+    const submitButton = document.getElementById("pa-player-add-submit");
+    const errorBox = document.getElementById("pa-player-add-error");
+    const name = String(nameInput?.value || "").normalize("NFKC").trim();
+    const number = String(numberInput?.value || "").trim();
+    const year = Number(yearInput?.value);
+    const minYear = getPlayerAnalysisClubInfo().yearStart || PLAYER_ANALYSIS_YEAR_START;
+    if (!name || !number || !Number.isInteger(year) || year < minYear || year > 2100) {
+      if (errorBox) errorBox.textContent = "背番号、名前、所属年を正しく入力してください。";
+      return;
+    }
+    if (submitButton) submitButton.disabled = true;
+    if (errorBox) errorBox.textContent = "";
+    try {
+      const existingRecords = loadManualPlayerRecords();
+      const existingRecord = manualPlayerEditingId
+        ? existingRecords.find(item => String(item.id) === manualPlayerEditingId)
+        : null;
+      const removePhoto = Boolean(document.getElementById("pa-player-add-remove-photo")?.checked);
+      const photo = photoInput?.files?.[0]
+        ? await prepareManualPlayerPhoto(photoInput.files[0])
+        : (removePhoto ? "" : manualPlayerEditingPhoto);
+      const affiliatedTeams = String(document.getElementById("pa-player-add-affiliated-teams")?.value || "")
+        .split(/[、,\n]/)
+        .map(value => value.trim())
+        .filter(Boolean);
+      const record = {
+        ...(existingRecord || {}),
+        id: existingRecord?.id || globalThis.crypto?.randomUUID?.() || `local-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
+        club: existingRecord?.club || playerAnalysisState.selectedClub,
+        year,
+        number,
+        name,
+        photo,
+        positions: Array.from(document.querySelectorAll("input[name='pa-player-add-position']:checked")).map(input => input.value),
+        nameEn: String(document.getElementById("pa-player-add-name-en")?.value || "").normalize("NFKC").trim(),
+        heightCm: String(document.getElementById("pa-player-add-height")?.value || "").trim(),
+        weightKg: String(document.getElementById("pa-player-add-weight")?.value || "").trim(),
+        birthDate: String(document.getElementById("pa-player-add-birth-date")?.value || "").trim(),
+        birthplace: String(document.getElementById("pa-player-add-birthplace")?.value || "").trim(),
+        finalTeam: String(document.getElementById("pa-player-add-final-team")?.value || "").trim(),
+        affiliatedTeams,
+        createdAt: existingRecord?.createdAt || new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      const wasEditing = Boolean(existingRecord);
+      saveManualPlayerRecords(wasEditing
+        ? existingRecords.map(item => String(item.id) === String(record.id) ? record : item)
+        : [...existingRecords, record]);
+      closeManualPlayerAddModal();
+      if (wasEditing) closePlayerAnalysisModal();
+      else if (getActiveAppHistoryEntry()?.kind === "pa-filter") setPlayerAnalysisFilterPanel(false);
+      await renderPlayerAnalysisYear(playerAnalysisState.year);
+    } catch (error) {
+      console.warn("Manual player could not be saved", error);
+      if (errorBox) {
+        errorBox.textContent = error && error.name === "QuotaExceededError"
+          ? "保存容量が足りません。写真を小さくして再度お試しください。"
+          : (error.message || "選手を保存できませんでした。");
+      }
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
+  }
+
+  async function deleteManualPlayer(player) {
+    const ids = new Set(getManualPlayerIds(player));
+    if (!ids.size) return;
+    if (!window.confirm(`${player.player_name || "この選手"}を削除しますか？`)) return;
+    try {
+      saveManualPlayerRecords(loadManualPlayerRecords().filter(record => !ids.has(String(record.id))));
+      closePlayerAnalysisModal();
+      playerAnalysisState.selectedKey = null;
+      await renderPlayerAnalysisYear(playerAnalysisState.year);
+    } catch (error) {
+      console.warn("Manual player could not be deleted", error);
+      window.alert("選手を削除できませんでした。");
+    }
   }
 
   function hasPlayerValue(value) {
@@ -1334,6 +1532,119 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getPlayerAnalysisClubInfo(club = playerAnalysisState.selectedClub) {
     return PLAYER_ANALYSIS_CLUBS[getPlayerAnalysisClub(club)] || PLAYER_ANALYSIS_CLUBS.niigata;
+  }
+
+  function loadManualPlayerRecords() {
+    try {
+      const value = JSON.parse(localStorage.getItem(PLAYER_ANALYSIS_MANUAL_STORAGE_KEY) || "[]");
+      if (!Array.isArray(value)) return [];
+      return value.filter(item => item && typeof item === "object" && item.id && item.name && Number.isInteger(Number(item.year)));
+    } catch (error) {
+      console.warn("Manual player data could not be read", error);
+      return [];
+    }
+  }
+
+  function saveManualPlayerRecords(records) {
+    localStorage.setItem(PLAYER_ANALYSIS_MANUAL_STORAGE_KEY, JSON.stringify(records));
+  }
+
+  function createManualPlayerRow(record, index = 0) {
+    const year = Number(record.year);
+    const row = {
+      season: year,
+      player_key: `manual:${record.id}`,
+      player_name: String(record.name || "").trim(),
+      numbers: record.number === "" || record.number === null || record.number === undefined ? [] : [String(record.number)],
+      positions: sortPlayerPositions(Array.isArray(record.positions) ? record.positions : []),
+      played_matches: 0,
+      played_wins: 0,
+      played_draws: 0,
+      played_losses: 0,
+      played_points: 0,
+      played_goals_for: 0,
+      played_goals_against: 0,
+      played_goal_diff: 0,
+      played_clean_sheets: 0,
+      starter_matches: 0,
+      starter_wins: 0,
+      starter_draws: 0,
+      starter_losses: 0,
+      starter_points: 0,
+      sub_matches: 0,
+      sub_wins: 0,
+      sub_draws: 0,
+      sub_losses: 0,
+      sub_points: 0,
+      bench_only_matches: 0,
+      non_played_matches: 0,
+      goals: 0,
+      scored_matches: 0,
+      scored_wins: 0,
+      scored_draws: 0,
+      scored_losses: 0,
+      yellow_cards: 0,
+      red_cards: 0,
+      __paIndex: index,
+      __paKey: `manual-${record.id}-${year}`,
+      __paGroupKey: `manual:${record.id}`,
+      __paIsManual: true,
+      __paManualId: String(record.id),
+      __paManualIds: [String(record.id)],
+      __paManualPhoto: String(record.photo || ""),
+      __paManualInfo: String(record.info || ""),
+      __paManualClub: getPlayerAnalysisClub(record.club),
+      __paManualCreatedAt: String(record.createdAt || ""),
+      __paManualRecord: { ...record }
+    };
+    row.__paProfile = buildManualPlayerProfile(row);
+    applyPlayerProfileToRow(row, row.__paProfile);
+    return row;
+  }
+
+  function getManualPlayerRowsForYears(years, club = playerAnalysisState.selectedClub) {
+    const allowedYears = new Set((Array.isArray(years) ? years : [years]).map(Number).filter(Number.isInteger));
+    const clubKey = getPlayerAnalysisClub(club);
+    return loadManualPlayerRecords()
+      .filter(record => getPlayerAnalysisClub(record.club) === clubKey && allowedYears.has(Number(record.year)))
+      .map(createManualPlayerRow);
+  }
+
+  function buildManualPlayerProfile(player) {
+    if (!player || !player.__paIsManual) return null;
+    const record = player.__paManualRecord || {};
+    const years = Array.from(new Set([
+      getPlayerYearValue(player),
+      ...(Array.isArray(player.seasons) ? player.seasons : [])
+    ].map(Number).filter(Number.isInteger)));
+    const positions = getPlayerPositions(player);
+    return {
+      app_player_name: player.player_name,
+      name: player.player_name,
+      official_name: player.player_name,
+      name_en: String(record.nameEn || ""),
+      position: positions.join(" / "),
+      birth_date: String(record.birthDate || ""),
+      birthplace: String(record.birthplace || ""),
+      height_cm: record.heightCm || "",
+      weight_kg: record.weightKg || "",
+      final_team: String(record.finalTeam || ""),
+      affiliated_teams: Array.isArray(record.affiliatedTeams) ? record.affiliatedTeams : [],
+      annual_records: years.map(year => ({ season: String(year), team: getPlayerAnalysisClubInfo(player.__paManualClub).name, league: "手動追加" })),
+      __paManual: true
+    };
+  }
+
+  function isManualPlayer(player) {
+    return Boolean(player && (player.__paIsManual || (Array.isArray(player.__paManualIds) && player.__paManualIds.length)));
+  }
+
+  function getManualPlayerIds(player) {
+    if (!player) return [];
+    return Array.from(new Set([
+      ...(Array.isArray(player.__paManualIds) ? player.__paManualIds : []),
+      player.__paManualId
+    ].filter(Boolean).map(String)));
   }
 
   function normalizePlayerImageName(name) {
@@ -1398,6 +1709,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getPlayerImageSources(playerName, club = playerAnalysisState.selectedClub, player = null) {
+    if (player && player.__paManualPhoto) return [player.__paManualPhoto];
     const aliasNames = getPlayerImageAliasNames(playerName, player);
     const baseNames = shouldUseGenericPlayerImageName(playerName, player) ? [playerName] : [];
     const names = [...aliasNames, ...baseNames].flatMap(getPlayerImageNameVariants);
@@ -3776,6 +4088,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       }
       const aggregate = groups.get(groupKey);
+      if (isManualPlayer(row)) {
+        aggregate.__paIsManual = true;
+        aggregate.__paManualIds = Array.from(new Set([...(aggregate.__paManualIds || []), ...getManualPlayerIds(row)]));
+        aggregate.__paManualId = aggregate.__paManualIds[0] || row.__paManualId;
+        aggregate.__paManualPhoto = aggregate.__paManualPhoto || row.__paManualPhoto || "";
+        aggregate.__paManualInfo = aggregate.__paManualInfo || row.__paManualInfo || "";
+        aggregate.__paManualClub = aggregate.__paManualClub || row.__paManualClub || playerAnalysisState.selectedClub;
+        aggregate.__paManualRecord = aggregate.__paManualRecord || row.__paManualRecord || null;
+      }
       const year = getPlayerYearValue(row);
       aggregate.__paYearRows.push(row);
       if (year && !aggregate.seasons.includes(year)) aggregate.seasons.push(year);
@@ -3820,7 +4141,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       player.scored_points_per_match = calculatePlayerPointsPerMatch(player.scored_wins, player.scored_draws, player.scored_matches);
       player.carded_win_rate = calculatePlayerRate(player.carded_wins, player.carded_matches);
       player.__paIndex = index;
-      player.__paKey = `all-${player.__paGroupKey}`;
+      player.__paKey = isManualPlayer(player) ? `manual-all-${player.__paManualIds.join("-")}` : `all-${player.__paGroupKey}`;
+      if (isManualPlayer(player)) player.__paProfile = buildManualPlayerProfile(player);
       return player;
     });
   }
@@ -3839,6 +4161,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function getPlayerAnalysisYearRowsForPlayer(player, scope = playerAnalysisState.matchScope, competitionNames = getActivePlayerAnalysisCompetitionFilter()) {
+    if (isManualPlayer(player)) {
+      const ids = new Set(getManualPlayerIds(player));
+      return loadManualPlayerRecords()
+        .filter(record => ids.has(String(record.id)) && getPlayerAnalysisClub(record.club) === getPlayerAnalysisClub(player.__paManualClub))
+        .map(createManualPlayerRow)
+        .sort((a, b) => (getPlayerYearValue(b) || 0) - (getPlayerYearValue(a) || 0));
+    }
     const groupKey = getPlayerGroupKey(player);
     if (!groupKey) return [];
     await loadAllPlayerAnalysisYears(scope, competitionNames);
@@ -7075,6 +7404,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function getPlayerProfile(player, club = playerAnalysisState.selectedClub) {
+    if (isManualPlayer(player)) return buildManualPlayerProfile(player);
     const clubKey = getPlayerAnalysisClub(club);
     const profiles = await loadPlayerProfiles(clubKey);
     const primary = findPlayerProfile(profiles, player);
@@ -7155,6 +7485,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const items = Array.isArray(rows) ? rows : [];
     const missing = [];
     items.forEach(player => {
+      if (isManualPlayer(player)) {
+        applyPlayerProfileToRow(player, buildManualPlayerProfile(player));
+        return;
+      }
       const profile = findPlayerProfile(profiles, player);
       if (profile) applyPlayerProfileToRow(player, profile);
       else missing.push(player);
@@ -7469,6 +7803,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           ${renderPlayerOpponentGoalSection(player.player_name || "-", currentOpponentMode === "defense" ? currentInsights.opponentDefense : currentInsights.opponentGoals, { mode: currentOpponentMode })}
         </div>
       ` : ""}
+      ${isManualPlayer(aggregate) || isManualPlayer(player) ? `
+        <div class="pa-manual-delete-zone">
+          <button type="button" class="pa-manual-edit-btn" data-pa-edit-manual>この選手を編集</button>
+          <button type="button" class="pa-manual-delete-btn" data-pa-delete-manual>この選手を削除</button>
+        </div>
+      ` : ""}
     `;
     setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell(getPlayerProfileEnglishName(profile, aggregate || player), aggregate.player_name || player.player_name || "-", body, meta));
     setPlayerProfileTab(activeTab);
@@ -7719,7 +8059,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setPlayerAnalysisStatus(`${loadingLabel} / ${getPlayerAnalysisScopeLabel()} の選手分析データを読み込み中...`);
     const competitionFilter = getActivePlayerAnalysisCompetitionFilter();
 
-    const entry = playerAnalysisState.timeMode === "range"
+    const sourceEntry = playerAnalysisState.timeMode === "range"
       ? {
         rows: await buildPlayerRowsForYears(activeYears, playerAnalysisState.matchScope, competitionFilter),
         missing: !activeYears.length
@@ -7727,8 +8067,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       : playerAnalysisState.year === "all"
         ? await loadAllPlayerAnalysisYears(playerAnalysisState.matchScope, competitionFilter)
         : await loadScopedPlayerAnalysisYear(playerAnalysisState.year, playerAnalysisState.matchScope, competitionFilter);
+    const entry = { ...sourceEntry, rows: [...(sourceEntry.rows || [])] };
     playerAnalysisState.teamStats = await buildPlayerAnalysisTeamStats(timeValue, playerAnalysisState.matchScope, competitionFilter);
-    entry.missing = entry.missing || !entry.rows.length;
+    const manualYearRows = getManualPlayerRowsForYears(activeYears, playerAnalysisState.selectedClub);
+    const manualRows = playerAnalysisState.timeMode === "range" || playerAnalysisState.year === "all"
+      ? aggregatePlayerAnalysisRows(manualYearRows)
+      : manualYearRows;
+    entry.rows = [...(entry.rows || []), ...manualRows];
+    entry.missing = !entry.rows.length;
     await attachPlayerProfilesToRows(entry.rows);
     playerAnalysisState.data = entry.rows;
     playerAnalysisState.selectedKey = null;
@@ -7873,12 +8219,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (els.filterFab) els.filterFab.onclick = () => setPlayerAnalysisFilterPanel(true);
     if (els.filterClose) els.filterClose.onclick = () => setPlayerAnalysisFilterPanel(false);
     if (els.filterBackdrop) els.filterBackdrop.onclick = () => setPlayerAnalysisFilterPanel(false);
+    if (els.secretAddTrigger) {
+      let secretTapCount = 0;
+      let lastSecretTapAt = 0;
+      els.secretAddTrigger.onclick = event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const now = Date.now();
+        if (now - lastSecretTapAt > 1400) secretTapCount = 0;
+        lastSecretTapAt = now;
+        secretTapCount += 1;
+        if (secretTapCount < 10) return;
+        secretTapCount = 0;
+        openManualPlayerAddModal();
+      };
+    }
+    const playerAddForm = document.getElementById("pa-player-add-form");
+    const playerAddPhoto = document.getElementById("pa-player-add-photo");
+    if (playerAddForm) playerAddForm.onsubmit = saveManualPlayerFromForm;
+    [document.getElementById("pa-player-add-close"), document.getElementById("pa-player-add-cancel"), document.getElementById("pa-player-add-backdrop")]
+      .filter(Boolean)
+      .forEach(element => { element.onclick = closeManualPlayerAddModal; });
+    if (playerAddPhoto) {
+      playerAddPhoto.onchange = () => {
+        const photoName = document.getElementById("pa-player-add-photo-name");
+        if (photoName) photoName.textContent = playerAddPhoto.files?.[0]?.name || (manualPlayerEditingPhoto ? "現在の写真を登録済み" : "未選択");
+      };
+    }
     if (els.scrollTopFab) {
       els.scrollTopFab.onclick = scrollPlayerAnalysisToTop;
-      els.scrollTopFab.addEventListener("click", scrollPlayerAnalysisToTop);
     }
     if (playerAnalysisView) {
       playerAnalysisView.addEventListener("scroll", updatePlayerAnalysisScrollTopButton, { passive: true });
+      window.addEventListener("scroll", updatePlayerAnalysisScrollTopButton, { passive: true });
       updatePlayerAnalysisScrollTopButton();
     }
     if (els.bottomTabs) {
@@ -7995,7 +8368,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") setPlayerAnalysisFilterPanel(false);
+      if (event.key !== "Escape") return;
+      if (document.getElementById("pa-player-add-modal")?.classList.contains("active")) {
+        closeManualPlayerAddModal();
+        return;
+      }
+      setPlayerAnalysisFilterPanel(false);
     });
     els.scopeButtons.forEach(button => {
       button.onclick = () => {
@@ -8186,6 +8564,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.onclick = async (event) => {
       if (event.target.closest("[data-pa-modal-close]")) {
         closePlayerAnalysisModal();
+        return;
+      }
+      if (event.target.closest("[data-pa-edit-manual]") && playerAnalysisState.modalPlayer) {
+        openManualPlayerAddModal(playerAnalysisState.modalPlayer);
+        return;
+      }
+      if (event.target.closest("[data-pa-delete-manual]") && playerAnalysisState.modalPlayer) {
+        await deleteManualPlayer(playerAnalysisState.modalPlayer);
         return;
       }
       if (handlePlayerProfileSectionToggle(event)) return;

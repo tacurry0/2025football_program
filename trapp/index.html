@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260622filter-summary-redesign">
+  <link rel="stylesheet" href="style.css?v=20260622local-player-edit">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <meta name="mobile-web-app-capable" content="yes">
@@ -868,6 +868,7 @@ We can't help falling in love with you
           <button type="button" id="pa-filter-close" class="pa-filter-close" aria-label="フィルターを閉じる">×</button>
           <div class="pa-filter-main">
             <label class="pa-search-field" for="pa-player-search">
+              <span id="pa-secret-add-trigger" class="pa-secret-add-trigger" aria-hidden="true"></span>
               <span>選手名</span>
               <input type="search" id="pa-player-search" placeholder="日本語名・英語名で検索" autocomplete="off">
             </label>
@@ -1247,6 +1248,85 @@ We can't help falling in love with you
     <div id="sheet-content"></div>
   </div>
 
+  <div id="pa-player-add-backdrop" class="pa-player-add-backdrop" hidden></div>
+  <section id="pa-player-add-modal" class="pa-player-add-modal" role="dialog" aria-modal="true" aria-labelledby="pa-player-add-title" hidden>
+    <form id="pa-player-add-form" class="pa-player-add-form">
+      <header class="pa-player-add-head">
+        <div>
+          <span>LOCAL PLAYER</span>
+          <h2 id="pa-player-add-title">選手を追加</h2>
+        </div>
+        <button type="button" id="pa-player-add-close" aria-label="閉じる">×</button>
+      </header>
+      <div class="pa-player-add-body">
+        <p class="pa-player-add-local-note">この端末のブラウザ内にのみ保存されます。</p>
+        <div class="pa-player-add-grid">
+          <label>
+            <span>背番号</span>
+            <input type="number" id="pa-player-add-number" min="0" max="999" inputmode="numeric" placeholder="例: 10" required>
+          </label>
+          <label>
+            <span>所属年</span>
+            <input type="number" id="pa-player-add-year" min="1994" max="2100" inputmode="numeric" required>
+          </label>
+          <label class="wide">
+            <span>名前</span>
+            <input type="text" id="pa-player-add-name" maxlength="80" autocomplete="off" placeholder="選手名" required>
+          </label>
+          <label class="wide">
+            <span>英語名</span>
+            <input type="text" id="pa-player-add-name-en" maxlength="120" autocomplete="off" placeholder="例: TARO YAMADA">
+          </label>
+          <fieldset class="wide pa-player-add-position">
+            <legend>ポジション</legend>
+            <label><input type="checkbox" name="pa-player-add-position" value="GK"><span>GK</span></label>
+            <label><input type="checkbox" name="pa-player-add-position" value="DF"><span>DF</span></label>
+            <label><input type="checkbox" name="pa-player-add-position" value="MF"><span>MF</span></label>
+            <label><input type="checkbox" name="pa-player-add-position" value="FW"><span>FW</span></label>
+          </fieldset>
+          <label>
+            <span>身長 (cm)</span>
+            <input type="number" id="pa-player-add-height" min="100" max="250" inputmode="numeric" placeholder="例: 178">
+          </label>
+          <label>
+            <span>体重 (kg)</span>
+            <input type="number" id="pa-player-add-weight" min="30" max="200" inputmode="numeric" placeholder="例: 72">
+          </label>
+          <label class="wide">
+            <span>生年月日</span>
+            <input type="date" id="pa-player-add-birth-date">
+          </label>
+          <label>
+            <span>出身地</span>
+            <input type="text" id="pa-player-add-birthplace" maxlength="100" placeholder="例: 新潟県">
+          </label>
+          <label>
+            <span>前所属 / 最終所属</span>
+            <input type="text" id="pa-player-add-final-team" maxlength="120" placeholder="クラブ名">
+          </label>
+          <label class="wide">
+            <span>所属クラブ歴</span>
+            <input type="text" id="pa-player-add-affiliated-teams" maxlength="500" placeholder="クラブ名を「、」区切りで入力">
+          </label>
+          <label class="wide pa-player-add-photo-field">
+            <span>写真</span>
+            <input type="file" id="pa-player-add-photo" accept="image/*">
+            <span id="pa-player-add-photo-name" class="pa-player-add-photo-name">未選択</span>
+          </label>
+          <label id="pa-player-add-remove-photo-field" class="wide pa-player-add-remove-photo" hidden>
+            <input type="checkbox" id="pa-player-add-remove-photo">
+            <span>現在の写真を削除</span>
+          </label>
+        </div>
+        <div id="pa-player-add-error" class="pa-player-add-error" role="alert" aria-live="polite"></div>
+      </div>
+      <footer class="pa-player-add-actions">
+        <button type="button" id="pa-player-add-cancel">キャンセル</button>
+        <button type="submit" id="pa-player-add-submit">確定</button>
+      </footer>
+    </form>
+  </section>
+
   <!-- 🎯 Calendar Match Picker Overlay -->
   <div id="match-picker-backdrop" class="sub-pane-backdrop"></div>
   <div id="match-picker-overlay" class="sub-pane-pop">
@@ -1290,7 +1370,7 @@ We can't help falling in love with you
 
   <script src="pwa.js?v=20260618pwa-install"></script>
   <script src="schedule/schedule.js?v=20260617manual-score-off"></script>
-  <script src="script.js?v=20260622filter-summary-redesign"></script>
+  <script src="script.js?v=20260622local-player-edit"></script>
 
 </body>
 </html>
