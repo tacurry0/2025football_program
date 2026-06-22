@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v56-local-player-edit';
+const cacheName = 'football-app-v57-modal-close-center';
 const assetsToCache = [
   './',
   './index.html',

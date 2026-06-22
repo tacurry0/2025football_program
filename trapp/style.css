@@ -4608,13 +4608,29 @@ body.pa-modal-open {
   flex: 0 0 auto;
   width: 40px;
   height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
   border: 0;
   border-radius: 50%;
   background: rgba(255,255,255,0.92);
   color: #111;
-  font-size: 1.4rem;
+  font-size: 0;
   font-weight: 900;
+  line-height: 0;
+  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
+}
+
+.pa-modal-close::before {
+  content: "×";
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-1px);
 }
 
 .pa-modal-meta {
@@ -8535,7 +8551,10 @@ body[data-mode="dashboard"] #header-n-gate-container { pointer-events: auto; }
     height: 34px;
     background: rgba(255,255,255,0.92);
     color: #111;
-    font-size: 1.1rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-modal-close::before {
+    font-size: 21px;
   }
 
   body[data-mode="player-analysis"] .pa-modal-meta {
