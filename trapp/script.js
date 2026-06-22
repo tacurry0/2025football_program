@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     filtered: [],
     sortKey: "played_matches",
     sortDirection: "desc",
-    listDetail: true,
+    listDetail: false,
     selectedKey: null,
     query: "",
     positions: [],
@@ -2040,15 +2040,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     return rawName.toUpperCase();
   }
 
-  function renderPlayerPhoto(playerName, club = playerAnalysisState.selectedClub, className = "", player = null) {
+  function renderPlayerPhoto(playerName, club = playerAnalysisState.selectedClub, className = "", player = null, options = {}) {
     const resolvedClub = getPlayerAnalysisClub(club);
     const sources = getPlayerImageSources(playerName, resolvedClub, player);
     if (!sources.length) return "";
     const fallbackSources = sources.slice(1);
     const altName = normalizePlayerImageName(playerName);
     const classes = ["player-photo", `club-${resolvedClub}`, className].filter(Boolean).join(" ");
+    const tagName = options.inline ? "span" : "figure";
     return `
-      <figure class="${escapeHtml(classes)}">
+      <${tagName} class="${escapeHtml(classes)}">
         <img
           src="${escapeHtml(sources[0])}"
           ${fallbackSources.length ? `data-fallback-srcs="${escapeHtml(fallbackSources.join("|"))}"` : ""}
@@ -2057,7 +2058,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           loading="eager"
           decoding="async"
         >
-      </figure>
+      </${tagName}>
     `;
   }
 
@@ -4132,27 +4133,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getPlayerAnalysisAdvancedFilterOptions() {
     return [
-      ["", "条件なし"],
-      ["number", "背番号"],
-      ["played-min", "出場試合数 以上"],
-      ["played-max", "出場試合数 以下"],
-      ["starts-min", "先発数 以上"],
-      ["goals-min", "得点数 以上"],
-      ["played-rate-min", "出場時勝率 %以上"],
-      ["scored-rate-min", "ゴール試合勝率 %以上"],
-      ["scored-ppm-min", "ゴール試合平均勝ち点 以上"],
-      ["month-goals-min", "対象月の得点数 以上"],
-      ["month-played-rate-min", "対象月の出場時勝率 %以上"],
-      ["yellow-min", "警告数 以上"],
-      ["red-min", "退場数 以上"],
-      ["seasons-min", "所属年数 以上"],
-      ["seasons-max", "所属年数 以下"],
-      ["height-min", "身長 cm以上"],
-      ["height-max", "身長 cm以下"],
-      ["weight-min", "体重 kg以上"],
-      ["weight-max", "体重 kg以下"],
-      ["birth-year-min", "生まれ年 以降"],
-      ["birth-year-max", "生まれ年 以前"]
+      { label: "基本", options: [["", "条件なし"], ["number", "背番号"]] },
+      { label: "出場", options: [
+        ["played-min", "出場試合数 以上"], ["played-max", "出場試合数 以下"],
+        ["starts-min", "先発数 以上"], ["starts-max", "先発数 以下"]
+      ] },
+      { label: "得点・成績", options: [
+        ["goals-min", "得点数 以上"], ["goals-max", "得点数 以下"],
+        ["played-rate-min", "出場時勝率 %以上"], ["played-rate-max", "出場時勝率 %以下"],
+        ["scored-rate-min", "ゴール試合勝率 %以上"], ["scored-rate-max", "ゴール試合勝率 %以下"],
+        ["scored-ppm-min", "ゴール試合平均勝ち点 以上"], ["scored-ppm-max", "ゴール試合平均勝ち点 以下"]
+      ] },
+      { label: "月別", options: [
+        ["month-goals-min", "対象月の得点数 以上"], ["month-goals-max", "対象月の得点数 以下"],
+        ["month-played-rate-min", "対象月の出場時勝率 %以上"], ["month-played-rate-max", "対象月の出場時勝率 %以下"]
+      ] },
+      { label: "カード", options: [
+        ["yellow-min", "警告数 以上"], ["yellow-max", "警告数 以下"],
+        ["red-min", "退場数 以上"], ["red-max", "退場数 以下"]
+      ] },
+      { label: "プロフィール", options: [
+        ["seasons-min", "所属年数 以上"], ["seasons-max", "所属年数 以下"],
+        ["height-min", "身長 cm以上"], ["height-max", "身長 cm以下"],
+        ["weight-min", "体重 kg以上"], ["weight-max", "体重 kg以下"],
+        ["birth-year-min", "生まれ年 以降"], ["birth-year-max", "生まれ年 以前"]
+      ] }
     ];
   }
 
@@ -4181,12 +4186,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (filter.type === "played-min") return played >= value;
     if (filter.type === "played-max") return played <= value;
     if (filter.type === "starts-min") return starts >= value;
+    if (filter.type === "starts-max") return starts <= value;
     if (filter.type === "goals-min") return goals >= value;
+    if (filter.type === "goals-max") return goals <= value;
     if (filter.type === "played-rate-min") return playedRate !== null && playedRate >= value;
+    if (filter.type === "played-rate-max") return playedRate !== null && playedRate <= value;
     if (filter.type === "scored-rate-min") return scoredRate !== null && scoredRate >= value;
+    if (filter.type === "scored-rate-max") return scoredRate !== null && scoredRate <= value;
     if (filter.type === "scored-ppm-min") return scoredPpm !== null && scoredPpm >= value;
+    if (filter.type === "scored-ppm-max") return scoredPpm !== null && scoredPpm <= value;
     if (filter.type === "yellow-min") return yellow >= value;
+    if (filter.type === "yellow-max") return yellow <= value;
     if (filter.type === "red-min") return red >= value;
+    if (filter.type === "red-max") return red <= value;
     if (filter.type === "seasons-min") return seasonCount >= value;
     if (filter.type === "seasons-max") return seasonCount <= value;
     if (filter.type === "height-min") return height !== null && height >= value;
@@ -4195,12 +4207,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (filter.type === "weight-max") return weight !== null && weight <= value;
     if (filter.type === "birth-year-min") return birthYear !== null && birthYear >= value;
     if (filter.type === "birth-year-max") return birthYear !== null && birthYear <= value;
-    if (filter.type === "month-goals-min" || filter.type === "month-played-rate-min") {
+    if (isPlayerAnalysisMonthCompactFilter(filter.type)) {
       const month = normalizePlayerMonthFilter(filter.month);
       const monthlyStats = getPlayerMonthlyStatsForMonth(player, month);
       if (filter.type === "month-goals-min") return monthlyStats.goals >= value;
+      if (filter.type === "month-goals-max") return monthlyStats.goals <= value;
       const monthlyPlayedRate = calculatePlayerRate(monthlyStats.wins, monthlyStats.played);
-      return monthlyPlayedRate !== null && monthlyPlayedRate >= value;
+      if (monthlyPlayedRate === null) return false;
+      return filter.type === "month-played-rate-min" ? monthlyPlayedRate >= value : monthlyPlayedRate <= value;
     }
     return true;
   }
@@ -4575,7 +4589,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function isPlayerAnalysisMonthCompactFilter(type) {
-    return type === "month-goals-min" || type === "month-played-rate-min";
+    return type === "month-goals-min" || type === "month-goals-max"
+      || type === "month-played-rate-min" || type === "month-played-rate-max";
   }
 
   function updatePlayerAnalysisCompactFilterControls(els = getPlayerAnalysisElements()) {
@@ -4638,7 +4653,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const filters = playerAnalysisState.advancedFilters && playerAnalysisState.advancedFilters.length
       ? playerAnalysisState.advancedFilters
       : [createPlayerAnalysisAdvancedFilter()];
-    const options = getPlayerAnalysisAdvancedFilterOptions();
+    const optionGroups = getPlayerAnalysisAdvancedFilterOptions();
     advancedFilterRows.innerHTML = filters.map((filter, index) => {
       const type = String(filter.type || "");
       const monthActive = isPlayerAnalysisMonthCompactFilter(type);
@@ -4647,7 +4662,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           <label class="pa-select-field">
             <span>条件 ${index + 1}</span>
             <select data-pa-filter-type>
-              ${options.map(([value, label]) => `<option value="${escapeHtml(value)}" ${value === type ? "selected" : ""}>${escapeHtml(label)}</option>`).join("")}
+              ${optionGroups.map(group => `
+                <optgroup label="${escapeHtml(group.label)}">
+                  ${group.options.map(([value, label]) => `<option value="${escapeHtml(value)}" ${value === type ? "selected" : ""}>${escapeHtml(label)}</option>`).join("")}
+                </optgroup>
+              `).join("")}
             </select>
           </label>
           <label class="pa-select-field pa-filter-month-field" ${monthActive ? "" : "hidden"}>
@@ -4721,24 +4740,46 @@ document.addEventListener("DOMContentLoaded", async () => {
         || (toPlayerNumber(b.played_matches) || 0) - (toPlayerNumber(a.played_matches) || 0))[0];
     const yearLabel = getPlayerAnalysisTimeLabel();
     const scopeLabel = getPlayerAnalysisScopeLabel();
-    const cards = [
-      { label: "対象", value: yearLabel, caption: scopeLabel, tone: "scope" },
-      { label: "選手数", value: rows.length, caption: `${playedPlayers}人が出場`, tone: "players" },
-      { label: "出場あり", value: playedPlayers, caption: "出場試合数 1以上", tone: "played" },
-      { label: "総得点", value: totalGoals, caption: "選手別得点の合計", tone: "goals" },
-      { label: "最多出場", value: formatPlayerNumber(topAppearance && topAppearance.played_matches), caption: topAppearance ? topAppearance.player_name : "-", tone: "appearances" },
-      { label: "最多先発", value: formatPlayerNumber(topStarter && topStarter.starter_matches), caption: topStarter ? topStarter.player_name : "-", tone: "starts" },
-      { label: "得点トップ", value: formatPlayerNumber(topScorer && topScorer.goals), caption: topScorer ? topScorer.player_name : "-", tone: "scorer" },
-      { label: "出場勝率トップ", value: formatPlayerRate(topWinRate && topWinRate.played_win_rate), caption: topWinRate ? topWinRate.player_name : "-", tone: "rate" }
+    const totals = [
+      { label: "登録選手", value: rows.length, unit: "名" },
+      { label: "出場選手", value: playedPlayers, unit: "名" },
+      { label: "チーム総得点", value: totalGoals, unit: "得点" }
     ];
-    summary.innerHTML = cards.map((card, index) => `
-      <div class="pa-summary-card tone-${escapeHtml(card.tone)}" style="--pa-card-index:${index + 1}">
-        <i aria-hidden="true">${escapeHtml(String(index + 1).padStart(2, "0"))}</i>
-        <span>${escapeHtml(card.label)}</span>
-        <strong>${escapeHtml(String(card.value))}</strong>
-        <small>${escapeHtml(card.caption)}</small>
-      </div>
-    `).join("");
+    const leaders = [
+      { label: "最多出場", value: formatPlayerNumber(topAppearance && topAppearance.played_matches), unit: "試合", name: topAppearance ? topAppearance.player_name : "-" },
+      { label: "最多先発", value: formatPlayerNumber(topStarter && topStarter.starter_matches), unit: "試合", name: topStarter ? topStarter.player_name : "-" },
+      { label: "得点王", value: formatPlayerNumber(topScorer && topScorer.goals), unit: "得点", name: topScorer ? topScorer.player_name : "-" },
+      { label: "最高出場勝率", value: formatPlayerRate(topWinRate && topWinRate.played_win_rate), unit: "", name: topWinRate ? topWinRate.player_name : "-" }
+    ];
+    summary.innerHTML = `
+      <section class="pa-summary-overview" aria-label="分析対象と主要数値">
+        <header class="pa-summary-scope">
+          <span><small>ANALYSIS SCOPE</small><strong>${escapeHtml(yearLabel)}</strong></span>
+          <em>${escapeHtml(scopeLabel)}</em>
+        </header>
+        <div class="pa-summary-totals">
+          ${totals.map(item => `
+            <article>
+              <span>${escapeHtml(item.label)}</span>
+              <strong>${escapeHtml(String(item.value))}<small>${escapeHtml(item.unit)}</small></strong>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+      <section class="pa-summary-leaders" aria-label="トップ選手">
+        <header><span>TOP PERFORMERS</span><small>対象期間のリーダー</small></header>
+        <div class="pa-summary-leader-grid">
+          ${leaders.map((item, index) => `
+            <article>
+              <i aria-hidden="true">${String(index + 1).padStart(2, "0")}</i>
+              <span>${escapeHtml(item.label)}</span>
+              <strong>${escapeHtml(String(item.value))}${item.unit ? `<small>${escapeHtml(item.unit)}</small>` : ""}</strong>
+              <b>${escapeHtml(item.name)}</b>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    `;
   }
 
   function createPlayerRankingMetric() {
@@ -6253,6 +6294,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <span class="pa-mobile-shirt ${isGoalkeeper ? "gk" : ""}" aria-label="背番号 ${escapeHtml(formatPlayerList(player.numbers))}">
               <span class="pa-mobile-number-cycle" data-pa-number-count="${numberCount}">${numberCycle}</span>
             </span>
+            ${renderPlayerPhoto(name, playerAnalysisState.selectedClub, "pa-mobile-list-photo", player, { inline: true })}
             <span class="pa-mobile-compact-name">
                <small>${escapeHtml(formatPlayerList(player.positions))}</small>
                <strong title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
@@ -6305,6 +6347,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
     }).join("");
     setupPlayerAnalysisNumberCycles(mobileList);
+    setupPlayerPhotos(mobileList);
   }
 
   function renderPlayerAnalysisTable() {
