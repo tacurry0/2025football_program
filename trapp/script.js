@@ -1493,6 +1493,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     return text || "-";
   }
 
+  function formatPlayerCardNumbers(value) {
+    const items = Array.isArray(value)
+      ? value.map(item => String(item || "").trim()).filter(Boolean)
+      : normalizePlayerNumberValues(value);
+    return items.length ? items.join(" ") : "-";
+  }
+
   function normalizePlayerNumberValues(value) {
     const raw = Array.isArray(value)
       ? value
@@ -5629,7 +5636,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       <section class="pa-rank-card" data-pa-ranking="${escapeHtml(config.id)}" role="button" tabindex="0" aria-label="${escapeHtml(config.title)}を全順位で表示">
         <div class="pa-rank-card-head">
           <h3>${escapeHtml(config.title)}</h3>
-          <span>全順位</span>
+          <div class="pa-rank-card-actions">
+            <button type="button" class="pa-card-output-btn compact" data-pa-ranking-card="${escapeHtml(config.id)}" aria-label="${escapeHtml(config.title)}のカード画像を表示">カード</button>
+            <span>全順位</span>
+          </div>
         </div>
         ${items.length ? `<ol class="pa-rank-list">
           ${items.map(item => `
@@ -5723,6 +5733,731 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
   }
 
+  function getPlayerCardTheme(club = playerAnalysisState.selectedClub) {
+    const key = getPlayerAnalysisClub(club);
+    if (key === "kumamoto") {
+      return {
+        key,
+        accent: "#cc0000",
+        accentLight: "#ef5350",
+        accentDark: "#2b1012",
+        accentInk: "#8a1018",
+        secondary: "#111111",
+        pale: "#fff1f1",
+        soft: "#ffe4e5",
+        emblem: "./data/assets/emblems/ロアッソ熊本.png"
+      };
+    }
+    return {
+      key,
+      accent: "#ff6600",
+      accentLight: "#ff8b2b",
+      accentDark: "#271607",
+      accentInk: "#8b3900",
+      secondary: "#003366",
+      pale: "#fff5ec",
+      soft: "#ffe2c8",
+      emblem: "./data/assets/emblems/アルビレックス新潟.png"
+    };
+  }
+
+  function ensurePlayerCardPreviewModal() {
+    let backdrop = document.getElementById("pa-card-preview-backdrop");
+    let modal = document.getElementById("pa-card-preview-modal");
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.id = "pa-card-preview-backdrop";
+      backdrop.className = "pa-card-preview-backdrop";
+      document.body.appendChild(backdrop);
+    }
+    if (!modal) {
+      modal = document.createElement("section");
+      modal.id = "pa-card-preview-modal";
+      modal.className = "pa-card-preview-modal";
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-modal", "true");
+      modal.setAttribute("aria-labelledby", "pa-card-preview-title");
+      document.body.appendChild(modal);
+    }
+    backdrop.onclick = closePlayerCardPreviewModal;
+    modal.onclick = event => {
+      if (event.target.closest("[data-pa-card-preview-close]")) closePlayerCardPreviewModal();
+    };
+    return { backdrop, modal };
+  }
+
+  function closePlayerCardPreviewModal() {
+    document.getElementById("pa-card-preview-backdrop")?.classList.remove("active");
+    document.getElementById("pa-card-preview-modal")?.classList.remove("active");
+    document.body.classList.remove("pa-card-preview-open");
+  }
+
+  function setPlayerCardPreviewShell(title, bodyClass = "") {
+    const { backdrop, modal } = ensurePlayerCardPreviewModal();
+    modal.innerHTML = `
+      <header class="pa-card-preview-head">
+        <div>
+          <span>CARD IMAGE</span>
+          <h2 id="pa-card-preview-title">${escapeHtml(title || "カード画像")}</h2>
+        </div>
+        <button type="button" class="pa-card-preview-close" data-pa-card-preview-close aria-label="閉じる">×</button>
+      </header>
+      <div class="pa-card-preview-body ${escapeHtml(bodyClass)}"></div>
+    `;
+    backdrop.classList.add("active");
+    modal.classList.add("active");
+    document.body.classList.add("pa-card-preview-open");
+    return modal.querySelector(".pa-card-preview-body");
+  }
+
+  function setPlayerCardPreviewLoading(title) {
+    const body = setPlayerCardPreviewShell(title, "loading");
+    if (body) {
+      body.innerHTML = `<div class="pa-card-preview-loading"><strong>画像を生成中...</strong></div>`;
+    }
+  }
+
+  function setPlayerCardPreviewError(message) {
+    const modal = document.getElementById("pa-card-preview-modal");
+    const body = modal?.querySelector(".pa-card-preview-body");
+    if (!body) return;
+    body.className = "pa-card-preview-body error";
+    body.innerHTML = `<div class="pa-card-preview-error">${escapeHtml(message || "カード画像を生成できませんでした。")}</div>`;
+  }
+
+  function setPlayerCardPreviewImage(dataUrl, title, filename) {
+    const modal = document.getElementById("pa-card-preview-modal");
+    const body = modal?.querySelector(".pa-card-preview-body");
+    if (!body) return;
+    body.className = "pa-card-preview-body image";
+    body.innerHTML = "";
+    const image = document.createElement("img");
+    image.src = dataUrl;
+    image.alt = title || "カード画像";
+    image.draggable = true;
+    const actions = document.createElement("div");
+    actions.className = "pa-card-preview-actions";
+    const download = document.createElement("a");
+    download.href = dataUrl;
+    download.download = filename || "trapp-card.png";
+    download.textContent = "保存";
+    actions.appendChild(download);
+    body.appendChild(image);
+    body.appendChild(actions);
+  }
+
+  function loadPlayerCardImage(sources) {
+    const queue = (Array.isArray(sources) ? sources : [sources])
+      .map(source => String(source || "").trim())
+      .filter(Boolean);
+    return new Promise(resolve => {
+      const tryNext = () => {
+        const source = queue.shift();
+        if (!source) {
+          resolve(null);
+          return;
+        }
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = tryNext;
+        image.src = source;
+      };
+      tryNext();
+    });
+  }
+
+  function drawPlayerCardRoundRect(ctx, x, y, width, height, radius) {
+    const r = Math.max(0, Math.min(radius, width / 2, height / 2));
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + width, y, x + width, y + height, r);
+    ctx.arcTo(x + width, y + height, x, y + height, r);
+    ctx.arcTo(x, y + height, x, y, r);
+    ctx.arcTo(x, y, x + width, y, r);
+    ctx.closePath();
+  }
+
+  function fillPlayerCardRoundRect(ctx, x, y, width, height, radius, fillStyle, strokeStyle = "", lineWidth = 1) {
+    drawPlayerCardRoundRect(ctx, x, y, width, height, radius);
+    if (fillStyle) {
+      ctx.fillStyle = fillStyle;
+      ctx.fill();
+    }
+    if (strokeStyle) {
+      ctx.strokeStyle = strokeStyle;
+      ctx.lineWidth = lineWidth;
+      ctx.stroke();
+    }
+  }
+
+  function getPlayerCardFont(weight = 800, size = 32) {
+    return `${weight} ${size}px JLeagueKick, "Noto Sans JP", "Yu Gothic", sans-serif`;
+  }
+
+  function drawPlayerCardFitText(ctx, text, x, y, maxWidth, options = {}) {
+    const value = String(text || "-");
+    const minSize = options.minSize || 18;
+    let size = options.size || 32;
+    const weight = options.weight || 800;
+    const align = options.align || "left";
+    ctx.textAlign = align;
+    ctx.textBaseline = options.baseline || "alphabetic";
+    ctx.fillStyle = options.color || "#111111";
+    while (size > minSize) {
+      ctx.font = getPlayerCardFont(weight, size);
+      if (ctx.measureText(value).width <= maxWidth) break;
+      size -= 2;
+    }
+    ctx.font = getPlayerCardFont(weight, size);
+    ctx.fillText(value, x, y);
+    return size;
+  }
+
+  function drawPlayerCardWrappedText(ctx, text, x, y, maxWidth, lineHeight, options = {}) {
+    const raw = String(text || "");
+    const chars = Array.from(raw);
+    const lines = [];
+    let line = "";
+    ctx.font = getPlayerCardFont(options.weight || 800, options.size || 28);
+    chars.forEach(char => {
+      const next = `${line}${char}`;
+      if (ctx.measureText(next).width > maxWidth && line) {
+        lines.push(line);
+        line = char;
+      } else {
+        line = next;
+      }
+    });
+    if (line) lines.push(line);
+    ctx.fillStyle = options.color || "#111111";
+    ctx.textAlign = options.align || "left";
+    ctx.textBaseline = "alphabetic";
+    const drawnLines = lines.slice(0, options.maxLines || 2);
+    drawnLines.forEach((item, index) => {
+      ctx.fillText(item, x, y + (index * lineHeight));
+    });
+    return drawnLines.length;
+  }
+
+  function drawPlayerCardCoverImage(ctx, image, x, y, width, height, radius = 0) {
+    if (!image) return false;
+    const sourceWidth = image.naturalWidth || image.width;
+    const sourceHeight = image.naturalHeight || image.height;
+    if (!sourceWidth || !sourceHeight) return false;
+    const scale = Math.max(width / sourceWidth, height / sourceHeight);
+    const drawWidth = sourceWidth * scale;
+    const drawHeight = sourceHeight * scale;
+    const dx = x + ((width - drawWidth) / 2);
+    const dy = y + ((height - drawHeight) / 2);
+    ctx.save();
+    if (radius) {
+      drawPlayerCardRoundRect(ctx, x, y, width, height, radius);
+      ctx.clip();
+    }
+    ctx.drawImage(image, dx, dy, drawWidth, drawHeight);
+    ctx.restore();
+    return true;
+  }
+
+  function drawPlayerCardContainedImage(ctx, image, x, y, width, height) {
+    if (!image) return false;
+    const sourceWidth = image.naturalWidth || image.width;
+    const sourceHeight = image.naturalHeight || image.height;
+    if (!sourceWidth || !sourceHeight) return false;
+    const scale = Math.min(width / sourceWidth, height / sourceHeight);
+    const drawWidth = sourceWidth * scale;
+    const drawHeight = sourceHeight * scale;
+    ctx.drawImage(image, x + ((width - drawWidth) / 2), y + ((height - drawHeight) / 2), drawWidth, drawHeight);
+    return true;
+  }
+
+  function drawPlayerCardMetric(ctx, label, value, x, y, width, height, theme) {
+    fillPlayerCardRoundRect(ctx, x, y, width, height, 18, "#ffffff", "rgba(0,0,0,0.08)", 2);
+    ctx.fillStyle = theme.accent;
+    ctx.font = getPlayerCardFont(900, 42);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    drawPlayerCardFitText(ctx, value, x + (width / 2), y + 58, width - 16, {
+      size: 42,
+      minSize: 24,
+      weight: 900,
+      align: "center",
+      color: theme.accent
+    });
+    drawPlayerCardFitText(ctx, label, x + (width / 2), y + height - 22, width - 16, {
+      size: 20,
+      minSize: 14,
+      weight: 800,
+      align: "center",
+      color: "#333333"
+    });
+  }
+
+  function drawPlayerCardInfoRow(ctx, label, value, x, y, maxWidth) {
+    ctx.fillStyle = "#777777";
+    ctx.font = getPlayerCardFont(800, 22);
+    ctx.textAlign = "left";
+    ctx.fillText(label, x, y);
+    drawPlayerCardFitText(ctx, value, x + 112, y, maxWidth - 112, {
+      size: 24,
+      minSize: 16,
+      weight: 900,
+      color: "#111111"
+    });
+  }
+
+  function getPlayerCardSafeFilename(value) {
+    return String(value || "trapp-card")
+      .normalize("NFKC")
+      .replace(/[\\/:*?"<>|]+/g, "-")
+      .replace(/\s+/g, "-")
+      .slice(0, 80);
+  }
+
+  function formatPlayerCardShortDate(value) {
+    if (!hasPlayerProfileValue(value)) return "-";
+    return String(value).trim().replace(/-/g, "/");
+  }
+
+  function getPlayerCardDisplayRows(player, rows) {
+    const activeYears = new Set(getPlayerAnalysisTimeYears());
+    const sourceRows = (Array.isArray(rows) && rows.length)
+      ? rows
+      : Array.isArray(player && player.__paYearRows)
+        ? player.__paYearRows
+        : [player].filter(Boolean);
+    const scopedRows = sourceRows.filter(row => {
+      if (!activeYears.size) return true;
+      const year = getPlayerYearValue(row);
+      return year && activeYears.has(year);
+    });
+    return scopedRows.length ? scopedRows : sourceRows;
+  }
+
+  async function buildPlayerCardContext(player, options = {}) {
+    const sourcePlayer = player || playerAnalysisState.modalPlayer;
+    if (!sourcePlayer) return null;
+    const scope = options.scope || playerAnalysisState.matchScope;
+    const competitionNames = Object.prototype.hasOwnProperty.call(options, "competitionNames")
+      ? options.competitionNames
+      : getActivePlayerAnalysisCompetitionFilter();
+    const yearRows = await getPlayerAnalysisYearRowsForPlayer(sourcePlayer, scope, competitionNames);
+    const displayRows = getPlayerCardDisplayRows(sourcePlayer, yearRows);
+    const displayPlayer = displayRows.length > 1
+      ? (aggregatePlayerAnalysisRows(displayRows)[0] || sourcePlayer)
+      : (displayRows[0] || sourcePlayer);
+    const statePlayer = (playerAnalysisState.data || []).find(row => getPlayerGroupKey(row) === getPlayerGroupKey(sourcePlayer));
+    if (statePlayer) {
+      displayPlayer.__paImpact = statePlayer.__paImpact;
+      displayPlayer.__paRankingMetrics = statePlayer.__paRankingMetrics;
+      displayPlayer.profile_name_en = displayPlayer.profile_name_en || statePlayer.profile_name_en;
+      displayPlayer.profile_height_cm = displayPlayer.profile_height_cm || statePlayer.profile_height_cm;
+      displayPlayer.profile_weight_kg = displayPlayer.profile_weight_kg || statePlayer.profile_weight_kg;
+      displayPlayer.profile_birth_year = displayPlayer.profile_birth_year || statePlayer.profile_birth_year;
+      displayPlayer.profile_birthplace = displayPlayer.profile_birthplace || statePlayer.profile_birthplace;
+    }
+    const metricYears = getPlayerAnalysisYearsForPlayers([sourcePlayer], displayRows);
+    const metricMap = await buildPlayerAnalysisRankingMetrics(metricYears, scope, competitionNames);
+    displayPlayer.__paRankingMetrics = metricMap.get(getPlayerGroupKey(sourcePlayer)) || displayPlayer.__paRankingMetrics || createPlayerRankingMetric();
+    const profile = await getPlayerProfile(sourcePlayer);
+    return { sourcePlayer, displayPlayer, yearRows, displayRows, profile, scope, competitionNames };
+  }
+
+  async function buildPlayerAnalysisPlayerCardDataUrl(player, options = {}) {
+    const context = await buildPlayerCardContext(player, options);
+    if (!context) throw new Error("player not found");
+    const { sourcePlayer, displayPlayer, yearRows, profile, scope } = context;
+    const theme = getPlayerCardTheme(playerAnalysisState.selectedClub);
+    const clubInfo = getPlayerAnalysisClubInfo();
+    const canvas = document.createElement("canvas");
+    canvas.width = 1080;
+    canvas.height = 1440;
+    const ctx = canvas.getContext("2d");
+    const gradient = ctx.createLinearGradient(0, 0, 1080, 1440);
+    gradient.addColorStop(0, "#fffaf5");
+    gradient.addColorStop(0.48, "#ffffff");
+    gradient.addColorStop(1, theme.pale);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = theme.soft;
+    ctx.globalAlpha = 0.48;
+    ctx.beginPath();
+    ctx.moveTo(790, 0);
+    ctx.lineTo(1080, 0);
+    ctx.lineTo(1080, 620);
+    ctx.lineTo(620, 960);
+    ctx.closePath();
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    fillPlayerCardRoundRect(ctx, 18, 18, 1044, 1404, 42, "rgba(255,255,255,0.84)", theme.accent, 6);
+    const headerGradient = ctx.createLinearGradient(28, 36, 1052, 154);
+    headerGradient.addColorStop(0, theme.accentDark);
+    headerGradient.addColorStop(0.58, theme.secondary);
+    headerGradient.addColorStop(1, theme.accent);
+    fillPlayerCardRoundRect(ctx, 42, 42, 996, 132, 28, headerGradient);
+
+    const emblem = await loadPlayerCardImage(theme.emblem);
+    drawPlayerCardContainedImage(ctx, emblem, 62, 56, 96, 96);
+    drawPlayerCardFitText(ctx, clubInfo.englishName, 178, 108, 820, { size: 64, minSize: 36, weight: 900, color: "#ffffff" });
+    drawPlayerCardFitText(ctx, "PLAYER CARD", 178, 146, 360, { size: 26, minSize: 16, weight: 800, color: "rgba(255,255,255,0.78)" });
+
+    const playerName = displayPlayer.player_name || sourcePlayer.player_name || "-";
+    const number = formatPlayerCardNumbers(displayPlayer.numbers || sourcePlayer.numbers);
+    const position = formatPlayerList(displayPlayer.positions || sourcePlayer.positions);
+    const photo = await loadPlayerCardImage(getPlayerImageSources(playerName, playerAnalysisState.selectedClub, sourcePlayer));
+    fillPlayerCardRoundRect(ctx, 58, 202, 430, 472, 28, theme.pale, "rgba(0,0,0,0.08)", 2);
+    if (!drawPlayerCardCoverImage(ctx, photo, 58, 202, 430, 472, 28)) {
+      const photoGradient = ctx.createLinearGradient(58, 202, 488, 674);
+      photoGradient.addColorStop(0, theme.accent);
+      photoGradient.addColorStop(1, theme.secondary);
+      fillPlayerCardRoundRect(ctx, 58, 202, 430, 472, 28, photoGradient);
+      drawPlayerCardFitText(ctx, number, 273, 445, 330, { size: 150, minSize: 74, weight: 900, color: "rgba(255,255,255,0.92)", align: "center" });
+    }
+
+    drawPlayerCardFitText(ctx, number, 526, 318, 462, { size: 112, minSize: 34, weight: 900, color: theme.accent });
+    drawPlayerCardFitText(ctx, position, 526, 366, 462, { size: 34, minSize: 22, weight: 900, color: theme.accentInk });
+    const nameLineCount = drawPlayerCardWrappedText(ctx, playerName, 526, 438, 465, 52, { size: 52, weight: 900, maxLines: 2, color: "#111111" });
+    const englishY = 438 + (Math.max(1, nameLineCount) * 52) + 20;
+    drawPlayerCardFitText(ctx, getPlayerProfileEnglishName(profile, displayPlayer), 526, englishY, 462, {
+      size: 30,
+      minSize: 18,
+      weight: 900,
+      color: "#333333"
+    });
+    const profileStartY = englishY + 48;
+    const profileRows = [
+      ["生年月日", formatPlayerCardShortDate(profile && profile.birth_date)],
+      ["出身地", hasPlayerProfileValue(profile && profile.birthplace) ? profile.birthplace : "-"],
+      ["身長/体重", `${hasPlayerProfileValue(profile && profile.height_cm) ? profile.height_cm : "-"}cm / ${hasPlayerProfileValue(profile && profile.weight_kg) ? profile.weight_kg : "-"}kg`],
+      ["所属年数", `${formatPlayerNumber(getPlayerSeasonCount(displayPlayer))}年`]
+    ];
+    profileRows.forEach((row, index) => drawPlayerCardInfoRow(ctx, row[0], row[1], 526, profileStartY + (index * 40), 470));
+
+    const metrics = displayPlayer.__paRankingMetrics || {};
+    const metricItems = [
+      ["試合", formatPlayerNumber(displayPlayer.played_matches)],
+      ["先発", formatPlayerNumber(displayPlayer.starter_matches)],
+      ["出場時間", formatPlayerMinutes(metrics.played_minutes)],
+      ["得点", formatPlayerNumber(displayPlayer.goals)],
+      ["警告", formatPlayerNumber(displayPlayer.yellow_cards)],
+      ["退場", formatPlayerNumber(displayPlayer.red_cards)]
+    ];
+    const metricsY = Math.max(730, profileStartY + (profileRows.length * 40) + 24);
+    metricItems.forEach((item, index) => {
+      drawPlayerCardMetric(ctx, item[0], item[1], 58 + (index * 160), metricsY, 142, 106, theme);
+    });
+
+    const tableTitleY = metricsY + 154;
+    drawPlayerCardFitText(ctx, `年度別成績 (${clubInfo.shortName})`, 540, tableTitleY, 700, {
+      size: 28,
+      minSize: 18,
+      weight: 900,
+      align: "center",
+      color: "#111111"
+    });
+    const tableX = 58;
+    const tableY = tableTitleY + 28;
+    const tableW = 964;
+    const tableBottom = 1368;
+    const tableH = Math.max(250, tableBottom - tableY);
+    fillPlayerCardRoundRect(ctx, tableX, tableY, tableW, tableH, 18, "rgba(255,255,255,0.92)", "rgba(0,0,0,0.08)", 2);
+    const sortedRows = (Array.isArray(yearRows) ? [...yearRows] : [])
+      .sort((a, b) => (getPlayerYearValue(a) || 0) - (getPlayerYearValue(b) || 0));
+    if (sortedRows.length) {
+      if (sortedRows.length <= 10) {
+        const headerH = 44;
+        const rowH = Math.max(30, Math.min(44, Math.floor((tableH - headerH - 8) / sortedRows.length)));
+        ctx.fillStyle = theme.pale;
+        ctx.fillRect(tableX + 2, tableY + 2, tableW - 4, headerH);
+        const columns = [
+          ["年度", 88],
+          ["背", 92],
+          ["出場", 118],
+          ["先発", 118],
+          ["得点", 118],
+          ["勝率", 138],
+          ["警告", 118],
+          ["退場", 118]
+        ];
+        let columnX = tableX + 22;
+        columns.forEach(([label, width]) => {
+          drawPlayerCardFitText(ctx, label, columnX + (width / 2), tableY + 27, width - 8, {
+            size: 19,
+            minSize: 14,
+            weight: 900,
+            align: "center",
+            baseline: "middle",
+            color: theme.accentInk
+          });
+          columnX += width;
+        });
+        const maxPlayed = Math.max(1, ...sortedRows.map(row => toPlayerNumber(row.played_matches) || 0));
+        sortedRows.forEach((row, rowIndex) => {
+          const y = tableY + headerH + (rowIndex * rowH);
+          ctx.fillStyle = rowIndex % 2 ? "rgba(0,0,0,0.018)" : "#ffffff";
+          ctx.fillRect(tableX + 2, y, tableW - 4, rowH);
+          columnX = tableX + 22;
+          const values = [
+            formatPlayerNumber(getPlayerYearValue(row)),
+            formatPlayerCardNumbers(row.numbers),
+            formatPlayerNumber(row.played_matches),
+            formatPlayerNumber(row.starter_matches),
+            formatPlayerNumber(row.goals),
+            formatPlayerRate(row.played_win_rate),
+            formatPlayerNumber(row.yellow_cards),
+            formatPlayerNumber(row.red_cards)
+          ];
+          const playedRatio = (toPlayerNumber(row.played_matches) || 0) / maxPlayed;
+          values.forEach((value, columnIndex) => {
+            const width = columns[columnIndex][1];
+            if (columnIndex === 2) {
+              fillPlayerCardRoundRect(ctx, columnX + 16, y + rowH - 12, Math.max(6, (width - 30) * playedRatio), 7, 4, theme.accentLight);
+            }
+            drawPlayerCardFitText(ctx, value, columnX + (width / 2), y + (rowH / 2), width - 10, {
+              size: 20,
+              minSize: 13,
+              weight: columnIndex <= 1 ? 900 : 800,
+              align: "center",
+              baseline: "middle",
+              color: "#222222"
+            });
+            columnX += width;
+          });
+        });
+      } else {
+        const columnCount = sortedRows.length > 18 ? 3 : 2;
+        const rowsPerColumn = Math.ceil(sortedRows.length / columnCount);
+        const headerH = 42;
+        const rowH = Math.max(34, Math.min(58, Math.floor((tableH - headerH - 22) / rowsPerColumn)));
+        const columnW = (tableW - 42) / columnCount;
+        ctx.fillStyle = theme.pale;
+        ctx.fillRect(tableX + 2, tableY + 2, tableW - 4, headerH);
+        for (let column = 0; column < columnCount; column += 1) {
+          const x = tableX + 18 + (column * columnW);
+          drawPlayerCardFitText(ctx, "年度別サマリー", x + 10, tableY + 27, columnW - 20, {
+            size: 19,
+            minSize: 12,
+            weight: 900,
+            color: theme.accentInk
+          });
+        }
+        sortedRows.forEach((row, index) => {
+          const column = Math.floor(index / rowsPerColumn);
+          const rowIndex = index % rowsPerColumn;
+          const x = tableX + 18 + (column * columnW);
+          const y = tableY + headerH + 12 + (rowIndex * rowH);
+          const cellH = Math.max(30, rowH - 5);
+          fillPlayerCardRoundRect(ctx, x, y - 22, columnW - 12, cellH, 10, rowIndex % 2 ? "rgba(0,0,0,0.018)" : "#ffffff", "rgba(0,0,0,0.035)", 1);
+          fillPlayerCardRoundRect(ctx, x + 8, y - 14, 52, 22, 8, theme.accent);
+          drawPlayerCardFitText(ctx, formatPlayerNumber(getPlayerYearValue(row)), x + 34, y + 3, 46, {
+            size: 16,
+            minSize: 11,
+            weight: 900,
+            align: "center",
+            color: "#ffffff"
+          });
+          const identityText = `#${formatPlayerCardNumbers(row.numbers)} ${formatPlayerList(row.positions)}`;
+          drawPlayerCardFitText(ctx, identityText, x + 70, y + 2, columnW - 92, {
+            size: columnCount === 2 ? 18 : 15,
+            minSize: 10,
+            weight: 900,
+            color: "#222222"
+          });
+          const statText = `出 ${formatPlayerNumber(row.played_matches)}　先 ${formatPlayerNumber(row.starter_matches)}　得 ${formatPlayerNumber(row.goals)}`;
+          drawPlayerCardFitText(ctx, statText, x + 70, y + Math.min(26, rowH - 10), columnW - 92, {
+            size: columnCount === 2 ? 16 : 13,
+            minSize: 9,
+            weight: 800,
+            color: theme.accentInk
+          });
+        });
+      }
+    } else {
+      drawPlayerCardFitText(ctx, "年度別データがありません", 540, tableY + 180, 520, {
+        size: 26,
+        minSize: 18,
+        weight: 900,
+        align: "center",
+        color: "#777777"
+      });
+    }
+
+    return canvas.toDataURL("image/png");
+  }
+
+  async function buildPlayerAnalysisRankingCardDataUrl(config, items) {
+    const theme = getPlayerCardTheme(playerAnalysisState.selectedClub);
+    const clubInfo = getPlayerAnalysisClubInfo();
+    const canvas = document.createElement("canvas");
+    canvas.width = 1080;
+    canvas.height = 1350;
+    const ctx = canvas.getContext("2d");
+    const bg = ctx.createLinearGradient(0, 0, 1080, 1350);
+    bg.addColorStop(0, "#fffaf5");
+    bg.addColorStop(0.55, "#ffffff");
+    bg.addColorStop(1, theme.pale);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, 1080, 1350);
+    fillPlayerCardRoundRect(ctx, 18, 18, 1044, 1314, 38, "rgba(255,255,255,0.88)", theme.accent, 6);
+    const head = ctx.createLinearGradient(42, 42, 1038, 160);
+    head.addColorStop(0, theme.accent);
+    head.addColorStop(0.72, theme.accentLight);
+    head.addColorStop(1, theme.accentDark);
+    fillPlayerCardRoundRect(ctx, 42, 42, 996, 132, 28, head);
+    const emblem = await loadPlayerCardImage(theme.emblem);
+    drawPlayerCardContainedImage(ctx, emblem, 62, 58, 92, 92);
+    drawPlayerCardFitText(ctx, config.title, 178, 94, 820, { size: 48, minSize: 28, weight: 900, color: "#ffffff" });
+    drawPlayerCardFitText(ctx, `${clubInfo.name} / ${getPlayerAnalysisTimeLabel()} / TOP 10`, 178, 136, 820, {
+      size: 34,
+      minSize: 18,
+      weight: 800,
+      color: "rgba(255,255,255,0.84)"
+    });
+
+    const topImages = await Promise.all(items.slice(0, 3).map(item => (
+      loadPlayerCardImage(getPlayerImageSources(item.player.player_name || "", playerAnalysisState.selectedClub, item.player))
+    )));
+    const podium = [
+      { x: 390, y: 220, w: 300, h: 280, item: items[0], image: topImages[0], lift: 0 },
+      { x: 80, y: 250, w: 280, h: 250, item: items[1], image: topImages[1], lift: 20 },
+      { x: 720, y: 268, w: 280, h: 232, item: items[2], image: topImages[2], lift: 38 }
+    ];
+    podium.forEach((slot, index) => {
+      if (!slot.item) return;
+      fillPlayerCardRoundRect(ctx, slot.x, slot.y, slot.w, slot.h, 24, "#ffffff", "rgba(0,0,0,0.08)", 2);
+      const photoSize = index === 0 ? 118 : 98;
+      const photoX = slot.x + (slot.w / 2) - (photoSize / 2);
+      fillPlayerCardRoundRect(ctx, photoX, slot.y + 24, photoSize, photoSize, photoSize / 2, theme.pale);
+      ctx.save();
+      drawPlayerCardRoundRect(ctx, photoX, slot.y + 24, photoSize, photoSize, photoSize / 2);
+      ctx.clip();
+      if (!drawPlayerCardCoverImage(ctx, slot.image, photoX, slot.y + 24, photoSize, photoSize)) {
+        ctx.fillStyle = theme.accent;
+        ctx.fillRect(photoX, slot.y + 24, photoSize, photoSize);
+        drawPlayerCardFitText(ctx, formatPlayerCardNumbers(slot.item.player.numbers), photoX + (photoSize / 2), slot.y + 24 + (photoSize / 2) + 15, photoSize - 12, {
+          size: 42,
+          minSize: 22,
+          weight: 900,
+          align: "center",
+          color: "#ffffff"
+        });
+      }
+      ctx.restore();
+      fillPlayerCardRoundRect(ctx, slot.x + 20, slot.y + 20, 58, 58, 18, theme.accent);
+      drawPlayerCardFitText(ctx, formatPlayerNumber(slot.item.rank), slot.x + 49, slot.y + 60, 48, {
+        size: 30,
+        minSize: 18,
+        weight: 900,
+        align: "center",
+        color: "#ffffff"
+      });
+      drawPlayerCardFitText(ctx, slot.item.player.player_name || "-", slot.x + (slot.w / 2), slot.y + photoSize + 72, slot.w - 34, {
+        size: index === 0 ? 32 : 28,
+        minSize: 18,
+        weight: 900,
+        align: "center",
+        color: "#111111"
+      });
+      drawPlayerCardFitText(ctx, config.valueFormatter(slot.item.value, slot.item.player), slot.x + (slot.w / 2), slot.y + slot.h - 42, slot.w - 40, {
+        size: index === 0 ? 48 : 42,
+        minSize: 24,
+        weight: 900,
+        align: "center",
+        color: theme.accent
+      });
+    });
+
+    const listX = 58;
+    const listY = 548;
+    const listW = 964;
+    const rowH = 76;
+    fillPlayerCardRoundRect(ctx, listX, listY, listW, 780, 24, "rgba(255,255,255,0.92)", "rgba(0,0,0,0.08)", 2);
+    const numericValues = items.map(item => Math.abs(toPlayerNumber(item.value) || 0)).filter(value => value > 0);
+    const maxValue = Math.max(1, ...numericValues);
+    items.slice(0, 10).forEach((item, index) => {
+      const y = listY + 18 + (index * rowH);
+      ctx.fillStyle = index % 2 ? "rgba(0,0,0,0.018)" : "#ffffff";
+      fillPlayerCardRoundRect(ctx, listX + 16, y, listW - 32, 58, 16, ctx.fillStyle);
+      fillPlayerCardRoundRect(ctx, listX + 32, y + 8, 44, 44, 14, index < 3 ? theme.accent : theme.soft);
+      drawPlayerCardFitText(ctx, formatPlayerNumber(item.rank), listX + 54, y + 38, 36, {
+        size: 26,
+        minSize: 16,
+        weight: 900,
+        align: "center",
+        color: index < 3 ? "#ffffff" : theme.accentInk
+      });
+      fillPlayerCardRoundRect(ctx, listX + 88, y + 13, 78, 34, 12, theme.pale, "rgba(0,0,0,0.04)", 1);
+      drawPlayerCardFitText(ctx, formatPlayerList(item.player.positions), listX + 127, y + 36, 68, {
+        size: 25,
+        minSize: 16,
+        weight: 800,
+        align: "center",
+        color: theme.accentInk
+      });
+      drawPlayerCardFitText(ctx, item.player.player_name || "-", listX + 176, y + 37, 360, {
+        size: 34,
+        minSize: 20,
+        weight: 900,
+        color: "#111111"
+      });
+      const barValue = Math.abs(toPlayerNumber(item.value) || 0);
+      const barW = Math.max(8, Math.min(220, (barValue / maxValue) * 220));
+      fillPlayerCardRoundRect(ctx, listX + 548, y + 36, 230, 12, 6, theme.soft);
+      fillPlayerCardRoundRect(ctx, listX + 548, y + 36, barW, 12, 6, theme.accentLight);
+      drawPlayerCardFitText(ctx, config.valueFormatter(item.value, item.player), listX + listW - 40, y + 41, 174, {
+        size: 34,
+        minSize: 20,
+        weight: 900,
+        align: "right",
+        color: theme.accent
+      });
+    });
+    if (!items.length) {
+      drawPlayerCardFitText(ctx, "データがありません", 540, 850, 500, {
+        size: 32,
+        minSize: 20,
+        weight: 900,
+        align: "center",
+        color: "#777777"
+      });
+    }
+
+    return canvas.toDataURL("image/png");
+  }
+
+  async function openPlayerAnalysisPlayerCard(player, options = {}) {
+    const target = player || playerAnalysisState.modalPlayer;
+    if (!target) return;
+    const title = `${target.player_name || "選手"} カード`;
+    setPlayerCardPreviewLoading(title);
+    try {
+      const dataUrl = await buildPlayerAnalysisPlayerCardDataUrl(target, options);
+      setPlayerCardPreviewImage(dataUrl, title, `${getPlayerCardSafeFilename(target.player_name)}-card.png`);
+    } catch (error) {
+      console.warn("Player card generation failed", error);
+      setPlayerCardPreviewError("カード画像を生成できませんでした。");
+    }
+  }
+
+  async function openPlayerAnalysisRankingCard(rankingId) {
+    const config = getPlayerAnalysisRankingConfigs().find(item => item.id === rankingId);
+    if (!config) return;
+    const title = config.title || "ランキングカード";
+    setPlayerCardPreviewLoading(title);
+    try {
+      await ensurePlayerAnalysisRankingMetrics(playerAnalysisState.data);
+      const items = getRankedPlayerRankingItems(playerAnalysisState.data, config)
+        .filter(item => item.rank !== null)
+        .slice(0, 10);
+      const dataUrl = await buildPlayerAnalysisRankingCardDataUrl(config, items);
+      setPlayerCardPreviewImage(dataUrl, title, `${getPlayerCardSafeFilename(title)}.png`);
+    } catch (error) {
+      console.warn("Ranking card generation failed", error);
+      setPlayerCardPreviewError("ランキングカード画像を生成できませんでした。");
+    }
+  }
+
   function findPlayerAnalysisRowByKey(key) {
     return [...playerAnalysisState.data, ...playerAnalysisState.filtered, ...playerAnalysisState.modalRankingRows]
       .find(row => getPlayerAnalysisKey(row) === key);
@@ -5757,6 +6492,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       <span class="pa-chip">${escapeHtml(yearLabel)}</span>
       <span class="pa-chip scope">${escapeHtml(getPlayerAnalysisScopeLabel())}</span>
       <span class="pa-chip">${rows.length}人</span>
+      <button type="button" class="pa-card-output-btn" data-pa-ranking-card="${escapeHtml(rankingId)}">カード</button>
     `;
     setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell("PLAYER RANKING", config.title, body, meta));
     addAppHistoryEntry(
@@ -7774,6 +8510,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const meta = `
       ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal", aggregate)}
       <span class="pa-player-position-text">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
+      <button type="button" class="pa-card-output-btn" data-pa-player-card>カード</button>
     `;
     const body = `
       <div class="pa-profile-tabs" role="tablist" aria-label="選手データ表示切り替え">
@@ -7912,6 +8649,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="pa-detail-meta">
           ${renderPlayerNumberBadge(player.numbers, "modal", player)}
           <span class="pa-player-position-text">${escapeHtml(formatPlayerList(player.positions))}</span>
+          <button type="button" class="pa-card-output-btn" data-pa-player-card="${escapeHtml(getPlayerAnalysisKey(player))}">カード</button>
         </div>
       </div>
       ${renderPlayerAnalysisDetailSections(player)}
@@ -8491,11 +9229,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (els.rankings) {
       els.rankings.onclick = (event) => {
+        const cardButton = event.target.closest("[data-pa-ranking-card]");
+        if (cardButton) {
+          event.preventDefault();
+          event.stopPropagation();
+          openPlayerAnalysisRankingCard(cardButton.dataset.paRankingCard);
+          return;
+        }
         const card = event.target.closest(".pa-rank-card[data-pa-ranking]");
         if (!card) return;
         openPlayerAnalysisRankingModal(card.dataset.paRanking);
       };
       els.rankings.onkeydown = (event) => {
+        if (event.target.closest("[data-pa-ranking-card]")) return;
         if (event.key !== "Enter" && event.key !== " ") return;
         const card = event.target.closest(".pa-rank-card[data-pa-ranking]");
         if (!card) return;
@@ -8557,6 +9303,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (els.detail) {
       els.detail.onclick = (event) => {
+        const cardButton = event.target.closest("[data-pa-player-card]");
+        if (cardButton) {
+          const key = cardButton.dataset.paPlayerCard || playerAnalysisState.selectedKey;
+          const player = playerAnalysisState.filtered.find(row => getPlayerAnalysisKey(row) === key)
+            || playerAnalysisState.data.find(row => getPlayerAnalysisKey(row) === key);
+          if (player) openPlayerAnalysisPlayerCard(player);
+          return;
+        }
         if (handlePlayerProfileSectionToggle(event)) return;
       };
     }
@@ -8564,6 +9318,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.onclick = async (event) => {
       if (event.target.closest("[data-pa-modal-close]")) {
         closePlayerAnalysisModal();
+        return;
+      }
+      const playerCardButton = event.target.closest("[data-pa-player-card]");
+      if (playerCardButton) {
+        const key = playerCardButton.dataset.paPlayerCard || "";
+        const player = key ? findPlayerAnalysisRowByKey(key) : playerAnalysisState.modalPlayer;
+        await openPlayerAnalysisPlayerCard(player || playerAnalysisState.modalPlayer, {
+          scope: getActivePlayerAnalysisModalScope(),
+          competitionNames: null
+        });
+        return;
+      }
+      const rankingCardButton = event.target.closest("[data-pa-ranking-card]");
+      if (rankingCardButton) {
+        await openPlayerAnalysisRankingCard(rankingCardButton.dataset.paRankingCard);
         return;
       }
       if (event.target.closest("[data-pa-edit-manual]") && playerAnalysisState.modalPlayer) {
