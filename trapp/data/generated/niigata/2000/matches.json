@@ -1,5 +1,28 @@
 [
   {
+    "match_id": "albirex_past_emperor_2000_unknown",
+    "url": "https://www.albirex.co.jp/",
+    "season": "2000",
+    "competition": "天皇杯",
+    "section": "",
+    "date": "",
+    "kickoff": "",
+    "stadium": "アルビレックス新潟 〒",
+    "attendance": 0,
+    "weather": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "株式会社",
+    "home_score": 950,
+    "away_score": 954,
+    "target_team": "アルビレックス新潟",
+    "target_side": "home",
+    "opponent": "株式会社",
+    "target_score": 950,
+    "opponent_score": 954,
+    "result": "loss",
+    "points": 0
+  },
+  {
     "match_id": "5350",
     "url": "https://data.j-league.or.jp/SFMS02/?match_card_id=5350",
     "season": "2000",

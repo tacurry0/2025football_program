@@ -1,0 +1,1052 @@
+[
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/index.htm",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0709.htm",
+    "label": "frame",
+    "source": "frame"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0729.htm",
+    "label": "第25節 vs ベガルタ仙台",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0802.htm",
+    "label": "第26節 vs 浦和レッズ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0805.htm",
+    "label": "第27節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0812.htm",
+    "label": "第28節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0818.htm",
+    "label": "第29節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0827.htm",
+    "label": "第30節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0902.htm",
+    "label": "第31節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0910.htm",
+    "label": "第32節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0915.htm",
+    "label": "第33節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/0928.htm",
+    "label": "第35節 vs ベガルタ仙台",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1001.htm",
+    "label": "第36節 vs 浦和レッズ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1005.htm",
+    "label": "第37節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1014.htm",
+    "label": "第38節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1022.htm",
+    "label": "第39節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1028.htm",
+    "label": "第40節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1105.htm",
+    "label": "第41節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1111.htm",
+    "label": "第42節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1116.htm",
+    "label": "第43節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1119.htm",
+    "label": "第44節 vs コンサドーレ札幌",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1125.htm",
+    "label": "天皇杯 vs テイヘンズFC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1203.htm",
+    "label": "天皇杯 vs 国見高等学校",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/1210.htm",
+    "label": "天皇杯 vs ヴェルディ川崎",
+    "source": "dropdown"
+  },
+  {
+    "year": "2000",
+    "url": "https://www.albirex.co.jp/past/data2000/kiroku/menu.htm",
+    "label": "frame",
+    "source": "frame"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/index.htm",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0311.htm",
+    "label": "frame",
+    "source": "frame"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0317.htm",
+    "label": "第2節 vs 京都パープルサンガ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0324.htm",
+    "label": "第3節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0331.htm",
+    "label": "第4節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0407.htm",
+    "label": "第5節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0414.htm",
+    "label": "第6節 vs ベガルタ仙台",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0421.htm",
+    "label": "第7節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0503.htm",
+    "label": "第9節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0506.htm",
+    "label": "第10節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0519.htm",
+    "label": "第12節 vs京都パープルサンガ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0523.htm",
+    "label": "第13節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0527.htm",
+    "label": "第14節 vs ベガルタ仙台",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0616.htm",
+    "label": "第15節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0623.htm",
+    "label": "第16節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0628.htm",
+    "label": "第17節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0707.htm",
+    "label": "第18節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0711.htm",
+    "label": "第19節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0714.htm",
+    "label": "第20節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0721.htm",
+    "label": "第21節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0725.htm",
+    "label": "第22節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0728.htm",
+    "label": "第23節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0803.htm",
+    "label": "第24節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0811.htm",
+    "label": "第25節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0814.htm",
+    "label": "第26節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0818.htm",
+    "label": "第27節 vs ベガルタ仙台",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0825.htm",
+    "label": "第28節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0901.htm",
+    "label": "第29節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0905.htm",
+    "label": "第30節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0908.htm",
+    "label": "第31節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0915.htm",
+    "label": "第32節 vs 京都パープルサンガ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0919.htm",
+    "label": "第33節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0922.htm",
+    "label": "第34節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/0929.htm",
+    "label": "第35節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1006.htm",
+    "label": "第36節 vs ベガルタ仙台",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1013.htm",
+    "label": "第37節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1017.htm",
+    "label": "第38節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1020.htm",
+    "label": "第39節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1028.htm",
+    "label": "第40節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1103.htm",
+    "label": "第41節 vs 京都パープルサンガ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1106.htm",
+    "label": "第42節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1118.htm",
+    "label": "第44節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1125.htm",
+    "label": "EC1 vs マインドハウスTC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1202.htm",
+    "label": "EC2 vs 栃木SC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/1216.htm",
+    "label": "EC4 vs ガンバ大阪",
+    "source": "dropdown"
+  },
+  {
+    "year": "2001",
+    "url": "https://www.albirex.co.jp/past/data2001/kiroku/menu.htm",
+    "label": "frame",
+    "source": "frame"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/index.htm",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0303.htm",
+    "label": "第1節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0309.htm",
+    "label": "第2節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0317.htm",
+    "label": "第3節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0321.htm",
+    "label": "第4節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0324.htm",
+    "label": "第5節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0330.htm",
+    "label": "第6節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0406.htm",
+    "label": "第7節 vs アビスパ福岡",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0410.htm",
+    "label": "第8節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0414.htm",
+    "label": "第9節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0420.htm",
+    "label": "第10節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0424.htm",
+    "label": "第11節 vs セレッソ大阪",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0427.htm",
+    "label": "第12節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0503.htm",
+    "label": "第13節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0506.htm",
+    "label": "第14節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0512.htm",
+    "label": "第15節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0706.htm",
+    "label": "第16節 vs アビスパ福岡",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0710.htm",
+    "label": "第17節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0713.htm",
+    "label": "第18節 vs セレッソ大阪",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0720.htm",
+    "label": "第19節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0724.htm",
+    "label": "第20節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0727.htm",
+    "label": "第21節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0803.htm",
+    "label": "第22節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0807.htm",
+    "label": "第23節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0810.htm",
+    "label": "第24節 vs セレッソ大阪",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0816.htm",
+    "label": "第25節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0821.htm",
+    "label": "第26節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0825.htm",
+    "label": "第27節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0831.htm",
+    "label": "第28節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0907.htm",
+    "label": "第29節 vs アビスパ福岡",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0911.htm",
+    "label": "第30節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0914.htm",
+    "label": "第31節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0921.htm",
+    "label": "第32節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0925.htm",
+    "label": "第33節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/0928.htm",
+    "label": "第34節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1005.htm",
+    "label": "第35節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1009.htm",
+    "label": "第36節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1012.htm",
+    "label": "第37節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1019.htm",
+    "label": "第38節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1023.htm",
+    "label": "第39節 vs 大分トリニータ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1029.htm",
+    "label": "第40節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1102.htm",
+    "label": "第41節 vs アビスパ福岡",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1109.htm",
+    "label": "第42節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1116.htm",
+    "label": "第43節 vs セレッソ大阪",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1124.htm",
+    "label": "第44節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1201.htm",
+    "label": "天皇杯1回戦 vs 紀北蹴球団",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1208.htm",
+    "label": "天皇杯2回戦 vs プロフェソール宮崎",
+    "source": "dropdown"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/1215.htm",
+    "label": "frame",
+    "source": "frame"
+  },
+  {
+    "year": "2002",
+    "url": "https://www.albirex.co.jp/past/data2002/kiroku/menu.htm",
+    "label": "frame",
+    "source": "frame"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/index.htm",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0316.htm",
+    "label": "第1節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0322.htm",
+    "label": "第2節 vs アビスパ福岡",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0329.htm",
+    "label": "第3節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0405.htm",
+    "label": "第4節 vs コンサドーレ札幌",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0409.htm",
+    "label": "第5節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0412.htm",
+    "label": "第6節 vs サンフレッチェ広島",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0420.htm",
+    "label": "第7節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0426.htm",
+    "label": "第8節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0429.htm",
+    "label": "第9節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0505.htm",
+    "label": "第10節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0510.htm",
+    "label": "第11節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0514.htm",
+    "label": "第12節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0517.htm",
+    "label": "第13節 vs アビスパ福岡",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0524.htm",
+    "label": "第14節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0531.htm",
+    "label": "第15節 vs コンサドーレ札幌",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0607.htm",
+    "label": "第16節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0614.htm",
+    "label": "第17節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0618.htm",
+    "label": "第18節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0621.htm",
+    "label": "第19節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0628.htm",
+    "label": "第20節 vs サンフレッチェ広島",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0702.htm",
+    "label": "第21節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0705.htm",
+    "label": "第22節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0719.htm",
+    "label": "第23節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0726.htm",
+    "label": "第24節 vs アビスパ福岡",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0730.htm",
+    "label": "第25節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0802.htm",
+    "label": "第26節 vs コンサドーレ札幌",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0810.htm",
+    "label": "第27節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0816.htm",
+    "label": "第28節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0823.htm",
+    "label": "第29節 vs サンフレッチェ広島",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0830.htm",
+    "label": "第30節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0903.htm",
+    "label": "第31節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0906.htm",
+    "label": "第32節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0913.htm",
+    "label": "第33節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0920.htm",
+    "label": "第34節 vs 湘南ベルマーレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0923.htm",
+    "label": "第35節 vs サンフレッチェ広島",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/0927.htm",
+    "label": "第36節 vs サガン鳥栖",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1004.htm",
+    "label": "第37節 vs 川崎フロンターレ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1011.htm",
+    "label": "第38節 vs モンテディオ山形",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1017.htm",
+    "label": "第39節 vs 水戸ホーリーホック",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1026.htm",
+    "label": "第40節 vs ヴァンフォーレ甲府",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1101.htm",
+    "label": "第41節 vs コンサドーレ札幌",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1108.htm",
+    "label": "第42節 vs 横浜FC",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1115.htm",
+    "label": "第43節 vs アビスパ福岡",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1123.htm",
+    "label": "第44節 vs 大宮アルディージャ",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1130.htm",
+    "label": "天皇杯1回戦 vs ヴォルカ鹿児島",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1207.htm",
+    "label": "天皇杯2回戦 vs 高知大学",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1214.htm",
+    "label": "天皇杯3回戦 vs ベガルタ仙台",
+    "source": "dropdown"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/1220.htm",
+    "label": "frame",
+    "source": "frame"
+  },
+  {
+    "year": "2003",
+    "url": "https://www.albirex.co.jp/past/data2003/kiroku/menu.htm",
+    "label": "frame",
+    "source": "frame"
+  },
+  {
+    "year": "2004",
+    "url": "https://www.albirex.co.jp/past/data2004/index.htm",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  },
+  {
+    "year": "2005",
+    "url": "https://www.albirex.co.jp/past/data2005/index.htm",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  },
+  {
+    "year": "2006",
+    "url": "https://www.albirex.co.jp/past/data2006/index.htm",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  },
+  {
+    "year": "2007",
+    "url": "https://www.albirex.co.jp/past/data2007/index.htm",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  },
+  {
+    "year": "2008",
+    "url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+    "label": "試合結果",
+    "source": "seasondata-link"
+  }
+]

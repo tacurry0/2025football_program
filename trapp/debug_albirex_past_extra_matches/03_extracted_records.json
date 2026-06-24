@@ -1,0 +1,4372 @@
+[
+  {
+    "match_card_id": "albirex_past_emperor_2000_unknown",
+    "url": "https://www.albirex.co.jp/",
+    "season": "2000",
+    "competition": "天皇杯",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "株式会社",
+    "home_score": "950",
+    "away_score": "0954",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "",
+    "stadium": "アルビレックス新潟 〒",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2000/kiroku/1119.htm",
+      "detail_url": "https://www.albirex.co.jp/",
+      "row_text": "株式会社 アルビレックス新潟 〒950-0954 新潟市中央区美咲町2丁目1番10号 TEL 025(282)0011 FAX 025(282)0013 Copyright(C) ALBIREX NIIGATA INC. All rights reserved.",
+      "competition_heading": "2000 J LEAGUE DIVISION 2 ◇◆ 永井監督コメント ◆◇ ハーフタイム 中盤でのプレッシャーをもっとかけていけ。相手のリスタートに気をつけろ。 攻撃はもっと前へという意識を強く持て 試合終了後 内容的には勝っていた試合だが最後にやられた。前半から決定的なチャンスを何回もはずしたところは、もっと選手が落ち着いてシュートができていれば前半で勝負がついていた試合だったと思う。私が、3年間アルビレックスの監督としていられたのは選手のお陰だと思っている。選手達には感謝しています。天皇杯はベルディをやぶって、もっと上位を目指すつもりで臨みたいと思っています。ありがとうございました。 第44節 vs コンサドーレ札幌 【節】第44節 【日時】11月 19日 (日) 13:04 キックオフ 【試合会場】新潟市陸上競技場 【入場者数】4,368 人 【天候】曇 【風】中 8.3°C 【芝】 【主審】柏原 丈二 【副審】竹内 元人/河合 英治/野崎 尚文 アルビレックス新潟 1 1 前半 0 2 コンサドーレ札幌 勝点(46→46) 0 後半 2 勝点(91→94) 13 SH 10 4 CK 12 27 FK 16 アルビレックス新潟 コンサドーレ札幌 GK 20 木寺 浩一 GK 30 小林 弘記 DF 2 木澤 正徳 DF 3 森 秀昭 DF 3 セルジオ DF 14 古川 毅 DF 14 高橋 直樹 DF 20 小松崎 保 DF 12 中野 圭一郎 MF 2 田渕 龍二 MF 6 秋葉 忠宏 MF 8 ビジュ MF 13 寺川 能人 MF 10 アウミール MF 15 本間 勲 MF 19 伊藤 優津樹 MF 5 神田 勝夫 MF 17 清水 範久 FW 8 ナシメント FW 24 河村 優 FW 17 鈴木 慎吾 FW 11 播戸 竜二 GK 21 野澤 洋輔 GK 29 井上 敦史 DF 4 柴 暢彦 DF 6 大森 健作 DF 19 井上 公平 MF 15 村田 達哉 MF 18 式田 高義 MF 22 池内 友彦 FW 23 深澤 仁博 MF 23 佐賀 一平 監督 永井 良和 監督 岡田 武史 ■ ■ 得 点 ■ ■ 26’ ナシメント 86’ 播戸 竜二 87’ 播戸 竜二 ■ ■ 交 代 ■ ■ 57' OUT 阿部 敏之 45’ OUT 清水 範久 IN 河合 竜二 IN 池内 友彦 81' OUT 岡野 雅行 45’ OUT 河村 優 IN 大柴 健二 IN 村田 達哉 83' OUT クビツァ 70’ OUT 小松崎 保 IN 土橋 正樹 IN 佐賀 一平 ■ ■ 警 告 ■ ■ 53’ 高橋 直樹 37’ 伊藤 優津樹 78’ 秋葉 忠宏 69’ 伊藤 優津樹 73’ ビジュ 80’ アウミール 89’ 播戸 竜二",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": ""
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2004_1113",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/1113.html",
+    "season": "2004",
+    "competition": "第84回天皇杯 全日本サッカー選手権大会",
+    "section": "第4回戦",
+    "home_team": "湘南ベルマーレ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "18:30",
+    "stadium": "平塚競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "1",
+        "away": "9"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/1113.html",
+      "row_text": "4回戦 11/13(土) 18:30 湘南ベルマーレ 平塚競技場 ● 2-3",
+      "competition_heading": "■ ■ 第84回天皇杯 全日本サッカー選手権大会 ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "第84回天皇杯 全日本サッカー選手権大会 4回戦 vs 湘南ベルマーレ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_0321",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/0321.htm",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs ベガルタ仙台",
+    "section": "Bグループ",
+    "home_team": "ベガルタ仙台",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "仙台スタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/0321.htm",
+      "row_text": "3/21(日) 15:00 ベガルタ仙台 仙台スタジアム ○ 2-1",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs ベガルタ仙台"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_0516",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/0516.htm",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs 浦和レッズ",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "浦和レッズ",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/0516.htm",
+      "row_text": "5/16(日) 14:00 浦和レッズ 新発田市五十公野公園陸上競技場 ● 0-1",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs 浦和レッズ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_0530",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/0530.htm",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs FC東京",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "FC東京",
+    "home_score": "2",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "7",
+        "away": "1"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/0530.htm",
+      "row_text": "5/30(日) 15:00 FC東京 新潟市陸上競技場 ● 2-3",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs FC東京"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_0606",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/0606.htm",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs 浦和レッズ",
+    "section": "Bグループ",
+    "home_team": "浦和レッズ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "埼玉スタジアム2002第二グラウンド",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "21",
+        "away": "15"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/0606.htm",
+      "row_text": "6/6(日) 14:00 浦和レッズ 埼玉スタジアム2002第二グラウンド ○ 1-0",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs 浦和レッズ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_0627_2",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/0627_2.htm",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs ジェフユナイテッド市原",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ジェフユナイテッド市原",
+    "home_score": "1",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "16:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "5",
+        "away": "1"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/0627_2.htm",
+      "row_text": "6/27(日) 16:00 ジェフユナイテッド市原 新発田市五十公野公園陸上競技場 ● 1-2",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs ジェフユナイテッド市原"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_0718_2",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/0718_2.htm",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs FC東京",
+    "section": "Bグループ",
+    "home_team": "FC東京",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "17:00",
+    "stadium": "江東区夢の島競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "21",
+        "away": "17"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/0718_2.htm",
+      "row_text": "7/18(日) 17:00 FC東京 江東区夢の島競技場 △ 1-1",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs FC東京"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_0808",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/0808.htm",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "ジェフユナイテッド市原",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "17:00",
+    "stadium": "姉崎サッカー場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/0808.htm",
+      "row_text": "8/8(日) 17:00 ジェフユナイテッド市原 姉崎サッカー場 △ 1-1",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_0815",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/0815.htm",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs ベガルタ仙台",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ベガルタ仙台",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/0815.htm",
+      "row_text": "8/15(日) 15:00 ベガルタ仙台 新発田市五十公野公園陸上競技場 △ 1-1",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs ベガルタ仙台"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2004_1011",
+    "url": "https://www.albirex.co.jp/past/data2004/kiroku/1011.html",
+    "season": "2004",
+    "competition": "Jサテライトリーグ Bグループ vs 大宮アルディージャ",
+    "section": "Bグループ",
+    "home_team": "大宮アルディージャ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "秋葉の森総合公園サッカー場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "21",
+        "away": "9"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2004/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2004/kiroku/1011.html",
+      "row_text": "10/11(月・祝) 14:00 大宮アルディージャ 秋葉の森総合公園サッカー場 ○ 1-0",
+      "competition_heading": "■ ■ 2004Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs 大宮アルディージャ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2005_1103",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/1103.html",
+    "season": "2005",
+    "competition": "第85回天皇杯全日本サッカー選手権大会",
+    "section": "第4回戦",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ザスパ草津",
+    "home_score": "1",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "13:00",
+    "stadium": "新潟スタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/1103.html",
+      "row_text": "4回戦 11/3(木・祝) 13:00 ザスパ草津 新潟スタジアム ○ 1-0",
+      "competition_heading": "■ ■ 第85回天皇杯 全日本サッカー選手権大会 ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "第85回天皇杯全日本サッカー選手権大会 4回戦 vs.ザスパ草津"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2005_1210",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/1210.html",
+    "season": "2005",
+    "competition": "第85回 天皇杯全日本サッカー選手権大会",
+    "section": "第5回戦",
+    "home_team": "ジュビロ磐田",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "13:00",
+    "stadium": "ヤマハスタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/1210.html",
+      "row_text": "5回戦 12/10(土) 13:00 ジュビロ磐田 ヤマハスタジアム ● 1-2",
+      "competition_heading": "■ ■ 第85回天皇杯 全日本サッカー選手権大会 ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "第85回 天皇杯全日本サッカー選手権大会 5回戦 vs.ジュビロ磐田"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_0327",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0327.htm",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "浦和レッズ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "4",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "さいたま市浦和駒場スタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0327.htm",
+      "row_text": "3/27(日) 14:00 浦和レッズ さいたま市浦和駒場スタジアム ○ 4-3",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_0417",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0417.htm",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "浦和レッズ",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新潟スタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0417.htm",
+      "row_text": "4/17(日) 14:00 浦和レッズ 新潟スタジアム ● 0-1",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_0529",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0529.htm",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "東京ヴェルディ1969",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "ヴェルディグラウンド",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0529.htm",
+      "row_text": "5/29(日) 14:00 東京ヴェルディ1969 ヴェルディグラウンド ○ 3-0",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_0718",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0718.html",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "鹿島アントラーズ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "成田市中台運動公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0718.html",
+      "row_text": "7/18(月・祝) 15:00 鹿島アントラーズ 成田市中台運動公園陸上競技場 ● 1-2",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_0814",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0814.html",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "ベガルタ仙台",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "仙台スタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0814.html",
+      "row_text": "8/14(日) 15:00 ベガルタ仙台 仙台スタジアム ● 2-3",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_0821",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0821.html",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "鹿島アントラーズ",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0821.html",
+      "row_text": "8/21(日) 15:00 鹿島アントラーズ 新発田市五十公野公園陸上競技場 △ 0-0",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_0828",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0828.html",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "ザスパ草津",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "嬬恋村運動公園陸上競技場(会場変更されました 8/12)",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0828.html",
+      "row_text": "8/28(日) 15:00 ザスパ草津 嬬恋村運動公園陸上競技場(会場変更されました 8/12) ● 1-2",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_0911",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0911.html",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ベガルタ仙台",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0911.html",
+      "row_text": "9/11(日) 14:00 ベガルタ仙台 新発田市五十公野公園陸上競技場 △ 2-2",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_1016",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/1016.html",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ザスパ草津",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/1016.html",
+      "row_text": "10/16(日) 15:00 ザスパ草津 新潟市陸上競技場 ● 0-3",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2005_1023",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/1023.html",
+    "season": "2005",
+    "competition": "Jサテライトリーグ Bグループ vs",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "東京ヴェルディ1969",
+    "home_score": "2",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "8",
+        "away": "1969"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/1023.html",
+      "row_text": "10/23(日) 14:00 東京ヴェルディ1969 新発田市五十公野公園陸上競技場 ○ 2-0",
+      "competition_heading": "■ ■ 2005 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ vs"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_preseason_2005_0227",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0227.html",
+    "season": "2005",
+    "competition": "Jリーグプレシーズンマッチ vs. ジュビロ磐田",
+    "section": "",
+    "home_team": "ジュビロ磐田",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "ヤマハスタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0227.html",
+      "row_text": "2/27(日) 14:00 ジュビロ磐田 ヤマハスタジアム △ 1-1",
+      "competition_heading": "■ ■ 2005 Jリーグプレシーズンマッチ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jリーグプレシーズンマッチ vs. ジュビロ磐田"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_preseason_2005_0728",
+    "url": "https://www.albirex.co.jp/past/data2005/kiroku/0728.html",
+    "season": "2005",
+    "competition": "■ ■ 2005 Jリーグプレシーズンマッチ ■ ■",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "新潟市合併記念",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "19:00",
+    "stadium": "国際親善マッチ 大連実徳 新潟スタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2005/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2005/kiroku/0728.html",
+      "row_text": "7/28(木) 19:00 新潟市合併記念 国際親善マッチ 大連実徳 新潟スタジアム △ 2-2",
+      "competition_heading": "■ ■ 2005 Jリーグプレシーズンマッチ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": ""
+    }
+  },
+  {
+    "match_card_id": "albirex_past_worldchallenge_2006_0804",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/0804.html",
+    "season": "2006",
+    "competition": "ワールドチャレンジマッチ セビリアFC JAPAN TOUR vs セビリアFC",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "セビリアFC",
+    "home_score": "0",
+    "away_score": "6",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "19:30",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/0804.html",
+      "row_text": "8/4(金) 19:30 セビリアFC 新潟市陸上競技場 ● 0-6",
+      "competition_heading": "■ ■ ワールドチャレンジマッチ セビリアFC JAPAN TOUR 2006 ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "ワールドチャレンジマッチ セビリアFC JAPAN TOUR vs セビリアFC"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2006_1104",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/1104.html",
+    "season": "2006",
+    "competition": "第86回天皇杯",
+    "section": "第4回戦",
+    "home_team": "アルビレックス新潟",
+    "away_team": "徳島ヴォルティス",
+    "home_score": "2",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "13:00",
+    "stadium": "新潟スタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/1104.html",
+      "row_text": "4回戦 11/4(土) 13:00 徳島ヴォルティス 新潟スタジアム ○ 2-0",
+      "competition_heading": "■ ■ 第86回天皇杯 全日本サッカー選手権大会 ■ ■ トーナメント表は こちら をご覧ください",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "第86回天皇杯 4回戦 vs 徳島ヴォルティス"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2006_1209",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/1209.html",
+    "season": "2006",
+    "competition": "第86回天皇杯 全日本サッカー選手権大会",
+    "section": "第5回戦",
+    "home_team": "コンサドーレ札幌",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "7",
+    "pk_away_score": "8",
+    "date": "",
+    "kickoff": "13:00",
+    "stadium": "フクダ電子アリーナ BS",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/1209.html",
+      "row_text": "5回戦 12/9(土) 13:00 コンサドーレ札幌 フクダ電子アリーナ BS ● 0-0 【PK8-7】",
+      "competition_heading": "■ ■ 第86回天皇杯 全日本サッカー選手権大会 ■ ■ トーナメント表は こちら をご覧ください",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "第86回天皇杯 全日本サッカー選手権大会5回戦 vs コンサドーレ札幌"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2006_0416",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/0416.html",
+    "season": "2006",
+    "competition": "サテライトリーグ Bグループ 第3日 vs.FC東京",
+    "section": "Bグループ",
+    "home_team": "FC東京",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "4",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "江戸川区陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/0416.html",
+      "row_text": "4/16(日) 14:00 FC東京 江戸川区陸上競技場 ○ 4-2",
+      "competition_heading": "■ ■ 2006 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "2006サテライトリーグ Bグループ 第3日 vs.FC東京"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2006_0507",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/0507.html",
+    "season": "2006",
+    "competition": "サテライトリーグ Bグループ 第4日 vs ザスパ草津",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ザスパ草津",
+    "home_score": "3",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/0507.html",
+      "row_text": "5/7(日) 14:00 ザスパ草津 新潟市陸上競技場 ○ 3-1",
+      "competition_heading": "■ ■ 2006 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "2006サテライトリーグ Bグループ 第4日 vs ザスパ草津"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2006_0528",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/0528.html",
+    "season": "2006",
+    "competition": "Jサテライトリーグ Bグループ 第5日 vs モンテディオ山形",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "モンテディオ山形",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/0528.html",
+      "row_text": "5/28(日) 14:00 モンテディオ山形 新発田市五十公野公園陸上競技場 △ 0-0",
+      "competition_heading": "■ ■ 2006 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第5日 vs モンテディオ山形"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2006_0709",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/0709.html",
+    "season": "2006",
+    "competition": "Jサテライトリーグ Bグループ 第7日 vs 鹿島アントラーズ",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "鹿島アントラーズ",
+    "home_score": "4",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/0709.html",
+      "row_text": "7/9(日) 15:00 鹿島アントラーズ 新発田市五十公野公園陸上競技場 ○ 4-0",
+      "competition_heading": "■ ■ 2006 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第7日 vs 鹿島アントラーズ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2006_0813",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/0813.html",
+    "season": "2006",
+    "competition": "Jサテライトリーグ Bグループ 第9日 vs モンテディオ山形",
+    "section": "Bグループ",
+    "home_team": "モンテディオ山形",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "16:00",
+    "stadium": "鶴岡市小真木原陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/0813.html",
+      "row_text": "8/13(日) 16:00 モンテディオ山形 鶴岡市小真木原陸上競技場 ○ 3-2",
+      "competition_heading": "■ ■ 2006 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第9日 vs モンテディオ山形"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2006_0903_02",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/0903_02.html",
+    "season": "2006",
+    "competition": "Jサテライトリーグ Bグループ 第10日 vs ザスパ草津",
+    "section": "Bグループ",
+    "home_team": "ザスパ草津",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "嬬恋村運動公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/0903_02.html",
+      "row_text": "9/3(日) 14:00 ザスパ草津 嬬恋村運動公園陸上競技場 ○ 3-0",
+      "competition_heading": "■ ■ 2006 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第10日 vs ザスパ草津"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2006_0917",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/0917.html",
+    "season": "2006",
+    "competition": "Jサテライトリーグ Bグループ 第12日 vs FC東京",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "FC東京",
+    "home_score": "1",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:30",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/0917.html",
+      "row_text": "9/17(日) 15:30 FC東京 新潟市陸上競技場 ● 1-2",
+      "competition_heading": "■ ■ 2006 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第12日 vs FC東京"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2006_1015_01",
+    "url": "https://www.albirex.co.jp/past/data2006/kiroku/1015_01.html",
+    "season": "2006",
+    "competition": "Jサテライトリーグ Bグループ 第14日 vs 鹿島アントラーズ",
+    "section": "Bグループ",
+    "home_team": "鹿島アントラーズ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "6",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "ひたちなか市総合運動公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2006/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2006/kiroku/1015_01.html",
+      "row_text": "10/15(日) 15:00 鹿島アントラーズ ひたちなか市総合運動公園陸上競技場 ● 1-6",
+      "competition_heading": "■ ■ 2006 Jサテライトリーグ Bグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第14日 vs 鹿島アントラーズ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_preseason_2007_0218",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/0218.html",
+    "season": "2007",
+    "competition": "2007Jリーグプレシーズンマッチ 上毛新聞創刊120周年記念 vs ザスパ草津",
+    "section": "",
+    "home_team": "ザスパ草津",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "13:00",
+    "stadium": "群馬県立敷島公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/0218.html",
+      "row_text": "2/18(日) 13:00 ザスパ草津 群馬県立敷島公園陸上競技場 △ 1-1",
+      "competition_heading": "■ ■ 上毛新聞創刊120周年記念 Jリーグプレシーズンマッチ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "2007Jリーグプレシーズンマッチ 上毛新聞創刊120周年記念 vs ザスパ草津"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2007_1104_01",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/1104_01.html",
+    "season": "2007",
+    "competition": "第87回天皇杯",
+    "section": "第4回戦",
+    "home_team": "アルビレックス新潟",
+    "away_team": "サガン鳥栖",
+    "home_score": "2",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "13:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/1104_01.html",
+      "row_text": "4回戦 11/4(日) 13:00 サガン鳥栖 東北電力ビッグスワンスタジアム ● 2-3",
+      "competition_heading": "■ ■ 第87回天皇杯 全日本サッカー選手権大会 ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "第87回天皇杯 4回戦 vs サガン鳥栖"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2007_0603_01",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/0603_01.html",
+    "season": "2007",
+    "competition": "Jサテライトリーグ Cグループ 第2日 vs ザスパ草津",
+    "section": "Cグループ",
+    "home_team": "ザスパ草津",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "嬬恋村運動公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/0603_01.html",
+      "row_text": "6/3(日) 14:00 ザスパ草津 嬬恋村運動公園陸上競技場 ● 1-2",
+      "competition_heading": "■ ■ 2007 Jサテライトリーグ Cグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Cグループ 第2日 vs ザスパ草津"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2007_0624_02",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/0624_02.html",
+    "season": "2007",
+    "competition": "Jサテライトリーグ Cグループ 第3日 vs 川崎フロンターレ",
+    "section": "Cグループ",
+    "home_team": "川崎フロンターレ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "等々力陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/0624_02.html",
+      "row_text": "6/24(日) 14:00 川崎フロンターレ 等々力陸上競技場 △ 1-1",
+      "competition_heading": "■ ■ 2007 Jサテライトリーグ Cグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Cグループ 第3日 vs 川崎フロンターレ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2007_0701_02",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/0701_02.html",
+    "season": "2007",
+    "competition": "Jサテライトリーグ Cグループ 第4日 vs 浦和レッズ",
+    "section": "Cグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "浦和レッズ",
+    "home_score": "1",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "17:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/0701_02.html",
+      "row_text": "7/1(日) 17:00 浦和レッズ 新潟市陸上競技場 ● 1-2",
+      "competition_heading": "■ ■ 2007 Jサテライトリーグ Cグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Cグループ 第4日 vs 浦和レッズ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2007_0902_02",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/0902_02.html",
+    "season": "2007",
+    "competition": "Jサテライトリーグ Cグループ 第7日 vs 浦和レッズ",
+    "section": "Cグループ",
+    "home_team": "浦和レッズ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "東松山陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/0902_02.html",
+      "row_text": "9/2(日) 15:00 浦和レッズ 東松山陸上競技場 △ 0-0",
+      "competition_heading": "■ ■ 2007 Jサテライトリーグ Cグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Cグループ 第7日 vs 浦和レッズ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2007_0908_01",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/0908_01.html",
+    "season": "2007",
+    "competition": "Jサテライトリーグ Cグループ 第9日 vs 川崎フロンターレ",
+    "section": "Cグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "川崎フロンターレ",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/0908_01.html",
+      "row_text": "9/8(土) 14:00 川崎フロンターレ 新発田市五十公野公園陸上競技場 △ 2-2",
+      "competition_heading": "■ ■ 2007 Jサテライトリーグ Cグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Cグループ 第9日 vs 川崎フロンターレ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2007_1014_02",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/1014_02.html",
+    "season": "2007",
+    "competition": "Jサテライトリーグ Cグループ 第12日 vs 大宮アルディージャ",
+    "section": "Cグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "大宮アルディージャ",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/1014_02.html",
+      "row_text": "10/14(日) 14:00 大宮アルディージャ 新発田市五十公野公園陸上競技場 ○ 2-1",
+      "competition_heading": "■ ■ 2007 Jサテライトリーグ Cグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Cグループ 第12日 vs 大宮アルディージャ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2007_1021_02",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/1021_02.html",
+    "season": "2007",
+    "competition": "Jサテライトリーグ Cグループ 第13日 vs 大宮アルディージャ",
+    "section": "Cグループ",
+    "home_team": "大宮アルディージャ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "川越運動公園陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/1021_02.html",
+      "row_text": "10/21(日) 14:00 大宮アルディージャ 川越運動公園陸上競技場 △ 0-0",
+      "competition_heading": "■ ■ 2007 Jサテライトリーグ Cグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Cグループ 第13日 vs 大宮アルディージャ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2007_1031_01",
+    "url": "https://www.albirex.co.jp/past/data2007/kiroku/1031_01.html",
+    "season": "2007",
+    "competition": "Jサテライトリーグ Cグループ 第14日 vs ザスパ草津",
+    "section": "Cグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ザスパ草津",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "19:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2007/index.htm",
+      "detail_url": "https://www.albirex.co.jp/past/data2007/kiroku/1031_01.html",
+      "row_text": "10/31(水) 19:00 ザスパ草津 新潟市陸上競技場 △ 0-0",
+      "competition_heading": "■ ■ 2007 Jサテライトリーグ Cグループ ■ ■",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Cグループ 第14日 vs ザスパ草津"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2008_result081102",
+    "url": "https://www.albirex.co.jp/past/data2008/result081102.html",
+    "season": "2008",
+    "competition": "第88回 天皇杯全日本サッカー選手権大会",
+    "section": "第4回戦",
+    "home_team": "アルビレックス新潟",
+    "away_team": "横浜FC",
+    "home_score": "2",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "13:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "18'",
+        "name": "アレッサンドロ"
+      },
+      {
+        "time": "20'",
+        "name": "内田 潤"
+      }
+    ],
+    "away_goals": [],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "4",
+        "away": "10"
+      },
+      {
+        "type": "CK",
+        "home": "6",
+        "away": "3"
+      },
+      {
+        "type": "FK",
+        "home": "15",
+        "away": "12"
+      },
+      {
+        "type": "オフサイド",
+        "home": "4",
+        "away": "2"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "内田 潤",
+          "time": "20'"
+        }
+      ],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result081102.html",
+      "row_text": "4 11/2(日) 13:00 横浜FC 東北電力ビッグスワンスタジアム ○ 2-0",
+      "competition_heading": "第88回 天皇杯全国サッカー選手権大会",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "第88回 天皇杯全日本サッカー選手権大会 第4回戦 vs 横浜FC"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2008_result081115",
+    "url": "https://www.albirex.co.jp/past/data2008/result081115.html",
+    "season": "2008",
+    "competition": "第88回 天皇杯全日本サッカー選手権大会",
+    "section": "第5回戦",
+    "home_team": "FC東京",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "13:00",
+    "stadium": "とりぎんバードスタジアム",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "31'",
+        "name": "エメルソン"
+      },
+      {
+        "time": "53'",
+        "name": "赤嶺 真吾"
+      },
+      {
+        "time": "62'",
+        "name": "梶山 陽平"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "6'",
+        "name": "マルシオ リシャルデス"
+      },
+      {
+        "time": "21'",
+        "name": "千葉 和彦"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "14",
+        "away": "9"
+      },
+      {
+        "type": "CK",
+        "home": "3",
+        "away": "4"
+      },
+      {
+        "type": "FK",
+        "home": "20",
+        "away": "13"
+      },
+      {
+        "type": "オフサイド",
+        "home": "3",
+        "away": "3"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "千葉 和彦",
+          "time": "21'"
+        },
+        {
+          "type": "警告",
+          "name": "赤嶺 真吾 62′梶山 陽平",
+          "time": "53'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result081115.html",
+      "row_text": "5 11/15(土) 13:00 FC東京 とりぎんバードスタジアム ● 2-3",
+      "competition_heading": "第88回 天皇杯全国サッカー選手権大会",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "第88回 天皇杯全日本サッカー選手権大会 第5回戦 vs FC東京"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080420_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080420_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ 第3日 vs ベガルタ仙台",
+    "section": "Bグループ",
+    "home_team": "ベガルタ仙台",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "ユアテックスタジアム仙台",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "35'",
+        "name": "川又 堅碁"
+      },
+      {
+        "time": "2'",
+        "name": "2"
+      },
+      {
+        "time": "2'",
+        "name": "6"
+      },
+      {
+        "time": "2'",
+        "name": "9"
+      },
+      {
+        "time": "1'",
+        "name": "7"
+      },
+      {
+        "time": "2'",
+        "name": "7"
+      },
+      {
+        "time": "2'",
+        "name": "4"
+      },
+      {
+        "time": "1'",
+        "name": "4"
+      },
+      {
+        "time": "3'",
+        "name": "0"
+      },
+      {
+        "time": "1'",
+        "name": "0"
+      },
+      {
+        "time": "1'",
+        "name": "4"
+      },
+      {
+        "time": "2'",
+        "name": "0"
+      },
+      {
+        "time": "1'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "2"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "3'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "8"
+      },
+      {
+        "time": "1'",
+        "name": "5"
+      },
+      {
+        "time": "1'",
+        "name": "5"
+      },
+      {
+        "time": "1'",
+        "name": "3"
+      },
+      {
+        "time": "1'",
+        "name": "9"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "80'",
+        "name": "′"
+      },
+      {
+        "time": "62'",
+        "name": "′"
+      },
+      {
+        "time": "83'",
+        "name": "′"
+      },
+      {
+        "time": "69'",
+        "name": "′"
+      },
+      {
+        "time": "80'",
+        "name": "′"
+      },
+      {
+        "time": "86'",
+        "name": "′"
+      },
+      {
+        "time": "4'",
+        "name": "月20日(日)14:00キックオフ"
+      },
+      {
+        "time": "1'",
+        "name": ",800人"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "23'",
+        "name": "宮沢 正史"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "13",
+        "away": "13"
+      },
+      {
+        "type": "CK",
+        "home": "1",
+        "away": "2"
+      },
+      {
+        "type": "FK",
+        "home": "15",
+        "away": "9"
+      },
+      {
+        "type": "オフサイド",
+        "home": "3",
+        "away": "3"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result080420_s.html",
+      "row_text": "4/20(日) 14:00 ベガルタ仙台 ユアテックスタジアム仙台 △ 1-1",
+      "competition_heading": "2008 2008 Jサテライトリーグ Bグループ",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第3日 vs ベガルタ仙台"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080601_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080601_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ 第5日 vs モンテディオ山形",
+    "section": "Bグループ",
+    "home_team": "モンテディオ山形",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "鶴岡市小真木原陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "85'",
+        "name": "マイケル ジェームズ"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "2"
+      },
+      {
+        "time": "1'",
+        "name": "4"
+      },
+      {
+        "time": "2'",
+        "name": "6"
+      },
+      {
+        "time": "1'",
+        "name": "5"
+      },
+      {
+        "time": "1'",
+        "name": "8"
+      },
+      {
+        "time": "2'",
+        "name": "8"
+      },
+      {
+        "time": "2'",
+        "name": "9"
+      },
+      {
+        "time": "1'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "5"
+      },
+      {
+        "time": "3'",
+        "name": "0"
+      },
+      {
+        "time": "1'",
+        "name": "9"
+      },
+      {
+        "time": "1'",
+        "name": "6"
+      },
+      {
+        "time": "1'",
+        "name": "3"
+      },
+      {
+        "time": "1'",
+        "name": "7"
+      },
+      {
+        "time": "1'",
+        "name": "6"
+      },
+      {
+        "time": "2'",
+        "name": "4"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "57'",
+        "name": "′"
+      },
+      {
+        "time": "66'",
+        "name": "′"
+      },
+      {
+        "time": "57'",
+        "name": "′"
+      },
+      {
+        "time": "76'",
+        "name": "′"
+      },
+      {
+        "time": "69'",
+        "name": "′"
+      },
+      {
+        "time": "82'",
+        "name": "′"
+      },
+      {
+        "time": "87'",
+        "name": "′"
+      },
+      {
+        "time": "69'",
+        "name": "′"
+      },
+      {
+        "time": "89'",
+        "name": "′"
+      },
+      {
+        "time": "89'",
+        "name": "′"
+      },
+      {
+        "time": "6'",
+        "name": "月1日(日)14:00キックオフ"
+      },
+      {
+        "time": "1'",
+        "name": ",056人"
+      },
+      {
+        "time": "87'",
+        "name": "木村 誠 89′園田 拓也"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "87'",
+        "name": "木村 誠"
+      },
+      {
+        "time": "89'",
+        "name": "園田 拓也"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "13",
+        "away": "8"
+      },
+      {
+        "type": "CK",
+        "home": "3",
+        "away": "3"
+      },
+      {
+        "type": "FK",
+        "home": "4",
+        "away": "16"
+      },
+      {
+        "type": "オフサイド",
+        "home": "2",
+        "away": "3"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "園田 拓也",
+          "time": "89'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result080601_s.html",
+      "row_text": "6/1(日) 14:00 モンテディオ山形 鶴岡市小真木原陸上競技場 ● 1-2",
+      "competition_heading": "2008 2008 Jサテライトリーグ Bグループ",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第5日 vs モンテディオ山形"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080706_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080706_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ 第7日 vs 東京ヴェルディ",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "東京ヴェルディ",
+    "home_score": "2",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "16:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "16'",
+        "name": "′"
+      },
+      {
+        "time": "34'",
+        "name": "′"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "10'",
+        "name": "′"
+      },
+      {
+        "time": "15'",
+        "name": "′"
+      },
+      {
+        "time": "77'",
+        "name": "河野 広貴"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "10",
+        "away": "7"
+      },
+      {
+        "type": "CK",
+        "home": "2",
+        "away": "7"
+      },
+      {
+        "type": "FK",
+        "home": "20",
+        "away": "7"
+      },
+      {
+        "type": "オフサイド",
+        "home": "4",
+        "away": "6"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "川又 堅碁",
+          "time": "34'"
+        },
+        {
+          "type": "警告",
+          "name": "川又 堅碁",
+          "time": "34'"
+        },
+        {
+          "type": "警告",
+          "name": "河野 広貴 77′河野 広貴",
+          "time": "15'"
+        },
+        {
+          "type": "警告",
+          "name": "エルサムニー オサマ",
+          "time": "10'"
+        },
+        {
+          "type": "警告",
+          "name": "河野 広貴",
+          "time": "15'"
+        }
+      ],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result080706_s.html",
+      "row_text": "7/6(日) 16:00 東京ヴェルディ 新潟市陸上競技場 ● 2-3",
+      "competition_heading": "2008 2008 Jサテライトリーグ Bグループ",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第7日 vs 東京ヴェルディ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080721_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080721_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ 第8日 vs 東京ヴェルディ",
+    "section": "Bグループ",
+    "home_team": "東京ヴェルディ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "16:00",
+    "stadium": "ヴェルディグラウンド",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "38'",
+        "name": "海本 慶治"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "66'",
+        "name": "′"
+      },
+      {
+        "time": "87'",
+        "name": "′"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "15",
+        "away": "4"
+      },
+      {
+        "type": "CK",
+        "home": "3",
+        "away": "6"
+      },
+      {
+        "type": "FK",
+        "home": "16",
+        "away": "11"
+      },
+      {
+        "type": "オフサイド",
+        "home": "2",
+        "away": "2"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "井上 平",
+          "time": "87'"
+        },
+        {
+          "type": "警告",
+          "name": "井上 平",
+          "time": "87'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result080721_s.html",
+      "row_text": "7/21(月・祝) 16:00 東京ヴェルディ ヴェルディグラウンド ● 1-2",
+      "competition_heading": "2008 2008 Jサテライトリーグ Bグループ",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第8日 vs 東京ヴェルディ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080817_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080817_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ 第11日 vs 大宮アルディージャ",
+    "section": "Bグループ",
+    "home_team": "大宮アルディージャ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "16:00",
+    "stadium": "鴻巣市立陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "42'",
+        "name": "川又 堅碁"
+      },
+      {
+        "time": "82'",
+        "name": "明堂 和也"
+      },
+      {
+        "time": "1'",
+        "name": "8"
+      },
+      {
+        "time": "2'",
+        "name": "2"
+      },
+      {
+        "time": "2'",
+        "name": "6"
+      },
+      {
+        "time": "1'",
+        "name": "7"
+      },
+      {
+        "time": "1'",
+        "name": "3"
+      },
+      {
+        "time": "3'",
+        "name": "4"
+      },
+      {
+        "time": "2'",
+        "name": "8"
+      },
+      {
+        "time": "1'",
+        "name": "4"
+      },
+      {
+        "time": "1'",
+        "name": "1"
+      },
+      {
+        "time": "3'",
+        "name": "0"
+      },
+      {
+        "time": "2'",
+        "name": "0"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "9"
+      },
+      {
+        "time": "2'",
+        "name": "4"
+      },
+      {
+        "time": "1'",
+        "name": "6"
+      },
+      {
+        "time": "2'",
+        "name": "7"
+      },
+      {
+        "time": "1'",
+        "name": "5"
+      },
+      {
+        "time": "1'",
+        "name": "4"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "82'",
+        "name": "′"
+      },
+      {
+        "time": "63'",
+        "name": "′"
+      },
+      {
+        "time": "65'",
+        "name": "′"
+      },
+      {
+        "time": "73'",
+        "name": "′"
+      },
+      {
+        "time": "75'",
+        "name": "′"
+      },
+      {
+        "time": "8'",
+        "name": "月17日(日)16:00キックオフ"
+      },
+      {
+        "time": "415'",
+        "name": "人"
+      },
+      {
+        "time": "46'",
+        "name": "橋本 早十 59′ 橋本 早十"
+      },
+      {
+        "time": "59'",
+        "name": "橋本 早十"
+      },
+      {
+        "time": "42'",
+        "name": "川又 堅碁 82′明堂 和也"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "46'",
+        "name": "′"
+      },
+      {
+        "time": "59'",
+        "name": "′"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "6",
+        "away": "9"
+      },
+      {
+        "type": "CK",
+        "home": "3",
+        "away": "7"
+      },
+      {
+        "type": "FK",
+        "home": "20",
+        "away": "11"
+      },
+      {
+        "type": "オフサイド",
+        "home": "3",
+        "away": "5"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "橋本 早十",
+          "time": "59'"
+        },
+        {
+          "type": "警告",
+          "name": "橋本 早十",
+          "time": "59'"
+        },
+        {
+          "type": "警告",
+          "name": "明堂 和也",
+          "time": "82'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result080817_s.html",
+      "row_text": "8/17(日) 16:00 大宮アルディージャ 鴻巣市立陸上競技場 △ 2-2",
+      "competition_heading": "2008 2008 Jサテライトリーグ Bグループ",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県外会場のためaway_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第11日 vs 大宮アルディージャ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080829_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080829_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ 第12日 vs 大宮アルディージャ",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "大宮アルディージャ",
+    "home_score": "3",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "19:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "42'",
+        "name": "川又 堅碁"
+      },
+      {
+        "time": "44'",
+        "name": "川又 堅碁"
+      },
+      {
+        "time": "89'",
+        "name": "田中 僚"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "1'",
+        "name": "川原 達也"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "3'",
+        "name": "1"
+      },
+      {
+        "time": "1'",
+        "name": "8"
+      },
+      {
+        "time": "2'",
+        "name": "2"
+      },
+      {
+        "time": "2'",
+        "name": "9"
+      },
+      {
+        "time": "1'",
+        "name": "6"
+      },
+      {
+        "time": "1'",
+        "name": "7"
+      },
+      {
+        "time": "3'",
+        "name": "4"
+      },
+      {
+        "time": "2'",
+        "name": "4"
+      },
+      {
+        "time": "1'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "8"
+      },
+      {
+        "time": "1'",
+        "name": "0"
+      },
+      {
+        "time": "2'",
+        "name": "7"
+      },
+      {
+        "time": "2'",
+        "name": "0"
+      },
+      {
+        "time": "1'",
+        "name": "5"
+      },
+      {
+        "time": "1'",
+        "name": "4"
+      },
+      {
+        "time": "2'",
+        "name": "5"
+      },
+      {
+        "time": "1'",
+        "name": "3"
+      },
+      {
+        "time": "3'",
+        "name": "5"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "84'",
+        "name": "′"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "56'",
+        "name": "′"
+      },
+      {
+        "time": "68'",
+        "name": "′"
+      },
+      {
+        "time": "75'",
+        "name": "′"
+      },
+      {
+        "time": "56'",
+        "name": "′"
+      },
+      {
+        "time": "58'",
+        "name": "′"
+      },
+      {
+        "time": "63'",
+        "name": "′"
+      },
+      {
+        "time": "74'",
+        "name": "′"
+      },
+      {
+        "time": "88'",
+        "name": "′"
+      },
+      {
+        "time": "8'",
+        "name": "月29日(金)19:00キックオフ"
+      },
+      {
+        "time": "1'",
+        "name": ",097人"
+      },
+      {
+        "time": "42'",
+        "name": "川又 堅碁 44′川又 堅碁 89′田中 僚"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "9",
+        "away": "15"
+      },
+      {
+        "type": "CK",
+        "home": "4",
+        "away": "5"
+      },
+      {
+        "type": "FK",
+        "home": "15",
+        "away": "15"
+      },
+      {
+        "type": "オフサイド",
+        "home": "1",
+        "away": "5"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "川又 堅碁 89′田中 僚",
+          "time": "44'"
+        }
+      ],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result080829_s.html",
+      "row_text": "8/29(金) 19:00 大宮アルディージャ 新潟市陸上競技場 ○ 3-1",
+      "competition_heading": "2008 2008 Jサテライトリーグ Bグループ",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第12日 vs 大宮アルディージャ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080915_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080915_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ 第14日 vs モンテディオ山形",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "モンテディオ山形",
+    "home_score": "5",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "15:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "0'",
+        "name": "田中 亜土夢"
+      },
+      {
+        "time": "14'",
+        "name": "河原 和寿"
+      },
+      {
+        "time": "21'",
+        "name": "川又 堅碁"
+      },
+      {
+        "time": "59'",
+        "name": "田中 亜土夢"
+      },
+      {
+        "time": "76'",
+        "name": "奥田 陽一"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "30'",
+        "name": "リチェーリ"
+      },
+      {
+        "time": "89'",
+        "name": "リチェーリ"
+      },
+      {
+        "time": "2'",
+        "name": "2"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "6"
+      },
+      {
+        "time": "2'",
+        "name": "2"
+      },
+      {
+        "time": "1'",
+        "name": "8"
+      },
+      {
+        "time": "2'",
+        "name": "9"
+      },
+      {
+        "time": "1'",
+        "name": "6"
+      },
+      {
+        "time": "1'",
+        "name": "3"
+      },
+      {
+        "time": "2'",
+        "name": "8"
+      },
+      {
+        "time": "1'",
+        "name": "0"
+      },
+      {
+        "time": "2'",
+        "name": "4"
+      },
+      {
+        "time": "1'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "7"
+      },
+      {
+        "time": "1'",
+        "name": "5"
+      },
+      {
+        "time": "1'",
+        "name": "4"
+      },
+      {
+        "time": "2'",
+        "name": "5"
+      },
+      {
+        "time": "2'",
+        "name": "0"
+      },
+      {
+        "time": "67'",
+        "name": "′"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "59'",
+        "name": "′"
+      },
+      {
+        "time": "68'",
+        "name": "′"
+      },
+      {
+        "time": "30'",
+        "name": "′"
+      },
+      {
+        "time": "79'",
+        "name": "′"
+      },
+      {
+        "time": "9'",
+        "name": "月15日(月)15:00キックオフ"
+      },
+      {
+        "time": "2'",
+        "name": ",126人"
+      },
+      {
+        "time": "0'",
+        "name": "田中 亜土夢 14′河原 和寿 21′川又 堅碁 59′田中 亜土夢 76′奥田 陽一"
+      },
+      {
+        "time": "30'",
+        "name": "リチェーリ 89′リチェーリ"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "11",
+        "away": "11"
+      },
+      {
+        "type": "CK",
+        "home": "8",
+        "away": "2"
+      },
+      {
+        "type": "FK",
+        "home": "6",
+        "away": "12"
+      },
+      {
+        "type": "オフサイド",
+        "home": "1",
+        "away": "6"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "河原 和寿 21′川又 堅碁 59′田中 亜土夢 76′奥田 陽一",
+          "time": "14'"
+        },
+        {
+          "type": "警告",
+          "name": "リチェーリ",
+          "time": "89'"
+        }
+      ],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result080915_s.html",
+      "row_text": "9/15(月・祝) 15:00 モンテディオ山形 新潟市陸上競技場 ○ 5-2",
+      "competition_heading": "2008 2008 Jサテライトリーグ Bグループ",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第14日 vs モンテディオ山形"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081005_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result081005_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ 第16日 vs ベガルタ仙台",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ベガルタ仙台",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "",
+    "kickoff": "14:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "",
+    "weather": "",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [
+      {
+        "time": "0'",
+        "name": "川又 堅碁"
+      }
+    ],
+    "away_goals": [
+      {
+        "time": "45'",
+        "name": "′"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "6"
+      },
+      {
+        "time": "1'",
+        "name": "7"
+      },
+      {
+        "time": "2'",
+        "name": "9"
+      },
+      {
+        "time": "1'",
+        "name": "6"
+      },
+      {
+        "time": "1'",
+        "name": "3"
+      },
+      {
+        "time": "2'",
+        "name": "8"
+      },
+      {
+        "time": "3'",
+        "name": "0"
+      },
+      {
+        "time": "1'",
+        "name": "0"
+      },
+      {
+        "time": "1'",
+        "name": "3"
+      },
+      {
+        "time": "1'",
+        "name": "1"
+      },
+      {
+        "time": "2'",
+        "name": "1"
+      },
+      {
+        "time": "1'",
+        "name": "5"
+      },
+      {
+        "time": "2'",
+        "name": "0"
+      },
+      {
+        "time": "1'",
+        "name": "5"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "45'",
+        "name": "※"
+      },
+      {
+        "time": "66'",
+        "name": "′"
+      },
+      {
+        "time": "5'",
+        "name": "′"
+      },
+      {
+        "time": "35'",
+        "name": "′"
+      },
+      {
+        "time": "35'",
+        "name": "′"
+      },
+      {
+        "time": "80'",
+        "name": "′"
+      },
+      {
+        "time": "10'",
+        "name": "月5日(日)14:00キックオフ"
+      },
+      {
+        "time": "1'",
+        "name": ",965人"
+      },
+      {
+        "time": "45'",
+        "name": "中島 裕希"
+      }
+    ],
+    "stats": [
+      {
+        "type": "GK",
+        "home": "10",
+        "away": "12"
+      },
+      {
+        "type": "CK",
+        "home": "5",
+        "away": "5"
+      },
+      {
+        "type": "FK",
+        "home": "13",
+        "away": "13"
+      },
+      {
+        "type": "オフサイド",
+        "home": "5",
+        "away": "4"
+      }
+    ],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "中島 裕希",
+          "time": "45'"
+        }
+      ],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "",
+      "副審": ""
+    },
+    "source": {
+      "type": "albirex_past",
+      "seasondata_url": "https://www.albirex.co.jp/past/seasondata.htm",
+      "game_page_url": "https://www.albirex.co.jp/past/data2008/game_2008.html",
+      "detail_url": "https://www.albirex.co.jp/past/data2008/result081005_s.html",
+      "row_text": "10/5(日) 14:00 ベガルタ仙台 新潟市陸上競技場 △ 1-1",
+      "competition_heading": "2008 2008 Jサテライトリーグ Bグループ",
+      "home_away_rule": "新潟県内会場ならホーム、それ以外はアウェイ",
+      "note": "新潟県内会場のためhome_teamをアルビレックス新潟に設定"
+    },
+    "extra": {
+      "wind": "",
+      "pitch": "",
+      "detail_title": "Jサテライトリーグ Bグループ 第16日 vs ベガルタ仙台"
+    }
+  }
+]
