@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v57-modal-close-center';
+const cacheName = 'football-app-v59-home-dock';
 const assetsToCache = [
   './',
   './index.html',
@@ -24,6 +24,11 @@ const assetsToCache = [
   './data/assets/icons/adidas.png',
   './data/assets/icons/j1.png',
   './data/assets/icons/j2.png',
+  './data/assets/icons/alb_logo1.png',
+  './data/assets/icons/roasso_logo1.png',
+  './data/assets/icons/j2_2.png',
+  './data/assets/icons/j3_2.png',
+  './data/assets/icons/ylc_logo1.jpg',
   './vision/vendor/html2canvas.min.js',
   './data/assets/fonts/jleaguekick-bold.woff2',
   './data/assets/fonts/BIZUDPGothic-Regular.ttf',

@@ -380,6 +380,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     delete document.body.dataset.paModalOriginMode;
     document.body.setAttribute("data-mode", currentMode);
+    updateDashboardDockState();
   }
 
   appHistoryEntries.set(0, {
@@ -9479,6 +9480,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  function updateDashboardDockState() {
+    const activePaneId = ["standings-overlay", "links-overlay"]
+      .find(id => document.getElementById(id)?.classList.contains("active")) || "";
+    document.querySelectorAll(".dash-ql-btn").forEach(btn => {
+      const mode = btn.dataset.dockMode;
+      const pane = btn.dataset.dockPane;
+      const isActive = pane ? pane === activePaneId : (!activePaneId && mode === currentMode);
+      btn.classList.toggle("active", isActive);
+      if (isActive) btn.setAttribute("aria-current", "page");
+      else btn.removeAttribute("aria-current");
+    });
+  }
+
   function switchMode(mode, options = {}) {
     const previousMode = currentMode;
     currentMode = mode;
@@ -9526,16 +9540,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (mode === "player-analysis") setPlayerAnalysisScreen(activeScreen, { history: false });
       }, options);
     }
+    updateDashboardDockState();
   }
 
   function openSubPane(id) {
     const pane = document.getElementById(id);
     if (pane) pane.classList.add("active");
     sideMenu.classList.remove("active");
+    updateDashboardDockState();
   }
 
   document.querySelectorAll(".close-pane").forEach(btn => {
-    btn.onclick = () => btn.closest(".sub-pane").classList.remove("active");
+    btn.onclick = () => {
+      btn.closest(".sub-pane").classList.remove("active");
+      updateDashboardDockState();
+    };
   });
 
   // --- Navigation & Sync ---
@@ -12211,17 +12230,46 @@ document.addEventListener("DOMContentLoaded", async () => {
       const myEmblem = m.club === "niigata" ? "./data/assets/emblems/アルビレックス新潟.png" : "./data/assets/emblems/ロアッソ熊本.png";
       const J_CLUB_ENG = { "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC" };
       const engOpp = J_CLUB_ENG[m.opponent] || m.opponent.toUpperCase();
+      const dashClubLogo = m.club === "niigata" ? "./data/assets/icons/alb_logo1.png" : "./data/assets/icons/roasso_logo1.png";
+      const competitionText = [
+        getMatchCompetitionText(m),
+        m.competition,
+        m.tournament,
+        m.league,
+        m.matchweek,
+        m.stage,
+        m.section
+      ].filter(Boolean).join(" ");
+      const competitionKey = /ルヴァン|YLC|Jリーグカップ|Ｊリーグカップ|ナビスコ|round-levain/i.test(competitionText)
+        ? "levain"
+        : (/(^|[^A-Z0-9])J3([^A-Z0-9]|$)|Ｊ3|Ｊ３/.test(competitionText)
+          ? "j3"
+          : (/(^|[^A-Z0-9])J2([^A-Z0-9]|$)|Ｊ2|Ｊ２/.test(competitionText)
+            ? "j2"
+            : (m.club === "kumamoto" ? "j3" : "j2")));
+      const competitionLogoMap = {
+        j2: { src: "./data/assets/icons/j2_2.png", alt: "J2" },
+        j3: { src: "./data/assets/icons/j3_2.png", alt: "J3" },
+        levain: { src: "./data/assets/icons/ylc_logo1.jpg", alt: "ルヴァンカップ" }
+      };
+      const competitionLogo = competitionLogoMap[competitionKey] || competitionLogoMap.j2;
 
       return `
-          <div class="dash-card white-theme" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white;">
+          <div class="dash-card white-theme home-card-enhanced home-card-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white;">
             <div class="dash-card-header" style="background:${mainColor}; border-bottom:none; padding:8px 15px;">
-              <span class="dash-team-name" style="font-size:1.4rem; font-weight:900;">${clubName}</span>
+              <div class="home-club-lockup">
+                <span class="home-club-mark"><img src="${dashClubLogo}" alt="${clubName}" loading="eager" decoding="async"></span>
+                <span class="dash-team-name" style="font-size:1.4rem; font-weight:900;">${clubName}</span>
+              </div>
               ${haBadge.replace('font-size:1rem;', 'font-size:0.85rem;')}
             </div>
             <div class="dash-card-body" style="background: white; color: #111; padding:10px 15px;">
               
               <!-- Top area (Date, Venue + Weather) -->
               <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                 <div class="home-competition-logo comp-${competitionKey}" data-competition-key="${competitionKey}">
+                    <img src="${competitionLogo.src}" alt="${competitionLogo.alt}" loading="eager" decoding="async">
+                 </div>
                  <!-- Left Side: Date and Venue -->
                  <div style="display:flex; flex-direction:column; gap:6px;">
                     <div style="display:flex; align-items:center; gap:8px;">
@@ -12310,9 +12358,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Bind new quick links
+    const btnHome = document.getElementById("dash-to-dashboard");
     const btnFeed = document.getElementById("dash-to-feed");
     const btnCal = document.getElementById("dash-to-calendar");
     const btnPlayerAnalysis = document.getElementById("dash-to-player-analysis");
+    if (btnHome) btnHome.onclick = () => switchMode("dashboard");
     if (btnFeed) btnFeed.onclick = () => switchMode("feed");
     if (btnCal) btnCal.onclick = () => switchMode("calendar");
     if (btnPlayerAnalysis) btnPlayerAnalysis.onclick = () => switchMode("player-analysis");
@@ -12322,6 +12372,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       loadStandings();
     };
     document.getElementById("dash-to-links").onclick = () => openSubPane("links-overlay");
+    updateDashboardDockState();
 
     // Auto Fetch Weather Function inline
     const fetchWeatherForDash = async (idPrefix, clubPrefix) => {
@@ -13026,11 +13077,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   sideMenuBackdrop.onclick = () => toggleMenu(false);
 
   function openSubPane(id, options = {}) {
-    document.getElementById(id).classList.add("active");
+    const pane = document.getElementById(id);
+    if (!pane) return;
+    pane.classList.add("active");
     addAppHistoryEntry(`sub-pane:${id}`, () => openSubPane(id, { history: false }), options);
+    updateDashboardDockState();
   }
   function closeSubPane(id, options = {}) {
-    const closeDirect = () => document.getElementById(id).classList.remove("active");
+    const closeDirect = () => {
+      document.getElementById(id)?.classList.remove("active");
+      updateDashboardDockState();
+    };
     if (options.history === false) closeDirect();
     else closeAppHistoryEntry(`sub-pane:${id}`, closeDirect);
   }
@@ -13065,12 +13122,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (menuVision) {
     menuVision.onclick = () => switchMode("vision");
   }
+  const dashHomeBtn = document.getElementById("dash-to-dashboard");
+  if (dashHomeBtn) {
+    dashHomeBtn.onclick = () => switchMode("dashboard");
+  }
+  const dashFeedBtn = document.getElementById("dash-to-feed");
+  if (dashFeedBtn) {
+    dashFeedBtn.onclick = () => switchMode("feed");
+  }
+  const dashCalendarBtn = document.getElementById("dash-to-calendar");
+  if (dashCalendarBtn) {
+    dashCalendarBtn.onclick = () => switchMode("calendar");
+  }
   const dashStandingsBtn = document.getElementById("dash-to-standings");
   if (dashStandingsBtn) {
     dashStandingsBtn.onclick = () => {
       openSubPane("standings-overlay");
       loadStandings();
     };
+  }
+  const dashLinksBtn = document.getElementById("dash-to-links");
+  if (dashLinksBtn) {
+    dashLinksBtn.onclick = () => openSubPane("links-overlay");
   }
   const dashVisionBtn = document.getElementById("dash-to-vision");
   if (dashVisionBtn) {

@@ -9328,3 +9328,549 @@ body[data-mode="dashboard"] #header-n-gate-container { pointer-events: auto; }
 .club-pip.active {
   filter: drop-shadow(0 5px 9px rgba(0,0,0,0.16));
 }
+
+/* =========================================
+   Dashboard Home Redesign
+   ========================================= */
+body[data-mode="dashboard"] #ultra-dashboard {
+  gap: 14px;
+  padding: calc(64px + env(safe-area-inset-top)) 12px calc(106px + env(safe-area-inset-bottom)) !important;
+  background: transparent;
+}
+
+body[data-mode="dashboard"] #dashboard-cards-container {
+  width: min(100%, 920px);
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+body[data-mode="dashboard"] .dash-card,
+body[data-mode="dashboard"] .dash-card.white-theme {
+  --club-accent: #ff6600;
+  --club-accent-rgb: 255,102,0;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  border: 1px solid rgba(8,12,20,0.62) !important;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 22%),
+    linear-gradient(135deg, rgba(var(--club-accent-rgb),0.22), rgba(255,255,255,0) 38%),
+    linear-gradient(180deg, #10151d 0%, #19202b 100%) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 22%),
+    linear-gradient(135deg, rgba(var(--club-accent-rgb),0.22), rgba(255,255,255,0) 38%),
+    linear-gradient(180deg, #10151d 0%, #19202b 100%) !important;
+  box-shadow: 0 18px 44px rgba(12,18,28,0.16) !important;
+}
+
+body[data-mode="dashboard"] #dash-card-niigata {
+  --club-accent: var(--albirex-orange);
+  --club-accent-rgb: var(--albirex-orange-rgb);
+}
+
+body[data-mode="dashboard"] #dash-card-kumamoto {
+  --club-accent: var(--roasso-red);
+  --club-accent-rgb: var(--roasso-red-rgb);
+}
+
+body[data-mode="dashboard"] .dash-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 0;
+  width: 82px;
+  border-radius: 18px 0 0 18px;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--club-accent), rgba(var(--club-accent-rgb),0.64));
+  clip-path: polygon(0 0, 82px 0, 72px 18%, 42px 100%, 0 100%);
+  opacity: 0.96;
+}
+
+body[data-mode="dashboard"] .dash-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(110deg, rgba(255,255,255,0.045), transparent 28%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 56px);
+  opacity: 0.64;
+}
+
+body[data-mode="dashboard"] .dash-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+body[data-mode="dashboard"] .dash-card-header,
+body[data-mode="dashboard"] #dash-card-niigata .dash-card-header,
+body[data-mode="dashboard"] #dash-card-kumamoto .dash-card-header {
+  min-height: 58px;
+  padding: 6px 14px 6px 12px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  background: transparent !important;
+  color: #fff;
+  box-shadow: none !important;
+  gap: 8px;
+}
+
+body[data-mode="dashboard"] .home-club-lockup {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body[data-mode="dashboard"] .home-club-mark {
+  flex: 0 0 62px;
+  width: 62px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-mode="dashboard"] .home-club-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+body[data-mode="dashboard"] .home-card-kumamoto .home-club-mark {
+  overflow: hidden;
+}
+
+body[data-mode="dashboard"] .home-card-kumamoto .home-club-mark img {
+  transform: translateY(-8px) scale(0.62);
+  transform-origin: center top;
+}
+
+body[data-mode="dashboard"] .dash-team-name {
+  min-width: 0;
+  flex: 1;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem !important;
+  line-height: 1;
+  letter-spacing: 0.10em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body[data-mode="dashboard"] .sheet-ha {
+  min-width: 50px;
+  padding: 5px 8px;
+  border: 1px solid rgba(255,255,255,0.26);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.10) !important;
+  box-shadow: none;
+  color: #fff !important;
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+
+body[data-mode="dashboard"] .dash-card-body {
+  display: grid;
+  gap: 10px;
+  padding: 8px 12px 13px 16px !important;
+  background: transparent !important;
+  color: #fff !important;
+}
+
+body[data-mode="dashboard"] .dash-card-body > div:first-child {
+  min-width: 0;
+  display: grid !important;
+  grid-template-columns: 58px minmax(0, 1fr) minmax(58px, auto);
+  align-items: stretch !important;
+  gap: 9px;
+  margin-bottom: 0 !important;
+  padding: 8px 9px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 13px;
+  background: rgba(255,255,255,0.065);
+}
+
+body[data-mode="dashboard"] .dash-card-body > div:first-child > div:first-child {
+  min-width: 0;
+  gap: 7px !important;
+}
+
+body[data-mode="dashboard"] .home-competition-logo {
+  align-self: stretch;
+  min-height: 62px;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-mode="dashboard"] .home-competition-logo img {
+  max-width: 100%;
+  max-height: 58px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.22));
+}
+
+body[data-mode="dashboard"] .home-competition-logo.comp-levain img {
+  max-height: 48px;
+}
+
+body[data-mode="dashboard"] .dash-mw {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  background: #05070a !important;
+  color: #fff !important;
+  font-size: 0.78rem;
+  line-height: 1;
+  box-shadow: none;
+}
+
+body[data-mode="dashboard"] .dash-date {
+  min-width: 0;
+  color: #fff !important;
+  font-size: 0.84rem !important;
+  font-weight: 900 !important;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+body[data-mode="dashboard"] .dash-venue-row {
+  min-width: 0;
+  color: rgba(255,255,255,0.72) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.35;
+}
+
+body[data-mode="dashboard"] .dash-venue-row svg {
+  flex: 0 0 15px;
+  color: rgba(255,255,255,0.64);
+}
+
+body[data-mode="dashboard"] .dash-venue-row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+body[data-mode="dashboard"] [id^="dash-weather-"] {
+  min-width: 72px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+body[data-mode="dashboard"] .val-weather {
+  min-height: 30px;
+  justify-content: flex-end;
+  color: rgba(255,255,255,0.72);
+}
+
+body[data-mode="dashboard"] .dash-card-body > div:nth-child(2) {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center !important;
+  gap: 10px !important;
+  margin-bottom: 0 !important;
+  padding: 0 2px 2px !important;
+  border: 0 !important;
+}
+
+body[data-mode="dashboard"] .dash-vs {
+  flex: 0 0 auto;
+  padding: 6px 8px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 9px;
+  background: rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.76) !important;
+  font-size: 0.78rem !important;
+  line-height: 1;
+  letter-spacing: 0.08em;
+}
+
+body[data-mode="dashboard"] .dash-opp-name {
+  min-width: 0;
+  color: #fff !important;
+  font-size: 1.45rem !important;
+  line-height: 1.16;
+  letter-spacing: 0 !important;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.28);
+}
+
+body[data-mode="dashboard"] .dash-card-split {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 9px !important;
+  align-items: stretch;
+}
+
+body[data-mode="dashboard"] .dash-card-split > div[style*="width:1px"] {
+  display: none !important;
+}
+
+body[data-mode="dashboard"] .dash-side-panel {
+  min-width: 0;
+  padding: 10px 7px 8px;
+  border: 1px solid rgba(255,255,255,0.74);
+  border-radius: 13px;
+  background: rgba(255,255,255,0.94);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 8px 20px rgba(0,0,0,0.14);
+  color: var(--text-main);
+}
+
+body[data-mode="dashboard"] .dash-side-panel > img {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: contain;
+  margin-bottom: 7px !important;
+  filter: drop-shadow(0 5px 8px rgba(12,18,28,0.18)) !important;
+}
+
+body[data-mode="dashboard"] .dash-side-panel > div:nth-of-type(1) {
+  width: 100% !important;
+  min-height: 34px;
+  margin-bottom: 6px !important;
+  padding: 5px 6px !important;
+  border: 1px solid rgba(20,24,32,0.10) !important;
+  border-radius: 10px;
+  background: #f2f4f7;
+  color: var(--text-main);
+}
+
+body[data-mode="dashboard"] .val-rank-num-my,
+body[data-mode="dashboard"] .val-rank-num-opp {
+  color: var(--text-main) !important;
+  font-size: 1.18rem !important;
+  line-height: 1;
+}
+
+body[data-mode="dashboard"] .val-prev-score-my,
+body[data-mode="dashboard"] .val-prev-score-opp {
+  color: var(--text-main) !important;
+  font-size: 1.02rem !important;
+  letter-spacing: 0 !important;
+}
+
+body[data-mode="dashboard"] .dash-prev-meta {
+  min-height: 24px;
+  margin-bottom: 4px;
+  gap: 5px;
+  color: #737b88;
+  font-size: 0.74rem;
+}
+
+body[data-mode="dashboard"] .dash-prev-ha,
+body[data-mode="dashboard"] .dash-form-ha {
+  color: #737b88;
+}
+
+body[data-mode="dashboard"] .dash-form-strip {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 5px;
+  gap: 4px;
+}
+
+body[data-mode="dashboard"] .dash-form-item {
+  width: 21px;
+  gap: 2px;
+}
+
+body[data-mode="dashboard"] .dash-form-symbol {
+  color: var(--text-main);
+  font-size: 0.80rem;
+}
+
+body[data-mode="dashboard"] .dash-form-emblem,
+body[data-mode="dashboard"] .dash-form-emblem-placeholder {
+  width: 16px;
+  height: 16px;
+}
+
+body[data-mode="dashboard"] #dash-update-time {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #848c99 !important;
+  font-size: 0.62rem !important;
+  font-weight: 900 !important;
+}
+
+body:not([data-mode="dashboard"]):not([data-mode="feed"]):not([data-mode="calendar"]) .dash-quick-links {
+  display: none !important;
+}
+
+body[data-mode="dashboard"] .dash-quick-links,
+body[data-mode="feed"] .dash-quick-links,
+body[data-mode="calendar"] .dash-quick-links {
+  position: fixed;
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  z-index: 3150;
+  width: auto;
+  max-width: 520px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+  padding: 7px;
+  border: 1px solid rgba(255,255,255,0.74);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.86);
+  box-shadow: 0 18px 46px rgba(12,18,28,0.18), inset 0 1px 0 rgba(255,255,255,0.85);
+  backdrop-filter: blur(22px) saturate(1.15);
+  -webkit-backdrop-filter: blur(22px) saturate(1.15);
+  flex-shrink: 0;
+}
+
+body:has(#side-menu.active) .dash-quick-links {
+  display: none !important;
+}
+
+body[data-mode="dashboard"] .dash-ql-btn,
+body[data-mode="feed"] .dash-ql-btn,
+body[data-mode="calendar"] .dash-ql-btn {
+  min-height: 58px;
+  padding: 7px 2px;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  background-image: none;
+  box-shadow: none;
+}
+
+body[data-mode="dashboard"] .dash-ql-btn::before,
+body[data-mode="feed"] .dash-ql-btn::before,
+body[data-mode="calendar"] .dash-ql-btn::before {
+  display: none;
+}
+
+body[data-mode="dashboard"] .dash-ql-btn .m-icon,
+body[data-mode="feed"] .dash-ql-btn .m-icon,
+body[data-mode="calendar"] .dash-ql-btn .m-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--text-main);
+}
+
+body[data-mode="dashboard"] .dash-ql-btn span,
+body[data-mode="feed"] .dash-ql-btn span,
+body[data-mode="calendar"] .dash-ql-btn span {
+  color: var(--text-main);
+  font-size: 0.64rem;
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 0;
+  white-space: normal;
+}
+
+body[data-mode="dashboard"] .dash-ql-btn.active,
+body[data-mode="feed"] .dash-ql-btn.active,
+body[data-mode="calendar"] .dash-ql-btn.active {
+  border-color: rgba(10,14,20,0.12);
+  background: #10151d;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 18px rgba(12,18,28,0.16);
+}
+
+body[data-mode="dashboard"] .dash-ql-btn.active .m-icon,
+body[data-mode="dashboard"] .dash-ql-btn.active span,
+body[data-mode="feed"] .dash-ql-btn.active .m-icon,
+body[data-mode="feed"] .dash-ql-btn.active span,
+body[data-mode="calendar"] .dash-ql-btn.active .m-icon,
+body[data-mode="calendar"] .dash-ql-btn.active span {
+  color: #fff;
+}
+
+body[data-mode="dashboard"] .dash-ql-btn:active,
+body[data-mode="feed"] .dash-ql-btn:active,
+body[data-mode="calendar"] .dash-ql-btn:active {
+  transform: translateY(1px) scale(0.98);
+  border-color: rgba(20,24,32,0.10);
+  background: rgba(20,24,32,0.055);
+}
+
+body[data-mode="feed"] #ultra-nav,
+body[data-mode="calendar"] #ultra-nav {
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  z-index: 3040;
+}
+
+body[data-mode="feed"] .month-section {
+  padding-bottom: calc(220px + env(safe-area-inset-bottom)) !important;
+}
+
+body[data-mode="calendar"] #calendar-view {
+  padding-bottom: calc(220px + env(safe-area-inset-bottom)) !important;
+}
+
+#standings-overlay .pane-content,
+#links-overlay .pane-content {
+  padding-bottom: calc(116px + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 760px) {
+  body[data-mode="dashboard"] #dashboard-cards-container {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    gap: 11px;
+  }
+}
+
+@media (max-width: 390px) {
+  body[data-mode="dashboard"] #ultra-dashboard {
+    padding-inline: 9px;
+  }
+
+  body[data-mode="dashboard"] .dash-card-body {
+    padding-right: 10px !important;
+  }
+
+  body[data-mode="dashboard"] .dash-opp-name {
+    font-size: 1.28rem !important;
+  }
+
+  body[data-mode="dashboard"] .dash-side-panel {
+    padding-inline: 6px;
+  }
+
+  body[data-mode="dashboard"] .dash-side-panel > img {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  body[data-mode="dashboard"] .home-club-mark {
+    flex-basis: 58px;
+    width: 58px;
+  }
+}

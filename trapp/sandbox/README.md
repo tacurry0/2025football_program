@@ -9,3 +9,12 @@
 - 本番ファイルは変更しない
 
 デザイン変更は `sandbox/sandbox-theme.css` のみで行います。
+
+## Home Sandbox
+
+`home.html` はホーム画面の見た目だけを検証するページです。
+
+- 元の `index.html`、`schedule/schedule.js`、`script.js` を実行
+- データとホーム画面の内容は元アプリのまま
+- `home-theme.css` だけで `body[data-mode="dashboard"]` 配下を上書き
+- 本番ファイルは変更しない

@@ -1,0 +1,5409 @@
+[
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080309",
+    "url": "https://www.albirex.co.jp/past/data2008/result080309.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "大宮アルディージャ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/03/09",
+    "kickoff": "16:00",
+    "stadium": "NACK5スタジアム",
+    "attendance": "14380",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 72′ 寺川 能人",
+          "time": "70'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 84′ 千葉 和彦",
+          "time": "78'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 松下 年宏",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "77′ 本間 勲",
+          "time": "66'"
+        }
+      ],
+      "manager": "樋口"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "靖洋 鈴木 淳"
+    },
+    "referees": {
+      "主審": "片山 義継",
+      "副審": "中井 恒 , 金田 大吉"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080315",
+    "url": "https://www.albirex.co.jp/past/data2008/result080315.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "FC東京",
+    "home_score": "2",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/03/15",
+    "kickoff": "16:03",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "35083",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 62′ エメルソン",
+          "time": "78'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 浅利 悟",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 71′ 石川 直宏",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 川口 信男",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 82′ カボレ",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 赤嶺 真吾",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "70′ 長友 佑郎",
+          "time": "84'"
+        },
+        {
+          "type": "警告",
+          "name": "75′ 梶山 陽平",
+          "time": "89'"
+        },
+        {
+          "type": "警告",
+          "name": "赤嶺 真吾",
+          "time": "89'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 城福 浩"
+    },
+    "referees": {
+      "主審": "佐藤 隆治",
+      "副審": "上荒 敬司 , 佐藤 秀明"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080330",
+    "url": "https://www.albirex.co.jp/past/data2008/result080330.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "浦和レッドダイヤモンズ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/03/30",
+    "kickoff": "16:03",
+    "stadium": "埼玉スタジアム2002",
+    "attendance": "46962",
+    "weather": "雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 8′ 本間 勲",
+          "time": "9'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 木暮 郁哉",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 71′ 寺川 能人",
+          "time": "68'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 75′ アレッサンドロ",
+          "time": "85'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "29′ 永田 充",
+          "time": "14'"
+        },
+        {
+          "type": "警告",
+          "name": "33′ 千代反田 充",
+          "time": "60'"
+        },
+        {
+          "type": "警告",
+          "name": "55′ 内田 潤",
+          "time": "72'"
+        }
+      ],
+      "manager": "ゲルト"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "エンゲルス 鈴木 淳"
+    },
+    "referees": {
+      "主審": "松尾 一",
+      "副審": "名木 利幸 , 西尾 英朗"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080402",
+    "url": "https://www.albirex.co.jp/past/data2008/result080402.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "鹿島アントラーズ",
+    "home_score": "0",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/02",
+    "kickoff": "19:04",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "22740",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 75′ 田代 有三",
+          "time": "53'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN ダニーロ",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 79′ 野沢 拓也",
+          "time": "68'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 増田 誓志",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 85′ 内田 篤人",
+          "time": "73'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 伊野波 雅彦",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "71′ 本山 雅志",
+          "time": "57'"
+        },
+        {
+          "type": "警告",
+          "name": "72′ 本山 雅志",
+          "time": "67'"
+        },
+        {
+          "type": "退場",
+          "name": "本山 雅志",
+          "time": "72'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 オズワルド オリヴェイラ"
+    },
+    "referees": {
+      "主審": "奥谷 彰男",
+      "副審": "下村 昌昭 , 佐藤 秀明"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080406",
+    "url": "https://www.albirex.co.jp/past/data2008/result080406.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "柏レイソル",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/06",
+    "kickoff": "16:00",
+    "stadium": "日立柏サッカー場",
+    "attendance": "9585",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ アレッサンドロ",
+          "time": "70'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 松下 年宏",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 80′ ダヴィ",
+          "time": "75'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "16′ アレッサンドロ",
+          "time": "26'"
+        },
+        {
+          "type": "警告",
+          "name": "51′ 内田 潤",
+          "time": "89'"
+        }
+      ],
+      "manager": "石崎"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "信弘 鈴木 淳"
+    },
+    "referees": {
+      "主審": "小川 直仁",
+      "副審": "前島 和彦 , 金田 大吉"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080413",
+    "url": "https://www.albirex.co.jp/past/data2008/result080413.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "ガンバ大阪",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/13",
+    "kickoff": "16:03",
+    "stadium": "万博記念競技場",
+    "attendance": "13321",
+    "weather": "曇のち雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 65′ 田中 亜土夢",
+          "time": "66'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN ダヴィ",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 74′ 木暮 郁哉",
+          "time": "84'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 永田 充",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 82′ アレッサンドロ",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "松下 年宏",
+          "time": "51'"
+        },
+        {
+          "type": "警告",
+          "name": "北野 貴之",
+          "time": "76'"
+        }
+      ],
+      "manager": "西野"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "朗 鈴木 淳"
+    },
+    "referees": {
+      "主審": "村上 伸次",
+      "副審": "宮島 一代 , 大塚 晴弘"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080419",
+    "url": "https://www.albirex.co.jp/past/data2008/result080419.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "京都サンガF.C.",
+    "home_score": "1",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/19",
+    "kickoff": "16:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "27115",
+    "weather": "雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 44′ パウリーニョ",
+          "time": "59'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 森岡 隆三",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 45′ 林 丈統",
+          "time": "68'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 平島 崇",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 76′ 中山 博貴",
+          "time": "73'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 徳重 隆明",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "34′ シジクレイ",
+          "time": "55'"
+        },
+        {
+          "type": "警告",
+          "name": "41′ シジクレイ",
+          "time": "67'"
+        },
+        {
+          "type": "警告",
+          "name": "田原 豊",
+          "time": "50'"
+        },
+        {
+          "type": "警告",
+          "name": "増嶋 竜也",
+          "time": "79'"
+        },
+        {
+          "type": "警告",
+          "name": "増嶋 竜也",
+          "time": "82'"
+        },
+        {
+          "type": "退場",
+          "name": "シジクレイ",
+          "time": "41'"
+        },
+        {
+          "type": "退場",
+          "name": "アタリバ",
+          "time": "80'"
+        },
+        {
+          "type": "退場",
+          "name": "加藤 久(監督)",
+          "time": "83'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 加藤 久"
+    },
+    "referees": {
+      "主審": "佐藤 隆治",
+      "副審": "中原 美智雄 , 佐藤 秀明"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080426",
+    "url": "https://www.albirex.co.jp/past/data2008/result080426.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "コンサドーレ札幌",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/26",
+    "kickoff": "13:33",
+    "stadium": "札幌ドーム",
+    "attendance": "13055",
+    "weather": "屋内",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 70′ ダヴィ",
+          "time": "65'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 松下 年宏",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 84′ アレッサンドロ",
+          "time": "77'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "81'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "27′ マルシオ リシャルデス",
+          "time": "13'"
+        },
+        {
+          "type": "警告",
+          "name": "72′ アレッサンドロ",
+          "time": "29'"
+        },
+        {
+          "type": "警告",
+          "name": "矢野 貴章",
+          "time": "89'"
+        },
+        {
+          "type": "退場",
+          "name": "退場",
+          "time": "34'"
+        }
+      ],
+      "manager": "三浦"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "俊也 鈴木 淳"
+    },
+    "referees": {
+      "主審": "岡田 正義",
+      "副審": "村上 孝治 , 岡野 尚士"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080429",
+    "url": "https://www.albirex.co.jp/past/data2008/result080429.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "東京ヴェルディ",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/29",
+    "kickoff": "15:04",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "35788",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 79′ レアンドロ",
+          "time": "51'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河野 広貴",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 84′ 冨澤 清太郎",
+          "time": "76'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 柴崎 晃誠",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "83'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "54′ 那須 大亮",
+          "time": "63'"
+        },
+        {
+          "type": "警告",
+          "name": "89′ 土屋 征夫",
+          "time": "82'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 柱谷 哲二"
+    },
+    "referees": {
+      "主審": "吉田 寿光",
+      "副審": "金田 大吉 , 西尾 英朗"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080503",
+    "url": "https://www.albirex.co.jp/past/data2008/result080503.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "大分トリニータ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/05/03",
+    "kickoff": "13:05",
+    "stadium": "九州石油ドーム",
+    "attendance": "19273",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 木暮 郁哉",
+          "time": "71'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 長谷部 彩翔",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 61′ 寺川 能人",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 永田 充",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 82′ ダヴィ",
+          "time": "84'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 川又 堅碁",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "内田 潤",
+          "time": "50'"
+        },
+        {
+          "type": "警告",
+          "name": "ダヴィ",
+          "time": "53'"
+        }
+      ],
+      "manager": "シャムスカ"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "鈴木 淳"
+    },
+    "referees": {
+      "主審": "田辺 宏司",
+      "副審": "間島 宗一 , 平野 伸一"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080506",
+    "url": "https://www.albirex.co.jp/past/data2008/result080506.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "清水エスパルス",
+    "home_score": "3",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/05/06",
+    "kickoff": "14:34",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "36403",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 58′ 本田 拓也",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 兵働 昭弘",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 58′ 原 一樹",
+          "time": "85'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 西澤 明訓",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 66′ 山西 尊裕",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 戸田 光洋",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "60′ 西澤 明訓",
+          "time": "59'"
+        },
+        {
+          "type": "警告",
+          "name": "青山 直晃",
+          "time": "73'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 長谷川 健太"
+    },
+    "referees": {
+      "主審": "高山 啓義",
+      "副審": "上荒 敬司 , 佐藤 秀明"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080510",
+    "url": "https://www.albirex.co.jp/past/data2008/result080510.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ジュビロ磐田",
+    "home_score": "1",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/05/10",
+    "kickoff": "19:04",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "33657",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 60′ 萬代 宏樹",
+          "time": "75'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 前田 遼一",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 81′ 中山 雅史",
+          "time": "78'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 山崎 亮平",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "86'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "4′ 加賀 健一",
+          "time": "85'"
+        },
+        {
+          "type": "警告",
+          "name": "加賀 健一",
+          "time": "71'"
+        },
+        {
+          "type": "警告",
+          "name": "茶野 隆行",
+          "time": "89'"
+        },
+        {
+          "type": "退場",
+          "name": "加賀 健一",
+          "time": "71'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 内山 篤"
+    },
+    "referees": {
+      "主審": "松村 和彦",
+      "副審": "安元 利充 , 小椋 剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080518",
+    "url": "https://www.albirex.co.jp/past/data2008/result080518.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "ヴィッセル神戸",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/05/18",
+    "kickoff": "16:03",
+    "stadium": "ホームズスタジアム神戸",
+    "attendance": "9117",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 64′ 寺川 能人",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 本間 勲",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 84′ アレッサンドロ",
+          "time": "59'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "77'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "10′ 寺川 能人",
+          "time": "77'"
+        }
+      ],
+      "manager": "松田"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "浩 鈴木 淳"
+    },
+    "referees": {
+      "主審": "奥谷 彰男",
+      "副審": "中原 美智雄 , 長谷 忠志"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080628",
+    "url": "https://www.albirex.co.jp/past/data2008/result080628.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "川崎フロンターレ",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/06/28",
+    "kickoff": "16:03",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "40029",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 55′ 横山 知伸",
+          "time": "67'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 大橋 正博",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 66′ 菊地 光将",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 黒津 勝",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 76′ 山岸 智",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田坂 祐介",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "44′ 菊地 光将",
+          "time": "80'"
+        },
+        {
+          "type": "退場",
+          "name": "退場",
+          "time": "57'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 高畠 勉"
+    },
+    "referees": {
+      "主審": "前田 拓哉",
+      "副審": "上荒 敬司 , 佐藤 秀明"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080705",
+    "url": "https://www.albirex.co.jp/past/data2008/result080705.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "名古屋グランパス",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/05",
+    "kickoff": "19:03",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "37529",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 60′ 深井 正樹",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 杉本 恵太",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 73′ 玉田 圭司",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 牧 佑樹",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 80′ ヨンセン",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 米山 篤志",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "11′ 深井 正樹",
+          "time": "44'"
+        },
+        {
+          "type": "警告",
+          "name": "62′ 吉村 圭司",
+          "time": "50'"
+        },
+        {
+          "type": "警告",
+          "name": "65′ バヤリッツァ",
+          "time": "64'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 ストイコビッチ"
+    },
+    "referees": {
+      "主審": "東城 穣",
+      "副審": "高橋 佳久 , 青木 隆"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080713",
+    "url": "https://www.albirex.co.jp/past/data2008/result080713.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "横浜F・マリノス",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/13",
+    "kickoff": "19:00",
+    "stadium": "ニッパツ三ツ沢球技場",
+    "attendance": "12294",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 44′ 松下 年宏",
+          "time": "81'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 寺川 能人",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 77′ マルシオ リシャルデス",
+          "time": "81'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 87′ アレッサンドロ",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中野 洋司",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "2′ 千葉 和彦",
+          "time": "79'"
+        },
+        {
+          "type": "警告",
+          "name": "松下 年宏",
+          "time": "33'"
+        }
+      ],
+      "manager": "桑原"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "隆 鈴木 淳"
+    },
+    "referees": {
+      "主審": "田辺 宏司",
+      "副審": "西尾 英朗 , 長谷 忠志"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080716",
+    "url": "https://www.albirex.co.jp/past/data2008/result080716.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ジェフユナイテッド千葉",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/16",
+    "kickoff": "19:33",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "30711",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 59′ 益山 司",
+          "time": "74'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中島 浩司",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 65′ 根本 裕一",
+          "time": "85'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN レイナウド",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 81′ 谷澤 達也",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 苔口 卓也",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "44′ 池田 昇平",
+          "time": "38'"
+        },
+        {
+          "type": "警告",
+          "name": "44′ ボスナー",
+          "time": "67'"
+        },
+        {
+          "type": "警告",
+          "name": "59′ 巻 誠一郎",
+          "time": "81'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 アレックス ミラー"
+    },
+    "referees": {
+      "主審": "松尾 一",
+      "副審": "名木 利幸 , 岡野 宇広"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080720",
+    "url": "https://www.albirex.co.jp/past/data2008/result080720.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "清水エスパルス",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/20",
+    "kickoff": "19:03",
+    "stadium": "日本平スタジアム",
+    "attendance": "17025",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 寺川 能人",
+          "time": "76'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 69′ 千葉 和彦",
+          "time": "80'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 木暮 郁哉",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "千葉 和彦",
+          "time": "42'"
+        },
+        {
+          "type": "警告",
+          "name": "矢野 貴章",
+          "time": "57'"
+        },
+        {
+          "type": "警告",
+          "name": "永田 充",
+          "time": "89'"
+        }
+      ],
+      "manager": "長谷川"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "健太 鈴木 淳"
+    },
+    "referees": {
+      "主審": "吉田 寿光",
+      "副審": "相楽 亨 , 間島 宗一"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080727",
+    "url": "https://www.albirex.co.jp/past/data2008/result080727.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "コンサドーレ札幌",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/27",
+    "kickoff": "18:03",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "35388",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 57′ 西 大伍",
+          "time": "64'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 鄭 容臺",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 63′ 藤田 征也",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 砂川 誠",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 75′ 中山 元気",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 西谷 正也",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "22′ ダヴィ",
+          "time": "78'"
+        },
+        {
+          "type": "警告",
+          "name": "中山 元気",
+          "time": "39'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 三浦 俊也"
+    },
+    "referees": {
+      "主審": "鍋島 將起",
+      "副審": "高橋 佳久 , 長谷 忠志"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080809",
+    "url": "https://www.albirex.co.jp/past/data2008/result080809.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "東京ヴェルディ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "4",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/08/09",
+    "kickoff": "18:03",
+    "stadium": "味の素スタジアム",
+    "attendance": "9211",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 田中 亜土夢",
+          "time": "78'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN アウグスト",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 56′ 千葉 和彦",
+          "time": "80'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 木暮 郁哉",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 79 ́ アレッサンドロ",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "30′ 永田 充",
+          "time": "1'"
+        },
+        {
+          "type": "退場",
+          "name": "́ 退場",
+          "time": "82'"
+        }
+      ],
+      "manager": "柱谷"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "哲二 鈴木 淳"
+    },
+    "referees": {
+      "主審": "村上 伸次",
+      "副審": "宮島 一代 , 大塚 晴弘"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080816",
+    "url": "https://www.albirex.co.jp/past/data2008/result080816.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "大分トリニータ",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/08/16",
+    "kickoff": "19:03",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "38781",
+    "weather": "雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 78 ́ 森島 康仁",
+          "time": "73'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 藤田 義明",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 85′ 金崎 夢生",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 清武 弘嗣",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "́",
+          "time": "57'"
+        },
+        {
+          "type": "警告",
+          "name": "́",
+          "time": "65'"
+        },
+        {
+          "type": "警告",
+          "name": "́ 上本 大海",
+          "time": "60'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "森島 康仁",
+          "time": "26'"
+        },
+        {
+          "type": "警告",
+          "name": "ホベルト",
+          "time": "49'"
+        }
+      ],
+      "manager": "淳 シャムスカ"
+    },
+    "referees": {
+      "主審": "松尾 一",
+      "副審": "下村 昌昭 , 安食 弘幸"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080823",
+    "url": "https://www.albirex.co.jp/past/data2008/result080823.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "京都サンガF.C.",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/08/23",
+    "kickoff": "19:04",
+    "stadium": "京都市西京極総合運動公園陸上競技場兼球技場",
+    "attendance": "8688",
+    "weather": "曇時々雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 62′ 矢野 貴章",
+          "time": "64'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN アウグスト",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 71′ 本間 勲",
+          "time": "67'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 86′ 田中 亜土夢",
+          "time": "88'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 内田 潤",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "88′ アウグスト",
+          "time": "6'"
+        },
+        {
+          "type": "警告",
+          "name": "89′ 千代反田 充",
+          "time": "44'"
+        }
+      ],
+      "manager": "加藤"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "久 鈴木 淳"
+    },
+    "referees": {
+      "主審": "岡田 正義",
+      "副審": "村上 孝治 , 岡野 尚士"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080828",
+    "url": "https://www.albirex.co.jp/past/data2008/result080828.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "川崎フロンターレ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "4",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/08/28",
+    "kickoff": "19:03",
+    "stadium": "等々力陸上競技場",
+    "attendance": "10884",
+    "weather": "曇時々雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 60′ 松尾 直人",
+          "time": "65'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 71′ 寺川 能人",
+          "time": "71'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN アウグスト",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 81′ アレッサンドロ",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "アレッサンドロ",
+          "time": "31'"
+        },
+        {
+          "type": "警告",
+          "name": "マルシオ リシャルデス",
+          "time": "54'"
+        },
+        {
+          "type": "警告",
+          "name": "矢野 貴章",
+          "time": "89'"
+        }
+      ],
+      "manager": "高畠"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "勉 鈴木 淳"
+    },
+    "referees": {
+      "主審": "扇谷 健司",
+      "副審": "中込 均 , 原田 昌彦"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080914",
+    "url": "https://www.albirex.co.jp/past/data2008/result080914.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "柏レイソル",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/09/14",
+    "kickoff": "16:03",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "36770",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 鎌田 次郎",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN ポポ",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 55′ 太田 圭輔",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN アレックス",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 70′ 菅沼 実",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 北嶋 秀朗",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "41′ 大谷 秀和",
+          "time": "56'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 石崎 信弘"
+    },
+    "referees": {
+      "主審": "奥谷 彰男",
+      "副審": "平野 伸一 , 柴田 正利"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080920",
+    "url": "https://www.albirex.co.jp/past/data2008/result080920.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "名古屋グランパス",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/09/20",
+    "kickoff": "19:03",
+    "stadium": "名古屋市瑞穂陸上競技場",
+    "attendance": "12095",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 43′ 木暮 郁哉",
+          "time": "44'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 寺川 能人",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 79′ 寺川 能人",
+          "time": "73'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "49′ アレッサンドロ",
+          "time": "53'"
+        },
+        {
+          "type": "警告",
+          "name": "内田 潤",
+          "time": "66'"
+        }
+      ],
+      "manager": "ストイコビッチ"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "鈴木 淳"
+    },
+    "referees": {
+      "主審": "家本 政明",
+      "副審": "中井 恒 , 安元 利充"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080923",
+    "url": "https://www.albirex.co.jp/past/data2008/result080923.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ヴィッセル神戸",
+    "home_score": "3",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/09/23",
+    "kickoff": "14:05",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "32208",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45* 馬場 賢治",
+          "time": "81'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 吉田 孝行",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 70′ 松岡 亮輔",
+          "time": "87'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 英雄",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 79′ 金 南一",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 鈴木 規郎",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "44′ 松岡 亮輔",
+          "time": "50'"
+        },
+        {
+          "type": "警告",
+          "name": "72′ 河本 裕之",
+          "time": "65'"
+        },
+        {
+          "type": "警告",
+          "name": "金 南一",
+          "time": "72'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 松田 浩"
+    },
+    "referees": {
+      "主審": "村上 伸次",
+      "副審": "宮島 一代 , 大塚 晴弘"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080928",
+    "url": "https://www.albirex.co.jp/past/data2008/result080928.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "ジュビロ磐田",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/09/28",
+    "kickoff": "16:04",
+    "stadium": "ヤマハスタジアム",
+    "attendance": "14241",
+    "weather": "曇のち雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 62′ 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 海本 慶治",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 76′ 千葉 和彦",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "22′ 千代反田 充",
+          "time": "12'"
+        },
+        {
+          "type": "警告",
+          "name": "40′ 矢野 貴章",
+          "time": "13'"
+        },
+        {
+          "type": "警告",
+          "name": "58′ 千代反田 充",
+          "time": "24'"
+        },
+        {
+          "type": "警告",
+          "name": "73′ 海本 慶治",
+          "time": "30'"
+        },
+        {
+          "type": "退場",
+          "name": "千代反田 充",
+          "time": "58'"
+        }
+      ],
+      "manager": "ハンス"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "オフト 鈴木 淳"
+    },
+    "referees": {
+      "主審": "柏原 丈二",
+      "副審": "高橋 佳久 , 青木 隆"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081004",
+    "url": "https://www.albirex.co.jp/past/data2008/result081004.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "横浜F・マリノス",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/10/04",
+    "kickoff": "15:04",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "34025",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 78′ 河合 竜二",
+          "time": "67'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 水沼 宏太",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 82′ 小宮山 尊信",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 金井 貢史",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 85′ 坂田 大輔",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 大島 秀夫",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "18′ 田中 裕介",
+          "time": "37'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 木村 浩吉"
+    },
+    "referees": {
+      "主審": "野田 祐樹",
+      "副審": "下村 昌昭 , 小椋 剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081018",
+    "url": "https://www.albirex.co.jp/past/data2008/result081018.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "ジェフユナイテッド千葉",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/10/18",
+    "kickoff": "16:03",
+    "stadium": "フクダ電子アリーナ",
+    "attendance": "16407",
+    "weather": "晴時々曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 3′ 松尾 直人",
+          "time": "78'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中野 洋司",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 77′ 本間 勲",
+          "time": "81'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 寺川 能人",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 89′ 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "中野 洋司",
+          "time": "30'"
+        }
+      ],
+      "manager": "アレックス"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "ミラー 鈴木 淳"
+    },
+    "referees": {
+      "主審": "高山 啓義",
+      "副審": "廣嶋 禎数 , 原田 昌彦"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081026",
+    "url": "https://www.albirex.co.jp/past/data2008/result081026.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "浦和レッドダイヤモンズ",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/10/26",
+    "kickoff": "14:04",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "40359",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [
+        {
+          "position": "FW",
+          "number": "15",
+          "name": "エスクデロ セルヒオ"
+        }
+      ],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 66′ 高原 直泰",
+          "time": "84'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 達也",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 89′ ポンテ",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 岡野 雅行",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "堀之内 聖",
+          "time": "57'"
+        },
+        {
+          "type": "警告",
+          "name": "岡野 雅行",
+          "time": "89'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 ゲルト エンゲルス"
+    },
+    "referees": {
+      "主審": "岡田 正義",
+      "副審": "宮島 一代 , 大塚 晴弘"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081109",
+    "url": "https://www.albirex.co.jp/past/data2008/result081109.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "鹿島アントラーズ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/11/09",
+    "kickoff": "16:04",
+    "stadium": "カシマサッカースタジアム",
+    "attendance": "21500",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 86′ アレッサンドロ",
+          "time": "76'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 89′ マルシオ リシャルデス",
+          "time": "83'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 海本 慶治",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "86'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "69′ 内田 潤",
+          "time": "76'"
+        }
+      ],
+      "manager": "オズワルド"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "オリヴェイラ 鈴木 淳"
+    },
+    "referees": {
+      "主審": "山西 博文",
+      "副審": "小椋 剛 , 中原 美智雄"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081123",
+    "url": "https://www.albirex.co.jp/past/data2008/result081123.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "大宮アルディージャ",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/11/23",
+    "kickoff": "16:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "35452",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 20′ 藤本 主税",
+          "time": "87'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 小林 慶行",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 60′ 片岡 洋介",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 斉藤 雅人",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 72′ 金澤 慎",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 吉原 宏太",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "34′ レアンドロ",
+          "time": "40'"
+        },
+        {
+          "type": "退場",
+          "name": "退場",
+          "time": "56'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 樋口 靖洋"
+    },
+    "referees": {
+      "主審": "村上 伸次",
+      "副審": "村上 孝治 , 岡野 尚士"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081130",
+    "url": "https://www.albirex.co.jp/past/data2008/result081130.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "FC東京",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/11/30",
+    "kickoff": "16:04",
+    "stadium": "味の素スタジアム",
+    "attendance": "35172",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 79′ 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "64'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "75'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "25′ 田中 亜土夢",
+          "time": "56'"
+        },
+        {
+          "type": "警告",
+          "name": "42′ 千葉 和彦",
+          "time": "68'"
+        },
+        {
+          "type": "警告",
+          "name": "本間 勲",
+          "time": "55'"
+        }
+      ],
+      "manager": "城福"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "浩 鈴木 淳"
+    },
+    "referees": {
+      "主審": "扇谷 健司",
+      "副審": "安元 利充 , 原田 昌彦"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081206",
+    "url": "https://www.albirex.co.jp/past/data2008/result081206.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ガンバ大阪",
+    "home_score": "3",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/12/06",
+    "kickoff": "14:33",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "34287",
+    "weather": "雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 下平 匠",
+          "time": "77'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 播戸 竜二",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 83′ 寺田 紳一",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 平井 将生",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "20′ 橋本 英郎",
+          "time": "15'"
+        },
+        {
+          "type": "警告",
+          "name": "播戸 竜二",
+          "time": "80'"
+        },
+        {
+          "type": "警告",
+          "name": "山口 智",
+          "time": "87'"
+        },
+        {
+          "type": "警告",
+          "name": "中澤 聡太",
+          "time": "89'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 西野 朗"
+    },
+    "referees": {
+      "主審": "家本 政明",
+      "副審": "山崎 裕彦 , 武田 進"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080320",
+    "url": "https://www.albirex.co.jp/past/data2008/result080320.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "大宮アルディージャ",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/03/20",
+    "kickoff": "16:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "22578",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 71′ 内田 智也",
+          "time": "70'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 金澤 慎",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 81′ ペドロ ジュニオール",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 森田 浩史",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "20′ レアンドロ",
+          "time": "42'"
+        },
+        {
+          "type": "警告",
+          "name": "24′ ペドロ ジュニオール",
+          "time": "71'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 樋口 靖洋"
+    },
+    "referees": {
+      "主審": "前田 拓哉",
+      "副審": "中原 美智雄 , 長谷 忠志"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080323",
+    "url": "https://www.albirex.co.jp/past/data2008/result080323.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "大分トリニータ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/03/23",
+    "kickoff": "14:05",
+    "stadium": "九州石油ドーム",
+    "attendance": "10774",
+    "weather": "屋内",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 63′ 寺川 能人",
+          "time": "41'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 木暮 郁哉",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 73′ 松尾 直人",
+          "time": "81'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 永田 充",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 82′ ダヴィ",
+          "time": "84'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "9′ 矢野 貴章",
+          "time": "8'"
+        }
+      ],
+      "manager": "シャムスカ"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "鈴木 淳"
+    },
+    "referees": {
+      "主審": "高山 啓義",
+      "副審": "犬飼 一郎 , 小椋 剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080416",
+    "url": "https://www.albirex.co.jp/past/data2008/result080416.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "大分トリニータ",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/16",
+    "kickoff": "19:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "16159",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 28′ 西山 哲平",
+          "time": "57'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 上本 大海",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 46※ 小手川 宏基",
+          "time": "63'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 金崎 夢生",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 80′ 前田 俊介",
+          "time": "74'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 市原 大嗣",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "23′ 西山 哲平",
+          "time": "48'"
+        },
+        {
+          "type": "警告",
+          "name": "37′ 山崎 哲也",
+          "time": "53'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 シャムスカ"
+    },
+    "referees": {
+      "主審": "前田 拓哉",
+      "副審": "名木 利幸 , 中井 恒"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080525",
+    "url": "https://www.albirex.co.jp/past/data2008/result080525.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "横浜F・マリノス",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/05/25",
+    "kickoff": "15:00",
+    "stadium": "ニッパツ三ツ沢球技場",
+    "attendance": "9803",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 57′ 寺川 能人",
+          "time": "57'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 71′ 河原 和寿",
+          "time": "82'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 川又 堅碁",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 82′ 川又 堅碁",
+          "time": "86'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 長谷部 彩翔",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "26′ 永田 充",
+          "time": "37'"
+        }
+      ],
+      "manager": "桑原"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "隆 鈴木 淳"
+    },
+    "referees": {
+      "主審": "鍋島 將起",
+      "副審": "犬飼 一郎 , 安食 弘幸"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080531",
+    "url": "https://www.albirex.co.jp/past/data2008/result080531.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "大宮アルディージャ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/05/31",
+    "kickoff": "14:00",
+    "stadium": "熊谷スポーツ文化公園陸上競技場",
+    "attendance": "6245",
+    "weather": "雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 65′ 田中 亜土夢",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河原 和寿",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "65'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "85'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "12′ 千葉 和彦",
+          "time": "19'"
+        },
+        {
+          "type": "警告",
+          "name": "68′ 松尾 直人",
+          "time": "67'"
+        },
+        {
+          "type": "警告",
+          "name": "89′ 内田 潤",
+          "time": "89'"
+        },
+        {
+          "type": "退場",
+          "name": "退場",
+          "time": "89'"
+        }
+      ],
+      "manager": "樋口"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "靖洋 鈴木 淳"
+    },
+    "referees": {
+      "主審": "岡田 正義",
+      "副審": "武田 進 , 前島 和彦"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080608",
+    "url": "https://www.albirex.co.jp/past/data2008/result080608.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "横浜F・マリノス",
+    "home_score": "0",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/06/08",
+    "kickoff": "15:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "28542",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 76′ 大島 秀夫",
+          "time": "65'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 坂田 大輔",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 83′ 清水 範久",
+          "time": "76'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 乾 貴士",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 89′ 水沼 宏太",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 天野 貴史",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "68′ 松田 直樹",
+          "time": "6'"
+        },
+        {
+          "type": "警告",
+          "name": "72′ 河合 竜二",
+          "time": "27'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 桑原 隆"
+    },
+    "referees": {
+      "主審": "穴沢 努",
+      "副審": "抱山 公彦 , 下村 昌昭"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2008_result081102",
+    "url": "https://www.albirex.co.jp/past/data2008/result081102.html",
+    "season": "2008",
+    "competition": "第88回天皇杯 全日本サッカー選手権大会",
+    "section": "第4回戦",
+    "home_team": "アルビレックス新潟",
+    "away_team": "横浜FC",
+    "home_score": "2",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/11/02",
+    "kickoff": "13:01",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "7607",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 30′ 吉本 岳史",
+          "time": "70'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 根占 真伍",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 滝澤 邦彦",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 三浦 淳宏",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 79′ 中田 洋介",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN アンデルソン",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "吉本 岳史",
+          "time": "8'"
+        },
+        {
+          "type": "警告",
+          "name": "太田 宏介",
+          "time": "18'"
+        },
+        {
+          "type": "警告",
+          "name": "八角 剛史",
+          "time": "24'"
+        },
+        {
+          "type": "警告",
+          "name": "エリゼウ",
+          "time": "89'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 都並 敏史"
+    },
+    "referees": {
+      "主審": "小川 直仁",
+      "副審": "相楽 亨 , 阿部 浩士"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_emperor_2008_result081115",
+    "url": "https://www.albirex.co.jp/past/data2008/result081115.html",
+    "season": "2008",
+    "competition": "第88回天皇杯 全日本サッカー選手権大会",
+    "section": "第5回戦",
+    "home_team": "FC東京",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/11/15",
+    "kickoff": "13:00",
+    "stadium": "とりぎんバードスタジアム",
+    "attendance": "3211",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ エメルソン",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 石川 直宏",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 64′ カボレ",
+          "time": "73'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 平山 相太",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 70′ 茂庭 照幸",
+          "time": "85'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 藤山 竜仁",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "35′ 茂庭 照幸",
+          "time": "25'"
+        }
+      ],
+      "manager": "鈴木"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "淳 城福 浩"
+    },
+    "referees": {
+      "主審": "鍋島 將起",
+      "副審": "高橋 佳久 , 青木 隆"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080420_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080420_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ",
+    "section": "Bグループ",
+    "home_team": "ベガルタ仙台",
+    "away_team": "アルビレックス新潟",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/20",
+    "kickoff": "14:00",
+    "stadium": "ユアテックスタジアム仙台",
+    "attendance": "1800",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 佐藤 崇史",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 奥田 陽一",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 80′ 中野 洋司",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 木村 博行",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 83′ 奥田 陽一",
+          "time": "62'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 白山 智一",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "岡部 拓人",
+      "副審": "矢部 鋼治 , 山田 雅文"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080601_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080601_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ",
+    "section": "Bグループ",
+    "home_team": "モンテディオ山形",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/06/01",
+    "kickoff": "14:00",
+    "stadium": "鶴岡市小真木原陸上競技場",
+    "attendance": "1056",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 57′ 奥田 陽一",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 白山 智一",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 57′ 比嘉 諒人",
+          "time": "66'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 小林 誠",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 69′ 佐藤 崇史",
+          "time": "76'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 西本 大輝",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "89′ 西本 大輝",
+          "time": "69'"
+        },
+        {
+          "type": "警告",
+          "name": "奥山 武宰士",
+          "time": "89'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "岡部 拓人",
+      "副審": "佐藤 淳 , 吉見 祐悦"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080706_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080706_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "東京ヴェルディ",
+    "home_score": "2",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/06",
+    "kickoff": "16:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "2085",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 62′ 柴崎 晃誠",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 富所 悠",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "エルサムニー オサマ",
+          "time": "77'"
+        },
+        {
+          "in_out": "▲",
+          "name": "井上 平",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "廣山 望",
+          "time": "83'"
+        },
+        {
+          "in_out": "▲",
+          "name": "吉武 剛",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "飯尾 一慶",
+          "time": "23'"
+        },
+        {
+          "type": "警告",
+          "name": "足助 翔",
+          "time": "57'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "飯田 淳平",
+      "副審": "平山 元輝 , 熊谷 幸剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080721_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080721_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ",
+    "section": "Bグループ",
+    "home_team": "東京ヴェルディ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/21",
+    "kickoff": "16:00",
+    "stadium": "ヴェルディグラウンド",
+    "attendance": "240",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 66′ 木暮 郁哉",
+          "time": "66'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 福田 賢生",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "田中 亜土夢",
+          "time": "81'"
+        },
+        {
+          "in_out": "▲",
+          "name": "坂井 陽祐",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "河原 和寿",
+          "time": "88'"
+        },
+        {
+          "in_out": "▲",
+          "name": "小林 誠",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "13′ 中野 洋司",
+          "time": "10'"
+        },
+        {
+          "type": "警告",
+          "name": "23′ 中野 洋司",
+          "time": "37'"
+        },
+        {
+          "type": "警告",
+          "name": "65′ 長谷部 彩翔",
+          "time": "70'"
+        },
+        {
+          "type": "退場",
+          "name": "中野 洋司",
+          "time": "23'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "今村 亮一",
+      "副審": "向山 悟 , 本槁 巧"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080817_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080817_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ",
+    "section": "Bグループ",
+    "home_team": "大宮アルディージャ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/08/17",
+    "kickoff": "16:00",
+    "stadium": "鴻巣市立陸上競技場",
+    "attendance": "415",
+    "weather": "雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 82′ 明堂 和也",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 大野 和成",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "牧野 明久",
+      "副審": "坂本 正志 , 吉川 和宏"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080829_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080829_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "大宮アルディージャ",
+    "home_score": "3",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/08/29",
+    "kickoff": "19:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "1097",
+    "weather": "曇時々雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 清水 慶記",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 小林 庸尚",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 桑田 直徹",
+          "time": "84'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 内田 智也",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 56′ 川辺 隆弥",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 新井 涼平",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 68′ 内田 智也",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 渡部 大輔",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 75′ 土岐田 洸平",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中川 貴晴",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "市川 雅彦",
+          "time": "56'"
+        },
+        {
+          "type": "警告",
+          "name": "新井 涼平",
+          "time": "58'"
+        },
+        {
+          "type": "警告",
+          "name": "土岐田 洸平",
+          "time": "63'"
+        },
+        {
+          "type": "警告",
+          "name": "川原 達也",
+          "time": "74'"
+        },
+        {
+          "type": "退場",
+          "name": "橋本 早十",
+          "time": "88'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "佐藤 隆治",
+      "副審": "大矢 充 , 栗山 俊佑"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080915_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result080915_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "モンテディオ山形",
+    "home_score": "5",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/09/15",
+    "kickoff": "15:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "2126",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [
+        {
+          "position": "FW",
+          "number": "20",
+          "name": "根本 亮助"
+        }
+      ],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 財前 宣之",
+          "time": "67'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 高橋 駿太",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 59′ 坂井 将吾",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 根本 亮助",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 68′ 渡辺 匠",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 本橋 卓巳",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "飯田 淳平",
+      "副審": "栗山 俊佑 , 熊谷 幸剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081005_s",
+    "url": "https://www.albirex.co.jp/past/data2008/result081005_s.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ Bグループ",
+    "section": "Bグループ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ベガルタ仙台",
+    "home_score": "1",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/10/05",
+    "kickoff": "14:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "1965",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 中原 貴之",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 田中 康平",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 66′ 三澤 純一",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 西山 貴永",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "35′ 飛弾 暁",
+          "time": "5'"
+        },
+        {
+          "type": "警告",
+          "name": "80′ 西山 貴永",
+          "time": "35'"
+        }
+      ],
+      "manager": ""
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": ""
+    },
+    "referees": {
+      "主審": "飯田 淳平",
+      "副審": "平山 元輝 , 熊谷 幸剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080420_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080420_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "TASAKIペルーレFC",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/20",
+    "kickoff": "12:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "2272",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 69′ 田中 明日菜",
+          "time": "72'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中岡 麻衣子",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 76′ 清原 万里江",
+          "time": "80'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 澤田 由佳",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 89′ 大石 沙弥香",
+          "time": "84'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 河上 恵実子",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "奥山"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "達之 仲井 昇"
+    },
+    "referees": {
+      "主審": "馬場 佐知子",
+      "副審": "平山 元輝 , 熊谷 幸剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080429_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080429_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "伊賀フットボールクラブくノ一",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/04/29",
+    "kickoff": "12:00",
+    "stadium": "新潟市陸上競技場",
+    "attendance": "941",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 46※ 吉泉 愛",
+          "time": "62'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 鈴木 綾",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 67′ 宮本 ともみ",
+          "time": "68'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 菊地 由香里",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 89′ 清原 祐子",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 山科 花恵",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "奥山"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "達之 大須賀 まき"
+    },
+    "referees": {
+      "主審": "真殿 三加",
+      "副審": "金子 剛志 , 大矢 充"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080504_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080504_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "日テレ・ベレーザ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/05/04",
+    "kickoff": "14:00",
+    "stadium": "駒沢オリンピック公園総合運動場陸上競技場",
+    "attendance": "1500",
+    "weather": "雨",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 77′ 深田 未央",
+          "time": "41'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 江橋 桂",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 81′ 吉田 瑞季",
+          "time": "85'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 牧野 愛美",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "川村 優理",
+          "time": "58'"
+        }
+      ],
+      "manager": "松田"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "岳夫 奥山 達之"
+    },
+    "referees": {
+      "主審": "佐藤 奈美",
+      "副審": "高橋 早織 , 鈴木 ゆみ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080511_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080511_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "岡山湯郷Belle",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/05/11",
+    "kickoff": "12:00",
+    "stadium": "胎内市総合グラウンド陸上競技場",
+    "attendance": "931",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 71′ 田畑 沙由里",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 有町 紗央里",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 79′ 加戸 由佳",
+          "time": "62'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中田 麻衣子",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 81′ 保手濱 理恵",
+          "time": "67'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 井上 稚子",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "奥山"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "達之 本田 美登里"
+    },
+    "referees": {
+      "主審": "長谷川 芙紗子",
+      "副審": "大矢 充 , 熊谷 幸剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080615_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080615_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "INACレオネッサ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/06/15",
+    "kickoff": "14:00",
+    "stadium": "ホームズスタジアム神戸",
+    "attendance": "495",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 斎藤 友里",
+          "time": "56'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 菅澤 優衣香",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 63′ 大堀 幸恵",
+          "time": "83'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中島 未来",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 65′ 光安 亜里沙",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 深田 未央",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "田渕"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "径二 奥山 達之"
+    },
+    "referees": {
+      "主審": "吉澤 久恵",
+      "副審": "高原 健一 , 内橋 克博"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080629_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080629_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "TASAKIペルーレFC",
+    "away_team": "アルビレックス新潟",
+    "home_score": "4",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/06/29",
+    "kickoff": "11:30",
+    "stadium": "神戸総合運動公園ユニバー記念競技場",
+    "attendance": "523",
+    "weather": "くもり",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 55′ 口木 未来",
+          "time": "74'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中島 未来",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 70′ 與山 このみ",
+          "time": "74'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中村 早樹",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "仲井"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "昇 奥山 達之"
+    },
+    "referees": {
+      "主審": "漆畑 成子",
+      "副審": "森 麻衣子 , 赤坂 竜一"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080706_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080706_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "日テレ・ベレーザ",
+    "home_score": "1",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/06",
+    "kickoff": "12:00",
+    "stadium": "東北電力ビッグスワンスタジアム",
+    "attendance": "1584",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 四方 菜穂",
+          "time": "58'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 岩清水 梓",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 65′ 木龍 七瀬",
+          "time": "65'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 永里 優季",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 69′ 永里 亜紗乃",
+          "time": "87'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 近賀 ゆかり",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "奥山"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "達之 松田 岳夫"
+    },
+    "referees": {
+      "主審": "鮎貝 志保",
+      "副審": "熊谷 幸剛 , 高津 大志"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080713_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080713_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "伊賀フットボールクラブくノ一",
+    "away_team": "アルビレックス新潟",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/07/13",
+    "kickoff": "12:00",
+    "stadium": "上野運動公園競技場",
+    "attendance": "350",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 65′ 菅澤 優衣香",
+          "time": "73'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中島 未来",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 73′ 與山 このみ",
+          "time": "75'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 口木 未来",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "野村 千枝子",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "大堀 幸恵",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "41′ 上尾野辺 めぐみ",
+          "time": "35'"
+        },
+        {
+          "type": "警告",
+          "name": "川村 優理",
+          "time": "57'"
+        }
+      ],
+      "manager": "大須賀"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "まき 奥山 達之"
+    },
+    "referees": {
+      "主審": "和田 りつ子",
+      "副審": "森川 徹 , 稲垣 真"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080914_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080914_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "岡山湯郷Belle",
+    "away_team": "アルビレックス新潟",
+    "home_score": "2",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/09/14",
+    "kickoff": "12:00",
+    "stadium": "岡山県美作ラグビー・サッカー場",
+    "attendance": "1588",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 71′ 井上 光保",
+          "time": "36'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 詫間 美樹",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 82′ 中島 未来",
+          "time": "75'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中村 早樹",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 86′ 牧野 愛美",
+          "time": "86'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 與山 このみ",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "33′ 田中 桜",
+          "time": "15'"
+        },
+        {
+          "type": "警告",
+          "name": "東山 真依子",
+          "time": "35'"
+        },
+        {
+          "type": "警告",
+          "name": "東山 真依子",
+          "time": "69'"
+        },
+        {
+          "type": "退場",
+          "name": "東山 真依子",
+          "time": "69'"
+        }
+      ],
+      "manager": "本田"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "美登里 奥山 達之"
+    },
+    "referees": {
+      "主審": "竹下 聖",
+      "副審": "河添 三代子 , 田中 よしこ"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result080921_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result080921_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "INACレオネッサ",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/09/21",
+    "kickoff": "12:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "731",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 59′ 鈴木 智子",
+          "time": "28'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 川澄 奈穂美",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 84′ 原 歩",
+          "time": "51'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 澤井 理恵",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 88′ 米津 美和",
+          "time": "82'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 櫨 まどか",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "50′ 那須 麻衣子",
+          "time": "48'"
+        }
+      ],
+      "manager": "奥山"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "達之 田渕 径二"
+    },
+    "referees": {
+      "主審": "真殿 三加",
+      "副審": "栗山 俊佑 , 高津 大志"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081019_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result081019_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "TASAKIペルーレFC",
+    "home_score": "0",
+    "away_score": "3",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/10/19",
+    "kickoff": "12:00",
+    "stadium": "胎内市総合グラウンド陸上競技場",
+    "attendance": "981",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 68′ 大石 沙弥香",
+          "time": "55'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 清原 万里江",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 77′ 白鳥 綾",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 坂井 優紀",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 89′ 山本 絵美",
+          "time": "89'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 澤田 由佳",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "奥山"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "達之 仲井 昇"
+    },
+    "referees": {
+      "主審": "鮎貝 志保",
+      "副審": "牛木 貴英 , 高津 大志"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081026_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result081026_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "日テレ・ベレーザ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "3",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/10/26",
+    "kickoff": "13:00",
+    "stadium": "平塚市総合公園競技場",
+    "attendance": "700",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 36′ 大堀 幸恵",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 斎藤 友里",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 70′ 大友 麻衣子",
+          "time": "63'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 諏訪 江利乃",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 77′ 江橋 桂",
+          "time": "77'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中村 早樹",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "51′ 斎藤 友里",
+          "time": "45'"
+        }
+      ],
+      "manager": "松田"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "岳夫 奥山 達之"
+    },
+    "referees": {
+      "主審": "井脇 真理子",
+      "副審": "吉澤 久恵 , 桐原 純子"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081103_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result081103_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "伊賀フットボールクラブくノ一",
+    "home_score": "1",
+    "away_score": "0",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/11/03",
+    "kickoff": "12:01",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "1194",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 66′ 吉泉 愛",
+          "time": "68'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 熊谷 さやか",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 76′ 堤 早希",
+          "time": "78'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 鈴木 綾",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 83′ 山科 花恵",
+          "time": "83'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 作元 芙美佳",
+          "time": ""
+        }
+      ],
+      "cards": [],
+      "manager": "奥山"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "達之 大須賀 まき"
+    },
+    "referees": {
+      "主審": "大岩 真由美",
+      "副審": "平山 元輝 , 大滝 敬三"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081116_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result081116_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "アルビレックス新潟",
+    "away_team": "岡山湯郷Belle",
+    "home_score": "2",
+    "away_score": "1",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/11/16",
+    "kickoff": "12:00",
+    "stadium": "新発田市五十公野公園陸上競技場",
+    "attendance": "759",
+    "weather": "曇",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 63′ 津波古 友美子",
+          "time": "61'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 中川 千尋",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "87'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": ""
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "44′ 細川 のの子",
+          "time": "11'"
+        }
+      ],
+      "manager": "奥山"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "達之 本田 美登里"
+    },
+    "referees": {
+      "主審": "漆畑 成子",
+      "副審": "平山 元輝 , 熊谷 幸剛"
+    }
+  },
+  {
+    "match_card_id": "albirex_past_satellite_2008_result081123_l",
+    "url": "https://www.albirex.co.jp/past/data2008/result081123_l.html",
+    "season": "2008",
+    "competition": "Jサテライトリーグ",
+    "section": "",
+    "home_team": "INACレオネッサ",
+    "away_team": "アルビレックス新潟",
+    "home_score": "4",
+    "away_score": "2",
+    "pk_home_score": "",
+    "pk_away_score": "",
+    "date": "2008/11/23",
+    "kickoff": "13:00",
+    "stadium": "長居第2陸上競技場",
+    "attendance": "358",
+    "weather": "晴",
+    "temperature": "",
+    "humidity": "",
+    "home_goals": [],
+    "away_goals": [],
+    "stats": [],
+    "home_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [
+        {
+          "in_out": "▽",
+          "name": "OUT 45※ 野村 千枝子",
+          "time": "79'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 菅澤 優衣香",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT 51′ 斎藤 友里",
+          "time": "80'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN 口木 未来",
+          "time": ""
+        },
+        {
+          "in_out": "▽",
+          "name": "OUT",
+          "time": "88'"
+        },
+        {
+          "in_out": "▲",
+          "name": "IN",
+          "time": ""
+        }
+      ],
+      "cards": [
+        {
+          "type": "警告",
+          "name": "牧野 愛美",
+          "time": "34'"
+        }
+      ],
+      "manager": "田渕"
+    },
+    "away_details": {
+      "starting": [],
+      "substitutes": [],
+      "substitutions": [],
+      "cards": [],
+      "manager": "径二 奥山 達之"
+    },
+    "referees": {
+      "主審": "深野 悦子",
+      "副審": "的崎 睦子 , 佐々木 里紗"
+    }
+  }
+]
