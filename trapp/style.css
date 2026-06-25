@@ -7006,6 +7006,89 @@ body[data-mode="player-analysis"] #hamburger-btn {
 
 #calendar-body { width: 100%; max-width: 600px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
 
+#standings-view,
+#links-view {
+  width: 100%;
+  height: 100%;
+  padding: calc(76px + env(safe-area-inset-top)) 14px calc(104px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  overflow-y: auto;
+  flex-direction: column;
+  align-items: center;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(var(--albirex-orange-rgb),0.10), transparent 34%),
+    linear-gradient(180deg, #f7f8fb 0%, #eef1f6 100%);
+}
+
+.app-page-shell {
+  width: min(100%, 760px);
+  display: grid;
+  gap: 14px;
+}
+
+.app-page-header {
+  display: grid;
+  gap: 3px;
+  padding: 0 4px;
+}
+
+.app-page-header span {
+  color: #7a818d;
+  font-family: var(--font-kick);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.app-page-header h1 {
+  margin: 0;
+  color: var(--text-main);
+  font-family: var(--font-kick);
+  font-size: 1.78rem;
+  line-height: 1;
+}
+
+#standings-view .standings-container {
+  height: auto;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.84);
+  box-shadow: 0 18px 44px rgba(12,18,28,0.10), inset 0 1px 0 rgba(255,255,255,0.76);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.links-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.link-card {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.88);
+  color: var(--text-main);
+  font-family: var(--font-kick);
+  font-size: 1.04rem;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(12,18,28,0.08), inset 0 1px 0 rgba(255,255,255,0.82);
+}
+
+.link-card::after {
+  content: "↗";
+  color: #7a818d;
+  font-size: 0.82rem;
+}
+
+.link-card:active {
+  transform: translateY(1px) scale(0.99);
+}
+
 .cal-day-label {
   text-align: center; font-family: var(--font-kick); font-size: 1.5rem; color: var(--text-grey); padding-bottom: 12px;
   font-weight: 800;
@@ -8387,16 +8470,29 @@ body[data-mode="dashboard"] #ultra-nav {
   display: none !important;
 }
 
+body[data-mode="standings"] #active-month-title,
+body[data-mode="standings"] #club-selection,
+body[data-mode="standings"] #search-section,
+body[data-mode="standings"] #ultra-nav,
+body[data-mode="links"] #active-month-title,
+body[data-mode="links"] #club-selection,
+body[data-mode="links"] #search-section,
+body[data-mode="links"] #ultra-nav {
+  display: none !important;
+}
+
 body[data-mode="dashboard"] #ultra-header {
-  background: transparent;
-  border-bottom: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   pointer-events: none;
 }
 body[data-mode="dashboard"] .header-content {
   justify-content: flex-end;
-  padding-bottom: 0.5rem;
+  padding-top: 0.45rem;
+  padding-bottom: 0.2rem;
 }
 body[data-mode="dashboard"] #hamburger-btn {
   pointer-events: auto;
@@ -8406,9 +8502,47 @@ body[data-mode="dashboard"] #hamburger-btn {
   border-radius: 50%;
   padding: 8px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transform: translateY(-6px);
+}
+body[data-mode="dashboard"] #hamburger-btn:active {
+  transform: translateY(-6px) scale(0.9);
 }
 body[data-mode="dashboard"] .header-title {
   display: none !important;
+}
+
+body[data-mode="standings"] #ultra-header,
+body[data-mode="links"] #ultra-header {
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  pointer-events: none;
+}
+
+body[data-mode="standings"] .header-content,
+body[data-mode="links"] .header-content {
+  justify-content: flex-end;
+  padding-top: 0.45rem;
+  padding-bottom: 0.2rem;
+}
+
+body[data-mode="standings"] #hamburger-btn,
+body[data-mode="links"] #hamburger-btn {
+  pointer-events: auto;
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transform: translateY(-6px);
+}
+
+body[data-mode="standings"] #hamburger-btn:active,
+body[data-mode="links"] #hamburger-btn:active {
+  transform: translateY(-6px) scale(0.9);
 }
 
 body[data-mode="vision"] #active-month-title,
@@ -9495,6 +9629,26 @@ body[data-mode="dashboard"] .sheet-ha {
   letter-spacing: 0.06em;
 }
 
+body[data-mode="dashboard"] #dash-card-niigata .sheet-ha.badge-home {
+  border-color: var(--albirex-orange) !important;
+  background: var(--albirex-orange) !important;
+}
+
+body[data-mode="dashboard"] #dash-card-niigata .sheet-ha.badge-away {
+  border-color: var(--albirex-orange) !important;
+  background: rgba(7,19,34,0.36) !important;
+}
+
+body[data-mode="dashboard"] #dash-card-kumamoto .sheet-ha.badge-home {
+  border-color: var(--roasso-red) !important;
+  background: var(--roasso-red) !important;
+}
+
+body[data-mode="dashboard"] #dash-card-kumamoto .sheet-ha.badge-away {
+  border-color: var(--roasso-red) !important;
+  background: rgba(22,8,12,0.36) !important;
+}
+
 body[data-mode="dashboard"] .dash-card-body {
   display: grid;
   gap: 10px;
@@ -9510,10 +9664,10 @@ body[data-mode="dashboard"] .dash-card-body > div:first-child {
   align-items: stretch !important;
   gap: 9px;
   margin-bottom: 0 !important;
-  padding: 8px 9px;
+  padding: 5px 9px 8px;
   border: 0;
-  border-radius: 13px;
-  background: rgba(255,255,255,0.065);
+  border-radius: 0;
+  background: transparent;
 }
 
 body[data-mode="dashboard"] .dash-card-body > div:first-child > div:first-child {
@@ -9560,11 +9714,26 @@ body[data-mode="dashboard"] .dash-mw {
 
 body[data-mode="dashboard"] .dash-date {
   min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 6px;
   color: #fff !important;
-  font-size: 0.84rem !important;
+  font-size: 1rem !important;
   font-weight: 900 !important;
-  line-height: 1.25;
+  line-height: 1;
   overflow-wrap: anywhere;
+}
+
+body[data-mode="dashboard"] .dash-date-main {
+  font-size: 1.34rem;
+  line-height: 1;
+}
+
+body[data-mode="dashboard"] .dash-date-sub {
+  color: rgba(255,255,255,0.78);
+  font-size: 0.86rem;
+  line-height: 1;
 }
 
 body[data-mode="dashboard"] .dash-venue-row {
@@ -9696,6 +9865,19 @@ body[data-mode="dashboard"] .dash-form-ha {
   color: #737b88;
 }
 
+body[data-mode="dashboard"] .dash-prev-ha {
+  min-width: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 4px;
+  border-radius: 5px;
+  background: rgba(16,21,29,0.07);
+  font-size: 0.58rem;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 body[data-mode="dashboard"] .dash-form-strip {
   width: 100%;
   min-height: 42px;
@@ -9719,25 +9901,15 @@ body[data-mode="dashboard"] .dash-form-emblem-placeholder {
   height: 16px;
 }
 
-body[data-mode="dashboard"] #dash-update-time {
-  grid-column: 1 / -1;
-  justify-self: center;
-  margin-top: 0 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  color: #848c99 !important;
-  font-size: 0.62rem !important;
-  font-weight: 900 !important;
-}
-
-body:not([data-mode="dashboard"]):not([data-mode="feed"]):not([data-mode="calendar"]) .dash-quick-links {
+body:not([data-mode="dashboard"]):not([data-mode="feed"]):not([data-mode="calendar"]):not([data-mode="standings"]):not([data-mode="links"]) .dash-quick-links {
   display: none !important;
 }
 
 body[data-mode="dashboard"] .dash-quick-links,
 body[data-mode="feed"] .dash-quick-links,
-body[data-mode="calendar"] .dash-quick-links {
+body[data-mode="calendar"] .dash-quick-links,
+body[data-mode="standings"] .dash-quick-links,
+body[data-mode="links"] .dash-quick-links {
   position: fixed;
   left: max(12px, env(safe-area-inset-left));
   right: max(12px, env(safe-area-inset-right));
@@ -9765,7 +9937,9 @@ body:has(#side-menu.active) .dash-quick-links {
 
 body[data-mode="dashboard"] .dash-ql-btn,
 body[data-mode="feed"] .dash-ql-btn,
-body[data-mode="calendar"] .dash-ql-btn {
+body[data-mode="calendar"] .dash-ql-btn,
+body[data-mode="standings"] .dash-ql-btn,
+body[data-mode="links"] .dash-ql-btn {
   min-height: 58px;
   padding: 7px 2px;
   flex-direction: column;
@@ -9779,13 +9953,17 @@ body[data-mode="calendar"] .dash-ql-btn {
 
 body[data-mode="dashboard"] .dash-ql-btn::before,
 body[data-mode="feed"] .dash-ql-btn::before,
-body[data-mode="calendar"] .dash-ql-btn::before {
+body[data-mode="calendar"] .dash-ql-btn::before,
+body[data-mode="standings"] .dash-ql-btn::before,
+body[data-mode="links"] .dash-ql-btn::before {
   display: none;
 }
 
 body[data-mode="dashboard"] .dash-ql-btn .m-icon,
 body[data-mode="feed"] .dash-ql-btn .m-icon,
-body[data-mode="calendar"] .dash-ql-btn .m-icon {
+body[data-mode="calendar"] .dash-ql-btn .m-icon,
+body[data-mode="standings"] .dash-ql-btn .m-icon,
+body[data-mode="links"] .dash-ql-btn .m-icon {
   width: 22px;
   height: 22px;
   color: var(--text-main);
@@ -9793,7 +9971,9 @@ body[data-mode="calendar"] .dash-ql-btn .m-icon {
 
 body[data-mode="dashboard"] .dash-ql-btn span,
 body[data-mode="feed"] .dash-ql-btn span,
-body[data-mode="calendar"] .dash-ql-btn span {
+body[data-mode="calendar"] .dash-ql-btn span,
+body[data-mode="standings"] .dash-ql-btn span,
+body[data-mode="links"] .dash-ql-btn span {
   color: var(--text-main);
   font-size: 0.64rem;
   line-height: 1.15;
@@ -9804,7 +9984,9 @@ body[data-mode="calendar"] .dash-ql-btn span {
 
 body[data-mode="dashboard"] .dash-ql-btn.active,
 body[data-mode="feed"] .dash-ql-btn.active,
-body[data-mode="calendar"] .dash-ql-btn.active {
+body[data-mode="calendar"] .dash-ql-btn.active,
+body[data-mode="standings"] .dash-ql-btn.active,
+body[data-mode="links"] .dash-ql-btn.active {
   border-color: rgba(10,14,20,0.12);
   background: #10151d;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 18px rgba(12,18,28,0.16);
@@ -9815,13 +9997,19 @@ body[data-mode="dashboard"] .dash-ql-btn.active span,
 body[data-mode="feed"] .dash-ql-btn.active .m-icon,
 body[data-mode="feed"] .dash-ql-btn.active span,
 body[data-mode="calendar"] .dash-ql-btn.active .m-icon,
-body[data-mode="calendar"] .dash-ql-btn.active span {
+body[data-mode="calendar"] .dash-ql-btn.active span,
+body[data-mode="standings"] .dash-ql-btn.active .m-icon,
+body[data-mode="standings"] .dash-ql-btn.active span,
+body[data-mode="links"] .dash-ql-btn.active .m-icon,
+body[data-mode="links"] .dash-ql-btn.active span {
   color: #fff;
 }
 
 body[data-mode="dashboard"] .dash-ql-btn:active,
 body[data-mode="feed"] .dash-ql-btn:active,
-body[data-mode="calendar"] .dash-ql-btn:active {
+body[data-mode="calendar"] .dash-ql-btn:active,
+body[data-mode="standings"] .dash-ql-btn:active,
+body[data-mode="links"] .dash-ql-btn:active {
   transform: translateY(1px) scale(0.98);
   border-color: rgba(20,24,32,0.10);
   background: rgba(20,24,32,0.055);
@@ -9839,11 +10027,6 @@ body[data-mode="feed"] .month-section {
 
 body[data-mode="calendar"] #calendar-view {
   padding-bottom: calc(220px + env(safe-area-inset-bottom)) !important;
-}
-
-#standings-overlay .pane-content,
-#links-overlay .pane-content {
-  padding-bottom: calc(116px + env(safe-area-inset-bottom));
 }
 
 @media (max-width: 760px) {

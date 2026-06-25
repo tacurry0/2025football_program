@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v63-home-polish';
+const cacheName = 'football-app-v68-hide-sync';
 const assetsToCache = [
   './',
   './index.html',

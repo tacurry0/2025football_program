@@ -119,6 +119,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const ultraFeed = document.getElementById("ultra-feed");
   const calendarView = document.getElementById("calendar-view");
   const ultraDashboard = document.getElementById("ultra-dashboard");
+  const standingsView = document.getElementById("standings-view");
+  const linksView = document.getElementById("links-view");
   const visionView = document.getElementById("vision-view");
   const playerAnalysisView = document.getElementById("player-analysis-view");
 
@@ -163,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let visibleSections = [];
   let selectedYear = null;
   let renderedFeedYear = undefined;
-  let currentMode = "dashboard"; // dashboard, feed, calendar, player-analysis or vision
+  let currentMode = "dashboard"; // dashboard, feed, calendar, standings, links, player-analysis or vision
   let lineupDetailExpanded = false;
   const scheduleCompetitionFilterState = {
     active: false,
@@ -426,6 +428,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   function parseDate(s) {
     const [y, m, d] = (getFirstIsoDateText(s) || String(s || "")).split("-").map(Number);
     return new Date(y, m - 1, d || 1);
+  }
+
+  function formatDashboardDateParts(dateText, dayText = "", timeText = "") {
+    const shortDate = String(dateText || "").trim()
+      .replace(/(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})/g, (_, _year, month, day) => `${Number(month)}/${Number(day)}`)
+      .replace(/\s+/g, " ");
+    return {
+      date: shortDate,
+      meta: [dayText, timeText].filter(Boolean).join(" ").trim()
+    };
   }
 
   function isBeforeToday(dateStr) {
@@ -9481,12 +9493,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function updateDashboardDockState() {
-    const activePaneId = ["standings-overlay", "links-overlay"]
-      .find(id => document.getElementById(id)?.classList.contains("active")) || "";
     document.querySelectorAll(".dash-ql-btn").forEach(btn => {
       const mode = btn.dataset.dockMode;
       const pane = btn.dataset.dockPane;
-      const isActive = pane ? pane === activePaneId : (!activePaneId && mode === currentMode);
+      const isActive = pane
+        ? document.getElementById(pane)?.classList.contains("active")
+        : mode === currentMode;
       btn.classList.toggle("active", isActive);
       if (isActive) btn.setAttribute("aria-current", "page");
       else btn.removeAttribute("aria-current");
@@ -9497,11 +9509,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const previousMode = currentMode;
     currentMode = mode;
     document.body.setAttribute("data-mode", mode);
-    ["standings-overlay", "links-overlay"].forEach(id => document.getElementById(id)?.classList.remove("active"));
 
     if (ultraDashboard) ultraDashboard.className = mode === "dashboard" ? "active-view" : "hidden-view";
     if (ultraFeed) ultraFeed.className = mode === "feed" ? "active-view" : "hidden-view";
     if (calendarView) calendarView.className = mode === "calendar" ? "active-view" : "hidden-view";
+    if (standingsView) standingsView.className = mode === "standings" ? "active-view" : "hidden-view";
+    if (linksView) linksView.className = mode === "links" ? "active-view" : "hidden-view";
     if (playerAnalysisView) playerAnalysisView.className = mode === "player-analysis" ? "active-view" : "hidden-view";
     if (visionView) visionView.className = mode === "vision" ? "active-view" : "hidden-view";
     if (mode !== "player-analysis") setPlayerAnalysisFilterPanel(false);
@@ -9512,6 +9525,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       updateYearTabState();
       rebuildMonthTabs();
     }
+    if (mode === "standings") loadStandings();
     if (mode === "dashboard") renderDashboard();
     if (mode === "player-analysis") {
       initializePlayerAnalysisView();
@@ -9546,11 +9560,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function openSubPane(id) {
     const pane = document.getElementById(id);
-    if (["standings-overlay", "links-overlay"].includes(id)) {
-      ["standings-overlay", "links-overlay"].forEach(otherId => {
-        if (otherId !== id) document.getElementById(otherId)?.classList.remove("active");
-      });
-    }
     if (pane) pane.classList.add("active");
     sideMenu.classList.remove("active");
     updateDashboardDockState();
@@ -12259,6 +12268,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         levain: { src: "./data/assets/icons/ylc_logo1.jpg", alt: "ルヴァンカップ" }
       };
       const competitionLogo = competitionLogoMap[competitionKey] || competitionLogoMap.j2;
+      const dashboardDateParts = formatDashboardDateParts(m.date, m.day, m.time);
+      const dashboardDateHtml = `<span class="dash-date-main">${escapeHtml(dashboardDateParts.date)}</span>${dashboardDateParts.meta ? `<span class="dash-date-sub">${escapeHtml(dashboardDateParts.meta)}</span>` : ""}`;
 
       return `
           <div class="dash-card white-theme home-card-enhanced home-card-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white;">
@@ -12280,7 +12291,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                  <div style="display:flex; flex-direction:column; gap:6px;">
                     <div style="display:flex; align-items:center; gap:8px;">
                        ${renderRoundPill(m, "dash-mw")}
-                       <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${m.date} ${m.day} ${m.time}</span>
+                       <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${dashboardDateHtml}</span>
                     </div>
                     <div class="dash-venue-row" style="color:#555; font-size:0.85rem; align-items:center; display:flex;">
                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:4px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -12373,11 +12384,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (btnCal) btnCal.onclick = () => switchMode("calendar");
     if (btnPlayerAnalysis) btnPlayerAnalysis.onclick = () => switchMode("player-analysis");
 
-    document.getElementById("dash-to-standings").onclick = () => {
-      openSubPane("standings-overlay");
-      loadStandings();
-    };
-    document.getElementById("dash-to-links").onclick = () => openSubPane("links-overlay");
+    document.getElementById("dash-to-standings").onclick = () => switchMode("standings");
+    document.getElementById("dash-to-links").onclick = () => switchMode("links");
     updateDashboardDockState();
 
     // Auto Fetch Weather Function inline
@@ -12694,7 +12702,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         if (elDate) elDate.innerText = lastInfo.date.substring(5).replace("-", "/");
         if (elOpp) elOpp.innerText = opp;
-        if (elHA) elHA.innerText = isHome ? "H" : "A";
+        if (elHA) elHA.innerText = isHome ? "HOME" : "AWAY";
         if (elScore) elScore.innerText = scoreStr;
         if (elRes) elRes.innerHTML = resHtml;
         if (elForm) elForm.innerHTML = formHtml;
@@ -12730,16 +12738,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }, 100);
 
-    // Add update timestamp to dashboard
-    const dashboardContainer = document.getElementById("dashboard-cards-container");
-    let timeBox = document.getElementById("dash-update-time");
-    if (!timeBox && dashboardContainer) {
-      timeBox = document.createElement("div");
-      timeBox.id = "dash-update-time";
-      dashboardContainer.appendChild(timeBox);
-    }
-    if (timeBox) timeBox.style.cssText = "font-size:0.65rem; color:white; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:10px; margin-top:15px; display:inline-block; font-weight:700;";
-    if (timeBox) timeBox.innerText = `最終同期: ${new Date().toLocaleTimeString()} (Data: GAS最新)`;
   }
 
 
@@ -12858,6 +12856,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (ultraDashboard) ultraDashboard.className = "active-view";
   if (ultraFeed) ultraFeed.className = "hidden-view";
   if (calendarView) calendarView.className = "hidden-view";
+  if (standingsView) standingsView.className = "hidden-view";
+  if (linksView) linksView.className = "hidden-view";
   if (playerAnalysisView) playerAnalysisView.className = "hidden-view";
   if (visionView) visionView.className = "hidden-view";
   renderDashboard();
@@ -13085,11 +13085,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   function openSubPane(id, options = {}) {
     const pane = document.getElementById(id);
     if (!pane) return;
-    if (["standings-overlay", "links-overlay"].includes(id)) {
-      ["standings-overlay", "links-overlay"].forEach(otherId => {
-        if (otherId !== id) document.getElementById(otherId)?.classList.remove("active");
-      });
-    }
     pane.classList.add("active");
     addAppHistoryEntry(`sub-pane:${id}`, () => openSubPane(id, { history: false }), options);
     updateDashboardDockState();
@@ -13123,12 +13118,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (menuPlayerAnalysis) {
     menuPlayerAnalysis.onclick = () => switchMode("player-analysis");
   }
-  document.getElementById("menu-links").onclick = () => openSubPane("links-overlay");
+  document.getElementById("menu-links").onclick = () => switchMode("links");
   document.getElementById("menu-chants").onclick = () => openSubPane("chants-overlay");
-  document.getElementById("menu-standings").onclick = () => {
-    openSubPane("standings-overlay");
-    loadStandings();
-  };
+  document.getElementById("menu-standings").onclick = () => switchMode("standings");
   const menuVision = document.getElementById("menu-vision");
   if (menuVision) {
     menuVision.onclick = () => switchMode("vision");
@@ -13147,14 +13139,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   const dashStandingsBtn = document.getElementById("dash-to-standings");
   if (dashStandingsBtn) {
-    dashStandingsBtn.onclick = () => {
-      openSubPane("standings-overlay");
-      loadStandings();
-    };
+    dashStandingsBtn.onclick = () => switchMode("standings");
   }
   const dashLinksBtn = document.getElementById("dash-to-links");
   if (dashLinksBtn) {
-    dashLinksBtn.onclick = () => openSubPane("links-overlay");
+    dashLinksBtn.onclick = () => switchMode("links");
   }
   const dashVisionBtn = document.getElementById("dash-to-vision");
   if (dashVisionBtn) {
