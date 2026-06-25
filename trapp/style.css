@@ -9351,25 +9351,29 @@ body[data-mode="dashboard"] .dash-card,
 body[data-mode="dashboard"] .dash-card.white-theme {
   --club-accent: #ff6600;
   --club-accent-rgb: 255,102,0;
+  --home-bg-top: #10151d;
+  --home-bg-bottom: #19202b;
   position: relative;
   overflow: hidden;
   min-height: 0;
-  border: 1px solid rgba(8,12,20,0.62) !important;
+  border: 0 !important;
   border-radius: 18px !important;
   background:
     linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 22%),
     linear-gradient(135deg, rgba(var(--club-accent-rgb),0.22), rgba(255,255,255,0) 38%),
-    linear-gradient(180deg, #10151d 0%, #19202b 100%) !important;
+    linear-gradient(180deg, var(--home-bg-top) 0%, var(--home-bg-bottom) 100%) !important;
   background-image:
     linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 22%),
     linear-gradient(135deg, rgba(var(--club-accent-rgb),0.22), rgba(255,255,255,0) 38%),
-    linear-gradient(180deg, #10151d 0%, #19202b 100%) !important;
+    linear-gradient(180deg, var(--home-bg-top) 0%, var(--home-bg-bottom) 100%) !important;
   box-shadow: 0 18px 44px rgba(12,18,28,0.16) !important;
 }
 
 body[data-mode="dashboard"] #dash-card-niigata {
   --club-accent: var(--albirex-orange);
   --club-accent-rgb: var(--albirex-orange-rgb);
+  --home-bg-top: #0b2748;
+  --home-bg-bottom: #123d68;
 }
 
 body[data-mode="dashboard"] #dash-card-kumamoto {
@@ -9397,10 +9401,8 @@ body[data-mode="dashboard"] .dash-card::after {
   z-index: 0;
   border-radius: inherit;
   pointer-events: none;
-  background:
-    linear-gradient(110deg, rgba(255,255,255,0.045), transparent 28%),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 56px);
-  opacity: 0.64;
+  background: linear-gradient(110deg, rgba(255,255,255,0.035), transparent 32%);
+  opacity: 0.48;
 }
 
 body[data-mode="dashboard"] .dash-card > * {
@@ -9413,7 +9415,7 @@ body[data-mode="dashboard"] #dash-card-niigata .dash-card-header,
 body[data-mode="dashboard"] #dash-card-kumamoto .dash-card-header {
   min-height: 58px;
   padding: 6px 14px 6px 12px !important;
-  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  border-bottom: 0 !important;
   background: transparent !important;
   color: #fff;
   box-shadow: none !important;
@@ -9449,12 +9451,17 @@ body[data-mode="dashboard"] .home-club-mark img {
 }
 
 body[data-mode="dashboard"] .home-card-kumamoto .home-club-mark {
-  overflow: hidden;
+  height: 54px;
+  overflow: visible;
 }
 
 body[data-mode="dashboard"] .home-card-kumamoto .home-club-mark img {
-  transform: translateY(-8px) scale(0.62);
-  transform-origin: center top;
+  width: 32px;
+  height: 52px;
+  max-width: none;
+  object-fit: contain;
+  transform: translateY(-1px);
+  transform-origin: center;
 }
 
 body[data-mode="dashboard"] .dash-team-name {
@@ -9504,7 +9511,7 @@ body[data-mode="dashboard"] .dash-card-body > div:first-child {
   gap: 9px;
   margin-bottom: 0 !important;
   padding: 8px 9px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 0;
   border-radius: 13px;
   background: rgba(255,255,255,0.065);
 }

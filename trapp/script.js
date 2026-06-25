@@ -9497,6 +9497,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const previousMode = currentMode;
     currentMode = mode;
     document.body.setAttribute("data-mode", mode);
+    ["standings-overlay", "links-overlay"].forEach(id => document.getElementById(id)?.classList.remove("active"));
 
     if (ultraDashboard) ultraDashboard.className = mode === "dashboard" ? "active-view" : "hidden-view";
     if (ultraFeed) ultraFeed.className = mode === "feed" ? "active-view" : "hidden-view";
@@ -9545,6 +9546,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function openSubPane(id) {
     const pane = document.getElementById(id);
+    if (["standings-overlay", "links-overlay"].includes(id)) {
+      ["standings-overlay", "links-overlay"].forEach(otherId => {
+        if (otherId !== id) document.getElementById(otherId)?.classList.remove("active");
+      });
+    }
     if (pane) pane.classList.add("active");
     sideMenu.classList.remove("active");
     updateDashboardDockState();
@@ -13079,6 +13085,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   function openSubPane(id, options = {}) {
     const pane = document.getElementById(id);
     if (!pane) return;
+    if (["standings-overlay", "links-overlay"].includes(id)) {
+      ["standings-overlay", "links-overlay"].forEach(otherId => {
+        if (otherId !== id) document.getElementById(otherId)?.classList.remove("active");
+      });
+    }
     pane.classList.add("active");
     addAppHistoryEntry(`sub-pane:${id}`, () => openSubPane(id, { history: false }), options);
     updateDashboardDockState();
