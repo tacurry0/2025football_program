@@ -12207,6 +12207,56 @@ document.addEventListener("DOMContentLoaded", async () => {
     "大和ハウス プレミストドーム": "札幌市豊平区", "平和堂HATOスタジアム": "彦根市"
   };
 
+  function decorateDashboardClubMark(mark, club) {
+    if (!mark) return;
+    mark.dataset.effectClub = club;
+    if (mark.dataset.effectReady === "true") return;
+    mark.dataset.effectReady = "true";
+    for (let i = 0; i < 7; i += 1) {
+      const spark = document.createElement("span");
+      spark.className = `home-mark-spark spark-${i + 1}`;
+      mark.appendChild(spark);
+    }
+  }
+
+  function installDashboardStartupReveal() {
+    if (document.documentElement.dataset.dashboardStartupReveal === "done") return false;
+    document.documentElement.dataset.dashboardStartupReveal = "done";
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+
+    const reveal = document.createElement("div");
+    reveal.id = "home-loading-reveal";
+    reveal.className = "home-loading-reveal";
+    reveal.setAttribute("aria-hidden", "true");
+    reveal.innerHTML = `
+      <div class="home-reveal-noise"></div>
+      <div class="home-reveal-line"></div>
+      <div class="home-reveal-stack">
+        <div class="home-reveal-club reveal-niigata">
+          <span class="home-reveal-crest"><img src="./data/assets/icons/alb_logo1.png" alt=""></span>
+          <span class="home-reveal-name">ALBIREX NIIGATA</span>
+        </div>
+        <div class="home-reveal-core"><span>LOADING</span></div>
+        <div class="home-reveal-club reveal-kumamoto">
+          <span class="home-reveal-crest"><img src="./data/assets/icons/roasso_logo1.png" alt=""></span>
+          <span class="home-reveal-name">ROASSO KUMAMOTO</span>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(reveal);
+    document.documentElement.classList.add("home-startup-effect");
+    document.body.classList.add("home-startup-effect");
+    window.setTimeout(() => {
+      reveal.classList.add("is-exiting");
+      document.documentElement.classList.remove("home-startup-effect");
+      document.body.classList.remove("home-startup-effect");
+    }, 3300);
+    window.setTimeout(() => {
+      reveal.remove();
+    }, 4400);
+    return true;
+  }
+
   async function renderDashboard() {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
@@ -12272,7 +12322,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const dashboardDateHtml = `<span class="dash-date-main">${escapeHtml(dashboardDateParts.date)}</span>${dashboardDateParts.meta ? `<span class="dash-date-sub">${escapeHtml(dashboardDateParts.meta)}</span>` : ""}`;
 
       return `
-          <div class="dash-card white-theme home-card-enhanced home-card-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white;">
+          <div class="dash-card white-theme home-card-enhanced home-card-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white; --home-enter-delay:${m.club === "kumamoto" ? "180ms" : "20ms"};">
             <div class="dash-card-header" style="background:${mainColor}; border-bottom:none; padding:8px 15px;">
               <div class="home-club-lockup">
                 <span class="home-club-mark"><img src="${dashClubLogo}" alt="${clubName}" loading="eager" decoding="async"></span>
@@ -12353,7 +12403,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     html += renderCard(nextNiigata, "ALBIREX NIIGATA", "var(--albirex-orange)", "新潟");
     html += renderCard(nextKumamoto, "ROASSO KUMAMOTO", "var(--roasso-red)", "熊本");
+    installDashboardStartupReveal();
     container.innerHTML = html;
+
+    container.querySelectorAll(".dash-card").forEach(card => {
+      const club = card.id && card.id.includes("kumamoto") ? "kumamoto" : "niigata";
+      decorateDashboardClubMark(card.querySelector(".home-club-mark"), club);
+    });
 
     // Header Announcements (N Gate etc)
     updateHeaderAnnouncements();

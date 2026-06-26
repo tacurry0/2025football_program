@@ -94,16 +94,65 @@
           return img;
         };
 
+        const decorateClubMark = (mark, club) => {
+          if (!mark) return;
+          mark.dataset.effectClub = club;
+          if (mark.dataset.effectReady === "true") return;
+          mark.dataset.effectReady = "true";
+          for (let i = 0; i < 7; i += 1) {
+            const spark = document.createElement("span");
+            spark.className = "home-mark-spark spark-" + (i + 1);
+            mark.appendChild(spark);
+          }
+        };
+
+        const installStartupReveal = () => {
+          if (document.documentElement.dataset.homeStartupReveal === "done") return;
+          document.documentElement.dataset.homeStartupReveal = "done";
+          const reveal = document.createElement("div");
+          reveal.id = "home-loading-reveal";
+          reveal.className = "home-loading-reveal";
+          reveal.setAttribute("aria-hidden", "true");
+          reveal.innerHTML = [
+            '<div class="home-reveal-noise"></div>',
+            '<div class="home-reveal-line"></div>',
+            '<div class="home-reveal-stack">',
+              '<div class="home-reveal-club reveal-niigata">',
+                '<span class="home-reveal-crest"><img src="' + CLUBS.niigata.logo + '" alt=""></span>',
+                '<span class="home-reveal-name">ALBIREX NIIGATA</span>',
+              '</div>',
+              '<div class="home-reveal-core"><span>LOADING</span></div>',
+              '<div class="home-reveal-club reveal-kumamoto">',
+                '<span class="home-reveal-crest"><img src="' + CLUBS.kumamoto.logo + '" alt=""></span>',
+                '<span class="home-reveal-name">ROASSO KUMAMOTO</span>',
+              '</div>',
+            '</div>'
+          ].join("");
+          document.body.appendChild(reveal);
+          document.documentElement.classList.add("home-startup-effect");
+          document.body.classList.add("home-startup-effect");
+          window.setTimeout(() => {
+            reveal.classList.add("is-exiting");
+            document.documentElement.classList.remove("home-startup-effect");
+            document.body.classList.remove("home-startup-effect");
+          }, 3300);
+          window.setTimeout(() => {
+            reveal.remove();
+          }, 4400);
+        };
+
         const enhanceCard = (card) => {
           const club = getClub(card);
           const clubInfo = CLUBS[club];
           if (!card || !clubInfo) return;
           card.classList.add("home-card-enhanced", "home-card-" + club);
+          card.style.setProperty("--home-enter-delay", club === "kumamoto" ? "180ms" : "20ms");
 
           const header = card.querySelector(".dash-card-header");
           const teamName = header && header.querySelector(".dash-team-name");
-          if (header && teamName && !header.querySelector(".home-club-lockup")) {
-            const lockup = document.createElement("div");
+          let lockup = header && header.querySelector(".home-club-lockup");
+          if (header && teamName && !lockup) {
+            lockup = document.createElement("div");
             lockup.className = "home-club-lockup";
             const mark = document.createElement("span");
             mark.className = "home-club-mark";
@@ -112,6 +161,7 @@
             lockup.appendChild(mark);
             lockup.appendChild(teamName);
           }
+          decorateClubMark(lockup && lockup.querySelector(".home-club-mark"), club);
 
           const top = card.querySelector(".dash-card-body > div:first-child");
           if (top) {
@@ -132,7 +182,9 @@
         };
 
         const enhanceDashboard = () => {
-          document.querySelectorAll("#dashboard-cards-container .dash-card").forEach(enhanceCard);
+          const cards = Array.from(document.querySelectorAll("#dashboard-cards-container .dash-card"));
+          if (cards.length && document.body.dataset.mode === "dashboard") installStartupReveal();
+          cards.forEach(enhanceCard);
         };
 
         const start = () => {
@@ -151,6 +203,8 @@
         window.addEventListener("load", start, { once: true });
         setTimeout(start, 800);
         setTimeout(start, 1800);
+        setTimeout(start, 3400);
+        setTimeout(start, 6200);
       })();
     `;
   }
@@ -178,7 +232,7 @@
         .replace(/<link\b[^>]*rel=["']manifest["'][^>]*>/gi, "")
         .replace(/<script\b[^>]*src=["'][^"']*pwa\.js[^"']*["'][^>]*><\/script>/gi, "")
         .replace("<head>", `<head><base href="${ROOT}">`)
-        .replace("</head>", `<link rel="stylesheet" href="./sandbox/home-theme.css?v=20260625home7"></head>`)
+        .replace("</head>", `<link rel="stylesheet" href="./sandbox/home-theme.css?v=20260626startup3"></head>`)
         .replace(/<body([^>]*)>/i, '<body$1 class="sandbox-home-only">')
         .replace("</body>", `<div id="home-sandbox-badge" aria-hidden="true"><span></span>HOME SANDBOX</div><script>${homeEnhancerSource()}<\/script></body>`)
         .replace(/<title>[^<]*<\/title>/i, "<title>takarei - Home Sandbox</title>");

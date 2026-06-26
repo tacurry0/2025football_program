@@ -17,4 +17,6 @@
 - 元の `index.html`、`schedule/schedule.js`、`script.js` を実行
 - データとホーム画面の内容は元アプリのまま
 - `home-theme.css` だけで `body[data-mode="dashboard"]` 配下を上書き
+- 起動時だけ `alb_logo1.png` と `roasso_logo1.png` を使ったロゴ演出を表示
+- ホームカード左側のクラブロゴにも、サンドボックス専用の光・粒子エフェクトを追加
 - 本番ファイルは変更しない

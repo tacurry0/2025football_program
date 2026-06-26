@@ -7,14 +7,37 @@
   <title>takarei Home Sandbox</title>
   <style>
     @font-face{font-family:JLeagueKick;src:url("../data/assets/fonts/jleaguekick-bold.woff2?v=20260601assets1") format("woff2");font-weight:bold;font-style:normal}
-    html,body{width:100%;height:100%;margin:0;background:#f6f7fa;font-family:JLeagueKick,system-ui,sans-serif;color:#172033}
-    .boot{display:grid;place-items:center;align-content:center;gap:14px;height:100%;text-align:center}
-    .boot-mark{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#172033;color:#fff;font-size:22px;font-weight:800;box-shadow:0 14px 30px rgba(23,32,51,.18)}
-    .boot b{font-size:14px}.boot small{color:#818999;font-size:10px}.boot-line{width:110px;height:3px;overflow:hidden;border-radius:99px;background:#e0e3e8}.boot-line::after{content:"";display:block;width:45%;height:100%;border-radius:inherit;background:#f26722;animation:load 1s ease-in-out infinite alternate}@keyframes load{to{transform:translateX(122%)}}
+    html,body{width:100%;height:100%;margin:0;background:#0d131b;font-family:JLeagueKick,system-ui,sans-serif;color:#fff;overflow:hidden}
+    .boot{position:relative;display:grid;place-items:center;align-content:center;gap:18px;height:100%;text-align:center;background:radial-gradient(circle at 24% 34%,rgba(242,103,34,.32),transparent 30%),radial-gradient(circle at 76% 36%,rgba(192,32,42,.34),transparent 31%),linear-gradient(180deg,#101822 0%,#121a24 52%,#0a0e14 100%)}
+    .boot::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,transparent,black 24%,black 76%,transparent);opacity:.46}
+    .boot::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 42%,rgba(255,255,255,.18) 50%,transparent 58%);transform:translateX(-72%);animation:bootSweep 1.65s cubic-bezier(.22,1,.36,1) infinite}
+    .boot-stage{position:relative;z-index:1;display:grid;grid-template-rows:86px auto 86px;justify-items:center;align-items:center;gap:14px;width:min(92vw,260px)}
+    .boot-crest{position:relative;display:grid;place-items:center;width:86px;height:72px;filter:drop-shadow(0 16px 24px rgba(0,0,0,.34));animation:bootCrest 1.35s cubic-bezier(.2,1,.22,1) both}
+    .boot-crest::before{content:"";position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.28),transparent 66%);filter:blur(8px);transform:scale(.82);animation:bootPulse 1.35s ease-out infinite}
+    .boot-crest img{position:relative;max-width:100%;max-height:100%;object-fit:contain}
+    .boot-crest.kumamoto{animation-delay:.12s}
+    .boot-crest.kumamoto img{transform:scale(.74)}
+    .boot-copy{position:relative;display:grid;gap:8px;justify-items:center;min-width:0}
+    .boot-copy b{font-size:18px;line-height:1;letter-spacing:.14em;text-shadow:0 4px 18px rgba(0,0,0,.42);white-space:nowrap}
+    .boot-copy small{color:rgba(255,255,255,.62);font-size:9px;letter-spacing:.18em;white-space:nowrap}
+    .boot-line{width:100%;height:4px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+    .boot-line::after{content:"";display:block;width:44%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#f26722,#fff,#c0202a);animation:load 1.02s cubic-bezier(.65,0,.35,1) infinite}
+    @keyframes load{0%{transform:translateX(-105%)}100%{transform:translateX(235%)}}
+    @keyframes bootSweep{0%{transform:translateX(-72%);opacity:0}34%{opacity:.8}100%{transform:translateX(72%);opacity:0}}
+    @keyframes bootCrest{0%{opacity:0;transform:translateY(18px) scale(.74) rotate(-6deg);filter:blur(5px) drop-shadow(0 16px 24px rgba(0,0,0,.34))}72%{opacity:1;transform:translateY(-2px) scale(1.05) rotate(1deg);filter:blur(0) drop-shadow(0 16px 24px rgba(0,0,0,.34))}100%{opacity:1;transform:translateY(0) scale(1) rotate(0);filter:blur(0) drop-shadow(0 16px 24px rgba(0,0,0,.34))}}
+    @keyframes bootPulse{0%,100%{opacity:.45;transform:scale(.82)}50%{opacity:.95;transform:scale(1.06)}}
+    @media (max-width:390px){.boot-stage{grid-template-rows:74px auto 74px;width:min(88vw,230px)}.boot-crest{width:72px;height:62px}.boot-copy b{font-size:15px}}
+    @media (prefers-reduced-motion:reduce){.boot::after,.boot-crest,.boot-crest::before,.boot-line::after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
   </style>
   <script src="./home-app.js" defer></script>
 </head>
 <body>
-  <div class="boot"><span class="boot-mark">T</span><b>ホーム画面を読み込んでいます</b><small>HOME SANDBOX - ORIGINAL DATA</small><span class="boot-line"></span></div>
+  <div class="boot">
+    <div class="boot-stage">
+      <span class="boot-crest niigata"><img src="../data/assets/icons/alb_logo1.png" alt="ALBIREX NIIGATA"></span>
+      <span class="boot-copy"><b>LOADING</b><small>HOME SANDBOX</small><span class="boot-line"></span></span>
+      <span class="boot-crest kumamoto"><img src="../data/assets/icons/roasso_logo1.png" alt="ROASSO KUMAMOTO"></span>
+    </div>
+  </div>
 </body>
 </html>

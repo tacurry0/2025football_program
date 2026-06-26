@@ -9503,6 +9503,16 @@ body[data-mode="dashboard"] .dash-card.white-theme {
   box-shadow: 0 18px 44px rgba(12,18,28,0.16) !important;
 }
 
+body[data-mode="dashboard"] .dash-card.home-card-enhanced {
+  animation: homeCardEnter 780ms cubic-bezier(.16, 1, .3, 1) var(--home-enter-delay, 0ms) both;
+  transform-origin: center top;
+}
+
+html.home-startup-effect body[data-mode="dashboard"] .dash-card.home-card-enhanced,
+body.home-startup-effect[data-mode="dashboard"] .dash-card.home-card-enhanced {
+  animation-delay: calc(2820ms + var(--home-enter-delay, 0ms));
+}
+
 body[data-mode="dashboard"] #dash-card-niigata {
   --club-accent: var(--albirex-orange);
   --club-accent-rgb: var(--albirex-orange-rgb);
@@ -9526,6 +9536,8 @@ body[data-mode="dashboard"] .dash-card::before {
   background: linear-gradient(180deg, var(--club-accent), rgba(var(--club-accent-rgb),0.64));
   clip-path: polygon(0 0, 82px 0, 72px 18%, 42px 100%, 0 100%);
   opacity: 0.96;
+  transform-origin: left center;
+  animation: homeAccentCharge 2200ms cubic-bezier(.22, 1, .36, 1) both;
 }
 
 body[data-mode="dashboard"] .dash-card::after {
@@ -9537,6 +9549,7 @@ body[data-mode="dashboard"] .dash-card::after {
   pointer-events: none;
   background: linear-gradient(110deg, rgba(255,255,255,0.035), transparent 32%);
   opacity: 0.48;
+  animation: homeCardSheen 3600ms cubic-bezier(.22, 1, .36, 1) 620ms both;
 }
 
 body[data-mode="dashboard"] .dash-card > * {
@@ -9565,16 +9578,55 @@ body[data-mode="dashboard"] .home-club-lockup {
 }
 
 body[data-mode="dashboard"] .home-club-mark {
+  --crest-scale: 1;
+  --crest-scale-in: 0.66;
+  --crest-scale-pop: 1.09;
+  --crest-scale-float: 1.018;
   flex: 0 0 62px;
   width: 62px;
   height: 52px;
+  position: relative;
+  z-index: 0;
   display: grid;
   place-items: center;
   overflow: visible;
+  isolation: isolate;
   border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+}
+
+body[data-mode="dashboard"] .home-club-mark::before,
+body[data-mode="dashboard"] .home-club-mark::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+body[data-mode="dashboard"] .home-club-mark::before {
+  inset: -9px -5px;
+  z-index: 0;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.25), rgba(255,255,255,0) 58%),
+    conic-gradient(from 0deg, transparent 0 32%, rgba(255,255,255,0.88) 38%, var(--club-accent) 46%, transparent 58% 100%);
+  filter: blur(0.2px);
+  opacity: 0.72;
+  transform: scale(0.72) rotate(-18deg);
+  animation: homeCrestHalo 2600ms cubic-bezier(.22, 1, .36, 1) var(--home-enter-delay, 0ms) both,
+    homeCrestOrbit 5400ms linear calc(1180ms + var(--home-enter-delay, 0ms)) infinite;
+}
+
+body[data-mode="dashboard"] .home-club-mark::after {
+  inset: 2px -8px;
+  z-index: 2;
+  border-radius: 999px;
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.86) 48%, transparent 74%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-72%) skewX(-13deg);
+  animation: homeCrestGlint 2250ms cubic-bezier(.22, 1, .36, 1) calc(440ms + var(--home-enter-delay, 0ms)) both;
 }
 
 body[data-mode="dashboard"] .home-club-mark img {
@@ -9582,6 +9634,14 @@ body[data-mode="dashboard"] .home-club-mark img {
   height: 100%;
   object-fit: contain;
   display: block;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.36)) drop-shadow(0 0 16px rgba(var(--club-accent-rgb),0.36));
+  transform: scale(var(--crest-scale));
+  transform-origin: center;
+  animation:
+    homeCrestIgnite 1120ms cubic-bezier(.16, 1, .3, 1) var(--home-enter-delay, 0ms) both,
+    homeCrestFloat 6200ms ease-in-out calc(1280ms + var(--home-enter-delay, 0ms)) infinite;
 }
 
 body[data-mode="dashboard"] .home-card-kumamoto .home-club-mark {
@@ -9594,8 +9654,61 @@ body[data-mode="dashboard"] .home-card-kumamoto .home-club-mark img {
   height: 52px;
   max-width: none;
   object-fit: contain;
-  transform: translateY(-1px);
+  transform: scale(var(--crest-scale));
   transform-origin: center;
+}
+
+html.home-startup-effect body[data-mode="dashboard"] .home-club-mark::before,
+body.home-startup-effect[data-mode="dashboard"] .home-club-mark::before {
+  animation-delay: calc(2820ms + var(--home-enter-delay, 0ms)), calc(4000ms + var(--home-enter-delay, 0ms));
+}
+
+html.home-startup-effect body[data-mode="dashboard"] .home-club-mark::after,
+body.home-startup-effect[data-mode="dashboard"] .home-club-mark::after {
+  animation-delay: calc(3260ms + var(--home-enter-delay, 0ms));
+}
+
+html.home-startup-effect body[data-mode="dashboard"] .home-club-mark img,
+body.home-startup-effect[data-mode="dashboard"] .home-club-mark img {
+  animation-delay: calc(2820ms + var(--home-enter-delay, 0ms)), calc(4100ms + var(--home-enter-delay, 0ms));
+}
+
+body[data-mode="dashboard"] .home-mark-spark {
+  --spark-x: 0px;
+  --spark-y: 0px;
+  --spark-delay: 0ms;
+  --spark-color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--spark-color);
+  box-shadow: 0 0 12px var(--spark-color), 0 0 22px rgba(255,255,255,0.42);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: homeMarkSpark 1280ms cubic-bezier(.16, 1, .3, 1) var(--spark-delay) both;
+}
+
+html.home-startup-effect body[data-mode="dashboard"] .home-mark-spark,
+body.home-startup-effect[data-mode="dashboard"] .home-mark-spark {
+  animation-delay: calc(3040ms + var(--spark-delay));
+}
+
+body[data-mode="dashboard"] .home-mark-spark.spark-1 { --spark-x: -30px; --spark-y: -18px; --spark-delay: 110ms; --spark-color: #fff2cf; }
+body[data-mode="dashboard"] .home-mark-spark.spark-2 { --spark-x: 31px; --spark-y: -14px; --spark-delay: 190ms; --spark-color: #ffffff; }
+body[data-mode="dashboard"] .home-mark-spark.spark-3 { --spark-x: -24px; --spark-y: 19px; --spark-delay: 260ms; --spark-color: var(--club-accent); }
+body[data-mode="dashboard"] .home-mark-spark.spark-4 { --spark-x: 28px; --spark-y: 18px; --spark-delay: 330ms; --spark-color: #ffffff; }
+body[data-mode="dashboard"] .home-mark-spark.spark-5 { --spark-x: -4px; --spark-y: -28px; --spark-delay: 410ms; --spark-color: var(--club-accent); }
+body[data-mode="dashboard"] .home-mark-spark.spark-6 { --spark-x: 8px; --spark-y: 30px; --spark-delay: 500ms; --spark-color: #fff2cf; }
+body[data-mode="dashboard"] .home-mark-spark.spark-7 { --spark-x: 39px; --spark-y: 1px; --spark-delay: 580ms; --spark-color: var(--club-accent); }
+
+body[data-mode="dashboard"] .home-card-kumamoto .home-mark-spark.spark-3,
+body[data-mode="dashboard"] .home-card-kumamoto .home-mark-spark.spark-5,
+body[data-mode="dashboard"] .home-card-kumamoto .home-mark-spark.spark-7 {
+  --spark-color: #ff4b58;
 }
 
 body[data-mode="dashboard"] .dash-team-name {
@@ -10027,6 +10140,309 @@ body[data-mode="feed"] .month-section {
 
 body[data-mode="calendar"] #calendar-view {
   padding-bottom: calc(220px + env(safe-area-inset-bottom)) !important;
+}
+
+#home-loading-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  color: #fff;
+  background:
+    radial-gradient(circle at 50% 24%, rgba(242,103,34,0.36), transparent 24%),
+    radial-gradient(circle at 50% 76%, rgba(192,32,42,0.40), transparent 25%),
+    linear-gradient(180deg, #111922 0%, #121b25 54%, #080d13 100%);
+  opacity: 1;
+}
+
+#home-loading-reveal::before,
+#home-loading-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#home-loading-reveal::before {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,0.045) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, transparent 0 88px, rgba(255,255,255,0.07) 89px 90px, transparent 91px);
+  background-size: 58px 58px, 58px 58px, 100% 100%;
+  mask-image: linear-gradient(180deg, transparent, black 18%, black 80%, transparent);
+  opacity: 0.58;
+  animation: homeRevealGrid 3300ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+#home-loading-reveal::after {
+  background: linear-gradient(112deg, transparent 0 43%, rgba(255,255,255,0.24) 50%, transparent 57%);
+  transform: translateX(-76%);
+  opacity: 0;
+  animation: homeRevealSweep 1850ms cubic-bezier(.22, 1, .36, 1) 860ms both;
+}
+
+#home-loading-reveal.is-exiting {
+  animation: homeRevealExit 880ms cubic-bezier(.65, 0, .35, 1) both;
+}
+
+.home-reveal-noise {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 16px),
+    repeating-linear-gradient(65deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 20px);
+  opacity: 0.22;
+  transform: scale(1.05);
+}
+
+.home-reveal-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(74vw, 620px);
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.92), transparent);
+  box-shadow: 0 0 20px rgba(255,255,255,0.36);
+  transform: translate(-50%, -50%) scaleX(0);
+  animation: homeRevealLine 2300ms cubic-bezier(.16, 1, .3, 1) 360ms both;
+}
+
+.home-reveal-stack {
+  position: relative;
+  z-index: 1;
+  width: min(88vw, 310px);
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 13px;
+}
+
+.home-reveal-club {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  min-width: 132px;
+}
+
+.home-reveal-crest {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(88px, 14vw, 148px);
+  height: clamp(76px, 12vw, 124px);
+  filter: drop-shadow(0 22px 34px rgba(0,0,0,0.36));
+}
+
+.home-reveal-crest::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.24), transparent 58%),
+    conic-gradient(from -20deg, transparent, rgba(255,255,255,0.82), transparent 34%, transparent);
+  filter: blur(1px);
+  opacity: 0.76;
+  animation: homeRevealCrestHalo 2850ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.home-reveal-crest img {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.reveal-kumamoto .home-reveal-crest img {
+  transform: scale(0.74);
+}
+
+.home-reveal-name {
+  font-size: clamp(10px, 1.8vw, 16px);
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-shadow: 0 3px 18px rgba(0,0,0,0.48);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: homeRevealName 1200ms cubic-bezier(.16, 1, .3, 1) 780ms both;
+}
+
+.reveal-niigata {
+  animation: homeRevealNiigata 3100ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.reveal-kumamoto {
+  animation: homeRevealKumamoto 3100ms cubic-bezier(.16, 1, .3, 1) 80ms both;
+}
+
+.home-reveal-core {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(94px, 14vw, 132px);
+  height: clamp(94px, 14vw, 132px);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.22), rgba(255,255,255,0.05) 44%, transparent 65%),
+    conic-gradient(from 90deg, #f26722, #fff, #c0202a, #f26722);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.16), 0 24px 60px rgba(0,0,0,0.28);
+  transform: scale(0.62);
+  opacity: 0;
+  animation: homeRevealCore 2100ms cubic-bezier(.16, 1, .3, 1) 680ms both;
+}
+
+.home-reveal-core::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: inherit;
+  background: #101822;
+}
+
+.home-reveal-core span {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(11px, 1.7vw, 16px);
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-align: center;
+}
+
+@keyframes homeCardEnter {
+  0% { opacity: 0; transform: translateY(26px) scale(0.965); filter: blur(5px); }
+  70% { opacity: 1; transform: translateY(-3px) scale(1.006); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes homeAccentCharge {
+  0% { transform: scaleX(0.18); opacity: 0.42; }
+  58% { transform: scaleX(1.05); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0.96; }
+}
+
+@keyframes homeCardSheen {
+  0% { opacity: 0; transform: translateX(-18%); }
+  36% { opacity: 0.78; }
+  100% { opacity: 0.64; transform: translateX(0); }
+}
+
+@keyframes homeCrestIgnite {
+  0% {
+    opacity: 0;
+    transform: translateX(-16px) scale(var(--crest-scale-in)) rotate(-7deg);
+    filter: blur(5px) drop-shadow(0 8px 12px rgba(0,0,0,0.36)) drop-shadow(0 0 4px rgba(var(--club-accent-rgb),0.12));
+  }
+  58% {
+    opacity: 1;
+    transform: translateX(2px) scale(var(--crest-scale-pop)) rotate(2deg);
+    filter: blur(0) drop-shadow(0 8px 12px rgba(0,0,0,0.36)) drop-shadow(0 0 24px rgba(var(--club-accent-rgb),0.62));
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(var(--crest-scale)) rotate(0);
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.36)) drop-shadow(0 0 16px rgba(var(--club-accent-rgb),0.36));
+  }
+}
+
+@keyframes homeCrestFloat {
+  0%, 100% { transform: translateY(0) scale(var(--crest-scale)); }
+  50% { transform: translateY(-2px) scale(var(--crest-scale-float)); }
+}
+
+@keyframes homeCrestHalo {
+  0% { opacity: 0; transform: scale(0.36) rotate(-42deg); }
+  62% { opacity: 0.86; transform: scale(1.03) rotate(18deg); }
+  100% { opacity: 0.72; transform: scale(0.72) rotate(-18deg); }
+}
+
+@keyframes homeCrestOrbit {
+  0% { transform: scale(0.72) rotate(-18deg); }
+  100% { transform: scale(0.72) rotate(342deg); }
+}
+
+@keyframes homeCrestGlint {
+  0% { opacity: 0; transform: translateX(-72%) skewX(-13deg); }
+  28% { opacity: 0.88; }
+  70% { opacity: 0.18; }
+  100% { opacity: 0; transform: translateX(76%) skewX(-13deg); }
+}
+
+@keyframes homeMarkSpark {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.18); }
+  18% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--spark-x), var(--spark-y)) scale(0.08); }
+}
+
+@keyframes homeRevealGrid {
+  0% { opacity: 0; transform: scale(1.08); }
+  100% { opacity: 0.58; transform: scale(1); }
+}
+
+@keyframes homeRevealSweep {
+  0% { opacity: 0; transform: translateX(-76%); }
+  36% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(76%); }
+}
+
+@keyframes homeRevealLine {
+  0% { opacity: 0; transform: translate(-50%, -50%) scaleX(0); }
+  45% { opacity: 1; transform: translate(-50%, -50%) scaleX(1); }
+  100% { opacity: 0.54; transform: translate(-50%, -50%) scaleX(0.66); }
+}
+
+@keyframes homeRevealCrestHalo {
+  0% { opacity: 0; transform: scale(0.52) rotate(-60deg); }
+  58% { opacity: 0.86; transform: scale(1.05) rotate(34deg); }
+  100% { opacity: 0.58; transform: scale(0.9) rotate(94deg); }
+}
+
+@keyframes homeRevealName {
+  0% { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes homeRevealNiigata {
+  0% { opacity: 0; transform: translateY(-42px) rotate(-5deg) scale(0.78); filter: blur(7px); }
+  56% { opacity: 1; transform: translateY(3px) rotate(1deg) scale(1.06); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); filter: blur(0); }
+}
+
+@keyframes homeRevealKumamoto {
+  0% { opacity: 0; transform: translateY(42px) rotate(5deg) scale(0.78); filter: blur(7px); }
+  56% { opacity: 1; transform: translateY(-3px) rotate(-1deg) scale(1.06); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); filter: blur(0); }
+}
+
+@keyframes homeRevealCore {
+  0% { opacity: 0; transform: scale(0.62) rotate(-18deg); filter: blur(7px); }
+  48% { opacity: 1; transform: scale(1.08) rotate(5deg); filter: blur(0); }
+  100% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+}
+
+@keyframes homeRevealExit {
+  0% { opacity: 1; clip-path: inset(0 0 0 0); filter: blur(0); }
+  100% { opacity: 0; clip-path: inset(0 0 0 0); filter: blur(12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #home-loading-reveal {
+    display: none;
+  }
+
+  body[data-mode="dashboard"] .dash-card.home-card-enhanced,
+  body[data-mode="dashboard"] .home-club-mark::before,
+  body[data-mode="dashboard"] .home-club-mark::after,
+  body[data-mode="dashboard"] .home-club-mark img,
+  body[data-mode="dashboard"] .home-mark-spark {
+    animation: none !important;
+  }
 }
 
 @media (max-width: 760px) {
