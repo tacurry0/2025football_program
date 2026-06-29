@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="home-startup-effect">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260626startup-effect">
+  <link rel="stylesheet" href="style.css?v=20260629home-ambient">
+  <script>
+    window.__dashboardStartupStartedAt = performance.now();
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.remove("home-startup-effect");
+    }
+  </script>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
   <meta name="mobile-web-app-capable" content="yes">
@@ -15,6 +21,20 @@
   <link rel="apple-touch-icon" href="./data/assets/icons/icon-192.png">
 </head>
 <body>
+
+  <div id="home-loading-reveal" class="home-loading-reveal" aria-hidden="true">
+    <div class="home-reveal-noise"></div>
+    <div class="home-reveal-line"></div>
+    <div class="home-reveal-stack">
+      <div class="home-reveal-club reveal-niigata">
+        <span class="home-reveal-crest"><img src="./data/assets/icons/alb_logo1.png" alt=""></span>
+      </div>
+      <div class="home-reveal-core"><span>LOADING</span></div>
+      <div class="home-reveal-club reveal-kumamoto">
+        <span class="home-reveal-crest"><img src="./data/assets/icons/roasso_logo1.png" alt=""></span>
+      </div>
+    </div>
+  </div>
 
   <div id="bg-canvas"></div>
 
@@ -1360,7 +1380,7 @@ We can't help falling in love with you
 
   <script src="pwa.js?v=20260618pwa-install"></script>
   <script src="schedule/schedule.js?v=20260617manual-score-off"></script>
-  <script src="script.js?v=20260626startup-effect"></script>
+  <script src="script.js?v=20260629startup-light5"></script>
 
 </body>
 </html>

@@ -12210,57 +12210,51 @@ document.addEventListener("DOMContentLoaded", async () => {
   function decorateDashboardClubMark(mark, club) {
     if (!mark) return;
     mark.dataset.effectClub = club;
-    if (mark.dataset.effectReady === "true") return;
     mark.dataset.effectReady = "true";
-    for (let i = 0; i < 7; i += 1) {
-      const spark = document.createElement("span");
-      spark.className = `home-mark-spark spark-${i + 1}`;
-      mark.appendChild(spark);
-    }
   }
 
   function installDashboardStartupReveal() {
-    if (document.documentElement.dataset.dashboardStartupReveal === "done") return false;
-    document.documentElement.dataset.dashboardStartupReveal = "done";
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+    const root = document.documentElement;
+    if (root.dataset.dashboardStartupReveal === "scheduled" || root.dataset.dashboardStartupReveal === "done") return false;
 
-    const reveal = document.createElement("div");
-    reveal.id = "home-loading-reveal";
-    reveal.className = "home-loading-reveal";
-    reveal.setAttribute("aria-hidden", "true");
-    reveal.innerHTML = `
-      <div class="home-reveal-noise"></div>
-      <div class="home-reveal-line"></div>
-      <div class="home-reveal-stack">
-        <div class="home-reveal-club reveal-niigata">
-          <span class="home-reveal-crest"><img src="./data/assets/icons/alb_logo1.png" alt=""></span>
-          <span class="home-reveal-name">ALBIREX NIIGATA</span>
-        </div>
-        <div class="home-reveal-core"><span>LOADING</span></div>
-        <div class="home-reveal-club reveal-kumamoto">
-          <span class="home-reveal-crest"><img src="./data/assets/icons/roasso_logo1.png" alt=""></span>
-          <span class="home-reveal-name">ROASSO KUMAMOTO</span>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(reveal);
-    document.documentElement.classList.add("home-startup-effect");
+    const reveal = document.getElementById("home-loading-reveal");
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      reveal?.remove();
+      root.classList.remove("home-startup-effect");
+      document.body.classList.remove("home-startup-effect");
+      root.dataset.dashboardStartupReveal = "done";
+      root.dataset.dashboardStartupIntroPlayed = "done";
+      return false;
+    }
+    if (!reveal) return false;
+
+    root.dataset.dashboardStartupReveal = "scheduled";
+    root.classList.add("home-startup-effect");
     document.body.classList.add("home-startup-effect");
+    const startedAt = Number(window.__dashboardStartupStartedAt) || performance.now();
+    const exitDelay = Math.max(0, 3300 - (performance.now() - startedAt));
+
     window.setTimeout(() => {
       reveal.classList.add("is-exiting");
-      document.documentElement.classList.remove("home-startup-effect");
+      root.classList.remove("home-startup-effect");
       document.body.classList.remove("home-startup-effect");
-    }, 3300);
+    }, exitDelay);
     window.setTimeout(() => {
       reveal.remove();
-    }, 4400);
+      root.classList.add("home-dashboard-entering");
+      root.dataset.dashboardStartupIntroPlayed = "done";
+      root.dataset.dashboardStartupReveal = "done";
+    }, exitDelay + 1100);
+    window.setTimeout(() => {
+      root.classList.remove("home-dashboard-entering");
+    }, exitDelay + 5500);
     return true;
   }
 
   async function renderDashboard() {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
-    document.body.setAttribute("data-dashboard-full-ready", "true");
+    const isStartupIntro = document.documentElement.dataset.dashboardStartupIntroPlayed !== "done";
 
     // Sort logic to find "Next" Match
     const now = new Date();
@@ -12322,7 +12316,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const dashboardDateHtml = `<span class="dash-date-main">${escapeHtml(dashboardDateParts.date)}</span>${dashboardDateParts.meta ? `<span class="dash-date-sub">${escapeHtml(dashboardDateParts.meta)}</span>` : ""}`;
 
       return `
-          <div class="dash-card white-theme home-card-enhanced home-card-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white; --home-enter-delay:${m.club === "kumamoto" ? "180ms" : "20ms"};">
+          <div class="dash-card white-theme home-card-enhanced${isStartupIntro ? " home-card-intro" : ""} home-card-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white; --home-enter-delay:${m.club === "kumamoto" ? "180ms" : "20ms"};">
             <div class="dash-card-header" style="background:${mainColor}; border-bottom:none; padding:8px 15px;">
               <div class="home-club-lockup">
                 <span class="home-club-mark"><img src="${dashClubLogo}" alt="${clubName}" loading="eager" decoding="async"></span>
@@ -12403,13 +12397,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     html += renderCard(nextNiigata, "ALBIREX NIIGATA", "var(--albirex-orange)", "新潟");
     html += renderCard(nextKumamoto, "ROASSO KUMAMOTO", "var(--roasso-red)", "熊本");
-    installDashboardStartupReveal();
     container.innerHTML = html;
 
     container.querySelectorAll(".dash-card").forEach(card => {
       const club = card.id && card.id.includes("kumamoto") ? "kumamoto" : "niigata";
       decorateDashboardClubMark(card.querySelector(".home-club-mark"), club);
     });
+    document.body.setAttribute("data-dashboard-full-ready", "true");
+    installDashboardStartupReveal();
 
     // Header Announcements (N Gate etc)
     updateHeaderAnnouncements();
