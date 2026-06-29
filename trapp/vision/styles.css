@@ -741,6 +741,15 @@ body.admin-page {
   font-family: var(--app-font);
   font-weight: 900;
   letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.admin-title-short,
+.admin-more-menu,
+.preview-close-button,
+.mobile-preview-toggle,
+.preview-backdrop {
+  display: none;
 }
 
 .admin-actions {
@@ -827,6 +836,16 @@ body.admin-page {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.common-settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.common-settings > summary {
+  display: none;
 }
 
 .control-section {
@@ -1086,13 +1105,19 @@ body.admin-page {
 }
 
 @media (max-width: 720px) {
+  body.admin-page {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+
   .admin-header {
-    position: static;
-    z-index: 20;
+    position: sticky;
+    top: 0;
+    z-index: 50;
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
     padding: 10px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
   }
 
   .admin-kicker {
@@ -1103,21 +1128,92 @@ body.admin-page {
     font-size: 18px;
   }
 
+  .admin-title-long {
+    display: none;
+  }
+
+  .admin-title-short {
+    display: inline;
+  }
+
   .admin-actions {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
     gap: 6px;
-    overflow-x: auto;
-    padding-bottom: 2px;
+    overflow: visible;
   }
 
   .admin-actions > * {
-    flex: 0 0 auto;
-    width: auto;
     height: 34px;
     padding: 0 10px;
     font-size: 12px;
+  }
+
+  .admin-actions > .export-target-select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-actions > .admin-link,
+  .admin-actions > #resetButton {
+    display: none;
+  }
+
+  .admin-more-menu {
+    position: relative;
+    display: block;
+    height: 34px;
+    padding: 0;
+  }
+
+  .admin-more-menu > summary {
+    display: grid;
+    height: 34px;
+    padding: 0 11px;
+    place-items: center;
+    color: #fff;
+    list-style: none;
+    background: #263445;
+    border: 1px solid #526277;
+    cursor: pointer;
+  }
+
+  .admin-more-menu > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .admin-more-menu-panel {
+    position: absolute;
+    top: calc(100% + 7px);
+    right: 0;
+    z-index: 70;
+    display: grid;
+    width: 210px;
+    padding: 8px;
+    background: #121a23;
+    border: 1px solid #526277;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+  }
+
+  .admin-more-menu-panel a,
+  .admin-more-menu-panel button {
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0 12px;
+    color: #f5f7fb;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #2f3c4c;
+  }
+
+  .admin-more-menu-panel > :last-child {
+    color: #ffb69b;
+    border-bottom: 0;
   }
 
   .export-button {
@@ -1125,8 +1221,21 @@ body.admin-page {
   }
 
   .admin-shell {
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
     padding: 10px;
+  }
+
+  .control-panel,
+  .control-section,
+  .common-settings,
+  .common-settings-content,
+  .player-editor,
+  .scorer-editor,
+  .referee-editor {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .control-section {
@@ -1139,14 +1248,118 @@ body.admin-page {
     grid-template-columns: 1fr;
   }
 
+  .common-settings .field-grid,
+  .common-settings .score-grid,
+  .common-settings .color-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .common-settings .score-grid > label:first-child {
+    grid-column: 1 / -1;
+  }
+
   .logo-controls,
-  .official-url-row,
-  .official-match-picker {
+  .official-url-row {
     grid-template-columns: 1fr;
   }
 
+  .official-match-picker {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: 8px;
+  }
+
+  .official-mode-actions {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+  }
+
   .admin-tabs {
-    grid-template-columns: 1fr;
+    position: sticky;
+    top: calc(var(--mobile-admin-header-height, 94px) + 6px);
+    z-index: 40;
+    display: flex;
+    gap: 6px;
+    margin: 0 -10px;
+    width: calc(100% + 20px);
+    min-width: 0;
+    max-width: none;
+    padding: 7px 10px;
+    overflow-x: auto;
+    scroll-padding-inline: 10px;
+    scrollbar-width: none;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+  }
+
+  .admin-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .admin-tab {
+    flex: 0 0 auto;
+    min-width: 92px;
+    min-height: 42px;
+    padding: 0 13px;
+  }
+
+  .common-settings {
+    overflow: hidden;
+    background: #19232e;
+    border: 1px solid #35414f;
+  }
+
+  .common-settings > summary {
+    position: relative;
+    display: grid;
+    gap: 3px;
+    min-height: 64px;
+    padding: 12px 48px 12px 14px;
+    align-content: center;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .common-settings > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .common-settings > summary::after {
+    position: absolute;
+    top: 50%;
+    right: 17px;
+    content: "+";
+    color: #ff9865;
+    font-size: 24px;
+    font-weight: 500;
+    transform: translateY(-50%);
+  }
+
+  .common-settings[open] > summary::after {
+    content: "−";
+  }
+
+  .common-settings > summary span {
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  .common-settings > summary small {
+    color: #93a4ba;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .common-settings-content {
+    gap: 0;
+    border-top: 1px solid #35414f;
+  }
+
+  .common-settings-content .control-section {
+    border: 0;
+    border-bottom: 1px solid #35414f;
+  }
+
+  .common-settings-content .control-section:last-child {
+    border-bottom: 0;
   }
 
   .control-section input,
@@ -1156,6 +1369,8 @@ body.admin-page {
   }
 
   .player-edit-row {
+    width: 100%;
+    min-width: 0;
     grid-template-columns: 42px 48px minmax(0, 1fr) minmax(0, 1fr) 52px 48px;
     gap: 4px;
   }
@@ -1165,6 +1380,8 @@ body.admin-page {
   }
 
   .scorer-edit-row {
+    width: 100%;
+    min-width: 0;
     grid-template-columns: 58px minmax(0, 1fr) minmax(0, 1fr) 52px;
   }
 
@@ -1175,13 +1392,112 @@ body.admin-page {
   .player-edit-row input,
   .half-toggle,
   .yellow-toggle {
+    min-width: 0;
     min-height: 42px;
     padding: 0 4px;
     font-size: 11px;
   }
 
+  .preview-panel {
+    position: fixed;
+    right: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom));
+    left: 8px;
+    z-index: 90;
+    max-height: calc(100dvh - 24px);
+    overflow: auto;
+    border-color: #66778d;
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.72);
+    transform: translateY(calc(100% + 24px));
+    visibility: hidden;
+    transition: transform 180ms ease, visibility 180ms ease;
+  }
+
+  body.preview-sheet-open {
+    overflow: hidden;
+  }
+
+  body.preview-sheet-open .preview-panel {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .preview-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background: #101821;
+  }
+
+  .preview-switcher {
+    grid-column: 1 / -1;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .preview-switcher::-webkit-scrollbar {
+    display: none;
+  }
+
+  .preview-close-button {
+    display: inline-flex;
+    min-height: 34px;
+    padding: 0 12px;
+    align-items: center;
+    color: #fff;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 900;
+    background: #263445;
+    border: 1px solid #526277;
+  }
+
   .preview-stage {
-    min-height: 188px;
+    min-height: 0;
+  }
+
+  .mobile-preview-toggle {
+    position: fixed;
+    right: 16px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    z-index: 60;
+    display: inline-flex;
+    min-height: 48px;
+    padding: 0 18px;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-family: var(--app-font);
+    font-size: 14px;
+    font-weight: 900;
+    background: #e15a24;
+    border: 1px solid #ff9865;
+    border-radius: 24px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.52);
+  }
+
+  .preview-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background: rgba(1, 5, 9, 0.72);
+    border: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 180ms ease, visibility 180ms ease;
+  }
+
+  body.preview-sheet-open .preview-backdrop {
+    display: block;
+    opacity: 1;
+    visibility: visible;
   }
 }
 

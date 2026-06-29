@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>大型ビジョン 管理画面</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260529niigata1" />
+    <link rel="stylesheet" href="styles.css?v=20260629mobile1" />
   </head>
   <body class="admin-page">
     <header class="admin-header">
       <div>
         <p class="admin-kicker">STADIUM VISION CONTROLLER</p>
-        <h1>大型ビジョン 管理画面</h1>
+        <h1><span class="admin-title-long">大型ビジョン 管理画面</span><span class="admin-title-short">ビジョン管理</span></h1>
       </div>
       <div class="admin-actions">
         <select class="export-target-select" id="exportTargetSelect" aria-label="画像出力する画面">
@@ -33,11 +33,31 @@
         <a class="admin-link" href="reserve.html?v=20260529niigata1" target="_blank" rel="noopener">リザーブ</a>
         <a class="admin-link" href="preview.html?v=20260529niigata1" target="_blank" rel="noopener">全画面プレビュー</a>
         <button class="admin-button" id="resetButton" type="button">初期値に戻す</button>
+        <details class="admin-more-menu">
+          <summary aria-label="その他の操作">その他</summary>
+          <div class="admin-more-menu-panel">
+            <a href="display.html?v=20260529niigata1" target="_blank" rel="noopener">スタメン画面</a>
+            <a href="result.html?v=20260529niigata1" target="_blank" rel="noopener">結果画面</a>
+            <a href="attendance.html?v=20260529niigata1" target="_blank" rel="noopener">来場者画面</a>
+            <a href="preview.html?v=20260529niigata1" target="_blank" rel="noopener">全画面プレビュー</a>
+            <button id="mobileResetButton" type="button">初期値に戻す</button>
+          </div>
+        </details>
       </div>
     </header>
 
     <main class="admin-shell">
       <form class="control-panel" id="controlForm" autocomplete="off">
+        <div class="admin-tabs" role="tablist" aria-label="作成画面">
+          <button class="admin-tab active" type="button" data-tab-target="lineup" role="tab" aria-selected="true">スタメン</button>
+          <button class="admin-tab" type="button" data-tab-target="result" role="tab" aria-selected="false">試合結果</button>
+          <button class="admin-tab" type="button" data-tab-target="attendance" role="tab" aria-selected="false">来場者数</button>
+          <button class="admin-tab" type="button" data-tab-target="top" role="tab" aria-selected="false">対戦トップ</button>
+          <button class="admin-tab" type="button" data-tab-target="referees" role="tab" aria-selected="false">審判</button>
+          <button class="admin-tab" type="button" data-tab-target="announce" role="tab" aria-selected="false">スタメン発表</button>
+          <button class="admin-tab" type="button" data-tab-target="reserve" role="tab" aria-selected="false">リザーブ</button>
+        </div>
+
         <section class="control-section import-section">
           <h2>公式記録から反映</h2>
           <div class="official-match-picker" aria-label="JSONから試合を選択">
@@ -61,16 +81,12 @@
           <p class="official-import-status" id="officialImportStatus" aria-live="polite"></p>
         </section>
 
-        <div class="admin-tabs" role="tablist" aria-label="作成画面">
-          <button class="admin-tab active" type="button" data-tab-target="lineup" role="tab" aria-selected="true">スタメン</button>
-          <button class="admin-tab" type="button" data-tab-target="result" role="tab" aria-selected="false">試合結果</button>
-          <button class="admin-tab" type="button" data-tab-target="attendance" role="tab" aria-selected="false">来場者数</button>
-          <button class="admin-tab" type="button" data-tab-target="top" role="tab" aria-selected="false">対戦トップ</button>
-          <button class="admin-tab" type="button" data-tab-target="referees" role="tab" aria-selected="false">審判</button>
-          <button class="admin-tab" type="button" data-tab-target="announce" role="tab" aria-selected="false">スタメン発表</button>
-          <button class="admin-tab" type="button" data-tab-target="reserve" role="tab" aria-selected="false">リザーブ</button>
-        </div>
-
+        <details class="common-settings" id="commonSettings" open>
+          <summary>
+            <span>試合・クラブ設定</span>
+            <small>クラブ名、カラー、スコア</small>
+          </summary>
+          <div class="common-settings-content">
         <section class="control-section">
           <h2>クラブ名</h2>
           <div class="field-grid">
@@ -160,6 +176,8 @@
             </label>
           </div>
         </section>
+          </div>
+        </details>
 
         <section class="control-section" data-tab-panel="lineup">
           <h2>画像部分</h2>
@@ -315,7 +333,7 @@
         </section>
       </form>
 
-      <section class="preview-panel" aria-label="プレビュー">
+      <section class="preview-panel" id="mobilePreviewSheet" aria-label="プレビュー">
         <div class="preview-toolbar">
           <span>表示プレビュー</span>
           <div class="preview-switcher" aria-label="プレビュー切替">
@@ -328,6 +346,7 @@
             <button class="preview-button" type="button" data-preview-src="reserve.html?v=20260529niigata1" data-preview-width="1920" data-preview-height="1080">リザーブ</button>
             <button class="preview-button" type="button" data-preview-src="preview.html?v=20260529niigata1" data-preview-width="1920" data-preview-height="1080">全画面</button>
           </div>
+          <button class="preview-close-button" id="previewCloseButton" type="button" aria-label="プレビューを閉じる">閉じる</button>
         </div>
         <div class="preview-stage">
           <iframe class="vision-preview" src="display.html?v=20260529niigata1" title="大型ビジョンプレビュー" data-preview-width="1920" data-preview-height="1080"></iframe>
@@ -335,8 +354,13 @@
       </section>
     </main>
 
+    <button class="mobile-preview-toggle" id="mobilePreviewToggle" type="button" aria-controls="mobilePreviewSheet" aria-expanded="false">
+      <span aria-hidden="true">▣</span> プレビュー
+    </button>
+    <button class="preview-backdrop" id="previewBackdrop" type="button" aria-label="プレビューを閉じる"></button>
+
     <script src="vendor/html2canvas.min.js?v=20260529navvision2"></script>
-    <script src="app.js?v=20260529navvision2"></script>
+    <script src="app.js?v=20260629mobile1"></script>
   </body>
 </html>
 

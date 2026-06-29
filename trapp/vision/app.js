@@ -2280,6 +2280,9 @@
         const active = button.dataset.tabTarget === target;
         button.classList.toggle("active", active);
         button.setAttribute("aria-selected", active ? "true" : "false");
+        if (active && window.matchMedia("(max-width: 720px)").matches) {
+          button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        }
       });
       panels.forEach((panel) => {
         panel.hidden = panel.dataset.tabPanel !== target;
@@ -2291,6 +2294,75 @@
     buttons.forEach((button) => {
       button.addEventListener("click", () => activate(button.dataset.tabTarget));
     });
+  }
+
+  function initMobileAdminUi() {
+    const mobileQuery = window.matchMedia("(max-width: 720px)");
+    const header = document.querySelector(".admin-header");
+    const commonSettings = document.getElementById("commonSettings");
+    const previewToggle = document.getElementById("mobilePreviewToggle");
+    const previewClose = document.getElementById("previewCloseButton");
+    const previewBackdrop = document.getElementById("previewBackdrop");
+    const previewSheet = document.getElementById("mobilePreviewSheet");
+    const mobileReset = document.getElementById("mobileResetButton");
+    const desktopReset = document.getElementById("resetButton");
+    let wasMobile = null;
+
+    const updateHeaderHeight = () => {
+      if (!header || !mobileQuery.matches) return;
+      document.documentElement.style.setProperty("--mobile-admin-header-height", `${Math.ceil(header.getBoundingClientRect().height)}px`);
+    };
+
+    const closePreview = () => {
+      document.body.classList.remove("preview-sheet-open");
+      if (previewToggle) previewToggle.setAttribute("aria-expanded", "false");
+    };
+
+    const openPreview = () => {
+      if (!mobileQuery.matches || !previewSheet) return;
+      document.body.classList.add("preview-sheet-open");
+      if (previewToggle) previewToggle.setAttribute("aria-expanded", "true");
+      window.requestAnimationFrame(updatePreviewScale);
+    };
+
+    const applyLayoutMode = () => {
+      const isMobile = mobileQuery.matches;
+      if (isMobile !== wasMobile && commonSettings) {
+        commonSettings.open = !isMobile;
+      }
+      if (!isMobile) {
+        closePreview();
+        document.documentElement.style.removeProperty("--mobile-admin-header-height");
+      } else {
+        updateHeaderHeight();
+      }
+      wasMobile = isMobile;
+    };
+
+    if (previewToggle) previewToggle.addEventListener("click", openPreview);
+    if (previewClose) previewClose.addEventListener("click", closePreview);
+    if (previewBackdrop) previewBackdrop.addEventListener("click", closePreview);
+    if (mobileReset && desktopReset) {
+      mobileReset.addEventListener("click", () => {
+        desktopReset.click();
+        const menu = mobileReset.closest("details");
+        if (menu) menu.open = false;
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closePreview();
+    });
+
+    if ("ResizeObserver" in window && header) {
+      new ResizeObserver(updateHeaderHeight).observe(header);
+    }
+    if (mobileQuery.addEventListener) {
+      mobileQuery.addEventListener("change", applyLayoutMode);
+    } else {
+      mobileQuery.addListener(applyLayoutMode);
+    }
+    applyLayoutMode();
   }
 
   function exportScreenName(src) {
@@ -3057,6 +3129,7 @@
     initPreviewScaler(state);
     initPreviewSwitcher(state);
     initAdminTabs(state);
+    initMobileAdminUi();
 
     form.addEventListener("input", (event) => {
       if (event.target.closest("[data-club-select]")) return;
