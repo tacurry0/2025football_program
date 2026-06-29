@@ -148,13 +148,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const sideMenu = document.getElementById("side-menu");
   const sideMenuBackdrop = document.getElementById("side-menu-backdrop");
-  const hamBtn = document.getElementById("hamburger-btn");
-  const hamburgerIconHtml = hamBtn ? hamBtn.innerHTML : "";
-  const ellipsisIconHtml = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="5.01" y2="12"></line><line x1="12" y1="12" x2="12.01" y2="12"></line><line x1="19" y1="12" x2="19.01" y2="12"></line></svg>';
   const searchInput = document.getElementById("search-input");
   const searchPopup = document.getElementById("search-popup");
   const scheduleCompetitionFilter = document.getElementById("schedule-competition-filter");
   const scheduleCompetitionOptions = document.getElementById("schedule-competition-options");
+  const scheduleViewSwitchButtons = Array.from(document.querySelectorAll("[data-schedule-view]"));
 
   const ymPickerOverlay = document.getElementById("ym-picker-overlay");
   const ymPickerBackdrop = document.getElementById("ym-picker-backdrop");
@@ -9498,10 +9496,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pane = btn.dataset.dockPane;
       const isActive = pane
         ? document.getElementById(pane)?.classList.contains("active")
-        : mode === currentMode;
+        : mode === "schedule"
+          ? currentMode === "feed" || currentMode === "calendar"
+          : mode === currentMode;
       btn.classList.toggle("active", isActive);
       if (isActive) btn.setAttribute("aria-current", "page");
       else btn.removeAttribute("aria-current");
+    });
+  }
+
+  function updateScheduleViewSwitchState() {
+    scheduleViewSwitchButtons.forEach(btn => {
+      const isActive = btn.dataset.scheduleView === currentMode;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
   }
 
@@ -9546,7 +9554,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         rebuildMonthTabs();
       });
     }
-    if (hamBtn) hamBtn.innerHTML = mode === "vision" ? ellipsisIconHtml : hamburgerIconHtml;
+    updateScheduleViewSwitchState();
     sideMenu.classList.remove("active");
     if (options.history !== false && (previousMode !== mode || getActiveAppHistoryEntry()?.kind === "side-menu")) {
       const activeScreen = playerAnalysisState.activeScreen;
@@ -9764,7 +9772,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const kOn = toggleKumamoto.classList.contains("active");
     document.querySelectorAll(".card.club-niigata").forEach(c => c.style.display = nOn ? "flex" : "none");
     document.querySelectorAll(".card.club-kumamoto").forEach(c => c.style.display = kOn ? "flex" : "none");
-    [document.getElementById("menu-vision"), document.getElementById("dash-to-vision")].forEach((control) => {
+    [document.getElementById("menu-vision")].forEach((control) => {
       if (!control) return;
       control.hidden = !nOn;
       control.setAttribute("aria-hidden", nOn ? "false" : "true");
@@ -12428,11 +12436,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Bind new quick links
     const btnHome = document.getElementById("dash-to-dashboard");
     const btnFeed = document.getElementById("dash-to-feed");
-    const btnCal = document.getElementById("dash-to-calendar");
     const btnPlayerAnalysis = document.getElementById("dash-to-player-analysis");
     if (btnHome) btnHome.onclick = () => switchMode("dashboard");
     if (btnFeed) btnFeed.onclick = () => switchMode("feed");
-    if (btnCal) btnCal.onclick = () => switchMode("calendar");
     if (btnPlayerAnalysis) btnPlayerAnalysis.onclick = () => switchMode("player-analysis");
 
     document.getElementById("dash-to-standings").onclick = () => switchMode("standings");
@@ -13120,16 +13126,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       sideMenu.classList.add("active");
       sideMenuBackdrop.classList.add("active");
       addAppHistoryEntry("side-menu", () => toggleMenu(true, { history: false }), options);
+      updateDashboardDockState();
     } else {
       const closeDirect = () => {
         sideMenu.classList.remove("active");
         sideMenuBackdrop.classList.remove("active");
+        updateDashboardDockState();
       };
       if (options.history === false) closeDirect();
       else closeAppHistoryEntry("side-menu", closeDirect);
     }
   };
-  hamBtn.onclick = () => toggleMenu(true);
   document.getElementById("menu-close").onclick = () => toggleMenu(false);
   sideMenuBackdrop.onclick = () => toggleMenu(false);
 
@@ -13162,16 +13169,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // previous screen immediately.
   menuItems.forEach(btn => btn.addEventListener('click', () => toggleMenu(false, { history: false })));
 
-  document.getElementById("menu-dashboard").onclick = () => switchMode("dashboard");
-  document.getElementById("menu-feed").onclick = () => switchMode("feed");
-  document.getElementById("menu-calendar").onclick = () => switchMode("calendar");
-  const menuPlayerAnalysis = document.getElementById("menu-player-analysis");
-  if (menuPlayerAnalysis) {
-    menuPlayerAnalysis.onclick = () => switchMode("player-analysis");
-  }
-  document.getElementById("menu-links").onclick = () => switchMode("links");
   document.getElementById("menu-chants").onclick = () => openSubPane("chants-overlay");
-  document.getElementById("menu-standings").onclick = () => switchMode("standings");
   const menuVision = document.getElementById("menu-vision");
   if (menuVision) {
     menuVision.onclick = () => switchMode("vision");
@@ -13184,10 +13182,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (dashFeedBtn) {
     dashFeedBtn.onclick = () => switchMode("feed");
   }
-  const dashCalendarBtn = document.getElementById("dash-to-calendar");
-  if (dashCalendarBtn) {
-    dashCalendarBtn.onclick = () => switchMode("calendar");
+  const dashPlayerAnalysisBtn = document.getElementById("dash-to-player-analysis");
+  if (dashPlayerAnalysisBtn) {
+    dashPlayerAnalysisBtn.onclick = () => switchMode("player-analysis");
   }
+  scheduleViewSwitchButtons.forEach(btn => {
+    btn.onclick = () => switchMode(btn.dataset.scheduleView);
+  });
   const dashStandingsBtn = document.getElementById("dash-to-standings");
   if (dashStandingsBtn) {
     dashStandingsBtn.onclick = () => switchMode("standings");
@@ -13196,32 +13197,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (dashLinksBtn) {
     dashLinksBtn.onclick = () => switchMode("links");
   }
-  const dashVisionBtn = document.getElementById("dash-to-vision");
-  if (dashVisionBtn) {
-    dashVisionBtn.onclick = () => switchMode("vision");
+  const dashMenuBtn = document.getElementById("dash-to-menu");
+  if (dashMenuBtn) {
+    dashMenuBtn.onclick = () => toggleMenu(true);
   }
   document.getElementById("menu-data").onclick = () => openSubPane("data-overlay");
-  document.getElementById("menu-reload").onclick = async () => {
-    const btn = document.getElementById("menu-reload");
-    const label = btn.querySelector(".m-label");
-    const originalLabel = label.textContent;
-    label.textContent = "更新中...";
-    btn.style.pointerEvents = "none";
-    btn.style.opacity = "0.7";
-
-    try {
-      await refreshAllData(true); // Force GAS
-      alert("最新データを取得して反映しました。");
-    } catch (e) {
-      console.error(e);
-      alert("更新に失敗しました。");
-    } finally {
-      label.textContent = originalLabel;
-      btn.style.pointerEvents = "auto";
-      btn.style.opacity = "1";
-      toggleMenu(false);
-    }
-  };
 
 
   // Data Backup Logic
