@@ -1515,6 +1515,372 @@ body.admin-page {
   object-position: bottom;
 }
 
+/* =========================================
+   Admin workflow cockpit
+   ========================================= */
+.admin-match-ribbon {
+  position: sticky;
+  top: 0;
+  z-index: 58;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  min-height: 66px;
+  padding: 8px 22px;
+  align-items: center;
+  color: #fff;
+  background: rgba(15, 23, 32, 0.97);
+  border-bottom: 1px solid #35414f;
+  box-shadow: 0 9px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.admin-ribbon-team {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.admin-ribbon-team.away {
+  justify-items: end;
+  text-align: right;
+}
+
+.admin-ribbon-team small,
+.admin-ribbon-score > small {
+  color: #8fa0b5;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+}
+
+.admin-ribbon-team strong {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-ribbon-score {
+  display: grid;
+  min-width: 98px;
+  place-items: center;
+}
+
+.admin-ribbon-score > strong {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+}
+
+.admin-ribbon-score i {
+  color: #697b90;
+  font-style: normal;
+}
+
+.admin-workflow-nav {
+  position: sticky;
+  top: 66px;
+  z-index: 57;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 8px 12px;
+  background: rgba(13, 19, 26, 0.96);
+  border: 1px solid #35414f;
+  border-top: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(16px);
+}
+
+.admin-workflow-button {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  min-height: 44px;
+  padding: 0 12px;
+  align-items: center;
+  color: #aebdce;
+  font-family: var(--app-font);
+  font-size: 12px;
+  font-weight: 900;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.admin-workflow-button span {
+  color: #697b90;
+  font-size: 9px;
+}
+
+.admin-workflow-button.active {
+  color: #fff;
+  background: #263445;
+  border-color: #526277;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.24);
+}
+
+.admin-workflow-button.active span {
+  color: #ff9865;
+}
+
+.workflow-panel-heading {
+  display: flex;
+  padding: 5px 2px 2px;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.workflow-panel-heading > span {
+  color: #ff9865;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.workflow-panel-heading h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.workflow-panel-heading p {
+  margin: 4px 0 0;
+  color: #8fa0b5;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.admin-tab-proxy {
+  display: none;
+}
+
+.admin-score-stepper {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  overflow: hidden;
+  background: #0d131a;
+  border: 1px solid #435164;
+  border-radius: 9px;
+}
+
+.admin-score-stepper input {
+  min-width: 0;
+  text-align: center;
+  border-top: 0;
+  border-bottom: 0;
+  border-radius: 0;
+  -moz-appearance: textfield;
+}
+
+.admin-score-stepper input::-webkit-inner-spin-button,
+.admin-score-stepper input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.admin-score-stepper button {
+  padding: 0;
+  color: #dce6f5;
+  font-size: 18px;
+  font-weight: 900;
+  background: #202c39;
+  border: 0;
+  cursor: pointer;
+}
+
+.responsive-display-host,
+.responsive-display-host body.display-page {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  background: #05080c;
+}
+
+.responsive-display-host body.display-page > .canvas {
+  position: absolute !important;
+  margin: 0 !important;
+}
+
+.workflow-subnav {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-radius: 11px;
+}
+
+.admin-shell {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.control-section,
+.preview-panel {
+  border-radius: 13px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.control-section {
+  background: linear-gradient(145deg, #1b2632, #151e28);
+}
+
+.preview-panel {
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  body.admin-page {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom));
+  }
+
+  .admin-header {
+    position: static;
+    min-height: 58px;
+    padding: 8px 10px;
+    box-shadow: none;
+  }
+
+  .admin-kicker {
+    display: block;
+    margin: 0;
+    font-size: 8px;
+  }
+
+  .admin-header h1 {
+    font-size: 17px;
+  }
+
+  .admin-match-ribbon {
+    position: static;
+    min-height: 62px;
+    padding: 6px 12px;
+  }
+
+  .admin-ribbon-team strong {
+    max-width: 110px;
+    font-size: 12px;
+  }
+
+  .admin-ribbon-score {
+    min-width: 72px;
+  }
+
+  .admin-ribbon-score > strong {
+    gap: 9px;
+    font-size: 21px;
+  }
+
+  .admin-workflow-nav {
+    top: 0;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+    max-width: none;
+    padding: 6px 8px;
+    gap: 3px;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .admin-workflow-button {
+    grid-template-columns: 1fr;
+    min-width: 0;
+    min-height: 50px;
+    padding: 5px 2px;
+    place-items: center;
+    gap: 1px;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .admin-workflow-button span {
+    font-size: 8px;
+  }
+
+  .admin-shell {
+    display: block;
+    padding: 12px 10px 20px;
+  }
+
+  .control-panel {
+    gap: 12px;
+  }
+
+  .workflow-panel-heading {
+    padding: 3px 4px 1px;
+  }
+
+  .workflow-panel-heading h2 {
+    font-size: 20px;
+  }
+
+  .workflow-panel-heading p {
+    font-size: 10px;
+  }
+
+  .admin-tabs.workflow-subnav {
+    position: sticky;
+    top: 64px;
+    z-index: 36;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 5px;
+    gap: 4px;
+    overflow: visible;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  }
+
+  .admin-tabs.workflow-subnav[hidden] {
+    display: none;
+  }
+
+  .workflow-subnav .admin-tab {
+    min-width: 0;
+    min-height: 40px;
+    padding: 0 4px;
+    font-size: 10px;
+  }
+
+  .control-section {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .field-grid,
+  .score-grid,
+  .color-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .field-grid.wide,
+  [data-tab-panel="announce"] .field-grid,
+  [data-tab-panel="reserve"] > .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .score-grid > label:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .admin-score-stepper {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+  }
+
+  .admin-score-stepper input {
+    padding-right: 3px;
+    padding-left: 3px;
+    font-size: 18px;
+  }
+
+  .preview-panel {
+    border-radius: 17px 17px 0 0;
+  }
+}
+
 #defaultLogo {
   max-width: 188px;
   max-height: 106px;

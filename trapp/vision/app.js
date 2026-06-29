@@ -2374,6 +2374,31 @@
     activate("prepare", { initial: true });
   }
 
+  function initAdminScoreSteppers() {
+    document.querySelectorAll(".score-grid input[type='number']").forEach((input) => {
+      if (input.parentElement && input.parentElement.classList.contains("admin-score-stepper")) return;
+      const wrapper = document.createElement("div");
+      wrapper.className = "admin-score-stepper";
+      const minus = document.createElement("button");
+      const plus = document.createElement("button");
+      minus.type = "button";
+      plus.type = "button";
+      minus.textContent = "−";
+      plus.textContent = "+";
+      minus.setAttribute("aria-label", `${input.name}を1減らす`);
+      plus.setAttribute("aria-label", `${input.name}を1増やす`);
+      input.parentNode.insertBefore(wrapper, input);
+      wrapper.append(minus, input, plus);
+      const change = (delta) => {
+        const current = Number.parseInt(input.value || "0", 10);
+        input.value = String(Math.max(0, (Number.isFinite(current) ? current : 0) + delta));
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      };
+      minus.addEventListener("click", () => change(-1));
+      plus.addEventListener("click", () => change(1));
+    });
+  }
+
   function initMobileAdminUi() {
     const mobileQuery = window.matchMedia("(max-width: 720px)");
     const header = document.querySelector(".admin-header");
@@ -3208,6 +3233,7 @@
     initPreviewSwitcher(state);
     initAdminTabs(state);
     initAdminWorkflow();
+    initAdminScoreSteppers();
     initMobileAdminUi();
 
     form.addEventListener("input", (event) => {
@@ -3714,10 +3740,32 @@
     }
   }
 
+  function initResponsiveDisplayFit() {
+    if (!document.body.classList.contains("display-page")) return;
+    const canvas = document.querySelector(".canvas");
+    if (!canvas) return;
+    document.documentElement.classList.add("responsive-display-host");
+    const fit = () => {
+      const viewportWidth = document.documentElement.clientWidth || window.innerWidth || 1920;
+      const viewportHeight = document.documentElement.clientHeight || window.innerHeight || 1080;
+      const scale = Math.min(viewportWidth / 1920, viewportHeight / 1080);
+      const renderedWidth = 1920 * scale;
+      const renderedHeight = 1080 * scale;
+      canvas.style.left = `${Math.max(0, (viewportWidth - renderedWidth) / 2)}px`;
+      canvas.style.top = `${Math.max(0, (viewportHeight - renderedHeight) / 2)}px`;
+      canvas.style.transform = `scale(${scale})`;
+      canvas.style.transformOrigin = "0 0";
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    window.addEventListener("orientationchange", fit);
+  }
+
   let currentState = loadState();
   saveState(currentState, false);
   renderDisplay(currentState);
   initAdmin(currentState);
+  initResponsiveDisplayFit();
   loadClubEmblems();
 
   window.scoreboardVision = {
