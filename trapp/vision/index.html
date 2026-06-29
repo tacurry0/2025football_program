@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>大型ビジョン 管理画面</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260629mobile1" />
+    <link rel="stylesheet" href="styles.css?v=20260629workflow1" />
   </head>
   <body class="admin-page">
     <header class="admin-header">
       <div>
-        <p class="admin-kicker">STADIUM VISION CONTROLLER</p>
-        <h1><span class="admin-title-long">大型ビジョン 管理画面</span><span class="admin-title-short">ビジョン管理</span></h1>
+        <p class="admin-kicker">VISION CONTROL</p>
+        <h1>試合運用</h1>
       </div>
       <div class="admin-actions">
         <select class="export-target-select" id="exportTargetSelect" aria-label="画像出力する画面">
@@ -46,19 +46,39 @@
       </div>
     </header>
 
+    <section class="admin-match-ribbon" aria-label="現在の試合">
+      <div class="admin-ribbon-team home"><small>HOME</small><strong data-admin-home-club>左チーム</strong></div>
+      <div class="admin-ribbon-score"><small data-admin-round>節</small><strong><span data-admin-total-home>0</span><i>–</i><span data-admin-total-away>0</span></strong></div>
+      <div class="admin-ribbon-team away"><small>AWAY</small><strong data-admin-away-club>右チーム</strong></div>
+    </section>
+
+    <nav class="admin-workflow-nav" aria-label="運用メニュー">
+      <button class="admin-workflow-button active" type="button" data-workflow-target="prepare" aria-current="page"><span>01</span>試合準備</button>
+      <button class="admin-workflow-button" type="button" data-workflow-target="members"><span>02</span>メンバー</button>
+      <button class="admin-workflow-button" type="button" data-workflow-target="result"><span>03</span>試合結果</button>
+      <button class="admin-workflow-button" type="button" data-workflow-target="venue"><span>04</span>会場表示</button>
+    </nav>
+
     <main class="admin-shell">
       <form class="control-panel" id="controlForm" autocomplete="off">
-        <div class="admin-tabs" role="tablist" aria-label="作成画面">
+        <div class="workflow-panel-heading" id="workflowPanelHeading">
+          <span>01</span>
+          <div><h2>試合準備</h2><p>公式記録と基本情報を設定します。</p></div>
+        </div>
+
+        <div class="admin-tabs workflow-subnav" data-workflow-subnav="members" role="tablist" aria-label="メンバー画面" hidden>
           <button class="admin-tab active" type="button" data-tab-target="lineup" role="tab" aria-selected="true">スタメン</button>
-          <button class="admin-tab" type="button" data-tab-target="result" role="tab" aria-selected="false">試合結果</button>
-          <button class="admin-tab" type="button" data-tab-target="attendance" role="tab" aria-selected="false">来場者数</button>
-          <button class="admin-tab" type="button" data-tab-target="top" role="tab" aria-selected="false">対戦トップ</button>
-          <button class="admin-tab" type="button" data-tab-target="referees" role="tab" aria-selected="false">審判</button>
           <button class="admin-tab" type="button" data-tab-target="announce" role="tab" aria-selected="false">スタメン発表</button>
           <button class="admin-tab" type="button" data-tab-target="reserve" role="tab" aria-selected="false">リザーブ</button>
         </div>
+        <div class="admin-tabs workflow-subnav" data-workflow-subnav="venue" role="tablist" aria-label="会場表示画面" hidden>
+          <button class="admin-tab" type="button" data-tab-target="attendance" role="tab" aria-selected="false">来場者数</button>
+          <button class="admin-tab" type="button" data-tab-target="top" role="tab" aria-selected="false">対戦トップ</button>
+          <button class="admin-tab" type="button" data-tab-target="referees" role="tab" aria-selected="false">審判</button>
+        </div>
+        <button class="admin-tab-proxy" type="button" data-tab-target="result" tabindex="-1" aria-hidden="true">試合結果</button>
 
-        <section class="control-section import-section">
+        <section class="control-section import-section" data-workflow-section="prepare">
           <h2>公式記録から反映</h2>
           <div class="official-match-picker" aria-label="JSONから試合を選択">
             <label>
@@ -81,13 +101,7 @@
           <p class="official-import-status" id="officialImportStatus" aria-live="polite"></p>
         </section>
 
-        <details class="common-settings" id="commonSettings" open>
-          <summary>
-            <span>試合・クラブ設定</span>
-            <small>クラブ名、カラー、スコア</small>
-          </summary>
-          <div class="common-settings-content">
-        <section class="control-section">
+        <section class="control-section" data-workflow-section="prepare">
           <h2>クラブ名</h2>
           <div class="field-grid">
             <label>
@@ -113,7 +127,7 @@
           </div>
         </section>
 
-        <section class="control-section">
+        <section class="control-section" data-workflow-section="prepare">
           <h2>クラブカラー</h2>
           <div class="color-grid">
             <label>
@@ -143,7 +157,7 @@
           </div>
         </section>
 
-        <section class="control-section">
+        <section class="control-section" data-workflow-section="result" hidden>
           <h2>試合情報</h2>
           <div class="score-grid">
             <label>
@@ -176,10 +190,8 @@
             </label>
           </div>
         </section>
-          </div>
-        </details>
 
-        <section class="control-section" data-tab-panel="lineup">
+        <section class="control-section" data-workflow-section="prepare">
           <h2>画像部分</h2>
           <div class="image-control-stack">
             <div class="logo-controls">
@@ -204,17 +216,17 @@
           </div>
         </section>
 
-        <section class="control-section" data-tab-panel="lineup">
+        <section class="control-section" data-workflow-section="members" data-tab-panel="lineup" hidden>
           <h2>左チーム メンバー</h2>
           <div class="player-editor" id="homeEditor"></div>
         </section>
 
-        <section class="control-section" data-tab-panel="lineup">
+        <section class="control-section" data-workflow-section="members" data-tab-panel="lineup" hidden>
           <h2>右チーム メンバー</h2>
           <div class="player-editor" id="awayEditor"></div>
         </section>
 
-        <section class="control-section" data-tab-panel="announce" hidden>
+        <section class="control-section" data-workflow-section="members" data-tab-panel="announce" hidden>
           <h2>スタメン発表</h2>
           <div class="field-grid">
             <label>
@@ -227,7 +239,7 @@
           </div>
         </section>
 
-        <section class="control-section" data-tab-panel="reserve" hidden>
+        <section class="control-section" data-workflow-section="members" data-tab-panel="reserve" hidden>
           <h2>リザーブ</h2>
           <div class="field-grid">
             <label>
@@ -240,27 +252,27 @@
           </div>
         </section>
 
-        <section class="control-section" data-tab-panel="reserve" hidden>
+        <section class="control-section" data-workflow-section="members" data-tab-panel="reserve" hidden>
           <h2>左チーム リザーブ</h2>
           <div class="player-editor" id="homeReserveEditor"></div>
         </section>
 
-        <section class="control-section" data-tab-panel="reserve" hidden>
+        <section class="control-section" data-workflow-section="members" data-tab-panel="reserve" hidden>
           <h2>右チーム リザーブ</h2>
           <div class="player-editor" id="awayReserveEditor"></div>
         </section>
 
-        <section class="control-section" data-tab-panel="result" hidden>
+        <section class="control-section" data-workflow-section="result" data-tab-panel="result" hidden>
           <h2>左チーム 得点者</h2>
           <div class="scorer-editor" id="homeScorerEditor"></div>
         </section>
 
-        <section class="control-section" data-tab-panel="result" hidden>
+        <section class="control-section" data-workflow-section="result" data-tab-panel="result" hidden>
           <h2>右チーム 得点者</h2>
           <div class="scorer-editor" id="awayScorerEditor"></div>
         </section>
 
-        <section class="control-section" data-tab-panel="attendance" hidden>
+        <section class="control-section" data-workflow-section="venue" data-tab-panel="attendance" hidden>
           <h2>来場者数</h2>
           <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; margin: 0 auto; max-width: 480px;">
             <div style="font-size: 15px; font-weight: 800; color: #aebbd0; letter-spacing: 0.1em; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">本日の来場者数</div>
@@ -272,7 +284,7 @@
           </div>
         </section>
 
-        <section class="control-section" data-tab-panel="top" hidden>
+        <section class="control-section" data-workflow-section="venue" data-tab-panel="top" hidden>
           <h2>対戦トップ</h2>
           <div class="field-grid wide">
             <label>
@@ -298,7 +310,7 @@
           </div>
         </section>
 
-        <section class="control-section" data-tab-panel="referees" hidden>
+        <section class="control-section" data-workflow-section="venue" data-tab-panel="referees" hidden>
           <h2>審判</h2>
           <div class="referee-editor">
             <div class="referee-edit-row referee-edit-head">
@@ -360,7 +372,7 @@
     <button class="preview-backdrop" id="previewBackdrop" type="button" aria-label="プレビューを閉じる"></button>
 
     <script src="vendor/html2canvas.min.js?v=20260529navvision2"></script>
-    <script src="app.js?v=20260629mobile1"></script>
+    <script src="app.js?v=20260629workflow1"></script>
   </body>
 </html>
 

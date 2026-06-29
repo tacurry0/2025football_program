@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#111821">
+    <title>大型ビジョン管理 · Mobile Cockpit Sandbox</title>
+    <link rel="stylesheet" href="./vision-admin-proposal.css?v=20260629a">
+    <script src="./vision-admin-proposal.js?v=20260629a" defer></script>
+  </head>
+  <body>
+    <header class="cockpit-header">
+      <div class="header-copy">
+        <span class="eyebrow">VISION CONTROL</span>
+        <h1>試合運用</h1>
+      </div>
+      <div class="header-actions">
+        <button class="icon-button" id="settingsOpen" type="button" aria-label="試合・クラブ設定を開く">⚙</button>
+        <button class="primary-button" id="previewOpen" type="button">プレビュー</button>
+      </div>
+    </header>
+
+    <section class="match-ribbon" aria-label="現在の試合">
+      <div class="match-team home">
+        <img src="../data/assets/icons/alb_logo1.png" alt="">
+        <span><small>HOME</small><b>新潟</b></span>
+      </div>
+      <div class="ribbon-score">
+        <small>第12節</small>
+        <strong><span data-total-home>1</span><i>–</i><span data-total-away>0</span></strong>
+      </div>
+      <div class="match-team away">
+        <span><small>AWAY</small><b>FC大阪</b></span>
+        <span class="team-mark team-mark-away">FC</span>
+      </div>
+    </section>
+
+    <div class="app-layout">
+      <nav class="workflow-nav" aria-label="運用メニュー">
+        <button class="workflow-button active" type="button" data-workflow="prepare"><span>01</span>試合準備</button>
+        <button class="workflow-button" type="button" data-workflow="members"><span>02</span>メンバー</button>
+        <button class="workflow-button" type="button" data-workflow="result"><span>03</span>試合結果</button>
+        <button class="workflow-button" type="button" data-workflow="venue"><span>04</span>会場表示</button>
+      </nav>
+
+      <main class="workspace">
+        <section class="workflow-panel active" data-workflow-panel="prepare">
+          <div class="panel-heading">
+            <div><span>01</span><h2>試合準備</h2></div>
+            <p>公式記録を選ぶだけで、各画面の基礎情報をまとめて反映します。</p>
+          </div>
+
+          <article class="card import-card">
+            <div class="card-title"><span class="card-icon">↙</span><div><h3>公式記録から反映</h3><p>対象試合と反映タイミングを選択</p></div></div>
+            <div class="two-column">
+              <label><span>年</span><select><option>2026年</option><option>2025年</option></select></label>
+              <label><span>節</span><select><option>第12節 H FC大阪</option><option>第11節 A 熊本</option></select></label>
+            </div>
+            <div class="choice-grid" role="group" aria-label="反映タイミング">
+              <button class="choice-button selected" type="button" data-choice>試合前で反映<small>先発・基本情報</small></button>
+              <button class="choice-button" type="button" data-choice>試合後で反映<small>結果・交代・警告</small></button>
+            </div>
+            <button class="wide-primary" id="applyMatch" type="button">この内容を反映</button>
+            <p class="inline-status" id="applyStatus" aria-live="polite">第12節 アルビレックス新潟 vs FC大阪</p>
+          </article>
+
+          <article class="card setup-summary-card">
+            <div class="card-title"><span class="card-icon">✓</span><div><h3>反映される内容</h3><p>詳細は右上の設定からいつでも修正できます</p></div></div>
+            <div class="summary-list">
+              <button type="button" data-open-settings><span>対戦カード</span><b>新潟 vs FC大阪</b><i>›</i></button>
+              <button type="button" data-open-settings><span>大会表記</span><b>J2・J3 百年構想リーグ</b><i>›</i></button>
+              <button type="button" data-open-settings><span>クラブカラー</span><b><em class="swatch orange"></em><em class="swatch blue"></em>設定済み</b><i>›</i></button>
+              <button type="button" data-open-settings><span>下部ロゴ画像</span><b>未選択</b><i>›</i></button>
+            </div>
+          </article>
+        </section>
+
+        <section class="workflow-panel" data-workflow-panel="members" hidden>
+          <div class="panel-heading">
+            <div><span>02</span><h2>メンバー</h2></div>
+            <p>表示内容とチームを先に選び、選手だけに集中して編集します。</p>
+          </div>
+          <div class="segment-control" data-segment-group="memberMode">
+            <button class="active" type="button" data-segment="starting">スタメン</button>
+            <button type="button" data-segment="announce">スタメン発表</button>
+            <button type="button" data-segment="reserve">リザーブ</button>
+          </div>
+          <div class="team-switch" data-segment-group="teamSide">
+            <button class="active" type="button" data-segment="home"><span class="mini-dot orange"></span>新潟</button>
+            <button type="button" data-segment="away"><span class="mini-dot blue"></span>FC大阪</button>
+          </div>
+          <article class="card member-card">
+            <div class="member-card-head"><div><h3 id="memberListTitle">新潟 スタメン</h3><p>11名・警告表示を含む</p></div><button id="memberHelp" type="button">項目説明</button></div>
+            <div class="member-list" id="memberList"></div>
+          </article>
+        </section>
+
+        <section class="workflow-panel" data-workflow-panel="result" hidden>
+          <div class="panel-heading">
+            <div><span>03</span><h2>試合結果</h2></div>
+            <p>前半・後半を入力するとTOTALへ反映。得点者はチームごとに編集します。</p>
+          </div>
+          <article class="card score-console">
+            <div class="score-team-row"><span><em class="mini-dot orange"></em>新潟</span><small>FC大阪<span class="mini-dot blue"></span></small></div>
+            <div class="period-row" data-period="first">
+              <b>前半</b>
+              <div class="stepper"><button type="button" data-score="firstHome" data-delta="-1">−</button><strong data-score-value="firstHome">0</strong><button type="button" data-score="firstHome" data-delta="1">＋</button></div>
+              <i>–</i>
+              <div class="stepper"><button type="button" data-score="firstAway" data-delta="-1">−</button><strong data-score-value="firstAway">0</strong><button type="button" data-score="firstAway" data-delta="1">＋</button></div>
+            </div>
+            <div class="period-row" data-period="second">
+              <b>後半</b>
+              <div class="stepper"><button type="button" data-score="secondHome" data-delta="-1">−</button><strong data-score-value="secondHome">1</strong><button type="button" data-score="secondHome" data-delta="1">＋</button></div>
+              <i>–</i>
+              <div class="stepper"><button type="button" data-score="secondAway" data-delta="-1">−</button><strong data-score-value="secondAway">0</strong><button type="button" data-score="secondAway" data-delta="1">＋</button></div>
+            </div>
+            <div class="total-row"><span>TOTAL</span><strong><b data-total-home>1</b><i>–</i><b data-total-away>0</b></strong></div>
+          </article>
+          <div class="team-switch" data-segment-group="scorerSide">
+            <button class="active" type="button" data-segment="home"><span class="mini-dot orange"></span>新潟の得点者</button>
+            <button type="button" data-segment="away"><span class="mini-dot blue"></span>FC大阪の得点者</button>
+          </div>
+          <article class="card scorer-card">
+            <div class="field-header"><span>時間</span><span>姓</span><span>名</span><span>表示</span></div>
+            <div id="scorerRows"></div>
+            <button class="add-row-button" id="addScorer" type="button">＋ 得点者を追加</button>
+          </article>
+        </section>
+
+        <section class="workflow-panel" data-workflow-panel="venue" hidden>
+          <div class="panel-heading">
+            <div><span>04</span><h2>会場表示</h2></div>
+            <p>試合当日に切り替える3画面をまとめています。</p>
+          </div>
+          <div class="segment-control" data-segment-group="venueMode">
+            <button class="active" type="button" data-segment="attendance">来場者数</button>
+            <button type="button" data-segment="top">対戦トップ</button>
+            <button type="button" data-segment="referees">審判</button>
+          </div>
+          <article class="card venue-pane active" data-venue-pane="attendance">
+            <div class="attendance-editor">
+              <span>本日の来場者数</span>
+              <label><input type="text" value="16,994" inputmode="numeric"><b>人</b></label>
+              <small>ご来場ありがとうございました</small>
+            </div>
+          </article>
+          <article class="card venue-pane" data-venue-pane="top" hidden>
+            <div class="form-stack">
+              <label><span>年</span><input type="text" value="2026"></label>
+              <label><span>キックオフ</span><input type="text" value="14:00K.O."></label>
+              <label><span>サンクスデー表記</span><input type="text" value="DAMZサンクスデー"></label>
+              <label><span>左クラブ英字</span><input type="text" value="ALBIREX NIIGATA"></label>
+              <label><span>右クラブ英字</span><input type="text" value="FC OSAKA"></label>
+            </div>
+          </article>
+          <article class="card venue-pane" data-venue-pane="referees" hidden>
+            <div class="referee-list" id="refereeList"></div>
+          </article>
+        </section>
+      </main>
+
+      <aside class="desktop-preview">
+        <div class="preview-label"><span>LIVE PREVIEW</span><button type="button" data-open-preview>拡大</button></div>
+        <div class="preview-frame-wrap"><iframe src="../vision/display.html?v=20260529niigata1" title="大型ビジョンプレビュー" tabindex="-1"></iframe></div>
+      </aside>
+    </div>
+
+    <div class="sheet-backdrop" data-close-overlay></div>
+    <aside class="side-sheet settings-sheet" id="settingsSheet" aria-label="試合・クラブ設定" aria-hidden="true">
+      <div class="sheet-header"><div><span>DETAIL SETTINGS</span><h2>試合・クラブ設定</h2></div><button type="button" data-close-overlay aria-label="閉じる">×</button></div>
+      <div class="sheet-body">
+        <section><h3>クラブ名</h3><div class="form-stack two"><label><span>左クラブ選択</span><select><option>アルビレックス新潟</option></select></label><label><span>右クラブ選択</span><select><option>FC大阪</option></select></label><label><span>左クラブ名</span><input value="アルビレックス新潟"></label><label><span>右クラブ名</span><input value="FC大阪"></label></div></section>
+        <section><h3>クラブカラー</h3><div class="color-settings"><label><span>左チーム色</span><input type="color" value="#e15a24"></label><label><span>右チーム色</span><input type="color" value="#166bc5"></label><label><span>左クラブ名文字色</span><input type="color" value="#ffffff"></label><label><span>右クラブ名文字色</span><input type="color" value="#ffffff"></label><label><span>左背番号文字色</span><input type="color" value="#ffffff"></label><label><span>右背番号文字色</span><input type="color" value="#ffffff"></label></div></section>
+        <section><h3>試合情報</h3><div class="form-stack"><label><span>節</span><input value="第12節"></label></div></section>
+        <section><h3>画像部分</h3><div class="form-stack"><label><span>上部大会表記</span><select><option>J2・J3 百年構想リーグ</option><option>明治安田 J1 LEAGUE</option><option>明治安田 J2 LEAGUE</option></select></label><label><span>下部ロゴ画像</span><input type="file" accept="image/*"></label><button class="secondary-button" type="button">画像を消す</button></div></section>
+      </div>
+      <div class="sheet-footer"><button class="wide-primary" type="button" data-close-overlay>設定を閉じる</button></div>
+    </aside>
+
+    <aside class="preview-sheet" id="previewSheet" aria-label="表示プレビュー" aria-hidden="true">
+      <div class="sheet-header"><div><span>OUTPUT CONTROL</span><h2>表示プレビュー</h2></div><button type="button" data-close-overlay aria-label="閉じる">×</button></div>
+      <div class="preview-screen-tabs" id="previewTabs">
+        <button class="active" type="button" data-preview-src="../vision/display.html?v=20260529niigata1">スタメン</button>
+        <button type="button" data-preview-src="../vision/result.html?v=20260529niigata1">結果</button>
+        <button type="button" data-preview-src="../vision/attendance.html?v=20260529niigata1">来場者</button>
+        <button type="button" data-preview-src="../vision/top.html?v=20260529niigata1">対戦トップ</button>
+        <button type="button" data-preview-src="../vision/referees.html?v=20260529niigata1">審判</button>
+        <button type="button" data-preview-src="../vision/starting.html?v=20260529niigata1">スタメン発表</button>
+        <button type="button" data-preview-src="../vision/reserve.html?v=20260529niigata1">リザーブ</button>
+      </div>
+      <div class="large-preview"><iframe id="proposalPreview" src="../vision/display.html?v=20260529niigata1" title="大型ビジョンプレビュー" tabindex="-1"></iframe></div>
+      <div class="output-actions"><select aria-label="画像出力する画面"><option>スタメン</option><option>結果</option><option>来場者</option><option>対戦トップ</option><option>審判</option><option>スタメン発表</option><option>リザーブ</option></select><button class="wide-primary" type="button">画像出力</button></div>
+      <details class="screen-links"><summary>各表示画面を別ウィンドウで開く</summary><div><a href="../vision/display.html" target="_blank">スタメン画面</a><a href="../vision/result.html" target="_blank">結果画面</a><a href="../vision/attendance.html" target="_blank">来場者画面</a><a href="../vision/top.html" target="_blank">対戦トップ</a><a href="../vision/referees.html" target="_blank">審判画面</a><a href="../vision/starting.html" target="_blank">スタメン発表</a><a href="../vision/reserve.html" target="_blank">リザーブ</a><a href="../vision/preview.html" target="_blank">全画面プレビュー</a></div></details>
+      <button class="danger-button" type="button">初期値に戻す</button>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

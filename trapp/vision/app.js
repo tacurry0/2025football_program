@@ -1102,6 +1102,21 @@
     });
   }
 
+  function renderAdminMatchRibbon(state) {
+    const values = {
+      "[data-admin-home-club]": state.home && state.home.club ? state.home.club : "左チーム",
+      "[data-admin-away-club]": state.away && state.away.club ? state.away.club : "右チーム",
+      "[data-admin-round]": state.match && state.match.round ? state.match.round : "節",
+      "[data-admin-total-home]": state.match && state.match.totalHome !== "" ? state.match.totalHome : "0",
+      "[data-admin-total-away]": state.match && state.match.totalAway !== "" ? state.match.totalAway : "0"
+    };
+    Object.entries(values).forEach(([selector, value]) => {
+      document.querySelectorAll(selector).forEach((node) => {
+        node.textContent = String(value);
+      });
+    });
+  }
+
   function renderDisplay(state) {
     applyColors(state);
     document.querySelectorAll(".canvas, .vision-board").forEach((node) => {
@@ -1116,6 +1131,7 @@
     renderResult(state);
     renderAnnouncementBoards(state);
     renderClubEmblems(state);
+    renderAdminMatchRibbon(state);
     scheduleClubLabelFit();
     schedulePlayerNameFit();
   }
@@ -2296,6 +2312,68 @@
     });
   }
 
+  function initAdminWorkflow() {
+    const workflowButtons = Array.from(document.querySelectorAll("[data-workflow-target]"));
+    const sections = Array.from(document.querySelectorAll("[data-workflow-section]"));
+    const subnavs = Array.from(document.querySelectorAll("[data-workflow-subnav]"));
+    const heading = document.getElementById("workflowPanelHeading");
+    if (!workflowButtons.length || !sections.length) return;
+
+    const copy = {
+      prepare: ["01", "試合準備", "公式記録と基本情報を設定します。"],
+      members: ["02", "メンバー", "表示内容を選び、両チームの選手を編集します。"],
+      result: ["03", "試合結果", "スコアと得点者をまとめて入力します。"],
+      venue: ["04", "会場表示", "来場者数・対戦トップ・審判を切り替えます。"]
+    };
+    const defaults = { members: "lineup", result: "result", venue: "attendance" };
+    const lastTabs = { members: "lineup", venue: "attendance" };
+
+    document.querySelectorAll(".workflow-subnav [data-tab-target]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (["lineup", "announce", "reserve"].includes(button.dataset.tabTarget)) lastTabs.members = button.dataset.tabTarget;
+        if (["attendance", "top", "referees"].includes(button.dataset.tabTarget)) lastTabs.venue = button.dataset.tabTarget;
+      });
+    });
+
+    const activate = (workflow, options = {}) => {
+      const tabTarget = workflow === "members" ? lastTabs.members : workflow === "venue" ? lastTabs.venue : defaults[workflow];
+      if (tabTarget) {
+        const tabButton = document.querySelector(`[data-tab-target="${tabTarget}"]`);
+        if (tabButton) tabButton.click();
+      } else {
+        const lineupPreview = Array.from(document.querySelectorAll("[data-preview-src]"))
+          .find((button) => String(button.dataset.previewSrc || "").includes("display.html"));
+        if (lineupPreview) selectPreview(lineupPreview, currentState);
+      }
+
+      sections.forEach((section) => {
+        if (section.dataset.workflowSection !== workflow) {
+          section.hidden = true;
+        } else if (!section.hasAttribute("data-tab-panel")) {
+          section.hidden = false;
+        }
+      });
+      subnavs.forEach((nav) => { nav.hidden = nav.dataset.workflowSubnav !== workflow; });
+      workflowButtons.forEach((button) => {
+        const active = button.dataset.workflowTarget === workflow;
+        button.classList.toggle("active", active);
+        if (active) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
+      });
+
+      const labels = copy[workflow] || copy.prepare;
+      if (heading) {
+        heading.innerHTML = `<span>${labels[0]}</span><div><h2>${labels[1]}</h2><p>${labels[2]}</p></div>`;
+      }
+      if (!options.initial) window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    workflowButtons.forEach((button) => {
+      button.addEventListener("click", () => activate(button.dataset.workflowTarget));
+    });
+    activate("prepare", { initial: true });
+  }
+
   function initMobileAdminUi() {
     const mobileQuery = window.matchMedia("(max-width: 720px)");
     const header = document.querySelector(".admin-header");
@@ -3129,6 +3207,7 @@
     initPreviewScaler(state);
     initPreviewSwitcher(state);
     initAdminTabs(state);
+    initAdminWorkflow();
     initMobileAdminUi();
 
     form.addEventListener("input", (event) => {
