@@ -3166,7 +3166,7 @@
     ].join(";");
     document.body.appendChild(frame);
     const loadPromise = waitForFrameLoad(frame, 6000);
-    frame.src = src || "display.html?v=20260521b";
+    frame.src = src || "display.html?v=20260629workflow1";
     await loadPromise;
     const win = frame.contentWindow;
     if (win && win.scoreboardVision) {
@@ -3185,7 +3185,7 @@
   async function exportCurrentImage(state, targetSrc) {
     const next = normalizeState(state);
     const previewFrame = getPreviewFrame();
-    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20260521b";
+    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20260629workflow1";
     let captureFrame = null;
 
     let blob;

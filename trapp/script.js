@@ -11261,7 +11261,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="vision-display-shell">
         <iframe
           class="vision-display-frame"
-          src="./vision/display.html?v=20260601vision3"
+          src="./vision/display.html?v=20260629workflow1"
           title="大型ビジョン スタメンプレビュー"
           aria-label="大型ビジョン スタメンプレビュー"
         ></iframe>
