@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260629home-motion3-bottom-nav-six">
+  <link rel="stylesheet" href="style.css?v=20260702header-layout">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -46,7 +46,6 @@
         <img src="./data/assets/emblems/アルビレックス新潟.png" id="toggle-niigata" class="club-pip active" alt="新潟">
         <img src="./data/assets/emblems/ロアッソ熊本.png" id="toggle-kumamoto" class="club-pip active" alt="熊本">
       </div>
-      <div id="header-n-gate-container"></div>
     </div>
     
     <div id="search-section">
@@ -1167,9 +1166,11 @@ We can't help falling in love with you
 
     <!-- View 6: Stadium Vision Controller -->
     <main id="vision-view" class="hidden-view">
-      <iframe class="vision-app-frame" data-src="vision/index.html?v=20260629workflow1" title="大型ビジョン管理画面"></iframe>
+      <iframe class="vision-app-frame" data-src="vision/index.html?v=20260702header-layout" title="大型ビジョン管理画面"></iframe>
     </main>
   </div>
+
+  <div id="home-n-gate-container" hidden></div>
 
   <nav class="dash-quick-links" aria-label="画面ナビ">
      <button class="dash-ql-btn" id="dash-to-dashboard" data-dock-mode="dashboard" aria-label="ホーム">
@@ -1351,7 +1352,7 @@ We can't help falling in love with you
 
   <script src="pwa.js?v=20260618pwa-install"></script>
   <script src="schedule/schedule.js?v=20260617manual-score-off"></script>
-  <script src="script.js?v=20260629bottom-nav-six"></script>
+  <script src="script.js?v=20260702header-layout"></script>
 
 </body>
 </html>

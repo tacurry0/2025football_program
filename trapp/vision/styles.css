@@ -2846,6 +2846,27 @@ body.fullscreen-preview-page {
   background: #080d12;
 }
 
+/* The workflow switcher is the vision screen's header. */
+body.admin-page > .admin-workflow-nav {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  max-width: none;
+  margin: 0;
+  border-right: 0;
+  border-left: 0;
+}
+
+body.admin-page > .admin-match-ribbon {
+  position: static;
+}
+
+@media (max-width: 720px) {
+  body.admin-page > .admin-workflow-nav {
+    padding-top: calc(6px + env(safe-area-inset-top));
+  }
+}
+
 .fullscreen-preview {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);

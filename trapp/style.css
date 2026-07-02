@@ -66,7 +66,6 @@ html, body {
 #active-month-title { font-family: var(--font-kick); font-size: 1.4rem; letter-spacing: 0.05em; color: var(--text-main); cursor: pointer; user-select: none; }
 #active-month-title:active { opacity: 0.6; }
 #club-selection { justify-self: center; }
-#header-n-gate-container { justify-self: end; }
 
 /* 📅 Year/Month Picker Popup */
 .ym-picker-pop {
@@ -5583,8 +5582,7 @@ body.pa-player-add-open {
 body[data-mode="player-analysis"] #active-month-title,
 body[data-mode="player-analysis"] #club-selection,
 body[data-mode="player-analysis"] #search-section,
-body[data-mode="player-analysis"] #ultra-nav,
-body[data-mode="player-analysis"] #header-n-gate-container {
+body[data-mode="player-analysis"] #ultra-nav {
   display: none !important;
 }
 
@@ -8489,12 +8487,10 @@ body[data-mode="standings"] #active-month-title,
 body[data-mode="standings"] #club-selection,
 body[data-mode="standings"] #search-section,
 body[data-mode="standings"] #ultra-nav,
-body[data-mode="standings"] #header-n-gate-container,
 body[data-mode="links"] #active-month-title,
 body[data-mode="links"] #club-selection,
 body[data-mode="links"] #search-section,
-body[data-mode="links"] #ultra-nav,
-body[data-mode="links"] #header-n-gate-container {
+body[data-mode="links"] #ultra-nav {
   display: none !important;
 }
 
@@ -8535,8 +8531,7 @@ body[data-mode="links"] .header-content {
 body[data-mode="vision"] #active-month-title,
 body[data-mode="vision"] #club-selection,
 body[data-mode="vision"] #search-section,
-body[data-mode="vision"] #ultra-nav,
-body[data-mode="vision"] #header-n-gate-container {
+body[data-mode="vision"] #ultra-nav {
   display: none !important;
 }
 
@@ -8641,22 +8636,6 @@ body[data-mode="vision"] .header-content {
 .dash-ql-btn:active { transform: scale(0.94); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
 .dash-ql-btn .m-icon { width: 22px; height: 22px; color: var(--text-main); }
 .dash-ql-btn span { font-weight: 900; font-size: 0.95rem; color: var(--text-main); }
-
-/* 📢 Header N Gate Button */
-#header-n-gate-container { display: flex; align-items: center; }
-body[data-mode="dashboard"] #header-n-gate-container { pointer-events: auto; }
-.btn-ngate-header {
-  padding: 6px 12px; border-radius: 20px; background: var(--albirex-orange); color: white;
-  font-family: var(--font-kick); font-size: 0.75rem; font-weight: 900;
-  text-decoration: none; box-shadow: 0 4px 10px rgba(var(--albirex-orange-rgb), 0.3);
-  white-space: nowrap; margin-right: 10px; border: 1.5px solid rgba(255,255,255,0.3);
-  transition: transform 0.2s;
-}
-.btn-ngate-header:active { transform: scale(0.94); opacity: 0.9; }
-
-@media (max-width: 600px) {
-  .btn-ngate-header { padding: 5px 10px; font-size: 0.7rem; margin-right: 5px; }
-}
 
 /* Player analysis mobile polish: readable, compact, and visually consistent. */
 @media (max-width: 600px) {
@@ -9388,7 +9367,7 @@ body[data-mode="dashboard"] #header-n-gate-container { pointer-events: auto; }
 .result-badge,
 .match-ha-pill,
 .sheet-ha,
-.btn-ngate-header,
+.btn-ngate-home,
 .today-bubble,
 .year-tab.active,
 .month-tab.active,
@@ -10389,4 +10368,84 @@ body[data-mode="calendar"] #calendar-view {
     flex-basis: 58px;
     width: 58px;
   }
+}
+
+/* =========================================
+   Screen chrome: schedule owns the app header
+   ========================================= */
+body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-header {
+  display: none !important;
+}
+
+body[data-mode="dashboard"] #ultra-dashboard {
+  padding-top: calc(12px + env(safe-area-inset-top)) !important;
+}
+
+body[data-mode="standings"] #standings-view,
+body[data-mode="links"] #links-view {
+  padding-top: calc(14px + env(safe-area-inset-top));
+}
+
+body[data-mode="vision"] #vision-view {
+  padding-top: 0;
+}
+
+body[data-mode="player-analysis"] #player-analysis-view {
+  padding-top: calc(72px + env(safe-area-inset-top));
+  padding-bottom: calc(100px + env(safe-area-inset-bottom));
+}
+
+body[data-mode="player-analysis"] .pa-bottom-tabs {
+  top: 0;
+  bottom: auto;
+  z-index: 2100;
+  padding: calc(5px + env(safe-area-inset-top)) 0 5px;
+  border-top: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+body[data-mode="player-analysis"] .player-analysis-page {
+  padding-bottom: 12px;
+}
+
+body[data-mode="player-analysis"] .pa-scroll-top-fab {
+  bottom: calc(92px + env(safe-area-inset-bottom));
+}
+
+#home-n-gate-container {
+  position: fixed;
+  right: max(12px, calc((100vw - 620px) / 2 + 8px));
+  bottom: calc(92px + env(safe-area-inset-bottom));
+  z-index: 3140;
+}
+
+#home-n-gate-container[hidden],
+body:not([data-mode="dashboard"]) #home-n-gate-container {
+  display: none !important;
+}
+
+.btn-ngate-home {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 999px;
+  color: #fff;
+  font-family: var(--font-kick);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+  background: linear-gradient(135deg, #ff7900, var(--albirex-orange));
+  box-shadow: 0 12px 28px rgba(var(--albirex-orange-rgb),0.38), inset 0 1px 0 rgba(255,255,255,0.34);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-ngate-home:active {
+  opacity: 0.9;
+  transform: scale(0.96);
 }

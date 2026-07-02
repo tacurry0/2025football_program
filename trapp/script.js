@@ -1145,18 +1145,32 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch (e) { console.warn("Weather UI update failed", e); }
     }
 
-    function updateHeaderAnnouncements() {
-      const container = document.getElementById("header-n-gate-container");
+    function getMatchKickoffDate(match) {
+      const dateText = getFirstIsoDateText(match?.date);
+      const timeMatch = String(match?.time || "").normalize("NFKC").match(/(\d{1,2}):(\d{2})/);
+      if (!dateText || !timeMatch) return null;
+      const [year, month, day] = dateText.split("-").map(Number);
+      const kickoff = new Date(year, month - 1, day, Number(timeMatch[1]), Number(timeMatch[2]), 0, 0);
+      return Number.isNaN(kickoff.getTime()) ? null : kickoff;
+    }
+
+    function updateNGateAnnouncement() {
+      const container = document.getElementById("home-n-gate-container");
       if (!container) return;
       const now = new Date();
-      const cutoffStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-      const sorted = [...scheduleData].sort((a, b) => parseDate(a.date) - parseDate(b.date));
-      const todayNiigataHome = sorted.find(m => m.date === cutoffStr && m.club === "niigata" && getMatchIsHome(m));
-      const showNGate = Boolean(todayNiigataHome);
+      const activeMatch = scheduleData.find(match => {
+        if (match.club !== "niigata" || !getMatchIsHome(match)) return false;
+        const kickoff = getMatchKickoffDate(match);
+        if (!kickoff) return false;
+        const opensAt = new Date(kickoff.getTime() - (4.5 * 60 * 60 * 1000));
+        return now >= opensAt && now <= kickoff;
+      });
 
-      if (showNGate) {
-        container.innerHTML = `<a href="https://www.albirex.co.jp/ticket/ngate/form/" target="_blank" class="btn-ngate-header">Nゲート抽選</a>`;
+      if (activeMatch) {
+        container.hidden = false;
+        container.innerHTML = `<a href="https://www.albirex.co.jp/ticket/ngate/form/" target="_blank" rel="noopener" class="btn-ngate-home">Nゲート抽選</a>`;
       } else {
+        container.hidden = true;
         container.innerHTML = "";
       }
     }
@@ -9736,7 +9750,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (currentMode === "calendar") renderCalendar();
     if (currentMode === "dashboard") renderDashboard();
-    updateHeaderAnnouncements();
+    updateNGateAnnouncement();
   }
 
   function scrollToIndex(idx) {
@@ -12414,8 +12428,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.body.setAttribute("data-dashboard-full-ready", "true");
     installDashboardStartupReveal();
 
-    // Header Announcements (N Gate etc)
-    updateHeaderAnnouncements();
+    // Match-day action shown from 4.5 hours before kickoff until kickoff.
+    updateNGateAnnouncement();
 
     // Bind buttons
     container.querySelectorAll('.dash-card').forEach(card => {
@@ -12918,6 +12932,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (playerAnalysisView) playerAnalysisView.className = "hidden-view";
   if (visionView) visionView.className = "hidden-view";
   renderDashboard();
+  window.setInterval(updateNGateAnnouncement, 30000);
 
   // Build the heavier feed/calendar navigation after the must-show dashboard cards.
   requestAnimationFrame(() => {
@@ -13511,7 +13526,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // アプリ起動時に初期化
-  updateHeaderAnnouncements();
+  updateNGateAnnouncement();
 
   // 最新データが必要な場合はメニューの再読み込みから同期する
 

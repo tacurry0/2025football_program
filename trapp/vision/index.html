@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>大型ビジョン 管理画面</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260629workflow1" />
+    <link rel="stylesheet" href="styles.css?v=20260702header-layout" />
   </head>
   <body class="admin-page">
+    <nav class="admin-workflow-nav" aria-label="運用メニュー">
+      <button class="admin-workflow-button active" type="button" data-workflow-target="prepare" aria-current="page"><span>01</span>試合準備</button>
+      <button class="admin-workflow-button" type="button" data-workflow-target="members"><span>02</span>メンバー</button>
+      <button class="admin-workflow-button" type="button" data-workflow-target="result"><span>03</span>試合結果</button>
+      <button class="admin-workflow-button" type="button" data-workflow-target="venue"><span>04</span>会場表示</button>
+    </nav>
+
     <header class="admin-header">
       <div>
         <p class="admin-kicker">VISION CONTROL</p>
@@ -51,13 +58,6 @@
       <div class="admin-ribbon-score"><small data-admin-round>節</small><strong><span data-admin-total-home>0</span><i>–</i><span data-admin-total-away>0</span></strong></div>
       <div class="admin-ribbon-team away"><small>AWAY</small><strong data-admin-away-club>右チーム</strong></div>
     </section>
-
-    <nav class="admin-workflow-nav" aria-label="運用メニュー">
-      <button class="admin-workflow-button active" type="button" data-workflow-target="prepare" aria-current="page"><span>01</span>試合準備</button>
-      <button class="admin-workflow-button" type="button" data-workflow-target="members"><span>02</span>メンバー</button>
-      <button class="admin-workflow-button" type="button" data-workflow-target="result"><span>03</span>試合結果</button>
-      <button class="admin-workflow-button" type="button" data-workflow-target="venue"><span>04</span>会場表示</button>
-    </nav>
 
     <main class="admin-shell">
       <form class="control-panel" id="controlForm" autocomplete="off">
@@ -372,7 +372,7 @@
     <button class="preview-backdrop" id="previewBackdrop" type="button" aria-label="プレビューを閉じる"></button>
 
     <script src="vendor/html2canvas.min.js?v=20260529navvision2"></script>
-    <script src="app.js?v=20260629workflow1"></script>
+    <script src="app.js?v=20260702header-layout"></script>
   </body>
 </html>
 
