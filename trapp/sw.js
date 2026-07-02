@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v80-home-calendar-chants';
+const cacheName = 'football-app-v81-calendar-personal-plan';
 const assetsToCache = [
   './',
   './index.html',
@@ -45,6 +45,7 @@ const assetsToCache = [
   './data/history/kumamoto/2026.json',
   './data/assets/emblems/アルビレックス新潟.png',
   './data/assets/emblems/ロアッソ熊本.png',
+  './data/assets/emblems/熊本学園大学.gif',
   './manifest.json',
   './data/assets/icons/icon-192.png',
   './data/assets/icons/icon-512.png'

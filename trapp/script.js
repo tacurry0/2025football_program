@@ -147,6 +147,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const pickerBackdrop = document.getElementById("match-picker-backdrop");
   const pickerList = document.getElementById("picker-list");
 
+  const calendarPlanSheet = document.getElementById("calendar-plan-sheet");
+  const calendarPlanBackdrop = document.getElementById("calendar-plan-backdrop");
+  const calendarPlanForm = document.getElementById("calendar-plan-form");
+  const calendarPlanDate = document.getElementById("calendar-plan-date");
+  const calendarPlanName = document.getElementById("calendar-plan-name");
+  const calendarPlanStart = document.getElementById("calendar-plan-start");
+  const calendarPlanEnd = document.getElementById("calendar-plan-end");
+  const calendarPlanMemo = document.getElementById("calendar-plan-memo");
+  const calendarPlanDelete = document.getElementById("calendar-plan-delete");
+
   const sideMenu = document.getElementById("side-menu");
   const sideMenuBackdrop = document.getElementById("side-menu-backdrop");
   const searchInput = document.getElementById("search-input");
@@ -356,6 +366,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     sheetBackdrop?.classList.remove("active");
     pickerOverlay?.classList.remove("active");
     pickerBackdrop?.classList.remove("active");
+    calendarPlanSheet?.classList.remove("active");
+    calendarPlanBackdrop?.classList.remove("active");
     ymPickerOverlay?.classList.remove("active");
     ymPickerBackdrop?.classList.remove("active");
     sideMenu?.classList.remove("active");
@@ -562,6 +574,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     function localizeEmblemUrl(url) {
       if (!url) return "";
       const value = String(url);
+      if (value.includes("inc-s.kumagaku.ac.jp") && value.includes("img_mark_01.gif")) {
+        return "./data/assets/emblems/熊本学園大学.gif";
+      }
       if (value.startsWith("./data/assets/emblems/")) return value;
       if (value.startsWith("data/assets/emblems/")) return `./${value}`;
       if (value.startsWith("./emblems/")) return value.replace("./emblems/", "./data/assets/emblems/");
@@ -9827,13 +9842,60 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- Calendar Engine ---
 
-  function openCalendarPlan(matches) {
-    if (matches.length === 1) openDetailSheet(matches[0], { focusPlan: true });
-    else if (matches.length > 1) openMatchPicker(matches, { planMode: true });
+  const CALENDAR_PERSONAL_PLANS_KEY = "calendar_personal_plans_v1";
+  let activeCalendarPlanDate = "";
+
+  function readCalendarPersonalPlans() {
+    try {
+      const plans = JSON.parse(localStorage.getItem(CALENDAR_PERSONAL_PLANS_KEY) || "{}");
+      return plans && typeof plans === "object" && !Array.isArray(plans) ? plans : {};
+    } catch (error) {
+      console.warn("Calendar personal plans could not be read", error);
+      return {};
+    }
   }
 
-  function bindCalendarLongPress(cell, matches) {
-    if (!matches.length) return;
+  function writeCalendarPersonalPlans(plans) {
+    localStorage.setItem(CALENDAR_PERSONAL_PLANS_KEY, JSON.stringify(plans));
+  }
+
+  function getCalendarPersonalPlan(date) {
+    return readCalendarPersonalPlans()[date] || null;
+  }
+
+  function formatCalendarPlanDate(date) {
+    const parsed = parseDate(date);
+    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+    return `${parsed.getFullYear()}年${parsed.getMonth() + 1}月${parsed.getDate()}日（${weekdays[parsed.getDay()]}）`;
+  }
+
+  function openCalendarPersonalPlan(date, options = {}) {
+    if (!date || !calendarPlanSheet || !calendarPlanForm) return;
+    const plan = getCalendarPersonalPlan(date);
+    activeCalendarPlanDate = date;
+    calendarPlanDate.textContent = formatCalendarPlanDate(date);
+    calendarPlanName.value = plan?.name || "";
+    calendarPlanStart.value = plan?.start || "";
+    calendarPlanEnd.value = plan?.end || "";
+    calendarPlanMemo.value = plan?.memo || "";
+    calendarPlanDelete.hidden = !plan;
+    calendarPlanSheet.classList.add("active");
+    calendarPlanBackdrop.classList.add("active");
+    addAppHistoryEntry("calendar-personal-plan", () => openCalendarPersonalPlan(date, { history: false }), options);
+    window.setTimeout(() => calendarPlanName.focus({ preventScroll: true }), 260);
+  }
+
+  function closeCalendarPersonalPlan(options = {}) {
+    const closeDirect = () => {
+      calendarPlanSheet?.classList.remove("active");
+      calendarPlanBackdrop?.classList.remove("active");
+      activeCalendarPlanDate = "";
+    };
+    if (options.history === false) closeDirect();
+    else closeAppHistoryEntry("calendar-personal-plan", closeDirect);
+  }
+
+  function bindCalendarLongPress(cell, date) {
     let timer = null;
     let startX = 0;
     let startY = 0;
@@ -9854,7 +9916,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         cell.classList.remove("longpress-ready");
         cell.dataset.longPressHandled = "true";
         if (navigator.vibrate) navigator.vibrate(25);
-        openCalendarPlan(matches);
+        openCalendarPersonalPlan(date);
       }, 500);
     };
 
@@ -9888,9 +9950,39 @@ document.addEventListener("DOMContentLoaded", async () => {
       cancel();
       if (cell.dataset.longPressHandled === "true") return;
       cell.dataset.longPressHandled = "true";
-      openCalendarPlan(matches);
+      openCalendarPersonalPlan(date);
     });
   }
+
+  calendarPlanForm?.addEventListener("submit", event => {
+    event.preventDefault();
+    const name = calendarPlanName.value.trim();
+    if (!activeCalendarPlanDate || !name) {
+      calendarPlanName.focus();
+      return;
+    }
+    const plans = readCalendarPersonalPlans();
+    plans[activeCalendarPlanDate] = {
+      name,
+      start: calendarPlanStart.value,
+      end: calendarPlanEnd.value,
+      memo: calendarPlanMemo.value.trim()
+    };
+    writeCalendarPersonalPlans(plans);
+    closeCalendarPersonalPlan();
+    renderCalendar();
+  });
+
+  calendarPlanDelete?.addEventListener("click", () => {
+    if (!activeCalendarPlanDate) return;
+    const plans = readCalendarPersonalPlans();
+    delete plans[activeCalendarPlanDate];
+    writeCalendarPersonalPlans(plans);
+    closeCalendarPersonalPlan();
+    renderCalendar();
+  });
+  document.getElementById("calendar-plan-close")?.addEventListener("click", () => closeCalendarPersonalPlan());
+  calendarPlanBackdrop?.addEventListener("click", () => closeCalendarPersonalPlan());
 
   function renderCalendar() {
     const activeSec = visibleSections[currentIndex];
@@ -9932,16 +10024,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       const dayMatches = matchesInMonth.filter(m => m.date === dateStr);
+      const personalPlan = getCalendarPersonalPlan(dateStr);
       cell.dataset.date = dateStr;
       cell.dataset.matchCount = String(dayMatches.length);
-      cell.setAttribute("aria-label", `${month}月${d}日${dayMatches.length ? `、${dayMatches.length}試合。長押しで観戦予定を入力` : ""}`);
+      cell.setAttribute("aria-label", `${month}月${d}日${dayMatches.length ? `、${dayMatches.length}試合` : ""}${personalPlan ? `、予定：${personalPlan.name}` : ""}。長押しで予定を確認・入力`);
+
+      if (personalPlan) cell.classList.add("has-personal-plan");
 
       // 観戦予定のハイライト判定
       dayMatches.forEach(m => {
         const isAttend = localStorage.getItem(`attend_${m.date}_${m.club}_${m.opponent}`) === "true";
         if (isAttend) {
           cell.classList.add(`attending-${m.club}`);
-          cell.classList.add("has-plan");
         }
       });
 
@@ -9971,7 +10065,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (dayMatches.length === 1) openDetailSheet(dayMatches[0]);
         else if (dayMatches.length > 1) openMatchPicker(dayMatches);
       };
-      bindCalendarLongPress(cell, dayMatches);
+      bindCalendarLongPress(cell, dateStr);
 
       calendarBody.appendChild(cell);
     }
@@ -12408,14 +12502,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     root.querySelectorAll(".dash-venue-row").forEach(row => {
       const label = row.querySelector("span");
       if (!label || !row.clientWidth) return;
-      let size = 15.5;
+      let size = 14.5;
+      label.style.transform = "none";
       label.style.fontSize = `${size}px`;
       label.style.whiteSpace = "nowrap";
-      while (label.scrollWidth > row.clientWidth && size > 11.5) {
+      while (label.scrollWidth > row.clientWidth && size > 12.5) {
         size -= 0.5;
         label.style.fontSize = `${size}px`;
       }
-      if (label.scrollWidth > row.clientWidth) label.style.whiteSpace = "normal";
+      if (label.scrollWidth > row.clientWidth) {
+        const scale = Math.max(0.72, row.clientWidth / label.scrollWidth);
+        label.style.transform = `scaleX(${scale})`;
+        label.style.transformOrigin = "left center";
+      }
     });
   }
 
@@ -12506,14 +12605,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                        ${renderRoundPill(m, "dash-mw")}
                        <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${dashboardDateHtml}</span>
                     </div>
+                    <div class="dash-venue-row" style="color:#555; font-size:0.85rem; align-items:center; display:flex;">
+                       <span style="font-weight:700;">${escapeHtml(m.venue || "会場未定")}</span>
+                    </div>
                  </div>
 
                  <!-- Right Side: Weather -->
                  <div id="dash-weather-${m.club}" data-venue="${m.venue}" data-date="${m.date}" style="text-align:right;">
                     <span class="val-weather" style="font-size:1.8rem; display:flex; align-items:center; gap: 8px;"></span>
-                 </div>
-                 <div class="dash-venue-row" style="color:#555; font-size:0.85rem; align-items:center; display:flex;">
-                    <span style="font-weight:700;">${escapeHtml(m.venue || "会場未定")}</span>
                  </div>
               </div>
               
