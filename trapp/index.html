@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260702schedule-detail-polish">
+  <link rel="stylesheet" href="style.css?v=20260702home-calendar-chants">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -29,7 +29,7 @@
       <div class="home-reveal-club reveal-niigata">
         <span class="home-reveal-crest"><img src="./data/assets/icons/alb_logo1.png" alt=""></span>
       </div>
-      <div class="home-reveal-core"><span>LOADING</span></div>
+      <div class="home-reveal-core" aria-hidden="true"></div>
       <div class="home-reveal-club reveal-kumamoto">
         <span class="home-reveal-crest"><img src="./data/assets/icons/roasso_logo1.png" alt=""></span>
       </div>
@@ -117,13 +117,14 @@
     </div>
   </div>
 
-  <!-- 📢 Chants Overlay -->
-  <div id="chants-overlay" class="sub-pane">
-    <div class="pane-header">
-      <h3>チャント集 / CHANTS</h3>
-      <button class="close-pane">✕</button>
-    </div>
-    <div class="pane-content u-chant-area">
+  <!-- 📢 Chants Page -->
+  <main id="chants-view" class="hidden-view">
+    <section class="chants-page app-page-shell" aria-labelledby="chants-page-title">
+      <header class="app-page-header">
+        <span>SUPPORTERS' SONGS</span>
+        <h1 id="chants-page-title">チャント集</h1>
+      </header>
+      <div class="u-chant-area">
       <div class="standings-tabs" style="margin-bottom: 20px;">
         <button class="u-tab-btn active" onclick="switchChantClub('niigata', this)">新潟</button>
         <button class="u-tab-btn" onclick="switchChantClub('kumamoto', this)">熊本</button>
@@ -676,8 +677,9 @@ We can't help falling in love with you
           </div>
         </div>
       </div>
-    </div>
-  </div>
+      </div>
+    </section>
+  </main>
 
   <!-- 💾 Data Backup Overlay -->
   <div id="data-overlay" class="sub-pane">
@@ -1357,7 +1359,7 @@ We can't help falling in love with you
 
   <script src="pwa.js?v=20260618pwa-install"></script>
   <script src="schedule/schedule.js?v=20260617manual-score-off"></script>
-  <script src="script.js?v=20260702schedule-detail-polish"></script>
+  <script src="script.js?v=20260702home-calendar-chants"></script>
 
 </body>
 </html>

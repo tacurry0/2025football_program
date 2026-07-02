@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const ultraDashboard = document.getElementById("ultra-dashboard");
   const standingsView = document.getElementById("standings-view");
   const linksView = document.getElementById("links-view");
+  const chantsView = document.getElementById("chants-view");
   const visionView = document.getElementById("vision-view");
   const playerAnalysisView = document.getElementById("player-analysis-view");
 
@@ -165,7 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let visibleSections = [];
   let selectedYear = null;
   let renderedFeedYear = undefined;
-  let currentMode = "dashboard"; // dashboard, feed, calendar, standings, links, player-analysis or vision
+  let currentMode = "dashboard"; // dashboard, feed, calendar, standings, links, chants, player-analysis or vision
   let lineupDetailExpanded = false;
   const scheduleCompetitionFilterState = {
     active: false,
@@ -359,6 +360,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ymPickerBackdrop?.classList.remove("active");
     sideMenu?.classList.remove("active");
     sideMenuBackdrop?.classList.remove("active");
+    document.body.classList.remove("side-menu-open");
     document.querySelectorAll(".sub-pane.active").forEach(pane => pane.classList.remove("active"));
     document.getElementById("vision-preview-backdrop")?.classList.remove("active");
     document.getElementById("vision-preview-modal")?.classList.remove("active");
@@ -765,7 +767,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     function renderTeamEmblem(url, teamName, imageClass = "", mediaClass = "") {
       const resolvedUrl = String(url || "").trim();
       const image = resolvedUrl
-        ? `<img class="${escapeHtml(imageClass)}" src="${escapeHtml(resolvedUrl)}" alt="${escapeHtml(teamName || "クラブ")}" onerror="this.hidden=true;this.nextElementSibling.hidden=false">`
+        ? `<img class="${escapeHtml(imageClass)}" src="${escapeHtml(resolvedUrl)}" alt="${escapeHtml(teamName || "クラブ")}" referrerpolicy="no-referrer" onerror="this.hidden=true;this.nextElementSibling.hidden=false">`
         : "";
       return `<span class="team-emblem-media ${escapeHtml(mediaClass)}">${image}<span class="team-emblem-missing" ${resolvedUrl ? "hidden" : ""} aria-label="クラブ画像なし">?</span></span>`;
     }
@@ -9562,6 +9564,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (calendarView) calendarView.className = mode === "calendar" ? "active-view" : "hidden-view";
     if (standingsView) standingsView.className = mode === "standings" ? "active-view" : "hidden-view";
     if (linksView) linksView.className = mode === "links" ? "active-view" : "hidden-view";
+    if (chantsView) chantsView.className = mode === "chants" ? "active-view" : "hidden-view";
     if (playerAnalysisView) playerAnalysisView.className = mode === "player-analysis" ? "active-view" : "hidden-view";
     if (visionView) visionView.className = mode === "vision" ? "active-view" : "hidden-view";
     if (mode !== "player-analysis") setPlayerAnalysisFilterPanel(false);
@@ -9595,6 +9598,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     updateScheduleViewSwitchState();
     sideMenu.classList.remove("active");
+    sideMenuBackdrop.classList.remove("active");
+    document.body.classList.remove("side-menu-open");
     if (options.history !== false && (previousMode !== mode || getActiveAppHistoryEntry()?.kind === "side-menu")) {
       const activeScreen = playerAnalysisState.activeScreen;
       addAppHistoryEntry(`mode:${mode}`, () => {
@@ -9839,26 +9844,52 @@ document.addEventListener("DOMContentLoaded", async () => {
       cell.classList.remove("longpress-ready");
     };
 
-    cell.addEventListener("pointerdown", event => {
-      if (event.button !== undefined && event.button !== 0) return;
+    const start = (x, y) => {
       cancel();
-      startX = event.clientX;
-      startY = event.clientY;
+      startX = x;
+      startY = y;
       cell.classList.add("longpress-ready");
       timer = window.setTimeout(() => {
         timer = null;
         cell.classList.remove("longpress-ready");
         cell.dataset.longPressHandled = "true";
+        if (navigator.vibrate) navigator.vibrate(25);
         openCalendarPlan(matches);
-      }, 550);
+      }, 500);
+    };
+
+    const move = (x, y) => {
+      if (Math.abs(x - startX) > 10 || Math.abs(y - startY) > 10) cancel();
+    };
+
+    cell.addEventListener("pointerdown", event => {
+      if (event.pointerType === "touch") return;
+      if (event.button !== undefined && event.button !== 0) return;
+      start(event.clientX, event.clientY);
     });
     cell.addEventListener("pointermove", event => {
-      if (Math.abs(event.clientX - startX) > 10 || Math.abs(event.clientY - startY) > 10) cancel();
+      if (event.pointerType !== "touch") move(event.clientX, event.clientY);
     });
     cell.addEventListener("pointerup", cancel);
     cell.addEventListener("pointercancel", cancel);
     cell.addEventListener("pointerleave", cancel);
-    cell.addEventListener("contextmenu", event => event.preventDefault());
+    cell.addEventListener("touchstart", event => {
+      const touch = event.touches[0];
+      if (touch) start(touch.clientX, touch.clientY);
+    }, { passive: true });
+    cell.addEventListener("touchmove", event => {
+      const touch = event.touches[0];
+      if (touch) move(touch.clientX, touch.clientY);
+    }, { passive: true });
+    cell.addEventListener("touchend", cancel, { passive: true });
+    cell.addEventListener("touchcancel", cancel, { passive: true });
+    cell.addEventListener("contextmenu", event => {
+      event.preventDefault();
+      cancel();
+      if (cell.dataset.longPressHandled === "true") return;
+      cell.dataset.longPressHandled = "true";
+      openCalendarPlan(matches);
+    });
   }
 
   function renderCalendar() {
@@ -12373,6 +12404,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     return true;
   }
 
+  function fitDashboardVenueLabels(root = document) {
+    root.querySelectorAll(".dash-venue-row").forEach(row => {
+      const label = row.querySelector("span");
+      if (!label || !row.clientWidth) return;
+      let size = 15.5;
+      label.style.fontSize = `${size}px`;
+      label.style.whiteSpace = "nowrap";
+      while (label.scrollWidth > row.clientWidth && size > 11.5) {
+        size -= 0.5;
+        label.style.fontSize = `${size}px`;
+      }
+      if (label.scrollWidth > row.clientWidth) label.style.whiteSpace = "normal";
+    });
+  }
+
   async function renderDashboard() {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
@@ -12450,24 +12496,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="dash-card-body" style="background: white; color: #111; padding:10px 15px;">
               
               <!-- Top area (Date, Venue + Weather) -->
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+              <div class="dash-match-overview" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
                  <div class="home-competition-logo comp-${competitionKey}" data-competition-key="${competitionKey}">
                     <img src="${competitionLogo.src}" alt="${competitionLogo.alt}" loading="eager" decoding="async">
                  </div>
-                 <!-- Left Side: Date and Venue -->
-                 <div style="display:flex; flex-direction:column; gap:6px;">
+                 <!-- Match date -->
+                 <div class="dash-match-meta-column" style="display:flex; flex-direction:column; gap:6px;">
                     <div style="display:flex; align-items:center; gap:8px;">
                        ${renderRoundPill(m, "dash-mw")}
                        <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${dashboardDateHtml}</span>
-                    </div>
-                    <div class="dash-venue-row" style="color:#555; font-size:0.85rem; align-items:center; display:flex;">
-                       <span style="font-weight:700;">${escapeHtml(m.venue || "会場未定")}</span>
                     </div>
                  </div>
 
                  <!-- Right Side: Weather -->
                  <div id="dash-weather-${m.club}" data-venue="${m.venue}" data-date="${m.date}" style="text-align:right;">
                     <span class="val-weather" style="font-size:1.8rem; display:flex; align-items:center; gap: 8px;"></span>
+                 </div>
+                 <div class="dash-venue-row" style="color:#555; font-size:0.85rem; align-items:center; display:flex;">
+                    <span style="font-weight:700;">${escapeHtml(m.venue || "会場未定")}</span>
                  </div>
               </div>
               
@@ -12520,6 +12566,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     html += renderCard(nextNiigata, "ALBIREX NIIGATA", "var(--albirex-orange)", "新潟");
     html += renderCard(nextKumamoto, "ROASSO KUMAMOTO", "var(--roasso-red)", "熊本");
     container.innerHTML = html;
+    requestAnimationFrame(() => fitDashboardVenueLabels(container));
 
     container.querySelectorAll(".dash-card").forEach(card => {
       const club = card.id && card.id.includes("kumamoto") ? "kumamoto" : "niigata";
@@ -13035,8 +13082,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (linksView) linksView.className = "hidden-view";
   if (playerAnalysisView) playerAnalysisView.className = "hidden-view";
   if (visionView) visionView.className = "hidden-view";
+  if (chantsView) chantsView.className = "hidden-view";
   renderDashboard();
   window.setInterval(updateNGateAnnouncement, 30000);
+  window.addEventListener("resize", () => {
+    if (currentMode === "dashboard") requestAnimationFrame(() => fitDashboardVenueLabels(ultraDashboard));
+  });
 
   // Build the heavier feed/calendar navigation after the must-show dashboard cards.
   requestAnimationFrame(() => {
@@ -13244,12 +13295,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (isOpen) {
       sideMenu.classList.add("active");
       sideMenuBackdrop.classList.add("active");
+      document.body.classList.add("side-menu-open");
       addAppHistoryEntry("side-menu", () => toggleMenu(true, { history: false }), options);
       updateDashboardDockState();
     } else {
       const closeDirect = () => {
         sideMenu.classList.remove("active");
         sideMenuBackdrop.classList.remove("active");
+        document.body.classList.remove("side-menu-open");
         updateDashboardDockState();
       };
       if (options.history === false) closeDirect();
@@ -13288,7 +13341,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // previous screen immediately.
   menuItems.forEach(btn => btn.addEventListener('click', () => toggleMenu(false, { history: false })));
 
-  document.getElementById("menu-chants").onclick = () => openSubPane("chants-overlay");
+  document.getElementById("menu-chants").onclick = () => switchMode("chants");
   const menuVision = document.getElementById("menu-vision");
   if (menuVision) {
     menuVision.onclick = () => switchMode("vision");

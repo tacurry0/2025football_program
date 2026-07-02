@@ -10594,8 +10594,6 @@ body[data-mode="player-analysis"] .pa-bottom-tab.active {
 }
 
 /* Calendar plan affordances */
-.cal-match-chip.niigata .cal-ha { color: var(--albirex-orange) !important; }
-.cal-match-chip.kumamoto .cal-ha { color: var(--roasso-red) !important; }
 .cal-cell.has-plan .cal-date-num { color: #e21b2d; }
 .cal-cell.longpress-ready {
   transform: scale(0.96);
@@ -10838,15 +10836,167 @@ body[data-mode="dashboard"] .dash-venue-row span {
 .match-detail-emblem-media .match-detail-emblem { width: 42px; height: 42px; margin: 0 !important; object-fit: contain; }
 .match-detail-emblem-media .team-emblem-missing { width: 40px; height: 40px; }
 
-/* Strong club-colored calendar markers remain legible on every cell. */
+/* =========================================
+   Home density, stable calendar, chants page
+   ========================================= */
+body[data-mode="dashboard"] .dash-match-meta-column {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+body[data-mode="dashboard"] .dash-match-overview {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start !important;
+  gap: 5px 9px;
+}
+
+body[data-mode="dashboard"] .dash-match-overview .dash-venue-row {
+  grid-column: 1 / -1;
+}
+
+body[data-mode="dashboard"] .dash-venue-row span {
+  width: 100%;
+  max-width: none;
+  line-height: 1.12;
+  text-align: left;
+}
+
+body[data-mode="dashboard"] .dash-side-panel > div:nth-of-type(1) {
+  height: 26px;
+  min-height: 26px;
+  margin-bottom: 2px !important;
+  padding: 0 4px !important;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body[data-mode="dashboard"] .dash-side-panel > img {
+  width: 60px !important;
+  height: 60px !important;
+  margin-bottom: 4px !important;
+}
+
+body[data-mode="dashboard"] .dash-opp-emblem-link {
+  width: 64px;
+  height: 62px;
+  margin-bottom: 2px;
+}
+
+body[data-mode="dashboard"] .dash-opp-emblem-media {
+  width: 60px;
+  height: 60px;
+}
+
+body[data-mode="dashboard"] .dash-opp-emblem-media .dash-opp-emblem {
+  max-width: 60px;
+  width: 60px;
+  height: 60px !important;
+}
+
+body[data-mode="dashboard"] .dash-opp-emblem-media .team-emblem-missing {
+  width: 54px;
+  height: 54px;
+}
+
+.cal-cell {
+  height: clamp(62px, 13vw, 96px);
+  min-height: 0;
+  aspect-ratio: auto;
+  overflow: hidden;
+}
+
+.schedule-filter-toggle {
+  width: 26px;
+  height: 18px;
+  gap: 2px;
+  border: 0;
+  border-radius: 6px;
+  background: rgba(20,24,32,0.09);
+}
+
+.schedule-filter-toggle span {
+  width: 11px;
+  height: 1px;
+}
+
+.schedule-filter-toggle.active span:nth-child(1) { transform: translateY(3px) rotate(45deg); }
+.schedule-filter-toggle.active span:nth-child(3) { transform: translateY(-3px) rotate(-45deg); }
+
 .cal-match-chip.niigata .cal-ha {
-  -webkit-text-stroke: 0.7px #0757a6;
-  paint-order: stroke fill;
-  text-shadow: 0 1px 1px rgba(7,87,166,0.32);
+  color: var(--albirex-orange) !important;
+  -webkit-text-stroke: 0 transparent;
+  text-shadow: none;
 }
 
 .cal-match-chip.kumamoto .cal-ha {
-  -webkit-text-stroke: 0.7px rgba(0,0,0,0.9);
-  paint-order: stroke fill;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.28);
+  color: #111 !important;
+  -webkit-text-stroke: 0 transparent;
+  text-shadow: none;
+}
+
+.home-reveal-core {
+  height: 24px;
+  padding: 0;
+}
+
+#side-menu-backdrop { z-index: 4200; }
+#side-menu { z-index: 4300; }
+#menu-close { z-index: 4310; }
+body.side-menu-open .dash-quick-links,
+body.side-menu-open #ultra-nav { display: none !important; }
+
+#chants-view {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  padding: calc(18px + env(safe-area-inset-top)) 12px calc(104px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-direction: column;
+  align-items: center;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(var(--albirex-orange-rgb),0.10), transparent 32%),
+    linear-gradient(180deg, #f7f8fb 0%, #eef1f6 100%);
+}
+
+.chants-page { width: min(100%, 760px); }
+.chants-page .u-chant-area { padding: 0 0 28px; }
+.chants-page .standings-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 7px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 8px 24px rgba(12,18,28,0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.chants-page .u-chant-item {
+  border-radius: 15px;
+  border-color: rgba(18,24,32,0.07);
+  box-shadow: 0 8px 22px rgba(18,24,32,0.05);
+}
+
+@media (max-width: 390px) {
+  body[data-mode="dashboard"] .dash-side-panel > img {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  body[data-mode="dashboard"] .dash-opp-emblem-link,
+  body[data-mode="dashboard"] .dash-opp-emblem-media {
+    width: 58px;
+    height: 58px;
+  }
+  body[data-mode="dashboard"] .dash-opp-emblem-media .dash-opp-emblem {
+    max-width: 58px;
+    width: 58px;
+    height: 58px !important;
+  }
 }
