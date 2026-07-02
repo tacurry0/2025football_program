@@ -150,6 +150,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sideMenuBackdrop = document.getElementById("side-menu-backdrop");
   const searchInput = document.getElementById("search-input");
   const searchPopup = document.getElementById("search-popup");
+  const scheduleFilterToggle = document.getElementById("schedule-filter-toggle");
+  const scheduleFilterPanel = document.getElementById("schedule-filter-panel");
   const scheduleCompetitionFilter = document.getElementById("schedule-competition-filter");
   const scheduleCompetitionOptions = document.getElementById("schedule-competition-options");
   const scheduleViewSwitchButtons = Array.from(document.querySelectorAll("[data-schedule-view]"));
@@ -758,6 +760,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function resolveEmblemUrl(teamName, fallback = "") {
       return getEmblemUrlForTeam(teamName) || localizeEmblemUrl(fallback) || "";
+    }
+
+    function renderTeamEmblem(url, teamName, imageClass = "", mediaClass = "") {
+      const resolvedUrl = String(url || "").trim();
+      const image = resolvedUrl
+        ? `<img class="${escapeHtml(imageClass)}" src="${escapeHtml(resolvedUrl)}" alt="${escapeHtml(teamName || "クラブ")}" onerror="this.hidden=true;this.nextElementSibling.hidden=false">`
+        : "";
+      return `<span class="team-emblem-media ${escapeHtml(mediaClass)}">${image}<span class="team-emblem-missing" ${resolvedUrl ? "hidden" : ""} aria-label="クラブ画像なし">?</span></span>`;
     }
 
     function cleanResultTeamName(value) {
@@ -9527,6 +9537,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  function setScheduleFilterPanel(open) {
+    const isOpen = Boolean(open);
+    if (scheduleFilterPanel) scheduleFilterPanel.hidden = !isOpen;
+    if (scheduleFilterToggle) {
+      scheduleFilterToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      scheduleFilterToggle.setAttribute("aria-label", isOpen ? "検索フィルターを閉じる" : "検索フィルターを開く");
+      scheduleFilterToggle.classList.toggle("active", isOpen);
+    }
+    document.body.classList.toggle("schedule-filters-open", isOpen);
+    if (!isOpen) {
+      if (scheduleCompetitionFilter) scheduleCompetitionFilter.open = false;
+      if (searchPopup) searchPopup.style.display = "none";
+    }
+  }
+
   function switchMode(mode, options = {}) {
     const previousMode = currentMode;
     currentMode = mode;
@@ -9797,6 +9822,45 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- Calendar Engine ---
 
+  function openCalendarPlan(matches) {
+    if (matches.length === 1) openDetailSheet(matches[0], { focusPlan: true });
+    else if (matches.length > 1) openMatchPicker(matches, { planMode: true });
+  }
+
+  function bindCalendarLongPress(cell, matches) {
+    if (!matches.length) return;
+    let timer = null;
+    let startX = 0;
+    let startY = 0;
+
+    const cancel = () => {
+      if (timer) window.clearTimeout(timer);
+      timer = null;
+      cell.classList.remove("longpress-ready");
+    };
+
+    cell.addEventListener("pointerdown", event => {
+      if (event.button !== undefined && event.button !== 0) return;
+      cancel();
+      startX = event.clientX;
+      startY = event.clientY;
+      cell.classList.add("longpress-ready");
+      timer = window.setTimeout(() => {
+        timer = null;
+        cell.classList.remove("longpress-ready");
+        cell.dataset.longPressHandled = "true";
+        openCalendarPlan(matches);
+      }, 550);
+    });
+    cell.addEventListener("pointermove", event => {
+      if (Math.abs(event.clientX - startX) > 10 || Math.abs(event.clientY - startY) > 10) cancel();
+    });
+    cell.addEventListener("pointerup", cancel);
+    cell.addEventListener("pointercancel", cancel);
+    cell.addEventListener("pointerleave", cancel);
+    cell.addEventListener("contextmenu", event => event.preventDefault());
+  }
+
   function renderCalendar() {
     const activeSec = visibleSections[currentIndex];
     if (!activeSec) return;
@@ -9837,11 +9901,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       const dayMatches = matchesInMonth.filter(m => m.date === dateStr);
+      cell.dataset.date = dateStr;
+      cell.dataset.matchCount = String(dayMatches.length);
+      cell.setAttribute("aria-label", `${month}月${d}日${dayMatches.length ? `、${dayMatches.length}試合。長押しで観戦予定を入力` : ""}`);
 
       // 観戦予定のハイライト判定
       dayMatches.forEach(m => {
         const isAttend = localStorage.getItem(`attend_${m.date}_${m.club}_${m.opponent}`) === "true";
-        if (isAttend) cell.classList.add(`attending-${m.club}`);
+        if (isAttend) {
+          cell.classList.add(`attending-${m.club}`);
+          cell.classList.add("has-plan");
+        }
       });
 
       const num = document.createElement("span");
@@ -9856,15 +9926,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         const emblemUrl = resolveEmblemUrl(m.opponent, m.emblem);
         const item = document.createElement("div");
         item.className = `cal-match-chip ${m.club} ${isHome ? 'home' : 'away'}`;
-        item.innerHTML = `<span class="cal-ha">${isHome ? 'H' : 'A'}</span><img class="cal-emblem" src="${escapeHtml(emblemUrl)}" alt="${escapeHtml(m.opponent)}">`;
+        item.innerHTML = `<span class="cal-ha">${isHome ? 'H' : 'A'}</span>${renderTeamEmblem(emblemUrl, m.opponent, "cal-emblem", "cal-emblem-media")}`;
         matchContainer.appendChild(item);
       });
       cell.appendChild(matchContainer);
 
-      cell.onclick = () => {
+      cell.onclick = event => {
+        if (cell.dataset.longPressHandled === "true") {
+          delete cell.dataset.longPressHandled;
+          event.preventDefault();
+          return;
+        }
         if (dayMatches.length === 1) openDetailSheet(dayMatches[0]);
         else if (dayMatches.length > 1) openMatchPicker(dayMatches);
       };
+      bindCalendarLongPress(cell, dayMatches);
 
       calendarBody.appendChild(cell);
     }
@@ -9883,6 +9959,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function openMatchPicker(matches, options = {}) {
+    const planMode = Boolean(options.planMode);
+    const pickerTitle = pickerOverlay.querySelector(".pop-header h4");
+    if (pickerTitle) pickerTitle.textContent = planMode ? "予定を入力する試合" : "試合を選択";
     pickerList.innerHTML = matches.map(m => `
       <div class="picker-item" data-date="${m.date}" data-club="${m.club}" data-opp="${m.opponent}">
         <span class="picker-club ${m.club}">${m.club === 'niigata' ? '新潟' : '熊本'}</span>
@@ -9891,12 +9970,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     `).join("");
     pickerOverlay.classList.add("active");
     pickerBackdrop.classList.add("active");
-    addAppHistoryEntry("match-picker", () => openMatchPicker(matches, { history: false }), options);
+    addAppHistoryEntry("match-picker", () => openMatchPicker(matches, { history: false, planMode }), options);
 
     pickerList.querySelectorAll(".picker-item").forEach(item => {
       item.onclick = () => {
         const m = matches.find(x => x.date === item.dataset.date && x.club === item.dataset.club && x.opponent === item.dataset.opp);
-        if (m) { closeMatchPicker({ history: false }); openDetailSheet(m); }
+        if (m) { closeMatchPicker({ history: false }); openDetailSheet(m, planMode ? { focusPlan: true } : {}); }
       };
     });
   }
@@ -11427,6 +11506,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const detailRoundClass = getRoundDisplayClass(detailData, "match-detail-round");
 
     sheetContent.innerHTML = `
+      <div class="match-detail-sheetbar">
+        <div><span>MATCH</span><strong>試合詳細</strong></div>
+        <button type="button" id="detail-sheet-close" aria-label="試合詳細を閉じる">×</button>
+      </div>
       <section class="match-detail-card match-detail-compact club-${match.club}">
         <div class="match-detail-top">
           <div>
@@ -11439,7 +11522,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="match-detail-board">
           <div class="match-detail-team">
-            <img src="${escapeHtml(scoreBoard.homeEmblem)}" alt="${escapeHtml(scoreBoard.homeName)}">
+            ${renderTeamEmblem(scoreBoard.homeEmblem, scoreBoard.homeName, "match-detail-emblem", "match-detail-emblem-media")}
             <span>HOME</span>
             <strong>${escapeHtml(scoreBoard.homeName)}</strong>
             <small>${escapeHtml(homeEnglish)}</small>
@@ -11454,7 +11537,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             ${pkDisplay ? `<small>${escapeHtml(pkDisplay)}</small>` : ""}
           </div>
           <div class="match-detail-team away">
-            <img src="${escapeHtml(scoreBoard.awayEmblem)}" alt="${escapeHtml(scoreBoard.awayName)}">
+            ${renderTeamEmblem(scoreBoard.awayEmblem, scoreBoard.awayName, "match-detail-emblem", "match-detail-emblem-media")}
             <span>AWAY</span>
             <strong>${escapeHtml(scoreBoard.awayName)}</strong>
             <small>${escapeHtml(awayEnglish)}</small>
@@ -11493,22 +11576,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       </section>
 
+      <section class="match-plan-panel" id="match-plan-panel">
+        <div class="match-plan-heading">
+          <div><span>MY PLAN</span><strong>観戦予定・メモ</strong></div>
+          <small>カレンダーに反映されます</small>
+        </div>
+        <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
+          <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
+          <span class="btn-text">観戦予定</span>
+        </div>
+        <div class="u-note-single">
+          <div class="u-note-box">
+            <div class="u-note-header">
+              <label>メモ</label>
+              <button class="u-note-edit-btn" id="memo-edit-btn">編集</button>
+            </div>
+            <div class="u-memo-display" id="memo-display"></div>
+            <textarea class="u-textarea memo-field hidden">${escapeHtml(sMemo)}</textarea>
+          </div>
+        </div>
+      </section>
       ${officialInfoHtml}
       ${membersHtml}
-      <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
-        <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
-        <span class="btn-text">観戦予定</span>
-      </div>
-      <div class="u-note-single">
-        <div class="u-note-box">
-          <div class="u-note-header">
-            <label>メモ</label>
-            <button class="u-note-edit-btn" id="memo-edit-btn">編集</button>
-          </div>
-          <div class="u-memo-display" id="memo-display"></div>
-          <textarea class="u-textarea memo-field hidden">${sMemo}</textarea>
-        </div>
-      </div>
       <button class="close-sheet-btn">保存して閉じる</button>
     `;
 
@@ -11586,13 +11675,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     detailSheet.classList.add("active");
     sheetBackdrop.classList.add("active");
-    addAppHistoryEntry("match-detail", () => openDetailSheet(match, { history: false }), options);
+    addAppHistoryEntry("match-detail", () => openDetailSheet(match, { history: false, focusPlan: Boolean(options.focusPlan) }), options);
 
     // Prevent touch events from leaking through to the feed slider behind
     detailSheet.ontouchstart = (e) => e.stopPropagation();
     detailSheet.ontouchmove = (e) => e.stopPropagation();
 
     sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
+    sheetContent.querySelector("#detail-sheet-close").onclick = () => closeDetailSheet();
     sheetBackdrop.onclick = () => closeDetailSheet();
     document.querySelector(".sheet-handle").onclick = () => closeDetailSheet();
 
@@ -11629,6 +11719,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       updateDashboardPrevResults();
     };
     sheetContent.querySelectorAll("input, textarea").forEach(inp => inp.oninput = saveAndRefresh);
+
+    if (options.focusPlan) {
+      requestAnimationFrame(() => {
+        const panel = sheetContent.querySelector("#match-plan-panel");
+        if (!panel) return;
+        detailSheet.scrollTo({ top: Math.max(0, panel.offsetTop - 62), behavior: "smooth" });
+        panel.classList.add("attention");
+        window.setTimeout(() => panel.classList.remove("attention"), 1300);
+      });
+    }
   }
 
   function closeDetailSheet(options = {}) {
@@ -12334,6 +12434,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         levain: { src: "./data/assets/icons/ylc_logo1.jpg", alt: "ルヴァンカップ" }
       };
       const competitionLogo = competitionLogoMap[competitionKey] || competitionLogoMap.j2;
+      const opponentEmblemUrl = resolveEmblemUrl(m.opponent, m.emblem);
       const dashboardDateParts = formatDashboardDateParts(m.date, m.day, m.time);
       const dashboardDateHtml = `<span class="dash-date-main">${escapeHtml(dashboardDateParts.date)}</span>${dashboardDateParts.meta ? `<span class="dash-date-sub">${escapeHtml(dashboardDateParts.meta)}</span>` : ""}`;
 
@@ -12360,8 +12461,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                        <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${dashboardDateHtml}</span>
                     </div>
                     <div class="dash-venue-row" style="color:#555; font-size:0.85rem; align-items:center; display:flex;">
-                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-right:4px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                       <span style="font-weight:700;">${m.venue}</span>
+                       <span style="font-weight:700;">${escapeHtml(m.venue || "会場未定")}</span>
                     </div>
                  </div>
 
@@ -12399,7 +12499,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                  
                  <!-- Right (Opponent) -->
                  <div class="dash-side-panel" style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <img src="${escapeHtml(resolveEmblemUrl(m.opponent, m.emblem))}" class="dash-opp-emblem" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${m.opponent}', event)">
+                    <button type="button" class="dash-opp-emblem-link" data-opponent="${escapeHtml(m.opponent)}" aria-label="${escapeHtml(m.opponent)}の公式サイトを開く">${renderTeamEmblem(opponentEmblemUrl, m.opponent, "dash-opp-emblem", "dash-opp-emblem-media")}</button>
                     <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
                        <span class="val-rank-num-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-opp">-</span> pts</span>
@@ -12424,6 +12524,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     container.querySelectorAll(".dash-card").forEach(card => {
       const club = card.id && card.id.includes("kumamoto") ? "kumamoto" : "niigata";
       decorateDashboardClubMark(card.querySelector(".home-club-mark"), club);
+    });
+    container.querySelectorAll(".dash-opp-emblem-link").forEach(link => {
+      link.onclick = event => window.openClubSite(link.dataset.opponent, event);
     });
     document.body.setAttribute("data-dashboard-full-ready", "true");
     installDashboardStartupReveal();
@@ -12876,6 +12979,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
         const emblemUrl = resolveEmblemUrl(match.opponent, match.emblem);
+        const feedEmblemHtml = renderTeamEmblem(emblemUrl, match.opponent, "emblem", "feed-emblem-media");
 
         let resultHtml = "";
         if (res) {
@@ -12886,7 +12990,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>`;
         }
 
-        card.innerHTML = `${resultHtml}<div class="match-meta">${renderRoundPill(match, "match-mw-pill")}<span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${match.date} ${match.day} - ${match.time}</div><div class="match-venue">${match.venue}</div><div class="match-row"><h3 class="opponent-name" title="長押しでHOME/AWAYのクラブ名をコピー">${escapeHtml(match.opponent)}</h3><img class="emblem" src="${escapeHtml(emblemUrl)}"></div>`;
+        card.innerHTML = `${resultHtml}<div class="match-meta">${renderRoundPill(match, "match-mw-pill")}<span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${escapeHtml(match.date)} ${escapeHtml(match.day)} - ${escapeHtml(match.time)}</div><div class="match-venue">${escapeHtml(match.venue)}</div><div class="match-row"><h3 class="opponent-name" title="長押しでHOME/AWAYのクラブ名をコピー">${escapeHtml(match.opponent)}</h3>${feedEmblemHtml}</div>`;
         bindClubNameLongPress(card.querySelector(".opponent-name"), card, match);
         card.onclick = () => {
           if (card.dataset.suppressClick === "true") {
@@ -13204,6 +13308,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   scheduleViewSwitchButtons.forEach(btn => {
     btn.onclick = () => switchMode(btn.dataset.scheduleView);
   });
+  if (scheduleFilterToggle) {
+    scheduleFilterToggle.onclick = () => setScheduleFilterPanel(scheduleFilterToggle.getAttribute("aria-expanded") !== "true");
+  }
+  setScheduleFilterPanel(false);
   const dashStandingsBtn = document.getElementById("dash-to-standings");
   if (dashStandingsBtn) {
     dashStandingsBtn.onclick = () => switchMode("standings");

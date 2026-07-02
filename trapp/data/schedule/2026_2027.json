@@ -1,5 +1,27 @@
 [
   {
+    "club": "niigata",
+    "matchweek": "PM",
+    "date": "2026-07-25",
+    "day": "Sat",
+    "time": "19:00",
+    "opponent": "モンテディオ山形",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "FINAL",
+    "date": "2026-08-02",
+    "day": "Sun",
+    "time": "19:00",
+    "opponent": "熊本学園大学",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://www.inc-s.kumagaku.ac.jp/theme/inc-s/img/vi_img/img_mark_01.gif",
+    "details": ""
+  },
+  {
     "club": "kumamoto",
     "matchweek": "MW1",
     "date": "2026-08-08",
@@ -66,6 +88,17 @@
     "details": ""
   },
   {
+    "club": "niigata",
+    "matchweek": "EC2",
+    "date": "2026-08-26",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "未定",
+    "venue": "デンカビッグスワンスタジアム",
+    "emblem": "",
+    "details": ""
+  },
+  {
     "club": "kumamoto",
     "matchweek": "MW4",
     "date": "2026-08-30",
@@ -85,6 +118,28 @@
     "opponent": "いわきFC",
     "venue": "ハワイアンズスタジアムいわき",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
+    "details": ""
+  },
+  {
+    "club": "niigata",
+    "matchweek": "LC1",
+    "date": "2026-09-02",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "ザスパ群馬",
+    "venue": "正田醤油スタジアム群馬",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
+    "details": ""
+  },
+  {
+    "club": "kumamoto",
+    "matchweek": "LC1",
+    "date": "2026-09-02",
+    "day": "Wed",
+    "time": "19:00",
+    "opponent": "大分トリニータ",
+    "venue": "えがお健康スタジアム",
+    "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
     "details": ""
   },
   {
