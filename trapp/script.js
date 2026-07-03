@@ -1221,6 +1221,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       mainPeriodEnd: document.getElementById("pa-main-period-end"),
       clubSelect: document.getElementById("pa-club-select"),
       clubName: document.getElementById("pa-title"),
+      clubCrest: document.getElementById("pa-club-crest"),
+      clubCaption: document.getElementById("pa-club-caption"),
       clubMenu: document.getElementById("pa-club-menu"),
       status: document.getElementById("pa-status"),
       summary: document.getElementById("pa-summary-cards"),
@@ -2707,10 +2709,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderPlayerAnalysisClubControl() {
-    const { clubSelect, clubName, clubMenu } = getPlayerAnalysisElements();
+    const { clubSelect, clubName, clubCrest, clubCaption, clubMenu } = getPlayerAnalysisElements();
     const info = getPlayerAnalysisClubInfo();
     document.body.setAttribute("data-pa-club", info.key);
     if (clubName) clubName.textContent = info.englishName;
+    if (clubCrest) {
+      clubCrest.src = info.key === "kumamoto"
+        ? "./data/assets/icons/roasso_logo1.png"
+        : "./data/assets/icons/alb_logo1.png";
+      clubCrest.alt = "";
+    }
+    if (clubCaption) clubCaption.textContent = `${info.name} 選手データ分析`;
     if (clubSelect) {
       clubSelect.setAttribute("aria-label", `${info.name}を選択中`);
       clubSelect.setAttribute("aria-expanded", clubMenu && !clubMenu.hidden ? "true" : "false");
@@ -12763,10 +12772,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                        <span class="val-rank-num-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-my">-</span> pts</span>
                     </div>
-                    <div class="dash-prev-meta"><span class="val-prev-date-my">-</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-my" alt=""><span class="val-prev-ha-my dash-prev-ha">-</span></div>
-                    <div class="dash-prev-score-row" style="display:flex; align-items:center; gap:6px;">
-                       <span class="val-prev-score-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
-                       <span class="val-prev-res-my">-</span>
+                    <div class="dash-prev-result" aria-label="直近結果">
+                      <span class="val-prev-date-my dash-prev-date">-</span>
+                      <div class="dash-prev-matchline"><span class="dash-prev-vs">VS</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-my" alt=""><span class="val-prev-opp-name-my dash-prev-opp-name">-</span><span class="val-prev-score-my dash-prev-score">-</span><span class="val-prev-res-my dash-prev-result-badge">-</span></div>
+                      <span class="val-prev-ha-my dash-prev-ha">-</span>
                     </div>
                     <div class="val-prev-form-my" style="min-height:18px;"></div>
                  </div>
@@ -12781,10 +12790,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                        <span class="val-rank-num-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-opp">-</span> pts</span>
                     </div>
-                    <div class="dash-prev-meta"><span class="val-prev-date-opp">-</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-opp" alt=""><span class="val-prev-ha-opp dash-prev-ha">-</span></div>
-                    <div class="dash-prev-score-row" style="display:flex; align-items:center; gap:6px;">
-                       <span class="val-prev-score-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
-                       <span class="val-prev-res-opp">-</span>
+                    <div class="dash-prev-result" aria-label="直近結果">
+                      <span class="val-prev-date-opp dash-prev-date">-</span>
+                      <div class="dash-prev-matchline"><span class="dash-prev-vs">VS</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-opp" alt=""><span class="val-prev-opp-name-opp dash-prev-opp-name">-</span><span class="val-prev-score-opp dash-prev-score">-</span><span class="val-prev-res-opp dash-prev-result-badge">-</span></div>
+                      <span class="val-prev-ha-opp dash-prev-ha">-</span>
                     </div>
                     <div class="val-prev-form-opp" style="min-height:18px;"></div>
                  </div>
@@ -13107,7 +13116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         }
 
-        const resHtml = `<span style="border:1px solid ${badgeColor}; background:${badgeColor}; color:${badgeText}; border-radius:12px; padding:3px 8px; font-size:0.7rem; font-weight:800; display:inline-flex; align-items:center; gap:4px;"><span style="font-size:0.5rem;">●</span> ${symbol}</span>`;
+        const resHtml = `<span class="dash-prev-outcome" style="--outcome-bg:${badgeColor}; --outcome-color:${badgeText};"><span>●</span>${symbol}</span>`;
 
         let formHtml = `<div class="dash-form-strip">`;
         const recent5 = past.slice(0, 5).reverse();
@@ -13608,15 +13617,307 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (dashMenuBtn) {
     dashMenuBtn.onclick = () => toggleMenu(true);
   }
-  document.getElementById("menu-data").onclick = () => openSubPane("data-overlay");
+  document.getElementById("menu-data").onclick = () => {
+    renderShareablePlayerList();
+    openSubPane("data-overlay");
+  };
 
 
   // Data Backup Logic
+  const TRAPP_SHARE_FORMAT = "trapp-share-package";
+  const TRAPP_SHARE_VERSION = 1;
+
+  function createSharePackage(kind, data) {
+    return {
+      format: TRAPP_SHARE_FORMAT,
+      version: TRAPP_SHARE_VERSION,
+      kind,
+      exportedAt: new Date().toISOString(),
+      app: "takarei",
+      data
+    };
+  }
+
+  function downloadJsonFile(file) {
+    const url = URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = file.name;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function shareOrDownloadPackage(payload, filename, title, message) {
+    const file = new File([JSON.stringify(payload, null, 2)], filename, { type: "application/json" });
+    const shareData = { title, text: message, files: [file] };
+    if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+      try {
+        await navigator.share(shareData);
+        return "shared";
+      } catch (error) {
+        if (error?.name === "AbortError") return "cancelled";
+        console.warn("File sharing failed; downloading instead", error);
+      }
+    }
+    downloadJsonFile(file);
+    return "downloaded";
+  }
+
+  function setShareStatus(id, message, tone = "") {
+    const element = document.getElementById(id);
+    if (!element) return;
+    element.textContent = message;
+    element.dataset.tone = tone;
+  }
+
+  function getAttendanceShareData() {
+    return scheduleData.filter(match => {
+      const id = `${match.date}_${match.club}_${match.opponent}`;
+      return localStorage.getItem(`attend_${id}`) === "true";
+    }).map(match => ({
+      date: match.date,
+      club: match.club,
+      opponent: match.opponent
+    }));
+  }
+
+  function getPersonalPlanCount(plans) {
+    return Object.values(plans || {}).reduce((total, items) => total + (Array.isArray(items) ? items.length : 0), 0);
+  }
+
+  function normalizeSharedPlans(source) {
+    const normalized = {};
+    if (!source || typeof source !== "object" || Array.isArray(source)) return normalized;
+    Object.entries(source).forEach(([date, items]) => {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
+      const list = (Array.isArray(items) ? items : [items])
+        .map((plan, index) => normalizeCalendarPersonalPlan(plan, `shared-${date}-${index}-${Date.now()}`))
+        .filter(Boolean);
+      if (list.length) normalized[date] = list;
+    });
+    return normalized;
+  }
+
+  function mergeSharedPlans(incoming) {
+    const current = readCalendarPersonalPlans();
+    const incomingIds = new Set(Object.values(incoming).flat().map(plan => String(plan.id)));
+    Object.keys(current).forEach(date => {
+      current[date] = (current[date] || []).filter(plan => !incomingIds.has(String(plan.id)));
+      if (!current[date].length) delete current[date];
+    });
+    Object.entries(incoming).forEach(([date, plans]) => {
+      const byId = new Map((current[date] || []).map(plan => [String(plan.id), plan]));
+      plans.forEach(plan => byId.set(String(plan.id), plan));
+      current[date] = Array.from(byId.values());
+    });
+    writeCalendarPersonalPlans(current);
+  }
+
+  async function readShareFile(file, expectedKind) {
+    if (!file) throw new Error("ファイルが選択されていません。");
+    if (file.size > 25 * 1024 * 1024) throw new Error("ファイルサイズが大きすぎます（上限25MB）。");
+    const payload = JSON.parse(await file.text());
+    if (payload?.format !== TRAPP_SHARE_FORMAT || Number(payload?.version) !== TRAPP_SHARE_VERSION) {
+      throw new Error("takareiアプリで作成した共有ファイルではありません。");
+    }
+    if (payload.kind !== expectedKind) {
+      throw new Error(expectedKind === "schedule" ? "予定表の共有ファイルを選択してください。" : "自作選手の共有ファイルを選択してください。");
+    }
+    return payload;
+  }
+
+  const shareScheduleButton = document.getElementById("share-schedule-btn");
+  if (shareScheduleButton) {
+    shareScheduleButton.onclick = async () => {
+      const plans = readCalendarPersonalPlans();
+      const attendance = getAttendanceShareData();
+      const planCount = getPersonalPlanCount(plans);
+      if (!planCount && !attendance.length) {
+        setShareStatus("schedule-share-status", "共有できる予定がまだありません。", "error");
+        return;
+      }
+      shareScheduleButton.disabled = true;
+      setShareStatus("schedule-share-status", "共有ファイルを作成しています…");
+      try {
+        const payload = createSharePackage("schedule", { personalPlans: plans, attendance });
+        const result = await shareOrDownloadPackage(
+          payload,
+          `takarei_schedule_${new Date().toISOString().slice(0, 10)}.trapp.json`,
+          "takarei 予定表",
+          "このファイルをtakareiアプリの「データ管理」から読み込んでください。"
+        );
+        if (result === "shared") setShareStatus("schedule-share-status", `予定${planCount + attendance.length}件を共有しました。`, "success");
+        else if (result === "downloaded") setShareStatus("schedule-share-status", "ファイルを保存しました。LINEではファイルとして添付してください。", "success");
+        else setShareStatus("schedule-share-status", "共有をキャンセルしました。");
+      } catch (error) {
+        console.warn("Schedule export failed", error);
+        setShareStatus("schedule-share-status", "予定表をエクスポートできませんでした。", "error");
+      } finally {
+        shareScheduleButton.disabled = false;
+      }
+    };
+  }
+
+  const importScheduleFile = document.getElementById("import-schedule-file");
+  document.getElementById("import-schedule-trigger")?.addEventListener("click", () => importScheduleFile?.click());
+  if (importScheduleFile) {
+    importScheduleFile.onchange = async event => {
+      try {
+        const payload = await readShareFile(event.target.files?.[0], "schedule");
+        const plans = normalizeSharedPlans(payload.data?.personalPlans);
+        const attendance = Array.isArray(payload.data?.attendance) ? payload.data.attendance : [];
+        mergeSharedPlans(plans);
+        let attendanceCount = 0;
+        attendance.forEach(item => {
+          const date = String(item?.date || "");
+          const club = String(item?.club || "");
+          const opponent = String(item?.opponent || "");
+          const match = scheduleData.find(candidate => candidate.date === date && candidate.club === club && candidate.opponent === opponent);
+          if (!match) return;
+          localStorage.setItem(`attend_${match.date}_${match.club}_${match.opponent}`, "true");
+          attendanceCount += 1;
+        });
+        const count = getPersonalPlanCount(plans) + attendanceCount;
+        setShareStatus("schedule-share-status", `予定${count}件を読み込みました。`, "success");
+        if (currentMode === "calendar") renderCalendar();
+        if (currentMode === "feed") renderFeed();
+      } catch (error) {
+        console.warn("Schedule import failed", error);
+        setShareStatus("schedule-share-status", error.message || "予定表を読み込めませんでした。", "error");
+      } finally {
+        event.target.value = "";
+      }
+    };
+  }
+
+  function renderShareablePlayerList() {
+    const list = document.getElementById("export-player-list");
+    if (!list) return;
+    const records = loadManualPlayerRecords().sort((a, b) => String(a.name).localeCompare(String(b.name), "ja"));
+    if (!records.length) {
+      list.innerHTML = '<p class="u-player-export-empty">自作選手はまだ登録されていません。</p>';
+      updateShareablePlayerSelection();
+      return;
+    }
+    list.innerHTML = records.map(record => {
+      const photo = String(record.photo || "");
+      const safePhoto = /^data:image\/(?:jpeg|png|webp|gif);base64,/i.test(photo) ? photo : "";
+      const positions = Array.isArray(record.positions) ? record.positions.join(" / ") : "";
+      return `<label class="u-player-export-item">
+        <input type="checkbox" value="${escapeHtml(String(record.id))}">
+        <span class="u-player-export-photo">${safePhoto ? `<img src="${safePhoto}" alt="">` : `<span>${escapeHtml(String(record.number || "–"))}</span>`}</span>
+        <span class="u-player-export-copy"><strong>${escapeHtml(record.name)}</strong><small>${escapeHtml(`${record.year} / ${positions || "ポジション未設定"}`)}</small></span>
+        <span class="u-player-export-check" aria-hidden="true">✓</span>
+      </label>`;
+    }).join("");
+    list.querySelectorAll('input[type="checkbox"]').forEach(input => input.addEventListener("change", updateShareablePlayerSelection));
+    updateShareablePlayerSelection();
+  }
+
+  function updateShareablePlayerSelection() {
+    const list = document.getElementById("export-player-list");
+    const inputs = Array.from(list?.querySelectorAll('input[type="checkbox"]') || []);
+    const selected = inputs.filter(input => input.checked);
+    const count = document.getElementById("export-player-count");
+    const shareButton = document.getElementById("share-players-btn");
+    const selectAllButton = document.getElementById("export-player-select-all");
+    if (count) count.textContent = `${selected.length}人を選択中`;
+    if (shareButton) shareButton.disabled = selected.length === 0;
+    if (selectAllButton) {
+      selectAllButton.disabled = inputs.length === 0;
+      selectAllButton.textContent = inputs.length > 0 && selected.length === inputs.length ? "選択を解除" : "すべて選択";
+    }
+  }
+
+  document.getElementById("export-player-select-all")?.addEventListener("click", () => {
+    const inputs = Array.from(document.querySelectorAll('#export-player-list input[type="checkbox"]'));
+    const shouldSelect = inputs.some(input => !input.checked);
+    inputs.forEach(input => { input.checked = shouldSelect; });
+    updateShareablePlayerSelection();
+  });
+
+  const sharePlayersButton = document.getElementById("share-players-btn");
+  if (sharePlayersButton) {
+    sharePlayersButton.onclick = async () => {
+      const ids = new Set(Array.from(document.querySelectorAll('#export-player-list input[type="checkbox"]:checked')).map(input => input.value));
+      const players = loadManualPlayerRecords().filter(record => ids.has(String(record.id)));
+      if (!players.length) return;
+      sharePlayersButton.disabled = true;
+      setShareStatus("player-share-status", "選手データと画像をまとめています…");
+      try {
+        const payload = createSharePackage("players", { players });
+        const result = await shareOrDownloadPackage(
+          payload,
+          `takarei_players_${new Date().toISOString().slice(0, 10)}.trapp.json`,
+          "takarei 自作選手",
+          "このファイルをtakareiアプリの「データ管理」から読み込んでください。"
+        );
+        if (result === "shared") setShareStatus("player-share-status", `${players.length}人の選手を共有しました。`, "success");
+        else if (result === "downloaded") setShareStatus("player-share-status", "ファイルを保存しました。LINEではファイルとして添付してください。", "success");
+        else setShareStatus("player-share-status", "共有をキャンセルしました。");
+      } catch (error) {
+        console.warn("Player export failed", error);
+        setShareStatus("player-share-status", "選手をエクスポートできませんでした。", "error");
+      } finally {
+        updateShareablePlayerSelection();
+      }
+    };
+  }
+
+  const importPlayersFile = document.getElementById("import-players-file");
+  document.getElementById("import-players-trigger")?.addEventListener("click", () => importPlayersFile?.click());
+  if (importPlayersFile) {
+    importPlayersFile.onchange = async event => {
+      try {
+        const payload = await readShareFile(event.target.files?.[0], "players");
+        const incoming = (Array.isArray(payload.data?.players) ? payload.data.players : []).map((record, index) => {
+          if (!record || typeof record !== "object") return null;
+          const name = String(record.name || "").normalize("NFKC").trim().slice(0, 80);
+          const year = Number(record.year);
+          if (!name || !Number.isInteger(year) || year < 1900 || year > 2100) return null;
+          const photoValue = String(record.photo || "");
+          return {
+            id: String(record.id || globalThis.crypto?.randomUUID?.() || `shared-${Date.now()}-${index}-${Math.random().toString(36).slice(2, 9)}`),
+            club: PLAYER_ANALYSIS_CLUBS[record.club] ? record.club : "niigata",
+            year,
+            number: String(record.number ?? "").slice(0, 8),
+            name,
+            photo: /^data:image\/(?:jpeg|png|webp|gif);base64,/i.test(photoValue) ? photoValue : "",
+            positions: (Array.isArray(record.positions) ? record.positions : []).filter(position => ["GK", "DF", "MF", "FW"].includes(position)),
+            nameEn: String(record.nameEn || "").normalize("NFKC").trim().slice(0, 120),
+            heightCm: String(record.heightCm ?? "").slice(0, 8),
+            weightKg: String(record.weightKg ?? "").slice(0, 8),
+            birthDate: String(record.birthDate || "").slice(0, 10),
+            birthplace: String(record.birthplace || "").trim().slice(0, 100),
+            finalTeam: String(record.finalTeam || "").trim().slice(0, 120),
+            affiliatedTeams: (Array.isArray(record.affiliatedTeams) ? record.affiliatedTeams : []).map(value => String(value).trim().slice(0, 120)).filter(Boolean).slice(0, 30),
+            createdAt: String(record.createdAt || new Date().toISOString()),
+            updatedAt: new Date().toISOString()
+          };
+        }).filter(Boolean);
+        if (!incoming.length) throw new Error("読み込める選手が含まれていません。");
+        const merged = new Map(loadManualPlayerRecords().map(record => [String(record.id), record]));
+        incoming.forEach(record => merged.set(String(record.id), { ...record, updatedAt: new Date().toISOString() }));
+        saveManualPlayerRecords(Array.from(merged.values()));
+        renderShareablePlayerList();
+        setShareStatus("player-share-status", `${incoming.length}人の選手を読み込みました。画像も反映されています。`, "success");
+        if (currentMode === "player-analysis") await renderPlayerAnalysisYear(playerAnalysisState.year);
+      } catch (error) {
+        console.warn("Player import failed", error);
+        setShareStatus("player-share-status", error.message || "選手を読み込めませんでした。", "error");
+      } finally {
+        event.target.value = "";
+      }
+    };
+  }
+
   document.getElementById("export-btn").onclick = () => {
     const data = {};
     for (let i = 0; i < localStorage.length; i++) {
       const k = localStorage.key(i);
-      if (k.startsWith("score_") || k.startsWith("memo_") || k.startsWith("attend_") || k.startsWith("note_")) {
+      if (k.startsWith("score_") || k.startsWith("memo_") || k.startsWith("attend_") || k.startsWith("note_") || k === CALENDAR_PERSONAL_PLANS_KEY || k === PLAYER_ANALYSIS_MANUAL_STORAGE_KEY) {
         data[k] = localStorage.getItem(k);
       }
     }
@@ -13638,7 +13939,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     reader.onload = (ev) => {
       try {
         const data = JSON.parse(ev.target.result);
-        Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
+        if (!data || typeof data !== "object" || Array.isArray(data) || data.format === TRAPP_SHARE_FORMAT) throw new Error("invalid backup");
+        const isAllowedKey = key => key.startsWith("score_") || key.startsWith("memo_") || key.startsWith("attend_") || key.startsWith("note_") || key === CALENDAR_PERSONAL_PLANS_KEY || key === PLAYER_ANALYSIS_MANUAL_STORAGE_KEY;
+        Object.keys(data).filter(isAllowedKey).forEach(k => localStorage.setItem(k, String(data[k])));
         alert("インポートが完了しました。アプリを再読み込みします。");
         location.reload();
       } catch (err) {

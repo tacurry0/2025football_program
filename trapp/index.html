@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260703calendar-plan-list">
+  <link rel="stylesheet" href="style.css?v=20260703share-ui">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -688,7 +688,7 @@ We can't help falling in love with you
       <button class="close-pane">✕</button>
     </div>
     <div class="pane-content u-backup-area">
-      <p class="u-backup-desc">観戦予定、メモ、結果のデータをJSONファイルとして保存したり、読み込んだりできます。</p>
+      <p class="u-backup-desc">予定や自作選手をファイルにまとめ、LINEなどで共有できます。受け取ったファイルを読み込むと、この端末にも反映されます。</p>
       <div class="u-backup-group">
         <label>テキスト一括反映 (自動入力)</label>
         <button id="open-bulk-paste-btn" class="u-backup-btn export" style="background:#007bff; color:white; border:none; margin-top: 5px;">一括入力画面へ</button>
@@ -698,18 +698,58 @@ We can't help falling in love with you
         <label>観戦予定</label>
         <button id="export-list-btn" class="u-backup-btn export" style="background:#28a745; color:white; border:none;">観戦予定リストをコピー</button>
       </div>
+
+      <section class="u-share-card" aria-labelledby="schedule-share-title">
+        <div class="u-share-card-head">
+          <span class="u-share-card-icon" aria-hidden="true">予定</span>
+          <div>
+            <h4 id="schedule-share-title">予定表を共有</h4>
+            <p>カレンダーの個人予定と観戦予定を一括で送れます。</p>
+          </div>
+        </div>
+        <div class="u-share-actions">
+          <button id="share-schedule-btn" class="u-backup-btn share" type="button">エクスポート / LINEで共有</button>
+          <button id="import-schedule-trigger" class="u-backup-btn import" type="button">受け取った予定表を読み込む</button>
+          <input type="file" id="import-schedule-file" hidden accept=".json,.trapp.json,application/json">
+        </div>
+        <p id="schedule-share-status" class="u-share-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="u-share-card" aria-labelledby="player-share-title">
+        <div class="u-share-card-head">
+          <span class="u-share-card-icon player" aria-hidden="true">選手</span>
+          <div>
+            <h4 id="player-share-title">自作選手を共有</h4>
+            <p>送りたい選手を選択してください。登録画像も一緒に送られます。</p>
+          </div>
+        </div>
+        <div class="u-player-export-toolbar">
+          <span id="export-player-count">0人を選択中</span>
+          <button id="export-player-select-all" type="button">すべて選択</button>
+        </div>
+        <div id="export-player-list" class="u-player-export-list" aria-label="エクスポートする自作選手">
+          <p class="u-player-export-empty">自作選手はまだ登録されていません。</p>
+        </div>
+        <div class="u-share-actions">
+          <button id="share-players-btn" class="u-backup-btn share" type="button" disabled>選択した選手をLINEで共有</button>
+          <button id="import-players-trigger" class="u-backup-btn import" type="button">受け取った選手を読み込む</button>
+          <input type="file" id="import-players-file" hidden accept=".json,.trapp.json,application/json">
+        </div>
+        <p id="player-share-status" class="u-share-status" role="status" aria-live="polite"></p>
+      </section>
+
       <div class="u-backup-group">
-        <label>エクスポート</label>
+        <label>端末データのバックアップ</label>
         <button id="export-btn" class="u-backup-btn export">データをファイルに保存</button>
       </div>
 
       <div class="u-backup-group">
-        <label>インポート</label>
+        <label>バックアップの復元</label>
         <button id="import-trigger" class="u-backup-btn import">ファイルから読み込み</button>
         <input type="file" id="import-file" style="display:none" accept=".json">
       </div>
 
-      <div class="u-backup-warning">※インポートすると現在のデータは書き換えられます。完了後にアプリが自動的に再読み込みされます。</div>
+      <div class="u-backup-warning">予定表と自作選手の読み込みは、現在のデータを残したまま追加・更新します。バックアップの復元のみ現在のデータを書き換えます。</div>
     </div>
   </div>
 
@@ -775,10 +815,14 @@ We can't help falling in love with you
           <div class="pa-board-main">
             <div class="pa-topbar">
               <div class="pa-heading">
-                <span class="pa-kicker">PLAYER ANALYSIS</span>
-                <button type="button" id="pa-club-select" class="pa-club-select" aria-haspopup="true" aria-expanded="false">
-                  <span id="pa-title">ALBIREX NIIGATA</span>
-                </button>
+                <span class="pa-club-crest" aria-hidden="true"><img id="pa-club-crest" src="./data/assets/icons/alb_logo1.png" alt=""></span>
+                <div class="pa-heading-copy">
+                  <span class="pa-kicker"><i aria-hidden="true"></i> PERFORMANCE LAB</span>
+                  <button type="button" id="pa-club-select" class="pa-club-select" aria-haspopup="true" aria-expanded="false">
+                    <span id="pa-title">ALBIREX NIIGATA</span>
+                  </button>
+                  <span id="pa-club-caption" class="pa-club-caption">選手データ分析</span>
+                </div>
                 <div id="pa-club-menu" class="pa-club-menu" hidden>
                   <button type="button" data-pa-club="niigata">ALBIREX NIIGATA</button>
                   <button type="button" data-pa-club="kumamoto">ROASSO KUMAMOTO</button>
@@ -1419,7 +1463,7 @@ We can't help falling in love with you
 
   <script src="pwa.js?v=20260618pwa-install"></script>
   <script src="schedule/schedule.js?v=20260617manual-score-off"></script>
-  <script src="script.js?v=20260703calendar-plan-list"></script>
+  <script src="script.js?v=20260703share-ui"></script>
 
 </body>
 </html>
