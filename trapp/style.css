@@ -10370,99 +10370,7 @@ body[data-mode="calendar"] #calendar-view {
   }
 }
 
-/* 2026-07: dashboard result stack, analysis header, and share packages */
-.dash-prev-result {
-  width: 100%;
-  min-height: 76px;
-  display: grid;
-  grid-template-rows: auto minmax(28px, auto) auto;
-  justify-items: center;
-  align-content: center;
-  gap: 4px;
-  padding: 7px 4px;
-  box-sizing: border-box;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #f7f8fa, #f1f3f6);
-  border: 1px solid rgba(20,24,32,0.07);
-}
-
-.dash-prev-date {
-  color: #737b88;
-  font-family: var(--font-kick);
-  font-size: 0.7rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.dash-prev-matchline {
-  width: 100%;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-
-.dash-prev-matchline .dash-prev-vs {
-  flex: 0 0 auto;
-  color: #8a919d;
-  font-family: var(--font-kick);
-  font-size: 0.62rem;
-  font-weight: 900;
-}
-
-.dash-prev-matchline .dash-prev-opp-emblem {
-  flex: 0 0 auto;
-  width: 19px;
-  height: 19px;
-}
-
-.dash-prev-opp-name {
-  min-width: 0;
-  max-width: 62px;
-  overflow: hidden;
-  color: #252a32;
-  font-size: 0.67rem;
-  font-weight: 900;
-  line-height: 1.15;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.dash-prev-score {
-  flex: 0 0 auto;
-  color: #111 !important;
-  font-family: var(--font-kick);
-  font-size: 0.86rem !important;
-  font-weight: 900;
-  letter-spacing: 0 !important;
-  white-space: nowrap;
-}
-
-.dash-prev-result-badge { flex: 0 0 auto; }
-.dash-prev-outcome {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 3px 5px;
-  border-radius: 999px;
-  color: var(--outcome-color);
-  background: var(--outcome-bg);
-  font-family: var(--font-kick);
-  font-size: 0.56rem;
-  font-weight: 900;
-  line-height: 1;
-}
-.dash-prev-outcome > span { font-size: 0.42rem; }
-body[data-mode="dashboard"] .dash-prev-result > .dash-prev-ha {
-  min-width: 38px;
-  padding: 3px 7px;
-  color: #555e6a;
-  background: #e2e5ea;
-  font-size: 0.58rem;
-  letter-spacing: 0.04em;
-}
-
+/* 2026-07: analysis header and share packages */
 .pa-heading {
   display: flex;
   align-items: center;
@@ -10644,10 +10552,6 @@ body[data-pa-club="kumamoto"] .pa-topbar {
 .u-player-export-item:has(input:checked) .u-player-export-check { color: #fff; background: #06c755; }
 
 @media (max-width: 600px) {
-  .dash-prev-matchline { gap: 3px; }
-  .dash-prev-opp-name { max-width: 44px; font-size: 0.62rem; }
-  .dash-prev-score { font-size: 0.78rem !important; }
-  .dash-prev-outcome { padding-inline: 4px; font-size: 0.52rem; }
   body[data-mode="player-analysis"] .pa-topbar {
     grid-template-columns: 1fr;
     gap: 14px;
@@ -11634,5 +11538,234 @@ body.side-menu-open #ultra-nav { display: none !important; }
     max-width: 58px;
     width: 58px;
     height: 58px !important;
+  }
+}
+
+/* Player analysis mobile header: this is the primary app chrome on phones. */
+.pa-heading-title {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: clamp(1.45rem, 2.3vw, 2rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+@media (max-width: 760px) {
+  body[data-mode="player-analysis"] #player-analysis-view {
+    padding-top: calc(70px + env(safe-area-inset-top)) !important;
+  }
+
+  body[data-mode="player-analysis"] .pa-overview-board {
+    padding: 0 10px 12px;
+  }
+
+  body[data-mode="player-analysis"] .pa-topbar {
+    display: block;
+    margin: 0;
+    padding: 15px;
+    overflow: visible;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(var(--albirex-orange-rgb),0.92), transparent 42%),
+      linear-gradient(145deg, #121419 0%, #20242c 72%, #5f280d 100%);
+    box-shadow: 0 18px 38px rgba(16,20,27,0.2);
+  }
+
+  body[data-pa-club="kumamoto"][data-mode="player-analysis"] .pa-topbar {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(224,24,55,0.88), transparent 42%),
+      linear-gradient(145deg, #121419 0%, #20242c 72%, #680c1d 100%);
+  }
+
+  body[data-mode="player-analysis"] .pa-topbar::before {
+    display: block;
+    border-radius: inherit;
+    opacity: 0.32;
+  }
+
+  body[data-mode="player-analysis"] .pa-heading {
+    position: relative;
+    display: grid;
+    grid-template-columns: 50px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    min-height: 54px;
+  }
+
+  body[data-mode="player-analysis"] .pa-club-crest {
+    width: 50px;
+    height: 50px;
+    padding: 6px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 9px 22px rgba(0,0,0,0.24), inset 0 1px 0 #fff;
+  }
+
+  body[data-mode="player-analysis"] .pa-heading-copy {
+    min-width: 0;
+  }
+
+  body[data-mode="player-analysis"] .pa-heading .pa-kicker {
+    gap: 5px;
+    margin: 0 0 5px;
+    color: rgba(255,255,255,0.64);
+    font-size: 0.56rem;
+    letter-spacing: 0.13em;
+  }
+
+  body[data-mode="player-analysis"] .pa-heading-title {
+    color: #fff;
+    font-size: 1.52rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-club-caption {
+    max-width: 100%;
+    margin-top: 5px;
+    overflow: hidden;
+    color: rgba(255,255,255,0.56);
+    font-family: var(--font-kick);
+    font-size: 0.48rem;
+    letter-spacing: 0.04em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  body[data-mode="player-analysis"] .pa-club-select {
+    min-width: 62px;
+    min-height: 36px;
+    margin: 0;
+    padding: 0 25px 0 11px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.14);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
+    font-family: var(--font-main);
+    font-size: 0.78rem;
+    font-weight: 900;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  body[data-mode="player-analysis"] .pa-club-select::after {
+    right: 11px;
+    width: 6px;
+    height: 6px;
+  }
+
+  body[data-mode="player-analysis"] .pa-club-menu {
+    top: calc(100% + 10px);
+    right: 0;
+    left: auto;
+    min-width: min(270px, calc(100vw - 44px));
+  }
+
+  body[data-mode="player-analysis"] .pa-main-time-controls {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 13px;
+    border-top: 1px solid rgba(255,255,255,0.13);
+  }
+
+  body[data-mode="player-analysis"] .pa-main-year-row {
+    grid-template-columns: minmax(0, 1fr) 64px;
+    gap: 8px;
+  }
+
+  body[data-mode="player-analysis"] .pa-year-field,
+  body[data-mode="player-analysis"] .pa-scope-field,
+  body[data-mode="player-analysis"] .pa-main-period-fields label {
+    color: rgba(255,255,255,0.68);
+  }
+
+  body[data-mode="player-analysis"] .pa-year-field span {
+    text-align: left;
+  }
+
+  body[data-mode="player-analysis"] .pa-year-field select,
+  body[data-mode="player-analysis"] .pa-main-period-toggle,
+  body[data-mode="player-analysis"] .pa-main-period-fields select {
+    min-height: 40px;
+    border-color: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.95);
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-scope-field {
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  body[data-mode="player-analysis"] .pa-scope-switch {
+    min-height: 42px;
+    border-color: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.09);
+  }
+
+  body[data-mode="player-analysis"] .pa-scope-btn {
+    color: rgba(255,255,255,0.74);
+    font-size: 0.68rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-scope-btn.active {
+    color: #fff;
+  }
+
+  /* Keep each source photo's intrinsic aspect ratio in the compact list. */
+  body[data-mode="player-analysis"] .pa-mobile-list-photo.player-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-list-photo.player-photo img,
+  body[data-mode="player-analysis"] .pa-mobile-list-photo.player-photo.club-niigata img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+/* Keep the fixed analysis switcher and the mobile header in separate layers. */
+@media (max-width: 760px) {
+  body[data-mode="player-analysis"] .pa-bottom-tabs {
+    top: calc(7px + env(safe-area-inset-top));
+    width: calc(100% - 16px);
+    padding: 3px;
+    border-color: rgba(17,20,26,0.08);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.94);
+    box-shadow: 0 8px 22px rgba(17,20,26,0.10), inset 0 1px 0 #fff;
+  }
+
+  body[data-mode="player-analysis"] .pa-bottom-tab {
+    min-height: 43px;
+    padding: 0 5px;
+    border-radius: 13px;
+    color: #707680;
+    font-size: 0.68rem;
+    letter-spacing: 0;
+  }
+
+  body[data-mode="player-analysis"] .pa-bottom-tab.active {
+    color: #fff;
+    background: linear-gradient(135deg, #ff6a24, #f04a0c);
+    box-shadow: 0 6px 14px rgba(var(--albirex-orange-rgb),0.28);
+  }
+
+  body[data-pa-club="kumamoto"][data-mode="player-analysis"] .pa-bottom-tab.active {
+    background: linear-gradient(135deg, #e92845, #b80f2a);
+    box-shadow: 0 6px 14px rgba(214,22,52,0.26);
+  }
+
+  body[data-mode="player-analysis"] .pa-topbar {
+    box-shadow: 0 14px 30px rgba(16,20,27,0.17);
   }
 }

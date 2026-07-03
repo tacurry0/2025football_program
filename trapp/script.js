@@ -2712,14 +2712,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { clubSelect, clubName, clubCrest, clubCaption, clubMenu } = getPlayerAnalysisElements();
     const info = getPlayerAnalysisClubInfo();
     document.body.setAttribute("data-pa-club", info.key);
-    if (clubName) clubName.textContent = info.englishName;
+    if (clubName) clubName.textContent = info.shortName;
     if (clubCrest) {
       clubCrest.src = info.key === "kumamoto"
         ? "./data/assets/icons/roasso_logo1.png"
         : "./data/assets/icons/alb_logo1.png";
       clubCrest.alt = "";
     }
-    if (clubCaption) clubCaption.textContent = `${info.name} 選手データ分析`;
+    if (clubCaption) clubCaption.textContent = `${info.englishName} / PLAYER DATA`;
     if (clubSelect) {
       clubSelect.setAttribute("aria-label", `${info.name}を選択中`);
       clubSelect.setAttribute("aria-expanded", clubMenu && !clubMenu.hidden ? "true" : "false");
@@ -12772,10 +12772,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                        <span class="val-rank-num-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-my">-</span> pts</span>
                     </div>
-                    <div class="dash-prev-result" aria-label="直近結果">
-                      <span class="val-prev-date-my dash-prev-date">-</span>
-                      <div class="dash-prev-matchline"><span class="dash-prev-vs">VS</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-my" alt=""><span class="val-prev-opp-name-my dash-prev-opp-name">-</span><span class="val-prev-score-my dash-prev-score">-</span><span class="val-prev-res-my dash-prev-result-badge">-</span></div>
-                      <span class="val-prev-ha-my dash-prev-ha">-</span>
+                    <div class="dash-prev-meta"><span class="val-prev-date-my">-</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-my" alt=""><span class="val-prev-ha-my dash-prev-ha">-</span></div>
+                    <div class="dash-prev-score-row" style="display:flex; align-items:center; gap:6px;">
+                       <span class="val-prev-score-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
+                       <span class="val-prev-res-my">-</span>
                     </div>
                     <div class="val-prev-form-my" style="min-height:18px;"></div>
                  </div>
@@ -12790,10 +12790,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                        <span class="val-rank-num-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
                        <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-opp">-</span> pts</span>
                     </div>
-                    <div class="dash-prev-result" aria-label="直近結果">
-                      <span class="val-prev-date-opp dash-prev-date">-</span>
-                      <div class="dash-prev-matchline"><span class="dash-prev-vs">VS</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-opp" alt=""><span class="val-prev-opp-name-opp dash-prev-opp-name">-</span><span class="val-prev-score-opp dash-prev-score">-</span><span class="val-prev-res-opp dash-prev-result-badge">-</span></div>
-                      <span class="val-prev-ha-opp dash-prev-ha">-</span>
+                    <div class="dash-prev-meta"><span class="val-prev-date-opp">-</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-opp" alt=""><span class="val-prev-ha-opp dash-prev-ha">-</span></div>
+                    <div class="dash-prev-score-row" style="display:flex; align-items:center; gap:6px;">
+                       <span class="val-prev-score-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
+                       <span class="val-prev-res-opp">-</span>
                     </div>
                     <div class="val-prev-form-opp" style="min-height:18px;"></div>
                  </div>
@@ -13116,7 +13116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         }
 
-        const resHtml = `<span class="dash-prev-outcome" style="--outcome-bg:${badgeColor}; --outcome-color:${badgeText};"><span>●</span>${symbol}</span>`;
+        const resHtml = `<span style="border:1px solid ${badgeColor}; background:${badgeColor}; color:${badgeText}; border-radius:12px; padding:3px 8px; font-size:0.7rem; font-weight:800; display:inline-flex; align-items:center; gap:4px;"><span style="font-size:0.5rem;">●</span> ${symbol}</span>`;
 
         let formHtml = `<div class="dash-form-strip">`;
         const recent5 = past.slice(0, 5).reverse();
