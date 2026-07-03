@@ -151,6 +151,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const calendarPlanBackdrop = document.getElementById("calendar-plan-backdrop");
   const calendarPlanForm = document.getElementById("calendar-plan-form");
   const calendarPlanDate = document.getElementById("calendar-plan-date");
+  const calendarPlanTitle = document.getElementById("calendar-plan-title");
+  const calendarPlanListView = document.getElementById("calendar-plan-list-view");
+  const calendarPlanList = document.getElementById("calendar-plan-list");
+  const calendarPlanDetailView = document.getElementById("calendar-plan-detail-view");
+  const calendarPlanDetailTime = document.getElementById("calendar-plan-detail-time");
+  const calendarPlanDetailName = document.getElementById("calendar-plan-detail-name");
+  const calendarPlanDetailMemo = document.getElementById("calendar-plan-detail-memo");
+  const calendarPlanFormTitle = document.getElementById("calendar-plan-form-title");
   const calendarPlanName = document.getElementById("calendar-plan-name");
   const calendarPlanStart = document.getElementById("calendar-plan-start");
   const calendarPlanEnd = document.getElementById("calendar-plan-end");
@@ -9842,13 +9850,49 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- Calendar Engine ---
 
-  const CALENDAR_PERSONAL_PLANS_KEY = "calendar_personal_plans_v1";
+  const CALENDAR_PERSONAL_PLANS_KEY = "calendar_personal_plans_v2";
+  const CALENDAR_PERSONAL_PLANS_LEGACY_KEY = "calendar_personal_plans_v1";
   let activeCalendarPlanDate = "";
+  let activeCalendarPlanId = "";
+
+  function normalizeCalendarPersonalPlan(plan, fallbackId) {
+    if (!plan || typeof plan !== "object") return null;
+    const title = String(plan.title || plan.name || "").trim();
+    if (!title) return null;
+    return {
+      id: String(plan.id || fallbackId),
+      title,
+      start: String(plan.start || ""),
+      end: String(plan.end || ""),
+      memo: String(plan.memo || plan.details || "").trim()
+    };
+  }
 
   function readCalendarPersonalPlans() {
     try {
-      const plans = JSON.parse(localStorage.getItem(CALENDAR_PERSONAL_PLANS_KEY) || "{}");
-      return plans && typeof plans === "object" && !Array.isArray(plans) ? plans : {};
+      const saved = JSON.parse(localStorage.getItem(CALENDAR_PERSONAL_PLANS_KEY) || "null");
+      if (saved && typeof saved === "object" && !Array.isArray(saved)) {
+        const normalized = {};
+        Object.entries(saved).forEach(([date, items]) => {
+          const sourceItems = Array.isArray(items) ? items : [items];
+          const dayPlans = sourceItems
+            .map((plan, index) => normalizeCalendarPersonalPlan(plan, `plan-${date}-${index}`))
+            .filter(Boolean);
+          if (dayPlans.length) normalized[date] = dayPlans;
+        });
+        return normalized;
+      }
+
+      const legacy = JSON.parse(localStorage.getItem(CALENDAR_PERSONAL_PLANS_LEGACY_KEY) || "{}");
+      const migrated = {};
+      if (legacy && typeof legacy === "object" && !Array.isArray(legacy)) {
+        Object.entries(legacy).forEach(([date, plan]) => {
+          const normalizedPlan = normalizeCalendarPersonalPlan(plan, `legacy-${date}`);
+          if (normalizedPlan) migrated[date] = [normalizedPlan];
+        });
+      }
+      localStorage.setItem(CALENDAR_PERSONAL_PLANS_KEY, JSON.stringify(migrated));
+      return migrated;
     } catch (error) {
       console.warn("Calendar personal plans could not be read", error);
       return {};
@@ -9859,8 +9903,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.setItem(CALENDAR_PERSONAL_PLANS_KEY, JSON.stringify(plans));
   }
 
-  function getCalendarPersonalPlan(date) {
-    return readCalendarPersonalPlans()[date] || null;
+  function getCalendarPersonalPlans(date) {
+    const plans = readCalendarPersonalPlans()[date];
+    return Array.isArray(plans) ? plans : [];
+  }
+
+  function createCalendarPersonalPlanId() {
+    return `plan-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   }
 
   function formatCalendarPlanDate(date) {
@@ -9869,20 +9918,85 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${parsed.getFullYear()}年${parsed.getMonth() + 1}月${parsed.getDate()}日（${weekdays[parsed.getDay()]}）`;
   }
 
-  function openCalendarPersonalPlan(date, options = {}) {
-    if (!date || !calendarPlanSheet || !calendarPlanForm) return;
-    const plan = getCalendarPersonalPlan(date);
-    activeCalendarPlanDate = date;
-    calendarPlanDate.textContent = formatCalendarPlanDate(date);
-    calendarPlanName.value = plan?.name || "";
+  function formatCalendarPlanTime(plan) {
+    if (plan.start && plan.end) return `${plan.start} – ${plan.end}`;
+    if (plan.start) return `${plan.start}から`;
+    if (plan.end) return `${plan.end}まで`;
+    return "時間未設定";
+  }
+
+  function setCalendarPlanView(view) {
+    calendarPlanListView.hidden = view !== "list";
+    calendarPlanDetailView.hidden = view !== "detail";
+    calendarPlanForm.hidden = view !== "form";
+    calendarPlanTitle.textContent = view === "detail" ? "予定の詳細" : (view === "form" ? (activeCalendarPlanId ? "予定を編集" : "予定を追加") : "この日の予定");
+  }
+
+  function renderCalendarPlanList() {
+    const plans = getCalendarPersonalPlans(activeCalendarPlanDate)
+      .slice()
+      .sort((a, b) => (a.start || "99:99").localeCompare(b.start || "99:99") || a.title.localeCompare(b.title, "ja"));
+    if (!plans.length) {
+      calendarPlanList.innerHTML = `
+        <div class="calendar-plan-empty">
+          <span aria-hidden="true">○</span>
+          <strong>予定はありません</strong>
+          <small>下の追加ボタンから登録できます</small>
+        </div>`;
+      return;
+    }
+    calendarPlanList.innerHTML = plans.map(plan => `
+      <button type="button" class="calendar-plan-list-item" data-plan-id="${escapeHtml(plan.id)}">
+        <span class="calendar-plan-list-time">${escapeHtml(formatCalendarPlanTime(plan))}</span>
+        <strong>${escapeHtml(plan.title)}</strong>
+        <span class="calendar-plan-list-chevron" aria-hidden="true">›</span>
+      </button>`).join("");
+    calendarPlanList.querySelectorAll("[data-plan-id]").forEach(button => {
+      button.addEventListener("click", () => showCalendarPlanDetail(button.dataset.planId));
+    });
+  }
+
+  function showCalendarPlanList() {
+    activeCalendarPlanId = "";
+    renderCalendarPlanList();
+    setCalendarPlanView("list");
+  }
+
+  function showCalendarPlanDetail(planId) {
+    const plan = getCalendarPersonalPlans(activeCalendarPlanDate).find(item => item.id === planId);
+    if (!plan) {
+      showCalendarPlanList();
+      return;
+    }
+    activeCalendarPlanId = plan.id;
+    calendarPlanDetailTime.textContent = formatCalendarPlanTime(plan);
+    calendarPlanDetailName.textContent = plan.title;
+    calendarPlanDetailMemo.textContent = plan.memo || "詳細はありません";
+    calendarPlanDetailMemo.classList.toggle("is-empty", !plan.memo);
+    setCalendarPlanView("detail");
+  }
+
+  function showCalendarPlanForm(planId = "") {
+    const plan = planId ? getCalendarPersonalPlans(activeCalendarPlanDate).find(item => item.id === planId) : null;
+    activeCalendarPlanId = plan?.id || "";
+    calendarPlanFormTitle.textContent = plan ? "予定を編集" : "新しい予定";
+    calendarPlanName.value = plan?.title || "";
     calendarPlanStart.value = plan?.start || "";
     calendarPlanEnd.value = plan?.end || "";
     calendarPlanMemo.value = plan?.memo || "";
     calendarPlanDelete.hidden = !plan;
+    setCalendarPlanView("form");
+    window.setTimeout(() => calendarPlanName.focus({ preventScroll: true }), 80);
+  }
+
+  function openCalendarPersonalPlan(date, options = {}) {
+    if (!date || !calendarPlanSheet) return;
+    activeCalendarPlanDate = date;
+    calendarPlanDate.textContent = formatCalendarPlanDate(date);
+    showCalendarPlanList();
     calendarPlanSheet.classList.add("active");
     calendarPlanBackdrop.classList.add("active");
     addAppHistoryEntry("calendar-personal-plan", () => openCalendarPersonalPlan(date, { history: false }), options);
-    window.setTimeout(() => calendarPlanName.focus({ preventScroll: true }), 260);
   }
 
   function closeCalendarPersonalPlan(options = {}) {
@@ -9890,6 +10004,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       calendarPlanSheet?.classList.remove("active");
       calendarPlanBackdrop?.classList.remove("active");
       activeCalendarPlanDate = "";
+      activeCalendarPlanId = "";
     };
     if (options.history === false) closeDirect();
     else closeAppHistoryEntry("calendar-personal-plan", closeDirect);
@@ -9927,6 +10042,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     cell.addEventListener("pointerdown", event => {
       if (event.pointerType === "touch") return;
       if (event.button !== undefined && event.button !== 0) return;
+      event.preventDefault();
       start(event.clientX, event.clientY);
     });
     cell.addEventListener("pointermove", event => {
@@ -9945,6 +10061,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, { passive: true });
     cell.addEventListener("touchend", cancel, { passive: true });
     cell.addEventListener("touchcancel", cancel, { passive: true });
+    cell.addEventListener("selectstart", event => event.preventDefault());
     cell.addEventListener("contextmenu", event => {
       event.preventDefault();
       cancel();
@@ -9956,30 +10073,45 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   calendarPlanForm?.addEventListener("submit", event => {
     event.preventDefault();
-    const name = calendarPlanName.value.trim();
-    if (!activeCalendarPlanDate || !name) {
+    const title = calendarPlanName.value.trim();
+    if (!activeCalendarPlanDate || !title) {
       calendarPlanName.focus();
       return;
     }
     const plans = readCalendarPersonalPlans();
-    plans[activeCalendarPlanDate] = {
-      name,
+    const dayPlans = Array.isArray(plans[activeCalendarPlanDate]) ? plans[activeCalendarPlanDate] : [];
+    const savedPlan = {
+      id: activeCalendarPlanId || createCalendarPersonalPlanId(),
+      title,
       start: calendarPlanStart.value,
       end: calendarPlanEnd.value,
       memo: calendarPlanMemo.value.trim()
     };
+    const existingIndex = dayPlans.findIndex(plan => plan.id === savedPlan.id);
+    if (existingIndex >= 0) dayPlans[existingIndex] = savedPlan;
+    else dayPlans.push(savedPlan);
+    plans[activeCalendarPlanDate] = dayPlans;
     writeCalendarPersonalPlans(plans);
-    closeCalendarPersonalPlan();
     renderCalendar();
+    showCalendarPlanDetail(savedPlan.id);
   });
 
   calendarPlanDelete?.addEventListener("click", () => {
-    if (!activeCalendarPlanDate) return;
+    if (!activeCalendarPlanDate || !activeCalendarPlanId) return;
     const plans = readCalendarPersonalPlans();
-    delete plans[activeCalendarPlanDate];
+    const remaining = (plans[activeCalendarPlanDate] || []).filter(plan => plan.id !== activeCalendarPlanId);
+    if (remaining.length) plans[activeCalendarPlanDate] = remaining;
+    else delete plans[activeCalendarPlanDate];
     writeCalendarPersonalPlans(plans);
-    closeCalendarPersonalPlan();
     renderCalendar();
+    showCalendarPlanList();
+  });
+  document.getElementById("calendar-plan-add")?.addEventListener("click", () => showCalendarPlanForm());
+  document.getElementById("calendar-plan-detail-back")?.addEventListener("click", showCalendarPlanList);
+  document.getElementById("calendar-plan-edit")?.addEventListener("click", () => showCalendarPlanForm(activeCalendarPlanId));
+  document.getElementById("calendar-plan-form-back")?.addEventListener("click", () => {
+    if (activeCalendarPlanId) showCalendarPlanDetail(activeCalendarPlanId);
+    else showCalendarPlanList();
   });
   document.getElementById("calendar-plan-close")?.addEventListener("click", () => closeCalendarPersonalPlan());
   calendarPlanBackdrop?.addEventListener("click", () => closeCalendarPersonalPlan());
@@ -10024,12 +10156,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       const dayMatches = matchesInMonth.filter(m => m.date === dateStr);
-      const personalPlan = getCalendarPersonalPlan(dateStr);
+      const personalPlans = getCalendarPersonalPlans(dateStr);
       cell.dataset.date = dateStr;
       cell.dataset.matchCount = String(dayMatches.length);
-      cell.setAttribute("aria-label", `${month}月${d}日${dayMatches.length ? `、${dayMatches.length}試合` : ""}${personalPlan ? `、予定：${personalPlan.name}` : ""}。長押しで予定を確認・入力`);
+      cell.setAttribute("aria-label", `${month}月${d}日${dayMatches.length ? `、${dayMatches.length}試合` : ""}${personalPlans.length ? `、予定${personalPlans.length}件` : ""}。長押しで予定を確認・追加`);
 
-      if (personalPlan) cell.classList.add("has-personal-plan");
+      if (personalPlans.length) cell.classList.add("has-personal-plan");
 
       // 観戦予定のハイライト判定
       dayMatches.forEach(m => {

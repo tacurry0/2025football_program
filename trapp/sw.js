@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v81-calendar-personal-plan';
+const cacheName = 'football-app-v82-calendar-plan-list';
 const assetsToCache = [
   './',
   './index.html',
