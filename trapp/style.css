@@ -11769,3 +11769,22 @@ body.side-menu-open #ultra-nav { display: none !important; }
     box-shadow: 0 14px 30px rgba(16,20,27,0.17);
   }
 }
+/* League-specific standings, preserving the existing club accents. */
+.league-controls { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin:12px 0; }
+.league-controls label { display:flex; align-items:center; gap:8px; font-size:14px; }
+.league-controls select, .league-controls button { font:inherit; min-height:44px; padding:8px 12px; border:1px solid #cbd0d8; border-radius:8px; background:#fff; color:#222; }
+.league-tabs { display:flex; gap:8px; margin:16px 0; }
+.league-tabs button { flex:1; min-height:48px; border:1px solid #cbd0d8; border-radius:10px; background:#fff; color:#222; font-size:18px; font-weight:800; cursor:pointer; }
+.league-tabs button span { font-size:14px; margin-left:8px; }
+.league-tabs button[aria-pressed="true"][data-league="j2"] { background:#fff0e6; border-color:#db5700; color:#963a00; }
+.league-tabs button[aria-pressed="true"][data-league="j3"] { background:#fff0f0; border-color:#ba2525; color:#9b1515; }
+.league-data-status { color:#555; font-size:14px; line-height:1.6; margin:10px 0; }
+.league-data-status.is-stale { color:#8a4300; background:#fff4df; padding:10px; border-radius:8px; }
+.league-table-scroll { width:100%; overflow-x:auto; border:1px solid #e0e3e8; border-radius:10px; margin-bottom:22px; }
+.league-table-scroll .standings-table { margin:0; width:100%; min-width:650px; border-radius:0; }
+.league-table-scroll th button { color:inherit; background:none; border:0; padding:10px 4px; font:inherit; cursor:pointer; min-height:44px; white-space:nowrap; }
+.league-team-link { display:flex; gap:8px; align-items:center; color:inherit; font:inherit; border:0; background:none; text-align:left; cursor:pointer; min-height:40px; }
+.league-controls :focus-visible, .league-tabs :focus-visible, .league-table-scroll :focus-visible { outline:3px solid #176bb8; outline-offset:2px; }
+.league-empty { padding:24px 8px; color:#9c2525; }
+.dash-league-status { margin:8px 0 0; font-size:12px; color:#666; line-height:1.5; }
+.dash-league-status.is-stale { color:#8a4300; }

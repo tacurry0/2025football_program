@@ -79,7 +79,7 @@
     },
     match: {
       phase: "fulltime",
-      league: "明治安田\nJ2・J3 百年構想リーグ",
+      league: "明治安田\nJ2リーグ",
       round: "第12節",
       firstHome: "0",
       firstAway: "0",
@@ -167,18 +167,20 @@
         <text x="49" y="36" font-family="Arial, sans-serif" font-size="14" font-weight="900" text-anchor="middle">J2</text>
         <text x="49" y="52" font-family="Arial, sans-serif" font-size="14" font-weight="900" text-anchor="middle">J3</text>
         <text x="92" y="35" font-family="BIZUDPGothicLocal, BIZ UDPGothic, Noto Sans JP, sans-serif" font-size="25" font-weight="900">明治安田</text>
-        <text x="92" y="63" font-family="BIZUDPGothicLocal, BIZ UDPGothic, Noto Sans JP, sans-serif" font-size="24" font-weight="900">J2・J3 百年構想リーグ</text>
+        <text x="92" y="63" font-family="BIZUDPGothicLocal, BIZ UDPGothic, Noto Sans JP, sans-serif" font-size="24" font-weight="900">J2リーグ</text>
       </g>
     </svg>`;
     return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
   }
 
   const DEFAULT_LEAGUE_IMAGE = makeDefaultLeagueImage();
-  const DEFAULT_LEAGUE_ASSET = "../data/assets/icons/100l.png?v=20260601assets1";
+  const DEFAULT_LEAGUE_ASSET = "../data/assets/icons/j2.png?v=20260601assets1";
   const LEAGUE_LOGO_ASSETS = {
     hundred: "../data/assets/icons/100l.png?v=20260601assets1",
     j1: "../data/assets/icons/j1.png?v=20260601assets1",
-    j2: "../data/assets/icons/j2.png?v=20260601assets1"
+    j2: "../data/assets/icons/j2.png?v=20260601assets1",
+    j3: "../data/assets/icons/j3_2.png?v=20260907",
+    leaguecup: "../data/assets/icons/ylc_logo1.jpg?v=20260907"
   };
   const LEAGUE_LOGO_OPTIONS = Object.values(LEAGUE_LOGO_ASSETS);
 
@@ -942,6 +944,7 @@
     if (/^\.\.\/data\/assets\/icons\/[^"'<>]+\.(png|webp|jpg|jpeg|svg)(\?[^"'<>]*)?$/i.test(text)) return text;
     if (/icons\/j1\.png/i.test(text)) return LEAGUE_LOGO_ASSETS.j1;
     if (/icons\/j2\.png/i.test(text)) return LEAGUE_LOGO_ASSETS.j2;
+    if (/icons\/j3(?:_2)?\.png/i.test(text)) return LEAGUE_LOGO_ASSETS.j3;
     if (/icons\/100l\.png/i.test(text)) return LEAGUE_LOGO_ASSETS.hundred;
     return DEFAULT_LEAGUE_ASSET;
   }
@@ -1541,6 +1544,8 @@
     if (/(^|[^A-Z0-9])J2([^A-Z0-9]|$)/i.test(text) || text.includes("明治安田J2")) {
       return LEAGUE_LOGO_ASSETS.j2;
     }
+    if (/(^|[^A-Z0-9])J3([^A-Z0-9]|$)/i.test(text) || text.includes("明治安田J3")) return LEAGUE_LOGO_ASSETS.j3;
+    if (/ルヴァン|YBC|YLC/i.test(text)) return LEAGUE_LOGO_ASSETS.leaguecup;
     return "";
   }
 
@@ -1551,15 +1556,12 @@
   }
 
   function getLeagueNameForMatch(matchData) {
-    const competition = matchData && matchData.competition || "";
-    if (competition) return competition;
-    return getMatchDataYear(matchData) === 2026 ? "J2・J3 百年構想リーグ" : "";
+    return window.TrappLeague.context(matchData || {}).label;
   }
 
   function getLeagueLogoForMatch(matchData) {
-    const fromText = getLeagueLogoFromText(matchData && matchData.competition || "");
-    if (fromText) return fromText;
-    return getMatchDataYear(matchData) === 2026 ? LEAGUE_LOGO_ASSETS.hundred : "";
+    const context = window.TrappLeague.context(matchData || {});
+    return LEAGUE_LOGO_ASSETS[context.competition === "j2j3" ? "hundred" : context.competition] || getLeagueLogoFromText(context.label);
   }
 
   function extractOfficialLeagueName(text) {
@@ -1567,7 +1569,7 @@
     if (officialMatch) return officialMatch[1].trim();
     const lines = text.split("\n").map((line) => line.trim()).filter(Boolean);
     return lines.find((line) => (
-      /明治安田|J1|J2|百年構想リーグ/.test(line) && /第\s*\d+\s*節/.test(line)
+      /明治安田|J1|J2|J3|百年構想リーグ/.test(line) && /第\s*\d+\s*節/.test(line)
     )) || "";
   }
 
@@ -3796,7 +3798,6 @@
     }
   });
 })();
-
 
 
 

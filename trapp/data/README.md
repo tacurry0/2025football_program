@@ -4,7 +4,7 @@
 
 ## Active Data
 
-- `schedule/2026.json`
+- `schedule/2026_2027.json`
   - ホーム画面、日程一覧、カレンダーの初期日程。
   - 参照元: `schedule/schedule.js`, `script.js`
 
@@ -19,12 +19,23 @@
   - 参照元: `script.js`
 
 - `results/results.json`
-  - GAS結果取得が失敗した場合のローカルfallback。
+  - 百年構想リーグの取得済み結果。2026年2〜6月分を履歴として読む。
   - 参照元: `script.js`
 
+- `results/2026_2027/{j2,j3}.json`
+  - J2/J3別の正常取得済み結果。GAS更新前・通信失敗・オフライン時にも表示可能。
+  - 参照元: `league-data.js`, `script.js`
+
+- `standings/2026_2027/{j2,j3}.json`
+  - J2/J3それぞれ20クラブの順位表。各ファイルに実際の取得日時と公式更新日を保持。
+  - 参照元: `league-data.js`, `script.js`
+
+- `standings/archive/2026_hundred.json`
+  - 2026年4月17日に取得した百年構想リーグの保存分。最終順位ではない。
+  - 参照元: `league-ui.js`
+
 - `standings/current.json`
-  - GAS順位表取得が失敗した場合、またはGAS順位表に新潟/熊本がない場合のローカルfallback。
-  - 参照元: `script.js`
+  - 現行J2/J3の統合スナップショット。互換参照用。新しい画面はリーグ別ファイルを読む。
 
 - `clubs/club_emblems.json`
   - クラブ名からエンブレム画像への対応表。
@@ -53,3 +64,7 @@
 
 - `old/`
   - 現在の参照元からは読まない旧データ、重複データ、検証用データ。
+
+## League data service
+
+GASの導入・取得仕様・検証手順は `../gas/README.md` を参照。

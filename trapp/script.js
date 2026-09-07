@@ -46,6 +46,7 @@ window.openClubSite = async function(clubName, event) {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const leagueClient = window.TrappLeague.createClient();
   const waitForScheduleReady = () => {
     if (!window.scheduleDataReady) return Promise.resolve();
     const timeout = new Promise(resolve => setTimeout(resolve, 1200));
@@ -113,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   await loadScheduleFallback();
 
-  var scheduleData = window.scheduleData = normalizeAsciiFieldsInPlace(window.scheduleData || []);
+  var scheduleData = window.scheduleData = normalizeAsciiFieldsInPlace(window.scheduleData || []).map(window.TrappLeague.annotate);
   const feedSlider = document.getElementById("feed-slider");
   const calendarBody = document.getElementById("calendar-body");
   const ultraFeed = document.getElementById("ultra-feed");
@@ -183,6 +184,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let allSections = [];
   let visibleSections = [];
   let selectedYear = null;
+  let selectedSeason = "";
   let renderedFeedYear = undefined;
   let currentMode = "dashboard"; // dashboard, feed, calendar, standings, links, chants, player-analysis or vision
   let lineupDetailExpanded = false;
@@ -191,7 +193,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     selected: [],
     available: []
   };
-  const SCHEDULE_COMPETITION_FILTER_OPTIONS = ["リーグ", "カップ", "その他"];
+  const SCHEDULE_COMPETITION_FILTER_OPTIONS = ["リーグ", "カップ", "百年構想", "その他"];
   const PLAYER_ANALYSIS_YEAR_START = 1994;
   const PLAYER_ANALYSIS_YEAR_END = 2026;
   const PLAYER_ANALYSIS_CLUBS = {
@@ -9702,7 +9704,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function updateYearTabState() {
     Object.keys(yearTabs).forEach(k => {
-      if (yearTabs[k]) yearTabs[k].classList.toggle("active", Number(k) === selectedYear);
+      if (yearTabs[k]) yearTabs[k].classList.toggle("active", selectedSeason ? k === selectedSeason : Number(k) === selectedYear);
     });
     scrollActiveNavItem(yearTabContainer, ".year-tab.active");
   }
@@ -9742,14 +9744,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     yearTabContainer.innerHTML = "";
     yearTabs = {};
 
-    getAvailableYears().forEach(y => {
+    [window.TrappLeague.SEASON, ...getAvailableYears()].forEach(y => {
       const key = String(y);
       const btn = document.createElement("button");
       btn.id = `toggle-year-${key}`;
       btn.className = "year-tab";
-      btn.textContent = key;
+      btn.textContent = key === window.TrappLeague.SEASON ? "2026/27" : key;
       btn.onclick = async () => {
-        await applyYearFilter(Number(key));
+        await applyYearFilter(key === window.TrappLeague.SEASON ? key : Number(key));
       };
       yearTabContainer.appendChild(btn);
       yearTabs[key] = btn;
@@ -9783,6 +9785,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function applyYearFilter(year, skipScroll = false) {
+    const nextSeason = year === window.TrappLeague.SEASON ? year : "";
+    if (selectedSeason !== nextSeason) renderedFeedYear = undefined;
+    selectedSeason = nextSeason;
     const normalizedYear = year === null || year === undefined || year === "" ? null : Number(year);
     selectedYear = Number.isFinite(normalizedYear) && normalizedYear > 0 ? normalizedYear : null;
     const shouldLoadHistory = selectedYear && selectedYear <= HISTORY_END_YEAR;
@@ -10308,16 +10313,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getScheduleCompetitionFilterName(match) {
-    const text = getMatchCompetitionText(match);
-    const year = Number(toIsoDate(match && match.date || "").slice(0, 4));
-    const matchweek = String((match && match.matchweek) || "").normalize("NFKC").trim();
-    if (/百年構想|100年構想/.test(text) || (year === 2026 && /^MW\s*\d+$/i.test(matchweek))) return "カップ";
-    if (/カップ|ナビスコ|ルヴァン|天皇杯|スーパーカップ|ACL|YBC/i.test(text)) return "カップ";
-    if (/^PO\s*\d+$/i.test(matchweek) || /昇格プレーオフ|J1参入プレーオフ|J1昇格|サテライト|エリート|SATELLITE|ELITE|プレシーズン|親善/i.test(text)) return "その他";
-    if (/リーグ|ディビジョン|J1|J2|J3|Ｊ1|Ｊ2|Ｊ3/i.test(text)) return "リーグ";
-    const detailHead = String((match && match.details) || "").normalize("NFKC").trim().split(/\s+/)[0] || "";
-    if (/^(J1|J2|J3)$/i.test(detailHead)) return "リーグ";
-    if (/^(LC|EC)$/i.test(detailHead)) return "カップ";
+    const ctx = window.TrappLeague.context(match);
+    if (ctx.competition === "j2j3") return "百年構想";
+    if (["j1", "j2", "j3"].includes(ctx.competition)) return "リーグ";
+    if (["leaguecup", "emperor"].includes(ctx.competition)) return "カップ";
+    if (/カップ|ナビスコ|ルヴァン|天皇杯|スーパーカップ|ACL|YBC/i.test(getMatchCompetitionText(match))) return "カップ";
     return "その他";
   }
 
@@ -10400,7 +10400,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function getRoundDisplayClass(match, baseClass = "") {
     const text = getMatchCompetitionText(match);
     const year = Number(toIsoDate(match && match.date || "").slice(0, 4));
-    const inferredHundredConcept = year === 2026 && /^MW\s*\d+$/i.test(String(match && match.matchweek || ""));
+    const inferredHundredConcept = window.TrappLeague.context(match).competition === "j2j3";
     const isPromotionPlayoff = /^PO\s*\d+$/i.test(String(match && match.matchweek || ""))
       || /昇格プレーオフ|プレーオフラウンド|プレイオフラウンド/i.test(text);
     const classes = [baseClass].filter(Boolean);
@@ -11289,12 +11289,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function getVisionLeagueLogo(match) {
-    const year = parseDate(match.date).getFullYear();
-    const text = `${match.tournament || ""} ${match.competition || ""} ${match.league || ""}`;
-    if (year === 2026 || /百年構想/.test(text)) return "../data/assets/icons/100l.png?v=20260601assets1";
-    if (/J1|Ｊ１/.test(text)) return "../data/assets/icons/j1.png?v=20260601assets1";
-    if (/J2|Ｊ２/.test(text)) return "../data/assets/icons/j2.png?v=20260601assets1";
-    return "../data/assets/icons/100l.png?v=20260601assets1";
+    const key = window.TrappLeague.context(match).competition;
+    const icons = { j1: "j1.png", j2: "j2.png", j3: "j3_2.png", j2j3: "100l.png", leaguecup: "ylc_logo1.jpg" };
+    return icons[key] ? `../data/assets/icons/${icons[key]}?v=20260907` : "";
   }
 
   function normalizeVisionClubName(name) {
@@ -11428,7 +11425,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
       match: {
         phase: phase === "pre" ? "kickoff" : "fulltime",
-        league: parseDate(detail.date).getFullYear() === 2026 ? "明治安田\nJ2・J3 百年構想リーグ" : (detail.tournament || ""),
+        league: window.TrappLeague.context(detail).label,
         round: formatVisionRoundLabel(detail),
         firstHome: scores.firstHome,
         firstAway: scores.firstAway,
@@ -12006,27 +12003,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     else closeAppHistoryEntry("match-detail", closeDirect);
   }
 
-  const GAS_EXEC_URL = "https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec";
-
-  // --- Results & Data Management ---
+  // --- Competition/season-scoped results and standings ---
   let officialResults = [];
   let cachedStandings = null;
+  let cachedStandingsPayload = null;
+  let cachedResultsPayload = null;
+  let standingsRequest = 0;
   let cachedLeagueResults = [];
   let officialResultIndex = new Map();
-  const STANDINGS_CACHE_MAX_AGE = 5 * 60 * 1000;
-  const RESULTS_CACHE_MAX_AGE = 6 * 60 * 60 * 1000;
-  const RESULT_GAS_SOURCE_PARAMS = [
-    { league: "j2" },
-    { league: "playoff" },
-    { league: "all" },
-    { league: "playoff", competition_years: "20261", competition_frame_ids: "36" },
-    { league: "playoff", competition_years: "20261", competition_frame_ids: "28" },
-    { league: "playoff", competition_years: "20261", competition_frame_ids: "20" },
-    { league: "playoff", competition_years: "20261", competition_frame_ids: "33" },
-    { league: "playoff", competition_years: "20261", competition_frame_ids: "26" },
-    { league: "j2", stage: "playoff" },
-    { league: "j2", competition: "playoff" }
-  ];
+  const STANDINGS_CACHE_MAX_AGE = 30 * 60 * 1000;
+  const RESULTS_CACHE_MAX_AGE = 30 * 60 * 1000;
 
   function readTimedCache(key, maxAgeMs) {
     try {
@@ -12041,12 +12027,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function writeTimedCache(key, data) {
-    localStorage.setItem(key, JSON.stringify({ savedAt: Date.now(), data }));
+    try { localStorage.setItem(key, JSON.stringify({ savedAt: Date.now(), data })); } catch (_) {}
   }
 
   // Initialize data from localStorage cache
-  cachedStandings = normalizeAsciiFieldsInPlace(readTimedCache("trapp_standings_cache", STANDINGS_CACHE_MAX_AGE));
-  cachedLeagueResults = normalizeAsciiFieldsInPlace(readTimedCache("trapp_results_cache", RESULTS_CACHE_MAX_AGE) || []);
+  // Legacy keys remain untouched for recovery; active-season data uses v2 keys.
+  cachedLeagueResults = normalizeAsciiFieldsInPlace(readTimedCache("trapp_v2_2026_2027_results_combined", RESULTS_CACHE_MAX_AGE) || []);
 
   function getResultArray(payload) {
     if (!payload) return [];
@@ -12078,7 +12064,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function resultMatchesScheduleMatch(result, match) {
-    if (!result || !match) return false;
+    if (!result || !match || !window.TrappLeague.compatible(result, match)) return false;
+    if (result.match_id && match.match_id) return result.match_id === match.match_id;
     const resultDate = toIsoDate(result.date || "");
     const matchDate = toIsoDate(match.date || "");
     if (resultDate && matchDate && resultDate !== matchDate) return false;
@@ -12125,7 +12112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function normalizeOfficialResult(result) {
     if (!result) return null;
-    const normalized = { ...result };
+    const normalized = window.TrappLeague.annotate(result);
     normalizeAsciiFieldsInPlace(normalized);
     if (normalized.date) normalized.date = toIsoDate(normalized.date);
     if (normalized.home) normalized.home = cleanResultTeamName(normalized.home);
@@ -12136,15 +12123,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getResultFixtureKey(result) {
     if (!result) return "";
+    if (result.match_id) return window.TrappLeague.fixtureKey(result);
     const date = toIsoDate(result.date || "");
     if (result.home || result.away) {
       const sides = [canonicalTeamName(result.home || ""), canonicalTeamName(result.away || "")].sort().join(":");
-      return ["fixture", date, sides].join("|");
+      const ctx = window.TrappLeague.context(result);
+      return ["fixture", ctx.season, ctx.competition, date, sides].join("|");
     }
     if (result.club && result.opponent) {
       const own = result.club === "niigata" ? "新潟" : result.club === "kumamoto" ? "熊本" : result.club;
       const sides = [canonicalTeamName(own), canonicalTeamName(result.opponent)].sort().join(":");
-      return ["fixture", date, sides].join("|");
+      const ctx = window.TrappLeague.context(result);
+      return ["fixture", ctx.season, ctx.competition, date, sides].join("|");
     }
     return ["fixture", date, canonicalTeamName(result.section || "")].join("|");
   }
@@ -12245,6 +12235,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const result = normalizeOfficialResult({
       date: match.date,
+      season: window.TrappLeague.context(match).season,
+      competition_id: window.TrappLeague.context(match).competition,
+      match_id: match.match_id,
       club: match.club,
       opponent: match.opponent,
       home_away: isOwnHome ? "H" : "A",
@@ -12286,19 +12279,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function mergeOfficialResults(results) {
-    const resultSeen = new Set(getResultArray(officialResults).map(r => getResultKey(r)));
+    const byFixture = new Map(getResultArray(officialResults).map(r => [getResultFixtureKey(r), r]));
     let changed = false;
 
     getResultArray(results).forEach(raw => {
       const result = normalizeOfficialResult(raw);
       if (!result || !result.date) return;
-      const key = getResultKey(result);
-      if (resultSeen.has(key)) return;
-      officialResults.push(result);
-      resultSeen.add(key);
+      const key = getResultFixtureKey(result);
+      const existing = byFixture.get(key);
+      if (existing && JSON.stringify(existing) === JSON.stringify(result)) return;
+      if (existing?.status === "finished" && result.status && result.status !== "finished") return;
+      byFixture.set(key, result);
       changed = true;
     });
 
+    if (changed) officialResults = Array.from(byFixture.values());
     if (changed) rebuildOfficialResultIndex();
     if (changed) renderedFeedYear = undefined;
     return changed;
@@ -12323,45 +12318,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
   }
 
-  function buildGasUrl(type, params = {}) {
-    const query = new URLSearchParams({ type, ...params });
-    if (!query.has("league")) query.set("league", "j2");
-    query.set("nocache", "1");
-    query.set("t", String(Date.now()));
-    return `${GAS_EXEC_URL}?${query.toString()}`;
-  }
-
-  async function fetchGasJson(type, params = {}, timeoutMs = 12000) {
-    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
-    const timeoutId = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
-    try {
-      const res = await fetch(buildGasUrl(type, params), controller ? { signal: controller.signal } : undefined);
-      if (!res.ok) throw new Error(`GAS ${type} HTTP ${res.status}`);
-      return await res.json();
-    } finally {
-      if (timeoutId) clearTimeout(timeoutId);
-    }
-  }
-
-  async function fetchGasResults(forceGas = false) {
-    const timeoutMs = forceGas ? 45000 : 6500;
-    const sourceParams = forceGas ? RESULT_GAS_SOURCE_PARAMS : RESULT_GAS_SOURCE_PARAMS.slice(0, 3);
-    const settled = await Promise.allSettled(
-      sourceParams.map(params => fetchGasJson("results", params, timeoutMs))
-    );
-    const payloads = settled
-      .filter(item => item.status === "fulfilled" && getResultArray(item.value).length)
-      .map(item => item.value);
-    return payloads.length ? mergeResultPayloads(payloads) : null;
-  }
-
   async function refreshLeagueResults(forceGas = false) {
     const json = await fetchData("results", forceGas);
     const results = getResultArray(json);
 
     if (results.length) {
       cachedLeagueResults = results.map(normalizeOfficialResult).filter(Boolean);
-      writeTimedCache("trapp_results_cache", cachedLeagueResults);
+      writeTimedCache("trapp_v2_2026_2027_results_combined", cachedLeagueResults);
       mergeOfficialResults(cachedLeagueResults);
       syncResultsToLocalStorage(cachedLeagueResults);
       return cachedLeagueResults;
@@ -12375,69 +12338,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function fetchLocalJson(type) {
-    const paths = {
-      standings: ["./data/standings/current.json"],
-      results: ["./data/results/playoffs.json", "./data/results/current.json", "./data/results/results.json", "./data/results.json"]
-    }[type] || [`./data/${type}.json`];
-
-    if (type === "results") {
-      const payloads = [];
-      for (const path of paths) {
-        try {
-          const res = await fetch(`${path}?t=${Date.now()}`, { cache: "no-store" });
-          if (res.ok) payloads.push(normalizeAsciiFieldsInPlace(await res.json()));
-        } catch (e) {
-          console.warn(`Static load failed: ${path}`);
-        }
-      }
-      return payloads.length ? mergeResultPayloads(payloads) : null;
-    }
-
-    for (const path of paths) {
+    const payloads = await Promise.all(["j2", "j3"].map(async league => {
       try {
-        const res = await fetch(`${path}?t=${Date.now()}`, { cache: "no-store" });
-        if (res.ok) return normalizeAsciiFieldsInPlace(await res.json());
-      } catch (e) {
-        console.warn(`Static load failed: ${path}`);
-      }
-    }
-    return null;
+        const payload = await fetchHistoryFile(`./data/${type}/${window.TrappLeague.SEASON}/${league}.json`);
+        let saved = null;
+        try { saved = JSON.parse(localStorage.getItem(`trapp_v2_${window.TrappLeague.SEASON}_${league}_${type}`) || "null"); } catch (_) {}
+        const candidates = [payload, saved].filter(p => window.TrappLeague.validPayload(p, type, league));
+        candidates.sort((a, b) => Date.parse(b.fetchedAt) - Date.parse(a.fetchedAt));
+        return candidates[0] ? { ...candidates[0], stale: true, source: candidates[0] === saved ? "cache" : "bundled" } : null;
+      } catch (_) { return null; }
+    }));
+    const valid = payloads.filter(Boolean);
+    return { data: valid.flatMap(p => p.data), sources: Object.fromEntries(valid.map(p => [p.league, p])) };
   }
 
-  function standingsHaveDashboardTeams(rows) {
-    if (!Array.isArray(rows)) return false;
-    const hasNiigata = rows.some(row => robustTeamMatch(row.team, "アルビレックス新潟") || robustTeamMatch(row.team, "新潟"));
-    const hasKumamoto = rows.some(row => robustTeamMatch(row.team, "ロアッソ熊本") || robustTeamMatch(row.team, "熊本"));
-    return hasNiigata && hasKumamoto;
-  }
-
-  /**
-   * Universal fetch with fallback and stale check
-   */
   async function fetchData(type, forceGas = false) {
-    let staticJson = await fetchLocalJson(type);
-
-    if (type === "results") {
-      try {
-        const gasJson = normalizeAsciiFieldsInPlace(await fetchGasResults(forceGas));
-        const payloads = [staticJson, gasJson].filter(Boolean);
-        if (payloads.length) return mergeResultPayloads(payloads);
-      } catch (e) {
-        console.warn(`GAS fetch failed, using local fallback: ${type}`);
-      }
-      return staticJson;
+    const payload = normalizeAsciiFieldsInPlace(await leagueClient.all(type, forceGas));
+    if (type === "standings") {
+      cachedStandingsPayload = payload;
+      cachedStandings = payload.data;
+    } else {
+      cachedResultsPayload = payload;
     }
-
-    try {
-      const gasJson = normalizeAsciiFieldsInPlace(await fetchGasJson(type, { league: "j2" }, forceGas ? 45000 : 12000));
-      const gasArr = gasJson.data || (Array.isArray(gasJson) ? gasJson : []);
-      const staticArr = (staticJson && staticJson.data) ? staticJson.data : (Array.isArray(staticJson) ? staticJson : []);
-      if (type === "standings" && standingsHaveDashboardTeams(staticArr) && !standingsHaveDashboardTeams(gasArr)) {
-        return staticJson;
-      }
-      if (gasArr.length >= staticArr.length && gasArr.length > 0) return gasJson;
-    } catch (e) { console.warn(`GAS fetch failed, using local fallback: ${type}`); }
-    return staticJson;
+    return payload;
   }
 
   /**
@@ -12452,7 +12375,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const stdJson = await standingsPromise;
     if (stdJson && stdJson.data) {
       cachedStandings = stdJson.data;
-      writeTimedCache("trapp_standings_cache", cachedStandings);
+      writeTimedCache("trapp_v2_2026_2027_standings_combined", cachedStandings);
     }
 
     if (currentMode === "dashboard") renderDashboard();
@@ -12471,11 +12394,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   function findOfficialResult(match) {
     if (!officialResults || !officialResults.length) return null;
     const indexed = officialResultIndex.get(getScheduleResultKey(match.date, match.club, match.opponent));
-    if (indexed) return indexed;
+    if (indexed && window.TrappLeague.compatible(indexed, match)) return indexed;
+    if (match.match_id) {
+      const exact = officialResults.find(r => r.match_id === match.match_id && window.TrappLeague.compatible(r, match));
+      if (exact) return exact;
+    }
 
     const myKw = match.club === "niigata" ? "新潟" : "熊本";
     
     return officialResults.map(normalizeOfficialResult).filter(Boolean).find(r => {
+      if (!window.TrappLeague.compatible(r, match)) return false;
       if (resultMatchesScheduleMatch(r, match)) return true;
 
       // Static JSON Format Support
@@ -12494,11 +12422,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       const oppMatch = robustTeamMatch(opp, match.opponent);
       
       if (dateMatch && oppMatch) return true;
-      if (r.section && match.matchweek) {
-         const rSec = parseInt(r.section);
-         const mSec = parseInt(match.matchweek.replace(/\D/g, ""));
-         if (rSec === mSec && oppMatch) return true;
-      }
       return false;
     });
   }
@@ -12515,11 +12438,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     getResultArray(results).forEach(r => {
       r = normalizeOfficialResult(r);
-      if (!r || !r.date) return;
+      if (!r || !r.date || (r.status && r.status !== "finished")) return;
       const m = r.club && r.opponent
         ? matchByKey.get(getScheduleResultKey(r.date, r.club, r.opponent))
         : findScheduleMatchForResult(r);
-      if (!m) return;
+      if (!m || !window.TrappLeague.compatible(r, m)) return;
 
       const scores = extractOwnResultScores(r, m);
       if (!scores) return;
@@ -12557,7 +12480,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     fetchData("standings").then(stdJson => {
       if (stdJson && stdJson.data) {
         cachedStandings = stdJson.data;
-        writeTimedCache("trapp_standings_cache", cachedStandings);
+        writeTimedCache("trapp_v2_2026_2027_standings_combined", cachedStandings);
         if (currentMode === "dashboard") renderDashboard();
       }
     });
@@ -12918,18 +12841,29 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = cachedStandings;
       if (!data) return;
 
-      const findStandingRow = (teamName) => {
+      const findStandingRow = (teamName, league) => {
         if (!teamName) return null;
-        return data.find(row => row.team && robustTeamMatch(row.team, teamName)) || null;
+        return data.find(row => row.league === league && row.season === window.TrappLeague.SEASON && row.team && robustTeamMatch(row.team, teamName)) || null;
       };
       
       const updateStatsCard = (m, myKeyword) => {
         if (!m) return;
-        const myData = findStandingRow(myKeyword);
-        const oppData = findStandingRow(m.opponent);
+        const league = m.club === "kumamoto" ? "j3" : "j2";
+        const myData = findStandingRow(myKeyword, league);
+        const oppData = findStandingRow(m.opponent, league);
 
         const card = document.getElementById(`dash-card-${m.club}`);
         if (card) {
+          let status = card.querySelector(".dash-league-status");
+          if (!status) {
+            status = document.createElement("p");
+            status.className = "dash-league-status";
+            (card.querySelector(".dash-card-body") || card).appendChild(status);
+          }
+          const source = cachedStandingsPayload?.sources?.[league];
+          const resultsSource = cachedResultsPayload?.sources?.[league];
+          status.classList.toggle("is-stale", !!source?.stale || !!resultsSource?.stale);
+          status.textContent = `${league.toUpperCase()}順位表 ${source?.stale ? "保存データ" : ""}／取得: ${source?.fetchedAt ? new Date(source.fetchedAt).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }) : "未取得"}${resultsSource?.stale ? "（結果も保存データ）" : ""}`;
           if (myData) {
             const rankEl = card.querySelector('.val-rank-num-my');
             const ptsEl = card.querySelector('.val-pts-my');
@@ -13213,9 +13147,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     feedSlider.innerHTML = "";
     scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
     const ymMap = {};
-    const yearMatches = year === null
-      ? scheduleData
-      : scheduleData.filter(m => parseDate(m.date).getFullYear() === Number(year));
+    const yearMatches = selectedSeason
+      ? scheduleData.filter(m => window.TrappLeague.context(m).season === selectedSeason)
+      : year === null ? scheduleData : scheduleData.filter(m => parseDate(m.date).getFullYear() === Number(year));
     rebuildScheduleCompetitionFilterOptions(yearMatches);
     const sourceMatches = filterScheduleMatchesByCompetition(yearMatches);
 
@@ -13305,15 +13239,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     mergeOfficialResults(cachedLeagueResults);
     syncResultsToLocalStorage(cachedLeagueResults);
   }
-  if (!cachedStandings || !standingsHaveDashboardTeams(cachedStandings)) {
+  // Show bundled results immediately while GAS refreshes in the background.
+  const initialResults = await fetchLocalJson("results");
+  if (!cachedLeagueResults.length && initialResults.data.length) {
+    cachedLeagueResults = initialResults.data.map(normalizeOfficialResult);
+    mergeOfficialResults(cachedLeagueResults);
+    syncResultsToLocalStorage(cachedLeagueResults);
+  }
+  if (!cachedResultsPayload) cachedResultsPayload = initialResults;
+  if (!cachedStandingsPayload) {
     const localStandings = await fetchLocalJson("standings");
-    const localRows = localStandings && localStandings.data ? localStandings.data : (Array.isArray(localStandings) ? localStandings : []);
+    if (!cachedStandingsPayload) cachedStandingsPayload = localStandings;
+    const localRows = cachedStandingsPayload.data || [];
     if (localRows.length) {
       cachedStandings = localRows;
-      writeTimedCache("trapp_standings_cache", cachedStandings);
+      writeTimedCache("trapp_v2_2026_2027_standings_combined", cachedStandings);
     }
   }
   await ensureHistoryYearLoaded(initialYear);
+  // Preserve the saved hundred-year results as history, separate from J2/J3.
+  fetchHistoryFile("./data/results/results.json").then(payload => {
+    const archived = getResultArray(payload).filter(r => r.date >= "2026-02-01" && r.date < "2026-07-01")
+      .map(r => ({ ...r, season: window.TrappLeague.HUNDRED, competition_id: "j2j3" }));
+    mergeOfficialResults(archived);
+    syncResultsToLocalStorage(archived);
+    if (currentMode === "dashboard") renderDashboard();
+  });
   document.body.setAttribute("data-mode", "dashboard");
   if (ultraDashboard) ultraDashboard.className = "active-view";
   if (ultraFeed) ultraFeed.className = "hidden-view";
@@ -13332,7 +13283,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Build the heavier feed/calendar navigation after the must-show dashboard cards.
   requestAnimationFrame(() => {
     setTimeout(async () => {
-      await applyYearFilter(initialYear, true);
+      await applyYearFilter(window.TrappLeague.SEASON, true);
       const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
       scrollToIndex(tIdx !== -1 ? tIdx : 0);
     }, 0);
@@ -14094,130 +14045,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       parent.classList.toggle('active');
     };
   });
-  // =========================================================
-  // 🔄 GAS API 自動同期（試合結果 + 順位表）
-  // =========================================================
-  const gasUrl = 'https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec';
-
-
-  // --- Standings View ---
-
-  async function loadStandings() {
+  // --- J2/J3 standings; historical snapshot is separately labelled ---
+  async function loadStandings(force = false) {
+    const request = ++standingsRequest;
     const container = document.getElementById("standings-content");
     if (!container) return;
-    container.innerHTML = `<div style="text-align:center;padding:40px;color:#888;">読み込み中...</div>`;
-    try {
-      const json = await fetchData("standings");
-      if (!json || !json.data || !Array.isArray(json.data)) throw new Error("no data");
-
-      // グループ別に整理
-      const groups = {};
-      json.data.forEach(row => {
-        if (!groups[row.group]) groups[row.group] = [];
-        groups[row.group].push(row);
-      });
-
-      // グループ表示順: WEST-A → WEST-B → EAST-A → EAST-B
-      const GROUP_ORDER = ['WEST-A', 'WEST-B', 'EAST-A', 'EAST-B'];
-      const sortedGroups = Object.keys(groups).sort((a, b) => {
-        const ai = GROUP_ORDER.findIndex(k => a.includes(k));
-        const bi = GROUP_ORDER.findIndex(k => b.includes(k));
-        return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
-      });
-      // カラム定義
-      const COLS = [
-        { label: '順', key: 'rank', type: 'num' },
-        { label: 'チーム', key: 'team', type: 'str' },
-        { label: '勝点', key: 'points', type: 'num' },
-        { label: '試合', key: 'played', type: 'num' },
-        { label: '勝', key: 'won', type: 'num' },
-        { label: 'PK勝', key: 'pk_won', type: 'num' },
-        { label: 'PK負', key: 'pk_lost', type: 'num' },
-        { label: '負', key: 'lost', type: 'num' },
-        { label: '得', key: 'goals_for', type: 'num' },
-        { label: '失', key: 'goals_against', type: 'num' },
-        { label: '差', key: 'goal_diff', type: 'num' },
-      ];
-
-      // ソート状態をグループ毎に管理
-      const sortState = {};
-      sortedGroups.forEach(g => { sortState[g] = { key: 'rank', dir: 'asc' }; });
-
-      function buildGroupTable(groupName, rows) {
-        const { key: sKey, dir: sDir } = sortState[groupName];
-        const sorted = [...rows].sort((a, b) => {
-          const col = COLS.find(c => c.key === sKey);
-          if (!col) return 0;
-          if (col.type === 'str') {
-            const av = (a[sKey] || '').toString();
-            const bv = (b[sKey] || '').toString();
-            return sDir === 'asc' ? av.localeCompare(bv, 'ja') : bv.localeCompare(av, 'ja');
-          }
-          const av = parseFloat(a[sKey]) || 0;
-          const bv = parseFloat(b[sKey]) || 0;
-          return sDir === 'asc' ? av - bv : bv - av;
-        });
-        const thHTML = COLS.map(c => {
-          const isSorted = c.key === sKey;
-          const cls = isSorted ? (sDir === 'asc' ? 'sort-asc' : 'sort-desc') : '';
-          return '<th class="' + cls + '" data-key="' + c.key + '" data-group="' + groupName + '">' + c.label + '</th>';
-        }).join('');
-        const tbodyHTML = sorted.map(row => {
-          const teamName = normalizeAsciiText(row.team || '');
-          const isNiigata = teamName.includes('新潟');
-          const isKumamoto = teamName.includes('熊本');
-          const trcls = isNiigata ? 'standing-niigata' : isKumamoto ? 'standing-kumamoto' : '';
-          const emblemUrl = getEmblemUrlForTeam(teamName);
-          const emblemHTML = emblemUrl ? '<img class="standing-team-emblem" src="' + escapeHtml(emblemUrl) + '" alt="' + escapeHtml(teamName) + '">' : '<span class="standing-team-emblem-placeholder"></span>';
-          return '<tr class="' + trcls + '">'
-            + '<td class="col-rank">' + row.rank + '</td>'
-            + '<td class="standing-team" style="cursor:pointer;" onclick="openClubSite(\'' + teamName + '\', event)"><span class="standing-team-name">' + emblemHTML + '<span>' + teamName + '</span></span></td>'
-            + '<td class="col-pts"><strong>' + row.points + '</strong></td>'
-            + '<td>' + row.played + '</td>'
-            + '<td>' + row.won + '</td>'
-            + '<td>' + (row.pk_won || '-') + '</td>'
-            + '<td>' + (row.pk_lost || '-') + '</td>'
-            + '<td>' + row.lost + '</td>'
-            + '<td>' + row.goals_for + '</td>'
-            + '<td>' + row.goals_against + '</td>'
-            + '<td>' + row.goal_diff + '</td>'
-            + '</tr>';
-        }).join('');
-        return '<div class="standings-group-title">' + groupName + '</div>'
-          + '<div style="border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.03); margin:10px 0 20px;">'
-          + '<div style="width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;">'
-          + '<table class="standings-table" data-group="' + groupName + '" style="margin:0; box-shadow:none; border-radius:0;">'
-          + '<thead><tr>' + thHTML + '</tr></thead>'
-          + '<tbody>' + tbodyHTML + '</tbody>'
-          + '</table></div></div>';
-      }
-
-      function renderAll() {
-        const now = new Date().toLocaleString("ja-JP");
-        let html = sortedGroups.map(g => buildGroupTable(g, groups[g])).join('');
-        html += '<p style="text-align:center;font-size:0.75rem;color:#999;margin-top:16px;padding-bottom:8px;">更新: ' + now + '</p>';
-        container.innerHTML = html;
-        // ソートクリックイベントを再バインド
-        container.querySelectorAll('.standings-table th[data-key]').forEach(th => {
-          th.onclick = () => {
-            const group = th.dataset.group;
-            const key = th.dataset.key;
-            const cur = sortState[group];
-            if (cur.key === key) {
-              cur.dir = cur.dir === 'asc' ? 'desc' : 'asc';
-            } else {
-              cur.key = key;
-              cur.dir = (key === 'team' || key === 'lost' || key === 'goals_against') ? 'asc' : 'desc';
-            }
-            renderAll();
-          };
-        });
-      }
-
-      renderAll();
-    } catch (e) {
-      container.innerHTML = `<div style="text-align:center;padding:40px;color:#e74c3c;">取得に失敗しました。<br>再度お試しください。</div>`;
-    }
+    const options = { getEmblem: getEmblemUrlForTeam, onReload: () => loadStandings(true) };
+    if (!cachedStandingsPayload) cachedStandingsPayload = await fetchLocalJson("standings");
+    if (request !== standingsRequest) return;
+    window.TrappStandings.render(container, cachedStandingsPayload, options);
+    const payload = await fetchData("standings", force);
+    if (request !== standingsRequest) return;
+    window.TrappStandings.render(container, payload, options);
   }
 
   // アプリ起動時に初期化

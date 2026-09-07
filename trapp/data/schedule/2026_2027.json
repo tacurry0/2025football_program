@@ -8,7 +8,11 @@
     "opponent": "モンテディオ山形",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "friendly",
+    "competition": "親善試合",
+    "section": null
   },
   {
     "club": "kumamoto",
@@ -19,7 +23,11 @@
     "opponent": "熊本学園大学",
     "venue": "えがお健康スタジアム",
     "emblem": "https://www.inc-s.kumagaku.ac.jp/theme/inc-s/img/vi_img/img_mark_01.gif",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "other",
+    "competition": "その他",
+    "section": null
   },
   {
     "club": "kumamoto",
@@ -30,7 +38,13 @@
     "opponent": "SC相模原",
     "venue": "相模原ギオンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_sagamihara.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 1,
+    "match_id": "2026080815",
+    "home_away": "A"
   },
   {
     "club": "niigata",
@@ -41,7 +55,13 @@
     "opponent": "RB大宮アルディージャ",
     "venue": "NACK5スタジアム大宮",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_omiya.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 1,
+    "match_id": "2026080810",
+    "home_away": "A"
   },
   {
     "club": "niigata",
@@ -52,7 +72,13 @@
     "opponent": "北海道コンサドーレ札幌",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_sapporo.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 2,
+    "match_id": "2026081516",
+    "home_away": "H"
   },
   {
     "club": "kumamoto",
@@ -63,7 +89,13 @@
     "opponent": "栃木SC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 2,
+    "match_id": "2026081523",
+    "home_away": "H"
   },
   {
     "club": "niigata",
@@ -74,7 +106,13 @@
     "opponent": "藤枝MYFC",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_fujieda.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 3,
+    "match_id": "2026082213",
+    "home_away": "H"
   },
   {
     "club": "kumamoto",
@@ -85,7 +123,13 @@
     "opponent": "AC長野パルセイロ",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_nagano.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 3,
+    "match_id": "2026082223",
+    "home_away": "H"
   },
   {
     "club": "niigata",
@@ -96,7 +140,11 @@
     "opponent": "未定",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "emperor",
+    "competition": "天皇杯",
+    "section": null
   },
   {
     "club": "kumamoto",
@@ -107,7 +155,13 @@
     "opponent": "高知ユナイテッドSC",
     "venue": "GIKENスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kochi.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 4,
+    "match_id": "2026083006",
+    "home_away": "A"
   },
   {
     "club": "niigata",
@@ -118,7 +172,13 @@
     "opponent": "いわきFC",
     "venue": "ハワイアンズスタジアムいわき",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 4,
+    "match_id": "2026082911",
+    "home_away": "A"
   },
   {
     "club": "niigata",
@@ -129,7 +189,11 @@
     "opponent": "ザスパ群馬",
     "venue": "正田醤油スタジアム群馬",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "leaguecup",
+    "competition": "JリーグYBCルヴァンカップ",
+    "section": null
   },
   {
     "club": "kumamoto",
@@ -140,7 +204,11 @@
     "opponent": "大分トリニータ",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "leaguecup",
+    "competition": "JリーグYBCルヴァンカップ",
+    "section": null
   },
   {
     "club": "niigata",
@@ -151,7 +219,13 @@
     "opponent": "横浜FC",
     "venue": "ニッパツ三ツ沢球技場",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafc.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 5,
+    "match_id": "2026090613",
+    "home_away": "A"
   },
   {
     "club": "kumamoto",
@@ -162,7 +236,13 @@
     "opponent": "奈良クラブ",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_nara.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 5,
+    "match_id": "2026090616",
+    "home_away": "H"
   },
   {
     "club": "kumamoto",
@@ -173,7 +253,13 @@
     "opponent": "福島ユナイテッドFC",
     "venue": "とうほう・みんなのスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_fukushima.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 6,
+    "match_id": "2026091217",
+    "home_away": "A"
   },
   {
     "club": "niigata",
@@ -184,7 +270,13 @@
     "opponent": "モンテディオ山形",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 6,
+    "match_id": "2026091305",
+    "home_away": "H"
   },
   {
     "club": "kumamoto",
@@ -195,7 +287,13 @@
     "opponent": "松本山雅FC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_matsumoto.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 7,
+    "match_id": "2026091803",
+    "home_away": "H"
   },
   {
     "club": "niigata",
@@ -206,7 +304,13 @@
     "opponent": "ジュビロ磐田",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 7,
+    "match_id": "2026091916",
+    "home_away": "H"
   },
   {
     "club": "niigata",
@@ -217,7 +321,13 @@
     "opponent": "ブラウブリッツ秋田",
     "venue": "ソユースタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 8,
+    "match_id": "2026092607",
+    "home_away": "A"
   },
   {
     "club": "kumamoto",
@@ -228,7 +338,13 @@
     "opponent": "ザスパ群馬",
     "venue": "正田醤油スタジアム群馬",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 8,
+    "match_id": "2026092622",
+    "home_away": "A"
   },
   {
     "club": "kumamoto",
@@ -239,7 +355,11 @@
     "opponent": "レイラック滋賀FC",
     "venue": "未定",
     "emblem": "https://d1o3ac4rhk9lvf.cloudfront.net/emblem/2026/shiga.svg",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 9
   },
   {
     "club": "niigata",
@@ -250,7 +370,11 @@
     "opponent": "徳島ヴォルティス",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 9
   },
   {
     "club": "kumamoto",
@@ -261,7 +385,11 @@
     "opponent": "愛媛FC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 10
   },
   {
     "club": "niigata",
@@ -272,7 +400,11 @@
     "opponent": "湘南ベルマーレ",
     "venue": "レモンガススタジアム平塚",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_shonan.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 10
   },
   {
     "club": "kumamoto",
@@ -283,7 +415,11 @@
     "opponent": "カマタマーレ讃岐",
     "venue": "四国化成MEGLIOスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_sanuki.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 11
   },
   {
     "club": "niigata",
@@ -294,7 +430,11 @@
     "opponent": "大分トリニータ",
     "venue": "クラサスドーム大分",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 11
   },
   {
     "club": "niigata",
@@ -305,7 +445,11 @@
     "opponent": "サガン鳥栖",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 12
   },
   {
     "club": "kumamoto",
@@ -316,7 +460,11 @@
     "opponent": "ガイナーレ鳥取",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tottori.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 12
   },
   {
     "club": "kumamoto",
@@ -327,7 +475,11 @@
     "opponent": "FC岐阜",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_gifu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 13
   },
   {
     "club": "niigata",
@@ -338,7 +490,11 @@
     "opponent": "ベガルタ仙台",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_sendai.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 13
   },
   {
     "club": "kumamoto",
@@ -349,7 +505,11 @@
     "opponent": "鹿児島ユナイテッドFC",
     "venue": "白波スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 14
   },
   {
     "club": "niigata",
@@ -360,7 +520,11 @@
     "opponent": "カターレ富山",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_toyama.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 14
   },
   {
     "club": "kumamoto",
@@ -371,7 +535,11 @@
     "opponent": "FC大阪",
     "venue": "未定",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_fosaka.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 15
   },
   {
     "club": "niigata",
@@ -382,7 +550,11 @@
     "opponent": "ヴァンフォーレ甲府",
     "venue": "JIT リサイクルインク スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 15
   },
   {
     "club": "kumamoto",
@@ -393,7 +565,11 @@
     "opponent": "レノファ山口FC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 16
   },
   {
     "club": "niigata",
@@ -404,7 +580,11 @@
     "opponent": "FC今治",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_imabari.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 16
   },
   {
     "club": "kumamoto",
@@ -415,7 +595,11 @@
     "opponent": "ツエーゲン金沢",
     "venue": "金沢ゴーゴーカレースタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 17
   },
   {
     "club": "niigata",
@@ -426,7 +610,11 @@
     "opponent": "テゲバジャーロ宮崎",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_miyazaki.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 17
   },
   {
     "club": "kumamoto",
@@ -437,7 +625,11 @@
     "opponent": "ギラヴァンツ北九州",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kitakyushu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 18
   },
   {
     "club": "niigata",
@@ -448,7 +640,11 @@
     "opponent": "栃木シティ",
     "venue": "CITY FOOTBALL STATION",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigic.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 18
   },
   {
     "club": "kumamoto",
@@ -459,7 +655,11 @@
     "opponent": "FC琉球",
     "venue": "沖縄県総合運動公園陸上競技場",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 19
   },
   {
     "club": "niigata",
@@ -470,7 +670,11 @@
     "opponent": "ヴァンラーレ八戸",
     "venue": "プライフーズスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_hachinohe.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 19
   },
   {
     "club": "kumamoto",
@@ -481,7 +685,11 @@
     "opponent": "FC大阪",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_fosaka.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 20
   },
   {
     "club": "niigata",
@@ -492,7 +700,11 @@
     "opponent": "ヴァンフォーレ甲府",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kofu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 20
   },
   {
     "club": "kumamoto",
@@ -503,7 +715,11 @@
     "opponent": "レノファ山口FC",
     "venue": "維新みらいふスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_yamaguchi.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 21
   },
   {
     "club": "niigata",
@@ -514,7 +730,11 @@
     "opponent": "北海道コンサドーレ札幌",
     "venue": "大和ハウス プレミストドーム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_sapporo.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 21
   },
   {
     "club": "kumamoto",
@@ -525,7 +745,11 @@
     "opponent": "ツエーゲン金沢",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kanazawa.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 22
   },
   {
     "club": "niigata",
@@ -536,7 +760,11 @@
     "opponent": "ジュビロ磐田",
     "venue": "ヤマハスタジアム（磐田）",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_iwata.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 22
   },
   {
     "club": "kumamoto",
@@ -547,7 +775,11 @@
     "opponent": "FC琉球",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_ryukyu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 23
   },
   {
     "club": "niigata",
@@ -558,7 +790,11 @@
     "opponent": "サガン鳥栖",
     "venue": "駅前不動産スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tosu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 23
   },
   {
     "club": "kumamoto",
@@ -569,7 +805,11 @@
     "opponent": "ギラヴァンツ北九州",
     "venue": "ミクニワールドスタジアム北九州",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kitakyushu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 24
   },
   {
     "club": "niigata",
@@ -580,7 +820,11 @@
     "opponent": "テゲバジャーロ宮崎",
     "venue": "いちご宮崎新富サッカー場",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_miyazaki.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 24
   },
   {
     "club": "kumamoto",
@@ -591,7 +835,11 @@
     "opponent": "SC相模原",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_sagamihara.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 25
   },
   {
     "club": "niigata",
@@ -602,7 +850,11 @@
     "opponent": "栃木シティ",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigic.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 25
   },
   {
     "club": "kumamoto",
@@ -613,7 +865,11 @@
     "opponent": "愛媛FC",
     "venue": "ニンジニアスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_ehime.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 26
   },
   {
     "club": "niigata",
@@ -624,7 +880,11 @@
     "opponent": "モンテディオ山形",
     "venue": "NDソフトスタジアム山形",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_yamagata.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 26
   },
   {
     "club": "kumamoto",
@@ -635,7 +895,11 @@
     "opponent": "奈良クラブ",
     "venue": "ロートフィールド奈良",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_nara.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 27
   },
   {
     "club": "niigata",
@@ -646,7 +910,11 @@
     "opponent": "湘南ベルマーレ",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_shonan.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 27
   },
   {
     "club": "kumamoto",
@@ -657,7 +925,11 @@
     "opponent": "鹿児島ユナイテッドFC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kagoshima.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 28
   },
   {
     "club": "niigata",
@@ -668,7 +940,11 @@
     "opponent": "徳島ヴォルティス",
     "venue": "鳴門・大塚スポーツパーク ポカリスエットスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tokushima.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 28
   },
   {
     "club": "kumamoto",
@@ -679,7 +955,11 @@
     "opponent": "AC長野パルセイロ",
     "venue": "未定",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_nagano.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 29
   },
   {
     "club": "niigata",
@@ -690,7 +970,11 @@
     "opponent": "いわきFC",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_iwaki.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 29
   },
   {
     "club": "kumamoto",
@@ -701,7 +985,11 @@
     "opponent": "カマタマーレ讃岐",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_sanuki.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 30
   },
   {
     "club": "niigata",
@@ -712,7 +1000,11 @@
     "opponent": "FC今治",
     "venue": "アシックス里山スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_imabari.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 30
   },
   {
     "club": "kumamoto",
@@ -723,7 +1015,11 @@
     "opponent": "栃木SC",
     "venue": "カンセキスタジアムとちぎ",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tochigi.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 31
   },
   {
     "club": "niigata",
@@ -734,7 +1030,11 @@
     "opponent": "ブラウブリッツ秋田",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_akita.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 31
   },
   {
     "club": "kumamoto",
@@ -745,7 +1045,11 @@
     "opponent": "福島ユナイテッドFC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_fukushima.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 32
   },
   {
     "club": "niigata",
@@ -756,7 +1060,11 @@
     "opponent": "藤枝MYFC",
     "venue": "藤枝総合運動公園サッカー場",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_fujieda.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 32
   },
   {
     "club": "kumamoto",
@@ -767,7 +1075,11 @@
     "opponent": "松本山雅FC",
     "venue": "未定",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_matsumoto.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 33
   },
   {
     "club": "niigata",
@@ -778,7 +1090,11 @@
     "opponent": "RB大宮アルディージャ",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_omiya.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 33
   },
   {
     "club": "kumamoto",
@@ -789,7 +1105,11 @@
     "opponent": "ザスパ群馬",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_gunma.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 34
   },
   {
     "club": "niigata",
@@ -800,7 +1120,11 @@
     "opponent": "横浜FC",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_yokohamafc.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 34
   },
   {
     "club": "kumamoto",
@@ -811,7 +1135,11 @@
     "opponent": "FC岐阜",
     "venue": "岐阜メモリアルセンター ヒマラヤスタジアム岐阜",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_gifu.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 35
   },
   {
     "club": "niigata",
@@ -822,7 +1150,11 @@
     "opponent": "ベガルタ仙台",
     "venue": "ユアテックスタジアム仙台",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_sendai.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 35
   },
   {
     "club": "kumamoto",
@@ -833,7 +1165,11 @@
     "opponent": "高知ユナイテッドSC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_kochi.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 36
   },
   {
     "club": "niigata",
@@ -844,7 +1180,11 @@
     "opponent": "大分トリニータ",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_oita.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 36
   },
   {
     "club": "kumamoto",
@@ -855,7 +1195,11 @@
     "opponent": "ガイナーレ鳥取",
     "venue": "Axisバードスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_tottori.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 37
   },
   {
     "club": "niigata",
@@ -866,7 +1210,11 @@
     "opponent": "カターレ富山",
     "venue": "富山県総合運動公園陸上競技場",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_toyama.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 37
   },
   {
     "club": "kumamoto",
@@ -877,7 +1225,11 @@
     "opponent": "レイラック滋賀FC",
     "venue": "えがお健康スタジアム",
     "emblem": "https://d1o3ac4rhk9lvf.cloudfront.net/emblem/2026/shiga.svg",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j3",
+    "competition": "明治安田J3リーグ",
+    "section": 38
   },
   {
     "club": "niigata",
@@ -888,6 +1240,10 @@
     "opponent": "ヴァンラーレ八戸",
     "venue": "デンカビッグスワンスタジアム",
     "emblem": "https://jleague.r10s.jp/img/common/img_club_hachinohe.png",
-    "details": ""
+    "details": "",
+    "season": "2026_2027",
+    "competition_id": "j2",
+    "competition": "明治安田J2リーグ",
+    "section": 38
   }
 ]
