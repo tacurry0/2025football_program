@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v86-j2-j3-2026-27';
+const cacheName = 'football-app-v87-cups-details';
 const assetsToCache = [
   './',
   './index.html',
@@ -7,6 +7,8 @@ const assetsToCache = [
   './script.js',
   './league-data.js',
   './league-ui.js',
+  './ui-v6.js',
+  './ui-v6.css',
   './pwa.js',
   './vision/index.html',
   './vision/display.html',
@@ -45,6 +47,14 @@ const assetsToCache = [
   './data/standings/2026_2027/j3.json',
   './data/results/2026_2027/j2.json',
   './data/results/2026_2027/j3.json',
+  './data/results/2026_2027/leaguecup.json',
+  './data/results/2026_2027/emperor.json',
+  './data/details/2026_2027/j2/2026090613.json',
+  './data/details/2026_2027/j3/2026090616.json',
+  './data/details/2026_2027/emperor/2026082624.json',
+  './data/details/2026_2027/emperor/2026081902.json',
+  './data/details/2026_2027/leaguecup/2026090202.json',
+  './data/details/2026_2027/leaguecup/2026090209.json',
   './data/results/results.json',
   './data/standings/archive/2026_hundred.json',
   './data/players/niigata.json',
@@ -82,7 +92,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   // GAS redirects remain network-only: query parameters identify league/season.
   if (url.hostname === 'script.google.com' || url.hostname === 'script.googleusercontent.com') return;
-  if (url.origin === location.origin && /\/data\/(standings|results)\//.test(url.pathname)) {
+  if (url.origin === location.origin && /\/data\/(standings|results|details)\//.test(url.pathname)) {
     e.respondWith(
       fetch(e.request).then(response => {
         if (!response.ok) throw new Error('League snapshot HTTP ' + response.status);

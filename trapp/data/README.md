@@ -22,8 +22,13 @@
   - 百年構想リーグの取得済み結果。2026年2〜6月分を履歴として読む。
   - 参照元: `script.js`
 
-- `results/2026_2027/{j2,j3}.json`
+- `results/2026_2027/{j2,j3,leaguecup,emperor}.json`
   - J2/J3別の正常取得済み結果。GAS更新前・通信失敗・オフライン時にも表示可能。
+  - 参照元: `league-data.js`, `script.js`
+
+- `details/2026_2027/{league}/{match_id}.json`
+  - 公式試合詳細の正常取得済みデータ。先発・控え・交代・得点・審判などを保持。
+  - 試合を開くとGASから更新し、失敗時は取得済みデータを表示。
   - 参照元: `league-data.js`, `script.js`
 
 - `standings/2026_2027/{j2,j3}.json`

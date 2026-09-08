@@ -95,7 +95,7 @@ function gasRuntime() {
   class Clock extends Date { constructor(...args) { super(...(args.length ? args : ['2026-09-07T03:00:00Z'])); } }
   const context = vm.createContext({ Date: Clock, console: { log() {}, error() {} },
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: value => ({ setMimeType() { return this; }, getContent: () => value }) },
-    Utilities: { formatDate: () => '2026-09-07', newBlob: blob, gzip: b => blob(zlib.gzipSync(b.getBytes())), ungzip: b => blob(zlib.gunzipSync(b.getBytes())), base64Encode: b => Buffer.from(b).toString('base64'), base64Decode: s => Buffer.from(s,'base64') },
+    Utilities: { formatDate: (d,z,fmt) => new Date(d.getTime()+32400000).toISOString().slice(fmt==='HH:mm'?11:0,fmt==='HH:mm'?16:10), newBlob: blob, gzip: b => blob(zlib.gzipSync(b.getBytes())), ungzip: b => blob(zlib.gunzipSync(b.getBytes())), base64Encode: b => Buffer.from(b).toString('base64'), base64Decode: s => Buffer.from(s,'base64') },
     CacheService: { getScriptCache: () => ({ get: k => cache.get(k), put: (k,v) => cache.set(k,v), removeAll: keys => keys.forEach(k => cache.delete(k)) }) },
     PropertiesService: { getScriptProperties: () => ({ getProperty: k => properties.get(k), setProperties: data => Object.entries(data).forEach(([k,v]) => properties.set(k,v)), deleteProperty: k => properties.delete(k) }) },
     LockService: { getScriptLock: () => ({ tryLock: () => true, releaseLock() {} }) },
@@ -152,7 +152,7 @@ test('main score sync preserves notes/attendance, matches competition and skips 
 });
 
 test('standings renderer exposes J2/J3 controls, real timestamps, draw column and escaped names', () => {
-  const buttons = {}, container = { innerHTML:'', querySelector:s => buttons[s] ||= {}, querySelectorAll:()=>[] };
+  const buttons = {}, container = { innerHTML:'', classList:{toggle(){}}, querySelector:s => buttons[s] ||= {}, querySelectorAll:()=>[] };
   const c=vm.createContext({window:{},Date}); vm.runInContext(read('league-ui.js'),c);
   const data=snapshot('standings'); data.data[0].team='<img onerror=bad>';
   c.window.TrappStandings.render(container,{sources:{j2:data}});
@@ -162,7 +162,7 @@ test('standings renderer exposes J2/J3 controls, real timestamps, draw column an
 });
 
 test('all changed JS parses and cached/shared-script assets exist', () => {
-  for (const file of ['script.js','league-data.js','league-ui.js','sw.js','vision/app.js','gas/JLeague.gs']) new vm.Script(read(file),{filename:file});
+  for (const file of ['script.js','league-data.js','league-ui.js','ui-v6.js','sw.js','vision/app.js','gas/JLeague.gs']) new vm.Script(read(file),{filename:file});
   const assets=read('sw.js').match(/const assetsToCache = (\[[\s\S]*?\]);/)[1];
   for(const asset of vm.runInNewContext(assets)) assert.ok(fs.existsSync(path.join(root,asset)),asset);
   for(const file of fs.readdirSync(path.join(root,'vision')).filter(f=>f.endsWith('.html'))) {
@@ -187,4 +187,109 @@ test('live saved official HTML passes exact GAS service, monthly coverage and al
     const repeat=call(c,{league,type:'results',nocache:'1'}); assert.deepEqual(repeat.data,results.data);
   }
   assert.ok(requests.some(url=>url.includes('year=2026-27')));
+});
+
+test('cup results include both followed clubs and PK, without mixing league records', async () => {
+  for(const league of ['leaguecup','emperor']) {
+    const p=snapshot('results',league);assert.ok(api.validPayload(p,'results',league));
+    assert.ok(p.data.some(r=>[r.home,r.away].includes('アルビレックス新潟')));
+    assert.ok(p.data.some(r=>[r.home,r.away].includes('ロアッソ熊本')));
+    assert.ok(p.data.some(r=>r.pk));assert.ok(p.data.every(r=>r.competition_id===league));
+  }
+  const requested=new Set();
+  const client=api.createClient({storage:storage(),fetch:async url=>{
+    const league=url.startsWith('./')?url.split('/').pop().split('.')[0]:new URL(url).searchParams.get('league');
+    if(!url.startsWith('./'))requested.add(league);return response(snapshot('results',league));
+  }});
+  const result=await client.all('results',true);
+  assert.deepEqual([...requested].sort(),api.RESULT_LEAGUES.slice().sort());
+  assert.equal(result.data.length,159);
+});
+
+test('cup reconciliation fills pending opponents, adds missing games and preserves user IDs', () => {
+  const schedule=JSON.parse(read('data/schedule/2026_2027.json'));
+  const pending=schedule.find(m=>m.club==='niigata'&&m.date==='2026-08-26');
+  const previousId=api.storageId(pending),count=schedule.length;
+  const rows=['leaguecup','emperor'].flatMap(l=>snapshot('results',l).data);
+  assert.ok(api.reconcileSchedule(schedule,rows));
+  assert.equal(pending.opponent,'鹿児島ユナイテッドFC');assert.equal(api.storageId(pending),previousId);
+  assert.ok(schedule.some(m=>m.club==='kumamoto'&&m.date==='2026-08-19'&&m.competition_id==='emperor'));
+  assert.ok(schedule.length>count);const once=JSON.stringify(schedule);
+  api.reconcileSchedule(schedule,rows);assert.equal(JSON.stringify(schedule),once);
+  const homeBefore=api.storageId(pending);
+  api.reconcileSchedule(schedule,[{...rows.find(r=>r.match_id===pending.match_id),date:'2026-08-27'}]);
+  assert.equal(api.storageId(pending),homeBefore);assert.equal(pending.date,'2026-08-27');
+});
+
+function detailHtml(league='leaguecup') {
+  const header=node('',null,{variant:'game-details',type:'post-game',tournament:league,tournamentName:league==='emperor'?'天皇杯':'ルヴァンカップ',date:'$D2026-09-06T09:00:00.000Z',section:'1回戦',homeTeam:{name:'ホーム',score:0,playerScoreList:[]},awayTeam:{name:'アウェイ',score:0,playerScoreList:[]},penalty:{homeTeamScore:4,awayTeamScore:3},stadium:{name:'競技場',weather:'晴れ',numberOfPeople:1000}});
+  const player=(n,side)=>node('m-lineup-list-item',[node('m-lineup-list-item__avatar',null,{memberId:String(100+n)}),node('m-lineup-list-item__position',`MF ${n+1}`),node('m-lineup-list-item__name',`${side}選手${n}`)]);
+  const starters=node('p-game-details-lineup-tab__starting-members',node('m-lineup-list__members',Array.from({length:11},(_,i)=>[player(i,'H'),player(i,'A')]).flat()));
+  const bench=node('p-game-details-lineup-tab__reserve-members',node('m-lineup-list__members',[player(12,'H'),player(12,'A')]));
+  const stream='1:'+JSON.stringify([header,starters,bench])+'\n';
+  return '<script>self.__next_f.push('+JSON.stringify([1,stream])+')</script>';
+}
+
+test('detail API returns lineups, zero scores and PK; rejects foreign URLs; keeps last good', () => {
+  const {context:c}=gasRuntime();let fetches=0;
+  c.UrlFetchApp={fetch:url=>{fetches++;assert.equal(url,'https://www.jleague.jp/match/leaguecup/2026/090613/');return {getResponseCode:()=>200,getContentText:()=>detailHtml()};}};
+  const params={type:'detail',path:'/match/leaguecup/2026/090613',season:api.SEASON};
+  const first=call(c,params);assert.equal(first.status,200);
+  assert.equal(first.data[0].home_starting_members.length,11);assert.equal(first.data[0].away_bench_members.length,1);
+  assert.equal(first.data[0].home_score,0);assert.equal(first.data[0].pk,'4 PK 3');
+  assert.equal(call(c,{...params,path:'https://example.com/'}).status,400);assert.equal(fetches,1);
+  c.UrlFetchApp.fetch=()=>{throw new Error('source unavailable')};
+  const stale=call(c,{...params,nocache:'1'});assert.equal(stale.stale,true);assert.equal(stale.fetchedAt,first.fetchedAt);
+  assert.equal(stale.data[0].home_starting_members.length,11);
+});
+
+test('client detail shows bundled data before refresh, and keeps it on failure', async () => {
+  const saved=JSON.parse(read('data/details/2026_2027/j2/2026090613.json'));
+  let displayed=false;
+  const client=api.createClient({storage:storage(),fetch:async url=>{if(url.startsWith('./'))return response(saved);assert.equal(displayed,true);throw new Error('offline');}});
+  const result=await client.detail(saved.data[0],true,p=>{displayed=true;assert.equal(p.data[0].home_starting_members.length,11);});
+  assert.equal(result.stale,true);assert.equal(result.fetchedAt,saved.fetchedAt);
+  assert.equal(await client.detail({...saved.data[0],source_url:'https://example.com/'},true),null);
+});
+
+test('year tabs use calendar years and calendar navigation can hide, restore and persist', () => {
+  const code=read('script.js');assert.ok(!code.includes('selectedSeason'));
+  assert.ok(code.includes('await applyYearFilter(initialYear, true)'));
+  const store=storage(),classes=new Set(),button={setAttribute(k,v){this[k]=v;},addEventListener(k,fn){this[k]=fn;}};
+  const c=vm.createContext({localStorage:store,document:{addEventListener(k,fn){fn();},getElementById:()=>button,body:{classList:{toggle(k,v){v?classes.add(k):classes.delete(k);}}}}});
+  vm.runInContext(read('ui-v6.js'),c);assert.equal(button['aria-expanded'],'true');
+  button.click();assert.equal(button['aria-expanded'],'false');assert.ok(classes.has('calendar-nav-collapsed'));
+  assert.equal(store.getItem('trapp_calendar_nav_collapsed'),'true');
+  button.click();assert.equal(button['aria-expanded'],'true');assert.ok(!classes.has('calendar-nav-collapsed'));
+});
+
+test('saved real detail records have 11 starters per team and preserve cup losses by PK', () => {
+  for(const league of api.RESULT_LEAGUES) {
+    const dir=path.join(root,'data/details',api.SEASON,league);
+    for(const file of fs.readdirSync(dir)) {
+      const p=JSON.parse(fs.readFileSync(path.join(dir,file),'utf8')),r=p.data[0];
+      assert.ok(api.validPayload(p,'results',league));assert.equal(r.home_starting_members.length,11);assert.equal(r.away_starting_members.length,11);
+      assert.ok(r.home_bench_members.length);assert.ok(r.away_bench_members.length);assert.ok(r.referee);
+      assert.equal(new Set(r.home_starting_members.map(x=>x.player_id)).size,11);
+    }
+  }
+  const r=JSON.parse(read('data/details/2026_2027/emperor/2026081902.json')).data[0];
+  assert.equal(r.pk,'6 PK 5');assert.equal(r.home_score,2);assert.equal(r.away_score,2);
+});
+
+test('live v6 official pages: monthly cup aggregation and detail parser match snapshots', {skip:!process.env.TRAPP_V6_FIXTURES}, () => {
+  const {context:c}=gasRuntime(),dir=process.env.TRAPP_V6_FIXTURES;
+  const files={j1:['emperor-j1','emperor-j1-september'],j2:['emperor-august','emperor-september'],j3:['emperor-j3','emperor-j3-september'],leaguecup:['cup-august','cup-month']};
+  c.UrlFetchApp={fetch:url=>{const u=new URL(url),page=u.pathname.split('/')[1],index=u.searchParams.get('startdate').slice(5,7)==='08'?0:1;const html=fs.readFileSync(path.join(dir,files[page][index]+'.html'),'utf8');return {getResponseCode:()=>200,getContentText:()=>html};},fetchAll:reqs=>reqs.map(r=>c.UrlFetchApp.fetch(r.url))};
+  for(const league of ['leaguecup','emperor']) {
+    const p=call(c,{type:'results',league});assert.equal(p.status,200,p.error);
+    assert.deepEqual(p.data,snapshot('results',league).data);
+    assert.equal(call(c,{type:'results',league,nocache:'1'}).data.length,p.data.length);
+  }
+  const pairs={'j2-detail':'j2/2026/090613','j3-detail':'j3/2026/090616','emperor-detail':'emperor/2026/082624','kumamoto-emperor-detail':'emperor/2026/081902','niigata-cup-detail':'leaguecup/2026/090202','kumamoto-cup-detail':'leaguecup/2026/090209'};
+  for(const [file,route] of Object.entries(pairs)) {
+    const r=clone(c.jlParseDetail(fs.readFileSync(path.join(dir,file+'.html'),'utf8'),'/match/'+route));
+    const expected=JSON.parse(read(`data/details/${api.SEASON}/${r.league}/${r.match_id}.json`)).data[0];
+    delete r.detail_fetched_at;delete expected.detail_fetched_at;assert.deepEqual(r,expected,file);
+  }
 });

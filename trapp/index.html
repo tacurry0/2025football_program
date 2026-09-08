@@ -6,6 +6,7 @@
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260703mobile-analysis-v3">
+  <link rel="stylesheet" href="ui-v6.css?v=20260908">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -1253,7 +1254,8 @@ We can't help falling in love with you
 
   <!-- 📱 Navigation Pill -->
   <footer id="ultra-nav">
-    <div class="nav-panel">
+    <button type="button" id="calendar-nav-toggle" aria-controls="calendar-year-month-panel" aria-expanded="true">年月を隠す ▾</button>
+    <div class="nav-panel" id="calendar-year-month-panel">
       <div class="nav-panel-main">
         <div class="nav-row-stack">
           <div class="nav-year-row nav-scroll-row">
@@ -1463,10 +1465,11 @@ We can't help falling in love with you
   </div>
 
   <script src="pwa.js?v=20260618pwa-install"></script>
-  <script src="league-data.js?v=20260907-leagues-v2"></script>
-  <script src="league-ui.js?v=20260907-leagues-v2"></script>
+  <script src="league-data.js?v=20260908-v6"></script>
+  <script src="league-ui.js?v=20260908-v6"></script>
+  <script src="ui-v6.js?v=20260908"></script>
   <script src="schedule/schedule.js?v=20260907-leagues-v2"></script>
-  <script src="script.js?v=20260907-leagues-v2"></script>
+  <script src="script.js?v=20260908-v6"></script>
 
 </body>
 </html>

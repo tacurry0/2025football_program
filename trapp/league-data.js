@@ -7,6 +7,7 @@
   "use strict";
   const SEASON = "2026_2027";
   const HUNDRED = "2026_hundred";
+  const RESULT_LEAGUES = ['j2', 'j3', 'leaguecup', 'emperor'];
   const GAS_URL = "https://script.google.com/macros/s/AKfycbxkYHfKA3KR_eKFFJ2Fij3_K3vTzyGtq8_Hr_vBEKslcU6B5XxodjcdmVNdTTnwtQUy/exec";
   const NAMES = { j1: "明治安田J1リーグ", j2: "明治安田J2リーグ", j3: "明治安田J3リーグ", j2j3: "明治安田J2・J3 百年構想リーグ", leaguecup: "JリーグYBCルヴァンカップ", emperor: "天皇杯", friendly: "親善試合", playoff: "昇格プレーオフ", other: "その他" };
   const normalize = value => String(value ?? "").normalize("NFKC").trim();
@@ -48,6 +49,35 @@
     const c = context(row);
     const sides = [normalize(row.home), normalize(row.away)].join("|");
     return row.match_id ? `${c.season}|${c.competition}|${row.match_id}` : `${c.season}|${c.competition}|${row.date}|${sides}`;
+  }
+  function storageId(match) {
+    return `${match.storage_date || match.date}_${match.club}_${match.storage_opponent || match.opponent}`;
+  }
+  function reconcileSchedule(schedule, results, matchesTeam = (a,b) => normalize(a) === normalize(b)) {
+    let changed = false;
+    for (const r of results) {
+      if (r.season !== SEASON || !RESULT_LEAGUES.includes(r.competition_id)) continue;
+      for (const [club, own] of [['niigata','アルビレックス新潟'],['kumamoto','ロアッソ熊本']]) {
+        const home = matchesTeam(r.home, own), away = matchesTeam(r.away, own);
+        if (!home && !away) continue;
+        const opponent = home ? r.away : r.home;
+        const candidates = schedule.filter(m => m.club === club && compatible(m,r));
+        let match = candidates.find(m => m.match_id === r.match_id || (m.date === r.date && matchesTeam(m.opponent,opponent)));
+        if (!match) {
+          const pending = candidates.filter(m => m.date === r.date && /^(未定|TBD|対戦相手未定)$/i.test(m.opponent));
+          if (pending.length === 1) match = pending[0];
+        }
+        if (!match) {
+          match = { club, date:r.date, opponent, day:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(r.date+'T12:00:00+09:00').getUTCDay()], time:r.time || '', venue:r.venue || '', emblem:'', matchweek:r.section ? `MW${r.section}` : r.round || 'カップ戦' };
+          schedule.push(match); changed = true;
+        }
+        if (match.date !== r.date) { match.storage_date ||= match.date; match.date = r.date; changed = true; }
+        if (match.opponent !== opponent) { match.storage_opponent ||= match.opponent; match.opponent = opponent; changed = true; }
+        const updates = {match_id:r.match_id, season:r.season, competition_id:r.competition_id, competition:NAMES[r.competition_id], home_away:home?'H':'A'};
+        for (const [k,v] of Object.entries(updates)) if (match[k] !== v) { match[k]=v; changed=true; }
+      }
+    }
+    return changed;
   }
   function validPayload(payload, type, league, season = SEASON) {
     if (!payload || payload.schemaVersion !== 2 || payload.status !== 200 || payload.league !== league || payload.season !== season || !Array.isArray(payload.data)) return false;
@@ -113,11 +143,40 @@
       try { return await promise; } finally { inflight.delete(key); }
     }
     async function all(type, force = false) {
-      const payloads = await Promise.all(["j2", "j3"].map(league => load(type, league, force)));
+      const payloads = await Promise.all((type === 'results' ? RESULT_LEAGUES : ['j2','j3']).map(league => load(type, league, force)));
       return { schemaVersion: 2, status: payloads.some(p => p.status === 200) ? 200 : 503, season: SEASON,
         data: payloads.flatMap(p => p.data), sources: Object.fromEntries(payloads.map(p => [p.league, p])), stale: payloads.some(p => p.stale) };
     }
-    return { load, all };
+    async function detail(match, force = false, onSaved) {
+      const league = context(match).competition;
+      const id = String(match.match_id || '');
+      const inferred = /^\d{10}$/.test(id) ? `/match/${league}/${id.slice(0,4)}/${id.slice(4)}` : '';
+      const path = String(match.source_url || match.j_official_url || inferred).replace(/^https:\/\/www\.jleague\.jp/, '').replace(/\/$/,'');
+      if (!RESULT_LEAGUES.includes(league) || !/^\/match\/(j2|j3|leaguecup|emperor)\/(2026|2027)\/\d{6}$/.test(path)) return null;
+      const key = `trapp_v6_detail_${path.replace(/\//g,'_')}`;
+      const valid = p => validPayload(p,'results',league) && p.data.length === 1 && p.data[0].match_id === match.match_id && p.data[0].detail_complete === true;
+      const saved = read(key), cached = valid(saved) ? saved : null;
+      if (!force && cached && !cached.stale && Date.now()-Date.parse(cached.fetchedAt) < 1800000) return cached;
+      if (inflight.has(key)) return inflight.get(key);
+      const promise = (async () => {
+        let bundled = null;
+        try { const p = await json(`./data/details/${SEASON}/${league}/${match.match_id}.json`,12000); if (valid(p)) bundled=p; } catch (_) {}
+        const previous = [cached,bundled].filter(Boolean).sort((a,b)=>Date.parse(b.fetchedAt)-Date.parse(a.fetchedAt))[0];
+        if (previous && onSaved) onSaved({...previous,stale:true});
+        try {
+          const params = new URLSearchParams({type:'detail',path,season:SEASON}); if(force) params.set('nocache','1');
+          const p = await json(`${options.url || GAS_URL}?${params}`,60000);
+          if (!valid(p)) throw new Error('出場選手情報が未公開、または詳細データを取得できませんでした');
+          const chosen = previous && Date.parse(previous.fetchedAt)>Date.parse(p.fetchedAt) ? {...previous,stale:true} : p;
+          write(key,chosen); return chosen;
+        } catch (error) {
+          return previous ? {...previous,stale:true,error:String(error.message || error)} : {status:503,data:[],stale:true,error:String(error.message || error)};
+        }
+      })();
+      inflight.set(key,promise);
+      try { return await promise; } finally { inflight.delete(key); }
+    }
+    return { load, all, detail };
   }
-  return { SEASON, HUNDRED, NAMES, GAS_URL, context, annotate, compatible, fixtureKey, validPayload, createClient };
+  return { SEASON, HUNDRED, RESULT_LEAGUES, NAMES, GAS_URL, context, annotate, compatible, fixtureKey, storageId, reconcileSchedule, validPayload, createClient };
 });

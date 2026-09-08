@@ -184,7 +184,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   let allSections = [];
   let visibleSections = [];
   let selectedYear = null;
-  let selectedSeason = "";
   let renderedFeedYear = undefined;
   let currentMode = "dashboard"; // dashboard, feed, calendar, standings, links, chants, player-analysis or vision
   let lineupDetailExpanded = false;
@@ -9704,7 +9703,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function updateYearTabState() {
     Object.keys(yearTabs).forEach(k => {
-      if (yearTabs[k]) yearTabs[k].classList.toggle("active", selectedSeason ? k === selectedSeason : Number(k) === selectedYear);
+      if (yearTabs[k]) yearTabs[k].classList.toggle("active", Number(k) === selectedYear);
     });
     scrollActiveNavItem(yearTabContainer, ".year-tab.active");
   }
@@ -9744,14 +9743,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     yearTabContainer.innerHTML = "";
     yearTabs = {};
 
-    [window.TrappLeague.SEASON, ...getAvailableYears()].forEach(y => {
+    getAvailableYears().forEach(y => {
       const key = String(y);
       const btn = document.createElement("button");
       btn.id = `toggle-year-${key}`;
       btn.className = "year-tab";
-      btn.textContent = key === window.TrappLeague.SEASON ? "2026/27" : key;
+      btn.textContent = key;
       btn.onclick = async () => {
-        await applyYearFilter(key === window.TrappLeague.SEASON ? key : Number(key));
+        await applyYearFilter(Number(key));
       };
       yearTabContainer.appendChild(btn);
       yearTabs[key] = btn;
@@ -9785,9 +9784,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function applyYearFilter(year, skipScroll = false) {
-    const nextSeason = year === window.TrappLeague.SEASON ? year : "";
-    if (selectedSeason !== nextSeason) renderedFeedYear = undefined;
-    selectedSeason = nextSeason;
     const normalizedYear = year === null || year === undefined || year === "" ? null : Number(year);
     selectedYear = Number.isFinite(normalizedYear) && normalizedYear > 0 ? normalizedYear : null;
     const shouldLoadHistory = selectedYear && selectedYear <= HISTORY_END_YEAR;
@@ -10179,7 +10175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // 観戦予定のハイライト判定
       dayMatches.forEach(m => {
-        const isAttend = localStorage.getItem(`attend_${m.date}_${m.club}_${m.opponent}`) === "true";
+        const isAttend = localStorage.getItem(`attend_${window.TrappLeague.storageId(m)}`) === "true";
         if (isAttend) {
           cell.classList.add(`attending-${m.club}`);
         }
@@ -10593,8 +10589,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         add(goal.scorer, { type: "goal", minute: goal.minute, text: minuteText(goal.minute) });
       });
       (side.substitutions || []).forEach(sub => {
-        add(sub.out, { type: "sub-out", minute: sub.minute, text: `${minuteText(sub.minute)}→${sub.in || ""}` });
-        add(sub.in, { type: "sub-in", minute: sub.minute, text: `${minuteText(sub.minute)}←${sub.out || ""}` });
+        add(sub.out, { type: "sub-out", minute: sub.minute, text: `${minuteText(sub.minute)} OUT${sub.in ? `→${sub.in}` : ""}` });
+        add(sub.in, { type: "sub-in", minute: sub.minute, text: `${minuteText(sub.minute)} IN${sub.out ? `←${sub.out}` : ""}` });
       });
       (side.cards || []).forEach(card => {
         add(card.player || card.name, { type: card.card === "red" ? "card-red" : "card-yellow", minute: card.minute || card.time, text: minuteText(card.minute || card.time) });
@@ -11696,7 +11692,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- Detail Sheet & Persistence ---
 
   function openDetailSheet(match, options = {}) {
-    const mId = `${match.date}_${match.club}_${match.opponent}`;
+    const mId = `${window.TrappLeague.storageId(match)}`;
     const offRes = findOfficialResult(match);
     const sMemo = localStorage.getItem(`memo_${mId}`) || "";
     const isAttend = localStorage.getItem(`attend_${mId}`) === "true";
@@ -11859,8 +11855,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
         </div>
       </section>
-      ${officialInfoHtml}
-      ${membersHtml}
+      <div id="official-detail-content">${officialInfoHtml}${membersHtml}</div>
+      <div class="official-detail-status" role="status" id="official-detail-status"></div>
       <button class="close-sheet-btn">保存して閉じる</button>
     `;
 
@@ -11870,6 +11866,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     bindPlayerLinks(match);
     bindLineupDetailToggle();
+    const detailSlot = sheetContent.querySelector('#official-detail-content');
+    const detailStatus = sheetContent.querySelector('#official-detail-status');
+    const fetchDetail = async (force = false) => {
+      detailStatus.textContent = '公式の出場選手・試合詳細を確認中…';
+      const payload = await leagueClient.detail({ ...match, ...findOfficialResult(match) }, force, saved => {
+        if (!detailSlot.isConnected || sheetContent.querySelector('#official-detail-content') !== detailSlot) return;
+        const row = saved.data[0];
+        detailSlot.innerHTML = renderOfficialInfo({ ...match, ...row }) + renderMatchMembers({ ...match, ...row });
+        detailStatus.textContent = '保存済みの詳細を表示中。公式の更新を確認しています…';
+        bindPlayerLinks({ ...match, ...row }); bindLineupDetailToggle();
+      });
+      if (!detailSlot.isConnected || sheetContent.querySelector('#official-detail-content') !== detailSlot) return;
+      const record = payload?.data?.[0];
+      if (record) {
+        const current = findOfficialResult(match);
+        const combined = payload.stale && current ? { ...record, home_score: current.home_score, away_score: current.away_score, pk: current.pk, status: current.status } : record;
+        mergeOfficialResults([combined]);
+        syncResultsToLocalStorage([combined]);
+        detailSlot.innerHTML = renderOfficialInfo({ ...match, ...record }) + renderMatchMembers({ ...match, ...record });
+        bindPlayerLinks({ ...match, ...record });
+        bindLineupDetailToggle();
+      }
+      const message = record ? `${payload.stale ? '保存済みの詳細' : '公式詳細'} ／ 取得: ${new Date(payload.fetchedAt).toLocaleString('ja-JP')}` : payload ? payload.error || '詳細を取得できませんでした' : 'この試合の公式詳細はまだ取得対象にありません';
+      detailStatus.textContent = message;
+      if (payload) {
+        const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = '詳細を更新';
+        retry.onclick = () => fetchDetail(true); detailStatus.appendChild(retry);
+      }
+    };
+    void fetchDetail();
 
     // Use the unified weather helper
     const wBox = sheetContent.querySelector("#u-auto-weather-area");
@@ -12032,7 +12058,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Initialize data from localStorage cache
   // Legacy keys remain untouched for recovery; active-season data uses v2 keys.
-  cachedLeagueResults = normalizeAsciiFieldsInPlace(readTimedCache("trapp_v2_2026_2027_results_combined", RESULTS_CACHE_MAX_AGE) || []);
+  // Bootstrap from per-competition payloads, including the cup snapshots.
+  cachedLeagueResults = [];
 
   function getResultArray(payload) {
     if (!payload) return [];
@@ -12217,7 +12244,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function buildStoredResultFromMatch(match) {
     if (!match || !match.date || !match.club || !match.opponent) return null;
-    const mId = `${match.date}_${match.club}_${match.opponent}`;
+    const mId = `${window.TrappLeague.storageId(match)}`;
     const myRaw = localStorage.getItem(`score_my_${mId}`);
     const oppRaw = localStorage.getItem(`score_opp_${mId}`);
     if (myRaw === null || oppRaw === null || myRaw === "" || oppRaw === "") return null;
@@ -12289,7 +12316,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const existing = byFixture.get(key);
       if (existing && JSON.stringify(existing) === JSON.stringify(result)) return;
       if (existing?.status === "finished" && result.status && result.status !== "finished") return;
-      byFixture.set(key, result);
+      byFixture.set(key, { ...existing, ...result });
       changed = true;
     });
 
@@ -12324,6 +12351,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (results.length) {
       cachedLeagueResults = results.map(normalizeOfficialResult).filter(Boolean);
+      window.TrappLeague.reconcileSchedule(scheduleData, cachedLeagueResults, robustTeamMatch);
       writeTimedCache("trapp_v2_2026_2027_results_combined", cachedLeagueResults);
       mergeOfficialResults(cachedLeagueResults);
       syncResultsToLocalStorage(cachedLeagueResults);
@@ -12338,7 +12366,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function fetchLocalJson(type) {
-    const payloads = await Promise.all(["j2", "j3"].map(async league => {
+    const payloads = await Promise.all((type === 'results' ? window.TrappLeague.RESULT_LEAGUES : ['j2','j3']).map(async league => {
       try {
         const payload = await fetchHistoryFile(`./data/${type}/${window.TrappLeague.SEASON}/${league}.json`);
         let saved = null;
@@ -12447,7 +12475,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const scores = extractOwnResultScores(r, m);
       if (!scores) return;
 
-      const mId = `${m.date}_${m.club}_${m.opponent}`;
+      const mId = `${window.TrappLeague.storageId(m)}`;
       const sM = String(scores.ownScore);
       const sO = String(scores.opponentScore);
       const pkM = scores.pkOwn !== null ? String(scores.pkOwn) : null;
@@ -12648,7 +12676,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const dashboardDateHtml = `<span class="dash-date-main">${escapeHtml(dashboardDateParts.date)}</span>${dashboardDateParts.meta ? `<span class="dash-date-sub">${escapeHtml(dashboardDateParts.meta)}</span>` : ""}`;
 
       return `
-          <div class="dash-card white-theme home-card-enhanced${isStartupIntro ? " home-card-intro" : ""} home-card-${m.club}" id="dash-card-${m.club}" data-mid="${m.date}_${m.club}_${m.opponent}" style="background: white; --home-enter-delay:${m.club === "kumamoto" ? "180ms" : "20ms"};">
+          <div class="dash-card white-theme home-card-enhanced${isStartupIntro ? " home-card-intro" : ""} home-card-${m.club}" id="dash-card-${m.club}" data-mid="${window.TrappLeague.storageId(m)}" style="background: white; --home-enter-delay:${m.club === "kumamoto" ? "180ms" : "20ms"};">
             <div class="dash-card-header" style="background:${mainColor}; border-bottom:none; padding:8px 15px;">
               <div class="home-club-lockup">
                 <span class="home-club-mark"><img src="${dashClubLogo}" alt="${clubName}" loading="eager" decoding="async"></span>
@@ -12747,7 +12775,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Bind buttons
     container.querySelectorAll('.dash-card').forEach(card => {
       const mId = card.dataset.mid;
-      const match = scheduleData.find(x => `${x.date}_${x.club}_${x.opponent}` === mId);
+      const match = scheduleData.find(x => `${window.TrappLeague.storageId(x)}` === mId);
       const opponentName = card.querySelector('.dash-opp-name');
       if (match) bindClubNameLongPress(opponentName, card, match);
       card.onclick = () => {
@@ -13147,9 +13175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     feedSlider.innerHTML = "";
     scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
     const ymMap = {};
-    const yearMatches = selectedSeason
-      ? scheduleData.filter(m => window.TrappLeague.context(m).season === selectedSeason)
-      : year === null ? scheduleData : scheduleData.filter(m => parseDate(m.date).getFullYear() === Number(year));
+    const yearMatches = year === null ? scheduleData : scheduleData.filter(m => parseDate(m.date).getFullYear() === Number(year));
     rebuildScheduleCompetitionFilterOptions(yearMatches);
     const sourceMatches = filterScheduleMatchesByCompetition(yearMatches);
 
@@ -13163,7 +13189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const section = document.createElement("div"); section.className = "month-section"; section.dataset.ym = key; section.dataset.year = year; section.dataset.ym_title = `${year} / ${String(month).padStart(2, "0")}`;
 
       ymMap[key].forEach(match => {
-        const mId = `${match.date}_${match.club}_${match.opponent}`;
+        const mId = `${window.TrappLeague.storageId(match)}`;
         const isAtt = localStorage.getItem(`attend_${mId}`) === "true";
         let sMy = "", sOpp = "";
         let sPkM = "", sPkO = "";
@@ -13243,6 +13269,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const initialResults = await fetchLocalJson("results");
   if (!cachedLeagueResults.length && initialResults.data.length) {
     cachedLeagueResults = initialResults.data.map(normalizeOfficialResult);
+    window.TrappLeague.reconcileSchedule(scheduleData, cachedLeagueResults, robustTeamMatch);
     mergeOfficialResults(cachedLeagueResults);
     syncResultsToLocalStorage(cachedLeagueResults);
   }
@@ -13283,7 +13310,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Build the heavier feed/calendar navigation after the must-show dashboard cards.
   requestAnimationFrame(() => {
     setTimeout(async () => {
-      await applyYearFilter(window.TrappLeague.SEASON, true);
+      await applyYearFilter(initialYear, true);
       const tIdx = visibleSections.findIndex(s => s.dataset.ym === tKey);
       scrollToIndex(tIdx !== -1 ? tIdx : 0);
     }, 0);
@@ -13625,7 +13652,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getAttendanceShareData() {
     return scheduleData.filter(match => {
-      const id = `${match.date}_${match.club}_${match.opponent}`;
+      const id = `${window.TrappLeague.storageId(match)}`;
       return localStorage.getItem(`attend_${id}`) === "true";
     }).map(match => ({
       date: match.date,
@@ -13727,7 +13754,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           const opponent = String(item?.opponent || "");
           const match = scheduleData.find(candidate => candidate.date === date && candidate.club === club && candidate.opponent === opponent);
           if (!match) return;
-          localStorage.setItem(`attend_${match.date}_${match.club}_${match.opponent}`, "true");
+          localStorage.setItem(`attend_${window.TrappLeague.storageId(match)}`, "true");
           attendanceCount += 1;
         });
         const count = getPersonalPlanCount(plans) + attendanceCount;
@@ -13939,7 +13966,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     exportListBtn.onclick = async () => {
       let txt = "【観戦予定リスト】\n\n";
       const attMatches = scheduleData.filter(match => {
-        const mId = `${match.date}_${match.club}_${match.opponent}`;
+        const mId = `${window.TrappLeague.storageId(match)}`;
         return localStorage.getItem(`attend_${mId}`) === "true";
       }).sort((a, b) => parseDate(a.date) - parseDate(b.date));
 
@@ -14014,7 +14041,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
           }
           if (target) {
-            const mId = `${target.date}_${target.club}_${target.opponent}`;
+            const mId = `${window.TrappLeague.storageId(target)}`;
             localStorage.setItem(`score_my_${mId}`, myScore);
             localStorage.setItem(`score_opp_${mId}`, oppScore);
             if (pkMy && pkOpp) {
