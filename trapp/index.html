@@ -6,10 +6,13 @@
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260703mobile-analysis-v3">
-  <link rel="stylesheet" href="ui-v6.css?v=20260908">
+  <link rel="stylesheet" href="ui-v6.css?v=20260912">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.__trappLiteStartup = /Android/i.test(navigator.userAgent)
+      || window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches;
+    if (window.__trappLiteStartup) {
+      document.documentElement.classList.add("lite-startup");
       document.documentElement.classList.remove("home-startup-effect");
     }
   </script>
@@ -798,6 +801,7 @@ We can't help falling in love with you
           <h1 id="links-page-title">リンク集</h1>
         </header>
         <div class="links-grid">
+          <a class="link-card" href="https://www.jleague.jp/" target="_blank" rel="noopener">J.LEAGUE</a>
           <a class="link-card" href="https://www.albirex.co.jp" target="_blank" rel="noopener">ALBIREX HP</a>
           <a class="link-card" href="https://roasso-k.com/" target="_blank" rel="noopener">ROASSO HP</a>
           <a class="link-card" href="https://www.albirex.co.jp/ticket/ngate/form/" target="_blank" rel="noopener">Nゲート抽選</a>
@@ -1254,7 +1258,7 @@ We can't help falling in love with you
 
   <!-- 📱 Navigation Pill -->
   <footer id="ultra-nav">
-    <button type="button" id="calendar-nav-toggle" aria-controls="calendar-year-month-panel" aria-expanded="true">年月を隠す ▾</button>
+    <button type="button" id="calendar-nav-toggle" aria-controls="calendar-year-month-panel" aria-expanded="true" aria-label="年月ナビゲーションを隠す"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
     <div class="nav-panel" id="calendar-year-month-panel">
       <div class="nav-panel-main">
         <div class="nav-row-stack">
@@ -1465,11 +1469,11 @@ We can't help falling in love with you
   </div>
 
   <script src="pwa.js?v=20260618pwa-install"></script>
-  <script src="league-data.js?v=20260908-v6"></script>
-  <script src="league-ui.js?v=20260908-v6"></script>
-  <script src="ui-v6.js?v=20260908"></script>
+  <script src="league-data.js?v=20260912-v7"></script>
+  <script src="league-ui.js?v=20260912-v7"></script>
+  <script src="ui-v6.js?v=20260912"></script>
   <script src="schedule/schedule.js?v=20260907-leagues-v2"></script>
-  <script src="script.js?v=20260908-v6"></script>
+  <script src="script.js?v=20260912-v7"></script>
 
 </body>
 </html>

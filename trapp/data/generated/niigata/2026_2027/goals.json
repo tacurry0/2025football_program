@@ -1,0 +1,74 @@
+[
+  {
+    "match_id": "2026081516",
+    "season": 2027,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "time": "19'",
+    "minute": 19,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026081516",
+    "season": 2027,
+    "player_key": "シマブク カズヨシ",
+    "player_name": "シマブク カズヨシ",
+    "time": "46'",
+    "minute": 46,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026082213",
+    "season": 2027,
+    "player_key": "シマブク カズヨシ",
+    "player_name": "シマブク カズヨシ",
+    "time": "82'",
+    "minute": 82,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026082911",
+    "season": 2027,
+    "player_key": "若月 大和",
+    "player_name": "若月 大和",
+    "time": "14'",
+    "minute": 14,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026082911",
+    "season": 2027,
+    "player_key": "桑山 侃士",
+    "player_name": "桑山 侃士",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026082911",
+    "season": 2027,
+    "player_key": "マテウス モラエス",
+    "player_name": "マテウス モラエス",
+    "time": "63'",
+    "minute": 63,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026090202",
+    "season": 2027,
+    "player_key": "前田 椋介",
+    "player_name": "前田 椋介",
+    "time": "36'",
+    "minute": 36,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026090202",
+    "season": 2027,
+    "player_key": "笠井 佳祐",
+    "player_name": "笠井 佳祐",
+    "time": "50'",
+    "minute": 50,
+    "is_own_goal": false
+  }
+]

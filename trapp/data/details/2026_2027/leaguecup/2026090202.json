@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-09-08T01:06:34.353Z",
+  "fetchedAt": "2026-09-12T13:10:57.980Z",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 64,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/090202",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/090202",
-      "detail_fetched_at": "2026-09-08T01:06:34.353Z",
+      "detail_fetched_at": "2026-09-12T13:10:57.976Z",
       "home_starting_members": [
         {
           "name": "近藤 壱成",
@@ -335,14 +335,14 @@
           "out": "ジェイソン ゲリア"
         },
         {
-          "minute": "45",
-          "in": "笠井 佳祐",
-          "out": "石山 青空"
-        },
-        {
           "minute": "67",
           "in": "桑山 侃士",
           "out": "マテウス モラエス"
+        },
+        {
+          "minute": "45",
+          "in": "笠井 佳祐",
+          "out": "石山 青空"
         },
         {
           "minute": "67",

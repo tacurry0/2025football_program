@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "emperor",
-  "fetchedAt": "2026-09-08T01:06:34.519Z",
+  "fetchedAt": "2026-09-12T13:10:57.507Z",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 66,
       "source_url": "https://www.jleague.jp/match/emperor/2026/081902",
       "j_official_url": "https://www.jleague.jp/match/emperor/2026/081902",
-      "detail_fetched_at": "2026-09-08T01:06:34.519Z",
+      "detail_fetched_at": "2026-09-12T13:10:57.498Z",
       "home_starting_members": [
         {
           "name": "バーンズ アントン",

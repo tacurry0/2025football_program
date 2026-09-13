@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-08T00:53:55.374Z",
+  "fetchedAt": "2026-09-12T13:10:58.342Z",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j3",
       "competition": "明治安田J3リーグ",
       "date": "2026-09-06",
-      "time": "18:03",
+      "time": "18:00",
       "round": "第5節",
       "home": "ロアッソ熊本",
       "away": "奈良クラブ",
@@ -28,7 +28,7 @@
       "humidity": 68,
       "source_url": "https://www.jleague.jp/match/j3/2026/090616",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/090616",
-      "detail_fetched_at": "2026-09-08T00:53:55.374Z",
+      "detail_fetched_at": "2026-09-12T13:10:58.337Z",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -156,18 +156,8 @@
       "home_substitutions": [
         {
           "minute": "83",
-          "in": "渡邉 怜歩",
-          "out": "三品 直哉"
-        },
-        {
-          "minute": "83",
           "in": "半代 将都",
           "out": "大本 祐槻"
-        },
-        {
-          "minute": "63",
-          "in": "鹿取 勇斗",
-          "out": "小林 慶太"
         },
         {
           "minute": "66",
@@ -178,6 +168,16 @@
           "minute": "66",
           "in": "ベ ジョンミン",
           "out": "石原 央羅"
+        },
+        {
+          "minute": "63",
+          "in": "鹿取 勇斗",
+          "out": "小林 慶太"
+        },
+        {
+          "minute": "83",
+          "in": "渡邉 怜歩",
+          "out": "三品 直哉"
         }
       ],
       "home_cards": [
@@ -335,6 +335,11 @@
           "out": "奥田 雄大"
         },
         {
+          "minute": "38",
+          "in": "富樫 佑太",
+          "out": "望月 想空"
+        },
+        {
           "minute": "66",
           "in": "田村 亮介",
           "out": "川﨑 修平"
@@ -343,19 +348,9 @@
           "minute": "66",
           "in": "森本 ヒマン",
           "out": "安藤 陸登"
-        },
-        {
-          "minute": "38",
-          "in": "富樫 佑太",
-          "out": "望月 想空"
         }
       ],
       "away_cards": [
-        {
-          "minute": "20",
-          "player": "安藤 陸登",
-          "card": "yellow"
-        },
         {
           "minute": "90+5",
           "player": "濵名 元希",
@@ -364,6 +359,11 @@
         {
           "minute": "49",
           "player": "富樫 佑太",
+          "card": "yellow"
+        },
+        {
+          "minute": "20",
+          "player": "安藤 陸登",
           "card": "yellow"
         }
       ],

@@ -254,7 +254,8 @@ test('client detail shows bundled data before refresh, and keeps it on failure',
 
 test('year tabs use calendar years and calendar navigation can hide, restore and persist', () => {
   const code=read('script.js');assert.ok(!code.includes('selectedSeason'));
-  assert.ok(code.includes('await applyYearFilter(initialYear, true)'));
+  assert.ok(code.includes('await applyYearFilter(selectedYear || initialYear, true)'));
+  assert.ok(code.includes('ensureScheduleNavigation().catch(console.error)'));
   const store=storage(),classes=new Set(),button={setAttribute(k,v){this[k]=v;},addEventListener(k,fn){this[k]=fn;}};
   const c=vm.createContext({localStorage:store,document:{addEventListener(k,fn){fn();},getElementById:()=>button,body:{classList:{toggle(k,v){v?classes.add(k):classes.delete(k);}}}}});
   vm.runInContext(read('ui-v6.js'),c);assert.equal(button['aria-expanded'],'true');

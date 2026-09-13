@@ -1,0 +1,74 @@
+[
+  {
+    "match_id": "2026081523",
+    "season": 2027,
+    "player_key": "那須 健一",
+    "player_name": "那須 健一",
+    "type": "警告",
+    "time": "90'+7",
+    "minute": 97
+  },
+  {
+    "match_id": "2026081523",
+    "season": 2027,
+    "player_key": "根岸 恵汰",
+    "player_name": "根岸 恵汰",
+    "type": "警告",
+    "time": "90'",
+    "minute": 90
+  },
+  {
+    "match_id": "2026081523",
+    "season": 2027,
+    "player_key": "大本 祐槻",
+    "player_name": "大本 祐槻",
+    "type": "退場",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "2026081523",
+    "season": 2027,
+    "player_key": "大本 祐槻",
+    "player_name": "大本 祐槻",
+    "type": "警告",
+    "time": "34'",
+    "minute": 34
+  },
+  {
+    "match_id": "2026083006",
+    "season": 2027,
+    "player_key": "石原 央羅",
+    "player_name": "石原 央羅",
+    "type": "警告",
+    "time": "54'",
+    "minute": 54
+  },
+  {
+    "match_id": "2026090209",
+    "season": 2027,
+    "player_key": "薬師田 澪",
+    "player_name": "薬師田 澪",
+    "type": "警告",
+    "time": "65'",
+    "minute": 65
+  },
+  {
+    "match_id": "2026090616",
+    "season": 2027,
+    "player_key": "那須 健一",
+    "player_name": "那須 健一",
+    "type": "警告",
+    "time": "80'",
+    "minute": 80
+  },
+  {
+    "match_id": "2026091217",
+    "season": 2027,
+    "player_key": "李 泰河",
+    "player_name": "李 泰河",
+    "type": "警告",
+    "time": "11'",
+    "minute": 11
+  }
+]

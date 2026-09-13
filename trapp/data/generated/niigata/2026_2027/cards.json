@@ -1,0 +1,29 @@
+[
+  {
+    "match_id": "2026082213",
+    "season": 2027,
+    "player_key": "大西 悠介",
+    "player_name": "大西 悠介",
+    "type": "警告",
+    "time": "52'",
+    "minute": 52
+  },
+  {
+    "match_id": "2026082911",
+    "season": 2027,
+    "player_key": "奥村 仁",
+    "player_name": "奥村 仁",
+    "type": "警告",
+    "time": "76'",
+    "minute": 76
+  },
+  {
+    "match_id": "2026082911",
+    "season": 2027,
+    "player_key": "笠井 佳祐",
+    "player_name": "笠井 佳祐",
+    "type": "警告",
+    "time": "40'",
+    "minute": 40
+  }
+]

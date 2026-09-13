@@ -1,0 +1,92 @@
+[
+  {
+    "match_id": "2026081902",
+    "season": 2027,
+    "player_key": "半代 将都",
+    "player_name": "半代 将都",
+    "time": "84'",
+    "minute": 84,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026081902",
+    "season": 2027,
+    "player_key": "鹿取 勇斗",
+    "player_name": "鹿取 勇斗",
+    "time": "94'",
+    "minute": 94,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026083006",
+    "season": 2027,
+    "player_key": "飯星 明良",
+    "player_name": "飯星 明良",
+    "time": "14'",
+    "minute": 14,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026083006",
+    "season": 2027,
+    "player_key": "三品 直哉",
+    "player_name": "三品 直哉",
+    "time": "23'",
+    "minute": 23,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026090209",
+    "season": 2027,
+    "player_key": "鹿取 勇斗",
+    "player_name": "鹿取 勇斗",
+    "time": "38'",
+    "minute": 38,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026090209",
+    "season": 2027,
+    "player_key": "永井 颯太",
+    "player_name": "永井 颯太",
+    "time": "56'",
+    "minute": 56,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026090616",
+    "season": 2027,
+    "player_key": "飯星 明良",
+    "player_name": "飯星 明良",
+    "time": "8'",
+    "minute": 8,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026090616",
+    "season": 2027,
+    "player_key": "李 泰河",
+    "player_name": "李 泰河",
+    "time": "24'",
+    "minute": 24,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026091217",
+    "season": 2027,
+    "player_key": "小澤 秀充",
+    "player_name": "小澤 秀充",
+    "time": "29'",
+    "minute": 29,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026091217",
+    "season": 2027,
+    "player_key": "石原 央羅",
+    "player_name": "石原 央羅",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
+  }
+]

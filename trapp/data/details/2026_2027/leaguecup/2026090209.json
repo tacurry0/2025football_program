@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-09-08T01:06:33.604Z",
+  "fetchedAt": "2026-09-12T13:10:58.068Z",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 56,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/090209",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/090209",
-      "detail_fetched_at": "2026-09-08T01:06:33.604Z",
+      "detail_fetched_at": "2026-09-12T13:10:58.063Z",
       "home_starting_members": [
         {
           "name": "佐藤 優也",
