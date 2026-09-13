@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-09-12T13:10:57.980Z",
+  "fetchedAt": "2026-09-13T14:40:42.931270+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 64,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/090202",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/090202",
-      "detail_fetched_at": "2026-09-12T13:10:57.976Z",
+      "detail_fetched_at": "2026-09-13T14:40:42.931270+00:00",
       "home_starting_members": [
         {
           "name": "近藤 壱成",

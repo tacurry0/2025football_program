@@ -2756,6 +2756,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     closePlayerAnalysisClubMenu();
     if (nextClub === playerAnalysisState.selectedClub) return;
     playerAnalysisState.selectedClub = nextClub;
+    refreshPlayerAnalysisData();
     playerAnalysisState.year = normalizePlayerAnalysisYearForClub(playerAnalysisState.year, nextClub);
     playerAnalysisState.timeMode = "year";
     playerAnalysisState.rangeStartYear = "";
@@ -3111,7 +3112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const entry = { rows: [], missing: false };
     try {
-      const res = await fetch(`./data/generated/${info.dataDir}/${playerAnalysisSeasonPath(normalizedYear)}/player_analysis.json?v=20260912`);
+      const res = await window.TrappAnalysisData.fetch(`./data/generated/${info.dataDir}/${playerAnalysisSeasonPath(normalizedYear)}/player_analysis.json?v=20260912`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const payload = await res.json();
       entry.rows = await mergePlayerAnalysisSupplementRows(normalizePlayerAnalysisRows(payload, normalizedYear), normalizedYear, info.key);
@@ -3132,7 +3133,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       playerAnalysisAllYearRowsCache.set(info.key, (async () => {
       const entry = { rows: [], missing: false };
       try {
-        const res = await fetch(`./data/generated/${info.dataDir}/all_years_player_analysis.json?v=20260912`);
+        const res = await window.TrappAnalysisData.fetch(`./data/generated/${info.dataDir}/all_years_player_analysis.json?v=20260912`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const payload = await res.json();
         entry.rows = await mergePlayerAnalysisSupplementAggregateRows(normalizePlayerAnalysisRows(payload, null), info.key);
@@ -3314,7 +3315,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const loadPart = async (name) => {
-      const res = await fetch(`./data/generated/${info.dataDir}/${playerAnalysisSeasonPath(normalizedYear)}/${name}.json?v=20260912`);
+      const res = await window.TrappAnalysisData.fetch(`./data/generated/${info.dataDir}/${playerAnalysisSeasonPath(normalizedYear)}/${name}.json?v=20260912`);
       if (!res.ok) throw new Error(`${name}.json HTTP ${res.status}`);
       const payload = normalizeAsciiFieldsInPlace(await res.json());
       return Array.isArray(payload) ? payload : [];
@@ -3351,7 +3352,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (playerAnalysisHistoryCache.has(cacheKey)) return playerAnalysisHistoryCache.get(cacheKey);
     const promise = (async () => {
       try {
-        const res = await fetch(`./data/history/${info.dataDir}/${playerAnalysisSeasonPath(normalizedYear)}.json?v=20260912`);
+        const res = await window.TrappAnalysisData.fetch(`./data/history/${info.dataDir}/${playerAnalysisSeasonPath(normalizedYear)}.json?v=20260912`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const payload = normalizeAsciiFieldsInPlace(await res.json());
         return Array.isArray(payload) ? payload : [];
@@ -9603,6 +9604,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (chantsView) chantsView.className = mode === "chants" ? "active-view" : "hidden-view";
     if (playerAnalysisView) playerAnalysisView.className = mode === "player-analysis" ? "active-view" : "hidden-view";
     if (visionView) visionView.className = mode === "vision" ? "active-view" : "hidden-view";
+    for (const feature of ["match-analysis", "stadium-map"]) {
+      document.getElementById(feature + "-view").className = mode === feature ? "active-view" : "hidden-view";
+    }
+    window.TrappFeatures.open(mode);
     if (mode !== "player-analysis") setPlayerAnalysisFilterPanel(false);
     updatePlayerAnalysisScrollTopButton();
 
@@ -9625,6 +9630,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderPlayerAnalysisTable();
       }
       requestAnimationFrame(updatePlayerAnalysisScrollTopButton);
+      refreshPlayerAnalysisData();
     }
     if (mode === "vision") ensureVisionFrame();
     if (mode === "feed" && scheduleNavigationReady) {
@@ -12735,6 +12741,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     html += renderCard(nextNiigata, "ALBIREX NIIGATA", "var(--albirex-orange)", "新潟");
     html += renderCard(nextKumamoto, "ROASSO KUMAMOTO", "var(--roasso-red)", "熊本");
     container.innerHTML = html;
+    container.querySelectorAll(".dash-card").forEach(card => {
+      const club = card.id?.includes("kumamoto") ? "kumamoto" : "niigata";
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "fx-dashboard-analysis";
+      button.dataset.feature = "match-analysis"; button.dataset.club = club;
+      button.innerHTML = '次節の対戦分析 <span aria-hidden="true">↗</span>';
+      button.addEventListener("click", e => { e.stopPropagation(); window.TrappFeatures.openForClub(club); });
+      card.append(button);
+    });
 
     container.querySelectorAll(".dash-card").forEach(card => {
       const club = card.id && card.id.includes("kumamoto") ? "kumamoto" : "niigata";
@@ -13871,7 +13886,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = {};
     for (let i = 0; i < localStorage.length; i++) {
       const k = localStorage.key(i);
-      if (k.startsWith("score_") || k.startsWith("memo_") || k.startsWith("attend_") || k.startsWith("note_") || k === CALENDAR_PERSONAL_PLANS_KEY || k === PLAYER_ANALYSIS_MANUAL_STORAGE_KEY) {
+      if (k.startsWith("score_") || k.startsWith("memo_") || k.startsWith("attend_") || k.startsWith("note_") || k === "trapp_stadium_visits_v1" || k === CALENDAR_PERSONAL_PLANS_KEY || k === PLAYER_ANALYSIS_MANUAL_STORAGE_KEY) {
         data[k] = localStorage.getItem(k);
       }
     }
@@ -13894,7 +13909,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const data = JSON.parse(ev.target.result);
         if (!data || typeof data !== "object" || Array.isArray(data) || data.format === TRAPP_SHARE_FORMAT) throw new Error("invalid backup");
-        const isAllowedKey = key => key.startsWith("score_") || key.startsWith("memo_") || key.startsWith("attend_") || key.startsWith("note_") || key === CALENDAR_PERSONAL_PLANS_KEY || key === PLAYER_ANALYSIS_MANUAL_STORAGE_KEY;
+        const isAllowedKey = key => key.startsWith("score_") || key.startsWith("memo_") || key.startsWith("attend_") || key.startsWith("note_") || key === "trapp_stadium_visits_v1" || key === CALENDAR_PERSONAL_PLANS_KEY || key === PLAYER_ANALYSIS_MANUAL_STORAGE_KEY;
+        if (data.trapp_stadium_visits_v1 && !window.TrappFeatures.validateVisits(data.trapp_stadium_visits_v1)) throw new Error("invalid visit backup");
         Object.keys(data).filter(isAllowedKey).forEach(k => localStorage.setItem(k, String(data[k])));
         alert("インポートが完了しました。アプリを再読み込みします。");
         location.reload();
@@ -14061,6 +14077,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (request !== standingsRequest) return;
     window.TrappStandings.render(container, payload, options);
   }
+
+
+  let analysisRefreshPending = null;
+  async function refreshPlayerAnalysisData(force = false) {
+    if (analysisRefreshPending) return analysisRefreshPending;
+    const label = document.getElementById("pa-update-status");
+    const button = document.getElementById("pa-update-check");
+    button.disabled = true; label.textContent = "公式記録の更新を確認中…";
+    analysisRefreshPending = (async () => {
+      try {
+        const update = await window.TrappAnalysisData.check(force);
+        if (update.changed) {
+          [playerAnalysisCache, playerAnalysisScopedCache, playerAnalysisDatasetCache,
+            playerAnalysisHistoryCache, playerAnalysisRankingMetricsCache, playerAnalysisAllPromises,
+            playerAnalysisAllYearRowsCache, playerAnalysisSeasonMetaCache, playerAnalysisMonthlyMetaCache,
+            playerAnalysisSpecialAvailabilityCache, playerAnalysisPlayedSetsCache].forEach(cache => cache.clear());
+          if (currentMode === "player-analysis") await renderPlayerAnalysisYear(playerAnalysisState.year);
+        }
+        const meta = update.manifest?.clubs[playerAnalysisState.selectedClub];
+        label.textContent = meta ? `自動更新 · ${meta.last_match_date}までの${meta.matches}試合` : "2026/27の公式記録を自動更新";
+      } catch (_) {
+        label.textContent = "更新を確認できません。保存済みの記録を表示しています。";
+      } finally { button.disabled = false; analysisRefreshPending = null; }
+    })();
+    return analysisRefreshPending;
+  }
+  document.getElementById("pa-update-check").onclick = () => refreshPlayerAnalysisData(true);
+  setInterval(() => { if (currentMode === "player-analysis" && !document.hidden) refreshPlayerAnalysisData(); }, 300000);
+  window.TrappFeatures.bind({
+    navigate: switchMode, schedule: () => scheduleData, results: () => officialResults,
+    isHome: getMatchIsHome, emblem: getEmblemUrlForTeam, openMatch: openDetailSheet
+  });
 
   // アプリ起動時に初期化
   updateNGateAnnouncement();

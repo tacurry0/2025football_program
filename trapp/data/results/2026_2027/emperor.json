@@ -3,15 +3,9 @@
   "status": 200,
   "season": "2026_2027",
   "league": "emperor",
-  "fetchedAt": "2026-09-08T01:06:34.107Z",
+  "fetchedAt": "2026-09-13T14:40:42.931270+00:00",
   "stale": false,
   "complete": true,
-  "scope": "jleague_clubs",
-  "coverage": {
-    "2026-08": "2026-09-08T01:02:02.818Z",
-    "2026-09": "2026-09-08T01:06:34.107Z"
-  },
-  "auditedMonth": 0,
   "data": [
     {
       "match_id": "2026081902",
@@ -690,6 +684,97 @@
       "status": "finished",
       "source_url": "https://www.jleague.jp/match/emperor/2026/082632",
       "round": "2回戦"
+    },
+    {
+      "match_id": "2026092317",
+      "season": "2026_2027",
+      "league": "emperor",
+      "competition_id": "emperor",
+      "date": "2026-09-23",
+      "section": null,
+      "home": "鹿島アントラーズ",
+      "away": "ヴァンフォーレ甲府",
+      "home_score": null,
+      "away_score": null,
+      "status": "scheduled",
+      "source_url": "https://www.jleague.jp/match/emperor/2026/092317",
+      "round": "3回戦"
+    },
+    {
+      "match_id": "2026092318",
+      "season": "2026_2027",
+      "league": "emperor",
+      "competition_id": "emperor",
+      "date": "2026-09-23",
+      "section": null,
+      "home": "ガンバ大阪",
+      "away": "徳島ヴォルティス",
+      "home_score": null,
+      "away_score": null,
+      "status": "scheduled",
+      "source_url": "https://www.jleague.jp/match/emperor/2026/092318",
+      "round": "3回戦"
+    },
+    {
+      "match_id": "2026092319",
+      "season": "2026_2027",
+      "league": "emperor",
+      "competition_id": "emperor",
+      "date": "2026-09-23",
+      "section": null,
+      "home": "ヴィッセル神戸",
+      "away": "サガン鳥栖",
+      "home_score": null,
+      "away_score": null,
+      "status": "scheduled",
+      "source_url": "https://www.jleague.jp/match/emperor/2026/092319",
+      "round": "3回戦"
+    },
+    {
+      "match_id": "2026092320",
+      "season": "2026_2027",
+      "league": "emperor",
+      "competition_id": "emperor",
+      "date": "2026-09-23",
+      "section": null,
+      "home": "柏レイソル",
+      "away": "FC今治",
+      "home_score": null,
+      "away_score": null,
+      "status": "scheduled",
+      "source_url": "https://www.jleague.jp/match/emperor/2026/092320",
+      "round": "3回戦"
+    },
+    {
+      "match_id": "2026092321",
+      "season": "2026_2027",
+      "league": "emperor",
+      "competition_id": "emperor",
+      "date": "2026-09-23",
+      "section": null,
+      "home": "京都サンガF.C.",
+      "away": "藤枝MYFC",
+      "home_score": null,
+      "away_score": null,
+      "status": "scheduled",
+      "source_url": "https://www.jleague.jp/match/emperor/2026/092321",
+      "round": "3回戦"
+    },
+    {
+      "match_id": "2026092322",
+      "season": "2026_2027",
+      "league": "emperor",
+      "competition_id": "emperor",
+      "date": "2026-09-23",
+      "section": null,
+      "home": "FC町田ゼルビア",
+      "away": "栃木シティ",
+      "home_score": null,
+      "away_score": null,
+      "status": "scheduled",
+      "source_url": "https://www.jleague.jp/match/emperor/2026/092322",
+      "round": "3回戦"
     }
-  ]
+  ],
+  "scope": "jleague_clubs"
 }

@@ -6,18 +6,20 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const read = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 
-test('2026/27 analysis includes all 15 checked official games and consistent appearances/goals', () => {
+test('2026/27 analysis includes all checked official games and consistent appearances/goals', () => {
   for (const [club, count] of [['niigata', 7], ['kumamoto', 8]]) {
     const dir = `data/generated/${club}/2026_2027`;
     const matches = read(`${dir}/matches.json`), apps = read(`${dir}/appearances.json`), goals = read(`${dir}/goals.json`);
     const analysis = read(`${dir}/player_analysis.json`);
-    assert.equal(matches.length, count);
-    assert.equal(read(`${dir}/metadata.json`).through, '2026-09-12');
+    assert.ok(matches.length >= count);
+    const meta = read(`${dir}/metadata.json`);
+    assert.equal(matches.length, meta.matches);
+    assert.ok(meta.through >= '2026-09-12');
     assert.equal(read(`data/generated/${club}/all_years_player_analysis.json`).filter(r => r.season === 2027).length, analysis.length);
     for (const match of matches) {
       assert.equal(Number(match.season), 2027);
       assert.equal(match.season_id, '2026_2027');
-      assert.ok(match.date >= '2026-08-01' && match.date <= '2026-09-12');
+      assert.ok(match.date >= '2026-08-01' && match.date <= meta.through);
       const record = read(`data/details/2026_2027/${match.competition_id}/${match.match_id}.json`).data[0];
       assert.equal(record.status, 'finished');
       const entries = apps.filter(a => a.match_id === match.match_id);
@@ -35,7 +37,7 @@ test('2026/27 analysis includes all 15 checked official games and consistent app
   const apps = read('data/generated/kumamoto/2026_2027/appearances.json');
   assert.equal(apps.find(a => a.match_id === '2026081902' && a.player_name === '大西 遼太郎').minute_in, 91);
   assert.equal(apps.find(a => a.match_id === '2026081902' && a.player_name === '小澤 秀充').minute_in, 80);
-  const last = read('data/generated/kumamoto/2026_2027/matches.json').at(-1);
+  const last = read('data/generated/kumamoto/2026_2027/matches.json').find(r => r.date === '2026-09-12');
   assert.equal(last.date, '2026-09-12'); assert.equal(last.target_score, 2); assert.equal(last.opponent_score, 1);
 });
 

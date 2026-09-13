@@ -1,0 +1,212 @@
+[
+  {
+    "name": "デンカビッグスワンスタジアム",
+    "lat": 37.882576,
+    "lng": 139.0591584,
+    "source": "https://www.openstreetmap.org/way/42744784"
+  },
+  {
+    "name": "えがお健康スタジアム",
+    "lat": 32.8369094,
+    "lng": 130.8001381,
+    "source": "https://www.openstreetmap.org/way/669942789"
+  },
+  {
+    "name": "CITY FOOTBALL STATION",
+    "aliases": [],
+    "lat": 36.3375681,
+    "lng": 139.6452876,
+    "source": "https://www.openstreetmap.org/way/1360283660"
+  },
+  {
+    "name": "GIKENスタジアム",
+    "aliases": [
+      "高知県立春野総合運動公園陸上競技場"
+    ],
+    "lat": 33.5112747,
+    "lng": 133.5027788,
+    "source": "https://www.openstreetmap.org/way/230426899"
+  },
+  {
+    "name": "NACK5スタジアム大宮",
+    "aliases": [],
+    "lat": 35.9161912,
+    "lng": 139.6334707,
+    "source": "https://www.openstreetmap.org/relation/17337961"
+  },
+  {
+    "name": "NDソフトスタジアム山形",
+    "aliases": [],
+    "lat": 38.335568,
+    "lng": 140.3774431,
+    "source": "https://www.openstreetmap.org/relation/2144513"
+  },
+  {
+    "name": "いちご宮崎新富サッカー場",
+    "aliases": [],
+    "lat": 32.0737242,
+    "lng": 131.4914031,
+    "source": "https://www.openstreetmap.org/way/1301811099"
+  },
+  {
+    "name": "とうほう・みんなのスタジアム",
+    "aliases": [],
+    "lat": 37.7232646,
+    "lng": 140.3613025,
+    "source": "https://www.openstreetmap.org/node/2602824257"
+  },
+  {
+    "name": "カンセキスタジアムとちぎ",
+    "aliases": [],
+    "lat": 36.5150345,
+    "lng": 139.8574531,
+    "source": "https://www.openstreetmap.org/way/1025951191"
+  },
+  {
+    "name": "クラサスドーム大分",
+    "aliases": [
+      "大分スポーツ公園総合競技場"
+    ],
+    "lat": 33.2007824,
+    "lng": 131.6574852,
+    "source": "https://www.openstreetmap.org/way/119673228"
+  },
+  {
+    "name": "サンプロ アルウィン",
+    "aliases": [
+      "サンプロ・アルウィン"
+    ],
+    "lat": 36.1796076,
+    "lng": 137.917142,
+    "source": "https://www.openstreetmap.org/way/370877517"
+  },
+  {
+    "name": "ソユースタジアム",
+    "aliases": [],
+    "lat": 39.7214994,
+    "lng": 140.0957994,
+    "source": "https://www.openstreetmap.org/way/253895842"
+  },
+  {
+    "name": "ニッパツ三ツ沢球技場",
+    "aliases": [],
+    "lat": 35.4690346,
+    "lng": 139.6036991,
+    "source": "https://www.openstreetmap.org/relation/9086087"
+  },
+  {
+    "name": "ニンジニアスタジアム",
+    "aliases": [],
+    "lat": 33.7681983,
+    "lng": 132.7976107,
+    "source": "https://www.openstreetmap.org/way/1077714458"
+  },
+  {
+    "name": "ミクニワールドスタジアム北九州",
+    "aliases": [],
+    "lat": 33.8911698,
+    "lng": 130.8887257,
+    "source": "https://www.openstreetmap.org/way/88460004"
+  },
+  {
+    "name": "ヤマハスタジアム（磐田）",
+    "aliases": [
+      "ヤマハスタジアム"
+    ],
+    "lat": 34.7251498,
+    "lng": 137.8751465,
+    "source": "https://www.openstreetmap.org/node/737218336"
+  },
+  {
+    "name": "四国化成MEGLIOスタジアム",
+    "aliases": [
+      "香川県立丸亀競技場"
+    ],
+    "lat": 34.2617591,
+    "lng": 133.7860583,
+    "source": "https://www.openstreetmap.org/way/214620942"
+  },
+  {
+    "name": "富山県総合運動公園陸上競技場",
+    "aliases": [
+      "総合運動公園陸上競技場"
+    ],
+    "lat": 36.6250065,
+    "lng": 137.1955592,
+    "source": "https://www.openstreetmap.org/way/548930586"
+  },
+  {
+    "name": "岐阜メモリアルセンター ヒマラヤスタジアム岐阜",
+    "aliases": [
+      "長良川競技場",
+      "岐阜メモリアルセンター長良川競技場"
+    ],
+    "lat": 35.4413429,
+    "lng": 136.766062,
+    "source": "https://www.openstreetmap.org/way/493042584"
+  },
+  {
+    "name": "沖縄県総合運動公園陸上競技場",
+    "aliases": [],
+    "lat": 26.3086014,
+    "lng": 127.8211176,
+    "source": "https://www.openstreetmap.org/way/376390215"
+  },
+  {
+    "name": "相模原ギオンスタジアム",
+    "aliases": [],
+    "lat": 35.5272548,
+    "lng": 139.386312,
+    "source": "https://www.openstreetmap.org/way/254291058"
+  },
+  {
+    "name": "藤枝総合運動公園サッカー場",
+    "aliases": [],
+    "lat": 34.8815901,
+    "lng": 138.2328945,
+    "source": "https://www.openstreetmap.org/way/372205865"
+  },
+  {
+    "name": "金沢ゴーゴーカレースタジアム",
+    "aliases": [
+      "金沢スタジアム"
+    ],
+    "lat": 36.5961186,
+    "lng": 136.6576653,
+    "source": "https://www.openstreetmap.org/way/1540734292"
+  },
+  {
+    "name": "駅前不動産スタジアム",
+    "aliases": [],
+    "lat": 33.3716798,
+    "lng": 130.5202079,
+    "source": "https://www.openstreetmap.org/node/1985546458"
+  },
+  {
+    "name": "ハワイアンズスタジアムいわき",
+    "aliases": [
+      "いわきグリーンフィールド"
+    ],
+    "lat": 37.0172453,
+    "lng": 140.8644121,
+    "source": "https://www.openstreetmap.org/way/229415848"
+  },
+  {
+    "name": "白波スタジアム",
+    "aliases": [
+      "鹿児島県立鴨池陸上競技場"
+    ],
+    "lat": 31.5648966,
+    "lng": 130.5601671,
+    "source": "https://www.openstreetmap.org/way/187585719"
+  },
+  {
+    "name": "鳴門・大塚スポーツパーク ポカリスエットスタジアム",
+    "aliases": [
+      "ポカリスエットスタジアム"
+    ],
+    "lat": 34.1683087,
+    "lng": 134.6178601,
+    "source": "https://www.openstreetmap.org/way/313323768"
+  }
+]

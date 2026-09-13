@@ -70,5 +70,14 @@
     "time": "50'",
     "minute": 50,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026091305",
+    "season": 2027,
+    "player_key": "前田 椋介",
+    "player_name": "前田 椋介",
+    "time": "46'",
+    "minute": 46,
+    "is_own_goal": false
   }
 ]

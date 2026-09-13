@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260703mobile-analysis-v3">
   <link rel="stylesheet" href="ui-v6.css?v=20260913-intro">
+  <link rel="stylesheet" href="features.css?v=20260913-features">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
     window.__trappReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -89,6 +90,8 @@
     <div class="menu-inner">
       <h2 class="menu-title">MENU</h2>
       <div class="menu-grid">
+        <button type="button" class="menu-card" data-feature="match-analysis"><svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20V10m8 10V4m8 16v-7M2 20h20"/></svg><span class="m-label">次節の対戦分析</span></button>
+        <button type="button" class="menu-card" data-feature="stadium-map"><svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span class="m-label">スタジアム訪問</span></button>
         <button class="menu-card" id="menu-chants">
           <svg class="m-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
           <span class="m-label">応援・チャント</span>
@@ -812,6 +815,35 @@ We can't help falling in love with you
       </section>
     </main>
 
+
+    <main id="match-analysis-view" class="hidden-view">
+      <section class="fx-page" aria-labelledby="fx-analysis-title">
+        <header class="fx-page-header"><span class="fx-eyebrow">THE NEXT CHALLENGE</span><h1 id="fx-analysis-title">次節の対戦分析</h1><p>次の一戦を、数字で読む。</p></header>
+        <div class="fx-controls"><label>クラブ<select id="fx-analysis-club"><option value="niigata">アルビレックス新潟</option><option value="kumamoto">ロアッソ熊本</option></select></label><label>集計対象<select id="fx-analysis-scope"><option value="all">公式戦すべて</option><option value="league">リーグ戦</option></select></label></div>
+        <div id="fx-analysis-content" aria-live="polite"></div>
+      </section>
+    </main>
+    <main id="stadium-map-view" class="hidden-view">
+      <section class="fx-page" aria-labelledby="stadium-map-title">
+        <header class="fx-page-header"><span class="fx-eyebrow">MY FOOTBALL JOURNEY</span><h1 id="stadium-map-title">スタジアム訪問</h1><p>あの日の景色を、ひとつずつ。</p></header>
+        <div class="fx-journey-summary"><div><b id="visit-count">0</b><span>スタジアム</span></div><div><b id="visit-total">0</b><span>訪問</span></div><button type="button" class="fx-button fx-primary" id="visit-add">＋ 訪問を記録</button></div>
+        <div id="stadium-map-canvas" aria-label="スタジアム訪問地図"></div><p class="fx-caption" id="map-network-status">色付きは訪問済み、グレーはスタジアム。地図は拡大・移動できます。</p>
+        <p id="visit-status" class="fx-notice" role="status" aria-live="polite"></p>
+        <form id="visit-form" class="fx-card" hidden>
+          <h2>訪問の記録</h2>
+          <label>スタジアム<input id="visit-venue" list="visit-venues" required maxlength="200" autocomplete="off" placeholder="スタジアム名"><datalist id="visit-venues"></datalist></label>
+          <div class="fx-controls"><label>訪問日<input id="visit-date" type="date" required></label><label>クラブ<select id="visit-club"><option value="niigata">新潟</option><option value="kumamoto">熊本</option><option value="other">その他</option></select></label></div>
+          <label>座席<input id="visit-seat" maxlength="100" placeholder="例：Nスタンド 2層目"></label>
+          <label>思い出・メモ<textarea id="visit-note" maxlength="3000" rows="4" placeholder="ピッチの見え方、スタグル、試合の感想…"></textarea></label>
+          <label>写真<input id="visit-photo" type="file" accept="image/*"></label><img id="visit-photo-preview" class="fx-visit-photo" alt="保存する写真" hidden><button type="button" class="fx-button" id="visit-photo-remove" hidden>写真を外す</button>
+          <details><summary>地図上の位置</summary><p class="fx-caption">登録済みのスタジアムは位置が入ります。未登録の場合は地図をタップするか、緯度・経度を入力できます。</p><div class="fx-controls"><label>緯度<input id="visit-lat" type="number" step="any" min="-90" max="90"></label><label>経度<input id="visit-lng" type="number" step="any" min="-180" max="180"></label></div><button type="button" id="visit-position" class="fx-button">地図で位置を選ぶ</button></details>
+          <div class="fx-row"><button type="submit" id="visit-save" class="fx-button fx-primary">保存</button><button type="button" id="visit-cancel" class="fx-button">キャンセル</button><button type="button" id="visit-delete" class="fx-button fx-danger" hidden>削除</button></div>
+        </form>
+        <div class="fx-section-heading"><h2>訪問リスト</h2><label class="fx-filter-label"><span class="sr-only">表示するクラブ</span><select id="visit-club-filter" aria-label="表示するクラブ"><option value="all">すべて</option><option value="niigata">新潟</option><option value="kumamoto">熊本</option><option value="other">その他</option></select></label></div><div id="visit-list" class="fx-visit-grid"></div>
+        <section class="fx-card"><h2>観戦予定から記録</h2><div id="visit-plans"></div></section><p class="fx-caption">記録と写真はこの端末に保存されます。メニューのデータ管理からバックアップできます。</p>
+      </section>
+    </main>
+
     <!-- View 5: Albirex Player Analysis -->
     <main id="player-analysis-view" class="hidden-view">
       <section class="player-analysis-page" aria-labelledby="pa-heading-title">
@@ -861,6 +893,7 @@ We can't help falling in love with you
               <div id="pa-competition-options" class="pa-competition-options" aria-label="大会名の選択"></div>
             </details>
 
+            <div class="pa-update-row"><span id="pa-update-status" role="status">2026/27の公式記録を自動更新</span><button type="button" id="pa-update-check" class="fx-icon-button" aria-label="選手分析の更新を確認" title="更新を確認">↻</button></div>
             <div id="pa-status" class="pa-status" role="status" aria-live="polite"></div>
             <div id="pa-summary-cards" class="pa-summary-grid"></div>
           </div>
@@ -1472,7 +1505,10 @@ We can't help falling in love with you
   <script src="league-ui.js?v=20260912-v7"></script>
   <script src="ui-v6.js?v=20260912"></script>
   <script src="schedule/schedule.js?v=20260907-leagues-v2"></script>
-  <script src="script.js?v=20260913-intro"></script>
+  <script src="features-model.js?v=20260913-features"></script>
+  <script src="features.js?v=20260913-features"></script>
+  <script src="analysis-data.js?v=20260913-features"></script>
+  <script src="script.js?v=20260913-features"></script>
 
 </body>
 </html>

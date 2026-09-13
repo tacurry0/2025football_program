@@ -50,7 +50,7 @@ test('legacy, wrong league, malformed, duplicate and incomplete payloads are rej
 });
 
 test('client uses newest last-good on network failure and preserves timestamp and old keys', async () => {
-  const saved = snapshot('standings'); saved.fetchedAt = '2026-09-08T00:00:00Z'; saved.stale = true;
+  const saved = snapshot('standings'); saved.fetchedAt = new Date(Date.parse(saved.fetchedAt)+86400000).toISOString(); saved.stale = true;
   const store = storage(); store.setItem(key('standings'), JSON.stringify(saved)); store.setItem('trapp_standings_cache', 'legacy'); store.setItem('memo_match', 'my note');
   const client = api.createClient({ storage: store, fetch: async url => { if (url.startsWith('./')) return response(snapshot('standings')); throw new Error('offline'); } });
   const result = await client.load('standings', 'j2', true);
@@ -75,7 +75,7 @@ test('old GAS format falls back; valid newer stale GAS data beats bundled data',
   let server = { status: 200, data: snapshot('standings').data };
   const client = api.createClient({ storage: storage(), fetch: async url => response(url.startsWith('./') ? snapshot('standings') : server) });
   assert.equal((await client.load('standings','j2',true)).source,'bundled');
-  server = { ...snapshot('standings'), fetchedAt: '2026-09-08T00:00:00Z', stale: true, error: 'source unavailable' };
+  server = { ...snapshot('standings'), fetchedAt: new Date(Date.parse(snapshot('standings').fetchedAt)+86400000).toISOString(), stale: true, error: 'source unavailable' };
   const result = await client.load('standings','j2',true);
   assert.equal(result.source,'gas'); assert.equal(result.stale,true); assert.equal(result.fetchedAt,server.fetchedAt);
 });
@@ -203,7 +203,7 @@ test('cup results include both followed clubs and PK, without mixing league reco
   }});
   const result=await client.all('results',true);
   assert.deepEqual([...requested].sort(),api.RESULT_LEAGUES.slice().sort());
-  assert.equal(result.data.length,159);
+  assert.equal(result.data.length,api.RESULT_LEAGUES.reduce((n,l)=>n+snapshot('results',l).data.length,0));
 });
 
 test('cup reconciliation fills pending opponents, adds missing games and preserves user IDs', () => {

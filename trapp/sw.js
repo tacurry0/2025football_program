@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v89-light-intro';
+const cacheName = 'football-app-v90-analysis-map';
 const assetsToCache = [
   "./",
   "./index.html",
@@ -9,6 +9,10 @@ const assetsToCache = [
   "./league-ui.js",
   "./ui-v6.js",
   "./ui-v6.css",
+  "./features.css",
+  "./features-model.js",
+  "./features.js",
+  "./analysis-data.js",
   "./pwa.js",
   "./schedule/schedule.js",
   "./data/schedule/2026_2027.json",
@@ -39,7 +43,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   // GAS redirects remain network-only: query parameters identify league/season.
   if (url.hostname === 'script.google.com' || url.hostname === 'script.googleusercontent.com') return;
-  if (url.origin === location.origin && /\/data\/(standings|results|details|generated)\//.test(url.pathname)) {
+  if (url.origin === location.origin && /\/data\/(standings|results|details|generated|insights)\//.test(url.pathname)) {
     e.respondWith(
       fetch(e.request).then(response => {
         if (!response.ok) throw new Error('League snapshot HTTP ' + response.status);
