@@ -12554,7 +12554,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (root.dataset.dashboardStartupReveal === "scheduled" || root.dataset.dashboardStartupReveal === "done") return false;
 
     const reveal = document.getElementById("home-loading-reveal");
-    if (window.__trappLiteStartup) {
+    if (window.__trappReducedMotion) {
       reveal?.remove();
       root.classList.remove("home-startup-effect");
       document.body.classList.remove("home-startup-effect");
@@ -12569,6 +12569,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.body.classList.add("home-startup-effect");
     const startedAt = Number(window.__dashboardStartupStartedAt) || performance.now();
     const exitDelay = Math.max(0, 3300 - (performance.now() - startedAt));
+    const exitDuration = window.__trappLiteStartup ? 550 : 1100;
 
     window.setTimeout(() => {
       reveal.classList.add("is-exiting");
@@ -12580,17 +12581,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       root.classList.add("home-dashboard-entering");
       root.dataset.dashboardStartupIntroPlayed = "done";
       root.dataset.dashboardStartupReveal = "done";
-    }, exitDelay + 1100);
+    }, exitDelay + exitDuration);
     window.setTimeout(() => {
       root.classList.remove("home-dashboard-entering");
-    }, exitDelay + 5500);
+    }, exitDelay + (window.__trappLiteStartup ? 1350 : 5500));
     return true;
   }
 
   async function renderDashboard() {
     const container = document.getElementById("dashboard-cards-container");
     if (!container) return;
-    const isStartupIntro = !window.__trappLiteStartup && document.documentElement.dataset.dashboardStartupIntroPlayed !== "done";
+    const isStartupIntro = !window.__trappReducedMotion && document.documentElement.dataset.dashboardStartupIntroPlayed !== "done";
 
     // Sort logic to find "Next" Match
     const now = new Date();
@@ -13260,8 +13261,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (chantsView) chantsView.className = "hidden-view";
   renderDashboard();
   window.setInterval(updateNGateAnnouncement, 30000);
-  if (window.requestIdleCallback) window.requestIdleCallback(refreshDashboardInBackground, { timeout: 3000 });
-  else window.setTimeout(refreshDashboardInBackground, 500);
+  // Keep refresh parsing and card replacement out of the opening animation.
+  const refreshDelay = window.__trappReducedMotion ? 0
+    : Math.max(window.__trappLiteStartup ? 1350 : 2100,
+      (window.__trappLiteStartup ? 4700 : 5400) - (performance.now() - window.__dashboardStartupStartedAt));
+  window.setTimeout(() => {
+    if (window.requestIdleCallback) window.requestIdleCallback(refreshDashboardInBackground, { timeout: 3000 });
+    else window.setTimeout(refreshDashboardInBackground, 0);
+  }, refreshDelay);
 
   // Build navigation only when requested; avoid rendering hundreds of hidden cards at launch.
   let scheduleNavigationReady = false;

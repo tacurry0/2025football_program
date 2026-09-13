@@ -6,15 +6,14 @@
   <title>takarei app</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260703mobile-analysis-v3">
-  <link rel="stylesheet" href="ui-v6.css?v=20260912">
+  <link rel="stylesheet" href="ui-v6.css?v=20260913-intro">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
+    window.__trappReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.__trappLiteStartup = /Android/i.test(navigator.userAgent)
-      || window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches;
-    if (window.__trappLiteStartup) {
-      document.documentElement.classList.add("lite-startup");
-      document.documentElement.classList.remove("home-startup-effect");
-    }
+      || window.matchMedia("(pointer: coarse)").matches;
+    if (window.__trappLiteStartup) document.documentElement.classList.add("lite-startup");
+    if (window.__trappReducedMotion) document.documentElement.classList.remove("home-startup-effect");
   </script>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#ffffff">
@@ -1473,7 +1472,7 @@ We can't help falling in love with you
   <script src="league-ui.js?v=20260912-v7"></script>
   <script src="ui-v6.js?v=20260912"></script>
   <script src="schedule/schedule.js?v=20260907-leagues-v2"></script>
-  <script src="script.js?v=20260912-v7"></script>
+  <script src="script.js?v=20260913-intro"></script>
 
 </body>
 </html>
