@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-13T15:02:21.450060+00:00",
+  "fetchedAt": "2026-09-13T18:19:36.307364+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 78,
       "source_url": "https://www.jleague.jp/match/j2/2026/091305",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/091305",
-      "detail_fetched_at": "2026-09-13T15:02:21.450060+00:00",
+      "detail_fetched_at": "2026-09-13T18:19:36.307364+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",
@@ -314,11 +314,6 @@
       ],
       "away_substitutions": [
         {
-          "minute": "70",
-          "in": "横山 塁",
-          "out": "土居 聖真"
-        },
-        {
           "minute": "62",
           "in": "岡本 一真",
           "out": "川井 歩"
@@ -337,6 +332,11 @@
           "minute": "84",
           "in": "森 海渡",
           "out": "高橋 潤哉"
+        },
+        {
+          "minute": "70",
+          "in": "横山 塁",
+          "out": "土居 聖真"
         },
         {
           "minute": "45",

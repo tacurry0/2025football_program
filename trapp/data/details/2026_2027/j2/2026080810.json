@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-13T15:02:21.450060+00:00",
+  "fetchedAt": "2026-09-13T18:19:36.307364+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 69,
       "source_url": "https://www.jleague.jp/match/j2/2026/080810",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/080810",
-      "detail_fetched_at": "2026-09-13T15:02:21.450060+00:00",
+      "detail_fetched_at": "2026-09-13T18:19:36.307364+00:00",
       "home_starting_members": [
         {
           "name": "トム グローバー",
@@ -165,6 +165,11 @@
           "out": "関口 凱心"
         },
         {
+          "minute": "62",
+          "in": "中山 昂大",
+          "out": "山本 桜大"
+        },
+        {
           "minute": "74",
           "in": "スファナット ムエアンタ",
           "out": "カプリーニ"
@@ -173,11 +178,6 @@
           "minute": "62",
           "in": "杉本 健勇",
           "out": "カルリーニョス ジュニオ"
-        },
-        {
-          "minute": "62",
-          "in": "中山 昂大",
-          "out": "山本 桜大"
         }
       ],
       "home_cards": [],

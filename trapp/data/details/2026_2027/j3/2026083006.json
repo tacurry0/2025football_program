@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-13T15:02:21.450060+00:00",
+  "fetchedAt": "2026-09-13T18:19:36.307364+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 89,
       "source_url": "https://www.jleague.jp/match/j3/2026/083006",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/083006",
-      "detail_fetched_at": "2026-09-13T15:02:21.450060+00:00",
+      "detail_fetched_at": "2026-09-13T18:19:36.307364+00:00",
       "home_starting_members": [
         {
           "name": "猪瀬 康介",
@@ -187,13 +187,13 @@
           "card": "yellow"
         },
         {
-          "minute": "69",
-          "player": "関野 元弥",
+          "minute": "26",
+          "player": "小林 大智",
           "card": "yellow"
         },
         {
-          "minute": "26",
-          "player": "小林 大智",
+          "minute": "69",
+          "player": "関野 元弥",
           "card": "yellow"
         }
       ],
