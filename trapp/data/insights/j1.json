@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j1",
-  "fetchedAt": "2026-09-13T14:55:49.408044+00:00",
+  "fetchedAt": "2026-09-13T15:02:21.450060+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -1127,5 +1127,6 @@
       "status": "scheduled",
       "source_url": "https://www.jleague.jp/match/j1/2026/092002"
     }
-  ]
+  ],
+  "scope": "j1"
 }
