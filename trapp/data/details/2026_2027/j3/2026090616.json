@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-13T18:19:36.307364+00:00",
+  "fetchedAt": "2026-09-13T23:27:30.516771+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 68,
       "source_url": "https://www.jleague.jp/match/j3/2026/090616",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/090616",
-      "detail_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+      "detail_fetched_at": "2026-09-13T23:27:30.516771+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -156,6 +156,11 @@
       "home_substitutions": [
         {
           "minute": "83",
+          "in": "渡邉 怜歩",
+          "out": "三品 直哉"
+        },
+        {
+          "minute": "83",
           "in": "半代 将都",
           "out": "大本 祐槻"
         },
@@ -165,19 +170,14 @@
           "out": "小澤 秀充"
         },
         {
-          "minute": "66",
-          "in": "ベ ジョンミン",
-          "out": "石原 央羅"
-        },
-        {
           "minute": "63",
           "in": "鹿取 勇斗",
           "out": "小林 慶太"
         },
         {
-          "minute": "83",
-          "in": "渡邉 怜歩",
-          "out": "三品 直哉"
+          "minute": "66",
+          "in": "ベ ジョンミン",
+          "out": "石原 央羅"
         }
       ],
       "home_cards": [

@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-13T18:19:36.307364+00:00",
+  "fetchedAt": "2026-09-13T23:27:30.516771+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j2/2026/090613",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/090613",
-      "detail_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+      "detail_fetched_at": "2026-09-13T23:27:30.516771+00:00",
       "home_starting_members": [
         {
           "name": "市川 暉記",
@@ -370,14 +370,14 @@
           "out": "笠井 佳祐"
         },
         {
-          "minute": "45",
-          "in": "マテウス モラエス",
-          "out": "古長谷 千博"
-        },
-        {
           "minute": "59",
           "in": "桑山 侃士",
           "out": "若月 大和"
+        },
+        {
+          "minute": "45",
+          "in": "マテウス モラエス",
+          "out": "古長谷 千博"
         },
         {
           "minute": "59",

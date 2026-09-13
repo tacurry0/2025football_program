@@ -22,7 +22,7 @@
     "assistant_referees": "佐藤 裕一、竹内 清人",
     "fourth_official": "山本 凌",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+    "source_fetched_at": "2026-09-13T23:27:30.516771+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -422,7 +422,7 @@
     "assistant_referees": "正木 篤志、宇田 賢史",
     "fourth_official": "松原 寛人",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+    "source_fetched_at": "2026-09-13T23:27:30.516771+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -848,7 +848,7 @@
     "assistant_referees": "西田 裕貴、横山 卓哉",
     "fourth_official": "佐々木 翔平",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+    "source_fetched_at": "2026-09-13T23:27:30.516771+00:00",
     "pk_home_score": "6",
     "pk_away_score": "5",
     "home_details": {
@@ -1263,7 +1263,7 @@
     "assistant_referees": "鶴岡 泰樹、佐藤 浩太",
     "fourth_official": "野際 祐史",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+    "source_fetched_at": "2026-09-13T23:27:30.516771+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -1657,7 +1657,7 @@
     "assistant_referees": "山口 隆平、森 陽平",
     "fourth_official": "原田 大輔",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+    "source_fetched_at": "2026-09-13T23:27:30.516771+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -1845,13 +1845,13 @@
           "type": "警告"
         },
         {
-          "name": "小林 大智",
-          "time": "26'",
+          "name": "関野 元弥",
+          "time": "69'",
           "type": "警告"
         },
         {
-          "name": "関野 元弥",
-          "time": "69'",
+          "name": "小林 大智",
+          "time": "26'",
           "type": "警告"
         }
       ]
@@ -2077,7 +2077,7 @@
     "assistant_referees": "友政 利貴、髙木 翔",
     "fourth_official": "野際 祐史",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+    "source_fetched_at": "2026-09-13T23:27:30.516771+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -2487,7 +2487,7 @@
     "assistant_referees": "佐藤 裕一、山口 大輔",
     "fourth_official": "島﨑 亮典",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+    "source_fetched_at": "2026-09-13T23:27:30.516771+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -2618,6 +2618,16 @@
       "manager": "片野坂 知宏",
       "substitutions": [
         {
+          "name": "三品 直哉",
+          "in_out": "▽",
+          "time": "83'"
+        },
+        {
+          "name": "渡邉 怜歩",
+          "in_out": "▲",
+          "time": "83'"
+        },
+        {
           "name": "大本 祐槻",
           "in_out": "▽",
           "time": "83'"
@@ -2638,16 +2648,6 @@
           "time": "66'"
         },
         {
-          "name": "石原 央羅",
-          "in_out": "▽",
-          "time": "66'"
-        },
-        {
-          "name": "ベ ジョンミン",
-          "in_out": "▲",
-          "time": "66'"
-        },
-        {
           "name": "小林 慶太",
           "in_out": "▽",
           "time": "63'"
@@ -2658,14 +2658,14 @@
           "time": "63'"
         },
         {
-          "name": "三品 直哉",
+          "name": "石原 央羅",
           "in_out": "▽",
-          "time": "83'"
+          "time": "66'"
         },
         {
-          "name": "渡邉 怜歩",
+          "name": "ベ ジョンミン",
           "in_out": "▲",
-          "time": "83'"
+          "time": "66'"
         }
       ],
       "cards": [
@@ -2916,7 +2916,7 @@
     "assistant_referees": "高橋 悠、松田 信清",
     "fourth_official": "大崎 翼",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-13T18:19:36.307364+00:00",
+    "source_fetched_at": "2026-09-13T23:27:30.516771+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
