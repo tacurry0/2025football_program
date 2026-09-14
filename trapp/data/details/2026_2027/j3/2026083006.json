@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-13T23:27:30.516771+00:00",
+  "fetchedAt": "2026-09-14T18:10:14.661742+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 89,
       "source_url": "https://www.jleague.jp/match/j3/2026/083006",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/083006",
-      "detail_fetched_at": "2026-09-13T23:27:30.516771+00:00",
+      "detail_fetched_at": "2026-09-14T18:10:14.661742+00:00",
       "home_starting_members": [
         {
           "name": "猪瀬 康介",

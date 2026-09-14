@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-13T23:27:30.516771+00:00",
+  "fetchedAt": "2026-09-14T18:10:14.661742+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j3/2026/091217",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/091217",
-      "detail_fetched_at": "2026-09-13T23:27:30.516771+00:00",
+      "detail_fetched_at": "2026-09-14T18:10:14.661742+00:00",
       "home_starting_members": [
         {
           "name": "吉丸 絢梓",
@@ -161,6 +161,11 @@
         },
         {
           "minute": "64",
+          "in": "吉田 陣平",
+          "out": "狩野 海晟"
+        },
+        {
+          "minute": "64",
           "in": "泉 彩稀",
           "out": "中村 翼"
         },
@@ -168,11 +173,6 @@
           "minute": "45",
           "in": "鈴 直樹",
           "out": "安在 達弥"
-        },
-        {
-          "minute": "64",
-          "in": "吉田 陣平",
-          "out": "狩野 海晟"
         }
       ],
       "home_cards": [],
@@ -309,11 +309,6 @@
       ],
       "away_substitutions": [
         {
-          "minute": "70",
-          "in": "半代 将都",
-          "out": "大本 祐槻"
-        },
-        {
           "minute": "86",
           "in": "三島 頌平",
           "out": "那須 健一"
@@ -322,6 +317,11 @@
           "minute": "86",
           "in": "ベ ジョンミン",
           "out": "石原 央羅"
+        },
+        {
+          "minute": "70",
+          "in": "半代 将都",
+          "out": "大本 祐槻"
         },
         {
           "minute": "70",

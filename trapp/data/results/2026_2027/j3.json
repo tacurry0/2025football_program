@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-13T23:27:30.516771+00:00",
+  "fetchedAt": "2026-09-14T18:10:14.661742+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -842,9 +842,9 @@
       "section": 6,
       "home": "FC大阪",
       "away": "愛媛FC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/091401"
     },
     {
