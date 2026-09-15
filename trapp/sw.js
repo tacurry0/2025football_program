@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v96-no-team-labels';
+const cacheName = 'football-app-v97-weather-motion';
 const assetsToCache = [
   "./",
   "./index.html",
