@@ -1,242 +1,264 @@
-/* Home only: keep the club identity and opening choreography. */
+/* Approved matchday-poster home. Every layout rule is scoped to this screen. */
+@font-face {
+  font-family: TrappPosterDate;
+  src: url('./data/assets/fonts/poster-date.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: TrappPosterJP;
+  src: url('./data/assets/fonts/poster-jp.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+}
 body[data-mode="dashboard"] #ultra-dashboard {
-  padding: calc(12px + env(safe-area-inset-top)) 12px calc(110px + env(safe-area-inset-bottom)) !important;
+  padding: calc(12px + env(safe-area-inset-top)) 12px calc(106px + env(safe-area-inset-bottom)) !important;
 }
-body[data-mode="dashboard"] #dashboard-cards-container { gap: 16px; }
-body[data-mode="dashboard"] .home-card-enhanced {
-  --home-gutter: 16px;
-  border-radius: 18px !important;
-  box-shadow: 0 8px 24px rgba(12, 18, 28, .13) !important;
+body[data-mode="dashboard"] #dashboard-cards-container { gap: 14px; align-items: start; }
+body[data-mode="dashboard"] .poster-card.white-theme {
+  --poster-ink: #071e38;
+  --poster-dark: #061b34;
+  --poster-accent: #fa6200;
+  --poster-glow: #063569;
+  --poster-jp: TrappPosterJP, 'Noto Sans JP', sans-serif;
+  --poster-num: JLeagueKick, 'Outfit', sans-serif;
+  border-radius: 10px !important;
+  background: var(--poster-dark) !important;
+  box-shadow: 0 7px 22px #14223615 !important;
+  color: #fff;
+  isolation: isolate;
 }
-body[data-mode="dashboard"] .home-card-enhanced .dash-card-header {
-  min-height: 70px;
-  padding: 8px var(--home-gutter) 8px 10px !important;
-  gap: 8px;
+body[data-mode="dashboard"] #dash-card-kumamoto.poster-card {
+  --poster-dark: #101316;
+  --poster-accent: #e60016;
+  --poster-glow: #222b32;
 }
-body[data-mode="dashboard"] .home-card-enhanced .home-club-lockup { gap: 12px; }
-body[data-mode="dashboard"] .home-card-enhanced .dash-team-name {
-  padding: 0;
-  font-size: 15px !important;
-  letter-spacing: .085em;
-  line-height: 1.15;
+body[data-mode="dashboard"] .poster-card.home-card-enhanced { animation: none; }
+body[data-mode="dashboard"] .poster-card::before,
+body[data-mode="dashboard"] .poster-card::after { display: none; }
+body[data-mode="dashboard"] .poster-card *,
+body[data-mode="dashboard"] .poster-card *::before,
+body[data-mode="dashboard"] .poster-card *::after { box-sizing: border-box; }
+body[data-mode="dashboard"] .poster-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 14px 16px;
+  background: linear-gradient(112deg, var(--poster-dark) 34%, var(--poster-glow));
+  cursor: pointer;
+  outline-offset: -4px;
+  -webkit-tap-highlight-color: transparent;
 }
-body[data-mode="dashboard"] .home-card-enhanced .sheet-ha {
-  box-sizing: border-box;
-  min-width: 58px;
-  padding: 6px 9px;
-  font-size: 12px !important;
-  border-radius: 5px;
+body[data-mode="dashboard"] .poster-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--poster-accent);
+  clip-path: polygon(0 0, 49% 0, 19% 78%, 0 100%);
+  pointer-events: none;
 }
-body[data-mode="dashboard"] .home-card-enhanced .dash-card-body {
-  gap: 14px;
-  padding: 8px var(--home-gutter) 0 !important;
+body[data-mode="dashboard"] .poster-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('./data/assets/home/poster-grain.svg') center / 460px 280px;
+  opacity: .36;
+  pointer-events: none;
 }
-
-/* Venue has its own full-width line beside the competition mark. */
-body[data-mode="dashboard"] .home-card-enhanced .dash-match-overview {
-  display: grid !important;
-  grid-template-columns: 54px minmax(0, 1fr) 66px;
-  grid-template-rows: auto auto;
-  gap: 5px 12px;
-  align-items: center !important;
-  padding: 0 !important;
+body[data-mode="dashboard"] .poster-hero > :not(.poster-watermark) { position: relative; z-index: 2; }
+body[data-mode="dashboard"] .poster-watermark {
+  position: absolute;
+  z-index: 0;
+  width: 65%;
+  height: 91%;
+  object-fit: contain;
+  right: -4%;
+  top: 4%;
+  opacity: .12;
+  pointer-events: none;
 }
-body[data-mode="dashboard"] .home-card-enhanced .home-competition-logo {
-  grid-column: 1;
-  grid-row: 1 / 3;
-  align-self: center;
-  min-height: 60px;
+body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { width: 50%; right: 8%; opacity: .16; }
+body[data-mode="dashboard"] .poster-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+body[data-mode="dashboard"] .poster-lockup { display: flex; align-items: center; min-width: 0; gap: 8px; }
+body[data-mode="dashboard"] .poster-card .home-club-mark {
+  width: 34px; height: 38px; flex: 0 0 34px;
+  margin: 0; padding: 0; min-height: 0;
 }
-body[data-mode="dashboard"] .home-card-enhanced .home-competition-logo img {
-  max-height: 58px;
-  filter: none;
+body[data-mode="dashboard"] .poster-card .home-club-mark::before { display: none; }
+body[data-mode="dashboard"] .poster-card .home-club-mark img {
+  width: 100%; height: 100%; max-width: 100%;
+  object-fit: contain; animation: none; filter: none; transform: none;
 }
-body[data-mode="dashboard"] .home-card-enhanced .dash-match-meta-column { display: contents !important; }
-body[data-mode="dashboard"] .home-card-enhanced .dash-match-meta-column > div:first-child {
-  grid-column: 2;
-  grid-row: 1;
-  flex-wrap: wrap;
-  min-width: 0;
-  gap: 7px !important;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-mw {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 24px;
-  box-sizing: border-box;
-  padding: 4px 7px;
-  font-size: 12px;
-  border-radius: 5px;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-date { gap: 4px 6px; }
-body[data-mode="dashboard"] .home-card-enhanced .dash-date-main {
-  font-size: 29px;
-  font-variant-numeric: tabular-nums;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-date-sub {
-  font-size: 13px;
-  line-height: 1.2;
-  color: #d9e1eb;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-venue-row {
-  grid-column: 2 / -1;
-  grid-row: 2;
-  align-self: start;
+body[data-mode="dashboard"] .poster-card.home-card-kumamoto .home-club-mark img { width: 25px; }
+body[data-mode="dashboard"] .poster-brand { min-width: 0; }
+body[data-mode="dashboard"] .poster-card .dash-team-name {
+  display: block;
+  margin: 0; padding: 0; min-height: 0;
+  font: 700 16px/1.2 var(--poster-num) !important;
+  color: #fff;
+  letter-spacing: .065em;
   overflow: visible;
-  color: #d9e1eb !important;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-venue-row span {
-  font-size: 12px;
-  line-height: 1.65;
-  letter-spacing: .01em;
-  word-break: normal;
-  overflow-wrap: anywhere;
-}
-body[data-mode="dashboard"] .home-card-enhanced [id^="dash-weather-"] {
-  grid-column: 3;
-  grid-row: 1;
-  min-width: 0;
-  align-self: center;
-}
-body[data-mode="dashboard"] .home-card-enhanced [id^="dash-weather-"] > div > div {
-  gap: 3px !important;
-  font-size: 18px !important;
   white-space: nowrap;
 }
-body[data-mode="dashboard"] .home-card-enhanced [id^="dash-weather-"] > div > div > span { font-size: inherit !important; }
-body[data-mode="dashboard"] .home-card-enhanced [id^="dash-weather-"] > div > div > span:last-child {
-  font-size: 12px !important;
-  color: #c7d3e0 !important;
+body[data-mode="dashboard"] .poster-brand > span { display: block; margin-top: 3px; font: 700 9px/1.4 var(--poster-jp); }
+body[data-mode="dashboard"] .poster-badges { display: flex; align-items: center; flex-shrink: 0; gap: 6px; }
+body[data-mode="dashboard"] .poster-competition { font: 700 13px/1.25 var(--poster-num); }
+body[data-mode="dashboard"] .poster-league-logo { width: 31px; height: 21px; overflow: hidden; }
+body[data-mode="dashboard"] .poster-league-logo img { display: block; width: 31px; height: auto; }
+body[data-mode="dashboard"] .poster-competition-text { max-width: 52px; font: 700 10px/1.35 var(--poster-jp); overflow-wrap: anywhere; }
+body[data-mode="dashboard"] .poster-round { font: 700 12px/1 var(--poster-num); border-left: 1px solid #ffffff59; padding: 1px 0 1px 7px; white-space: nowrap; }
+body[data-mode="dashboard"] .poster-ha {
+  min-width: 39px; padding: 6px 7px; border-radius: 3px;
+  font: 700 11px/1 var(--poster-num); text-align: center; letter-spacing: .055em;
+  background: var(--poster-accent); border: 1px solid var(--poster-accent);
 }
-body[data-mode="dashboard"] .home-card-enhanced .val-weather {
-  flex-direction: column;
-  align-items: flex-end !important;
-  gap: 2px !important;
-  font-size: 26px !important;
-  line-height: 1;
+body[data-mode="dashboard"] .poster-ha.is-away { background: #061325b3; border-color: var(--poster-accent); }
+body[data-mode="dashboard"] .poster-card .poster-slogan {
+  position: absolute; top: 62px; right: 15px; margin: 0;
+  font: 700 10px/1.75 var(--poster-jp); letter-spacing: .12em; color: #e1e9f1a6;
 }
-body[data-mode="dashboard"] .home-card-enhanced .val-weather svg { width: 28px; height: 28px; }
-body[data-mode="dashboard"] .home-card-enhanced .val-weather > div { gap: 3px !important; font-size: 18px !important; }
-body[data-mode="dashboard"] .home-card-enhanced .val-weather > div > span { font-size: inherit !important; }
-body[data-mode="dashboard"] .home-card-enhanced .val-weather > div > span:last-child {
-  color: #c7d3e0 !important;
-  font-size: 12px !important;
+body[data-mode="dashboard"] .poster-match-meta {
+  display: grid; grid-template-columns: minmax(0, 1fr) 58px;
+  grid-template-rows: auto auto; gap: 8px 8px; margin-top: 18px;
+}
+body[data-mode="dashboard"] .poster-date-line { display: flex; align-items: flex-end; min-width: 0; gap: 10px; }
+body[data-mode="dashboard"] .poster-date {
+  display: block; font: 400 76px/1 TrappPosterDate, var(--poster-num); letter-spacing: -.025em; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+body[data-mode="dashboard"] .poster-kickoff { display: flex; flex-direction: column; padding-bottom: 3px; font: 700 21px/1.05 var(--poster-num); }
+body[data-mode="dashboard"] .poster-time { white-space: nowrap; }
+body[data-mode="dashboard"] .poster-time.is-tbd { font: 700 10px/1.5 var(--poster-jp); padding-top: 4px; }
+body[data-mode="dashboard"] .poster-date-line.is-undated { flex-wrap: wrap; }
+body[data-mode="dashboard"] .poster-date-line.is-undated .poster-date { font: 700 23px/1.4 var(--poster-jp); white-space: normal; overflow-wrap: anywhere; }
+body[data-mode="dashboard"] .poster-venue { grid-column: 1; font: 700 12px/1.65 var(--poster-jp); overflow-wrap: anywhere; }
+body[data-mode="dashboard"] .poster-weather {
+  grid-column: 2; grid-row: 1 / 3; align-self: end; min-width: 0 !important;
+  padding-top: 40px; justify-content: flex-end;
+}
+body[data-mode="dashboard"] .poster-weather-unavailable { font: 500 9px/1.5 "Noto Sans JP",sans-serif; color: #d4e1ef; }
+body[data-mode="dashboard"] .poster-weather > div { width: 100%; }
+body[data-mode="dashboard"] .poster-weather svg { width: 26px !important; height: 26px !important; }
+body[data-mode="dashboard"] .poster-weather > div > div,
+body[data-mode="dashboard"] .poster-weather .val-weather > div { gap: 2px !important; font-size: 16px !important; white-space: nowrap; }
+body[data-mode="dashboard"] .poster-weather > div > div > span,
+body[data-mode="dashboard"] .poster-weather .val-weather > div > span { font-size: inherit !important; }
+body[data-mode="dashboard"] .poster-weather > div > div > span:last-child,
+body[data-mode="dashboard"] .poster-weather .val-weather > div > span:last-child { font-size: 10px !important; color: #d4e1ef !important; }
+body[data-mode="dashboard"] .poster-weather .val-weather { display: flex; flex-direction: column; align-items: flex-end; gap: 2px !important; font-size: 26px; }
+body[data-mode="dashboard"] .poster-opponent { display: flex; align-items: baseline; gap: 9px; padding-right: 72px; margin-top: 12px; }
+body[data-mode="dashboard"] .poster-vs { color: #ffbc83; font: 700 18px/1 var(--poster-num); }
+body[data-mode="dashboard"] .home-card-kumamoto .poster-vs { color: #ff6b77; }
+body[data-mode="dashboard"] .poster-card .dash-opp-name {
+  min-width: 0; margin: 0; color: #fff !important;
+  font: 900 27px/1.35 var(--poster-jp) !important;
+  letter-spacing: -.02em !important; word-break: normal; overflow-wrap: anywhere; text-shadow: none;
+}
+body[data-mode="dashboard"] .poster-card .poster-signature {
+  position: absolute; bottom: 17px; right: 14px; max-width: 78px;
+  text-align: right; font: 700 7px/1.7 var(--poster-num); letter-spacing: .18em; color: #cfdfed99;
 }
 
-/* Opponent headline: full Japanese glyphs, with room for long names. */
-body[data-mode="dashboard"] .home-card-enhanced .dash-card-body > div:nth-child(2) {
-  gap: 10px !important;
-  padding: 0 !important;
-  min-height: 36px;
+/* A continuous match report beneath the poster, without nested cards. */
+body[data-mode="dashboard"] .poster-report { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #fcfcfa; color: #101921; padding: 11px 0 12px; }
+body[data-mode="dashboard"] .poster-report-team { min-width: 0; padding: 0 12px; }
+body[data-mode="dashboard"] .poster-report-team + .poster-report-team { border-left: 1px solid #d5dce1; }
+body[data-mode="dashboard"] .poster-team-summary { display: grid; grid-template-columns: 53px minmax(0, 1fr); align-items: center; gap: 7px; min-height: 66px; }
+body[data-mode="dashboard"] .poster-card .poster-team-link {
+  display: grid; place-items: center; width: 53px; height: 62px;
+  margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; cursor: pointer;
 }
-body[data-mode="dashboard"] .home-card-enhanced .dash-vs {
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  font-size: 14px !important;
-  letter-spacing: .025em;
+body[data-mode="dashboard"] .poster-emblem-media { display: grid; place-items: center; width: 53px; height: 62px; }
+body[data-mode="dashboard"] .poster-team-emblem { max-width: 100%; width: 53px; height: 62px; object-fit: contain; filter: none; }
+body[data-mode="dashboard"] .poster-team-numbers { min-width: 0; }
+body[data-mode="dashboard"] .poster-team-name { font: 900 14px/1.4 var(--poster-jp); margin: 0 0 3px; overflow-wrap: anywhere; }
+body[data-mode="dashboard"] .poster-standing { display: flex; align-items: baseline; gap: 7px; }
+body[data-mode="dashboard"] .poster-rank { display: flex; align-items: baseline; gap: 4px; }
+body[data-mode="dashboard"] .poster-card .val-rank-num-my,
+body[data-mode="dashboard"] .poster-card .val-rank-num-opp { font: 700 32px/1 var(--poster-num) !important; color: #101921 !important; }
+body[data-mode="dashboard"] .poster-rank > small { font: 700 9px/1 var(--poster-jp); }
+body[data-mode="dashboard"] .poster-points { display: flex; align-items: baseline; gap: 3px; padding-left: 7px; border-left: 1px solid #b9c4cd; font: 700 19px/1 var(--poster-num); white-space: nowrap; }
+body[data-mode="dashboard"] .poster-points small { font-size: 10px; }
+body[data-mode="dashboard"] .poster-previous { border-top: 1px solid #d5dce1; margin-top: 8px; padding-top: 6px; }
+body[data-mode="dashboard"] .poster-section-label { font: 700 9px/1.5 var(--poster-jp); color: #4a5c6a; margin: 0 0 2px; }
+body[data-mode="dashboard"] .poster-card .dash-prev-meta { display: flex; justify-content: center; align-items: center; min-height: 23px; gap: 4px; margin: 0; color: #4a5c6a; font: 700 11px/1 var(--poster-num); }
+body[data-mode="dashboard"] .poster-card .dash-prev-vs { font-size: 7px; opacity: .65; }
+body[data-mode="dashboard"] .poster-card .dash-prev-opp-emblem { width: 20px; height: 20px; object-fit: contain; filter: none; }
+body[data-mode="dashboard"] .poster-card .dash-prev-ha { min-width: 33px; border-radius: 2px; font-size: 9px; padding: 2px 4px; color: #4a5c6a; }
+body[data-mode="dashboard"] .poster-card .dash-prev-score-row { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 31px; flex-wrap: wrap; }
+body[data-mode="dashboard"] .poster-card .val-prev-score-my,
+body[data-mode="dashboard"] .poster-card .val-prev-score-opp { font: 700 25px/1.2 var(--poster-num) !important; white-space: nowrap; color: #101921 !important; }
+body[data-mode="dashboard"] .poster-card .val-prev-res-my > span,
+body[data-mode="dashboard"] .poster-card .val-prev-res-opp > span { font: 700 11px/1 var(--poster-num) !important; padding: 3px 10px !important; border-radius: 5px !important; }
+body[data-mode="dashboard"] .poster-card .val-prev-res-my > span > span,
+body[data-mode="dashboard"] .poster-card .val-prev-res-opp > span > span { display: none; }
+body[data-mode="dashboard"] .poster-recent { border-top: 1px solid #d5dce1; margin-top: 7px; padding-top: 6px; }
+body[data-mode="dashboard"] .poster-card .dash-form-strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3px; width: 100%; margin: 4px 0 0; min-height: 40px; }
+body[data-mode="dashboard"] .poster-card .dash-form-item { width: auto; min-width: 0; gap: 3px; }
+body[data-mode="dashboard"] .poster-card .dash-form-symbol { font: 700 11px/1 var(--poster-jp); height: 12px; color: #101921; }
+body[data-mode="dashboard"] .poster-card .dash-form-emblem,
+body[data-mode="dashboard"] .poster-card .dash-form-emblem-placeholder { width: 18px; height: 18px; }
+body[data-mode="dashboard"] .poster-card .dash-form-ha { color: #4a5c6a; font: 700 11px/1 var(--poster-num); }
+body[data-mode="dashboard"] .poster-pending { color: #687784; margin: 8px 0; font: 500 10px/1.6 'Noto Sans JP',sans-serif; }
+body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis {
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; overflow: hidden; width: 100%; min-height: 42px;
+  margin: 0; padding: 10px 16px 10px 36px; border: 0; border-radius: 0;
+  background: var(--poster-dark); color: #fff;
+  font: 700 12px/1.5 var(--poster-jp); text-align: left;
 }
-body[data-mode="dashboard"] .home-card-enhanced .dash-opp-name {
-  font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: clamp(20px, 5.6vw, 25px) !important;
-  font-weight: 900 !important;
-  line-height: 1.45;
-  word-break: normal;
-  overflow-wrap: anywhere;
-  text-shadow: none;
-}
+body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 31px; background: var(--poster-accent); clip-path: polygon(0 0,100% 0,30% 100%,0 100%); }
+body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis > span { font: inherit; }
+body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis svg { width: 24px; height: 20px; flex-shrink: 0; }
+body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:focus-visible,
+body[data-mode="dashboard"] .poster-hero:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+body[data-mode="dashboard"] .poster-card .poster-team-link:focus-visible { outline: 2px solid #07589b; outline-offset: 1px; }
+body[data-mode="dashboard"] .poster-empty { padding: 20px; color: #fff; font: 700 14px/1.7 'Noto Sans JP',sans-serif; }
+body[data-mode="dashboard"] .dash-quick-links { background: #fffffff7; box-shadow: 0 5px 20px #14223616; }
 
-/* A shared comparison surface, divided by a fine rule. */
-body[data-mode="dashboard"] .home-card-enhanced .dash-card-split {
-  gap: 0 !important;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .85);
-  border-radius: 12px;
-  background: #f7f8fa;
+@media (min-width: 400px) {
+  body[data-mode="dashboard"] .poster-hero { padding: 16px 16px 18px; }
+  body[data-mode="dashboard"] .poster-match-meta { margin-top: 22px; }
+  body[data-mode="dashboard"] .poster-date { font-size: 90px; }
+  body[data-mode="dashboard"] .poster-kickoff { font-size: 24px; }
+  body[data-mode="dashboard"] .poster-card .dash-team-name { font-size: 18px !important; }
+  body[data-mode="dashboard"] .poster-card .dash-opp-name { font-size: 30px !important; }
+  body[data-mode="dashboard"] .poster-team-summary { grid-template-columns: 60px minmax(0,1fr); min-height: 72px; }
+  body[data-mode="dashboard"] .poster-card .poster-team-link,
+  body[data-mode="dashboard"] .poster-emblem-media,
+  body[data-mode="dashboard"] .poster-team-emblem { width: 60px; height: 70px; }
+  body[data-mode="dashboard"] .poster-card .val-rank-num-my,
+  body[data-mode="dashboard"] .poster-card .val-rank-num-opp { font-size: 37px !important; }
 }
-body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel {
-  padding: 16px 10px 12px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel:last-child { border-left: 1px solid #dde2e9; }
-body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel > img,
-body[data-mode="dashboard"] .home-card-enhanced .dash-opp-emblem-link {
-  width: 66px !important;
-  height: 66px !important;
-  margin: 0 0 10px !important;
-  filter: none !important;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-opp-emblem-media,
-body[data-mode="dashboard"] .home-card-enhanced .dash-opp-emblem-media .dash-opp-emblem {
-  width: 66px;
-  max-width: 66px;
-  height: 66px !important;
-  filter: none;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel > div:nth-of-type(1) {
-  height: auto;
-  min-height: 38px;
-  padding: 0 0 9px !important;
-  margin: 0 0 9px !important;
-  border: 0 !important;
-  border-bottom: 1px solid #dde2e9 !important;
-  border-radius: 0;
-  background: transparent;
-  overflow: visible;
-  align-items: baseline !important;
-}
-body[data-mode="dashboard"] .home-card-enhanced .val-rank-num-my,
-body[data-mode="dashboard"] .home-card-enhanced .val-rank-num-opp { font-size: 25px !important; }
-body[data-mode="dashboard"] .home-card-enhanced .dash-prev-meta {
-  min-height: 26px;
-  margin-bottom: 5px;
-  gap: 5px;
-  color: #596474;
-  font-size: 12px;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-prev-ha {
-  color: #596474;
-  border-radius: 3px;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-prev-score-row { min-height: 32px; gap: 7px !important; }
-body[data-mode="dashboard"] .home-card-enhanced .val-prev-score-my,
-body[data-mode="dashboard"] .home-card-enhanced .val-prev-score-opp { font-size: 23px !important; }
-body[data-mode="dashboard"] .home-card-enhanced [class^="val-prev-form-"] { width: 100%; }
-body[data-mode="dashboard"] .home-card-enhanced .dash-form-strip {
-  justify-content: space-between;
-  gap: 2px;
-  margin-top: 10px;
-}
-body[data-mode="dashboard"] .home-card-enhanced .dash-form-item { flex: 1; min-width: 0; gap: 4px; }
-body[data-mode="dashboard"] .home-card-enhanced .dash-form-emblem,
-body[data-mode="dashboard"] .home-card-enhanced .dash-form-emblem-placeholder { width: 18px; height: 18px; }
-body[data-mode="dashboard"] .home-card-enhanced .dash-form-ha { color: #596474; font-size: 13px; }
-body[data-mode="dashboard"] .home-card-enhanced .fx-dashboard-analysis {
-  width: calc(100% - 2 * var(--home-gutter));
-  margin: 0 var(--home-gutter);
-  padding: 14px 2px;
-  min-height: 48px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  font-size: 12px;
-  letter-spacing: .02em;
-}
-body[data-mode="dashboard"] .home-card-enhanced .fx-dashboard-analysis:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: -4px;
+@media (min-width: 761px) and (max-width: 950px) {
+  body[data-mode="dashboard"] #dashboard-cards-container { grid-template-columns: 1fr; max-width: 440px; }
 }
 @media (max-width: 350px) {
   body[data-mode="dashboard"] #ultra-dashboard { padding-inline: 8px !important; }
-  body[data-mode="dashboard"] .home-card-enhanced { --home-gutter: 12px; }
-  body[data-mode="dashboard"] .home-card-enhanced .home-club-lockup { gap: 6px; }
-  body[data-mode="dashboard"] .home-card-enhanced .dash-team-name { font-size: 13px !important; letter-spacing: .04em; }
-  body[data-mode="dashboard"] .home-card-enhanced .sheet-ha { min-width: 50px; }
-  body[data-mode="dashboard"] .home-card-enhanced .dash-match-overview { grid-template-columns: 46px minmax(0, 1fr) 60px; column-gap: 9px; }
-  body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel { padding-inline: 7px; }
+  body[data-mode="dashboard"] .poster-hero { padding-inline: 11px; }
+  body[data-mode="dashboard"] .poster-lockup { gap: 5px; }
+  body[data-mode="dashboard"] .poster-card .home-club-mark { width: 29px; flex-basis: 29px; }
+  body[data-mode="dashboard"] .poster-card .dash-team-name { font-size: 14px !important; letter-spacing: .04em; }
+  body[data-mode="dashboard"] .poster-brand > span { font-size: 8px; }
+  body[data-mode="dashboard"] .poster-badges { gap: 4px; }
+  body[data-mode="dashboard"] .poster-ha { min-width: 35px; padding-inline: 5px; }
+  body[data-mode="dashboard"] .poster-date { font-size: 64px; }
+  body[data-mode="dashboard"] .poster-kickoff { font-size: 18px; }
+  body[data-mode="dashboard"] .poster-opponent { padding-right: 0; }
+  body[data-mode="dashboard"] .poster-card .poster-signature { display: none; }
+  body[data-mode="dashboard"] .poster-card .dash-opp-name { font-size: 25px !important; }
+  body[data-mode="dashboard"] .poster-report-team { padding-inline: 9px; }
+  body[data-mode="dashboard"] .poster-team-summary { grid-template-columns: 45px minmax(0,1fr); gap: 5px; }
+  body[data-mode="dashboard"] .poster-card .poster-team-link,
+  body[data-mode="dashboard"] .poster-emblem-media,
+  body[data-mode="dashboard"] .poster-team-emblem { width: 45px; height: 57px; }
+  body[data-mode="dashboard"] .poster-standing { gap: 5px; }
+  body[data-mode="dashboard"] .poster-points { padding-left: 5px; font-size: 17px; }
+  body[data-mode="dashboard"] .poster-card .val-rank-num-my,
+  body[data-mode="dashboard"] .poster-card .val-rank-num-opp { font-size: 29px !important; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.home-dashboard-entering body[data-mode="dashboard"] .poster-card.home-card-intro {
+    animation: homeLiteCard 600ms cubic-bezier(.16,1,.3,1) var(--home-enter-delay,0ms) both !important;
+  }
 }

@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v93-home-polish';
+const cacheName = 'football-app-v94-matchday-poster';
 const assetsToCache = [
   "./",
   "./index.html",
@@ -11,6 +11,10 @@ const assetsToCache = [
   "./ui-v6.css",
   "./features.css",
   "./home.css",
+  "./home-view.js",
+  "./data/assets/home/poster-grain.svg",
+  "./data/assets/fonts/poster-jp.woff2",
+  "./data/assets/fonts/poster-date.woff2",
   "./features-model.js",
   "./features.js",
   "./analysis-data.js",

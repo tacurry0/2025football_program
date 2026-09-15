@@ -12625,128 +12625,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let html = "";
     const renderCard = (m, clubName, mainColor, myShortName) => {
-      if (!m) return `<div class="dash-card"><div style="padding:20px;text-align:center;color:#888;">今後の試合予定はありません</div></div>`;
-      const isAtt = localStorage.getItem('attend_' + m.date + '_' + m.club + '_' + m.opponent) === "true";
-      const isHome = getMatchIsHome(m);
-      const haBadge = isHome ? '<span class="sheet-ha badge-home" style="color:#fff; font-weight:800; font-size:1rem;">HOME</span>' : '<span class="sheet-ha badge-away" style="color:#fff; font-weight:800; font-size:1rem;">AWAY</span>';
-      const myEmblem = m.club === "niigata" ? "./data/assets/emblems/アルビレックス新潟.png" : "./data/assets/emblems/ロアッソ熊本.png";
-      const J_CLUB_ENG = { "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC" };
-      const engOpp = J_CLUB_ENG[m.opponent] || m.opponent.toUpperCase();
-      const dashClubLogo = m.club === "niigata" ? "./data/assets/icons/alb_logo1.png" : "./data/assets/icons/roasso_logo1.png";
-      const competitionText = [
-        getMatchCompetitionText(m),
-        m.competition,
-        m.tournament,
-        m.league,
-        m.matchweek,
-        m.stage,
-        m.section
-      ].filter(Boolean).join(" ");
-      const competitionKey = /ルヴァン|YLC|Jリーグカップ|Ｊリーグカップ|ナビスコ|round-levain/i.test(competitionText)
-        ? "levain"
-        : (/(^|[^A-Z0-9])J3([^A-Z0-9]|$)|Ｊ3|Ｊ３/.test(competitionText)
-          ? "j3"
-          : (/(^|[^A-Z0-9])J2([^A-Z0-9]|$)|Ｊ2|Ｊ２/.test(competitionText)
-            ? "j2"
-            : (m.club === "kumamoto" ? "j3" : "j2")));
-      const competitionLogoMap = {
-        j2: { src: "./data/assets/icons/j2_2.png", alt: "J2" },
-        j3: { src: "./data/assets/icons/j3_2.png", alt: "J3" },
-        levain: { src: "./data/assets/icons/ylc_logo1.jpg", alt: "ルヴァンカップ" }
-      };
-      const competitionLogo = competitionLogoMap[competitionKey] || competitionLogoMap.j2;
-      const opponentEmblemUrl = resolveEmblemUrl(m.opponent, m.emblem);
-      const dashboardDateParts = formatDashboardDateParts(m.date, m.day, m.time);
-      const dashboardDateHtml = `<span class="dash-date-main">${escapeHtml(dashboardDateParts.date)}</span>${dashboardDateParts.meta ? `<span class="dash-date-sub">${escapeHtml(dashboardDateParts.meta)}</span>` : ""}`;
-
-      return `
-          <div class="dash-card white-theme home-card-enhanced${isStartupIntro ? " home-card-intro" : ""} home-card-${m.club}" id="dash-card-${m.club}" data-mid="${window.TrappLeague.storageId(m)}" style="background: white; --home-enter-delay:${m.club === "kumamoto" ? "180ms" : "20ms"};">
-            <div class="dash-card-header" style="background:${mainColor}; border-bottom:none; padding:8px 15px;">
-              <div class="home-club-lockup">
-                <span class="home-club-mark"><img src="${dashClubLogo}" alt="${clubName}" loading="eager" decoding="async"></span>
-                <span class="dash-team-name" style="font-size:1.4rem; font-weight:900;">${clubName}</span>
-              </div>
-              ${haBadge.replace('font-size:1rem;', 'font-size:0.85rem;')}
-            </div>
-            <div class="dash-card-body" style="background: white; color: #111; padding:10px 15px;">
-              
-              <!-- Top area (Date, Venue + Weather) -->
-              <div class="dash-match-overview" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
-                 <div class="home-competition-logo comp-${competitionKey}" data-competition-key="${competitionKey}">
-                    <img src="${competitionLogo.src}" alt="${competitionLogo.alt}" loading="eager" decoding="async">
-                 </div>
-                 <!-- Match date -->
-                 <div class="dash-match-meta-column" style="display:flex; flex-direction:column; gap:6px;">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                       ${renderRoundPill(m, "dash-mw")}
-                       <span class="dash-date" style="color: #111; font-weight: 500; font-size:0.95rem;">${dashboardDateHtml}</span>
-                    </div>
-                    <div class="dash-venue-row" style="color:#555; font-size:0.85rem; align-items:center; display:flex;">
-                       <span style="font-weight:700;">${escapeHtml(m.venue || "会場未定")}</span>
-                    </div>
-                 </div>
-
-                 <!-- Right Side: Weather -->
-                 <div id="dash-weather-${m.club}" data-venue="${m.venue}" data-date="${m.date}" style="text-align:right;">
-                    <span class="val-weather" style="font-size:1.8rem; display:flex; align-items:center; gap: 8px;"></span>
-                 </div>
-              </div>
-              
-              <!-- Opponent Title -->
-              <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:10px; border-bottom: 1px solid #f0f0f5; padding-bottom:10px;">
-                 <span class="dash-vs" style="color:#888; font-size:1.1rem; font-weight:800;">VS</span>
-                 <h3 class="dash-opp-name" style="color:#111; font-weight:900; margin:0; font-size:1.6rem; font-family:var(--font-main); letter-spacing:1px;">${m.opponent}</h3>
-              </div>
-              
-               <!-- Split Layout -->
-              <div class="dash-card-split" style="display:flex; gap: 15px;">
-                 <!-- Left (My Team) -->
-                 <div class="dash-side-panel" style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <img src="${myEmblem}" style="height:45px; margin-bottom:4px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); cursor:pointer;" onclick="openClubSite('${myShortName === '新潟' ? 'アルビレックス新潟' : 'ロアッソ熊本'}', event)">
-                    <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
-                       <span class="val-rank-num-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
-                       <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-my">-</span> pts</span>
-                    </div>
-                    <div class="dash-prev-meta"><span class="val-prev-date-my">-</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-my" alt=""><span class="val-prev-ha-my dash-prev-ha">-</span></div>
-                    <div class="dash-prev-score-row" style="display:flex; align-items:center; gap:6px;">
-                       <span class="val-prev-score-my" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
-                       <span class="val-prev-res-my">-</span>
-                    </div>
-                    <div class="val-prev-form-my" style="min-height:18px;"></div>
-                 </div>
-                 
-                 <!-- Divider -->
-                 <div style="width:1px; background:#e8e8ed;"></div>
-                 
-                 <!-- Right (Opponent) -->
-                 <div class="dash-side-panel" style="flex:1; display:flex; flex-direction:column; align-items:center; text-align:center;">
-                    <button type="button" class="dash-opp-emblem-link" data-opponent="${escapeHtml(m.opponent)}" aria-label="${escapeHtml(m.opponent)}の公式サイトを開く">${renderTeamEmblem(opponentEmblemUrl, m.opponent, "dash-opp-emblem", "dash-opp-emblem-media")}</button>
-                    <div style="display:flex; align-items:baseline; gap:4px; border-bottom:1px solid #f0f0f5; width:95%; justify-content:center; padding-bottom:6px; margin-bottom:6px;">
-                       <span class="val-rank-num-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111;">-</span><span style="font-weight:700; font-size:0.85rem;">th</span>
-                       <span style="font-size:0.85rem; color:#666; font-weight:700; margin-left:6px;"><span class="val-pts-opp">-</span> pts</span>
-                    </div>
-                    <div class="dash-prev-meta"><span class="val-prev-date-opp">-</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-opp" alt=""><span class="val-prev-ha-opp dash-prev-ha">-</span></div>
-                    <div class="dash-prev-score-row" style="display:flex; align-items:center; gap:6px;">
-                       <span class="val-prev-score-opp" style="font-family:var(--font-main); font-size:1.4rem; font-weight:900; color:#111; letter-spacing:1px; white-space:nowrap;">-</span>
-                       <span class="val-prev-res-opp">-</span>
-                    </div>
-                    <div class="val-prev-form-opp" style="min-height:18px;"></div>
-                 </div>
-              </div>
-            </div>
-          </div>
-        `;
+      if (!m) return `<div class="dash-card poster-empty"><p>${escapeHtml(myShortName)}の今後の試合予定はありません</p></div>`;
+      const ownName = m.club === "niigata" ? "アルビレックス新潟" : "ロアッソ熊本";
+      return window.TrappHome.renderCard({
+        match: m, clubName, ownName, myShortName,
+        opponentShortName: TEAM_ALIAS_OVERRIDES[normalizeName(m.opponent)] || m.opponent,
+        isHome: getMatchIsHome(m), isIntro: isStartupIntro,
+        storageId: window.TrappLeague.storageId(m), competition: window.TrappLeague.context(m),
+        roundHtml: renderRoundPill(m, "poster-round"),
+        myEmblemHtml: renderTeamEmblem(resolveEmblemUrl(ownName, ""), ownName, "poster-team-emblem", "poster-emblem-media"),
+        opponentEmblemHtml: renderTeamEmblem(resolveEmblemUrl(m.opponent, m.emblem), m.opponent, "poster-team-emblem", "poster-emblem-media")
+      });
     };
 
     html += renderCard(nextNiigata, "ALBIREX NIIGATA", "var(--albirex-orange)", "新潟");
     html += renderCard(nextKumamoto, "ROASSO KUMAMOTO", "var(--roasso-red)", "熊本");
     container.innerHTML = html;
-    container.querySelectorAll(".dash-card").forEach(card => {
+    container.querySelectorAll(".poster-card").forEach(card => {
       const club = card.id?.includes("kumamoto") ? "kumamoto" : "niigata";
       const button = document.createElement("button");
       button.type = "button"; button.className = "fx-dashboard-analysis";
       button.dataset.feature = "match-analysis"; button.dataset.club = club;
-      button.innerHTML = '次節の対戦分析 <span aria-hidden="true">↗</span>';
+      button.innerHTML = '<span>次節の対戦分析</span><svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 12h28M20 3l9 9-9 9"/></svg>';
       button.addEventListener("click", e => { e.stopPropagation(); window.TrappFeatures.openForClub(club); });
       card.append(button);
     });
@@ -12770,6 +12670,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       const match = scheduleData.find(x => `${window.TrappLeague.storageId(x)}` === mId);
       const opponentName = card.querySelector('.dash-opp-name');
       if (match) bindClubNameLongPress(opponentName, card, match);
+      const hero = card.querySelector('.poster-hero');
+      if (hero) hero.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); card.click(); }
+      });
       card.onclick = () => {
         if (card.dataset.suppressClick === "true") {
           delete card.dataset.suppressClick;
@@ -12792,69 +12696,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("dash-to-links").onclick = () => switchMode("links");
     updateDashboardDockState();
 
-    // Auto Fetch Weather Function inline
-    const fetchWeatherForDash = async (idPrefix, clubPrefix) => {
-      const wBox = document.getElementById(idPrefix);
-      if (!wBox) return;
-      const venue = wBox.dataset.venue;
-      const dateStr = wBox.dataset.date;
-
-      const cacheKey = `weather_html_${venue}_${dateStr}`;
-      const cachedHTML = localStorage.getItem(cacheKey);
-      const cachedTime = localStorage.getItem(`${cacheKey}_time`);
-
-      // 3時間のキャッシュ有効期限
-      if (cachedHTML && cachedTime && (Date.now() - parseInt(cachedTime) < 10800000)) {
-        wBox.querySelector('.val-weather').innerHTML = cachedHTML;
+    // One SVG weather renderer for both first paint and cached home visits.
+    const fetchWeatherForDash = async id => {
+      const box = document.getElementById(id);
+      if (!box) return;
+      const { venue, date } = box.dataset;
+      const days = (new Date(date) - new Date()) / 86400000;
+      if (days < -4 || days > 14) {
+        box.innerHTML = '<span class="poster-weather-unavailable">取得期間外</span>';
         return;
       }
-
-      const mDate = new Date(dateStr);
-      const now = new Date();
-      const diffDays = (mDate - now) / (1000 * 60 * 60 * 24);
-
-      if (diffDays >= -4 && diffDays <= 14) {
-        const searchLocation = COMMON_STADIUM_CITY_MAP[venue] || venue;
-        try {
-          let lat, lon;
-          const cCache = localStorage.getItem('coord_' + searchLocation);
-          if (cCache) { const c = JSON.parse(cCache); lat = c.lat; lon = c.lon; }
-          else {
-            const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchLocation)}&format=json&limit=1`);
-            const data = await res.json();
-            if (data && data[0]) {
-              lat = data[0].lat; lon = data[0].lon;
-              localStorage.setItem('coord_' + searchLocation, JSON.stringify({ lat, lon }));
-            }
-          }
-          if (lat !== undefined && lon !== undefined) {
-            const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&past_days=3&forecast_days=16`);
-            const wData = await wRes.json();
-            const dIdx = wData.daily?.time?.indexOf(dateStr);
-            if (dIdx !== undefined && dIdx > -1) {
-              const code = wData.daily.weather_code[dIdx];
-              const max = wData.daily.temperature_2m_max[dIdx];
-              const min = wData.daily.temperature_2m_min[dIdx];
-              let emoji = "☁️";
-              if (code <= 1) emoji = "☀️";
-              else if (code <= 3) emoji = "☁️";
-              else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) emoji = "☔️";
-              else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) emoji = "⛄️";
-              
-              const finalHTML = `${emoji} <div style="display:flex; align-items:baseline; gap:6px; font-family:var(--font-kick); font-weight:900; font-size:1.4rem;"><span style="color:#ff3b30;">${Math.round(max)}</span> <span style="font-size:1.2rem; color:#aaa;">/</span> <span style="color:#007aff;">${Math.round(min)}</span> <span style="font-size:1rem; color:#111;">℃</span></div>`;
-              wBox.querySelector(".val-weather").innerHTML = finalHTML;
-              localStorage.setItem(cacheKey, finalHTML);
-              localStorage.setItem(`${cacheKey}_time`, Date.now().toString());
-            }
-          }
-        } catch (e) { }
-      } else {
-        wBox.querySelector(".val-weather").innerHTML = `<span style="font-size:0.6rem;color:#999;line-height:2;">取得期間外</span>`;
+      const key = `trapp_home_weather_svg_${venue}_${date}`;
+      try {
+        const cached = JSON.parse(localStorage.getItem(key) || 'null');
+        if (cached && Date.now() - cached.at < 10800000 && typeof cached.html === 'string' && cached.html.includes('<svg')) {
+          box.innerHTML = cached.html;
+          return;
+        }
+      } catch (_) {}
+      await updateWeatherUI(box, date, venue);
+      if (box.querySelector('svg')) {
+        try { localStorage.setItem(key, JSON.stringify({ at: Date.now(), html: box.innerHTML })); } catch (_) {}
       }
     };
-
-    if (nextNiigata) fetchWeatherForDash(`dash-weather-niigata`, 'niigata');
-    if (nextKumamoto) fetchWeatherForDash(`dash-weather-kumamoto`, 'kumamoto');
+    if (nextNiigata) fetchWeatherForDash('dash-weather-niigata');
+    if (nextKumamoto) fetchWeatherForDash('dash-weather-kumamoto');
 
     // Ensure standings are available on dashboard
     const refreshStandings = async () => {
@@ -13029,7 +12895,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           past.push(item);
         });
 
-        if (!past.length) return;
+        if (!past.length) {
+          const form = card.querySelector(`.val-prev-form-${prefix}`);
+          if (form) form.innerHTML = '<p class="poster-pending">直近の記録はありません</p>';
+          return;
+        }
         const last = past[0].result;
         const lastInfo = past[0].info;
         if (!lastInfo) return;
@@ -13132,16 +13002,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateUI("niigata", "新潟", nextNiigata);
     updateUI("kumamoto", "熊本", nextKumamoto);
 
-    // --- Dashboard Weather Sync ---
-    setTimeout(() => {
-      const wN = document.getElementById("dash-weather-niigata");
-      const wK = document.getElementById("dash-weather-kumamoto");
-      // Use schedule.js updateWeatherUI function to inject SVG icons
-      if (typeof updateWeatherUI === 'function') {
-        if (wN && nextNiigata) updateWeatherUI(wN, nextNiigata.date, nextNiigata.venue);
-        if (wK && nextKumamoto) updateWeatherUI(wK, nextKumamoto.date, nextKumamoto.venue);
-      }
-    }, 100);
 
   }
 
