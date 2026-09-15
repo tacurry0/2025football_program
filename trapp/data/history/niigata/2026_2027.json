@@ -22,7 +22,7 @@
     "assistant_referees": "篠藤 巧、長田 望",
     "fourth_official": "國吉 真吾",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+    "source_fetched_at": "2026-09-15T17:14:50.612450+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -416,7 +416,7 @@
     "assistant_referees": "金井 清一、柳岡 拓磨",
     "fourth_official": "辛島 宗烈",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+    "source_fetched_at": "2026-09-15T17:14:50.612450+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -830,7 +830,7 @@
     "assistant_referees": "眞鍋 久大、荒上 修人",
     "fourth_official": "堀越 雅弘",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+    "source_fetched_at": "2026-09-15T17:14:50.612450+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -1153,6 +1153,16 @@
       "manager": "槙野 智章",
       "substitutions": [
         {
+          "name": "岡本 拓也",
+          "in_out": "▽",
+          "time": "84'"
+        },
+        {
+          "name": "青木 俊輔",
+          "in_out": "▲",
+          "time": "84'"
+        },
+        {
           "name": "真鍋 隼虎",
           "in_out": "▽",
           "time": "59'"
@@ -1181,16 +1191,6 @@
           "name": "中村 優斗",
           "in_out": "▲",
           "time": "45'"
-        },
-        {
-          "name": "岡本 拓也",
-          "in_out": "▽",
-          "time": "84'"
-        },
-        {
-          "name": "青木 俊輔",
-          "in_out": "▲",
-          "time": "84'"
         }
       ],
       "cards": [
@@ -1226,7 +1226,7 @@
     "assistant_referees": "熊谷 幸剛、小出 貴彦",
     "fourth_official": "渡邉 駿",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+    "source_fetched_at": "2026-09-15T17:14:50.612450+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -1632,7 +1632,7 @@
     "assistant_referees": "竹長 泰彦、川勝 彬史",
     "fourth_official": "大田 智寛",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+    "source_fetched_at": "2026-09-15T17:14:50.612450+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -2070,7 +2070,7 @@
     "assistant_referees": "秋澤 昌治、宇田川 恭弘",
     "fourth_official": "手塚 優",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+    "source_fetched_at": "2026-09-15T17:14:50.612450+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -2484,7 +2484,7 @@
     "assistant_referees": "鶴岡 泰樹、一木 千広",
     "fourth_official": "北沢 倫章",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+    "source_fetched_at": "2026-09-15T17:14:50.612450+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -2873,16 +2873,6 @@
           "time": "71'"
         },
         {
-          "name": "古長谷 千博",
-          "in_out": "▽",
-          "time": "45'"
-        },
-        {
-          "name": "マテウス モラエス",
-          "in_out": "▲",
-          "time": "45'"
-        },
-        {
           "name": "若月 大和",
           "in_out": "▽",
           "time": "59'"
@@ -2891,6 +2881,16 @@
           "name": "桑山 侃士",
           "in_out": "▲",
           "time": "59'"
+        },
+        {
+          "name": "古長谷 千博",
+          "in_out": "▽",
+          "time": "45'"
+        },
+        {
+          "name": "マテウス モラエス",
+          "in_out": "▲",
+          "time": "45'"
         },
         {
           "name": "白井 永地",
@@ -2916,7 +2916,7 @@
     "competition_id": "j2",
     "section": "第6節",
     "date": "2026-09-13",
-    "kickoff": "18:05",
+    "kickoff": "18:00",
     "stadium": "デンカビッグスワンスタジアム",
     "attendance": 17298,
     "weather": "曇り",
@@ -2930,7 +2930,7 @@
     "assistant_referees": "内山 翔太、長田 望",
     "fourth_official": "田中 玲匡",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+    "source_fetched_at": "2026-09-15T17:14:50.612450+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -3247,16 +3247,6 @@
       "manager": "横内 昭展",
       "substitutions": [
         {
-          "name": "土居 聖真",
-          "in_out": "▽",
-          "time": "70'"
-        },
-        {
-          "name": "横山 塁",
-          "in_out": "▲",
-          "time": "70'"
-        },
-        {
           "name": "川井 歩",
           "in_out": "▽",
           "time": "62'"
@@ -3295,6 +3285,16 @@
           "name": "森 海渡",
           "in_out": "▲",
           "time": "84'"
+        },
+        {
+          "name": "土居 聖真",
+          "in_out": "▽",
+          "time": "70'"
+        },
+        {
+          "name": "横山 塁",
+          "in_out": "▲",
+          "time": "70'"
         },
         {
           "name": "榎本 啓吾",

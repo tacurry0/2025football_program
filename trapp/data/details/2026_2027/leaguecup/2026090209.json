@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-09-14T23:58:25.372990+00:00",
+  "fetchedAt": "2026-09-15T17:14:50.612450+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 56,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/090209",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/090209",
-      "detail_fetched_at": "2026-09-14T23:58:25.372990+00:00",
+      "detail_fetched_at": "2026-09-15T17:14:50.612450+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 優也",
@@ -336,11 +336,6 @@
         },
         {
           "minute": "59",
-          "in": "松尾 勇佑",
-          "out": "茂 平"
-        },
-        {
-          "minute": "59",
           "in": "木本 真翔",
           "out": "有働 夢叶"
         },
@@ -348,6 +343,11 @@
           "minute": "59",
           "in": "相澤 デイビッド",
           "out": "櫻井 勇斗"
+        },
+        {
+          "minute": "59",
+          "in": "松尾 勇佑",
+          "out": "茂 平"
         }
       ],
       "away_cards": [
