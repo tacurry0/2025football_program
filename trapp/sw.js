@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v92-restore-ui';
+const cacheName = 'football-app-v93-home-polish';
 const assetsToCache = [
   "./",
   "./index.html",
@@ -10,6 +10,7 @@ const assetsToCache = [
   "./ui-v6.js",
   "./ui-v6.css",
   "./features.css",
+  "./home.css",
   "./features-model.js",
   "./features.js",
   "./analysis-data.js",

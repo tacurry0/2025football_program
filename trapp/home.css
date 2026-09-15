@@ -1,0 +1,242 @@
+/* Home only: keep the club identity and opening choreography. */
+body[data-mode="dashboard"] #ultra-dashboard {
+  padding: calc(12px + env(safe-area-inset-top)) 12px calc(110px + env(safe-area-inset-bottom)) !important;
+}
+body[data-mode="dashboard"] #dashboard-cards-container { gap: 16px; }
+body[data-mode="dashboard"] .home-card-enhanced {
+  --home-gutter: 16px;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 24px rgba(12, 18, 28, .13) !important;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-card-header {
+  min-height: 70px;
+  padding: 8px var(--home-gutter) 8px 10px !important;
+  gap: 8px;
+}
+body[data-mode="dashboard"] .home-card-enhanced .home-club-lockup { gap: 12px; }
+body[data-mode="dashboard"] .home-card-enhanced .dash-team-name {
+  padding: 0;
+  font-size: 15px !important;
+  letter-spacing: .085em;
+  line-height: 1.15;
+}
+body[data-mode="dashboard"] .home-card-enhanced .sheet-ha {
+  box-sizing: border-box;
+  min-width: 58px;
+  padding: 6px 9px;
+  font-size: 12px !important;
+  border-radius: 5px;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-card-body {
+  gap: 14px;
+  padding: 8px var(--home-gutter) 0 !important;
+}
+
+/* Venue has its own full-width line beside the competition mark. */
+body[data-mode="dashboard"] .home-card-enhanced .dash-match-overview {
+  display: grid !important;
+  grid-template-columns: 54px minmax(0, 1fr) 66px;
+  grid-template-rows: auto auto;
+  gap: 5px 12px;
+  align-items: center !important;
+  padding: 0 !important;
+}
+body[data-mode="dashboard"] .home-card-enhanced .home-competition-logo {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+  min-height: 60px;
+}
+body[data-mode="dashboard"] .home-card-enhanced .home-competition-logo img {
+  max-height: 58px;
+  filter: none;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-match-meta-column { display: contents !important; }
+body[data-mode="dashboard"] .home-card-enhanced .dash-match-meta-column > div:first-child {
+  grid-column: 2;
+  grid-row: 1;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: 7px !important;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-mw {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  box-sizing: border-box;
+  padding: 4px 7px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-date { gap: 4px 6px; }
+body[data-mode="dashboard"] .home-card-enhanced .dash-date-main {
+  font-size: 29px;
+  font-variant-numeric: tabular-nums;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-date-sub {
+  font-size: 13px;
+  line-height: 1.2;
+  color: #d9e1eb;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-venue-row {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  align-self: start;
+  overflow: visible;
+  color: #d9e1eb !important;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-venue-row span {
+  font-size: 12px;
+  line-height: 1.65;
+  letter-spacing: .01em;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+body[data-mode="dashboard"] .home-card-enhanced [id^="dash-weather-"] {
+  grid-column: 3;
+  grid-row: 1;
+  min-width: 0;
+  align-self: center;
+}
+body[data-mode="dashboard"] .home-card-enhanced [id^="dash-weather-"] > div > div {
+  gap: 3px !important;
+  font-size: 18px !important;
+  white-space: nowrap;
+}
+body[data-mode="dashboard"] .home-card-enhanced [id^="dash-weather-"] > div > div > span { font-size: inherit !important; }
+body[data-mode="dashboard"] .home-card-enhanced [id^="dash-weather-"] > div > div > span:last-child {
+  font-size: 12px !important;
+  color: #c7d3e0 !important;
+}
+body[data-mode="dashboard"] .home-card-enhanced .val-weather {
+  flex-direction: column;
+  align-items: flex-end !important;
+  gap: 2px !important;
+  font-size: 26px !important;
+  line-height: 1;
+}
+body[data-mode="dashboard"] .home-card-enhanced .val-weather svg { width: 28px; height: 28px; }
+body[data-mode="dashboard"] .home-card-enhanced .val-weather > div { gap: 3px !important; font-size: 18px !important; }
+body[data-mode="dashboard"] .home-card-enhanced .val-weather > div > span { font-size: inherit !important; }
+body[data-mode="dashboard"] .home-card-enhanced .val-weather > div > span:last-child {
+  color: #c7d3e0 !important;
+  font-size: 12px !important;
+}
+
+/* Opponent headline: full Japanese glyphs, with room for long names. */
+body[data-mode="dashboard"] .home-card-enhanced .dash-card-body > div:nth-child(2) {
+  gap: 10px !important;
+  padding: 0 !important;
+  min-height: 36px;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-vs {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 14px !important;
+  letter-spacing: .025em;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-opp-name {
+  font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: clamp(20px, 5.6vw, 25px) !important;
+  font-weight: 900 !important;
+  line-height: 1.45;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  text-shadow: none;
+}
+
+/* A shared comparison surface, divided by a fine rule. */
+body[data-mode="dashboard"] .home-card-enhanced .dash-card-split {
+  gap: 0 !important;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .85);
+  border-radius: 12px;
+  background: #f7f8fa;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel {
+  padding: 16px 10px 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel:last-child { border-left: 1px solid #dde2e9; }
+body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel > img,
+body[data-mode="dashboard"] .home-card-enhanced .dash-opp-emblem-link {
+  width: 66px !important;
+  height: 66px !important;
+  margin: 0 0 10px !important;
+  filter: none !important;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-opp-emblem-media,
+body[data-mode="dashboard"] .home-card-enhanced .dash-opp-emblem-media .dash-opp-emblem {
+  width: 66px;
+  max-width: 66px;
+  height: 66px !important;
+  filter: none;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel > div:nth-of-type(1) {
+  height: auto;
+  min-height: 38px;
+  padding: 0 0 9px !important;
+  margin: 0 0 9px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #dde2e9 !important;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+  align-items: baseline !important;
+}
+body[data-mode="dashboard"] .home-card-enhanced .val-rank-num-my,
+body[data-mode="dashboard"] .home-card-enhanced .val-rank-num-opp { font-size: 25px !important; }
+body[data-mode="dashboard"] .home-card-enhanced .dash-prev-meta {
+  min-height: 26px;
+  margin-bottom: 5px;
+  gap: 5px;
+  color: #596474;
+  font-size: 12px;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-prev-ha {
+  color: #596474;
+  border-radius: 3px;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-prev-score-row { min-height: 32px; gap: 7px !important; }
+body[data-mode="dashboard"] .home-card-enhanced .val-prev-score-my,
+body[data-mode="dashboard"] .home-card-enhanced .val-prev-score-opp { font-size: 23px !important; }
+body[data-mode="dashboard"] .home-card-enhanced [class^="val-prev-form-"] { width: 100%; }
+body[data-mode="dashboard"] .home-card-enhanced .dash-form-strip {
+  justify-content: space-between;
+  gap: 2px;
+  margin-top: 10px;
+}
+body[data-mode="dashboard"] .home-card-enhanced .dash-form-item { flex: 1; min-width: 0; gap: 4px; }
+body[data-mode="dashboard"] .home-card-enhanced .dash-form-emblem,
+body[data-mode="dashboard"] .home-card-enhanced .dash-form-emblem-placeholder { width: 18px; height: 18px; }
+body[data-mode="dashboard"] .home-card-enhanced .dash-form-ha { color: #596474; font-size: 13px; }
+body[data-mode="dashboard"] .home-card-enhanced .fx-dashboard-analysis {
+  width: calc(100% - 2 * var(--home-gutter));
+  margin: 0 var(--home-gutter);
+  padding: 14px 2px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 12px;
+  letter-spacing: .02em;
+}
+body[data-mode="dashboard"] .home-card-enhanced .fx-dashboard-analysis:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+@media (max-width: 350px) {
+  body[data-mode="dashboard"] #ultra-dashboard { padding-inline: 8px !important; }
+  body[data-mode="dashboard"] .home-card-enhanced { --home-gutter: 12px; }
+  body[data-mode="dashboard"] .home-card-enhanced .home-club-lockup { gap: 6px; }
+  body[data-mode="dashboard"] .home-card-enhanced .dash-team-name { font-size: 13px !important; letter-spacing: .04em; }
+  body[data-mode="dashboard"] .home-card-enhanced .sheet-ha { min-width: 50px; }
+  body[data-mode="dashboard"] .home-card-enhanced .dash-match-overview { grid-template-columns: 46px minmax(0, 1fr) 60px; column-gap: 9px; }
+  body[data-mode="dashboard"] .home-card-enhanced .dash-side-panel { padding-inline: 7px; }
+}
