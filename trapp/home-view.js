@@ -26,7 +26,6 @@
       <div class="poster-team-summary">
         <button type="button" class="poster-team-link dash-opp-emblem-link" data-opponent="${escape(fullName)}" aria-label="${escape(fullName)}の公式サイトを開く">${emblemHtml}</button>
         <div class="poster-team-numbers">
-          <h3 class="poster-team-name" title="${escape(fullName)}">${escape(shortName)}</h3>
           <div class="poster-standing"><span class="poster-rank"><b class="val-rank-num-${prefix}">—</b><small>位</small></span><span class="poster-points"><b class="val-pts-${prefix}">—</b><small>pts</small></span></div>
         </div>
       </div>
