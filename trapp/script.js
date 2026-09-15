@@ -12646,7 +12646,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const button = document.createElement("button");
       button.type = "button"; button.className = "fx-dashboard-analysis";
       button.dataset.feature = "match-analysis"; button.dataset.club = club;
-      button.innerHTML = '<span>次節の対戦分析</span><svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 12h28M20 3l9 9-9 9"/></svg>';
+      button.innerHTML = '<span>対戦分析</span><svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 12h28M20 3l9 9-9 9"/></svg>';
       button.addEventListener("click", e => { e.stopPropagation(); window.TrappFeatures.openForClub(club); });
       card.append(button);
     });

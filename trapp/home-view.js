@@ -30,12 +30,12 @@
           <div class="poster-standing"><span class="poster-rank"><b class="val-rank-num-${prefix}">—</b><small>位</small></span><span class="poster-points"><b class="val-pts-${prefix}">—</b><small>pts</small></span></div>
         </div>
       </div>
-      <div class="poster-previous">
-        <h4 class="poster-section-label">直近の試合</h4>
+      <div class="poster-previous" aria-label="直近の試合">
+        
         <div class="dash-prev-meta"><span class="val-prev-date-${prefix}">—</span><span class="dash-prev-vs">vs</span><img class="dash-prev-opp-emblem val-prev-opp-emblem-${prefix}" alt=""><span class="val-prev-ha-${prefix} dash-prev-ha">—</span></div>
         <div class="dash-prev-score-row"><span class="val-prev-score-${prefix}">—</span><span class="val-prev-res-${prefix}">—</span></div>
       </div>
-      <div class="poster-recent"><h4 class="poster-section-label">直近5試合</h4><div class="val-prev-form-${prefix}"><p class="poster-pending">データを確認中</p></div></div>
+      <div class="poster-recent" aria-label="直近5試合"><div class="val-prev-form-${prefix}"><p class="poster-pending">データを確認中</p></div></div>
     </section>`;
   }
   function renderCard(options) {
@@ -49,17 +49,15 @@
       <div class="poster-hero" role="button" tabindex="0" aria-label="${escape(summary)}">
         <img class="poster-watermark" src="${crest}" alt="" aria-hidden="true" decoding="async">
         <header class="poster-header">
-          <div class="poster-lockup"><span class="home-club-mark"><img src="${crest}" alt="" decoding="async"></span><div class="poster-brand"><h2 class="dash-team-name">${escape(clubName)}</h2><span>${escape(ownName)}</span></div></div>
+          <div class="poster-lockup"><span class="home-club-mark"><img src="${crest}" alt="" decoding="async"></span><div class="poster-brand"><h2 class="dash-team-name">${escape(clubName)}</h2></div></div>
           <div class="poster-badges">${competitionBadge(competition)}${roundHtml}<span class="poster-ha ${isHome ? 'is-home' : 'is-away'}">${ha}</span></div>
         </header>
-        <p class="poster-slogan" aria-hidden="true">${club === 'niigata' ? '新潟と、<br>ともに。' : '熊本と、<br>ともに、<br>前へ。'}</p>
         <div class="poster-match-meta">
           <div class="poster-date-line${date.exact ? '' : ' is-undated'}"><time class="poster-date"${date.exact ? ` datetime="${escape(match.date)}"` : ''}>${escape(date.date)}</time><div class="poster-kickoff"><span>${escape(date.day)}</span><span class="poster-time${date.time === '時刻未定' ? ' is-tbd' : ''}">${escape(date.time)}</span></div></div>
           <div class="poster-venue">${escape(match.venue || '会場未定')}</div>
           <div class="poster-weather" id="dash-weather-${club}" data-venue="${escape(match.venue || '')}" data-date="${escape(match.date)}" aria-label="試合日の天気予報"><span class="val-weather"></span></div>
         </div>
         <div class="poster-opponent"><span class="poster-vs">VS</span><h3 class="dash-opp-name">${escape(match.opponent)}</h3></div>
-        <span class="poster-signature" aria-hidden="true">${escape(clubName)}<br>${ha} MATCH</span>
       </div>
       <div class="poster-report">${reportTeam('my', ownName, myShortName, myEmblemHtml)}${reportTeam('opp', match.opponent, opponentShortName, opponentEmblemHtml)}</div>
     </article>`;
