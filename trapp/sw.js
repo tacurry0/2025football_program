@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v99-broadcast-motion';
+const cacheName = 'football-app-v100-soft-motion';
 const assetsToCache = [
   "./",
   "./index.html",

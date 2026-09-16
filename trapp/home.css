@@ -259,7 +259,7 @@ body[data-mode="dashboard"] .dash-quick-links { background: #fffffff7; box-shado
 }
 @media (prefers-reduced-motion: no-preference) {
   html.home-dashboard-entering body[data-mode="dashboard"] .poster-card.home-card-intro {
-    animation: homeLiteCard 600ms cubic-bezier(.16,1,.3,1) var(--home-enter-delay,0ms) both !important;
+    animation: homeLiteCard 750ms cubic-bezier(.16,1,.3,1) var(--home-enter-delay,0ms) both !important;
   }
 }
 
@@ -274,39 +274,39 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   body[data-mode="dashboard"] .poster-card.poster-motion-running { --poster-motion-play: running; }
   body[data-mode="dashboard"] .poster-watermark {
     transform-origin: 60% 55%;
-    animation: posterMarkDrift 6s ease-in-out infinite alternate;
+    animation: posterMarkDrift 8s ease-in-out infinite alternate;
     animation-play-state: var(--poster-motion-play);
   }
   body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { animation-delay: -5s; animation-direction: alternate-reverse; }
   body[data-mode="dashboard"] .poster-card .poster-hero > .poster-light {
     display: block; position: absolute; z-index: 1; inset: -25% auto -25% -55%; width: 44%;
     pointer-events: none;
-    background: linear-gradient(90deg, transparent, #ffffff24 45%, #ffffff4a 52%, transparent);
-    animation: posterLightSweep 4.5s ease-in-out infinite;
+    background: linear-gradient(90deg, transparent, #ffffff18 45%, #ffffff30 52%, transparent);
+    animation: posterLightSweep 6.5s ease-in-out infinite;
     animation-play-state: var(--poster-motion-play);
   }
   body[data-mode="dashboard"] .home-card-kumamoto .poster-light { animation-delay: -3s !important; }
   body[data-mode="dashboard"] .poster-weather svg {
     overflow: visible;
-    animation: posterCloudDrift 2.6s ease-in-out infinite;
+    animation: posterCloudDrift 3.4s ease-in-out infinite;
     animation-play-state: var(--poster-motion-play);
   }
   body[data-mode="dashboard"] .poster-weather svg:has(circle) {
-    animation-name: posterSunTurn; animation-duration: 12s; animation-timing-function: linear;
+    animation-name: posterSunTurn; animation-duration: 16s; animation-timing-function: linear;
   }
   body[data-mode="dashboard"] .poster-weather svg:has(path) line {
-    animation: posterRainDrop 1.25s ease-in infinite;
+    animation: posterRainDrop 1.6s ease-in infinite;
     animation-play-state: var(--poster-motion-play);
   }
-  body[data-mode="dashboard"] .poster-weather svg:has(path) line:nth-of-type(2) { animation-delay: -.4s; }
-  body[data-mode="dashboard"] .poster-weather svg:has(path) line:nth-of-type(3) { animation-delay: -.8s; }
+  body[data-mode="dashboard"] .poster-weather svg:has(path) line:nth-of-type(2) { animation-delay: -.5s; }
+  body[data-mode="dashboard"] .poster-weather svg:has(path) line:nth-of-type(3) { animation-delay: -1s; }
   body[data-mode="dashboard"] .poster-weather svg:not(:has(path, circle)) {
-    animation-name: posterSnowTurn; animation-duration: 9s;
+    animation-name: posterSnowTurn; animation-duration: 12s;
   }
   body[data-mode="dashboard"] .poster-hero,
   body[data-mode="dashboard"] .poster-card .poster-team-link,
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis svg {
-    transition: transform 220ms cubic-bezier(.2,.8,.2,1);
+    transition: transform 280ms cubic-bezier(.2,.8,.2,1);
   }
   body[data-mode="dashboard"] .poster-hero:active { transform: scale(.985); }
   body[data-mode="dashboard"] .poster-card .poster-team-link:active { transform: scale(.9); }
@@ -344,7 +344,7 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
 @media (prefers-reduced-motion: no-preference) {
   body[data-mode="dashboard"] .poster-watermark {
     translate: var(--poster-depth-x, 0px) var(--poster-depth-y, 0px);
-    transition: translate 180ms ease-out;
+    transition: translate 240ms ease-out;
   }
   body[data-mode="dashboard"] .poster-card .poster-hero > .poster-atmosphere,
   body[data-mode="dashboard"] .poster-card .poster-hero > .poster-curtain,
@@ -356,11 +356,11 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   }
   body[data-mode="dashboard"] .poster-atmosphere i {
     position: absolute; width: 2px; height: 135%; top: -20%; left: 10%;
-    background: linear-gradient(transparent, #ffffff70, transparent);
-    animation: posterSpeedLine 3.2s linear infinite;
+    background: linear-gradient(transparent, #ffffff48, transparent);
+    animation: posterSpeedLine 4.2s linear infinite;
     animation-play-state: var(--poster-motion-play);
   }
-  body[data-mode="dashboard"] .poster-atmosphere i:nth-child(2) { left: 35%; width: 8px; opacity: .3; animation-delay: -1.9s; animation-duration: 4.4s; }
+  body[data-mode="dashboard"] .poster-atmosphere i:nth-child(2) { left: 35%; width: 8px; opacity: .3; animation-delay: -1.9s; animation-duration: 5.8s; }
   body[data-mode="dashboard"] .poster-atmosphere i:nth-child(3) { left: 65%; animation-delay: -1s; }
   body[data-mode="dashboard"] .poster-atmosphere i:nth-child(4) { left: 85%; width: 4px; opacity: .5; animation-delay: -2.6s; }
   body[data-mode="dashboard"] .poster-card .poster-hero > .poster-curtain {
@@ -374,19 +374,19 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
     transform: translate(-50%,-50%) scale(.1);
   }
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis svg {
-    animation: posterArrowDrive 2.8s ease-in-out infinite;
+    animation: posterArrowDrive 3.6s ease-in-out infinite;
     animation-play-state: var(--poster-motion-play);
   }
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis::before {
     width: 38px;
-    animation: posterAccentDrive 3.5s ease-in-out infinite alternate;
+    animation: posterAccentDrive 4.6s ease-in-out infinite alternate;
     animation-play-state: var(--poster-motion-play);
   }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   body[data-mode="dashboard"] .poster-hero {
     transform: perspective(900px) rotateX(var(--poster-tilt-x,0deg)) rotateY(var(--poster-tilt-y,0deg));
-    transition: transform 220ms ease-out;
+    transition: transform 280ms ease-out;
   }
   body[data-mode="dashboard"] .poster-hero:active {
     transform: perspective(900px) rotateX(var(--poster-tilt-x,0deg)) rotateY(var(--poster-tilt-y,0deg)) scale(.975);

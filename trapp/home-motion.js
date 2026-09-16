@@ -48,7 +48,7 @@
       duration = 720;
     }
     const animation = element.animate(keyframes,
-      { duration, delay, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
+      { duration: Math.round(duration * 1.25), delay, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
     entrances.add(animation);
     const done = () => entrances.delete(animation);
     animation.onfinish = done;
@@ -191,7 +191,7 @@
     const animation = ripple.animate([
       { opacity: .9, transform: 'translate(-50%,-50%) scale(.1)' },
       { opacity: 0, transform: 'translate(-50%,-50%) scale(4)' }
-    ], { duration: 650, easing: 'cubic-bezier(.1,.6,.2,1)' });
+    ], { duration: 780, easing: 'cubic-bezier(.1,.6,.2,1)' });
     entrances.add(animation);
     animation.onfinish = animation.oncancel = () => entrances.delete(animation);
   }, { passive: true });
