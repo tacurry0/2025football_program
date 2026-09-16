@@ -263,32 +263,76 @@ body[data-mode="dashboard"] .dash-quick-links { background: #fffffff7; box-shado
   }
 }
 
-/* Short compositor-only motion; no loops, scroll handlers or extra requests. */
+body[data-mode="dashboard"] .poster-light { display: none; }
+
+/* Matchday motion: the controller pauses every loop outside the visible home. */
 @media (prefers-reduced-motion: no-preference) {
-  html:not(.home-startup-effect) body[data-mode="dashboard"] .poster-watermark {
-    animation: posterMarkReveal 900ms cubic-bezier(.16,1,.3,1) both;
+  body[data-mode="dashboard"] .poster-card { --poster-motion-play: paused; }
+  body[data-mode="dashboard"] .poster-card.poster-motion-running { --poster-motion-play: running; }
+  body[data-mode="dashboard"] .poster-watermark {
+    transform-origin: 60% 55%;
+    animation: posterMarkDrift 12s ease-in-out infinite alternate;
+    animation-play-state: var(--poster-motion-play);
   }
+  body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { animation-delay: -5s; animation-direction: alternate-reverse; }
+  body[data-mode="dashboard"] .poster-card .poster-hero > .poster-light {
+    display: block; position: absolute; z-index: 1; inset: -25% auto -25% -55%; width: 44%;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, #ffffff0d 45%, #ffffff1a 52%, transparent);
+    animation: posterLightSweep 9s ease-in-out infinite;
+    animation-play-state: var(--poster-motion-play);
+  }
+  body[data-mode="dashboard"] .home-card-kumamoto .poster-light { animation-delay: -3s !important; }
   body[data-mode="dashboard"] .poster-weather svg {
-    animation: posterWeatherReveal 360ms ease-out both;
+    overflow: visible;
+    animation: posterCloudDrift 3.8s ease-in-out infinite;
+    animation-play-state: var(--poster-motion-play);
+  }
+  body[data-mode="dashboard"] .poster-weather svg:has(circle) {
+    animation-name: posterSunTurn; animation-duration: 24s; animation-timing-function: linear;
+  }
+  body[data-mode="dashboard"] .poster-weather svg:has(path) line {
+    animation: posterRainDrop 1.25s ease-in infinite;
+    animation-play-state: var(--poster-motion-play);
+  }
+  body[data-mode="dashboard"] .poster-weather svg:has(path) line:nth-of-type(2) { animation-delay: -.4s; }
+  body[data-mode="dashboard"] .poster-weather svg:has(path) line:nth-of-type(3) { animation-delay: -.8s; }
+  body[data-mode="dashboard"] .poster-weather svg:not(:has(path, circle)) {
+    animation-name: posterSnowTurn; animation-duration: 9s;
   }
   body[data-mode="dashboard"] .poster-hero,
   body[data-mode="dashboard"] .poster-card .poster-team-link,
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis svg {
-    transition: transform 160ms ease-out;
+    transition: transform 220ms cubic-bezier(.2,.8,.2,1);
   }
-  body[data-mode="dashboard"] .poster-hero:active { transform: scale(.992); }
-  body[data-mode="dashboard"] .poster-card .poster-team-link:active { transform: scale(.94); }
-  body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:active svg { transform: translateX(4px); }
+  body[data-mode="dashboard"] .poster-hero:active { transform: scale(.985); }
+  body[data-mode="dashboard"] .poster-card .poster-team-link:active { transform: scale(.9); }
+  body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:active svg { transform: translateX(7px); }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:hover svg { transform: translateX(4px); }
-  body[data-mode="dashboard"] .poster-card .poster-team-link:hover { transform: translateY(-2px); }
+  body[data-mode="dashboard"] .poster-card .poster-team-link:hover { transform: translateY(-4px) scale(1.05); }
+  body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:hover svg { transform: translateX(7px); }
 }
-@keyframes posterMarkReveal {
-  from { transform: translate3d(12px,0,0) scale(1.04); }
-  to { transform: translate3d(0,0,0) scale(1); }
+@keyframes posterMarkDrift {
+  from { transform: translate3d(-5px,5px,0) rotate(-2deg) scale(1); }
+  to { transform: translate3d(9px,-7px,0) rotate(2deg) scale(1.08); }
 }
-@keyframes posterWeatherReveal {
-  from { opacity: 0; transform: translateY(4px) scale(.94); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes posterLightSweep {
+  0%, 16% { transform: translateX(-40%) skewX(-18deg); opacity: 0; }
+  25% { opacity: 1; }
+  64%, 100% { transform: translateX(430%) skewX(-18deg); opacity: 0; }
+}
+@keyframes posterCloudDrift {
+  0%, 100% { transform: translate(0,0); }
+  50% { transform: translate(-3px,-2px); }
+}
+@keyframes posterSunTurn { to { transform: rotate(360deg); } }
+@keyframes posterSnowTurn {
+  0%,100% { transform: translateY(-2px) rotate(-12deg); }
+  50% { transform: translateY(2px) rotate(12deg); }
+}
+@keyframes posterRainDrop {
+  0% { transform: translate(1px,-2px); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(-1px,2px); opacity: 0; }
 }
