@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-15T23:40:20.124789+00:00",
+  "fetchedAt": "2026-09-16T17:15:42.571943+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 83,
       "source_url": "https://www.jleague.jp/match/j2/2026/082213",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/082213",
-      "detail_fetched_at": "2026-09-15T23:40:20.124789+00:00",
+      "detail_fetched_at": "2026-09-16T17:15:42.571943+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",
@@ -320,11 +320,6 @@
       ],
       "away_substitutions": [
         {
-          "minute": "84",
-          "in": "青木 俊輔",
-          "out": "岡本 拓也"
-        },
-        {
           "minute": "59",
           "in": "金本 毅騎",
           "out": "真鍋 隼虎"
@@ -338,6 +333,11 @@
           "minute": "45",
           "in": "中村 優斗",
           "out": "近藤 優成"
+        },
+        {
+          "minute": "84",
+          "in": "青木 俊輔",
+          "out": "岡本 拓也"
         }
       ],
       "away_cards": [
