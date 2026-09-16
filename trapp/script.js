@@ -10139,13 +10139,42 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("calendar-plan-close")?.addEventListener("click", () => closeCalendarPersonalPlan());
   calendarPlanBackdrop?.addEventListener("click", () => closeCalendarPersonalPlan());
 
+  let selectedCalendarDate = "";
+  function renderCalendarSelection(dateStr, matches) {
+    selectedCalendarDate = dateStr;
+    calendarBody.querySelectorAll('.cal-cell[data-date]').forEach(cell => {
+      const selected = cell.dataset.date === dateStr;
+      cell.classList.toggle('selected', selected);
+      cell.setAttribute('aria-pressed', String(selected));
+    });
+    const panel = document.getElementById('calendar-selected');
+    const date = parseDate(dateStr);
+    panel.innerHTML = `<header class="calendar-selected-header"><h2>${date.getMonth()+1}月${date.getDate()}日（${['日','月','火','水','木','金','土'][date.getDay()]}）</h2><button type="button" class="calendar-add-plan" aria-label="この日の予定を確認・追加"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></header><div class="calendar-selected-matches"></div>`;
+    const list = panel.querySelector('.calendar-selected-matches');
+    matches.forEach(match => list.appendChild(createScheduleCard(match)));
+    if (!matches.length) list.innerHTML = '<p class="calendar-no-match">試合はありません</p>';
+    const plans = getCalendarPersonalPlans(dateStr);
+    if (plans.length) {
+      const button = document.createElement('button');
+      button.type = 'button'; button.className = 'calendar-personal-summary';
+      button.textContent = plans.map(plan => plan.title).join(' ／ ');
+      button.onclick = () => openCalendarPersonalPlan(dateStr);
+      panel.appendChild(button);
+    }
+    panel.querySelector('.calendar-add-plan').onclick = () => openCalendarPersonalPlan(dateStr);
+  }
+
   function renderCalendar() {
     const activeSec = visibleSections[currentIndex];
-    if (!activeSec) return;
+    if (!activeSec) {
+      calendarBody.innerHTML = '<p class="schedule-empty">表示できる日程がありません</p>';
+      document.getElementById('calendar-selected').innerHTML = '';
+      return;
+    }
     const [year, month] = activeSec.dataset.ym.split("-").map(Number);
 
     calendarBody.innerHTML = "";
-    const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+    const days = ["日", "月", "火", "水", "木", "金", "土"];
     days.forEach(d => {
       const el = document.createElement("div");
       el.className = "cal-day-label"; el.textContent = d;
@@ -10181,6 +10210,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       const dayMatches = matchesInMonth.filter(m => m.date === dateStr);
       const personalPlans = getCalendarPersonalPlans(dateStr);
       cell.dataset.date = dateStr;
+      cell.setAttribute('role', 'button');
+      cell.tabIndex = 0;
+      cell.onkeydown = event => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); cell.click(); }
+      };
       cell.dataset.matchCount = String(dayMatches.length);
       cell.setAttribute("aria-label", `${month}月${d}日${dayMatches.length ? `、${dayMatches.length}試合` : ""}${personalPlans.length ? `、予定${personalPlans.length}件` : ""}。長押しで予定を確認・追加`);
 
@@ -10206,7 +10240,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const emblemUrl = resolveEmblemUrl(m.opponent, m.emblem);
         const item = document.createElement("div");
         item.className = `cal-match-chip ${m.club} ${isHome ? 'home' : 'away'}`;
-        item.innerHTML = `<span class="cal-ha">${isHome ? 'H' : 'A'}</span>${renderTeamEmblem(emblemUrl, m.opponent, "cal-emblem", "cal-emblem-media")}`;
+        item.innerHTML = `${renderTeamEmblem(emblemUrl, m.opponent, "cal-emblem", "cal-emblem-media")}<span class="cal-ha">${isHome ? 'H' : 'A'}</span><span class="cal-kickoff">${escapeHtml(m.time || '未定')}</span>`;
+        item.title = `${m.club === 'niigata' ? '新潟' : '熊本'} 対 ${m.opponent} ${m.time || '時刻未定'}`;
         matchContainer.appendChild(item);
       });
       cell.appendChild(matchContainer);
@@ -10217,13 +10252,23 @@ document.addEventListener("DOMContentLoaded", async () => {
           event.preventDefault();
           return;
         }
-        if (dayMatches.length === 1) openDetailSheet(dayMatches[0]);
-        else if (dayMatches.length > 1) openMatchPicker(dayMatches);
+        renderCalendarSelection(dateStr, dayMatches);
       };
       bindCalendarLongPress(cell, dateStr);
 
       calendarBody.appendChild(cell);
     }
+
+    const remainder = (firstDay + daysInMonth) % 7;
+    if (remainder) for (let i = remainder; i < 7; i++) {
+      const empty = document.createElement('div'); empty.className = 'cal-cell empty'; calendarBody.appendChild(empty);
+    }
+    const ym = `${year}-${String(month).padStart(2, '0')}`;
+    if (!selectedCalendarDate.startsWith(ym + '-')) {
+      const nowDate = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      selectedCalendarDate = nowDate.startsWith(ym + '-') ? nowDate : (matchesInMonth[0]?.date || ym + '-01');
+    }
+    renderCalendarSelection(selectedCalendarDate, matchesInMonth.filter(m => m.date === selectedCalendarDate));
 
     // --- Added Swipe Support for Calendar ---
     let touchStartX = 0;
@@ -10395,14 +10440,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function refreshScheduleCompetitionFilteredViews() {
+    const currentMonth = visibleSections[currentIndex]?.dataset.ym;
     readScheduleCompetitionOptions();
     renderedFeedYear = undefined;
     renderFeed(selectedYear);
-    if (currentMode === "calendar") renderCalendar();
-    if (currentMode === "feed") {
-      currentIndex = Math.max(0, Math.min(currentIndex, visibleSections.length - 1));
-      if (visibleSections.length) scrollToIndex(currentIndex);
-      else rebuildMonthTabs();
+    const retained = visibleSections.findIndex(section => section.dataset.ym === currentMonth);
+    currentIndex = retained >= 0 ? retained : Math.max(0, Math.min(currentIndex, visibleSections.length - 1));
+    if (visibleSections.length) scrollToIndex(currentIndex, "auto");
+    else {
+      rebuildMonthTabs();
+      if (currentMode === "calendar") renderCalendar();
     }
   }
 
@@ -12002,22 +12049,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       localStorage.setItem(`memo_${mId}`, mVal);
       localStorage.setItem(`attend_${mId}`, isAtt);
 
-      const card = document.querySelector(`.card[data-mid="${mId}"]`);
-      if (card) {
-        // Update Attendance Emoji in Feed
-        const metaDiv = card.querySelector(".match-meta");
-        let attEl = metaDiv.querySelector(".match-att-emoji");
-        if (isAtt) {
-          if (!attEl) {
-            attEl = document.createElement("span");
-            attEl.className = "match-att-emoji";
-            attEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>';
-            metaDiv.appendChild(attEl);
-          }
-        } else {
-          if (attEl) attEl.remove();
-        }
-      }
+      updateScheduleAttendance(mId, isAtt);
       updateDashboardPrevResults();
     };
     sheetContent.querySelectorAll("input, textarea").forEach(inp => inp.oninput = saveAndRefresh);
@@ -13012,25 +13044,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- Rendering Feed ---
 
 
-  function renderFeed(year = selectedYear) {
-    renderedFeedYear = year;
-    feedSlider.innerHTML = "";
-    scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
-    const ymMap = {};
-    const yearMatches = year === null ? scheduleData : scheduleData.filter(m => parseDate(m.date).getFullYear() === Number(year));
-    rebuildScheduleCompetitionFilterOptions(yearMatches);
-    const sourceMatches = filterScheduleMatchesByCompetition(yearMatches);
-
-    sourceMatches.forEach(m => {
-      const d = parseDate(m.date), key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-      if (!ymMap[key]) ymMap[key] = []; ymMap[key].push(m);
+  function updateScheduleAttendance(mId, isAtt) {
+    document.querySelectorAll('.schedule-ticket').forEach(card => {
+      if (card.dataset.mid !== mId) return;
+      const button = card.querySelector('.ticket-attend');
+      button?.setAttribute('aria-pressed', String(isAtt));
+      button?.setAttribute('aria-label', isAtt ? '観戦予定を解除' : '観戦予定に追加');
     });
+  }
 
-    Object.keys(ymMap).sort().forEach(key => {
-      const [year, month] = key.split("-").map(Number);
-      const section = document.createElement("div"); section.className = "month-section"; section.dataset.ym = key; section.dataset.year = year; section.dataset.ym_title = `${year} / ${String(month).padStart(2, "0")}`;
-
-      ymMap[key].forEach(match => {
+  function createScheduleCard(match) {
         const mId = `${window.TrappLeague.storageId(match)}`;
         const isAtt = localStorage.getItem(`attend_${mId}`) === "true";
         let sMy = "", sOpp = "";
@@ -13065,7 +13088,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         }
         const isHome = getMatchIsHome(match);
-        const card = document.createElement("div"); card.className = `card club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
+        const card = document.createElement("article"); card.className = `card schedule-ticket club-${match.club} type-${isHome ? 'home' : 'away'}`; card.dataset.mid = mId;
         const ha = isHome ? 'HOME' : 'AWAY';
         const emblemUrl = resolveEmblemUrl(match.opponent, match.emblem);
         const feedEmblemHtml = renderTeamEmblem(emblemUrl, match.opponent, "emblem", "feed-emblem-media");
@@ -13079,8 +13102,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>`;
         }
 
-        card.innerHTML = `${resultHtml}<div class="match-meta">${renderRoundPill(match, "match-mw-pill")}<span class="match-ha-pill">${ha}</span>${isAtt ? '<span class="match-att-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>' : ''}</div><div class="match-date-time">${escapeHtml(match.date)} ${escapeHtml(match.day)} - ${escapeHtml(match.time)}</div><div class="match-venue">${escapeHtml(match.venue)}</div><div class="match-row"><h3 class="opponent-name" title="長押しでHOME/AWAYのクラブ名をコピー">${escapeHtml(match.opponent)}</h3>${feedEmblemHtml}</div>`;
-        bindClubNameLongPress(card.querySelector(".opponent-name"), card, match);
+        const context = window.TrappLeague.context(match);
+        const comp = ({ j1: "J1", j2: "J2", j3: "J3", leaguecup: "ルヴァン", emperor: "天皇杯", j2j3: "百年構想", friendly: "親善試合" })[context.competition] || context.label || "その他";
+        const date = parseDate(match.date);
+        const exact = /^\d{4}-\d{2}-\d{2}$/.test(match.date || "");
+        const dateLabel = exact ? String(date.getDate()) : match.date || "日程未定";
+        const day = exact ? ["SUN","MON","TUE","WED","THU","FRI","SAT"][date.getDay()] : "";
+        const flag = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+        card.dataset.date = match.date;
+        card.innerHTML = `<div class="ticket-date${exact ? "" : " is-undated"}"><time datetime="${escapeHtml(match.date)}">${escapeHtml(dateLabel)}</time><span>${day}</span><b>${escapeHtml(match.time || "時刻未定")}</b></div>
+          <div class="ticket-content"><div class="match-meta"><span class="ticket-competition">${escapeHtml(comp)}</span><span class="ticket-round-divider">/</span>${renderRoundPill(match, "match-mw-pill")}<span class="match-ha-pill">${ha}</span></div>
+          <div class="match-row">${feedEmblemHtml}<h3 class="opponent-name">${escapeHtml(match.opponent)}</h3></div>
+          <div class="match-venue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>${escapeHtml(match.venue || "会場未定")}</span></div>${resultHtml}</div>
+          <button type="button" class="ticket-open" aria-label="${escapeHtml(`${match.date} ${match.club === 'niigata' ? '新潟' : '熊本'} 対 ${match.opponent}の試合詳細を開く`)}"></button>
+          <button type="button" class="ticket-attend" aria-label="観戦予定${isAtt ? 'を解除' : 'に追加'}" aria-pressed="${isAtt}">${flag}</button>`;
+        card.querySelector('.ticket-attend').onclick = event => {
+          event.stopPropagation();
+          const next = localStorage.getItem(`attend_${mId}`) !== "true";
+          localStorage.setItem(`attend_${mId}`, String(next));
+          updateScheduleAttendance(mId, next);
+          if (currentMode === "calendar") renderCalendar();
+        };
+        bindClubNameLongPress(card.querySelector(".ticket-open"), card, match);
         card.onclick = () => {
           if (card.dataset.suppressClick === "true") {
             delete card.dataset.suppressClick;
@@ -13088,10 +13131,31 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
           openDetailSheet(match);
         };
-        section.appendChild(card);
-      });
+        return card;
+  }
+
+  function renderFeed(year = selectedYear) {
+    renderedFeedYear = year;
+    feedSlider.innerHTML = "";
+    scheduleData.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+    const ymMap = {};
+    const yearMatches = year === null ? scheduleData : scheduleData.filter(m => parseDate(m.date).getFullYear() === Number(year));
+    rebuildScheduleCompetitionFilterOptions(yearMatches);
+    const sourceMatches = filterScheduleMatchesByCompetition(yearMatches);
+
+    sourceMatches.forEach(m => {
+      const d = parseDate(m.date), key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      if (!ymMap[key]) ymMap[key] = []; ymMap[key].push(m);
+    });
+
+    Object.keys(ymMap).sort().forEach(key => {
+      const [year, month] = key.split("-").map(Number);
+      const section = document.createElement("div"); section.className = "month-section"; section.dataset.ym = key; section.dataset.year = year; section.dataset.ym_title = `${year} / ${String(month).padStart(2, "0")}`;
+
+      ymMap[key].forEach(match => section.appendChild(createScheduleCard(match)));
       feedSlider.appendChild(section);
     });
+    if (!Object.keys(ymMap).length) feedSlider.innerHTML = '<p class="schedule-empty schedule-feed-empty">条件に合う試合はありません</p>';
     allSections = Array.from(document.querySelectorAll(".month-section"));
     rebuildYearTabs();
     rebuildVisibleSections();
@@ -13185,6 +13249,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const i = visibleSections.findIndex(s => s.dataset.ym === k);
     if (i !== -1) scrollToIndex(i);
   };
+
+  async function shiftScheduleMonth(delta) {
+    const next = currentIndex + delta;
+    if (next >= 0 && next < visibleSections.length) { scrollToIndex(next); return; }
+    const years = getAvailableYears();
+    const year = Number(visibleSections[currentIndex]?.dataset.year || selectedYear);
+    const target = years[years.indexOf(year) + delta];
+    if (!target) return;
+    await applyYearFilter(target, true);
+    scrollToIndex(delta < 0 ? visibleSections.length - 1 : 0);
+  }
+  document.getElementById('schedule-prev-month').onclick = () => void shiftScheduleMonth(-1);
+  document.getElementById('schedule-next-month').onclick = () => void shiftScheduleMonth(1);
 
   // YM Picker
   function openYmPicker(options = {}) {

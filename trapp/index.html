@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="ui-v6.css?v=20260913-intro">
   <link rel="stylesheet" href="features.css?v=20260913-features">
   <link rel="stylesheet" href="home.css?v=20260916-soft-motion">
+  <link rel="stylesheet" href="schedule-view.css?v=20260916-matchday-schedule">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
     window.__trappReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -46,7 +47,7 @@
   <!-- 💎 Fixed App Header -->
   <header id="ultra-header">
     <div class="header-content">
-      <div id="active-month-title" title="タップして月を選択">... / ..</div>
+      <div class="schedule-month-heading"><span class="schedule-eyebrow">SCHEDULE</span><div class="schedule-month-controls"><button type="button" id="schedule-prev-month" aria-label="前の月">‹</button><button type="button" id="active-month-title" title="タップして年月を選択">... / ..</button><button type="button" id="schedule-next-month" aria-label="次の月">›</button></div></div>
       <div id="club-selection">
         <img src="./data/assets/emblems/アルビレックス新潟.png" id="toggle-niigata" class="club-pip active" alt="新潟">
         <img src="./data/assets/emblems/ロアッソ熊本.png" id="toggle-kumamoto" class="club-pip active" alt="熊本">
@@ -65,7 +66,7 @@
         </button>
       </div>
       <button type="button" id="schedule-filter-toggle" class="schedule-filter-toggle" aria-label="検索フィルターを開く" aria-expanded="false" aria-controls="schedule-filter-panel">
-        <span></span><span></span><span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2" fill="white"/><circle cx="16" cy="12" r="2" fill="white"/><circle cx="9" cy="18" r="2" fill="white"/></svg>
       </button>
       <div id="schedule-filter-panel" class="schedule-filter-panel" hidden>
         <div id="search-wrap">
@@ -779,6 +780,7 @@ We can't help falling in love with you
       <div id="calendar-body">
         <!-- Injected via JS -->
       </div>
+      <section id="calendar-selected" aria-label="選択した日の試合と予定"></section>
     </main>
 
     <!-- View 3: Standings -->
@@ -1510,7 +1512,8 @@ We can't help falling in love with you
   <script src="features.js?v=20260913-features"></script>
   <script src="analysis-data.js?v=20260913-features"></script>
   <script src="home-view.js?v=20260915-no-team-labels"></script>
-  <script src="script.js?v=20260915-poster-clean"></script>
+  <script src="script.js?v=20260916-matchday-schedule"></script>
+  <script src="schedule-view.js?v=20260916-matchday-schedule"></script>
   <script src="home-motion.js?v=20260916-soft-motion"></script>
 
 </body>

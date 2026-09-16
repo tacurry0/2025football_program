@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v100-soft-motion';
+const cacheName = 'football-app-v101-matchday-schedule';
 const assetsToCache = [
   "./",
   "./index.html",
@@ -12,6 +12,9 @@ const assetsToCache = [
   "./features.css",
   "./home.css",
   "./home-view.js",
+  "./schedule-view.css",
+  "./schedule-view.js",
+  "./data/assets/fonts/schedule-jp.woff",
   "./home-motion.js",
   "./data/assets/home/poster-grain.svg",
   "./data/assets/fonts/poster-jp.woff2",
