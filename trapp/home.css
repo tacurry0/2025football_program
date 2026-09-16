@@ -263,7 +263,10 @@ body[data-mode="dashboard"] .dash-quick-links { background: #fffffff7; box-shado
   }
 }
 
-body[data-mode="dashboard"] .poster-light { display: none; }
+body[data-mode="dashboard"] .poster-light,
+body[data-mode="dashboard"] .poster-atmosphere,
+body[data-mode="dashboard"] .poster-curtain,
+body[data-mode="dashboard"] .poster-ripple { display: none; }
 
 /* Matchday motion: the controller pauses every loop outside the visible home. */
 @media (prefers-reduced-motion: no-preference) {
@@ -271,25 +274,25 @@ body[data-mode="dashboard"] .poster-light { display: none; }
   body[data-mode="dashboard"] .poster-card.poster-motion-running { --poster-motion-play: running; }
   body[data-mode="dashboard"] .poster-watermark {
     transform-origin: 60% 55%;
-    animation: posterMarkDrift 12s ease-in-out infinite alternate;
+    animation: posterMarkDrift 6s ease-in-out infinite alternate;
     animation-play-state: var(--poster-motion-play);
   }
   body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { animation-delay: -5s; animation-direction: alternate-reverse; }
   body[data-mode="dashboard"] .poster-card .poster-hero > .poster-light {
     display: block; position: absolute; z-index: 1; inset: -25% auto -25% -55%; width: 44%;
     pointer-events: none;
-    background: linear-gradient(90deg, transparent, #ffffff0d 45%, #ffffff1a 52%, transparent);
-    animation: posterLightSweep 9s ease-in-out infinite;
+    background: linear-gradient(90deg, transparent, #ffffff24 45%, #ffffff4a 52%, transparent);
+    animation: posterLightSweep 4.5s ease-in-out infinite;
     animation-play-state: var(--poster-motion-play);
   }
   body[data-mode="dashboard"] .home-card-kumamoto .poster-light { animation-delay: -3s !important; }
   body[data-mode="dashboard"] .poster-weather svg {
     overflow: visible;
-    animation: posterCloudDrift 3.8s ease-in-out infinite;
+    animation: posterCloudDrift 2.6s ease-in-out infinite;
     animation-play-state: var(--poster-motion-play);
   }
   body[data-mode="dashboard"] .poster-weather svg:has(circle) {
-    animation-name: posterSunTurn; animation-duration: 24s; animation-timing-function: linear;
+    animation-name: posterSunTurn; animation-duration: 12s; animation-timing-function: linear;
   }
   body[data-mode="dashboard"] .poster-weather svg:has(path) line {
     animation: posterRainDrop 1.25s ease-in infinite;
@@ -314,8 +317,8 @@ body[data-mode="dashboard"] .poster-light { display: none; }
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:hover svg { transform: translateX(7px); }
 }
 @keyframes posterMarkDrift {
-  from { transform: translate3d(-5px,5px,0) rotate(-2deg) scale(1); }
-  to { transform: translate3d(9px,-7px,0) rotate(2deg) scale(1.08); }
+  from { transform: translate3d(-14px,10px,0) rotate(-5deg) scale(1); }
+  to { transform: translate3d(18px,-14px,0) rotate(5deg) scale(1.16); }
 }
 @keyframes posterLightSweep {
   0%, 16% { transform: translateX(-40%) skewX(-18deg); opacity: 0; }
@@ -324,7 +327,7 @@ body[data-mode="dashboard"] .poster-light { display: none; }
 }
 @keyframes posterCloudDrift {
   0%, 100% { transform: translate(0,0); }
-  50% { transform: translate(-3px,-2px); }
+  50% { transform: translate(-5px,-4px); }
 }
 @keyframes posterSunTurn { to { transform: rotate(360deg); } }
 @keyframes posterSnowTurn {
@@ -335,4 +338,71 @@ body[data-mode="dashboard"] .poster-light { display: none; }
   0% { transform: translate(1px,-2px); opacity: 0; }
   30% { opacity: 1; }
   100% { transform: translate(-1px,2px); opacity: 0; }
+}
+
+/* Broadcast-style layers keep the typography still once the entrance finishes. */
+@media (prefers-reduced-motion: no-preference) {
+  body[data-mode="dashboard"] .poster-watermark {
+    translate: var(--poster-depth-x, 0px) var(--poster-depth-y, 0px);
+    transition: translate 180ms ease-out;
+  }
+  body[data-mode="dashboard"] .poster-card .poster-hero > .poster-atmosphere,
+  body[data-mode="dashboard"] .poster-card .poster-hero > .poster-curtain,
+  body[data-mode="dashboard"] .poster-card .poster-hero > .poster-ripple {
+    display: block; position: absolute; pointer-events: none;
+  }
+  body[data-mode="dashboard"] .poster-card .poster-hero > .poster-atmosphere {
+    z-index: 1; inset: 0; overflow: hidden;
+  }
+  body[data-mode="dashboard"] .poster-atmosphere i {
+    position: absolute; width: 2px; height: 135%; top: -20%; left: 10%;
+    background: linear-gradient(transparent, #ffffff70, transparent);
+    animation: posterSpeedLine 3.2s linear infinite;
+    animation-play-state: var(--poster-motion-play);
+  }
+  body[data-mode="dashboard"] .poster-atmosphere i:nth-child(2) { left: 35%; width: 8px; opacity: .3; animation-delay: -1.9s; animation-duration: 4.4s; }
+  body[data-mode="dashboard"] .poster-atmosphere i:nth-child(3) { left: 65%; animation-delay: -1s; }
+  body[data-mode="dashboard"] .poster-atmosphere i:nth-child(4) { left: 85%; width: 4px; opacity: .5; animation-delay: -2.6s; }
+  body[data-mode="dashboard"] .poster-card .poster-hero > .poster-curtain {
+    z-index: 4; inset: -15% -30%; background: var(--poster-accent);
+    transform: translateX(110%) skewX(-20deg);
+  }
+  body[data-mode="dashboard"] .poster-card .poster-hero > .poster-ripple {
+    z-index: 3; width: 140px; height: 140px; border-radius: 50%;
+    border: 2px solid #ffffffb3; background: #ffffff20; opacity: 0;
+    left: var(--poster-touch-x,50%); top: var(--poster-touch-y,50%);
+    transform: translate(-50%,-50%) scale(.1);
+  }
+  body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis svg {
+    animation: posterArrowDrive 2.8s ease-in-out infinite;
+    animation-play-state: var(--poster-motion-play);
+  }
+  body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis::before {
+    width: 38px;
+    animation: posterAccentDrive 3.5s ease-in-out infinite alternate;
+    animation-play-state: var(--poster-motion-play);
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body[data-mode="dashboard"] .poster-hero {
+    transform: perspective(900px) rotateX(var(--poster-tilt-x,0deg)) rotateY(var(--poster-tilt-y,0deg));
+    transition: transform 220ms ease-out;
+  }
+  body[data-mode="dashboard"] .poster-hero:active {
+    transform: perspective(900px) rotateX(var(--poster-tilt-x,0deg)) rotateY(var(--poster-tilt-y,0deg)) scale(.975);
+  }
+}
+@keyframes posterSpeedLine {
+  from { transform: translateX(-180px) skewX(-26deg); opacity: 0; }
+  20%,75% { opacity: .7; }
+  to { transform: translateX(420px) skewX(-26deg); opacity: 0; }
+}
+@keyframes posterArrowDrive {
+  0%,55%,100% { translate: 0 0; }
+  70% { translate: 7px 0; }
+  83% { translate: 2px 0; }
+}
+@keyframes posterAccentDrive {
+  from { transform: translateX(-7px); }
+  to { transform: translateX(4px); }
 }
