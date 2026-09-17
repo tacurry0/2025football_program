@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-16T23:48:13.916624+00:00",
+  "fetchedAt": "2026-09-17T17:14:36.680940+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j2/2026/090613",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/090613",
-      "detail_fetched_at": "2026-09-16T23:48:13.916624+00:00",
+      "detail_fetched_at": "2026-09-17T17:14:36.680940+00:00",
       "home_starting_members": [
         {
           "name": "市川 暉記",
@@ -155,6 +155,16 @@
       ],
       "home_substitutions": [
         {
+          "minute": "82",
+          "in": "中村 琉聖",
+          "out": "新保 海鈴"
+        },
+        {
+          "minute": "82",
+          "in": "宇田 光史朗",
+          "out": "小倉 陽太"
+        },
+        {
           "minute": "73",
           "in": "窪田 稜",
           "out": "村田 透馬"
@@ -173,24 +183,9 @@
           "minute": "45",
           "in": "伊藤 槙人",
           "out": "杉田 隼"
-        },
-        {
-          "minute": "82",
-          "in": "中村 琉聖",
-          "out": "新保 海鈴"
-        },
-        {
-          "minute": "82",
-          "in": "宇田 光史朗",
-          "out": "小倉 陽太"
         }
       ],
       "home_cards": [
-        {
-          "minute": "1",
-          "player": "杉田 隼",
-          "card": "yellow"
-        },
         {
           "minute": "90+5",
           "player": "市川 暉記",
@@ -199,6 +194,11 @@
         {
           "minute": "82",
           "player": "岩崎 亮佑",
+          "card": "yellow"
+        },
+        {
+          "minute": "1",
+          "player": "杉田 隼",
           "card": "yellow"
         }
       ],
@@ -370,11 +370,6 @@
           "out": "笠井 佳祐"
         },
         {
-          "minute": "45",
-          "in": "マテウス モラエス",
-          "out": "古長谷 千博"
-        },
-        {
           "minute": "59",
           "in": "桑山 侃士",
           "out": "若月 大和"
@@ -383,6 +378,11 @@
           "minute": "59",
           "in": "前田 椋介",
           "out": "白井 永地"
+        },
+        {
+          "minute": "45",
+          "in": "マテウス モラエス",
+          "out": "古長谷 千博"
         }
       ],
       "away_cards": [],

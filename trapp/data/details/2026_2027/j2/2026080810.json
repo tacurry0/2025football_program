@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-16T23:48:13.916624+00:00",
+  "fetchedAt": "2026-09-17T17:14:36.680940+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 69,
       "source_url": "https://www.jleague.jp/match/j2/2026/080810",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/080810",
-      "detail_fetched_at": "2026-09-16T23:48:13.916624+00:00",
+      "detail_fetched_at": "2026-09-17T17:14:36.680940+00:00",
       "home_starting_members": [
         {
           "name": "トム グローバー",
@@ -165,11 +165,6 @@
           "out": "関口 凱心"
         },
         {
-          "minute": "62",
-          "in": "中山 昂大",
-          "out": "山本 桜大"
-        },
-        {
           "minute": "74",
           "in": "スファナット ムエアンタ",
           "out": "カプリーニ"
@@ -178,6 +173,11 @@
           "minute": "62",
           "in": "杉本 健勇",
           "out": "カルリーニョス ジュニオ"
+        },
+        {
+          "minute": "62",
+          "in": "中山 昂大",
+          "out": "山本 桜大"
         }
       ],
       "home_cards": [],
@@ -319,16 +319,6 @@
           "out": "シマブク カズヨシ"
         },
         {
-          "minute": "59",
-          "in": "前田 椋介",
-          "out": "新井 泰貴"
-        },
-        {
-          "minute": "59",
-          "in": "笠井 佳祐",
-          "out": "若月 大和"
-        },
-        {
           "minute": "74",
           "in": "佐藤 海宏",
           "out": "奥村 仁"
@@ -337,6 +327,16 @@
           "minute": "74",
           "in": "白井 永地",
           "out": "大西 悠介"
+        },
+        {
+          "minute": "59",
+          "in": "前田 椋介",
+          "out": "新井 泰貴"
+        },
+        {
+          "minute": "59",
+          "in": "笠井 佳祐",
+          "out": "若月 大和"
         }
       ],
       "away_cards": [],

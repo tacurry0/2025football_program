@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-16T23:48:13.916624+00:00",
+  "fetchedAt": "2026-09-17T17:14:36.680940+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 68,
       "source_url": "https://www.jleague.jp/match/j3/2026/090616",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/090616",
-      "detail_fetched_at": "2026-09-16T23:48:13.916624+00:00",
+      "detail_fetched_at": "2026-09-17T17:14:36.680940+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -156,6 +156,11 @@
       "home_substitutions": [
         {
           "minute": "83",
+          "in": "渡邉 怜歩",
+          "out": "三品 直哉"
+        },
+        {
+          "minute": "83",
           "in": "半代 将都",
           "out": "大本 祐槻"
         },
@@ -173,11 +178,6 @@
           "minute": "63",
           "in": "鹿取 勇斗",
           "out": "小林 慶太"
-        },
-        {
-          "minute": "83",
-          "in": "渡邉 怜歩",
-          "out": "三品 直哉"
         }
       ],
       "home_cards": [
@@ -335,11 +335,6 @@
           "out": "奥田 雄大"
         },
         {
-          "minute": "38",
-          "in": "富樫 佑太",
-          "out": "望月 想空"
-        },
-        {
           "minute": "66",
           "in": "田村 亮介",
           "out": "川﨑 修平"
@@ -348,6 +343,11 @@
           "minute": "66",
           "in": "森本 ヒマン",
           "out": "安藤 陸登"
+        },
+        {
+          "minute": "38",
+          "in": "富樫 佑太",
+          "out": "望月 想空"
         }
       ],
       "away_cards": [

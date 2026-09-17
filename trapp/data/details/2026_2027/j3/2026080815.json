@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-16T23:48:13.916624+00:00",
+  "fetchedAt": "2026-09-17T17:14:36.680940+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 87,
       "source_url": "https://www.jleague.jp/match/j3/2026/080815",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/080815",
-      "detail_fetched_at": "2026-09-16T23:48:13.916624+00:00",
+      "detail_fetched_at": "2026-09-17T17:14:36.680940+00:00",
       "home_starting_members": [
         {
           "name": "金 珉浩",
@@ -160,16 +160,6 @@
           "out": "島川 俊郎"
         },
         {
-          "minute": "72",
-          "in": "奥山 洋平",
-          "out": "中山 陸"
-        },
-        {
-          "minute": "72",
-          "in": "タナウット",
-          "out": "佐々木 快"
-        },
-        {
           "minute": "80",
           "in": "棚橋 尭士",
           "out": "前田 泰良"
@@ -178,6 +168,16 @@
           "minute": "80",
           "in": "神戸 康輔",
           "out": "竹内 崇人"
+        },
+        {
+          "minute": "72",
+          "in": "奥山 洋平",
+          "out": "中山 陸"
+        },
+        {
+          "minute": "72",
+          "in": "タナウット",
+          "out": "佐々木 快"
         }
       ],
       "home_cards": [
@@ -319,6 +319,11 @@
       ],
       "away_substitutions": [
         {
+          "minute": "81",
+          "in": "半代 将都",
+          "out": "永井 颯太"
+        },
+        {
           "minute": "76",
           "in": "鹿取 勇斗",
           "out": "飯星 明良"
@@ -337,11 +342,6 @@
           "minute": "72",
           "in": "飯星 明良",
           "out": "三島 頌平"
-        },
-        {
-          "minute": "81",
-          "in": "半代 将都",
-          "out": "永井 颯太"
         }
       ],
       "away_cards": [],

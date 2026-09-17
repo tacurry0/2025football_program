@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-16T23:48:13.916624+00:00",
+  "fetchedAt": "2026-09-17T17:14:36.680940+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j2/2026/082911",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/082911",
-      "detail_fetched_at": "2026-09-16T23:48:13.916624+00:00",
+      "detail_fetched_at": "2026-09-17T17:14:36.680940+00:00",
       "home_starting_members": [
         {
           "name": "佐々木 雅士",
@@ -170,17 +170,22 @@
           "out": "深港 壮一郎"
         },
         {
-          "minute": "62",
-          "in": "藤井 海和",
-          "out": "遠藤 凌"
-        },
-        {
           "minute": "73",
           "in": "岡庭 愁人",
           "out": "木吹 翔太"
+        },
+        {
+          "minute": "62",
+          "in": "藤井 海和",
+          "out": "遠藤 凌"
         }
       ],
       "home_cards": [
+        {
+          "minute": "87",
+          "player": "加藤 大晟",
+          "card": "yellow"
+        },
         {
           "minute": "66",
           "player": "山中 惇希",
@@ -189,11 +194,6 @@
         {
           "minute": "45+1",
           "player": "深港 壮一郎",
-          "card": "yellow"
-        },
-        {
-          "minute": "87",
-          "player": "加藤 大晟",
           "card": "yellow"
         }
       ],

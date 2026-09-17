@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-16T23:48:13.916624+00:00",
+  "fetchedAt": "2026-09-17T17:14:36.680940+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j3/2026/091217",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/091217",
-      "detail_fetched_at": "2026-09-16T23:48:13.916624+00:00",
+      "detail_fetched_at": "2026-09-17T17:14:36.680940+00:00",
       "home_starting_members": [
         {
           "name": "吉丸 絢梓",
@@ -155,11 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "45",
-          "in": "鈴 直樹",
-          "out": "安在 達弥"
-        },
-        {
           "minute": "84",
           "in": "藤田 仁朗",
           "out": "岡田 優希"
@@ -173,6 +168,11 @@
           "minute": "64",
           "in": "泉 彩稀",
           "out": "中村 翼"
+        },
+        {
+          "minute": "45",
+          "in": "鈴 直樹",
+          "out": "安在 達弥"
         }
       ],
       "home_cards": [],

@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-09-16T23:48:13.916624+00:00",
+  "fetchedAt": "2026-09-17T17:14:36.680940+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 64,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/090202",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/090202",
-      "detail_fetched_at": "2026-09-16T23:48:13.916624+00:00",
+      "detail_fetched_at": "2026-09-17T17:14:36.680940+00:00",
       "home_starting_members": [
         {
           "name": "近藤 壱成",
@@ -155,16 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "69",
-          "in": "中島 大嘉",
-          "out": "青木 翔大"
-        },
-        {
-          "minute": "69",
-          "in": "瀬畠 義成",
-          "out": "玉城 大志"
-        },
-        {
           "minute": "81",
           "in": "中野 力瑠",
           "out": "貫 真郷"
@@ -175,6 +165,16 @@
           "out": "田中 翔太"
         },
         {
+          "minute": "69",
+          "in": "中島 大嘉",
+          "out": "青木 翔大"
+        },
+        {
+          "minute": "69",
+          "in": "瀬畠 義成",
+          "out": "玉城 大志"
+        },
+        {
           "minute": "58",
           "in": "風間 宏希",
           "out": "池下 由也"
@@ -182,13 +182,13 @@
       ],
       "home_cards": [
         {
-          "minute": "56",
-          "player": "池下 由也",
+          "minute": "85",
+          "player": "中野 力瑠",
           "card": "yellow"
         },
         {
-          "minute": "85",
-          "player": "中野 力瑠",
+          "minute": "56",
+          "player": "池下 由也",
           "card": "yellow"
         }
       ],
@@ -335,11 +335,6 @@
           "out": "ジェイソン ゲリア"
         },
         {
-          "minute": "45",
-          "in": "笠井 佳祐",
-          "out": "石山 青空"
-        },
-        {
           "minute": "67",
           "in": "桑山 侃士",
           "out": "マテウス モラエス"
@@ -348,6 +343,11 @@
           "minute": "67",
           "in": "若月 大和",
           "out": "イウリ カスティーリョ"
+        },
+        {
+          "minute": "45",
+          "in": "笠井 佳祐",
+          "out": "石山 青空"
         }
       ],
       "away_cards": [],
