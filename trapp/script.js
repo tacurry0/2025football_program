@@ -10964,7 +10964,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupPlayerChantAudio(sheetContent);
     const backBtn = sheetContent.querySelector(".u-player-back");
     if (backBtn && sourceMatch) backBtn.onclick = () => openDetailSheet(sourceMatch);
-    sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
   }
 
   function findPlayerAnalysisRowByIdentity(rows, playerName, year) {
@@ -11791,135 +11790,56 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
-    const J_CLUB_ENG = {
-      "北海道コンサドーレ札幌": "HOKKAIDO CONSADOLE SAPPORO", "ヴァンラーレ八戸": "VANRAURE HACHINOHE", "いわてグルージャ盛岡": "IWATE GRULLA MORIOKA", "ベガルタ仙台": "VEGALTA SENDAI", "ブラウブリッツ秋田": "BLAUBLITZ AKITA", "モンテディオ山形": "MONTEDIO YAMAGATA", "福島ユナイテッドFC": "FUKUSHIMA UNITED FC", "いわきFC": "IWAKI FC", "鹿島アントラーズ": "KASHIMA ANTLERS", "水戸ホーリーホック": "MITO HOLLYHOCK", "栃木SC": "TOCHIGI SC", "ザスパ群馬": "THESPA GUNMA", "浦和レッズ": "URAWA REDS", "大宮アルディージャ": "OMIYA ARDIJA", "RB大宮アルディージャ": "RB OMIYA ARDIJA", "ジェフユナイテッド千葉": "JEF UNITED CHIBA", "柏レイソル": "KASHIWA REYSOL", "FC東京": "FC TOKYO", "東京ヴェルディ": "TOKYO VERDY", "FC町田ゼルビア": "FC MACHIDA ZELVIA", "川崎フロンターレ": "KAWASAKI FRONTALE", "横浜F・マリノス": "YOKOHAMA F. MARINOS", "横浜FC": "YOKOHAMA FC", "Y.S.C.C.横浜": "Y.S.C.C. YOKOHAMA", "湘南ベルマーレ": "SHONAN BELLMARE", "SC相模原": "SC SAGAMIHARA", "ヴァンフォーレ甲府": "VENTFORET KOFU", "松本山雅FC": "MATSUMOTO YAMAGA FC", "AC長野パルセイロ": "AC NAGANO PARCEIRO", "アルビレックス新潟": "ALBIREX NIIGATA", "カターレ富山": "KATALLER TOYAMA", "ツエーゲン金沢": "ZWEIGEN KANAZAWA", "清水エスパルス": "SHIMIZU S-PULSE", "ジュビロ磐田": "JUBILO IWATA", "藤枝MYFC": "FUJIEDA MYFC", "アスルクラロ沼津": "AZUL CLARO NUMAZU", "名古屋グランパス": "NAGOYA GRAMPUS", "FC岐阜": "FC GIFU", "京都サンガF.C.": "KYOTO SANGA F.C.", "ガンバ大阪": "GAMBA OSAKA", "セレッソ大阪": "CEREZO OSAKA", "FC大阪": "FC OSAKA", "ヴィッセル神戸": "VISSEL KOBE", "ヴィッセル神戶": "VISSEL KOBE", "奈良クラブ": "NARA CLUB", "ガイナーレ鳥取": "GAINARE TOTTORI", "ファジアーノ岡山": "FAGIANO OKAYAMA", "サンフレッチェ広島": "SANFRECCE HIROSHIMA", "レノファ山口FC": "RENOFA YAMAGUCHI FC", "カマタマーレ讃岐": "KAMATAMARE SANUKI", "徳島ヴォルティス": "TOKUSHIMA VORTIS", "愛媛FC": "EHIME FC", "FC今治": "FC IMABARI", "アビスパ福岡": "AVISPA FUKUOKA", "ギラヴァンツ北九州": "GIRAVANZ KITAKYUSHU", "サガン鳥栖": "SAGAN TOSU", "V・ファーレン長崎": "V-VAREN NAGASAKI", "ロアッソ熊本": "ROASSO KUMAMOTO", "大分トリニータ": "OITA TRINITA", "テゲバジャーロ宮崎": "TEGEVAJARO MIYAZAKI", "鹿児島ユナイテッドFC": "KAGOSHIMA UNITED FC", "FC琉球": "FC RYUKYU", "高知ユナイテッドSC": "KOCHI UNITED SC", "レイラック滋賀FC": "REILAC SHIGA FC"
-    };
-
     const detailData = offRes ? { ...match, ...offRes } : match;
-    const officialInfoHtml = renderOfficialInfo(detailData);
-    const membersHtml = renderMatchMembers(detailData);
-
-    const homeAway = getMatchIsHome(detailData) ? "HOME" : "AWAY";
-    const clubName = match.club === "niigata" ? "ALBIREX NIIGATA" : "ROASSO KUMAMOTO";
-    const scoreBoard = getHomeAwayDisplay(detailData, sMy, sOpp);
-    const homeEnglish = J_CLUB_ENG[scoreBoard.homeName] || getClubEnglishName(scoreBoard.homeName);
-    const awayEnglish = J_CLUB_ENG[scoreBoard.awayName] || getClubEnglishName(scoreBoard.awayName);
-    const detailRound = formatVisionRoundLabel(detailData);
-    const visionButtonHtml = match.club === "niigata" && getMatchIsHome(match)
-      ? `<button type="button" class="u-vision-open-btn" id="detail-vision-preview">ビジョンプレビュー</button>`
-      : "";
-    const hasOwnScore = sMy !== "" && sOpp !== "";
-    const pkScores = getMatchIsHome(detailData) ? [sPkM, sPkO] : [sPkO, sPkM];
-    const pkDisplay = hasOwnScore && Number(sMy) === Number(sOpp) && sPkM !== "" && sPkO !== "" ? `PK ${pkScores.join(" - ")}` : "";
-    const matchDateText = [detailData.date || match.date, detailData.day || match.day].filter(Boolean).join(" ");
-    const matchTimeText = detailData.time || match.time || "";
-    const venueText = detailData.venue || match.venue || "-";
-    const detailRoundClass = getRoundDisplayClass(detailData, "match-detail-round");
-
+    const report = window.TrappMatchReport;
+    const reportData = data => {
+      const board = getHomeAwayDisplay(data, sMy, sOpp);
+      const scores = extractOwnResultScores(data, match);
+      const ownHome = getMatchIsHome(data);
+      const pkPair = scores && scores.pkOwn !== null && scores.pkOpponent !== null
+        ? (ownHome ? [scores.pkOwn, scores.pkOpponent] : [scores.pkOpponent, scores.pkOwn])
+        : sPkM !== "" && sPkO !== "" ? (ownHome ? [sPkM, sPkO] : [sPkO, sPkM]) : null;
+      const competition = window.TrappLeague.context(data).competition;
+      return { ...data, ownHome, home:board.homeName, away:board.awayName,
+        home_score:board.homeScore === '-' ? null : board.homeScore,
+        away_score:board.awayScore === '-' ? null : board.awayScore,
+        home_emblem:board.homeEmblem, away_emblem:board.awayEmblem,
+        competitionLabel:({j1:'J1リーグ',j2:'J2リーグ',j3:'J3リーグ',leaguecup:'ルヴァンカップ',emperor:'天皇杯',j2j3:'百年構想リーグ'})[competition] || getCompetitionShort(data.competition || data.tournament || ''),
+        roundLabel:formatVisionRoundLabel(data), pkLabel:pkPair ? `PK ${pkPair.join(' - ')}` : '' };
+    };
+    let currentDetailData = detailData;
+    const initialReport = reportData(detailData);
     detailSheet.dataset.club = match.club;
+    detailSheet.dataset.view = 'overview';
     detailSheet.scrollTop = 0;
     sheetContent.innerHTML = `
-      <div class="match-detail-sheetbar">
-        <div><span>MATCH</span><strong>試合詳細</strong></div>
-        <button type="button" id="detail-sheet-close" aria-label="試合詳細を閉じる">×</button>
-      </div>
-      <section class="match-detail-card match-detail-compact club-${match.club}">
-        <div class="match-detail-top">
-          <div>
-            <span>ROUND</span>
-            <strong class="${escapeHtml(detailRoundClass)}">${escapeHtml(detailRound)}</strong>
-          </div>
-          <div class="match-detail-chips">
-            <span class="sheet-ha badge-${homeAway.toLowerCase()}">${homeAway}</span>
-          </div>
-        </div>
-        <div class="match-detail-board">
-          <div class="match-detail-team">
-            ${renderTeamEmblem(scoreBoard.homeEmblem, scoreBoard.homeName, "match-detail-emblem", "match-detail-emblem-media")}
-            <span>HOME</span>
-            <strong>${escapeHtml(scoreBoard.homeName)}</strong>
-            <small>${escapeHtml(homeEnglish)}</small>
-          </div>
-          <div class="match-detail-scorebox">
-            <div class="match-detail-score">
-              <strong>${escapeHtml(scoreBoard.homeScore)}</strong>
-              <span>:</span>
-              <strong>${escapeHtml(scoreBoard.awayScore)}</strong>
-            </div>
-            <small class="match-detail-pk" ${pkDisplay ? "" : "hidden"}>${escapeHtml(pkDisplay)}</small>
-          </div>
-          <div class="match-detail-team away">
-            ${renderTeamEmblem(scoreBoard.awayEmblem, scoreBoard.awayName, "match-detail-emblem", "match-detail-emblem-media")}
-            <span>AWAY</span>
-            <strong>${escapeHtml(scoreBoard.awayName)}</strong>
-            <small>${escapeHtml(awayEnglish)}</small>
-          </div>
-        </div>
-        <div class="match-detail-info">
-          <div>
-            <span>DATE</span>
-            <strong>${escapeHtml(matchDateText || "-")}${matchTimeText ? ` <em>${escapeHtml(matchTimeText)}</em>` : ""}</strong>
-          </div>
-          <div>
-            <span>VENUE</span>
-            <strong>${escapeHtml(venueText)}</strong>
-          </div>
-        </div>
-        ${visionButtonHtml ? `<div class="match-detail-actions">${visionButtonHtml}</div>` : ""}
-      </section>
-
+      <div id="report-header-content">${report.header(initialReport)}</div>
       <div class="match-detail-tabs" role="tablist" aria-label="試合情報">
-        <button type="button" id="detail-tab-overview" role="tab" aria-selected="true" aria-controls="detail-panel-overview" data-detail-tab="overview">結果・概要</button>
+        <button type="button" id="detail-tab-overview" role="tab" aria-selected="true" aria-controls="detail-panel-overview" data-detail-tab="overview">概要</button>
+        <button type="button" id="detail-tab-timeline" role="tab" aria-selected="false" aria-controls="detail-panel-timeline" tabindex="-1" data-detail-tab="timeline">試合経過</button>
         <button type="button" id="detail-tab-members" role="tab" aria-selected="false" aria-controls="detail-panel-members" tabindex="-1" data-detail-tab="members">出場選手</button>
       </div>
       <section id="detail-panel-overview" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-overview">
-      <div id="official-detail-content">${renderDetailGoals(detailData)}${officialInfoHtml}</div>
-      <section id="u-auto-weather-area" class="u-weather-card" style="display:none;">
-        <div>
-           <span>FORECAST</span>
-           <div id="u-weather-display">
-             <span class="w-icon" style="font-size: 1.8rem;">-</span>
-           </div>
-        </div>
-        <div class="u-weather-divider"></div>
-        <div>
-           <span>TEMPERATURE</span>
-           <div class="u-weather-temps">
-             <span id="u-temp-max">-</span>
-             <small>℃</small>
-             <em>/</em>
-             <span id="u-temp-min">-</span>
-             <small>℃</small>
-           </div>
-        </div>
-      </section>
-
-      <section class="match-plan-panel" id="match-plan-panel">
-        <div class="match-plan-heading">
-          <div><span>MY PLAN</span><strong>観戦予定・メモ</strong></div>
-          <small>カレンダーに反映されます</small>
-        </div>
-        <div class="u-attend-btn ${match.club} ${isAttend ? 'active' : ''}" id="attend-toggle">
-          <span class="btn-icon" style="display: flex;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></span>
-          <span class="btn-text">観戦予定</span>
-        </div>
-        <div class="u-note-single">
-          <div class="u-note-box">
-            <div class="u-note-header">
-              <label>メモ</label>
-              <button class="u-note-edit-btn" id="memo-edit-btn">編集</button>
-            </div>
-            <div class="u-memo-display" id="memo-display"></div>
-            <textarea class="u-textarea memo-field hidden">${escapeHtml(sMemo)}</textarea>
+        <div id="official-detail-content">${report.conditions(initialReport)}${report.timeline(initialReport,true)}</div>
+        <section id="u-auto-weather-area" class="u-weather-card" style="display:none;">
+          <div><span>予報</span><div id="u-weather-display"><span class="w-icon">-</span></div></div>
+          <div class="u-weather-temps"><span id="u-temp-max">-</span><small>℃</small><em>/</em><span id="u-temp-min">-</span><small>℃</small></div>
+        </section>
+        <section class="report-plan" id="match-plan-panel">
+          <div class="report-plan-heading"><h3>観戦予定・メモ</h3>
+            <button type="button" class="report-attend ${isAttend ? 'active' : ''}" id="attend-toggle" aria-pressed="${isAttend}"><span aria-hidden="true">⚑</span> 観戦予定</button>
+            <button type="button" class="u-note-edit-btn" id="memo-edit-btn" aria-label="メモを編集">編集</button>
           </div>
-        </div>
+          <div class="u-memo-display" id="memo-display"></div>
+          <textarea class="u-textarea memo-field hidden" aria-label="観戦メモ" placeholder="メモを追加">${escapeHtml(sMemo)}</textarea>
+        </section>
+        <details class="report-officials"><summary>審判・公式記録 <span aria-hidden="true">↗　›</span></summary><div id="report-official-content">${renderOfficialInfo(detailData)}</div>
+          ${match.club === 'niigata' && getMatchIsHome(match) ? '<button type="button" class="u-vision-open-btn" id="detail-vision-preview">ビジョンプレビュー</button>' : ''}
+        </details>
       </section>
-      </section>
-      <section id="detail-panel-members" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-members" hidden>
-        <div id="official-members-content">${membersHtml || '<p class="detail-empty">出場選手はまだ取得できていません。</p>'}</div>
-      </section>
-      <div class="official-detail-status" role="status" id="official-detail-status"></div>
-      <button class="close-sheet-btn">保存して閉じる</button>
+      <section id="detail-panel-timeline" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-timeline" hidden><div id="report-timeline-content">${report.timeline(initialReport)}</div></section>
+      <section id="detail-panel-members" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-members" hidden><div id="official-members-content">${report.members(initialReport)}</div></section>
+      <details class="report-update"><summary>データ更新</summary><div class="official-detail-status" role="status" id="official-detail-status"></div></details>
     `;
 
     const tabs = Array.from(sheetContent.querySelectorAll('[data-detail-tab]'));
@@ -11930,8 +11850,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         button.tabIndex = selected ? 0 : -1;
         sheetContent.querySelector(`#detail-panel-${button.dataset.detailTab}`).hidden = !selected;
       });
+      detailSheet.dataset.view = tab.dataset.detailTab;
+      detailSheet.scrollTop = 0;
       if (focus) tab.focus();
-      if (tab.dataset.detailTab === 'members') requestAnimationFrame(() => setupScrollablePlayerNames(sheetContent));
     };
     tabs.forEach((tab, index) => {
       tab.onclick = () => selectTab(tab);
@@ -11942,30 +11863,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         selectTab(tabs[next], true);
       };
     });
-    const updateDetailPanels = record => {
-      const data = { ...match, ...record };
-      sheetContent.querySelector('#official-detail-content').innerHTML = renderDetailGoals(data) + renderOfficialInfo(data);
-      sheetContent.querySelector('#official-members-content').innerHTML = renderMatchMembers(data) || '<p class="detail-empty">出場選手はまだ取得できていません。</p>';
-      const scores = extractOwnResultScores(data, match);
-      if (scores) {
-        const board = getHomeAwayDisplay(data, String(scores.ownScore), String(scores.opponentScore));
-        const numbers = sheetContent.querySelectorAll('.match-detail-score strong');
-        numbers[0].textContent = board.homeScore;
-        numbers[1].textContent = board.awayScore;
-        const pk = sheetContent.querySelector('.match-detail-pk');
-        const hasPk = scores.pkOwn !== null && scores.pkOpponent !== null;
-        pk.hidden = !hasPk;
-        pk.textContent = hasPk ? `PK ${(getMatchIsHome(data) ? [scores.pkOwn, scores.pkOpponent] : [scores.pkOpponent, scores.pkOwn]).join(' - ')}` : '';
-      }
-      bindPlayerLinks(data);
-      bindLineupDetailToggle();
+    const bindReportActions = () => {
+      sheetContent.querySelector('[data-report-all-events]')?.addEventListener('click', () => selectTab(tabs[1]));
+      sheetContent.querySelector('#detail-sheet-close').onclick = () => closeDetailSheet();
+      const vision = sheetContent.querySelector('#detail-vision-preview');
+      if (vision) vision.onclick = () => openVisionPreviewPicker(currentDetailData);
     };
-    const visionPreviewBtn = sheetContent.querySelector("#detail-vision-preview");
-    if (visionPreviewBtn) {
-      visionPreviewBtn.onclick = () => openVisionPreviewPicker(detailData);
-    }
-    bindPlayerLinks(match);
-    bindLineupDetailToggle();
+    const updateDetailPanels = record => {
+      currentDetailData = { ...match, ...record };
+      const data = reportData(currentDetailData);
+      sheetContent.querySelector('#report-header-content').innerHTML = report.header(data);
+      sheetContent.querySelector('#official-detail-content').innerHTML = report.conditions(data) + report.timeline(data,true);
+      sheetContent.querySelector('#report-timeline-content').innerHTML = report.timeline(data);
+      sheetContent.querySelector('#report-official-content').innerHTML = renderOfficialInfo(currentDetailData);
+      sheetContent.querySelector('#official-members-content').innerHTML = report.members(data);
+      bindPlayerLinks(currentDetailData);
+      bindReportActions();
+    };
+    bindPlayerLinks(detailData);
+    bindReportActions();
     const detailSlot = sheetContent.querySelector('#official-detail-content');
     const detailStatus = sheetContent.querySelector('#official-detail-status');
     const fetchDetail = async (force = false) => {
@@ -12070,7 +11986,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     detailSheet.ontouchstart = (e) => e.stopPropagation();
     detailSheet.ontouchmove = (e) => e.stopPropagation();
 
-    sheetContent.querySelector(".close-sheet-btn").onclick = () => closeDetailSheet();
     sheetContent.querySelector("#detail-sheet-close").onclick = () => closeDetailSheet();
     sheetBackdrop.onclick = () => closeDetailSheet();
     document.querySelector(".sheet-handle").onclick = () => closeDetailSheet();
@@ -12078,6 +11993,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const toggleBtn = document.getElementById("attend-toggle");
     toggleBtn.onclick = () => {
       toggleBtn.classList.toggle("active");
+      toggleBtn.setAttribute("aria-pressed", String(toggleBtn.classList.contains("active")));
       saveAndRefresh();
       if (currentMode === "calendar") renderCalendar();
     };
