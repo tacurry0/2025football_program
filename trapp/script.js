@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let selectedYear = null;
   let renderedFeedYear = undefined;
   let currentMode = "dashboard"; // dashboard, feed, calendar, standings, links, chants, player-analysis or vision
-  let lineupDetailExpanded = false;
+  let lineupDetailExpanded = true;
   const scheduleCompetitionFilterState = {
     active: false,
     selected: [],
@@ -10514,6 +10514,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     return fallback;
   }
 
+  function renderDetailGoals(match) {
+    const ownHome = getMatchIsHome(match);
+    const goals = [
+      match.home_goals || (ownHome ? match.goals : match.opponent_goals) || [],
+      match.away_goals || (ownHome ? match.opponent_goals : match.goals) || []
+    ];
+    if (!goals.some(list => Array.isArray(list) && list.length)) return '';
+    return `<section class="detail-goals"><h4>得点</h4><div class="detail-goals-grid">${goals.map((list, index) => `<div><span class="detail-side-label">${index === 0 ? 'HOME' : 'AWAY'}</span>${Array.isArray(list) && list.length ? list.map(goal => `<p><span>${escapeHtml(String(goal.minute ?? '').replace(/[’′'分]/g, ''))}′</span><strong>${escapeHtml(goal.scorer || goal.player || '得点者不明')}</strong></p>`).join('') : '<p class="detail-empty">—</p>'}</div>`).join('')}</div></section>`;
+  }
+
   function renderOfficialInfo(match) {
     const refs = match.referees || {};
     const varAvar = splitOfficialNames(refs["VAR／AVAR"] || refs["VAR/AVAR"] || refs.var_avar);
@@ -10691,7 +10701,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const side = sideData[sideKey];
       const starters = Array.isArray(side.starters) ? side.starters : [];
       const bench = Array.isArray(side.bench) ? side.bench : [];
-      if (!starters.length && !bench.length) return "";
+
       const eventMap = makeEventMap(side);
       const rows = (members) => members.map(member => {
         const events = eventMap.get(compactPlayerName(getMemberName(member))) || [];
@@ -10699,6 +10709,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       }).join("");
       return `
         <div class="lineup-team ${sideKey} ${side.own ? "own" : "opponent"}">
+          <div class="lineup-team-heading"><span>${side.label}</span><strong>${escapeHtml(side.teamName)}</strong></div>
+          ${!starters.length && !bench.length ? '<p class="detail-empty">メンバー未取得</p>' : ''}
           ${starters.length ? `
             <div class="lineup-block">
               <h5>STARTING XI</h5>
@@ -10709,13 +10721,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="lineup-block bench-block">
               <h5>BENCH</h5>
               <ul class="lineup-list bench">${rows(bench)}</ul>
-              ${side.manager ? `<div class="lineup-manager-row"><span>監督</span><strong>${escapeHtml(side.manager)}</strong></div>` : ""}
             </div>
           ` : ""}
+          ${side.manager ? `<div class="lineup-manager-row"><span>監督</span><strong>${escapeHtml(side.manager)}</strong></div>` : ""}
         </div>
       `;
     };
 
+    if (![sideData.home.starters, sideData.home.bench, sideData.away.starters, sideData.away.bench].some(rows => Array.isArray(rows) && rows.length)) return "";
     const homeHtml = renderSide("home");
     const awayHtml = renderSide("away");
     if (!homeHtml && !awayHtml) return "";
@@ -10723,7 +10736,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `
       <section class="lineup-summary ${lineupDetailExpanded ? "show-events" : ""}">
         <div class="lineup-summary-head">
-          <h4>LINEUPS</h4>
+          <h4>出場選手</h4>
           <button type="button" class="lineup-detail-toggle" aria-pressed="${lineupDetailExpanded ? "true" : "false"}">
             詳細 ${lineupDetailExpanded ? "ON" : "OFF"}
           </button>
@@ -11792,38 +11805,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const homeEnglish = J_CLUB_ENG[scoreBoard.homeName] || getClubEnglishName(scoreBoard.homeName);
     const awayEnglish = J_CLUB_ENG[scoreBoard.awayName] || getClubEnglishName(scoreBoard.awayName);
     const detailRound = formatVisionRoundLabel(detailData);
-    const resultStatusLabel = scoreBoard.homeScore !== "-" || scoreBoard.awayScore !== "-" ? "MATCH RESULT" : "MATCH PREVIEW";
     const visionButtonHtml = match.club === "niigata" && getMatchIsHome(match)
       ? `<button type="button" class="u-vision-open-btn" id="detail-vision-preview">ビジョンプレビュー</button>`
       : "";
     const hasOwnScore = sMy !== "" && sOpp !== "";
-    const ownScoreNumber = Number(sMy);
-    const oppScoreNumber = Number(sOpp);
-    const pkOwnNumber = Number(sPkM);
-    const pkOppNumber = Number(sPkO);
-    let outcomeLabel = resultStatusLabel;
-    let outcomeClass = "pending";
-    if (hasOwnScore && Number.isFinite(ownScoreNumber) && Number.isFinite(oppScoreNumber)) {
-      if (ownScoreNumber === oppScoreNumber && sPkM !== "" && sPkO !== "" && Number.isFinite(pkOwnNumber) && Number.isFinite(pkOppNumber)) {
-        outcomeLabel = pkOwnNumber > pkOppNumber ? "PK WIN" : "PK LOSE";
-        outcomeClass = pkOwnNumber > pkOppNumber ? "win" : "lose";
-      } else if (ownScoreNumber > oppScoreNumber) {
-        outcomeLabel = "WIN";
-        outcomeClass = "win";
-      } else if (ownScoreNumber < oppScoreNumber) {
-        outcomeLabel = "LOSE";
-        outcomeClass = "lose";
-      } else {
-        outcomeLabel = "DRAW";
-        outcomeClass = "draw";
-      }
-    }
-    const pkDisplay = hasOwnScore && ownScoreNumber === oppScoreNumber && sPkM !== "" && sPkO !== "" ? `PK ${sPkM} - ${sPkO}` : "";
+    const pkScores = getMatchIsHome(detailData) ? [sPkM, sPkO] : [sPkO, sPkM];
+    const pkDisplay = hasOwnScore && Number(sMy) === Number(sOpp) && sPkM !== "" && sPkO !== "" ? `PK ${pkScores.join(" - ")}` : "";
     const matchDateText = [detailData.date || match.date, detailData.day || match.day].filter(Boolean).join(" ");
     const matchTimeText = detailData.time || match.time || "";
     const venueText = detailData.venue || match.venue || "-";
     const detailRoundClass = getRoundDisplayClass(detailData, "match-detail-round");
 
+    detailSheet.dataset.club = match.club;
+    detailSheet.scrollTop = 0;
     sheetContent.innerHTML = `
       <div class="match-detail-sheetbar">
         <div><span>MATCH</span><strong>試合詳細</strong></div>
@@ -11847,13 +11841,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             <small>${escapeHtml(homeEnglish)}</small>
           </div>
           <div class="match-detail-scorebox">
-            <span class="match-detail-outcome ${outcomeClass}">${escapeHtml(outcomeLabel)}</span>
             <div class="match-detail-score">
               <strong>${escapeHtml(scoreBoard.homeScore)}</strong>
               <span>:</span>
               <strong>${escapeHtml(scoreBoard.awayScore)}</strong>
             </div>
-            ${pkDisplay ? `<small>${escapeHtml(pkDisplay)}</small>` : ""}
+            <small class="match-detail-pk" ${pkDisplay ? "" : "hidden"}>${escapeHtml(pkDisplay)}</small>
           </div>
           <div class="match-detail-team away">
             ${renderTeamEmblem(scoreBoard.awayEmblem, scoreBoard.awayName, "match-detail-emblem", "match-detail-emblem-media")}
@@ -11875,6 +11868,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         ${visionButtonHtml ? `<div class="match-detail-actions">${visionButtonHtml}</div>` : ""}
       </section>
 
+      <div class="match-detail-tabs" role="tablist" aria-label="試合情報">
+        <button type="button" id="detail-tab-overview" role="tab" aria-selected="true" aria-controls="detail-panel-overview" data-detail-tab="overview">結果・概要</button>
+        <button type="button" id="detail-tab-members" role="tab" aria-selected="false" aria-controls="detail-panel-members" tabindex="-1" data-detail-tab="members">出場選手</button>
+      </div>
+      <section id="detail-panel-overview" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-overview">
+      <div id="official-detail-content">${renderDetailGoals(detailData)}${officialInfoHtml}</div>
       <section id="u-auto-weather-area" class="u-weather-card" style="display:none;">
         <div>
            <span>FORECAST</span>
@@ -11915,11 +11914,52 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
         </div>
       </section>
-      <div id="official-detail-content">${officialInfoHtml}${membersHtml}</div>
+      </section>
+      <section id="detail-panel-members" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-members" hidden>
+        <div id="official-members-content">${membersHtml || '<p class="detail-empty">出場選手はまだ取得できていません。</p>'}</div>
+      </section>
       <div class="official-detail-status" role="status" id="official-detail-status"></div>
       <button class="close-sheet-btn">保存して閉じる</button>
     `;
 
+    const tabs = Array.from(sheetContent.querySelectorAll('[data-detail-tab]'));
+    const selectTab = (tab, focus = false) => {
+      tabs.forEach(button => {
+        const selected = button === tab;
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+        sheetContent.querySelector(`#detail-panel-${button.dataset.detailTab}`).hidden = !selected;
+      });
+      if (focus) tab.focus();
+      if (tab.dataset.detailTab === 'members') requestAnimationFrame(() => setupScrollablePlayerNames(sheetContent));
+    };
+    tabs.forEach((tab, index) => {
+      tab.onclick = () => selectTab(tab);
+      tab.onkeydown = event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        selectTab(tabs[next], true);
+      };
+    });
+    const updateDetailPanels = record => {
+      const data = { ...match, ...record };
+      sheetContent.querySelector('#official-detail-content').innerHTML = renderDetailGoals(data) + renderOfficialInfo(data);
+      sheetContent.querySelector('#official-members-content').innerHTML = renderMatchMembers(data) || '<p class="detail-empty">出場選手はまだ取得できていません。</p>';
+      const scores = extractOwnResultScores(data, match);
+      if (scores) {
+        const board = getHomeAwayDisplay(data, String(scores.ownScore), String(scores.opponentScore));
+        const numbers = sheetContent.querySelectorAll('.match-detail-score strong');
+        numbers[0].textContent = board.homeScore;
+        numbers[1].textContent = board.awayScore;
+        const pk = sheetContent.querySelector('.match-detail-pk');
+        const hasPk = scores.pkOwn !== null && scores.pkOpponent !== null;
+        pk.hidden = !hasPk;
+        pk.textContent = hasPk ? `PK ${(getMatchIsHome(data) ? [scores.pkOwn, scores.pkOpponent] : [scores.pkOpponent, scores.pkOwn]).join(' - ')}` : '';
+      }
+      bindPlayerLinks(data);
+      bindLineupDetailToggle();
+    };
     const visionPreviewBtn = sheetContent.querySelector("#detail-vision-preview");
     if (visionPreviewBtn) {
       visionPreviewBtn.onclick = () => openVisionPreviewPicker(detailData);
@@ -11933,9 +11973,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const payload = await leagueClient.detail({ ...match, ...findOfficialResult(match) }, force, saved => {
         if (!detailSlot.isConnected || sheetContent.querySelector('#official-detail-content') !== detailSlot) return;
         const row = saved.data[0];
-        detailSlot.innerHTML = renderOfficialInfo({ ...match, ...row }) + renderMatchMembers({ ...match, ...row });
+        updateDetailPanels(row);
         detailStatus.textContent = '保存済みの詳細を表示中。公式の更新を確認しています…';
-        bindPlayerLinks({ ...match, ...row }); bindLineupDetailToggle();
       });
       if (!detailSlot.isConnected || sheetContent.querySelector('#official-detail-content') !== detailSlot) return;
       const record = payload?.data?.[0];
@@ -11944,18 +11983,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         const combined = payload.stale && current ? { ...record, home_score: current.home_score, away_score: current.away_score, pk: current.pk, status: current.status } : record;
         mergeOfficialResults([combined]);
         syncResultsToLocalStorage([combined]);
-        detailSlot.innerHTML = renderOfficialInfo({ ...match, ...record }) + renderMatchMembers({ ...match, ...record });
-        bindPlayerLinks({ ...match, ...record });
-        bindLineupDetailToggle();
+        updateDetailPanels(combined);
       }
       const message = record ? `${payload.stale ? '保存済みの詳細' : '公式詳細'} ／ 取得: ${new Date(payload.fetchedAt).toLocaleString('ja-JP')}` : payload ? payload.error || '詳細を取得できませんでした' : 'この試合の公式詳細はまだ取得対象にありません';
       detailStatus.textContent = message;
       if (payload) {
         const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = '詳細を更新';
-        retry.onclick = () => fetchDetail(true); detailStatus.appendChild(retry);
+        retry.onclick = () => refreshDetail(true); detailStatus.appendChild(retry);
       }
     };
-    void fetchDetail();
+    const refreshDetail = (force = false) => fetchDetail(force).catch(() => {
+      if (detailStatus.isConnected) detailStatus.textContent = '詳細を更新できませんでした。取得済みの記録を表示しています。';
+    });
+    void refreshDetail();
 
     // Use the unified weather helper
     const wBox = sheetContent.querySelector("#u-auto-weather-area");
