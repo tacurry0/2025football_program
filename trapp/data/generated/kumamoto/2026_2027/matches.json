@@ -214,5 +214,32 @@
     "competition_id": "j3",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026091803",
+    "url": "https://www.jleague.jp/match/j3/2026/091803",
+    "season": "2027",
+    "competition": "明治安田J3リーグ",
+    "section": "第7節",
+    "date": "2026-09-18",
+    "kickoff": "19:03",
+    "stadium": "えがお健康スタジアム",
+    "attendance": 3485,
+    "weather": "曇り",
+    "home_team": "ロアッソ熊本",
+    "away_team": "松本山雅FC",
+    "home_score": 0,
+    "away_score": 0,
+    "target_team": "ロアッソ熊本",
+    "target_side": "home",
+    "opponent": "松本山雅FC",
+    "target_score": 0,
+    "opponent_score": 0,
+    "result": "draw",
+    "points": 1,
+    "season_id": "2026_2027",
+    "competition_id": "j3",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]

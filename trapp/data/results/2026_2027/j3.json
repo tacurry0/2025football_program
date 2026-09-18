@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-17T23:38:58.265994+00:00",
+  "fetchedAt": "2026-09-18T16:41:47.922251+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -856,9 +856,9 @@
       "section": 7,
       "home": "FC大阪",
       "away": "福島ユナイテッドFC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 4,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/091802"
     },
     {
@@ -870,9 +870,9 @@
       "section": 7,
       "home": "ロアッソ熊本",
       "away": "松本山雅FC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/091803"
     },
     {
