@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v104-compact-members';
+const cacheName = 'football-app-v105-standings';
 const assetsToCache = [
   "./",
   "./index.html",
@@ -7,6 +7,7 @@ const assetsToCache = [
   "./script.js",
   "./league-data.js",
   "./league-ui.js",
+  "./standings-view.css",
   "./ui-v6.js",
   "./ui-v6.css",
   "./features.css",

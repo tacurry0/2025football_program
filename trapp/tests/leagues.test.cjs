@@ -151,12 +151,12 @@ test('main score sync preserves notes/attendance, matches competition and skips 
   assert.equal(store.getItem('score_my_'+id),'0'); assert.equal(store.getItem('memo_'+id),'keep'); assert.equal(store.getItem('att_'+id),'true');
 });
 
-test('standings renderer exposes J2/J3 controls, real timestamps, draw column and escaped names', () => {
-  const buttons = {}, container = { innerHTML:'', classList:{toggle(){}}, querySelector:s => buttons[s] ||= {}, querySelectorAll:()=>[] };
-  const c=vm.createContext({window:{},Date}); vm.runInContext(read('league-ui.js'),c);
+test('standings renderer exposes J2/J3 and basic/detail controls without losing records or escaping', () => {
+  const buttons = {}, container = { innerHTML:'', dataset:{}, isConnected:false, classList:{toggle(){}}, querySelector:s => buttons[s] ||= {}, querySelectorAll:()=>[] };
+  const c=vm.createContext({window:{},Date,fetch:async()=>({ok:true,json:async()=>({data:[]})})}); vm.runInContext(read('league-ui.js'),c);
   const data=snapshot('standings'); data.data[0].team='<img onerror=bad>';
   c.window.TrappStandings.render(container,{sources:{j2:data}});
-  assert.match(container.innerHTML,/data-league="j3"/); assert.match(container.innerHTML,/data-sort="drawn"/);
+  assert.match(container.innerHTML,/data-league="j3"/); assert.match(container.innerHTML,/data-display="detail"/); assert.match(container.innerHTML,/分/);
   assert.ok(container.innerHTML.includes('&lt;img onerror=bad&gt;')); assert.ok(!container.innerHTML.includes('<img onerror=bad>'));
   assert.ok(!container.innerHTML.includes('PK勝')); assert.ok(!container.innerHTML.includes('取得日時不明'));
 });

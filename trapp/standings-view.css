@@ -1,0 +1,100 @@
+/* Approved standings layout: all rules stay inside the existing standings screen. */
+#standings-view { background:#f2f4f7; padding:calc(18px + env(safe-area-inset-top)) 14px calc(114px + env(safe-area-inset-bottom)); }
+#standings-view .app-page-shell { gap:14px; }
+#standings-view .standings-container { padding:0; border-radius:10px; overflow:hidden; background:white; box-shadow:0 4px 15px #14223608; backdrop-filter:none; -webkit-backdrop-filter:none; }
+#standings-content { --st-accent:#ef6200; --st-dark:#061b34; color:#15202d; font-family:'Noto Sans JP',sans-serif; }
+#standings-content[data-club="kumamoto"] { --st-accent:#e60016; --st-dark:#101316; }
+#standings-content *,#standings-content *::before,#standings-content *::after { box-sizing:border-box; }
+#standings-content [hidden] { display:none!important; }
+#standings-content button,#standings-content select { font-family:inherit; cursor:pointer; }
+#standings-content button:focus-visible,#standings-content select:focus-visible { outline:2px solid #397cec; outline-offset:-2px; }
+#standings-content .st-controls { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px; }
+#standings-content .st-controls label { display:flex; gap:9px; align-items:center; min-width:0; font-size:12px; }
+#standings-content .st-controls select { min-width:0; width:100%; max-width:240px; padding:9px 24px 9px 10px; height:40px; border:1px solid #d4dbe3; border-radius:7px; background:#fff; color:#172435; font-size:12px; }
+#standings-content .st-refresh { display:grid; place-items:center; width:40px; height:40px; flex-shrink:0; padding:9px; color:#172435; border:1px solid #d4dbe3; border-radius:7px; background:white; }
+#standings-content .st-refresh svg { width:22px; height:22px; }
+#standings-content .st-refresh:disabled { opacity:.45; cursor:default; }
+#standings-content .st-refresh.is-loading svg { animation:st-refresh-spin 1s linear infinite; }
+#standings-content .st-leagues { display:flex; padding:0 12px 10px; }
+#standings-content .st-leagues button { position:relative; flex:1; border:0; border-bottom:1px solid #dbe1e7; padding:10px; min-height:42px; color:#4f5c6c; background:white; font:700 19px/1.3 JLeagueKick,Outfit,sans-serif; }
+#standings-content .st-leagues button[aria-pressed="true"] { color:var(--st-accent); }
+#standings-content .st-leagues button[aria-pressed="true"]::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:3px; background:var(--st-accent); }
+#standings-content .st-summary { position:relative; isolation:isolate; overflow:hidden; padding:16px 16px 13px; color:white; background:var(--st-dark); }
+#standings-content .st-summary::before { content:''; position:absolute; inset:0; background:var(--st-accent); clip-path:polygon(0 0,26% 0,4% 100%,0 100%); z-index:-2; }
+#standings-content .st-summary::after { content:''; position:absolute; inset:0; background:url('./data/assets/home/poster-grain.svg') center/460px 280px; opacity:.36; z-index:-1; pointer-events:none; }
+#standings-content .st-watermark { position:absolute; width:48%; height:155%; object-fit:contain; right:-5%; top:-23%; opacity:.1; z-index:-1; pointer-events:none; }
+#standings-content .st-summary-main { display:flex; gap:12px; align-items:center; }
+#standings-content .st-summary-crest { width:40px; height:49px; object-fit:contain; flex-shrink:0; }
+#standings-content .st-summary-rank { min-width:50px; }
+#standings-content .st-summary-rank > span { font-size:12px; font-weight:700; }
+#standings-content .st-summary-rank > div { display:flex; align-items:baseline; gap:4px; }
+#standings-content .st-summary-rank strong { font:700 35px/1.1 JLeagueKick,Outfit,sans-serif; }
+#standings-content .st-summary-rank small { font-size:12px; }
+#standings-content .st-summary-points { display:flex; gap:5px; align-items:baseline; border-left:1px solid #ffffff60; padding-left:13px; margin-left:auto; white-space:nowrap; }
+#standings-content .st-summary-points span { font-size:12px; }
+#standings-content .st-summary-points strong { font:700 31px/1.2 JLeagueKick,Outfit,sans-serif; }
+#standings-content .st-summary-gap { border-left:1px solid #ffffff60; padding-left:12px; font-size:12px; font-weight:700; }
+#standings-content .st-summary-form { display:flex; align-items:center; gap:8px; padding-left:52px; margin-top:8px; font-size:11px; }
+#standings-content .st-form { display:inline-flex; gap:3px; align-items:center; white-space:nowrap; }
+#standings-content .st-result { font:500 15px/1.2 sans-serif; }
+#standings-content .st-form-empty { font-size:10px; opacity:.65; }
+#standings-content .st-table-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px; }
+#standings-content .st-table-toolbar h2 { margin:0; font-size:16px; color:#101820; line-height:1.5; }
+#standings-content .st-display { display:flex; border:1px solid #d9dfe6; border-radius:7px; overflow:hidden; }
+#standings-content .st-display button { border:0; background:white; padding:7px 16px; min-height:36px; font-size:12px; color:#506071; }
+#standings-content .st-display button[aria-pressed="true"] { background:#10151d; color:#fff; border-radius:6px; }
+#standings-content .st-notice { margin:0; padding:9px 12px; background:#fff8e8; color:#795829; font-size:11px; line-height:1.7; }
+#standings-content .st-group-heading { margin:0; padding:10px 12px; background:#eff2f6; font-size:14px; }
+#standings-content .st-table { border-collapse:collapse; table-layout:fixed; width:100%; margin:0; border:0; font-variant-numeric:tabular-nums; }
+#standings-content .st-col-rank { width:10%; }
+#standings-content .st-col-team { width:47%; }
+#standings-content .st-col-points { width:15%; }
+#standings-content .st-col-played { width:14%; }
+#standings-content .st-col-diff { width:14%; }
+#standings-content .st-table th { padding:0; background:#f1f3f6; color:#677181; text-align:center; border:0; }
+#standings-content .st-table th:nth-child(2) { text-align:left; padding-left:8px; }
+#standings-content .st-table th button { border:0; width:100%; padding:10px 0; background:none; font-size:11px; color:inherit; font-weight:600; text-align:inherit; white-space:nowrap; }
+#standings-content .st-table th button span { font-size:9px; }
+#standings-content .st-table td { padding:6px 3px; height:46px; border:0; border-bottom:1px solid #e6eaf0; text-align:center; vertical-align:middle; font:500 15px/1.4 Outfit,'Noto Sans JP',sans-serif; }
+#standings-content .st-table td.st-team { text-align:left; padding:6px 5px 6px 8px; }
+#standings-content .st-table td.st-rank { font:700 21px/1.2 JLeagueKick,Outfit,sans-serif; }
+#standings-content .st-team-link { display:flex; align-items:center; gap:8px; width:100%; min-width:0; padding:0; border:0; background:none; color:inherit; text-align:left; font:700 14px/1.5 'Noto Sans JP',sans-serif; }
+#standings-content .st-team-link img { width:26px; height:29px; flex:0 0 26px; object-fit:contain; }
+#standings-content .st-team-link span { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+#standings-content .st-points strong { display:grid; place-items:center; min-height:32px; border-radius:5px; background:linear-gradient(90deg,#19283b05 var(--points-fill),transparent var(--points-fill)); font:700 22px/1.2 JLeagueKick,Outfit,sans-serif; }
+#standings-content .st-own.st-niigata { background:#fff0e5; --row-accent:#d95000; }
+#standings-content .st-own.st-kumamoto { background:#ffedf0; --row-accent:#d6001a; }
+#standings-content .st-own .st-rank { box-shadow:inset 3px 0 var(--row-accent); color:var(--row-accent); }
+#standings-content .st-own .st-team-link,#standings-content .st-own .st-points { color:var(--row-accent); }
+#standings-content .st-detail { margin-top:3px; }
+#standings-content .st-row-form { min-height:17px; padding-left:34px; }
+#standings-content .st-record { display:block; font:500 9px/1.7 'Noto Sans JP',sans-serif; color:#566171; overflow-wrap:anywhere; }
+#standings-content .st-record > span { display:inline; }
+#standings-content.st-expanded .st-table td { padding-top:9px; padding-bottom:9px; }
+#standings-content .st-form-legend { margin:0; padding:14px 12px; font-size:11px; line-height:1.8; color:#5f6c7c; }
+#standings-content .st-form-legend > span { font-size:10px; }
+#standings-content .st-empty { padding:25px 15px; font-size:13px; line-height:1.8; color:#687589; }
+#standings-content .st-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+@keyframes st-refresh-spin { to { transform:rotate(360deg); } }
+@media(min-width:600px) {
+ #standings-content .st-controls,#standings-content .st-table-toolbar { padding:14px 18px; }
+ #standings-content .st-summary { padding:18px 24px 14px; }
+ #standings-content .st-summary-main { gap:20px; }
+ #standings-content .st-summary-points { margin-left:20px; }
+ #standings-content .st-summary-gap { margin-left:auto; }
+ #standings-content .st-record > span { display:inline; }
+ #standings-content .st-table td { height:50px; }
+ #standings-content .st-team-link { font-size:15px; }
+}
+@media(max-width:350px) {
+ #standings-view { padding-left:8px; padding-right:8px; }
+ #standings-content .st-summary { padding:12px 10px; }
+ #standings-content .st-summary-main { gap:8px; }
+ #standings-content .st-summary-points,#standings-content .st-summary-gap { padding-left:8px; }
+ #standings-content .st-summary-gap { font-size:10px; }
+ #standings-content .st-summary-crest { width:32px; }
+ #standings-content .st-team-link { gap:5px; font-size:12px; }
+ #standings-content .st-team-link img { width:23px; flex-basis:23px; }
+ #standings-content .st-detail { padding-left:0; }
+}
+@media(prefers-reduced-motion:reduce) { #standings-content .st-refresh.is-loading svg { animation:none; } }
