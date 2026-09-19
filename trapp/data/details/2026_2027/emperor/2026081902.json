@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "emperor",
-  "fetchedAt": "2026-09-19T16:02:16.391573+00:00",
+  "fetchedAt": "2026-09-19T23:29:07.081845+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 66,
       "source_url": "https://www.jleague.jp/match/emperor/2026/081902",
       "j_official_url": "https://www.jleague.jp/match/emperor/2026/081902",
-      "detail_fetched_at": "2026-09-19T16:02:16.391573+00:00",
+      "detail_fetched_at": "2026-09-19T23:29:07.081845+00:00",
       "home_starting_members": [
         {
           "name": "バーンズ アントン",
@@ -143,36 +143,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "73",
-          "in": "",
-          "out": "ムン ミン"
-        },
-        {
-          "minute": "87",
-          "in": "",
-          "out": "東條 敦輝"
-        },
-        {
-          "minute": "73",
-          "in": "",
-          "out": "清水 祐輔"
-        },
-        {
-          "minute": "91",
-          "in": "",
-          "out": "橋本 清太郎"
-        },
-        {
-          "minute": "76",
-          "in": "",
-          "out": "藤田 一途"
-        },
-        {
-          "minute": "76",
-          "in": "",
-          "out": "小西 陽向"
-        },
-        {
           "minute": "76",
           "in": "荒井 涼",
           "out": ""
@@ -201,6 +171,36 @@
           "minute": "73",
           "in": "篠田 大輝",
           "out": ""
+        },
+        {
+          "minute": "73",
+          "in": "",
+          "out": "ムン ミン"
+        },
+        {
+          "minute": "87",
+          "in": "",
+          "out": "東條 敦輝"
+        },
+        {
+          "minute": "73",
+          "in": "",
+          "out": "清水 祐輔"
+        },
+        {
+          "minute": "91",
+          "in": "",
+          "out": "橋本 清太郎"
+        },
+        {
+          "minute": "76",
+          "in": "",
+          "out": "藤田 一途"
+        },
+        {
+          "minute": "76",
+          "in": "",
+          "out": "小西 陽向"
         }
       ],
       "home_cards": [],
@@ -343,36 +343,6 @@
       "away_substitutions": [
         {
           "minute": "91",
-          "in": "",
-          "out": "黒木 晃平"
-        },
-        {
-          "minute": "80",
-          "in": "",
-          "out": "長嶋 志歩"
-        },
-        {
-          "minute": "63",
-          "in": "",
-          "out": "渡邉 怜歩"
-        },
-        {
-          "minute": "46",
-          "in": "",
-          "out": "松田 詠太郎"
-        },
-        {
-          "minute": "63",
-          "in": "",
-          "out": "根岸 恵汰"
-        },
-        {
-          "minute": "80",
-          "in": "",
-          "out": "石原 央羅"
-        },
-        {
-          "minute": "91",
           "in": "大西 遼太郎",
           "out": ""
         },
@@ -400,6 +370,36 @@
           "minute": "46",
           "in": "大本 祐槻",
           "out": ""
+        },
+        {
+          "minute": "91",
+          "in": "",
+          "out": "黒木 晃平"
+        },
+        {
+          "minute": "80",
+          "in": "",
+          "out": "長嶋 志歩"
+        },
+        {
+          "minute": "63",
+          "in": "",
+          "out": "渡邉 怜歩"
+        },
+        {
+          "minute": "46",
+          "in": "",
+          "out": "松田 詠太郎"
+        },
+        {
+          "minute": "63",
+          "in": "",
+          "out": "根岸 恵汰"
+        },
+        {
+          "minute": "80",
+          "in": "",
+          "out": "石原 央羅"
         }
       ],
       "away_cards": [],

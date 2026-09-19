@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "emperor",
-  "fetchedAt": "2026-09-19T16:02:16.391573+00:00",
+  "fetchedAt": "2026-09-19T23:29:07.081845+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 83,
       "source_url": "https://www.jleague.jp/match/emperor/2026/082624",
       "j_official_url": "https://www.jleague.jp/match/emperor/2026/082624",
-      "detail_fetched_at": "2026-09-19T16:02:16.391573+00:00",
+      "detail_fetched_at": "2026-09-19T23:29:07.081845+00:00",
       "home_starting_members": [
         {
           "name": "内山 翔太",
