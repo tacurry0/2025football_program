@@ -10524,64 +10524,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `<section class="detail-goals"><h4>得点</h4><div class="detail-goals-grid">${goals.map((list, index) => `<div><span class="detail-side-label">${index === 0 ? 'HOME' : 'AWAY'}</span>${Array.isArray(list) && list.length ? list.map(goal => `<p><span>${escapeHtml(String(goal.minute ?? '').replace(/[’′'分]/g, ''))}′</span><strong>${escapeHtml(goal.scorer || goal.player || '得点者不明')}</strong></p>`).join('') : '<p class="detail-empty">—</p>'}</div>`).join('')}</div></section>`;
   }
 
-  function renderOfficialInfo(match) {
-    const refs = match.referees || {};
-    const varAvar = splitOfficialNames(refs["VAR／AVAR"] || refs["VAR/AVAR"] || refs.var_avar);
-    const assistantReferees = Array.isArray(match.assistant_referees)
-      ? match.assistant_referees.join(" / ")
-      : (match.assistant_referees || refs["副審"] || "");
-    const temperature = match.temperature !== undefined && match.temperature !== null && match.temperature !== "" ? `${match.temperature}℃` : "";
-    const humidity = match.humidity !== undefined && match.humidity !== null && match.humidity !== "" ? `${match.humidity}%` : "";
-    const attendanceNumber = Number(String(match.attendance || "").replace(/,/g, ""));
-    const attendance = match.attendance !== undefined && match.attendance !== null && match.attendance !== ""
-      ? `${Number.isFinite(attendanceNumber) ? attendanceNumber.toLocaleString("ja-JP") : String(match.attendance)}人`
-      : "";
-
-    const conditionItems = [
-      ["天候", match.weather],
-      ["気温", temperature],
-      ["湿度", humidity],
-      ["入場者", attendance]
-    ].filter(([, value]) => value !== undefined && value !== null && value !== "");
-    const officialItems = [
-      ["主審", match.referee || refs["主審"]],
-      ["副審", assistantReferees],
-      ["第4の審判員", match.fourth_official || refs["第4の審判員"]],
-      ["VAR", match.var_referee || refs.VAR || varAvar[0]],
-      ["AVAR", match.avar_referee || refs.AVAR || varAvar[1]]
-    ].filter(([, value]) => value !== undefined && value !== null && value !== "");
-    const groups = [
-      ["CONDITION", conditionItems],
-      ["OFFICIALS", officialItems]
-    ].filter(([, items]) => items.length);
-
-    if (!groups.length && !match.j_official_url) return "";
-
-    return `
-      <section class="match-facts-strip">
-        <div class="match-facts-head">
-          <h4>公式記録</h4>
-          ${match.j_official_url ? `<a class="u-official-link" href="${escapeHtml(match.j_official_url)}" target="_blank" rel="noopener">J.LEAGUE DATA</a>` : ""}
-        </div>
-        <div class="match-facts-groups">
-          ${groups.map(([groupLabel, items]) => `
-            <div class="match-facts-group">
-              <span class="match-facts-group-label">${escapeHtml(groupLabel)}</span>
-              <div class="match-facts-row">
-                ${items.map(([label, value]) => `
-                  <div class="match-fact-item">
-                    <span>${escapeHtml(label)}</span>
-                    <strong>${formatRecordValue(value)}</strong>
-                  </div>
-                `).join("")}
-              </div>
-            </div>
-          `).join("")}
-        </div>
-      </section>
-    `;
-  }
-
   function renderMemberList(title, members, type, clickable = true) {
     if (!Array.isArray(members) || !members.length) return "";
     const rows = members.map(member => {
@@ -11807,6 +11749,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         competitionLabel:({j1:'J1リーグ',j2:'J2リーグ',j3:'J3リーグ',leaguecup:'ルヴァンカップ',emperor:'天皇杯',j2j3:'百年構想リーグ'})[competition] || getCompetitionShort(data.competition || data.tournament || ''),
         roundLabel:formatVisionRoundLabel(data), pkLabel:pkPair ? `PK ${pkPair.join(' - ')}` : '' };
     };
+    const reportOverview = data => `<section class="report-facts" aria-label="公式記録">${report.conditions(data)}${report.officials(data)}
+      ${match.club === 'niigata' && getMatchIsHome(match) ? '<button type="button" class="u-vision-open-btn" id="detail-vision-preview">ビジョンプレビュー</button>' : ''}</section>${report.timeline(data,true)}`;
     let currentDetailData = detailData;
     const initialReport = reportData(detailData);
     detailSheet.dataset.club = match.club;
@@ -11820,7 +11764,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <button type="button" id="detail-tab-members" role="tab" aria-selected="false" aria-controls="detail-panel-members" tabindex="-1" data-detail-tab="members">出場選手</button>
       </div>
       <section id="detail-panel-overview" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-overview">
-        <div id="official-detail-content">${report.conditions(initialReport)}${report.timeline(initialReport,true)}</div>
+        <div id="official-detail-content">${reportOverview(initialReport)}</div>
         <section id="u-auto-weather-area" class="u-weather-card" style="display:none;">
           <div><span>予報</span><div id="u-weather-display"><span class="w-icon">-</span></div></div>
           <div class="u-weather-temps"><span id="u-temp-max">-</span><small>℃</small><em>/</em><span id="u-temp-min">-</span><small>℃</small></div>
@@ -11833,12 +11777,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="u-memo-display" id="memo-display"></div>
           <textarea class="u-textarea memo-field hidden" aria-label="観戦メモ" placeholder="メモを追加">${escapeHtml(sMemo)}</textarea>
         </section>
-        <details class="report-officials"><summary>審判・公式記録 <span aria-hidden="true">↗　›</span></summary><div id="report-official-content">${renderOfficialInfo(detailData)}</div>
-          ${match.club === 'niigata' && getMatchIsHome(match) ? '<button type="button" class="u-vision-open-btn" id="detail-vision-preview">ビジョンプレビュー</button>' : ''}
-        </details>
       </section>
       <section id="detail-panel-timeline" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-timeline" hidden><div id="report-timeline-content">${report.timeline(initialReport)}</div></section>
-      <section id="detail-panel-members" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-members" hidden><div id="official-members-content">${report.members(initialReport)}</div></section>
+      <section id="detail-panel-members" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-members" data-details="off" hidden><div class="report-members-toolbar"><button type="button" role="switch" aria-label="選手の詳細表示" aria-checked="false" data-member-details><span>詳細</span><strong>OFF</strong></button></div><div id="official-members-content">${report.members(initialReport)}</div></section>
       <details class="report-update"><summary>データ更新</summary><div class="official-detail-status" role="status" id="official-detail-status"></div></details>
     `;
 
@@ -11873,15 +11814,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       currentDetailData = { ...match, ...record };
       const data = reportData(currentDetailData);
       sheetContent.querySelector('#report-header-content').innerHTML = report.header(data);
-      sheetContent.querySelector('#official-detail-content').innerHTML = report.conditions(data) + report.timeline(data,true);
+      sheetContent.querySelector('#official-detail-content').innerHTML = reportOverview(data);
       sheetContent.querySelector('#report-timeline-content').innerHTML = report.timeline(data);
-      sheetContent.querySelector('#report-official-content').innerHTML = renderOfficialInfo(currentDetailData);
       sheetContent.querySelector('#official-members-content').innerHTML = report.members(data);
       bindPlayerLinks(currentDetailData);
       bindReportActions();
     };
     bindPlayerLinks(detailData);
     bindReportActions();
+    report.mountMembers(sheetContent);
     const detailSlot = sheetContent.querySelector('#official-detail-content');
     const detailStatus = sheetContent.querySelector('#official-detail-status');
     const fetchDetail = async (force = false) => {

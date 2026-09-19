@@ -51,6 +51,55 @@
     if(![m.weather,m.temperature,m.humidity,m.attendance].some(has))return '';
     return `<section class="report-conditions" aria-label="試合当日の天候と入場者数"><div>${has(m.weather)||has(m.temperature) ? `<p>${cloud}<span>${esc(m.weather || '気温')}</span>${has(m.temperature) ? `<strong>${esc(m.temperature)}<small>℃</small></strong>` : ''}</p>` : ''}${has(m.humidity) ? `<p>${drop}<span>湿度</span><strong>${esc(m.humidity)}<small>%</small></strong></p>` : ''}</div>${has(m.attendance) ? `<div><p>${people}<span>入場者</span><strong>${esc(Number.isFinite(attendance) ? attendance.toLocaleString('ja-JP') : m.attendance)}<small>人</small></strong></p></div>` : ''}</section>`;
   }
+  function officials(m) {
+    const refs = m.referees || {};
+    const text = v => Array.isArray(v) ? v.join(' / ') : v;
+    const varPair = String(text(refs['VAR／AVAR'] || refs['VAR/AVAR'] || refs.var_avar) || '').split(/[、,／/]/).map(v=>v.trim());
+    const rows = [
+      ['主審',m.referee || refs['主審']],
+      ['副審',m.assistant_referees || refs['副審']],
+      ['第4の審判員',m.fourth_official || refs['第4の審判員']],
+      ['VAR',m.var_referee || refs.VAR || varPair[0]],
+      ['AVAR',m.avar_referee || refs.AVAR || varPair[1]]
+    ].filter(([,value])=>text(value));
+    const url = m.j_official_url || m.source_url || '';
+    const link = /^https?:\/\//i.test(url) ? `<a href="${esc(url)}" target="_blank" rel="noopener">公式記録 <span aria-hidden="true">↗</span></a>` : '';
+    return `<div class="report-officials"><dl>${rows.length ? rows.map(([label,value])=>`<div><dt>${label}</dt><dd>${esc(text(value))}</dd></div>`).join('') : '<div><dt>審判</dt><dd class="report-unavailable">未取得</dd></div>'}</dl>${link}</div>`;
+  }
+  // One observer set per open sheet; refreshes also cover async records and font loading.
+  let disposeMembers = null;
+  function mountMembers(container) {
+    if (disposeMembers) disposeMembers();
+    const panel = container.querySelector('#detail-panel-members');
+    const toggle = panel.querySelector('[data-member-details]');
+    let frame = 0, disposed = false;
+    const measure = () => {
+      frame = 0;
+      if (disposed || !panel.isConnected || panel.hidden) return;
+      panel.querySelectorAll('.report-name-text').forEach(name => {
+        const viewport = name.parentElement;
+        const distance = panel.dataset.details === 'off' ? Math.max(0, name.scrollWidth - viewport.clientWidth) : 0;
+        name.style.setProperty('--name-distance', `${-distance}px`);
+        name.style.setProperty('--name-duration', `${Math.max(7, distance / 18 + 4)}s`);
+        name.classList.toggle('is-overflowing', distance > 1);
+      });
+    };
+    const schedule = () => { if (!disposed && !frame) frame = requestAnimationFrame(measure); };
+    toggle.onclick = () => {
+      const enabled = panel.dataset.details !== 'on';
+      panel.dataset.details = enabled ? 'on' : 'off';
+      toggle.setAttribute('aria-checked', String(enabled));
+      toggle.querySelector('strong').textContent = enabled ? 'ON' : 'OFF';
+      schedule();
+    };
+    const resize = new ResizeObserver(schedule);
+    resize.observe(panel);
+    const changes = new MutationObserver(schedule);
+    changes.observe(panel.querySelector('#official-members-content'), {childList:true,subtree:true});
+    document.fonts?.ready.then(schedule);
+    schedule();
+    disposeMembers = () => { disposed = true; cancelAnimationFrame(frame); resize.disconnect(); changes.disconnect(); };
+  }
   function playerEvents(team, name) {
     const same = n => cleanName(n) === cleanName(name);
     return [
@@ -63,7 +112,7 @@
   function memberCell(member, team) {
     if(!member)return '<td class="report-player-cell empty"><span aria-label="登録なし">—</span></td>';
     const name = typeof member === 'string' ? member : member.name || '';
-    const player = team.own ? `<button type="button" class="u-player-link" data-player="${esc(name)}">${esc(name)}</button>` : `<span class="u-member-static">${esc(name)}</span>`;
+    const player = team.own ? `<button type="button" class="u-player-link" data-player="${esc(name)}"><span class="report-name-text">${esc(name)}</span></button>` : `<span class="u-member-static"><span class="report-name-text">${esc(name)}</span></span>`;
     return `<td class="report-player-cell"><div class="report-player"><span class="report-position">${esc(member.position || '')}</span><strong class="report-number">${esc(member.number ?? '')}</strong><div class="report-player-name">${player}<span class="report-player-events">${playerEvents(team,name).map(event=>`<span>${icon(event.kind)}<time>${stamp(event.minute)}</time></span>`).join('')}</span></div></div></td>`;
   }
   function members(m) {
@@ -77,7 +126,7 @@
     return `<header class="report-hero">${m.ownHome ? emblem(m.home_emblem,"","report-watermark") : emblem(m.away_emblem,"","report-watermark")}<div class="report-title"><h2>試合詳細</h2><button type="button" id="detail-sheet-close" aria-label="試合詳細を閉じる">×</button></div><div class="report-competition">${esc(m.competitionLabel)} <span>${esc(m.roundLabel)}</span></div><div class="report-scoreboard">${teamHero(teams[0])}<div class="report-scorebox"><div class="match-detail-score"><strong>${esc(m.home_score ?? '—')}</strong><span>:</span><strong>${esc(m.away_score ?? '—')}</strong></div><small class="match-detail-pk" ${m.pkLabel?'':'hidden'}>${esc(m.pkLabel)}</small></div>${teamHero(teams[1])}</div><div class="report-match-meta"><span class="report-compact-round">${esc(m.roundLabel)} · </span><time>${esc(date)}${m.day ? ' '+esc(m.day) : ''}　${esc(m.time || '')}</time><strong>${esc(m.venue || '会場未定')}</strong></div></header>`;
   }
   function teamHero(team) {return `<div class="report-hero-team">${emblem(team.emblem,team.name)}<small>${team.side.toUpperCase()}</small><strong>${esc(team.name)}</strong></div>`;}
-  const api = {sides,events,timeline,conditions,members,header};
+  const api = {sides,events,timeline,conditions,officials,members,header,mountMembers};
   if(typeof module!=='undefined' && module.exports) module.exports=api;
   else root.TrappMatchReport=api;
 })(typeof window!=='undefined' ? window : this);

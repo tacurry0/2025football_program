@@ -97,10 +97,15 @@
 #detail-sheet .u-memo-display { margin-top:14px; min-height:30px; padding:0; font-size:13px; line-height:1.8; white-space:pre-wrap; overflow-wrap:anywhere; background:none; border:0; }
 #detail-sheet .u-memo-display:empty::before { content:'メモを追加'; color:#99a7b9; }
 #detail-sheet .memo-field { margin-top:12px; }
-#detail-sheet .report-officials { border-bottom:1px solid #d4dce4; }
-#detail-sheet .report-officials > summary { display:flex; justify-content:space-between; list-style:none; padding:22px 2px; font-weight:700; font-size:16px; cursor:pointer; }
-#detail-sheet .report-officials > summary::-webkit-details-marker { display:none; }
-#detail-sheet .report-officials[open] > summary { padding-bottom:8px; }
+#detail-sheet .report-facts { border-bottom:1px solid #d4dce4; padding-bottom:15px; }
+#detail-sheet .report-facts .report-conditions { border-bottom:0; padding-bottom:12px; }
+#detail-sheet .report-officials { padding:10px 9px 0; }
+#detail-sheet .report-officials dl { margin:0; display:grid; gap:6px; }
+#detail-sheet .report-officials dl > div { display:grid; grid-template-columns:90px minmax(0,1fr); gap:8px; font-size:12px; line-height:1.7; }
+#detail-sheet .report-officials dt { color:#68768a; }
+#detail-sheet .report-officials dd { margin:0; font-weight:600; overflow-wrap:anywhere; }
+#detail-sheet .report-officials .report-unavailable { color:#8994a2; font-weight:400; }
+#detail-sheet .report-officials > a { display:block; width:fit-content; margin:9px 0 0 auto; color:#38475a; font-size:12px; text-decoration:none; padding:5px 0; }
 #detail-sheet .match-facts-strip { background:none; box-shadow:none; border:0; border-radius:0; }
 #detail-sheet .report-update { margin:12px 16px 0; color:#7b8797; font-size:10px; }
 #detail-sheet .report-update summary { cursor:pointer; }
@@ -158,3 +163,28 @@
   #detail-sheet .report-conditions strong { font-size:17px; }
 }
 @media (prefers-reduced-motion:reduce) { #detail-sheet,#detail-sheet .match-detail-panel { animation:none; transition:none; } }
+
+/* Compact lineups retain one fixed-height row per player on both sides. */
+#detail-sheet .report-members-toolbar { display:flex; justify-content:flex-end; padding-top:10px; }
+#detail-sheet [data-member-details] { display:flex; align-items:center; gap:9px; min-height:36px; padding:4px 10px; border:1px solid #cbd5df; border-radius:6px; background:#fff; color:#38475a; font:600 12px/1.5 'Noto Sans JP',sans-serif; cursor:pointer; }
+#detail-sheet [data-member-details] strong { padding:2px 7px; border-radius:4px; background:#edf1f5; font:700 12px/1.5 Outfit,sans-serif; }
+#detail-sheet [data-member-details][aria-checked="true"] strong { background:var(--detail-accent); color:white; }
+#detail-sheet [data-details="off"] .report-player-events,
+#detail-sheet [data-details="off"] .report-legend { display:none; }
+#detail-sheet [data-details="off"] .report-player { align-items:center; height:24px; }
+#detail-sheet [data-details="off"] .report-player-name > .u-player-link,
+#detail-sheet [data-details="off"] .report-player-name > .u-member-static { overflow:hidden; white-space:nowrap; overflow-wrap:normal; height:24px; }
+#detail-sheet [data-details="off"] .report-name-text { display:block; width:max-content; white-space:nowrap; }
+#detail-sheet [data-details="off"] .report-name-text.is-overflowing { animation:report-name-scroll var(--name-duration,8s) linear infinite; }
+#detail-sheet [data-details="off"] .report-player-name:hover .report-name-text,
+#detail-sheet [data-details="off"] .report-player-name:focus-within .report-name-text { animation-play-state:paused; }
+@keyframes report-name-scroll {
+  0%,20% { transform:translateX(0); }
+  70%,90% { transform:translateX(var(--name-distance)); }
+  100% { transform:translateX(0); }
+}
+@media (prefers-reduced-motion:reduce) {
+  #detail-sheet [data-details="off"] .report-name-text.is-overflowing { animation:none; }
+  #detail-sheet [data-details="off"] .report-player-name > .u-player-link,
+  #detail-sheet [data-details="off"] .report-player-name > .u-member-static { overflow-x:auto; scrollbar-width:none; }
+}
