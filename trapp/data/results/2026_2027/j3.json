@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-18T23:33:21.350276+00:00",
+  "fetchedAt": "2026-09-19T16:02:16.391573+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -884,9 +884,9 @@
       "section": 7,
       "home": "愛媛FC",
       "away": "カマタマーレ讃岐",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/091918"
     },
     {
@@ -898,9 +898,9 @@
       "section": 7,
       "home": "ザスパ群馬",
       "away": "高知ユナイテッドSC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/091919"
     },
     {
@@ -912,9 +912,9 @@
       "section": 7,
       "home": "ガイナーレ鳥取",
       "away": "奈良クラブ",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 3,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/091920"
     },
     {
@@ -926,9 +926,9 @@
       "section": 7,
       "home": "鹿児島ユナイテッドFC",
       "away": "栃木SC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 3,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/091921"
     },
     {

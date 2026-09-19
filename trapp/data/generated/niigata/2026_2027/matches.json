@@ -214,5 +214,32 @@
     "competition_id": "j2",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026091916",
+    "url": "https://www.jleague.jp/match/j2/2026/091916",
+    "season": "2027",
+    "competition": "明治安田J2リーグ",
+    "section": "第7節",
+    "date": "2026-09-19",
+    "kickoff": "19:03",
+    "stadium": "デンカビッグスワンスタジアム",
+    "attendance": 20708,
+    "weather": "曇り",
+    "home_team": "アルビレックス新潟",
+    "away_team": "ジュビロ磐田",
+    "home_score": 2,
+    "away_score": 1,
+    "target_team": "アルビレックス新潟",
+    "target_side": "home",
+    "opponent": "ジュビロ磐田",
+    "target_score": 2,
+    "opponent_score": 1,
+    "result": "win",
+    "points": 3,
+    "season_id": "2026_2027",
+    "competition_id": "j2",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]

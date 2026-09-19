@@ -44,6 +44,10 @@
     "player_name": "吉満 大介"
   },
   {
+    "player_key": "大澤 朋也",
+    "player_name": "大澤 朋也"
+  },
+  {
     "player_key": "大西 悠介",
     "player_name": "大西 悠介"
   },
@@ -110,5 +114,9 @@
   {
     "player_key": "藤原 奏哉",
     "player_name": "藤原 奏哉"
+  },
+  {
+    "player_key": "関口 正大",
+    "player_name": "関口 正大"
   }
 ]
