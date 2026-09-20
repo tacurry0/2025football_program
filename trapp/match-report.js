@@ -8,6 +8,25 @@
   const minuteOrder = value => { const parts = minute(value).split('+').map(Number); return Number.isFinite(parts[0]) ? parts[0] + (parts[1] || 0) / 100 : 1000; };
   const stamp = value => minute(value) ? `${esc(minute(value))}′` : '';
   const names = { 'ロアッソ熊本':'熊本', 'アルビレックス新潟':'新潟', '大分トリニータ':'大分' };
+  // Lineup headings use place names, retaining qualifiers for clubs sharing a place.
+  const lineupNames = new Map(Object.entries({
+    '北海道コンサドーレ札幌':'札幌','コンサドーレ札幌':'札幌','ヴァンラーレ八戸':'八戸',
+    'いわてグルージャ盛岡':'盛岡','ブラウブリッツ秋田':'秋田','ベガルタ仙台':'仙台',
+    'モンテディオ山形':'山形','福島ユナイテッドFC':'福島','いわきFC':'いわき',
+    '鹿島アントラーズ':'鹿島','水戸ホーリーホック':'水戸','栃木SC':'栃木SC','栃木':'栃木SC','栃木シティ':'栃木C','栃木シティFC':'栃木C',
+    'ザスパ群馬':'群馬','ザスパクサツ群馬':'群馬','浦和レッズ':'浦和','浦和レッドダイヤモンズ':'浦和',
+    'RB大宮アルディージャ':'大宮','大宮アルディージャ':'大宮','ジェフユナイテッド千葉':'千葉','ジェフユナイテッド市原・千葉':'千葉','柏レイソル':'柏',
+    'FC東京':'FC東京','東京':'FC東京','東京ヴェルディ':'東京V','FC町田ゼルビア':'町田','川崎フロンターレ':'川崎',
+    '横浜F・マリノス':'横浜FM','横浜FC':'横浜FC','横浜':'横浜FC','Y.S.C.C.横浜':'YS横浜','YSCC横浜':'YS横浜',
+    '湘南ベルマーレ':'湘南','SC相模原':'相模原','ヴァンフォーレ甲府':'甲府','松本山雅FC':'松本','AC長野パルセイロ':'長野',
+    'アルビレックス新潟':'新潟','カターレ富山':'富山','ツエーゲン金沢':'金沢','清水エスパルス':'清水','ジュビロ磐田':'磐田',
+    '藤枝MYFC':'藤枝','アスルクラロ沼津':'沼津','名古屋グランパス':'名古屋','名古屋グランパスエイト':'名古屋','FC岐阜':'岐阜',
+    '京都サンガF.C.':'京都','京都サンガFC':'京都','ガンバ大阪':'G大阪','セレッソ大阪':'C大阪','FC大阪':'FC大阪','大阪':'FC大阪',
+    'ヴィッセル神戸':'神戸','奈良クラブ':'奈良','レイラック滋賀FC':'滋賀','ガイナーレ鳥取':'鳥取','ファジアーノ岡山':'岡山',
+    'サンフレッチェ広島':'広島','レノファ山口FC':'山口','カマタマーレ讃岐':'讃岐','徳島ヴォルティス':'徳島','愛媛FC':'愛媛','FC今治':'今治',
+    '高知ユナイテッドSC':'高知','アビスパ福岡':'福岡','ギラヴァンツ北九州':'北九州','サガン鳥栖':'鳥栖','V・ファーレン長崎':'長崎',
+    'ロアッソ熊本':'熊本','大分トリニータ':'大分','テゲバジャーロ宮崎':'宮崎','鹿児島ユナイテッドFC':'鹿児島','FC琉球':'琉球','FC琉球OKINAWA':'琉球'
+  }).map(([name, short]) => [cleanName(name), short]));
   const emblem = (url, name, className = '') => url ? `<img class="${className}" src="${esc(url)}" alt="${esc(name)}" loading="eager">` : `<span class="report-emblem-placeholder ${className}">${esc(String(name).slice(0,2))}</span>`;
   const icon = (kind, label = '') => `<span class="report-event-icon ${kind}" role="img" aria-label="${esc(label || ({goal:'得点',in:'途中出場',out:'途中交代',sub:'交代',yellow:'警告',red:'退場'}[kind] || kind))}">${({goal:'⚽',in:'↑',out:'↓',sub:'⇄',yellow:'',red:''}[kind] || '')}</span>`;
   const cloud = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 18h12a4 4 0 0 0 .5-8A6 6 0 0 0 7 8a5 5 0 0 0-1 10Z"/></svg>';
@@ -118,7 +137,7 @@
   function members(m) {
     const teams = sides(m);
     if(!teams.some(t=>t.starters.length || t.bench.length))return '<p class="report-empty">出場選手はまだ取得できていません。</p>';
-    return `<section class="report-members"><table class="report-lineups"><thead><tr>${teams.map(team=>`<th scope="col" class="${team.own?'own':'opponent'}"><div>${emblem(team.emblem,team.name)}<span><strong>${esc(team.short)}</strong><small>${team.side.toUpperCase()}</small></span></div></th>`).join('')}</tr></thead>${[['先発','starters'],['控え','bench']].map(([label,key])=>`<tbody><tr class="report-lineup-label"><th colspan="2" scope="colgroup">${label}</th></tr>${Array.from({length:Math.max(...teams.map(t=>t[key].length))},(_,i)=>`<tr>${teams.map(t=>memberCell(t[key][i],t)).join('')}</tr>`).join('')}</tbody>`).join('')}<tfoot><tr>${teams.map(t=>`<td><span>監督</span> <strong>${esc(t.manager || '—')}</strong></td>`).join('')}</tr></tfoot></table><div class="report-legend">${icon('goal')} 得点 ${icon('in')}${icon('out')} 交代 ${icon('yellow')} 警告 ${icon('red')} 退場</div></section>`;
+    return `<section class="report-members"><table class="report-lineups"><thead><tr>${teams.map(team=>`<th scope="col" class="${team.own?'own':'opponent'}"><div>${emblem(team.emblem,team.name)}<span><strong>${esc(lineupNames.get(cleanName(team.name)) || team.short)}</strong><small>${team.side.toUpperCase()}</small></span></div></th>`).join('')}</tr></thead>${[['先発','starters'],['控え','bench']].map(([label,key])=>`<tbody><tr class="report-lineup-label"><th colspan="2" scope="colgroup">${label}</th></tr>${Array.from({length:Math.max(...teams.map(t=>t[key].length))},(_,i)=>`<tr>${teams.map(t=>memberCell(t[key][i],t)).join('')}</tr>`).join('')}</tbody>`).join('')}<tfoot><tr>${teams.map(t=>`<td><span>監督</span> <strong>${esc(t.manager || '—')}</strong></td>`).join('')}</tr></tfoot></table><div class="report-legend">${icon('goal')} 得点 ${icon('in')}${icon('out')} 交代 ${icon('yellow')} 警告 ${icon('red')} 退場</div></section>`;
   }
   function header(m) {
     const teams = sides(m);
