@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v107-standings-form';
+const cacheName = 'football-app-v108-standings-motion';
 const assetsToCache = [
   "./",
   "./index.html",
