@@ -10,6 +10,7 @@
 #standings-content button:focus-visible,#standings-content select:focus-visible { outline:2px solid #397cec; outline-offset:-2px; }
 #standings-content .st-controls { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px; }
 #standings-content .st-controls label { display:flex; gap:9px; align-items:center; min-width:0; font-size:12px; }
+#standings-content .st-controls label > span { flex-shrink:0; white-space:nowrap; }
 #standings-content .st-controls select { min-width:0; width:100%; max-width:240px; padding:9px 24px 9px 10px; height:40px; border:1px solid #d4dbe3; border-radius:7px; background:#fff; color:#172435; font-size:12px; }
 #standings-content .st-refresh { display:grid; place-items:center; width:40px; height:40px; flex-shrink:0; padding:9px; color:#172435; border:1px solid #d4dbe3; border-radius:7px; background:white; }
 #standings-content .st-refresh svg { width:22px; height:22px; }
