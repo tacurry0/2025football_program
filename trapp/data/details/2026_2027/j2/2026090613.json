@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-19T23:29:07.081845+00:00",
+  "fetchedAt": "2026-09-20T16:27:21.630968+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j2/2026/090613",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/090613",
-      "detail_fetched_at": "2026-09-19T23:29:07.081845+00:00",
+      "detail_fetched_at": "2026-09-20T16:27:21.630968+00:00",
       "home_starting_members": [
         {
           "name": "市川 暉記",

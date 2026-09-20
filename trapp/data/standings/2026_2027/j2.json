@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-19T23:29:07.081845+00:00",
+  "fetchedAt": "2026-09-20T16:27:21.630968+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -27,9 +27,25 @@
       "season": "2026_2027",
       "league": "j2",
       "competition_id": "j2",
+      "team_id": "sendai",
+      "team": "ベガルタ仙台",
+      "rank": 2,
+      "points": 14,
+      "played": 7,
+      "won": 4,
+      "drawn": 2,
+      "lost": 1,
+      "goals_for": 13,
+      "goals_against": 7,
+      "goal_diff": 6
+    },
+    {
+      "season": "2026_2027",
+      "league": "j2",
+      "competition_id": "j2",
       "team_id": "toyama",
       "team": "カターレ富山",
-      "rank": 2,
+      "rank": 3,
       "points": 13,
       "played": 7,
       "won": 4,
@@ -45,7 +61,7 @@
       "competition_id": "j2",
       "team_id": "yokohamafc",
       "team": "横浜FC",
-      "rank": 3,
+      "rank": 4,
       "points": 13,
       "played": 7,
       "won": 4,
@@ -61,7 +77,7 @@
       "competition_id": "j2",
       "team_id": "omiya",
       "team": "RB大宮アルディージャ",
-      "rank": 4,
+      "rank": 5,
       "points": 13,
       "played": 7,
       "won": 3,
@@ -77,7 +93,7 @@
       "competition_id": "j2",
       "team_id": "shonan",
       "team": "湘南ベルマーレ",
-      "rank": 5,
+      "rank": 6,
       "points": 12,
       "played": 7,
       "won": 3,
@@ -86,22 +102,6 @@
       "goals_for": 7,
       "goals_against": 6,
       "goal_diff": 1
-    },
-    {
-      "season": "2026_2027",
-      "league": "j2",
-      "competition_id": "j2",
-      "team_id": "sendai",
-      "team": "ベガルタ仙台",
-      "rank": 6,
-      "points": 11,
-      "played": 6,
-      "won": 3,
-      "drawn": 2,
-      "lost": 1,
-      "goals_for": 10,
-      "goals_against": 6,
-      "goal_diff": 4
     },
     {
       "season": "2026_2027",
@@ -127,13 +127,13 @@
       "team": "栃木シティ",
       "rank": 8,
       "points": 10,
-      "played": 6,
+      "played": 7,
       "won": 3,
       "drawn": 1,
-      "lost": 2,
-      "goals_for": 13,
-      "goals_against": 7,
-      "goal_diff": 6
+      "lost": 3,
+      "goals_for": 14,
+      "goals_against": 10,
+      "goal_diff": 4
     },
     {
       "season": "2026_2027",
@@ -328,6 +328,6 @@
       "goal_diff": -9
     }
   ],
-  "sourceUpdatedAt": "2026/9/19",
+  "sourceUpdatedAt": "2026/9/20",
   "sourceUrl": "https://www.jleague.jp/j2/standings/?year=2026-27"
 }

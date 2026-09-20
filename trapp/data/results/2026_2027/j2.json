@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-19T23:29:07.081845+00:00",
+  "fetchedAt": "2026-09-20T16:27:21.630968+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -982,9 +982,9 @@
       "section": 7,
       "home": "栃木シティ",
       "away": "ベガルタ仙台",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 3,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/092003"
     },
     {
