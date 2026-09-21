@@ -1,0 +1,108 @@
+/* Only the player profile dialog adopts this design. */
+#pa-modal.pv-modal { width:min(680px,calc(100vw - 16px)); height:min(92dvh,980px); max-height:calc(100dvh - 16px); border-radius:20px; background:#fff; }
+#pa-modal .pv-shell { --pv-accent:#f66a00; --pv-dark:#061e38; display:flex; flex-direction:column; min-height:0; height:100%; color:#132333; font-family:'Noto Sans JP',sans-serif; }
+#pa-modal .pv-shell[data-club="kumamoto"] { --pv-accent:#e50020; --pv-dark:#101419; }
+#pa-modal .pv-shell *,#pa-modal .pv-shell *::before,#pa-modal .pv-shell *::after { box-sizing:border-box; }
+#pa-modal .pv-shell [hidden] { display:none!important; }
+#pa-modal .pv-shell button:focus-visible,#pa-modal .pv-shell select:focus-visible { outline:2px solid #438de0; outline-offset:-3px; }
+#pa-modal .pv-hero { flex:none; position:relative; isolation:isolate; overflow:hidden; height:264px; border-bottom:4px solid var(--pv-accent); background:var(--pv-dark); color:#fff; transition:height .22s ease; }
+#pa-modal .pv-hero::before { content:''; position:absolute; inset:0; z-index:-2; background:var(--pv-accent); clip-path:polygon(0 0,68% 0,0 66%); }
+#pa-modal .pv-hero::after { content:''; position:absolute; inset:0; z-index:-1; background:url('./data/assets/home/poster-grain.svg') center/460px 280px; opacity:.35; pointer-events:none; }
+#pa-modal .pv-handle { position:absolute; top:10px; left:calc(50% - 24px); width:48px; height:4px; border-radius:4px; background:#ffffff75; }
+#pa-modal .pv-top { position:relative; z-index:4; display:flex; justify-content:space-between; align-items:center; padding:24px 20px 0; font-size:20px; font-weight:900; }
+#pa-modal .pv-close { display:grid; place-items:center; width:40px; height:40px; padding:0; background:none; border:0; color:#fff; font:300 42px/1 sans-serif; cursor:pointer; }
+#pa-modal .pv-watermark { position:absolute; right:-20px; bottom:-30px; width:220px; height:240px; object-fit:contain; opacity:.09; z-index:-1; }
+#pa-modal .pv-photo { position:absolute; right:-10px; bottom:0; width:48%; height:210px; pointer-events:none; }
+#pa-modal .pv-photo .player-photo { display:block; position:absolute; inset:0; width:100%; height:100%; margin:0; background:none; border:0; border-radius:0; box-shadow:none; }
+#pa-modal .pv-photo img { width:100%; height:100%; object-fit:contain; object-position:center bottom; }
+#pa-modal .pv-identity { position:relative; z-index:2; display:flex; align-items:center; gap:14px; margin:32px 18px 0; max-width:72%; text-shadow:0 2px 8px #00152f85; }
+#pa-modal .pv-shirt { flex:none; min-width:52px; }
+#pa-modal .pv-shirt strong { display:block; font:400 66px/.95 JLeagueKick,sans-serif; }
+#pa-modal .pv-shirt > span { display:block; margin-top:7px; font:600 17px/1.2 Outfit,sans-serif; }
+#pa-modal .pv-name { min-width:0; }
+#pa-modal .pv-name h2 { margin:0; color:#fff; font:900 clamp(20px,5.8vw,30px)/1.35 'Noto Sans JP',sans-serif; overflow-wrap:anywhere; }
+#pa-modal .pv-name p { margin:5px 0 0; color:#fff; font:500 12px/1.4 Outfit,sans-serif; letter-spacing:.06em; overflow-wrap:anywhere; }
+#pa-modal .pv-card-button { position:absolute; left:20px; bottom:16px; z-index:4; width:44px; height:40px; display:grid; place-items:center; border:1px solid #ffffff85; border-radius:5px; color:#fff; background:#04172870; cursor:pointer; }
+#pa-modal .pv-shell.is-compact .pv-hero { height:172px; }
+#pa-modal .pv-shell.is-compact .pv-photo { height:134px; width:36%; }
+#pa-modal .pv-shell.is-compact .pv-identity { margin-top:14px; margin-left:18px; max-width:74%; }
+#pa-modal .pv-shell.is-compact .pv-shirt strong { font-size:46px; }
+#pa-modal .pv-shell.is-compact .pv-shirt > span { font-size:12px; margin-top:3px; }
+#pa-modal .pv-shell.is-compact .pv-name h2 { font-size:22px; }
+#pa-modal .pv-shell.is-compact .pv-card-button { left:auto; right:14px; bottom:10px; background:#061d35c9; width:36px; height:36px; }
+#pa-modal .pv-body { padding:0 0 max(18px,env(safe-area-inset-bottom)); background:#fff; flex:1; min-height:0; overflow:auto; overscroll-behavior:contain; }
+#pa-modal .pv-shell .pa-profile-tabs { position:sticky; top:0; z-index:6; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin:0; padding:0 10px; border:0; border-bottom:1px solid #dce1e6; border-radius:0; background:#fff; }
+#pa-modal .pv-shell .pa-profile-tab { min-width:0; min-height:52px; padding:0 3px; border:0; border-bottom:3px solid transparent; border-radius:0; background:#fff; box-shadow:none; color:#65707b; font:700 13px/1.3 'Noto Sans JP',sans-serif; }
+#pa-modal .pv-shell .pa-profile-tab.active { color:#131f2a; border-bottom-color:var(--pv-accent); }
+#pa-modal .pv-shell .pa-profile-panel { margin:0; padding:0 18px; }
+#pa-modal .pv-shell .pa-profile-panel[data-pa-panel="profile"] { display:block; }
+#pa-modal .pv-shell .pa-bio-hero { display:block; border:0; border-radius:0; box-shadow:none; background:#fff; }
+#pa-modal .pv-shell .pa-bio-visual { display:none; }
+#pa-modal .pv-shell .pa-bio-overview,#pa-modal .pv-shell .pa-bio-empty { padding:0; background:#fff; }
+#pa-modal .pv-shell .pa-bio-overview > h3,#pa-modal .pv-shell .pa-bio-kicker,#pa-modal .pv-shell .pa-bio-position-chip { display:none; }
+#pa-modal .pv-shell .pa-bio-vitals { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin:0; padding:22px 0; }
+#pa-modal .pv-shell .pa-bio-vital { padding:0 10px; min-height:72px; border:0; border-right:1px solid #dce1e6; border-radius:0; background:none; gap:8px; text-align:center; }
+#pa-modal .pv-shell .pa-bio-vital:last-child { border:0; }
+#pa-modal .pv-shell .pa-bio-vital > span { color:#52606e; font:500 12px/1.4 'Noto Sans JP',sans-serif; letter-spacing:0; }
+#pa-modal .pv-shell .pa-bio-vital > strong { color:#0a2135; font:500 35px/1 JLeagueKick,Outfit,sans-serif; }
+#pa-modal .pv-shell .pa-bio-vital > strong small { font:400 11px/1 'Noto Sans JP',sans-serif; }
+#pa-modal .pv-shell .pa-bio-details { margin:0; padding:12px 0; border-top:1px solid #dce1e6; border-bottom:1px solid #dce1e6; }
+#pa-modal .pv-shell .pa-bio-details > div { border:0; min-height:34px; grid-template-columns:80px minmax(0,1fr); }
+#pa-modal .pv-shell .pa-bio-details dt { font-size:12px; font-weight:500; }
+#pa-modal .pv-shell .pa-bio-details dd { font-size:13px; font-weight:700; }
+#pa-modal .pv-shell .pa-bio-section,#pa-modal .pv-shell .player-chant-player,#pa-modal .pv-shell .pa-bio-history { margin:0; padding:18px 0; border:0; border-bottom:1px solid #dce1e6; border-radius:0; box-shadow:none; background:#fff; }
+#pa-modal .pv-shell .pa-bio-section-head > span,#pa-modal .pv-shell .player-chant-head > span { display:none; }
+#pa-modal .pv-shell .pa-bio-section h3,#pa-modal .pv-shell .player-chant-head strong { margin:0 0 14px; font:700 16px/1.5 'Noto Sans JP',sans-serif; color:#152330; }
+#pa-modal .pv-shell .pa-bio-club-route { display:flex; flex-direction:column; align-items:stretch; gap:0; padding:0 0 0 8px; background:none; }
+#pa-modal .pv-shell .pa-bio-club-route > span { position:relative; padding:9px 0 9px 20px; border:0; border-left:2px solid var(--pv-accent); border-radius:0; background:none; color:#142232; font-size:13px; }
+#pa-modal .pv-shell .pa-bio-club-route > span::before { content:''; position:absolute; left:-6px; top:15px; width:10px; height:10px; border-radius:50%; background:var(--pv-accent); }
+#pa-modal .pv-shell .pa-bio-club-route > span::after { display:none; }
+#pa-modal .pv-shell .pa-bio-milestones { display:block; }
+#pa-modal .pv-shell .pa-bio-milestone { padding:10px 0; background:none; border:0; border-radius:0; }
+#pa-modal .pv-shell .pa-bio-source-link { margin:16px 0; border:0; background:none; box-shadow:none; }
+#pa-modal .pv-period-controls { display:flex; gap:10px; align-items:center; padding:14px 18px 8px; }
+#pa-modal .pv-period-controls select { width:100%; min-height:42px; padding:8px 12px; border:1px solid #d3dbe3; border-radius:6px; background:white; color:#122334; font:700 13px 'Noto Sans JP',sans-serif; }
+#pa-modal .pv-shell .pa-profile-stat-controls { margin:0; padding:4px 18px 12px; border:0; border-radius:0; background:none; }
+#pa-modal .pv-shell .pa-profile-kpis { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin:0; padding:12px 0 20px; }
+#pa-modal .pv-shell .pa-profile-kpi { display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:0; min-height:96px; padding:12px 4px; border:0; border-right:1px solid #dce1e6; border-bottom:1px solid #dce1e6; border-radius:0; box-shadow:none; background:none; }
+#pa-modal .pv-shell .pa-profile-kpi:nth-child(3n) { border-right:0; }
+#pa-modal .pv-shell .pa-profile-kpi > span { font:500 11px/1.4 'Noto Sans JP',sans-serif; color:#52606e; }
+#pa-modal .pv-shell .pa-profile-kpi > strong { margin:7px 0 3px; color:#0c2337; font:500 34px/1.1 JLeagueKick,Outfit,sans-serif; white-space:nowrap; }
+#pa-modal .pv-shell .pa-profile-kpi:nth-child(3) > strong { color:var(--pv-accent); }
+#pa-modal .pv-shell .pa-profile-kpi small { font:400 9px/1.4 'Noto Sans JP',sans-serif; color:#64707a; }
+#pa-modal .pv-stats-period { margin:10px 0 0; font-size:11px; color:#64707a; }
+#pa-modal .pv-shell .pa-profile-section { margin:0 0 14px; border:0; border-bottom:1px solid #dce1e6; border-radius:0; background:none; box-shadow:none; }
+#pa-modal .pv-shell .pa-profile-section-toggle { padding:12px 0; background:none; color:#142232; }
+#pa-modal .pv-shell .pa-profile-section-toggle span { font:700 16px/1.4 'Noto Sans JP',sans-serif; }
+#pa-modal .pv-year-list { display:grid; gap:12px; padding:10px 0; }
+#pa-modal .pv-year-card { padding:14px; border:1px solid #dce1e6; border-radius:8px; }
+#pa-modal .pv-year-card.is-selected { border-left:3px solid var(--pv-accent); }
+#pa-modal .pv-year-card header { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+#pa-modal .pv-year-card .pa-year-detail-btn { padding:8px 0; color:#142232; background:none; border:0; font-weight:700; }
+#pa-modal .pv-year-card .pv-year-number { font:500 28px/1 JLeagueKick,sans-serif; }
+#pa-modal .pv-year-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:10px 0 0; }
+#pa-modal .pv-year-stats div { text-align:center; }
+#pa-modal .pv-year-stats dt { font-size:10px; color:#687583; }
+#pa-modal .pv-year-stats dd { margin:4px 0; font:500 23px/1.2 JLeagueKick,Outfit,sans-serif; }
+#pa-modal .pv-year-more { font-size:11px; color:#637281; }
+#pa-modal .pv-year-log { display:block; width:100%; margin:14px 0; padding:12px; border:1px solid #cbd3dc; border-radius:6px; background:#fff; color:#142232; font:700 12px 'Noto Sans JP',sans-serif; }
+@media(max-width:370px) { #pa-modal .pv-identity { gap:8px; margin-left:14px; } #pa-modal .pv-shirt strong { font-size:56px; } #pa-modal .pv-name h2 { font-size:21px; } #pa-modal .pv-shell .pa-profile-panel { padding:0 12px; } #pa-modal .pv-shell .pa-profile-kpi > strong { font-size:29px; } }
+@media(prefers-reduced-motion:reduce) { #pa-modal .pv-hero { transition:none; } }
+#pa-modal .pv-shell .pa-profile-kpi::before { display:none; }
+#pa-modal .pv-appearance { border-bottom:1px solid #dce1e6; padding:0 0 14px; }
+#pa-modal .pv-appearance h3 { margin:0 0 12px; font-size:16px; }
+#pa-modal .pv-appearance > div { display:flex; align-items:center; gap:16px; margin:12px 0; font-size:12px; }
+#pa-modal .pv-appearance > div > span { width:56px; flex:none; }
+#pa-modal .pv-appearance i { flex:1; height:6px; border-radius:4px; background:#edf0f3; overflow:hidden; }
+#pa-modal .pv-appearance b { display:block; height:100%; background:var(--pv-accent); border-radius:4px; }
+#pa-modal .pv-appearance strong { font:500 24px/1 JLeagueKick,Outfit,sans-serif; }
+#pa-modal .pv-appearance small { margin-left:4px; font:400 10px 'Noto Sans JP',sans-serif; }
+#pa-modal .pv-discipline { display:flex; justify-content:space-around; gap:14px; padding:18px 0; border-bottom:1px solid #dce1e6; }
+#pa-modal .pv-discipline > span { display:flex; gap:10px; align-items:center; font-size:12px; }
+#pa-modal .pv-discipline i { width:12px; height:17px; border-radius:2px; }
+#pa-modal .pv-discipline .yellow { background:#f5c400; }
+#pa-modal .pv-discipline .red { background:#df203b; }
+#pa-modal .pv-discipline strong { font:500 24px/1 JLeagueKick,Outfit,sans-serif; }
+#pa-modal .pv-full-stats { margin:14px 0; }
+#pa-modal .pv-full-stats > summary { padding:14px 0; cursor:pointer; font-size:14px; font-weight:700; }
+#pa-modal .pv-shell .pa-category-filter { border:1px solid #dce1e6; border-radius:6px; background:#f4f6f8; box-shadow:none; }

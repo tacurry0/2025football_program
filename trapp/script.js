@@ -374,6 +374,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function hideNavigableLayers() {
+    playerProfileViewCleanup?.();
+    playerProfileViewCleanup = null;
     detailSheet?.classList.remove("active");
     sheetBackdrop?.classList.remove("active");
     pickerOverlay?.classList.remove("active");
@@ -5761,8 +5763,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { backdrop, modal };
   }
 
+  let playerProfileViewCleanup = null;
+
   function closePlayerAnalysisModal(options = {}) {
     const closeDirect = () => {
+      playerProfileViewCleanup?.();
+      playerProfileViewCleanup = null;
       document.getElementById("pa-modal-backdrop")?.classList.remove("active");
       document.getElementById("pa-modal")?.classList.remove("active");
       document.body.classList.remove("pa-modal-open");
@@ -5785,7 +5791,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.body.dataset.paModalOriginMode = document.body.getAttribute("data-mode") || currentMode;
       document.body.setAttribute("data-mode", "player-analysis");
     }
+    playerProfileViewCleanup?.();
+    playerProfileViewCleanup = null;
     modal.innerHTML = html;
+    modal.classList.toggle("pv-modal", !!modal.querySelector("[data-player-profile]"));
     setupPlayerPhotos(modal);
     setupPlayerChantAudio(modal);
     backdrop.classList.add("active");
@@ -8407,7 +8416,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderPlayerProfileBio(profile, player) {
     const playerName = String((player && player.player_name) || (profile && profile.app_player_name) || "-");
-    const photo = renderPlayerPhoto(playerName, playerAnalysisState.selectedClub, "pa-player-photo", player);
+    const photo = "";
     if (!profile) {
       return `
         <div class="pa-bio-hero no-profile">
@@ -8423,9 +8432,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const birthYear = getPlayerProfileBirthYear(profile);
     const vitals = [
-      ["HEIGHT", profile.height_cm, "cm"],
-      ["WEIGHT", profile.weight_kg, "kg"],
-      ["BORN", birthYear, ""]
+      ["身長", profile.height_cm, "cm"],
+      ["体重", profile.weight_kg, "kg"],
+      ["ポジション", profile.position, ""]
     ].filter(([, value]) => hasPlayerProfileValue(value));
     const details = [
       ["生年月日", formatPlayerProfileDate(profile.birth_date)],
@@ -8499,47 +8508,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderPlayerProfileYearTable(yearRows) {
-    if (!yearRows.length) {
-      return `<div class="pa-muted" style="padding:16px;text-align:center;">データがありません</div>`;
-    }
-    return `
-      <div class="pa-yearly-table-wrap">
-        <table class="pa-yearly-table">
-          <thead>
-            <tr>
-              <th>年度</th>
-              <th>背番号</th>
-              <th>ポジション</th>
-              <th class="pa-num">出場</th>
-              <th class="pa-num">先発</th>
-              <th class="pa-num">途中</th>
-              <th class="pa-num">得点</th>
-              <th class="pa-num">出場勝率</th>
-              <th class="pa-num">平均勝ち点</th>
-              <th class="pa-num">警告</th>
-              <th class="pa-num">退場</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${yearRows.map(row => `
-              <tr>
-                <td><button type="button" class="pa-year-detail-btn" data-pa-year-detail="${escapeHtml(formatPlayerNumber(getPlayerYearValue(row)))}">${escapeHtml(playerAnalysisSeasonLabel(getPlayerYearValue(row)))}</button></td>
-                <td><span class="pa-yearly-number ${isPlayerGoalkeeper(row) ? "gk" : ""}">${escapeHtml(formatPlayerList(row.numbers))}</span></td>
-                <td>${escapeHtml(formatPlayerList(row.positions))}</td>
-                <td class="pa-num">${escapeHtml(formatPlayerNumber(row.played_matches))}</td>
-                <td class="pa-num">${escapeHtml(formatPlayerNumber(row.starter_matches))}</td>
-                <td class="pa-num">${escapeHtml(formatPlayerNumber(row.sub_matches))}</td>
-                <td class="pa-num">${escapeHtml(formatPlayerNumber(row.goals))}</td>
-                <td class="pa-num">${escapeHtml(formatPlayerRate(row.played_win_rate))}</td>
-                <td class="pa-num">${escapeHtml(formatPlayerDecimal(row.played_points_per_match))}</td>
-                <td class="pa-num">${escapeHtml(formatPlayerNumber(row.yellow_cards))}</td>
-                <td class="pa-num">${escapeHtml(formatPlayerNumber(row.red_cards))}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-    `;
+    if (!yearRows.length) return '<p class="pa-muted">データがありません</p>';
+    return `<div class="pv-year-list">${[...yearRows].sort((a,b)=>getPlayerYearValue(b)-getPlayerYearValue(a)).map(row=>{
+      const year=getPlayerYearValue(row);
+      return `<article class="pv-year-card" data-pv-year-card="${year}"><header><button type="button" class="pa-year-detail-btn" data-pa-year-detail="${year}">${escapeHtml(playerAnalysisSeasonLabel(year))} →</button><span class="pv-year-number" aria-label="背番号 ${escapeHtml(formatPlayerList(row.numbers))}">${escapeHtml(formatPlayerList(row.numbers))}</span></header><dl class="pv-year-stats">${[['出場',row.played_matches],['先発',row.starter_matches],['途中',row.sub_matches],['得点',row.goals]].map(([label,value])=>`<div><dt>${label}</dt><dd>${escapeHtml(formatPlayerNumber(value))}</dd></div>`).join('')}</dl><p class="pv-year-more">出場勝率 ${escapeHtml(formatPlayerRate(row.played_win_rate))} · 平均勝点 ${escapeHtml(formatPlayerDecimal(row.played_points_per_match))}<br>警告 ${escapeHtml(formatPlayerNumber(row.yellow_cards))} · 退場 ${escapeHtml(formatPlayerNumber(row.red_cards))}</p></article>`;
+    }).join('')}</div>`;
   }
 
   function setPlayerProfileTab(tabName) {
@@ -8557,6 +8530,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.querySelectorAll("[data-pa-stats-controls]").forEach(controls => {
       controls.hidden = playerAnalysisState.profileTab === "profile";
     });
+    modal.profileSync?.();
   }
 
   function renderPlayerAnalysisProfile(player, yearRows, insights = {}, profile = null) {
@@ -8576,53 +8550,42 @@ document.addEventListener("DOMContentLoaded", async () => {
     const currentInsights = insights.current || { opponentGoals: [] };
     const totalOpponentMode = isPlayerGoalkeeper(aggregate) || isPlayerGoalkeeper(player) ? "defense" : "attack";
     const currentOpponentMode = isPlayerGoalkeeper(player) ? "defense" : "attack";
-    const yearLabel = getPlayerAnalysisTimeLabel();
-    const showCurrentTab = playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all";
-    const allowedTabs = showCurrentTab ? ["profile", "total", "yearly", "current"] : ["profile", "total", "yearly"];
-    const activeTab = allowedTabs.includes(playerAnalysisState.profileTab) ? playerAnalysisState.profileTab : "profile";
-
-    const meta = `
-      ${renderPlayerNumberBadge(aggregate.numbers || player.numbers, "modal", aggregate)}
-      <span class="pa-player-position-text">${escapeHtml(formatPlayerList(aggregate.positions || player.positions))}</span>
-      <button type="button" class="pa-card-output-btn" data-pa-player-card>カード</button>
-    `;
-    const body = `
+    const view = window.TrappPlayerProfile;
+    const sortedYears=[...yearRows].sort((a,b)=>getPlayerYearValue(b)-getPlayerYearValue(a));
+    const scopes=[{key:'total',label:'通算',numbers:aggregate.numbers || player.numbers,rotate:true}];
+    if(playerAnalysisState.timeMode==='range')scopes.push({key:'current',label:getPlayerAnalysisTimeLabel(),numbers:player.numbers,rotate:true});
+    sortedYears.forEach(row=>{const year=getPlayerYearValue(row);if(year)scopes.push({key:`year:${year}`,label:playerAnalysisSeasonLabel(year),numbers:row.numbers,rotate:false});});
+    let period=playerAnalysisState.profilePeriod || (playerAnalysisState.timeMode==='range'?'current':playerAnalysisState.year==='all'?'total':`year:${playerAnalysisState.year}`);
+    if(!scopes.some(scope=>scope.key===period))period=scopes[0].key;
+    const activeTab=['profile','total','yearly'].includes(playerAnalysisState.profileTab)?playerAnalysisState.profileTab:'profile';
+    const kpis=(row,rows)=>`<p class="pv-stats-period">${escapeHtml(getPlayerSeasonSpan(rows))}</p><div class="pa-profile-kpis">${[
+      ['出場',formatPlayerNumber(row.played_matches),'試合'],['先発',formatPlayerNumber(row.starter_matches),'試合'],['得点',formatPlayerNumber(row.goals),'点'],
+      ['途中出場',formatPlayerNumber(row.sub_matches),'試合'],['出場勝率',formatPlayerRate(row.played_win_rate),'出場した試合'],['平均勝点',formatPlayerDecimal(row.played_points_per_match),'出場した試合']
+    ].map(([label,value,unit])=>`<div class="pa-profile-kpi"><span>${label}</span><strong>${escapeHtml(value)}</strong><small>${unit}</small></div>`).join('')}</div>`;
+    const appearance=row=>`<section class="pv-appearance"><h3>出場内訳</h3>${[['先発',row.starter_matches],['途中出場',row.sub_matches]].map(([label,value])=>`<div><span>${label}</span><i aria-hidden="true"><b style="width:${Math.max(0,Math.min(100,(toPlayerNumber(value)||0)/Math.max(1,toPlayerNumber(row.played_matches)||0)*100))}%"></b></i><strong>${escapeHtml(formatPlayerNumber(value))}<small>試合</small></strong></div>`).join('')}</section><div class="pv-discipline"><span><i class="yellow" aria-hidden="true"></i>警告 <strong>${escapeHtml(formatPlayerNumber(row.yellow_cards))}</strong></span><span><i class="red" aria-hidden="true"></i>退場 <strong>${escapeHtml(formatPlayerNumber(row.red_cards))}</strong></span></div>`;
+    const stats=(key,row,rows,extra,mode)=>`<div data-pv-stats="${escapeHtml(key)}" ${key===period?'':'hidden'}>${kpis(row,rows)}${appearance(row)}${extra?renderPlayerOpponentGoalSection(row.player_name || player.player_name || '-',mode==='defense'?extra.opponentDefense:extra.opponentGoals,{mode}):''}${key.startsWith('year:')?`<button type="button" class="pa-year-detail-btn pv-year-log" data-pa-year-detail="${key.slice(5)}">試合ごとの成績を見る →</button>`:''}<details class="pv-full-stats"><summary>詳しい分析</summary>${renderPlayerAnalysisDetailSections(row)}</details></div>`;
+    const body=`
       <div class="pa-profile-tabs" role="tablist" aria-label="選手データ表示切り替え">
         <button type="button" class="pa-profile-tab" data-pa-profile-tab="profile" role="tab">プロフィール</button>
-        <button type="button" class="pa-profile-tab" data-pa-profile-tab="total" role="tab">累計</button>
+        <button type="button" class="pa-profile-tab" data-pa-profile-tab="total" role="tab">成績</button>
         <button type="button" class="pa-profile-tab" data-pa-profile-tab="yearly" role="tab">年別</button>
-        ${showCurrentTab ? `<button type="button" class="pa-profile-tab" data-pa-profile-tab="current" role="tab">${escapeHtml(yearLabel)}</button>` : ""}
       </div>
-      <div class="pa-profile-stat-controls" data-pa-stats-controls>
-        ${renderPlayerAnalysisCategoryChecklist()}
-      </div>
-      <div class="pa-profile-panel" data-pa-panel="profile" role="tabpanel">
-        ${renderPlayerProfileBio(profile, aggregate || player)}
-      </div>
+      <div class="pv-period-controls" hidden><select data-pv-period-select aria-label="表示するシーズン">${scopes.map(scope=>`<option value="${escapeHtml(scope.key)}" ${scope.key===period?'selected':''}>${escapeHtml(scope.label)}</option>`).join('')}</select></div>
+      <div class="pa-profile-stat-controls" data-pa-stats-controls>${renderPlayerAnalysisCategoryChecklist()}</div>
+      <div class="pa-profile-panel" data-pa-panel="profile" role="tabpanel">${renderPlayerProfileBio(profile,aggregate || player)}</div>
       <div class="pa-profile-panel" data-pa-panel="total" role="tabpanel">
-        ${renderPlayerProfileKpis(aggregate, yearRows)}
-        ${renderPlayerAnalysisDetailSections(aggregate)}
-        ${renderPlayerOpponentGoalSection(aggregate.player_name || player.player_name || "-", totalOpponentMode === "defense" ? totalInsights.opponentDefense : totalInsights.opponentGoals, { mode: totalOpponentMode })}
+        ${stats('total',aggregate,yearRows,totalInsights,totalOpponentMode)}
+        ${scopes.some(scope=>scope.key==='current')?stats('current',player,[player],currentInsights,currentOpponentMode):''}
+        ${sortedYears.map(row=>stats(`year:${getPlayerYearValue(row)}`,row,[row],Number(playerAnalysisState.year)===getPlayerYearValue(row)?currentInsights:null,isPlayerGoalkeeper(row)?'defense':'attack')).join('')}
       </div>
-      <div class="pa-profile-panel" data-pa-panel="yearly" role="tabpanel">
-        ${renderPlayerProfileYearTable(yearRows)}
-      </div>
-      ${showCurrentTab ? `
-        <div class="pa-profile-panel" data-pa-panel="current" role="tabpanel">
-          ${renderPlayerProfileKpis(player, [player])}
-          ${renderPlayerAnalysisDetailSections(player)}
-          ${renderPlayerOpponentGoalSection(player.player_name || "-", currentOpponentMode === "defense" ? currentInsights.opponentDefense : currentInsights.opponentGoals, { mode: currentOpponentMode })}
-        </div>
-      ` : ""}
-      ${isManualPlayer(aggregate) || isManualPlayer(player) ? `
-        <div class="pa-manual-delete-zone">
-          <button type="button" class="pa-manual-edit-btn" data-pa-edit-manual>この選手を編集</button>
-          <button type="button" class="pa-manual-delete-btn" data-pa-delete-manual>この選手を削除</button>
-        </div>
-      ` : ""}
-    `;
-    setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell(getPlayerProfileEnglishName(profile, aggregate || player), aggregate.player_name || player.player_name || "-", body, meta));
+      <div class="pa-profile-panel" data-pa-panel="yearly" role="tabpanel">${renderPlayerProfileYearTable(yearRows)}</div>
+      ${isManualPlayer(aggregate)||isManualPlayer(player)?'<div class="pa-manual-delete-zone"><button type="button" class="pa-manual-edit-btn" data-pa-edit-manual>この選手を編集</button><button type="button" class="pa-manual-delete-btn" data-pa-delete-manual>この選手を削除</button></div>':''}`;
+    const theme=getPlayerCardTheme();
+    const playerName=aggregate.player_name || player.player_name || '-';
+    setPlayerAnalysisModalContent(view.shell({name:playerName,english:getPlayerProfileEnglishName(profile,aggregate || player),position:formatPlayerList(player.positions || aggregate.positions),photo:renderPlayerPhoto(playerName,playerAnalysisState.selectedClub,'pv-player-photo',aggregate || player),emblem:theme.emblem,club:theme.key,scopes,period,body}));
     setPlayerProfileTab(activeTab);
+    const modal=document.getElementById('pa-modal');
+    playerProfileViewCleanup=view.mount(modal,value=>{playerAnalysisState.profilePeriod=value;});
   }
 
   async function openPlayerAnalysisProfile(player, options = {}) {
@@ -8634,6 +8597,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
     const profileNavigationId = activeAppHistoryId;
     if (options.resetCategories !== false) {
+      playerAnalysisState.profilePeriod = null;
+      playerAnalysisState.profileTab = "profile";
       playerAnalysisState.modalCategories = getPlayerAnalysisCategoriesForScope(playerAnalysisState.matchScope);
     }
     playerAnalysisState.modalPlayer = player;

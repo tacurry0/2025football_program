@@ -1,10 +1,12 @@
 
-const cacheName = 'football-app-v109-lineup-names';
+const cacheName = 'football-app-v110-player-profile';
 const assetsToCache = [
   "./",
   "./index.html",
   "./style.css",
   "./script.js",
+  "./player-profile-view.js",
+  "./player-profile-view.css",
   "./league-data.js",
   "./league-ui.js",
   "./standings-view.css",
