@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-20T23:29:06.033285+00:00",
+  "fetchedAt": "2026-09-21T18:18:22.102376+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 84,
       "source_url": "https://www.jleague.jp/match/j2/2026/091916",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/091916",
-      "detail_fetched_at": "2026-09-20T23:29:06.033285+00:00",
+      "detail_fetched_at": "2026-09-21T18:18:22.102376+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",
