@@ -23,3 +23,14 @@ test('profile header escapes names, shows only one number and exposes an icon-on
  assert.match(html,/data-pa-player-card aria-label="選手カードを作成"[^>]*><svg/);
  assert.equal((html.match(/data-pv-number /g)||[]).length,1);
 });
+
+test('cutouts preserve aliases, URI encoding, manual photos and original fallbacks',()=>{
+ const {photoSources}=require('../player-profile-view');
+ const original='./data/assets/images/player_niigata/'+encodeURIComponent('笠井 佳祐')+'.jpg';
+ const cutout='./data/assets/player_cutouts/123abc.webp';
+ const index={'./data/assets/images/player_niigata/笠井 佳祐.jpg':cutout};
+ assert.deepEqual(photoSources([original,'missing.jpg'],index),[cutout,original,'missing.jpg']);
+ assert.deepEqual(photoSources(['data:image/png;base64,abc'],index),['data:image/png;base64,abc']);
+ assert.deepEqual(photoSources([original],{}),[original]);
+ assert.deepEqual(photoSources([original],{[decodeURIComponent(original)]:'https://untrusted/image'}),[original]);
+});

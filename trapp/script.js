@@ -2429,7 +2429,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderPlayerPhoto(playerName, club = playerAnalysisState.selectedClub, className = "", player = null, options = {}) {
     const resolvedClub = getPlayerAnalysisClub(club);
-    const sources = getPlayerImageSources(playerName, resolvedClub, player);
+    const originals = getPlayerImageSources(playerName, resolvedClub, player);
+    const sources = options.cutout && window.TrappPlayerProfile ? window.TrappPlayerProfile.photoSources(originals) : originals;
     if (!sources.length) return "";
     const fallbackSources = sources.slice(1);
     const altName = normalizePlayerImageName(playerName);
@@ -8582,7 +8583,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ${isManualPlayer(aggregate)||isManualPlayer(player)?'<div class="pa-manual-delete-zone"><button type="button" class="pa-manual-edit-btn" data-pa-edit-manual>この選手を編集</button><button type="button" class="pa-manual-delete-btn" data-pa-delete-manual>この選手を削除</button></div>':''}`;
     const theme=getPlayerCardTheme();
     const playerName=aggregate.player_name || player.player_name || '-';
-    setPlayerAnalysisModalContent(view.shell({name:playerName,english:getPlayerProfileEnglishName(profile,aggregate || player),position:formatPlayerList(player.positions || aggregate.positions),photo:renderPlayerPhoto(playerName,playerAnalysisState.selectedClub,'pv-player-photo',aggregate || player),emblem:theme.emblem,club:theme.key,scopes,period,body}));
+    setPlayerAnalysisModalContent(view.shell({name:playerName,english:getPlayerProfileEnglishName(profile,aggregate || player),position:formatPlayerList(player.positions || aggregate.positions),photo:renderPlayerPhoto(playerName,playerAnalysisState.selectedClub,'pv-player-photo',aggregate || player,{cutout:true}),emblem:theme.emblem,club:theme.key,scopes,period,body}));
     setPlayerProfileTab(activeTab);
     const modal=document.getElementById('pa-modal');
     playerProfileViewCleanup=view.mount(modal,value=>{playerAnalysisState.profilePeriod=value;});

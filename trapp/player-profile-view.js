@@ -17,6 +17,18 @@
     const timer=plan.rotate ? clock.setInterval(()=>{index=(index+1)%plan.values.length;show(plan.values[index]);},5000) : null;
     return ()=>{if(timer !== null)clock.clearInterval(timer);};
   }
+  // Use only generated assets in the index; keep original URLs as load-error fallbacks.
+  function photoSources(sources, index = root.TrappPlayerCutouts || {}) {
+    const result = [];
+    for (const source of sources) {
+      let key;
+      try { key = decodeURIComponent(source); } catch (_) { key = source; }
+      const cutout = Object.prototype.hasOwnProperty.call(index, key) ? index[key] : null;
+      if (typeof cutout === 'string' && /^\.\/data\/assets\/player_cutouts\/[a-f0-9]+\.webp$/.test(cutout)) result.push(cutout);
+      result.push(source);
+    }
+    return [...new Set(result)];
+  }
   function shell({name,english,position,photo,emblem,club,scopes,period,body}) {
     const plan=numberPlan(scopes,period);
     return `<div class="pv-shell" data-player-profile data-club="${esc(club)}" data-pv-scopes="${esc(JSON.stringify(scopes))}" data-pv-period="${esc(period)}">
@@ -62,6 +74,6 @@
     select.addEventListener('change',change);body.addEventListener('scroll',scroll,{passive:true});document.addEventListener('visibilitychange',visibility);
     modal.profileSync=sync;restart();sync();return dispose;
   }
-  const api={numbers,numberPlan,cycle,shell,mount};
+  const api={numbers,numberPlan,cycle,photoSources,shell,mount};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.TrappPlayerProfile=api;
 })(typeof window!=='undefined'?window:globalThis);

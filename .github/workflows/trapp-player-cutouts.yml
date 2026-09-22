@@ -1,0 +1,62 @@
+name: Prepare trapp player cutouts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/trapp-player-cutouts.yml'
+      - 'trapp/data/scripts/build_player_cutouts.py'
+      - 'trapp/data/scripts/requirements-player-cutouts.txt'
+      - 'trapp/data/assets/images/player_*/**'
+      - 'trapp/data/assets/player_*/**'
+  schedule:
+    - cron: '17 19 * * *'
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: trapp-player-cutouts
+  cancel-in-progress: false
+jobs:
+  cutouts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: github-pages
+    env:
+      ORT_DISABLE_TELEMETRY: '1'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: trapp/data/scripts/requirements-player-cutouts.txt
+      - uses: actions/cache@v4
+        with:
+          path: ~/.u2net
+          key: player-cutouts-u2net-human-v1
+      - name: Install background removal dependencies
+        run: python -m pip install -r trapp/data/scripts/requirements-player-cutouts.txt
+      - name: Prepare new and changed portraits
+        run: python trapp/data/scripts/build_player_cutouts.py
+      - name: Commit generated portraits and index
+        id: commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add trapp/data/assets/player_cutouts trapp/player-cutouts-index.js
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Update transparent player portraits'
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+      # GITHUB_TOKEN pushes do not trigger another Pages build. Deploy this snapshot explicitly.
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.commit.outputs.changed == 'true'
+        with:
+          path: '.'
+      - uses: actions/deploy-pages@v4
+        if: steps.commit.outputs.changed == 'true'

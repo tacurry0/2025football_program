@@ -1,11 +1,12 @@
 
-const cacheName = 'football-app-v114-crest-swing-deep';
+const cacheName = 'football-app-v115-player-cutouts';
 const assetsToCache = [
   "./",
   "./index.html",
   "./style.css",
   "./script.js",
   "./player-profile-view.js",
+  "./player-cutouts-index.js",
   "./player-profile-view.css",
   "./league-data.js",
   "./league-ui.js",
