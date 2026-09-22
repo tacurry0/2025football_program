@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-22T17:14:58.047202+00:00",
+  "fetchedAt": "2026-09-22T23:47:12.492223+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 83,
       "source_url": "https://www.jleague.jp/match/j3/2026/091803",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/091803",
-      "detail_fetched_at": "2026-09-22T17:14:58.047202+00:00",
+      "detail_fetched_at": "2026-09-22T23:47:12.492223+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
