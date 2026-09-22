@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-22T00:15:52.355082+00:00",
+  "fetchedAt": "2026-09-22T17:14:58.047202+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j2",
       "competition": "明治安田J2リーグ",
       "date": "2026-09-19",
-      "time": "19:03",
+      "time": "19:00",
       "round": "第7節",
       "home": "アルビレックス新潟",
       "away": "ジュビロ磐田",
@@ -28,7 +28,7 @@
       "humidity": 84,
       "source_url": "https://www.jleague.jp/match/j2/2026/091916",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/091916",
-      "detail_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+      "detail_fetched_at": "2026-09-22T17:14:58.047202+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",

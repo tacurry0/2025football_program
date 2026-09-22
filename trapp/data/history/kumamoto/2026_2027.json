@@ -22,7 +22,7 @@
     "assistant_referees": "佐藤 裕一、竹内 清人",
     "fourth_official": "山本 凌",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -422,7 +422,7 @@
     "assistant_referees": "正木 篤志、宇田 賢史",
     "fourth_official": "松原 寛人",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -848,7 +848,7 @@
     "assistant_referees": "西田 裕貴、横山 卓哉",
     "fourth_official": "佐々木 翔平",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "6",
     "pk_away_score": "5",
     "home_details": {
@@ -1263,7 +1263,7 @@
     "assistant_referees": "鶴岡 泰樹、佐藤 浩太",
     "fourth_official": "野際 祐史",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -1657,7 +1657,7 @@
     "assistant_referees": "山口 隆平、森 陽平",
     "fourth_official": "原田 大輔",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -2077,7 +2077,7 @@
     "assistant_referees": "友政 利貴、髙木 翔",
     "fourth_official": "野際 祐史",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -2487,7 +2487,7 @@
     "assistant_referees": "佐藤 裕一、山口 大輔",
     "fourth_official": "島﨑 亮典",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -2916,7 +2916,7 @@
     "assistant_referees": "高橋 悠、松田 信清",
     "fourth_official": "大崎 翼",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
@@ -3301,7 +3301,7 @@
     "competition_id": "j3",
     "section": "第7節",
     "date": "2026-09-18",
-    "kickoff": "19:03",
+    "kickoff": "19:00",
     "stadium": "えがお健康スタジアム",
     "attendance": 3485,
     "weather": "曇り",
@@ -3315,7 +3315,7 @@
     "assistant_referees": "宮原 一也、鈴木 隆太",
     "fourth_official": "上田 隆生",
     "detail_complete": true,
-    "source_fetched_at": "2026-09-22T00:15:52.355082+00:00",
+    "source_fetched_at": "2026-09-22T17:14:58.047202+00:00",
     "pk_home_score": "",
     "pk_away_score": "",
     "home_details": {
