@@ -281,10 +281,10 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   body[data-mode="dashboard"] .poster-card.poster-motion-running { --poster-motion-play: running; }
   body[data-mode="dashboard"] .poster-watermark {
     transform-origin: center;
-    animation: posterCrestSpin 5s linear infinite;
+    animation: posterCrestSwing 3s ease-in-out infinite alternate;
     animation-play-state: var(--poster-motion-play);
   }
-  body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { animation-delay: -1.25s; }
+  body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { animation-delay: -1.5s; }
   body[data-mode="dashboard"] .poster-card .poster-hero > .poster-light {
     display: block; position: absolute; z-index: 1; inset: -25% auto -25% -55%; width: 44%;
     pointer-events: none;
@@ -323,9 +323,9 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   body[data-mode="dashboard"] .poster-card .poster-team-link:hover { transform: translateY(-4px) scale(1.05); }
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:hover svg { transform: translateX(7px); }
 }
-@keyframes posterCrestSpin {
-  from { transform: perspective(650px) rotateX(8deg) rotateY(0deg); }
-  to { transform: perspective(650px) rotateX(8deg) rotateY(360deg); }
+@keyframes posterCrestSwing {
+  from { transform: perspective(650px) rotateX(6deg) rotateY(-28deg); }
+  to { transform: perspective(650px) rotateX(6deg) rotateY(28deg); }
 }
 @keyframes posterLightSweep {
   0%, 16% { transform: translateX(-40%) skewX(-18deg); opacity: 0; }
