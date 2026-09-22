@@ -324,8 +324,8 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:hover svg { transform: translateX(7px); }
 }
 @keyframes posterCrestSwing {
-  from { transform: perspective(650px) rotateX(6deg) rotateY(-28deg); }
-  to { transform: perspective(650px) rotateX(6deg) rotateY(28deg); }
+  from { transform: perspective(650px) rotateX(6deg) rotateY(-45deg); }
+  to { transform: perspective(650px) rotateX(6deg) rotateY(45deg); }
 }
 @keyframes posterLightSweep {
   0%, 16% { transform: translateX(-40%) skewX(-18deg); opacity: 0; }
