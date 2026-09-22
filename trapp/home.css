@@ -74,10 +74,11 @@ body[data-mode="dashboard"] .poster-watermark {
   object-fit: contain;
   right: 3%;
   top: 17%;
-  opacity: .18;
+  opacity: .26;
+  backface-visibility: visible;
   pointer-events: none;
 }
-body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { width: 48%; right: 3%; opacity: .20; }
+body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { width: 48%; right: 3%; opacity: .28; }
 body[data-mode="dashboard"] .poster-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 body[data-mode="dashboard"] .poster-lockup { display: flex; align-items: center; min-width: 0; gap: 8px; }
 body[data-mode="dashboard"] .poster-card .home-club-mark {
@@ -141,9 +142,6 @@ body[data-mode="dashboard"] .poster-weather {
   background: #00132280; color: #edf4fc;
 }
 body[data-mode="dashboard"] .poster-weather:has(.val-weather:empty) { display: none; }
-body[data-mode="dashboard"] .poster-weather:has(svg)::before {
-  content: '当日予報'; font: 500 10px/1.4 "Noto Sans JP", sans-serif; color: #d4e1ef;
-}
 body[data-mode="dashboard"] .poster-weather-unavailable { font: 500 10px/1.5 "Noto Sans JP",sans-serif; color: #d4e1ef; }
 body[data-mode="dashboard"] .poster-weather > div,
 body[data-mode="dashboard"] .poster-weather .val-weather {
@@ -193,7 +191,7 @@ body[data-mode="dashboard"] .poster-section-label { font: 700 9px/1.5 var(--post
 body[data-mode="dashboard"] .poster-card .dash-prev-meta { display: flex; justify-content: center; align-items: center; min-height: 23px; gap: 4px; margin: 0; color: #4a5c6a; font: 700 11px/1 var(--poster-num); }
 body[data-mode="dashboard"] .poster-card .dash-prev-vs { font-size: 7px; opacity: .65; }
 body[data-mode="dashboard"] .poster-card .dash-prev-opp-emblem { width: 20px; height: 20px; object-fit: contain; filter: none; }
-body[data-mode="dashboard"] .poster-card .dash-prev-ha { min-width: 33px; border: 0; border-radius: 0; background: none; box-shadow: none; font-size: 10px; font-weight: 400; padding: 0; color: #4a5c6a; }
+body[data-mode="dashboard"] .poster-card .dash-prev-ha { min-width: 33px; border: 0; border-radius: 0; background: none; box-shadow: none; font-family: Arial, "Noto Sans JP", sans-serif; font-size: 10px; font-weight: 400; padding: 0; color: #4a5c6a; }
 body[data-mode="dashboard"] .poster-card .dash-prev-score-row { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 31px; flex-wrap: wrap; }
 body[data-mode="dashboard"] .poster-card .val-prev-score-my,
 body[data-mode="dashboard"] .poster-card .val-prev-score-opp { font: 700 25px/1.2 var(--poster-num) !important; white-space: nowrap; color: #101921 !important; }
@@ -283,10 +281,10 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   body[data-mode="dashboard"] .poster-card.poster-motion-running { --poster-motion-play: running; }
   body[data-mode="dashboard"] .poster-watermark {
     transform-origin: center;
-    animation: posterCrestBreathe 7s ease-in-out infinite alternate;
+    animation: posterCrestSpin 5s linear infinite;
     animation-play-state: var(--poster-motion-play);
   }
-  body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { animation-delay: -5s; animation-direction: alternate-reverse; }
+  body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { animation-delay: -1.25s; }
   body[data-mode="dashboard"] .poster-card .poster-hero > .poster-light {
     display: block; position: absolute; z-index: 1; inset: -25% auto -25% -55%; width: 44%;
     pointer-events: none;
@@ -325,9 +323,9 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   body[data-mode="dashboard"] .poster-card .poster-team-link:hover { transform: translateY(-4px) scale(1.05); }
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:hover svg { transform: translateX(7px); }
 }
-@keyframes posterCrestBreathe {
-  from { transform: translateY(3px) scale(1); }
-  to { transform: translateY(-3px) scale(1.07); }
+@keyframes posterCrestSpin {
+  from { transform: perspective(650px) rotateX(8deg) rotateY(0deg); }
+  to { transform: perspective(650px) rotateX(8deg) rotateY(360deg); }
 }
 @keyframes posterLightSweep {
   0%, 16% { transform: translateX(-40%) skewX(-18deg); opacity: 0; }
@@ -416,4 +414,4 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   to { transform: translateX(4px); }
 }
 
-body[data-mode="dashboard"] .poster-card .dash-prev-ha.is-home { font-weight: 900; }
+body[data-mode="dashboard"] .poster-card .dash-prev-ha.is-home { font-weight: 900; -webkit-text-stroke: .3px currentColor; }
