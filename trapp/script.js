@@ -12871,7 +12871,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         if (elDate) elDate.innerText = lastInfo.date.substring(5).replace("-", "/");
         if (elOpp) elOpp.innerText = opp;
-        if (elHA) elHA.innerText = isHome ? "HOME" : "AWAY";
+        if (elHA) {
+          elHA.innerText = isHome ? "HOME" : "AWAY";
+          elHA.classList.toggle("is-home", isHome);
+        }
         if (elScore) elScore.innerText = scoreStr;
         if (elRes) elRes.innerHTML = resHtml;
         if (elForm) elForm.innerHTML = formHtml;

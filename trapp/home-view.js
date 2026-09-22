@@ -46,7 +46,7 @@
     const summary = `${ownName} 対 ${match.opponent} ${match.date} ${date.time}の試合詳細を開く`;
     return `<article class="dash-card white-theme home-card-enhanced poster-card${isIntro ? ' home-card-intro' : ''} home-card-${club}" id="dash-card-${club}" data-mid="${escape(storageId)}" style="--home-enter-delay:${club === 'kumamoto' ? '180ms' : '20ms'}">
       <div class="poster-hero" role="button" tabindex="0" aria-label="${escape(summary)}">
-        <img class="poster-watermark" src="${crest}" alt="" aria-hidden="true" decoding="async">
+        <img class="poster-watermark" src="./data/assets/emblems/${club === 'niigata' ? 'アルビレックス新潟' : 'ロアッソ熊本'}.png" alt="" aria-hidden="true" decoding="async">
         <header class="poster-header">
           <div class="poster-lockup"><span class="home-club-mark"><img src="${crest}" alt="" decoding="async"></span><div class="poster-brand"><h2 class="dash-team-name">${escape(clubName)}</h2></div></div>
           <div class="poster-badges">${competitionBadge(competition)}${roundHtml}<span class="poster-ha ${isHome ? 'is-home' : 'is-away'}">${ha}</span></div>

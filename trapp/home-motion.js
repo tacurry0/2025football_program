@@ -143,7 +143,7 @@
         const rect = hero?.getBoundingClientRect();
         if (!rect) continue;
         const progress = Math.max(-1, Math.min(1, (innerHeight * .45 - rect.top - rect.height / 2) / (innerHeight * .55)));
-        card.style.setProperty('--poster-depth-y', `${progress * 35}px`);
+        card.style.setProperty('--poster-depth-y', `${progress * 8}px`);
       }
     });
   }
@@ -167,7 +167,7 @@
       const dy = (y - rect.top) / rect.height - .5;
       card.style.setProperty('--poster-tilt-x', `${-dy * 7}deg`);
       card.style.setProperty('--poster-tilt-y', `${dx * 7}deg`);
-      card.style.setProperty('--poster-depth-x', `${dx * 32}px`);
+      card.style.setProperty('--poster-depth-x', `${dx * 10}px`);
     });
   }, { passive: true });
   container.addEventListener('pointerout', event => {

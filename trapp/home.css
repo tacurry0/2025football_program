@@ -69,15 +69,15 @@ body[data-mode="dashboard"] .poster-hero > :not(.poster-watermark) { position: r
 body[data-mode="dashboard"] .poster-watermark {
   position: absolute;
   z-index: 0;
-  width: 65%;
-  height: 91%;
+  width: 48%;
+  height: 76%;
   object-fit: contain;
-  right: -4%;
-  top: 4%;
-  opacity: .12;
+  right: 3%;
+  top: 17%;
+  opacity: .18;
   pointer-events: none;
 }
-body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { width: 50%; right: 8%; opacity: .16; }
+body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { width: 48%; right: 3%; opacity: .20; }
 body[data-mode="dashboard"] .poster-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 body[data-mode="dashboard"] .poster-lockup { display: flex; align-items: center; min-width: 0; gap: 8px; }
 body[data-mode="dashboard"] .poster-card .home-club-mark {
@@ -118,7 +118,7 @@ body[data-mode="dashboard"] .poster-card .poster-slogan {
   font: 700 10px/1.75 var(--poster-jp); letter-spacing: .12em; color: #e1e9f1a6;
 }
 body[data-mode="dashboard"] .poster-match-meta {
-  display: grid; grid-template-columns: minmax(0, 1fr) 64px;
+  display: grid; grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto auto; gap: 8px 8px; margin-top: 18px;
 }
 body[data-mode="dashboard"] .poster-date-line { display: flex; align-items: flex-end; min-width: 0; gap: 10px; }
@@ -132,20 +132,29 @@ body[data-mode="dashboard"] .poster-time.is-tbd { font: 700 10px/1.5 var(--poste
 body[data-mode="dashboard"] .poster-date-line.is-undated { flex-wrap: wrap; }
 body[data-mode="dashboard"] .poster-date-line.is-undated .poster-date { font: 700 23px/1.4 var(--poster-jp); white-space: normal; overflow-wrap: anywhere; }
 body[data-mode="dashboard"] .poster-venue { grid-column: 1 / -1; font: 700 12px/1.65 var(--poster-jp); overflow-wrap: anywhere; }
+/* Weather belongs to the venue, in one calm, readable line. */
 body[data-mode="dashboard"] .poster-weather {
-  grid-column: 2; grid-row: 1; align-self: end; min-width: 0 !important;
-  padding: 0 0 3px 8px; border-left: 1px solid #ffffff30; justify-content: flex-end;
+  grid-column: 1; grid-row: 3; justify-self: start;
+  display: flex; align-items: center; gap: 8px;
+  min-width: 0 !important; min-height: 26px;
+  padding: 3px 9px; border: 0; border-radius: 4px;
+  background: #00132280; color: #edf4fc;
 }
-body[data-mode="dashboard"] .poster-weather-unavailable { font: 500 9px/1.5 "Noto Sans JP",sans-serif; color: #d4e1ef; }
-body[data-mode="dashboard"] .poster-weather > div { width: 100%; }
-body[data-mode="dashboard"] .poster-weather svg { width: 26px !important; height: 26px !important; }
+body[data-mode="dashboard"] .poster-weather:has(.val-weather:empty) { display: none; }
+body[data-mode="dashboard"] .poster-weather:has(svg)::before {
+  content: '当日予報'; font: 500 10px/1.4 "Noto Sans JP", sans-serif; color: #d4e1ef;
+}
+body[data-mode="dashboard"] .poster-weather-unavailable { font: 500 10px/1.5 "Noto Sans JP",sans-serif; color: #d4e1ef; }
+body[data-mode="dashboard"] .poster-weather > div,
+body[data-mode="dashboard"] .poster-weather .val-weather {
+  display: flex !important; flex-direction: row !important; align-items: center !important; gap: 7px !important;
+}
+body[data-mode="dashboard"] .poster-weather svg { width: 20px !important; height: 20px !important; flex-shrink: 0; }
 body[data-mode="dashboard"] .poster-weather > div > div,
-body[data-mode="dashboard"] .poster-weather .val-weather > div { gap: 2px !important; font-size: 16px !important; white-space: nowrap; }
-body[data-mode="dashboard"] .poster-weather > div > div > span,
-body[data-mode="dashboard"] .poster-weather .val-weather > div > span { font-size: inherit !important; }
-body[data-mode="dashboard"] .poster-weather > div > div > span:last-child,
-body[data-mode="dashboard"] .poster-weather .val-weather > div > span:last-child { font-size: 10px !important; color: #d4e1ef !important; }
-body[data-mode="dashboard"] .poster-weather .val-weather { display: flex; flex-direction: column; align-items: flex-end; gap: 2px !important; font-size: 26px; }
+body[data-mode="dashboard"] .poster-weather .val-weather > div { gap: 3px !important; font-size: 16px !important; white-space: nowrap; }
+body[data-mode="dashboard"] .poster-weather .w-temp-max { color: #ffb499 !important; }
+body[data-mode="dashboard"] .poster-weather .w-temp-min { color: #8dd7ff !important; }
+body[data-mode="dashboard"] .poster-weather > div > div > span:last-child { font-size: 11px !important; color: #d4e1ef !important; }
 body[data-mode="dashboard"] .poster-opponent { display: flex; align-items: baseline; gap: 9px; padding-right: 0; margin-top: 12px; }
 body[data-mode="dashboard"] .poster-vs { color: #ffbc83; font: 700 18px/1 var(--poster-num); }
 body[data-mode="dashboard"] .home-card-kumamoto .poster-vs { color: #ff6b77; }
@@ -184,7 +193,7 @@ body[data-mode="dashboard"] .poster-section-label { font: 700 9px/1.5 var(--post
 body[data-mode="dashboard"] .poster-card .dash-prev-meta { display: flex; justify-content: center; align-items: center; min-height: 23px; gap: 4px; margin: 0; color: #4a5c6a; font: 700 11px/1 var(--poster-num); }
 body[data-mode="dashboard"] .poster-card .dash-prev-vs { font-size: 7px; opacity: .65; }
 body[data-mode="dashboard"] .poster-card .dash-prev-opp-emblem { width: 20px; height: 20px; object-fit: contain; filter: none; }
-body[data-mode="dashboard"] .poster-card .dash-prev-ha { min-width: 33px; border-radius: 2px; font-size: 9px; padding: 2px 4px; color: #4a5c6a; }
+body[data-mode="dashboard"] .poster-card .dash-prev-ha { min-width: 33px; border: 0; border-radius: 0; background: none; box-shadow: none; font-size: 10px; font-weight: 400; padding: 0; color: #4a5c6a; }
 body[data-mode="dashboard"] .poster-card .dash-prev-score-row { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 31px; flex-wrap: wrap; }
 body[data-mode="dashboard"] .poster-card .val-prev-score-my,
 body[data-mode="dashboard"] .poster-card .val-prev-score-opp { font: 700 25px/1.2 var(--poster-num) !important; white-space: nowrap; color: #101921 !important; }
@@ -273,8 +282,8 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   body[data-mode="dashboard"] .poster-card { --poster-motion-play: paused; }
   body[data-mode="dashboard"] .poster-card.poster-motion-running { --poster-motion-play: running; }
   body[data-mode="dashboard"] .poster-watermark {
-    transform-origin: 60% 55%;
-    animation: posterMarkDrift 8s ease-in-out infinite alternate;
+    transform-origin: center;
+    animation: posterCrestBreathe 7s ease-in-out infinite alternate;
     animation-play-state: var(--poster-motion-play);
   }
   body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { animation-delay: -5s; animation-direction: alternate-reverse; }
@@ -316,9 +325,9 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   body[data-mode="dashboard"] .poster-card .poster-team-link:hover { transform: translateY(-4px) scale(1.05); }
   body[data-mode="dashboard"] .poster-card .fx-dashboard-analysis:hover svg { transform: translateX(7px); }
 }
-@keyframes posterMarkDrift {
-  from { transform: translate3d(-14px,10px,0) rotate(-5deg) scale(1); }
-  to { transform: translate3d(18px,-14px,0) rotate(5deg) scale(1.16); }
+@keyframes posterCrestBreathe {
+  from { transform: translateY(3px) scale(1); }
+  to { transform: translateY(-3px) scale(1.07); }
 }
 @keyframes posterLightSweep {
   0%, 16% { transform: translateX(-40%) skewX(-18deg); opacity: 0; }
@@ -406,3 +415,5 @@ body[data-mode="dashboard"] .poster-ripple { display: none; }
   from { transform: translateX(-7px); }
   to { transform: translateX(4px); }
 }
+
+body[data-mode="dashboard"] .poster-card .dash-prev-ha.is-home { font-weight: 900; }
