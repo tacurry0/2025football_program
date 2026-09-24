@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "emperor",
-  "fetchedAt": "2026-09-23T23:55:41.928505+00:00",
+  "fetchedAt": "2026-09-24T17:31:16.740835+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 83,
       "source_url": "https://www.jleague.jp/match/emperor/2026/082624",
       "j_official_url": "https://www.jleague.jp/match/emperor/2026/082624",
-      "detail_fetched_at": "2026-09-23T23:55:41.928505+00:00",
+      "detail_fetched_at": "2026-09-24T17:31:16.740835+00:00",
       "home_starting_members": [
         {
           "name": "内山 翔太",
@@ -155,31 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "57",
-          "in": "加藤 徹也",
-          "out": ""
-        },
-        {
-          "minute": "46",
-          "in": "笠井 佳祐",
-          "out": ""
-        },
-        {
-          "minute": "57",
-          "in": "シマブク カズヨシ",
-          "out": ""
-        },
-        {
-          "minute": "64",
-          "in": "藤原 奏哉",
-          "out": ""
-        },
-        {
-          "minute": "74",
-          "in": "奥村 仁",
-          "out": ""
-        },
-        {
           "minute": "64",
           "in": "",
           "out": "早川 史哉"
@@ -203,6 +178,31 @@
           "minute": "46",
           "in": "",
           "out": "イウリ カスティーリョ"
+        },
+        {
+          "minute": "57",
+          "in": "加藤 徹也",
+          "out": ""
+        },
+        {
+          "minute": "46",
+          "in": "笠井 佳祐",
+          "out": ""
+        },
+        {
+          "minute": "57",
+          "in": "シマブク カズヨシ",
+          "out": ""
+        },
+        {
+          "minute": "64",
+          "in": "藤原 奏哉",
+          "out": ""
+        },
+        {
+          "minute": "74",
+          "in": "奥村 仁",
+          "out": ""
         }
       ],
       "home_cards": [],
@@ -333,31 +333,6 @@
       ],
       "away_substitutions": [
         {
-          "minute": "59",
-          "in": "嵯峨 理久",
-          "out": ""
-        },
-        {
-          "minute": "83",
-          "in": "藤村 慶太",
-          "out": ""
-        },
-        {
-          "minute": "46",
-          "in": "圓道 将良",
-          "out": ""
-        },
-        {
-          "minute": "59",
-          "in": "有田 稜",
-          "out": ""
-        },
-        {
-          "minute": "46",
-          "in": "河村 慶人",
-          "out": ""
-        },
-        {
           "minute": "46",
           "in": "",
           "out": "田中 渉"
@@ -381,6 +356,31 @@
           "minute": "59",
           "in": "",
           "out": "髙橋 旺良"
+        },
+        {
+          "minute": "59",
+          "in": "嵯峨 理久",
+          "out": ""
+        },
+        {
+          "minute": "83",
+          "in": "藤村 慶太",
+          "out": ""
+        },
+        {
+          "minute": "46",
+          "in": "圓道 将良",
+          "out": ""
+        },
+        {
+          "minute": "59",
+          "in": "有田 稜",
+          "out": ""
+        },
+        {
+          "minute": "46",
+          "in": "河村 慶人",
+          "out": ""
         }
       ],
       "away_cards": [],

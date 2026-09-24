@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-09-23T23:55:41.928505+00:00",
+  "fetchedAt": "2026-09-24T17:31:16.740835+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 87,
       "source_url": "https://www.jleague.jp/match/j3/2026/080815",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/080815",
-      "detail_fetched_at": "2026-09-23T23:55:41.928505+00:00",
+      "detail_fetched_at": "2026-09-24T17:31:16.740835+00:00",
       "home_starting_members": [
         {
           "name": "金 珉浩",
