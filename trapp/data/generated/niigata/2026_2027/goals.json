@@ -97,5 +97,23 @@
     "time": "60'",
     "minute": 60,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026092607",
+    "season": 2027,
+    "player_key": "マテウス モラエス",
+    "player_name": "マテウス モラエス",
+    "time": "15'",
+    "minute": 15,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026092607",
+    "season": 2027,
+    "player_key": "イウリ カスティーリョ",
+    "player_name": "イウリ カスティーリョ",
+    "time": "90'",
+    "minute": 90,
+    "is_own_goal": false
   }
 ]

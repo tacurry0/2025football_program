@@ -88,5 +88,14 @@
     "time": "61'",
     "minute": 61,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026092622",
+    "season": 2027,
+    "player_key": "鹿取 勇斗",
+    "player_name": "鹿取 勇斗",
+    "time": "71'",
+    "minute": 71,
+    "is_own_goal": false
   }
 ]

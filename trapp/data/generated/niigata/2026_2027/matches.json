@@ -241,5 +241,32 @@
     "competition_id": "j2",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026092607",
+    "url": "https://www.jleague.jp/match/j2/2026/092607",
+    "season": "2027",
+    "competition": "明治安田J2リーグ",
+    "section": "第8節",
+    "date": "2026-09-26",
+    "kickoff": "17:04",
+    "stadium": "ソユースタジアム",
+    "attendance": 10847,
+    "weather": "晴れ",
+    "home_team": "ブラウブリッツ秋田",
+    "away_team": "アルビレックス新潟",
+    "home_score": 2,
+    "away_score": 2,
+    "target_team": "アルビレックス新潟",
+    "target_side": "away",
+    "opponent": "ブラウブリッツ秋田",
+    "target_score": 2,
+    "opponent_score": 2,
+    "result": "draw",
+    "points": 1,
+    "season_id": "2026_2027",
+    "competition_id": "j2",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]

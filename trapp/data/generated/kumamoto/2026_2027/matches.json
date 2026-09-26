@@ -241,5 +241,32 @@
     "competition_id": "j3",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026092622",
+    "url": "https://www.jleague.jp/match/j3/2026/092622",
+    "season": "2027",
+    "competition": "明治安田J3リーグ",
+    "section": "第8節",
+    "date": "2026-09-26",
+    "kickoff": "17:03",
+    "stadium": "正田醤油スタジアム群馬",
+    "attendance": 2950,
+    "weather": "雨",
+    "home_team": "ザスパ群馬",
+    "away_team": "ロアッソ熊本",
+    "home_score": 0,
+    "away_score": 1,
+    "target_team": "ロアッソ熊本",
+    "target_side": "away",
+    "opponent": "ザスパ群馬",
+    "target_score": 1,
+    "opponent_score": 0,
+    "result": "win",
+    "points": 3,
+    "season_id": "2026_2027",
+    "competition_id": "j3",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]
