@@ -10,6 +10,7 @@ test('manual analysis refresh uses the published fallback, validates files and p
     Array.from({ length: 7 }, (_, index) => `generated/${club}/2026_2027/${index}.json`));
   let version = 1;
   let corrupt = false;
+  let rawUnavailable = true;
   const requests = [];
   const storage = new Map();
   const cache = {
@@ -18,12 +19,18 @@ test('manual analysis refresh uses the published fallback, validates files and p
     keys: async () => [...storage.keys()].map(url => ({ url })),
     delete: async key => storage.delete(key)
   };
-  const record = () => JSON.stringify({ version });
-  const files = () => Object.fromEntries(keys.map(key => [key, createHash('sha256').update(record()).digest('hex')]));
+  const record = (sourceVersion = version) => JSON.stringify({ version: sourceVersion });
+  const files = (sourceVersion = version) => Object.fromEntries(keys.map(key => [key, createHash('sha256').update(record(sourceVersion)).digest('hex')]));
   const fetch = async (url, options) => {
     requests.push([url, options.cache]);
-    if (url.startsWith('https://raw.githubusercontent.com/')) throw new Error('raw endpoint unavailable');
-    if (url.includes('/generated/update.json?')) return new Response(JSON.stringify({ season: '2026_2027', revision: String(version), files: files(), clubs: {} }));
+    const raw = url.startsWith('https://raw.githubusercontent.com/');
+    if (raw && rawUnavailable) throw new Error('raw endpoint unavailable');
+    const sourceVersion = raw ? 1 : version;
+    if (url.includes('/generated/update.json?')) return new Response(JSON.stringify({
+      season: '2026_2027', revision: String(sourceVersion), files: files(sourceVersion), clubs: {},
+      checkedAt: new Date(Date.UTC(2026, 8, 28, sourceVersion)).toISOString()
+    }));
+    if (raw) return new Response(record(sourceVersion));
     return new Response(corrupt && url.includes('/0.json?') ? '{}' : record());
   };
   const context = vm.createContext({
@@ -38,12 +45,19 @@ test('manual analysis refresh uses the published fallback, validates files and p
   assert.equal(first.manifest.revision, '1');
   assert.equal((await (await api.fetch('./data/generated/niigata/2026_2027/0.json')).json()).version, 1);
   assert(requests.some(([url, cacheMode]) => url.startsWith('https://example.com/trapp/data/') && cacheMode === 'no-store'));
-  version = 2; corrupt = true;
+  const beforeManual = requests.filter(([url]) => url.includes('/0.json?')).length;
+  const sameRevision = await api.check(true);
+  assert.equal(sameRevision.changed, false);
+  assert.equal(sameRevision.refreshed, true);
+  assert(requests.filter(([url]) => url.includes('/0.json?')).length > beforeManual);
+  version = 2; rawUnavailable = false; corrupt = true;
   await assert.rejects(api.check(true));
   assert.equal(api.metadata.revision, '1');
   assert.equal((await (await api.fetch('./data/generated/niigata/2026_2027/0.json')).json()).version, 1);
   corrupt = false;
   const retry = await api.check(true);
   assert.equal(retry.changed, true);
+  assert.equal(retry.manifest.checkedAt, '2026-09-28T02:00:00.000Z');
+  assert(requests.some(([url]) => url.startsWith('https://raw.githubusercontent.com/') && url.includes('/0.json?')));
   assert.equal((await (await api.fetch('./data/generated/niigata/2026_2027/0.json')).json()).version, 2);
 });

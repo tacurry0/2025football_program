@@ -13899,11 +13899,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (analysisRefreshPending) return analysisRefreshPending;
     const label = document.getElementById("pa-update-status");
     const button = document.getElementById("pa-update-check");
-    button.disabled = true; label.textContent = "公式記録の更新を確認中…";
+    button.disabled = true; label.textContent = "公開データを再取得中…";
     analysisRefreshPending = (async () => {
       try {
         const update = await window.TrappAnalysisData.check(force);
-        if (update.changed) {
+        if (update.changed || (force && update.refreshed)) {
           [playerAnalysisCache, playerAnalysisScopedCache, playerAnalysisDatasetCache,
             playerAnalysisHistoryCache, playerAnalysisRankingMetricsCache, playerAnalysisAllPromises,
             playerAnalysisAllYearRowsCache, playerAnalysisSeasonMetaCache, playerAnalysisMonthlyMetaCache,
@@ -13911,8 +13911,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (currentMode === "player-analysis") await renderPlayerAnalysisYear(playerAnalysisState.year);
         }
         const meta = update.manifest?.clubs[playerAnalysisState.selectedClub];
-        const prefix = force ? (update.changed ? "更新完了" : "最新を確認済み") : "自動更新";
-        label.textContent = meta ? `${prefix} · ${meta.last_match_date}までの${meta.matches}試合` : `${prefix} · 2026/27公式記録`;
+        const prefix = force ? (update.changed ? "新しい記録を反映" : "再取得完了・新着試合なし") : "公式データ";
+        const checkedAt = update.manifest?.checkedAt;
+        const formatCheckTime = value => new Intl.DateTimeFormat("ja-JP", {
+          timeZone: "Asia/Tokyo", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false
+        }).format(new Date(value));
+        const checkedLabel = Number.isFinite(Date.parse(checkedAt)) ? formatCheckTime(checkedAt) : "-";
+        const timeLabel = force ? `アプリ取得 ${formatCheckTime(Date.now())} / 公式集計 ${checkedLabel}` : `公式集計 ${checkedLabel}`;
+        label.textContent = meta
+          ? `${prefix} · ${meta.last_match_date}まで${meta.matches}試合\n${timeLabel}`
+          : `${prefix} · 2026/27公式記録\n${timeLabel}`;
       } catch (error) {
         console.warn("Player analysis refresh failed", error);
         label.textContent = "更新できませんでした。↻で再試行できます。";
