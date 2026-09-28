@@ -8531,6 +8531,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function setPlayerProfileTab(tabName) {
     const modal = document.getElementById("pa-modal");
     if (!modal) return;
+    const previousTab = playerAnalysisState.profileTab;
     playerAnalysisState.profileTab = tabName || "profile";
     modal.querySelectorAll(".pa-profile-tab").forEach(button => {
       const active = button.dataset.paProfileTab === playerAnalysisState.profileTab;
@@ -8543,6 +8544,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.querySelectorAll("[data-pa-stats-controls]").forEach(controls => {
       controls.hidden = playerAnalysisState.profileTab === "profile";
     });
+    if (playerAnalysisState.profileTab === "total" && previousTab === "yearly") {
+      const picker = modal.querySelector("[data-pv-period-select]");
+      if (picker && picker.value !== "total") {
+        picker.value = "total";
+        picker.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+    }
     modal.profileSync?.();
   }
 
@@ -8568,7 +8576,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const scopes=[{key:'total',label:'通算',numbers:aggregate.numbers || player.numbers,rotate:true}];
     if(playerAnalysisState.timeMode==='range')scopes.push({key:'current',label:getPlayerAnalysisTimeLabel(),numbers:player.numbers,rotate:true});
     sortedYears.forEach(row=>{const year=getPlayerYearValue(row);if(year)scopes.push({key:`year:${year}`,label:playerAnalysisSeasonLabel(year),numbers:row.numbers,rotate:false});});
-    let period=playerAnalysisState.profilePeriod || (playerAnalysisState.timeMode==='range'?'current':playerAnalysisState.year==='all'?'total':`year:${playerAnalysisState.year}`);
+    let period=playerAnalysisState.profilePeriod || 'total';
     if(!scopes.some(scope=>scope.key===period))period=scopes[0].key;
     const activeTab=['profile','total','yearly'].includes(playerAnalysisState.profileTab)?playerAnalysisState.profileTab:'profile';
     const kpis=(row,rows)=>`<p class="pv-stats-period">${escapeHtml(getPlayerSeasonSpan(rows))}</p><div class="pa-profile-kpis">${[
@@ -8595,7 +8603,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ${isManualPlayer(aggregate)||isManualPlayer(player)?'<div class="pa-manual-delete-zone"><button type="button" class="pa-manual-edit-btn" data-pa-edit-manual>この選手を編集</button><button type="button" class="pa-manual-delete-btn" data-pa-delete-manual>この選手を削除</button></div>':''}`;
     const theme=getPlayerCardTheme();
     const playerName=aggregate.player_name || player.player_name || '-';
-    setPlayerAnalysisModalContent(view.shell({name:playerName,english:getPlayerProfileEnglishName(profile,aggregate || player),position:formatPlayerList(player.positions || aggregate.positions),photo:renderPlayerPhoto(playerName,playerAnalysisState.selectedClub,'pv-player-photo',aggregate || player,{cutout:true}),emblem:theme.emblem,club:theme.key,scopes,period,body}));
+    setPlayerAnalysisModalContent(view.shell({name:playerName,english:getPlayerProfileEnglishName(profile,aggregate || player),position:formatPlayerList(player.positions || aggregate.positions),photo:renderPlayerPhoto(playerName,playerAnalysisState.selectedClub,'pv-player-photo',aggregate || player,{cutout:true,inline:true}),emblem:theme.emblem,club:theme.key,scopes,period,body}));
     setPlayerProfileTab(activeTab);
     const modal=document.getElementById('pa-modal');
     playerProfileViewCleanup=view.mount(modal,value=>{playerAnalysisState.profilePeriod=value;});

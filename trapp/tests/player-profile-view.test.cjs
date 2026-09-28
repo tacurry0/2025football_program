@@ -17,11 +17,14 @@ test('total cycles every five seconds and disposal removes its timer; a year doe
  assert.deepEqual(shown,['23','16','0','23']);stop();assert.equal(callbacks.size,0);
  cycle(numberPlan(scopes,'year:2020'),v=>shown.push(v),clock);assert.equal(callbacks.size,0);assert.equal(shown.at(-1),'16');
 });
-test('profile header escapes names, shows only one number and exposes an icon-only accessible card button',()=>{
- const html=shell({name:'<選手>',english:'PLAYER',position:'FW',photo:'',emblem:'crest.png',club:'niigata',scopes,period:'year:2020',body:''});
+test('profile photo is the only card creation control and names remain escaped',()=>{
+ const html=shell({name:'<選手>',english:'PLAYER',position:'FW',photo:'<span class="player-photo"><img alt="選手の写真"></span>',emblem:'crest.png',club:'niigata',scopes,period:'year:2020',body:''});
  assert(html.includes('&lt;選手&gt;'));assert(html.includes('背番号 16'));assert(!html.includes('アルビレックス新潟'));
- assert.match(html,/data-pa-player-card aria-label="選手カードを作成"[^>]*><svg/);
+ assert.match(html,/<button[^>]*class="pv-photo"[^>]*data-pa-player-card[^>]*aria-label="&lt;選手&gt;の写真から選手カードを作成"[^>]*><span class="player-photo">/);
+ assert(!html.includes('pv-card-button'));
+ assert.equal((html.match(/data-pa-player-card/g)||[]).length,1);
  assert.equal((html.match(/data-pv-number /g)||[]).length,1);
+ assert(!shell({name:'選手',english:'',position:'FW',photo:'',emblem:'crest.png',club:'niigata',scopes,period:'total',body:''}).includes('data-pa-player-card'));
 });
 
 test('cutouts preserve aliases, URI encoding, manual photos and original fallbacks',()=>{

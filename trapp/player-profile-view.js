@@ -33,9 +33,9 @@
     const plan=numberPlan(scopes,period);
     return `<div class="pv-shell" data-player-profile data-club="${esc(club)}" data-pv-scopes="${esc(JSON.stringify(scopes))}" data-pv-period="${esc(period)}">
       <header class="pv-hero"><span class="pv-handle" aria-hidden="true"></span><div class="pv-top"><span>選手詳細</span><button type="button" class="pv-close" data-pa-modal-close aria-label="選手詳細を閉じる">×</button></div>
-      <img class="pv-watermark" src="${esc(emblem)}" alt=""><div class="pv-photo">${photo}</div>
+      <img class="pv-watermark" src="${esc(emblem)}" alt="">${photo ? `<button type="button" class="pv-photo" data-pa-player-card aria-label="${esc(name)}の写真から選手カードを作成" title="選手カードを作成">${photo}</button>` : ''}
       <div class="pv-identity"><div class="pv-shirt"><strong data-pv-number aria-label="背番号 ${esc(plan.values[0])}">${esc(plan.values[0])}</strong><span>${esc(position)}</span></div><div class="pv-name"><h2>${esc(name)}</h2><p>${esc(english)}</p></div></div>
-      <button type="button" class="pv-card-button" data-pa-player-card aria-label="選手カードを作成" title="選手カードを作成"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="5" width="15" height="17" rx="2"/><path d="M3 17V4a2 2 0 0 1 2-2h11M9 16h7M9 19h5"/><circle cx="12.5" cy="10.5" r="2"/></svg></button></header>
+      </header>
       <div class="pa-modal-body pv-body">${body}</div></div>`;
   }
   function mount(modal, onPeriod) {
