@@ -7893,9 +7893,10 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
     height: 44px;
     box-sizing: border-box;
     margin: 0;
-    border: 1px solid rgba(255,255,255,0.22);
-    border-radius: 10px;
-    background: rgba(255,255,255,0.12);
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
     box-shadow: none;
   }
   .pa-mobile-list-photo.player-photo img,
@@ -11725,6 +11726,11 @@ body.side-menu-open #ultra-nav { display: none !important; }
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   body[data-mode="player-analysis"] .pa-mobile-list-photo.player-photo img,
