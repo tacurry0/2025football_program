@@ -45,6 +45,7 @@ test('opponent record counts every played game even if the player scores only on
   ), context);
   assert.equal(context.isPlayerAppearancePlayedForCombination(appearances[0]), true);
   assert.equal(context.isPlayerAppearancePlayedForCombination(appearances.at(-1)), false);
+  assert.equal(context.isPlayerAppearancePlayedForCombination({ bench: true, sub_in: true, played: true, minute_in: 91 }), true);
   vm.runInContext(functionSource, context);
   const stats = await context.buildPlayerPerformanceExtras({ player_key: 'scorer' });
   const opponent = stats.opponentGoals[0];

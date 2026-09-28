@@ -4035,9 +4035,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function isPlayerAppearancePlayedForCombination(appearance) {
     if (!appearance || appearance.played === false) return false;
+    if (appearance.played === true) return true;
     const hasMinute = hasPlayerValue(appearance.minute_in) || hasPlayerValue(appearance.minute_out);
     if (hasMinute) return calculatePlayerAppearanceMinutes(appearance) >= 1;
-    if (appearance.played === true) return true;
     const type = String(appearance.appearance_type || "").normalize("NFKC").toLowerCase();
     if (type.includes("bench") || (appearance.bench && !appearance.sub_in && !appearance.starter)) return false;
     return Boolean(appearance.player_key || appearance.player_name);
