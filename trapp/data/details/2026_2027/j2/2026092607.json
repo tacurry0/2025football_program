@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-09-27T23:55:54.162417+00:00",
+  "fetchedAt": "2026-09-28T19:49:09.891715+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j2",
       "competition": "明治安田J2リーグ",
       "date": "2026-09-26",
-      "time": "17:04",
+      "time": "17:00",
       "round": "第8節",
       "home": "ブラウブリッツ秋田",
       "away": "アルビレックス新潟",
@@ -28,7 +28,7 @@
       "humidity": 66,
       "source_url": "https://www.jleague.jp/match/j2/2026/092607",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/092607",
-      "detail_fetched_at": "2026-09-27T23:55:54.162417+00:00",
+      "detail_fetched_at": "2026-09-28T19:49:09.891715+00:00",
       "home_starting_members": [
         {
           "name": "山田 元気",
