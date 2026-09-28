@@ -7947,8 +7947,13 @@ body:not([data-mode="feed"]):not([data-mode="calendar"]) #ultra-nav { display: n
     white-space: nowrap;
   }
   .pa-mobile-identity {
-    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-columns: 44px 44px minmax(0, 1fr);
     gap: 8px;
+  }
+  .pa-mobile-identity .pa-mobile-list-photo.player-photo {
+    grid-area: auto;
+    width: 44px;
+    height: 52px;
   }
   .pa-mobile-shirt {
     width: 44px;

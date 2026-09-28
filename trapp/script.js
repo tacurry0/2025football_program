@@ -3956,7 +3956,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           opponentMap.set(opponent, {
             opponent,
             goals: 0,
-            scoredMatchIds: new Set(),
+            playedMatchIds: new Set(),
             wins: 0,
             draws: 0,
             losses: 0
@@ -3964,22 +3964,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         const stats = opponentMap.get(opponent);
         stats.goals += 1;
-        const matchId = String(match.match_id);
-        if (!stats.scoredMatchIds.has(matchId)) {
-          stats.scoredMatchIds.add(matchId);
-          if (match.result === "win") stats.wins += 1;
-          else if (match.result === "draw") stats.draws += 1;
-          else if (match.result === "loss") stats.losses += 1;
-        }
       });
 
       (dataset.appearances || []).forEach(appearance => {
         if (getPlayerCanonicalIdentity(appearance, year).groupKey !== groupKey) return;
-        if (String(appearance.position || "").trim() !== "GK") return;
         if (!isPlayerAppearancePlayedForCombination(appearance)) return;
         const match = matchMap.get(String(appearance.match_id));
         if (!match) return;
         const opponent = normalizeOpponentClubName(match.opponent) || "-";
+        const stats = opponentMap.get(opponent);
+        if (stats && !stats.playedMatchIds.has(`${year}:${match.match_id}`)) {
+          stats.playedMatchIds.add(`${year}:${match.match_id}`);
+          if (match.result === "win") stats.wins += 1;
+          else if (match.result === "draw") stats.draws += 1;
+          else if (match.result === "loss") stats.losses += 1;
+        }
+        if (String(appearance.position || "").trim() !== "GK") return;
         if (!gkOpponentMap.has(opponent)) {
           gkOpponentMap.set(opponent, {
             opponent,
@@ -3990,28 +3990,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             goalsAgainst: 0
           });
         }
-        const stats = gkOpponentMap.get(opponent);
-        stats.matches += 1;
-        stats.goalsAgainst += toPlayerNumber(match.opponent_score) || 0;
-        if (match.result === "win") stats.wins += 1;
-        else if (match.result === "draw") stats.draws += 1;
-        else if (match.result === "loss") stats.losses += 1;
+        const gkStats = gkOpponentMap.get(opponent);
+        gkStats.matches += 1;
+        gkStats.goalsAgainst += toPlayerNumber(match.opponent_score) || 0;
+        if (match.result === "win") gkStats.wins += 1;
+        else if (match.result === "draw") gkStats.draws += 1;
+        else if (match.result === "loss") gkStats.losses += 1;
       });
     }
 
     const opponentGoals = Array.from(opponentMap.values()).map(stats => {
-      const scoredMatches = stats.scoredMatchIds.size;
+      const matches = stats.playedMatchIds.size;
       return {
         opponent: stats.opponent,
         goals: stats.goals,
-        scoredMatches,
+        matches,
         wins: stats.wins,
         draws: stats.draws,
         losses: stats.losses,
-        winRate: calculatePlayerRate(stats.wins, scoredMatches)
+        winRate: calculatePlayerRate(stats.wins, matches)
       };
     }).sort((a, b) => b.goals - a.goals
-      || b.scoredMatches - a.scoredMatches
+      || b.matches - a.matches
       || a.opponent.localeCompare(b.opponent, "ja"));
 
     const opponentDefense = Array.from(gkOpponentMap.values()).map(stats => ({
@@ -6725,7 +6725,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let rank = 0;
     return [...items]
       .sort((a, b) => b.goals - a.goals
-        || b.scoredMatches - a.scoredMatches
+        || b.matches - a.matches
         || String(a.playerName || "").localeCompare(String(b.playerName || ""), "ja"))
       .map((item, index) => {
         if (!previous || item.goals !== previous.goals) rank = index + 1;
@@ -6773,8 +6773,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             positions: getPlayerPositions(player),
             numbers: getPlayerNumbers(player),
             goals: 0,
-            scoredMatchIds: new Set(),
-            scoredMatches: new Map(),
+            playedMatchIds: new Set(),
+            matchRows: new Map(),
             wins: 0,
             draws: 0,
             losses: 0
@@ -6782,29 +6782,40 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         const stats = byPlayer.get(groupKey);
         stats.goals += 1;
-        const matchId = String(match.match_id);
-        if (!stats.scoredMatches.has(matchId)) {
-          stats.scoredMatches.set(matchId, { match, goals: 0 });
+        const matchId = `${year}:${match.match_id}`;
+        if (!stats.matchRows.has(matchId)) {
+          stats.matchRows.set(matchId, { match, goals: 0 });
         }
-        stats.scoredMatches.get(matchId).goals += 1;
-        if (!stats.scoredMatchIds.has(matchId)) {
-          stats.scoredMatchIds.add(matchId);
+        stats.matchRows.get(matchId).goals += 1;
+      });
+      (dataset.appearances || []).forEach(appearance => {
+        if (!isPlayerAppearancePlayedForCombination(appearance)) return;
+        const match = matchMap.get(String(appearance.match_id));
+        if (!match) return;
+        const groupKey = getPlayerCanonicalIdentity(appearance, year).groupKey;
+        const opponent = normalizeOpponentClubName(match.opponent) || "-";
+        const stats = rankingSource.get(opponent)?.get(groupKey);
+        if (!stats) return;
+        const matchId = `${year}:${match.match_id}`;
+        if (!stats.playedMatchIds.has(matchId)) {
+          stats.playedMatchIds.add(matchId);
           if (match.result === "win") stats.wins += 1;
           else if (match.result === "draw") stats.draws += 1;
           else if (match.result === "loss") stats.losses += 1;
         }
+        if (!stats.matchRows.has(matchId)) stats.matchRows.set(matchId, { match, goals: 0 });
       });
     }
 
     const rankings = new Map();
     rankingSource.forEach((byPlayer, opponent) => {
       const items = Array.from(byPlayer.values()).map(stats => {
-        const scoredMatches = stats.scoredMatchIds.size;
+        const matches = stats.playedMatchIds.size;
         return {
           ...stats,
-          scoredMatches,
-          matchRows: Array.from(stats.scoredMatches.values()).sort((a, b) => String(b.match.date || "").localeCompare(String(a.match.date || ""))),
-          winRate: calculatePlayerRate(stats.wins, scoredMatches)
+          matches,
+          matchRows: Array.from(stats.matchRows.values()).sort((a, b) => String(b.match.date || "").localeCompare(String(a.match.date || ""))),
+          winRate: calculatePlayerRate(stats.wins, matches)
         };
       }).filter(item => item.goals > 0);
       rankings.set(opponent, getRankedOpponentClubPlayerItems(items));
@@ -6892,7 +6903,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </span>
               </div>
               <div class="pa-opponent-player-sub">
-                <span>${escapeHtml(formatPlayerNumber(item.scoredMatches))}試合</span>
+                <span>${escapeHtml(formatPlayerNumber(item.matches))}試合</span>
                 <span>${escapeHtml(formatPlayerRecord(item.wins, item.draws, item.losses))}</span>
                 <span>勝率 ${escapeHtml(formatPlayerRate(item.winRate))}</span>
               </div>
@@ -7443,7 +7454,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <span class="pa-mobile-shirt ${isGoalkeeper ? "gk" : ""}" aria-label="背番号 ${escapeHtml(formatPlayerList(player.numbers))}">
               <span class="pa-mobile-number-cycle" data-pa-number-count="${numberCount}">${numberCycle}</span>
             </span>
-            ${renderPlayerPhoto(name, playerAnalysisState.selectedClub, "pa-mobile-list-photo", player, { inline: true })}
+            ${renderPlayerPhoto(name, playerAnalysisState.selectedClub, "pa-mobile-list-photo", player, { inline: true, cutout: true })}
             <span class="pa-mobile-compact-name">
                <small>${escapeHtml(formatPlayerList(player.positions))}</small>
                <strong title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
@@ -7461,6 +7472,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <span class="pa-mobile-shirt ${isGoalkeeper ? "gk" : ""}" aria-label="背番号 ${escapeHtml(formatPlayerList(player.numbers))}">
               <span class="pa-mobile-number-cycle" data-pa-number-count="${numberCount}">${numberCycle}</span>
             </span>
+            ${renderPlayerPhoto(name, playerAnalysisState.selectedClub, "pa-mobile-list-photo", player, { inline: true, cutout: true })}
             <span class="pa-mobile-title">
               <span class="pa-mobile-title-row">
                 <span class="pa-mobile-position">${escapeHtml(formatPlayerList(player.positions))}</span>
@@ -7807,7 +7819,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <strong>${mode === "defense"
                   ? `${escapeHtml(formatPlayerGoalsAgainstAverage(item.goalsAgainstAvg))}${escapeHtml(valueLabel)}`
                   : `${escapeHtml(formatPlayerNumber(item.goals))}${escapeHtml(valueLabel)}`}</strong>
-                <small>${escapeHtml(formatPlayerNumber(mode === "defense" ? item.matches : item.scoredMatches))}試合 / ${escapeHtml(formatPlayerRecord(item.wins, item.draws, item.losses))} / 勝率 ${escapeHtml(formatPlayerRate(item.winRate))}</small>
+                <small>${escapeHtml(formatPlayerNumber(item.matches))}試合 / ${escapeHtml(formatPlayerRecord(item.wins, item.draws, item.losses))} / 勝率 ${escapeHtml(formatPlayerRate(item.winRate))}</small>
               </li>
             `).join("")}
           </ol>
@@ -13899,9 +13911,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (currentMode === "player-analysis") await renderPlayerAnalysisYear(playerAnalysisState.year);
         }
         const meta = update.manifest?.clubs[playerAnalysisState.selectedClub];
-        label.textContent = meta ? `自動更新 · ${meta.last_match_date}までの${meta.matches}試合` : "2026/27の公式記録を自動更新";
-      } catch (_) {
-        label.textContent = "更新を確認できません。保存済みの記録を表示しています。";
+        const prefix = force ? (update.changed ? "更新完了" : "最新を確認済み") : "自動更新";
+        label.textContent = meta ? `${prefix} · ${meta.last_match_date}までの${meta.matches}試合` : `${prefix} · 2026/27公式記録`;
+      } catch (error) {
+        console.warn("Player analysis refresh failed", error);
+        label.textContent = "更新できませんでした。↻で再試行できます。";
       } finally { button.disabled = false; analysisRefreshPending = null; }
     })();
     return analysisRefreshPending;
