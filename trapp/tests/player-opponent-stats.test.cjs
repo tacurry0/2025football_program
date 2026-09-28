@@ -16,6 +16,10 @@ test('opponent record counts every played game even if the player scores only on
     { match_id: 'c', opponent: '対戦相手', result: 'loss', target_side: 'home', opponent_score: 2 }
   ];
   const appearances = games.map(game => ({ match_id: game.match_id, player_key: 'scorer', position: 'FW', played: true }));
+  appearances[0].bench = true;
+  appearances[0].sub_in = true;
+  appearances[0].minute_in = 55;
+  appearances.push({ match_id: 'b', player_key: 'scorer', position: 'FW', bench: true, played: false });
   appearances.push({ match_id: 'c', player_key: 'substitute', position: 'FW', played: false });
   const context = vm.createContext({
     playerAnalysisState: { matchScope: 'all' },
@@ -30,10 +34,17 @@ test('opponent record counts every played game even if the player scores only on
     isPlayerAnalysisScopeMatch: () => true,
     getPlayerCanonicalIdentity: row => ({ groupKey: row.player_key }),
     normalizeOpponentClubName: value => value,
-    isPlayerAppearancePlayedForCombination: row => row.played,
+    hasPlayerValue: value => value !== null && value !== undefined && value !== '',
+    calculatePlayerAppearanceMinutes: row => row.played ? 90 - Number(row.minute_in || 0) : 0,
     calculatePlayerRate: (wins, matches) => matches ? (wins / matches) * 100 : null,
     toPlayerNumber: value => Number(value)
   });
+  vm.runInContext(source.slice(
+    source.indexOf('  function isPlayerAppearancePlayedForCombination('),
+    source.indexOf('  async function getPlayerPlayedMatchEntries(')
+  ), context);
+  assert.equal(context.isPlayerAppearancePlayedForCombination(appearances[0]), true);
+  assert.equal(context.isPlayerAppearancePlayedForCombination(appearances.at(-1)), false);
   vm.runInContext(functionSource, context);
   const stats = await context.buildPlayerPerformanceExtras({ player_key: 'scorer' });
   const opponent = stats.opponentGoals[0];
