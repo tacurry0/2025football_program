@@ -4918,15 +4918,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       ? values.reduce((sum, value) => sum + value, 0) / values.length
       : null;
     const teamValue = getPlayerAnalysisTeamSortValue(sortKey);
+    const matchCountSorts = new Set(["played_matches", "starter_matches", "non_starter_matches", "sub_matches"]);
     const cards = [
       {
-        label: `${info.label} 選手平均`,
-        value: average === null ? "-" : formatPlayerAnalysisAverageValue(average, info.type),
+        label: "選手平均",
+        value: average === null ? "-" : `${formatPlayerAnalysisAverageValue(average, info.type)}${matchCountSorts.has(sortKey) ? "試合" : ""}`,
         hidden: info.noAverage
       },
       {
         label: info.teamLabel || "チーム数値",
-        value: formatPlayerAnalysisMetricValue(teamValue, info.type),
+        value: `${formatPlayerAnalysisMetricValue(teamValue, info.type)}${info.teamMetric === "matches" ? "試合" : ""}`,
         hidden: teamValue === null
       }
     ].filter(card => !card.hidden);
@@ -5167,7 +5168,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     summary.innerHTML = `
       <section class="pa-summary-overview" aria-label="分析対象と主要数値">
         <header class="pa-summary-scope">
-          <span><small>ANALYSIS SCOPE</small><strong>${escapeHtml(yearLabel)}</strong></span>
+          <span><small>対象シーズン</small><strong>${escapeHtml(yearLabel)}</strong></span>
           <em>${escapeHtml(scopeLabel)}</em>
         </header>
         <div class="pa-summary-totals">
@@ -5180,7 +5181,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       </section>
       <section class="pa-summary-leaders" aria-label="トップ選手">
-        <header><span>TOP PERFORMERS</span><small>対象期間のリーダー</small></header>
+        <header><span>個人ランキング</span><small>各項目のトップ</small></header>
         <div class="pa-summary-leader-grid">
           ${leaders.map((item, index) => `
             <article>
@@ -7407,6 +7408,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   function renderPlayerAnalysisMobileList(rows) {
     const { mobileList } = getPlayerAnalysisElements();
     if (!mobileList) return;
+    const listHead = document.getElementById("pa-mobile-list-head");
+    const listMetric = document.getElementById("pa-mobile-list-metric");
+    if (listHead && listMetric) {
+      const sortInfo = getPlayerAnalysisSortInfo(playerAnalysisState.sortKey);
+      const metricLabel = sortInfo ? (sortInfo.shortLabel || sortInfo.label) : "数値";
+      const metricUnits = {
+        played_matches: "試合", starter_matches: "試合", non_starter_matches: "試合", sub_matches: "試合",
+        profile_height_cm: "cm", profile_weight_kg: "kg", profile_birth_year: "年"
+      };
+      const unit = metricUnits[playerAnalysisState.sortKey] || "";
+      listMetric.innerHTML = `${escapeHtml(metricLabel)}${unit ? `<small>${escapeHtml(unit)}</small>` : ""}`;
+      listHead.hidden = playerAnalysisState.listDetail || !rows.length;
+    }
     if (!rows.length) {
       mobileList.innerHTML = `<div class="pa-mobile-empty">データがありません</div>`;
       setupPlayerAnalysisNumberCycles(mobileList);
@@ -7459,8 +7473,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                <small>${escapeHtml(formatPlayerList(player.positions))}</small>
                <strong title="${escapeHtml(name)}">${escapeHtml(name)}</strong>
             </span>
-            <span class="pa-mobile-compact-metric">
-              <small>${escapeHtml(metricLabel)}</small>
+            <span class="pa-mobile-compact-metric" aria-label="${escapeHtml(metricLabel)} ${escapeHtml(metricValue)}">
               <b>${escapeHtml(metricValue)}</b>
             </span>
           </button>
@@ -13906,8 +13919,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function refreshPlayerAnalysisData(force = false) {
     if (analysisRefreshPending) return analysisRefreshPending;
     const label = document.getElementById("pa-update-status");
+    const time = document.getElementById("pa-update-time");
     const button = document.getElementById("pa-update-check");
-    button.disabled = true; label.textContent = "公開データを再取得中…";
+    button.disabled = true;
+    label.textContent = "試合記録を確認中…";
     analysisRefreshPending = (async () => {
       try {
         const update = await window.TrappAnalysisData.check(force);
@@ -13919,19 +13934,20 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (currentMode === "player-analysis") await renderPlayerAnalysisYear(playerAnalysisState.year);
         }
         const meta = update.manifest?.clubs[playerAnalysisState.selectedClub];
-        const prefix = force ? (update.changed ? "新しい記録を反映" : "再取得完了・新着試合なし") : "公式データ";
         const checkedAt = update.manifest?.checkedAt;
         const formatCheckTime = value => new Intl.DateTimeFormat("ja-JP", {
           timeZone: "Asia/Tokyo", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false
         }).format(new Date(value));
         const checkedLabel = Number.isFinite(Date.parse(checkedAt)) ? formatCheckTime(checkedAt) : "-";
-        const timeLabel = force ? `アプリ取得 ${formatCheckTime(Date.now())} / 公式集計 ${checkedLabel}` : `公式集計 ${checkedLabel}`;
+        const matchDate = String(meta?.last_match_date || "").match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+        const latestMatchLabel = matchDate ? `${Number(matchDate[2])}/${Number(matchDate[3])}` : "-";
         label.textContent = meta
-          ? `${prefix} · ${meta.last_match_date}まで${meta.matches}試合\n${timeLabel}`
-          : `${prefix} · 2026/27公式記録\n${timeLabel}`;
+          ? `収録 ${formatPlayerNumber(meta.matches)}試合｜最新試合 ${latestMatchLabel}`
+          : "試合記録を確認できませんでした";
+        if (time) time.textContent = `最終取得 ${checkedLabel}`;
       } catch (error) {
         console.warn("Player analysis refresh failed", error);
-        label.textContent = "更新できませんでした。↻で再試行できます。";
+        label.textContent = "試合記録を取得できませんでした";
       } finally { button.disabled = false; analysisRefreshPending = null; }
     })();
     return analysisRefreshPending;

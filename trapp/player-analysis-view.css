@@ -1,0 +1,715 @@
+/* Player analysis: compact controls and a continuous, scannable list. */
+@media (max-width: 760px) {
+  body[data-mode="player-analysis"] #player-analysis-view {
+    padding-inline: 0;
+    background: #f4f6f8;
+  }
+
+  body[data-mode="player-analysis"] .player-analysis-page {
+    gap: 0;
+    padding-bottom: 84px;
+  }
+
+  body[data-mode="player-analysis"] .pa-overview-board {
+    display: block;
+    padding: 0;
+  }
+
+  body[data-mode="player-analysis"] .pa-board-main {
+    display: grid;
+    gap: 0;
+    padding: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-topbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-heading {
+    grid-column: 1;
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 10px;
+    min-height: 62px;
+    margin: 0;
+    padding: 9px 14px;
+    border-radius: 0;
+    background: linear-gradient(124deg, var(--albirex-orange) 0 7%, #071e38 7% 82%, #0c2c4c 82% 100%);
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-club-crest {
+    width: 36px;
+    height: 42px;
+    padding: 1px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-club-crest img {
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+  }
+
+  body[data-mode="player-analysis"] .pa-heading .pa-kicker,
+  body[data-mode="player-analysis"] .pa-club-caption {
+    display: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-heading-title {
+    color: #fff;
+    font-family: var(--font-main);
+    font-size: 1.22rem;
+    letter-spacing: 0;
+  }
+
+  body[data-mode="player-analysis"] .pa-club-select {
+    min-width: 66px;
+    min-height: 36px;
+    padding: 0 25px 0 10px;
+    border: 1px solid rgba(255,255,255,0.42);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 0.82rem;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-main-time-controls {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 8px 12px;
+    border-bottom: 1px solid #e2e5e9;
+  }
+
+  body[data-mode="player-analysis"] .pa-main-year-row {
+    grid-template-columns: minmax(0, 1fr) 76px;
+    gap: 8px;
+    align-items: center;
+  }
+
+  body[data-mode="player-analysis"] .pa-year-field {
+    width: auto;
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    align-items: center;
+    gap: 7px;
+    color: #65707c;
+    font-size: 0.72rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-year-field span {
+    text-align: left;
+  }
+
+  body[data-mode="player-analysis"] .pa-year-field select,
+  body[data-mode="player-analysis"] .pa-main-period-toggle {
+    min-height: 40px;
+    border: 1px solid #d9dee5;
+    border-radius: 8px;
+    background: #fff;
+    color: #10263d;
+    box-shadow: none;
+    font-size: 0.84rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-main-period-toggle {
+    min-width: 0;
+    padding: 0 8px;
+  }
+
+  body[data-mode="player-analysis"] .pa-main-period-fields {
+    margin-top: 8px;
+  }
+
+  body[data-mode="player-analysis"] .pa-scope-field {
+    width: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+    margin: 0;
+    padding: 8px 12px 0;
+    color: #687382;
+    font-size: 0.64rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-scope-switch {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 2px;
+    min-height: 40px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid #dfe3e8;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-scope-btn {
+    min-height: 40px;
+    padding: 0 4px;
+    border-radius: 0;
+    border-bottom: 3px solid transparent;
+    color: #5b6571;
+    font-size: clamp(0.62rem, 2.65vw, 0.72rem);
+    font-weight: 850;
+    white-space: nowrap;
+  }
+
+  body[data-mode="player-analysis"] .pa-scope-btn.active {
+    border-bottom-color: var(--albirex-orange);
+    background: #fff;
+    color: var(--pa-accent-ink);
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-competition-details {
+    margin: 0 12px;
+    border: 0;
+    border-bottom: 1px solid #e2e5e9;
+    border-radius: 0;
+    background: #fff;
+  }
+
+  body[data-mode="player-analysis"] .pa-competition-details summary {
+    min-height: 39px;
+    padding: 0 2px;
+    color: #344152;
+    font-size: 0.76rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-update-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 38px;
+    margin: 0;
+    padding: 4px 12px;
+    border: 0;
+    border-bottom: 1px solid #e5e8ec;
+    color: #596675;
+    font-size: 0.69rem;
+    line-height: 1.25;
+  }
+
+  body[data-mode="player-analysis"] #pa-update-status {
+    min-width: 0;
+    overflow: hidden;
+    color: #445568;
+    font-weight: 750;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  body[data-mode="player-analysis"] .pa-update-meta {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 6px;
+    color: #7b8490;
+    font-size: 0.64rem;
+    white-space: nowrap;
+  }
+
+  body[data-mode="player-analysis"] .pa-update-row .fx-icon-button {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    padding: 0;
+    border: 1px solid #d9dee5;
+    border-radius: 50%;
+    background: #fff;
+    color: #18324f;
+    box-shadow: none;
+    font-size: 1.12rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-status.active {
+    margin: 6px 12px;
+    padding: 8px 10px;
+    border: 1px solid #f1d0b5;
+    border-radius: 7px;
+    background: #fff7f1;
+    color: #78400f;
+    font-size: 0.75rem;
+    text-align: left;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: 0 12px;
+    background: #fff;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-overview {
+    padding: 9px 0 10px;
+    border: 0;
+    border-bottom: 1px solid #dfe3e8;
+    border-radius: 0;
+    background: #fff;
+    color: #132b44;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-overview::after { display: none; }
+
+  body[data-mode="player-analysis"] .pa-summary-scope {
+    align-items: center;
+    gap: 8px;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-scope > span {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-scope small {
+    color: #697585;
+    font-size: 0.62rem;
+    letter-spacing: 0;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-scope strong {
+    color: #102a45;
+    font-size: 1.15rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-scope em {
+    max-width: 58%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #737e8b;
+    font-size: 0.65rem;
+    text-align: right;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-totals {
+    gap: 0;
+    margin-top: 8px;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-totals article {
+    gap: 4px;
+    padding: 4px 8px;
+    border: 0;
+    border-left: 1px solid #dfe3e8;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-totals article:first-child { border-left: 3px solid var(--albirex-orange); }
+
+  body[data-mode="player-analysis"] .pa-summary-totals article > span {
+    color: #737e8b;
+    font-size: 0.61rem;
+    white-space: nowrap;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-totals strong {
+    color: #102a45;
+    font-size: 1.45rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-totals strong small {
+    color: #7a8490;
+    font-family: var(--font-main);
+    font-size: 0.61rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-leaders {
+    padding: 10px 0;
+    border: 0;
+    border-bottom: 1px solid #dfe3e8;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-leaders > header {
+    padding: 0 0 7px;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-leaders > header span {
+    color: #18324f;
+    font-family: var(--font-main);
+    font-size: 0.82rem;
+    letter-spacing: 0;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-leaders > header small { color: #8a929c; }
+
+  body[data-mode="player-analysis"] .pa-summary-leader-grid { gap: 0 8px; }
+
+  body[data-mode="player-analysis"] .pa-summary-leader-grid article {
+    min-height: 48px;
+    padding: 6px 7px 6px 10px;
+    border-bottom: 1px solid #e7eaee;
+    border-radius: 0;
+    background: #fff;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-leader-grid article::before { width: 2px; }
+
+  body[data-mode="player-analysis"] .pa-summary-leader-grid i {
+    color: rgba(7,30,56,0.07);
+    font-size: 1.2rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-summary-leader-grid article > span { color: #737e8b; }
+  body[data-mode="player-analysis"] .pa-summary-leader-grid strong { color: #122d49; font-size: 1.18rem; }
+  body[data-mode="player-analysis"] .pa-summary-leader-grid b { color: #27394b; font-size: 0.65rem; }
+  body[data-mode="player-analysis"] .pa-summary-leader-grid strong small { color: #78828e; }
+
+  body[data-mode="player-analysis"] .pa-board-rankings {
+    margin: 0;
+    padding: 8px 12px 10px;
+    background: #f4f6f8;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-rankings {
+    gap: 8px;
+    padding-bottom: 2px;
+  }
+
+  body[data-mode="player-analysis"] .pa-rank-card {
+    flex-basis: min(250px, calc(100vw - 42px));
+    min-height: 116px;
+    padding: 10px 11px;
+    border: 1px solid #e0e4e9;
+    border-radius: 9px;
+    background: #fff;
+    color: #172c42;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-rank-card h3 { color: #172c42; }
+  body[data-mode="player-analysis"] .pa-rank-card-head span { background: #f2f4f7; color: #687585; }
+  body[data-mode="player-analysis"] .pa-rank-list span { color: #26394d; }
+  body[data-mode="player-analysis"] .pa-rank-list b,
+  body[data-mode="player-analysis"] .pa-rank-list em { color: #132b44; }
+
+  body[data-mode="player-analysis"] .pa-workbench {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: 0 0 24px;
+  }
+
+  body[data-mode="player-analysis"] .pa-data-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: 0;
+    border-top: 1px solid #dfe3e8;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-table-headline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0;
+    margin: 0;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 0;
+    background: #071e38;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-table-title {
+    display: flex !important;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  body[data-mode="player-analysis"] .pa-table-title strong {
+    color: #fff;
+    font-family: var(--font-main);
+    font-size: 0.96rem;
+    letter-spacing: 0;
+  }
+
+  body[data-mode="player-analysis"] #pa-table-count {
+    color: rgba(255,255,255,0.66);
+    font-size: 0.72rem;
+  }
+
+  body[data-mode="player-analysis"] #pa-filter-fab {
+    position: static;
+    left: auto;
+    bottom: auto;
+    z-index: auto;
+    min-width: 88px;
+    min-height: 34px;
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 9px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 7px;
+    background: transparent;
+    color: #fff;
+    font-size: 0.7rem;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] #pa-filter-fab svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  body[data-mode="player-analysis"] #pa-filter-fab span { font-size: 0.68rem; }
+
+  body[data-mode="player-analysis"] .pa-sort-controls {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 70px auto;
+    gap: 7px;
+    align-items: end;
+    padding: 8px 10px 7px;
+    background: #fff;
+  }
+
+  body[data-mode="player-analysis"] .pa-sort-select-field {
+    gap: 3px;
+    color: #78828d;
+    font-size: 0.62rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-sort-select-field select {
+    min-width: 0;
+    min-height: 38px;
+    padding: 0 24px 0 9px;
+    border: 1px solid #d9dee5;
+    border-radius: 7px;
+    background: #fff;
+    color: #142b44;
+    font-size: 0.78rem;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-sort-select-field.compact select { padding-right: 18px; }
+
+  body[data-mode="player-analysis"] .pa-list-detail-toggle {
+    min-width: 64px;
+    min-height: 38px;
+    padding: 0 7px;
+    border: 1px solid #d9dee5;
+    border-radius: 7px;
+    background: #f5f6f8;
+    color: #354458;
+    font-size: 0.7rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-list-detail-toggle[aria-pressed="true"] {
+    border-color: var(--albirex-orange);
+    background: var(--albirex-orange);
+    color: #fff;
+  }
+
+  body[data-mode="player-analysis"] .pa-sort-summary {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin: 1px -10px -7px;
+    padding: 0 3px;
+    border-top: 1px solid #e5e8ed;
+    background: #f1f3f6;
+  }
+
+  body[data-mode="player-analysis"] .pa-sort-summary > div {
+    min-height: 36px;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 5px 8px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-sort-summary > div + div { border-left: 1px solid #d8dde4; }
+  body[data-mode="player-analysis"] .pa-sort-summary span { color: #647181; font-size: 0.64rem; }
+  body[data-mode="player-analysis"] .pa-sort-summary strong { color: #132b44; font-size: 0.95rem; }
+
+  body[data-mode="player-analysis"] .pa-mobile-list-head {
+    display: grid;
+    grid-template-columns: 40px 42px minmax(0, 1fr) 54px;
+    align-items: end;
+    gap: 6px;
+    min-height: 30px;
+    padding: 5px 8px 4px;
+    border-top: 1px solid #e2e6eb;
+    border-bottom: 1px solid #dce1e7;
+    background: #f1f3f6;
+    color: #6a7583;
+    font-size: 0.66rem;
+    font-weight: 850;
+    line-height: 1.1;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-list-head[hidden] { display: none; }
+  body[data-mode="player-analysis"] .pa-mobile-list-head > :last-child { text-align: center; }
+  body[data-mode="player-analysis"] .pa-mobile-list-head small { margin-left: 2px; font-size: 0.58rem; font-weight: 700; }
+
+  body[data-mode="player-analysis"] .pa-mobile-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: 0 8px;
+    background: #fff;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-player-card.compact {
+    grid-template-columns: 40px 42px minmax(0, 1fr) 54px;
+    grid-template-areas: "number photo name metric";
+    gap: 6px;
+    min-height: 60px;
+    padding: 4px 0;
+    border: 0;
+    border-bottom: 1px solid #e1e5ea;
+    border-radius: 0;
+    background: #fff;
+    color: #142a40;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-player-card.compact.selected {
+    border-color: #e1e5ea;
+    background: #fff7f1;
+    box-shadow: inset 3px 0 var(--albirex-orange);
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-player-card.compact .pa-mobile-shirt {
+    width: 40px;
+    height: 48px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #0b2743;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-player-card.compact .pa-mobile-shirt.gk {
+    background: transparent;
+    color: #0b2743;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-player-card.compact .pa-mobile-number-cycle {
+    height: 2rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-player-card.compact .pa-mobile-number-cycle span {
+    max-width: 38px;
+    color: #0b2743;
+    font-family: var(--font-kick);
+    font-size: 1.62rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-list-photo.player-photo {
+    grid-area: photo;
+    width: 42px;
+    height: 50px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-list-photo.player-photo img,
+  body[data-mode="player-analysis"] .pa-mobile-list-photo.player-photo.club-niigata img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-compact-name {
+    gap: 3px;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-compact-name small {
+    color: #778290;
+    font-size: 0.65rem;
+    font-weight: 750;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-compact-name strong {
+    color: #172a3d;
+    font-size: 0.91rem;
+    line-height: 1.12;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-compact-metric {
+    min-width: 0;
+    justify-items: center;
+    padding: 0;
+    color: #0b2743;
+  }
+
+  body[data-mode="player-analysis"] .pa-mobile-compact-metric b {
+    color: #0b2743;
+    font-family: var(--font-kick);
+    font-size: 1.28rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-scroll-top-fab {
+    right: 12px;
+    bottom: calc(158px + env(safe-area-inset-bottom));
+    padding: 9px;
+    border: 1px solid #d9dee5;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(7,30,56,0.13);
+  }
+}
+
+@media (min-width: 761px) {
+  body[data-mode="player-analysis"] .pa-update-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 2px;
+    border-top: 1px solid #dce3eb;
+    color: #52677a;
+    font-size: 0.76rem;
+  }
+
+  body[data-mode="player-analysis"] .pa-update-meta { display: inline-flex; align-items: center; gap: 8px; color: #77828e; }
+
+  body[data-mode="player-analysis"] .pa-mobile-list-head { display: none !important; }
+}

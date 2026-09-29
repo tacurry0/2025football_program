@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="standings-view.css?v=20260920-standings-4">
   <link rel="stylesheet" href="match-detail.css?v=20260919-compact">
   <link rel="stylesheet" href="schedule-view.css?v=20260916-matchday-schedule">
+  <link rel="stylesheet" href="player-analysis-view.css?v=20260929-compact-list">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
     window.__trappReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -899,7 +900,10 @@ We can't help falling in love with you
               <div id="pa-competition-options" class="pa-competition-options" aria-label="大会名の選択"></div>
             </details>
 
-            <div class="pa-update-row"><span id="pa-update-status" role="status">2026/27の公式記録を自動更新</span><button type="button" id="pa-update-check" class="fx-icon-button" aria-label="選手分析の公式データを再取得" title="最新の公開データを再取得">↻</button></div>
+            <div class="pa-update-row" aria-label="集計データの更新情報">
+              <span id="pa-update-status" role="status" aria-live="polite">集計範囲を確認中</span>
+              <span class="pa-update-meta"><span id="pa-update-time">データ確認 --</span><button type="button" id="pa-update-check" class="fx-icon-button" aria-label="選手分析のデータを再取得" title="最新データを再取得">↻</button></span>
+            </div>
             <div id="pa-status" class="pa-status" role="status" aria-live="polite"></div>
             <div id="pa-summary-cards" class="pa-summary-grid"></div>
           </div>
@@ -910,7 +914,6 @@ We can't help falling in love with you
 
         <div id="pa-analysis-screen" class="pa-screen active" data-pa-screen="analysis">
         <div class="pa-workbench">
-        <button type="button" id="pa-filter-fab" class="pa-filter-fab" aria-controls="pa-filter-panel" aria-expanded="false">FILTER</button>
         <div id="pa-filter-backdrop" class="pa-filter-backdrop" hidden></div>
         <div id="pa-filter-panel" class="pa-controls" aria-label="選手分析の絞り込み">
           <button type="button" id="pa-filter-close" class="pa-filter-close" aria-label="フィルターを閉じる">×</button>
@@ -1028,10 +1031,11 @@ We can't help falling in love with you
 
         <section class="pa-data-panel" aria-label="選手一覧">
         <div class="pa-table-headline">
-          <div>
+          <div class="pa-table-title">
+            <strong>選手一覧</strong>
             <span id="pa-table-count">0人</span>
-            <strong>PLAYER DATA</strong>
           </div>
+          <button type="button" id="pa-filter-fab" class="pa-filter-fab" aria-controls="pa-filter-panel" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span>絞り込み</span></button>
           <div class="pa-sort-controls" aria-label="並び順">
             <label class="pa-sort-select-field" for="pa-sort-key-select">
               <span>並び順</span>
@@ -1152,6 +1156,9 @@ We can't help falling in love with you
             </thead>
             <tbody id="pa-table-body"></tbody>
           </table>
+        </div>
+        <div id="pa-mobile-list-head" class="pa-mobile-list-head" role="row" aria-label="一覧の項目" hidden>
+          <span role="columnheader">背番号</span><span aria-hidden="true"></span><span role="columnheader">選手</span><span id="pa-mobile-list-metric" role="columnheader">出場<small>試合</small></span>
         </div>
         <div id="pa-mobile-list" class="pa-mobile-list" aria-label="選手一覧"></div>
 
