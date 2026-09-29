@@ -1,0 +1,784 @@
+{
+  "source": "https://www.jleague.jp/club/{club}/ (official club roster)",
+  "downloaded": [
+    {
+      "club": "kumamoto",
+      "name": "三品 直哉",
+      "official_name": "三品 直哉",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/kumamoto/player/main/1645029_l.webp",
+      "file": "data/assets/images/player_kumamoto/三品 直哉.jpg"
+    },
+    {
+      "club": "kumamoto",
+      "name": "中島 永弥",
+      "official_name": "中島 永弥",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/kumamoto/player/main/1657648_l.webp",
+      "file": "data/assets/images/player_kumamoto/中島 永弥.jpg"
+    },
+    {
+      "club": "kumamoto",
+      "name": "宮田 和純",
+      "official_name": "宮田 和純",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/kumamoto/player/main/1621199_l.webp",
+      "file": "data/assets/images/player_kumamoto/宮田 和純.jpg"
+    },
+    {
+      "club": "kumamoto",
+      "name": "小澤 秀充",
+      "official_name": "小澤 秀充",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/kumamoto/player/main/1636277_l.webp",
+      "file": "data/assets/images/player_kumamoto/小澤 秀充.jpg"
+    },
+    {
+      "club": "kumamoto",
+      "name": "木村 匠汰",
+      "official_name": "木村 匠汰",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/kumamoto/player/main/1657647_l.webp",
+      "file": "data/assets/images/player_kumamoto/木村 匠汰.jpg"
+    },
+    {
+      "club": "kumamoto",
+      "name": "石田 凌太郎",
+      "official_name": "石田 凌太郎",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/kumamoto/player/main/1619231_l.webp",
+      "file": "data/assets/images/player_kumamoto/石田 凌太郎.jpg"
+    },
+    {
+      "club": "niigata",
+      "name": "イウリ カスティーリョ",
+      "official_name": "イウリ カスティーリョ",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/niigata/player/main/1629399_l.webp",
+      "file": "data/assets/images/player_niigata/イウリ カスティーリョ.jpg"
+    },
+    {
+      "club": "niigata",
+      "name": "前田 椋介",
+      "official_name": "前田 椋介",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/niigata/player/main/1629441_l.webp",
+      "file": "data/assets/images/player_niigata/前田 椋介.jpg"
+    },
+    {
+      "club": "niigata",
+      "name": "大澤 朋也",
+      "official_name": "大澤 朋也",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/niigata/player/main/1631739_l.webp",
+      "file": "data/assets/images/player_niigata/大澤 朋也.jpg"
+    },
+    {
+      "club": "niigata",
+      "name": "松浦 大翔",
+      "official_name": "松浦 大翔",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/niigata/player/main/1655908_l.webp",
+      "file": "data/assets/images/player_niigata/松浦 大翔.jpg"
+    },
+    {
+      "club": "niigata",
+      "name": "桑山 侃士",
+      "official_name": "桑山 侃士",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/niigata/player/main/1641528_l.webp",
+      "file": "data/assets/images/player_niigata/桑山 侃士.jpg"
+    },
+    {
+      "club": "niigata",
+      "name": "関口 正大",
+      "official_name": "関口 正大",
+      "year": 2026,
+      "source_url": "https://www.jleague.jp/img/cache/2026/niigata/player/main/1630145_l.webp",
+      "file": "data/assets/images/player_niigata/関口 正大.jpg"
+    }
+  ],
+  "unavailable": [
+    {
+      "club": "kumamoto",
+      "name": "アンデルソン-2011"
+    },
+    {
+      "club": "kumamoto",
+      "name": "イム ジンウ"
+    },
+    {
+      "club": "kumamoto",
+      "name": "ウーゴ"
+    },
+    {
+      "club": "kumamoto",
+      "name": "エジミウソン"
+    },
+    {
+      "club": "kumamoto",
+      "name": "カレン ロバート"
+    },
+    {
+      "club": "kumamoto",
+      "name": "キム ジョンソク"
+    },
+    {
+      "club": "kumamoto",
+      "name": "キム テヨン"
+    },
+    {
+      "club": "kumamoto",
+      "name": "キム ビョンヨン"
+    },
+    {
+      "club": "kumamoto",
+      "name": "クォン ソックン"
+    },
+    {
+      "club": "kumamoto",
+      "name": "クォン ハンジン"
+    },
+    {
+      "club": "kumamoto",
+      "name": "グスタボ"
+    },
+    {
+      "club": "kumamoto",
+      "name": "シュミット ダニエル"
+    },
+    {
+      "club": "kumamoto",
+      "name": "ジュニオール"
+    },
+    {
+      "club": "kumamoto",
+      "name": "ソン イニョン"
+    },
+    {
+      "club": "kumamoto",
+      "name": "チャ ジホ"
+    },
+    {
+      "club": "kumamoto",
+      "name": "チョ ソンジン"
+    },
+    {
+      "club": "kumamoto",
+      "name": "ドゥグラス"
+    },
+    {
+      "club": "kumamoto",
+      "name": "ファビオ"
+    },
+    {
+      "club": "kumamoto",
+      "name": "モルベッキ"
+    },
+    {
+      "club": "kumamoto",
+      "name": "三島 康平"
+    },
+    {
+      "club": "kumamoto",
+      "name": "三鬼 海"
+    },
+    {
+      "club": "kumamoto",
+      "name": "上原 拓郎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "上村 健一"
+    },
+    {
+      "club": "kumamoto",
+      "name": "上里 一将"
+    },
+    {
+      "club": "kumamoto",
+      "name": "中山 悟志"
+    },
+    {
+      "club": "kumamoto",
+      "name": "中山 雄登"
+    },
+    {
+      "club": "kumamoto",
+      "name": "五領 淳樹"
+    },
+    {
+      "club": "kumamoto",
+      "name": "井畑 翔太郎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "仲間 隼斗"
+    },
+    {
+      "club": "kumamoto",
+      "name": "似鳥 康太"
+    },
+    {
+      "club": "kumamoto",
+      "name": "佐藤 慎之介"
+    },
+    {
+      "club": "kumamoto",
+      "name": "佐藤 昭大"
+    },
+    {
+      "club": "kumamoto",
+      "name": "佐野 翼"
+    },
+    {
+      "club": "kumamoto",
+      "name": "光永 祐也"
+    },
+    {
+      "club": "kumamoto",
+      "name": "八久保 颯"
+    },
+    {
+      "club": "kumamoto",
+      "name": "加藤 健太"
+    },
+    {
+      "club": "kumamoto",
+      "name": "加藤 竜二"
+    },
+    {
+      "club": "kumamoto",
+      "name": "北嶋 秀朗"
+    },
+    {
+      "club": "kumamoto",
+      "name": "北川 佳男"
+    },
+    {
+      "club": "kumamoto",
+      "name": "北里 大地"
+    },
+    {
+      "club": "kumamoto",
+      "name": "南 雄太"
+    },
+    {
+      "club": "kumamoto",
+      "name": "原 一樹"
+    },
+    {
+      "club": "kumamoto",
+      "name": "原 裕太郎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "原田 拓"
+    },
+    {
+      "club": "kumamoto",
+      "name": "吉井 孝輔"
+    },
+    {
+      "club": "kumamoto",
+      "name": "吉田 智志"
+    },
+    {
+      "club": "kumamoto",
+      "name": "喜名 哲裕"
+    },
+    {
+      "club": "kumamoto",
+      "name": "園田 拓也"
+    },
+    {
+      "club": "kumamoto",
+      "name": "坂元 大希"
+    },
+    {
+      "club": "kumamoto",
+      "name": "坂田 良太"
+    },
+    {
+      "club": "kumamoto",
+      "name": "堀米 勇輝"
+    },
+    {
+      "club": "kumamoto",
+      "name": "堤 俊輔"
+    },
+    {
+      "club": "kumamoto",
+      "name": "多々良 敦斗"
+    },
+    {
+      "club": "kumamoto",
+      "name": "大崎 舜"
+    },
+    {
+      "club": "kumamoto",
+      "name": "大谷 尚輝"
+    },
+    {
+      "club": "kumamoto",
+      "name": "大迫 希"
+    },
+    {
+      "club": "kumamoto",
+      "name": "太 洋一"
+    },
+    {
+      "club": "kumamoto",
+      "name": "宇留野 純"
+    },
+    {
+      "club": "kumamoto",
+      "name": "安 柄俊"
+    },
+    {
+      "club": "kumamoto",
+      "name": "宮崎 大志郎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "小林 弘記"
+    },
+    {
+      "club": "kumamoto",
+      "name": "小林 陽介"
+    },
+    {
+      "club": "kumamoto",
+      "name": "小森田 友明"
+    },
+    {
+      "club": "kumamoto",
+      "name": "小牧 成亘"
+    },
+    {
+      "club": "kumamoto",
+      "name": "山下 訓広"
+    },
+    {
+      "club": "kumamoto",
+      "name": "山内 祐一"
+    },
+    {
+      "club": "kumamoto",
+      "name": "山口 武士"
+    },
+    {
+      "club": "kumamoto",
+      "name": "山崎 侑輝"
+    },
+    {
+      "club": "kumamoto",
+      "name": "山本 翔平"
+    },
+    {
+      "club": "kumamoto",
+      "name": "岡本 賢明"
+    },
+    {
+      "club": "kumamoto",
+      "name": "岡村 和哉"
+    },
+    {
+      "club": "kumamoto",
+      "name": "岡﨑 亮平"
+    },
+    {
+      "club": "kumamoto",
+      "name": "岩丸 史也"
+    },
+    {
+      "club": "kumamoto",
+      "name": "崔 根植"
+    },
+    {
+      "club": "kumamoto",
+      "name": "嶋田 慎太郎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "巻 誠一郎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "市村 篤司"
+    },
+    {
+      "club": "kumamoto",
+      "name": "常盤 聡"
+    },
+    {
+      "club": "kumamoto",
+      "name": "平木 良樹"
+    },
+    {
+      "club": "kumamoto",
+      "name": "平繁 龍一"
+    },
+    {
+      "club": "kumamoto",
+      "name": "廣井 友信"
+    },
+    {
+      "club": "kumamoto",
+      "name": "斉藤 紀由"
+    },
+    {
+      "club": "kumamoto",
+      "name": "有村 光史"
+    },
+    {
+      "club": "kumamoto",
+      "name": "木下 正貴"
+    },
+    {
+      "club": "kumamoto",
+      "name": "木島 良輔"
+    },
+    {
+      "club": "kumamoto",
+      "name": "木村 祐志"
+    },
+    {
+      "club": "kumamoto",
+      "name": "村上 巧"
+    },
+    {
+      "club": "kumamoto",
+      "name": "松岡 康暢"
+    },
+    {
+      "club": "kumamoto",
+      "name": "松橋 章太"
+    },
+    {
+      "club": "kumamoto",
+      "name": "林 祥太"
+    },
+    {
+      "club": "kumamoto",
+      "name": "根占 真伍"
+    },
+    {
+      "club": "kumamoto",
+      "name": "森川 泰臣"
+    },
+    {
+      "club": "kumamoto",
+      "name": "植田 龍仁朗"
+    },
+    {
+      "club": "kumamoto",
+      "name": "横山 知伸"
+    },
+    {
+      "club": "kumamoto",
+      "name": "橋本 拳人"
+    },
+    {
+      "club": "kumamoto",
+      "name": "武富 孝介"
+    },
+    {
+      "club": "kumamoto",
+      "name": "水野 晃樹"
+    },
+    {
+      "club": "kumamoto",
+      "name": "永井 建成"
+    },
+    {
+      "club": "kumamoto",
+      "name": "池谷 友喜"
+    },
+    {
+      "club": "kumamoto",
+      "name": "河端 和哉"
+    },
+    {
+      "club": "kumamoto",
+      "name": "河野 健一"
+    },
+    {
+      "club": "kumamoto",
+      "name": "清武 功暉"
+    },
+    {
+      "club": "kumamoto",
+      "name": "渡辺 匠"
+    },
+    {
+      "club": "kumamoto",
+      "name": "澤田 崇"
+    },
+    {
+      "club": "kumamoto",
+      "name": "熊谷 雅彦"
+    },
+    {
+      "club": "kumamoto",
+      "name": "片山 奨典"
+    },
+    {
+      "club": "kumamoto",
+      "name": "田中 俊一"
+    },
+    {
+      "club": "kumamoto",
+      "name": "田中 達也"
+    },
+    {
+      "club": "kumamoto",
+      "name": "町田 多聞"
+    },
+    {
+      "club": "kumamoto",
+      "name": "畑 実"
+    },
+    {
+      "club": "kumamoto",
+      "name": "白谷 建人"
+    },
+    {
+      "club": "kumamoto",
+      "name": "皆川 佑介"
+    },
+    {
+      "club": "kumamoto",
+      "name": "矢野 大輔"
+    },
+    {
+      "club": "kumamoto",
+      "name": "石井 俊也"
+    },
+    {
+      "club": "kumamoto",
+      "name": "福王 忠世"
+    },
+    {
+      "club": "kumamoto",
+      "name": "稲田 康志"
+    },
+    {
+      "club": "kumamoto",
+      "name": "笹垣 拓也"
+    },
+    {
+      "club": "kumamoto",
+      "name": "筑城 和人"
+    },
+    {
+      "club": "kumamoto",
+      "name": "篠原 弘次郎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "米原 秀亮"
+    },
+    {
+      "club": "kumamoto",
+      "name": "網田 慎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "若杉 拓哉"
+    },
+    {
+      "club": "kumamoto",
+      "name": "菅沼 実"
+    },
+    {
+      "club": "kumamoto",
+      "name": "菅沼 駿哉"
+    },
+    {
+      "club": "kumamoto",
+      "name": "薗田 淳"
+    },
+    {
+      "club": "kumamoto",
+      "name": "藏川 洋平"
+    },
+    {
+      "club": "kumamoto",
+      "name": "藤本 主税"
+    },
+    {
+      "club": "kumamoto",
+      "name": "藤本 大"
+    },
+    {
+      "club": "kumamoto",
+      "name": "藤田 俊哉"
+    },
+    {
+      "club": "kumamoto",
+      "name": "西 弘則"
+    },
+    {
+      "club": "kumamoto",
+      "name": "西森 正明"
+    },
+    {
+      "club": "kumamoto",
+      "name": "車 智鎬"
+    },
+    {
+      "club": "kumamoto",
+      "name": "野田 裕喜"
+    },
+    {
+      "club": "kumamoto",
+      "name": "金井 大樹"
+    },
+    {
+      "club": "kumamoto",
+      "name": "鈴木 祐輔"
+    },
+    {
+      "club": "kumamoto",
+      "name": "長沢 駿"
+    },
+    {
+      "club": "kumamoto",
+      "name": "関 光博"
+    },
+    {
+      "club": "kumamoto",
+      "name": "青木 剛"
+    },
+    {
+      "club": "kumamoto",
+      "name": "青木 良太"
+    },
+    {
+      "club": "kumamoto",
+      "name": "養父 雄仁"
+    },
+    {
+      "club": "kumamoto",
+      "name": "高橋 泰"
+    },
+    {
+      "club": "kumamoto",
+      "name": "高橋 祐太郎"
+    },
+    {
+      "club": "kumamoto",
+      "name": "高瀬 優孝"
+    },
+    {
+      "club": "kumamoto",
+      "name": "髙柳 一誠"
+    },
+    {
+      "club": "kumamoto",
+      "name": "齊藤 和樹"
+    },
+    {
+      "club": "kumamoto",
+      "name": "齋藤 恵太"
+    },
+    {
+      "club": "niigata",
+      "name": "′"
+    },
+    {
+      "club": "niigata",
+      "name": "アンデルソン-2011"
+    },
+    {
+      "club": "niigata",
+      "name": "シルビーニョ-2019-2020"
+    },
+    {
+      "club": "niigata",
+      "name": "丸山 壮大"
+    },
+    {
+      "club": "niigata",
+      "name": "丸山 嵩大"
+    },
+    {
+      "club": "niigata",
+      "name": "丸山 皓己"
+    },
+    {
+      "club": "niigata",
+      "name": "五十嵐 新"
+    },
+    {
+      "club": "niigata",
+      "name": "加藤 悠馬"
+    },
+    {
+      "club": "niigata",
+      "name": "吉原 秀祐"
+    },
+    {
+      "club": "niigata",
+      "name": "吉田 光希"
+    },
+    {
+      "club": "niigata",
+      "name": "園田 拓也"
+    },
+    {
+      "club": "niigata",
+      "name": "奥田 陽一"
+    },
+    {
+      "club": "niigata",
+      "name": "宮沢 正史"
+    },
+    {
+      "club": "niigata",
+      "name": "小枇 ランディー エメカ"
+    },
+    {
+      "club": "niigata",
+      "name": "山根 成陽"
+    },
+    {
+      "club": "niigata",
+      "name": "押久保 汐音"
+    },
+    {
+      "club": "niigata",
+      "name": "木村 誠"
+    },
+    {
+      "club": "niigata",
+      "name": "河田 波大"
+    },
+    {
+      "club": "niigata",
+      "name": "浅倉 廉"
+    },
+    {
+      "club": "niigata",
+      "name": "營田 一燈"
+    },
+    {
+      "club": "niigata",
+      "name": "田中 僚"
+    },
+    {
+      "club": "niigata",
+      "name": "稲川 碧希"
+    },
+    {
+      "club": "niigata",
+      "name": "芹澤 飛勇"
+    },
+    {
+      "club": "niigata",
+      "name": "長谷川 紡"
+    }
+  ],
+  "errors": []
+}

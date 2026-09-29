@@ -5719,9 +5719,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `
       <section class="pa-rank-card" data-pa-ranking="${escapeHtml(config.id)}" role="button" tabindex="0" aria-label="${escapeHtml(config.title)}を全順位で表示">
         <div class="pa-rank-card-head">
-          <h3>${escapeHtml(config.title)}</h3>
+          <h3 class="pa-ranking-title" data-pa-ranking-hold="${escapeHtml(config.id)}" tabindex="0" role="button" aria-label="${escapeHtml(config.title)}。長押しでカード画像を作成" title="長押しでカード画像を作成">${escapeHtml(config.title)}</h3>
           <div class="pa-rank-card-actions">
-            <button type="button" class="pa-card-output-btn compact" data-pa-ranking-card="${escapeHtml(config.id)}" aria-label="${escapeHtml(config.title)}のカード画像を表示">カード</button>
             <span>全順位</span>
           </div>
         </div>
@@ -5803,6 +5802,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     playerProfileViewCleanup = null;
     modal.innerHTML = html;
     modal.classList.toggle("pv-modal", !!modal.querySelector("[data-player-profile]"));
+    modal.classList.toggle("pa-ranking-modal", !!modal.querySelector(".pa-ranking-modal-list"));
     setupPlayerPhotos(modal);
     setupPlayerChantAudio(modal);
     backdrop.classList.add("active");
@@ -6549,6 +6549,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  let playerRankingLongPressUntil = 0;
+  function installPlayerRankingLongPress(container) {
+    let timer = null;
+    let startX = 0;
+    let startY = 0;
+    const cancel = () => {
+      clearTimeout(timer);
+      timer = null;
+    };
+    container.addEventListener("pointerdown", event => {
+      const title = event.target.closest("[data-pa-ranking-hold]");
+      if (!title || (event.button !== undefined && event.button !== 0)) return;
+      cancel();
+      startX = event.clientX;
+      startY = event.clientY;
+      const rankingId = title.dataset.paRankingHold;
+      timer = setTimeout(() => {
+        timer = null;
+        playerRankingLongPressUntil = Date.now() + 800;
+        navigator.vibrate?.(20);
+        openPlayerAnalysisRankingCard(rankingId);
+      }, 550);
+    });
+    container.addEventListener("pointermove", event => {
+      if (Math.abs(event.clientX - startX) > 10 || Math.abs(event.clientY - startY) > 10) cancel();
+    });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(type => container.addEventListener(type, cancel));
+    container.addEventListener("contextmenu", event => {
+      if (event.target.closest("[data-pa-ranking-hold]")) event.preventDefault();
+    });
+    container.addEventListener("keydown", event => {
+      const title = event.target.closest("[data-pa-ranking-hold]");
+      if (!title || !title.matches(":focus")) return;
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      event.stopPropagation();
+      playerRankingLongPressUntil = Date.now() + 800;
+      openPlayerAnalysisRankingCard(title.dataset.paRankingHold);
+    });
+  }
+
   function findPlayerAnalysisRowByKey(key) {
     return [...playerAnalysisState.data, ...playerAnalysisState.filtered, ...playerAnalysisState.modalRankingRows]
       .find(row => getPlayerAnalysisKey(row) === key);
@@ -6583,9 +6624,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       <span class="pa-chip">${escapeHtml(yearLabel)}</span>
       <span class="pa-chip scope">${escapeHtml(getPlayerAnalysisScopeLabel())}</span>
       <span class="pa-chip">${rows.length}人</span>
-      <button type="button" class="pa-card-output-btn" data-pa-ranking-card="${escapeHtml(rankingId)}">カード</button>
     `;
     setPlayerAnalysisModalContent(renderPlayerAnalysisModalShell("PLAYER RANKING", config.title, body, meta));
+    const modal = document.getElementById("pa-modal");
+    const heading = modal?.querySelector(".pa-modal-title h2");
+    if (heading) {
+      heading.dataset.paRankingHold = rankingId;
+      heading.tabIndex = 0;
+      heading.setAttribute("role", "button");
+      heading.setAttribute("aria-label", `${config.title}。長押しでカード画像を作成`);
+      heading.title = "長押しでカード画像を作成";
+    }
     addAppHistoryEntry(
       "pa-modal:ranking",
       () => openPlayerAnalysisRankingModal(rankingId, { history: false }),
@@ -9328,12 +9377,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
     }
     if (els.rankings) {
+      installPlayerRankingLongPress(els.rankings);
       els.rankings.onclick = (event) => {
-        const cardButton = event.target.closest("[data-pa-ranking-card]");
-        if (cardButton) {
+        if (Date.now() < playerRankingLongPressUntil) {
           event.preventDefault();
           event.stopPropagation();
-          openPlayerAnalysisRankingCard(cardButton.dataset.paRankingCard);
           return;
         }
         const card = event.target.closest(".pa-rank-card[data-pa-ranking]");
@@ -9341,6 +9389,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         openPlayerAnalysisRankingModal(card.dataset.paRanking);
       };
       els.rankings.onkeydown = (event) => {
+        if (event.defaultPrevented) return;
         if (event.target.closest("[data-pa-ranking-card]")) return;
         if (event.key !== "Enter" && event.key !== " ") return;
         const card = event.target.closest(".pa-rank-card[data-pa-ranking]");
@@ -9415,7 +9464,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
     }
     const { modal } = ensurePlayerAnalysisModal();
+    installPlayerRankingLongPress(modal);
     modal.onclick = async (event) => {
+      if (Date.now() < playerRankingLongPressUntil) {
+        event.preventDefault();
+        return;
+      }
       if (event.target.closest("[data-pa-modal-close]")) {
         closePlayerAnalysisModal();
         return;
