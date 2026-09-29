@@ -4319,12 +4319,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderPlayerAnalysisMainTimeControls() {
-    const { mainPeriodToggle, mainPeriodFields, mainPeriodStart, mainPeriodEnd } = getPlayerAnalysisElements();
+    const { yearSelect, mainPeriodToggle, mainPeriodFields, mainPeriodStart, mainPeriodEnd } = getPlayerAnalysisElements();
     normalizePlayerAnalysisTimeState();
     const range = playerAnalysisState.timeMode === "range";
+    const yearField = yearSelect && yearSelect.closest(".pa-year-field");
+    const timeControls = document.getElementById("pa-main-time-controls");
+    if (yearField) yearField.hidden = range;
+    if (timeControls) timeControls.dataset.timeMode = range ? "range" : "year";
     if (mainPeriodToggle) {
       mainPeriodToggle.classList.toggle("active", range);
       mainPeriodToggle.setAttribute("aria-pressed", range ? "true" : "false");
+      mainPeriodToggle.textContent = range ? "単年" : "期間";
+      mainPeriodToggle.setAttribute("aria-label", range ? "単年に戻す" : "期間で絞り込む");
     }
     if (mainPeriodFields) mainPeriodFields.hidden = !range;
     renderPlayerAnalysisPeriodOptions(mainPeriodStart, playerAnalysisState.rangeStartYear);
@@ -7307,10 +7313,30 @@ document.addEventListener("DOMContentLoaded", async () => {
           [`${shortNames[1]}のみ出場`, patternStats.get(2) || analysis.onlyB],
           ["両方非出場", patternStats.get(0) || analysis.neither]
         ];
+    const mobileCards = rows.map(([label, source]) => {
+      const stats = source || finalizePlayerMatchStats(createPlayerMatchStats());
+      const sampleNote = stats.matches > 0 && stats.matches < 5 ? " <small>サンプル少</small>" : "";
+      const items = [
+        ["試合", formatPlayerNumber(stats.matches)],
+        ["勝敗", formatPlayerRecord(stats.wins, stats.draws, stats.losses)],
+        ["勝率", formatPlayerRate(stats.winRate)],
+        ["平均勝点", formatPlayerFixed(stats.pointsPerMatch, 2)],
+        ["得点", formatPlayerNumber(stats.goalsFor)],
+        ["失点", formatPlayerNumber(stats.goalsAgainst)],
+        ["平均得点", formatPlayerFixed(stats.goalsForAvg, 2)],
+        ["平均失点", formatPlayerFixed(stats.goalsAgainstAvg, 2)]
+      ];
+      return `
+        <article class="pa-combo-mobile-card">
+          <h5>${escapeHtml(label)}${sampleNote}</h5>
+          <dl>${items.map(([name, value]) => `<div><dt>${escapeHtml(name)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>
+        </article>
+      `;
+    }).join("");
     return `
       <section class="pa-combo-analysis">
         <h4>${escapeHtml(title)}</h4>
-        <div class="pa-compare-table-wrap">
+        <div class="pa-compare-table-wrap pa-combo-table-wrap">
           <table class="pa-compare-table compact">
             <thead>
               <tr>
@@ -7330,6 +7356,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </tbody>
           </table>
         </div>
+        <div class="pa-combo-mobile-cards">${mobileCards}</div>
       </section>
     `;
   }
