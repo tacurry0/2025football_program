@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v121-frameless-list-photo';
+const cacheName = 'football-app-v122-club-official-profiles';
 const assetsToCache = [
   "./",
   "./index.html",
@@ -7,6 +7,7 @@ const assetsToCache = [
   "./script.js",
   "./player-profile-view.js",
   "./player-cutouts-index.js",
+  "./player-official-index.js",
   "./player-profile-view.css",
   "./league-data.js",
   "./league-ui.js",
@@ -58,7 +59,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   // GAS redirects remain network-only: query parameters identify league/season.
   if (url.hostname === 'script.google.com' || url.hostname === 'script.googleusercontent.com') return;
-  if (url.origin === location.origin && /\/data\/(standings|results|details|generated|insights)\//.test(url.pathname)) {
+  if (url.origin === location.origin && /\/data\/(standings|results|details|generated|insights|players)\//.test(url.pathname)) {
     e.respondWith(
       fetch(e.request).then(response => {
         if (!response.ok) throw new Error('League snapshot HTTP ' + response.status);
