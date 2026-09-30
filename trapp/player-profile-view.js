@@ -34,7 +34,7 @@
     return `<div class="pv-shell" data-player-profile data-club="${esc(club)}" data-pv-scopes="${esc(JSON.stringify(scopes))}" data-pv-period="${esc(period)}">
       <header class="pv-hero"><span class="pv-handle" aria-hidden="true"></span><div class="pv-top"><span>選手詳細</span><button type="button" class="pv-close" data-pa-modal-close aria-label="選手詳細を閉じる">×</button></div>
       <img class="pv-watermark" src="${esc(emblem)}" alt="">${photo ? `<button type="button" class="pv-photo" data-pa-player-card aria-label="${esc(name)}の写真から選手カードを作成" title="選手カードを作成">${photo}</button>` : ''}
-      <div class="pv-identity"><div class="pv-shirt"><strong data-pv-number aria-label="背番号 ${esc(plan.values[0])}">${esc(plan.values[0])}</strong><span>${esc(position)}</span></div><div class="pv-name"><h2>${esc(name)}</h2><p>${esc(english)}</p></div></div>
+      <div class="pv-identity"><div class="pv-shirt"><strong data-pv-number aria-label="背番号 ${esc(plan.values[0])}">${esc(plan.values[0])}</strong><span>${esc(position)}</span></div><div class="pv-name${Array.from(name || '').length > 8 ? ' is-long' : ''}"><h2>${esc(name)}</h2><p>${esc(english)}</p></div></div>
       </header>
       <div class="pa-modal-body pv-body">${body}</div></div>`;
   }

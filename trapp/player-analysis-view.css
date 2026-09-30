@@ -416,6 +416,7 @@
   }
 
   body[data-mode="player-analysis"] .pa-data-panel {
+    grid-column: 1;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
@@ -489,6 +490,7 @@
   body[data-mode="player-analysis"] #pa-filter-fab span { font-size: 0.68rem; }
 
   body[data-mode="player-analysis"] .pa-sort-controls {
+    grid-column: 1 / -1;
     width: 100%;
     min-width: 0;
     display: grid;
@@ -500,12 +502,16 @@
   }
 
   body[data-mode="player-analysis"] .pa-sort-select-field {
+    min-width: 0;
+    width: 100%;
     gap: 3px;
     color: #78828d;
     font-size: 0.62rem;
   }
 
   body[data-mode="player-analysis"] .pa-sort-select-field select {
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
     min-height: 38px;
     padding: 0 24px 0 9px;
@@ -1393,9 +1399,37 @@ body[data-mode="player-analysis"] .pa-ranking-modal .pa-modal-player-link:focus-
 
 @media (max-width: 760px) {
   body[data-mode="player-analysis"] .pa-mobile-list-head:not([hidden]) {
-    position: sticky;
-    top: calc(58px + env(safe-area-inset-top));
-    z-index: 2200;
+    position: relative;
+    top: auto;
+    align-self: start;
+    z-index: 1;
     box-shadow: 0 2px 5px rgba(7,30,56,.09);
   }
+  body[data-mode="player-analysis"] .pa-mobile-list-head.pa-mobile-list-head-fixed:not([hidden]) {
+    display: grid;
+    position: fixed;
+    top: var(--pa-fixed-head-top);
+    left: var(--pa-fixed-head-left);
+    width: var(--pa-fixed-head-width);
+    z-index: 2050;
+    pointer-events: none;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body[data-mode="player-analysis"] .pa-mobile-list-photo.club-niigata {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+  body[data-mode="player-analysis"] .pa-mobile-list-photo.club-niigata img[data-pa-photo-crop="upper"] {
+    flex: none;
+    height: 200%;
+    width: auto;
+    max-height: none;
+    max-width: none;
+    object-fit: contain;
+    object-position: center top;
+  }
 }
+.pa-mobile-list-head-fixed { display: none; }

@@ -1326,7 +1326,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  let playerListFixedHead = null;
+
+  function updatePlayerAnalysisListHeader() {
+    const head = document.getElementById("pa-mobile-list-head");
+    const list = document.getElementById("pa-mobile-list");
+    const tabs = document.getElementById("pa-bottom-tabs");
+    const active = currentMode === "player-analysis" && playerAnalysisState.activeScreen === "analysis"
+      && window.matchMedia("(max-width: 760px)").matches && head && !head.hidden && list && tabs;
+    if (!active) {
+      if (playerListFixedHead) playerListFixedHead.hidden = true;
+      return;
+    }
+    const rect = head.getBoundingClientRect();
+    const listRect = list.getBoundingClientRect();
+    const top = Math.max(0, tabs.getBoundingClientRect().bottom);
+    const pinned = rect.top <= top && listRect.bottom > top + rect.height && rect.width > 0;
+    if (!pinned) {
+      if (playerListFixedHead) playerListFixedHead.hidden = true;
+      return;
+    }
+    if (!playerListFixedHead) {
+      // Place the fixed copy outside the panel's backdrop-filter containing block.
+      playerListFixedHead = document.createElement("div");
+      playerListFixedHead.className = "pa-mobile-list-head pa-mobile-list-head-fixed";
+      playerListFixedHead.setAttribute("aria-hidden", "true");
+      document.body.appendChild(playerListFixedHead);
+    }
+    const markup = head.innerHTML.replace(/\s(?:id|role)="[^"]*"/g, "");
+    if (playerListFixedHead.innerHTML !== markup) playerListFixedHead.innerHTML = markup;
+    playerListFixedHead.style.setProperty("--pa-fixed-head-top", `${top}px`);
+    playerListFixedHead.style.setProperty("--pa-fixed-head-left", `${rect.left}px`);
+    playerListFixedHead.style.setProperty("--pa-fixed-head-width", `${rect.width}px`);
+    playerListFixedHead.hidden = false;
+  }
+
   function updatePlayerAnalysisScrollTopButton() {
+    updatePlayerAnalysisListHeader();
     const { scrollTopFab } = getPlayerAnalysisElements();
     if (!scrollTopFab) return;
     const scrollOffset = Math.max(
@@ -2436,7 +2472,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderPlayerPhoto(playerName, club = playerAnalysisState.selectedClub, className = "", player = null, options = {}) {
     const resolvedClub = getPlayerAnalysisClub(club);
-    const originals = getPlayerImageSources(playerName, resolvedClub, player);
+    let originals = getPlayerImageSources(playerName, resolvedClub, player);
+    const niigataList = resolvedClub === "niigata" && className.includes("pa-mobile-list-photo") && !player?.__paManualPhoto;
+    if (niigataList) {
+      const entry = window.TrappOfficialPlayers?.niigata?.[normalizePlayerIdentityText(playerName)];
+      if (entry?.list_photo) originals = [entry.list_photo, ...originals.filter(source => source !== entry.list_photo)];
+      else originals = [...originals.filter(source => !source.includes("/official_players/")), ...originals.filter(source => source.includes("/official_players/"))];
+    }
     const sources = options.cutout && window.TrappPlayerProfile ? window.TrappPlayerProfile.photoSources(originals) : originals;
     if (!sources.length) return "";
     const fallbackSources = sources.slice(1);
@@ -2448,7 +2490,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         <img
           src="${escapeHtml(sources[0])}"
           ${fallbackSources.length ? `data-fallback-srcs="${escapeHtml(fallbackSources.join("|"))}"` : ""}
-          data-player-photo
+          data-player-photo ${niigataList ? 'data-pa-niigata-list-photo' : ''}
+          ${niigataList && sources[0].includes("/official_players/niigata/") ? 'data-pa-photo-crop="upper"' : ''}
           alt="${escapeHtml(`${altName}の写真`)}"
           loading="${className.includes("pa-mobile-list-photo") ? "lazy" : "eager"}"
           decoding="async"
@@ -2463,7 +2506,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (img.dataset.playerPhotoBound === "true") return;
       img.dataset.playerPhotoBound = "true";
       const frame = img.closest(".player-photo");
-      const show = () => frame?.classList.add("is-loaded");
+      const show = () => {
+        if (img.hasAttribute("data-pa-niigata-list-photo")) {
+          img.dataset.paPhotoCrop = img.src.includes("/official_players/niigata/") ? "upper" : "none";
+        }
+        frame?.classList.add("is-loaded");
+      };
       const hide = () => frame?.remove();
       const checkCurrentSource = () => {
         window.setTimeout(() => {
@@ -5507,10 +5555,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           metric.sub_goals += 1;
         }
         const goalMinute = parsePlayerGoalMinute(goal);
-        if (goalMinute.isExtra) metric.extra_time_goals += 1;
-        else if (goalMinute.isAdditional) metric.additional_time_goals += 1;
-        else if (goalMinute.minute !== null && goalMinute.minute <= 45) metric.first_half_goals += 1;
-        else metric.second_half_goals += 1;
+        const stoppageBase = String(goal.time || goal.minute_text || "").match(/^\s*(\d+)\s*\+/);
+        const halfMinute = stoppageBase ? Number(stoppageBase[1]) : goalMinute.minute;
+        if (goalMinute.isAdditional) metric.additional_time_goals += 1;
+        if (halfMinute !== null && halfMinute > 90) metric.extra_time_goals += 1;
+        else if (halfMinute !== null && halfMinute <= 45) metric.first_half_goals += 1;
+        else if (halfMinute !== null) metric.second_half_goals += 1;
 
         const orderedGoals = targetGoalsByMatch.get(String(goal.match_id)) || [];
         const goalIndex = orderedGoals.indexOf(goal) + 1;
@@ -7605,6 +7655,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }).join("");
     setupPlayerAnalysisNumberCycles(mobileList);
     setupPlayerPhotos(mobileList);
+    requestAnimationFrame(updatePlayerAnalysisListHeader);
   }
 
   function renderPlayerAnalysisTable() {
@@ -8307,7 +8358,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const exact = new Map();
         const normalized = new Map();
         try {
-          const response = await fetch(`./data/players/${clubKey}.json?v=20260930-club-profiles`, { cache: "no-cache" });
+          const response = await fetch(`./data/players/${clubKey}.json?v=20260930-profile-inline`, { cache: "no-store" });
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           const payload = await response.json();
           Object.entries(payload || {}).forEach(([key, profile]) => {
@@ -8325,6 +8376,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         } catch (error) {
           console.warn(`Player profiles unavailable for ${clubKey}`, error);
         }
+        // The script is network-first even on devices with an older JSON cache.
+        // Merge bundled current club profiles after historical JSON profiles.
+        Object.values(window.TrappOfficialPlayers?.[clubKey] || {}).forEach(entry => {
+          if (!entry.profile) return;
+          const names = [entry.name, entry.official_name, entry.profile.app_player_name]
+            .filter(Boolean).map(normalizePlayerImageName);
+          const previous = names.map(name => normalized.get(normalizePlayerIdentityText(name))).find(Boolean) || {};
+          const profile = { ...previous, ...entry.profile, links: { ...previous.links, ...entry.profile.links } };
+          names.forEach(name => {
+            exact.set(name, profile);
+            normalized.set(normalizePlayerIdentityText(name), profile);
+          });
+        });
         return { exact, normalized };
       })());
     }
@@ -8680,7 +8744,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ['出場',formatPlayerNumber(row.played_matches),'試合'],['先発',formatPlayerNumber(row.starter_matches),'試合'],['得点',formatPlayerNumber(row.goals),'点'],
       ['途中出場',formatPlayerNumber(row.sub_matches),'試合'],['出場勝率',formatPlayerRate(row.played_win_rate),'出場した試合'],['平均勝点',formatPlayerDecimal(row.played_points_per_match),'出場した試合']
     ].map(([label,value,unit])=>`<div class="pa-profile-kpi"><span>${label}</span><strong>${escapeHtml(value)}</strong><small>${unit}</small></div>`).join('')}</div>`;
-    const appearance=row=>`<section class="pv-appearance"><h3>出場内訳</h3>${[['先発',row.starter_matches],['途中出場',row.sub_matches]].map(([label,value])=>`<div><span>${label}</span><i aria-hidden="true"><b style="width:${Math.max(0,Math.min(100,(toPlayerNumber(value)||0)/Math.max(1,toPlayerNumber(row.played_matches)||0)*100))}%"></b></i><strong>${escapeHtml(formatPlayerNumber(value))}<small>試合</small></strong></div>`).join('')}</section><div class="pv-discipline"><span><i class="yellow" aria-hidden="true"></i>警告 <strong>${escapeHtml(formatPlayerNumber(row.yellow_cards))}</strong></span><span><i class="red" aria-hidden="true"></i>退場 <strong>${escapeHtml(formatPlayerNumber(row.red_cards))}</strong></span></div>`;
+    const appearance=row=>`<section class="pv-appearance"><h3>出場内訳</h3>${[['先発',row.starter_matches],['途中出場',row.sub_matches]].map(([label,value])=>`<div><span>${label}</span><i aria-hidden="true"><b style="width:${Math.max(0,Math.min(100,(toPlayerNumber(value)||0)/Math.max(1,toPlayerNumber(row.played_matches)||0)*100))}%"></b></i><strong>${escapeHtml(formatPlayerNumber(value))}<small>試合</small></strong></div>`).join('')}</section><dl class="pv-goal-halves">${[['前半ゴール数','first_half_goals'],['後半ゴール数','second_half_goals']].map(([label,key])=>`<div><dt>${label}</dt><dd>${escapeHtml(formatPlayerNumber(getPlayerRankingValue(row,{metricKey:key})))}<small>点</small></dd></div>`).join('')}</dl><div class="pv-discipline"><span><i class="yellow" aria-hidden="true"></i>警告 <strong>${escapeHtml(formatPlayerNumber(row.yellow_cards))}</strong></span><span><i class="red" aria-hidden="true"></i>退場 <strong>${escapeHtml(formatPlayerNumber(row.red_cards))}</strong></span></div>`;
     const stats=(key,row,rows,extra,mode)=>`<div data-pv-stats="${escapeHtml(key)}" ${key===period?'':'hidden'}>${kpis(row,rows)}${appearance(row)}${extra?renderPlayerOpponentGoalSection(row.player_name || player.player_name || '-',mode==='defense'?extra.opponentDefense:extra.opponentGoals,{mode}):''}${key.startsWith('year:')?`<button type="button" class="pa-year-detail-btn pv-year-log" data-pa-year-detail="${key.slice(5)}">試合ごとの成績を見る →</button>`:''}<details class="pv-full-stats"><summary>詳しい分析</summary>${renderPlayerAnalysisDetailSections(row)}</details></div>`;
     const body=`
       <div class="pa-profile-tabs" role="tablist" aria-label="選手データ表示切り替え">
@@ -8744,6 +8808,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const currentMetricMap = (playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all")
       ? await buildPlayerAnalysisRankingMetrics(currentMetricYears, modalScope, null)
       : null;
+    await Promise.all(yearRows.map(async row => {
+      const year = getPlayerYearValue(row);
+      if (!year) return;
+      const metrics = yearRows.length === 1 ? totalMetricMap : await buildPlayerAnalysisRankingMetrics([year], modalScope, null);
+      row.__paRankingMetrics = metrics.get(getPlayerGroupKey(row)) || null;
+    }));
     const insights = {
       total: await buildPlayerPerformanceExtras(player, yearRows, modalScope, null),
       current: (playerAnalysisState.timeMode === "range" || playerAnalysisState.year !== "all")
@@ -9147,6 +9217,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (playerAnalysisView) {
       playerAnalysisView.addEventListener("scroll", updatePlayerAnalysisScrollTopButton, { passive: true });
       window.addEventListener("scroll", updatePlayerAnalysisScrollTopButton, { passive: true });
+      window.addEventListener("resize", updatePlayerAnalysisScrollTopButton, { passive: true });
+      if (els.bottomTabs && window.ResizeObserver) {
+        new ResizeObserver(updatePlayerAnalysisScrollTopButton).observe(els.bottomTabs);
+      }
       updatePlayerAnalysisScrollTopButton();
     }
     if (els.bottomTabs) {

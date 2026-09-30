@@ -37848,5 +37848,27 @@
     },
     "image_source_url": "https://roasso-k.com/img/players/3812_big.jpg",
     "fetched_at": "2026-09-30T06:50:31+00:00"
+  },
+  "ショファー ネオ": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "kumamoto",
+    "app_player_name": "ショファー ネオ",
+    "name": "ショファー ネオ",
+    "official_name": "ショファー ネオ",
+    "name_en": "CHOFFART NEO",
+    "position": "GK",
+    "birth_date": "2005/05/30",
+    "birthplace": "熊本県（熊本市）",
+    "height_cm": 181,
+    "weight_kg": 70,
+    "affiliated_teams": [
+      "ロアッソ熊本ユース",
+      "ロアッソ熊本"
+    ],
+    "links": {
+      "club_official": "https://roasso-k.com/clubteam/players/1680"
+    },
+    "fetched_at": "2026-09-30T10:05:01+00:00"
   }
 }

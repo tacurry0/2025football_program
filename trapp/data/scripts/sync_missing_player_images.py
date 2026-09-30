@@ -195,10 +195,50 @@ def load_index():
     return {}
 
 
+def write_index(index):
+    # Bundle current basic profiles with the network-first script so older
+    # offline JSON caches cannot leave new players without a profile.
+    fields = ("source", "source_confidence", "club", "app_player_name", "name", "official_name",
+              "name_en", "position", "number", "birth_date", "birthplace", "height_cm", "weight_kg",
+              "final_team", "affiliated_teams", "nickname", "blood_type", "dominant_foot", "links")
+    legacy = {}
+    for base in (DATA / "assets/images/player_niigata", DATA / "assets/player_niigata"):
+        if base.exists():
+            for photo in sorted(base.iterdir()):
+                if photo.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+                    legacy.setdefault(normalized_name(photo.stem), "./" + photo.relative_to(APP).as_posix())
+    for club, players in index.items():
+        profiles = json.loads((DATA / "players" / f"{club}.json").read_text(encoding="utf-8"))
+        lookup = {normalized_name(k): v for k, v in profiles.items() if k != "_meta" and isinstance(v, dict)}
+        for name, profile in profiles.items():
+            if name == "_meta" or not isinstance(profile, dict) or not profile.get("links", {}).get("club_official"):
+                continue
+            key = normalized_name(name)
+            if key not in players:
+                # Archived official profiles can supplement a past season
+                # without introducing or replacing any list photo.
+                players[key] = {"name": name, "official_name": profile.get("official_name", name),
+                    "profile_url": profile["links"]["club_official"], "photo": ""}
+        for key, entry in players.items():
+            profile = lookup.get(normalized_name(entry["name"]))
+            if profile:
+                entry["profile"] = {k: profile[k] for k in fields if k in profile}
+            if club == "niigata":
+                entry["list_photo"] = legacy.get(key, entry["photo"])
+                entry["list_crop"] = "none" if key in legacy else "upper"
+    payload = "/* Generated from club official player detail pages. */\nwindow.TrappOfficialPlayers = " + json.dumps(index, ensure_ascii=False, sort_keys=True, indent=2) + ";\n"
+    if not INDEX.exists() or INDEX.read_text(encoding="utf-8") != payload:
+        INDEX.write_text(payload, encoding="utf-8")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", help="Refresh only names containing this text, preserving the other entries")
+    parser.add_argument("--refresh-index-only", action="store_true", help="Bundle already fetched profiles and list photo choices without downloading any image")
     args = parser.parse_args()
+    if args.refresh_index_only:
+        write_index(load_index())
+        return
     session = requests.Session()
     session.headers.update({"User-Agent": USER_AGENT, "Accept-Language": "ja"})
     report = {"source": "club official player detail pages", "synced": [], "errors": []}
@@ -247,9 +287,7 @@ def main():
                 "club_official_synced_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 "club_official_players": len(players)})
             write_json(path, profiles)
-    payload = "/* Generated from club official player detail pages. */\nwindow.TrappOfficialPlayers = " + json.dumps(index, ensure_ascii=False, sort_keys=True, indent=2) + ";\n"
-    if not INDEX.exists() or INDEX.read_text(encoding="utf-8") != payload:
-        INDEX.write_text(payload, encoding="utf-8")
+    write_index(index)
     referenced = {APP / p["photo"].removeprefix("./") for players in index.values() for p in players.values()}
     for path in ASSETS.glob("*/*.webp"):
         if path not in referenced:
