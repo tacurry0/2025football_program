@@ -8,7 +8,10 @@
     "supplemented_at": "2026-06-18T08:46:09.409Z",
     "supplement_source": "scripts/fetch-missing-player-profiles.mjs",
     "name_only_supplemented_at": "2026-06-18T08:52:56.633Z",
-    "name_only_supplement_source": "scripts/fetch-missing-player-profiles-by-name.mjs"
+    "name_only_supplement_source": "scripts/fetch-missing-player-profiles-by-name.mjs",
+    "club_official_source": "https://www.albirex.co.jp/team/player/2026-27/",
+    "club_official_synced_at": "2026-09-30T06:51:59+00:00",
+    "club_official_players": 33
   },
   "アウグスト": {
     "source": "jleague_data_site",
@@ -2477,13 +2480,13 @@
     }
   },
   "ジェイソン ゲリア": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "29427",
     "app_player_name": "ジェイソン ゲリア",
     "name": "ジェイソン ゲリア",
     "official_name": "ジェイソン ゲリア",
-    "name_en": "Jason Kato Geria(JASON GERIA)",
+    "name_en": "JASON KATO GERIA",
     "normalized_names": [
       "ジェイソンゲリア",
       "jasonkatogeria(jasongeria)"
@@ -2546,13 +2549,17 @@
       }
     ],
     "affiliated_teams": [
-      "千葉",
-      "新潟"
+      "メルボルン ビクトリーFC/オーストラリア",
+      "ジェフユナイテッド・千葉",
+      "パース グローリーFC/オーストラリア",
+      "メルボルン ビクトリーFC/オーストラリア",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=29427"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=29427",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/2/"
     },
-    "fetched_at": "2026-06-18T08:36:11.507Z",
+    "fetched_at": "2026-09-30T06:47:27+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -2593,16 +2600,43 @@
           "opponent": "鹿島アントラーズ"
         }
       ]
-    }
+    },
+    "number": "2",
+    "nickname": "ジェイス",
+    "blood_type": "-",
+    "dominant_foot": "右 (29cm)",
+    "club_profile_fields": {
+      "名前": "ジェイソン ゲリア",
+      "生年月日": "1993/5/10(33歳)",
+      "身長/体重": "183cm/78kg",
+      "血液型": "-",
+      "出身地": "オーストラリア",
+      "利き足": "右 (29cm)",
+      "経歴": "メルボルン ビクトリーFC/オーストラリア → ジェフユナイテッド・千葉 → パース グローリーFC/オーストラリア → メルボルン ビクトリーFC/オーストラリア",
+      "ニックネーム": "ジェイス",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "5人(兄、姉、姉、姉、自分)",
+      "趣味・マイブーム": "NBA",
+      "使用スパイクのメーカー": "NIKE",
+      "仲の良い選手": "舞行龍 ジェームズ 選手、トーマスデン 選手",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "ノアムバウマン/とにかくシュートがはいりません。",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "三笘薫 選手",
+      "好きな海外の選手": "ジネディーヌ・ジダン 選手",
+      "好きな食べ物": "焼肉",
+      "背番号へのこだわり": "2が好きだから",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "美味しいコーヒー豆を見つける"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/02.png"
   },
   "シマブク カズヨシ": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "41153",
     "app_player_name": "シマブク カズヨシ",
     "name": "シマブク カズヨシ",
     "official_name": "シマブク カズヨシ",
-    "name_en": "SHIMABUKU Kazuyoshi",
+    "name_en": "KAZUYOSHI SHIMABUKU",
     "normalized_names": [
       "シマブクカズヨシ",
       "shimabukukazuyoshi"
@@ -2612,7 +2646,7 @@
     "birthplace": "ペルー",
     "birth_date": "1999/07/29",
     "height_cm": 166,
-    "weight_kg": 63,
+    "weight_kg": 67,
     "first_appearances": [
       "リーグ戦:",
       "2021 明治安田J2-35",
@@ -2676,13 +2710,20 @@
       }
     ],
     "affiliated_teams": [
-      "新潟",
-      "藤枝"
+      "東松山新宿サッカースポーツ少年団",
+      "東松山ぺレーニアフットボールクラブジュニア",
+      "浦和レッズジュニアユース",
+      "浦和レッズユース",
+      "新潟医療福祉大",
+      "アルビレックス新潟",
+      "藤枝MYFC",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=41153"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=41153",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/17/"
     },
-    "fetched_at": "2026-06-18T08:36:11.914Z",
+    "fetched_at": "2026-09-30T06:51:57+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -2744,7 +2785,40 @@
           "opponent": "ファジアーノ岡山"
         }
       ]
-    }
+    },
+    "number": "17",
+    "nickname": "シマブクかぶよし",
+    "blood_type": "O型",
+    "dominant_foot": "右 (25.5cm)",
+    "club_profile_fields": {
+      "名前": "シマブク カズヨシ",
+      "生年月日": "1999/7/29(27歳)",
+      "身長/体重": "166cm/67.kg",
+      "血液型": "O型",
+      "出身地": "ペルー",
+      "利き足": "右 (25.5cm)",
+      "経歴": "東松山新宿サッカースポーツ少年団 → 東松山ぺレーニアフットボールクラブジュニア → 浦和レッズジュニアユース → 浦和レッズユース → 新潟医療福祉大 → アルビレックス新潟 → 藤枝MYFC",
+      "ニックネーム": "シマブクかぶよし",
+      "出身小学校": "東松山市立新宿小学校",
+      "出身中学校": "上尾市立大石中学校",
+      "出身高校": "埼玉県立桶川西高等学校",
+      "出身大学": "新潟医療福祉大学",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人(兄、自分、妹)",
+      "趣味・マイブーム": "カフェ巡り",
+      "使用スパイクのメーカー": "NIKE",
+      "仲の良い選手": "みーーーーんな❤️",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "前田椋介選手/めっちゃうるさいとこが好き",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "ジョルディクルークス 選手/めっちゃ早いし左足がすんごいから",
+      "好きな海外の選手": "リオネル・メッシ 選手",
+      "好きなアーティスト": "Bruno Marsさん",
+      "好きなタレント・芸能人": "島村拓弥選手",
+      "好きな食べ物": "かもせやのチーズ豆腐",
+      "背番号へのこだわり": "好きな選手がつけてたから",
+      "今シーズンの目標(サッカー面)": "5ゴール5アシスト",
+      "今季の目標(サッカー・プライベート可)": "チディとたっくんに会いに行く!"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/17.png"
   },
   "ジャン パトリック": {
     "source": "jleague_data_site",
@@ -3694,13 +3768,13 @@
     }
   },
   "ダニーロ ゴメス": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "49679",
     "app_player_name": "ダニーロ ゴメス",
     "name": "ダニーロ ゴメス",
     "official_name": "ダニーロ ゴメス",
-    "name_en": "DANILO GOMES Magalhaes",
+    "name_en": "DANILO GOMES",
     "normalized_names": [
       "ダニロゴメス",
       "danilogomesmagalhaes"
@@ -3756,12 +3830,18 @@
       }
     ],
     "affiliated_teams": [
-      "新潟"
+      "サンパウロFC/ブラジル",
+      "ブラジル デ ペロッタス/ブラジル",
+      "アトレチコ ゴイアニエンセ/ブラジル",
+      "クイアバEC/ブラジル",
+      "AAポンチ プレッタ/ブラジル",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49679"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49679",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/11/"
     },
-    "fetched_at": "2026-06-18T08:36:17.755Z",
+    "fetched_at": "2026-09-30T06:48:10+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -3821,7 +3901,41 @@
           "opponent": "浦和レッズ"
         }
       ]
-    }
+    },
+    "number": "11",
+    "nickname": "ダニー",
+    "blood_type": "-",
+    "dominant_foot": "右 (25.5cm)",
+    "club_profile_fields": {
+      "名前": "ダニーロ ゴメス",
+      "生年月日": "1999/2/5(27歳)",
+      "身長/体重": "175cm/77kg",
+      "血液型": "-",
+      "出身地": "ブラジル",
+      "利き足": "右 (25.5cm)",
+      "経歴": "サンパウロFC/ブラジル → ブラジル デ ペロッタス/ブラジル → アトレチコ ゴイアニエンセ/ブラジル → クイアバEC/ブラジル → AAポンチ プレッタ/ブラジル → アルビレックス新潟",
+      "ニックネーム": "ダニー",
+      "出身小学校": "Luiz Nunes de Oliveira",
+      "小学生・ジュニア(4種)時の所属チーム名": "São Paulo",
+      "出身中学校": "Luiz Nunes de Oliveira",
+      "中学生・ジュニアユース(3種)時の所属チーム名": "São Paulo",
+      "出身高校": "Luiz Nunes Oliveira",
+      "高校生・ユース(2種)時の所属チーム名": "São Paulo",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "4人(自分、弟、妹、妹)",
+      "趣味・マイブーム": "友達とゲーム",
+      "使用スパイクのメーカー": "NIKE",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "星雄次/ロッカーで隣の席で、とても優しい",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "アンドレス・イニエスタ 選手/頭がいい選手だから",
+      "好きな海外の選手": "クリスティアーノ・ロナウド 選手",
+      "好きなアーティスト": "マイケルジャクソン さん",
+      "好きなタレント・芸能人": "マイケルジャクソン さん",
+      "好きな食べ物": "寿司",
+      "背番号へのこだわり": "ネイマールが使ってた背番号だから",
+      "今シーズンの目標(サッカー面)": "J1に戻る手伝いをする",
+      "今季の目標(サッカー・プライベート可)": "アシスト、ゴールなど自分の目標に到達。試合に出場する。"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/11.png"
   },
   "チアゴ ガリャルド": {
     "source": "jleague_data_site",
@@ -6776,13 +6890,13 @@
     }
   },
   "マテウス モラエス": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "70149",
     "app_player_name": "マテウス モラエス",
     "name": "マテウス モラエス",
     "official_name": "マテウス モラエス",
-    "name_en": "Purcelo Blecha de Moraes Matheus(MATHEUS MORAES)",
+    "name_en": "MATHEUS PURCELO BLECHA DE MORAES",
     "normalized_names": [
       "マテウスモラエス",
       "purceloblechademoraesmatheus(matheusmoraes)"
@@ -6792,7 +6906,7 @@
     "birthplace": "ブラジル",
     "birth_date": "2000/04/22",
     "height_cm": 176,
-    "weight_kg": 72,
+    "weight_kg": 75,
     "first_appearances": [
       "リーグ戦:",
       "2025 明治安田J1-26",
@@ -6818,12 +6932,18 @@
       }
     ],
     "affiliated_teams": [
-      "新潟"
+      "サントスFC/ブラジル",
+      "マリンガFC/ブラジル",
+      "サントスFC/ブラジル",
+      "ロンドリーナEC/ブラジル",
+      "マリンガFC/ブラジル",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=70149"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=70149",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/55/"
     },
-    "fetched_at": "2026-06-18T08:36:33.537Z",
+    "fetched_at": "2026-09-30T06:48:41+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -6866,7 +6986,39 @@
           "event": "goal"
         }
       ]
-    }
+    },
+    "number": "55",
+    "nickname": "モラエス",
+    "blood_type": "-",
+    "dominant_foot": "左 (27.5cm)",
+    "club_profile_fields": {
+      "名前": "マテウス モラエス",
+      "生年月日": "2000/4/22(26歳)",
+      "身長/体重": "176cm/75kg",
+      "血液型": "-",
+      "出身地": "ブラジル",
+      "利き足": "左 (27.5cm)",
+      "経歴": "サントスFC/ブラジル → マリンガFC/ブラジル → サントスFC/ブラジル → ロンドリーナEC/ブラジル → マリンガFC/ブラジル",
+      "ニックネーム": "モラエス",
+      "出身小学校": "Brascuba",
+      "出身中学校": "Azevedo Júnior",
+      "出身高校": "Azevedo Júnior",
+      "独身 / 既婚": "既婚",
+      "趣味・マイブーム": "ドラマ視聴",
+      "使用スパイクのメーカー": "Nike",
+      "仲の良い選手": "ユーリアルベルト",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "笠井佳祐/新潟で仲良くなったし、サッカーのスタイルが好き。",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "ロドリゴ/めっちゃうまい",
+      "好きな海外の選手": "ネイマール",
+      "好きなアーティスト": "MC Tuto",
+      "好きなタレント・芸能人": "シルビオサントス",
+      "好きな食べ物": "寿司、シュラスコ",
+      "背番号へのこだわり": "55,10,9が好き。今までのチームで番号だから。",
+      "好きな海外の選手2": "ネイマール",
+      "今シーズンの目標(サッカー面)": "J1昇格、得点王",
+      "今季の目標(サッカー・プライベート可)": "日本の文化、サッカーに適応していく。"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/55.png"
   },
   "マルキーニョ": {
     "source": "jleague_data_site",
@@ -12526,13 +12678,13 @@
     }
   },
   "笠井 佳祐": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "60238",
     "app_player_name": "笠井 佳祐",
     "name": "笠井 佳祐",
     "official_name": "笠井 佳祐",
-    "name_en": "KASAI Keisuke",
+    "name_en": "KEISUKE KASAI",
     "normalized_names": [
       "笠井佳祐",
       "kasaikeisuke"
@@ -12542,7 +12694,7 @@
     "birthplace": "千葉県",
     "birth_date": "2002/08/30",
     "height_cm": 180,
-    "weight_kg": 71,
+    "weight_kg": 72,
     "first_appearances": [
       "リーグ戦:",
       "2025 明治安田J1-7",
@@ -12579,12 +12731,17 @@
       }
     ],
     "affiliated_teams": [
-      "新潟"
+      "中野木FC",
+      "VIVAIO船橋SC",
+      "関東第一高",
+      "桐蔭横浜大",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=60238"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=60238",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/6/"
     },
-    "fetched_at": "2026-06-18T08:37:00.792Z",
+    "fetched_at": "2026-09-30T06:48:01+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -12635,7 +12792,40 @@
           "opponent": "ガンバ大阪"
         }
       ]
-    }
+    },
+    "number": "6",
+    "nickname": "けーけ",
+    "blood_type": "A型",
+    "dominant_foot": "右 (26cm)",
+    "club_profile_fields": {
+      "名前": "笠井 佳祐",
+      "生年月日": "2002/8/30(24歳)",
+      "身長/体重": "180cm/72kg",
+      "血液型": "A型",
+      "出身地": "千葉県",
+      "利き足": "右 (26cm)",
+      "経歴": "中野木FC → VIVAIO船橋SC → 関東第一高 → 桐蔭横浜大",
+      "ニックネーム": "けーけ",
+      "出身小学校": "中野木小学校",
+      "出身中学校": "前原中学校",
+      "出身高校": "関東第一高校",
+      "出身大学": "桐蔭横浜大学",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "一人っ子",
+      "趣味・マイブーム": "自炊",
+      "使用スパイクのメーカー": "MIZUNO",
+      "仲の良い選手": "藤原優大 選手、吉田陣平 選手、マテウス モラエス 選手、古長谷千博選手",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "藤原奏哉/笑顔が可愛いので笑顔にさせていきたい",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "細谷真大 選手/どんな形でも点を取れるから",
+      "好きな海外の選手": "リオネル・メッシ 選手",
+      "好きなアーティスト": "ONE OK ROCKさん、BADPOPさん",
+      "好きなタレント・芸能人": "由布菜月 さん、永野芽郁 さん",
+      "好きな食べ物": "焼肉",
+      "背番号へのこだわり": "自分にとって運勢が良い番号であり、前任を超えていくためにも変えた",
+      "今シーズンの目標(サッカー面)": "J1昇格、2桁得点",
+      "今季の目標(サッカー・プライベート可)": "何も見ずに料理を作れるようにする"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/06.png"
   },
   "梶山 陽平": {
     "source": "jleague_data_site",
@@ -13905,13 +14095,13 @@
     }
   },
   "吉満 大介": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "15731",
     "app_player_name": "吉満 大介",
     "name": "吉満 大介",
     "official_name": "吉満 大介",
-    "name_en": "YOSHIMITSU Daisuke",
+    "name_en": "DAISUKE YOSHIMITSU",
     "normalized_names": [
       "吉満大介",
       "yoshimitsudaisuke"
@@ -13921,7 +14111,7 @@
     "birthplace": "鹿児島県",
     "birth_date": "1993/02/21",
     "height_cm": 187,
-    "weight_kg": 85,
+    "weight_kg": 90,
     "first_appearances": [
       "リーグ戦:",
       "2015 明治安田J2-42",
@@ -14030,14 +14220,14 @@
       }
     ],
     "affiliated_teams": [
-      "栃木",
-      "山口",
-      "新潟"
+      "飛松FC ー アミーゴス鹿児島U-15 ー 神村学園高 ー 鹿屋体育大 ー 栃木SC ー レノファ山口FC",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=15731"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=15731",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/23/"
     },
-    "fetched_at": "2026-06-18T08:37:06.424Z",
+    "fetched_at": "2026-09-30T06:47:13+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -14087,7 +14277,39 @@
           "opponent": "V・ファーレン長崎"
         }
       ]
-    }
+    },
+    "number": "23",
+    "nickname": "ミツ",
+    "blood_type": "B型",
+    "dominant_foot": "右 (28.5cm)",
+    "club_profile_fields": {
+      "名前": "吉満 大介",
+      "生年月日": "1993/2/21(33歳)",
+      "身長/体重": "187cm/90kg",
+      "血液型": "B型",
+      "出身地": "鹿児島県",
+      "利き足": "右 (28.5cm)",
+      "経歴": "飛松FC ー アミーゴス鹿児島U-15 ー 神村学園高 ー 鹿屋体育大 ー 栃木SC ー レノファ山口FC",
+      "ニックネーム": "ミツ",
+      "出身小学校": "安良小学校",
+      "小学生・ジュニア(4種)時の所属チーム名": "飛松FC",
+      "出身中学校": "横川中学校",
+      "中学生・ジュニアユース(3種)時の所属チーム名": "アミーゴス鹿児島",
+      "出身高校": "神村学園",
+      "高校生・ユース(2種)時の所属チーム名": "神村学園",
+      "出身大学": "鹿屋体育大",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人(自分・妹・弟)",
+      "趣味・マイブーム": "マイクラ",
+      "使用スパイクのメーカー": "adidas",
+      "仲の良い選手": "星雄次 選手",
+      "好きな海外の選手": "ジャンルイジ・ブッフォン 選手",
+      "好きなアーティスト": "Mrs. GREEN APPLEさん",
+      "好きな食べ物": "うなぎ",
+      "今シーズンの目標(サッカー面)": "昇格",
+      "今季の目標(サッカー・プライベート可)": "料理を作る機会を増やす"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/23.png"
   },
   "宮崎 幾笑": {
     "source": "jleague_data_site",
@@ -20293,13 +20515,13 @@
     }
   },
   "若月 大和": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "32508",
     "app_player_name": "若月 大和",
     "name": "若月 大和",
     "official_name": "若月 大和",
-    "name_en": "WAKATSUKI Yamato",
+    "name_en": "YAMATO WAKATSUKI",
     "normalized_names": [
       "若月大和",
       "wakatsukiyamato"
@@ -20309,7 +20531,7 @@
     "birthplace": "群馬県",
     "birth_date": "2002/01/18",
     "height_cm": 170,
-    "weight_kg": 65,
+    "weight_kg": 66,
     "first_appearances": [
       "リーグ戦:",
       "2019 明治安田J1-13",
@@ -20373,14 +20595,20 @@
       }
     ],
     "affiliated_teams": [
-      "湘南",
-      "山口",
-      "新潟"
+      "リベルティー大間々SC",
+      "前橋SCJrユース",
+      "桐生第一高",
+      "湘南ベルマーレ",
+      "FCシオン/スイス",
+      "湘南ベルマーレ",
+      "レノファ山口FC",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=32508"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=32508",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/18/"
     },
-    "fetched_at": "2026-06-18T08:37:23.125Z",
+    "fetched_at": "2026-09-30T06:48:35+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -20421,7 +20649,39 @@
           "opponent": "FC町田ゼルビア"
         }
       ]
-    }
+    },
+    "number": "18",
+    "nickname": "わか",
+    "blood_type": "B型",
+    "dominant_foot": "右 (24.5cm)",
+    "club_profile_fields": {
+      "名前": "若月 大和",
+      "生年月日": "2002/1/18(24歳)",
+      "身長/体重": "170cm/66kg",
+      "血液型": "B型",
+      "出身地": "群馬県",
+      "利き足": "右 (24.5cm)",
+      "経歴": "リベルティー大間々SC → 前橋SCJrユース → 桐生第一高 → 湘南ベルマーレ → FCシオン/スイス → 湘南ベルマーレ → レノファ山口FC",
+      "ニックネーム": "わか",
+      "出身小学校": "大間々東小学校",
+      "出身中学校": "大間々東中学校",
+      "出身高校": "桐生第一高校",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人(兄、兄、自分)",
+      "趣味・マイブーム": "買い物・キャンプ・愛犬ランチ",
+      "使用スパイクのメーカー": "MIZUNO",
+      "仲の良い選手": "チーム山登り(ふみくん、みつくん、えいじくん、ゆうしん)、ブル",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "大西悠介/ノリは悪いけど楽しい",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "山口蛍 選手/Jリーグ初出場した試合に吹き飛ばされたから",
+      "好きな海外の選手": "キリアン・エムバペ 選手",
+      "好きなアーティスト": "HANA さん",
+      "好きなタレント・芸能人": "ぺこぱ さん",
+      "好きな食べ物": "嫁の作るご飯全部",
+      "背番号へのこだわり": "こだわりはないが18番に誇りを持っている",
+      "今シーズンの目標(サッカー面)": "J2優勝",
+      "今季の目標(サッカー・プライベート可)": "ゴールという結果にこだわる"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/18.png"
   },
   "守田 達弥": {
     "source": "jleague_data_site",
@@ -23074,13 +23334,13 @@
     }
   },
   "小野 裕二": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "9984",
     "app_player_name": "小野 裕二",
     "name": "小野 裕二",
     "official_name": "小野 裕二",
-    "name_en": "ONO Yuji",
+    "name_en": "YUJI ONO",
     "normalized_names": [
       "小野裕二",
       "onoyuji"
@@ -23090,7 +23350,7 @@
     "birthplace": "神奈川県",
     "birth_date": "1992/12/22",
     "height_cm": 170,
-    "weight_kg": 69,
+    "weight_kg": 66,
     "first_appearances": [
       "リーグ戦:",
       "2010 J1-13",
@@ -23217,15 +23477,14 @@
       }
     ],
     "affiliated_teams": [
-      "横浜FM",
-      "鳥栖",
-      "G大阪",
-      "新潟"
+      "城北ファイターズ ー 横浜F・マリノスJrユース追浜 ー 横浜F・マリノスユース ー 横浜F・マリノス ー スタンダール・リエージュ/ベルギー ー シント=トロイデンVV/ベルギー ー サガン鳥栖 ー ガンバ大阪 ー サガン鳥栖",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=9984"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=9984",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/99/"
     },
-    "fetched_at": "2026-06-18T08:37:29.535Z",
+    "fetched_at": "2026-09-30T06:48:44+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -23275,7 +23534,32 @@
           "opponent": "FC東京"
         }
       ]
-    }
+    },
+    "number": "99",
+    "blood_type": "B型",
+    "dominant_foot": "右 (25.5cm)",
+    "club_profile_fields": {
+      "名前": "小野 裕二",
+      "生年月日": "1992/12/22(33歳)",
+      "身長/体重": "170cm/66kg",
+      "血液型": "B型",
+      "出身地": "神奈川県",
+      "利き足": "右 (25.5cm)",
+      "経歴": "城北ファイターズ ー 横浜F・マリノスJrユース追浜 ー 横浜F・マリノスユース ー 横浜F・マリノス ー スタンダール・リエージュ/ベルギー ー シント=トロイデンVV/ベルギー ー サガン鳥栖 ー ガンバ大阪 ー サガン鳥栖",
+      "出身小学校": "城北小学校",
+      "出身中学校": "衣笠中学校",
+      "出身高校": "逗葉高校",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(兄、自分)",
+      "趣味・マイブーム": "ゴルフ、サウナ",
+      "使用スパイクのメーカー": "NIKE",
+      "好きな海外の選手": "ウェイン・ルーニー 選手",
+      "好きなアーティスト": "湘南乃風 さん",
+      "好きな食べ物": "焼肉",
+      "今シーズンの目標(サッカー面)": "復活",
+      "今季の目標(サッカー・プライベート可)": "ゴルフベスト記録更新"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/99.png"
   },
   "小林 慶行": {
     "source": "jleague_data_site",
@@ -25677,13 +25961,13 @@
     }
   },
   "新井 泰貴": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "37513",
     "app_player_name": "新井 泰貴",
     "name": "新井 泰貴",
     "official_name": "新井 泰貴",
-    "name_en": "ARAI Taiki",
+    "name_en": "TAIKI ARAI",
     "normalized_names": [
       "新井泰貴",
       "araitaiki"
@@ -25693,7 +25977,7 @@
     "birthplace": "神奈川県",
     "birth_date": "1997/06/19",
     "height_cm": 174,
-    "weight_kg": 67,
+    "weight_kg": 70,
     "first_appearances": [
       "リーグ戦:",
       "2020 明治安田J3-1",
@@ -25766,14 +26050,19 @@
       }
     ],
     "affiliated_teams": [
-      "鳥取",
-      "藤枝",
-      "新潟"
+      "湘南レオーネ",
+      "湘南ベルマーレU-15平塚",
+      "湘南ベルマーレU-18",
+      "産業能率大",
+      "ガイナーレ鳥取",
+      "藤枝MYFC",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=37513"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=37513",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/22/"
     },
-    "fetched_at": "2026-06-18T08:37:35.934Z",
+    "fetched_at": "2026-09-30T06:48:21+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -25814,7 +26103,40 @@
           "opponent": "鹿島アントラーズ"
         }
       ]
-    }
+    },
+    "number": "22",
+    "nickname": "たいき",
+    "blood_type": "B型",
+    "dominant_foot": "左 (26.5cm)",
+    "club_profile_fields": {
+      "名前": "新井 泰貴",
+      "生年月日": "1997/6/19(29歳)",
+      "身長/体重": "174cm/70kg",
+      "血液型": "B型",
+      "出身地": "神奈川県",
+      "利き足": "左 (26.5cm)",
+      "経歴": "湘南レオーネ → 湘南ベルマーレU-15平塚 → 湘南ベルマーレU-18 → 産業能率大 → ガイナーレ鳥取 → 藤枝MYFC",
+      "ニックネーム": "たいき",
+      "出身小学校": "藤沢市立片瀬小学校",
+      "出身中学校": "藤沢市立片瀬中学校",
+      "出身高校": "平塚学園高等学校",
+      "出身大学": "産業能率大学",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人(兄・兄・自分)",
+      "趣味・マイブーム": "コーヒー(仮)",
+      "使用スパイクのメーカー": "MIZUNO",
+      "仲の良い選手": "落合陸、シマブクカズヨシ、矢村健 選手",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "舩木翔 選手/サッカーが上手いところ",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "宇佐美貴史 選手/テクニックと視野の広さ",
+      "好きな海外の選手": "ペドロ・ゴンサレス・ロペス 選手",
+      "好きなアーティスト": "HANA さん",
+      "好きなタレント・芸能人": "サンドウィッチマン さん",
+      "好きな食べ物": "餃子",
+      "背番号へのこだわり": "尊敬する藤枝MYFCの先輩、久富選手と同じ番号だから",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "健康に気をつける"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/22.png"
   },
   "新井 直人": {
     "source": "jleague_data_site",
@@ -26005,13 +26327,13 @@
     }
   },
   "森 昂大": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "44635",
     "app_player_name": "森 昂大",
     "name": "森 昂大",
     "official_name": "森 昂大",
-    "name_en": "MORI Kodai",
+    "name_en": "KODAI MORI",
     "normalized_names": [
       "森昂大",
       "morikodai"
@@ -26021,7 +26343,7 @@
     "birthplace": "長野県",
     "birth_date": "1999/04/27",
     "height_cm": 183,
-    "weight_kg": 74,
+    "weight_kg": 78,
     "first_appearances": [
       "リーグ戦:",
       "2023 明治安田J2-7",
@@ -26076,13 +26398,18 @@
       }
     ],
     "affiliated_teams": [
-      "徳島",
-      "新潟"
+      "鎌田SSS",
+      "AMBICION松本",
+      "創造学園高",
+      "びわこ成蹊スポーツ大",
+      "徳島ヴォルティス",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=44635"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=44635",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/38/"
     },
-    "fetched_at": "2026-06-18T08:37:36.818Z",
+    "fetched_at": "2026-09-30T06:47:56+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -26123,7 +26450,38 @@
           "opponent": "東京ヴェルディ"
         }
       ]
-    }
+    },
+    "number": "38",
+    "nickname": "コーディ",
+    "blood_type": "A型",
+    "dominant_foot": "右 (28.5cm)",
+    "club_profile_fields": {
+      "名前": "森 昂大",
+      "生年月日": "1999/4/27(27歳)",
+      "身長/体重": "183cm/78kg",
+      "血液型": "A型",
+      "出身地": "長野県",
+      "利き足": "右 (28.5cm)",
+      "経歴": "鎌田SSS → AMBICION松本 → 創造学園高 → びわこ成蹊スポーツ大 → 徳島ヴォルティス",
+      "ニックネーム": "コーディ",
+      "出身小学校": "鎌田小学校",
+      "出身中学校": "鎌田中学校",
+      "出身高校": "創造学園高校(現、松本国際高校)",
+      "出身大学": "びわこ成蹊スポーツ大学",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(姉、自分)",
+      "趣味・マイブーム": "ゴルフ",
+      "使用スパイクのメーカー": "MIZUNO",
+      "仲の良い選手": "奥村仁、大竹優心",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "新井泰貴/いじると意外と面白く返してくる",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "マテウスジェズス 選手/強い、上手い、速い、全部揃っていたから",
+      "好きなタレント・芸能人": "馬場ふみか さん",
+      "好きな食べ物": "カレー、麺類",
+      "背番号へのこだわり": "仲良い人がつけていた番号だから",
+      "今シーズンの目標(サッカー面)": "試合に出る",
+      "今季の目標(サッカー・プライベート可)": "ゴルフも上手くなる"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/38.png"
   },
   "森 俊介": {
     "source": "jleague_data_site",
@@ -26257,13 +26615,13 @@
     }
   },
   "森 璃太": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "52117",
     "app_player_name": "森 璃太",
     "name": "森 璃太",
     "official_name": "森 璃太",
-    "name_en": "MORI Rita",
+    "name_en": "RITA MORI",
     "normalized_names": [
       "森璃太",
       "moririta"
@@ -26273,7 +26631,7 @@
     "birthplace": "神奈川県",
     "birth_date": "2001/08/19",
     "height_cm": 170,
-    "weight_kg": 65,
+    "weight_kg": 68,
     "first_appearances": [
       "リーグ戦:",
       "2024 明治安田J3-26",
@@ -26319,14 +26677,22 @@
       }
     ],
     "affiliated_teams": [
-      "新潟",
-      "福島",
-      "栃木SC"
+      "大島シェルズSC",
+      "川崎フロンターレU-12",
+      "川崎フロンターレU-15",
+      "川崎フロンターレU-18",
+      "早稲田大",
+      "アルビレックス新潟",
+      "福島ユナイテッドFC",
+      "アルビレックス新潟",
+      "栃木SC",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=52117"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=52117",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/24/"
     },
-    "fetched_at": "2026-06-18T08:37:37.632Z",
+    "fetched_at": "2026-09-30T06:47:42+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -26367,7 +26733,40 @@
           "opponent": "いわきFC"
         }
       ]
-    }
+    },
+    "number": "24",
+    "nickname": "りーた",
+    "blood_type": "A型",
+    "dominant_foot": "右 (26cm)",
+    "club_profile_fields": {
+      "名前": "森 璃太",
+      "生年月日": "2001/8/19(25歳)",
+      "身長/体重": "170cm/68kg",
+      "血液型": "A型",
+      "出身地": "神奈川県",
+      "利き足": "右 (26cm)",
+      "経歴": "大島シェルズSC → 川崎フロンターレU-12 → 川崎フロンターレU-15 → 川崎フロンターレU-18 → 早稲田大 → アルビレックス新潟 → 福島ユナイテッドFC → アルビレックス新潟 → 栃木SC",
+      "ニックネーム": "りーた",
+      "出身小学校": "大島小学校",
+      "出身中学校": "塚越中学校",
+      "出身高校": "住吉高校",
+      "出身大学": "早稲田大学",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "一人っ子",
+      "趣味・マイブーム": "HIPHOPを聴くこと",
+      "使用スパイクのメーカー": "adidas",
+      "仲の良い選手": "舩木翔 くん、古長谷千博 選手",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "舩木翔/優しい最高な先輩",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "イッサムジェバリ 選手/とても強かったから",
+      "好きな海外の選手": "ヌーノ・メンデス 選手",
+      "好きなアーティスト": "BADHOPさん",
+      "好きなタレント・芸能人": "上杉柊平さん",
+      "好きな食べ物": "焼肉",
+      "背番号へのこだわり": "父の誕生日だから",
+      "今シーズンの目標(サッカー面)": "目に見える結果を残す",
+      "今季の目標(サッカー・プライベート可)": "英語を習得する"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/24.png"
   },
   "森田 浩史": {
     "source": "jleague_data_site",
@@ -27816,13 +28215,13 @@
     }
   },
   "星 雄次": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "9989",
     "app_player_name": "星 雄次",
     "name": "星 雄次",
     "official_name": "星 雄次",
-    "name_en": "HOSHI Yuji",
+    "name_en": "YUJI HOSHI",
     "normalized_names": [
       "星雄次",
       "hoshiyuji"
@@ -27832,7 +28231,7 @@
     "birthplace": "神奈川県",
     "birth_date": "1992/07/27",
     "height_cm": 170,
-    "weight_kg": 64,
+    "weight_kg": 65,
     "first_appearances": [
       "リーグ戦:",
       "2015 明治安田J3-1",
@@ -27950,15 +28349,14 @@
       }
     ],
     "affiliated_teams": [
-      "福島",
-      "山口",
-      "大分",
-      "新潟"
+      "つくし野サッカースポーツ少年団 - 横浜F・マリノスJrユース - 横浜F・マリノスユース - 法政大 - 福島ユナイテッドFC - レノファ山口FC - 大分トリニータ",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=9989"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=9989",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/19/"
     },
-    "fetched_at": "2026-06-18T08:37:42.261Z",
+    "fetched_at": "2026-09-30T06:48:18+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -28036,7 +28434,39 @@
           "opponent": "レノファ山口FC"
         }
       ]
-    }
+    },
+    "number": "19",
+    "nickname": "ゆうじ",
+    "blood_type": "O型",
+    "dominant_foot": "右 (25.5cm)",
+    "club_profile_fields": {
+      "名前": "星 雄次",
+      "生年月日": "1992/7/27(34歳)",
+      "身長/体重": "170cm/65kg",
+      "血液型": "O型",
+      "出身地": "神奈川県",
+      "利き足": "右 (25.5cm)",
+      "経歴": "つくし野サッカースポーツ少年団 - 横浜F・マリノスJrユース - 横浜F・マリノスユース - 法政大 - 福島ユナイテッドFC - レノファ山口FC - 大分トリニータ",
+      "ニックネーム": "ゆうじ",
+      "出身小学校": "南つくし野小学校",
+      "出身中学校": "つくし野中学校",
+      "出身高校": "都立小川高等学校",
+      "出身大学": "法政大学",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人 (姉、双子兄、自分)",
+      "趣味・マイブーム": "コーヒーを淹れること",
+      "使用スパイクのメーカー": "MIZUNO",
+      "仲の良い選手": "吉満大介、藤原奏哉",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "笠井佳祐/車を変えたから",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "大迫勇也 選手/ ボール収めすぎです",
+      "好きな海外の選手": "ルカ・モドリッチ 選手",
+      "好きなタレント・芸能人": "戸田恵梨香 さん",
+      "好きな食べ物": "餃子",
+      "背番号へのこだわり": "ずっと付けてるから",
+      "今シーズンの目標(サッカー面)": "試合に出る J1昇格",
+      "今季の目標(サッカー・プライベート可)": "美味しいコーヒーを淹れる"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/19.png"
   },
   "西 大伍": {
     "source": "jleague_data_site",
@@ -28686,23 +29116,23 @@
     }
   },
   "石山 青空": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "49273",
     "app_player_name": "石山 青空",
     "name": "石山 青空",
     "official_name": "石山 青空",
-    "name_en": "ISHIYAMA Aozora",
+    "name_en": "AOZORA ISHIYAMA",
     "normalized_names": [
       "石山青空",
       "ishiyamaaozora"
     ],
     "final_team": "新潟",
     "position": "MF",
-    "birthplace": "新潟県",
+    "birthplace": "新潟県燕市",
     "birth_date": "2006/01/27",
     "height_cm": 170,
-    "weight_kg": 65,
+    "weight_kg": 66,
     "first_appearances": [
       "リーグ戦:",
       "2024 明治安田J1-16",
@@ -28748,13 +29178,16 @@
       }
     ],
     "affiliated_teams": [
-      "新潟",
-      "松本"
+      "吉田サッカークラブ",
+      "アルビレックス新潟U-15/燕市立燕中学校",
+      "アルビレックス新潟U-18/開志学園高校",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49273"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49273",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/40/"
     },
-    "fetched_at": "2026-06-18T08:37:44.793Z",
+    "fetched_at": "2026-09-30T06:48:24+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -28804,7 +29237,39 @@
           "opponent": "アビスパ福岡"
         }
       ]
-    }
+    },
+    "number": "40",
+    "nickname": "ゾラ",
+    "blood_type": "AB型",
+    "dominant_foot": "右 (26.5cm)",
+    "club_profile_fields": {
+      "名前": "石山 青空",
+      "生年月日": "2006/1/27(20歳)",
+      "身長/体重": "170cm/66kg",
+      "血液型": "AB型",
+      "出身地": "新潟県燕市",
+      "利き足": "右 (26.5cm)",
+      "経歴": "吉田サッカークラブ → アルビレックス新潟U-15/燕市立燕中学校 → アルビレックス新潟U-18/開志学園高校",
+      "ニックネーム": "ゾラ",
+      "出身小学校": "燕市立燕西小学校",
+      "出身中学校": "燕市立燕中学校",
+      "出身高校": "開志学園高校",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(兄、自分)",
+      "趣味・マイブーム": "ブロスタ",
+      "使用スパイクのメーカー": "asics",
+      "仲の良い選手": "杉田隼 選手、大竹優心、内山翔太、佐藤海宏",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "佐藤海宏/生意気なところ",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "伊藤涼太郎 選手/とにかくサッカーが上手かったから",
+      "好きな海外の選手": "リオネル・メッシ 選手",
+      "好きなアーティスト": "FUNKY MONKEY BΛBY'S さん",
+      "好きなタレント・芸能人": "うじとうえだ",
+      "好きな食べ物": "寿司、ピザ",
+      "背番号へのこだわり": "プロに入る前から付けてるから",
+      "今シーズンの目標(サッカー面)": "試合に出続けること",
+      "今季の目標(サッカー・プライベート可)": "自炊頑張る"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/40.png"
   },
   "石川 直樹": {
     "source": "jleague_data_site",
@@ -31192,20 +31657,20 @@
     }
   },
   "早川 史哉": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "10729",
     "app_player_name": "早川 史哉",
     "name": "早川 史哉",
     "official_name": "早川 史哉",
-    "name_en": "HAYAKAWA Fumiya",
+    "name_en": "FUMIYA HAYAKAWA",
     "normalized_names": [
       "早川史哉",
       "hayakawafumiya"
     ],
     "final_team": "新潟",
     "position": "DF",
-    "birthplace": "新潟県",
+    "birthplace": "新潟県新潟市",
     "birth_date": "1994/01/12",
     "height_cm": 170,
     "weight_kg": 70,
@@ -31299,12 +31764,14 @@
       }
     ],
     "affiliated_teams": [
-      "新潟"
+      "小針レオレオサッカー少年団 - アルビレックス新潟ジュニアユース(現U-15) - アルビレックス新潟ユース(現U-18) - 筑波大",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=10729"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=10729",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/15/"
     },
-    "fetched_at": "2026-06-18T08:37:50.324Z",
+    "fetched_at": "2026-09-30T06:47:39+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -31410,7 +31877,40 @@
           "opponent": "横浜F・マリノス"
         }
       ]
-    }
+    },
+    "number": "15",
+    "nickname": "ふみぞー",
+    "blood_type": "B型",
+    "dominant_foot": "右 (26cm)",
+    "club_profile_fields": {
+      "名前": "早川 史哉",
+      "生年月日": "1994/1/12(32歳)",
+      "身長/体重": "170cm/70kg",
+      "血液型": "B型",
+      "出身地": "新潟県新潟市",
+      "利き足": "右 (26cm)",
+      "経歴": "小針レオレオサッカー少年団 - アルビレックス新潟ジュニアユース(現U-15) - アルビレックス新潟ユース(現U-18) - 筑波大",
+      "ニックネーム": "ふみぞー",
+      "出身小学校": "新潟市立小針小学校",
+      "出身中学校": "新潟市立小針中学校",
+      "出身高校": "開志学園高等学校",
+      "出身大学": "筑波大学",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人(姉・自分・弟)",
+      "趣味・マイブーム": "良い睡眠への追求、コーヒー",
+      "使用スパイクのメーカー": "asics",
+      "仲の良い選手": "ダニーロ・ゴメス",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "奥村仁/たこ焼きを作るのが上手です。一家一台奥村仁。",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "大迫勇也選手/全てのクオリティが高い",
+      "好きな海外の選手": "ファビオ・カンナヴァーロ 選手",
+      "好きなアーティスト": "小田和正さん",
+      "好きなタレント・芸能人": "長谷川元希選手",
+      "好きな食べ物": "ハイカカオチョコレート",
+      "背番号へのこだわり": "先人が築いた歴史ある素晴らしい番号だから",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "みんなを笑顔にする"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/15.png"
   },
   "増田 繁人": {
     "source": "jleague_data_site",
@@ -41348,13 +41848,13 @@
     }
   },
   "白井 永地": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "11931",
     "app_player_name": "白井 永地",
     "name": "白井 永地",
     "official_name": "白井 永地",
-    "name_en": "SHIRAI Eiji",
+    "name_en": "EIJI SHIRAI",
     "normalized_names": [
       "白井永地",
       "shiraieiji"
@@ -41518,17 +42018,20 @@
       }
     ],
     "affiliated_teams": [
-      "水戸",
-      "J-22",
-      "岡山",
-      "徳島",
-      "柏",
-      "新潟"
+      "実籾マリンスターズ",
+      "柏レイソルU-15",
+      "柏レイソルU-18",
+      "水戸ホーリーホック",
+      "ファジアーノ岡山",
+      "徳島ヴォルティス",
+      "柏レイソル",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=11931"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=11931",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/8/"
     },
-    "fetched_at": "2026-06-18T08:38:17.448Z",
+    "fetched_at": "2026-09-30T06:48:07+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -41569,7 +42072,38 @@
           "opponent": "川崎フロンターレ"
         }
       ]
-    }
+    },
+    "number": "8",
+    "nickname": "えいじ",
+    "blood_type": "O型",
+    "dominant_foot": "右 (27.5cm)",
+    "club_profile_fields": {
+      "名前": "白井 永地",
+      "生年月日": "1995/9/26(31歳)",
+      "身長/体重": "176cm/72kg",
+      "血液型": "O型",
+      "出身地": "千葉県",
+      "利き足": "右 (27.5cm)",
+      "経歴": "実籾マリンスターズ → 柏レイソルU-15 → 柏レイソルU-18 → 水戸ホーリーホック → ファジアーノ岡山 → 徳島ヴォルティス → 柏レイソル",
+      "ニックネーム": "えいじ",
+      "出身小学校": "千草台小学校",
+      "出身中学校": "千草台中学校",
+      "出身高校": "日本体育大学柏高等学校",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人",
+      "趣味・マイブーム": "サウナ",
+      "使用スパイクのメーカー": "TLSS",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "吉満大介/髭",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "マテウス・サヴィオ 選手",
+      "好きな海外の選手": "スティーヴン・ジェラード 選手",
+      "好きなアーティスト": "ケツメイシさん",
+      "好きなタレント・芸能人": "長澤まさみ さん",
+      "好きな食べ物": "寿司",
+      "背番号へのこだわり": "ユースの時の背番号だから",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "育児"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/08.png"
   },
   "尾崎 瑛一郎": {
     "source": "jleague_data_site",
@@ -42548,13 +43082,13 @@
     }
   },
   "舞行龍ジェームズ": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "9703",
     "app_player_name": "舞行龍ジェームズ",
-    "name": "舞行龍ジェームズ(マイケル ジェームズ)",
-    "official_name": "舞行龍ジェームズ(マイケル ジェームズ)",
-    "name_en": "FITZGERALD Michael James",
+    "name": "舞行龍 ジェームズ",
+    "official_name": "舞行龍 ジェームズ",
+    "name_en": "MICHAEL JAMES FITZGERALD",
     "normalized_names": [
       "舞行龍ジェムズ(マイケルジェムズ)",
       "舞行龍ジェムズマイケルジェムズ",
@@ -42567,7 +43101,7 @@
     "birthplace": "ニュージーランド",
     "birth_date": "1988/09/17",
     "height_cm": 185,
-    "weight_kg": 82,
+    "weight_kg": 85,
     "first_appearances": [
       "リーグ戦:",
       "2013 J2-6",
@@ -42712,14 +43246,14 @@
       }
     ],
     "affiliated_teams": [
-      "長崎",
-      "新潟",
-      "川崎F"
+      "成立学園高 - アルビレックス新潟 - JAPANサッカーカレッジ - ツエーゲン金沢 - V・ファーレン長崎 - アルビレックス新潟 - 川崎フロンターレ",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=9703"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=9703",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/5/"
     },
-    "fetched_at": "2026-06-18T08:38:20.168Z",
+    "fetched_at": "2026-09-30T06:47:36+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -42853,7 +43387,38 @@
           "opponent": "川崎フロンターレ"
         }
       ]
-    }
+    },
+    "number": "5",
+    "nickname": "MJ",
+    "blood_type": "A型",
+    "dominant_foot": "右 (28.5cm)",
+    "club_profile_fields": {
+      "名前": "舞行龍 ジェームズ",
+      "生年月日": "1988/9/17(38歳)",
+      "身長/体重": "185cm/85kg",
+      "血液型": "A型",
+      "出身地": "ニュージーランド",
+      "利き足": "右 (28.5cm)",
+      "経歴": "成立学園高 - アルビレックス新潟 - JAPANサッカーカレッジ - ツエーゲン金沢 - V・ファーレン長崎 - アルビレックス新潟 - 川崎フロンターレ",
+      "ニックネーム": "MJ",
+      "出身小学校": "Marist Herne Bay",
+      "出身中学校": "St Peter's College Auckland",
+      "出身高校": "成立学園",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(自分、弟)",
+      "趣味・マイブーム": "ゴルフ",
+      "使用スパイクのメーカー": "NIKE",
+      "仲の良い選手": "クリスティアン・ロメロ 選手、家長昭博 選手、新井直人 選手、稲村隼翔 選手、橋本健人 選手、千葉和彦 選手",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "白井永地/いいパパ",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "フランサ 選手/上手すぎるから",
+      "好きな海外の選手": "ロイ・キーン 選手",
+      "好きなアーティスト": "KVI BABA さん",
+      "好きなタレント・芸能人": "馬場ふみか さん",
+      "好きな食べ物": "のっぺ",
+      "今シーズンの目標(サッカー面)": "J1",
+      "今季の目標(サッカー・プライベート可)": "ロレックス 100周年モデル"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/05.png"
   },
   "服部 浩紀": {
     "source": "jleague_data_site",
@@ -47098,13 +47663,13 @@
     }
   },
   "落合 陸": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "45106",
     "app_player_name": "落合 陸",
     "name": "落合 陸",
     "official_name": "落合 陸",
-    "name_en": "OCHIAI Riku",
+    "name_en": "RIKU OCHIAI",
     "normalized_names": [
       "落合陸",
       "ochiairiku"
@@ -47114,7 +47679,7 @@
     "birthplace": "埼玉県",
     "birth_date": "1999/05/23",
     "height_cm": 175,
-    "weight_kg": 72,
+    "weight_kg": 75,
     "first_appearances": [
       "リーグ戦:",
       "2023 明治安田J1-17",
@@ -47178,15 +47743,21 @@
       }
     ],
     "affiliated_teams": [
-      "柏",
-      "水戸",
-      "新潟",
-      "大分"
+      "尾間木サッカースポーツ少年団",
+      "柏レイソルU-12",
+      "柏レイソルU-15",
+      "柏レイソルU-18",
+      "VONDS市原FC",
+      "東京国際大",
+      "柏レイソル",
+      "水戸ホーリーホック",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=45106"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=45106",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/13/"
     },
-    "fetched_at": "2026-06-18T08:38:32.466Z",
+    "fetched_at": "2026-09-30T06:48:13+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -47227,7 +47798,37 @@
           "opponent": "セレッソ大阪"
         }
       ]
-    }
+    },
+    "number": "13",
+    "nickname": "リク",
+    "blood_type": "A型",
+    "dominant_foot": "右 (26.5cm)",
+    "club_profile_fields": {
+      "名前": "落合 陸",
+      "生年月日": "1999/5/23(27歳)",
+      "身長/体重": "175cm/75kg",
+      "血液型": "A型",
+      "出身地": "埼玉県",
+      "利き足": "右 (26.5cm)",
+      "経歴": "尾間木サッカースポーツ少年団 → 柏レイソルU-12 →柏レイソルU-15 → 柏レイソルU-18 → VONDS市原FC → 東京国際大 → 柏レイソル → 水戸ホーリーホック",
+      "ニックネーム": "リク",
+      "出身小学校": "川口市立木曽呂小学校",
+      "出身中学校": "川口市立北中学校",
+      "出身高校": "日本体育大学柏高等学校",
+      "出身大学": "東京国際大学",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(自分、妹)",
+      "趣味・マイブーム": "下半身の筋トレ",
+      "使用スパイクのメーカー": "asics",
+      "仲の良い選手": "古賀太陽 選手、新井泰貴、シマブクカズヨシ、前田椋介",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "前田涼介/顔が濃ゆい",
+      "好きなタレント・芸能人": "小栗旬 さん",
+      "好きな食べ物": "カレーライス",
+      "背番号へのこだわり": "偉大な選手達がつけてた番号で結果を残したいから",
+      "今シーズンの目標(サッカー面)": "結果に拘る",
+      "今季の目標(サッカー・プライベート可)": "身近な人、応援してくる人達を笑顔にすること"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/13.png"
   },
   "李 明載": {
     "source": "jleague_data_site",
@@ -49078,13 +49679,13 @@
     }
   },
   "舩木 翔": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "19335",
     "app_player_name": "舩木 翔",
     "name": "舩木 翔",
     "official_name": "舩木 翔",
-    "name_en": "FUNAKI Kakeru",
+    "name_en": "KAKERU FUNAKI",
     "normalized_names": [
       "舩木翔",
       "funakikakeru"
@@ -49093,8 +49694,8 @@
     "position": "DF",
     "birthplace": "奈良県",
     "birth_date": "1998/04/13",
-    "height_cm": 177,
-    "weight_kg": 65,
+    "height_cm": 179,
+    "weight_kg": 72,
     "first_appearances": [
       "リーグ戦:",
       "2016 明治安田J3-2",
@@ -49230,16 +49831,21 @@
       }
     ],
     "affiliated_teams": [
-      "C大23",
-      "C大阪",
-      "磐田",
-      "相模原",
-      "新潟"
+      "セレッソ大阪U-12",
+      "セレッソ大阪U-15",
+      "セレッソ大阪U-18",
+      "セレッソ大阪",
+      "ジュビロ磐田",
+      "セレッソ大阪",
+      "SC相模原",
+      "セレッソ大阪",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=19335"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=19335",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/77/"
     },
-    "fetched_at": "2026-06-18T08:38:37.567Z",
+    "fetched_at": "2026-09-30T06:47:59+00:00",
     "club": "niigata",
     "matched_annual_records": [
       {
@@ -49280,7 +49886,39 @@
           "opponent": "川崎フロンターレ"
         }
       ]
-    }
+    },
+    "number": "77",
+    "nickname": "かける",
+    "blood_type": "B型",
+    "dominant_foot": "左 (27.5cm)",
+    "club_profile_fields": {
+      "名前": "舩木 翔",
+      "生年月日": "1998/4/13(28歳)",
+      "身長/体重": "179cm/72kg",
+      "血液型": "B型",
+      "出身地": "奈良県",
+      "利き足": "左 (27.5cm)",
+      "経歴": "セレッソ大阪U-12 → セレッソ大阪U-15 → セレッソ大阪U-18 → セレッソ大阪 →ジュビロ磐田 → セレッソ大阪 → SC相模原 → セレッソ大阪",
+      "ニックネーム": "かける",
+      "出身小学校": "王寺南小学校",
+      "出身中学校": "王寺南中学校",
+      "出身高校": "興国高校",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(姉、自分)",
+      "趣味・マイブーム": "APEX、ネイル",
+      "使用スパイクのメーカー": "NIKE",
+      "仲の良い選手": "中村拓海 選手、古山兼悟 選手、畠中慎之助 選手、登里の兄貴(登里享平 選手)、小野の兄貴(小野裕二 選手)",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "新井泰貴/全部好き",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "アンドレス・イニエスタ 選手/全てのレベルが高かったから",
+      "好きな海外の選手": "リサンドロ・マルティネス 選手",
+      "好きなアーティスト": "LDH さん",
+      "好きなタレント・芸能人": "木村拓哉 さん",
+      "好きな食べ物": "ラーメン",
+      "背番号へのこだわり": "結婚記念日と足したら14になるから",
+      "今シーズンの目標(サッカー面)": "新潟のみんなでJ1に上がる",
+      "今季の目標(サッカー・プライベート可)": "もっと魅力のある人間になる"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/77.png"
   },
   "曺 永哲": {
     "source": "jleague_data_site",
@@ -49642,13 +50280,13 @@
     }
   },
   "バウマン": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "61966",
     "app_player_name": "バウマン",
     "name": "バウマン",
     "official_name": "バウマン",
-    "name_en": "Noam BAUMANN",
+    "name_en": "NOAM BAUMANN",
     "normalized_names": [
       "バウマン",
       "noambaumann"
@@ -49684,12 +50322,25 @@
       }
     ],
     "affiliated_teams": [
-      "相模原"
+      "FCルツェルン/スイス",
+      "ツーク94/スイス",
+      "FCルツェルン/スイス",
+      "ツーク94/スイス",
+      "FCヴィル1900/スイス",
+      "FCルガーノ/スイス",
+      "FCヴィル1900/スイス",
+      "FCルガーノ/スイス",
+      "アスコリ/イタリア",
+      "FCヴィル1900/スイス",
+      "OFI/ギリシャ",
+      "SC相模原",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=61966"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=61966",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/46/"
     },
-    "fetched_at": "2026-06-18T08:46:09.638Z",
+    "fetched_at": "2026-09-30T06:47:19+00:00",
     "club": "niigata",
     "matched_annual_records": [],
     "supplement": {
@@ -49702,7 +50353,38 @@
       "missing_name": "バウマン",
       "index_name": "バウマン",
       "index_final_team": "新潟"
-    }
+    },
+    "number": "46",
+    "nickname": "ノアム",
+    "blood_type": "-",
+    "dominant_foot": "右 (29cm)",
+    "club_profile_fields": {
+      "名前": "バウマン",
+      "生年月日": "1996/4/10(30歳)",
+      "身長/体重": "194cm/84kg",
+      "血液型": "-",
+      "出身地": "スイス",
+      "利き足": "右 (29cm)",
+      "経歴": "FCルツェルン/スイス → ツーク94/スイス → FCルツェルン/スイス → ツーク94/スイス→ FCヴィル1900/スイス → FCルガーノ/スイス → FCヴィル1900/スイス → FCルガーノ/スイス → アスコリ/イタリア → FCヴィル1900/スイス → OFI/ギリシャ → SC相模原",
+      "ニックネーム": "ノアム",
+      "小学生・ジュニア(4種)時の所属チーム名": "FC LUZEL",
+      "中学生・ジュニアユース(3種)時の所属チーム名": "FC LUZEL",
+      "高校生・ユース(2種)時の所属チーム名": "FC LUZEL",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "姉1人",
+      "趣味・マイブーム": "テレビゲーム",
+      "使用スパイクのメーカー": "Nike",
+      "仲の良い選手": "みっちゃん(吉満大介 選手)",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "サトウミヒロ",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "ラウタロ・マルティネス 選手",
+      "好きな海外の選手": "ネウソン・デ・ジェズス・シウヴァ 選手",
+      "好きなアーティスト": "ドレイクさん",
+      "好きな食べ物": "焼肉",
+      "背番号へのこだわり": "プロ一年目からの背番号です。",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "家族と日本生活を楽しみたいです。"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/46.png"
   },
   "ヘイス": {
     "source": "jleague_data_site",
@@ -49973,13 +50655,13 @@
     }
   },
   "加藤 徹也": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "49686",
     "app_player_name": "加藤 徹也",
     "name": "加藤 徹也",
     "official_name": "加藤 徹也",
-    "name_en": "KATO Tetsuya",
+    "name_en": "TETSUYA KATO",
     "normalized_names": [
       "加藤徹也",
       "katotetsuya"
@@ -50033,13 +50715,18 @@
       }
     ],
     "affiliated_teams": [
-      "奈良",
-      "今治"
+      "アストロンFC",
+      "聖和学園高",
+      "びわこ成蹊スポーツ大",
+      "奈良クラブ",
+      "FC今治",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49686"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49686",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/3/"
     },
-    "fetched_at": "2026-06-18T08:46:09.919Z",
+    "fetched_at": "2026-09-30T06:47:33+00:00",
     "club": "niigata",
     "matched_annual_records": [],
     "supplement": {
@@ -50052,7 +50739,38 @@
       "missing_name": "加藤 徹也",
       "index_name": "加藤 徹也",
       "index_final_team": "新潟"
-    }
+    },
+    "number": "3",
+    "nickname": "テツ",
+    "blood_type": "A型",
+    "dominant_foot": "左 (28cm)",
+    "club_profile_fields": {
+      "名前": "加藤 徹也",
+      "生年月日": "1996/3/13(30歳)",
+      "身長/体重": "181cm/75kg",
+      "血液型": "A型",
+      "出身地": "福島県",
+      "利き足": "左 (28cm)",
+      "経歴": "アストロンFC → 聖和学園高 → びわこ成蹊スポーツ大 → 奈良クラブ → FC今治",
+      "ニックネーム": "テツ",
+      "出身小学校": "勿来第一小学校",
+      "出身中学校": "勿来第一中学校",
+      "出身高校": "聖和学園",
+      "出身大学": "びわこ成蹊スポーツ",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(姉、自分)",
+      "趣味・マイブーム": "ポケカ集め",
+      "使用スパイクのメーカー": "MIZUNO",
+      "仲の良い選手": "西袋裕太 選手",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "白井永地/プライベートでは女の子のパパとしてとても優しい",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "マルクス ヴィニシウス 選手/1人で点を取れるし、ハードワークもするし、チームメイトにいて頼もしかったから",
+      "好きな海外の選手": "リオネル・メッシ 選手",
+      "好きなアーティスト": "平井大 さん",
+      "好きな食べ物": "焼肉",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "ゴルフをする"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/03.png"
   },
   "河田 波大": {
     "source": "jleague_data_site",
@@ -50337,13 +51055,13 @@
     }
   },
   "佐藤 海宏": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "49333",
     "app_player_name": "佐藤 海宏",
     "name": "佐藤 海宏",
     "official_name": "佐藤 海宏",
-    "name_en": "SATO Mihiro",
+    "name_en": "MIHIRO SATO",
     "normalized_names": [
       "佐藤海宏",
       "satomihiro"
@@ -50352,8 +51070,8 @@
     "position": "DF",
     "birthplace": "茨城県",
     "birth_date": "2007/02/26",
-    "height_cm": 177,
-    "weight_kg": 72,
+    "height_cm": 178,
+    "weight_kg": 75,
     "first_appearances": [
       "リーグ戦:",
       "2025 明治安田J1-2",
@@ -50381,12 +51099,17 @@
       }
     ],
     "affiliated_teams": [
-      "鹿島"
+      "鹿島アントラーズジュニア",
+      "鹿島アントラーズJr ユース",
+      "鹿島アントラーズユース",
+      "鹿島アントラーズ",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49333"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49333",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/26/"
     },
-    "fetched_at": "2026-06-18T08:46:10.226Z",
+    "fetched_at": "2026-09-30T06:47:44+00:00",
     "club": "niigata",
     "matched_annual_records": [],
     "supplement": {
@@ -50399,7 +51122,38 @@
       "missing_name": "佐藤 海宏",
       "index_name": "佐藤 海宏",
       "index_final_team": "新潟"
-    }
+    },
+    "number": "26",
+    "nickname": "みひ",
+    "blood_type": "A型",
+    "dominant_foot": "左 (27.5cm)",
+    "club_profile_fields": {
+      "名前": "佐藤 海宏",
+      "生年月日": "2007/2/26(19歳)",
+      "身長/体重": "178cm/75kg",
+      "血液型": "A型",
+      "出身地": "茨城県",
+      "利き足": "左 (27.5cm)",
+      "経歴": "鹿島アントラーズジュニア → 鹿島アントラーズJr ユース → 鹿島アントラーズユース → 鹿島アントラーズ",
+      "ニックネーム": "みひ",
+      "出身小学校": "中野東小学校",
+      "出身中学校": "大野中学校",
+      "出身高校": "鹿島学園",
+      "出身大学": "なし",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人(姉、自分、妹)",
+      "趣味・マイブーム": "サウナ・温泉",
+      "使用スパイクのメーカー": "MIZUNO",
+      "仲の良い選手": "内山翔太、石山青空",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "藤原優大くん/かっこよくて優しい",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "ルーカスフェルナンデス 選手/何もできなかったから",
+      "好きなタレント・芸能人": "うじとうえだ",
+      "好きな食べ物": "ハンバーグ、寿司",
+      "背番号へのこだわり": "誕生日だから",
+      "今シーズンの目標(サッカー面)": "J1昇格に貢献する",
+      "今季の目標(サッカー・プライベート可)": "新しい趣味をみつける"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/26.png"
   },
   "山根 成陽": {
     "source": "jleague_data_site",
@@ -50496,13 +51250,13 @@
     }
   },
   "松岡 敏也": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "70779",
     "app_player_name": "松岡 敏也",
     "name": "松岡 敏也",
     "official_name": "松岡 敏也",
-    "name_en": "MATSUOKA Toshiya",
+    "name_en": "TOSHIYA MATSUOKA",
     "normalized_names": [
       "松岡敏也",
       "matsuokatoshiya"
@@ -50511,7 +51265,7 @@
     "position": "DF",
     "birthplace": "福岡県",
     "birth_date": "2007/09/28",
-    "height_cm": 175,
+    "height_cm": 176,
     "weight_kg": 68,
     "first_appearances": [
       "リーグ戦:",
@@ -50527,11 +51281,17 @@
       "J2合計"
     ],
     "annual_records": [],
-    "affiliated_teams": [],
+    "affiliated_teams": [
+      "バディフットボールクラブ福岡",
+      "SALTZ FC",
+      "興國高",
+      "アルビレックス新潟"
+    ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=70779"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=70779",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/33/"
     },
-    "fetched_at": "2026-06-18T08:46:10.248Z",
+    "fetched_at": "2026-09-30T06:47:50+00:00",
     "club": "niigata",
     "matched_annual_records": [],
     "supplement": {
@@ -50544,7 +51304,38 @@
       "missing_name": "松岡 敏也",
       "index_name": "松岡 敏也",
       "index_final_team": "新潟"
-    }
+    },
+    "number": "33",
+    "nickname": "としや",
+    "blood_type": "A型",
+    "dominant_foot": "右 (26.5cm)",
+    "club_profile_fields": {
+      "名前": "松岡 敏也",
+      "生年月日": "2007/9/28(19歳)",
+      "身長/体重": "176cm/68kg",
+      "血液型": "A型",
+      "出身地": "福岡県",
+      "利き足": "右 (26.5cm)",
+      "経歴": "バディフットボールクラブ福岡 → SALTZ FC → 興國高",
+      "ニックネーム": "としや",
+      "出身小学校": "筑紫野市立原田小学校",
+      "出身中学校": "筑紫野南中学校",
+      "出身高校": "興國高等学校",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(自分、妹)",
+      "趣味・マイブーム": "車の運転",
+      "使用スパイクのメーカー": "adidas",
+      "仲の良い選手": "藤原優大 くん",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "ミツ(吉満大介)さん/優しいところ",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "新川駿 選手/代表で一緒にプレーしてすごかったから",
+      "好きな海外の選手": "アクラフ・ハキミ 選手",
+      "好きなアーティスト": "Eric.B.Jr.さん",
+      "好きなタレント・芸能人": "今田美桜 さん",
+      "好きな食べ物": "パスタ",
+      "今シーズンの目標(サッカー面)": "怪我せずに多くの試合に絡む",
+      "今季の目標(サッカー・プライベート可)": "結果を残す"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/33.png"
   },
   "瀬口 拓弥": {
     "source": "jleague_data_site",
@@ -50619,13 +51410,13 @@
     }
   },
   "大西 悠介": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "54761",
     "app_player_name": "大西 悠介",
     "name": "大西 悠介",
     "official_name": "大西 悠介",
-    "name_en": "ONISHI Yusuke",
+    "name_en": "YUSUKE ONISHI",
     "normalized_names": [
       "大西悠介",
       "onishiyusuke"
@@ -50635,7 +51426,7 @@
     "birthplace": "茨城県",
     "birth_date": "2001/05/20",
     "height_cm": 174,
-    "weight_kg": 67,
+    "weight_kg": 73,
     "first_appearances": [
       "リーグ戦:",
       "2024 明治安田J2-1",
@@ -50672,12 +51463,18 @@
       }
     ],
     "affiliated_teams": [
-      "いわき"
+      "鹿島アントラーズつくばジュニア",
+      "クラブドラゴンズ柏",
+      "流通経済大付属柏高",
+      "国士舘大",
+      "いわきFC",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=54761"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=54761",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/7/"
     },
-    "fetched_at": "2026-06-18T08:46:10.316Z",
+    "fetched_at": "2026-09-30T06:48:04+00:00",
     "club": "niigata",
     "matched_annual_records": [],
     "supplement": {
@@ -50690,7 +51487,39 @@
       "missing_name": "大西 悠介",
       "index_name": "大西 悠介",
       "index_final_team": "新潟"
-    }
+    },
+    "number": "7",
+    "nickname": "ブル",
+    "blood_type": "A型",
+    "dominant_foot": "右 (28cm)",
+    "club_profile_fields": {
+      "名前": "大西 悠介",
+      "生年月日": "2001/5/20(25歳)",
+      "身長/体重": "174cm/73kg",
+      "血液型": "A型",
+      "出身地": "茨城県",
+      "利き足": "右 (28cm)",
+      "経歴": "鹿島アントラーズつくばジュニア → クラブドラゴンズ柏 → 流通経済大付属柏高 → 国士舘大 → いわきFC",
+      "ニックネーム": "ブル",
+      "出身小学校": "谷田部小学校",
+      "出身中学校": "谷田部中学校",
+      "出身高校": "流通経済大学附属柏高校",
+      "出身大学": "国士舘大学",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(姉、自分)",
+      "趣味・マイブーム": "映画鑑賞",
+      "使用スパイクのメーカー": "NIKE",
+      "仲の良い選手": "若月大和",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "若月大和/面白い",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "乾貴士 選手",
+      "好きな海外の選手": "フェリペ・メロ 選手",
+      "好きなアーティスト": "FUTUREさん",
+      "好きなタレント・芸能人": "加藤純一 さん",
+      "好きな食べ物": "シュラスコ",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "新潟初ゴール"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/07.png"
   },
   "大谷 昌司": {
     "source": "jleague_data_site",
@@ -50896,13 +51725,13 @@
     }
   },
   "藤原 優大": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "37981",
     "app_player_name": "藤原 優大",
     "name": "藤原 優大",
     "official_name": "藤原 優大",
-    "name_en": "FUJIWARA Yudai",
+    "name_en": "YUDAI FUJIWARA",
     "normalized_names": [
       "藤原優大",
       "fujiwarayudai"
@@ -50911,8 +51740,8 @@
     "position": "DF",
     "birthplace": "青森県",
     "birth_date": "2002/06/29",
-    "height_cm": 182,
-    "weight_kg": 74,
+    "height_cm": 180,
+    "weight_kg": 75,
     "first_appearances": [
       "リーグ戦:",
       "2021 明治安田J2-21",
@@ -50994,15 +51823,21 @@
       }
     ],
     "affiliated_teams": [
-      "浦和",
-      "相模原",
-      "町田",
-      "大分"
+      "リベロ津軽S.C",
+      "青森山田中",
+      "青森山田高",
+      "浦和レッズ",
+      "SC相模原",
+      "FC町田ゼルビア",
+      "大分トリニータ",
+      "浦和レッズ",
+      "アルビレックス新潟"
     ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=37981"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=37981",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/34/"
     },
-    "fetched_at": "2026-06-18T08:46:10.466Z",
+    "fetched_at": "2026-09-30T06:47:53+00:00",
     "club": "niigata",
     "matched_annual_records": [],
     "supplement": {
@@ -51015,26 +51850,58 @@
       "missing_name": "藤原 優大",
       "index_name": "藤原 優大",
       "index_final_team": "新潟"
-    }
+    },
+    "number": "34",
+    "nickname": "ゆーだい",
+    "blood_type": "A型",
+    "dominant_foot": "右 (27cm)",
+    "club_profile_fields": {
+      "名前": "藤原 優大",
+      "生年月日": "2002/6/29(24歳)",
+      "身長/体重": "180cm/75kg",
+      "血液型": "A型",
+      "出身地": "青森県",
+      "利き足": "右 (27cm)",
+      "経歴": "リベロ津軽S.C → 青森山田中 → 青森山田高 → 浦和レッズ → SC相模原 →FC町田ゼルビア → 大分トリニータ → 浦和レッズ",
+      "ニックネーム": "ゆーだい",
+      "出身小学校": "豊田小学校",
+      "出身中学校": "青森山田中学校",
+      "出身高校": "青森山田高校",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(自分、弟)",
+      "趣味・マイブーム": "ランニング",
+      "使用スパイクのメーカー": "MIZUNO",
+      "仲の良い選手": "吉田陣平 選手",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "桑山侃士/イケメン",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "武田英寿 選手/左足がすごかったから",
+      "好きな海外の選手": "タビナス・ポール・ビスマルク 選手",
+      "好きなアーティスト": "小袋成彬さん",
+      "好きなタレント・芸能人": "鈴木真海子 さん",
+      "好きな食べ物": "刺身",
+      "背番号へのこだわり": "愛着",
+      "今シーズンの目標(サッカー面)": "試合に出る",
+      "今季の目標(サッカー・プライベート可)": "楽しむ"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/34.png"
   },
   "内山 翔太": {
-    "source": "jleague_data_site",
+    "source": "club_official",
     "source_confidence": "high",
     "player_id": "49494",
     "app_player_name": "内山 翔太",
     "name": "内山 翔太",
     "official_name": "内山 翔太",
-    "name_en": "UCHIYAMA Shota",
+    "name_en": "SHOTA UCHIYAMA",
     "normalized_names": [
       "内山翔太",
       "uchiyamashota"
     ],
     "final_team": "新潟",
     "position": "GK",
-    "birthplace": "新潟県",
+    "birthplace": "新潟県新潟市",
     "birth_date": "2006/11/09",
     "height_cm": 190,
-    "weight_kg": 73,
+    "weight_kg": 79,
     "first_appearances": [
       "リーグ戦:",
       "2026特別 明治安田J2・J3百年構想-1",
@@ -51049,11 +51916,17 @@
       "J2合計"
     ],
     "annual_records": [],
-    "affiliated_teams": [],
+    "affiliated_teams": [
+      "女池パイレーツ/アルビレックス新潟サッカースクール",
+      "アルビレックス新潟U-15/鳥屋野中",
+      "アルビレックス新潟U-18/開志学園高",
+      "アルビレックス新潟"
+    ],
     "links": {
-      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49494"
+      "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49494",
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/71/"
     },
-    "fetched_at": "2026-06-18T08:46:10.484Z",
+    "fetched_at": "2026-09-30T06:47:21+00:00",
     "club": "niigata",
     "matched_annual_records": [],
     "supplement": {
@@ -51066,7 +51939,39 @@
       "missing_name": "内山 翔太",
       "index_name": "内山 翔太",
       "index_final_team": "新潟"
-    }
+    },
+    "number": "71",
+    "nickname": "しょーちゃん",
+    "blood_type": "A型",
+    "dominant_foot": "右 (28.5cm)",
+    "club_profile_fields": {
+      "名前": "内山 翔太",
+      "生年月日": "2006/11/9(19歳)",
+      "身長/体重": "190cm/79kg",
+      "血液型": "A型",
+      "出身地": "新潟県新潟市",
+      "利き足": "右 (28.5cm)",
+      "経歴": "女池パイレーツ/アルビレックス新潟サッカースクール → アルビレックス新潟U-15/鳥屋野中 → アルビレックス新潟U-18/開志学園高",
+      "ニックネーム": "しょーちゃん",
+      "出身小学校": "女池小学校",
+      "出身中学校": "鳥屋野中学校",
+      "出身高校": "開志学園",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "一人っ子",
+      "趣味・マイブーム": "ブロスタ、Ghost of Tsushima",
+      "使用スパイクのメーカー": "adidas",
+      "仲の良い選手": "佐藤海宏、石山青空、大竹優心",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "ノアム バウマン/上半身の筋肉がえぐい",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "小島亨介 選手/ビルドアップとセービングがめっちゃうまい",
+      "好きな海外の選手": "ジャンルイジ・ドンナルンマ 選手",
+      "好きなアーティスト": "林和希 さん",
+      "好きなタレント・芸能人": "うじとうえだ さん",
+      "好きな食べ物": "焼肉、寿司",
+      "背番号へのこだわり": "好きな数字だから",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "一回は自炊する"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/71.png"
   },
   "營田 一燈": {
     "source": "jleague_data_site",
@@ -51891,5 +52796,460 @@
       "index_name": "中村 太亮",
       "index_final_team": "岩手"
     }
+  },
+  "松浦 大翔": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "niigata",
+    "app_player_name": "松浦 大翔",
+    "name": "松浦 大翔",
+    "official_name": "松浦 大翔",
+    "name_en": "HIROTO MATSUURA",
+    "position": "GK",
+    "number": "41",
+    "birth_date": "2008/09/21",
+    "birthplace": "新潟県新潟市",
+    "height_cm": 184,
+    "weight_kg": 77,
+    "final_team": "新潟",
+    "affiliated_teams": [
+      "bandai 12",
+      "アルビレックス新潟U-15/新潟市立東新潟中",
+      "アルビレックス新潟U-18/開志学園高",
+      "アルビレックス新潟"
+    ],
+    "nickname": "まつ",
+    "blood_type": "AB型",
+    "dominant_foot": "右 (27.5cm)",
+    "club_profile_fields": {
+      "名前": "松浦 大翔",
+      "生年月日": "2008/9/21(18歳)",
+      "身長/体重": "184cm/77kg",
+      "血液型": "AB型",
+      "出身地": "新潟県新潟市",
+      "利き足": "右 (27.5cm)",
+      "経歴": "bandai 12 → アルビレックス新潟U-15/新潟市立東新潟中 → アルビレックス新潟U-18/開志学園高",
+      "ニックネーム": "まつ",
+      "出身中学校": "新潟市立東新潟中学校",
+      "出身高校": "開志学園高校",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(自分、妹)",
+      "趣味・マイブーム": "音楽をきくこと",
+      "使用スパイクのメーカー": "adidas",
+      "仲の良い選手": "鳥羽ひかる(アルビレックス新潟U-18)",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "鳥羽ひかる/面白いところ",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "吉田湊海 /シュートがうまかったから",
+      "好きな海外の選手": "ジョアン・ガルシア 選手",
+      "好きなアーティスト": "backnumber さん",
+      "好きなタレント・芸能人": "千鳥",
+      "好きな食べ物": "お肉",
+      "背番号へのこだわり": "自分に一番あってると思ったから",
+      "今シーズンの目標(サッカー面)": "少しでも早く試合に絡むこと",
+      "今季の目標(サッカー・プライベート可)": "テストで赤点をとらない"
+    },
+    "links": {
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/41/"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/41.png",
+    "fetched_at": "2026-09-30T06:47:16+00:00"
+  },
+  "佐藤 空斗夢": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "niigata",
+    "app_player_name": "佐藤 空斗夢",
+    "name": "佐藤 空斗夢",
+    "official_name": "佐藤 空斗夢",
+    "name_en": "ATOMU SATO",
+    "position": "GK",
+    "number": "42",
+    "birth_date": "2009/07/25",
+    "birthplace": "新潟県新潟市",
+    "height_cm": 184,
+    "weight_kg": 72,
+    "final_team": "新潟",
+    "affiliated_teams": [
+      "アルビレックス新潟U-12",
+      "アルビレックス新潟U-15/新潟市立横越中",
+      "アルビレックス新潟U-18/開志学園高",
+      "アルビレックス新潟"
+    ],
+    "blood_type": "-",
+    "club_profile_fields": {
+      "名前": "佐藤 空斗夢",
+      "生年月日": "2009/7/25(17歳)",
+      "身長/体重": "184cm/72kg",
+      "血液型": "-",
+      "出身地": "新潟県新潟市",
+      "利き足": "",
+      "経歴": "アルビレックス新潟U-12 → アルビレックス新潟U-15/新潟市立横越中 → アルビレックス新潟U-18/開志学園高"
+    },
+    "links": {
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/42/"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/42.png",
+    "fetched_at": "2026-09-30T06:47:24+00:00"
+  },
+  "関口 正大": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "niigata",
+    "app_player_name": "関口 正大",
+    "name": "関口 正大",
+    "official_name": "関口 正大",
+    "name_en": "MASAHIRO SEKIGUCHI",
+    "position": "DF",
+    "number": "30",
+    "birth_date": "1998/04/21",
+    "birthplace": "新潟県新潟市西区",
+    "height_cm": 172,
+    "weight_kg": 66,
+    "final_team": "新潟",
+    "affiliated_teams": [
+      "エフスリー",
+      "FC五十嵐Jrユース",
+      "新潟明訓高",
+      "法政大",
+      "ヴァンフォーレ甲府",
+      "V・ファーレン長崎",
+      "アルビレックス新潟"
+    ],
+    "nickname": "まさ",
+    "blood_type": "O型",
+    "dominant_foot": "右 (26cm)",
+    "club_profile_fields": {
+      "名前": "関口 正大",
+      "生年月日": "1998/4/21(28歳)",
+      "身長/体重": "172cm/66kg",
+      "血液型": "O型",
+      "出身地": "新潟県新潟市西区",
+      "利き足": "右 (26cm)",
+      "経歴": "エフスリー → FC五十嵐Jrユース → 新潟明訓高 → 法政大 → ヴァンフォーレ甲府 → V・ファーレン長崎",
+      "ニックネーム": "まさ",
+      "小学生・ジュニア(4種)時の所属チーム名": "エフスリー",
+      "出身中学校": "五十嵐中学校",
+      "中学生・ジュニアユース(3種)時の所属チーム名": "FC五十嵐Jrユース",
+      "出身高校": "新潟明訓高校",
+      "高校生・ユース(2種)時の所属チーム名": "新潟明訓高校",
+      "出身大学": "法政大学",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人(兄・姉・自分)",
+      "趣味・マイブーム": "洗車、釣り",
+      "使用スパイクのメーカー": "adidas",
+      "仲の良い選手": "長谷川元希 選手",
+      "好きなアーティスト": "SixTONES さん",
+      "好きな食べ物": "ぶどう",
+      "今シーズンの目標(サッカー面)": "J1昇格",
+      "今季の目標(サッカー・プライベート可)": "新潟を知る"
+    },
+    "links": {
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/30/"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/30.png",
+    "fetched_at": "2026-09-30T06:47:47+00:00"
+  },
+  "古長谷 千博": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "niigata",
+    "app_player_name": "古長谷 千博",
+    "name": "古長谷 千博",
+    "official_name": "古長谷 千博",
+    "name_en": "CHIHIRO KONAGAYA",
+    "position": "MF",
+    "number": "14",
+    "birth_date": "2001/10/25",
+    "birthplace": "静岡県",
+    "height_cm": 171,
+    "weight_kg": 61,
+    "final_team": "新潟",
+    "affiliated_teams": [
+      "アスルクラロ沼津U12",
+      "清水エスパルスJrユース",
+      "清水桜が丘高",
+      "常葉大",
+      "ロアッソ熊本",
+      "アルビレックス新潟"
+    ],
+    "nickname": "ちひろ",
+    "blood_type": "A型",
+    "dominant_foot": "右 (23.5cm)",
+    "club_profile_fields": {
+      "名前": "古長谷 千博",
+      "生年月日": "2001/10/25(24歳)",
+      "身長/体重": "171cm/61kg",
+      "血液型": "A型",
+      "出身地": "静岡県",
+      "利き足": "右 (23.5cm)",
+      "経歴": "アスルクラロ沼津U12 → 清水エスパルスJrユース → 清水桜が丘高 → 常葉大 → ロアッソ熊本",
+      "ニックネーム": "ちひろ",
+      "出身小学校": "大岡南小学校",
+      "小学生・ジュニア(4種)時の所属チーム名": "アスルクラロ沼津U12",
+      "出身中学校": "大岡中学校",
+      "中学生・ジュニアユース(3種)時の所属チーム名": "清水エスパルスジュニアユース",
+      "出身高校": "清水桜が丘高校",
+      "高校生・ユース(2種)時の所属チーム名": "清水桜が丘高校",
+      "出身大学": "常葉大学",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "1人",
+      "使用スパイクのメーカー": "mizuno",
+      "仲の良い選手": "熊本の同期、森璃太、小野裕二 さん、舩木翔 くん",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "小野裕二さん/ツンデレなところがかわいい。",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "マテウス・ジェズス 選手",
+      "好きな海外の選手": "フェルミン・ロペス 選手",
+      "好きなアーティスト": "eillさん、GRe4N BOYZさん",
+      "好きなタレント・芸能人": "倉科カナ さん",
+      "好きな食べ物": "クレープ",
+      "背番号へのこだわり": "中学生の時の番号だから",
+      "今シーズンの目標(サッカー面)": "J2優勝J1昇格",
+      "今季の目標(サッカー・プライベート可)": "楽しくプレーしてお客さんも楽しませる"
+    },
+    "links": {
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/14/"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/14.png",
+    "fetched_at": "2026-09-30T06:48:15+00:00"
+  },
+  "前田 椋介": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "niigata",
+    "app_player_name": "前田 椋介",
+    "name": "前田 椋介",
+    "official_name": "前田 椋介",
+    "name_en": "RYOSUKE MAEDA",
+    "position": "MF",
+    "number": "70",
+    "birth_date": "1998/03/02",
+    "birthplace": "宮崎県",
+    "height_cm": 170,
+    "weight_kg": 64,
+    "final_team": "新潟",
+    "affiliated_teams": [
+      "吾田東FC",
+      "吾田中学校",
+      "宮崎日大高校",
+      "宮崎産業経営大学",
+      "福島ユナイテッドFC",
+      "テゲバジャーロ宮崎",
+      "水戸ホーリーホック",
+      "愛媛FC",
+      "アルビレックス新潟"
+    ],
+    "nickname": "まえちゃん",
+    "blood_type": "A型",
+    "dominant_foot": "右 (26cm)",
+    "club_profile_fields": {
+      "名前": "前田 椋介",
+      "生年月日": "1998/3/2(28歳)",
+      "身長/体重": "170cm/64kg",
+      "血液型": "A型",
+      "出身地": "宮崎県",
+      "利き足": "右 (26cm)",
+      "経歴": "吾田東FC → 吾田中学校 → 宮崎日大高校 → 宮崎産業経営大学 → 福島ユナイテッドFC → テゲバジャーロ宮崎 → 水戸ホーリーホック → 愛媛FC",
+      "ニックネーム": "まえちゃん",
+      "出身小学校": "吾田小学校",
+      "出身中学校": "吾田中学校",
+      "出身高校": "宮崎日大高校",
+      "出身大学": "宮崎産業経営大学",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(兄、自分)",
+      "趣味・マイブーム": "麻雀",
+      "使用スパイクのメーカー": "SVOLME",
+      "仲の良い選手": "落合陸",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "シマブクカズヨシ/うるさいところ",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "長谷川雄志 選手/全てがレベル高かった",
+      "好きな海外の選手": "アンドレス・イニエスタ 選手",
+      "好きなタレント・芸能人": "佐々木希 さん",
+      "好きな食べ物": "ラーメン",
+      "背番号へのこだわり": "ランクル70が欲しいから。",
+      "今シーズンの目標(サッカー面)": "コンスタントに試合に出る",
+      "今季の目標(サッカー・プライベート可)": "子供とたくさん遊ぶ"
+    },
+    "links": {
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/70/"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/70.png",
+    "fetched_at": "2026-09-30T06:48:26+00:00"
+  },
+  "イウリ カスティーリョ": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "niigata",
+    "app_player_name": "イウリ カスティーリョ",
+    "name": "イウリ カスティーリョ",
+    "official_name": "イウリ カスティーリョ",
+    "name_en": "IURY CASTILHO",
+    "position": "FW",
+    "number": "9",
+    "birth_date": "1995/09/06",
+    "birthplace": "ブラジル",
+    "height_cm": 185,
+    "weight_kg": 75,
+    "final_team": "新潟",
+    "affiliated_teams": [
+      "アヴァイFC(ブラジル)",
+      "FCゾリャ・ルハーンシク(ウクライナ)",
+      "アル・ナスルFC(UAE)",
+      "アル・フェイファFC(サウジアラビア)",
+      "ポルティモネンセSC(ポルトガル)",
+      "レノファ山口FC",
+      "セントロ・スポルチーヴォ・アラゴアーノ(ブラジル)",
+      "セアラーSC(ブラジル)",
+      "クイアバEC(ブラジル)",
+      "ECヴィトーリア(ブラジル)",
+      "ミラソウFC(ブラジル)",
+      "コリチーバFC(ブラジル)",
+      "スポルチ・レシフェ(ブラジル)",
+      "アルビレックス新潟"
+    ],
+    "nickname": "イウリ",
+    "blood_type": "O型",
+    "dominant_foot": "右",
+    "club_profile_fields": {
+      "名前": "イウリ カスティーリョ",
+      "生年月日": "1995/9/6(31歳)",
+      "身長/体重": "185cm/75kg",
+      "血液型": "O型",
+      "出身地": "ブラジル",
+      "利き足": "右",
+      "経歴": "アヴァイFC(ブラジル) → FCゾリャ・ルハーンシク(ウクライナ) →アル・ナスルFC(UAE) → アル・フェイファFC(サウジアラビア) →ポルティモネンセSC(ポルトガル) → レノファ山口FC →セントロ・スポルチーヴォ・アラゴアーノ(ブラジル) →セアラーSC(ブラジル) → クイアバEC(ブラジル) → ECヴィトーリア(ブラジル) →ミラソウFC(ブラジル) → コリチーバFC(ブラジル) → スポルチ・レシフェ(ブラジル)",
+      "ニックネーム": "イウリ",
+      "独身 / 既婚": "既婚",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "5人",
+      "趣味・マイブーム": "ボクシング",
+      "使用スパイクのメーカー": "NIKE",
+      "仲の良い選手": "ネイマール",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "ダニーロゴメス、マテウスモラエス、吉満大介",
+      "好きな海外の選手": "リオネル・メッシ 選手",
+      "好きなアーティスト": "ウィルスミス さん",
+      "好きなタレント・芸能人": "kevin hart さん",
+      "好きな食べ物": "寿司",
+      "背番号へのこだわり": "ストライカーがつけている背番号だから",
+      "今シーズンの目標(サッカー面)": "J1昇格、得点王",
+      "今季の目標(サッカー・プライベート可)": "お父さんとして成長する、日本語をたくさん覚える"
+    },
+    "links": {
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/9/"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/09.png",
+    "fetched_at": "2026-09-30T06:48:29+00:00"
+  },
+  "大澤 朋也": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "niigata",
+    "app_player_name": "大澤 朋也",
+    "name": "大澤 朋也",
+    "official_name": "大澤 朋也",
+    "name_en": "TOMOYA OSAWA",
+    "position": "FW",
+    "number": "16",
+    "birth_date": "2002/09/06",
+    "birthplace": "千葉県",
+    "height_cm": 175,
+    "weight_kg": 72,
+    "final_team": "新潟",
+    "affiliated_teams": [
+      "大宮アルディージャジュニア",
+      "大宮アルディージャJrユース",
+      "大宮アルディージャU18",
+      "大宮アルディージャ",
+      "愛媛FC",
+      "大宮アルディージャ",
+      "ツエーゲン金沢",
+      "RB大宮アルディージャ",
+      "ツエーゲン金沢",
+      "アルビレックス新潟"
+    ],
+    "nickname": "ともや、とも",
+    "blood_type": "B型",
+    "dominant_foot": "右 (27.5cm)",
+    "club_profile_fields": {
+      "名前": "大澤 朋也",
+      "生年月日": "2002/9/6(24歳)",
+      "身長/体重": "175cm/72kg",
+      "血液型": "B型",
+      "出身地": "千葉県",
+      "利き足": "右 (27.5cm)",
+      "経歴": "大宮アルディージャジュニア → 大宮アルディージャJrユース → 大宮アルディージャU18 → 大宮アルディージャ → 愛媛FC → 大宮アルディージャ → ツエーゲン金沢 → RB大宮アルディージャ → ツエーゲン金沢",
+      "ニックネーム": "ともや、とも",
+      "小学生・ジュニア(4種)時の所属チーム名": "大宮アルディージャジュニア",
+      "中学生・ジュニアユース(3種)時の所属チーム名": "大宮アルディージャJrユース",
+      "高校生・ユース(2種)時の所属チーム名": "大宮アルディージャU18",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "3人(双子兄・自分・妹)",
+      "趣味・マイブーム": "サウナ",
+      "使用スパイクのメーカー": "asics",
+      "仲の良い選手": "柴山昌也 選手、大山啓輔 選手",
+      "好きな海外の選手": "セルヒオ・アグエロ 選手",
+      "好きなアーティスト": "back number さん",
+      "好きな食べ物": "肉と魚",
+      "今シーズンの目標(サッカー面)": "J2優勝、J1昇格",
+      "今季の目標(サッカー・プライベート可)": "1人で外食"
+    },
+    "links": {
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/16/"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/16.png",
+    "fetched_at": "2026-09-30T06:48:32+00:00"
+  },
+  "桑山 侃士": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "niigata",
+    "app_player_name": "桑山 侃士",
+    "name": "桑山 侃士",
+    "official_name": "桑山 侃士",
+    "name_en": "KANJI KUWAYAMA",
+    "position": "FW",
+    "number": "32",
+    "birth_date": "2002/11/28",
+    "birthplace": "埼玉県",
+    "height_cm": 184,
+    "weight_kg": 80,
+    "final_team": "新潟",
+    "affiliated_teams": [
+      "浦和レッズジュニア",
+      "GRANDE FC U-15",
+      "東海大高輪台高",
+      "東海大",
+      "FC町田ゼルビア",
+      "アルビレックス新潟"
+    ],
+    "nickname": "かんじ",
+    "blood_type": "A型",
+    "dominant_foot": "右 (28.5cm)",
+    "club_profile_fields": {
+      "名前": "桑山 侃士",
+      "生年月日": "2002/11/28(23歳)",
+      "身長/体重": "184cm/80kg",
+      "血液型": "A型",
+      "出身地": "埼玉県",
+      "利き足": "右 (28.5cm)",
+      "経歴": "浦和レッズジュニア → GRANDE FC U-15 → 東海大高輪台高 → 東海大 →FC町田ゼルビア",
+      "ニックネーム": "かんじ",
+      "出身高校": "東海大高輪台高校",
+      "出身大学": "東海大学",
+      "独身 / 既婚": "独身",
+      "兄弟構成 [例:2人(兄・自分)、3人(姉・自分・弟)]": "2人(兄、自分)",
+      "趣味・マイブーム": "古着屋巡り",
+      "使用スパイクのメーカー": "New Balance",
+      "仲の良い選手": "林幸多郎 選手、望月ヘンリー海輝 選手",
+      "推しのチームメートの名前と、その選手の好きなところや推しポイント": "笠井佳祐選手、藤原優大選手/2人ともいい匂いがする",
+      "過去に対戦して最も衝撃を受けた選手/その理由": "大迫勇也 選手/どんなボールも収めていたから",
+      "好きな海外の選手": "ハリー・ケイン 選手",
+      "好きなアーティスト": "Suchmosさん",
+      "好きなタレント・芸能人": "下田北斗 選手",
+      "好きな食べ物": "パスタ",
+      "背番号へのこだわり": "人生で初めてつけた背番号",
+      "今シーズンの目標(サッカー面)": "J2優勝",
+      "今季の目標(サッカー・プライベート可)": "J2優勝"
+    },
+    "links": {
+      "club_official": "https://www.albirex.co.jp/team/player/2026-27/32/"
+    },
+    "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/32.png",
+    "fetched_at": "2026-09-30T06:48:37+00:00"
   }
 }

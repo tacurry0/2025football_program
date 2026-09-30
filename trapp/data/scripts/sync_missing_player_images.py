@@ -1,271 +1,263 @@
 #!/usr/bin/env python3
-"""Download missing player portraits from the official J.League directory.
+"""Synchronize current player portraits AND profiles from the two club websites.
 
-The app resolves portraits by exact player name from data/assets/images/player_*
-and the cutout workflow handles transparency and deployment afterwards.
-Only names already present in checked-in analysis data are eligible. The current
-official J.League site exposes player names and IDs in each club's roster table;
-the profile photo itself has the generic alt text "Player", so matching against
-image alt text silently skipped every portrait. Match the exact roster link name
-and use its official player ID to resolve the high-resolution profile image.
+Niigata's detail PNG already has alpha: retain its pixels and alpha losslessly.
+Kumamoto's detail _big image is retained at its original resolution. The cutout
+builder handles opaque photos afterwards. Historical profiles/photos are kept.
 """
 from __future__ import annotations
 
+import hashlib
+import argparse
 import json
 import re
 import time
 import unicodedata
-from collections import defaultdict
+from datetime import datetime, timezone
+from io import BytesIO
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
-from io import BytesIO
 
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image, ImageOps
 
-
 DATA = Path(__file__).resolve().parents[1]
 APP = DATA.parent
+ASSETS = DATA / "assets/official_players"
+INDEX = APP / "player-official-index.js"
+REPORT = DATA / "assets/images/player_image_sync_report.json"
 CLUBS = {
-    "niigata": {"name": "アルビレックス新潟", "slug": "niigata", "league": "j2"},
-    "kumamoto": {"name": "ロアッソ熊本", "slug": "kumamoto", "league": "j3"},
+    "niigata": {"name": "アルビレックス新潟", "short": "新潟", "url": "https://www.albirex.co.jp/team/player/"},
+    "kumamoto": {"name": "ロアッソ熊本", "short": "熊本", "url": "https://roasso-k.com/clubteam/players"},
 }
-ROSTER_URL = "https://www.jleague.jp/club/{slug}/"
-REPORT_PATH = DATA / "assets/images/player_image_sync_report.json"
-USER_AGENT = "trapp-player-image-sync/1.0 (personal app; contact: repository owner)"
-MIN_IMAGE_EDGE = 96
-PAGE_DELAY_SECONDS = 0.4
-IMAGE_DELAY_SECONDS = 0.5
+DELAY = 0.35
+USER_AGENT = "Mozilla/5.0 (compatible; trapp-club-player-sync/2.0)"
 
 
-def normalized_name(value: object) -> str:
-    text = unicodedata.normalize("NFKC", str(value or ""))
-    text = text.replace("\u00a0", " ").replace("\u3000", " ")
-    text = re.sub(r"\s+", " ", text).strip()
-    # The app accepts spaces and Japanese middle dots as equivalent filename
-    # variants. Keep every other character so similar names cannot collide.
-    return re.sub(r"[\s・･]", "", text)
+def clean(value):
+    return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", str(value or ""))).strip()
 
 
-def canonical_storage_name(name: str, year: int) -> str:
-    """Match the historical-name canonicalization used by the player UI."""
-    compact = normalized_name(name)
-    if compact in {"曺永哲", "チョヨンチョル"}:
-        return "曺 永哲"
-    if compact in {"マイケルジェームズ", "舞行龍ジェームズ"}:
-        return "舞行龍ジェームズ"
-    if compact in {"宋株熏", "ソンジュフン"}:
-        return "宋 株熏"
-    if compact == "アンデルソン":
-        return "アンデルソン-2011" if year >= 2011 else "アンデルソン"
-    if compact == "シルビーニョ":
-        return "シルビーニョ-2019-2020" if year >= 2019 else "シルビーニョ"
-    return unicodedata.normalize("NFKC", name).strip()
+def normalized_name(value):
+    return re.sub(r"[\s・･]", "", clean(value))
 
 
-def source_image_keys(directory: Path) -> set[str]:
-    if not directory.exists():
-        return set()
+def player_name(value):
+    # Registration labels on Kumamoto's roster are not part of a player's name.
+    return clean(re.sub(r"[（(][^）)]*(?:登録|指定)[^）)]*[）)]", "", str(value)))
+
+
+def text(node):
+    return clean(node.get_text(" ", strip=True)) if node else ""
+
+
+def get_page(session, url):
+    time.sleep(DELAY)
+    r = session.get(url, timeout=(12, 40))
+    r.raise_for_status()
+    if urlparse(r.url).hostname != urlparse(url).hostname:
+        raise ValueError(f"Unexpected redirect: {r.url}")
+    return BeautifulSoup(r.content, "html.parser"), r.url
+
+
+def roster(session, club):
+    soup, url = get_page(session, CLUBS[club]["url"])
+    if club == "niigata":
+        # Discover the latest published season rather than guessing player URLs.
+        seasons = set(re.findall(r"/team/player/(\d{4}(?:-\d{2})?)/", str(soup)))
+        if seasons:
+            season = max(seasons, key=lambda s: (int(s[:4]), "-" in s))
+            latest = urljoin(url, f"/team/player/{season}/")
+            if latest != url:
+                soup, url = get_page(session, latest)
+        players = []
+        for a in soup.select("a.player-item[href]"):
+            if not re.search(r"/team/player/\d{4}(?:-\d{2})?/\d+/$", a["href"]):
+                continue
+            players.append({"name": text(a.select_one(".player-name_jp")),
+                            "name_en": text(a.select_one(".player-name_en")),
+                            "position": text(a.select_one(".player-pos")),
+                            "number": text(a.select_one(".player-number")),
+                            "url": urljoin(url, a["href"])})
+    else:
+        players = []
+        for a in soup.select("a[href]"):
+            if not re.search(r"/clubteam/players/\d+$", a["href"]):
+                continue
+            img = a.find("img")
+            number = text(a.select_one("h3 strong"))
+            if not img or "_staff" in img.get("src", "") or not number.isdigit():
+                continue
+            heading = a.find_previous("h2")
+            pos = re.match(r"(GK|DF|MF|FW)\b", text(heading))
+            players.append({"name": player_name(text(a.find("p"))), "name_en": "",
+                            "position": pos.group(1) if pos else "", "number": number,
+                            "url": urljoin(url, a["href"])})
+    unique = {p["url"]: p for p in players if p["name"]}
+    if not unique:
+        raise ValueError(f"No players found on official roster: {url}")
+    return list(unique.values()), url
+
+
+def detail(session, club, entry):
+    soup, url = get_page(session, entry["url"])
+    fields = {}
+    if club == "niigata":
+        for dl in soup.find_all("dl"):
+            key, value = dl.find("dt"), dl.find("dd")
+            if key and value:
+                fields[text(key)] = text(value)
+        portrait = soup.find("img", src=re.compile(r"/files/player/[^/]+/detail/"))
+        name = fields.get("名前", entry["name"])
+        english = text(soup.select_one(".player-head-detail .name")) or entry["name_en"]
+    else:
+        for tr in soup.select("table tr"):
+            th, td = tr.find("th"), tr.find("td")
+            if th and td:
+                # Some official Q&A rows nest td inside an unclosed th.
+                key = clean(" ".join(th.find_all(string=True, recursive=False)))
+                fields[key or text(th)] = text(td)
+        tables = soup.find_all("table")
+        history = next((t for t in tables if len(t.select("td[colspan='2']")) and not t.find("th")), None)
+        if history:
+            fields["経歴"] = text(history)
+        portrait = soup.find("img", src=re.compile(r"/img/players/\d+_big\.(?:jpg|jpeg|png|webp)(?:\?|$)", re.I))
+        name = player_name(text(soup.find("h1"))) or entry["name"]
+        english = entry["name_en"]
+    if normalized_name(name) != normalized_name(entry["name"]):
+        raise ValueError(f"Profile identity mismatch: {entry['name']} / {name}")
+    if not portrait:
+        raise ValueError(f"No detail portrait for {name}: {url}")
+    image_url = urljoin(url, portrait["src"])
+    if urlparse(image_url).hostname != urlparse(url).hostname:
+        raise ValueError(f"Non-club portrait URL: {image_url}")
+    birth = re.search(r"(\d{4})[年/.-](\d{1,2})[月/.-](\d{1,2})", fields.get("生年月日", ""))
+    size = fields.get("身長/体重", "")
+    height = re.search(r"(\d+)\s*cm", fields.get("身長", size))
+    weight = re.search(r"(\d+)\.?\s*kg", fields.get("体重", size))
+    if not birth or not height or not weight:
+        raise ValueError(f"Incomplete basic profile for {name}: {url}")
+    career = [clean(t) for t in re.split(r"\s*(?:→|～|〜|－)\s*", fields.get("経歴", "")) if clean(t)]
+    current = CLUBS[club]["name"]
+    if not career or normalized_name(career[-1]) != normalized_name(current):
+        career.append(current)
     return {
-        normalized_name(path.stem)
-        for path in directory.iterdir()
-        if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}
+        "source": "club_official", "source_confidence": "high", "club": club,
+        "app_player_name": name, "name": name, "official_name": name,
+        "name_en": english, "position": entry["position"], "number": entry["number"],
+        "birth_date": f"{int(birth[1]):04d}/{int(birth[2]):02d}/{int(birth[3]):02d}",
+        "birthplace": fields.get("出身地", ""), "height_cm": int(height[1]), "weight_kg": int(weight[1]),
+        "final_team": CLUBS[club]["short"], "affiliated_teams": career,
+        "nickname": fields.get("ニックネーム", ""), "blood_type": fields.get("血液型", ""),
+        "dominant_foot": fields.get("利き足", ""), "club_profile_fields": fields,
+        "links": {"club_official": url}, "image_source_url": image_url,
     }
 
 
-def season_to_directory_year(value: object) -> int | None:
-    """Analysis data stores the 2026/27 season under 2027; J.League uses 2026."""
-    match = re.search(r"\d{4}", str(value or ""))
-    if not match:
-        return None
-    year = int(match.group(0))
-    return 2026 if year == 2027 else year
+def save_portrait(session, club, url):
+    time.sleep(DELAY)
+    r = session.get(url, timeout=(12, 45))
+    r.raise_for_status()
+    if urlparse(r.url).hostname != urlparse(url).hostname:
+        raise ValueError(f"Unexpected portrait redirect: {r.url}")
+    with Image.open(BytesIO(r.content)) as source:
+        image = ImageOps.exif_transpose(source)
+        image.load()
+        if min(image.size) < 300:
+            raise ValueError(f"Refusing small portrait: {image.size}")
+        has_alpha = "A" in image.getbands() and image.getchannel("A").getextrema()[0] < 255
+        if club == "niigata" and not has_alpha:
+            raise ValueError("Niigata detail portrait is not transparent; refusing thumbnail fallback")
+        # Lossless WebP keeps every source pixel and native alpha; never resize.
+        encoded = BytesIO()
+        image.convert("RGBA" if has_alpha else "RGB").save(encoded, format="WEBP", lossless=True, method=6)
+        data = encoded.getvalue()
+        digest = hashlib.sha256(data).hexdigest()[:24]
+        target = ASSETS / club / f"{digest}.webp"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if not target.exists():
+            target.write_bytes(data)
+        return {"photo": "./" + target.relative_to(APP).as_posix(), "source_url": url,
+                "width": image.width, "height": image.height, "native_alpha": has_alpha}
 
 
-def missing_players(club: str) -> dict[int, dict[str, str]]:
-    source = DATA / "generated" / club / "all_years_player_analysis.json"
-    if not source.exists():
-        raise FileNotFoundError(f"Player analysis file not found: {source}")
-    records = json.loads(source.read_text(encoding="utf-8"))
-    image_dirs = [
-        APP / f"data/assets/images/player_{club}",
-        APP / f"data/assets/player_{club}",
-    ]
-    present = set().union(*(source_image_keys(directory) for directory in image_dirs))
-    requested: dict[int, dict[str, str]] = defaultdict(dict)
-    for row in records:
-        name = str(row.get("player_name") or row.get("player_key") or "").strip()
-        year = season_to_directory_year(row.get("season"))
-        if not name or year is None:
-            continue
-        storage_name = canonical_storage_name(name, year)
-        if normalized_name(storage_name) not in present:
-            # Keep the source spelling for exact matching to that season's roster.
-            requested[year][storage_name] = name
-    return requested
+def write_json(path, data):
+    content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.exists() or path.read_text(encoding="utf-8") != content:
+        path.write_text(content, encoding="utf-8")
 
 
-def official_roster_images(
-    html: bytes, requested: dict[str, str], page_url: str, club_slug: str, year: int
-) -> dict[str, str]:
-    soup = BeautifulSoup(html, "html.parser")
-    wanted = {normalized_name(source_name): storage_name for storage_name, source_name in requested.items()}
-    players: dict[str, str] = {}
-
-    # Keep compatibility with server-rendered roster links when present.
-    for anchor in soup.find_all("a", href=True):
-        name = normalized_name(anchor.get_text(" ", strip=True))
-        match = re.search(r"/player/(\d+)/", str(anchor["href"]))
-        if name in wanted and match:
-            players[name] = match.group(1)
-
-    # The current J.League roster is hydrated from a Next.js Flight payload,
-    # where player links are represented as escaped JSON rather than HTML anchors.
-    player_record = re.compile(
-        r'\\"playerId\\"\s*:\s*\\"(?P<id>\d+)\\".*?'
-        r'\\"playerName\\"\s*:\s*\\"(?P<name>(?:\\\\.|[^"\\])*)\\"',
-        re.DOTALL,
-    )
-    raw_html = html.decode("utf-8", errors="replace")
-    for match in player_record.finditer(raw_html):
-        try:
-            source_name = json.loads('"' + match.group("name") + '"')
-        except json.JSONDecodeError:
-            source_name = match.group("name").replace('\\"', '"')
-        name = normalized_name(source_name)
-        if name in wanted:
-            players[name] = match.group("id")
-
-    found: dict[str, str] = {}
-    for name, player_id in players.items():
-        # Player profile pages use this official, high-resolution image path.
-        # The roster thumbnail is only 96x96 and is not suitable for the detail card.
-        image_url = urljoin(
-            page_url,
-            f"/img/cache/{year}/{club_slug}/player/main/{player_id}_l.webp",
-        )
-        if urlparse(image_url).hostname == "www.jleague.jp":
-            found[wanted[name]] = image_url
-    return found
+def load_index():
+    if INDEX.exists():
+        return json.loads(INDEX.read_text(encoding="utf-8").split("window.TrappOfficialPlayers =", 1)[1].strip().rstrip(";"))
+    return {}
 
 
-def save_jpeg(session: requests.Session, image_url: str, destination: Path) -> None:
-    with session.get(image_url, timeout=(12, 30)) as response:
-        response.raise_for_status()
-        content_type = response.headers.get("Content-Type", "").lower()
-        if content_type and not content_type.startswith("image/"):
-            raise ValueError(f"Not an image response ({content_type})")
-        try:
-            image = Image.open(BytesIO(response.content))
-            image = ImageOps.exif_transpose(image).convert("RGB")
-            image.load()
-        except Exception as exc:
-            raise ValueError(f"Image could not be decoded: {exc}") from exc
-    if min(image.size) < MIN_IMAGE_EDGE:
-        raise ValueError(f"Image is too small: {image.width}x{image.height}")
-    image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    temporary = destination.with_suffix(".jpg.tmp")
-    image.save(temporary, format="JPEG", quality=92, optimize=True)
-    temporary.replace(destination)
-
-
-def fetch_roster(
-    session: requests.Session, club_config: dict[str, str], year: int
-) -> tuple[bytes, str]:
-    response = session.get(
-        ROSTER_URL.format(slug=club_config["slug"]),
-        params={"navicode": club_config["league"]},
-        timeout=(12, 35),
-    )
-    response.raise_for_status()
-    if club_config["name"] not in response.text or not re.search(r"/player/\d+/", response.text):
-        raise ValueError(f"Unexpected official roster response for {club_config['name']} {year}")
-    return response.content, response.url
-
-
-def write_report(payload: dict) -> None:
-    REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REPORT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
-def main() -> None:
-    report = {
-        "source": "https://www.jleague.jp/club/{club}/ (official club roster)",
-        "downloaded": [],
-        "unavailable": [],
-        "errors": [],
-    }
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--name", help="Refresh only names containing this text, preserving the other entries")
+    args = parser.parse_args()
     session = requests.Session()
-    session.headers.update({"User-Agent": USER_AGENT, "Accept-Language": "ja,en-US;q=0.9,en;q=0.8"})
-
+    session.headers.update({"User-Agent": USER_AGENT, "Accept-Language": "ja"})
+    report = {"source": "club official player detail pages", "synced": [], "errors": []}
+    if args.name and REPORT.exists():
+        report = json.loads(REPORT.read_text(encoding="utf-8"))
+        for field in ("synced", "errors"):
+            report[field] = [row for row in report.get(field, []) if normalized_name(args.name) not in normalized_name(row.get("name", ""))]
+    index = load_index()
     for club in CLUBS:
-        by_year = missing_players(club)
-        pending = set().union(*(set(names) for names in by_year.values())) if by_year else set()
-        if not pending:
-            print(f"{club}: no missing player portraits")
-            continue
-
-        output = APP / f"data/assets/images/player_{club}"
-        # Prefer the newest spelling if the same stored player appears in
-        # multiple seasons. The current club roster gives stable official IDs.
-        latest_names: dict[str, str] = {}
-        for year in sorted(by_year, reverse=True):
-            for storage_name, source_name in by_year[year].items():
-                latest_names.setdefault(storage_name, source_name)
-        official_year = max((season_to_directory_year(year) or year for year in by_year), default=2026)
+        path = DATA / "players" / f"{club}.json"
+        profiles = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
         try:
-            html, page_url = fetch_roster(session, CLUBS[club], official_year)
-            matches = official_roster_images(
-                html, latest_names, page_url, CLUBS[club]["slug"], official_year
-            )
+            players, roster_url = roster(session, club)
         except Exception as exc:
-            report["errors"].append({"club": club, "year": official_year, "error": str(exc)})
-            matches = {}
-
-        club_downloaded = 0
-        for storage_name in sorted(latest_names):
-            if storage_name not in pending:
-                continue
-            source_name = latest_names[storage_name]
-            image_url = matches.get(storage_name)
-            if not image_url:
-                continue
-            destination = output / f"{storage_name}.jpg"
-            if destination.exists():
-                pending.discard(storage_name)
+            report["errors"].append({"club": club, "error": str(exc)})
+            continue
+        keys = {normalized_name(k): k for k in profiles if k != "_meta"}
+        club_index = index.setdefault(club, {})
+        changed = False
+        print(f"{club}: {len(players)} official player profiles", flush=True)
+        for entry in players:
+            if args.name and normalized_name(args.name) not in normalized_name(entry["name"]):
                 continue
             try:
-                time.sleep(IMAGE_DELAY_SECONDS)
-                save_jpeg(session, image_url, destination)
-                report["downloaded"].append({
-                    "club": club,
-                    "name": storage_name,
-                    "official_name": source_name,
-                    "year": official_year,
-                    "source_url": image_url,
-                    "file": destination.relative_to(APP).as_posix(),
-                })
-                club_downloaded += 1
-                pending.discard(storage_name)
-                print(f"{club} {storage_name}: saved ({official_year})")
+                fresh = detail(session, club, entry)
+                name = keys.get(normalized_name(fresh["name"]), fresh["name"])
+                previous = profiles.get(name, {})
+                # Keep league milestones and past annual records already in the app.
+                merged = {**previous, **{k: v for k, v in fresh.items() if v not in (None, "")}}
+                merged["app_player_name"] = name
+                merged["links"] = {**previous.get("links", {}), **fresh["links"]}
+                if merged != previous:
+                    merged["fetched_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+                    profiles[name] = merged
+                    changed = True
+                photo = save_portrait(session, club, fresh["image_source_url"])
+                key = normalized_name(name)
+                club_index[key] = {"name": name, "official_name": fresh["name"], "profile_url": fresh["links"]["club_official"], **photo}
+                report["synced"].append({"club": club, **club_index[key]})
+                print(f"{club} {name}: {photo['width']}x{photo['height']} native-alpha={photo['native_alpha']}; profile saved", flush=True)
             except Exception as exc:
-                report["errors"].append({
-                    "club": club, "name": storage_name, "year": official_year, "error": str(exc)
-                })
-        time.sleep(PAGE_DELAY_SECONDS)
-
-        for name in sorted(pending):
-            report["unavailable"].append({"club": club, "name": name})
-        print(f"{club}: downloaded {club_downloaded}; still missing {len(pending)}")
-
-    # Keep the report deterministic so an unchanged nightly run does not create
-    # a pointless commit and redeploy.
-    report["downloaded"].sort(key=lambda row: (row["club"], row["name"]))
-    report["unavailable"].sort(key=lambda row: (row["club"], row["name"]))
-    report["errors"].sort(key=lambda row: (row.get("club", ""), row.get("name", ""), row.get("year", 0)))
-    write_report(report)
+                report["errors"].append({"club": club, "name": entry["name"], "error": str(exc)})
+                print(f"WARNING {club} {entry['name']}: {exc}", flush=True)
+        if changed:
+            profiles.setdefault("_meta", {}).update({"club_official_source": roster_url,
+                "club_official_synced_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "club_official_players": len(players)})
+            write_json(path, profiles)
+    payload = "/* Generated from club official player detail pages. */\nwindow.TrappOfficialPlayers = " + json.dumps(index, ensure_ascii=False, sort_keys=True, indent=2) + ";\n"
+    if not INDEX.exists() or INDEX.read_text(encoding="utf-8") != payload:
+        INDEX.write_text(payload, encoding="utf-8")
+    referenced = {APP / p["photo"].removeprefix("./") for players in index.values() for p in players.values()}
+    for path in ASSETS.glob("*/*.webp"):
+        if path not in referenced:
+            path.unlink()
+    write_json(REPORT, report)
+    print(f"Synced {len(report['synced'])} portraits/profiles; errors {len(report['errors'])}", flush=True)
+    if report["errors"]:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

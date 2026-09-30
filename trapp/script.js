@@ -1789,11 +1789,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     const baseNames = shouldUseGenericPlayerImageName(playerName, player) ? [playerName] : [];
     const names = [...aliasNames, ...baseNames].flatMap(getPlayerImageNameVariants);
     if (!names.length) return [];
+    const official = window.TrappOfficialPlayers?.[getPlayerAnalysisClub(club)] || {};
+    const clubSources = Array.from(new Set(names)).flatMap(name => {
+      const key = normalizePlayerImageName(name).replace(/[\s・･]/g, "");
+      const photo = official[key]?.photo;
+      return typeof photo === "string" && /^\.\/data\/assets\/official_players\/(?:niigata|kumamoto)\/[a-f0-9]+\.webp$/.test(photo) ? [photo] : [];
+    });
     const directories = getPlayerImageDirectories(club);
-    return Array.from(new Set(names)).flatMap(name => {
+    const legacySources = Array.from(new Set(names)).flatMap(name => {
       const filename = `${encodeURIComponent(name)}.jpg`;
       return directories.map(dir => `${dir}/${filename}`);
     });
+    return [...new Set([...clubSources, ...legacySources])];
   }
 
   const PLAYER_ENGLISH_NAME_OVERRIDES = {
@@ -2443,7 +2450,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ${fallbackSources.length ? `data-fallback-srcs="${escapeHtml(fallbackSources.join("|"))}"` : ""}
           data-player-photo
           alt="${escapeHtml(`${altName}の写真`)}"
-          loading="eager"
+          loading="${className.includes("pa-mobile-list-photo") ? "lazy" : "eager"}"
           decoding="async"
         >
       </${tagName}>
@@ -8300,7 +8307,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const exact = new Map();
         const normalized = new Map();
         try {
-          const response = await fetch(`./data/players/${clubKey}.json?v=20260618profiles`);
+          const response = await fetch(`./data/players/${clubKey}.json?v=20260930-club-profiles`, { cache: "no-cache" });
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           const payload = await response.json();
           Object.entries(payload || {}).forEach(([key, profile]) => {
@@ -8548,7 +8555,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       renderPlayerProfileMilestone("Jリーグ初出場", profile.first_appearances),
       renderPlayerProfileMilestone("Jリーグ初得点", profile.first_goals)
     ].filter(Boolean).join("");
-    const sourceUrl = String(profile.links && profile.links.jleague_data || "");
+    const sourceUrl = String(profile.links && (profile.links.club_official || profile.links.jleague_data) || "");
+    const sourceLabel = profile.links?.club_official ? getPlayerAnalysisClubInfo(profile.club || playerAnalysisState.selectedClub).name + " 公式サイト" : "J.LEAGUE Data Site";
     const officialName = hasPlayerProfileValue(profile.official_name) && normalizePlayerImageName(profile.official_name) !== normalizePlayerImageName(playerName)
       ? `<span class="pa-bio-official-name">登録名 ${escapeHtml(profile.official_name)}</span>`
       : "";
@@ -8602,7 +8610,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ${/^https:\/\//.test(sourceUrl) ? `
         <a class="pa-bio-source-link" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">
           <span>出典</span>
-          <strong>J.LEAGUE Data Site</strong>
+          <strong>${escapeHtml(sourceLabel)}</strong>
           <b aria-hidden="true">↗</b>
         </a>
       ` : ""}
@@ -14006,8 +14014,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     label.textContent = "試合記録を確認中…";
     analysisRefreshPending = (async () => {
       try {
+        if (force) playerProfileCache.clear();
         const update = await window.TrappAnalysisData.check(force);
-        if (update.changed || (force && update.refreshed)) {
+        if (update.changed || force) {
           [playerAnalysisCache, playerAnalysisScopedCache, playerAnalysisDatasetCache,
             playerAnalysisHistoryCache, playerAnalysisRankingMetricsCache, playerAnalysisAllPromises,
             playerAnalysisAllYearRowsCache, playerAnalysisSeasonMetaCache, playerAnalysisMonthlyMetaCache,

@@ -27,10 +27,21 @@ def sources():
         for base in (APP / f'data/assets/images/player_{club}', APP / f'data/assets/player_{club}'):
             if base.exists():
                 yield from sorted(p for p in base.iterdir() if p.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp'))
+    official_index = APP / 'player-official-index.js'
+    if official_index.exists():
+        payload = official_index.read_text(encoding='utf-8').split('window.TrappOfficialPlayers =', 1)[1].strip().rstrip(';')
+        clubs = json.loads(payload)
+        paths = {item.get('photo', '') for players in clubs.values() for item in players.values()}
+        for source in sorted(paths):
+            if source.startswith('./data/assets/official_players/') and source.endswith('.webp'):
+                path = APP / source.removeprefix('./')
+                if path.is_file():
+                    yield path
 
 
 def image_key(path):
-    return hashlib.sha256(RECIPE.encode() + path.read_bytes()).hexdigest()[:24]
+    recipe = 'official-fullsize-lossless-v1' if 'official_players' in path.parts else RECIPE
+    return hashlib.sha256(recipe.encode() + path.read_bytes()).hexdigest()[:24]
 
 
 def valid_cutout(image):
@@ -63,6 +74,17 @@ def main():
         key = image_key(path)
         dest = OUTPUT / f'{key}.webp'
         try:
+            official = 'official_players' in path.parts
+            original_url = './' + path.relative_to(APP).as_posix()
+            if official:
+                with Image.open(path) as native:
+                    if 'A' in native.getbands() and valid_cutout(native.convert('RGBA')):
+                        # The club has already cut out the player. Never infer another
+                        # mask or re-encode a native transparent portrait.
+                        index[original_url] = original_url
+                        cached += 1
+                        print(f'[{pos}/{len(paths)}] {path.name}: native club transparency', flush=True)
+                        continue
             if not dest.exists():
                 import onnxruntime as ort
                 ort.disable_telemetry_events()
@@ -71,7 +93,8 @@ def main():
                     session = new_session(MODEL, providers=['CPUExecutionProvider'])
                 with Image.open(path) as source:
                     original = ImageOps.exif_transpose(source).convert('RGBA')
-                    original.thumbnail((1000, 1000), Image.Resampling.LANCZOS)
+                    if not official:
+                        original.thumbnail((1000, 1000), Image.Resampling.LANCZOS)
                     cutout = remove(original, session=session, alpha_matting=True,
                                     alpha_matting_foreground_threshold=240,
                                     alpha_matting_background_threshold=10,
@@ -84,12 +107,14 @@ def main():
                     l,t,r,b = bounds
                     cutout = cutout.crop((max(0,l-2),max(0,t-2),min(cutout.width,r+2),min(cutout.height,b+2)))
                 temp = dest.with_suffix('.tmp')
-                cutout.save(temp, format='WEBP', quality=92, method=6)
+                if official:
+                    cutout.save(temp, format='WEBP', lossless=True, method=6)
+                else:
+                    cutout.save(temp, format='WEBP', quality=92, method=6)
                 temp.replace(dest)
                 generated += 1
             else:
                 cached += 1
-            original_url = './' + path.relative_to(APP).as_posix()
             index[original_url] = './' + quote(dest.relative_to(APP).as_posix(), safe='/')
             print(f'[{pos}/{len(paths)}] {path.name} -> {dest.name}', flush=True)
         except Exception as exc:

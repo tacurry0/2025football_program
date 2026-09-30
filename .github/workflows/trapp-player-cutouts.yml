@@ -9,6 +9,9 @@ on:
       - 'trapp/data/scripts/sync_missing_player_images.py'
       - 'trapp/data/scripts/requirements-player-cutouts.txt'
       - 'trapp/data/scripts/requirements-player-image-sync.txt'
+      - 'trapp/data/players/*.json'
+      - 'trapp/data/assets/official_players/**'
+      - 'trapp/player-official-index.js'
       - 'trapp/data/assets/images/player_*/**'
       - 'trapp/data/assets/player_*/**'
   schedule:
@@ -44,7 +47,7 @@ jobs:
         run: python -m pip install -r trapp/data/scripts/requirements-player-cutouts.txt
       - name: Install official portrait sync dependencies
         run: python -m pip install -r trapp/data/scripts/requirements-player-image-sync.txt
-      - name: Download missing official player portraits
+      - name: Sync club official player photos and profiles
         run: python trapp/data/scripts/sync_missing_player_images.py
       - name: Prepare new and changed portraits
         run: python trapp/data/scripts/build_player_cutouts.py
@@ -55,16 +58,19 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add trapp/data/assets/images/player_niigata trapp/data/assets/images/player_kumamoto
           git add trapp/data/assets/images/player_image_sync_report.json
+          git add trapp/data/assets/official_players trapp/data/players
+          git add trapp/player-official-index.js
           git add trapp/data/assets/player_cutouts trapp/player-cutouts-index.js
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Update transparent player portraits'
           git pull --rebase origin main
           git push origin HEAD:main
           echo 'changed=true' >> "$GITHUB_OUTPUT"
-      # GITHUB_TOKEN pushes do not trigger another Pages build. Deploy this snapshot explicitly.
+      # Publish pushed app changes even when all generated photos are already current.
+      # GITHUB_TOKEN pushes also require an explicit Pages deployment.
       - uses: actions/upload-pages-artifact@v3
-        if: steps.commit.outputs.changed == 'true'
+        if: github.event_name != 'schedule' || steps.commit.outputs.changed == 'true'
         with:
           path: '.'
       - uses: actions/deploy-pages@v4
-        if: steps.commit.outputs.changed == 'true'
+        if: github.event_name != 'schedule' || steps.commit.outputs.changed == 'true'

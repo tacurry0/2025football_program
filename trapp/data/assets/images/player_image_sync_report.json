@@ -1,686 +1,731 @@
 {
-  "source": "https://www.jleague.jp/club/{club}/ (official club roster)",
-  "downloaded": [],
-  "unavailable": [
-    {
-      "club": "kumamoto",
-      "name": "アンデルソン-2011"
-    },
-    {
-      "club": "kumamoto",
-      "name": "イム ジンウ"
-    },
-    {
-      "club": "kumamoto",
-      "name": "ウーゴ"
-    },
-    {
-      "club": "kumamoto",
-      "name": "エジミウソン"
-    },
-    {
-      "club": "kumamoto",
-      "name": "カレン ロバート"
-    },
-    {
-      "club": "kumamoto",
-      "name": "キム ジョンソク"
-    },
-    {
-      "club": "kumamoto",
-      "name": "キム テヨン"
-    },
-    {
-      "club": "kumamoto",
-      "name": "キム ビョンヨン"
-    },
-    {
-      "club": "kumamoto",
-      "name": "クォン ソックン"
-    },
-    {
-      "club": "kumamoto",
-      "name": "クォン ハンジン"
-    },
-    {
-      "club": "kumamoto",
-      "name": "グスタボ"
-    },
-    {
-      "club": "kumamoto",
-      "name": "シュミット ダニエル"
-    },
-    {
-      "club": "kumamoto",
-      "name": "ジュニオール"
-    },
-    {
-      "club": "kumamoto",
-      "name": "ソン イニョン"
-    },
-    {
-      "club": "kumamoto",
-      "name": "チャ ジホ"
-    },
-    {
-      "club": "kumamoto",
-      "name": "チョ ソンジン"
-    },
-    {
-      "club": "kumamoto",
-      "name": "ドゥグラス"
-    },
-    {
-      "club": "kumamoto",
-      "name": "ファビオ"
-    },
-    {
-      "club": "kumamoto",
-      "name": "モルベッキ"
-    },
-    {
-      "club": "kumamoto",
-      "name": "三島 康平"
-    },
-    {
-      "club": "kumamoto",
-      "name": "三鬼 海"
-    },
-    {
-      "club": "kumamoto",
-      "name": "上原 拓郎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "上村 健一"
-    },
-    {
-      "club": "kumamoto",
-      "name": "上里 一将"
-    },
-    {
-      "club": "kumamoto",
-      "name": "中山 悟志"
-    },
-    {
-      "club": "kumamoto",
-      "name": "中山 雄登"
-    },
-    {
-      "club": "kumamoto",
-      "name": "五領 淳樹"
-    },
-    {
-      "club": "kumamoto",
-      "name": "井畑 翔太郎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "仲間 隼斗"
-    },
-    {
-      "club": "kumamoto",
-      "name": "似鳥 康太"
-    },
-    {
-      "club": "kumamoto",
-      "name": "佐藤 慎之介"
-    },
-    {
-      "club": "kumamoto",
-      "name": "佐藤 昭大"
-    },
-    {
-      "club": "kumamoto",
-      "name": "佐野 翼"
-    },
-    {
-      "club": "kumamoto",
-      "name": "光永 祐也"
-    },
-    {
-      "club": "kumamoto",
-      "name": "八久保 颯"
-    },
-    {
-      "club": "kumamoto",
-      "name": "加藤 健太"
-    },
-    {
-      "club": "kumamoto",
-      "name": "加藤 竜二"
-    },
-    {
-      "club": "kumamoto",
-      "name": "北嶋 秀朗"
-    },
-    {
-      "club": "kumamoto",
-      "name": "北川 佳男"
-    },
-    {
-      "club": "kumamoto",
-      "name": "北里 大地"
-    },
-    {
-      "club": "kumamoto",
-      "name": "南 雄太"
-    },
-    {
-      "club": "kumamoto",
-      "name": "原 一樹"
-    },
-    {
-      "club": "kumamoto",
-      "name": "原 裕太郎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "原田 拓"
-    },
-    {
-      "club": "kumamoto",
-      "name": "吉井 孝輔"
-    },
-    {
-      "club": "kumamoto",
-      "name": "吉田 智志"
-    },
-    {
-      "club": "kumamoto",
-      "name": "喜名 哲裕"
-    },
-    {
-      "club": "kumamoto",
-      "name": "園田 拓也"
-    },
-    {
-      "club": "kumamoto",
-      "name": "坂元 大希"
-    },
-    {
-      "club": "kumamoto",
-      "name": "坂田 良太"
-    },
-    {
-      "club": "kumamoto",
-      "name": "堀米 勇輝"
-    },
-    {
-      "club": "kumamoto",
-      "name": "堤 俊輔"
-    },
-    {
-      "club": "kumamoto",
-      "name": "多々良 敦斗"
-    },
-    {
-      "club": "kumamoto",
-      "name": "大崎 舜"
-    },
-    {
-      "club": "kumamoto",
-      "name": "大谷 尚輝"
-    },
-    {
-      "club": "kumamoto",
-      "name": "大迫 希"
-    },
-    {
-      "club": "kumamoto",
-      "name": "太 洋一"
-    },
-    {
-      "club": "kumamoto",
-      "name": "宇留野 純"
-    },
-    {
-      "club": "kumamoto",
-      "name": "安 柄俊"
-    },
-    {
-      "club": "kumamoto",
-      "name": "宮崎 大志郎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "小林 弘記"
-    },
-    {
-      "club": "kumamoto",
-      "name": "小林 陽介"
-    },
-    {
-      "club": "kumamoto",
-      "name": "小森田 友明"
-    },
-    {
-      "club": "kumamoto",
-      "name": "小牧 成亘"
-    },
-    {
-      "club": "kumamoto",
-      "name": "山下 訓広"
-    },
-    {
-      "club": "kumamoto",
-      "name": "山内 祐一"
-    },
-    {
-      "club": "kumamoto",
-      "name": "山口 武士"
-    },
-    {
-      "club": "kumamoto",
-      "name": "山崎 侑輝"
-    },
-    {
-      "club": "kumamoto",
-      "name": "山本 翔平"
-    },
-    {
-      "club": "kumamoto",
-      "name": "岡本 賢明"
-    },
-    {
-      "club": "kumamoto",
-      "name": "岡村 和哉"
-    },
-    {
-      "club": "kumamoto",
-      "name": "岡﨑 亮平"
-    },
-    {
-      "club": "kumamoto",
-      "name": "岩丸 史也"
-    },
-    {
-      "club": "kumamoto",
-      "name": "崔 根植"
-    },
-    {
-      "club": "kumamoto",
-      "name": "嶋田 慎太郎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "巻 誠一郎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "市村 篤司"
-    },
-    {
-      "club": "kumamoto",
-      "name": "常盤 聡"
-    },
-    {
-      "club": "kumamoto",
-      "name": "平木 良樹"
-    },
-    {
-      "club": "kumamoto",
-      "name": "平繁 龍一"
-    },
-    {
-      "club": "kumamoto",
-      "name": "廣井 友信"
-    },
-    {
-      "club": "kumamoto",
-      "name": "斉藤 紀由"
-    },
-    {
-      "club": "kumamoto",
-      "name": "有村 光史"
-    },
-    {
-      "club": "kumamoto",
-      "name": "木下 正貴"
-    },
-    {
-      "club": "kumamoto",
-      "name": "木島 良輔"
-    },
-    {
-      "club": "kumamoto",
-      "name": "木村 祐志"
-    },
-    {
-      "club": "kumamoto",
-      "name": "村上 巧"
-    },
-    {
-      "club": "kumamoto",
-      "name": "松岡 康暢"
-    },
-    {
-      "club": "kumamoto",
-      "name": "松橋 章太"
-    },
-    {
-      "club": "kumamoto",
-      "name": "林 祥太"
-    },
-    {
-      "club": "kumamoto",
-      "name": "根占 真伍"
-    },
-    {
-      "club": "kumamoto",
-      "name": "森川 泰臣"
-    },
-    {
-      "club": "kumamoto",
-      "name": "植田 龍仁朗"
-    },
-    {
-      "club": "kumamoto",
-      "name": "横山 知伸"
-    },
-    {
-      "club": "kumamoto",
-      "name": "橋本 拳人"
-    },
-    {
-      "club": "kumamoto",
-      "name": "武富 孝介"
-    },
-    {
-      "club": "kumamoto",
-      "name": "水野 晃樹"
-    },
-    {
-      "club": "kumamoto",
-      "name": "永井 建成"
-    },
-    {
-      "club": "kumamoto",
-      "name": "池谷 友喜"
-    },
-    {
-      "club": "kumamoto",
-      "name": "河端 和哉"
-    },
-    {
-      "club": "kumamoto",
-      "name": "河野 健一"
-    },
-    {
-      "club": "kumamoto",
-      "name": "清武 功暉"
-    },
-    {
-      "club": "kumamoto",
-      "name": "渡辺 匠"
-    },
-    {
-      "club": "kumamoto",
-      "name": "澤田 崇"
-    },
-    {
-      "club": "kumamoto",
-      "name": "熊谷 雅彦"
-    },
-    {
-      "club": "kumamoto",
-      "name": "片山 奨典"
-    },
-    {
-      "club": "kumamoto",
-      "name": "田中 俊一"
-    },
-    {
-      "club": "kumamoto",
-      "name": "田中 達也"
-    },
-    {
-      "club": "kumamoto",
-      "name": "町田 多聞"
-    },
-    {
-      "club": "kumamoto",
-      "name": "畑 実"
-    },
-    {
-      "club": "kumamoto",
-      "name": "白谷 建人"
-    },
-    {
-      "club": "kumamoto",
-      "name": "皆川 佑介"
-    },
-    {
-      "club": "kumamoto",
-      "name": "矢野 大輔"
-    },
-    {
-      "club": "kumamoto",
-      "name": "石井 俊也"
-    },
-    {
-      "club": "kumamoto",
-      "name": "福王 忠世"
-    },
-    {
-      "club": "kumamoto",
-      "name": "稲田 康志"
-    },
-    {
-      "club": "kumamoto",
-      "name": "笹垣 拓也"
-    },
-    {
-      "club": "kumamoto",
-      "name": "筑城 和人"
-    },
-    {
-      "club": "kumamoto",
-      "name": "篠原 弘次郎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "米原 秀亮"
-    },
-    {
-      "club": "kumamoto",
-      "name": "網田 慎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "若杉 拓哉"
-    },
-    {
-      "club": "kumamoto",
-      "name": "菅沼 実"
-    },
-    {
-      "club": "kumamoto",
-      "name": "菅沼 駿哉"
-    },
-    {
-      "club": "kumamoto",
-      "name": "薗田 淳"
-    },
-    {
-      "club": "kumamoto",
-      "name": "藏川 洋平"
-    },
-    {
-      "club": "kumamoto",
-      "name": "藤本 主税"
-    },
-    {
-      "club": "kumamoto",
-      "name": "藤本 大"
-    },
-    {
-      "club": "kumamoto",
-      "name": "藤田 俊哉"
-    },
-    {
-      "club": "kumamoto",
-      "name": "西 弘則"
-    },
-    {
-      "club": "kumamoto",
-      "name": "西森 正明"
-    },
-    {
-      "club": "kumamoto",
-      "name": "車 智鎬"
-    },
-    {
-      "club": "kumamoto",
-      "name": "野田 裕喜"
-    },
-    {
-      "club": "kumamoto",
-      "name": "金井 大樹"
-    },
-    {
-      "club": "kumamoto",
-      "name": "鈴木 祐輔"
-    },
-    {
-      "club": "kumamoto",
-      "name": "長沢 駿"
-    },
-    {
-      "club": "kumamoto",
-      "name": "関 光博"
-    },
-    {
-      "club": "kumamoto",
-      "name": "青木 剛"
-    },
-    {
-      "club": "kumamoto",
-      "name": "青木 良太"
-    },
-    {
-      "club": "kumamoto",
-      "name": "養父 雄仁"
-    },
-    {
-      "club": "kumamoto",
-      "name": "高橋 泰"
-    },
-    {
-      "club": "kumamoto",
-      "name": "高橋 祐太郎"
-    },
-    {
-      "club": "kumamoto",
-      "name": "高瀬 優孝"
-    },
-    {
-      "club": "kumamoto",
-      "name": "髙柳 一誠"
-    },
-    {
-      "club": "kumamoto",
-      "name": "齊藤 和樹"
-    },
-    {
-      "club": "kumamoto",
-      "name": "齋藤 恵太"
+  "source": "club official player detail pages",
+  "synced": [
+    {
+      "club": "niigata",
+      "name": "吉満 大介",
+      "official_name": "吉満 大介",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/23/",
+      "photo": "./data/assets/official_players/niigata/4664ed1d2458c3299b014b86.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/23.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "′"
+      "name": "松浦 大翔",
+      "official_name": "松浦 大翔",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/41/",
+      "photo": "./data/assets/official_players/niigata/2995e4b804215b28e3e260d3.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/41.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "アンデルソン-2011"
+      "name": "バウマン",
+      "official_name": "バウマン",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/46/",
+      "photo": "./data/assets/official_players/niigata/fe47f2361f46908354b3aeae.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/46.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "シルビーニョ-2019-2020"
+      "name": "内山 翔太",
+      "official_name": "内山 翔太",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/71/",
+      "photo": "./data/assets/official_players/niigata/855575d9f6002f3e6df7fc39.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/71.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "丸山 壮大"
+      "name": "佐藤 空斗夢",
+      "official_name": "佐藤 空斗夢",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/42/",
+      "photo": "./data/assets/official_players/niigata/e0a52665e415f51596fb5cc1.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/42.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "丸山 嵩大"
+      "name": "ジェイソン ゲリア",
+      "official_name": "ジェイソン ゲリア",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/2/",
+      "photo": "./data/assets/official_players/niigata/d2749aee635af27cad7d601a.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/02.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "丸山 皓己"
+      "name": "加藤 徹也",
+      "official_name": "加藤 徹也",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/3/",
+      "photo": "./data/assets/official_players/niigata/357b559f04a9f614720be78d.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/03.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "五十嵐 新"
+      "name": "舞行龍ジェームズ",
+      "official_name": "舞行龍 ジェームズ",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/5/",
+      "photo": "./data/assets/official_players/niigata/2b808735787fd6dbea8b41ce.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/05.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "加藤 悠馬"
+      "name": "早川 史哉",
+      "official_name": "早川 史哉",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/15/",
+      "photo": "./data/assets/official_players/niigata/c8e68481c0fdc1a6980401c8.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/15.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "吉原 秀祐"
+      "name": "森 璃太",
+      "official_name": "森 璃太",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/24/",
+      "photo": "./data/assets/official_players/niigata/0564691dfae6416d8c2c354a.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/24.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "吉田 光希"
+      "name": "佐藤 海宏",
+      "official_name": "佐藤 海宏",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/26/",
+      "photo": "./data/assets/official_players/niigata/37867a93556de14b7d496223.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/26.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "園田 拓也"
+      "name": "関口 正大",
+      "official_name": "関口 正大",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/30/",
+      "photo": "./data/assets/official_players/niigata/bd15dced265e53d6087af026.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/30.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "奥田 陽一"
+      "name": "松岡 敏也",
+      "official_name": "松岡 敏也",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/33/",
+      "photo": "./data/assets/official_players/niigata/707208371ce5cfd08ebf270e.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/33.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "宮沢 正史"
+      "name": "藤原 優大",
+      "official_name": "藤原 優大",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/34/",
+      "photo": "./data/assets/official_players/niigata/c68beb0f5ef9c0e8e3c06257.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/34.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "小枇 ランディー エメカ"
+      "name": "森 昂大",
+      "official_name": "森 昂大",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/38/",
+      "photo": "./data/assets/official_players/niigata/ef98859171328bd455e5f0d6.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/38.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "山根 成陽"
+      "name": "舩木 翔",
+      "official_name": "舩木 翔",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/77/",
+      "photo": "./data/assets/official_players/niigata/96560c96f64b4ce50d9f2353.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/77.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "押久保 汐音"
+      "name": "笠井 佳祐",
+      "official_name": "笠井 佳祐",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/6/",
+      "photo": "./data/assets/official_players/niigata/59ad2f15cfade1b5f8388082.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/06.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "木村 誠"
+      "name": "大西 悠介",
+      "official_name": "大西 悠介",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/7/",
+      "photo": "./data/assets/official_players/niigata/d8dfc73dd8297bedea02847f.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/07.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "河田 波大"
+      "name": "白井 永地",
+      "official_name": "白井 永地",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/8/",
+      "photo": "./data/assets/official_players/niigata/c98f3b65d47d037d9032fcb9.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/08.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "浅倉 廉"
+      "name": "ダニーロ ゴメス",
+      "official_name": "ダニーロ ゴメス",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/11/",
+      "photo": "./data/assets/official_players/niigata/f6183e12f2e6af76816c02c8.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/11.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "營田 一燈"
+      "name": "落合 陸",
+      "official_name": "落合 陸",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/13/",
+      "photo": "./data/assets/official_players/niigata/53fef607b975ffd750c5caa4.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/13.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "田中 僚"
+      "name": "古長谷 千博",
+      "official_name": "古長谷 千博",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/14/",
+      "photo": "./data/assets/official_players/niigata/99bc85cb2092444e60ad69cb.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/14.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "稲川 碧希"
+      "name": "星 雄次",
+      "official_name": "星 雄次",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/19/",
+      "photo": "./data/assets/official_players/niigata/bc06f3d33e0fe875c2e73235.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/19.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "芹澤 飛勇"
+      "name": "新井 泰貴",
+      "official_name": "新井 泰貴",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/22/",
+      "photo": "./data/assets/official_players/niigata/84cff1009300531ffac28e50.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/22.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     },
     {
       "club": "niigata",
-      "name": "長谷川 紡"
+      "name": "石山 青空",
+      "official_name": "石山 青空",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/40/",
+      "photo": "./data/assets/official_players/niigata/f50cf84a2bdc7538f1697ffb.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/40.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
+    },
+    {
+      "club": "niigata",
+      "name": "前田 椋介",
+      "official_name": "前田 椋介",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/70/",
+      "photo": "./data/assets/official_players/niigata/3c26951ff8da76cf86a2a691.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/70.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
+    },
+    {
+      "club": "niigata",
+      "name": "イウリ カスティーリョ",
+      "official_name": "イウリ カスティーリョ",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/9/",
+      "photo": "./data/assets/official_players/niigata/eba8a983d97900abe960d954.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/09.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
+    },
+    {
+      "club": "niigata",
+      "name": "大澤 朋也",
+      "official_name": "大澤 朋也",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/16/",
+      "photo": "./data/assets/official_players/niigata/302da287d42b58174996ac5e.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/16.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
+    },
+    {
+      "club": "niigata",
+      "name": "若月 大和",
+      "official_name": "若月 大和",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/18/",
+      "photo": "./data/assets/official_players/niigata/1fed1dc0bc3ec5cba75a2e4c.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/18.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
+    },
+    {
+      "club": "niigata",
+      "name": "桑山 侃士",
+      "official_name": "桑山 侃士",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/32/",
+      "photo": "./data/assets/official_players/niigata/327b0dbde0c038cef35b8cf4.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/32.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
+    },
+    {
+      "club": "niigata",
+      "name": "マテウス モラエス",
+      "official_name": "マテウス モラエス",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/55/",
+      "photo": "./data/assets/official_players/niigata/640084e44937867ec41acae5.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/55.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
+    },
+    {
+      "club": "niigata",
+      "name": "小野 裕二",
+      "official_name": "小野 裕二",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/99/",
+      "photo": "./data/assets/official_players/niigata/6beaecd3c239475eb1907afd.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/99.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
+    },
+    {
+      "club": "kumamoto",
+      "name": "佐藤 史騎",
+      "official_name": "佐藤 史騎",
+      "profile_url": "https://roasso-k.com/clubteam/players/2258",
+      "photo": "./data/assets/official_players/kumamoto/164594d139757f039af0a7f3.webp",
+      "source_url": "https://roasso-k.com/img/players/2258_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "武者 大夢",
+      "official_name": "武者 大夢",
+      "profile_url": "https://roasso-k.com/clubteam/players/2653",
+      "photo": "./data/assets/official_players/kumamoto/bc4c9ae2fcc47be360a9fdd1.webp",
+      "source_url": "https://roasso-k.com/img/players/2653_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "西村 遥己",
+      "official_name": "西村 遥己",
+      "profile_url": "https://roasso-k.com/clubteam/players/3123",
+      "photo": "./data/assets/official_players/kumamoto/1b813ea1754f6e566c7f3391.webp",
+      "source_url": "https://roasso-k.com/img/players/3123_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "佐藤 優也",
+      "official_name": "佐藤 優也",
+      "profile_url": "https://roasso-k.com/clubteam/players/593",
+      "photo": "./data/assets/official_players/kumamoto/0446c1e7fde10c4a13e44e14.webp",
+      "source_url": "https://roasso-k.com/img/players/593_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "永野 春樹",
+      "official_name": "永野 春樹",
+      "profile_url": "https://roasso-k.com/clubteam/players/3810",
+      "photo": "./data/assets/official_players/kumamoto/b53bfa2ac32c8d0c7fde1737.webp",
+      "source_url": "https://roasso-k.com/img/players/3810_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "黒木 晃平",
+      "official_name": "黒木 晃平",
+      "profile_url": "https://roasso-k.com/clubteam/players/2",
+      "photo": "./data/assets/official_players/kumamoto/f4aa367a4be78a853ebed78d.webp",
+      "source_url": "https://roasso-k.com/img/players/2_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "大西 遼太郎",
+      "official_name": "大西 遼太郎",
+      "profile_url": "https://roasso-k.com/clubteam/players/1670",
+      "photo": "./data/assets/official_players/kumamoto/b5605ae389d8362c333873fb.webp",
+      "source_url": "https://roasso-k.com/img/players/1670_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "薬師田 澪",
+      "official_name": "薬師田 澪",
+      "profile_url": "https://roasso-k.com/clubteam/players/3119",
+      "photo": "./data/assets/official_players/kumamoto/0ab566d47b2900f9dddf8c52.webp",
+      "source_url": "https://roasso-k.com/img/players/3119_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "李 泰河",
+      "official_name": "李 泰河",
+      "profile_url": "https://roasso-k.com/clubteam/players/2649",
+      "photo": "./data/assets/official_players/kumamoto/f707aba6107fcd7ffd51235c.webp",
+      "source_url": "https://roasso-k.com/img/players/2649_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "戸田 峻平",
+      "official_name": "戸田 峻平",
+      "profile_url": "https://roasso-k.com/clubteam/players/3125",
+      "photo": "./data/assets/official_players/kumamoto/b259f10907402e3b82e988b7.webp",
+      "source_url": "https://roasso-k.com/img/players/3125_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "長嶋 志歩",
+      "official_name": "長嶋 志歩",
+      "profile_url": "https://roasso-k.com/clubteam/players/2652",
+      "photo": "./data/assets/official_players/kumamoto/9f68dac3e7fae71ca651f79f.webp",
+      "source_url": "https://roasso-k.com/img/players/2652_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "木村 匠汰",
+      "official_name": "木村 匠汰",
+      "profile_url": "https://roasso-k.com/clubteam/players/3811",
+      "photo": "./data/assets/official_players/kumamoto/0ad8c486b594c967a718eda7.webp",
+      "source_url": "https://roasso-k.com/img/players/3811_big.jpg",
+      "width": 511,
+      "height": 610,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "伊藤 颯真",
+      "official_name": "伊藤 颯真",
+      "profile_url": "https://roasso-k.com/clubteam/players/3127",
+      "photo": "./data/assets/official_players/kumamoto/58dc55a8177993da6ae9f644.webp",
+      "source_url": "https://roasso-k.com/img/players/3127_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "小林 慶太",
+      "official_name": "小林 慶太",
+      "profile_url": "https://roasso-k.com/clubteam/players/2650",
+      "photo": "./data/assets/official_players/kumamoto/0c7dfdc21f9005cc63ff89c0.webp",
+      "source_url": "https://roasso-k.com/img/players/2650_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "藤井 皓也",
+      "official_name": "藤井 皓也",
+      "profile_url": "https://roasso-k.com/clubteam/players/2255",
+      "photo": "./data/assets/official_players/kumamoto/413ae03ae6d1994958c5260f.webp",
+      "source_url": "https://roasso-k.com/img/players/2255_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "渡邉 怜歩",
+      "official_name": "渡邉 怜歩",
+      "profile_url": "https://roasso-k.com/clubteam/players/2648",
+      "photo": "./data/assets/official_players/kumamoto/bd2711c784d8a3cb6aa94278.webp",
+      "source_url": "https://roasso-k.com/img/players/2648_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "飯星 明良",
+      "official_name": "飯星 明良",
+      "profile_url": "https://roasso-k.com/clubteam/players/2645",
+      "photo": "./data/assets/official_players/kumamoto/08616bb4b9409538ee64da62.webp",
+      "source_url": "https://roasso-k.com/img/players/2645_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "三島 頌平",
+      "official_name": "三島 頌平",
+      "profile_url": "https://roasso-k.com/clubteam/players/912",
+      "photo": "./data/assets/official_players/kumamoto/76d0d41a2af77619d4f6589e.webp",
+      "source_url": "https://roasso-k.com/img/players/912_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "永井 颯太",
+      "official_name": "永井 颯太",
+      "profile_url": "https://roasso-k.com/clubteam/players/3122",
+      "photo": "./data/assets/official_players/kumamoto/903ee9b8f07a1536355030d5.webp",
+      "source_url": "https://roasso-k.com/img/players/3122_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "松田 詠太郎",
+      "official_name": "松田 詠太郎",
+      "profile_url": "https://roasso-k.com/clubteam/players/3124",
+      "photo": "./data/assets/official_players/kumamoto/8480e73a8d8b18230271233a.webp",
+      "source_url": "https://roasso-k.com/img/players/3124_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "那須 健一",
+      "official_name": "那須 健一",
+      "profile_url": "https://roasso-k.com/clubteam/players/3071",
+      "photo": "./data/assets/official_players/kumamoto/0b2619ba78ba9567a1dee7c2.webp",
+      "source_url": "https://roasso-k.com/img/players/3071_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "根岸 恵汰",
+      "official_name": "根岸 恵汰",
+      "profile_url": "https://roasso-k.com/clubteam/players/2651",
+      "photo": "./data/assets/official_players/kumamoto/8ad92a3b31abcd79aba2eddf.webp",
+      "source_url": "https://roasso-k.com/img/players/2651_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "吉岡 優希",
+      "official_name": "吉岡 優希",
+      "profile_url": "https://roasso-k.com/clubteam/players/3126",
+      "photo": "./data/assets/official_players/kumamoto/98fc559913f7c42ef3c98f53.webp",
+      "source_url": "https://roasso-k.com/img/players/3126_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "三品 直哉",
+      "official_name": "三品 直哉",
+      "profile_url": "https://roasso-k.com/clubteam/players/3412",
+      "photo": "./data/assets/official_players/kumamoto/6ad0af75098cf23a377fe87a.webp",
+      "source_url": "https://roasso-k.com/img/players/3412_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "中島 永弥",
+      "official_name": "中島 永弥",
+      "profile_url": "https://roasso-k.com/clubteam/players/3414",
+      "photo": "./data/assets/official_players/kumamoto/4fa83a8bddb5ce18b038d1ff.webp",
+      "source_url": "https://roasso-k.com/img/players/3414_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "小澤 秀充",
+      "official_name": "小澤 秀充",
+      "profile_url": "https://roasso-k.com/clubteam/players/3411",
+      "photo": "./data/assets/official_players/kumamoto/ca639f733f8c3d253d36f036.webp",
+      "source_url": "https://roasso-k.com/img/players/3411_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "石田 凌太郎",
+      "official_name": "石田 凌太郎",
+      "profile_url": "https://roasso-k.com/clubteam/players/3895",
+      "photo": "./data/assets/official_players/kumamoto/8f25b3cb07af6370f2a71e00.webp",
+      "source_url": "https://roasso-k.com/img/players/3895_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "大本 祐槻",
+      "official_name": "大本 祐槻",
+      "profile_url": "https://roasso-k.com/clubteam/players/1672",
+      "photo": "./data/assets/official_players/kumamoto/be069aa178032c8bb3d98748.webp",
+      "source_url": "https://roasso-k.com/img/players/1672_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "ベ ジョンミン",
+      "official_name": "ベ ジョンミン",
+      "profile_url": "https://roasso-k.com/clubteam/players/2253",
+      "photo": "./data/assets/official_players/kumamoto/974b677eba08ce6e8aea4b1f.webp",
+      "source_url": "https://roasso-k.com/img/players/2253_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "鹿取 勇斗",
+      "official_name": "鹿取 勇斗",
+      "profile_url": "https://roasso-k.com/clubteam/players/3120",
+      "photo": "./data/assets/official_players/kumamoto/7f9a82ad85ac03cfba3baf5c.webp",
+      "source_url": "https://roasso-k.com/img/players/3120_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "石原 央羅",
+      "official_name": "石原 央羅",
+      "profile_url": "https://roasso-k.com/clubteam/players/3121",
+      "photo": "./data/assets/official_players/kumamoto/b947e99a796c9b6a77b0c94b.webp",
+      "source_url": "https://roasso-k.com/img/players/3121_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "宮田 和純",
+      "official_name": "宮田 和純",
+      "profile_url": "https://roasso-k.com/clubteam/players/3413",
+      "photo": "./data/assets/official_players/kumamoto/ac44e49601ac958ef160c88b.webp",
+      "source_url": "https://roasso-k.com/img/players/3413_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
+      "name": "中山 大耀",
+      "official_name": "中山 大耀",
+      "profile_url": "https://roasso-k.com/clubteam/players/3812",
+      "photo": "./data/assets/official_players/kumamoto/cc67eea685321b8f7c911280.webp",
+      "source_url": "https://roasso-k.com/img/players/3812_big.jpg",
+      "width": 509,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "niigata",
+      "name": "シマブク カズヨシ",
+      "official_name": "シマブク カズヨシ",
+      "profile_url": "https://www.albirex.co.jp/team/player/2026-27/17/",
+      "photo": "./data/assets/official_players/niigata/abe7acf50bb57462c8bc0ce8.webp",
+      "source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/17.png",
+      "width": 900,
+      "height": 1081,
+      "native_alpha": true
     }
   ],
   "errors": []

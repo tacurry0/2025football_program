@@ -1,33 +1,41 @@
-# Player portrait cutouts
+# Club official player photos and profiles
 
-Run `python -m pip install -r trapp/data/scripts/requirements-player-image-sync.txt`, then
-`python trapp/data/scripts/sync_missing_player_images.py` from the repository root to
-look up portraits for missing players in the official J.League club rosters. The
-script uses the app's existing annual analysis records, matches the full player name
-to the roster's player link, then uses that official player ID to load the large
-profile image (the image itself has a generic `Player` alt label). It saves valid
-portraits under the expected Niigata/Kumamoto image directories and records unresolved
-names in `trapp/data/assets/images/player_image_sync_report.json`. It never overwrites
-an existing photo or accepts fuzzy matches.
+Install `requirements-player-image-sync.txt`, then run:
 
-Then run `python -m pip install -r trapp/data/scripts/requirements-player-cutouts.txt`,
-followed by `python trapp/data/scripts/build_player_cutouts.py` from the repository root.
-The cutout script scans both supported image directories, keeps originals untouched,
-and writes alpha WebP files plus `trapp/player-cutouts-index.js`. The profile hero uses
-indexed cutouts and falls back to the original on errors.
-Manual photos remain local and are not sent to this job.
+```sh
+python trapp/data/scripts/sync_missing_player_images.py
+```
 
-The `Prepare trapp player cutouts` workflow runs on source-image changes, nightly,
-and on manual dispatch. It first fetches missing official portraits, then removes
-backgrounds, commits source and generated images, and deploys the updated site. This
-also covers images committed by another Actions job (which cannot trigger a new push
-workflow). Identical image bytes share one output; unchanged images are skipped.
-Change RECIPE to regenerate after model/settings changes.
-Model inference runs on CPU in the preparation job, never on the user's phone.
-ONNX telemetry is disabled before initialization. The model is downloaded once and
-cached; no portrait is uploaded to a third-party background-removal API.
+The script discovers the latest published Albirex Niigata roster and the Roasso
+Kumamoto roster, and reads each player's detail page. It refreshes current players
+including those who already have photos. Niigata uses the native transparent PNG
+from `/files/player/<season>/detail/`; Kumamoto uses the detail `_big` portrait.
+J.League roster images and roster thumbnails are never used by this sync.
 
-`--name 笠井` creates a sample without replacing the public index.
-`data/assets/player_cutouts/report.json` records failures; those retain originals.
-The mask checks catch empty/full masks, but are not a guarantee of perfect hair edges.
-Inspect representative portraits before changing the recipe.
+Photos keep their original resolution and alpha and are stored as lossless WebP
+in `data/assets/official_players/<club>/`. Their content-based URLs are listed in
+`player-official-index.js`, which the app prefers over older images in both player
+lists and detail/card screens. Existing historical images remain available.
+
+Basic profiles, official English names when available, current position,
+birthdate, height, weight, birthplace, and club history update
+`data/players/niigata.json` and `kumamoto.json`. Existing league milestones and
+annual records remain intact. Source links point to the club's individual page.
+`--name 桑山` can retry one player while preserving the rest of the index/report.
+
+Install `requirements-player-cutouts.txt`, then run:
+
+```sh
+python trapp/data/scripts/build_player_cutouts.py
+```
+
+Native transparent official images are used directly without another mask.
+Opaque official portraits are cut out at their original resolution and saved
+losslessly. Older photos retain the existing cached cutouts and recipe. Model
+inference runs locally/on Actions, never on the phone or a third-party image API.
+
+The `Prepare trapp player cutouts` workflow runs nightly, on relevant source
+changes and manual dispatch. It syncs club photos and profiles, prepares missing
+cutouts, commits the assets/profile data and deploys the updated site. Failures
+are recorded in `data/assets/images/player_image_sync_report.json` and
+`data/assets/player_cutouts/report.json`; previous working entries are kept.
