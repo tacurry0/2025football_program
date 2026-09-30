@@ -2,10 +2,5 @@
   "recipe": "human-v1-webp-alpha",
   "sources": 538,
   "ready": 538,
-  "errors": [
-    {
-      "source": "data/assets/images/player_niigata/吉原 慎也.jpg",
-      "error": "image file is truncated (5 bytes not processed)"
-    }
-  ]
+  "errors": []
 }

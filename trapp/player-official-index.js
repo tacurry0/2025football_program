@@ -6,7 +6,7 @@ window.TrappOfficialPlayers = {
       "name": "ベ ジョンミン",
       "native_alpha": false,
       "official_name": "ベ ジョンミン",
-      "photo": "./data/assets/official_players/kumamoto/974b677eba08ce6e8aea4b1f.webp",
+      "photo": "./data/assets/official_players/kumamoto/4e7eb760541ca12950b5152e.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2253",
       "source_url": "https://roasso-k.com/img/players/2253_big.jpg",
       "width": 510
@@ -16,7 +16,7 @@ window.TrappOfficialPlayers = {
       "name": "三品 直哉",
       "native_alpha": false,
       "official_name": "三品 直哉",
-      "photo": "./data/assets/official_players/kumamoto/6ad0af75098cf23a377fe87a.webp",
+      "photo": "./data/assets/official_players/kumamoto/cf2c6cceffb31d540a7cdfd5.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3412",
       "source_url": "https://roasso-k.com/img/players/3412_big.jpg",
       "width": 510
@@ -26,7 +26,7 @@ window.TrappOfficialPlayers = {
       "name": "三島 頌平",
       "native_alpha": false,
       "official_name": "三島 頌平",
-      "photo": "./data/assets/official_players/kumamoto/76d0d41a2af77619d4f6589e.webp",
+      "photo": "./data/assets/official_players/kumamoto/778c8885cf623e3ed3e53610.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/912",
       "source_url": "https://roasso-k.com/img/players/912_big.jpg",
       "width": 510
@@ -36,7 +36,7 @@ window.TrappOfficialPlayers = {
       "name": "中山 大耀",
       "native_alpha": false,
       "official_name": "中山 大耀",
-      "photo": "./data/assets/official_players/kumamoto/cc67eea685321b8f7c911280.webp",
+      "photo": "./data/assets/official_players/kumamoto/6d7ffde9b171eeaf6faf330b.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3812",
       "source_url": "https://roasso-k.com/img/players/3812_big.jpg",
       "width": 509
@@ -46,7 +46,7 @@ window.TrappOfficialPlayers = {
       "name": "中島 永弥",
       "native_alpha": false,
       "official_name": "中島 永弥",
-      "photo": "./data/assets/official_players/kumamoto/4fa83a8bddb5ce18b038d1ff.webp",
+      "photo": "./data/assets/official_players/kumamoto/b7021bb768828bac63908f6c.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3414",
       "source_url": "https://roasso-k.com/img/players/3414_big.jpg",
       "width": 510
@@ -56,7 +56,7 @@ window.TrappOfficialPlayers = {
       "name": "伊藤 颯真",
       "native_alpha": false,
       "official_name": "伊藤 颯真",
-      "photo": "./data/assets/official_players/kumamoto/58dc55a8177993da6ae9f644.webp",
+      "photo": "./data/assets/official_players/kumamoto/dd5fdf7be3bd91179d6b2bc5.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3127",
       "source_url": "https://roasso-k.com/img/players/3127_big.jpg",
       "width": 510
@@ -66,7 +66,7 @@ window.TrappOfficialPlayers = {
       "name": "佐藤 優也",
       "native_alpha": false,
       "official_name": "佐藤 優也",
-      "photo": "./data/assets/official_players/kumamoto/0446c1e7fde10c4a13e44e14.webp",
+      "photo": "./data/assets/official_players/kumamoto/ed4beb65a79e4b10429f1074.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/593",
       "source_url": "https://roasso-k.com/img/players/593_big.jpg",
       "width": 510
@@ -76,7 +76,7 @@ window.TrappOfficialPlayers = {
       "name": "佐藤 史騎",
       "native_alpha": false,
       "official_name": "佐藤 史騎",
-      "photo": "./data/assets/official_players/kumamoto/164594d139757f039af0a7f3.webp",
+      "photo": "./data/assets/official_players/kumamoto/829fd559bdd0f487fb6e7246.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2258",
       "source_url": "https://roasso-k.com/img/players/2258_big.jpg",
       "width": 510
@@ -86,7 +86,7 @@ window.TrappOfficialPlayers = {
       "name": "吉岡 優希",
       "native_alpha": false,
       "official_name": "吉岡 優希",
-      "photo": "./data/assets/official_players/kumamoto/98fc559913f7c42ef3c98f53.webp",
+      "photo": "./data/assets/official_players/kumamoto/7e7a47e9ae7819df96b62d69.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3126",
       "source_url": "https://roasso-k.com/img/players/3126_big.jpg",
       "width": 510
@@ -96,7 +96,7 @@ window.TrappOfficialPlayers = {
       "name": "大本 祐槻",
       "native_alpha": false,
       "official_name": "大本 祐槻",
-      "photo": "./data/assets/official_players/kumamoto/be069aa178032c8bb3d98748.webp",
+      "photo": "./data/assets/official_players/kumamoto/f16e734b21f50b0250469d47.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/1672",
       "source_url": "https://roasso-k.com/img/players/1672_big.jpg",
       "width": 510
@@ -106,7 +106,7 @@ window.TrappOfficialPlayers = {
       "name": "大西 遼太郎",
       "native_alpha": false,
       "official_name": "大西 遼太郎",
-      "photo": "./data/assets/official_players/kumamoto/b5605ae389d8362c333873fb.webp",
+      "photo": "./data/assets/official_players/kumamoto/176e00d6d53ad60b10f1e2c3.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/1670",
       "source_url": "https://roasso-k.com/img/players/1670_big.jpg",
       "width": 510
@@ -116,7 +116,7 @@ window.TrappOfficialPlayers = {
       "name": "宮田 和純",
       "native_alpha": false,
       "official_name": "宮田 和純",
-      "photo": "./data/assets/official_players/kumamoto/ac44e49601ac958ef160c88b.webp",
+      "photo": "./data/assets/official_players/kumamoto/38e25e778a7c59ecc1803e5e.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3413",
       "source_url": "https://roasso-k.com/img/players/3413_big.jpg",
       "width": 510
@@ -126,7 +126,7 @@ window.TrappOfficialPlayers = {
       "name": "小林 慶太",
       "native_alpha": false,
       "official_name": "小林 慶太",
-      "photo": "./data/assets/official_players/kumamoto/0c7dfdc21f9005cc63ff89c0.webp",
+      "photo": "./data/assets/official_players/kumamoto/b00951f330d64ea87f81a259.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2650",
       "source_url": "https://roasso-k.com/img/players/2650_big.jpg",
       "width": 510
@@ -136,7 +136,7 @@ window.TrappOfficialPlayers = {
       "name": "小澤 秀充",
       "native_alpha": false,
       "official_name": "小澤 秀充",
-      "photo": "./data/assets/official_players/kumamoto/ca639f733f8c3d253d36f036.webp",
+      "photo": "./data/assets/official_players/kumamoto/3655180cd6a169001ce2d675.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3411",
       "source_url": "https://roasso-k.com/img/players/3411_big.jpg",
       "width": 510
@@ -146,7 +146,7 @@ window.TrappOfficialPlayers = {
       "name": "戸田 峻平",
       "native_alpha": false,
       "official_name": "戸田 峻平",
-      "photo": "./data/assets/official_players/kumamoto/b259f10907402e3b82e988b7.webp",
+      "photo": "./data/assets/official_players/kumamoto/d9bc3e4c04f9f670561760ed.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3125",
       "source_url": "https://roasso-k.com/img/players/3125_big.jpg",
       "width": 510
@@ -156,7 +156,7 @@ window.TrappOfficialPlayers = {
       "name": "木村 匠汰",
       "native_alpha": false,
       "official_name": "木村 匠汰",
-      "photo": "./data/assets/official_players/kumamoto/0ad8c486b594c967a718eda7.webp",
+      "photo": "./data/assets/official_players/kumamoto/a116d3ea451c0e59b4903f30.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3811",
       "source_url": "https://roasso-k.com/img/players/3811_big.jpg",
       "width": 511
@@ -166,7 +166,7 @@ window.TrappOfficialPlayers = {
       "name": "李 泰河",
       "native_alpha": false,
       "official_name": "李 泰河",
-      "photo": "./data/assets/official_players/kumamoto/f707aba6107fcd7ffd51235c.webp",
+      "photo": "./data/assets/official_players/kumamoto/c49b29f0c36eb8ecd3b4df56.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2649",
       "source_url": "https://roasso-k.com/img/players/2649_big.jpg",
       "width": 510
@@ -176,7 +176,7 @@ window.TrappOfficialPlayers = {
       "name": "松田 詠太郎",
       "native_alpha": false,
       "official_name": "松田 詠太郎",
-      "photo": "./data/assets/official_players/kumamoto/8480e73a8d8b18230271233a.webp",
+      "photo": "./data/assets/official_players/kumamoto/a7ef2d46a9ce817ba2cbeaf9.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3124",
       "source_url": "https://roasso-k.com/img/players/3124_big.jpg",
       "width": 510
@@ -186,7 +186,7 @@ window.TrappOfficialPlayers = {
       "name": "根岸 恵汰",
       "native_alpha": false,
       "official_name": "根岸 恵汰",
-      "photo": "./data/assets/official_players/kumamoto/8ad92a3b31abcd79aba2eddf.webp",
+      "photo": "./data/assets/official_players/kumamoto/4801c1bf3b463cd36707b5fc.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2651",
       "source_url": "https://roasso-k.com/img/players/2651_big.jpg",
       "width": 510
@@ -196,7 +196,7 @@ window.TrappOfficialPlayers = {
       "name": "武者 大夢",
       "native_alpha": false,
       "official_name": "武者 大夢",
-      "photo": "./data/assets/official_players/kumamoto/bc4c9ae2fcc47be360a9fdd1.webp",
+      "photo": "./data/assets/official_players/kumamoto/2a62cef8dce3a5320fa42e66.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2653",
       "source_url": "https://roasso-k.com/img/players/2653_big.jpg",
       "width": 510
@@ -206,7 +206,7 @@ window.TrappOfficialPlayers = {
       "name": "永井 颯太",
       "native_alpha": false,
       "official_name": "永井 颯太",
-      "photo": "./data/assets/official_players/kumamoto/903ee9b8f07a1536355030d5.webp",
+      "photo": "./data/assets/official_players/kumamoto/3e99e38eb14f4b94e21a67d1.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3122",
       "source_url": "https://roasso-k.com/img/players/3122_big.jpg",
       "width": 510
@@ -216,7 +216,7 @@ window.TrappOfficialPlayers = {
       "name": "永野 春樹",
       "native_alpha": false,
       "official_name": "永野 春樹",
-      "photo": "./data/assets/official_players/kumamoto/b53bfa2ac32c8d0c7fde1737.webp",
+      "photo": "./data/assets/official_players/kumamoto/eab927cd87b13312c357bc1f.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3810",
       "source_url": "https://roasso-k.com/img/players/3810_big.jpg",
       "width": 510
@@ -226,7 +226,7 @@ window.TrappOfficialPlayers = {
       "name": "渡邉 怜歩",
       "native_alpha": false,
       "official_name": "渡邉 怜歩",
-      "photo": "./data/assets/official_players/kumamoto/bd2711c784d8a3cb6aa94278.webp",
+      "photo": "./data/assets/official_players/kumamoto/cb465e049f774844cf2a0759.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2648",
       "source_url": "https://roasso-k.com/img/players/2648_big.jpg",
       "width": 510
@@ -236,7 +236,7 @@ window.TrappOfficialPlayers = {
       "name": "石原 央羅",
       "native_alpha": false,
       "official_name": "石原 央羅",
-      "photo": "./data/assets/official_players/kumamoto/b947e99a796c9b6a77b0c94b.webp",
+      "photo": "./data/assets/official_players/kumamoto/44cc4af45b62fcc506f5a55a.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3121",
       "source_url": "https://roasso-k.com/img/players/3121_big.jpg",
       "width": 510
@@ -246,7 +246,7 @@ window.TrappOfficialPlayers = {
       "name": "石田 凌太郎",
       "native_alpha": false,
       "official_name": "石田 凌太郎",
-      "photo": "./data/assets/official_players/kumamoto/8f25b3cb07af6370f2a71e00.webp",
+      "photo": "./data/assets/official_players/kumamoto/96922820c2fa53b6e9c6630b.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3895",
       "source_url": "https://roasso-k.com/img/players/3895_big.jpg",
       "width": 510
@@ -256,7 +256,7 @@ window.TrappOfficialPlayers = {
       "name": "薬師田 澪",
       "native_alpha": false,
       "official_name": "薬師田 澪",
-      "photo": "./data/assets/official_players/kumamoto/0ab566d47b2900f9dddf8c52.webp",
+      "photo": "./data/assets/official_players/kumamoto/626b7ce0f849a96d50f0a678.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3119",
       "source_url": "https://roasso-k.com/img/players/3119_big.jpg",
       "width": 510
@@ -266,7 +266,7 @@ window.TrappOfficialPlayers = {
       "name": "藤井 皓也",
       "native_alpha": false,
       "official_name": "藤井 皓也",
-      "photo": "./data/assets/official_players/kumamoto/413ae03ae6d1994958c5260f.webp",
+      "photo": "./data/assets/official_players/kumamoto/c932b1e2f48a8a02c1ae847f.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2255",
       "source_url": "https://roasso-k.com/img/players/2255_big.jpg",
       "width": 510
@@ -276,7 +276,7 @@ window.TrappOfficialPlayers = {
       "name": "西村 遥己",
       "native_alpha": false,
       "official_name": "西村 遥己",
-      "photo": "./data/assets/official_players/kumamoto/1b813ea1754f6e566c7f3391.webp",
+      "photo": "./data/assets/official_players/kumamoto/9799cd5c6211c9ec421ff169.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3123",
       "source_url": "https://roasso-k.com/img/players/3123_big.jpg",
       "width": 510
@@ -286,7 +286,7 @@ window.TrappOfficialPlayers = {
       "name": "那須 健一",
       "native_alpha": false,
       "official_name": "那須 健一",
-      "photo": "./data/assets/official_players/kumamoto/0b2619ba78ba9567a1dee7c2.webp",
+      "photo": "./data/assets/official_players/kumamoto/c175ce2c10e3ef106199b9ca.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3071",
       "source_url": "https://roasso-k.com/img/players/3071_big.jpg",
       "width": 510
@@ -296,7 +296,7 @@ window.TrappOfficialPlayers = {
       "name": "長嶋 志歩",
       "native_alpha": false,
       "official_name": "長嶋 志歩",
-      "photo": "./data/assets/official_players/kumamoto/9f68dac3e7fae71ca651f79f.webp",
+      "photo": "./data/assets/official_players/kumamoto/623b71349b11880411023e92.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2652",
       "source_url": "https://roasso-k.com/img/players/2652_big.jpg",
       "width": 510
@@ -306,7 +306,7 @@ window.TrappOfficialPlayers = {
       "name": "飯星 明良",
       "native_alpha": false,
       "official_name": "飯星 明良",
-      "photo": "./data/assets/official_players/kumamoto/08616bb4b9409538ee64da62.webp",
+      "photo": "./data/assets/official_players/kumamoto/c5ec1bb5dd771be68537333a.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2645",
       "source_url": "https://roasso-k.com/img/players/2645_big.jpg",
       "width": 510
@@ -316,7 +316,7 @@ window.TrappOfficialPlayers = {
       "name": "鹿取 勇斗",
       "native_alpha": false,
       "official_name": "鹿取 勇斗",
-      "photo": "./data/assets/official_players/kumamoto/7f9a82ad85ac03cfba3baf5c.webp",
+      "photo": "./data/assets/official_players/kumamoto/e6edf6dcd0d5efc5910d05c5.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/3120",
       "source_url": "https://roasso-k.com/img/players/3120_big.jpg",
       "width": 510
@@ -326,7 +326,7 @@ window.TrappOfficialPlayers = {
       "name": "黒木 晃平",
       "native_alpha": false,
       "official_name": "黒木 晃平",
-      "photo": "./data/assets/official_players/kumamoto/f4aa367a4be78a853ebed78d.webp",
+      "photo": "./data/assets/official_players/kumamoto/340d3a8acfcfaf402c30a402.webp",
       "profile_url": "https://roasso-k.com/clubteam/players/2",
       "source_url": "https://roasso-k.com/img/players/2_big.jpg",
       "width": 510
