@@ -268,5 +268,32 @@
     "competition_id": "j3",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026092909",
+    "url": "https://www.jleague.jp/match/leaguecup/2026/092909",
+    "season": "2027",
+    "competition": "Jリーグ ヤマザキビスケット ルヴァンカップ",
+    "section": "2回戦",
+    "date": "2026-09-29",
+    "kickoff": "19:00",
+    "stadium": "えがお健康スタジアム",
+    "attendance": 6682,
+    "weather": "晴れ",
+    "home_team": "ロアッソ熊本",
+    "away_team": "川崎フロンターレ",
+    "home_score": 0,
+    "away_score": 1,
+    "target_team": "ロアッソ熊本",
+    "target_side": "home",
+    "opponent": "川崎フロンターレ",
+    "target_score": 0,
+    "opponent_score": 1,
+    "result": "loss",
+    "points": 0,
+    "season_id": "2026_2027",
+    "competition_id": "leaguecup",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]

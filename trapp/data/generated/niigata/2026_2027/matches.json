@@ -268,5 +268,32 @@
     "competition_id": "j2",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026092902",
+    "url": "https://www.jleague.jp/match/leaguecup/2026/092902",
+    "season": "2027",
+    "competition": "Jリーグ ヤマザキビスケット ルヴァンカップ",
+    "section": "2回戦",
+    "date": "2026-09-29",
+    "kickoff": "19:00",
+    "stadium": "サンプロ アルウィン",
+    "attendance": 3089,
+    "weather": "晴れ",
+    "home_team": "松本山雅FC",
+    "away_team": "アルビレックス新潟",
+    "home_score": 1,
+    "away_score": 0,
+    "target_team": "アルビレックス新潟",
+    "target_side": "away",
+    "opponent": "松本山雅FC",
+    "target_score": 0,
+    "opponent_score": 1,
+    "result": "loss",
+    "points": 0,
+    "season_id": "2026_2027",
+    "competition_id": "leaguecup",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]

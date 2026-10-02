@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v123-player-layout-profiles';
+const cacheName = 'football-app-v124-cup-results';
 const assetsToCache = [
   "./",
   "./index.html",

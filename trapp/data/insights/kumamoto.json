@@ -9529,6 +9529,19 @@
       "pk_away_score": "",
       "source_url": "https://www.jleague.jp/match/j3/2026/092622",
       "match_id": "2026092622"
+    },
+    {
+      "date": "2026-09-29",
+      "home": "ロアッソ熊本",
+      "away": "川崎フロンターレ",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
+      "competition": "Jリーグ ヤマザキビスケット ルヴァンカップ",
+      "pk_home_score": "",
+      "pk_away_score": "",
+      "source_url": "https://www.jleague.jp/match/leaguecup/2026/092909",
+      "match_id": "2026092909"
     }
   ]
 }

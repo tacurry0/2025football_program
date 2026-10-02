@@ -96,7 +96,7 @@
     const fetcher = options.fetch || fetch;
     const storage = options.storage || (typeof localStorage !== "undefined" ? localStorage : null);
     const inflight = new Map();
-    const keyFor = (type, league) => `trapp_v2_${SEASON}_${league}_${type}`;
+    const keyFor = (type, league) => `trapp_v3_${SEASON}_${league}_${type}`;
     const read = key => { try { return JSON.parse(storage?.getItem(key) || "null"); } catch (_) { return null; } };
     const write = (key, value) => { try { storage?.setItem(key, JSON.stringify(value)); } catch (_) {} };
     async function json(url, timeoutMs) {
@@ -117,19 +117,24 @@
         if (!force && cached && !cached.stale && Date.now() - Date.parse(cached.fetchedAt) < 30 * 60 * 1000) return { ...cached, source: "cache" };
         let bundled = null;
         try { const p = await json(`./data/${type}/${SEASON}/${league}.json`, 12000); if (validPayload(p, type, league)) bundled = p; } catch (_) {}
-        const candidates = [cached, bundled].filter(Boolean).sort((a, b) => Date.parse(b.fetchedAt) - Date.parse(a.fetchedAt));
+        const finishedCount = p => p.data.filter(r => r.status === 'finished').length;
+        const rankCandidates = (a, b) => (type === 'results' ? finishedCount(b) - finishedCount(a) : 0) || Date.parse(b.fetchedAt) - Date.parse(a.fetchedAt);
+        const candidates = [cached, bundled].filter(Boolean).sort(rankCandidates);
         try {
           const params = new URLSearchParams({ type, league, season: SEASON });
           if (force) params.set("nocache", "1");
           const fresh = await json(`${options.url || GAS_URL}?${params}`, 90000);
           if (!validPayload(fresh, type, league)) throw new Error("GASの更新が未反映、またはデータの形式が不正です");
+          if (type === 'results' && candidates.some(p => p.data.some(r => r.status === 'finished' && !fresh.data.some(n => n.match_id === r.match_id && n.status === 'finished')))) {
+            throw new Error('取得した試合結果に不足があるため、保存済みの公式記録を表示しています');
+          }
           if (!fresh.stale && (!candidates[0] || Date.parse(fresh.fetchedAt) >= Date.parse(candidates[0].fetchedAt))) {
             write(key, fresh);
             return { ...fresh, source: "gas" };
           }
           if (fresh.stale) {
             candidates.push(fresh);
-            candidates.sort((a, b) => Date.parse(b.fetchedAt) - Date.parse(a.fetchedAt));
+            candidates.sort(rankCandidates);
             if (candidates[0] === fresh) write(key, fresh);
             throw new Error(fresh.error || "公式データの更新に失敗しました");
           }

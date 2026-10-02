@@ -43,5 +43,14 @@
     "type": "警告",
     "time": "90'",
     "minute": 90
+  },
+  {
+    "match_id": "2026092902",
+    "season": 2027,
+    "player_key": "笠井 佳祐",
+    "player_name": "笠井 佳祐",
+    "type": "警告",
+    "time": "61'",
+    "minute": 61
   }
 ]

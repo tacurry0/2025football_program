@@ -12474,9 +12474,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const payload = await fetchHistoryFile(`./data/${type}/${window.TrappLeague.SEASON}/${league}.json`);
         let saved = null;
-        try { saved = JSON.parse(localStorage.getItem(`trapp_v2_${window.TrappLeague.SEASON}_${league}_${type}`) || "null"); } catch (_) {}
+        try { saved = JSON.parse(localStorage.getItem(`trapp_v3_${window.TrappLeague.SEASON}_${league}_${type}`) || "null"); } catch (_) {}
         const candidates = [payload, saved].filter(p => window.TrappLeague.validPayload(p, type, league));
-        candidates.sort((a, b) => Date.parse(b.fetchedAt) - Date.parse(a.fetchedAt));
+        candidates.sort((a, b) => (type === 'results' ? b.data.filter(r => r.status === 'finished').length - a.data.filter(r => r.status === 'finished').length : 0) || Date.parse(b.fetchedAt) - Date.parse(a.fetchedAt));
         return candidates[0] ? { ...candidates[0], stale: true, source: candidates[0] === saved ? "cache" : "bundled" } : null;
       } catch (_) { return null; }
     }));

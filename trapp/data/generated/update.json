@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
   "season": "2026_2027",
-  "revision": "7459ec3345257f8c",
-  "checkedAt": "2026-10-02T01:03:48.885207+00:00",
+  "revision": "b9a6438dfb36294a",
+  "checkedAt": "2026-10-02T07:56:27.747686+00:00",
   "files": {
-    "generated/kumamoto/2026_2027/appearances.json": "11d2f5f62a4b0528b18fcfad2a51ce70deb9316ebf2ffb951acd0fc72419d798",
-    "generated/kumamoto/2026_2027/cards.json": "55a3a4972b381f0d06ddc97f34d71f6da25876d765275422d38ccdb38abd4fd2",
+    "generated/kumamoto/2026_2027/appearances.json": "8e9741b3b63f38f320f3d50e2e788673ec042b70c590a759a6620f420d871448",
+    "generated/kumamoto/2026_2027/cards.json": "f21673c1293c7e150cd15f7fdf471054ba5ce69cf1fcd10a715e3692a40b6724",
     "generated/kumamoto/2026_2027/goals.json": "f6e65bacb0b76a131dd8df6456a553bdc4e5f4abe9c0da7607b63084f579a3c2",
-    "generated/kumamoto/2026_2027/matches.json": "1c378304660fda520013865a26825bb51d2f57acf96871023d30863c129ee7ab",
-    "generated/kumamoto/2026_2027/player_analysis.json": "b186e7bc389c9a81225275050cd5d5296b451b9688b75e64b1285f47d31de320",
+    "generated/kumamoto/2026_2027/matches.json": "c26e4af44043a2bb15667126048efdcd3e112542f8f7b14ade6f696f7ad69003",
+    "generated/kumamoto/2026_2027/player_analysis.json": "9caa308399a2a148745e76de06268cdd805f50930e6d427d084ec0f9ccaca006",
     "generated/kumamoto/2026_2027/players.json": "bade7d882e5459e3a01f88dde4c081823785c7d955d4cdbff8d7413a4691efcf",
-    "generated/kumamoto/all_years_player_analysis.json": "4f86db419427285d45bba7a37fd84421fa8e5d6cbb295197a44b374e9d39b23e",
-    "generated/niigata/2026_2027/appearances.json": "65ed33d75a5c7d0499245d328c3981d81a10f6dbd63ddf3c24bb1fbf7f55a356",
-    "generated/niigata/2026_2027/cards.json": "ef08b9f4dafedde8f76e81c42869de115978d7db8ad0d1df7cf665bec9c20b02",
+    "generated/kumamoto/all_years_player_analysis.json": "0b96334b1e192d025f032d851cf352b26dfbf71053e5c0af7b87058fa33cfa66",
+    "generated/niigata/2026_2027/appearances.json": "086137a4190d1ba843198e131b4c7d0ffd710d7a870d23c3fba7e19384de85ce",
+    "generated/niigata/2026_2027/cards.json": "de189175e9697f91254992e03f91510e00a3a8d56a7941e892da03d25b014602",
     "generated/niigata/2026_2027/goals.json": "831384da29eb378627e25986780af8612bbf068135de3d1007050bc2ead21f43",
-    "generated/niigata/2026_2027/matches.json": "3ee28c8c1ae461c0dbfa59ff042c193504cb44e2445f9e415df5fe26b39db6e7",
-    "generated/niigata/2026_2027/player_analysis.json": "b5f2956610391addc9c1fa7580c6a8a3dfc00cc2b6ace0e2f25bda552b50fd44",
+    "generated/niigata/2026_2027/matches.json": "fa00ae8d87b218466d8d2539de232685ddd00c758c49bd2ff0e9a2e5c7b7b724",
+    "generated/niigata/2026_2027/player_analysis.json": "5fa4c05d8f20d3e2b8e3190054349f36fe2dcf7c53e402b9b1597256c28490b5",
     "generated/niigata/2026_2027/players.json": "ec133e0cbaca8cde48718de691d675491230d047c525780cc2c4189107222d71",
-    "generated/niigata/all_years_player_analysis.json": "471e4ced3e68eb2e08f4b485d866de24ee019a5b8c6545cfc2dcc241b2846778",
-    "history/kumamoto/2026_2027.json": "77a85c7f6eacb22c8cab06788ce0fd24125d2410f9a3abe76419f11bb6b3f18c",
-    "history/niigata/2026_2027.json": "8a8579faea5bf1e5e9e9b97163f38db2282ffd23cfba47bebc2decc0780e0da1"
+    "generated/niigata/all_years_player_analysis.json": "6a887f847d94363f39f2e9c2833969a73410af8eebb94eeff0387cc1fc8c2dc2",
+    "history/kumamoto/2026_2027.json": "573edf95c1a1c850825579db7d2d0819db8dc021628c37aba2fd42f17ed2a55a",
+    "history/niigata/2026_2027.json": "ac9f247806edb9a88025b7c6b08c6161bb66b3529b418ccfcf0dcbc8f8bc121e"
   },
   "clubs": {
     "niigata": {
@@ -27,8 +27,8 @@
       "label": "2026/27",
       "analysis_year": 2027,
       "through": "2026-10-02",
-      "last_match_date": "2026-09-26",
-      "matches": 10,
+      "last_match_date": "2026-09-29",
+      "matches": 11,
       "players": 30,
       "scope": "J2/J3・ルヴァンカップ・天皇杯の終了済み公式記録（練習試合・県予選を除く）",
       "sources": [
@@ -41,7 +41,8 @@
         "https://www.jleague.jp/match/j2/2026/090613",
         "https://www.jleague.jp/match/j2/2026/091305",
         "https://www.jleague.jp/match/j2/2026/091916",
-        "https://www.jleague.jp/match/j2/2026/092607"
+        "https://www.jleague.jp/match/j2/2026/092607",
+        "https://www.jleague.jp/match/leaguecup/2026/092902"
       ]
     },
     "kumamoto": {
@@ -49,8 +50,8 @@
       "label": "2026/27",
       "analysis_year": 2027,
       "through": "2026-10-02",
-      "last_match_date": "2026-09-26",
-      "matches": 10,
+      "last_match_date": "2026-09-29",
+      "matches": 11,
       "players": 29,
       "scope": "J2/J3・ルヴァンカップ・天皇杯の終了済み公式記録（練習試合・県予選を除く）",
       "sources": [
@@ -63,7 +64,8 @@
         "https://www.jleague.jp/match/j3/2026/090616",
         "https://www.jleague.jp/match/j3/2026/091217",
         "https://www.jleague.jp/match/j3/2026/091803",
-        "https://www.jleague.jp/match/j3/2026/092622"
+        "https://www.jleague.jp/match/j3/2026/092622",
+        "https://www.jleague.jp/match/leaguecup/2026/092909"
       ]
     }
   }

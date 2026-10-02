@@ -96,9 +96,12 @@ def main():
     jobs = []
     for league in ('j1', 'j2', 'j3', 'leaguecup', 'emperor'):
         for start, end in months:
-            routes = [f'{l}/match/search-list/' for l in ('j1', 'j2', 'j3')] if league == 'emperor' else [f'{league}/match/']
+            # The cup landing page now renders its fixtures on the client and
+            # ignores date filters. The league search pages still publish the
+            # official records on the server; include all three divisions.
+            routes = [f'{l}/match/search-list/' for l in ('j1', 'j2', 'j3')] if league in ('leaguecup', 'emperor') else [f'{league}/match/']
             for route in routes:
-                jobs.append(dict(type='results', league=league, url=f'https://www.jleague.jp/{route}?category={league}&startdate={start}&enddate={end}'))
+                jobs.append(dict(type='results', league=league, start=start, end=end, url=f'https://www.jleague.jp/{route}?category={league}&startdate={start}&enddate={end}'))
     for league in ('j2', 'j3'):
         jobs.append(dict(type='standings', league=league, url=f'https://www.jleague.jp/{league}/standings/?year=2026-27'))
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
@@ -114,6 +117,21 @@ def main():
             source = DATA / 'insights/j1.json' if league == 'j1' else DATA / 'results' / SEASON / (league + '.json')
             for row in json.loads(source.read_text())['data'] if source.exists() else []:
                 rows[row['match_id']] = row
+        # A retained snapshot must not hide an empty or partial official feed.
+        # Combine the division searches before checking each month's coverage.
+        for league, existing in results.items():
+            for start, end in months:
+                found = [row for job, payload in zip(jobs, parsed)
+                         if job['type'] == 'results' and job['league'] == league and job['start'] == start
+                         for row in payload]
+                if any(not start <= row['date'] <= end for row in found):
+                    raise ValueError('Official date filter ignored: ' + league + ' ' + start)
+                finished = {row['match_id'] for row in found if row.get('status') == 'finished'}
+                missing = [row['match_id'] for row in existing.values()
+                           if start <= row['date'] <= min(end, TODAY) and row.get('status') == 'finished'
+                           and row['match_id'] not in finished]
+                if missing:
+                    raise ValueError('Official records missing from refresh: ' + league + ' ' + ', '.join(missing))
         for job, payload in zip(jobs, parsed):
             league = job['league']
             if job['type'] == 'standings':
@@ -124,6 +142,16 @@ def main():
                     if old.get('status') == 'finished' and row.get('status') != 'finished':
                         continue
                     results[league][row['match_id']] = row
+        # Also catch newly played fixtures missing from the feed entirely.
+        # Same-day games may still be in progress; postponed games stay valid.
+        schedule_path = DATA / 'schedule' / (SEASON + '.json')
+        for fixture in json.loads(schedule_path.read_text()) if schedule_path.exists() else []:
+            league, match_id = fixture.get('competition_id'), fixture.get('match_id')
+            if league not in results or not match_id or fixture.get('club') not in builder.CLUBS or fixture.get('date', TODAY) >= TODAY:
+                continue
+            record = results[league].get(match_id)
+            if not record or record.get('status') not in ('finished', 'postponed'):
+                raise ValueError('Past club fixture has no official result: ' + match_id)
         own = []
         for league, by_id in results.items():
             rows = sorted(by_id.values(), key=lambda r:(r['date'], r['match_id']))

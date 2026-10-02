@@ -196,7 +196,9 @@ function jlResults(league, previous) {
   // Bounded batches; past completed months are retained and audited in rotation.
   for (let start = 0; start < selected.length; start += 3) {
     const batch = selected.slice(start, start + 3);
-    const pages = league === 'emperor' ? ['j1', 'j2', 'j3'].map(function (l) { return l + '/match/search-list/'; }) : [league + '/match/'];
+    // Cup landing pages render fixtures on the client; division searches
+    // expose the server records and honor the requested date range.
+    const pages = ['leaguecup', 'emperor'].includes(league) ? ['j1', 'j2', 'j3'].map(function (l) { return l + '/match/search-list/'; }) : [league + '/match/'];
     const requests = batch.flatMap(function (month) {
       const end = new Date(Number(month.slice(0, 4)), Number(month.slice(5, 7)), 0).getDate();
       return pages.map(function (page) { return Object.assign({ url: 'https://www.jleague.jp/' + page + '?startdate=' + month + '-01&enddate=' + month + '-' + end + '&category=' + league }, jlOptions()); });
@@ -212,7 +214,7 @@ function jlResults(league, previous) {
     });
   }
   return { data: Object.values(rows).sort(function (a, b) { return a.date.localeCompare(b.date) || a.match_id.localeCompare(b.match_id); }),
-    coverage: coverage, auditedMonth: audit + 1, sourceUrl: 'https://www.jleague.jp/' + (league === 'emperor' ? 'j2/match/search-list/?category=emperor' : league + '/match/'), scope: league === 'emperor' ? 'jleague_clubs' : league };
+    coverage: coverage, auditedMonth: audit + 1, sourceUrl: 'https://www.jleague.jp/' + (['leaguecup', 'emperor'].includes(league) ? 'j2/match/search-list/?category=' + league : league + '/match/'), scope: league === 'emperor' ? 'jleague_clubs' : league };
 }
 
 // Compress persisted snapshots; chunk below the per-property size limit.

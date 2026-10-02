@@ -70,5 +70,23 @@
     "type": "警告",
     "time": "11'",
     "minute": 11
+  },
+  {
+    "match_id": "2026092909",
+    "season": 2027,
+    "player_key": "三品 直哉",
+    "player_name": "三品 直哉",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
+  },
+  {
+    "match_id": "2026092909",
+    "season": 2027,
+    "player_key": "石原 央羅",
+    "player_name": "石原 央羅",
+    "type": "警告",
+    "time": "68'",
+    "minute": 68
   }
 ]

@@ -14716,6 +14716,19 @@
       "pk_away_score": "",
       "source_url": "https://www.jleague.jp/match/j2/2026/092607",
       "match_id": "2026092607"
+    },
+    {
+      "date": "2026-09-29",
+      "home": "松本山雅FC",
+      "away": "アルビレックス新潟",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
+      "competition": "Jリーグ ヤマザキビスケット ルヴァンカップ",
+      "pk_home_score": "",
+      "pk_away_score": "",
+      "source_url": "https://www.jleague.jp/match/leaguecup/2026/092902",
+      "match_id": "2026092902"
     }
   ]
 }
