@@ -8,192 +8,187 @@
   "complete": true,
   "data": [
     {
-      "match_id": "2026092622",
+      "match_id": "2026100201",
       "season": "2026_2027",
       "league": "j3",
       "competition_id": "j3",
       "competition": "明治安田J3リーグ",
-      "date": "2026-09-26",
-      "time": "17:00",
-      "round": "第8節",
-      "home": "ザスパ群馬",
+      "date": "2026-10-02",
+      "time": "19:03",
+      "round": "第9節",
+      "home": "レイラック滋賀FC",
       "away": "ロアッソ熊本",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 0,
       "status": "finished",
-      "venue": "正田醤油スタジアム群馬",
-      "attendance": 2950,
-      "weather": "雨",
-      "temperature": "20.1",
-      "humidity": 84,
-      "source_url": "https://www.jleague.jp/match/j3/2026/092622",
-      "j_official_url": "https://www.jleague.jp/match/j3/2026/092622",
+      "venue": "たけびしスタジアム京都",
+      "attendance": 1187,
+      "weather": "晴れ",
+      "temperature": "22.7",
+      "humidity": 55,
+      "source_url": "https://www.jleague.jp/match/j3/2026/100201",
+      "j_official_url": "https://www.jleague.jp/match/j3/2026/100201",
       "detail_fetched_at": "2026-10-02T18:00:25.707624+00:00",
       "home_starting_members": [
         {
-          "name": "近藤 壱成",
+          "name": "伊東 倖希",
           "position": "GK",
-          "number": "13",
-          "player_id": "1635450"
+          "number": "1",
+          "player_id": "1627355"
         },
         {
-          "name": "中村 涼",
+          "name": "平井 駿助",
           "position": "DF",
           "number": "2",
-          "player_id": "1648745"
+          "player_id": "1630163"
         },
         {
-          "name": "大畑 隆也",
+          "name": "小泉 隆斗",
           "position": "DF",
-          "number": "3",
-          "player_id": "1629996"
+          "number": "13",
+          "player_id": "1645928"
         },
         {
-          "name": "山原 康太郎",
+          "name": "白石 智之",
           "position": "DF",
-          "number": "16",
-          "player_id": "1637043"
+          "number": "14",
+          "player_id": "1607212"
         },
         {
-          "name": "貫 真郷",
+          "name": "鍋田 純志",
           "position": "DF",
-          "number": "22",
-          "player_id": "1636297"
+          "number": "37",
+          "player_id": "1635489"
         },
         {
-          "name": "玉城 大志",
-          "position": "MF",
-          "number": "4",
-          "player_id": "1644220"
-        },
-        {
-          "name": "神垣 陸",
+          "name": "中村 健人",
           "position": "MF",
           "number": "8",
-          "player_id": "1632218"
+          "player_id": "1629515"
         },
         {
-          "name": "モハマド ファルザン佐名",
+          "name": "三宅 海斗",
           "position": "MF",
-          "number": "19",
-          "player_id": "1639185"
+          "number": "11",
+          "player_id": "1627454"
         },
         {
-          "name": "藤村 怜",
+          "name": "ロメロ フランク",
           "position": "MF",
-          "number": "27",
-          "player_id": "1610940"
+          "number": "24",
+          "player_id": "800936"
         },
         {
-          "name": "百田 真登",
-          "position": "FW",
-          "number": "17",
-          "player_id": "1642635"
+          "name": "山口 隆希",
+          "position": "MF",
+          "number": "30",
+          "player_id": "1657481"
         },
         {
-          "name": "田中 翔太",
+          "name": "人見 拓哉",
           "position": "FW",
-          "number": "18",
-          "player_id": "1645925"
+          "number": "10",
+          "player_id": "1629486"
+        },
+        {
+          "name": "日野 友貴",
+          "position": "FW",
+          "number": "29",
+          "player_id": "1630015"
         }
       ],
       "home_bench_members": [
         {
-          "name": "キム ジェヒ",
+          "name": "本吉 勇貴",
           "position": "GK",
-          "number": "88",
-          "player_id": "1650809"
+          "number": "41",
+          "player_id": "1647176"
         },
         {
-          "name": "小柳 達司",
+          "name": "井出 敬大",
           "position": "DF",
-          "number": "30",
-          "player_id": "1200028"
+          "number": "4",
+          "player_id": "1627353"
         },
         {
-          "name": "相馬 丞",
+          "name": "角田 駿",
           "position": "DF",
-          "number": "52",
-          "player_id": "1627038"
+          "number": "26",
+          "player_id": "1654345"
         },
         {
-          "name": "風間 宏希",
+          "name": "谷田 壮志朗",
+          "position": "DF",
+          "number": "48",
+          "player_id": "1639136"
+        },
+        {
+          "name": "久保 瑛史",
           "position": "MF",
-          "number": "15",
-          "player_id": "1200831"
+          "number": "7",
+          "player_id": "1653084"
         },
         {
-          "name": "下川 太陽",
+          "name": "秋山 駿",
           "position": "MF",
-          "number": "20",
-          "player_id": "1624841"
+          "number": "18",
+          "player_id": "1654343"
         },
         {
-          "name": "野嶽 惇也",
+          "name": "松原 海斗",
           "position": "MF",
-          "number": "28",
-          "player_id": "1503564"
+          "number": "66",
+          "player_id": "1651528"
         },
         {
-          "name": "出間 思努",
+          "name": "坂元 一渚璃",
           "position": "FW",
-          "number": "69",
-          "player_id": "1641371"
+          "number": "9",
+          "player_id": "1640627"
         },
         {
-          "name": "小竹 知恩",
+          "name": "北條 真汰",
           "position": "FW",
           "number": "77",
-          "player_id": "1641490"
-        },
-        {
-          "name": "中島 大嘉",
-          "position": "FW",
-          "number": "99",
-          "player_id": "1630220"
+          "player_id": "1654346"
         }
       ],
       "home_substitutions": [
         {
-          "minute": "84",
-          "in": "出間 思努",
-          "out": "百田 真登"
-        },
-        {
           "minute": "77",
-          "in": "風間 宏希",
-          "out": "藤村 怜"
+          "in": "秋山 駿",
+          "out": "三宅 海斗"
         },
         {
-          "minute": "77",
-          "in": "中島 大嘉",
-          "out": "田中 翔太"
+          "minute": "72",
+          "in": "坂元 一渚璃",
+          "out": "人見 拓哉"
         },
         {
-          "minute": "68",
-          "in": "相馬 丞",
-          "out": "貫 真郷"
-        },
-        {
-          "minute": "58",
-          "in": "下川 太陽",
-          "out": "神垣 陸"
+          "minute": "63",
+          "in": "松原 海斗",
+          "out": "日野 友貴"
         },
         {
           "minute": "45",
-          "in": "野嶽 惇也",
-          "out": "玉城 大志"
+          "in": "北條 真汰",
+          "out": "山口 隆希"
+        },
+        {
+          "minute": "45",
+          "in": "久保 瑛史",
+          "out": "ロメロ フランク"
         }
       ],
       "home_cards": [
         {
-          "minute": "90+3",
-          "player": "中島 大嘉",
+          "minute": "61",
+          "player": "白石 智之",
           "card": "yellow"
         },
         {
-          "minute": "74",
-          "player": "藤村 怜",
+          "minute": "33",
+          "player": "ロメロ フランク",
           "card": "yellow"
         }
       ],
@@ -280,22 +275,28 @@
           "player_id": "1624509"
         },
         {
+          "name": "藤井 皓也",
+          "position": "MF",
+          "number": "7",
+          "player_id": "1642047"
+        },
+        {
           "name": "渡邉 怜歩",
           "position": "MF",
           "number": "11",
           "player_id": "1647675"
         },
         {
+          "name": "三島 頌平",
+          "position": "MF",
+          "number": "15",
+          "player_id": "1618094"
+        },
+        {
           "name": "永井 颯太",
           "position": "MF",
           "number": "17",
           "player_id": "1633168"
-        },
-        {
-          "name": "根岸 恵汰",
-          "position": "MF",
-          "number": "27",
-          "player_id": "1650520"
         },
         {
           "name": "石田 凌太郎",
@@ -318,50 +319,45 @@
       ],
       "away_substitutions": [
         {
-          "minute": "90+2",
-          "in": "永井 颯太",
-          "out": "小澤 秀充"
-        },
-        {
           "minute": "86",
           "in": "大西 遼太郎",
           "out": "那須 健一"
         },
         {
-          "minute": "86",
-          "in": "渡邉 怜歩",
-          "out": "鹿取 勇斗"
+          "minute": "80",
+          "in": "永井 颯太",
+          "out": "小澤 秀充"
         },
         {
-          "minute": "75",
-          "in": "石原 央羅",
-          "out": "ベ ジョンミン"
-        },
-        {
-          "minute": "70",
+          "minute": "72",
           "in": "石田 凌太郎",
           "out": "大本 祐槻"
         },
         {
-          "minute": "70",
-          "in": "根岸 恵汰",
-          "out": "飯星 明良"
-        }
-      ],
-      "away_cards": [],
-      "away_goals": [
+          "minute": "72",
+          "in": "藤井 皓也",
+          "out": "鹿取 勇斗"
+        },
         {
-          "scorer": "鹿取 勇斗",
-          "minute": "71",
-          "own_goal": false
+          "minute": "72",
+          "in": "宮田 和純",
+          "out": "ベ ジョンミン"
         }
       ],
-      "home_manager": "依田 光正",
+      "away_cards": [
+        {
+          "minute": "26",
+          "player": "那須 健一",
+          "card": "yellow"
+        }
+      ],
+      "away_goals": [],
+      "home_manager": "角田 誠",
       "away_manager": "片野坂 知宏",
       "detail_complete": true,
-      "referee": "矢野 浩平",
-      "assistant_referees": "金次 雄之介、鈴木 渓",
-      "fourth_official": "永野 貴大"
+      "referee": "松澤 慶和",
+      "assistant_referees": "伊勢 裕介、中山 友希",
+      "fourth_official": "多喜 功"
     }
   ]
 }

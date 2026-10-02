@@ -295,5 +295,32 @@
     "competition_id": "leaguecup",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026100201",
+    "url": "https://www.jleague.jp/match/j3/2026/100201",
+    "season": "2027",
+    "competition": "明治安田J3リーグ",
+    "section": "第9節",
+    "date": "2026-10-02",
+    "kickoff": "19:03",
+    "stadium": "たけびしスタジアム京都",
+    "attendance": 1187,
+    "weather": "晴れ",
+    "home_team": "レイラック滋賀FC",
+    "away_team": "ロアッソ熊本",
+    "home_score": 0,
+    "away_score": 0,
+    "target_team": "ロアッソ熊本",
+    "target_side": "away",
+    "opponent": "レイラック滋賀FC",
+    "target_score": 0,
+    "opponent_score": 0,
+    "result": "draw",
+    "points": 1,
+    "season_id": "2026_2027",
+    "competition_id": "j3",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]
