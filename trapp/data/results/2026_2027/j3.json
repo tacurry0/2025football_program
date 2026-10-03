@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-03T00:42:49.699124+00:00",
+  "fetchedAt": "2026-10-03T16:40:59.268699+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -1150,9 +1150,9 @@
       "section": 9,
       "home": "松本山雅FC",
       "away": "ガイナーレ鳥取",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100314"
     },
     {
@@ -1164,9 +1164,9 @@
       "section": 9,
       "home": "AC長野パルセイロ",
       "away": "奈良クラブ",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100315"
     },
     {
@@ -1178,9 +1178,9 @@
       "section": 9,
       "home": "FC岐阜",
       "away": "レノファ山口FC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100316"
     },
     {
@@ -1192,9 +1192,9 @@
       "section": 9,
       "home": "愛媛FC",
       "away": "ザスパ群馬",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 3,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100317"
     },
     {
@@ -1206,9 +1206,9 @@
       "section": 9,
       "home": "SC相模原",
       "away": "FC大阪",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100318"
     },
     {
@@ -1220,9 +1220,9 @@
       "section": 9,
       "home": "ギラヴァンツ北九州",
       "away": "高知ユナイテッドSC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100319"
     },
     {
@@ -1234,9 +1234,9 @@
       "section": 9,
       "home": "FC琉球",
       "away": "ツエーゲン金沢",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100320"
     },
     {

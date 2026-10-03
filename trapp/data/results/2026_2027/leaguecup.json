@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-10-03T00:42:49.699124+00:00",
+  "fetchedAt": "2026-10-03T16:40:59.268699+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -589,11 +589,12 @@
       "section": null,
       "home": "FC町田ゼルビア",
       "away": "京都サンガF.C.",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/100307",
-      "round": "4回戦"
+      "round": "4回戦",
+      "pk": "5 PK 3"
     },
     {
       "match_id": "2026100308",
@@ -604,9 +605,9 @@
       "section": null,
       "home": "柏レイソル",
       "away": "ガンバ大阪",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 5,
+      "away_score": 4,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/100308",
       "round": "4回戦"
     },

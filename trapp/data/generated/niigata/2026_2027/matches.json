@@ -295,5 +295,32 @@
     "competition_id": "leaguecup",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026100309",
+    "url": "https://www.jleague.jp/match/j2/2026/100309",
+    "season": "2027",
+    "competition": "明治安田J2リーグ",
+    "section": "第9節",
+    "date": "2026-10-03",
+    "kickoff": "14:03",
+    "stadium": "デンカビッグスワンスタジアム",
+    "attendance": 16730,
+    "weather": "晴れ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "徳島ヴォルティス",
+    "home_score": 2,
+    "away_score": 1,
+    "target_team": "アルビレックス新潟",
+    "target_side": "home",
+    "opponent": "徳島ヴォルティス",
+    "target_score": 2,
+    "opponent_score": 1,
+    "result": "win",
+    "points": 3,
+    "season_id": "2026_2027",
+    "competition_id": "j2",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]
