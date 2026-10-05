@@ -38,15 +38,19 @@
     </section>`;
   }
   function renderCard(options) {
-    const { match, clubName, ownName, myShortName, opponentShortName, isHome, isIntro, storageId, competition, roundHtml, myEmblemHtml, opponentEmblemHtml } = options;
+    const { match, clubName, ownName, myShortName, opponentShortName, isHome, isIntro, storageId, competition, roundHtml, myEmblemHtml, opponentEmblemHtml, myWatermarkHtml, opponentWatermarkHtml } = options;
     const club = match.club === 'kumamoto' ? 'kumamoto' : 'niigata';
     const crest = `./data/assets/icons/${club === 'niigata' ? 'alb' : 'roasso'}_logo1.png`;
     const date = fixtureDate(match);
     const ha = isHome ? 'HOME' : 'AWAY';
     const summary = `${ownName} 対 ${match.opponent} ${match.date} ${date.time}の試合詳細を開く`;
+    const own = { prefix: 'my', name: ownName, shortName: myShortName, emblem: myEmblemHtml, watermark: myWatermarkHtml };
+    const opponent = { prefix: 'opp', name: match.opponent, shortName: opponentShortName, emblem: opponentEmblemHtml, watermark: opponentWatermarkHtml };
+    // Keep the live-data prefixes attached to their clubs when switching sides.
+    const sides = isHome ? [own, opponent] : [opponent, own];
     return `<article class="dash-card white-theme home-card-enhanced poster-card${isIntro ? ' home-card-intro' : ''} home-card-${club}" id="dash-card-${club}" data-mid="${escape(storageId)}" style="--home-enter-delay:${club === 'kumamoto' ? '180ms' : '20ms'}">
       <div class="poster-hero" role="button" tabindex="0" aria-label="${escape(summary)}">
-        <img class="poster-watermark" src="./data/assets/emblems/${club === 'niigata' ? 'アルビレックス新潟' : 'ロアッソ熊本'}.png" alt="" aria-hidden="true" decoding="async">
+        ${sides.map((team, index) => `<div class="poster-watermark poster-watermark-${index === 0 ? 'home' : 'away'}" data-team="${escape(team.name)}" aria-hidden="true">${team.watermark}</div>`).join('')}
         <header class="poster-header">
           <div class="poster-lockup"><span class="home-club-mark"><img src="${crest}" alt="" decoding="async"></span><div class="poster-brand"><h2 class="dash-team-name">${escape(clubName)}</h2></div></div>
           <div class="poster-badges">${competitionBadge(competition)}${roundHtml}<span class="poster-ha ${isHome ? 'is-home' : 'is-away'}">${ha}</span></div>
@@ -58,7 +62,7 @@
         </div>
         <div class="poster-opponent"><span class="poster-vs">VS</span><h3 class="dash-opp-name">${escape(match.opponent)}</h3></div>
       </div>
-      <div class="poster-report">${reportTeam('my', ownName, myShortName, myEmblemHtml)}${reportTeam('opp', match.opponent, opponentShortName, opponentEmblemHtml)}</div>
+      <div class="poster-report">${sides.map(team => reportTeam(team.prefix, team.name, team.shortName, team.emblem)).join('')}</div>
     </article>`;
   }
   return { fixtureDate, renderCard };

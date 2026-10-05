@@ -12724,6 +12724,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         isHome: getMatchIsHome(m), isIntro: isStartupIntro,
         storageId: window.TrappLeague.storageId(m), competition: window.TrappLeague.context(m),
         roundHtml: renderRoundPill(m, "poster-round"),
+        myWatermarkHtml: renderTeamEmblem(resolveEmblemUrl(ownName, ""), ownName, "poster-watermark-image", "poster-watermark-media"),
+        opponentWatermarkHtml: renderTeamEmblem(resolveEmblemUrl(m.opponent, m.emblem), m.opponent, "poster-watermark-image", "poster-watermark-media"),
         myEmblemHtml: renderTeamEmblem(resolveEmblemUrl(ownName, ""), ownName, "poster-team-emblem", "poster-emblem-media"),
         opponentEmblemHtml: renderTeamEmblem(resolveEmblemUrl(m.opponent, m.emblem), m.opponent, "poster-team-emblem", "poster-emblem-media")
       });

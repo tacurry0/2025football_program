@@ -68,17 +68,19 @@ body[data-mode="dashboard"] .poster-hero::after {
 body[data-mode="dashboard"] .poster-hero > :not(.poster-watermark) { position: relative; z-index: 2; }
 body[data-mode="dashboard"] .poster-watermark {
   position: absolute;
-  z-index: 0;
-  width: 48%;
+  z-index: 1;
+  width: 44%;
   height: 76%;
-  object-fit: contain;
-  right: 3%;
   top: 17%;
   opacity: .26;
   backface-visibility: visible;
   pointer-events: none;
 }
-body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { width: 48%; right: 3%; opacity: .28; }
+body[data-mode="dashboard"] .poster-watermark-home { left: 3%; }
+body[data-mode="dashboard"] .poster-watermark-away { right: 3%; }
+body[data-mode="dashboard"] .poster-watermark-media { display: grid; place-items: center; width: 100%; height: 100%; }
+body[data-mode="dashboard"] .poster-watermark-image { width: 100%; height: 100%; object-fit: contain; }
+body[data-mode="dashboard"] .home-card-kumamoto .poster-watermark { opacity: .28; }
 body[data-mode="dashboard"] .poster-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 body[data-mode="dashboard"] .poster-lockup { display: flex; align-items: center; min-width: 0; gap: 8px; }
 body[data-mode="dashboard"] .poster-card .home-club-mark {
