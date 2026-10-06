@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-06T01:52:16.675404+00:00",
+  "fetchedAt": "2026-10-06T18:35:19.536975+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j2",
       "competition": "明治安田J2リーグ",
       "date": "2026-10-03",
-      "time": "14:03",
+      "time": "14:00",
       "round": "第9節",
       "home": "アルビレックス新潟",
       "away": "徳島ヴォルティス",
@@ -28,7 +28,7 @@
       "humidity": 43,
       "source_url": "https://www.jleague.jp/match/j2/2026/100309",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/100309",
-      "detail_fetched_at": "2026-10-06T01:52:16.675404+00:00",
+      "detail_fetched_at": "2026-10-06T18:35:19.536975+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",
