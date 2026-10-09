@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-09T01:23:47.841007+00:00",
+  "fetchedAt": "2026-10-09T18:29:45.527425+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -1276,9 +1276,9 @@
       "section": 10,
       "home": "SC相模原",
       "away": "カマタマーレ讃岐",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 3,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100902"
     },
     {
@@ -1290,9 +1290,9 @@
       "section": 10,
       "home": "FC大阪",
       "away": "ツエーゲン金沢",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/100904"
     },
     {
