@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-10T01:12:29.074127+00:00",
+  "fetchedAt": "2026-10-10T17:27:22.607025+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -1276,9 +1276,9 @@
       "section": 10,
       "home": "RB大宮アルディージャ",
       "away": "ヴァンラーレ八戸",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 3,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101013"
     },
     {
@@ -1290,9 +1290,9 @@
       "section": 10,
       "home": "横浜FC",
       "away": "大分トリニータ",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101014"
     },
     {
@@ -1304,9 +1304,9 @@
       "section": 10,
       "home": "徳島ヴォルティス",
       "away": "FC今治",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101015"
     },
     {
@@ -1318,9 +1318,9 @@
       "section": 10,
       "home": "サガン鳥栖",
       "away": "藤枝MYFC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101016"
     },
     {
@@ -1332,9 +1332,9 @@
       "section": 10,
       "home": "ヴァンフォーレ甲府",
       "away": "栃木シティ",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101017"
     },
     {
@@ -1346,9 +1346,9 @@
       "section": 10,
       "home": "ジュビロ磐田",
       "away": "北海道コンサドーレ札幌",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101018"
     },
     {
