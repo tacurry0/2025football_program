@@ -322,5 +322,32 @@
     "competition_id": "j2",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026101108",
+    "url": "https://www.jleague.jp/match/j2/2026/101108",
+    "season": "2027",
+    "competition": "明治安田J2リーグ",
+    "section": "第10節",
+    "date": "2026-10-11",
+    "kickoff": "18:00",
+    "stadium": "レモンガススタジアム平塚",
+    "attendance": 13545,
+    "weather": "曇り",
+    "home_team": "湘南ベルマーレ",
+    "away_team": "アルビレックス新潟",
+    "home_score": 1,
+    "away_score": 1,
+    "target_team": "アルビレックス新潟",
+    "target_side": "away",
+    "opponent": "湘南ベルマーレ",
+    "target_score": 1,
+    "opponent_score": 1,
+    "result": "draw",
+    "points": 1,
+    "season_id": "2026_2027",
+    "competition_id": "j2",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]

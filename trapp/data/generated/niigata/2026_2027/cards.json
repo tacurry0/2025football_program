@@ -52,5 +52,41 @@
     "type": "警告",
     "time": "61'",
     "minute": 61
+  },
+  {
+    "match_id": "2026101108",
+    "season": 2027,
+    "player_key": "大西 悠介",
+    "player_name": "大西 悠介",
+    "type": "退場",
+    "time": "74'",
+    "minute": 74
+  },
+  {
+    "match_id": "2026101108",
+    "season": 2027,
+    "player_key": "マテウス モラエス",
+    "player_name": "マテウス モラエス",
+    "type": "警告",
+    "time": "26'",
+    "minute": 26
+  },
+  {
+    "match_id": "2026101108",
+    "season": 2027,
+    "player_key": "ジェイソン ゲリア",
+    "player_name": "ジェイソン ゲリア",
+    "type": "警告",
+    "time": "25'",
+    "minute": 25
+  },
+  {
+    "match_id": "2026101108",
+    "season": 2027,
+    "player_key": "大西 悠介",
+    "player_name": "大西 悠介",
+    "type": "警告",
+    "time": "23'",
+    "minute": 23
   }
 ]

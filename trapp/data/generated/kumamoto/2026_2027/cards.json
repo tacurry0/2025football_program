@@ -97,5 +97,14 @@
     "type": "警告",
     "time": "26'",
     "minute": 26
+  },
+  {
+    "match_id": "2026101110",
+    "season": 2027,
+    "player_key": "那須 健一",
+    "player_name": "那須 健一",
+    "type": "警告",
+    "time": "9'",
+    "minute": 9
   }
 ]

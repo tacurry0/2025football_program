@@ -133,5 +133,14 @@
     "time": "25'",
     "minute": 25,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026101108",
+    "season": 2027,
+    "player_key": "若月 大和",
+    "player_name": "若月 大和",
+    "time": "50'",
+    "minute": 50,
+    "is_own_goal": false
   }
 ]

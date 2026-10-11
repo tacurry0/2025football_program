@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-11T00:25:54.468780+00:00",
+  "fetchedAt": "2026-10-11T17:45:58.484340+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -1360,9 +1360,9 @@
       "section": 10,
       "home": "モンテディオ山形",
       "away": "ベガルタ仙台",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101105"
     },
     {
@@ -1374,9 +1374,9 @@
       "section": 10,
       "home": "カターレ富山",
       "away": "テゲバジャーロ宮崎",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101106"
     },
     {
@@ -1388,9 +1388,9 @@
       "section": 10,
       "home": "いわきFC",
       "away": "ブラウブリッツ秋田",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101107"
     },
     {
@@ -1402,9 +1402,9 @@
       "section": 10,
       "home": "湘南ベルマーレ",
       "away": "アルビレックス新潟",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/101108"
     },
     {
