@@ -3168,7 +3168,7 @@
     ].join(";");
     document.body.appendChild(frame);
     const loadPromise = waitForFrameLoad(frame, 6000);
-    frame.src = src || "display.html?v=20260629workflow1";
+    frame.src = src || "display.html?v=20261014-season-vision";
     await loadPromise;
     const win = frame.contentWindow;
     if (win && win.scoreboardVision) {
@@ -3187,7 +3187,7 @@
   async function exportCurrentImage(state, targetSrc) {
     const next = normalizeState(state);
     const previewFrame = getPreviewFrame();
-    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20260629workflow1";
+    const activeSrc = targetSrc || (previewFrame && previewFrame.getAttribute("src")) || "display.html?v=20261014-season-vision";
     let captureFrame = null;
 
     let blob;
@@ -3395,6 +3395,7 @@
     };
 
     function mapJsonMatchToRecord(matchData) {
+      matchData = window.TrappVisionData.toHistory(matchData);
       const isHomeNiigata = isAlbirexNiigata(matchData.home_team);
       if (!isHomeNiigata && !isAlbirexNiigata(matchData.away_team)) {
         throw new Error("新潟戦ではない試合データは大型ビジョンに反映できません。");
@@ -3506,14 +3507,15 @@
       }
       const referees = normalizeRefereeList(refereesList, makeBlankReferees());
       
-      const homeTotal = parseInt(matchData.home_score || "0", 10);
-      const awayTotal = parseInt(matchData.away_score || "0", 10);
+      const homeHalves = window.TrappVisionData.halves(matchData.home_goals, matchData.home_score);
+      const awayHalves = window.TrappVisionData.halves(matchData.away_goals, matchData.away_score);
+      const homeTotal = homeHalves.total;
+      const awayTotal = awayHalves.total;
+      const homeFirstHalf = homeHalves.first;
+      const homeSecondHalf = homeHalves.second;
+      const awayFirstHalf = awayHalves.first;
+      const awaySecondHalf = awayHalves.second;
 
-      const homeFirstHalf = getGoalsPerHalf(matchData.home_goals).firstHalf;
-      const homeSecondHalf = Math.max(0, homeTotal - homeFirstHalf);
-
-      const awayFirstHalf = getGoalsPerHalf(matchData.away_goals).firstHalf;
-      const awaySecondHalf = Math.max(0, awayTotal - awayFirstHalf);
       const roundLabel = matchData._visionRound || getNiigataRoundLabel(matchData) || matchData.section || "";
 
       return {
@@ -3555,11 +3557,11 @@
         loadedMatchesForYear = [];
         return [];
       }
-      setOfficialStatus(`${year}年の新潟試合データを読み込み中...`, "");
+      setOfficialStatus(`${year.replace("_", "–")}の新潟試合データを読み込み中...`, "");
       const response = await fetch(`${HISTORY_DATA_DIR}/${year}.json?v=${new Date().getTime()}`, { cache: "no-store" });
       if (!response.ok) throw new Error(`${year}.json の読み込みに失敗しました (${response.status})`);
       const data = await response.json();
-      const niigataMatches = Array.isArray(data) ? data.filter(isNiigataMatchData) : [];
+      const niigataMatches = (Array.isArray(data) ? data : data.data || []).map(window.TrappVisionData.toHistory).filter(isNiigataMatchData);
       loadedMatchesForYear = niigataMatches.map((matchData, index) => ({
         ...matchData,
         _visionRound: getNiigataRoundLabel(matchData, index)
@@ -3588,7 +3590,7 @@
         const ha = isHomeNiigata ? "H" : "A";
         const opponent = isHomeNiigata ? m.away_team : m.home_team;
         
-        option.textContent = `${cleanSection} ${ha} ${opponent}`;
+        option.textContent = `${m.date} ${cleanSection} ${ha} ${opponent}`;
         matchSectionSelect.appendChild(option);
       });
       matchSectionSelect.disabled = !loadedMatchesForYear.length;
@@ -3606,7 +3608,7 @@
         if (!year) {
           setOfficialStatus("年を選択してください。", "");
         } else if (!loadedMatchesForYear.length) {
-          setOfficialStatus(`${year}年の新潟戦データが見つかりませんでした。`, "error");
+          setOfficialStatus(`${year.replace("_", "–")}の新潟戦データが見つかりませんでした。`, "error");
         } else {
           setOfficialStatus("節を選択してください。", "");
         }
@@ -3619,7 +3621,7 @@
         selectedMatchRecord = matched;
         setMatchButtons(true);
         const matchedRoundLabel = matched._visionRound || getNiigataRoundLabel(matched, parseInt(selectIndex, 10)) || matched.section || "";
-        setOfficialStatus(`${matched.season || year}年 ${matchedRoundLabel} ${matched.home_team} vs ${matched.away_team} が選択されました。`, "success");
+        setOfficialStatus(`${year.replace("_", "–")} ${matchedRoundLabel} ${matched.home_team} vs ${matched.away_team} が選択されました。`, "success");
       } else {
         selectedMatchRecord = null;
         setMatchButtons(false);
@@ -3655,7 +3657,11 @@
       placeholder.textContent = "年を選択";
       matchYearSelect.appendChild(placeholder);
       
-      for (let y = 2026; y >= 1999; y--) {
+      const seasonOption = document.createElement("option");
+      seasonOption.value = window.TrappLeague.SEASON;
+      seasonOption.textContent = window.TrappLeague.SEASON.replace("_", "–") + "シーズン";
+      matchYearSelect.appendChild(seasonOption);
+      for (let y = new Date().getFullYear(); y >= 1999; y--) {
         const option = document.createElement("option");
         option.value = String(y);
         option.textContent = `${y}年`;
@@ -3666,7 +3672,16 @@
     const loadMatchPicker = async () => {
       populateYearSelect();
       setMatchButtons(false);
-      setOfficialStatus("年を選択してください。", "");
+      if (!matchYearSelect) return;
+      matchYearSelect.value = window.TrappLeague.SEASON;
+      matchYearSelect.disabled = true;
+      try {
+        await loadMatchesForYear(matchYearSelect.value);
+        updateDropdownOptions();
+        const latest = loadedMatchesForYear.map((row,index)=>({row,index})).filter(({row})=>row.home_score !== null && row.away_score !== null).sort((a,b)=>b.row.date.localeCompare(a.row.date))[0];
+        if (latest) { matchSectionSelect.value = String(latest.index); updateSelectedMatch(); }
+      } catch (error) { setOfficialStatus("現在のシーズンを読み込めませんでした。シーズンを選び直して再取得できます。", "error"); }
+      finally { matchYearSelect.disabled = false; }
     };
 
     if (matchYearSelect) {
@@ -3680,11 +3695,15 @@
         
         try {
           matchYearSelect.disabled = true;
+          loadedMatchesForYear = [];
+          selectedMatchRecord = null;
+          setMatchButtons(false);
+          updateDropdownOptions();
           await loadMatchesForYear(year);
           updateDropdownOptions();
         } catch (error) {
           console.error(error);
-          setOfficialStatus(`${year}年の試合データの取得に失敗しました。`, "error");
+          setOfficialStatus(`${year.replace("_", "–")}の試合データの取得に失敗しました。`, "error");
         } finally {
           matchYearSelect.disabled = false;
         }

@@ -140,6 +140,19 @@
 #detail-sheet .report-player-cell.empty { text-align:center; color:#9aa5b3; }
 #detail-sheet .report-legend { display:flex; align-items:center; flex-wrap:wrap; gap:5px; padding:13px 0 7px; font-size:11px; }
 #detail-sheet .u-weather-card { margin:0; border-radius:0; border:0; border-bottom:1px solid #d4dce4; box-shadow:none; }
+#detail-sheet .report-forecast { align-items:center; justify-content:space-between; gap:16px; margin:0; padding:18px 0; border-bottom:1px solid #d4dce4; }
+#detail-sheet .report-forecast-condition { min-width:0; }
+#detail-sheet .report-forecast-label { display:block; font:500 11px/1.5 'Noto Sans JP',sans-serif; color:#6d7b89; }
+#detail-sheet .report-forecast-description { display:flex; align-items:center; gap:8px; margin-top:5px; }
+#detail-sheet .report-forecast-description strong { font:700 13px/1.6 'Noto Sans JP',sans-serif; }
+#detail-sheet .report-forecast .w-icon { display:flex; flex:0 0 30px; align-items:center; }
+#detail-sheet .report-forecast .w-icon svg { width:30px!important; height:30px!important; }
+#detail-sheet .report-forecast-temps { display:flex; flex-direction:row; align-items:center; flex-shrink:0; gap:18px; }
+#detail-sheet .report-forecast-temp > div { display:flex; align-items:baseline; gap:3px; white-space:nowrap; }
+#detail-sheet .report-forecast-temp b { font:700 28px/1.2 var(--font-kick); }
+#detail-sheet .report-forecast-temp small { font:500 11px/1.4 'Noto Sans JP',sans-serif; color:#6d7b89; }
+#detail-sheet .report-forecast-temp.is-high b { color:#d44c3b; }
+#detail-sheet .report-forecast-temp.is-low b { color:#2475b5; }
 @keyframes report-appear { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
 @media (min-width:500px) {
   #detail-sheet .report-hero { padding:29px 25px 25px; }

@@ -22,7 +22,7 @@
       </div>
       <div class="admin-actions">
         <select class="export-target-select" id="exportTargetSelect" aria-label="画像出力する画面">
-          <option value="display.html?v=20260629workflow1">スタメン</option>
+          <option value="display.html?v=20261014-season-vision">スタメン</option>
           <option value="result.html?v=20260629workflow1">結果</option>
           <option value="attendance.html?v=20260629workflow1">来場者</option>
           <option value="top.html?v=20260629workflow1">対戦トップ</option>
@@ -31,7 +31,7 @@
           <option value="reserve.html?v=20260629workflow1">リザーブ</option>
         </select>
         <button class="admin-button export-button" id="exportImageButton" type="button">画像出力</button>
-        <a class="admin-link" href="display.html?v=20260629workflow1" target="_blank" rel="noopener">スタメン画面</a>
+        <a class="admin-link" href="display.html?v=20261014-season-vision" target="_blank" rel="noopener">スタメン画面</a>
         <a class="admin-link" href="result.html?v=20260629workflow1" target="_blank" rel="noopener">結果画面</a>
         <a class="admin-link" href="attendance.html?v=20260629workflow1" target="_blank" rel="noopener">来場者画面</a>
         <a class="admin-link" href="top.html?v=20260629workflow1" target="_blank" rel="noopener">対戦トップ</a>
@@ -43,7 +43,7 @@
         <details class="admin-more-menu">
           <summary aria-label="その他の操作">その他</summary>
           <div class="admin-more-menu-panel">
-            <a href="display.html?v=20260629workflow1" target="_blank" rel="noopener">スタメン画面</a>
+            <a href="display.html?v=20261014-season-vision" target="_blank" rel="noopener">スタメン画面</a>
             <a href="result.html?v=20260629workflow1" target="_blank" rel="noopener">結果画面</a>
             <a href="attendance.html?v=20260629workflow1" target="_blank" rel="noopener">来場者画面</a>
             <a href="preview.html?v=20260629workflow1" target="_blank" rel="noopener">全画面プレビュー</a>
@@ -82,7 +82,7 @@
           <h2>公式記録から反映</h2>
           <div class="official-match-picker" aria-label="JSONから試合を選択">
             <label>
-              <span>年</span>
+              <span>シーズン / 年</span>
               <select id="matchYearSelect">
                 <option value="">年を選択</option>
               </select>
@@ -290,7 +290,7 @@
           <h2>対戦トップ</h2>
           <div class="field-grid wide">
             <label>
-              <span>年</span>
+              <span>シーズン / 年</span>
               <input name="top.year" type="text" placeholder="2024" />
             </label>
             <label>
@@ -351,7 +351,7 @@
         <div class="preview-toolbar">
           <span>表示プレビュー</span>
           <div class="preview-switcher" aria-label="プレビュー切替">
-            <button class="preview-button active" type="button" data-preview-src="display.html?v=20260629workflow1" data-preview-width="1920" data-preview-height="1080">スタメン</button>
+            <button class="preview-button active" type="button" data-preview-src="display.html?v=20261014-season-vision" data-preview-width="1920" data-preview-height="1080">スタメン</button>
             <button class="preview-button" type="button" data-preview-src="result.html?v=20260629workflow1" data-preview-width="1920" data-preview-height="1080">結果</button>
             <button class="preview-button" type="button" data-preview-src="attendance.html?v=20260629workflow1" data-preview-width="1920" data-preview-height="1080">来場者</button>
             <button class="preview-button" type="button" data-preview-src="top.html?v=20260629workflow1" data-preview-width="1920" data-preview-height="1080">対戦トップ</button>
@@ -363,7 +363,7 @@
           <button class="preview-close-button" id="previewCloseButton" type="button" aria-label="プレビューを閉じる">閉じる</button>
         </div>
         <div class="preview-stage">
-          <iframe class="vision-preview" src="display.html?v=20260629workflow1" title="大型ビジョンプレビュー" data-preview-width="1920" data-preview-height="1080"></iframe>
+          <iframe class="vision-preview" src="display.html?v=20261014-season-vision" title="大型ビジョンプレビュー" data-preview-width="1920" data-preview-height="1080"></iframe>
         </div>
       </section>
     </main>
@@ -375,7 +375,8 @@
 
     <script src="vendor/html2canvas.min.js?v=20260529navvision2"></script>
     <script src="../league-data.js?v=20260907-leagues-v2"></script>
-    <script src="app.js?v=20260907-leagues-v2"></script>
+    <script src="../vision-data.js?v=20261014-season-vision"></script>
+    <script src="app.js?v=20261014-season-vision"></script>
   </body>
 </html>
 

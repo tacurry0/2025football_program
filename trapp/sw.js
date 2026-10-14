@@ -1,5 +1,5 @@
 
-const cacheName = 'football-app-v125-home-away';
+const cacheName = 'football-app-v126-vision-analysis';
 const assetsToCache = [
   "./",
   "./index.html",
@@ -19,6 +19,7 @@ const assetsToCache = [
   "./match-detail.css",
   "./match-report.js",
   "./home-view.js",
+  "./vision-data.js",
   "./schedule-view.css",
   "./schedule-view.js",
   "./data/assets/fonts/schedule-jp.woff",

@@ -1155,8 +1155,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           const dIdx = wData.daily?.time?.indexOf(date);
           if (dIdx !== undefined && dIdx > -1) {
             const code = wData.daily.weather_code[dIdx];
-            const max = Math.round(wData.daily.temperature_2m_max[dIdx]);
-            const min = Math.round(wData.daily.temperature_2m_min[dIdx]);
+            const rawMax = wData.daily.temperature_2m_max[dIdx];
+            const rawMin = wData.daily.temperature_2m_min[dIdx];
+            if (!Number.isFinite(rawMax) || !Number.isFinite(rawMin) || !Number.isFinite(code)) return;
+            const max = Math.round(rawMax);
+            const min = Math.round(rawMin);
             
             const ICONS = {
               SUNNY: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
@@ -1166,12 +1169,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             };
             let ik = "CLOUDY";
             if (code <= 1) ik = "SUNNY";
-            else if (code <= 3) ik = "CLOUDY";
+            else if (code <= 3 || code === 45 || code === 48) ik = "CLOUDY";
             else if (code <= 69 || (code >= 80 && code <= 82) || code >= 95) ik = "RAIN";
             else if ((code >= 70 && code <= 79) || (code >= 85 && code <= 86)) ik = "SNOW";
 
+            const label = code === 45 || code === 48 ? '霧' : code === 2 ? '晴れ時々曇り' : ({SUNNY:'晴れ',CLOUDY:'曇り',RAIN:'雨',SNOW:'雪'})[ik];
             container.innerHTML = `
-              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:2px;">
+              <div style="display:flex; flex-direction:row; align-items:center; gap:7px;">
                 ${ICONS[ik]}
                 <div style="display:flex; align-items:baseline; gap:4px; font-family:var(--font-kick); font-weight:900; font-size:1.3rem;">
                   <span class="w-temp-max" style="color:#ff3b30;">${max}</span>
@@ -1181,6 +1185,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
             `;
+            return {icon:ICONS[ik], label, max, min};
           }
         }
       } catch (e) { console.warn("Weather UI update failed", e); }
@@ -11199,7 +11204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function getDetailMatchData(match) {
     const official = findOfficialResult(match);
-    return official ? { ...match, ...official } : match;
+    return window.TrappVisionData.normalize(official ? { ...match, ...official } : match);
   }
 
   function getHomeAwayDisplay(match, fallbackOwnScore = "", fallbackOpponentScore = "") {
@@ -11444,20 +11449,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       return { firstHome: "", firstAway: "", secondHome: "", secondAway: "", totalHome: "", totalAway: "" };
     }
 
-    const isOwnHome = getMatchIsHome(match);
-    const ownGoals = countVisionGoals(match.goals);
-    const opponentGoals = countVisionGoals(match.opponent_goals);
-    const homeGoalCounts = isOwnHome ? ownGoals : opponentGoals;
-    const awayGoalCounts = isOwnHome ? opponentGoals : ownGoals;
-
-    return {
-      firstHome: String(homeGoalCounts.first),
-      firstAway: String(awayGoalCounts.first),
-      secondHome: String(homeGoalCounts.second),
-      secondAway: String(awayGoalCounts.second),
-      totalHome: scoreBoard.homeScore === "-" ? "" : String(scoreBoard.homeScore),
-      totalAway: scoreBoard.awayScore === "-" ? "" : String(scoreBoard.awayScore)
-    };
+    const home = getVisionSideSource(match, "home");
+    const away = getVisionSideSource(match, "away");
+    const h = window.TrappVisionData.halves(home.goals, scoreBoard.homeScore);
+    const a = window.TrappVisionData.halves(away.goals, scoreBoard.awayScore);
+    return {firstHome:h.first, firstAway:a.first, secondHome:h.second, secondAway:a.second, totalHome:h.total, totalAway:a.total};
   }
 
   function getVisionLeagueLogo(match) {
@@ -11607,8 +11603,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         totalAway: scores.totalAway
       },
       result: {
-        homeScorers: [],
-        awayScorers: []
+        homeScorers: homeSource.goals.map(goal => ({minute:String(goal.minute || goal.time || "").replace(/[分']/g, ""), ...splitVisionPlayerName(goal.scorer || goal.name || "")})),
+        awayScorers: awaySource.goals.map(goal => ({minute:String(goal.minute || goal.time || "").replace(/[分']/g, ""), ...splitVisionPlayerName(goal.scorer || goal.name || "")}))
       },
       attendance: {
         title: "本日の来場者数",
@@ -11771,7 +11767,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const detail = getDetailMatchData(match);
     const score = getHomeAwayDisplay(detail);
     const phaseKey = VISION_PHASES[phase] ? phase : "pre";
-    const visionState = buildVisionStateForMatch(detail, phaseKey);
+    let visionState = buildVisionStateForMatch(detail, phaseKey);
     const phaseMeta = VISION_PHASES[phaseKey];
 
     modal.innerHTML = `
@@ -11789,12 +11785,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="vision-display-shell">
         <iframe
           class="vision-display-frame"
-          src="./vision/display.html?v=20260629workflow1"
+          src="./vision/display.html?v=20261014-season-vision"
           title="大型ビジョン スタメンプレビュー"
           aria-label="大型ビジョン スタメンプレビュー"
         ></iframe>
       </div>
-      ${renderVisionKanaControls(visionState)}
+      <div class="vision-kana-controls">${renderVisionKanaControls(visionState)}</div>
       <div class="vision-preview-actions">
         ${Object.entries(VISION_PHASES).map(([key, item]) => `
           <button type="button" data-phase="${key}" class="${phaseKey === key ? "active" : ""}">${item.button}</button>
@@ -11823,6 +11819,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.addEventListener("resize", resize, { once: true });
     modal.querySelector(".vision-preview-close").onclick = closeVisionPreviewModal;
     bindVisionKanaControls(modal, frame, visionState);
+    const refreshKey = `${window.TrappLeague.storageId(match)}:${phaseKey}:${performance.now()}`;
+    modal.dataset.visionRefreshKey = refreshKey;
+    const updateVision = record => {
+      if (!record || modal.dataset.visionRefreshKey !== refreshKey || !frame.isConnected) return;
+      const normalized = window.TrappVisionData.normalize({...match, ...record});
+      mergeOfficialResults([normalized]);
+      visionState = buildVisionStateForMatch(normalized, phaseKey);
+      applyVisionStateToFrame(frame, visionState);
+      const controls = modal.querySelector('.vision-kana-controls');
+      if (controls) controls.innerHTML = renderVisionKanaControls(visionState);
+      bindVisionKanaControls(modal, frame, visionState);
+    };
+    // Populate from the current history immediately, then refresh official details.
+    if (window.TrappLeague.context(detail).season === window.TrappLeague.SEASON) {
+      const historyPath = `./data/history/${match.club}/${window.TrappLeague.SEASON}.json`;
+      const historyFetch = window.TrappAnalysisData?.fetch || window.fetch.bind(window);
+      historyFetch(historyPath).then(response => response.ok ? response.json() : []).catch(() => []).then(rows => {
+        const record = rows.find(row => String(row.match_card_id) === String(detail.match_id) || row.date === match.date && [row.home_team,row.away_team].some(name => robustTeamMatch(name,match.opponent)));
+        if (record) updateVision(record);
+        return leagueClient.detail({...detail, ...window.TrappVisionData.normalize(record || detail)}, false, payload => updateVision(payload.data[0]));
+      }).then(payload => { if (payload?.data?.[0]) updateVision(payload.data[0]); }).catch(() => {});
+    }
     modal.querySelectorAll(".vision-preview-actions [data-phase]").forEach(btn => {
       btn.onclick = () => renderVisionPreview(match, btn.dataset.phase);
     });
@@ -11927,9 +11945,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
       <section id="detail-panel-overview" class="match-detail-panel" role="tabpanel" aria-labelledby="detail-tab-overview">
         <div id="official-detail-content">${reportOverview(initialReport)}</div>
-        <section id="u-auto-weather-area" class="u-weather-card" style="display:none;">
-          <div><span>予報</span><div id="u-weather-display"><span class="w-icon">-</span></div></div>
-          <div class="u-weather-temps"><span id="u-temp-max">-</span><small>℃</small><em>/</em><span id="u-temp-min">-</span><small>℃</small></div>
+        <section id="u-auto-weather-area" class="report-forecast" style="display:none;" aria-label="試合日の天気予報">
+          <div class="report-forecast-condition"><span class="report-forecast-label">試合日の予報</span><div class="report-forecast-description"><span class="w-icon" aria-hidden="true"></span><strong class="report-forecast-text"></strong></div></div>
+          <div class="report-forecast-temps"><div class="report-forecast-temp is-high"><span class="report-forecast-label">最高</span><div><b id="u-temp-max">—</b><small>℃</small></div></div><div class="report-forecast-temp is-low"><span class="report-forecast-label">最低</span><div><b id="u-temp-min">—</b><small>℃</small></div></div></div>
         </section>
         <section class="report-plan" id="match-plan-panel">
           <div class="report-plan-heading"><h3>観戦予定・メモ</h3>
@@ -12025,22 +12043,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (isBeforeToday(match.date)) {
       wBox.remove();
     } else {
-      updateWeatherUI(wIconPlace, match.date, match.venue).then(() => {
-        const resInner = wIconPlace.firstElementChild;
-        if (!resInner) {
-          wBox.remove();
-          return;
-        }
-        const svg = resInner.querySelector("svg");
-        const maxVal = resInner.querySelector(".w-temp-max");
-        const minVal = resInner.querySelector(".w-temp-min");
-        if (!svg && !maxVal && !minVal) {
-          wBox.remove();
-          return;
-        }
-        if (svg) wIconPlace.innerHTML = svg.outerHTML;
-        if (maxVal) tMaxPlace.innerText = maxVal.innerText;
-        if (minVal) tMinPlace.innerText = minVal.innerText;
+      updateWeatherUI(wIconPlace, match.date, match.venue).then(forecast => {
+        if (!wBox.isConnected) return;
+        if (!forecast) { wBox.remove(); return; }
+        wIconPlace.innerHTML = forecast.icon;
+        wBox.querySelector('.report-forecast-text').textContent = forecast.label;
+        tMaxPlace.textContent = forecast.max;
+        tMinPlace.textContent = forecast.min;
         wBox.style.display = "flex";
       });
     }

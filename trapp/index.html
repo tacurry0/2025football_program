@@ -7,11 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260928-list-photo-frameless">
   <link rel="stylesheet" href="ui-v6.css?v=20260913-intro">
-  <link rel="stylesheet" href="features.css?v=20260928-refresh">
+  <link rel="stylesheet" href="features.css?v=20261014-analysis">
   <link rel="stylesheet" href="home.css?v=20261005-home-away">
   <link rel="stylesheet" href="player-profile-view.css?v=20260930-profile-layout">
   <link rel="stylesheet" href="standings-view.css?v=20260920-standings-4">
-  <link rel="stylesheet" href="match-detail.css?v=20260919-compact">
+  <link rel="stylesheet" href="match-detail.css?v=20261014-forecast">
   <link rel="stylesheet" href="schedule-view.css?v=20260916-matchday-schedule">
   <link rel="stylesheet" href="player-analysis-view.css?v=20260930-list-layout">
   <script>
@@ -825,8 +825,8 @@ We can't help falling in love with you
 
     <main id="match-analysis-view" class="hidden-view">
       <section class="fx-page" aria-labelledby="fx-analysis-title">
-        <header class="fx-page-header"><span class="fx-eyebrow">THE NEXT CHALLENGE</span><h1 id="fx-analysis-title">次節の対戦分析</h1><p>次の一戦を、数字で読む。</p></header>
-        <div class="fx-controls"><label>クラブ<select id="fx-analysis-club"><option value="niigata">アルビレックス新潟</option><option value="kumamoto">ロアッソ熊本</option></select></label><label>集計対象<select id="fx-analysis-scope"><option value="all">公式戦すべて</option><option value="league">リーグ戦</option></select></label></div>
+        <header class="fx-page-header"><span class="fx-eyebrow">MATCH ANALYSIS</span><h1 id="fx-analysis-title">対戦分析</h1><p>対戦相手を選んで、成績と相性を比較。</p></header>
+        <div class="fx-controls fx-analysis-controls"><label>クラブ<select id="fx-analysis-club"><option value="niigata">アルビレックス新潟</option><option value="kumamoto">ロアッソ熊本</option></select></label><label>対戦相手<select id="fx-analysis-opponent"><option value="">次節の対戦相手</option></select></label><label>集計対象<select id="fx-analysis-scope"><option value="all">公式戦すべて</option><option value="league">リーグ戦</option></select></label><label>開催区分<select id="fx-analysis-location"><option value="all">ホーム・アウェイ両方</option><option value="home">ホーム（相手はアウェイ）</option><option value="away">アウェイ（相手はホーム）</option></select></label><label>直近の比較<select id="fx-analysis-recent"><option value="5">5試合</option><option value="10">10試合</option></select></label></div>
         <div id="fx-analysis-content" aria-live="polite"></div>
       </section>
     </main>
@@ -1268,7 +1268,7 @@ We can't help falling in love with you
 
     <!-- View 6: Stadium Vision Controller -->
     <main id="vision-view" class="hidden-view">
-      <iframe class="vision-app-frame" data-src="vision/index.html?v=20260702header-layout" title="大型ビジョン管理画面"></iframe>
+      <iframe class="vision-app-frame" data-src="vision/index.html?v=20261014-season-vision" title="大型ビジョン管理画面"></iframe>
     </main>
   </div>
 
@@ -1518,15 +1518,16 @@ We can't help falling in love with you
   <script src="league-ui.js?v=20260920-standings-4"></script>
   <script src="ui-v6.js?v=20260912"></script>
   <script src="schedule/schedule.js?v=20260907-leagues-v2"></script>
-  <script src="features-model.js?v=20260913-features"></script>
-  <script src="features.js?v=20260913-features"></script>
+  <script src="vision-data.js?v=20261014-season-vision"></script>
+  <script src="features-model.js?v=20261014-analysis"></script>
+  <script src="features.js?v=20261014-analysis"></script>
   <script src="analysis-data.js?v=20260928-force-refresh"></script>
   <script src="home-view.js?v=20261005-home-away"></script>
   <script src="match-report.js?v=20260920-club-names"></script>
   <script src="player-cutouts-index.js?v=20260930-club-cutouts"></script>
   <script src="player-official-index.js?v=20260930-profile-inline"></script>
   <script src="player-profile-view.js?v=20260930-profile-layout"></script>
-  <script src="script.js?v=20261005-home-away"></script>
+  <script src="script.js?v=20261014-vision-analysis"></script>
   <script src="schedule-view.js?v=20260916-matchday-schedule"></script>
   <script src="home-motion.js?v=20260922-home-crest"></script>
 
