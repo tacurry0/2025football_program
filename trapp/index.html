@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css?v=20260928-list-photo-frameless">
   <link rel="stylesheet" href="ui-v6.css?v=20260913-intro">
   <link rel="stylesheet" href="features.css?v=20261014-analysis">
+  <link rel="stylesheet" href="match-analysis.css?v=20261014-analysis-tabs">
   <link rel="stylesheet" href="home.css?v=20261005-home-away">
   <link rel="stylesheet" href="player-profile-view.css?v=20260930-profile-layout">
   <link rel="stylesheet" href="standings-view.css?v=20260920-standings-4">
@@ -825,8 +826,9 @@ We can't help falling in love with you
 
     <main id="match-analysis-view" class="hidden-view">
       <section class="fx-page" aria-labelledby="fx-analysis-title">
-        <header class="fx-page-header"><span class="fx-eyebrow">MATCH ANALYSIS</span><h1 id="fx-analysis-title">対戦分析</h1><p>対戦相手を選んで、成績と相性を比較。</p></header>
-        <div class="fx-controls fx-analysis-controls"><label>クラブ<select id="fx-analysis-club"><option value="niigata">アルビレックス新潟</option><option value="kumamoto">ロアッソ熊本</option></select></label><label>対戦相手<select id="fx-analysis-opponent"><option value="">次節の対戦相手</option></select></label><label>集計対象<select id="fx-analysis-scope"><option value="all">公式戦すべて</option><option value="league">リーグ戦</option></select></label><label>開催区分<select id="fx-analysis-location"><option value="all">ホーム・アウェイ両方</option><option value="home">ホーム（相手はアウェイ）</option><option value="away">アウェイ（相手はホーム）</option></select></label><label>直近の比較<select id="fx-analysis-recent"><option value="5">5試合</option><option value="10">10試合</option></select></label></div>
+        <header class="ma-page-header"><button type="button" class="ma-back" id="ma-analysis-back" aria-label="ホームに戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><div><span class="ma-eyebrow">MATCH ANALYSIS</span><h1 id="fx-analysis-title">対戦分析</h1></div><span class="ma-season">2026–27</span></header>
+        <div class="ma-primary-controls"><label>クラブ<select id="fx-analysis-club"><option value="niigata">アルビレックス新潟</option><option value="kumamoto">ロアッソ熊本</option></select></label><label>対戦相手<select id="fx-analysis-opponent"><option value="">次節の対戦相手</option></select></label></div>
+        <details class="ma-filter" id="ma-analysis-filters"><summary><span>集計条件</span><span id="ma-filter-summary">公式戦すべて · H / A 両方</span></summary><div class="ma-filter-controls"><label>集計対象<select id="fx-analysis-scope"><option value="all">公式戦すべて</option><option value="league">リーグ戦</option></select></label><label>開催区分<select id="fx-analysis-location"><option value="all">ホーム・アウェイ両方</option><option value="home">ホーム（相手はアウェイ）</option><option value="away">アウェイ（相手はホーム）</option></select></label><label>直近の比較<select id="fx-analysis-recent"><option value="5">5試合</option><option value="10">10試合</option></select></label></div></details>
         <div id="fx-analysis-content" aria-live="polite"></div>
       </section>
     </main>
@@ -1520,7 +1522,7 @@ We can't help falling in love with you
   <script src="schedule/schedule.js?v=20260907-leagues-v2"></script>
   <script src="vision-data.js?v=20261014-season-vision"></script>
   <script src="features-model.js?v=20261014-analysis"></script>
-  <script src="features.js?v=20261014-analysis"></script>
+  <script src="features.js?v=20261014-analysis-tabs"></script>
   <script src="analysis-data.js?v=20260928-force-refresh"></script>
   <script src="home-view.js?v=20261005-home-away"></script>
   <script src="match-report.js?v=20260920-club-names"></script>
