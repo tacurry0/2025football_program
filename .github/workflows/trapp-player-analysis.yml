@@ -10,6 +10,7 @@ on:
       - '.github/workflows/trapp-player-analysis.yml'
       - 'trapp/data/scripts/update_player_analysis.py'
       - 'trapp/data/scripts/build_2627_player_analysis.py'
+      - 'trapp/data/scripts/build_head_to_head_insights.py'
       - 'trapp/gas/JLeague.gs'
 permissions:
   contents: write

@@ -14,6 +14,7 @@ import time
 import urllib.request
 import urllib.parse
 import build_2627_player_analysis as builder
+import build_head_to_head_insights
 
 DATA = builder.DATA
 SEASON = builder.SEASON
@@ -180,6 +181,7 @@ def main():
         finally:
             builder.DATA = previous
         build_insights(stage)
+        build_head_to_head_insights.build(DATA, stage, TODAY)
         # A revision changes only when the derived analysis changes, not merely on each poll.
         digest = hashlib.sha256()
         for file in sorted((stage / 'generated').rglob('*.json')):

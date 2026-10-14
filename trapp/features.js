@@ -16,7 +16,7 @@ const isLeague=r=>['j1','j2','j3'].includes(competitionOf(r))||/ディビジョ�
 const inScope=(r,scope)=>scope==='all'||isLeague(r);
 const seasonStart='2026-07-01';
 function standingFor(rows,team){return rows.find(r=>M.same(r.team,team));}
-const analysisUI={tab:'overview',recentTeam:'own',h2hLimit:5};
+const analysisUI={tab:'overview',recentTeam:'own',h2hLimit:5,historyTab:'summary',historyTeam:'own',historyMetric:'goals',historyRange:'all',playerLimit:5};
 let analysisContext=null,analysisIdentity='';
 const analysisTabs=[['overview','概要'],['recent','直近成績'],['history','過去対戦'],['scorers','得点者']];
 const shortName=name=>({アルビレックス新潟:'新潟',ロアッソ熊本:'熊本'})[name]||name;
@@ -49,9 +49,51 @@ function recentPanel(c){
  const selected=analysisUI.recentTeam==='opp'?c.opp:c.own;
  return `<div class="ma-panel-heading"><h3>直近の調子</h3><div class="ma-segment" aria-label="直近の集計試合数">${[5,10].map(n=>`<button type="button" data-ma-recent="${n}" aria-pressed="${n===c.recent}">${n}試合</button>`).join('')}</div></div><div class="ma-form-board">${form(left)}${form(right)}<p>右が最新</p></div>${metricTable(left.name,right.name,[['成績',resultSummary(left.games.slice(0,c.recent)),resultSummary(right.games.slice(0,c.recent))],['平均得点',a.avgGF,b.avgGF],['平均失点',a.avgGA,b.avgGA]],'直近の試合成績の比較')}<details class="ma-disclosure"><summary>直近の詳細指標</summary>${metricTable(left.name,right.name,[['集計試合',a.played,b.played],['勝率',a.winRate,b.winRate],['無失点率',a.cleanSheetRate,b.cleanSheetRate]],'直近の詳細指標')}</details><div class="ma-team-switch" role="tablist" aria-label="試合一覧のクラブ">${[['own',c.name],['opp',c.opponent]].map(([key,name])=>`<button type="button" role="tab" id="ma-team-${key}" aria-controls="ma-recent-games" aria-selected="${analysisUI.recentTeam===key}" tabindex="${analysisUI.recentTeam===key?0:-1}" data-ma-team="${key}">${esc(shortName(name))}</button>`).join('')}</div><div id="ma-recent-games" role="tabpanel" aria-labelledby="ma-team-${analysisUI.recentTeam}">${analysisGameList(selected.slice(0,c.recent))}</div>`;
 }
+const headDetailCache=new Map();
+const headTabs=[['summary','成績'],['players','選手'],['trends','傾向'],['matches','試合']];
+function ensureHeadDetails(c,force=false){
+ if(c.headDetails?.status==='loading'||!force&&c.headDetails)return;
+ const key=c.club,cached=headDetailCache.get(key);
+ const promise=!force&&cached&&Date.now()-cached.at<300000?cached.promise:data(`insights/${key}_head_to_head.json`).then(payload=>{
+  if(payload?.schemaVersion!==1||payload.club!==key||!Array.isArray(payload.data))throw Error('Invalid head-to-head details');return payload;
+ });
+ if(force||!cached||Date.now()-cached.at>=300000)headDetailCache.set(key,{at:Date.now(),promise});
+ c.headDetails={status:'loading'};
+ promise.then(payload=>{c.headDetails={status:'ready',payload};if(analysisContext===c&&analysisUI.tab==='history')renderAnalysisPanel();}).catch(()=>{c.headDetails={status:'error'};headDetailCache.delete(key);if(analysisContext===c&&analysisUI.tab==='history')renderAnalysisPanel();});
+}
+function headGames(c){
+ let games=M.teamGames(M.unique([...c.h2h,...(c.headDetails?.payload?.data||[])]),c.name,c.before,c.side).filter(r=>M.same(r.opponent,c.opponent)&&inScope(r,c.scope));
+ if(analysisUI.historyRange==='recent')games=games.slice(0,10);
+ if(analysisUI.historyRange==='season')games=games.filter(r=>window.TrappLeague.context(r).season===window.TrappLeague.SEASON);
+ return games;
+}
+function headStatus(c){return c.headDetails?.status==='loading'?'<p class="ma-caption" role="status">得点者・出場記録を読み込んでいます…</p>':c.headDetails?.status==='error'?'<p class="ma-notice">詳しい対戦記録を取得できませんでした。<button type="button" class="ma-inline-retry" data-ma-head-retry>再取得</button></p>':'';}
+function headSummaryPanel(c,games){
+ const h=M.headSummary(games),other=M.metrics(games.map(r=>({...r,gf:r.ga,ga:r.gf,outcome:r.outcome==='W'?'L':r.outcome==='L'?'W':'D'}))),wins=h.played?h.W/h.played*100:0,draws=h.played?h.D/h.played*100:0,losses=h.played?h.L/h.played*100:0;
+ const extra=[['平均得点',h.avgGF,other.avgGF],['勝率',h.winRate,other.winRate],['無失点率',h.cleanSheetRate,other.cleanSheetRate],['複数得点',h.multiGoal,games.filter(r=>r.ga>=2).length],['連続無敗',h.played?h.unbeaten:'—',other.played?other.unbeaten:'—']];
+ const record=(label,r)=>r?`<div class="ma-head-record"><span>${label}</span><b>${r.gf} – ${r.ga}</b><small>${esc(r.date)} · ${r.homeSide?'HOME':'AWAY'}</small></div>`:'';
+ return `<div class="ma-h2h-summary"><div><b>${h.W}</b><span>${esc(shortName(c.name))}の勝利</span></div><div><b>${h.D}</b><span>引き分け</span></div><div><b>${h.L}</b><span>${esc(shortName(c.opponent))}の勝利</span></div></div><div class="ma-h2h-bar" aria-hidden="true"><i style="width:${wins}%"></i><i style="width:${draws}%"></i><i style="width:${losses}%"></i></div><p class="ma-caption">${games.length?esc(games.at(-1).date)+' ～ '+esc(games[0].date):'対戦記録はありません'} · PK戦は引き分け扱い</p>${metricTable(c.name,c.opponent,[['通算得点',h.played?h.gf:'—',other.played?other.gf:'—'],...extra],'直接対決での成績比較')}<details class="ma-disclosure"><summary>ホーム・アウェイ別</summary>${metricTable('HOME','AWAY',[['成績',h.home.played?`${h.home.W}勝 ${h.home.D}分 ${h.home.L}敗`:'—',h.away.played?`${h.away.W}勝 ${h.away.D}分 ${h.away.L}敗`:'—'],['平均得点',h.home.avgGF,h.away.avgGF],['平均失点',h.home.avgGA,h.away.avgGA],['無失点率',h.home.cleanSheetRate,h.away.cleanSheetRate]],esc(shortName(c.name))+'の開催区分別直接対決成績')}</details><div class="ma-head-records">${record('最大差での勝利',h.bestWin)}${record('最大差での敗戦',h.worstLoss)}</div><p class="ma-caption">最大差の記録は${esc(shortName(c.name))}から見たスコア。同じ差なら最新の試合。</p>`;
+}
+function headPlayersPanel(c,games){
+ const team=analysisUI.historyTeam==='opp'?c.opponent:c.name,kind=analysisUI.historyMetric,ranking=M.headPlayers(games,team,kind),rows=ranking.rows.slice(0,analysisUI.playerLimit),max=ranking.rows[0]?.[kind==='goals'?'goals':'appearances']||1;
+ return `<div class="ma-head-team-switch">${[['own',c.name],['opp',c.opponent]].map(([key,name])=>`<button type="button" data-ma-head-team="${key}" aria-pressed="${analysisUI.historyTeam===key}">${esc(shortName(name))}</button>`).join('')}</div><div class="ma-panel-heading"><h3>直接対決の選手ランキング</h3><div class="ma-segment" aria-label="ランキング指標">${[['goals','得点'],['appearances','出場']].map(([key,label])=>`<button type="button" data-ma-head-metric="${key}" aria-pressed="${kind===key}">${label}</button>`).join('')}</div></div>${rows.length?`<ol class="ma-scorers">${rows.map(p=>{const value=kind==='goals'?p.goals:p.appearances;return `<li><span class="ma-scorer-rank">${p.rank}</span><div><strong>${esc(p.name)}</strong><small class="ma-head-player-meta">${kind==='goals'?`${p.scored}試合で得点 · ${p.appearances?'出場記録 '+p.appearances:'出場記録未取得'}`:`先発 ${p.starts} · 得点 ${p.goals}`}</small><span class="ma-scorer-track" aria-hidden="true"><i style="width:${value/max*100}%"></i></span></div><b>${value}<small class="ma-head-unit">${kind==='goals'?'得点':'試合'}</small></b></li>`;}).join('')}</ol>`:`<p class="ma-empty">${c.headDetails?.status==='loading'?'詳しい公式記録を読み込んでいます。':'対象の選手記録はありません。'}</p>`}${ranking.rows.length>analysisUI.playerLimit?'<button type="button" class="ma-more" data-ma-head-players-more>さらに5人を表示</button>':''}<p class="ma-caption">${kind==='goals'?'得点者':'出場選手'}情報が揃う${kind==='goals'?ranking.completeGoals:ranking.completePlayers} / ${games.length}対戦。収録済みの記録のみ集計${kind==='goals'?'（オウンゴール除外）':'（出場しなかったベンチ選手は除外）'}。</p>`;
+}
+function headTrendsPanel(c,games){
+ const h=M.headSummary(games),own=M.headTiming(games,c.name),opp=M.headTiming(games,c.opponent),firstTotal=h.firstScored.played+h.firstConceded.played;
+ const timingRows=own.labels.map((label,index)=>[label,own.known||own.total===0?own.bins[index]:'—',opp.known||opp.total===0?opp.bins[index]:'—']);
+ const attendance=games.filter(r=>Number.isFinite(r.attendance)&&r.attendance>=0),average=attendance.length?Math.round(attendance.reduce((sum,r)=>sum+r.attendance,0)/attendance.length).toLocaleString('ja-JP'):'—';
+ const venues=new Map();for(const r of games)if(r.venue){if(!venues.has(r.venue))venues.set(r.venue,[]);venues.get(r.venue).push(r);}
+ const venueRows=[...venues].sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0],'ja')).slice(0,5);
+ return `<div class="ma-panel-heading"><h3>得点の時間帯</h3><span>得点数</span></div>${metricTable(c.name,c.opponent,timingRows,'直接対決の得点時間帯')}<p class="ma-caption">時刻が分かる得点：${esc(shortName(c.name))} ${own.known} / ${own.total}、${esc(shortName(c.opponent))} ${opp.known} / ${opp.total}。45分・90分の追加時間は各ハーフに含めます。</p><details class="ma-disclosure"><summary>先制と逆転の傾向</summary><dl class="ma-head-facts"><div><dt>先制した時の成績</dt><dd>${h.firstScored.played?`${h.firstScored.W}勝 ${h.firstScored.D}分 ${h.firstScored.L}敗`:'—'}</dd></div><div><dt>先制された時の成績</dt><dd>${h.firstConceded.played?`${h.firstConceded.W}勝 ${h.firstConceded.D}分 ${h.firstConceded.L}敗`:'—'}</dd></div><div><dt>逆転勝利</dt><dd>${firstTotal?h.comebackWins:'—'}</dd></div></dl><p class="ma-caption">${esc(shortName(c.name))}から見た記録。先制を判定できた${firstTotal}対戦を集計。</p></details><details class="ma-disclosure"><summary>シーズンごとの直接対決</summary><table class="ma-head-table"><thead><tr><th scope="col">シーズン</th><th scope="col">勝</th><th scope="col">分</th><th scope="col">敗</th><th scope="col">得点</th><th scope="col">失点</th></tr></thead><tbody>${h.seasons.map(s=>`<tr><th scope="row">${esc(String(s.season).replace('_','–'))}</th><td>${s.W}</td><td>${s.D}</td><td>${s.L}</td><td>${s.gf}</td><td>${s.ga}</td></tr>`).join('')}</tbody></table><p class="ma-caption">${esc(shortName(c.name))}から見た成績。</p></details><details class="ma-disclosure"><summary>会場・入場者数</summary><dl class="ma-head-facts"><div><dt>平均入場者数</dt><dd>${average}<small>人</small></dd></div></dl><p class="ma-caption">入場者数のある${attendance.length}対戦を集計。</p>${venueRows.length?`<ul class="ma-head-venues">${venueRows.map(([venue,rows])=>`<li><strong>${esc(venue)}</strong><span>${rows.length}対戦 · ${esc(resultSummary(rows))}</span></li>`).join('')}</ul>`:'<p class="ma-empty">会場の記録はありません。</p>'}</details>`;
+}
+function headMatchesPanel(c,games){
+ const goals=(r,team)=>{const own=M.same(r.home,team),score=Number(r[own?'home_score':'away_score']),events=r[own?'home_goals':'away_goals']||[];return `<div class="ma-head-match-goals"><h4>${esc(shortName(team))}</h4>${events.length?events.map(g=>`<p><time>${esc(g.minute||g.time||'—')}${g.minute||g.time?'′':''}</time><span>${esc(g.name||g.scorer||'得点者不明')}${g.own_goal?'（OG）':''}</span></p>`).join(''):`<p>${score===0?'得点なし':'得点者未取得'}</p>`}</div>`;};
+ return `<p class="ma-caption">${esc(shortName(c.name))}から見たスコア。試合を開くと得点者・会場を表示。</p><div class="ma-head-matches">${games.slice(0,analysisUI.h2hLimit).map(r=>`<details class="ma-head-match"><summary><time>${esc(r.date.replace(/-/g,'.'))}<small>${r.homeSide?'HOME':'AWAY'}</small></time><span class="ma-result ${r.outcome}">${r.outcome}</span><b>${r.gf} – ${r.ga}</b><span class="ma-head-expand">＋</span></summary><div class="ma-head-match-details"><p class="ma-caption">${esc(r.competition||window.TrappLeague.context(r).label)} · ${esc(r.venue||'会場未取得')}</p>${goals(r,c.name)}${goals(r,c.opponent)}${/^https?:\/\//.test(r.source_url||'')?`<a class="ma-head-official" href="${esc(r.source_url)}" target="_blank" rel="noopener">公式記録 ↗</a>`:''}</div></details>`).join('')||'<p class="ma-empty">対象の対戦記録はありません。</p>'}</div>${games.length>analysisUI.h2hLimit?`<button type="button" class="ma-more" data-ma-more>さらに5試合を表示 <span>${analysisUI.h2hLimit} / ${games.length}</span></button>`:''}`;
+}
 function historyPanel(c){
- const h=M.metrics(c.h2h),wins=h.played?h.W/h.played*100:0,draws=h.played?h.D/h.played*100:0,losses=h.played?h.L/h.played*100:0;
- return `<div class="ma-panel-heading"><h3>過去の対戦</h3><span>${h.played}<small>対戦</small></span></div><div class="ma-h2h-summary"><div><b>${h.W}</b><span>${esc(shortName(c.name))}の勝利</span></div><div><b>${h.D}</b><span>引き分け</span></div><div><b>${h.L}</b><span>${esc(shortName(c.opponent))}の勝利</span></div></div><div class="ma-h2h-bar" aria-hidden="true"><i style="width:${wins}%"></i><i style="width:${draws}%"></i><i style="width:${losses}%"></i></div><p class="ma-caption">${c.h2h.length?esc(c.h2h.at(-1).date)+' ～ '+esc(c.h2h[0].date):'収録済みの対戦記録はありません'} · PK戦は引き分け扱い</p>${h.played?`<p class="ma-caption">${esc(shortName(c.name))}の通算得点 / 失点：${h.gf} / ${h.ga}</p>`:''}<div class="ma-h2h-sides"><div><span>ホーム</span><b>${esc(resultSummary(c.h2h.filter(r=>r.homeSide)))}</b></div><div><span>アウェイ</span><b>${esc(resultSummary(c.h2h.filter(r=>!r.homeSide)))}</b></div></div><p class="ma-caption">以下の成績・スコアは${esc(shortName(c.name))}から見た記録</p>${analysisGameList(c.h2h.slice(0,analysisUI.h2hLimit),'対戦記録はまだありません。',true)}${c.h2h.length>analysisUI.h2hLimit?`<button type="button" class="ma-more" data-ma-more>さらに5試合を表示 <span>${analysisUI.h2hLimit} / ${c.h2h.length}</span></button>`:''}${!c.historyAvailable?'<p class="ma-notice">過去の記録を取得できなかったため、現在のシーズンのみ表示しています。</p>':''}`;
+ ensureHeadDetails(c);
+ const games=headGames(c),renderers={summary:headSummaryPanel,players:headPlayersPanel,trends:headTrendsPanel,matches:headMatchesPanel};
+ return `<div class="ma-panel-heading"><h3>直接対決 <span class="ma-head-count">${games.length}対戦</span></h3><select class="ma-head-range" id="ma-h2h-range" aria-label="直接対決の集計期間">${[['all','全期間'],['recent','直近10対戦'],['season','2026–27']].map(([key,label])=>`<option value="${key}" ${analysisUI.historyRange===key?'selected':''}>${label}</option>`).join('')}</select></div><div class="ma-history-tabs" role="tablist" aria-label="直接対決の情報">${headTabs.map(([key,label])=>`<button type="button" role="tab" id="ma-head-tab-${key}" aria-controls="ma-head-subpanel" aria-selected="${analysisUI.historyTab===key}" tabindex="${analysisUI.historyTab===key?0:-1}" data-ma-head-tab="${key}">${label}</button>`).join('')}</div>${headStatus(c)}<section id="ma-head-subpanel" role="tabpanel" aria-labelledby="ma-head-tab-${analysisUI.historyTab}">${renderers[analysisUI.historyTab](c,games)}</section>`;
 }
 function scorersPanel(c){
  const games=M.teamGames(c.currentDetails.filter(r=>inScope(r,c.scope)),c.name,c.before,c.side),goals=new Map();
@@ -74,7 +116,14 @@ function bindAnalysisControls(host){
   if(team){analysisUI.recentTeam=team.dataset.maTeam;renderAnalysisPanel();$('#ma-team-'+analysisUI.recentTeam)?.focus({preventScroll:true});}
   if(recent){$('#fx-analysis-recent').value=recent.dataset.maRecent;renderAnalysis();}
   if(event.target.closest('[data-ma-more]')){analysisUI.h2hLimit+=5;renderAnalysisPanel();}
+  const headTab=event.target.closest('[data-ma-head-tab]'),headTeam=event.target.closest('[data-ma-head-team]'),headMetric=event.target.closest('[data-ma-head-metric]');
+  if(headTab){analysisUI.historyTab=headTab.dataset.maHeadTab;renderAnalysisPanel();$('#ma-head-tab-'+analysisUI.historyTab)?.focus({preventScroll:true});}
+  if(headTeam){analysisUI.historyTeam=headTeam.dataset.maHeadTeam;analysisUI.playerLimit=5;renderAnalysisPanel();}
+  if(headMetric){analysisUI.historyMetric=headMetric.dataset.maHeadMetric;analysisUI.playerLimit=5;renderAnalysisPanel();}
+  if(event.target.closest('[data-ma-head-players-more]')){analysisUI.playerLimit+=5;renderAnalysisPanel();}
+  if(event.target.closest('[data-ma-head-retry]'))ensureHeadDetails(analysisContext,true);
  };
+ host.onchange=event=>{if(event.target.id==='ma-h2h-range'){analysisUI.historyRange=event.target.value;analysisUI.h2hLimit=5;analysisUI.playerLimit=5;renderAnalysisPanel();$('#ma-h2h-range')?.focus({preventScroll:true});}};
  host.onkeydown=event=>{
   const target=event.target.closest('[role="tab"]');if(!target||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
   const group=target.closest('[role="tablist"]'),buttons=[...group.querySelectorAll('[role="tab"]')],index=buttons.indexOf(target);
@@ -101,6 +150,7 @@ async function loadAnalysisData(force){
  analysisCache.set(key,{at:Date.now(),promise});return promise;
 }
 async function renderAnalysis(force=false){
+ if(force)headDetailCache.delete(club);
  const token=++request,host=$('#fx-analysis-content');host.innerHTML='<p class="ma-empty" role="status">対戦データを読み込んでいます…</p>';
  try{
   const [payloads,history,standingsPayloads,details]=await loadAnalysisData(force);
@@ -118,8 +168,8 @@ async function renderAnalysis(force=false){
   const h2h=M.teamGames(M.unique([...historical,...allRows]),name,before).filter(r=>M.same(r.opponent,opponent)&&inScope(r,scope));
   const dates=payloads.map(p=>p?.fetchedAt).filter(Boolean).sort(),currentDetails=(Array.isArray(details)?details:details?.data||[]).map(window.TrappVisionData.normalize).filter(r=>r.detail_complete!==false&&r.date>=seasonStart);
   const identity=club+'|'+M.norm(opponent);
-  if(analysisIdentity!==identity){analysisUI.h2hLimit=5;analysisUI.recentTeam='own';analysisIdentity=identity;}
-  analysisContext={name,opponent,match,standings,own,opp,ownAll,oppAll,h2h,scope,side,recent,before,currentDetails,historyAvailable:Boolean(history)};
+  if(analysisIdentity!==identity){analysisUI.h2hLimit=5;analysisUI.recentTeam='own';analysisUI.historyTeam='own';analysisUI.playerLimit=5;analysisIdentity=identity;}
+  analysisContext={club,name,opponent,match,standings,own,opp,ownAll,oppAll,h2h,scope,side,recent,before,currentDetails,historyAvailable:Boolean(history)};
   $('#match-analysis-view').dataset.club=club;
   updateAnalysisFilterSummary();
   host.innerHTML=`${analysisHero(analysisContext)}<nav class="ma-tabs" role="tablist" aria-label="対戦分析の表示">${analysisTabs.map(([key,label])=>`<button type="button" role="tab" id="ma-tab-${key}" data-ma-tab="${key}" aria-controls="ma-analysis-panel" aria-selected="${key===analysisUI.tab}" tabindex="${key===analysisUI.tab?0:-1}">${label}</button>`).join('')}</nav><section id="ma-analysis-panel" class="ma-panel" role="tabpanel" aria-labelledby="ma-tab-${analysisUI.tab}" tabindex="0"></section><details class="ma-source"><summary>データ情報・更新</summary><p>2026–27 ${scope==='league'?'リーグ戦':'公式戦'} ／ ${esc(before)}より前の終了済み試合。順位・勝点は最新のリーグ順位表。</p><p>公式記録の確認: ${dates.length?esc(new Date(dates[0]).toLocaleString('ja-JP')):'日時不明'} · <a href="https://www.jleague.jp/" target="_blank" rel="noopener">J.LEAGUE</a></p><button type="button" class="ma-more" id="fx-retry">データを再取得</button>${payloads.some(p=>!p)?'<p class="ma-notice">一部の大会データを取得できませんでした。取得済みの範囲を表示しています。</p>':''}</details>`;
