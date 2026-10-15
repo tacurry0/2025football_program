@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-15T00:04:02.616224+00:00",
+  "fetchedAt": "2026-10-15T17:19:10.519119+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 55,
       "source_url": "https://www.jleague.jp/match/j3/2026/100201",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/100201",
-      "detail_fetched_at": "2026-10-15T00:04:02.616224+00:00",
+      "detail_fetched_at": "2026-10-15T17:19:10.519119+00:00",
       "home_starting_members": [
         {
           "name": "伊東 倖希",
@@ -155,11 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "77",
-          "in": "秋山 駿",
-          "out": "三宅 海斗"
-        },
-        {
           "minute": "72",
           "in": "坂元 一渚璃",
           "out": "人見 拓哉"
@@ -178,6 +173,11 @@
           "minute": "45",
           "in": "久保 瑛史",
           "out": "ロメロ フランク"
+        },
+        {
+          "minute": "77",
+          "in": "秋山 駿",
+          "out": "三宅 海斗"
         }
       ],
       "home_cards": [
@@ -324,11 +324,6 @@
           "out": "那須 健一"
         },
         {
-          "minute": "80",
-          "in": "永井 颯太",
-          "out": "小澤 秀充"
-        },
-        {
           "minute": "72",
           "in": "石田 凌太郎",
           "out": "大本 祐槻"
@@ -342,6 +337,11 @@
           "minute": "72",
           "in": "宮田 和純",
           "out": "ベ ジョンミン"
+        },
+        {
+          "minute": "80",
+          "in": "永井 颯太",
+          "out": "小澤 秀充"
         }
       ],
       "away_cards": [

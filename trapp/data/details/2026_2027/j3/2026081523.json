@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-15T00:04:02.616224+00:00",
+  "fetchedAt": "2026-10-15T17:19:10.519119+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 58,
       "source_url": "https://www.jleague.jp/match/j3/2026/081523",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/081523",
-      "detail_fetched_at": "2026-10-15T00:04:02.616224+00:00",
+      "detail_fetched_at": "2026-10-15T17:19:10.519119+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -182,11 +182,6 @@
       ],
       "home_cards": [
         {
-          "minute": "90+7",
-          "player": "那須 健一",
-          "card": "yellow"
-        },
-        {
           "minute": "90",
           "player": "根岸 恵汰",
           "card": "yellow"
@@ -199,6 +194,11 @@
         {
           "minute": "34",
           "player": "大本 祐槻",
+          "card": "yellow"
+        },
+        {
+          "minute": "90+7",
+          "player": "那須 健一",
           "card": "yellow"
         }
       ],
@@ -334,16 +334,6 @@
           "out": "櫻井 稜"
         },
         {
-          "minute": "76",
-          "in": "鈴木 輪太朗 イブラヒーム",
-          "out": "近藤 慶一"
-        },
-        {
-          "minute": "76",
-          "in": "五十嵐 太陽",
-          "out": "名願 斗哉"
-        },
-        {
           "minute": "67",
           "in": "内田 航平",
           "out": "佐藤 祥"
@@ -352,6 +342,16 @@
           "minute": "67",
           "in": "永井 大士",
           "out": "松下 佳貴"
+        },
+        {
+          "minute": "76",
+          "in": "鈴木 輪太朗 イブラヒーム",
+          "out": "近藤 慶一"
+        },
+        {
+          "minute": "76",
+          "in": "五十嵐 太陽",
+          "out": "名願 斗哉"
         }
       ],
       "away_cards": [

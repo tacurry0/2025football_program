@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-10-15T00:04:02.616224+00:00",
+  "fetchedAt": "2026-10-15T17:19:10.519119+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 64,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/090202",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/090202",
-      "detail_fetched_at": "2026-10-15T00:04:02.616224+00:00",
+      "detail_fetched_at": "2026-10-15T17:19:10.519119+00:00",
       "home_starting_members": [
         {
           "name": "近藤 壱成",
@@ -155,16 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "81",
-          "in": "中野 力瑠",
-          "out": "貫 真郷"
-        },
-        {
-          "minute": "81",
-          "in": "小竹 知恩",
-          "out": "田中 翔太"
-        },
-        {
           "minute": "69",
           "in": "中島 大嘉",
           "out": "青木 翔大"
@@ -173,6 +163,16 @@
           "minute": "69",
           "in": "瀬畠 義成",
           "out": "玉城 大志"
+        },
+        {
+          "minute": "81",
+          "in": "中野 力瑠",
+          "out": "貫 真郷"
+        },
+        {
+          "minute": "81",
+          "in": "小竹 知恩",
+          "out": "田中 翔太"
         },
         {
           "minute": "58",

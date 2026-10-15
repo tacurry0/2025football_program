@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-15T00:04:02.616224+00:00",
+  "fetchedAt": "2026-10-15T17:19:10.519119+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 66,
       "source_url": "https://www.jleague.jp/match/j2/2026/092607",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/092607",
-      "detail_fetched_at": "2026-10-15T00:04:02.616224+00:00",
+      "detail_fetched_at": "2026-10-15T17:19:10.519119+00:00",
       "home_starting_members": [
         {
           "name": "山田 元気",
@@ -155,11 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "90+1",
-          "in": "梅田 魁人",
-          "out": "佐川 洸介"
-        },
-        {
           "minute": "78",
           "in": "岩井 琢朗",
           "out": "大石 竜平"
@@ -168,6 +163,11 @@
           "minute": "78",
           "in": "粟飯原 尚平",
           "out": "鈴木 翔大"
+        },
+        {
+          "minute": "90+1",
+          "in": "梅田 魁人",
+          "out": "佐川 洸介"
         },
         {
           "minute": "59",
@@ -182,13 +182,13 @@
       ],
       "home_cards": [
         {
-          "minute": "90+2",
-          "player": "長井 一真",
+          "minute": "64",
+          "player": "土井 紅貴",
           "card": "yellow"
         },
         {
-          "minute": "64",
-          "player": "土井 紅貴",
+          "minute": "90+2",
+          "player": "長井 一真",
           "card": "yellow"
         },
         {

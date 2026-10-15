@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-15T00:04:02.616224+00:00",
+  "fetchedAt": "2026-10-15T17:19:10.519119+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 83,
       "source_url": "https://www.jleague.jp/match/j3/2026/091803",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/091803",
-      "detail_fetched_at": "2026-10-15T00:04:02.616224+00:00",
+      "detail_fetched_at": "2026-10-15T17:19:10.519119+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -165,6 +165,11 @@
           "out": "大本 祐槻"
         },
         {
+          "minute": "67",
+          "in": "ベ ジョンミン",
+          "out": "石原 央羅"
+        },
+        {
           "minute": "80",
           "in": "永井 颯太",
           "out": "小澤 秀充"
@@ -173,11 +178,6 @@
           "minute": "80",
           "in": "鹿取 勇斗",
           "out": "藤井 皓也"
-        },
-        {
-          "minute": "67",
-          "in": "ベ ジョンミン",
-          "out": "石原 央羅"
         }
       ],
       "home_cards": [],
@@ -318,6 +318,11 @@
           "out": "佐相 壱明"
         },
         {
+          "minute": "65",
+          "in": "井上 愛簾",
+          "out": "佐藤 亮"
+        },
+        {
           "minute": "79",
           "in": "澤崎 凌大",
           "out": "村上 陽斗"
@@ -326,11 +331,6 @@
           "minute": "79",
           "in": "田口 裕也",
           "out": "田中 想来"
-        },
-        {
-          "minute": "65",
-          "in": "井上 愛簾",
-          "out": "佐藤 亮"
         }
       ],
       "away_cards": [

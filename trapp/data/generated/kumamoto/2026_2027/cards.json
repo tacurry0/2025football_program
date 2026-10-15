@@ -2,15 +2,6 @@
   {
     "match_id": "2026081523",
     "season": 2027,
-    "player_key": "那須 健一",
-    "player_name": "那須 健一",
-    "type": "警告",
-    "time": "90'+7",
-    "minute": 97
-  },
-  {
-    "match_id": "2026081523",
-    "season": 2027,
     "player_key": "根岸 恵汰",
     "player_name": "根岸 恵汰",
     "type": "警告",
@@ -34,6 +25,15 @@
     "type": "警告",
     "time": "34'",
     "minute": 34
+  },
+  {
+    "match_id": "2026081523",
+    "season": 2027,
+    "player_key": "那須 健一",
+    "player_name": "那須 健一",
+    "type": "警告",
+    "time": "90'+7",
+    "minute": 97
   },
   {
     "match_id": "2026083006",
