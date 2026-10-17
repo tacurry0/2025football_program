@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-16T23:50:55.541765+00:00",
+  "fetchedAt": "2026-10-17T15:54:03.840195+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 58,
       "source_url": "https://www.jleague.jp/match/j3/2026/081523",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/081523",
-      "detail_fetched_at": "2026-10-16T23:50:55.541765+00:00",
+      "detail_fetched_at": "2026-10-17T15:54:03.840195+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -156,16 +156,6 @@
       "home_substitutions": [
         {
           "minute": "69",
-          "in": "石原 央羅",
-          "out": "ベ ジョンミン"
-        },
-        {
-          "minute": "69",
-          "in": "松田 詠太郎",
-          "out": "三品 直哉"
-        },
-        {
-          "minute": "69",
           "in": "根岸 恵汰",
           "out": "三島 頌平"
         },
@@ -173,6 +163,16 @@
           "minute": "69",
           "in": "半代 将都",
           "out": "永井 颯太"
+        },
+        {
+          "minute": "69",
+          "in": "石原 央羅",
+          "out": "ベ ジョンミン"
+        },
+        {
+          "minute": "69",
+          "in": "松田 詠太郎",
+          "out": "三品 直哉"
         },
         {
           "minute": "17",
@@ -334,11 +334,6 @@
           "out": "櫻井 稜"
         },
         {
-          "minute": "76",
-          "in": "鈴木 輪太朗 イブラヒーム",
-          "out": "近藤 慶一"
-        },
-        {
           "minute": "67",
           "in": "内田 航平",
           "out": "佐藤 祥"
@@ -350,11 +345,21 @@
         },
         {
           "minute": "76",
+          "in": "鈴木 輪太朗 イブラヒーム",
+          "out": "近藤 慶一"
+        },
+        {
+          "minute": "76",
           "in": "五十嵐 太陽",
           "out": "名願 斗哉"
         }
       ],
       "away_cards": [
+        {
+          "minute": "90+5",
+          "player": "大曽根 広汰",
+          "card": "red"
+        },
         {
           "minute": "90+2",
           "player": "世瀬 啓人",
@@ -364,11 +369,6 @@
           "minute": "90",
           "player": "大曽根 広汰",
           "card": "yellow"
-        },
-        {
-          "minute": "90+5",
-          "player": "大曽根 広汰",
-          "card": "red"
         }
       ],
       "away_goals": [],

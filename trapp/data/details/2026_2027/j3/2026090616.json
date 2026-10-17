@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-16T23:50:55.541765+00:00",
+  "fetchedAt": "2026-10-17T15:54:03.840195+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 68,
       "source_url": "https://www.jleague.jp/match/j3/2026/090616",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/090616",
-      "detail_fetched_at": "2026-10-16T23:50:55.541765+00:00",
+      "detail_fetched_at": "2026-10-17T15:54:03.840195+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -325,6 +325,11 @@
       ],
       "away_substitutions": [
         {
+          "minute": "76",
+          "in": "宮崎 樹",
+          "out": "奥田 雄大"
+        },
+        {
           "minute": "66",
           "in": "田村 亮介",
           "out": "川﨑 修平"
@@ -338,11 +343,6 @@
           "minute": "76",
           "in": "濵名 元希",
           "out": "佐藤 諒"
-        },
-        {
-          "minute": "76",
-          "in": "宮崎 樹",
-          "out": "奥田 雄大"
         },
         {
           "minute": "38",
