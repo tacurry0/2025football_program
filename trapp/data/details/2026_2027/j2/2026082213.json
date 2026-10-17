@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-17T15:54:03.840195+00:00",
+  "fetchedAt": "2026-10-17T23:22:09.805178+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 83,
       "source_url": "https://www.jleague.jp/match/j2/2026/082213",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/082213",
-      "detail_fetched_at": "2026-10-17T15:54:03.840195+00:00",
+      "detail_fetched_at": "2026-10-17T23:22:09.805178+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",
@@ -166,13 +166,13 @@
         },
         {
           "minute": "66",
-          "in": "前田 椋介",
-          "out": "白井 永地"
+          "in": "桑山 侃士",
+          "out": "若月 大和"
         },
         {
           "minute": "66",
-          "in": "桑山 侃士",
-          "out": "若月 大和"
+          "in": "前田 椋介",
+          "out": "白井 永地"
         },
         {
           "minute": "53",
