@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "season": "2026_2027",
-  "revision": "9c2d1cdc3278b74c",
-  "checkedAt": "2026-10-17T23:22:09.805178+00:00",
+  "revision": "ff5a539841e42ab5",
+  "checkedAt": "2026-10-18T16:06:38.778902+00:00",
   "files": {
-    "generated/kumamoto/2026_2027/appearances.json": "c98da8e0624d1fb33a5e6e0a52e3b43953934161aff08f21518b0c6c98f014c9",
+    "generated/kumamoto/2026_2027/appearances.json": "210c697540187a197f673912c2d9459852ccb265ee0d48b6b05ef72654297db3",
     "generated/kumamoto/2026_2027/cards.json": "64e9e01142b2da6ba12701de377de59b09e687c7efa46c3612e921900c610cf3",
-    "generated/kumamoto/2026_2027/goals.json": "f6e65bacb0b76a131dd8df6456a553bdc4e5f4abe9c0da7607b63084f579a3c2",
-    "generated/kumamoto/2026_2027/matches.json": "23b7a13225a074c137e6ee46a232bcd4a392ff5ddc9f61592ef8f4197f180904",
-    "generated/kumamoto/2026_2027/player_analysis.json": "f10654cef39b5ebcbe2fbed1a294eeed5d71d3408ffbb29438d94005fa8efd3c",
-    "generated/kumamoto/2026_2027/players.json": "bade7d882e5459e3a01f88dde4c081823785c7d955d4cdbff8d7413a4691efcf",
-    "generated/kumamoto/all_years_player_analysis.json": "df3f0e61e26b615e0b3c7b229c698a579776cc463afa600aa2ec36180c9b660e",
+    "generated/kumamoto/2026_2027/goals.json": "ecb060ac320cc727d518a9a2bb6cc491a3350402e5ec4051f3429009f4ce96df",
+    "generated/kumamoto/2026_2027/matches.json": "d6b9c24468cdd94d771815885038e8dd06f4676b01ea88a7bf565e7700588eb8",
+    "generated/kumamoto/2026_2027/player_analysis.json": "39f3d117c47026ec24f5776158aa206c97c79f9ce9de3d5f07e3ed4d70573f61",
+    "generated/kumamoto/2026_2027/players.json": "a244023fae45a902d31f2f5927ea199079ca686906fe98d1aba010f1456c00cc",
+    "generated/kumamoto/all_years_player_analysis.json": "520e5635ba0f28db50def8b8cc7c2ee1e8efcc47dcb9a5407962c14a5501374c",
     "generated/niigata/2026_2027/appearances.json": "70b8dca1c0a04f62df1c9c6c9478b374f0704017952df3bd5114b61f9d4fa40c",
     "generated/niigata/2026_2027/cards.json": "573dad62ab53b8f443a44a688376a7f30b0ccdc2782f6f273ee8fa4ed776d59b",
     "generated/niigata/2026_2027/goals.json": "046317b902957377efd84cb8e131160af6f4392dd80b82b6a85cf66a39b3f887",
@@ -18,15 +18,15 @@
     "generated/niigata/2026_2027/player_analysis.json": "baa40e7467e2a9b708bcc276e4393673c663fb4b29161dbdb612abbfc3f8f610",
     "generated/niigata/2026_2027/players.json": "ec133e0cbaca8cde48718de691d675491230d047c525780cc2c4189107222d71",
     "generated/niigata/all_years_player_analysis.json": "f4e9df5b231e5f827fbe9402b8ce940990870ef6cf83f26dac5ff641df512c6f",
-    "history/kumamoto/2026_2027.json": "9e473005cb77527dc9415470733621af17b7c4237356de7cef34a8f789df0eba",
-    "history/niigata/2026_2027.json": "2ad1ec3f23573aedc4dab50d9739931a24ea219d78bf987412cbe178cdbb4b14"
+    "history/kumamoto/2026_2027.json": "38fc57bbf9d0cbd8ed6861e8c7059e602e00e3987cd6592952e7d5d9b261d3b1",
+    "history/niigata/2026_2027.json": "fc2b708c8f24dd2ac5240d111b42eee135e4a9600b80a9684de0bee108a389e4"
   },
   "clubs": {
     "niigata": {
       "season": "2026_2027",
       "label": "2026/27",
       "analysis_year": 2027,
-      "through": "2026-10-18",
+      "through": "2026-10-19",
       "last_match_date": "2026-10-17",
       "matches": 14,
       "players": 30,
@@ -52,10 +52,10 @@
       "season": "2026_2027",
       "label": "2026/27",
       "analysis_year": 2027,
-      "through": "2026-10-18",
-      "last_match_date": "2026-10-11",
-      "matches": 13,
-      "players": 29,
+      "through": "2026-10-19",
+      "last_match_date": "2026-10-18",
+      "matches": 14,
+      "players": 30,
       "scope": "J2/J3・ルヴァンカップ・天皇杯の終了済み公式記録（練習試合・県予選を除く）",
       "sources": [
         "https://www.jleague.jp/match/j3/2026/080815",
@@ -70,7 +70,8 @@
         "https://www.jleague.jp/match/j3/2026/092622",
         "https://www.jleague.jp/match/leaguecup/2026/092909",
         "https://www.jleague.jp/match/j3/2026/100201",
-        "https://www.jleague.jp/match/j3/2026/101110"
+        "https://www.jleague.jp/match/j3/2026/101110",
+        "https://www.jleague.jp/match/j3/2026/101805"
       ]
     }
   }

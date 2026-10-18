@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j1",
-  "fetchedAt": "2026-10-17T23:22:09.805178+00:00",
+  "fetchedAt": "2026-10-18T16:06:38.778902+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -1388,9 +1388,9 @@
       "section": 10,
       "home": "FC町田ゼルビア",
       "away": "アビスパ福岡",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 3,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/101812"
     },
     {
@@ -1402,9 +1402,9 @@
       "section": 10,
       "home": "ファジアーノ岡山",
       "away": "ヴィッセル神戸",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 3,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/101813"
     },
     {
