@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-18T16:06:38.778902+00:00",
+  "fetchedAt": "2026-10-18T23:36:28.294271+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 87,
       "source_url": "https://www.jleague.jp/match/j3/2026/080815",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/080815",
-      "detail_fetched_at": "2026-10-18T16:06:38.778902+00:00",
+      "detail_fetched_at": "2026-10-18T23:36:28.294271+00:00",
       "home_starting_members": [
         {
           "name": "金 珉浩",
@@ -155,9 +155,14 @@
       ],
       "home_substitutions": [
         {
-          "minute": "90",
-          "in": "徳永 裕大",
-          "out": "島川 俊郎"
+          "minute": "80",
+          "in": "棚橋 尭士",
+          "out": "前田 泰良"
+        },
+        {
+          "minute": "80",
+          "in": "神戸 康輔",
+          "out": "竹内 崇人"
         },
         {
           "minute": "72",
@@ -170,14 +175,9 @@
           "out": "佐々木 快"
         },
         {
-          "minute": "80",
-          "in": "棚橋 尭士",
-          "out": "前田 泰良"
-        },
-        {
-          "minute": "80",
-          "in": "神戸 康輔",
-          "out": "竹内 崇人"
+          "minute": "90",
+          "in": "徳永 裕大",
+          "out": "島川 俊郎"
         }
       ],
       "home_cards": [

@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-18T16:06:38.778902+00:00",
+  "fetchedAt": "2026-10-18T23:36:28.294271+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 61,
       "source_url": "https://www.jleague.jp/match/j3/2026/082223",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/082223",
-      "detail_fetched_at": "2026-10-18T16:06:38.778902+00:00",
+      "detail_fetched_at": "2026-10-18T23:36:28.294271+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -161,11 +161,6 @@
         },
         {
           "minute": "73",
-          "in": "鹿取 勇斗",
-          "out": "三島 頌平"
-        },
-        {
-          "minute": "73",
           "in": "小澤 秀充",
           "out": "永井 颯太"
         },
@@ -178,6 +173,11 @@
           "minute": "62",
           "in": "戸田 峻平",
           "out": "小林 慶太"
+        },
+        {
+          "minute": "73",
+          "in": "鹿取 勇斗",
+          "out": "三島 頌平"
         }
       ],
       "home_cards": [],
@@ -313,9 +313,9 @@
           "out": "近藤 貴司"
         },
         {
-          "minute": "73",
-          "in": "行德 瑛",
-          "out": "田中 康介"
+          "minute": "80",
+          "in": "進 昂平",
+          "out": "吉澤 柊"
         },
         {
           "minute": "45",
@@ -324,13 +324,13 @@
         },
         {
           "minute": "80",
-          "in": "進 昂平",
-          "out": "吉澤 柊"
-        },
-        {
-          "minute": "80",
           "in": "吉田 桂介",
           "out": "森田 大智"
+        },
+        {
+          "minute": "73",
+          "in": "行德 瑛",
+          "out": "田中 康介"
         }
       ],
       "away_cards": [],
