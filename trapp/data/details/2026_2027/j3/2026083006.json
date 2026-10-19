@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-18T23:36:28.294271+00:00",
+  "fetchedAt": "2026-10-19T18:49:19.957356+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 89,
       "source_url": "https://www.jleague.jp/match/j3/2026/083006",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/083006",
-      "detail_fetched_at": "2026-10-18T23:36:28.294271+00:00",
+      "detail_fetched_at": "2026-10-19T18:49:19.957356+00:00",
       "home_starting_members": [
         {
           "name": "猪瀬 康介",
@@ -155,11 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "90+1",
-          "in": "浅野 良啓",
-          "out": "高野 裕維"
-        },
-        {
           "minute": "76",
           "in": "オリグバッジョ イスマイラ",
           "out": "三好 麟大"
@@ -173,6 +168,11 @@
           "minute": "63",
           "in": "関野 元弥",
           "out": "田中 稔也"
+        },
+        {
+          "minute": "90+1",
+          "in": "浅野 良啓",
+          "out": "高野 裕維"
         },
         {
           "minute": "45",

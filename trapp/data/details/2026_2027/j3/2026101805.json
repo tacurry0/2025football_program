@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-18T23:36:28.294271+00:00",
+  "fetchedAt": "2026-10-19T18:49:19.957356+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 58,
       "source_url": "https://www.jleague.jp/match/j3/2026/101805",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/101805",
-      "detail_fetched_at": "2026-10-18T23:36:28.294271+00:00",
+      "detail_fetched_at": "2026-10-19T18:49:19.957356+00:00",
       "home_starting_members": [
         {
           "name": "青木 心",
@@ -155,19 +155,9 @@
       ],
       "home_substitutions": [
         {
-          "minute": "89",
-          "in": "イ ギサン",
-          "out": "岡 英輝"
-        },
-        {
           "minute": "63",
           "in": "有田 朱里",
           "out": "佐野 竜眞"
-        },
-        {
-          "minute": "45",
-          "in": "淺田 彗潤",
-          "out": "波本 頼"
         },
         {
           "minute": "45",
@@ -175,9 +165,19 @@
           "out": "後藤 優介"
         },
         {
+          "minute": "89",
+          "in": "イ ギサン",
+          "out": "岡 英輝"
+        },
+        {
           "minute": "69",
           "in": "石倉 潤征",
           "out": "米澤 令衣"
+        },
+        {
+          "minute": "45",
+          "in": "淺田 彗潤",
+          "out": "波本 頼"
         }
       ],
       "home_cards": [
