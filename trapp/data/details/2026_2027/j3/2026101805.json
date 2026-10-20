@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-20T00:36:59.127163+00:00",
+  "fetchedAt": "2026-10-20T17:29:59.453167+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j3",
       "competition": "明治安田J3リーグ",
       "date": "2026-10-18",
-      "time": "14:03",
+      "time": "14:00",
       "round": "第11節",
       "home": "カマタマーレ讃岐",
       "away": "ロアッソ熊本",
@@ -28,7 +28,7 @@
       "humidity": 58,
       "source_url": "https://www.jleague.jp/match/j3/2026/101805",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/101805",
-      "detail_fetched_at": "2026-10-20T00:36:59.127163+00:00",
+      "detail_fetched_at": "2026-10-20T17:29:59.453167+00:00",
       "home_starting_members": [
         {
           "name": "青木 心",
@@ -155,14 +155,19 @@
       ],
       "home_substitutions": [
         {
+          "minute": "63",
+          "in": "有田 朱里",
+          "out": "佐野 竜眞"
+        },
+        {
           "minute": "89",
           "in": "イ ギサン",
           "out": "岡 英輝"
         },
         {
-          "minute": "63",
-          "in": "有田 朱里",
-          "out": "佐野 竜眞"
+          "minute": "69",
+          "in": "石倉 潤征",
+          "out": "米澤 令衣"
         },
         {
           "minute": "45",
@@ -173,11 +178,6 @@
           "minute": "45",
           "in": "村上 悠緋",
           "out": "後藤 優介"
-        },
-        {
-          "minute": "69",
-          "in": "石倉 潤征",
-          "out": "米澤 令衣"
         }
       ],
       "home_cards": [

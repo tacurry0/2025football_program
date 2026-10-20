@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-10-20T00:36:59.127163+00:00",
+  "fetchedAt": "2026-10-20T17:29:59.453167+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/092902",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/092902",
-      "detail_fetched_at": "2026-10-20T00:36:59.127163+00:00",
+      "detail_fetched_at": "2026-10-20T17:29:59.453167+00:00",
       "home_starting_members": [
         {
           "name": "高麗 稜太",
@@ -165,11 +165,6 @@
           "out": "松村 厳"
         },
         {
-          "minute": "63",
-          "in": "樋口 大輝",
-          "out": "高野 遼"
-        },
-        {
           "minute": "68",
           "in": "村上 陽斗",
           "out": "澤崎 凌大"
@@ -178,6 +173,11 @@
           "minute": "68",
           "in": "藤枝 康佑",
           "out": "田口 裕也"
+        },
+        {
+          "minute": "63",
+          "in": "樋口 大輝",
+          "out": "高野 遼"
         }
       ],
       "home_cards": [
@@ -321,13 +321,13 @@
       "away_substitutions": [
         {
           "minute": "82",
-          "in": "桑山 侃士",
-          "out": "若月 大和"
+          "in": "加藤 徹也",
+          "out": "新井 泰貴"
         },
         {
           "minute": "82",
-          "in": "加藤 徹也",
-          "out": "新井 泰貴"
+          "in": "桑山 侃士",
+          "out": "若月 大和"
         },
         {
           "minute": "68",
