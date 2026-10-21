@@ -376,5 +376,32 @@
     "competition_id": "j3",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026102135",
+    "url": "https://www.jleague.jp/match/j3/2026/102135",
+    "season": "2027",
+    "competition": "明治安田J3リーグ",
+    "section": "第12節",
+    "date": "2026-10-21",
+    "kickoff": "19:03",
+    "stadium": "えがお健康スタジアム",
+    "attendance": 2917,
+    "weather": "曇りのち晴れ",
+    "home_team": "ロアッソ熊本",
+    "away_team": "ガイナーレ鳥取",
+    "home_score": 3,
+    "away_score": 0,
+    "target_team": "ロアッソ熊本",
+    "target_side": "home",
+    "opponent": "ガイナーレ鳥取",
+    "target_score": 3,
+    "opponent_score": 0,
+    "result": "win",
+    "points": 3,
+    "season_id": "2026_2027",
+    "competition_id": "j3",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]

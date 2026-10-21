@@ -151,5 +151,23 @@
     "time": "44'",
     "minute": 44,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026102123",
+    "season": 2027,
+    "player_key": "マテウス モラエス",
+    "player_name": "マテウス モラエス",
+    "time": "24'",
+    "minute": 24,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026102123",
+    "season": 2027,
+    "player_key": "桑山 侃士",
+    "player_name": "桑山 侃士",
+    "time": "80'",
+    "minute": 80,
+    "is_own_goal": false
   }
 ]

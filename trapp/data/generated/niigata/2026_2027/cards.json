@@ -88,5 +88,14 @@
     "type": "警告",
     "time": "23'",
     "minute": 23
+  },
+  {
+    "match_id": "2026102123",
+    "season": 2027,
+    "player_key": "関口 正大",
+    "player_name": "関口 正大",
+    "type": "警告",
+    "time": "51'",
+    "minute": 51
   }
 ]
