@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-10-20T17:29:59.453167+00:00",
+  "fetchedAt": "2026-10-21T00:06:26.377026+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 81,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/092909",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/092909",
-      "detail_fetched_at": "2026-10-20T17:29:59.453167+00:00",
+      "detail_fetched_at": "2026-10-21T00:06:26.377026+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 優也",
@@ -182,13 +182,13 @@
       ],
       "home_cards": [
         {
-          "minute": "68",
-          "player": "石原 央羅",
+          "minute": "85",
+          "player": "三品 直哉",
           "card": "yellow"
         },
         {
-          "minute": "85",
-          "player": "三品 直哉",
+          "minute": "68",
+          "player": "石原 央羅",
           "card": "yellow"
         }
       ],
