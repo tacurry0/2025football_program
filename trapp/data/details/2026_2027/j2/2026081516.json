@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-21T17:37:06.378413+00:00",
+  "fetchedAt": "2026-10-22T00:09:38.773603+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 65,
       "source_url": "https://www.jleague.jp/match/j2/2026/081516",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/081516",
-      "detail_fetched_at": "2026-10-21T17:37:06.378413+00:00",
+      "detail_fetched_at": "2026-10-22T00:09:38.773603+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",
@@ -341,11 +341,6 @@
       ],
       "away_cards": [
         {
-          "minute": "70",
-          "player": "宮澤 裕樹",
-          "card": "yellow"
-        },
-        {
           "minute": "64",
           "player": "西野 奨太",
           "card": "yellow"
@@ -353,6 +348,11 @@
         {
           "minute": "90",
           "player": "髙尾 瑠",
+          "card": "yellow"
+        },
+        {
+          "minute": "70",
+          "player": "宮澤 裕樹",
           "card": "yellow"
         },
         {
