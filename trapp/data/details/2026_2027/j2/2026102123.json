@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-23T00:08:02.009950+00:00",
+  "fetchedAt": "2026-10-23T17:24:33.183207+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j2",
       "competition": "明治安田J2リーグ",
       "date": "2026-10-21",
-      "time": "19:03",
+      "time": "19:00",
       "round": "第12節",
       "home": "アルビレックス新潟",
       "away": "サガン鳥栖",
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j2/2026/102123",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/102123",
-      "detail_fetched_at": "2026-10-23T00:08:02.009950+00:00",
+      "detail_fetched_at": "2026-10-23T17:24:33.183207+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",
