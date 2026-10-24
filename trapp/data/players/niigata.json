@@ -10,7 +10,7 @@
     "name_only_supplemented_at": "2026-06-18T08:52:56.633Z",
     "name_only_supplement_source": "scripts/fetch-missing-player-profiles-by-name.mjs",
     "club_official_source": "https://www.albirex.co.jp/team/player/2026-27/",
-    "club_official_synced_at": "2026-09-30T06:51:59+00:00",
+    "club_official_synced_at": "2026-10-24T21:38:11+00:00",
     "club_official_players": 33
   },
   "アウグスト": {
@@ -52976,7 +52976,7 @@
     "dominant_foot": "右 (23.5cm)",
     "club_profile_fields": {
       "名前": "古長谷 千博",
-      "生年月日": "2001/10/25(24歳)",
+      "生年月日": "2001/10/25(25歳)",
       "身長/体重": "171cm/61kg",
       "血液型": "A型",
       "出身地": "静岡県",
@@ -53008,7 +53008,7 @@
       "club_official": "https://www.albirex.co.jp/team/player/2026-27/14/"
     },
     "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/14.png",
-    "fetched_at": "2026-09-30T06:48:15+00:00"
+    "fetched_at": "2026-10-24T21:37:47+00:00"
   },
   "前田 椋介": {
     "source": "club_official",
