@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-23T23:58:04.860976+00:00",
+  "fetchedAt": "2026-10-24T16:13:11.466305+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 84,
       "source_url": "https://www.jleague.jp/match/j3/2026/092622",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/092622",
-      "detail_fetched_at": "2026-10-23T23:58:04.860976+00:00",
+      "detail_fetched_at": "2026-10-24T16:13:11.466305+00:00",
       "home_starting_members": [
         {
           "name": "近藤 壱成",
@@ -155,19 +155,24 @@
       ],
       "home_substitutions": [
         {
+          "minute": "84",
+          "in": "出間 思努",
+          "out": "百田 真登"
+        },
+        {
           "minute": "68",
           "in": "相馬 丞",
           "out": "貫 真郷"
         },
         {
+          "minute": "58",
+          "in": "下川 太陽",
+          "out": "神垣 陸"
+        },
+        {
           "minute": "45",
           "in": "野嶽 惇也",
           "out": "玉城 大志"
-        },
-        {
-          "minute": "84",
-          "in": "出間 思努",
-          "out": "百田 真登"
         },
         {
           "minute": "77",
@@ -178,11 +183,6 @@
           "minute": "77",
           "in": "中島 大嘉",
           "out": "田中 翔太"
-        },
-        {
-          "minute": "58",
-          "in": "下川 太陽",
-          "out": "神垣 陸"
         }
       ],
       "home_cards": [

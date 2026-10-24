@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-23T23:58:04.860976+00:00",
+  "fetchedAt": "2026-10-24T16:13:11.466305+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -1696,9 +1696,9 @@
       "section": 13,
       "home": "RB大宮アルディージャ",
       "away": "横浜FC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/102411"
     },
     {
@@ -1710,9 +1710,9 @@
       "section": 13,
       "home": "藤枝MYFC",
       "away": "徳島ヴォルティス",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/102412"
     },
     {

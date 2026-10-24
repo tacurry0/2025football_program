@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-23T23:58:04.860976+00:00",
+  "fetchedAt": "2026-10-24T16:13:11.466305+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 51,
       "source_url": "https://www.jleague.jp/match/j3/2026/101110",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/101110",
-      "detail_fetched_at": "2026-10-23T23:58:04.860976+00:00",
+      "detail_fetched_at": "2026-10-24T16:13:11.466305+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -155,21 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "76",
-          "in": "三島 頌平",
-          "out": "ベ ジョンミン"
-        },
-        {
-          "minute": "57",
-          "in": "石原 央羅",
-          "out": "大本 祐槻"
-        },
-        {
-          "minute": "68",
-          "in": "永井 颯太",
-          "out": "小林 慶太"
-        },
-        {
           "minute": "68",
           "in": "鹿取 勇斗",
           "out": "藤井 皓也"
@@ -178,6 +163,21 @@
           "minute": "68",
           "in": "松田 詠太郎",
           "out": "石田 凌太郎"
+        },
+        {
+          "minute": "76",
+          "in": "三島 頌平",
+          "out": "ベ ジョンミン"
+        },
+        {
+          "minute": "68",
+          "in": "永井 颯太",
+          "out": "小林 慶太"
+        },
+        {
+          "minute": "57",
+          "in": "石原 央羅",
+          "out": "大本 祐槻"
         }
       ],
       "home_cards": [
@@ -319,14 +319,14 @@
           "out": "上村 周平"
         },
         {
-          "minute": "77",
-          "in": "福島 隼斗",
-          "out": "柴田 徹"
-        },
-        {
           "minute": "66",
           "in": "石尾 崚雅",
           "out": "細谷 航平"
+        },
+        {
+          "minute": "77",
+          "in": "福島 隼斗",
+          "out": "柴田 徹"
         },
         {
           "minute": "45",
