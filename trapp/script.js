@@ -10407,8 +10407,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const emblemUrl = resolveEmblemUrl(m.opponent, m.emblem);
         const item = document.createElement("div");
         item.className = `cal-match-chip ${m.club} ${isHome ? 'home' : 'away'}`;
-        item.innerHTML = `${renderTeamEmblem(emblemUrl, m.opponent, "cal-emblem", "cal-emblem-media")}<span class="cal-ha">${isHome ? 'H' : 'A'}</span><span class="cal-kickoff">${escapeHtml(m.time || '未定')}</span>`;
-        item.title = `${m.club === 'niigata' ? '新潟' : '熊本'} 対 ${m.opponent} ${m.time || '時刻未定'}`;
+        item.innerHTML = `${renderTeamEmblem(emblemUrl, m.opponent, "cal-emblem", "cal-emblem-media")}<span class="cal-kickoff">${escapeHtml(m.time || '未定')}</span>`;
+        item.title = `${m.club === 'niigata' ? '新潟' : '熊本'} 対 ${m.opponent} ${isHome ? 'ホーム' : 'アウェイ'} ${m.time || '時刻未定'}`;
+        item.setAttribute('aria-label', item.title);
         matchContainer.appendChild(item);
       });
       cell.appendChild(matchContainer);

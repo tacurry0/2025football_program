@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="player-profile-view.css?v=20260930-profile-layout">
   <link rel="stylesheet" href="standings-view.css?v=20260920-standings-4">
   <link rel="stylesheet" href="match-detail.css?v=20261014-forecast">
-  <link rel="stylesheet" href="schedule-view.css?v=20260916-matchday-schedule">
+  <link rel="stylesheet" href="schedule-view.css?v=20261024-calendar-away">
   <link rel="stylesheet" href="player-analysis-view.css?v=20260930-list-layout">
   <script>
     window.__dashboardStartupStartedAt = performance.now();
@@ -52,7 +52,7 @@
   <!-- 💎 Fixed App Header -->
   <header id="ultra-header">
     <div class="header-content">
-      <div class="schedule-month-heading"><span class="schedule-eyebrow">SCHEDULE</span><div class="schedule-month-controls"><button type="button" id="schedule-prev-month" aria-label="前の月">‹</button><button type="button" id="active-month-title" title="タップして年月を選択">... / ..</button><button type="button" id="schedule-next-month" aria-label="次の月">›</button></div></div>
+      <div class="schedule-month-heading"><button type="button" id="calendar-nav-toggle" class="schedule-eyebrow" aria-controls="calendar-year-month-panel" aria-expanded="true" aria-label="SCHEDULE：年月ナビゲーションを隠す">SCHEDULE</button><div class="schedule-month-controls"><button type="button" id="schedule-prev-month" aria-label="前の月">‹</button><button type="button" id="active-month-title" title="タップして年月を選択">... / ..</button><button type="button" id="schedule-next-month" aria-label="次の月">›</button></div></div>
       <div id="club-selection">
         <img src="./data/assets/emblems/アルビレックス新潟.png" id="toggle-niigata" class="club-pip active" alt="新潟">
         <img src="./data/assets/emblems/ロアッソ熊本.png" id="toggle-kumamoto" class="club-pip active" alt="熊本">
@@ -1305,7 +1305,6 @@ We can't help falling in love with you
 
   <!-- 📱 Navigation Pill -->
   <footer id="ultra-nav">
-    <button type="button" id="calendar-nav-toggle" aria-controls="calendar-year-month-panel" aria-expanded="true" aria-label="年月ナビゲーションを隠す"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
     <div class="nav-panel" id="calendar-year-month-panel">
       <div class="nav-panel-main">
         <div class="nav-row-stack">
@@ -1518,7 +1517,7 @@ We can't help falling in love with you
   <script src="pwa.js?v=20260618pwa-install"></script>
   <script src="league-data.js?v=20261002-cup-results"></script>
   <script src="league-ui.js?v=20260920-standings-4"></script>
-  <script src="ui-v6.js?v=20260912"></script>
+  <script src="ui-v6.js?v=20261024-schedule-toggle"></script>
   <script src="schedule/schedule.js?v=20260907-leagues-v2"></script>
   <script src="vision-data.js?v=20261014-season-vision"></script>
   <script src="features-model.js?v=20261014-head-to-head"></script>
@@ -1529,8 +1528,8 @@ We can't help falling in love with you
   <script src="player-cutouts-index.js?v=20260930-club-cutouts"></script>
   <script src="player-official-index.js?v=20260930-profile-inline"></script>
   <script src="player-profile-view.js?v=20260930-profile-layout"></script>
-  <script src="script.js?v=20261014-vision-analysis"></script>
-  <script src="schedule-view.js?v=20260916-matchday-schedule"></script>
+  <script src="script.js?v=20261024-calendar-away"></script>
+  <script src="schedule-view.js?v=20261024-schedule-toggle"></script>
   <script src="home-motion.js?v=20260922-home-crest"></script>
 
 </body>

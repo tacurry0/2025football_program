@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.getElementById('ultra-header');
   const nav = document.getElementById('ultra-nav');
   const toggle = document.getElementById('calendar-nav-toggle');
-  header.querySelector('.schedule-month-heading').append(toggle);
   header.append(nav);
   // Start with the compact header on first use; preserve an explicit saved choice.
   try {

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function render() {
     document.body.classList.toggle('calendar-nav-collapsed', collapsed);
     button.setAttribute('aria-expanded', String(!collapsed));
-    button.setAttribute('aria-label', collapsed ? '年月ナビゲーションを表示' : '年月ナビゲーションを隠す');
+    button.setAttribute('aria-label', collapsed ? 'SCHEDULE：年月ナビゲーションを表示' : 'SCHEDULE：年月ナビゲーションを隠す');
   }
   button.addEventListener('click', () => {
     collapsed = !collapsed;
