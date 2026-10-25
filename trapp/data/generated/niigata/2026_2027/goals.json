@@ -169,5 +169,23 @@
     "time": "80'",
     "minute": 80,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026102509",
+    "season": 2027,
+    "player_key": "シマブク カズヨシ",
+    "player_name": "シマブク カズヨシ",
+    "time": "41'",
+    "minute": 41,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026102509",
+    "season": 2027,
+    "player_key": "関口 正大",
+    "player_name": "関口 正大",
+    "time": "55'",
+    "minute": 55,
+    "is_own_goal": false
   }
 ]

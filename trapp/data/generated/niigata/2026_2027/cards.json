@@ -97,5 +97,32 @@
     "type": "警告",
     "time": "51'",
     "minute": 51
+  },
+  {
+    "match_id": "2026102509",
+    "season": 2027,
+    "player_key": "桑山 侃士",
+    "player_name": "桑山 侃士",
+    "type": "警告",
+    "time": "84'",
+    "minute": 84
+  },
+  {
+    "match_id": "2026102509",
+    "season": 2027,
+    "player_key": "加藤 徹也",
+    "player_name": "加藤 徹也",
+    "type": "警告",
+    "time": "72'",
+    "minute": 72
+  },
+  {
+    "match_id": "2026102509",
+    "season": 2027,
+    "player_key": "新井 泰貴",
+    "player_name": "新井 泰貴",
+    "type": "警告",
+    "time": "3'",
+    "minute": 3
   }
 ]
