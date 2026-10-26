@@ -74,20 +74,20 @@
   {
     "match_id": "2026092909",
     "season": 2027,
-    "player_key": "三品 直哉",
-    "player_name": "三品 直哉",
-    "type": "警告",
-    "time": "85'",
-    "minute": 85
-  },
-  {
-    "match_id": "2026092909",
-    "season": 2027,
     "player_key": "石原 央羅",
     "player_name": "石原 央羅",
     "type": "警告",
     "time": "68'",
     "minute": 68
+  },
+  {
+    "match_id": "2026092909",
+    "season": 2027,
+    "player_key": "三品 直哉",
+    "player_name": "三品 直哉",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
   },
   {
     "match_id": "2026100201",
@@ -119,19 +119,19 @@
   {
     "match_id": "2026102516",
     "season": 2027,
-    "player_key": "ベ ジョンミン",
-    "player_name": "ベ ジョンミン",
-    "type": "警告",
-    "time": "49'",
-    "minute": 49
-  },
-  {
-    "match_id": "2026102516",
-    "season": 2027,
     "player_key": "根岸 恵汰",
     "player_name": "根岸 恵汰",
     "type": "警告",
     "time": "62'",
     "minute": 62
+  },
+  {
+    "match_id": "2026102516",
+    "season": 2027,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
   }
 ]

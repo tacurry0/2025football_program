@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-25T23:30:45.451245+00:00",
+  "fetchedAt": "2026-10-26T18:50:38.940679+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 66,
       "source_url": "https://www.jleague.jp/match/j2/2026/101108",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/101108",
-      "detail_fetched_at": "2026-10-25T23:30:45.451245+00:00",
+      "detail_fetched_at": "2026-10-26T18:50:38.940679+00:00",
       "home_starting_members": [
         {
           "name": "真田 幸太",
@@ -321,11 +321,6 @@
       "away_substitutions": [
         {
           "minute": "75",
-          "in": "笠井 佳祐",
-          "out": "マテウス モラエス"
-        },
-        {
-          "minute": "75",
           "in": "新井 泰貴",
           "out": "大澤 朋也"
         },
@@ -333,6 +328,11 @@
           "minute": "90+3",
           "in": "早川 史哉",
           "out": "関口 正大"
+        },
+        {
+          "minute": "75",
+          "in": "笠井 佳祐",
+          "out": "マテウス モラエス"
         },
         {
           "minute": "62",
