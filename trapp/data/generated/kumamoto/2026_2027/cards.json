@@ -110,6 +110,15 @@
   {
     "match_id": "2026102516",
     "season": 2027,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "type": "警告",
+    "time": "49'",
+    "minute": 49
+  },
+  {
+    "match_id": "2026102516",
+    "season": 2027,
     "player_key": "那須 健一",
     "player_name": "那須 健一",
     "type": "警告",
@@ -124,14 +133,5 @@
     "type": "警告",
     "time": "62'",
     "minute": 62
-  },
-  {
-    "match_id": "2026102516",
-    "season": 2027,
-    "player_key": "ベ ジョンミン",
-    "player_name": "ベ ジョンミン",
-    "type": "警告",
-    "time": "49'",
-    "minute": 49
   }
 ]

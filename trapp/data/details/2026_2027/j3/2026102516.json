@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-10-27T00:46:07.872281+00:00",
+  "fetchedAt": "2026-10-27T18:13:45.028008+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j3",
       "competition": "明治安田J3リーグ",
       "date": "2026-10-25",
-      "time": "13:03",
+      "time": "13:00",
       "round": "第13節",
       "home": "ロアッソ熊本",
       "away": "FC岐阜",
@@ -28,7 +28,7 @@
       "humidity": 70,
       "source_url": "https://www.jleague.jp/match/j3/2026/102516",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/102516",
-      "detail_fetched_at": "2026-10-27T00:46:07.872281+00:00",
+      "detail_fetched_at": "2026-10-27T18:13:45.028008+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -155,16 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "76",
-          "in": "永井 颯太",
-          "out": "小澤 秀充"
-        },
-        {
-          "minute": "63",
-          "in": "石原 央羅",
-          "out": "ベ ジョンミン"
-        },
-        {
           "minute": "82",
           "in": "吉岡 優希",
           "out": "藤井 皓也"
@@ -178,9 +168,24 @@
           "minute": "45",
           "in": "鹿取 勇斗",
           "out": "松田 詠太郎"
+        },
+        {
+          "minute": "76",
+          "in": "永井 颯太",
+          "out": "小澤 秀充"
+        },
+        {
+          "minute": "63",
+          "in": "石原 央羅",
+          "out": "ベ ジョンミン"
         }
       ],
       "home_cards": [
+        {
+          "minute": "49",
+          "player": "ベ ジョンミン",
+          "card": "yellow"
+        },
         {
           "minute": "77",
           "player": "那須 健一",
@@ -189,11 +194,6 @@
         {
           "minute": "62",
           "player": "根岸 恵汰",
-          "card": "yellow"
-        },
-        {
-          "minute": "49",
-          "player": "ベ ジョンミン",
           "card": "yellow"
         }
       ],
@@ -335,6 +335,16 @@
       ],
       "away_substitutions": [
         {
+          "minute": "89",
+          "in": "鈴木 陽人",
+          "out": "箱崎 達也"
+        },
+        {
+          "minute": "45",
+          "in": "屋敷 優成",
+          "out": "松井 匠"
+        },
+        {
           "minute": "76",
           "in": "ジョルダン テル",
           "out": "屋嘉比 奏汰"
@@ -348,16 +358,6 @@
           "minute": "60",
           "in": "北島 郁哉",
           "out": "泉澤 仁"
-        },
-        {
-          "minute": "89",
-          "in": "鈴木 陽人",
-          "out": "箱崎 達也"
-        },
-        {
-          "minute": "45",
-          "in": "屋敷 優成",
-          "out": "松井 匠"
         }
       ],
       "away_cards": [
