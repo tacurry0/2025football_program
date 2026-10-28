@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "season": "2026_2027",
-  "revision": "152ce75c8f278922",
-  "checkedAt": "2026-10-27T18:13:45.028008+00:00",
+  "revision": "18aaf09b23968e17",
+  "checkedAt": "2026-10-28T00:42:43.838814+00:00",
   "files": {
     "generated/kumamoto/2026_2027/appearances.json": "62ce8efd8445e51681e7c2d6c3db59b31eb73a2d6952e522ba5b022994f1054f",
-    "generated/kumamoto/2026_2027/cards.json": "60a7cf596c67db5aa9c0fcecad89ae0c6c26c380117742d7e8997df185210334",
+    "generated/kumamoto/2026_2027/cards.json": "f489df79c244479d3cf274297e479e02d44a5268242b54e49a34b5f4b650e895",
     "generated/kumamoto/2026_2027/goals.json": "42b3e49c2510d8afe733315f693262b4b89aad0827e3b43f30f48411280a60e9",
     "generated/kumamoto/2026_2027/matches.json": "2acd1dafbc446796f0e85399afe151da2f47e333ecb81f65551936de625daf6d",
     "generated/kumamoto/2026_2027/player_analysis.json": "7cb8f19579d4b831c761b253c828706e1781d20e9ab50a29159d9e7819e54a63",
@@ -18,8 +18,8 @@
     "generated/niigata/2026_2027/player_analysis.json": "60e4ee2c2f62af5e09448cd0191f59f444122280ac0a269970889d3585132338",
     "generated/niigata/2026_2027/players.json": "ec133e0cbaca8cde48718de691d675491230d047c525780cc2c4189107222d71",
     "generated/niigata/all_years_player_analysis.json": "5ecd1121d6a98bda36d602fd794c8400bcd34b0a8d5a339acdc435deac2d51e7",
-    "history/kumamoto/2026_2027.json": "85568047261a84f4cc53f50824d8d56a59282ecb068158240aefe375518282f2",
-    "history/niigata/2026_2027.json": "ea43b1cfe993aff898cafeddc1e5ab103428fbed52ed6270440aa355e0e26083"
+    "history/kumamoto/2026_2027.json": "76fc1db1dca6728e5b5d136d7687b2cf33e875082937f251e241e40b43316bf5",
+    "history/niigata/2026_2027.json": "6f5964fe553fc1cb47d7a0e50f4c10d343d7df689793d05032441c6513ccc1bc"
   },
   "clubs": {
     "niigata": {
