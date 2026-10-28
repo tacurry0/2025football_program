@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-10-28T00:42:43.838814+00:00",
+  "fetchedAt": "2026-10-28T18:30:10.948556+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j2/2026/082911",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/082911",
-      "detail_fetched_at": "2026-10-28T00:42:43.838814+00:00",
+      "detail_fetched_at": "2026-10-28T18:30:10.948556+00:00",
       "home_starting_members": [
         {
           "name": "佐々木 雅士",
@@ -156,13 +156,13 @@
       "home_substitutions": [
         {
           "minute": "82",
-          "in": "中島 舜",
-          "out": "山中 惇希"
+          "in": "田中 幹大",
+          "out": "山口 大輝"
         },
         {
           "minute": "82",
-          "in": "田中 幹大",
-          "out": "山口 大輝"
+          "in": "中島 舜",
+          "out": "山中 惇希"
         },
         {
           "minute": "73",
@@ -336,13 +336,13 @@
       "away_substitutions": [
         {
           "minute": "89",
-          "in": "佐藤 海宏",
-          "out": "シマブク カズヨシ"
+          "in": "早川 史哉",
+          "out": "奥村 仁"
         },
         {
           "minute": "89",
-          "in": "早川 史哉",
-          "out": "奥村 仁"
+          "in": "佐藤 海宏",
+          "out": "シマブク カズヨシ"
         },
         {
           "minute": "62",
