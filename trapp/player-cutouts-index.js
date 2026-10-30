@@ -499,6 +499,7 @@ window.TrappPlayerCutouts = {
   "./data/assets/official_players/kumamoto/c932b1e2f48a8a02c1ae847f.webp": "./data/assets/player_cutouts/709a26d73c1439f80f9e4498.webp",
   "./data/assets/official_players/kumamoto/cb465e049f774844cf2a0759.webp": "./data/assets/player_cutouts/758bb94df4e1979d1cc0f96b.webp",
   "./data/assets/official_players/kumamoto/cf2c6cceffb31d540a7cdfd5.webp": "./data/assets/player_cutouts/5625146d38de155450fc4a0f.webp",
+  "./data/assets/official_players/kumamoto/cf5ea2961e5ebc87fb60d896.webp": "./data/assets/player_cutouts/6e375deb8ff3777bfe894005.webp",
   "./data/assets/official_players/kumamoto/d9bc3e4c04f9f670561760ed.webp": "./data/assets/player_cutouts/675a98a8c89a7b594bdba6de.webp",
   "./data/assets/official_players/kumamoto/dd5fdf7be3bd91179d6b2bc5.webp": "./data/assets/player_cutouts/bbce2b17bcfe7bc49cb3f864.webp",
   "./data/assets/official_players/kumamoto/e6edf6dcd0d5efc5910d05c5.webp": "./data/assets/player_cutouts/8a40d678cae0f24d4d7376bd.webp",

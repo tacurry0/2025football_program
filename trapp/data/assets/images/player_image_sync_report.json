@@ -421,6 +421,17 @@
     },
     {
       "club": "kumamoto",
+      "name": "長井 京志郎",
+      "official_name": "長井 京志郎",
+      "profile_url": "https://roasso-k.com/clubteam/players/3909",
+      "photo": "./data/assets/official_players/kumamoto/cf5ea2961e5ebc87fb60d896.webp",
+      "source_url": "https://roasso-k.com/img/players/3909_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
       "name": "黒木 晃平",
       "official_name": "黒木 晃平",
       "profile_url": "https://roasso-k.com/clubteam/players/2",

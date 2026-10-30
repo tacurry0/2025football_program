@@ -1039,6 +1039,38 @@ window.TrappOfficialPlayers = {
       "source_url": "https://roasso-k.com/img/players/3071_big.jpg",
       "width": 510
     },
+    "長井京志郎": {
+      "height": 600,
+      "name": "長井 京志郎",
+      "native_alpha": false,
+      "official_name": "長井 京志郎",
+      "photo": "./data/assets/official_players/kumamoto/cf5ea2961e5ebc87fb60d896.webp",
+      "profile": {
+        "affiliated_teams": [
+          "SIEG熊本SS~ロアッソ熊本ジュニアユース~ロアッソ熊本ユース(在籍中)",
+          "ロアッソ熊本"
+        ],
+        "app_player_name": "長井 京志郎",
+        "birth_date": "2009/08/17",
+        "birthplace": "熊本県美里町",
+        "club": "kumamoto",
+        "final_team": "熊本",
+        "height_cm": 191,
+        "links": {
+          "club_official": "https://roasso-k.com/clubteam/players/3909"
+        },
+        "name": "長井 京志郎",
+        "number": "36",
+        "official_name": "長井 京志郎",
+        "position": "GK",
+        "source": "club_official",
+        "source_confidence": "high",
+        "weight_kg": 82
+      },
+      "profile_url": "https://roasso-k.com/clubteam/players/3909",
+      "source_url": "https://roasso-k.com/img/players/3909_big.jpg",
+      "width": 510
+    },
     "長嶋志歩": {
       "height": 600,
       "name": "長嶋 志歩",
