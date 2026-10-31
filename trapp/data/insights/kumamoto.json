@@ -1,5 +1,5 @@
 {
-  "through": "2026-10-31",
+  "through": "2026-11-01",
   "data": [
     {
       "date": "2008/03/08",
@@ -9607,6 +9607,19 @@
       "pk_away_score": "",
       "source_url": "https://www.jleague.jp/match/j3/2026/102516",
       "match_id": "2026102516"
+    },
+    {
+      "date": "2026-10-31",
+      "home": "鹿児島ユナイテッドFC",
+      "away": "ロアッソ熊本",
+      "home_score": 1,
+      "away_score": 1,
+      "status": "finished",
+      "competition": "明治安田J3リーグ",
+      "pk_home_score": "",
+      "pk_away_score": "",
+      "source_url": "https://www.jleague.jp/match/j3/2026/103132",
+      "match_id": "2026103132"
     }
   ]
 }

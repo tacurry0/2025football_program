@@ -169,5 +169,14 @@
     "time": "79'",
     "minute": 79,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026103132",
+    "season": 2027,
+    "player_key": "石原 央羅",
+    "player_name": "石原 央羅",
+    "time": "90'+2",
+    "minute": 92,
+    "is_own_goal": false
   }
 ]

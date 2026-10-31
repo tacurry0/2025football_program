@@ -2,10 +2,10 @@
   "season": "2026_2027",
   "label": "2026/27",
   "analysis_year": 2027,
-  "through": "2026-10-31",
-  "last_match_date": "2026-10-25",
-  "matches": 16,
-  "players": 30,
+  "through": "2026-11-01",
+  "last_match_date": "2026-10-31",
+  "matches": 17,
+  "players": 31,
   "scope": "J2/J3・ルヴァンカップ・天皇杯の終了済み公式記録（練習試合・県予選を除く）",
   "sources": [
     "https://www.jleague.jp/match/j2/2026/080810",
@@ -23,6 +23,7 @@
     "https://www.jleague.jp/match/j2/2026/101108",
     "https://www.jleague.jp/match/j2/2026/101723",
     "https://www.jleague.jp/match/j2/2026/102123",
-    "https://www.jleague.jp/match/j2/2026/102509"
+    "https://www.jleague.jp/match/j2/2026/102509",
+    "https://www.jleague.jp/match/j2/2026/103119"
   ]
 }

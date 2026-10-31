@@ -74,20 +74,20 @@
   {
     "match_id": "2026092909",
     "season": 2027,
-    "player_key": "三品 直哉",
-    "player_name": "三品 直哉",
-    "type": "警告",
-    "time": "85'",
-    "minute": 85
-  },
-  {
-    "match_id": "2026092909",
-    "season": 2027,
     "player_key": "石原 央羅",
     "player_name": "石原 央羅",
     "type": "警告",
     "time": "68'",
     "minute": 68
+  },
+  {
+    "match_id": "2026092909",
+    "season": 2027,
+    "player_key": "三品 直哉",
+    "player_name": "三品 直哉",
+    "type": "警告",
+    "time": "85'",
+    "minute": 85
   },
   {
     "match_id": "2026100201",
@@ -133,5 +133,23 @@
     "type": "警告",
     "time": "62'",
     "minute": 62
+  },
+  {
+    "match_id": "2026103132",
+    "season": 2027,
+    "player_key": "薬師田 澪",
+    "player_name": "薬師田 澪",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
+  },
+  {
+    "match_id": "2026103132",
+    "season": 2027,
+    "player_key": "大西 遼太郎",
+    "player_name": "大西 遼太郎",
+    "type": "警告",
+    "time": "79'",
+    "minute": 79
   }
 ]

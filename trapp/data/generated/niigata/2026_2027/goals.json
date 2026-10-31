@@ -187,5 +187,23 @@
     "time": "55'",
     "minute": 55,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026103119",
+    "season": 2027,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "18'",
+    "minute": 18,
+    "is_own_goal": true
+  },
+  {
+    "match_id": "2026103119",
+    "season": 2027,
+    "player_key": "イウリ カスティーリョ",
+    "player_name": "イウリ カスティーリョ",
+    "time": "61'",
+    "minute": 61,
+    "is_own_goal": false
   }
 ]
