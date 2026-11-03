@@ -1,0 +1,383 @@
+{
+  "schemaVersion": 2,
+  "status": 200,
+  "season": "2026_2027",
+  "league": "j2",
+  "fetchedAt": "2026-11-03T19:47:46.097509+00:00",
+  "stale": false,
+  "complete": true,
+  "data": [
+    {
+      "match_id": "2026110312",
+      "season": "2026_2027",
+      "league": "j2",
+      "competition_id": "j2",
+      "competition": "明治安田J2リーグ",
+      "date": "2026-11-03",
+      "time": "14:03",
+      "round": "第15節",
+      "home": "ヴァンフォーレ甲府",
+      "away": "アルビレックス新潟",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
+      "venue": "JIT リサイクルインク スタジアム",
+      "attendance": 8350,
+      "weather": "晴れ",
+      "temperature": "23",
+      "humidity": 44,
+      "source_url": "https://www.jleague.jp/match/j2/2026/110312",
+      "j_official_url": "https://www.jleague.jp/match/j2/2026/110312",
+      "detail_fetched_at": "2026-11-03T19:47:46.097509+00:00",
+      "home_starting_members": [
+        {
+          "name": "東 ジョン",
+          "position": "GK",
+          "number": "97",
+          "player_id": "1632238"
+        },
+        {
+          "name": "野澤 陸",
+          "position": "DF",
+          "number": "3",
+          "player_id": "1632206"
+        },
+        {
+          "name": "小出 悠太",
+          "position": "DF",
+          "number": "22",
+          "player_id": "1607084"
+        },
+        {
+          "name": "メンデス",
+          "position": "DF",
+          "number": "95",
+          "player_id": "1503923"
+        },
+        {
+          "name": "熊倉 弘達",
+          "position": "MF",
+          "number": "11",
+          "player_id": "1641562"
+        },
+        {
+          "name": "村上 千歩",
+          "position": "MF",
+          "number": "13",
+          "player_id": "1644221"
+        },
+        {
+          "name": "末木 裕也",
+          "position": "MF",
+          "number": "16",
+          "player_id": "1624512"
+        },
+        {
+          "name": "水野 颯太",
+          "position": "MF",
+          "number": "19",
+          "player_id": "1635475"
+        },
+        {
+          "name": "武井 成豪",
+          "position": "MF",
+          "number": "27",
+          "player_id": "1632418"
+        },
+        {
+          "name": "黒川 淳史",
+          "position": "MF",
+          "number": "96",
+          "player_id": "1501609"
+        },
+        {
+          "name": "内藤 大和",
+          "position": "FW",
+          "number": "10",
+          "player_id": "1635232"
+        }
+      ],
+      "home_bench_members": [
+        {
+          "name": "山内 康太",
+          "position": "GK",
+          "number": "33",
+          "player_id": "1610021"
+        },
+        {
+          "name": "山本 英臣",
+          "position": "DF",
+          "number": "4",
+          "player_id": "2890"
+        },
+        {
+          "name": "福元 竣",
+          "position": "DF",
+          "number": "17",
+          "player_id": "1655811"
+        },
+        {
+          "name": "小林 岩魚",
+          "position": "MF",
+          "number": "6",
+          "player_id": "1624352"
+        },
+        {
+          "name": "米陀 大洋",
+          "position": "MF",
+          "number": "15",
+          "player_id": "1651267"
+        },
+        {
+          "name": "和田 拓也",
+          "position": "MF",
+          "number": "41",
+          "player_id": "900054"
+        },
+        {
+          "name": "保坂 知希",
+          "position": "MF",
+          "number": "47",
+          "player_id": "1650542"
+        },
+        {
+          "name": "藤井 一志",
+          "position": "FW",
+          "number": "14",
+          "player_id": "1641522"
+        },
+        {
+          "name": "大島 康樹",
+          "position": "FW",
+          "number": "29",
+          "player_id": "1400847"
+        }
+      ],
+      "home_substitutions": [
+        {
+          "minute": "88",
+          "in": "福元 竣",
+          "out": "メンデス"
+        },
+        {
+          "minute": "77",
+          "in": "米陀 大洋",
+          "out": "熊倉 弘達"
+        },
+        {
+          "minute": "77",
+          "in": "藤井 一志",
+          "out": "黒川 淳史"
+        },
+        {
+          "minute": "72",
+          "in": "和田 拓也",
+          "out": "末木 裕也"
+        },
+        {
+          "minute": "66",
+          "in": "小林 岩魚",
+          "out": "水野 颯太"
+        },
+        {
+          "minute": "66",
+          "in": "大島 康樹",
+          "out": "内藤 大和"
+        }
+      ],
+      "home_cards": [
+        {
+          "minute": "90+4",
+          "player": "武井 成豪",
+          "card": "yellow"
+        },
+        {
+          "minute": "88",
+          "player": "メンデス",
+          "card": "yellow"
+        },
+        {
+          "minute": "81",
+          "player": "小出 悠太",
+          "card": "yellow"
+        },
+        {
+          "minute": "83",
+          "player": "村上 千歩",
+          "card": "yellow"
+        }
+      ],
+      "home_goals": [],
+      "away_starting_members": [
+        {
+          "name": "内山 翔太",
+          "position": "GK",
+          "number": "71",
+          "player_id": "1641153"
+        },
+        {
+          "name": "ジェイソン ゲリア",
+          "position": "DF",
+          "number": "2",
+          "player_id": "1400631"
+        },
+        {
+          "name": "佐藤 海宏",
+          "position": "DF",
+          "number": "26",
+          "player_id": "1639211"
+        },
+        {
+          "name": "関口 正大",
+          "position": "DF",
+          "number": "30",
+          "player_id": "1630145"
+        },
+        {
+          "name": "舩木 翔",
+          "position": "DF",
+          "number": "77",
+          "player_id": "1600516"
+        },
+        {
+          "name": "笠井 佳祐",
+          "position": "MF",
+          "number": "6",
+          "player_id": "1635487"
+        },
+        {
+          "name": "白井 永地",
+          "position": "MF",
+          "number": "8",
+          "player_id": "1400079"
+        },
+        {
+          "name": "古長谷 千博",
+          "position": "MF",
+          "number": "14",
+          "player_id": "1645923"
+        },
+        {
+          "name": "シマブク カズヨシ",
+          "position": "MF",
+          "number": "17",
+          "player_id": "1634153"
+        },
+        {
+          "name": "大澤 朋也",
+          "position": "FW",
+          "number": "16",
+          "player_id": "1631739"
+        },
+        {
+          "name": "若月 大和",
+          "position": "FW",
+          "number": "18",
+          "player_id": "1624852"
+        }
+      ],
+      "away_bench_members": [
+        {
+          "name": "松浦 大翔",
+          "position": "GK",
+          "number": "41",
+          "player_id": "1655908"
+        },
+        {
+          "name": "加藤 徹也",
+          "position": "DF",
+          "number": "3",
+          "player_id": "1624569"
+        },
+        {
+          "name": "舞行龍ジェームズ",
+          "position": "DF",
+          "number": "5",
+          "player_id": "800193"
+        },
+        {
+          "name": "早川 史哉",
+          "position": "DF",
+          "number": "15",
+          "player_id": "1100292"
+        },
+        {
+          "name": "森 昂大",
+          "position": "DF",
+          "number": "38",
+          "player_id": "1633515"
+        },
+        {
+          "name": "ダニーロ ゴメス",
+          "position": "MF",
+          "number": "11",
+          "player_id": "1640649"
+        },
+        {
+          "name": "星 雄次",
+          "position": "MF",
+          "number": "19",
+          "player_id": "1500624"
+        },
+        {
+          "name": "イウリ カスティーリョ",
+          "position": "FW",
+          "number": "9",
+          "player_id": "1629399"
+        },
+        {
+          "name": "桑山 侃士",
+          "position": "FW",
+          "number": "32",
+          "player_id": "1641528"
+        }
+      ],
+      "away_substitutions": [
+        {
+          "minute": "61",
+          "in": "桑山 侃士",
+          "out": "シマブク カズヨシ"
+        },
+        {
+          "minute": "83",
+          "in": "イウリ カスティーリョ",
+          "out": "若月 大和"
+        },
+        {
+          "minute": "83",
+          "in": "ダニーロ ゴメス",
+          "out": "古長谷 千博"
+        },
+        {
+          "minute": "61",
+          "in": "星 雄次",
+          "out": "大澤 朋也"
+        },
+        {
+          "minute": "25",
+          "in": "早川 史哉",
+          "out": "舩木 翔"
+        },
+        {
+          "minute": "25",
+          "in": "舞行龍ジェームズ",
+          "out": "ジェイソン ゲリア"
+        }
+      ],
+      "away_cards": [],
+      "away_goals": [
+        {
+          "scorer": "舞行龍ジェームズ",
+          "minute": "89",
+          "own_goal": false
+        }
+      ],
+      "home_manager": "渋谷 洋樹",
+      "away_manager": "船越 優蔵",
+      "detail_complete": true,
+      "referee": "田中 玲匡",
+      "assistant_referees": "阿部 将茂、長田 望",
+      "fourth_official": "藤澤 達也"
+    }
+  ]
+}

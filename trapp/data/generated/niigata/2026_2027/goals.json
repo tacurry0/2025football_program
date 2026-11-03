@@ -205,5 +205,14 @@
     "time": "61'",
     "minute": 61,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026110312",
+    "season": 2027,
+    "player_key": "舞行龍ジェームズ",
+    "player_name": "舞行龍ジェームズ",
+    "time": "89'",
+    "minute": 89,
+    "is_own_goal": false
   }
 ]
