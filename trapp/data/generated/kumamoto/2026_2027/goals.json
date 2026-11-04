@@ -178,5 +178,14 @@
     "time": "90'+2",
     "minute": 92,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026110411",
+    "season": 2027,
+    "player_key": "小澤 秀充",
+    "player_name": "小澤 秀充",
+    "time": "85'",
+    "minute": 85,
+    "is_own_goal": false
   }
 ]

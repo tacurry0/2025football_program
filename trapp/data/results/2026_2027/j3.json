@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-04T01:37:57.140227+00:00",
+  "fetchedAt": "2026-11-04T19:59:35.250248+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -2102,9 +2102,9 @@
       "section": 15,
       "home": "FC大阪",
       "away": "ロアッソ熊本",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/110411"
     },
     {

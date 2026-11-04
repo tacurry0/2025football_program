@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-04T01:37:57.140227+00:00",
+  "fetchedAt": "2026-11-04T19:59:35.250248+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -91,9 +91,25 @@
       "season": "2026_2027",
       "league": "j3",
       "competition_id": "j3",
+      "team_id": "fosaka",
+      "team": "FC大阪",
+      "rank": 6,
+      "points": 26,
+      "played": 15,
+      "won": 7,
+      "drawn": 5,
+      "lost": 3,
+      "goals_for": 25,
+      "goals_against": 15,
+      "goal_diff": 10
+    },
+    {
+      "season": "2026_2027",
+      "league": "j3",
+      "competition_id": "j3",
       "team_id": "ehime",
       "team": "愛媛FC",
-      "rank": 6,
+      "rank": 7,
       "points": 26,
       "played": 15,
       "won": 8,
@@ -109,31 +125,15 @@
       "competition_id": "j3",
       "team_id": "kumamoto",
       "team": "ロアッソ熊本",
-      "rank": 7,
+      "rank": 8,
       "points": 24,
-      "played": 14,
+      "played": 15,
       "won": 6,
       "drawn": 6,
-      "lost": 2,
-      "goals_for": 16,
-      "goals_against": 8,
-      "goal_diff": 8
-    },
-    {
-      "season": "2026_2027",
-      "league": "j3",
-      "competition_id": "j3",
-      "team_id": "fosaka",
-      "team": "FC大阪",
-      "rank": 8,
-      "points": 23,
-      "played": 14,
-      "won": 6,
-      "drawn": 5,
       "lost": 3,
-      "goals_for": 23,
-      "goals_against": 14,
-      "goal_diff": 9
+      "goals_for": 17,
+      "goals_against": 10,
+      "goal_diff": 7
     },
     {
       "season": "2026_2027",
@@ -328,6 +328,6 @@
       "goal_diff": -21
     }
   ],
-  "sourceUpdatedAt": "2026/11/3",
+  "sourceUpdatedAt": "2026/11/4",
   "sourceUrl": "https://www.jleague.jp/j3/standings/?year=2026-27"
 }
