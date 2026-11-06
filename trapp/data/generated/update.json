@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "season": "2026_2027",
-  "revision": "c38b8b436b2f0302",
-  "checkedAt": "2026-11-06T01:46:45.733191+00:00",
+  "revision": "a1ac5c54b02e469d",
+  "checkedAt": "2026-11-06T19:39:33.410274+00:00",
   "files": {
     "generated/kumamoto/2026_2027/appearances.json": "187d8ea956f16c847af8ec58201e7e29785bf12c33520990225835bb14b15ece",
-    "generated/kumamoto/2026_2027/cards.json": "4999a53f92c46a4a7f9c5058a8edcca3fb7d5d9dd5028af9ad3f7fef0849e8ff",
+    "generated/kumamoto/2026_2027/cards.json": "7282c4b6dde432ac2c050a259d6c131e7d14a75cc4941a393aab0815b0dc29e6",
     "generated/kumamoto/2026_2027/goals.json": "fdb1fcd5a46b49a91132a75ce81937dc76389a924af652f12b16edb5a7821960",
     "generated/kumamoto/2026_2027/matches.json": "5be760b766c800fea12ef4983e98d3c1600531b347ea9faf204a4044e615438f",
     "generated/kumamoto/2026_2027/player_analysis.json": "1f87400dcf91997d708fb6dda26be92dc845eaa2cdc1fb4bdc1e9f9f4708a50d",
@@ -18,15 +18,15 @@
     "generated/niigata/2026_2027/player_analysis.json": "847f50139f3133bfc21d7a4cb6e619c72aece5135cc75aa686701af6f630d2ae",
     "generated/niigata/2026_2027/players.json": "4bccc0850d74c95b3c15f93be099776e733cd8525f25f9d9fb055ecaa141fa12",
     "generated/niigata/all_years_player_analysis.json": "b517eb9333fba6d425ba1b23e9c619ff0f8a48c38a507b763af5ac42bd930872",
-    "history/kumamoto/2026_2027.json": "f4bfc55a2db0b3e70e59cae5c502cea07d1d9da05e8dad742c8d799986611f36",
-    "history/niigata/2026_2027.json": "2c04fd5b7496114837c1bfdf066ab4dc3f035ae4d5c69fa955be0d5a6127e81a"
+    "history/kumamoto/2026_2027.json": "ebad5a6969dbccdc6428623d3753ba033dd5f237da287bc21e3be242475d389c",
+    "history/niigata/2026_2027.json": "4f85706dc54a39d60d6c9d0b6805193ad6f3d119a72c24f0358b1d3eb87b1b5d"
   },
   "clubs": {
     "niigata": {
       "season": "2026_2027",
       "label": "2026/27",
       "analysis_year": 2027,
-      "through": "2026-11-06",
+      "through": "2026-11-07",
       "last_match_date": "2026-11-03",
       "matches": 18,
       "players": 31,
@@ -56,7 +56,7 @@
       "season": "2026_2027",
       "label": "2026/27",
       "analysis_year": 2027,
-      "through": "2026-11-06",
+      "through": "2026-11-07",
       "last_match_date": "2026-11-04",
       "matches": 18,
       "players": 32,
