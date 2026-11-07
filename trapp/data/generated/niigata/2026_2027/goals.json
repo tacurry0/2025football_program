@@ -214,5 +214,14 @@
     "time": "89'",
     "minute": 89,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026110715",
+    "season": 2027,
+    "player_key": "桑山 侃士",
+    "player_name": "桑山 侃士",
+    "time": "55'",
+    "minute": 55,
+    "is_own_goal": false
   }
 ]

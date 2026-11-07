@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-07T01:09:37.023787+00:00",
+  "fetchedAt": "2026-11-07T17:50:26.767214+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -2116,9 +2116,9 @@
       "section": 16,
       "home": "福島ユナイテッドFC",
       "away": "FC琉球",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 4,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/110718"
     },
     {
@@ -2130,9 +2130,9 @@
       "section": 16,
       "home": "ザスパ群馬",
       "away": "FC大阪",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/110719"
     },
     {
@@ -2144,9 +2144,9 @@
       "section": 16,
       "home": "FC岐阜",
       "away": "ギラヴァンツ北九州",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/110720"
     },
     {
@@ -2158,9 +2158,9 @@
       "section": 16,
       "home": "奈良クラブ",
       "away": "高知ユナイテッドSC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 5,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/110721"
     },
     {
@@ -2172,9 +2172,9 @@
       "section": 16,
       "home": "松本山雅FC",
       "away": "ツエーゲン金沢",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/110722"
     },
     {
@@ -2186,9 +2186,9 @@
       "section": 16,
       "home": "愛媛FC",
       "away": "レイラック滋賀FC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/110723"
     },
     {

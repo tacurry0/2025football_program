@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "leaguecup",
-  "fetchedAt": "2026-11-07T01:09:37.023787+00:00",
+  "fetchedAt": "2026-11-07T17:50:26.767214+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 81,
       "source_url": "https://www.jleague.jp/match/leaguecup/2026/092909",
       "j_official_url": "https://www.jleague.jp/match/leaguecup/2026/092909",
-      "detail_fetched_at": "2026-11-07T01:09:37.023787+00:00",
+      "detail_fetched_at": "2026-11-07T17:50:26.767214+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 優也",
@@ -161,13 +161,13 @@
         },
         {
           "minute": "64",
-          "in": "三品 直哉",
-          "out": "渡邉 怜歩"
+          "in": "小澤 秀充",
+          "out": "永井 颯太"
         },
         {
           "minute": "64",
-          "in": "小澤 秀充",
-          "out": "永井 颯太"
+          "in": "三品 直哉",
+          "out": "渡邉 怜歩"
         },
         {
           "minute": "45",
@@ -182,13 +182,13 @@
       ],
       "home_cards": [
         {
-          "minute": "68",
-          "player": "石原 央羅",
+          "minute": "85",
+          "player": "三品 直哉",
           "card": "yellow"
         },
         {
-          "minute": "85",
-          "player": "三品 直哉",
+          "minute": "68",
+          "player": "石原 央羅",
           "card": "yellow"
         }
       ],
@@ -325,6 +325,11 @@
         },
         {
           "minute": "79",
+          "in": "山市 秀翔",
+          "out": "伊藤 達哉"
+        },
+        {
+          "minute": "79",
           "in": "長 璃喜",
           "out": "マルシーニョ"
         },
@@ -337,11 +342,6 @@
           "minute": "69",
           "in": "橘田 健人",
           "out": "山本 悠樹"
-        },
-        {
-          "minute": "79",
-          "in": "山市 秀翔",
-          "out": "伊藤 達哉"
         }
       ],
       "away_cards": [
