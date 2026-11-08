@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 2,
+  "status": 200,
+  "season": "2026_2027",
+  "league": "j3",
+  "fetchedAt": "2026-11-08T18:03:39.281761+00:00",
+  "stale": false,
+  "complete": true,
+  "data": [
+    {
+      "match_id": "2026110810",
+      "season": "2026_2027",
+      "league": "j3",
+      "competition_id": "j3",
+      "competition": "明治安田J3リーグ",
+      "date": "2026-11-08",
+      "time": "13:03",
+      "round": "第16節",
+      "home": "ロアッソ熊本",
+      "away": "レノファ山口FC",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
+      "venue": "えがお健康スタジアム",
+      "attendance": 10239,
+      "weather": "曇り",
+      "temperature": "19.5",
+      "humidity": 32,
+      "source_url": "https://www.jleague.jp/match/j3/2026/110810",
+      "j_official_url": "https://www.jleague.jp/match/j3/2026/110810",
+      "detail_fetched_at": "2026-11-08T18:03:39.281761+00:00",
+      "home_starting_members": [
+        {
+          "name": "佐藤 史騎",
+          "position": "GK",
+          "number": "1",
+          "player_id": "1641507"
+        },
+        {
+          "name": "薬師田 澪",
+          "position": "DF",
+          "number": "4",
+          "player_id": "1639771"
+        },
+        {
+          "name": "李 泰河",
+          "position": "DF",
+          "number": "24",
+          "player_id": "1650522"
+        },
+        {
+          "name": "戸田 峻平",
+          "position": "DF",
+          "number": "26",
+          "player_id": "1647667"
+        },
+        {
+          "name": "飯星 明良",
+          "position": "MF",
+          "number": "13",
+          "player_id": "1650519"
+        },
+        {
+          "name": "那須 健一",
+          "position": "MF",
+          "number": "25",
+          "player_id": "1647285"
+        },
+        {
+          "name": "小澤 秀充",
+          "position": "MF",
+          "number": "37",
+          "player_id": "1636277"
+        },
+        {
+          "name": "石田 凌太郎",
+          "position": "MF",
+          "number": "39",
+          "player_id": "1619231"
+        },
+        {
+          "name": "ベ ジョンミン",
+          "position": "FW",
+          "number": "9",
+          "player_id": "1645922"
+        },
+        {
+          "name": "鹿取 勇斗",
+          "position": "FW",
+          "number": "10",
+          "player_id": "1655793"
+        },
+        {
+          "name": "中山 大耀",
+          "position": "FW",
+          "number": "32",
+          "player_id": "1657646"
+        }
+      ],
+      "home_bench_members": [
+        {
+          "name": "佐藤 優也",
+          "position": "GK",
+          "number": "23",
+          "player_id": "400737"
+        },
+        {
+          "name": "大西 遼太郎",
+          "position": "DF",
+          "number": "3",
+          "player_id": "1624509"
+        },
+        {
+          "name": "伊藤 颯真",
+          "position": "DF",
+          "number": "35",
+          "player_id": "1651811"
+        },
+        {
+          "name": "藤井 皓也",
+          "position": "MF",
+          "number": "7",
+          "player_id": "1642047"
+        },
+        {
+          "name": "渡邉 怜歩",
+          "position": "MF",
+          "number": "11",
+          "player_id": "1647675"
+        },
+        {
+          "name": "永井 颯太",
+          "position": "MF",
+          "number": "17",
+          "player_id": "1633168"
+        },
+        {
+          "name": "松田 詠太郎",
+          "position": "MF",
+          "number": "22",
+          "player_id": "1629502"
+        },
+        {
+          "name": "吉岡 優希",
+          "position": "MF",
+          "number": "28",
+          "player_id": "1646514"
+        },
+        {
+          "name": "石原 央羅",
+          "position": "FW",
+          "number": "14",
+          "player_id": "1647350"
+        }
+      ],
+      "home_substitutions": [
+        {
+          "minute": "78",
+          "in": "松田 詠太郎",
+          "out": "石田 凌太郎"
+        },
+        {
+          "minute": "78",
+          "in": "永井 颯太",
+          "out": "小澤 秀充"
+        },
+        {
+          "minute": "78",
+          "in": "藤井 皓也",
+          "out": "ベ ジョンミン"
+        },
+        {
+          "minute": "87",
+          "in": "吉岡 優希",
+          "out": "那須 健一"
+        },
+        {
+          "minute": "68",
+          "in": "石原 央羅",
+          "out": "中山 大耀"
+        }
+      ],
+      "home_cards": [
+        {
+          "minute": "28",
+          "player": "飯星 明良",
+          "card": "yellow"
+        }
+      ],
+      "home_goals": [
+        {
+          "scorer": "ベ ジョンミン",
+          "minute": "24",
+          "own_goal": false
+        }
+      ],
+      "away_starting_members": [
+        {
+          "name": "内山 圭",
+          "position": "GK",
+          "number": "35",
+          "player_id": "1000660"
+        },
+        {
+          "name": "小澤 亮太",
+          "position": "DF",
+          "number": "2",
+          "player_id": "1648837"
+        },
+        {
+          "name": "板倉 洸",
+          "position": "DF",
+          "number": "15",
+          "player_id": "1632366"
+        },
+        {
+          "name": "菊地 脩太",
+          "position": "DF",
+          "number": "33",
+          "player_id": "1635021"
+        },
+        {
+          "name": "山本 龍平",
+          "position": "DF",
+          "number": "77",
+          "player_id": "1624335"
+        },
+        {
+          "name": "中島 賢星",
+          "position": "MF",
+          "number": "4",
+          "player_id": "1500465"
+        },
+        {
+          "name": "野寄 和哉",
+          "position": "MF",
+          "number": "8",
+          "player_id": "1639187"
+        },
+        {
+          "name": "田邉 光平",
+          "position": "MF",
+          "number": "17",
+          "player_id": "1641540"
+        },
+        {
+          "name": "成岡 輝瑠",
+          "position": "MF",
+          "number": "40",
+          "player_id": "1622191"
+        },
+        {
+          "name": "渡邉 颯太",
+          "position": "FW",
+          "number": "13",
+          "player_id": "1645965"
+        },
+        {
+          "name": "久保 征一郎",
+          "position": "FW",
+          "number": "22",
+          "player_id": "1621200"
+        }
+      ],
+      "away_bench_members": [
+        {
+          "name": "飯田 雅浩",
+          "position": "GK",
+          "number": "41",
+          "player_id": "1635494"
+        },
+        {
+          "name": "大岩 一貴",
+          "position": "DF",
+          "number": "3",
+          "player_id": "1101478"
+        },
+        {
+          "name": "下堂 竜聖",
+          "position": "DF",
+          "number": "14",
+          "player_id": "1630085"
+        },
+        {
+          "name": "亀川 諒史",
+          "position": "DF",
+          "number": "18",
+          "player_id": "1200043"
+        },
+        {
+          "name": "三沢 直人",
+          "position": "MF",
+          "number": "7",
+          "player_id": "1618081"
+        },
+        {
+          "name": "伊藤 拓巳",
+          "position": "MF",
+          "number": "32",
+          "player_id": "1640647"
+        },
+        {
+          "name": "野村 直輝",
+          "position": "MF",
+          "number": "88",
+          "player_id": "1400084"
+        },
+        {
+          "name": "山本 駿亮",
+          "position": "FW",
+          "number": "19",
+          "player_id": "1632224"
+        },
+        {
+          "name": "岡留 零樹",
+          "position": "FW",
+          "number": "29",
+          "player_id": "1659343"
+        }
+      ],
+      "away_substitutions": [
+        {
+          "minute": "81",
+          "in": "伊藤 拓巳",
+          "out": "田邉 光平"
+        },
+        {
+          "minute": "45",
+          "in": "山本 駿亮",
+          "out": "久保 征一郎"
+        },
+        {
+          "minute": "87",
+          "in": "亀川 諒史",
+          "out": "山本 龍平"
+        },
+        {
+          "minute": "87",
+          "in": "岡留 零樹",
+          "out": "渡邉 颯太"
+        },
+        {
+          "minute": "63",
+          "in": "野村 直輝",
+          "out": "中島 賢星"
+        }
+      ],
+      "away_cards": [],
+      "away_goals": [
+        {
+          "scorer": "田邉 光平",
+          "minute": "72",
+          "own_goal": false
+        },
+        {
+          "scorer": "山本 駿亮",
+          "minute": "75",
+          "own_goal": false
+        }
+      ],
+      "home_manager": "片野坂 知宏",
+      "away_manager": "小田切 道治",
+      "detail_complete": true,
+      "referee": "矢野 浩平",
+      "assistant_referees": "佐藤 裕一、金次 雄之介",
+      "fourth_official": "鍋田 雄飛"
+    }
+  ]
+}

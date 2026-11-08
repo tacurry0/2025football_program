@@ -187,5 +187,14 @@
     "time": "85'",
     "minute": 85,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026110810",
+    "season": 2027,
+    "player_key": "ベ ジョンミン",
+    "player_name": "ベ ジョンミン",
+    "time": "24'",
+    "minute": 24,
+    "is_own_goal": false
   }
 ]
