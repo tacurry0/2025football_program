@@ -10,7 +10,7 @@
     "name_only_supplemented_at": "2026-06-18T08:52:56.633Z",
     "name_only_supplement_source": "scripts/fetch-missing-player-profiles-by-name.mjs",
     "club_official_source": "https://www.albirex.co.jp/team/player/2026-27/",
-    "club_official_synced_at": "2026-10-24T21:38:11+00:00",
+    "club_official_synced_at": "2026-11-08T22:55:34+00:00",
     "club_official_players": 33
   },
   "アウグスト": {
@@ -51926,7 +51926,7 @@
       "jleague_data": "https://data.j-league.or.jp/SFIX04/?player_id=49494",
       "club_official": "https://www.albirex.co.jp/team/player/2026-27/71/"
     },
-    "fetched_at": "2026-09-30T06:47:21+00:00",
+    "fetched_at": "2026-11-08T22:54:10+00:00",
     "club": "niigata",
     "matched_annual_records": [],
     "supplement": {
@@ -51946,7 +51946,7 @@
     "dominant_foot": "右 (28.5cm)",
     "club_profile_fields": {
       "名前": "内山 翔太",
-      "生年月日": "2006/11/9(19歳)",
+      "生年月日": "2006/11/9(20歳)",
       "身長/体重": "190cm/79kg",
       "血液型": "A型",
       "出身地": "新潟県新潟市",
