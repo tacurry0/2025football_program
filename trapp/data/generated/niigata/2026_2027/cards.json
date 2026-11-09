@@ -137,19 +137,19 @@
   {
     "match_id": "2026110715",
     "season": 2027,
-    "player_key": "シマブク カズヨシ",
-    "player_name": "シマブク カズヨシ",
-    "type": "警告",
-    "time": "69'",
-    "minute": 69
-  },
-  {
-    "match_id": "2026110715",
-    "season": 2027,
     "player_key": "舩木 翔",
     "player_name": "舩木 翔",
     "type": "警告",
     "time": "77'",
     "minute": 77
+  },
+  {
+    "match_id": "2026110715",
+    "season": 2027,
+    "player_key": "シマブク カズヨシ",
+    "player_name": "シマブク カズヨシ",
+    "type": "警告",
+    "time": "69'",
+    "minute": 69
   }
 ]
