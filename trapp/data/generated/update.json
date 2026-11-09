@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "season": "2026_2027",
-  "revision": "ad38e7b9384fee10",
-  "checkedAt": "2026-11-08T18:03:39.281761+00:00",
+  "revision": "0d7f3b4c70f8ea5f",
+  "checkedAt": "2026-11-09T01:11:19.308069+00:00",
   "files": {
     "generated/kumamoto/2026_2027/appearances.json": "7c3f10ca50e0fffe571135cae2de89f6fa41f967cd76b58cafde6277b35b539d",
     "generated/kumamoto/2026_2027/cards.json": "bdc92ee8a76bea0efb6a2f48a3f6eadd34301cde6230dd5d6bc4b76d75fb3969",
@@ -12,14 +12,14 @@
     "generated/kumamoto/2026_2027/players.json": "dc1f0edbb69818e232fb53a7f5dfc77edb88151f4d1dc3e788cd67464fa113f7",
     "generated/kumamoto/all_years_player_analysis.json": "84f1a5ad88ad5f3e660c17a8d2b25c6679cf8428c8ef2ed0b58fdd5134c5ccdd",
     "generated/niigata/2026_2027/appearances.json": "4535d28438b6b3ca69441823a7f9bff71f473a2fd1552e8647142a61fd9e363a",
-    "generated/niigata/2026_2027/cards.json": "4d0554850c5c64ebb6fe30d80ee3ecd08388e0b57232ee8416d2c2d6ababb400",
+    "generated/niigata/2026_2027/cards.json": "474cbbc833d12fae09c46ed5cebe917f771a4f654db96c5965ee7cf832c76f75",
     "generated/niigata/2026_2027/goals.json": "1d841113c8e19f7d29dfeaeb66a5ea058c080010e372042f1a41d2fb68c4006b",
     "generated/niigata/2026_2027/matches.json": "098cb4bb50c1118af608863baa61ed5e596de46bfed4bc8497554af35d09b2d7",
     "generated/niigata/2026_2027/player_analysis.json": "8994d516623332e28deceb6998b6a4d67cdffadb9c71c2d6bb6bf9f5715be44c",
     "generated/niigata/2026_2027/players.json": "4bccc0850d74c95b3c15f93be099776e733cd8525f25f9d9fb055ecaa141fa12",
     "generated/niigata/all_years_player_analysis.json": "d60beee892c52b5cf7cf0f7125c9b401043b8207b937628024d6e589398c47ad",
-    "history/kumamoto/2026_2027.json": "1df8d1dc22e0fc95ac39071774d9f1c60b1e4a857fc5a574adc0173ad02fffc1",
-    "history/niigata/2026_2027.json": "03f10d6a31c836503f1b39467be94b0af644b659496061fd4e82a6120c25ed67"
+    "history/kumamoto/2026_2027.json": "a3f32421c1cfb4f01be422312e9408bee559d3183e807b9b47ab2bd3c80f56ff",
+    "history/niigata/2026_2027.json": "00bfbb2fdccad6f758b99ce546ae4d8ef1b03c9fd02f9584afefdc57795c711d"
   },
   "clubs": {
     "niigata": {
