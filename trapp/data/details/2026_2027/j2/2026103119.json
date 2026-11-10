@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-09T22:40:08.212328+00:00",
+  "fetchedAt": "2026-11-10T19:58:42.772210+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 83,
       "source_url": "https://www.jleague.jp/match/j2/2026/103119",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/103119",
-      "detail_fetched_at": "2026-11-09T22:40:08.212328+00:00",
+      "detail_fetched_at": "2026-11-10T19:58:42.772210+00:00",
       "home_starting_members": [
         {
           "name": "内山 翔太",
@@ -160,11 +160,6 @@
           "out": "シマブク カズヨシ"
         },
         {
-          "minute": "78",
-          "in": "古長谷 千博",
-          "out": "大澤 朋也"
-        },
-        {
           "minute": "85",
           "in": "ダニーロ ゴメス",
           "out": "笠井 佳祐"
@@ -173,6 +168,11 @@
           "minute": "85",
           "in": "桑山 侃士",
           "out": "若月 大和"
+        },
+        {
+          "minute": "78",
+          "in": "古長谷 千博",
+          "out": "大澤 朋也"
         },
         {
           "minute": "28",

@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-09T22:40:08.212328+00:00",
+  "fetchedAt": "2026-11-10T19:58:42.772210+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j2/2026/102509",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/102509",
-      "detail_fetched_at": "2026-11-09T22:40:08.212328+00:00",
+      "detail_fetched_at": "2026-11-10T19:58:42.772210+00:00",
       "home_starting_members": [
         {
           "name": "バウマン",
@@ -160,16 +160,6 @@
           "out": "マテウス モラエス"
         },
         {
-          "minute": "68",
-          "in": "笠井 佳祐",
-          "out": "新井 泰貴"
-        },
-        {
-          "minute": "75",
-          "in": "古長谷 千博",
-          "out": "大澤 朋也"
-        },
-        {
           "minute": "75",
           "in": "桑山 侃士",
           "out": "若月 大和"
@@ -178,6 +168,16 @@
           "minute": "75",
           "in": "佐藤 海宏",
           "out": "シマブク カズヨシ"
+        },
+        {
+          "minute": "68",
+          "in": "笠井 佳祐",
+          "out": "新井 泰貴"
+        },
+        {
+          "minute": "75",
+          "in": "古長谷 千博",
+          "out": "大澤 朋也"
         }
       ],
       "home_cards": [

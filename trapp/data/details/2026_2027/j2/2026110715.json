@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-09T22:40:08.212328+00:00",
+  "fetchedAt": "2026-11-10T19:58:42.772210+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j2",
       "competition": "明治安田J2リーグ",
       "date": "2026-11-07",
-      "time": "14:03",
+      "time": "14:00",
       "round": "第16節",
       "home": "アルビレックス新潟",
       "away": "FC今治",
@@ -28,7 +28,7 @@
       "humidity": 43,
       "source_url": "https://www.jleague.jp/match/j2/2026/110715",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/110715",
-      "detail_fetched_at": "2026-11-09T22:40:08.212328+00:00",
+      "detail_fetched_at": "2026-11-10T19:58:42.772210+00:00",
       "home_starting_members": [
         {
           "name": "内山 翔太",
@@ -156,13 +156,13 @@
       "home_substitutions": [
         {
           "minute": "83",
-          "in": "ダニーロ ゴメス",
-          "out": "笠井 佳祐"
+          "in": "イウリ カスティーリョ",
+          "out": "若月 大和"
         },
         {
           "minute": "83",
-          "in": "イウリ カスティーリョ",
-          "out": "若月 大和"
+          "in": "ダニーロ ゴメス",
+          "out": "笠井 佳祐"
         },
         {
           "minute": "69",
@@ -352,13 +352,13 @@
       ],
       "away_cards": [
         {
-          "minute": "81",
-          "player": "櫛引 一紀",
+          "minute": "85",
+          "player": "梅木 怜",
           "card": "yellow"
         },
         {
-          "minute": "85",
-          "player": "梅木 怜",
+          "minute": "81",
+          "player": "櫛引 一紀",
           "card": "yellow"
         },
         {
