@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-11T01:27:42.848530+00:00",
+  "fetchedAt": "2026-11-11T19:50:05.673444+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 43,
       "source_url": "https://www.jleague.jp/match/j2/2026/110715",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/110715",
-      "detail_fetched_at": "2026-11-11T01:27:42.848530+00:00",
+      "detail_fetched_at": "2026-11-11T19:50:05.673444+00:00",
       "home_starting_members": [
         {
           "name": "内山 翔太",
@@ -352,13 +352,13 @@
       ],
       "away_cards": [
         {
-          "minute": "85",
-          "player": "梅木 怜",
+          "minute": "81",
+          "player": "櫛引 一紀",
           "card": "yellow"
         },
         {
-          "minute": "81",
-          "player": "櫛引 一紀",
+          "minute": "85",
+          "player": "梅木 怜",
           "card": "yellow"
         },
         {

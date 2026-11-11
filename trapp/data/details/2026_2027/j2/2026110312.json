@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-11T01:27:42.848530+00:00",
+  "fetchedAt": "2026-11-11T19:50:05.673444+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 44,
       "source_url": "https://www.jleague.jp/match/j2/2026/110312",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/110312",
-      "detail_fetched_at": "2026-11-11T01:27:42.848530+00:00",
+      "detail_fetched_at": "2026-11-11T19:50:05.673444+00:00",
       "home_starting_members": [
         {
           "name": "東 ジョン",
@@ -334,16 +334,6 @@
       ],
       "away_substitutions": [
         {
-          "minute": "83",
-          "in": "イウリ カスティーリョ",
-          "out": "若月 大和"
-        },
-        {
-          "minute": "83",
-          "in": "ダニーロ ゴメス",
-          "out": "古長谷 千博"
-        },
-        {
           "minute": "61",
           "in": "星 雄次",
           "out": "大澤 朋也"
@@ -352,6 +342,16 @@
           "minute": "61",
           "in": "桑山 侃士",
           "out": "シマブク カズヨシ"
+        },
+        {
+          "minute": "83",
+          "in": "イウリ カスティーリョ",
+          "out": "若月 大和"
+        },
+        {
+          "minute": "83",
+          "in": "ダニーロ ゴメス",
+          "out": "古長谷 千博"
         },
         {
           "minute": "25",
