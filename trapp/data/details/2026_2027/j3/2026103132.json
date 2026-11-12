@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-12T02:29:17.157429+00:00",
+  "fetchedAt": "2026-11-12T20:24:01.004761+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 52,
       "source_url": "https://www.jleague.jp/match/j3/2026/103132",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/103132",
-      "detail_fetched_at": "2026-11-12T02:29:17.157429+00:00",
+      "detail_fetched_at": "2026-11-12T20:24:01.004761+00:00",
       "home_starting_members": [
         {
           "name": "坂田 大樹",
@@ -161,6 +161,11 @@
         },
         {
           "minute": "73",
+          "in": "河村 慶人",
+          "out": "髙橋 旺良"
+        },
+        {
+          "minute": "73",
           "in": "稲葉 修土",
           "out": "吉尾 虹樹"
         },
@@ -173,11 +178,6 @@
           "minute": "63",
           "in": "圓道 将良",
           "out": "嵯峨 理久"
-        },
-        {
-          "minute": "73",
-          "in": "河村 慶人",
-          "out": "髙橋 旺良"
         }
       ],
       "home_cards": [
@@ -320,11 +320,6 @@
       ],
       "away_substitutions": [
         {
-          "minute": "45",
-          "in": "鹿取 勇斗",
-          "out": "吉岡 優希"
-        },
-        {
           "minute": "78",
           "in": "石原 央羅",
           "out": "戸田 峻平"
@@ -338,6 +333,11 @@
           "minute": "63",
           "in": "松田 詠太郎",
           "out": "石田 凌太郎"
+        },
+        {
+          "minute": "45",
+          "in": "鹿取 勇斗",
+          "out": "吉岡 優希"
         },
         {
           "minute": "29",
