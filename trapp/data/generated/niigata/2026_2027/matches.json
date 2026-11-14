@@ -511,5 +511,32 @@
     "competition_id": "j2",
     "pk_home_score": "",
     "pk_away_score": ""
+  },
+  {
+    "match_id": "2026111403",
+    "url": "https://www.jleague.jp/match/j2/2026/111403",
+    "season": "2027",
+    "competition": "明治安田J2リーグ",
+    "section": "第17節",
+    "date": "2026-11-14",
+    "kickoff": "14:00",
+    "stadium": "デンカビッグスワンスタジアム",
+    "attendance": 14945,
+    "weather": "晴れ",
+    "home_team": "アルビレックス新潟",
+    "away_team": "テゲバジャーロ宮崎",
+    "home_score": 1,
+    "away_score": 3,
+    "target_team": "アルビレックス新潟",
+    "target_side": "home",
+    "opponent": "テゲバジャーロ宮崎",
+    "target_score": 1,
+    "opponent_score": 3,
+    "result": "loss",
+    "points": 0,
+    "season_id": "2026_2027",
+    "competition_id": "j2",
+    "pk_home_score": "",
+    "pk_away_score": ""
   }
 ]

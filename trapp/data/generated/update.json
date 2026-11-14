@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "season": "2026_2027",
-  "revision": "55d0c4a7498d89db",
-  "checkedAt": "2026-11-14T01:42:56.046775+00:00",
+  "revision": "8b6d59bce0f2e68b",
+  "checkedAt": "2026-11-14T18:27:32.030202+00:00",
   "files": {
     "generated/kumamoto/2026_2027/appearances.json": "7c3f10ca50e0fffe571135cae2de89f6fa41f967cd76b58cafde6277b35b539d",
     "generated/kumamoto/2026_2027/cards.json": "37dedc4b462e448ad80f46daebab161747ec36e4c3bb30b3a29670d349c1d206",
@@ -11,25 +11,25 @@
     "generated/kumamoto/2026_2027/player_analysis.json": "cb87cd26434a837484445c56c3a318f1cdd0927547c3ae267cec0c62320d4d25",
     "generated/kumamoto/2026_2027/players.json": "dc1f0edbb69818e232fb53a7f5dfc77edb88151f4d1dc3e788cd67464fa113f7",
     "generated/kumamoto/all_years_player_analysis.json": "84f1a5ad88ad5f3e660c17a8d2b25c6679cf8428c8ef2ed0b58fdd5134c5ccdd",
-    "generated/niigata/2026_2027/appearances.json": "4535d28438b6b3ca69441823a7f9bff71f473a2fd1552e8647142a61fd9e363a",
-    "generated/niigata/2026_2027/cards.json": "4d0554850c5c64ebb6fe30d80ee3ecd08388e0b57232ee8416d2c2d6ababb400",
-    "generated/niigata/2026_2027/goals.json": "1d841113c8e19f7d29dfeaeb66a5ea058c080010e372042f1a41d2fb68c4006b",
-    "generated/niigata/2026_2027/matches.json": "5648d6c9692f26ba38dbe8fd046168d7a5ba6bc986cb89d2eb8e9aa842ec73c0",
-    "generated/niigata/2026_2027/player_analysis.json": "8994d516623332e28deceb6998b6a4d67cdffadb9c71c2d6bb6bf9f5715be44c",
-    "generated/niigata/2026_2027/players.json": "4bccc0850d74c95b3c15f93be099776e733cd8525f25f9d9fb055ecaa141fa12",
-    "generated/niigata/all_years_player_analysis.json": "d60beee892c52b5cf7cf0f7125c9b401043b8207b937628024d6e589398c47ad",
-    "history/kumamoto/2026_2027.json": "180a19ad4bab7d248f31145fbc687e846277700e5805202026b27bc7ccf56223",
-    "history/niigata/2026_2027.json": "62023f4bbee2a465d4a01a2acbb36f9908b0569be3a44092273dfe03a38edb4f"
+    "generated/niigata/2026_2027/appearances.json": "c22d471cb9b50adc41379c522800811cf00d2eb4d537dab03514fc98f8fb4442",
+    "generated/niigata/2026_2027/cards.json": "4d16944ceddf7bcd5b53f45b7b5d9f4540773c1d1130583317baefc9600e63ee",
+    "generated/niigata/2026_2027/goals.json": "704e717b4fa6d6c3996fef595846301c9e1017e67a7d91631aca673a6c706584",
+    "generated/niigata/2026_2027/matches.json": "58af719380067adc8412d19abf8e9b61028d3d712d02a6a78ff191cabaf678f1",
+    "generated/niigata/2026_2027/player_analysis.json": "1137095b2f17f4772b569ea640d8c0c343b03e1a8b8cc9cdc10d449f5c1db837",
+    "generated/niigata/2026_2027/players.json": "f71fdf7ffd1a9d965db47b136e1830cf488359e15089e69304a053d63ab38dc6",
+    "generated/niigata/all_years_player_analysis.json": "04f10de07329f6ef03050eeba5a80f842c2d3fce36c565f297fafc5b88fc09e7",
+    "history/kumamoto/2026_2027.json": "ed86f7e62bb4cdf6ebb41e15471089e2baf9d04b67bb09146a7092fe9e534bef",
+    "history/niigata/2026_2027.json": "f28b3af13dc0c5de1ab49d31f3b1dfbc31cbe809abd022f0ebb7ead9d46dd5af"
   },
   "clubs": {
     "niigata": {
       "season": "2026_2027",
       "label": "2026/27",
       "analysis_year": 2027,
-      "through": "2026-11-14",
-      "last_match_date": "2026-11-07",
-      "matches": 19,
-      "players": 31,
+      "through": "2026-11-15",
+      "last_match_date": "2026-11-14",
+      "matches": 20,
+      "players": 32,
       "scope": "J2/J3・ルヴァンカップ・天皇杯の終了済み公式記録（練習試合・県予選を除く）",
       "sources": [
         "https://www.jleague.jp/match/j2/2026/080810",
@@ -50,14 +50,15 @@
         "https://www.jleague.jp/match/j2/2026/102509",
         "https://www.jleague.jp/match/j2/2026/103119",
         "https://www.jleague.jp/match/j2/2026/110312",
-        "https://www.jleague.jp/match/j2/2026/110715"
+        "https://www.jleague.jp/match/j2/2026/110715",
+        "https://www.jleague.jp/match/j2/2026/111403"
       ]
     },
     "kumamoto": {
       "season": "2026_2027",
       "label": "2026/27",
       "analysis_year": 2027,
-      "through": "2026-11-14",
+      "through": "2026-11-15",
       "last_match_date": "2026-11-08",
       "matches": 19,
       "players": 32,
