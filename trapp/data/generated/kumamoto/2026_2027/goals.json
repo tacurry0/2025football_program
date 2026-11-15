@@ -196,5 +196,23 @@
     "time": "24'",
     "minute": 24,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026111513",
+    "season": 2027,
+    "player_key": "那須 健一",
+    "player_name": "那須 健一",
+    "time": "55'",
+    "minute": 55,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026111513",
+    "season": 2027,
+    "player_key": "戸田 峻平",
+    "player_name": "戸田 峻平",
+    "time": "68'",
+    "minute": 68,
+    "is_own_goal": false
   }
 ]

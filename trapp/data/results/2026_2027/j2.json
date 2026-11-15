@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-15T01:17:02.975284+00:00",
+  "fetchedAt": "2026-11-15T19:04:32.031111+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -2326,9 +2326,9 @@
       "section": 17,
       "home": "北海道コンサドーレ札幌",
       "away": "サガン鳥栖",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/111505"
     },
     {
@@ -2340,9 +2340,9 @@
       "section": 17,
       "home": "ヴァンラーレ八戸",
       "away": "いわきFC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/111506"
     },
     {
@@ -2354,9 +2354,9 @@
       "section": 17,
       "home": "ベガルタ仙台",
       "away": "ブラウブリッツ秋田",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 4,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/111507"
     },
     {
@@ -2368,9 +2368,9 @@
       "section": 17,
       "home": "カターレ富山",
       "away": "徳島ヴォルティス",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 3,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/111508"
     },
     {
@@ -2382,9 +2382,9 @@
       "section": 17,
       "home": "FC今治",
       "away": "ジュビロ磐田",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/111509"
     },
     {
