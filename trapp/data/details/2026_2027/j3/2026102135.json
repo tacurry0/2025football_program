@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-16T22:28:39.648140+00:00",
+  "fetchedAt": "2026-11-17T21:18:02.854628+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 78,
       "source_url": "https://www.jleague.jp/match/j3/2026/102135",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/102135",
-      "detail_fetched_at": "2026-11-16T22:28:39.648140+00:00",
+      "detail_fetched_at": "2026-11-17T21:18:02.854628+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -318,16 +318,6 @@
       ],
       "away_substitutions": [
         {
-          "minute": "81",
-          "in": "ムン ミン",
-          "out": "荒井 涼"
-        },
-        {
-          "minute": "81",
-          "in": "金浦 真樹",
-          "out": "ヴァンイヤーデン ショーン"
-        },
-        {
           "minute": "69",
           "in": "星 景虎",
           "out": "藤田 一途"
@@ -341,6 +331,16 @@
           "minute": "57",
           "in": "三木 直土",
           "out": "小西 陽向"
+        },
+        {
+          "minute": "81",
+          "in": "ムン ミン",
+          "out": "荒井 涼"
+        },
+        {
+          "minute": "81",
+          "in": "金浦 真樹",
+          "out": "ヴァンイヤーデン ショーン"
         }
       ],
       "away_cards": [

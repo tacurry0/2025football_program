@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-16T22:28:39.648140+00:00",
+  "fetchedAt": "2026-11-17T21:18:02.854628+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j3",
       "competition": "明治安田J3リーグ",
       "date": "2026-11-15",
-      "time": "14:03",
+      "time": "14:00",
       "round": "第17節",
       "home": "ツエーゲン金沢",
       "away": "ロアッソ熊本",
@@ -28,7 +28,7 @@
       "humidity": 90,
       "source_url": "https://www.jleague.jp/match/j3/2026/111513",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/111513",
-      "detail_fetched_at": "2026-11-16T22:28:39.648140+00:00",
+      "detail_fetched_at": "2026-11-17T21:18:02.854628+00:00",
       "home_starting_members": [
         {
           "name": "上田 樹",
