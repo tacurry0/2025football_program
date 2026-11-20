@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j1",
-  "fetchedAt": "2026-11-20T02:33:42.599005+00:00",
+  "fetchedAt": "2026-11-20T20:41:12.263828+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -1976,9 +1976,9 @@
       "section": 15,
       "home": "柏レイソル",
       "away": "ジェフユナイテッド千葉",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112001"
     },
     {
@@ -1990,9 +1990,9 @@
       "section": 15,
       "home": "鹿島アントラーズ",
       "away": "清水エスパルス",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 1,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112002"
     },
     {
@@ -2004,9 +2004,9 @@
       "section": 15,
       "home": "ヴィッセル神戸",
       "away": "水戸ホーリーホック",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112003"
     },
     {
