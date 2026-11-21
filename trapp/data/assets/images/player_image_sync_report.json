@@ -432,6 +432,17 @@
     },
     {
       "club": "kumamoto",
+      "name": "上林 真斗",
+      "official_name": "上林 真斗",
+      "profile_url": "https://roasso-k.com/clubteam/players/3916",
+      "photo": "./data/assets/official_players/kumamoto/0eddb4b1a71c7a9eb532c85e.webp",
+      "source_url": "https://roasso-k.com/img/players/3916_big.jpg",
+      "width": 510,
+      "height": 600,
+      "native_alpha": false
+    },
+    {
+      "club": "kumamoto",
       "name": "黒木 晃平",
       "official_name": "黒木 晃平",
       "profile_url": "https://roasso-k.com/clubteam/players/2",
@@ -494,17 +505,6 @@
       "source_url": "https://roasso-k.com/img/players/2652_big.jpg",
       "width": 510,
       "height": 600,
-      "native_alpha": false
-    },
-    {
-      "club": "kumamoto",
-      "name": "木村 匠汰",
-      "official_name": "木村 匠汰",
-      "profile_url": "https://roasso-k.com/clubteam/players/3811",
-      "photo": "./data/assets/official_players/kumamoto/a116d3ea451c0e59b4903f30.webp",
-      "source_url": "https://roasso-k.com/img/players/3811_big.jpg",
-      "width": 511,
-      "height": 610,
       "native_alpha": false
     },
     {

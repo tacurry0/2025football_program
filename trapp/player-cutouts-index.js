@@ -472,6 +472,7 @@ window.TrappPlayerCutouts = {
   "./data/assets/images/player_niigata/鳴尾 直軌.jpg": "./data/assets/player_cutouts/a5968527834983be61a98f42.webp",
   "./data/assets/images/player_niigata/黒崎 久志.jpg": "./data/assets/player_cutouts/c78733af4852c19f3f8c2fe1.webp",
   "./data/assets/images/player_niigata/黒河 貴矢.jpg": "./data/assets/player_cutouts/97d2e5395c1bc7de3e7d1764.webp",
+  "./data/assets/official_players/kumamoto/0eddb4b1a71c7a9eb532c85e.webp": "./data/assets/player_cutouts/e85985044dc80f905eb87b6a.webp",
   "./data/assets/official_players/kumamoto/176e00d6d53ad60b10f1e2c3.webp": "./data/assets/player_cutouts/5c244b8ab79ab1130f479002.webp",
   "./data/assets/official_players/kumamoto/2a62cef8dce3a5320fa42e66.webp": "./data/assets/player_cutouts/9d3459d08d2f871552d45543.webp",
   "./data/assets/official_players/kumamoto/340d3a8acfcfaf402c30a402.webp": "./data/assets/player_cutouts/e34526b744346ab17bb2560e.webp",

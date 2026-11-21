@@ -131,6 +131,38 @@ window.TrappOfficialPlayers = {
       "source_url": "https://roasso-k.com/img/players/912_big.jpg",
       "width": 510
     },
+    "上林真斗": {
+      "height": 600,
+      "name": "上林 真斗",
+      "native_alpha": false,
+      "official_name": "上林 真斗",
+      "photo": "./data/assets/official_players/kumamoto/0eddb4b1a71c7a9eb532c85e.webp",
+      "profile": {
+        "affiliated_teams": [
+          "FC LIEN~蓮田キッカーズ~FC LAVIDA~昌平高校~専修大学(在学中)",
+          "ロアッソ熊本"
+        ],
+        "app_player_name": "上林 真斗",
+        "birth_date": "2004/11/29",
+        "birthplace": "埼玉県",
+        "club": "kumamoto",
+        "final_team": "熊本",
+        "height_cm": 187,
+        "links": {
+          "club_official": "https://roasso-k.com/clubteam/players/3916"
+        },
+        "name": "上林 真斗",
+        "number": "37",
+        "official_name": "上林 真斗",
+        "position": "GK",
+        "source": "club_official",
+        "source_confidence": "high",
+        "weight_kg": 82
+      },
+      "profile_url": "https://roasso-k.com/clubteam/players/3916",
+      "source_url": "https://roasso-k.com/img/players/3916_big.jpg",
+      "width": 510
+    },
     "中山大耀": {
       "height": 600,
       "name": "中山 大耀",

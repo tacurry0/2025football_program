@@ -10,7 +10,7 @@
     "name_only_supplemented_at": "2026-06-18T08:52:56.633Z",
     "name_only_supplement_source": "scripts/fetch-missing-player-profiles-by-name.mjs",
     "club_official_source": "https://roasso-k.com/clubteam/players",
-    "club_official_synced_at": "2026-10-30T23:02:18+00:00",
+    "club_official_synced_at": "2026-11-21T00:51:15+00:00",
     "club_official_players": 34
   },
   "アンデルソン": {
@@ -37902,5 +37902,37 @@
     },
     "image_source_url": "https://roasso-k.com/img/players/3909_big.jpg",
     "fetched_at": "2026-10-30T23:00:53+00:00"
+  },
+  "上林 真斗": {
+    "source": "club_official",
+    "source_confidence": "high",
+    "club": "kumamoto",
+    "app_player_name": "上林 真斗",
+    "name": "上林 真斗",
+    "official_name": "上林 真斗",
+    "position": "GK",
+    "number": "37",
+    "birth_date": "2004/11/29",
+    "birthplace": "埼玉県",
+    "height_cm": 187,
+    "weight_kg": 82,
+    "final_team": "熊本",
+    "affiliated_teams": [
+      "FC LIEN~蓮田キッカーズ~FC LAVIDA~昌平高校~専修大学(在学中)",
+      "ロアッソ熊本"
+    ],
+    "club_profile_fields": {
+      "生年月日": "2004年11月29日",
+      "身長": "187cm",
+      "体重": "82kg",
+      "出身地": "埼玉県",
+      "": "",
+      "経歴": "FC LIEN~蓮田キッカーズ~FC LAVIDA~昌平高校~専修大学(在学中)"
+    },
+    "links": {
+      "club_official": "https://roasso-k.com/clubteam/players/3916"
+    },
+    "image_source_url": "https://roasso-k.com/img/players/3916_big.jpg",
+    "fetched_at": "2026-11-21T00:50:11+00:00"
   }
 }
