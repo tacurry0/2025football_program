@@ -232,5 +232,32 @@
     "time": "33'",
     "minute": 33,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026112111",
+    "season": 2027,
+    "player_key": "笠井 佳祐",
+    "player_name": "笠井 佳祐",
+    "time": "16'",
+    "minute": 16,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026112111",
+    "season": 2027,
+    "player_key": "加藤 徹也",
+    "player_name": "加藤 徹也",
+    "time": "67'",
+    "minute": 67,
+    "is_own_goal": false
+  },
+  {
+    "match_id": "2026112111",
+    "season": 2027,
+    "player_key": "星 雄次",
+    "player_name": "星 雄次",
+    "time": "69'",
+    "minute": 69,
+    "is_own_goal": false
   }
 ]
