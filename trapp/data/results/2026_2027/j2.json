@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-22T01:32:06.473366+00:00",
+  "fetchedAt": "2026-11-22T19:56:42.813902+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -2522,9 +2522,9 @@
       "section": 18,
       "home": "徳島ヴォルティス",
       "away": "湘南ベルマーレ",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j2/2026/112202"
     },
     {

@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-22T01:32:06.473366+00:00",
+  "fetchedAt": "2026-11-22T19:56:42.813902+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -142,14 +142,14 @@
       "team_id": "shonan",
       "team": "湘南ベルマーレ",
       "rank": 9,
-      "points": 26,
-      "played": 17,
-      "won": 6,
+      "points": 29,
+      "played": 18,
+      "won": 7,
       "drawn": 8,
       "lost": 3,
-      "goals_for": 18,
-      "goals_against": 15,
-      "goal_diff": 3
+      "goals_for": 20,
+      "goals_against": 16,
+      "goal_diff": 4
     },
     {
       "season": "2026_2027",
@@ -223,13 +223,13 @@
       "team": "徳島ヴォルティス",
       "rank": 14,
       "points": 20,
-      "played": 17,
+      "played": 18,
       "won": 6,
       "drawn": 2,
-      "lost": 9,
-      "goals_for": 15,
-      "goals_against": 19,
-      "goal_diff": -4
+      "lost": 10,
+      "goals_for": 16,
+      "goals_against": 21,
+      "goal_diff": -5
     },
     {
       "season": "2026_2027",
@@ -328,6 +328,6 @@
       "goal_diff": -25
     }
   ],
-  "sourceUpdatedAt": "2026/11/21",
+  "sourceUpdatedAt": "2026/11/22",
   "sourceUrl": "https://www.jleague.jp/j2/standings/?year=2026-27"
 }

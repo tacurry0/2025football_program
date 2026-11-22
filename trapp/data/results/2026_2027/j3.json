@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-22T01:32:06.473366+00:00",
+  "fetchedAt": "2026-11-22T19:56:42.813902+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -2494,9 +2494,9 @@
       "section": 18,
       "home": "ロアッソ熊本",
       "away": "ギラヴァンツ北九州",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/112203"
     },
     {
@@ -2508,9 +2508,9 @@
       "section": 18,
       "home": "レノファ山口FC",
       "away": "レイラック滋賀FC",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/112204"
     },
     {
@@ -2522,9 +2522,9 @@
       "section": 18,
       "home": "FC大阪",
       "away": "カマタマーレ讃岐",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 3,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j3/2026/112205"
     },
     {

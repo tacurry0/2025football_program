@@ -214,5 +214,14 @@
     "time": "68'",
     "minute": 68,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026112203",
+    "season": 2027,
+    "player_key": "石田 凌太郎",
+    "player_name": "石田 凌太郎",
+    "time": "86'",
+    "minute": 86,
+    "is_own_goal": false
   }
 ]
