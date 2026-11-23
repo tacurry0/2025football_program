@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-22T19:56:42.813902+00:00",
+  "fetchedAt": "2026-11-23T01:57:11.138383+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 35,
       "source_url": "https://www.jleague.jp/match/j3/2026/112203",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/112203",
-      "detail_fetched_at": "2026-11-22T19:56:42.813902+00:00",
+      "detail_fetched_at": "2026-11-23T01:57:11.138383+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -165,11 +165,6 @@
           "out": "戸田 峻平"
         },
         {
-          "minute": "35",
-          "in": "吉岡 優希",
-          "out": "那須 健一"
-        },
-        {
           "minute": "67",
           "in": "石原 央羅",
           "out": "ベ ジョンミン"
@@ -178,17 +173,22 @@
           "minute": "67",
           "in": "大西 遼太郎",
           "out": "三島 頌平"
+        },
+        {
+          "minute": "35",
+          "in": "吉岡 優希",
+          "out": "那須 健一"
         }
       ],
       "home_cards": [
         {
-          "minute": "54",
-          "player": "戸田 峻平",
+          "minute": "86",
+          "player": "石田 凌太郎",
           "card": "yellow"
         },
         {
-          "minute": "86",
-          "player": "石田 凌太郎",
+          "minute": "54",
+          "player": "戸田 峻平",
           "card": "yellow"
         }
       ],
@@ -325,6 +325,16 @@
       ],
       "away_substitutions": [
         {
+          "minute": "87",
+          "in": "吉原 楓人",
+          "out": "髙橋 大悟"
+        },
+        {
+          "minute": "87",
+          "in": "河辺 駿太郎",
+          "out": "高 昇辰"
+        },
+        {
           "minute": "78",
           "in": "吉田 晃盛",
           "out": "ワッド モハメッドサディキ"
@@ -338,16 +348,6 @@
           "minute": "45",
           "in": "吉長 真優",
           "out": "平原 隆暉"
-        },
-        {
-          "minute": "87",
-          "in": "吉原 楓人",
-          "out": "髙橋 大悟"
-        },
-        {
-          "minute": "87",
-          "in": "河辺 駿太郎",
-          "out": "高 昇辰"
         }
       ],
       "away_cards": [
