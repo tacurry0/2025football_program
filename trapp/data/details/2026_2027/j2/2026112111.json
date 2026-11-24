@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-23T01:57:11.138383+00:00",
+  "fetchedAt": "2026-11-24T00:17:47.481831+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 30,
       "source_url": "https://www.jleague.jp/match/j2/2026/112111",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/112111",
-      "detail_fetched_at": "2026-11-23T01:57:11.138383+00:00",
+      "detail_fetched_at": "2026-11-24T00:17:47.481831+00:00",
       "home_starting_members": [
         {
           "name": "キム ジンヒョン",
@@ -319,6 +319,11 @@
       ],
       "away_substitutions": [
         {
+          "minute": "89",
+          "in": "石山 青空",
+          "out": "星 雄次"
+        },
+        {
           "minute": "78",
           "in": "佐藤 海宏",
           "out": "大澤 朋也"
@@ -337,11 +342,6 @@
           "minute": "66",
           "in": "古長谷 千博",
           "out": "笠井 佳祐"
-        },
-        {
-          "minute": "89",
-          "in": "石山 青空",
-          "out": "星 雄次"
         }
       ],
       "away_cards": [],
