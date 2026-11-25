@@ -178,5 +178,14 @@
     "type": "警告",
     "time": "54'",
     "minute": 54
+  },
+  {
+    "match_id": "2026112518",
+    "season": 2027,
+    "player_key": "李 泰河",
+    "player_name": "李 泰河",
+    "type": "警告",
+    "time": "90'+4",
+    "minute": 94
   }
 ]

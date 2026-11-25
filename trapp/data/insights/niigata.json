@@ -1,5 +1,5 @@
 {
-  "through": "2026-11-25",
+  "through": "2026-11-26",
   "data": [
     {
       "date": "1999/03/14",
@@ -14859,6 +14859,19 @@
       "pk_away_score": "",
       "source_url": "https://www.jleague.jp/match/j2/2026/112111",
       "match_id": "2026112111"
+    },
+    {
+      "date": "2026-11-25",
+      "home": "ヴァンラーレ八戸",
+      "away": "アルビレックス新潟",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
+      "competition": "明治安田J2リーグ",
+      "pk_home_score": "",
+      "pk_away_score": "",
+      "source_url": "https://www.jleague.jp/match/j2/2026/112508",
+      "match_id": "2026112508"
     }
   ]
 }

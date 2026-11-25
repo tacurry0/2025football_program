@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j1",
-  "fetchedAt": "2026-11-24T22:44:10.698089+00:00",
+  "fetchedAt": "2026-11-25T21:57:24.196534+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -2116,9 +2116,9 @@
       "section": 16,
       "home": "水戸ホーリーホック",
       "away": "東京ヴェルディ",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112501"
     },
     {
@@ -2130,9 +2130,9 @@
       "section": 16,
       "home": "ジェフユナイテッド千葉",
       "away": "名古屋グランパス",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112502"
     },
     {
@@ -2144,9 +2144,9 @@
       "section": 16,
       "home": "FC東京",
       "away": "サンフレッチェ広島",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112503"
     },
     {
@@ -2158,9 +2158,9 @@
       "section": 16,
       "home": "ファジアーノ岡山",
       "away": "清水エスパルス",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 0,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112504"
     },
     {
@@ -2172,9 +2172,9 @@
       "section": 16,
       "home": "アビスパ福岡",
       "away": "横浜F・マリノス",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112505"
     },
     {
@@ -2186,9 +2186,9 @@
       "section": 16,
       "home": "V・ファーレン長崎",
       "away": "川崎フロンターレ",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112506"
     },
     {
@@ -2200,9 +2200,9 @@
       "section": 16,
       "home": "浦和レッズ",
       "away": "セレッソ大阪",
-      "home_score": null,
-      "away_score": null,
-      "status": "scheduled",
+      "home_score": 2,
+      "away_score": 2,
+      "status": "finished",
       "source_url": "https://www.jleague.jp/match/j1/2026/112507"
     },
     {

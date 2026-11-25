@@ -223,5 +223,14 @@
     "time": "86'",
     "minute": 86,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026112518",
+    "season": 2027,
+    "player_key": null,
+    "player_name": "オウンゴール",
+    "time": "80'",
+    "minute": 80,
+    "is_own_goal": true
   }
 ]

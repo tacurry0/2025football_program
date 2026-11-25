@@ -259,5 +259,14 @@
     "time": "69'",
     "minute": 69,
     "is_own_goal": false
+  },
+  {
+    "match_id": "2026112508",
+    "season": 2027,
+    "player_key": "佐藤 海宏",
+    "player_name": "佐藤 海宏",
+    "time": "90'",
+    "minute": 90,
+    "is_own_goal": false
   }
 ]
