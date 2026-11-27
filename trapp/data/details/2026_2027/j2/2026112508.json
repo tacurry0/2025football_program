@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j2",
-  "fetchedAt": "2026-11-26T21:53:32.441608+00:00",
+  "fetchedAt": "2026-11-27T21:36:29.158062+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -14,7 +14,7 @@
       "competition_id": "j2",
       "competition": "明治安田J2リーグ",
       "date": "2026-11-25",
-      "time": "18:33",
+      "time": "18:30",
       "round": "第19節",
       "home": "ヴァンラーレ八戸",
       "away": "アルビレックス新潟",
@@ -28,7 +28,7 @@
       "humidity": 74,
       "source_url": "https://www.jleague.jp/match/j2/2026/112508",
       "j_official_url": "https://www.jleague.jp/match/j2/2026/112508",
-      "detail_fetched_at": "2026-11-26T21:53:32.441608+00:00",
+      "detail_fetched_at": "2026-11-27T21:36:29.158062+00:00",
       "home_starting_members": [
         {
           "name": "谷口 裕介",
