@@ -3,7 +3,7 @@
   "status": 200,
   "season": "2026_2027",
   "league": "j3",
-  "fetchedAt": "2026-11-27T21:36:29.158062+00:00",
+  "fetchedAt": "2026-11-28T03:30:23.474700+00:00",
   "stale": false,
   "complete": true,
   "data": [
@@ -28,7 +28,7 @@
       "humidity": 35,
       "source_url": "https://www.jleague.jp/match/j3/2026/112203",
       "j_official_url": "https://www.jleague.jp/match/j3/2026/112203",
-      "detail_fetched_at": "2026-11-27T21:36:29.158062+00:00",
+      "detail_fetched_at": "2026-11-28T03:30:23.474700+00:00",
       "home_starting_members": [
         {
           "name": "佐藤 史騎",
@@ -155,16 +155,6 @@
       ],
       "home_substitutions": [
         {
-          "minute": "83",
-          "in": "渡邉 怜歩",
-          "out": "三品 直哉"
-        },
-        {
-          "minute": "83",
-          "in": "中山 大耀",
-          "out": "戸田 峻平"
-        },
-        {
           "minute": "67",
           "in": "石原 央羅",
           "out": "ベ ジョンミン"
@@ -173,6 +163,16 @@
           "minute": "67",
           "in": "大西 遼太郎",
           "out": "三島 頌平"
+        },
+        {
+          "minute": "83",
+          "in": "渡邉 怜歩",
+          "out": "三品 直哉"
+        },
+        {
+          "minute": "83",
+          "in": "中山 大耀",
+          "out": "戸田 峻平"
         },
         {
           "minute": "35",
@@ -340,14 +340,14 @@
           "out": "ワッド モハメッドサディキ"
         },
         {
-          "minute": "63",
-          "in": "坂下 湧太郎",
-          "out": "熊澤 和希"
-        },
-        {
           "minute": "45",
           "in": "吉長 真優",
           "out": "平原 隆暉"
+        },
+        {
+          "minute": "63",
+          "in": "坂下 湧太郎",
+          "out": "熊澤 和希"
         }
       ],
       "away_cards": [
