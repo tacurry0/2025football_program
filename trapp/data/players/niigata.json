@@ -10,7 +10,7 @@
     "name_only_supplemented_at": "2026-06-18T08:52:56.633Z",
     "name_only_supplement_source": "scripts/fetch-missing-player-profiles-by-name.mjs",
     "club_official_source": "https://www.albirex.co.jp/team/player/2026-27/",
-    "club_official_synced_at": "2026-11-08T22:55:34+00:00",
+    "club_official_synced_at": "2026-11-28T02:01:48+00:00",
     "club_official_players": 33
   },
   "アウグスト": {
@@ -53222,7 +53222,7 @@
     "dominant_foot": "右 (28.5cm)",
     "club_profile_fields": {
       "名前": "桑山 侃士",
-      "生年月日": "2002/11/28(23歳)",
+      "生年月日": "2002/11/28(24歳)",
       "身長/体重": "184cm/80kg",
       "血液型": "A型",
       "出身地": "埼玉県",
@@ -53250,6 +53250,6 @@
       "club_official": "https://www.albirex.co.jp/team/player/2026-27/32/"
     },
     "image_source_url": "https://www.albirex.co.jp/files/player/2026-27/detail/32.png",
-    "fetched_at": "2026-09-30T06:48:37+00:00"
+    "fetched_at": "2026-11-28T02:01:41+00:00"
   }
 }
